@@ -4,7 +4,7 @@
     "overdue": 24,
     "blocked": 58,
     "active": 16,
-    "next48": 40,
+    "coming": 50,
     "role_gaps": 88,
     "concern": "Gaurav Bansal (KU-1225Avondale) has 25 overdue + blocked tasks"
   },
@@ -12,14 +12,14 @@
     {
       "name": "Angel Pacheco",
       "ov": 0,
-      "act": 13,
+      "act": 8,
       "proj": 2,
       "ind": "clean"
     },
     {
       "name": "Jeff",
       "ov": 0,
-      "act": 7,
+      "act": 6,
       "proj": 2,
       "ind": "clean"
     },
@@ -33,9 +33,9 @@
     {
       "name": "Milagros Porturas",
       "ov": 7,
-      "act": 25,
+      "act": 20,
       "proj": 2,
-      "ind": "green"
+      "ind": "yellow"
     }
   ],
   "projects": [
@@ -44,10 +44,10 @@
       "pm": "Jeff",
       "st": "issue",
       "c": {
-        "l": 16,
-        "b": 9,
-        "a": 0,
-        "t": 7
+        "ov": 16,
+        "bl": 9,
+        "ac": 0,
+        "co": 7
       },
       "g": {
         "p": 22,
@@ -55,7 +55,7 @@
         "pc": 5
       },
       "tasks": {
-        "late": [
+        "overdue": [
           {
             "n": "Planning team meeting",
             "d": 4,
@@ -137,7 +137,6 @@
             "w": "\u26a0\ufe0f Nobody"
           }
         ],
-        "active": [],
         "blocked": [
           {
             "n": "811 INSPECTION",
@@ -194,7 +193,8 @@
             "bl": "IN GROUND PLUMBING (done)"
           }
         ],
-        "next48": [
+        "active": [],
+        "coming": [
           {
             "n": "Initial project kick off meeting",
             "w": "Majo Roman, Jeff, Romina Rey, Planning | Claudia Delgado",
@@ -245,10 +245,10 @@
       "pm": "Jeff, Milagros Porturas",
       "st": "issue",
       "c": {
-        "l": 8,
-        "b": 15,
-        "a": 9,
-        "t": 15
+        "ov": 8,
+        "bl": 15,
+        "ac": 9,
+        "co": 18
       },
       "g": {
         "p": 10,
@@ -256,7 +256,7 @@
         "pc": 4
       },
       "tasks": {
-        "late": [
+        "overdue": [
           {
             "n": "DEMO: COMPANYCAM COMPLETE",
             "d": 4,
@@ -296,53 +296,6 @@
             "n": "CABINETS: FINAL SIGN-OFF",
             "d": 1,
             "w": "Milagros Porturas"
-          }
-        ],
-        "active": [
-          {
-            "n": "CABINETS CO: CREATE SOW",
-            "dt": "Mar 24-24",
-            "w": "Milagros Porturas"
-          },
-          {
-            "n": "CABINETS CO: SOURCE VENDORS",
-            "dt": "Mar 24-24",
-            "w": "Milagros Porturas"
-          },
-          {
-            "n": "CABINETS CO: SUBMIT QUOTES",
-            "dt": "Mar 24-24",
-            "w": "Milagros Porturas"
-          },
-          {
-            "n": "CABINETS CO: APPROVE WORK ORDER",
-            "dt": "Mar 24-24",
-            "w": "Milagros Porturas"
-          },
-          {
-            "n": "CABINETS CO: CONFIRM SCHEDULE",
-            "dt": "Mar 24-24",
-            "w": "Milagros Porturas"
-          },
-          {
-            "n": "CABINETS CO: VERIFY READINESS",
-            "dt": "Mar 24-24",
-            "w": "Milagros Porturas"
-          },
-          {
-            "n": "CABINETS CO: COMPLETE TAKEOFF",
-            "dt": "Mar 24-24",
-            "w": "Milagros Porturas, Romina Rey"
-          },
-          {
-            "n": "CABINETS CO: SECURE PRICING",
-            "dt": "Mar 24-24",
-            "w": "Milagros Porturas, Romina Rey"
-          },
-          {
-            "n": "CABINETS CO: PURCHASE MATERIAL",
-            "dt": "Mar 24-24",
-            "w": "Milagros Porturas, Romina Rey"
           }
         ],
         "blocked": [
@@ -437,7 +390,54 @@
             "bl": "INSPECTION (not started)"
           }
         ],
-        "next48": [
+        "active": [
+          {
+            "n": "CABINETS CO: CREATE SOW",
+            "dt": "Mar 24-24",
+            "w": "Milagros Porturas"
+          },
+          {
+            "n": "CABINETS CO: SOURCE VENDORS",
+            "dt": "Mar 24-24",
+            "w": "Milagros Porturas"
+          },
+          {
+            "n": "CABINETS CO: SUBMIT QUOTES",
+            "dt": "Mar 24-24",
+            "w": "Milagros Porturas"
+          },
+          {
+            "n": "CABINETS CO: APPROVE WORK ORDER",
+            "dt": "Mar 24-24",
+            "w": "Milagros Porturas"
+          },
+          {
+            "n": "CABINETS CO: CONFIRM SCHEDULE",
+            "dt": "Mar 24-24",
+            "w": "Milagros Porturas"
+          },
+          {
+            "n": "CABINETS CO: VERIFY READINESS",
+            "dt": "Mar 24-24",
+            "w": "Milagros Porturas"
+          },
+          {
+            "n": "CABINETS CO: COMPLETE TAKEOFF",
+            "dt": "Mar 24-24",
+            "w": "Milagros Porturas, Romina Rey"
+          },
+          {
+            "n": "CABINETS CO: SECURE PRICING",
+            "dt": "Mar 24-24",
+            "w": "Milagros Porturas, Romina Rey"
+          },
+          {
+            "n": "CABINETS CO: PURCHASE MATERIAL",
+            "dt": "Mar 24-24",
+            "w": "Milagros Porturas, Romina Rey"
+          }
+        ],
+        "coming": [
           {
             "n": "CABINETS CO: CREATE SOW",
             "w": "Milagros Porturas",
@@ -527,6 +527,24 @@
             "w": "\u26a0\ufe0f Nobody",
             "when": "due Thu",
             "type": "due"
+          },
+          {
+            "n": "COUNTERTOPS: CONFIRM SCHEDULE",
+            "w": "Milagros Porturas, JC'S Countertops LLC",
+            "when": "due Fri",
+            "type": "due"
+          },
+          {
+            "n": "FLOORING: BILL & PAYMENT",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due Fri",
+            "type": "due"
+          },
+          {
+            "n": "DEMO: BILL & PAYMENT",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due Fri",
+            "type": "due"
           }
         ]
       }
@@ -536,10 +554,10 @@
       "pm": "Milagros Porturas",
       "st": "issue",
       "c": {
-        "l": 0,
-        "b": 11,
-        "a": 0,
-        "t": 0
+        "ov": 0,
+        "bl": 11,
+        "ac": 0,
+        "co": 0
       },
       "g": {
         "p": 10,
@@ -547,8 +565,7 @@
         "pc": 4
       },
       "tasks": {
-        "late": [],
-        "active": [],
+        "overdue": [],
         "blocked": [
           {
             "n": "DIG FOUNDATION AND PLUMBING DITCHES",
@@ -617,7 +634,8 @@
             "bl": "FOUNDATION POUR (not started)"
           }
         ],
-        "next48": []
+        "active": [],
+        "coming": []
       }
     },
     {
@@ -625,10 +643,10 @@
       "pm": "Angel Pacheco",
       "st": "issue",
       "c": {
-        "l": 0,
-        "b": 7,
-        "a": 2,
-        "t": 6
+        "ov": 0,
+        "bl": 7,
+        "ac": 2,
+        "co": 10
       },
       "g": {
         "p": 1,
@@ -636,19 +654,7 @@
         "pc": 0
       },
       "tasks": {
-        "late": [],
-        "active": [
-          {
-            "n": "DIG FOUNDATION DITCHES - WIP",
-            "dt": "Mar 23-25",
-            "w": "Clifford Clack, Efren Aguirre, Angel Pacheco"
-          },
-          {
-            "n": "FORM BOARD: PLACE FORM BOARD",
-            "dt": "Mar 24-25",
-            "w": "Clifford Clack, Angel Pacheco, Efren Aguirre"
-          }
-        ],
+        "overdue": [],
         "blocked": [
           {
             "n": "N GROUND ELECTRICAL - WIP",
@@ -693,7 +699,19 @@
             "bl": "ELECTRICAL ROUGH IN - READY (not started)"
           }
         ],
-        "next48": [
+        "active": [
+          {
+            "n": "DIG FOUNDATION DITCHES - WIP",
+            "dt": "Mar 23-25",
+            "w": "Clifford Clack, Efren Aguirre, Angel Pacheco"
+          },
+          {
+            "n": "FORM BOARD: PLACE FORM BOARD",
+            "dt": "Mar 24-25",
+            "w": "Clifford Clack, Angel Pacheco, Efren Aguirre"
+          }
+        ],
+        "coming": [
           {
             "n": "IN GROUND ELECTRICAL - READY",
             "w": "Clifford Clack, Angel Pacheco, Brayan Ramos",
@@ -729,6 +747,30 @@
             "w": "Clifford Clack, Angel Pacheco",
             "when": "due Thu",
             "type": "due"
+          },
+          {
+            "n": "PM INSPECTION | IN GROUND ELECTRICAL",
+            "w": "Clifford Clack, Angel Pacheco",
+            "when": "due Fri",
+            "type": "due"
+          },
+          {
+            "n": "PM INSPECTION | FOUNDATION",
+            "w": "Clifford Clack, Angel Pacheco",
+            "when": "due Fri",
+            "type": "due"
+          },
+          {
+            "n": "Concrete pour",
+            "w": "Clifford Clack, Angel Pacheco, Efren Aguirre",
+            "when": "due Fri",
+            "type": "due"
+          },
+          {
+            "n": "CITY INSPECTION | FORM BOARDS",
+            "w": "Clifford Clack, Majo Roman",
+            "when": "due Fri",
+            "type": "due"
           }
         ]
       }
@@ -738,10 +780,10 @@
       "pm": "Jeff, Marcio Oliveira",
       "st": "issue",
       "c": {
-        "l": 0,
-        "b": 5,
-        "a": 1,
-        "t": 1
+        "ov": 0,
+        "bl": 5,
+        "ac": 1,
+        "co": 1
       },
       "g": {
         "p": 3,
@@ -749,14 +791,7 @@
         "pc": 0
       },
       "tasks": {
-        "late": [],
-        "active": [
-          {
-            "n": "Schedule brick ties",
-            "dt": "Mar 24-4",
-            "w": "Marcio Oliveira, Jeff"
-          }
-        ],
+        "overdue": [],
         "blocked": [
           {
             "n": "Install brick ties",
@@ -789,7 +824,14 @@
             "bl": "Paint Walls & Ceilings (not started)"
           }
         ],
-        "next48": [
+        "active": [
+          {
+            "n": "Schedule brick ties",
+            "dt": "Mar 24-4",
+            "w": "Marcio Oliveira, Jeff"
+          }
+        ],
+        "coming": [
           {
             "n": "Schedule brick ties",
             "w": "Marcio Oliveira, Jeff",
@@ -804,10 +846,10 @@
       "pm": "Jeff",
       "st": "issue",
       "c": {
-        "l": 0,
-        "b": 5,
-        "a": 3,
-        "t": 5
+        "ov": 0,
+        "bl": 5,
+        "ac": 3,
+        "co": 6
       },
       "g": {
         "p": 2,
@@ -815,24 +857,7 @@
         "pc": 4
       },
       "tasks": {
-        "late": [],
-        "active": [
-          {
-            "n": "FRAMING: ERECT METAL FRAMING & COLUMNS (85%)",
-            "dt": "Mar 3-26",
-            "w": "\u26a0\ufe0f Nobody"
-          },
-          {
-            "n": "FRAMING: INTERIOR FRAMING",
-            "dt": "Mar 14-26",
-            "w": "\u26a0\ufe0f Nobody"
-          },
-          {
-            "n": "schedule framing",
-            "dt": "Mar 20-26",
-            "w": "Jeff"
-          }
-        ],
+        "overdue": [],
         "blocked": [
           {
             "n": "Spray Foam or Insulation Install",
@@ -865,7 +890,24 @@
             "bl": "FRAMING: PURCHASE MATERIAL (not started)"
           }
         ],
-        "next48": [
+        "active": [
+          {
+            "n": "FRAMING: ERECT METAL FRAMING & COLUMNS (85%)",
+            "dt": "Mar 3-26",
+            "w": "\u26a0\ufe0f Nobody"
+          },
+          {
+            "n": "FRAMING: INTERIOR FRAMING",
+            "dt": "Mar 14-26",
+            "w": "\u26a0\ufe0f Nobody"
+          },
+          {
+            "n": "schedule framing",
+            "dt": "Mar 20-26",
+            "w": "Jeff"
+          }
+        ],
+        "coming": [
           {
             "n": "FRAMING: ERECT METAL FRAMING & COLUMNS",
             "w": "\u26a0\ufe0f Nobody",
@@ -891,10 +933,16 @@
             "type": "starts"
           },
           {
+            "n": "DRYWALL: PURCHASE MATERIAL",
+            "w": "Jeff",
+            "when": "due Fri",
+            "type": "due"
+          },
+          {
             "n": "Purchase doors and trim",
             "w": "Jeff",
-            "when": "starts Thu",
-            "type": "starts"
+            "when": "due Fri",
+            "type": "due"
           }
         ]
       }
@@ -904,10 +952,10 @@
       "pm": "Angel Pacheco, Jeff",
       "st": "issue",
       "c": {
-        "l": 0,
-        "b": 3,
-        "a": 1,
-        "t": 2
+        "ov": 0,
+        "bl": 3,
+        "ac": 1,
+        "co": 4
       },
       "g": {
         "p": 5,
@@ -915,14 +963,7 @@
         "pc": 0
       },
       "tasks": {
-        "late": [],
-        "active": [
-          {
-            "n": "Order framing materials",
-            "dt": "Mar 13-24",
-            "w": "Angel Pacheco, Romina Rey"
-          }
-        ],
+        "overdue": [],
         "blocked": [
           {
             "n": "Concrete pour - Foundation",
@@ -943,7 +984,14 @@
             "bl": "Order framing materials (done)"
           }
         ],
-        "next48": [
+        "active": [
+          {
+            "n": "Order framing materials",
+            "dt": "Mar 13-24",
+            "w": "Angel Pacheco, Romina Rey"
+          }
+        ],
+        "coming": [
           {
             "n": "Order framing materials",
             "w": "Angel Pacheco, Romina Rey",
@@ -955,6 +1003,18 @@
             "w": "Angel Pacheco, Majo Roman",
             "when": "due tomorrow",
             "type": "due"
+          },
+          {
+            "n": "Concrete pour - Foundation",
+            "w": "Angel Pacheco, Efren Aguirre",
+            "when": "due Fri",
+            "type": "due"
+          },
+          {
+            "n": "Order Cedar Wood for Sunroom",
+            "w": "Angel Pacheco, Romina Rey",
+            "when": "due Fri",
+            "type": "due"
           }
         ]
       }
@@ -964,10 +1024,10 @@
       "pm": "Milagros Porturas",
       "st": "issue",
       "c": {
-        "l": 0,
-        "b": 2,
-        "a": 0,
-        "t": 0
+        "ov": 0,
+        "bl": 2,
+        "ac": 0,
+        "co": 0
       },
       "g": {
         "p": 0,
@@ -975,8 +1035,7 @@
         "pc": 0
       },
       "tasks": {
-        "late": [],
-        "active": [],
+        "overdue": [],
         "blocked": [
           {
             "n": "PLUMBING TRIM",
@@ -991,7 +1050,8 @@
             "bl": "PLUMBING TRIM (not started)"
           }
         ],
-        "next48": []
+        "active": [],
+        "coming": []
       }
     },
     {
@@ -999,10 +1059,10 @@
       "pm": "No PM",
       "st": "issue",
       "c": {
-        "l": 0,
-        "b": 1,
-        "a": 0,
-        "t": 0
+        "ov": 0,
+        "bl": 1,
+        "ac": 0,
+        "co": 0
       },
       "g": {
         "p": 2,
@@ -1010,8 +1070,7 @@
         "pc": 0
       },
       "tasks": {
-        "late": [],
-        "active": [],
+        "overdue": [],
         "blocked": [
           {
             "n": "PLUMBING: PLUMBING ROUGH IN",
@@ -1020,54 +1079,8 @@
             "bl": "PLUMBING: VERIFY READINESS (not started)"
           }
         ],
-        "next48": []
-      }
-    },
-    {
-      "name": "Karim Merchant (JOSE-TEST10)",
-      "pm": "Jeff",
-      "st": "issue",
-      "c": {
-        "l": 0,
-        "b": 0,
-        "a": 0,
-        "t": 4
-      },
-      "g": {
-        "p": 0,
-        "v": 0,
-        "pc": 0
-      },
-      "tasks": {
-        "late": [],
         "active": [],
-        "blocked": [],
-        "next48": [
-          {
-            "n": "Structural plans",
-            "w": "\u26a0\ufe0f Nobody",
-            "when": "due today",
-            "type": "due"
-          },
-          {
-            "n": "Permit package compilation",
-            "w": "Planning | Claudia Delgado",
-            "when": "due today",
-            "type": "due"
-          },
-          {
-            "n": "Permits Submission",
-            "w": "Planning | Claudia Delgado, Jeff",
-            "when": "starts Thu",
-            "type": "starts"
-          },
-          {
-            "n": "Material List Draft",
-            "w": "Romina Rey",
-            "when": "due Thu",
-            "type": "due"
-          }
-        ]
+        "coming": []
       }
     },
     {

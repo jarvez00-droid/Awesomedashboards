@@ -85,7 +85,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 .pc.op .pb{display:block}
 
 /* Preview - 3 columns visible on collapsed cards */
-.preview{padding:10px 14px;border-top:1px solid rgba(33,39,47,.5);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.preview{padding:10px 14px;border-top:1px solid rgba(33,39,47,.5);display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px}
 .pv-col{min-width:0}
 .pv-head{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding-bottom:6px;margin-bottom:6px;border-bottom:1px solid var(--bdr)}
 .pv-head.r{color:var(--red)}.pv-head.y{color:var(--ylw)}.pv-head.b{color:var(--blu)}
@@ -107,7 +107,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 .pb-full{grid-column:1/-1}
 
 @media(max-width:600px){
-  .preview{grid-template-columns:1fr 1fr}
+  .preview{grid-template-columns:1fr 1fr!important}
   .pb-grid{grid-template-columns:1fr}
   .pn{font-size:15px}
   .pc{margin-bottom:0;border-radius:8px}
@@ -249,152 +249,30 @@ function renderEOD(c) {
   const ps = EOD_DATA.projects;
   const issues = ps.filter(p => p.st === 'issue');
   const ok = ps.filter(p => p.st === 'ok');
-
   const d = new Date(EOD_DATA.date + 'T12:00:00');
   const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const dateLabel = days[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
 
   let h = `
     <div class="page-title">End of Day Wrap-Up</div>
-    <div class="page-sub">EOD Report · ${dateLabel} · 4:00 PM${!EOD_DATA.has_sod_baseline ? ' · <span style="color:var(--ylw)">⚠ No morning baseline - showing current status</span>' : ''}</div>
+    <div class="page-sub">EOD Report · ${dateLabel} · 4:00 PM${!EOD_DATA.has_sod_baseline ? ' · <span style="color:var(--ylw)">⚠ No morning baseline</span>' : ''}</div>
     <div class="stats" style="grid-template-columns:repeat(6,1fr)">
-      <div class="st g"><div class="n">${s.completed}</div><div class="l">Completed</div></div>
-      <div class="st r"><div class="n">${s.still_overdue}</div><div class="l">Still Over</div></div>
-      <div class="st r"><div class="n">${s.new_overdue}</div><div class="l">New Over</div></div>
-      <div class="st g"><div class="n">${s.resolved}</div><div class="l">Resolved</div></div>
-      <div class="st o"><div class="n">${s.still_blocked}</div><div class="l">Blocked</div></div>
-      <div class="st y"><div class="n">${s.next48}</div><div class="l">Next 48h</div></div>
+      <div class="st g"><div class="n">${s.completed||0}</div><div class="l">Done</div></div>
+      <div class="st r"><div class="n">${s.overdue}</div><div class="l">Overdue</div></div>
+      <div class="st o"><div class="n">${s.blocked}</div><div class="l">Blocked</div></div>
+      <div class="st b"><div class="n">${s.active}</div><div class="l">Active</div></div>
+      <div class="st y"><div class="n">${s.coming||0}</div><div class="l">Coming 72h</div></div>
+      <div class="st g"><div class="n">${s.resolved||0}</div><div class="l">Resolved</div></div>
     </div>
     <div class="alert"><span>⚠</span><div><b>Top concern:</b> ${s.concern}</div></div>
-    <div class="filters">
-      <button class="fb on" onclick="filt('all',this)">All <span class="cnt">${ps.length}</span></button>
-      <button class="fb" onclick="filt('issue',this)">Issues <span class="cnt">${issues.length}</span></button>
-      <button class="fb" onclick="filt('ok',this)">On Track <span class="cnt">${ok.length}</span></button>
-      <select class="fb" id="pm-filter" onchange="filtPM(this.value)" style="cursor:pointer;appearance:none;padding-right:24px;background-image:url('data:image/svg+xml,<%3Fxml version=%221.0%22%3F><svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22><path d=%22M0 0l5 6 5-6z%22 fill=%22%238B95A8%22/></svg>');background-repeat:no-repeat;background-position:right 8px center">
-        <option value="">All PMs</option>
-        ${EOD_DATA.pms.map(pm => `<option value="${pm.name}">${pm.name}</option>`).join('')}
-        <option value="__none">No PM</option>
-      </select>
-    </div>
+    ${buildFilters(ps, issues, ok, EOD_DATA.pms)}
     <div id="plist">`;
-
-  issues.forEach((p, i) => { h += eodProjCard(p, i === 0); });
-
-  if (ok.length) {
-    ok.forEach(p => {
-      const n48 = p.tasks?.next48 || [];
-      const pmVal = p.pm || 'No PM';
-      const tags = n48.length ? `<span class="tg y">${n48.length} next 48h</span>` : '';
-      h += `<div class="pc sev-g" data-st="ok" data-pm="${pmVal}"><div class="ph" onclick="tog(this)"><div>
-        <div class="pn" style="color:var(--grn)">✓ ${p.name}</div>
-        <div class="pp">${pmVal !== 'No PM' ? 'PM: '+pmVal : '<span class="nob">⚠ No PM assigned</span>'}</div></div>
-        <div class="pt"><span class="tg gr">on track</span>${tags}${chvSvg()}</div></div>
-        <div class="pb"><div style="padding:4px 0"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--ylw);margin-bottom:6px">Next 48 Hours</div>${n48.length ? n48.map(tk => `<div style="font-size:13px;padding:4px 0;border-bottom:1px solid rgba(33,39,47,.5)"><span style="margin-right:6px">●</span>${tk.n} <span style="color:var(--txt2)">${tk.when}</span><div style="font-size:12px;color:var(--txt2);padding-left:16px">${tk.w}</div></div>`).join('') : '<div style="font-size:13px;color:var(--dim);font-style:italic">Nothing upcoming</div>'}</div></div></div>`;
-    });
-  }
-
+  issues.forEach((p, i) => { h += buildCard(p, i === 0, true); });
+  ok.forEach(p => { h += buildOkCard(p); });
   h += '</div>';
-
-  h += '<div class="sh">PM Snapshot</div><div class="pmr">';
-  EOD_DATA.pms.forEach(pm => {
-    const badge = pm.ind === 'clean' ? '✅' : pm.ind === 'green' ? '🟢' : pm.ind === 'yellow' ? '🟡' : '🔴';
-    h += `<div class="pmc"><div><div class="pmn">${pm.name}</div><div class="pmd">${pm.completed} completed today<br>${pm.still_ov} overdue / ${pm.act} active<br>${pm.proj} project${pm.proj > 1 ? 's' : ''}</div></div><div class="pmb">${badge}</div></div>`;
-  });
-  h += '</div>';
+  h += buildPMSection(EOD_DATA.pms, true);
   h += '<div class="ft">Generated by Jade · Awesome Group · Data from JobTread</div>';
   c.innerHTML = h;
-}
-
-function eodProjCard(p, open) {
-  const c = p.c || {};
-  const t = p.tasks || {};
-  let tags = '';
-  if (c.completed) tags += `<span class="tg gr">${c.completed} done</span>`;
-  if (c.still_ov) tags += `<span class="tg r">${c.still_ov} overdue</span>`;
-  if (c.new_ov) tags += `<span class="tg r">${c.new_ov} new</span>`;
-  if (c.resolved) tags += `<span class="tg gr">${c.resolved} resolved</span>`;
-  if (c.still_bl) tags += `<span class="tg o">${c.still_bl} blocked</span>`;
-  if (c.next48) tags += `<span class="tg y">${c.next48} next 48h</span>`;
-
-  const pmLine = p.pm ? `PM: ${p.pm}` : '<span class="nob">⚠ No PM assigned</span>';
-  const sev = (c.still_ov || c.new_ov) ? 'sev-r' : c.still_bl ? 'sev-o' : c.completed ? 'sev-g' : 'sev-b';
-
-  // Preview: 3 columns - Completed | Overdue | Next 48h
-  let preview = '<div class="preview">';
-
-  preview += '<div class="pv-col"><div class="pv-head" style="color:var(--grn)">Completed</div>';
-  if (t.completed?.length) {
-    t.completed.slice(0,3).forEach(tk => {
-      preview += `<div class="pv-item"><div class="pv-dot" style="background:var(--grn)"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub">${tk.w}</div></div></div>`;
-    });
-    if (t.completed.length > 3) preview += `<div class="pv-more">+${t.completed.length-3} more</div>`;
-  } else { preview += '<div class="pv-empty">None today</div>'; }
-  preview += '</div>';
-
-  preview += '<div class="pv-col"><div class="pv-head r">Overdue</div>';
-  const allOv = [...(t.still_overdue||[]), ...(t.new_overdue||[])];
-  if (allOv.length) {
-    allOv.slice(0,3).forEach(tk => {
-      preview += `<div class="pv-item"><div class="pv-dot r"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub">${tk.w} · ${tk.d}d</div></div></div>`;
-    });
-    if (allOv.length > 3) preview += `<div class="pv-more">+${allOv.length-3} more</div>`;
-  } else { preview += '<div class="pv-empty">All clear</div>'; }
-  preview += '</div>';
-
-  const n48 = t.next48 || [];
-  preview += '<div class="pv-col"><div class="pv-head y">Next 48 Hours</div>';
-  if (n48.length) {
-    n48.slice(0,4).forEach(tk => {
-      preview += `<div class="pv-item"><div class="pv-dot y"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub">${tk.when} · ${tk.w}</div></div></div>`;
-    });
-    if (n48.length > 4) preview += `<div class="pv-more">+${n48.length-4} more</div>`;
-  } else { preview += '<div class="pv-empty">Nothing upcoming</div>'; }
-  preview += '</div></div>';
-
-  // Expanded body
-  let body = '<div class="pb-grid">';
-
-  // Left: Completed + Resolved + New Overdue
-  body += '<div>';
-  if (t.completed?.length) {
-    body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Completed Today</div>';
-    body += trowSection('g', t.completed, tk => trow('g', tk.n, tk.w, '✓'), 5);
-    body += '</div>';
-  }
-  if (t.resolved?.length) {
-    body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Resolved Blockers</div>';
-    body += trowSection('g', t.resolved, tk => trow('g', tk.n, tk.w, 'clear'), 5);
-    body += '</div>';
-  }
-  if (t.new_overdue?.length) {
-    body += '<div class="ts"><div class="tsl lr">🆕 New Overdue</div>';
-    body += trowSection('r', t.new_overdue, tk => trow('r', tk.n, tk.w, tk.d + 'd', true), 5);
-    body += '</div>';
-  }
-  body += '</div>';
-
-  // Right: Still Overdue + Still Blocked + Next 48h
-  body += '<div>';
-  if (t.still_overdue?.length) {
-    body += '<div class="ts"><div class="tsl lr">🔴 Still Overdue</div>';
-    body += trowSection('r', t.still_overdue, tk => trow('r', tk.n, tk.w, tk.d + 'd', true), 5);
-    body += '</div>';
-  }
-  if (t.still_blocked?.length) {
-    body += '<div class="ts"><div class="tsl bl">🟠 Still Blocked</div>';
-    body += trowSection('o', t.still_blocked, tk => trow('o', tk.n, tk.w, tk.due || '', false, tk.bl), 5);
-    body += '</div>';
-  }
-  if (n48.length) {
-    body += '<div class="ts"><div class="tsl dt">🔵 Next 48 Hours</div>';
-    body += trowSection('y', n48, tk => trow('y', tk.n, tk.w, tk.when), 5);
-    body += '</div>';
-  }
-  body += '</div></div>';
-
-  return `<div class="pc ${sev}${open ? ' op' : ''}" data-st="issue" data-pm="${p.pm||'No PM'}"><div class="ph" onclick="tog(this)"><div>
-    <div class="pn">${p.name}</div><div class="pp">${pmLine}</div></div>
-    <div class="pt">${tags}${chvSvg()}</div></div>${preview}<div class="pb">${body}</div></div>`;
 }
 
 function renderSOD(c) {
@@ -402,160 +280,138 @@ function renderSOD(c) {
   const ps = DATA.projects;
   const issues = ps.filter(p => p.st === 'issue');
   const ok = ps.filter(p => p.st === 'ok');
+  const d = new Date(DATA.date + 'T12:00:00');
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const dateLabel = days[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
 
   let h = `
     <div class="page-title">Schedule Check</div>
-    <div class="page-sub">SOD Report · ${(() => { const d = new Date(DATA.date + 'T12:00:00'); const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']; return days[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear(); })() } · 7:00 AM</div>
+    <div class="page-sub">SOD Report · ${dateLabel} · 7:00 AM</div>
     <div class="stats">
       <div class="st r"><div class="n">${s.overdue}</div><div class="l">Overdue</div></div>
       <div class="st o"><div class="n">${s.blocked}</div><div class="l">Blocked</div></div>
       <div class="st b"><div class="n">${s.active}</div><div class="l">Active</div></div>
-      <div class="st y"><div class="n">${s.next48||s.due_tomorrow||0}</div><div class="l">Next 48h</div></div>
+      <div class="st y"><div class="n">${s.coming||s.next48||0}</div><div class="l">Coming 72h</div></div>
       <div class="st g"><div class="n">${s.role_gaps}</div><div class="l">Gaps</div></div>
     </div>
     <div class="alert"><span>⚠</span><div><b>Top concern:</b> ${s.concern}</div></div>
-    <div class="filters">
-      <button class="fb on" onclick="filt('all',this)">All <span class="cnt">${ps.length}</span></button>
-      <button class="fb" onclick="filt('issue',this)">Issues <span class="cnt">${issues.length}</span></button>
-      <button class="fb" onclick="filt('ok',this)">On Track <span class="cnt">${ok.length}</span></button>
-      <select class="fb" id="pm-filter" onchange="filtPM(this.value)" style="cursor:pointer;appearance:none;padding-right:24px;background-image:url('data:image/svg+xml,<%3Fxml version=%221.0%22%3F><svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22><path d=%22M0 0l5 6 5-6z%22 fill=%22%238B95A8%22/></svg>');background-repeat:no-repeat;background-position:right 8px center">
-        <option value="">All PMs</option>
-        ${DATA.pms.map(pm => `<option value="${pm.name}">${pm.name}</option>`).join('')}
-        <option value="__none">No PM</option>
-      </select>
-    </div>
+    ${buildFilters(ps, issues, ok, DATA.pms)}
     <div id="plist">`;
-
-  issues.forEach((p, i) => { h += projCard(p, i === 0); });
-
-  if (ok.length) {
-    ok.forEach(p => {
-      const n48 = p.tasks?.next48 || [];
-      const pmVal = p.pm || 'No PM';
-      let n48html = '';
-      if (n48.length) {
-        n48html = n48.map(tk => `<span style="color:var(--txt)">${tk.n}</span> <span style="color:var(--dim)">${tk.when}</span>`).join(' · ');
-      } else {
-        n48html = '<span style="color:var(--dim);font-style:italic">Nothing upcoming</span>';
-      }
-      const tags = n48.length ? `<span class="tg y">${n48.length} next 48h</span>` : '';
-      h += `<div class="pc sev-g" data-st="ok" data-pm="${pmVal}"><div class="ph" onclick="tog(this)"><div>
-        <div class="pn" style="color:var(--grn)">✓ ${p.name}</div>
-        <div class="pp">${pmVal !== 'No PM' ? 'PM: '+pmVal : '<span class="nob">⚠ No PM assigned</span>'}</div></div>
-        <div class="pt"><span class="tg gr">on track</span>${tags}${chvSvg()}</div></div>
-        <div class="pb"><div style="padding:4px 0"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--ylw);margin-bottom:6px">Next 48 Hours</div>${n48.length ? n48.map(tk => `<div style="font-size:13px;padding:4px 0;border-bottom:1px solid rgba(33,39,47,.5)"><span style="margin-right:6px">●</span>${tk.n} <span style="color:var(--txt2)">${tk.when}</span><div style="font-size:12px;color:var(--txt2);padding-left:16px">${tk.w}</div></div>`).join('') : '<div style="font-size:13px;color:var(--dim);font-style:italic">Nothing upcoming</div>'}</div></div></div>`;
-    });
-  }
-
+  issues.forEach((p, i) => { h += buildCard(p, i === 0, false); });
+  ok.forEach(p => { h += buildOkCard(p); });
   h += '</div>';
-
-  h += '<div class="sh">PM Snapshot</div><div class="pmr">';
-  DATA.pms.forEach(pm => {
-    const badge = pm.ind === 'clean' ? '✅' : pm.ind === 'green' ? '🟢' : pm.ind === 'yellow' ? '🟡' : '🔴';
-    h += `<div class="pmc"><div><div class="pmn">${pm.name}</div><div class="pmd">${pm.ov} overdue / ${pm.act} active<br>${pm.proj} project${pm.proj > 1 ? 's' : ''}</div></div><div class="pmb">${badge}</div></div>`;
-  });
-  h += '</div>';
+  h += buildPMSection(DATA.pms, false);
   h += '<div class="ft">Generated by Jade · Awesome Group · Data from JobTread</div>';
   c.innerHTML = h;
 }
 
-function projCard(p, open) {
+// Shared helpers
+const pmSelectStyle = "cursor:pointer;appearance:none;padding-right:24px;background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22%3E%3Cpath d=%22M0 0l5 6 5-6z%22 fill=%22%238B95A8%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 8px center";
+
+function buildFilters(ps, issues, ok, pms) {
+  return `<div class="filters">
+    <button class="fb on" onclick="filt('all',this)">All <span class="cnt">${ps.length}</span></button>
+    <button class="fb" onclick="filt('issue',this)">Issues <span class="cnt">${issues.length}</span></button>
+    <button class="fb" onclick="filt('ok',this)">On Track <span class="cnt">${ok.length}</span></button>
+    <select class="fb" id="pm-filter" onchange="filtPM(this.value)" style="${pmSelectStyle}">
+      <option value="">All PMs</option>
+      ${pms.map(pm => `<option value="${pm.name}">${pm.name}</option>`).join('')}
+      <option value="__none">No PM</option>
+    </select></div>`;
+}
+
+function buildPMSection(pms, isEOD) {
+  let h = '<div class="sh">PM Snapshot</div><div class="pmr">';
+  pms.forEach(pm => {
+    const badge = pm.ind === 'clean' ? '✅' : pm.ind === 'green' ? '🟢' : pm.ind === 'yellow' ? '🟡' : '🔴';
+    const detail = isEOD
+      ? `${pm.completed||0} done today · ${pm.ov} overdue · ${pm.act} active<br>${pm.proj} project${pm.proj>1?'s':''}`
+      : `${pm.ov} overdue / ${pm.act} active<br>${pm.proj} project${pm.proj>1?'s':''}`;
+    h += `<div class="pmc"><div><div class="pmn">${pm.name}</div><div class="pmd">${detail}</div></div><div class="pmb">${badge}</div></div>`;
+  });
+  return h + '</div>';
+}
+
+function buildOkCard(p) {
+  const co = p.tasks?.coming || [];
+  const pmVal = p.pm || 'No PM';
+  const tags = co.length ? `<span class="tg y">${co.length} coming</span>` : '';
+  return `<div class="pc sev-g" data-st="ok" data-pm="${pmVal}"><div class="ph" onclick="tog(this)"><div>
+    <div class="pn" style="color:var(--grn)">✓ ${p.name}</div>
+    <div class="pp">${pmVal !== 'No PM' ? 'PM: '+pmVal : '<span class="nob">⚠ No PM assigned</span>'}</div></div>
+    <div class="pt"><span class="tg gr">on track</span>${tags}${chvSvg()}</div></div>
+    <div class="pb"><div style="padding:4px 0"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--ylw);margin-bottom:6px">Coming Up (72h)</div>${co.length ? co.map(tk => `<div style="font-size:12px;padding:3px 0;border-bottom:1px solid rgba(33,39,47,.3)"><span style="margin-right:6px">●</span>${tk.n} — <span style="color:var(--txt2)">${tk.when} · ${tk.w}</span></div>`).join('') : '<div style="font-size:12px;color:var(--dim);font-style:italic">Nothing upcoming</div>'}</div></div></div>`;
+}
+
+function buildCard(p, open, isEOD) {
   const c = p.c || {};
   const g = p.g || {};
   const t = p.tasks || {};
-  let tags = '';
-  if (c.l) tags += `<span class="tg r">${c.l} late</span>`;
-  if (c.b) tags += `<span class="tg o">${c.b} blocked</span>`;
-  if (c.a) tags += `<span class="tg b">${c.a} active</span>`;
-  if (c.t) tags += `<span class="tg y">${c.t} next 48h</span>`;
-
+  const ov = t.overdue || []; const bl = t.blocked || [];
+  const ac = t.active || []; const co = t.coming || [];
   const pmLine = p.pm ? `PM: ${p.pm}` : '<span class="nob">⚠ No PM assigned</span>';
 
-  // Build 3-column preview: LATE | TOMORROW | NEXT 2 DAYS
-  let preview = '<div class="preview">';
+  // Tags
+  let tags = '';
+  if (isEOD && c.completed) tags += `<span class="tg gr">${c.completed} done</span>`;
+  if (isEOD && c.resolved) tags += `<span class="tg gr">${c.resolved} cleared</span>`;
+  if (c.ov) tags += `<span class="tg r">${c.ov} late</span>`;
+  if (c.bl) tags += `<span class="tg o">${c.bl} blocked</span>`;
+  if (c.ac) tags += `<span class="tg b">${c.ac} active</span>`;
+  if (c.co) tags += `<span class="tg y">${c.co} coming</span>`;
 
-  // Column 1: LATE
-  preview += '<div class="pv-col"><div class="pv-head r">Late</div>';
-  if (t.late?.length) {
-    const real = t.late.filter(tk => !tk.s);
-    const summary = t.late.find(tk => tk.s);
-    real.slice(0, 3).forEach(tk => {
-      preview += `<div class="pv-item"><div class="pv-dot r"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub${!tk.w?' warn':''}">${tk.w||'⚠ nobody'} · ${tk.d}d</div></div></div>`;
-    });
-    const extra = Math.max(0, real.length - 3) + (summary ? parseInt(summary.n?.match(/\d+/)?.[0]) || 0 : 0);
-    if (extra > 0) preview += `<div class="pv-more">+${extra} more</div>`;
-  } else {
-    preview += '<div class="pv-empty">None - all clear</div>';
-  }
+  const sev = c.ov ? 'sev-r' : c.bl ? 'sev-o' : c.ac ? 'sev-b' : 'sev-g';
+
+  // Preview: 4 columns, max 2 per column
+  let preview = '<div class="preview" style="grid-template-columns:1fr 1fr 1fr 1fr">';
+  preview += pvCol('Overdue', 'r', ov, tk => `${tk.n}`, tk => `${tk.d}d`);
+  preview += pvCol('Active', 'b', ac, tk => `${tk.n}`, tk => tk.dt || 'active');
+  preview += pvCol('Blocked', 'o', bl, tk => `${tk.n}`, tk => tk.due || '');
+  preview += pvCol('Coming Up', 'y', co, tk => `${tk.n}`, tk => tk.when || '');
   preview += '</div>';
 
-  // Column 2: NEXT 48 HOURS
-  const n48 = t.next48 || t.tmr || [];
-  preview += '<div class="pv-col"><div class="pv-head y">Next 48 Hours</div>';
-  if (n48.length) {
-    n48.slice(0, 4).forEach(tk => {
-      const label = tk.when || 'due tomorrow';
-      preview += `<div class="pv-item"><div class="pv-dot y"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub${!tk.w?' warn':''}">${label} · ${tk.w||'⚠ nobody'}</div></div></div>`;
-    });
-    if (n48.length > 4) preview += `<div class="pv-more">+${n48.length - 4} more</div>`;
-  } else {
-    preview += '<div class="pv-empty">Nothing upcoming</div>';
-  }
-  preview += '</div>';
-
-  // Column 3: NEXT 2 DAYS (blocked + active coming up)
-  preview += '<div class="pv-col"><div class="pv-head b">Coming Up</div>';
-  let upcoming = [];
-  if (t.active) t.active.forEach(tk => upcoming.push({n:tk.n, w:tk.w, sub:tk.dt||'active'}));
-  if (t.blocked) t.blocked.filter(tk => !tk.s).slice(0, 3).forEach(tk => upcoming.push({n:tk.n, w:tk.w, due:tk.due, sub:'← '+tk.bl?.split('(')[0]?.trim(), isBlocked:true}));
-  if (upcoming.length) {
-    upcoming.slice(0, 4).forEach(tk => {
-      if (tk.isBlocked) {
-        const fmtDue = fmtDate(tk.due);
-        preview += `<div class="pv-item"><div class="pv-dot b"></div><div class="pv-txt"><div class="pv-name">${tk.n} <span style="color:var(--bdr);margin:0 4px">│</span><span style="color:var(--txt);font-family:var(--mono);font-size:11px">${fmtDue}</span></div><div class="pv-sub warn">🟠 ${tk.sub}</div></div></div>`;
-      } else {
-        preview += `<div class="pv-item"><div class="pv-dot b"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub">${(tk.w||'⚠ nobody') + ' · ' + tk.sub}</div></div></div>`;
-      }
-    });
-    if (upcoming.length > 4) preview += `<div class="pv-more">+${upcoming.length - 4} more</div>`;
-  } else {
-    preview += '<div class="pv-empty">Nothing upcoming</div>';
-  }
-  preview += '</div></div>';
-
-  // Build expanded body in 2-column grid
+  // Expanded: 2x2 grid
   let body = '<div class="pb-grid">';
 
-  // Left column: Late + Active
+  // Top-left: Overdue (+ EOD extras)
   body += '<div>';
-  if (t.late?.length) {
-    body += `<div class="ts"><div class="tsl lr">Overdue</div>`;
-    body += trowSection('r', t.late, tk => trow('r', tk.n, tk.w, tk.s ? tk.d : tk.d + 'd late', !tk.s), 5);
+  if (isEOD && t.completed?.length) {
+    body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Completed</div>';
+    body += trowSection('g', t.completed, tk => trow('g', tk.n, tk.w, '✓'), 5);
     body += '</div>';
   }
-  if (t.active?.length) {
-    body += `<div class="ts"><div class="tsl ac">Active</div>`;
-    body += trowSection('b', t.active, tk => trow('b', tk.n, tk.w, tk.dt || ''), 5);
+  if (isEOD && t.resolved?.length) {
+    body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Resolved</div>';
+    body += trowSection('g', t.resolved, tk => trow('g', tk.n, tk.w, 'clear'), 5);
+    body += '</div>';
+  }
+  if (ov.length) {
+    body += '<div class="ts"><div class="tsl lr">Overdue</div>';
+    body += trowSection('r', ov, tk => trow('r', tk.n, tk.w, tk.d + 'd', true), 5);
+    body += '</div>';
+  }
+  if (ac.length) {
+    body += '<div class="ts"><div class="tsl ac">Active</div>';
+    body += trowSection('b', ac, tk => trow('b', tk.n, tk.w, tk.dt || ''), 5);
     body += '</div>';
   }
   body += '</div>';
 
-  // Right column: Blocked + Next 48 Hours
+  // Top-right: Blocked
   body += '<div>';
-  if (t.blocked?.length) {
-    body += `<div class="ts"><div class="tsl bl">Blocked</div>`;
-    body += trowSection('o', t.blocked, tk => trow('o', tk.n, tk.w, tk.due || '', false, tk.bl), 5);
+  if (bl.length) {
+    body += '<div class="ts"><div class="tsl bl">Blocked</div>';
+    body += trowSection('o', bl, tk => trow('o', tk.n, tk.w, tk.due || '', false, tk.bl), 5);
     body += '</div>';
   }
-  const n48body = t.next48 || t.tmr || [];
-  if (n48body.length) {
-    body += `<div class="ts"><div class="tsl dt">Next 48 Hours</div>`;
-    body += trowSection('y', n48body, tk => trow('y', tk.n, tk.w, tk.when || 'tomorrow'), 5);
+  if (co.length) {
+    body += '<div class="ts"><div class="tsl dt">Coming Up (72h)</div>';
+    body += trowSection('y', co, tk => trow('y', tk.n, tk.w, tk.when || ''), 5);
     body += '</div>';
   }
   body += '</div>';
 
-  // Full-width: Gaps
+  // Gaps
   if (g.p || g.v || g.pc) {
     body += '<div class="pb-full"><div class="ts"><div class="tsl gp">Role Gaps</div><div class="gl">';
     if (g.p) body += `<span class="gt">${g.p} no PM</span>`;
@@ -565,10 +421,22 @@ function projCard(p, open) {
   }
   body += '</div>';
 
-  const sev = c.l ? 'sev-r' : c.b ? 'sev-o' : c.a ? 'sev-b' : 'sev-g';
   return `<div class="pc ${sev}${open ? ' op' : ''}" data-st="issue" data-pm="${p.pm||'No PM'}"><div class="ph" onclick="tog(this)"><div>
     <div class="pn">${p.name}</div><div class="pp">${pmLine}</div></div>
     <div class="pt">${tags}${chvSvg()}</div></div>${preview}<div class="pb">${body}</div></div>`;
+}
+
+function pvCol(label, color, items, nameFn, subFn) {
+  let h = `<div class="pv-col"><div class="pv-head ${color === 'b' ? 'b' : color}">${label}</div>`;
+  if (items.length) {
+    items.slice(0, 2).forEach(tk => {
+      h += `<div class="pv-item"><div class="pv-dot ${color}"></div><div class="pv-txt"><div class="pv-name">${nameFn(tk)}</div><div class="pv-sub">${subFn(tk)}</div></div></div>`;
+    });
+    if (items.length > 2) h += `<div class="pv-more">+${items.length - 2} more</div>`;
+  } else {
+    h += '<div class="pv-empty">None</div>';
+  }
+  return h + '</div>';
 }
 
 let _trowId = 0;
