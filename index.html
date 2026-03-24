@@ -245,17 +245,33 @@ function renderSOD(c) {
       <button class="fb on" onclick="filt('all',this)">All <span class="cnt">${ps.length}</span></button>
       <button class="fb" onclick="filt('issue',this)">Issues <span class="cnt">${issues.length}</span></button>
       <button class="fb" onclick="filt('ok',this)">On Track <span class="cnt">${ok.length}</span></button>
+      <select class="fb" id="pm-filter" onchange="filtPM(this.value)" style="cursor:pointer;appearance:none;padding-right:24px;background-image:url('data:image/svg+xml,<%3Fxml version=%221.0%22%3F><svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22><path d=%22M0 0l5 6 5-6z%22 fill=%22%238B95A8%22/></svg>');background-repeat:no-repeat;background-position:right 8px center">
+        <option value="">All PMs</option>
+        ${DATA.pms.map(pm => `<option value="${pm.name}">${pm.name}</option>`).join('')}
+        <option value="__none">No PM</option>
+      </select>
     </div>
     <div id="plist">`;
 
   issues.forEach((p, i) => { h += projCard(p, i === 0); });
 
   if (ok.length) {
-    h += `<div class="pc sev-g" data-st="ok"><div class="ph" onclick="tog(this)"><div>
-      <div class="pn" style="color:var(--grn)">✓ On Track</div>
-      <div class="pp">${ok.length} projects with no issues</div></div>
-      <div class="pt"><span class="tg gr">${ok.length} clean</span>${chvSvg()}</div></div>
-      <div class="pb"><div class="otg">${ok.map(p => `<div class="oti"><span class="otc">✓</span>${p.name}${!p.pm ? '<div class="otn">No PM assigned</div>' : ''}</div>`).join('')}</div></div></div>`;
+    ok.forEach(p => {
+      const n48 = p.tasks?.next48 || [];
+      const pmVal = p.pm || 'No PM';
+      let n48html = '';
+      if (n48.length) {
+        n48html = n48.map(tk => `<span style="color:var(--txt)">${tk.n}</span> <span style="color:var(--dim)">${tk.when}</span>`).join(' · ');
+      } else {
+        n48html = '<span style="color:var(--dim);font-style:italic">Nothing upcoming</span>';
+      }
+      const tags = n48.length ? `<span class="tg y">${n48.length} next 48h</span>` : '';
+      h += `<div class="pc sev-g" data-st="ok" data-pm="${pmVal}"><div class="ph" onclick="tog(this)"><div>
+        <div class="pn" style="color:var(--grn)">✓ ${p.name}</div>
+        <div class="pp">${pmVal !== 'No PM' ? 'PM: '+pmVal : '<span class="nob">⚠ No PM assigned</span>'}</div></div>
+        <div class="pt"><span class="tg gr">on track</span>${tags}${chvSvg()}</div></div>
+        <div class="pb"><div style="padding:4px 0"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--ylw);margin-bottom:6px">Next 48 Hours</div>${n48.length ? n48.map(tk => `<div style="font-size:13px;padding:4px 0;border-bottom:1px solid rgba(33,39,47,.5)"><span style="margin-right:6px">●</span>${tk.n} <span style="color:var(--txt2)">${tk.when}</span><div style="font-size:12px;color:var(--txt2);padding-left:16px">${tk.w}</div></div>`).join('') : '<div style="font-size:13px;color:var(--dim);font-style:italic">Nothing upcoming</div>'}</div></div></div>`;
+    });
   }
 
   h += '</div>';
@@ -377,7 +393,7 @@ function projCard(p, open) {
   body += '</div>';
   
   const sev = c.l ? 'sev-r' : c.b ? 'sev-o' : c.a ? 'sev-b' : 'sev-g';
-  return `<div class="pc ${sev}${open ? ' op' : ''}" data-st="issue"><div class="ph" onclick="tog(this)"><div>
+  return `<div class="pc ${sev}${open ? ' op' : ''}" data-st="issue" data-pm="${p.pm||'No PM'}"><div class="ph" onclick="tog(this)"><div>
     <div class="pn">${p.name}</div><div class="pp">${pmLine}</div></div>
     <div class="pt">${tags}${chvSvg()}</div></div>${preview}<div class="pb">${body}</div></div>`;
 }
@@ -409,13 +425,37 @@ function fmtDate(d) {
 
 function tog(el) { el.closest('.pc').classList.toggle('op'); }
 
-function filt(f, btn) {
-  document.querySelectorAll('.fb').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
+let curFilter = 'all';
+let curPMFilter = '';
+
+function applyFilters() {
   document.querySelectorAll('.pc[data-st]').forEach(card => {
-    if (f === 'all') card.style.display = '';
-    else card.style.display = card.dataset.st === f ? '' : 'none';
+    let show = true;
+    // Status filter
+    if (curFilter !== 'all' && card.dataset.st !== curFilter) show = false;
+    // PM filter
+    if (show && curPMFilter) {
+      const cardPM = card.dataset.pm || '';
+      if (curPMFilter === '__none') {
+        show = cardPM === 'No PM';
+      } else {
+        show = cardPM.includes(curPMFilter);
+      }
+    }
+    card.style.display = show ? '' : 'none';
   });
+}
+
+function filt(f, btn) {
+  document.querySelectorAll('.fb:not(#pm-filter)').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  curFilter = f;
+  applyFilters();
+}
+
+function filtPM(pm) {
+  curPMFilter = pm;
+  applyFilters();
 }
 
 // Archive page
