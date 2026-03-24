@@ -244,6 +244,10 @@ async function loadAndRenderEOD(c) {
   }
 }
 
+function eodSec(title, color, content) {
+  return `<div style="margin-bottom:14px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:${color};margin-bottom:6px">${title}</div><div style="font-size:13px;color:var(--txt);line-height:1.5">${content}</div></div>`;
+}
+
 function renderEOD(c) {
   const s = EOD_DATA.summary;
   const ps = EOD_DATA.projects;
@@ -274,16 +278,16 @@ function renderEOD(c) {
     const sevClass = p.trend === 'worse' ? 'sev-r' : p.trend === 'improved' ? 'sev-g' : 'sev-o';
 
     let body = '';
-    if (p.completed_text) body += `<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--grn);margin-bottom:4px">✅ Completed today</div><div style="font-size:13px;color:var(--txt);line-height:1.6">${p.completed_text}</div></div>`;
-    if (p.problems_text) body += `<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--red);margin-bottom:4px">🔴 Still a problem</div><div style="font-size:13px;color:var(--txt);line-height:1.6">${p.problems_text}</div></div>`;
-    if (p.risk_text) body += `<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--ylw);margin-bottom:4px">⚠️ Next 48 hours risk</div><div style="font-size:13px;color:var(--txt);line-height:1.6">${p.risk_text}</div></div>`;
-    if (!p.completed_text && !p.problems_text && !p.risk_text) body = '<div style="font-size:13px;color:var(--dim);font-style:italic">No changes today. All tasks on track.</div>';
+    const fmt = t => t.split('\n').map(l => `<div style="padding:2px 0">${l}</div>`).join('');
+    body += eodSec('✅ COMPLETED TODAY', 'var(--grn)', p.completed_text ? fmt(p.completed_text) : '<div style="color:var(--dim)">No tasks completed today.</div>');
+    if (p.problems_text) body += eodSec('🔴 STILL A PROBLEM', 'var(--red)', fmt(p.problems_text));
+    if (p.risk_text) body += eodSec('⚠️ NEXT 48H RISK', 'var(--ylw)', fmt(p.risk_text));
 
     h += `<div class="pc ${sevClass}" data-st="issue" data-pm="${p.pm||'No PM'}"><div class="ph" onclick="tog(this)"><div>
       <div class="pn">${p.name}</div>
       <div class="pp">PM: ${p.pm} &nbsp;|&nbsp; ${tIcon} ${tLabel}</div></div>
       <div class="pt">${chvSvg()}</div></div>
-      <div class="pb" style="padding:8px 14px 14px">${body}</div></div>`;
+      <div class="pb" style="padding:0 14px 14px"><div style="border-top:1px solid var(--bdr);margin-bottom:12px"></div>${body}</div></div>`;
   });
 
   if (ok.length) {
