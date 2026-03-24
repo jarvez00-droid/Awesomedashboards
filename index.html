@@ -194,169 +194,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 <div class="main" id="content"></div>
 
 <script>
-const DATA = {
-  "date": "2026-03-24",
-  "summary": { "overdue": 27, "blocked": 58, "active": 10, "due_tomorrow": 9, "role_gaps": 104,
-    "concern": "Gaurav Bansal has 16 overdue tasks + 38 with no PM assigned — needs Jeff to act immediately." },
-  "pms": [
-    { "name": "Angel Pacheco", "ov": 1, "act": 29, "proj": 2, "ind": "green" },
-    { "name": "Jeff", "ov": 0, "act": 15, "proj": 3, "ind": "clean" },
-    { "name": "Marcio Oliveira", "ov": 1, "act": 3, "proj": 1, "ind": "yellow" },
-    { "name": "Milagros", "ov": 1, "act": 47, "proj": 2, "ind": "green" }
-  ],
-  "projects": [
-    { "name":"Gaurav Bansal","num":"KU-1225Avondale","pm":"Jeff","st":"issue",
-      "c":{"l":16,"b":9,"a":0,"t":4},"g":{"p":38,"v":24,"pc":6},
-      "tasks":{
-        "late":[
-          {"n":"Planning team meeting","d":4},{"n":"Distribution plan V1","d":4},
-          {"n":"Distribution plan V2","d":4},{"n":"Structural plans","d":4},
-          {"n":"Energy Report","d":4},{"n":"Sales finishes meeting","d":4},
-          {"n":"+10 more tasks","d":"1-4","s":true}
-        ],
-        "active":[],
-        "blocked":[
-          {"n":"811 Inspection","due":"03/25","bl":"CALL 811 (done ✓)"},
-          {"n":"Dig Foundation & Plumbing","due":"03/28","bl":"Schedule Dig Foundation (not started)"},
-          {"n":"+7 more blocked","due":"Apr 2-7","bl":"All waiting on scheduling tasks","s":true}
-        ],
-        "tmr":[
-          {"n":"Initial project kick off meeting","w":"Jeff"},
-          {"n":"Set of architectural plans"},
-          {"n":"Permits Submission","w":"Claudia Delgado"},
-          {"n":"Schedule Dig Foundation"}
-        ]
-      }
-    },
-    { "name":"Sergio Lares","num":"212129","pm":"Jeff, Milagros Porturas","st":"issue",
-      "c":{"l":10,"b":15,"a":3,"t":2},"g":{"p":2,"v":10,"pc":3},
-      "tasks":{
-        "late":[
-          {"n":"SCHEDULE CREW","d":2,"w":"Milagros Porturas"},
-          {"n":"INSPECTION (×2)","d":1,"w":"Milagros Porturas"},
-          {"n":"+7 more overdue","d":"1-4","s":true}
-        ],
-        "active":[
-          {"n":"BUY CABINETS","dt":"Mar 24","w":"Henry M Vilchez, Milagros"},
-          {"n":"PICK UP CABINETS","dt":"Mar 24","w":"Henry M Vilchez, Milagros"},
-          {"n":"SCHEDULE CREW","dt":"Mar 24","w":"Milagros"}
-        ],
-        "blocked":[
-          {"n":"Plumbing Trim","due":"03/31","w":"Eliseo Vasquez, Milagros","bl":"Schedule Plumber (not started)"},
-          {"n":"+14 more blocked","due":"Mar-Apr","bl":"Countertops, electrical, appliances chain","s":true}
-        ],
-        "tmr":[
-          {"n":"re SCHEDULE CREW","w":"Milagros, JC'S"},
-          {"n":"CABINETS INSTALLATION"}
-        ]
-      }
-    },
-    { "name":"Stephanie and Marc Felton","pm":"Jeff, Marcio Oliveira","st":"issue",
-      "c":{"l":2,"b":5,"a":1,"t":0},"g":{"p":3,"v":4,"pc":0},
-      "tasks":{
-        "late":[
-          {"n":"Windows & Exterior Doors","d":3},
-          {"n":"Order brick","d":1,"w":"Marcio Oliveira"}
-        ],
-        "active":[{"n":"Schedule brick ties","dt":"Mar 24 – Apr 4","w":"Marcio, Jeff"}],
-        "blocked":[
-          {"n":"Drywall Hang & Finish","due":"04/03","bl":"Schedule sheetrock (not started)"},
-          {"n":"Interior Trim & Doors","due":"04/07","bl":"Drywall (not started)"},
-          {"n":"+3 more blocked","due":"Apr 10-14","bl":"Paint → cabinets chain","s":true}
-        ],
-        "tmr":[]
-      }
-    },
-    { "name":"Lingyan Qiu","num":"CNG2025-458","pm":"Angel Pacheco, Jeff","st":"issue",
-      "c":{"l":0,"b":4,"a":2,"t":0},"g":{"p":6,"v":11,"pc":0},
-      "tasks":{
-        "late":[],
-        "active":[
-          {"n":"Form board inspection","dt":"Mar 17–24","w":"Angel Pacheco"},
-          {"n":"Order framing materials","dt":"Mar 13–24","w":"Angel Pacheco, Romina Rey"}
-        ],
-        "blocked":[
-          {"n":"Concrete pour - Foundation","due":"03/27","bl":"Pre pour inspection (not started)"},
-          {"n":"Foundation cure","due":"04/07","w":"Angel Pacheco","bl":"Concrete pour (not started)"},
-          {"n":"Framing and cornice","due":"04/13","w":"Angel Pacheco","bl":"Order framing materials (done ✓)"},
-          {"n":"Framing inspection","due":"04/14","w":"Angel Pacheco","bl":"Framing and cornice (not started)"}
-        ],
-        "tmr":[]
-      }
-    },
-    { "name":"Clifford Clack — Gym Addition","pm":"Angel Pacheco","st":"issue",
-      "c":{"l":0,"b":8,"a":2,"t":2},"g":{"p":2,"v":2,"pc":0},
-      "tasks":{
-        "late":[],
-        "active":[
-          {"n":"DIG FOUNDATION DITCHES - WIP","dt":"Mar 24–25","w":"Clifford, Efren, Angel"},
-          {"n":"WIP | FORM BOARDS","dt":"Mar 24–25","w":"Clifford, Angel, Efren"}
-        ],
-        "blocked":[
-          {"n":"N Ground Electrical - WIP","due":"03/30","w":"Clifford Clack","bl":"IN GROUND ELECTRICAL - READY (not started)"},
-          {"n":"Foundation Inspection","due":"04/03","w":"Angel Pacheco","bl":"Foundation WIP (50%)"},
-          {"n":"Concrete pour","due":"04/02","w":"Angel, Efren","bl":"Pre pour inspection (not started)"},
-          {"n":"+5 more blocked","due":"Apr 8-14","bl":"Downstream chain","s":true}
-        ],
-        "tmr":[
-          {"n":"DIG FOUNDATION DITCHES - WIP","w":"Clifford, Efren, Angel"},
-          {"n":"WIP | FORM BOARDS","w":"Clifford, Angel, Efren"}
-        ]
-      }
-    },
-    { "name":"Katie Holmes & Sean Springs","pm":"Jeff","st":"issue",
-      "c":{"l":1,"b":5,"a":3,"t":0},"g":{"p":3,"v":10,"pc":4},
-      "tasks":{
-        "late":[{"n":"schedule framing","d":1,"w":"Jeff"}],
-        "active":[
-          {"n":"Erect Metal Framing (85%)","dt":"Mar 3–26"},
-          {"n":"Interior Framing","dt":"Mar 14–26"},
-          {"n":"Purchase lumber","dt":"Mar 19–26","w":"Jeff"}
-        ],
-        "blocked":[
-          {"n":"Spray Foam / Insulation","due":"04/02","w":"Jeff","bl":"Leland install windows (not started)"},
-          {"n":"+4 more blocked","due":"Apr 3-13","bl":"Plumbing → Electrical → HVAC chain","s":true}
-        ],
-        "tmr":[]
-      }
-    },
-    { "name":"Martha Cockrell","num":"CNG-20251199","pm":null,"st":"issue",
-      "c":{"l":2,"b":0,"a":0,"t":0},"g":{"p":6,"v":5,"pc":1},
-      "tasks":{
-        "late":[
-          {"n":"Framing and cornice","d":3,"w":"Martha Cockrell"},
-          {"n":"Purchase doors & windows","d":1}
-        ],
-        "active":[],"blocked":[],"tmr":[]
-      }
-    },
-    { "name":"Rohini Williams","num":"CNG2025-496","pm":"Milagros Porturas","st":"issue",
-      "c":{"l":0,"b":11,"a":0,"t":0},"g":{"p":10,"v":3,"pc":4},
-      "tasks":{
-        "late":[],
-        "active":[],
-        "blocked":[{"n":"11 tasks blocked","due":"Apr 9-11","bl":"All waiting on scheduling (plumber, electrician, dig, pour)","s":true}],
-        "tmr":[]
-      }
-    },
-    { "name":"Ginger Brown","pm":"Milagros Porturas","st":"issue",
-      "c":{"l":0,"b":2,"a":0,"t":0},"g":{"p":0,"v":1,"pc":0},
-      "tasks":{
-        "late":[],
-        "active":[],
-        "blocked":[
-          {"n":"Plumbing Trim","due":"04/13","w":"Eliseo Vasquez, Milagros","bl":"Schedule Plumber (not started)"},
-          {"n":"Plumbing Trim Inspection","due":"04/14","w":"Milagros","bl":"Plumbing Trim (not started)"}
-        ],
-        "tmr":[]
-      }
-    },
-    {"name":"Kyle Aubry - Project 01","pm":null,"st":"ok"},
-    {"name":"Charles Harris — Argyle TX","pm":null,"st":"ok"},
-    {"name":"Stephen Bernard Patrick","pm":null,"st":"ok"},
-    {"name":"Visionary Construction","pm":null,"st":"ok"}
-  ]
-};
+let DATA = {};
 
 let curPage = 'sod';
 
@@ -570,7 +408,26 @@ function filt(f, btn) {
   });
 }
 
-render();
+async function loadData() {
+  const today = new Date().toISOString().slice(0, 10);
+  try {
+    const r = await fetch('data/sod-' + today + '.json');
+    if (!r.ok) throw new Error('not found');
+    DATA = await r.json();
+  } catch(e) {
+    // Try yesterday if today isn't available yet
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    try {
+      const r2 = await fetch('data/sod-' + yesterday + '.json');
+      DATA = await r2.json();
+    } catch(e2) {
+      document.getElementById('content').innerHTML = '<div class="empty"><div class="empty-i">📋</div><div class="empty-t">No Data Yet</div><div class="empty-d">Waiting for first SOD report from Jade.</div></div>';
+      return;
+    }
+  }
+  render();
+}
+loadData();
 </script>
 </body>
 </html>
