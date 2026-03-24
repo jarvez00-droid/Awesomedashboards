@@ -215,6 +215,47 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 .fc-risk.high{background:var(--red-s);color:var(--red);border:1px solid var(--red-b)}
 .fc-risk.medium{background:var(--ylw-s);color:var(--ylw);border:1px solid var(--ylw-b)}
 .fc-risk.low{background:var(--grn-s);color:var(--grn);border:1px solid var(--grn-b)}
+
+/* Cash Flow */
+.cf-balance-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.cf-balance-label{font-size:13px;font-weight:600;color:var(--txt2)}
+.cf-balance-input{background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:8px 12px;font-size:18px;font-family:var(--mono);font-weight:700;color:var(--grn);width:200px;outline:none;transition:border-color .15s}
+.cf-balance-input:focus{border-color:var(--blu)}
+.cf-balance-saved{font-size:11px;color:var(--dim);font-style:italic}
+.cf-time-tabs{display:flex;gap:2px;margin-bottom:16px;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px;width:fit-content}
+.cf-tt{padding:6px 14px;font-size:12px;font-weight:500;font-family:var(--sans);color:var(--txt2);background:none;border:none;border-radius:4px;cursor:pointer;white-space:nowrap;transition:all .12s}
+.cf-tt:hover{color:var(--txt)}.cf-tt.on{background:var(--blu);color:#fff}
+.cf-chart-wrap{background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:16px;margin-bottom:20px;overflow-x:auto}
+.cf-chart{display:flex;align-items:flex-end;gap:2px;height:180px;min-width:100%}
+.cf-bar-group{display:flex;flex-direction:column;align-items:center;flex:1;min-width:36px;position:relative}
+.cf-bar{width:100%;max-width:32px;border-radius:4px 4px 0 0;transition:height .3s;position:relative;min-height:2px}
+.cf-bar.pos{background:var(--grn)}.cf-bar.neg{background:var(--red);border-radius:0 0 4px 4px}
+.cf-bar-lbl{font-size:9px;font-family:var(--mono);color:var(--txt2);margin-top:4px;white-space:nowrap;transform:rotate(-45deg);transform-origin:top left;position:relative;left:8px}
+.cf-bar-amt{font-size:9px;font-family:var(--mono);font-weight:600;position:absolute;top:-16px;left:50%;transform:translateX(-50%);white-space:nowrap}
+.cf-bar-amt.pos{color:var(--grn)}.cf-bar-amt.neg{color:var(--red)}
+.cf-baseline{position:absolute;left:0;right:0;border-top:1px dashed var(--dim);z-index:1}
+.cf-proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+@media(max-width:600px){.cf-proj-grid{grid-template-columns:1fr}}
+.cf-proj{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+.cf-proj-name{font-size:13px;font-weight:500}
+.cf-proj-amt{font-family:var(--mono);font-size:14px;font-weight:700}
+.cf-proj-amt.in{color:var(--grn)}.cf-proj-amt.out{color:var(--red)}.cf-proj-amt.net-pos{color:var(--grn)}.cf-proj-amt.net-neg{color:var(--red)}
+.cf-proj-detail{font-size:11px;color:var(--txt2)}
+.cf-pay-list{margin-top:4px}
+.cf-pay{display:flex;align-items:center;padding:6px 0;border-bottom:1px solid rgba(33,39,47,.3);font-size:12px;gap:8px}
+.cf-pay:last-child{border-bottom:none}
+.cf-pay-date{font-family:var(--mono);font-size:11px;color:var(--txt2);min-width:52px}
+.cf-pay-type{font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;min-width:54px;text-align:center}
+.cf-pay-type.in{background:var(--grn-s);color:var(--grn);border:1px solid var(--grn-b)}
+.cf-pay-type.out{background:var(--red-s);color:var(--red);border:1px solid var(--red-b)}
+.cf-pay-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cf-pay-proj{font-size:11px;color:var(--txt2)}
+.cf-pay-amt{font-family:var(--mono);font-weight:600;white-space:nowrap}
+.cf-pay-amt.in{color:var(--grn)}.cf-pay-amt.out{color:var(--red)}
+.cf-pay-status{font-size:10px;padding:2px 6px;border-radius:3px}
+.cf-pay-status.paid{background:var(--grn-s);color:var(--grn);border:1px solid var(--grn-b)}
+.cf-pay-status.pending{background:var(--ylw-s);color:var(--ylw);border:1px solid var(--ylw-b)}
+.cf-pay-status.tbd{background:rgba(85,95,112,.12);color:var(--dim);border:1px solid rgba(85,95,112,.2)}
 </style>
 </head>
 <body>
@@ -239,6 +280,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a data-p="eod">🌙 EOD</a>
   <a data-p="projects">◧ Projects</a>
   <a data-p="weekly">▤ Weekly Forecast</a>
+  <a data-p="cashflow">💰 Cash Flow</a>
   <a data-p="mgmt">▥ Management</a>
   <a data-p="archive">▦ Archive</a>
 </div>
@@ -269,6 +311,7 @@ function render() {
   if (curPage === 'sod') renderSOD(c);
   else if (curPage === 'eod') loadAndRenderEOD(c);
   else if (curPage === 'weekly') weeklyGate(c);
+  else if (curPage === 'cashflow') cashflowGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
     const titles = {projects:'Project Dashboards',mgmt:'EOD Management'};
@@ -490,6 +533,340 @@ function buildWeeklyProjectBody(p) {
   }
 
   return b;
+}
+
+// ═══════════════════════════════════════════
+// CASH FLOW
+// ═══════════════════════════════════════════
+let CF_DATA = null;
+let cfDays = 7;
+
+function cashflowGate(c) {
+  if (sessionStorage.getItem('wk_auth') === '1') {
+    loadAndRenderCashflow(c);
+    return;
+  }
+  c.innerHTML = `<div class="pw-gate">
+    <div class="pw-icon">💰</div>
+    <div class="pw-title">Cash Flow — Management View</div>
+    <div class="pw-sub">Enter password to access this report.</div>
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
+    <button class="pw-btn" id="pw-btn">Unlock</button>
+    <div class="pw-deny" id="pw-deny" style="display:none">Access denied</div>
+  </div>`;
+  const inp = document.getElementById('pw-input');
+  const btn = document.getElementById('pw-btn');
+  const deny = document.getElementById('pw-deny');
+  function tryPw() {
+    if (inp.value === WEEKLY_PW) {
+      sessionStorage.setItem('wk_auth', '1');
+      loadAndRenderCashflow(c);
+    } else {
+      inp.classList.add('pw-err');
+      deny.style.display = '';
+      setTimeout(() => inp.classList.remove('pw-err'), 400);
+    }
+  }
+  btn.addEventListener('click', tryPw);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') tryPw(); });
+  setTimeout(() => inp.focus(), 50);
+}
+
+async function loadAndRenderCashflow(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Cash Flow...</div></div>';
+  const today = new Date().toISOString().slice(0, 10);
+  // Try today, then yesterday
+  for (const d of [today, new Date(Date.now() - 86400000).toISOString().slice(0, 10)]) {
+    try {
+      const r = await fetch('data/cashflow-' + d + '.json');
+      if (!r.ok) continue;
+      CF_DATA = await r.json();
+      renderCashflow(c);
+      return;
+    } catch(e) {}
+  }
+  c.innerHTML = '<div class="empty"><div class="empty-i">💰</div><div class="empty-t">No Cash Flow Data</div><div class="empty-d">Run generate_cashflow_json.py to generate cash flow data.</div></div>';
+}
+
+function cfFmt(n) {
+  if (n === 0) return '$0';
+  const abs = Math.abs(n);
+  const s = abs >= 1000 ? '$' + abs.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0}) : '$' + abs.toFixed(0);
+  return n < 0 ? '-' + s : s;
+}
+function cfFmt2(n) {
+  const abs = Math.abs(n);
+  const s = '$' + abs.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  return n < 0 ? '-' + s : s;
+}
+
+function renderCashflow(c) {
+  const d = CF_DATA;
+  const s = d.summary;
+  const balance = parseFloat(localStorage.getItem('cf_balance') || '0');
+
+  // Flatten all items with dates into a day-by-day timeline
+  const allItems = d.all_tasks || [];
+  const today = new Date(d.date + 'T12:00:00');
+
+  // Time window tabs
+  let h = `
+    <div class="page-title">Cash Flow</div>
+    <div class="page-sub">Payment projections · Updated ${d.date}</div>
+    <div class="cf-balance-row">
+      <span class="cf-balance-label">Current Cash Position:</span>
+      <input type="text" class="cf-balance-input" id="cf-bal" value="${balance ? cfFmt2(balance) : ''}" placeholder="$0.00">
+      <span class="cf-balance-saved" id="cf-saved" style="display:none">✓ Saved</span>
+    </div>
+    <div class="stats" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">
+      <div class="st g"><div class="n">${cfFmt(s.total_income)}</div><div class="l">Income</div></div>
+      <div class="st r"><div class="n">${cfFmt(s.total_outgoing)}</div><div class="l">Outgoing</div></div>
+      <div class="st ${s.total_net >= 0 ? 'g' : 'r'}"><div class="n">${cfFmt(s.total_net)}</div><div class="l">Net</div></div>
+      <div class="st y"><div class="n">${s.total_payment_tasks}</div><div class="l">Payments</div></div>
+    </div>
+    <div class="cf-time-tabs" id="cf-tabs">
+      <button class="cf-tt${cfDays===7?' on':''}" data-d="7">1 Week</button>
+      <button class="cf-tt${cfDays===14?' on':''}" data-d="14">2 Weeks</button>
+      <button class="cf-tt${cfDays===21?' on':''}" data-d="21">3 Weeks</button>
+      <button class="cf-tt${cfDays===28?' on':''}" data-d="28">1 Month</button>
+    </div>
+    <div id="cf-body"></div>`;
+  c.innerHTML = h;
+
+  // Balance input handler
+  const balInput = document.getElementById('cf-bal');
+  const savedEl = document.getElementById('cf-saved');
+  balInput.addEventListener('change', () => {
+    const raw = balInput.value.replace(/[^0-9.\-]/g, '');
+    const val = parseFloat(raw) || 0;
+    localStorage.setItem('cf_balance', val.toString());
+    balInput.value = cfFmt2(val);
+    savedEl.style.display = '';
+    setTimeout(() => savedEl.style.display = 'none', 2000);
+    renderCfBody();
+  });
+
+  // Tab handler
+  document.getElementById('cf-tabs').addEventListener('click', e => {
+    const btn = e.target.closest('[data-d]');
+    if (!btn) return;
+    cfDays = parseInt(btn.dataset.d);
+    document.querySelectorAll('.cf-tt').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    renderCfBody();
+  });
+
+  renderCfBody();
+}
+
+function renderCfBody() {
+  const body = document.getElementById('cf-body');
+  if (!body || !CF_DATA) return;
+  const d = CF_DATA;
+  const balance = parseFloat(localStorage.getItem('cf_balance') || '0');
+  const today = new Date(d.date + 'T12:00:00');
+  const cutoff = new Date(today.getTime() + cfDays * 86400000);
+  const allItems = d.all_tasks || [];
+
+  // Filter items in time window
+  const windowItems = allItems.filter(t => {
+    if (!t.due) return false;
+    const td = new Date(t.due + 'T12:00:00');
+    return td >= today && td < cutoff;
+  });
+
+  // Group by day
+  const byDay = {};
+  windowItems.forEach(t => {
+    if (!byDay[t.due]) byDay[t.due] = [];
+    byDay[t.due].push(t);
+  });
+
+  // Build day-by-day running balance
+  const days = [];
+  let running = balance;
+  const allDates = [];
+  for (let i = 0; i < cfDays; i++) {
+    const dt = new Date(today.getTime() + i * 86400000);
+    const ds = dt.toISOString().slice(0, 10);
+    allDates.push(ds);
+  }
+
+  // Only include days that have payments or are first/last
+  const payDates = Object.keys(byDay).filter(ds => {
+    const dt = new Date(ds + 'T12:00:00');
+    return dt >= today && dt < cutoff;
+  }).sort();
+
+  // Include today always
+  const chartDates = new Set(payDates);
+  chartDates.add(d.date);
+  const sortedChartDates = [...chartDates].sort();
+
+  let runBal = balance;
+  const chartPoints = [];
+  // Add starting point
+  sortedChartDates.forEach(ds => {
+    let dayIn = 0, dayOut = 0;
+    (byDay[ds] || []).forEach(t => {
+      if (t.type === 'income') dayIn += t.amount;
+      else dayOut += t.amount;
+    });
+    runBal += dayIn - dayOut;
+    chartPoints.push({date: ds, balance: runBal, dayIn, dayOut, net: dayIn - dayOut});
+  });
+
+  // Find min/max for chart scaling
+  const allBals = [balance, ...chartPoints.map(p => p.balance)];
+  const maxBal = Math.max(...allBals, 1);
+  const minBal = Math.min(...allBals, 0);
+  const range = maxBal - minBal || 1;
+  const chartH = 160;
+
+  // Baseline Y (where $0 or starting balance sits)
+  const baseY = balance;
+
+  let html = '';
+
+  // ── Chart ──────────────────────────────
+  if (chartPoints.length > 0) {
+    // SVG line chart
+    const W = Math.max(chartPoints.length * 60, 400);
+    const H = 180;
+    const padL = 60, padR = 20, padT = 25, padB = 35;
+    const plotW = W - padL - padR;
+    const plotH = H - padT - padB;
+
+    const yMin = Math.min(minBal, 0);
+    const yMax = Math.max(maxBal, balance + 1);
+    const yRange = yMax - yMin || 1;
+    const toY = v => padT + plotH - ((v - yMin) / yRange * plotH);
+    const toX = i => padL + (chartPoints.length > 1 ? i / (chartPoints.length - 1) * plotW : plotW / 2);
+
+    // Zero line Y
+    const zeroY = toY(0);
+    const startY = toY(balance);
+
+    // Build path
+    let path = '';
+    let areaPath = '';
+    chartPoints.forEach((p, i) => {
+      const x = toX(i), y = toY(p.balance);
+      path += (i === 0 ? 'M' : 'L') + `${x},${y} `;
+    });
+
+    // Area fill under line
+    const firstX = toX(0), lastX = toX(chartPoints.length - 1);
+    areaPath = path + `L${lastX},${toY(0)} L${firstX},${toY(0)} Z`;
+
+    html += `<div class="cf-chart-wrap"><svg width="${W}" height="${H}" style="display:block;width:100%;max-width:${W}px" viewBox="0 0 ${W} ${H}">
+      <defs><linearGradient id="cfg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--grn)" stop-opacity="0.2"/>
+        <stop offset="100%" stop-color="var(--grn)" stop-opacity="0"/>
+      </linearGradient></defs>`;
+
+    // Grid lines
+    const gridLines = 4;
+    for (let i = 0; i <= gridLines; i++) {
+      const val = yMin + (yRange / gridLines) * i;
+      const y = toY(val);
+      html += `<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--bdr)" stroke-width="1"/>`;
+      html += `<text x="${padL-8}" y="${y+4}" text-anchor="end" fill="var(--dim)" font-size="10" font-family="var(--mono)">${cfFmt(val)}</text>`;
+    }
+
+    // Zero line
+    if (yMin < 0) {
+      html += `<line x1="${padL}" y1="${zeroY}" x2="${W-padR}" y2="${zeroY}" stroke="var(--dim)" stroke-width="1" stroke-dasharray="4,4"/>`;
+    }
+
+    // Starting balance line
+    html += `<line x1="${padL}" y1="${startY}" x2="${W-padR}" y2="${startY}" stroke="var(--blu)" stroke-width="1" stroke-dasharray="2,4" opacity="0.5"/>`;
+
+    // Area + line
+    html += `<path d="${areaPath}" fill="url(#cfg)"/>`;
+    html += `<path d="${path}" fill="none" stroke="var(--grn)" stroke-width="2.5" stroke-linejoin="round"/>`;
+
+    // Points + labels
+    chartPoints.forEach((p, i) => {
+      const x = toX(i), y = toY(p.balance);
+      const color = p.balance >= 0 ? 'var(--grn)' : 'var(--red)';
+      html += `<circle cx="${x}" cy="${y}" r="4" fill="${color}" stroke="var(--bg)" stroke-width="2"/>`;
+      // Date label
+      const dt = new Date(p.date + 'T12:00:00');
+      const lbl = MONTHS[dt.getMonth()] + ' ' + dt.getDate();
+      html += `<text x="${x}" y="${H-8}" text-anchor="middle" fill="var(--txt2)" font-size="10" font-family="var(--mono)">${lbl}</text>`;
+      // Balance label above point
+      html += `<text x="${x}" y="${y-10}" text-anchor="middle" fill="${color}" font-size="10" font-weight="600" font-family="var(--mono)">${cfFmt(p.balance)}</text>`;
+      // Net change below if any
+      if (p.net !== 0) {
+        const netColor = p.net > 0 ? 'var(--grn)' : 'var(--red)';
+        const netSign = p.net > 0 ? '+' : '';
+        html += `<text x="${x}" y="${y-22}" text-anchor="middle" fill="${netColor}" font-size="9" font-family="var(--mono)">${netSign}${cfFmt(p.net)}</text>`;
+      }
+    });
+
+    html += '</svg></div>';
+  } else {
+    html += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:32px;text-align:center;margin-bottom:20px;color:var(--dim)">No payments in this time window</div>';
+  }
+
+  // ── Per-project breakdown ──────────────
+  const projMap = {};
+  windowItems.forEach(t => {
+    if (!projMap[t.project]) projMap[t.project] = {income: 0, outgoing: 0, tasks: 0};
+    if (t.type === 'income') projMap[t.project].income += t.amount;
+    else projMap[t.project].outgoing += t.amount;
+    projMap[t.project].tasks++;
+  });
+
+  const projList = Object.entries(projMap).map(([name, v]) => ({name, ...v, net: v.income - v.outgoing}))
+    .sort((a, b) => Math.abs(b.net) - Math.abs(a.net));
+
+  if (projList.length) {
+    html += '<div style="font-size:14px;font-weight:600;color:var(--txt2);margin-bottom:8px">Project Impact</div>';
+    html += '<div class="cf-proj-grid">';
+    projList.forEach(p => {
+      const netCls = p.net >= 0 ? 'net-pos' : 'net-neg';
+      const sign = p.net >= 0 ? '+' : '';
+      let detail = [];
+      if (p.income) detail.push(`↑ ${cfFmt(p.income)}`);
+      if (p.outgoing) detail.push(`↓ ${cfFmt(p.outgoing)}`);
+      html += `<div class="cf-proj">
+        <div><div class="cf-proj-name">${p.name}</div><div class="cf-proj-detail">${detail.join(' · ')} · ${p.tasks} payment${p.tasks > 1 ? 's' : ''}</div></div>
+        <div class="cf-proj-amt ${netCls}">${sign}${cfFmt(p.net)}</div></div>`;
+    });
+    html += '</div>';
+  }
+
+  // ── Payment list ───────────────────────
+  html += '<div style="font-size:14px;font-weight:600;color:var(--txt2);margin-bottom:8px">Upcoming Payments</div>';
+  html += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:8px 12px">';
+
+  const sorted = [...windowItems].sort((a, b) => (a.due || '').localeCompare(b.due || ''));
+  if (sorted.length) {
+    sorted.forEach(t => {
+      const isIn = t.type === 'income';
+      const typeLabel = isIn ? 'IN' : 'OUT';
+      const typeCls = isIn ? 'in' : 'out';
+      const dt = new Date((t.due || d.date) + 'T12:00:00');
+      const dateLbl = MONTHS[dt.getMonth()] + ' ' + dt.getDate();
+      const amtStr = t.amount ? cfFmt2(t.amount) : 'TBD';
+      const statusCls = t.paid ? 'paid' : (t.amount ? 'pending' : 'tbd');
+      const statusLbl = t.paid ? '✓ Paid' : (t.amount ? 'Pending' : 'TBD');
+      html += `<div class="cf-pay">
+        <span class="cf-pay-date">${dateLbl}</span>
+        <span class="cf-pay-type ${typeCls}">${typeLabel}</span>
+        <span class="cf-pay-name">${t.task} <span class="cf-pay-proj">— ${t.project}</span></span>
+        <span class="cf-pay-amt ${typeCls}">${isIn ? '+' : '-'}${amtStr}</span>
+        <span class="cf-pay-status ${statusCls}">${statusLbl}</span>
+      </div>`;
+    });
+  } else {
+    html += '<div style="padding:12px;text-align:center;color:var(--dim);font-size:13px">No payments in this time window</div>';
+  }
+  html += '</div>';
+
+  body.innerHTML = html;
 }
 
 async function loadAndRenderEOD(c) {
