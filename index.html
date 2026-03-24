@@ -65,11 +65,12 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 .fb:hover{background:var(--card);color:var(--txt)}.fb.on{background:var(--blu);color:#fff;border-color:var(--blu)}
 
 /* Project card */
-.pc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);margin-bottom:8px;overflow:hidden;transition:border-color .15s}
-.pc:hover{border-color:var(--bdr-h)}
-.ph{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
-.ph:hover{background:var(--card-h)}
-.pn{font-size:14px;font-weight:600}
+.pc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);margin-bottom:20px;overflow:hidden;transition:border-color .15s;border-left:4px solid var(--bdr)}
+.pc.sev-r{border-left-color:var(--red)}.pc.sev-o{border-left-color:var(--org)}.pc.sev-b{border-left-color:var(--blu)}.pc.sev-g{border-left-color:var(--grn)}
+.pc:hover{border-color:var(--bdr-h)}.pc.sev-r:hover{border-left-color:var(--red)}.pc.sev-o:hover{border-left-color:var(--org)}.pc.sev-b:hover{border-left-color:var(--blu)}.pc.sev-g:hover{border-left-color:var(--grn)}
+.ph{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;background:rgba(255,255,255,.02)}
+.ph:hover{background:rgba(255,255,255,.04)}
+.pn{font-size:16px;font-weight:600}
 .pp{font-size:12px;color:var(--txt2);margin-top:1px}
 .pt{display:flex;gap:4px;flex-shrink:0;align-items:center;flex-wrap:wrap}
 .tg{font-family:var(--mono);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
@@ -106,8 +107,12 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 .pb-full{grid-column:1/-1}
 
 @media(max-width:600px){
-  .preview{grid-template-columns:1fr}
+  .preview{grid-template-columns:1fr 1fr}
   .pb-grid{grid-template-columns:1fr}
+  .pn{font-size:15px}
+  .pc{margin-bottom:0;border-radius:8px}
+  .pc+.pc{margin-top:20px;position:relative}
+  .pc+.pc::before{content:'';position:absolute;top:-11px;left:10%;right:10%;height:2px;background:rgba(255,255,255,.08);border-radius:1px}
 }
 
 /* Task sections */
@@ -246,7 +251,7 @@ function renderSOD(c) {
   issues.forEach((p, i) => { h += projCard(p, i === 0); });
 
   if (ok.length) {
-    h += `<div class="pc" data-st="ok"><div class="ph" onclick="tog(this)"><div>
+    h += `<div class="pc sev-g" data-st="ok"><div class="ph" onclick="tog(this)"><div>
       <div class="pn" style="color:var(--grn)">✓ On Track</div>
       <div class="pp">${ok.length} projects with no issues</div></div>
       <div class="pt"><span class="tg gr">${ok.length} clean</span>${chvSvg()}</div></div>
@@ -368,7 +373,8 @@ function projCard(p, open) {
   }
   body += '</div>';
   
-  return `<div class="pc${open ? ' op' : ''}" data-st="issue"><div class="ph" onclick="tog(this)"><div>
+  const sev = c.l ? 'sev-r' : c.b ? 'sev-o' : c.a ? 'sev-b' : 'sev-g';
+  return `<div class="pc ${sev}${open ? ' op' : ''}" data-st="issue"><div class="ph" onclick="tog(this)"><div>
     <div class="pn">${p.name}</div><div class="pp">${pmLine}</div></div>
     <div class="pt">${tags}${chvSvg()}</div></div>${preview}<div class="pb">${body}</div></div>`;
 }
