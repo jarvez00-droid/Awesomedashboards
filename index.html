@@ -207,6 +207,22 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 .wk-chip.pr{background:var(--grn-s);color:var(--grn);border:1px solid var(--grn-b)}
 .wk-chip.ca{background:var(--blu-s);color:var(--blu);border:1px solid var(--blu-b)}
 
+/* Weekly sections */
+.wk-zone{border-radius:var(--rl);padding:20px 16px;margin-bottom:4px}
+.wk-zone.review{background:rgba(85,95,112,.06);border:1px solid rgba(85,95,112,.15)}
+.wk-zone.forecast{background:rgba(82,139,255,.05);border:1px solid rgba(82,139,255,.15)}
+.wk-zone-header{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+.wk-zone-title{font-size:18px;font-weight:700}
+.wk-zone.review .wk-zone-title{color:var(--txt2)}
+.wk-zone.forecast .wk-zone-title{color:var(--blu)}
+.wk-zone-dates{font-size:13px;font-family:var(--mono);font-weight:500}
+.wk-zone.review .wk-zone-dates{color:var(--dim)}
+.wk-zone.forecast .wk-zone-dates{color:var(--blu);opacity:.7}
+.wk-zone-sub{font-size:12px;color:var(--dim);margin-bottom:16px}
+.wk-divider{display:flex;align-items:center;gap:12px;margin:24px 0;padding:0 4px}
+.wk-divider::before,.wk-divider::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,transparent,var(--blu),transparent)}
+.wk-divider-label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blu);white-space:nowrap}
+
 /* Forecast table */
 .fc-table{width:100%;border-collapse:collapse;font-size:12px}
 .fc-table th{text-align:left;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);padding:6px 8px;border-bottom:1px solid var(--bdr)}
@@ -386,6 +402,16 @@ function renderWeekly(c) {
   const s = w.summary;
   const drift = w.schedule_drift;
 
+  // Compute date ranges
+  // Review = the week period from the data
+  const reviewPeriod = w.period; // e.g. "Mar 23 - Mar 28, 2026"
+
+  // Forecast = next 2 weeks from today
+  const now = new Date();
+  const fc1 = new Date(now.getTime() + 86400000);
+  const fc2 = new Date(now.getTime() + 14 * 86400000);
+  const forecastPeriod = MONTHS[fc1.getMonth()] + ' ' + fc1.getDate() + ' - ' + MONTHS[fc2.getMonth()] + ' ' + fc2.getDate() + ', ' + fc2.getFullYear();
+
   // Overdue trend
   const ovDelta = s.total_overdue_end - s.total_overdue_start;
   const ovTrend = ovDelta > 0 ? `↑ ${ovDelta}` : ovDelta < 0 ? `↓ ${Math.abs(ovDelta)}` : '→ 0';
@@ -393,7 +419,15 @@ function renderWeekly(c) {
 
   let h = `
     <div class="page-title">Weekly Forecast — Management View</div>
-    <div class="page-sub">${w.week} · ${w.period}</div>
+    <div class="page-sub">${w.week}</div>
+
+    <!-- ═══ WEEK IN REVIEW ═══ -->
+    <div class="wk-zone review">
+      <div class="wk-zone-header">
+        <div class="wk-zone-title">📋 WEEK IN REVIEW</div>
+        <div class="wk-zone-dates">${reviewPeriod}</div>
+      </div>
+      <div class="wk-zone-sub">What happened this week — completions, issues, schedule changes, PM performance</div>
 
     <div class="stats" style="grid-template-columns:repeat(5,1fr)">
       <div class="st g"><div class="n">${s.tasks_completed}</div><div class="l">Completed</div></div>
@@ -421,17 +455,21 @@ function renderWeekly(c) {
   });
   h += '</div></div>';
 
-  // ── Projects ──────────────────────────────────
-  h += '<div class="wk-section"><div class="wk-section-title">Project Breakdown</div>';
-  const withIssues = w.projects.filter(p => p.still_overdue.length || p.schedule_changes.length || p.forecast_next_2_weeks.some(f => f.risk === 'high'));
-  const onTrack = w.projects.filter(p => !p.still_overdue.length && !p.schedule_changes.length && !p.forecast_next_2_weeks.some(f => f.risk === 'high'));
+  // ── Review: Project Summary (completions, overdue, changes) ──
+  const reviewProjs = w.projects.filter(p => p.completed_this_week.length || p.still_overdue.length || p.schedule_changes.length);
+  const reviewOk = w.projects.filter(p => !p.completed_this_week.length && !p.still_overdue.length && !p.schedule_changes.length);
 
-  withIssues.forEach(p => { h += buildWeeklyProjectCard(p, false); });
-  if (onTrack.length) {
-    h += '<div style="margin-top:16px;font-size:13px;font-weight:600;color:var(--grn);margin-bottom:6px">✅ On Track</div>';
-    onTrack.forEach(p => { h += buildWeeklyProjectCard(p, true); });
+  if (reviewProjs.length) {
+    h += '<div class="wk-section"><div class="wk-section-title">Project Summary</div>';
+    reviewProjs.forEach(p => { h += buildReviewCard(p); });
+    if (reviewOk.length) {
+      h += `<div style="margin-top:12px;font-size:13px;font-weight:600;color:var(--grn);margin-bottom:6px">✅ No changes this week (${reviewOk.length} projects)</div>`;
+      reviewOk.forEach(p => {
+        h += `<div style="font-size:12px;padding:4px 0;color:var(--dim)">${p.name} — ${p.pm !== 'UNMANAGED' ? p.pm : 'No PM'}</div>`;
+      });
+    }
+    h += '</div>';
   }
-  h += '</div>';
 
   // ── Schedule Drift ────────────────────────────
   h += '<div class="wk-section"><div class="wk-section-title">Schedule Drift</div>';
@@ -451,90 +489,126 @@ function renderWeekly(c) {
   }
   h += '</div>';
 
+  // Close REVIEW zone
+  h += '</div>';
+
+  // ═══ DIVIDER ═══
+  h += '<div class="wk-divider"><span class="wk-divider-label">🔭 LOOKING AHEAD</span></div>';
+
+  // ═══ FORECAST ZONE ═══
+  h += `<div class="wk-zone forecast">
+    <div class="wk-zone-header">
+      <div class="wk-zone-title">📅 FORECAST</div>
+      <div class="wk-zone-dates">${forecastPeriod}</div>
+    </div>
+    <div class="wk-zone-sub">What's coming — upcoming tasks, risk assessment, projected blockers</div>`;
+
+  // Forecast stats
+  const totalForecast = w.projects.reduce((sum, p) => sum + p.forecast_next_2_weeks.length, 0);
+  const highRisk = w.projects.reduce((sum, p) => sum + p.forecast_next_2_weeks.filter(f => f.risk === 'high').length, 0);
+  const medRisk = w.projects.reduce((sum, p) => sum + p.forecast_next_2_weeks.filter(f => f.risk === 'medium').length, 0);
+  const lowRisk = w.projects.reduce((sum, p) => sum + p.forecast_next_2_weeks.filter(f => f.risk === 'low').length, 0);
+
+  h += `<div class="stats" style="grid-template-columns:repeat(4,1fr)">
+    <div class="st b"><div class="n">${totalForecast}</div><div class="l">Tasks Due</div></div>
+    <div class="st r"><div class="n">${highRisk}</div><div class="l">High Risk</div></div>
+    <div class="st y"><div class="n">${medRisk}</div><div class="l">Medium Risk</div></div>
+    <div class="st g"><div class="n">${lowRisk}</div><div class="l">Low Risk</div></div>
+  </div>`;
+
+  // Forecast per project
+  const fcProjs = w.projects.filter(p => p.forecast_next_2_weeks.length > 0);
+  const fcNone = w.projects.filter(p => p.forecast_next_2_weeks.length === 0);
+
+  fcProjs.sort((a, b) => {
+    const aH = a.forecast_next_2_weeks.filter(f => f.risk === 'high').length;
+    const bH = b.forecast_next_2_weeks.filter(f => f.risk === 'high').length;
+    return bH - aH || b.forecast_next_2_weeks.length - a.forecast_next_2_weeks.length;
+  });
+
+  fcProjs.forEach(p => { h += buildForecastCard(p); });
+
+  if (fcNone.length) {
+    h += `<div style="margin-top:12px;font-size:13px;font-weight:600;color:var(--dim);margin-bottom:6px">No tasks due in 14 days (${fcNone.length} projects)</div>`;
+    fcNone.forEach(p => {
+      h += `<div style="font-size:12px;padding:4px 0;color:var(--dim)">${p.name} — ${p.pm !== 'UNMANAGED' ? p.pm : 'No PM'}</div>`;
+    });
+  }
+
+  // Close FORECAST zone
+  h += '</div>';
+
   h += '<div class="ft">Generated by Jade · Awesome Group · Weekly Forecast — Management View</div>';
   c.innerHTML = h;
 }
 
-function buildWeeklyProjectCard(p, compact) {
-  const hasOverdue = p.still_overdue.length > 0;
-  const hasHighRisk = p.forecast_next_2_weeks.some(f => f.risk === 'high');
-  const sev = hasOverdue ? 'sev-r' : hasHighRisk ? 'sev-o' : p.schedule_changes.length ? 'sev-b' : 'sev-g';
-
+// ── Review card (completions + overdue + changes, NO forecast) ──
+function buildReviewCard(p) {
   let tags = '';
-  if (p.still_overdue.length) tags += `<span class="tg r">${p.still_overdue.length} overdue</span>`;
   if (p.completed_this_week.length) tags += `<span class="tg gr">${p.completed_this_week.length} done</span>`;
+  if (p.still_overdue.length) tags += `<span class="tg r">${p.still_overdue.length} overdue</span>`;
   if (p.drift_days) tags += `<span class="tg ${p.drift_days > 0 ? 'o' : 'gr'}">${p.drift_days > 0 ? '+' : ''}${p.drift_days}d drift</span>`;
-  const highCount = p.forecast_next_2_weeks.filter(f => f.risk === 'high').length;
-  if (highCount) tags += `<span class="tg r">${highCount} high risk</span>`;
+  if (p.schedule_changes.length) tags += `<span class="tg b">${p.schedule_changes.length} changes</span>`;
 
-  if (compact) {
-    return `<div class="pc sev-g" style="margin-bottom:4px"><div class="ph" onclick="tog(this)"><div>
-      <div class="pn" style="color:var(--grn)">✓ ${p.name}</div>
-      <div class="pp">${p.pm}${p.forecast_next_2_weeks.length ? ` · ${p.forecast_next_2_weeks.length} tasks in 14d` : ''}</div></div>
-      <div class="pt">${tags}${chvSvg()}</div></div>
-      <div class="pb">${buildWeeklyProjectBody(p)}</div></div>`;
+  const sev = p.still_overdue.length ? 'sev-r' : p.schedule_changes.length ? 'sev-o' : 'sev-g';
+
+  let body = '<div style="border-top:1px solid var(--bdr);margin-bottom:10px"></div>';
+  if (p.week_summary) {
+    body += `<div style="font-size:13px;color:var(--txt);margin-bottom:12px;padding:8px 12px;background:var(--bg);border-radius:6px;border-left:3px solid var(--dim);line-height:1.5">${p.week_summary}</div>`;
   }
+  body += '<div class="pb-grid"><div>';
+  if (p.completed_this_week.length) {
+    body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Completed</div>';
+    p.completed_this_week.forEach(t => { body += `<div class="tr"><div class="td g"></div><div class="ti"><div class="tn">${t}</div></div></div>`; });
+    body += '</div>';
+  }
+  if (p.still_overdue.length) {
+    body += '<div class="ts"><div class="tsl lr">Still Overdue</div>';
+    p.still_overdue.forEach(t => { body += `<div class="tr"><div class="td r"></div><div class="ti"><div class="tn">${t}</div></div></div>`; });
+    body += '</div>';
+  }
+  body += '</div><div>';
+  if (p.schedule_changes.length) {
+    body += '<div class="ts"><div class="tsl" style="color:var(--org)">Schedule Changes</div>';
+    p.schedule_changes.slice(0, 8).forEach(ch => {
+      const clr = ch.type === 'last-minute' ? 'r' : ch.type === 'reactive' ? 'o' : ch.type === 'proactive' ? 'g' : 'b';
+      body += `<div class="tr"><div class="td ${clr}"></div><div class="ti"><div class="tn">${ch.task}</div></div><div class="tw${ch.shift.startsWith('+') ? ' ov' : ''}">${ch.shift}</div></div>`;
+    });
+    if (p.schedule_changes.length > 8) body += `<div class="show-more">+ ${p.schedule_changes.length - 8} more</div>`;
+    body += '</div>';
+  }
+  body += '</div></div>';
 
   return `<div class="pc ${sev}" style="margin-bottom:8px"><div class="ph" onclick="tog(this)"><div>
     <div class="pn">${p.name}</div>
-    <div class="pp">${p.pm !== 'UNMANAGED' ? 'PM: ' + p.pm : '<span class="nob">⚠ No PM assigned</span>'}</div></div>
+    <div class="pp">${p.pm !== 'UNMANAGED' ? 'PM: ' + p.pm : '<span class="nob">⚠ No PM</span>'}</div></div>
     <div class="pt">${tags}${chvSvg()}</div></div>
-    <div class="pb">${buildWeeklyProjectBody(p)}</div></div>`;
+    <div class="pb">${body}</div></div>`;
 }
 
-function buildWeeklyProjectBody(p) {
-  let b = '<div style="border-top:1px solid var(--bdr);margin-bottom:10px"></div>';
+// ── Forecast card (upcoming tasks + risk, NO history) ──
+function buildForecastCard(p) {
+  const highCount = p.forecast_next_2_weeks.filter(f => f.risk === 'high').length;
+  const medCount = p.forecast_next_2_weeks.filter(f => f.risk === 'medium').length;
+  let tags = '';
+  if (highCount) tags += `<span class="tg r">${highCount} high risk</span>`;
+  if (medCount) tags += `<span class="tg y">${medCount} medium</span>`;
+  tags += `<span class="tg b">${p.forecast_next_2_weeks.length} tasks</span>`;
 
-  // Week summary
-  if (p.week_summary) {
-    b += `<div style="font-size:13px;color:var(--txt);margin-bottom:12px;padding:8px 12px;background:var(--bg);border-radius:6px;border-left:3px solid var(--blu);line-height:1.5">${p.week_summary}</div>`;
-  }
+  const sev = highCount ? 'sev-r' : medCount ? 'sev-o' : 'sev-g';
 
-  // Two columns
-  b += '<div class="pb-grid">';
-
-  // Left: Completed + Overdue
-  b += '<div>';
-  if (p.completed_this_week.length) {
-    b += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Completed This Week</div>';
-    p.completed_this_week.forEach(t => {
-      b += `<div class="tr"><div class="td g"></div><div class="ti"><div class="tn">${t}</div></div></div>`;
-    });
-    b += '</div>';
-  }
-  if (p.still_overdue.length) {
-    b += '<div class="ts"><div class="tsl lr">Still Overdue</div>';
-    p.still_overdue.forEach(t => {
-      b += `<div class="tr"><div class="td r"></div><div class="ti"><div class="tn">${t}</div></div></div>`;
-    });
-    b += '</div>';
-  }
-  b += '</div>';
-
-  // Right: Schedule changes
-  b += '<div>';
-  if (p.schedule_changes.length) {
-    b += '<div class="ts"><div class="tsl" style="color:var(--org)">Schedule Changes</div>';
-    p.schedule_changes.slice(0, 8).forEach(ch => {
-      const clr = ch.type === 'last-minute' ? 'r' : ch.type === 'reactive' ? 'o' : ch.type === 'proactive' ? 'g' : 'b';
-      b += `<div class="tr"><div class="td ${clr}"></div><div class="ti"><div class="tn">${ch.task}</div></div><div class="tw${ch.shift.startsWith('+') ? ' ov' : ''}">${ch.shift}</div></div>`;
-    });
-    if (p.schedule_changes.length > 8) b += `<div class="show-more">+ ${p.schedule_changes.length - 8} more</div>`;
-    b += '</div>';
-  }
-  b += '</div></div>';
-
-  // Forecast table (full width)
-  if (p.forecast_next_2_weeks.length) {
-    b += `<div style="margin-top:12px"><div class="tsl dt" style="margin-bottom:6px">📅 Forecast — Next 14 Days</div>
+  let body = `<div style="border-top:1px solid var(--bdr);margin-bottom:10px"></div>
     <table class="fc-table"><thead><tr><th>Task</th><th>Due</th><th>Risk</th><th>Note</th></tr></thead><tbody>`;
-    p.forecast_next_2_weeks.forEach(f => {
-      b += `<tr><td style="font-weight:500">${f.task}</td><td style="white-space:nowrap;font-family:var(--mono)">${f.due}</td><td><span class="fc-risk ${f.risk}">${f.risk.toUpperCase()}</span></td><td style="color:var(--txt2);font-size:11px">${f.note}</td></tr>`;
-    });
-    b += '</tbody></table></div>';
-  }
+  p.forecast_next_2_weeks.forEach(f => {
+    body += `<tr><td style="font-weight:500">${f.task}</td><td style="white-space:nowrap;font-family:var(--mono)">${f.due}</td><td><span class="fc-risk ${f.risk}">${f.risk.toUpperCase()}</span></td><td style="color:var(--txt2);font-size:11px">${f.note}</td></tr>`;
+  });
+  body += '</tbody></table>';
 
-  return b;
+  return `<div class="pc ${sev}" style="margin-bottom:8px"><div class="ph" onclick="tog(this)"><div>
+    <div class="pn">${p.name}</div>
+    <div class="pp">${p.pm !== 'UNMANAGED' ? 'PM: ' + p.pm : '<span class="nob">⚠ No PM</span>'}</div></div>
+    <div class="pt">${tags}${chvSvg()}</div></div>
+    <div class="pb">${body}</div></div>`;
 }
 
 // ═══════════════════════════════════════════
