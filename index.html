@@ -124,7 +124,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 .tr{display:flex;align-items:flex-start;padding:7px 0;border-bottom:1px solid rgba(33,39,47,.5);font-size:13px}
 .tr:last-child{border-bottom:none}
 .td{width:7px;height:7px;border-radius:50%;margin-top:6px;margin-right:9px;flex-shrink:0}
-.td.r{background:var(--red)}.td.o{background:var(--org)}.td.b{background:var(--blu)}.td.y{background:var(--ylw)}
+.td.r{background:var(--red)}.td.o{background:var(--org)}.td.b{background:var(--blu)}.td.y{background:var(--ylw)}.td.g{background:var(--grn)}
 .ti{flex:1;min-width:0}
 .tn{font-weight:500;word-wrap:break-word}
 .tm{font-size:12px;color:var(--txt2);margin-top:1px}
@@ -163,7 +163,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 .empty-d{font-size:13px;color:var(--dim);max-width:360px}
 
 @media(max-width:600px){
-  .stats{grid-template-columns:repeat(3,1fr)}
+  .stats{grid-template-columns:repeat(3,1fr)!important}
   .otg,.pmr{grid-template-columns:1fr}
   .st .n{font-size:20px}
   .pn{font-size:13px}
@@ -213,15 +213,184 @@ document.getElementById('main-nav').addEventListener('click', e => {
   render();
 });
 
+let EOD_DATA = null;
+
 function render() {
   const c = document.getElementById('content');
   if (curPage === 'sod') renderSOD(c);
+  else if (curPage === 'eod') loadAndRenderEOD(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
-    const titles = {eod:'EOD Report',projects:'Project Dashboards',weekly:'Weekly Report',mgmt:'EOD Management'};
-    const descs = {eod:'End of day wrap-up with completions and tomorrow preview.',projects:'Live project status views. Coming soon.',weekly:'Full week deep-dive. First report generates next Monday.',mgmt:'Executive snapshot for the owner.'};
+    const titles = {projects:'Project Dashboards',weekly:'Weekly Report',mgmt:'EOD Management'};
+    const descs = {projects:'Live project status views. Coming soon.',weekly:'Full week deep-dive. First report generates next Monday.',mgmt:'Executive snapshot for the owner.'};
     c.innerHTML = `<div class="empty"><div class="empty-i">📋</div><div class="empty-t">${titles[curPage]||'Coming Soon'}</div><div class="empty-d">${descs[curPage]||''}</div></div>`;
   }
+}
+
+async function loadAndRenderEOD(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading EOD...</div></div>';
+  const dateToLoad = curDate || new Date().toISOString().slice(0,10);
+  try {
+    const r = await fetch('data/eod-' + dateToLoad + '.json');
+    if (!r.ok) throw new Error('not found');
+    EOD_DATA = await r.json();
+    renderEOD(c);
+  } catch(e) {
+    c.innerHTML = '<div class="empty"><div class="empty-i">🌙</div><div class="empty-t">No EOD Report</div><div class="empty-d">EOD report for this date hasn\'t been generated yet. Reports run at 4 PM.</div></div>';
+  }
+}
+
+function renderEOD(c) {
+  const s = EOD_DATA.summary;
+  const ps = EOD_DATA.projects;
+  const issues = ps.filter(p => p.st === 'issue');
+  const ok = ps.filter(p => p.st === 'ok');
+
+  const d = new Date(EOD_DATA.date + 'T12:00:00');
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const dateLabel = days[d.getDay()] + ', ' + MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+
+  let h = `
+    <div class="page-title">End of Day Wrap-Up</div>
+    <div class="page-sub">EOD Report · ${dateLabel} · 4:00 PM${!EOD_DATA.has_sod_baseline ? ' · <span style="color:var(--ylw)">⚠ No morning baseline — showing current status</span>' : ''}</div>
+    <div class="stats" style="grid-template-columns:repeat(6,1fr)">
+      <div class="st g"><div class="n">${s.completed}</div><div class="l">Completed</div></div>
+      <div class="st r"><div class="n">${s.still_overdue}</div><div class="l">Still Over</div></div>
+      <div class="st r"><div class="n">${s.new_overdue}</div><div class="l">New Over</div></div>
+      <div class="st g"><div class="n">${s.resolved}</div><div class="l">Resolved</div></div>
+      <div class="st o"><div class="n">${s.still_blocked}</div><div class="l">Blocked</div></div>
+      <div class="st y"><div class="n">${s.next48}</div><div class="l">Next 48h</div></div>
+    </div>
+    <div class="alert"><span>⚠</span><div><b>Top concern:</b> ${s.concern}</div></div>
+    <div class="filters">
+      <button class="fb on" onclick="filt('all',this)">All <span class="cnt">${ps.length}</span></button>
+      <button class="fb" onclick="filt('issue',this)">Issues <span class="cnt">${issues.length}</span></button>
+      <button class="fb" onclick="filt('ok',this)">On Track <span class="cnt">${ok.length}</span></button>
+      <select class="fb" id="pm-filter" onchange="filtPM(this.value)" style="cursor:pointer;appearance:none;padding-right:24px;background-image:url('data:image/svg+xml,<%3Fxml version=%221.0%22%3F><svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22><path d=%22M0 0l5 6 5-6z%22 fill=%22%238B95A8%22/></svg>');background-repeat:no-repeat;background-position:right 8px center">
+        <option value="">All PMs</option>
+        ${EOD_DATA.pms.map(pm => `<option value="${pm.name}">${pm.name}</option>`).join('')}
+        <option value="__none">No PM</option>
+      </select>
+    </div>
+    <div id="plist">`;
+
+  issues.forEach((p, i) => { h += eodProjCard(p, i === 0); });
+
+  if (ok.length) {
+    ok.forEach(p => {
+      const n48 = p.tasks?.next48 || [];
+      const pmVal = p.pm || 'No PM';
+      const tags = n48.length ? `<span class="tg y">${n48.length} next 48h</span>` : '';
+      h += `<div class="pc sev-g" data-st="ok" data-pm="${pmVal}"><div class="ph" onclick="tog(this)"><div>
+        <div class="pn" style="color:var(--grn)">✓ ${p.name}</div>
+        <div class="pp">${pmVal !== 'No PM' ? 'PM: '+pmVal : '<span class="nob">⚠ No PM assigned</span>'}</div></div>
+        <div class="pt"><span class="tg gr">on track</span>${tags}${chvSvg()}</div></div>
+        <div class="pb"><div style="padding:4px 0"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--ylw);margin-bottom:6px">Next 48 Hours</div>${n48.length ? n48.map(tk => `<div style="font-size:13px;padding:4px 0;border-bottom:1px solid rgba(33,39,47,.5)"><span style="margin-right:6px">●</span>${tk.n} <span style="color:var(--txt2)">${tk.when}</span><div style="font-size:12px;color:var(--txt2);padding-left:16px">${tk.w}</div></div>`).join('') : '<div style="font-size:13px;color:var(--dim);font-style:italic">Nothing upcoming</div>'}</div></div></div>`;
+    });
+  }
+
+  h += '</div>';
+
+  h += '<div class="sh">PM Snapshot</div><div class="pmr">';
+  EOD_DATA.pms.forEach(pm => {
+    const badge = pm.ind === 'clean' ? '✅' : pm.ind === 'green' ? '🟢' : pm.ind === 'yellow' ? '🟡' : '🔴';
+    h += `<div class="pmc"><div><div class="pmn">${pm.name}</div><div class="pmd">${pm.completed} completed today<br>${pm.still_ov} overdue / ${pm.act} active<br>${pm.proj} project${pm.proj > 1 ? 's' : ''}</div></div><div class="pmb">${badge}</div></div>`;
+  });
+  h += '</div>';
+  h += '<div class="ft">Generated by Jade · Awesome Group · Data from JobTread</div>';
+  c.innerHTML = h;
+}
+
+function eodProjCard(p, open) {
+  const c = p.c || {};
+  const t = p.tasks || {};
+  let tags = '';
+  if (c.completed) tags += `<span class="tg gr">${c.completed} done</span>`;
+  if (c.still_ov) tags += `<span class="tg r">${c.still_ov} overdue</span>`;
+  if (c.new_ov) tags += `<span class="tg r">${c.new_ov} new</span>`;
+  if (c.resolved) tags += `<span class="tg gr">${c.resolved} resolved</span>`;
+  if (c.still_bl) tags += `<span class="tg o">${c.still_bl} blocked</span>`;
+  if (c.next48) tags += `<span class="tg y">${c.next48} next 48h</span>`;
+
+  const pmLine = p.pm ? `PM: ${p.pm}` : '<span class="nob">⚠ No PM assigned</span>';
+  const sev = (c.still_ov || c.new_ov) ? 'sev-r' : c.still_bl ? 'sev-o' : c.completed ? 'sev-g' : 'sev-b';
+
+  // Preview: 3 columns - Completed | Overdue | Next 48h
+  let preview = '<div class="preview">';
+
+  preview += '<div class="pv-col"><div class="pv-head" style="color:var(--grn)">Completed</div>';
+  if (t.completed?.length) {
+    t.completed.slice(0,3).forEach(tk => {
+      preview += `<div class="pv-item"><div class="pv-dot" style="background:var(--grn)"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub">${tk.w}</div></div></div>`;
+    });
+    if (t.completed.length > 3) preview += `<div class="pv-more">+${t.completed.length-3} more</div>`;
+  } else { preview += '<div class="pv-empty">None today</div>'; }
+  preview += '</div>';
+
+  preview += '<div class="pv-col"><div class="pv-head r">Overdue</div>';
+  const allOv = [...(t.still_overdue||[]), ...(t.new_overdue||[])];
+  if (allOv.length) {
+    allOv.slice(0,3).forEach(tk => {
+      preview += `<div class="pv-item"><div class="pv-dot r"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub">${tk.w} · ${tk.d}d</div></div></div>`;
+    });
+    if (allOv.length > 3) preview += `<div class="pv-more">+${allOv.length-3} more</div>`;
+  } else { preview += '<div class="pv-empty">All clear</div>'; }
+  preview += '</div>';
+
+  const n48 = t.next48 || [];
+  preview += '<div class="pv-col"><div class="pv-head y">Next 48 Hours</div>';
+  if (n48.length) {
+    n48.slice(0,4).forEach(tk => {
+      preview += `<div class="pv-item"><div class="pv-dot y"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub">${tk.when} · ${tk.w}</div></div></div>`;
+    });
+    if (n48.length > 4) preview += `<div class="pv-more">+${n48.length-4} more</div>`;
+  } else { preview += '<div class="pv-empty">Nothing upcoming</div>'; }
+  preview += '</div></div>';
+
+  // Expanded body
+  let body = '<div class="pb-grid">';
+
+  // Left: Completed + Resolved
+  body += '<div>';
+  if (t.completed?.length) {
+    body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Completed Today</div>';
+    t.completed.forEach(tk => { body += trow('g', tk.n, tk.w, '✓'); });
+    body += '</div>';
+  }
+  if (t.resolved?.length) {
+    body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Resolved Blockers</div>';
+    t.resolved.forEach(tk => { body += trow('g', tk.n, tk.w, 'clear'); });
+    body += '</div>';
+  }
+  if (t.new_overdue?.length) {
+    body += '<div class="ts"><div class="tsl lr">🆕 New Overdue</div>';
+    t.new_overdue.forEach(tk => { body += trow('r', tk.n, tk.w, tk.d + 'd', true); });
+    body += '</div>';
+  }
+  body += '</div>';
+
+  // Right: Still Overdue + Still Blocked + Next 48h
+  body += '<div>';
+  if (t.still_overdue?.length) {
+    body += '<div class="ts"><div class="tsl lr">🔴 Still Overdue</div>';
+    t.still_overdue.forEach(tk => { body += trow('r', tk.n, tk.w, tk.d + 'd', true); });
+    body += '</div>';
+  }
+  if (t.still_blocked?.length) {
+    body += '<div class="ts"><div class="tsl bl">🟠 Still Blocked</div>';
+    t.still_blocked.forEach(tk => { body += trow('o', tk.n, tk.w, tk.due || '', false, tk.bl); });
+    body += '</div>';
+  }
+  if (n48.length) {
+    body += '<div class="ts"><div class="tsl dt">🔵 Next 48 Hours</div>';
+    n48.forEach(tk => { body += trow('y', tk.n, tk.w, tk.when); });
+    body += '</div>';
+  }
+  body += '</div></div>';
+
+  return `<div class="pc ${sev}${open ? ' op' : ''}" data-st="issue" data-pm="${p.pm||'No PM'}"><div class="ph" onclick="tog(this)"><div>
+    <div class="pn">${p.name}</div><div class="pp">${pmLine}</div></div>
+    <div class="pt">${tags}${chvSvg()}</div></div>${preview}<div class="pb">${body}</div></div>`;
 }
 
 function renderSOD(c) {
@@ -486,11 +655,15 @@ async function renderArchive(c) {
         const d = new Date(rpt.date + 'T12:00:00');
         const dayName = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()];
         const dayLabel = MONTHS[d.getMonth()] + ' ' + d.getDate();
-        h += `<div class="pc" style="margin-bottom:4px"><div class="ph" onclick="loadArchiveDate('${rpt.date}')" style="cursor:pointer">
-          <div><div class="pn">${dayName}, ${dayLabel}</div><div class="pp">SOD Report</div></div>
+        const isEOD = rpt.type === 'eod';
+        const typeLabel = isEOD ? 'EOD Report' : 'SOD Report';
+        const typeIcon = isEOD ? '🌙' : '☀';
+        h += `<div class="pc" style="margin-bottom:4px"><div class="ph" onclick="loadArchiveDate('${rpt.date}','${rpt.type||'sod'}')" style="cursor:pointer">
+          <div><div class="pn">${typeIcon} ${dayName}, ${dayLabel}</div><div class="pp">${typeLabel}</div></div>
           <div class="pt">
-            ${rpt.overdue ? `<span class="tg r">${rpt.overdue} late</span>` : ''}
-            ${rpt.blocked ? `<span class="tg o">${rpt.blocked} blocked</span>` : ''}
+            ${isEOD && rpt.completed ? `<span class="tg gr">${rpt.completed} done</span>` : ''}
+            ${(rpt.overdue||rpt.still_overdue) ? `<span class="tg r">${rpt.overdue||rpt.still_overdue} late</span>` : ''}
+            ${(rpt.blocked||rpt.still_blocked) ? `<span class="tg o">${rpt.blocked||rpt.still_blocked} blocked</span>` : ''}
             ${rpt.active ? `<span class="tg b">${rpt.active} active</span>` : ''}
             <span class="tg gr">${rpt.projects} projects</span>
           </div></div></div>`;
@@ -505,16 +678,27 @@ async function renderArchive(c) {
   }
 }
 
-async function loadArchiveDate(dateStr) {
+async function loadArchiveDate(dateStr, type) {
+  const isEOD = type === 'eod';
+  const file = isEOD ? 'eod-' : 'sod-';
   try {
-    const r = await fetch('data/sod-' + dateStr + '.json');
+    const r = await fetch('data/' + file + dateStr + '.json');
     if (!r.ok) throw new Error('not found');
-    DATA = await r.json();
-    curDate = dateStr;
-    updateDateDisplay();
-    document.querySelectorAll('#main-nav a').forEach(x => x.classList.remove('on'));
-    document.querySelector('#main-nav a[data-p="sod"]').classList.add('on');
-    curPage = 'sod';
+    if (isEOD) {
+      EOD_DATA = await r.json();
+      curDate = dateStr;
+      updateDateDisplay();
+      document.querySelectorAll('#main-nav a').forEach(x => x.classList.remove('on'));
+      document.querySelector('#main-nav a[data-p="eod"]').classList.add('on');
+      curPage = 'eod';
+    } else {
+      DATA = await r.json();
+      curDate = dateStr;
+      updateDateDisplay();
+      document.querySelectorAll('#main-nav a').forEach(x => x.classList.remove('on'));
+      document.querySelector('#main-nav a[data-p="sod"]').classList.add('on');
+      curPage = 'sod';
+    }
     render();
   } catch(e) {
     alert('Report not available for ' + dateStr);
