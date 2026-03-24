@@ -256,6 +256,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 .cf-pay-status.paid{background:var(--grn-s);color:var(--grn);border:1px solid var(--grn-b)}
 .cf-pay-status.pending{background:var(--ylw-s);color:var(--ylw);border:1px solid var(--ylw-b)}
 .cf-pay-status.tbd{background:rgba(85,95,112,.12);color:var(--dim);border:1px solid rgba(85,95,112,.2)}
+.cf-pay-bal{font-family:var(--mono);font-size:11px;font-weight:600;white-space:nowrap;min-width:72px;text-align:right}
+.cf-pay-bal.pos{color:var(--grn)}.cf-pay-bal.neg{color:var(--red)}
 </style>
 </head>
 <body>
@@ -602,14 +604,8 @@ function cfFmt2(n) {
 
 function renderCashflow(c) {
   const d = CF_DATA;
-  const s = d.summary;
   const balance = parseFloat(localStorage.getItem('cf_balance') || '0');
 
-  // Flatten all items with dates into a day-by-day timeline
-  const allItems = d.all_tasks || [];
-  const today = new Date(d.date + 'T12:00:00');
-
-  // Time window tabs
   let h = `
     <div class="page-title">Cash Flow</div>
     <div class="page-sub">Payment projections · Updated ${d.date}</div>
@@ -618,12 +614,7 @@ function renderCashflow(c) {
       <input type="text" class="cf-balance-input" id="cf-bal" value="${balance ? cfFmt2(balance) : ''}" placeholder="$0.00">
       <span class="cf-balance-saved" id="cf-saved" style="display:none">✓ Saved</span>
     </div>
-    <div class="stats" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">
-      <div class="st g"><div class="n">${cfFmt(s.total_income)}</div><div class="l">Income</div></div>
-      <div class="st r"><div class="n">${cfFmt(s.total_outgoing)}</div><div class="l">Outgoing</div></div>
-      <div class="st ${s.total_net >= 0 ? 'g' : 'r'}"><div class="n">${cfFmt(s.total_net)}</div><div class="l">Net</div></div>
-      <div class="st y"><div class="n">${s.total_payment_tasks}</div><div class="l">Payments</div></div>
-    </div>
+    <div id="cf-stats"></div>
     <div class="cf-time-tabs" id="cf-tabs">
       <button class="cf-tt${cfDays===7?' on':''}" data-d="7">1 Week</button>
       <button class="cf-tt${cfDays===14?' on':''}" data-d="14">2 Weeks</button>
@@ -661,7 +652,8 @@ function renderCashflow(c) {
 
 function renderCfBody() {
   const body = document.getElementById('cf-body');
-  if (!body || !CF_DATA) return;
+  const statsEl = document.getElementById('cf-stats');
+  if (!body || !statsEl || !CF_DATA) return;
   const d = CF_DATA;
   const balance = parseFloat(localStorage.getItem('cf_balance') || '0');
   const today = new Date(d.date + 'T12:00:00');
@@ -675,6 +667,24 @@ function renderCfBody() {
     return td >= today && td < cutoff;
   });
 
+  // Compute window totals
+  let winIncome = 0, winOutgoing = 0;
+  windowItems.forEach(t => {
+    if (t.type === 'income') winIncome += t.amount;
+    else winOutgoing += t.amount;
+  });
+  const winNet = winIncome - winOutgoing;
+  const projectedBal = balance + winNet;
+
+  // ── Stats (update every time) ──────────
+  statsEl.innerHTML = `<div class="stats" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px">
+    <div class="st g"><div class="n">${cfFmt(winIncome)}</div><div class="l">Income</div></div>
+    <div class="st r"><div class="n">${cfFmt(winOutgoing)}</div><div class="l">Outgoing</div></div>
+    <div class="st ${winNet >= 0 ? 'g' : 'r'}"><div class="n">${cfFmt(winNet)}</div><div class="l">Net</div></div>
+    <div class="st y"><div class="n">${windowItems.length}</div><div class="l">Payments</div></div>
+    <div class="st ${projectedBal >= 0 ? 'g' : 'r'}"><div class="n">${cfFmt(projectedBal)}</div><div class="l">Projected</div></div>
+  </div>`;
+
   // Group by day
   const byDay = {};
   windowItems.forEach(t => {
@@ -682,30 +692,14 @@ function renderCfBody() {
     byDay[t.due].push(t);
   });
 
-  // Build day-by-day running balance
-  const days = [];
-  let running = balance;
-  const allDates = [];
-  for (let i = 0; i < cfDays; i++) {
-    const dt = new Date(today.getTime() + i * 86400000);
-    const ds = dt.toISOString().slice(0, 10);
-    allDates.push(ds);
-  }
-
-  // Only include days that have payments or are first/last
-  const payDates = Object.keys(byDay).filter(ds => {
-    const dt = new Date(ds + 'T12:00:00');
-    return dt >= today && dt < cutoff;
-  }).sort();
-
-  // Include today always
+  // Only include days that have payments + today
+  const payDates = Object.keys(byDay).sort();
   const chartDates = new Set(payDates);
   chartDates.add(d.date);
   const sortedChartDates = [...chartDates].sort();
 
   let runBal = balance;
   const chartPoints = [];
-  // Add starting point
   sortedChartDates.forEach(ds => {
     let dayIn = 0, dayOut = 0;
     (byDay[ds] || []).forEach(t => {
@@ -720,17 +714,11 @@ function renderCfBody() {
   const allBals = [balance, ...chartPoints.map(p => p.balance)];
   const maxBal = Math.max(...allBals, 1);
   const minBal = Math.min(...allBals, 0);
-  const range = maxBal - minBal || 1;
-  const chartH = 160;
-
-  // Baseline Y (where $0 or starting balance sits)
-  const baseY = balance;
 
   let html = '';
 
   // ── Chart ──────────────────────────────
   if (chartPoints.length > 0) {
-    // SVG line chart
     const W = Math.max(chartPoints.length * 60, 400);
     const H = 180;
     const padL = 60, padR = 20, padT = 25, padB = 35;
@@ -743,21 +731,17 @@ function renderCfBody() {
     const toY = v => padT + plotH - ((v - yMin) / yRange * plotH);
     const toX = i => padL + (chartPoints.length > 1 ? i / (chartPoints.length - 1) * plotW : plotW / 2);
 
-    // Zero line Y
     const zeroY = toY(0);
     const startY = toY(balance);
 
-    // Build path
     let path = '';
-    let areaPath = '';
     chartPoints.forEach((p, i) => {
       const x = toX(i), y = toY(p.balance);
       path += (i === 0 ? 'M' : 'L') + `${x},${y} `;
     });
 
-    // Area fill under line
     const firstX = toX(0), lastX = toX(chartPoints.length - 1);
-    areaPath = path + `L${lastX},${toY(0)} L${firstX},${toY(0)} Z`;
+    const areaPath = path + `L${lastX},${toY(0)} L${firstX},${toY(0)} Z`;
 
     html += `<div class="cf-chart-wrap"><svg width="${W}" height="${H}" style="display:block;width:100%;max-width:${W}px" viewBox="0 0 ${W} ${H}">
       <defs><linearGradient id="cfg" x1="0" y1="0" x2="0" y2="1">
@@ -765,7 +749,6 @@ function renderCfBody() {
         <stop offset="100%" stop-color="var(--grn)" stop-opacity="0"/>
       </linearGradient></defs>`;
 
-    // Grid lines
     const gridLines = 4;
     for (let i = 0; i <= gridLines; i++) {
       const val = yMin + (yRange / gridLines) * i;
@@ -774,30 +757,22 @@ function renderCfBody() {
       html += `<text x="${padL-8}" y="${y+4}" text-anchor="end" fill="var(--dim)" font-size="10" font-family="var(--mono)">${cfFmt(val)}</text>`;
     }
 
-    // Zero line
     if (yMin < 0) {
       html += `<line x1="${padL}" y1="${zeroY}" x2="${W-padR}" y2="${zeroY}" stroke="var(--dim)" stroke-width="1" stroke-dasharray="4,4"/>`;
     }
 
-    // Starting balance line
     html += `<line x1="${padL}" y1="${startY}" x2="${W-padR}" y2="${startY}" stroke="var(--blu)" stroke-width="1" stroke-dasharray="2,4" opacity="0.5"/>`;
-
-    // Area + line
     html += `<path d="${areaPath}" fill="url(#cfg)"/>`;
     html += `<path d="${path}" fill="none" stroke="var(--grn)" stroke-width="2.5" stroke-linejoin="round"/>`;
 
-    // Points + labels
     chartPoints.forEach((p, i) => {
       const x = toX(i), y = toY(p.balance);
       const color = p.balance >= 0 ? 'var(--grn)' : 'var(--red)';
       html += `<circle cx="${x}" cy="${y}" r="4" fill="${color}" stroke="var(--bg)" stroke-width="2"/>`;
-      // Date label
       const dt = new Date(p.date + 'T12:00:00');
       const lbl = MONTHS[dt.getMonth()] + ' ' + dt.getDate();
       html += `<text x="${x}" y="${H-8}" text-anchor="middle" fill="var(--txt2)" font-size="10" font-family="var(--mono)">${lbl}</text>`;
-      // Balance label above point
       html += `<text x="${x}" y="${y-10}" text-anchor="middle" fill="${color}" font-size="10" font-weight="600" font-family="var(--mono)">${cfFmt(p.balance)}</text>`;
-      // Net change below if any
       if (p.net !== 0) {
         const netColor = p.net > 0 ? 'var(--grn)' : 'var(--red)';
         const netSign = p.net > 0 ? '+' : '';
@@ -838,12 +813,23 @@ function renderCfBody() {
     html += '</div>';
   }
 
-  // ── Payment list ───────────────────────
+  // ── Payment list with running balance ──
   html += '<div style="font-size:14px;font-weight:600;color:var(--txt2);margin-bottom:8px">Upcoming Payments</div>';
   html += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:8px 12px">';
 
+  // Header row
+  html += `<div class="cf-pay" style="border-bottom:1px solid var(--bdr);padding-bottom:4px;margin-bottom:2px">
+    <span class="cf-pay-date" style="font-weight:600;color:var(--txt)">Date</span>
+    <span class="cf-pay-type" style="background:none;border:none;color:var(--txt);font-weight:600">Type</span>
+    <span class="cf-pay-name" style="font-weight:600;color:var(--txt)">Payment</span>
+    <span class="cf-pay-amt" style="color:var(--txt)">Amount</span>
+    <span class="cf-pay-bal" style="color:var(--txt)">Balance</span>
+    <span class="cf-pay-status" style="background:none;border:none;color:var(--txt);font-weight:600">Status</span>
+  </div>`;
+
   const sorted = [...windowItems].sort((a, b) => (a.due || '').localeCompare(b.due || ''));
   if (sorted.length) {
+    let runningBal = balance;
     sorted.forEach(t => {
       const isIn = t.type === 'income';
       const typeLabel = isIn ? 'IN' : 'OUT';
@@ -853,11 +839,19 @@ function renderCfBody() {
       const amtStr = t.amount ? cfFmt2(t.amount) : 'TBD';
       const statusCls = t.paid ? 'paid' : (t.amount ? 'pending' : 'tbd');
       const statusLbl = t.paid ? '✓ Paid' : (t.amount ? 'Pending' : 'TBD');
+
+      // Update running balance
+      if (isIn) runningBal += t.amount;
+      else runningBal -= t.amount;
+
+      const balCls = runningBal >= 0 ? 'pos' : 'neg';
+
       html += `<div class="cf-pay">
         <span class="cf-pay-date">${dateLbl}</span>
         <span class="cf-pay-type ${typeCls}">${typeLabel}</span>
         <span class="cf-pay-name">${t.task} <span class="cf-pay-proj">— ${t.project}</span></span>
         <span class="cf-pay-amt ${typeCls}">${isIn ? '+' : '-'}${amtStr}</span>
+        <span class="cf-pay-bal ${balCls}">${cfFmt(runningBal)}</span>
         <span class="cf-pay-status ${statusCls}">${statusLbl}</span>
       </div>`;
     });
