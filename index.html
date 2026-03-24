@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CNG Operations Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0B0E13;--raised:#111519;--card:#161B22;--card-h:#1C222B;
+  --bdr:#21272F;--bdr-h:#2D3540;
+  --txt:#E6EAF0;--txt2:#8B95A8;--dim:#555F70;
+  --red:#F04438;--red-s:rgba(240,68,56,.1);--red-b:rgba(240,68,56,.25);
+  --org:#F79009;--org-s:rgba(247,144,9,.1);--org-b:rgba(247,144,9,.25);
+  --ylw:#EAAA08;--ylw-s:rgba(234,170,8,.1);--ylw-b:rgba(234,170,8,.25);
+  --blu:#528BFF;--blu-s:rgba(82,139,255,.1);--blu-b:rgba(82,139,255,.25);
+  --grn:#12B76A;--grn-s:rgba(18,183,106,.1);--grn-b:rgba(18,183,106,.25);
+  --pur:#9B8AFB;--acc:#818CF8;
+  --mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif;
+  --r:8px;--rl:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1.5;-webkit-font-smoothing:antialiased}
+
+/* Top bar */
+.top{position:sticky;top:0;background:var(--raised);border-bottom:1px solid var(--bdr);padding:12px 16px;z-index:100;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:34px;height:34px;background:linear-gradient(135deg,var(--acc),var(--pur));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;letter-spacing:1px;color:#fff}
+.brand-name{font-size:15px;font-weight:600}
+.brand-sub{font-size:11px;color:var(--dim)}
+.date-nav{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px}
+.date-btn{width:28px;height:28px;border:none;background:none;color:var(--txt2);font-size:16px;cursor:pointer;border-radius:4px;display:flex;align-items:center;justify-content:center}
+.date-btn:hover{background:var(--card-h);color:var(--txt)}
+.date-txt{font-size:13px;font-weight:500;padding:0 8px;min-width:80px;text-align:center}
+
+/* Nav tabs */
+.nav{display:flex;gap:2px;padding:8px 16px;overflow-x:auto;scrollbar-width:none;background:var(--raised);border-bottom:1px solid var(--bdr);position:sticky;top:58px;z-index:99}
+.nav::-webkit-scrollbar{display:none}
+.nav a{padding:8px 14px;font-size:13px;font-weight:500;color:var(--txt2);background:none;border:none;border-radius:6px;cursor:pointer;white-space:nowrap;text-decoration:none;transition:all .12s}
+.nav a:hover{background:var(--card);color:var(--txt)}
+.nav a.on{background:var(--blu);color:#fff}
+.nav .cnt{font-family:var(--mono);font-size:11px;margin-left:3px;opacity:.7}
+
+/* Main */
+.main{max-width:760px;margin:0 auto;padding:16px}
+.page-title{font-size:22px;font-weight:700;margin-bottom:2px}
+.page-sub{font-size:13px;color:var(--txt2);margin-bottom:20px}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px}
+.st{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:12px;text-align:center;position:relative;overflow:hidden}
+.st::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.st.r::before{background:var(--red)}.st.o::before{background:var(--org)}.st.b::before{background:var(--blu)}.st.y::before{background:var(--ylw)}.st.g::before{background:var(--dim)}
+.st .n{font-family:var(--mono);font-size:24px;font-weight:700;line-height:1}
+.st.r .n{color:var(--red)}.st.o .n{color:var(--org)}.st.b .n{color:var(--blu)}.st.y .n{color:var(--ylw)}.st.g .n{color:var(--txt2)}
+.st .l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--txt2);margin-top:4px}
+
+/* Alert */
+.alert{background:var(--red-s);border:1px solid var(--red-b);border-radius:var(--r);padding:12px 14px;margin-bottom:16px;font-size:13px;display:flex;gap:8px;align-items:flex-start}
+.alert b{color:var(--red)}
+
+/* Filters */
+.filters{display:flex;gap:4px;margin-bottom:14px}
+.fb{padding:6px 12px;font-size:13px;font-weight:500;font-family:var(--sans);color:var(--txt2);background:none;border:1px solid var(--bdr);border-radius:6px;cursor:pointer;white-space:nowrap}
+.fb:hover{background:var(--card);color:var(--txt)}.fb.on{background:var(--blu);color:#fff;border-color:var(--blu)}
+
+/* Project card */
+.pc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);margin-bottom:8px;overflow:hidden;transition:border-color .15s}
+.pc:hover{border-color:var(--bdr-h)}
+.ph{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.ph:hover{background:var(--card-h)}
+.pn{font-size:14px;font-weight:600}
+.pp{font-size:12px;color:var(--txt2);margin-top:1px}
+.pt{display:flex;gap:4px;flex-shrink:0;align-items:center;flex-wrap:wrap}
+.tg{font-family:var(--mono);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.tg.r{background:var(--red-s);color:var(--red);border:1px solid var(--red-b)}
+.tg.o{background:var(--org-s);color:var(--org);border:1px solid var(--org-b)}
+.tg.b{background:var(--blu-s);color:var(--blu);border:1px solid var(--blu-b)}
+.tg.y{background:var(--ylw-s);color:var(--ylw);border:1px solid var(--ylw-b)}
+.tg.gr{background:var(--grn-s);color:var(--grn);border:1px solid var(--grn-b)}
+.chv{width:14px;height:14px;color:var(--dim);transition:transform .2s;margin-left:4px;flex-shrink:0}
+.pc.op .chv{transform:rotate(180deg)}
+.pb{padding:0 14px 14px;display:none}
+.pc.op .pb{display:block}
+
+/* Preview - 3 columns visible on collapsed cards */
+.preview{padding:10px 14px;border-top:1px solid rgba(33,39,47,.5);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.pv-col{min-width:0}
+.pv-head{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding-bottom:6px;margin-bottom:6px;border-bottom:1px solid var(--bdr)}
+.pv-head.r{color:var(--red)}.pv-head.y{color:var(--ylw)}.pv-head.b{color:var(--blu)}
+.pv-item{font-size:12px;padding:3px 0;display:flex;align-items:flex-start;gap:6px;line-height:1.4}
+.pv-dot{width:5px;height:5px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.pv-dot.r{background:var(--red)}.pv-dot.y{background:var(--ylw)}.pv-dot.b{background:var(--blu)}
+.pv-txt{flex:1;min-width:0}
+.pv-name{color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pv-sub{font-size:11px;color:var(--txt2)}
+.pv-sub.warn{color:var(--red)}
+.pv-more{font-size:11px;color:var(--dim);padding:3px 0}
+.pv-empty{font-size:11px;color:var(--dim);font-style:italic;padding:3px 0}
+.pc.op .preview{display:none}
+
+/* Expanded body - 2 columns */
+.pb{padding:0 14px 14px;display:none}
+.pc.op .pb{display:block}
+.pb-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pb-full{grid-column:1/-1}
+
+@media(max-width:600px){
+  .preview{grid-template-columns:1fr}
+  .pb-grid{grid-template-columns:1fr}
+}
+
+/* Task sections */
+.ts{margin-bottom:10px}.ts:last-child{margin-bottom:0}
+.tsl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:5px 0;margin-bottom:3px;border-bottom:1px solid var(--bdr)}
+.tsl.lr{color:var(--red)}.tsl.ac{color:var(--blu)}.tsl.bl{color:var(--org)}.tsl.dt{color:var(--ylw)}.tsl.gp{color:var(--txt2)}
+
+/* Task row */
+.tr{display:flex;align-items:flex-start;padding:7px 0;border-bottom:1px solid rgba(33,39,47,.5);font-size:13px}
+.tr:last-child{border-bottom:none}
+.td{width:7px;height:7px;border-radius:50%;margin-top:6px;margin-right:9px;flex-shrink:0}
+.td.r{background:var(--red)}.td.o{background:var(--org)}.td.b{background:var(--blu)}.td.y{background:var(--ylw)}
+.ti{flex:1;min-width:0}
+.tn{font-weight:500;word-wrap:break-word}
+.tm{font-size:12px;color:var(--txt2);margin-top:1px}
+.tb{font-size:11px;color:var(--org);margin-top:3px;padding-left:16px;opacity:.85}
+.tw{font-family:var(--mono);font-size:12px;color:var(--txt);flex-shrink:0;margin-left:10px;text-align:right}
+.tw.ov{color:var(--red);font-weight:600}
+.nob{color:var(--red);font-weight:500;font-size:12px}
+
+/* Gaps */
+.gl{display:flex;gap:6px;flex-wrap:wrap;padding:6px 0}
+.gt{font-size:11px;background:rgba(85,95,112,.12);border:1px solid rgba(85,95,112,.2);padding:2px 7px;border-radius:4px;color:var(--txt2)}
+
+/* On track */
+.otg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.oti{background:var(--bg);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px;font-size:13px}
+.otc{color:var(--grn);font-weight:700;margin-right:6px}
+.otn{font-size:10px;color:var(--dim)}
+
+/* PM */
+.pmr{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.pmc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:12px 14px;display:flex;justify-content:space-between;align-items:flex-start}
+.pmn{font-size:14px;font-weight:600}
+.pmd{font-size:12px;color:var(--txt2);margin-top:3px;line-height:1.5}
+.pmb{font-size:18px}
+
+/* Section title */
+.sh{font-size:15px;font-weight:600;margin:24px 0 4px;color:var(--txt2)}
+
+/* Footer */
+.ft{margin-top:32px;padding:16px 0;border-top:1px solid var(--bdr);text-align:center;font-size:11px;color:var(--dim)}
+
+/* Placeholder */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;text-align:center}
+.empty-i{font-size:40px;margin-bottom:12px;opacity:.3}
+.empty-t{font-size:18px;font-weight:600;color:var(--txt2);margin-bottom:6px}
+.empty-d{font-size:13px;color:var(--dim);max-width:360px}
+
+@media(max-width:600px){
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .otg,.pmr{grid-template-columns:1fr}
+  .st .n{font-size:20px}
+  .pn{font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">
+    <div class="logo">CNG</div>
+    <div>
+      <div class="brand-name">Construction Nation</div>
+      <div class="brand-sub">Operations Dashboard</div>
+    </div>
+  </div>
+  <div class="date-nav">
+    <button class="date-btn" id="prev-btn">‹</button>
+    <span class="date-txt" id="date-display">Today</span>
+    <button class="date-btn" id="next-btn">›</button>
+  </div>
+</div>
+
+<div class="nav" id="main-nav">
+  <a class="on" data-p="sod">☀ SOD</a>
+  <a data-p="eod">🌙 EOD</a>
+  <a data-p="projects">◧ Projects</a>
+  <a data-p="weekly">▤ Weekly</a>
+  <a data-p="mgmt">▥ Management</a>
+  <a data-p="archive">▦ Archive</a>
+</div>
+
+<div class="main" id="content"></div>
+
+<script>
+const DATA = {
+  "date": "2026-03-24",
+  "summary": { "overdue": 27, "blocked": 58, "active": 10, "due_tomorrow": 9, "role_gaps": 104,
+    "concern": "Gaurav Bansal has 16 overdue tasks + 38 with no PM assigned — needs Jeff to act immediately." },
+  "pms": [
+    { "name": "Angel Pacheco", "ov": 1, "act": 29, "proj": 2, "ind": "green" },
+    { "name": "Jeff", "ov": 0, "act": 15, "proj": 3, "ind": "clean" },
+    { "name": "Marcio Oliveira", "ov": 1, "act": 3, "proj": 1, "ind": "yellow" },
+    { "name": "Milagros", "ov": 1, "act": 47, "proj": 2, "ind": "green" }
+  ],
+  "projects": [
+    { "name":"Gaurav Bansal","num":"KU-1225Avondale","pm":"Jeff","st":"issue",
+      "c":{"l":16,"b":9,"a":0,"t":4},"g":{"p":38,"v":24,"pc":6},
+      "tasks":{
+        "late":[
+          {"n":"Planning team meeting","d":4},{"n":"Distribution plan V1","d":4},
+          {"n":"Distribution plan V2","d":4},{"n":"Structural plans","d":4},
+          {"n":"Energy Report","d":4},{"n":"Sales finishes meeting","d":4},
+          {"n":"+10 more tasks","d":"1-4","s":true}
+        ],
+        "active":[],
+        "blocked":[
+          {"n":"811 Inspection","due":"03/25","bl":"CALL 811 (done ✓)"},
+          {"n":"Dig Foundation & Plumbing","due":"03/28","bl":"Schedule Dig Foundation (not started)"},
+          {"n":"+7 more blocked","due":"Apr 2-7","bl":"All waiting on scheduling tasks","s":true}
+        ],
+        "tmr":[
+          {"n":"Initial project kick off meeting","w":"Jeff"},
+          {"n":"Set of architectural plans"},
+          {"n":"Permits Submission","w":"Claudia Delgado"},
+          {"n":"Schedule Dig Foundation"}
+        ]
+      }
+    },
+    { "name":"Sergio Lares","num":"212129","pm":"Jeff, Milagros Porturas","st":"issue",
+      "c":{"l":10,"b":15,"a":3,"t":2},"g":{"p":2,"v":10,"pc":3},
+      "tasks":{
+        "late":[
+          {"n":"SCHEDULE CREW","d":2,"w":"Milagros Porturas"},
+          {"n":"INSPECTION (×2)","d":1,"w":"Milagros Porturas"},
+          {"n":"+7 more overdue","d":"1-4","s":true}
+        ],
+        "active":[
+          {"n":"BUY CABINETS","dt":"Mar 24","w":"Henry M Vilchez, Milagros"},
+          {"n":"PICK UP CABINETS","dt":"Mar 24","w":"Henry M Vilchez, Milagros"},
+          {"n":"SCHEDULE CREW","dt":"Mar 24","w":"Milagros"}
+        ],
+        "blocked":[
+          {"n":"Plumbing Trim","due":"03/31","w":"Eliseo Vasquez, Milagros","bl":"Schedule Plumber (not started)"},
+          {"n":"+14 more blocked","due":"Mar-Apr","bl":"Countertops, electrical, appliances chain","s":true}
+        ],
+        "tmr":[
+          {"n":"re SCHEDULE CREW","w":"Milagros, JC'S"},
+          {"n":"CABINETS INSTALLATION"}
+        ]
+      }
+    },
+    { "name":"Stephanie and Marc Felton","pm":"Jeff, Marcio Oliveira","st":"issue",
+      "c":{"l":2,"b":5,"a":1,"t":0},"g":{"p":3,"v":4,"pc":0},
+      "tasks":{
+        "late":[
+          {"n":"Windows & Exterior Doors","d":3},
+          {"n":"Order brick","d":1,"w":"Marcio Oliveira"}
+        ],
+        "active":[{"n":"Schedule brick ties","dt":"Mar 24 – Apr 4","w":"Marcio, Jeff"}],
+        "blocked":[
+          {"n":"Drywall Hang & Finish","due":"04/03","bl":"Schedule sheetrock (not started)"},
+          {"n":"Interior Trim & Doors","due":"04/07","bl":"Drywall (not started)"},
+          {"n":"+3 more blocked","due":"Apr 10-14","bl":"Paint → cabinets chain","s":true}
+        ],
+        "tmr":[]
+      }
+    },
+    { "name":"Lingyan Qiu","num":"CNG2025-458","pm":"Angel Pacheco, Jeff","st":"issue",
+      "c":{"l":0,"b":4,"a":2,"t":0},"g":{"p":6,"v":11,"pc":0},
+      "tasks":{
+        "late":[],
+        "active":[
+          {"n":"Form board inspection","dt":"Mar 17–24","w":"Angel Pacheco"},
+          {"n":"Order framing materials","dt":"Mar 13–24","w":"Angel Pacheco, Romina Rey"}
+        ],
+        "blocked":[
+          {"n":"Concrete pour - Foundation","due":"03/27","bl":"Pre pour inspection (not started)"},
+          {"n":"Foundation cure","due":"04/07","w":"Angel Pacheco","bl":"Concrete pour (not started)"},
+          {"n":"Framing and cornice","due":"04/13","w":"Angel Pacheco","bl":"Order framing materials (done ✓)"},
+          {"n":"Framing inspection","due":"04/14","w":"Angel Pacheco","bl":"Framing and cornice (not started)"}
+        ],
+        "tmr":[]
+      }
+    },
+    { "name":"Clifford Clack — Gym Addition","pm":"Angel Pacheco","st":"issue",
+      "c":{"l":0,"b":8,"a":2,"t":2},"g":{"p":2,"v":2,"pc":0},
+      "tasks":{
+        "late":[],
+        "active":[
+          {"n":"DIG FOUNDATION DITCHES - WIP","dt":"Mar 24–25","w":"Clifford, Efren, Angel"},
+          {"n":"WIP | FORM BOARDS","dt":"Mar 24–25","w":"Clifford, Angel, Efren"}
+        ],
+        "blocked":[
+          {"n":"N Ground Electrical - WIP","due":"03/30","w":"Clifford Clack","bl":"IN GROUND ELECTRICAL - READY (not started)"},
+          {"n":"Foundation Inspection","due":"04/03","w":"Angel Pacheco","bl":"Foundation WIP (50%)"},
+          {"n":"Concrete pour","due":"04/02","w":"Angel, Efren","bl":"Pre pour inspection (not started)"},
+          {"n":"+5 more blocked","due":"Apr 8-14","bl":"Downstream chain","s":true}
+        ],
+        "tmr":[
+          {"n":"DIG FOUNDATION DITCHES - WIP","w":"Clifford, Efren, Angel"},
+          {"n":"WIP | FORM BOARDS","w":"Clifford, Angel, Efren"}
+        ]
+      }
+    },
+    { "name":"Katie Holmes & Sean Springs","pm":"Jeff","st":"issue",
+      "c":{"l":1,"b":5,"a":3,"t":0},"g":{"p":3,"v":10,"pc":4},
+      "tasks":{
+        "late":[{"n":"schedule framing","d":1,"w":"Jeff"}],
+        "active":[
+          {"n":"Erect Metal Framing (85%)","dt":"Mar 3–26"},
+          {"n":"Interior Framing","dt":"Mar 14–26"},
+          {"n":"Purchase lumber","dt":"Mar 19–26","w":"Jeff"}
+        ],
+        "blocked":[
+          {"n":"Spray Foam / Insulation","due":"04/02","w":"Jeff","bl":"Leland install windows (not started)"},
+          {"n":"+4 more blocked","due":"Apr 3-13","bl":"Plumbing → Electrical → HVAC chain","s":true}
+        ],
+        "tmr":[]
+      }
+    },
+    { "name":"Martha Cockrell","num":"CNG-20251199","pm":null,"st":"issue",
+      "c":{"l":2,"b":0,"a":0,"t":0},"g":{"p":6,"v":5,"pc":1},
+      "tasks":{
+        "late":[
+          {"n":"Framing and cornice","d":3,"w":"Martha Cockrell"},
+          {"n":"Purchase doors & windows","d":1}
+        ],
+        "active":[],"blocked":[],"tmr":[]
+      }
+    },
+    { "name":"Rohini Williams","num":"CNG2025-496","pm":"Milagros Porturas","st":"issue",
+      "c":{"l":0,"b":11,"a":0,"t":0},"g":{"p":10,"v":3,"pc":4},
+      "tasks":{
+        "late":[],
+        "active":[],
+        "blocked":[{"n":"11 tasks blocked","due":"Apr 9-11","bl":"All waiting on scheduling (plumber, electrician, dig, pour)","s":true}],
+        "tmr":[]
+      }
+    },
+    { "name":"Ginger Brown","pm":"Milagros Porturas","st":"issue",
+      "c":{"l":0,"b":2,"a":0,"t":0},"g":{"p":0,"v":1,"pc":0},
+      "tasks":{
+        "late":[],
+        "active":[],
+        "blocked":[
+          {"n":"Plumbing Trim","due":"04/13","w":"Eliseo Vasquez, Milagros","bl":"Schedule Plumber (not started)"},
+          {"n":"Plumbing Trim Inspection","due":"04/14","w":"Milagros","bl":"Plumbing Trim (not started)"}
+        ],
+        "tmr":[]
+      }
+    },
+    {"name":"Kyle Aubry - Project 01","pm":null,"st":"ok"},
+    {"name":"Charles Harris — Argyle TX","pm":null,"st":"ok"},
+    {"name":"Stephen Bernard Patrick","pm":null,"st":"ok"},
+    {"name":"Visionary Construction","pm":null,"st":"ok"}
+  ]
+};
+
+let curPage = 'sod';
+
+document.getElementById('main-nav').addEventListener('click', e => {
+  const a = e.target.closest('a[data-p]');
+  if (!a) return;
+  e.preventDefault();
+  document.querySelectorAll('#main-nav a').forEach(x => x.classList.remove('on'));
+  a.classList.add('on');
+  curPage = a.dataset.p;
+  render();
+});
+
+function render() {
+  const c = document.getElementById('content');
+  if (curPage === 'sod') renderSOD(c);
+  else {
+    const titles = {eod:'EOD Report',projects:'Project Dashboards',weekly:'Weekly Report',mgmt:'EOD Management',archive:'Archive'};
+    const descs = {eod:'End of day wrap-up with completions and tomorrow preview.',projects:'Live project status views. Coming soon.',weekly:'Full week deep-dive. First report generates next Monday.',mgmt:'Executive snapshot for the owner.',archive:'Browse past reports by date using the arrows above.'};
+    c.innerHTML = `<div class="empty"><div class="empty-i">📋</div><div class="empty-t">${titles[curPage]||'Coming Soon'}</div><div class="empty-d">${descs[curPage]||''}</div></div>`;
+  }
+}
+
+function renderSOD(c) {
+  const s = DATA.summary;
+  const ps = DATA.projects;
+  const issues = ps.filter(p => p.st === 'issue');
+  const ok = ps.filter(p => p.st === 'ok');
+
+  let h = `
+    <div class="page-title">Schedule Check</div>
+    <div class="page-sub">SOD Report · Tuesday, March 24, 2026 · 7:00 AM</div>
+    <div class="stats">
+      <div class="st r"><div class="n">${s.overdue}</div><div class="l">Overdue</div></div>
+      <div class="st o"><div class="n">${s.blocked}</div><div class="l">Blocked</div></div>
+      <div class="st b"><div class="n">${s.active}</div><div class="l">Active</div></div>
+      <div class="st y"><div class="n">${s.due_tomorrow}</div><div class="l">Due Tmr</div></div>
+      <div class="st g"><div class="n">${s.role_gaps}</div><div class="l">Gaps</div></div>
+    </div>
+    <div class="alert"><span>⚠</span><div><b>Top concern:</b> ${s.concern}</div></div>
+    <div class="filters">
+      <button class="fb on" onclick="filt('all',this)">All <span class="cnt">${ps.length}</span></button>
+      <button class="fb" onclick="filt('issue',this)">Issues <span class="cnt">${issues.length}</span></button>
+      <button class="fb" onclick="filt('ok',this)">On Track <span class="cnt">${ok.length}</span></button>
+    </div>
+    <div id="plist">`;
+
+  issues.forEach((p, i) => { h += projCard(p, i === 0); });
+
+  if (ok.length) {
+    h += `<div class="pc" data-st="ok"><div class="ph" onclick="tog(this)"><div>
+      <div class="pn" style="color:var(--grn)">✓ On Track</div>
+      <div class="pp">${ok.length} projects with no issues</div></div>
+      <div class="pt"><span class="tg gr">${ok.length} clean</span>${chvSvg()}</div></div>
+      <div class="pb"><div class="otg">${ok.map(p => `<div class="oti"><span class="otc">✓</span>${p.name}${!p.pm ? '<div class="otn">No PM assigned</div>' : ''}</div>`).join('')}</div></div></div>`;
+  }
+
+  h += '</div>';
+
+  h += '<div class="sh">PM Snapshot</div><div class="pmr">';
+  DATA.pms.forEach(pm => {
+    const badge = pm.ind === 'clean' ? '✅' : pm.ind === 'green' ? '🟢' : pm.ind === 'yellow' ? '🟡' : '🔴';
+    h += `<div class="pmc"><div><div class="pmn">${pm.name}</div><div class="pmd">${pm.ov} overdue / ${pm.act} active<br>${pm.proj} project${pm.proj > 1 ? 's' : ''}</div></div><div class="pmb">${badge}</div></div>`;
+  });
+  h += '</div>';
+  h += '<div class="ft">Generated by Jade · Construction Nation Group · Data from JobTread</div>';
+  c.innerHTML = h;
+}
+
+function projCard(p, open) {
+  const c = p.c || {};
+  const g = p.g || {};
+  const t = p.tasks || {};
+  let tags = '';
+  if (c.l) tags += `<span class="tg r">${c.l} late</span>`;
+  if (c.b) tags += `<span class="tg o">${c.b} blocked</span>`;
+  if (c.a) tags += `<span class="tg b">${c.a} active</span>`;
+  if (c.t) tags += `<span class="tg y">${c.t} tmr</span>`;
+
+  const pmLine = p.pm ? `PM: ${p.pm}` : '<span class="nob">⚠ No PM assigned</span>';
+  
+  // Build 3-column preview: LATE | TOMORROW | NEXT 2 DAYS
+  let preview = '<div class="preview">';
+  
+  // Column 1: LATE
+  preview += '<div class="pv-col"><div class="pv-head r">Late</div>';
+  if (t.late?.length) {
+    const real = t.late.filter(tk => !tk.s);
+    const summary = t.late.find(tk => tk.s);
+    real.slice(0, 3).forEach(tk => {
+      preview += `<div class="pv-item"><div class="pv-dot r"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub${!tk.w?' warn':''}">${tk.w||'⚠ nobody'} · ${tk.d}d</div></div></div>`;
+    });
+    const extra = Math.max(0, real.length - 3) + (summary ? parseInt(summary.n?.match(/\d+/)?.[0]) || 0 : 0);
+    if (extra > 0) preview += `<div class="pv-more">+${extra} more</div>`;
+  } else {
+    preview += '<div class="pv-empty">None — all clear</div>';
+  }
+  preview += '</div>';
+  
+  // Column 2: TOMORROW
+  preview += '<div class="pv-col"><div class="pv-head y">Tomorrow</div>';
+  if (t.tmr?.length) {
+    t.tmr.slice(0, 4).forEach(tk => {
+      preview += `<div class="pv-item"><div class="pv-dot y"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub${!tk.w?' warn':''}">${tk.w||'⚠ nobody'}</div></div></div>`;
+    });
+    if (t.tmr.length > 4) preview += `<div class="pv-more">+${t.tmr.length - 4} more</div>`;
+  } else {
+    preview += '<div class="pv-empty">Nothing due</div>';
+  }
+  preview += '</div>';
+  
+  // Column 3: NEXT 2 DAYS (blocked + active coming up)
+  preview += '<div class="pv-col"><div class="pv-head b">Coming Up</div>';
+  let upcoming = [];
+  if (t.active) t.active.forEach(tk => upcoming.push({n:tk.n, w:tk.w, sub:tk.dt||'active'}));
+  if (t.blocked) t.blocked.filter(tk => !tk.s).slice(0, 3).forEach(tk => upcoming.push({n:tk.n, w:tk.w, due:tk.due, sub:'← '+tk.bl?.split('(')[0]?.trim(), isBlocked:true}));
+  if (upcoming.length) {
+    upcoming.slice(0, 4).forEach(tk => {
+      if (tk.isBlocked) {
+        const fmtDue = fmtDate(tk.due);
+        preview += `<div class="pv-item"><div class="pv-dot b"></div><div class="pv-txt"><div class="pv-name">${tk.n} <span style="color:var(--bdr);margin:0 4px">│</span><span style="color:var(--txt);font-family:var(--mono);font-size:11px">${fmtDue}</span></div><div class="pv-sub warn">🟠 ${tk.sub}</div></div></div>`;
+      } else {
+        preview += `<div class="pv-item"><div class="pv-dot b"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub">${(tk.w||'⚠ nobody') + ' · ' + tk.sub}</div></div></div>`;
+      }
+    });
+    if (upcoming.length > 4) preview += `<div class="pv-more">+${upcoming.length - 4} more</div>`;
+  } else {
+    preview += '<div class="pv-empty">Nothing upcoming</div>';
+  }
+  preview += '</div></div>';
+  
+  // Build expanded body in 2-column grid
+  let body = '<div class="pb-grid">';
+  
+  // Left column: Late + Active
+  body += '<div>';
+  if (t.late?.length) {
+    body += `<div class="ts"><div class="tsl lr">Overdue</div>`;
+    t.late.forEach(tk => { body += trow('r', tk.n, tk.w, tk.s ? tk.d : tk.d + 'd late', !tk.s); });
+    body += '</div>';
+  }
+  if (t.active?.length) {
+    body += `<div class="ts"><div class="tsl ac">Active</div>`;
+    t.active.forEach(tk => { body += trow('b', tk.n, tk.w, tk.dt || ''); });
+    body += '</div>';
+  }
+  body += '</div>';
+  
+  // Right column: Blocked + Due Tomorrow
+  body += '<div>';
+  if (t.blocked?.length) {
+    body += `<div class="ts"><div class="tsl bl">Blocked</div>`;
+    t.blocked.forEach(tk => { body += trow('o', tk.n, tk.w, tk.due || '', false, tk.bl); });
+    body += '</div>';
+  }
+  if (t.tmr?.length) {
+    body += `<div class="ts"><div class="tsl dt">Due Tomorrow</div>`;
+    t.tmr.forEach(tk => { body += trow('y', tk.n, tk.w, 'tomorrow'); });
+    body += '</div>';
+  }
+  body += '</div>';
+  
+  // Full-width: Gaps
+  if (g.p || g.v || g.pc) {
+    body += '<div class="pb-full"><div class="ts"><div class="tsl gp">Role Gaps</div><div class="gl">';
+    if (g.p) body += `<span class="gt">${g.p} no PM</span>`;
+    if (g.v) body += `<span class="gt">${g.v} no Vendor</span>`;
+    if (g.pc) body += `<span class="gt">${g.pc} no PurchCoord</span>`;
+    body += '</div></div></div>';
+  }
+  body += '</div>';
+  
+  return `<div class="pc${open ? ' op' : ''}" data-st="issue"><div class="ph" onclick="tog(this)"><div>
+    <div class="pn">${p.name}</div><div class="pp">${pmLine}</div></div>
+    <div class="pt">${tags}${chvSvg()}</div></div>${preview}<div class="pb">${body}</div></div>`;
+}
+
+function trow(color, name, who, when, overdue, blocker) {
+  const whoHtml = who ? who : '<span class="nob">⚠ Nobody assigned</span>';
+  return `<div class="tr"><div class="td ${color}"></div><div class="ti">
+    <div class="tn">${name}</div><div class="tm">${whoHtml}</div>
+    ${blocker ? `<div class="tb">↳ waiting on: ${blocker}</div>` : ''}
+    </div><div class="tw${overdue ? ' ov' : ''}">${when}</div></div>`;
+}
+
+function chvSvg() {
+  return `<svg class="chv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>`;
+}
+
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmtDate(d) {
+  if (!d) return '';
+  const clean = d.replace(/\//g, '-');
+  const parts = clean.split('-');
+  if (parts.length === 2) {
+    const m = parseInt(parts[0]) - 1;
+    const day = parseInt(parts[1]);
+    return (MONTHS[m]||'') + ' ' + day;
+  }
+  return d;
+}
+
+function tog(el) { el.closest('.pc').classList.toggle('op'); }
+
+function filt(f, btn) {
+  document.querySelectorAll('.fb').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.pc[data-st]').forEach(card => {
+    if (f === 'all') card.style.display = '';
+    else card.style.display = card.dataset.st === f ? '' : 'none';
+  });
+}
+
+render();
+</script>
+</body>
+</html>
