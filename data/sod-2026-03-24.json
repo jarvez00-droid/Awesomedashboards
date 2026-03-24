@@ -2,25 +2,25 @@
   "date": "2026-03-24",
   "summary": {
     "overdue": 24,
-    "blocked": 59,
-    "active": 17,
-    "due_tomorrow": 9,
-    "role_gaps": 90,
+    "blocked": 58,
+    "active": 16,
+    "next48": 40,
+    "role_gaps": 88,
     "concern": "Gaurav Bansal (KU-1225Avondale) has 25 overdue + blocked tasks"
   },
   "pms": [
     {
       "name": "Angel Pacheco",
       "ov": 0,
-      "act": 16,
+      "act": 13,
       "proj": 2,
       "ind": "clean"
     },
     {
       "name": "Jeff",
       "ov": 0,
-      "act": 8,
-      "proj": 3,
+      "act": 7,
+      "proj": 2,
       "ind": "clean"
     },
     {
@@ -33,7 +33,7 @@
     {
       "name": "Milagros Porturas",
       "ov": 7,
-      "act": 26,
+      "act": 25,
       "proj": 2,
       "ind": "green"
     }
@@ -47,7 +47,7 @@
         "l": 16,
         "b": 9,
         "a": 0,
-        "t": 5
+        "t": 7
       },
       "g": {
         "p": 22,
@@ -155,7 +155,7 @@
             "n": "INSPECTION - DIG FOUNDATION AND PLUMBING",
             "due": "03/30",
             "w": "\u26a0\ufe0f Nobody",
-            "bl": "DIG FOUNDATION AND PLUMBING DITCHES (33%)"
+            "bl": "DIG FOUNDATION AND PLUMBING DITCHES (not started)"
           },
           {
             "n": "PLACE FORM BOARD",
@@ -167,13 +167,13 @@
             "n": "INSPECTION - FORM BOARD",
             "due": "04/02",
             "w": "\u26a0\ufe0f Nobody",
-            "bl": "PLACE FORM BOARD (not started)"
+            "bl": "PLACE FORM BOARD (done)"
           },
           {
             "n": "CITY INSPECTION - FORM BOARD",
             "due": "04/03",
             "w": "\u26a0\ufe0f Nobody",
-            "bl": "PLACE FORM BOARD (not started)"
+            "bl": "PLACE FORM BOARD (done)"
           },
           {
             "n": "IN GROUND PLUMBING",
@@ -194,26 +194,48 @@
             "bl": "IN GROUND PLUMBING (done)"
           }
         ],
-        "tmr": [
+        "next48": [
           {
             "n": "Initial project kick off meeting",
-            "w": "Majo Roman, Jeff, Romina Rey, Planning | Claudia Delgado"
+            "w": "Majo Roman, Jeff, Romina Rey, Planning | Claudia Delgado",
+            "when": "due tomorrow",
+            "type": "due"
           },
           {
             "n": "Set of architectural final plans",
-            "w": "\u26a0\ufe0f Nobody"
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due tomorrow",
+            "type": "due"
           },
           {
             "n": "Permits Submission",
-            "w": "Planning | Claudia Delgado"
+            "w": "Planning | Claudia Delgado",
+            "when": "due tomorrow",
+            "type": "due"
           },
           {
             "n": "811 INSPECTION",
-            "w": "\u26a0\ufe0f Nobody"
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due tomorrow",
+            "type": "due"
           },
           {
             "n": "SCHEDULE DIG FOUNDATION AND PLUMBING DITCHES",
-            "w": "\u26a0\ufe0f Nobody"
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due tomorrow",
+            "type": "due"
+          },
+          {
+            "n": "MAKE SURE MATERIALS ARE ON SITE",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due Thu",
+            "type": "due"
+          },
+          {
+            "n": "DIG FOUNDATION AND PLUMBING DITCHES",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Thu",
+            "type": "starts"
           }
         ]
       }
@@ -226,7 +248,7 @@
         "l": 8,
         "b": 15,
         "a": 9,
-        "t": 2
+        "t": 15
       },
       "g": {
         "p": 10,
@@ -415,14 +437,96 @@
             "bl": "INSPECTION (not started)"
           }
         ],
-        "tmr": [
+        "next48": [
+          {
+            "n": "CABINETS CO: CREATE SOW",
+            "w": "Milagros Porturas",
+            "when": "due today",
+            "type": "due"
+          },
+          {
+            "n": "CABINETS CO: SOURCE VENDORS",
+            "w": "Milagros Porturas",
+            "when": "due today",
+            "type": "due"
+          },
+          {
+            "n": "CABINETS CO: SUBMIT QUOTES",
+            "w": "Milagros Porturas",
+            "when": "due today",
+            "type": "due"
+          },
+          {
+            "n": "CABINETS CO: APPROVE WORK ORDER",
+            "w": "Milagros Porturas",
+            "when": "due today",
+            "type": "due"
+          },
+          {
+            "n": "CABINETS CO: CONFIRM SCHEDULE",
+            "w": "Milagros Porturas",
+            "when": "due today",
+            "type": "due"
+          },
+          {
+            "n": "CABINETS CO: VERIFY READINESS",
+            "w": "Milagros Porturas",
+            "when": "due today",
+            "type": "due"
+          },
+          {
+            "n": "CABINETS CO: COMPLETE TAKEOFF",
+            "w": "Milagros Porturas, Romina Rey",
+            "when": "due today",
+            "type": "due"
+          },
+          {
+            "n": "CABINETS CO: SECURE PRICING",
+            "w": "Milagros Porturas, Romina Rey",
+            "when": "due today",
+            "type": "due"
+          },
+          {
+            "n": "CABINETS CO: PURCHASE MATERIAL",
+            "w": "Milagros Porturas, Romina Rey",
+            "when": "due today",
+            "type": "due"
+          },
           {
             "n": "COUNTERTOPS: RE SCHEDULE CREW",
-            "w": "Milagros Porturas, JC'S Countertops LLC"
+            "w": "Milagros Porturas, JC'S Countertops LLC",
+            "when": "due tomorrow",
+            "type": "due"
           },
           {
             "n": "CABINETS CO: CABINETS INSTALLATION",
-            "w": "\u26a0\ufe0f Nobody"
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due tomorrow",
+            "type": "due"
+          },
+          {
+            "n": "COUNTERTOPS: TAKE MEASUREMENTS FOR COUNTERTOPS",
+            "w": "JC'S Countertops LLC, Milagros Porturas",
+            "when": "due Thu",
+            "type": "due"
+          },
+          {
+            "n": "CABINETS CO: PM INSPECTION",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due Thu",
+            "type": "due"
+          },
+          {
+            "n": "CABINETS CO: COMPANYCAM COMPLETE",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due Thu",
+            "type": "due"
+          },
+          {
+            "n": "CABINETS CO: FINAL SIGN-OFF",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due Thu",
+            "type": "due"
           }
         ]
       }
@@ -456,7 +560,7 @@
             "n": "INSPECTION",
             "due": "04/11",
             "w": "\u26a0\ufe0f Nobody",
-            "bl": "DIG FOUNDATION AND PLUMBING DITCHES (33%)"
+            "bl": "DIG FOUNDATION AND PLUMBING DITCHES (not started)"
           },
           {
             "n": "811 INSPECTION",
@@ -474,7 +578,7 @@
             "n": "INSPECTION",
             "due": "04/11",
             "w": "\u26a0\ufe0f Nobody",
-            "bl": "PLACE FORM BOARD (not started)"
+            "bl": "PLACE FORM BOARD (done)"
           },
           {
             "n": "IN GROUND PLUMBING",
@@ -513,7 +617,7 @@
             "bl": "FOUNDATION POUR (not started)"
           }
         ],
-        "tmr": []
+        "next48": []
       }
     },
     {
@@ -522,13 +626,13 @@
       "st": "issue",
       "c": {
         "l": 0,
-        "b": 8,
+        "b": 7,
         "a": 2,
-        "t": 2
+        "t": 6
       },
       "g": {
-        "p": 2,
-        "v": 1,
+        "p": 1,
+        "v": 0,
         "pc": 0
       },
       "tasks": {
@@ -540,7 +644,7 @@
             "w": "Clifford Clack, Efren Aguirre, Angel Pacheco"
           },
           {
-            "n": "WIP | FORM BOARDS",
+            "n": "FORM BOARD: PLACE FORM BOARD",
             "dt": "Mar 24-25",
             "w": "Clifford Clack, Angel Pacheco, Efren Aguirre"
           }
@@ -548,13 +652,13 @@
         "blocked": [
           {
             "n": "N GROUND ELECTRICAL - WIP",
-            "due": "03/30",
-            "w": "Clifford Clack",
+            "due": "03/26",
+            "w": "Clifford Clack, Brayan Ramos, Angel Pacheco",
             "bl": "IN GROUND ELECTRICAL - READY (not started)"
           },
           {
             "n": "PM INSPECTION | IN GROUND ELECTRICAL",
-            "due": "03/31",
+            "due": "03/27",
             "w": "Clifford Clack, Angel Pacheco",
             "bl": "N GROUND ELECTRICAL - WIP (not started)"
           },
@@ -571,20 +675,14 @@
             "bl": "FRAMING - WIP (not started)"
           },
           {
-            "n": "FOUNDATION - INSPECTION",
-            "due": "04/03",
-            "w": "Clifford Clack, Angel Pacheco",
-            "bl": "FOUNDATION - WIP (50%)"
-          },
-          {
             "n": "Concrete pour",
-            "due": "04/02",
+            "due": "03/27",
             "w": "Clifford Clack, Angel Pacheco, Efren Aguirre",
-            "bl": "Pre pour inspection (not started)"
+            "bl": "Pre Pour inspection (not started)"
           },
           {
             "n": "Foundation cure",
-            "due": "04/13",
+            "due": "04/04",
             "w": "Clifford Clack, Angel Pacheco",
             "bl": "Concrete pour (not started)"
           },
@@ -595,14 +693,42 @@
             "bl": "ELECTRICAL ROUGH IN - READY (not started)"
           }
         ],
-        "tmr": [
+        "next48": [
           {
-            "n": "DIG FOUNDATION DITCHES - WIP",
-            "w": "Clifford Clack, Efren Aguirre, Angel Pacheco"
+            "n": "IN GROUND ELECTRICAL - READY",
+            "w": "Clifford Clack, Angel Pacheco, Brayan Ramos",
+            "when": "due tomorrow",
+            "type": "due"
           },
           {
-            "n": "WIP | FORM BOARDS",
-            "w": "Clifford Clack, Angel Pacheco, Efren Aguirre"
+            "n": "DIG FOUNDATION DITCHES - WIP",
+            "w": "Clifford Clack, Efren Aguirre, Angel Pacheco",
+            "when": "due tomorrow",
+            "type": "due"
+          },
+          {
+            "n": "FORM BOARD: PLACE FORM BOARD",
+            "w": "Clifford Clack, Angel Pacheco, Efren Aguirre",
+            "when": "due tomorrow",
+            "type": "due"
+          },
+          {
+            "n": "N GROUND ELECTRICAL - WIP",
+            "w": "Clifford Clack, Brayan Ramos, Angel Pacheco",
+            "when": "due Thu",
+            "type": "due"
+          },
+          {
+            "n": "CITY INSPECTION | DITCHES",
+            "w": "Clifford Clack, Angel Pacheco, Majo Roman",
+            "when": "due Thu",
+            "type": "due"
+          },
+          {
+            "n": "Pre Pour inspection",
+            "w": "Clifford Clack, Angel Pacheco",
+            "when": "due Thu",
+            "type": "due"
           }
         ]
       }
@@ -615,7 +741,7 @@
         "l": 0,
         "b": 5,
         "a": 1,
-        "t": 0
+        "t": 1
       },
       "g": {
         "p": 3,
@@ -663,7 +789,14 @@
             "bl": "Paint Walls & Ceilings (not started)"
           }
         ],
-        "tmr": []
+        "next48": [
+          {
+            "n": "Schedule brick ties",
+            "w": "Marcio Oliveira, Jeff",
+            "when": "starts today",
+            "type": "starts"
+          }
+        ]
       }
     },
     {
@@ -674,7 +807,7 @@
         "l": 0,
         "b": 5,
         "a": 3,
-        "t": 0
+        "t": 5
       },
       "g": {
         "p": 2,
@@ -685,12 +818,12 @@
         "late": [],
         "active": [
           {
-            "n": "Erect Metal Framing & Columns (85%)",
+            "n": "FRAMING: ERECT METAL FRAMING & COLUMNS (85%)",
             "dt": "Mar 3-26",
             "w": "\u26a0\ufe0f Nobody"
           },
           {
-            "n": "Interior Framing",
+            "n": "FRAMING: INTERIOR FRAMING",
             "dt": "Mar 14-26",
             "w": "\u26a0\ufe0f Nobody"
           },
@@ -732,7 +865,38 @@
             "bl": "FRAMING: PURCHASE MATERIAL (not started)"
           }
         ],
-        "tmr": []
+        "next48": [
+          {
+            "n": "FRAMING: ERECT METAL FRAMING & COLUMNS",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due Thu",
+            "type": "due"
+          },
+          {
+            "n": "FRAMING: INTERIOR FRAMING",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due Thu",
+            "type": "due"
+          },
+          {
+            "n": "schedule framing",
+            "w": "Jeff",
+            "when": "due Thu",
+            "type": "due"
+          },
+          {
+            "n": "schedule drywall",
+            "w": "Jeff",
+            "when": "starts Thu",
+            "type": "starts"
+          },
+          {
+            "n": "Purchase doors and trim",
+            "w": "Jeff",
+            "when": "starts Thu",
+            "type": "starts"
+          }
+        ]
       }
     },
     {
@@ -741,23 +905,18 @@
       "st": "issue",
       "c": {
         "l": 0,
-        "b": 4,
-        "a": 2,
-        "t": 0
+        "b": 3,
+        "a": 1,
+        "t": 2
       },
       "g": {
-        "p": 6,
-        "v": 11,
+        "p": 5,
+        "v": 10,
         "pc": 0
       },
       "tasks": {
         "late": [],
         "active": [
-          {
-            "n": "Form board inspection",
-            "dt": "Mar 17-24",
-            "w": "Angel Pacheco"
-          },
           {
             "n": "Order framing materials",
             "dt": "Mar 13-24",
@@ -768,29 +927,36 @@
           {
             "n": "Concrete pour - Foundation",
             "due": "03/27",
-            "w": "\u26a0\ufe0f Nobody",
-            "bl": "Pre pour inspection (not started)"
+            "w": "Angel Pacheco, Efren Aguirre",
+            "bl": "Pre pour inspection (done)"
           },
           {
             "n": "Foundation cure",
-            "due": "04/07",
+            "due": "04/08",
             "w": "Angel Pacheco",
             "bl": "Concrete pour - Foundation (not started)"
           },
           {
             "n": "Framing and cornice",
-            "due": "04/13",
-            "w": "Angel Pacheco",
-            "bl": "Order framing materials (done)"
-          },
-          {
-            "n": "Framing inspection",
             "due": "04/14",
             "w": "Angel Pacheco",
-            "bl": "Framing and cornice (not started)"
+            "bl": "Order framing materials (done)"
           }
         ],
-        "tmr": []
+        "next48": [
+          {
+            "n": "Order framing materials",
+            "w": "Angel Pacheco, Romina Rey",
+            "when": "due today",
+            "type": "due"
+          },
+          {
+            "n": "Pre pour inspection",
+            "w": "Angel Pacheco, Majo Roman",
+            "when": "due tomorrow",
+            "type": "due"
+          }
+        ]
       }
     },
     {
@@ -825,7 +991,7 @@
             "bl": "PLUMBING TRIM (not started)"
           }
         ],
-        "tmr": []
+        "next48": []
       }
     },
     {
@@ -834,7 +1000,7 @@
       "st": "issue",
       "c": {
         "l": 0,
-        "b": 0,
+        "b": 1,
         "a": 0,
         "t": 0
       },
@@ -846,8 +1012,62 @@
       "tasks": {
         "late": [],
         "active": [],
+        "blocked": [
+          {
+            "n": "PLUMBING: PLUMBING ROUGH IN",
+            "due": "04/10",
+            "w": "Martha Cockrell",
+            "bl": "PLUMBING: VERIFY READINESS (not started)"
+          }
+        ],
+        "next48": []
+      }
+    },
+    {
+      "name": "Karim Merchant (JOSE-TEST10)",
+      "pm": "Jeff",
+      "st": "issue",
+      "c": {
+        "l": 0,
+        "b": 0,
+        "a": 0,
+        "t": 4
+      },
+      "g": {
+        "p": 0,
+        "v": 0,
+        "pc": 0
+      },
+      "tasks": {
+        "late": [],
+        "active": [],
         "blocked": [],
-        "tmr": []
+        "next48": [
+          {
+            "n": "Structural plans",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "due today",
+            "type": "due"
+          },
+          {
+            "n": "Permit package compilation",
+            "w": "Planning | Claudia Delgado",
+            "when": "due today",
+            "type": "due"
+          },
+          {
+            "n": "Permits Submission",
+            "w": "Planning | Claudia Delgado, Jeff",
+            "when": "starts Thu",
+            "type": "starts"
+          },
+          {
+            "n": "Material List Draft",
+            "w": "Romina Rey",
+            "when": "due Thu",
+            "type": "due"
+          }
+        ]
       }
     },
     {

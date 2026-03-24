@@ -237,7 +237,7 @@ function renderSOD(c) {
       <div class="st r"><div class="n">${s.overdue}</div><div class="l">Overdue</div></div>
       <div class="st o"><div class="n">${s.blocked}</div><div class="l">Blocked</div></div>
       <div class="st b"><div class="n">${s.active}</div><div class="l">Active</div></div>
-      <div class="st y"><div class="n">${s.due_tomorrow}</div><div class="l">Due Tmr</div></div>
+      <div class="st y"><div class="n">${s.next48||s.due_tomorrow||0}</div><div class="l">Next 48h</div></div>
       <div class="st g"><div class="n">${s.role_gaps}</div><div class="l">Gaps</div></div>
     </div>
     <div class="alert"><span>⚠</span><div><b>Top concern:</b> ${s.concern}</div></div>
@@ -278,7 +278,7 @@ function projCard(p, open) {
   if (c.l) tags += `<span class="tg r">${c.l} late</span>`;
   if (c.b) tags += `<span class="tg o">${c.b} blocked</span>`;
   if (c.a) tags += `<span class="tg b">${c.a} active</span>`;
-  if (c.t) tags += `<span class="tg y">${c.t} tmr</span>`;
+  if (c.t) tags += `<span class="tg y">${c.t} next 48h</span>`;
 
   const pmLine = p.pm ? `PM: ${p.pm}` : '<span class="nob">⚠ No PM assigned</span>';
   
@@ -300,15 +300,17 @@ function projCard(p, open) {
   }
   preview += '</div>';
   
-  // Column 2: TOMORROW
-  preview += '<div class="pv-col"><div class="pv-head y">Tomorrow</div>';
-  if (t.tmr?.length) {
-    t.tmr.slice(0, 4).forEach(tk => {
-      preview += `<div class="pv-item"><div class="pv-dot y"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub${!tk.w?' warn':''}">${tk.w||'⚠ nobody'}</div></div></div>`;
+  // Column 2: NEXT 48 HOURS
+  const n48 = t.next48 || t.tmr || [];
+  preview += '<div class="pv-col"><div class="pv-head y">Next 48 Hours</div>';
+  if (n48.length) {
+    n48.slice(0, 4).forEach(tk => {
+      const label = tk.when || 'due tomorrow';
+      preview += `<div class="pv-item"><div class="pv-dot y"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub${!tk.w?' warn':''}">${label} · ${tk.w||'⚠ nobody'}</div></div></div>`;
     });
-    if (t.tmr.length > 4) preview += `<div class="pv-more">+${t.tmr.length - 4} more</div>`;
+    if (n48.length > 4) preview += `<div class="pv-more">+${n48.length - 4} more</div>`;
   } else {
-    preview += '<div class="pv-empty">Nothing due</div>';
+    preview += '<div class="pv-empty">Nothing upcoming</div>';
   }
   preview += '</div>';
   
@@ -349,16 +351,17 @@ function projCard(p, open) {
   }
   body += '</div>';
   
-  // Right column: Blocked + Due Tomorrow
+  // Right column: Blocked + Next 48 Hours
   body += '<div>';
   if (t.blocked?.length) {
     body += `<div class="ts"><div class="tsl bl">Blocked</div>`;
     t.blocked.forEach(tk => { body += trow('o', tk.n, tk.w, tk.due || '', false, tk.bl); });
     body += '</div>';
   }
-  if (t.tmr?.length) {
-    body += `<div class="ts"><div class="tsl dt">Due Tomorrow</div>`;
-    t.tmr.forEach(tk => { body += trow('y', tk.n, tk.w, 'tomorrow'); });
+  const n48body = t.next48 || t.tmr || [];
+  if (n48body.length) {
+    body += `<div class="ts"><div class="tsl dt">Next 48 Hours</div>`;
+    n48body.forEach(tk => { body += trow('y', tk.n, tk.w, tk.when || 'tomorrow'); });
     body += '</div>';
   }
   body += '</div>';
