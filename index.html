@@ -48,10 +48,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 
 /* Stats */
 .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px}
-.st{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:12px;text-align:center;position:relative;overflow:hidden}
+.st{background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 6px;text-align:center;position:relative;overflow:hidden}
 .st::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
 .st.r::before{background:var(--red)}.st.o::before{background:var(--org)}.st.b::before{background:var(--blu)}.st.y::before{background:var(--ylw)}.st.g::before{background:var(--dim)}
-.st .n{font-family:var(--mono);font-size:24px;font-weight:700;line-height:1}
+.st .n{font-family:var(--mono);font-size:20px;font-weight:700;line-height:1}
 .st.r .n{color:var(--red)}.st.o .n{color:var(--org)}.st.b .n{color:var(--blu)}.st.y .n{color:var(--ylw)}.st.g .n{color:var(--txt2)}
 .st .l{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--txt2);margin-top:4px}
 
@@ -121,16 +121,20 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 .tsl.lr{color:var(--red)}.tsl.ac{color:var(--blu)}.tsl.bl{color:var(--org)}.tsl.dt{color:var(--ylw)}.tsl.gp{color:var(--txt2)}
 
 /* Task row */
-.tr{display:flex;align-items:flex-start;padding:7px 0;border-bottom:1px solid rgba(33,39,47,.5);font-size:13px}
+.tr{display:flex;align-items:center;padding:4px 0;border-bottom:1px solid rgba(33,39,47,.3);font-size:12px;line-height:1.3}
 .tr:last-child{border-bottom:none}
-.td{width:7px;height:7px;border-radius:50%;margin-top:6px;margin-right:9px;flex-shrink:0}
+.td{width:5px;height:5px;border-radius:50%;margin-right:7px;flex-shrink:0}
 .td.r{background:var(--red)}.td.o{background:var(--org)}.td.b{background:var(--blu)}.td.y{background:var(--ylw)}.td.g{background:var(--grn)}
-.ti{flex:1;min-width:0}
-.tn{font-weight:500;word-wrap:break-word}
-.tm{font-size:12px;color:var(--txt2);margin-top:1px}
-.tb{font-size:11px;color:var(--org);margin-top:3px;padding-left:16px;opacity:.85}
-.tw{font-family:var(--mono);font-size:12px;color:var(--txt);flex-shrink:0;margin-left:10px;text-align:right}
+.ti{flex:1;min-width:0;display:flex;align-items:baseline;gap:4px;overflow:hidden}
+.tn{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:1;min-width:0}
+.tm{font-size:11px;color:var(--txt2);white-space:nowrap;flex-shrink:0}
+.tb{font-size:11px;color:var(--org);padding:1px 0 1px 12px;opacity:.85}
+.tw{font-family:var(--mono);font-size:11px;color:var(--txt);flex-shrink:0;margin-left:6px;text-align:right;white-space:nowrap}
 .tw.ov{color:var(--red);font-weight:600}
+.tr-bl{padding:0 0 4px 0;border-bottom:1px solid rgba(33,39,47,.3)}
+.tr-bl:last-child{border-bottom:none}
+.show-more{font-size:11px;color:var(--blu);cursor:pointer;padding:3px 0;user-select:none}
+.show-more:hover{text-decoration:underline}
 .nob{color:var(--red);font-weight:500;font-size:12px}
 
 /* Gaps */
@@ -252,7 +256,7 @@ function renderEOD(c) {
 
   let h = `
     <div class="page-title">End of Day Wrap-Up</div>
-    <div class="page-sub">EOD Report · ${dateLabel} · 4:00 PM${!EOD_DATA.has_sod_baseline ? ' · <span style="color:var(--ylw)">⚠ No morning baseline — showing current status</span>' : ''}</div>
+    <div class="page-sub">EOD Report · ${dateLabel} · 4:00 PM${!EOD_DATA.has_sod_baseline ? ' · <span style="color:var(--ylw)">⚠ No morning baseline - showing current status</span>' : ''}</div>
     <div class="stats" style="grid-template-columns:repeat(6,1fr)">
       <div class="st g"><div class="n">${s.completed}</div><div class="l">Completed</div></div>
       <div class="st r"><div class="n">${s.still_overdue}</div><div class="l">Still Over</div></div>
@@ -350,21 +354,21 @@ function eodProjCard(p, open) {
   // Expanded body
   let body = '<div class="pb-grid">';
 
-  // Left: Completed + Resolved
+  // Left: Completed + Resolved + New Overdue
   body += '<div>';
   if (t.completed?.length) {
     body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Completed Today</div>';
-    t.completed.forEach(tk => { body += trow('g', tk.n, tk.w, '✓'); });
+    body += trowSection('g', t.completed, tk => trow('g', tk.n, tk.w, '✓'), 5);
     body += '</div>';
   }
   if (t.resolved?.length) {
     body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Resolved Blockers</div>';
-    t.resolved.forEach(tk => { body += trow('g', tk.n, tk.w, 'clear'); });
+    body += trowSection('g', t.resolved, tk => trow('g', tk.n, tk.w, 'clear'), 5);
     body += '</div>';
   }
   if (t.new_overdue?.length) {
     body += '<div class="ts"><div class="tsl lr">🆕 New Overdue</div>';
-    t.new_overdue.forEach(tk => { body += trow('r', tk.n, tk.w, tk.d + 'd', true); });
+    body += trowSection('r', t.new_overdue, tk => trow('r', tk.n, tk.w, tk.d + 'd', true), 5);
     body += '</div>';
   }
   body += '</div>';
@@ -373,17 +377,17 @@ function eodProjCard(p, open) {
   body += '<div>';
   if (t.still_overdue?.length) {
     body += '<div class="ts"><div class="tsl lr">🔴 Still Overdue</div>';
-    t.still_overdue.forEach(tk => { body += trow('r', tk.n, tk.w, tk.d + 'd', true); });
+    body += trowSection('r', t.still_overdue, tk => trow('r', tk.n, tk.w, tk.d + 'd', true), 5);
     body += '</div>';
   }
   if (t.still_blocked?.length) {
     body += '<div class="ts"><div class="tsl bl">🟠 Still Blocked</div>';
-    t.still_blocked.forEach(tk => { body += trow('o', tk.n, tk.w, tk.due || '', false, tk.bl); });
+    body += trowSection('o', t.still_blocked, tk => trow('o', tk.n, tk.w, tk.due || '', false, tk.bl), 5);
     body += '</div>';
   }
   if (n48.length) {
     body += '<div class="ts"><div class="tsl dt">🔵 Next 48 Hours</div>';
-    n48.forEach(tk => { body += trow('y', tk.n, tk.w, tk.when); });
+    body += trowSection('y', n48, tk => trow('y', tk.n, tk.w, tk.when), 5);
     body += '</div>';
   }
   body += '</div></div>';
@@ -466,10 +470,10 @@ function projCard(p, open) {
   if (c.t) tags += `<span class="tg y">${c.t} next 48h</span>`;
 
   const pmLine = p.pm ? `PM: ${p.pm}` : '<span class="nob">⚠ No PM assigned</span>';
-  
+
   // Build 3-column preview: LATE | TOMORROW | NEXT 2 DAYS
   let preview = '<div class="preview">';
-  
+
   // Column 1: LATE
   preview += '<div class="pv-col"><div class="pv-head r">Late</div>';
   if (t.late?.length) {
@@ -481,10 +485,10 @@ function projCard(p, open) {
     const extra = Math.max(0, real.length - 3) + (summary ? parseInt(summary.n?.match(/\d+/)?.[0]) || 0 : 0);
     if (extra > 0) preview += `<div class="pv-more">+${extra} more</div>`;
   } else {
-    preview += '<div class="pv-empty">None — all clear</div>';
+    preview += '<div class="pv-empty">None - all clear</div>';
   }
   preview += '</div>';
-  
+
   // Column 2: NEXT 48 HOURS
   const n48 = t.next48 || t.tmr || [];
   preview += '<div class="pv-col"><div class="pv-head y">Next 48 Hours</div>';
@@ -498,7 +502,7 @@ function projCard(p, open) {
     preview += '<div class="pv-empty">Nothing upcoming</div>';
   }
   preview += '</div>';
-  
+
   // Column 3: NEXT 2 DAYS (blocked + active coming up)
   preview += '<div class="pv-col"><div class="pv-head b">Coming Up</div>';
   let upcoming = [];
@@ -518,39 +522,39 @@ function projCard(p, open) {
     preview += '<div class="pv-empty">Nothing upcoming</div>';
   }
   preview += '</div></div>';
-  
+
   // Build expanded body in 2-column grid
   let body = '<div class="pb-grid">';
-  
+
   // Left column: Late + Active
   body += '<div>';
   if (t.late?.length) {
     body += `<div class="ts"><div class="tsl lr">Overdue</div>`;
-    t.late.forEach(tk => { body += trow('r', tk.n, tk.w, tk.s ? tk.d : tk.d + 'd late', !tk.s); });
+    body += trowSection('r', t.late, tk => trow('r', tk.n, tk.w, tk.s ? tk.d : tk.d + 'd late', !tk.s), 5);
     body += '</div>';
   }
   if (t.active?.length) {
     body += `<div class="ts"><div class="tsl ac">Active</div>`;
-    t.active.forEach(tk => { body += trow('b', tk.n, tk.w, tk.dt || ''); });
+    body += trowSection('b', t.active, tk => trow('b', tk.n, tk.w, tk.dt || ''), 5);
     body += '</div>';
   }
   body += '</div>';
-  
+
   // Right column: Blocked + Next 48 Hours
   body += '<div>';
   if (t.blocked?.length) {
     body += `<div class="ts"><div class="tsl bl">Blocked</div>`;
-    t.blocked.forEach(tk => { body += trow('o', tk.n, tk.w, tk.due || '', false, tk.bl); });
+    body += trowSection('o', t.blocked, tk => trow('o', tk.n, tk.w, tk.due || '', false, tk.bl), 5);
     body += '</div>';
   }
   const n48body = t.next48 || t.tmr || [];
   if (n48body.length) {
     body += `<div class="ts"><div class="tsl dt">Next 48 Hours</div>`;
-    n48body.forEach(tk => { body += trow('y', tk.n, tk.w, tk.when || 'tomorrow'); });
+    body += trowSection('y', n48body, tk => trow('y', tk.n, tk.w, tk.when || 'tomorrow'), 5);
     body += '</div>';
   }
   body += '</div>';
-  
+
   // Full-width: Gaps
   if (g.p || g.v || g.pc) {
     body += '<div class="pb-full"><div class="ts"><div class="tsl gp">Role Gaps</div><div class="gl">';
@@ -560,19 +564,31 @@ function projCard(p, open) {
     body += '</div></div></div>';
   }
   body += '</div>';
-  
+
   const sev = c.l ? 'sev-r' : c.b ? 'sev-o' : c.a ? 'sev-b' : 'sev-g';
   return `<div class="pc ${sev}${open ? ' op' : ''}" data-st="issue" data-pm="${p.pm||'No PM'}"><div class="ph" onclick="tog(this)"><div>
     <div class="pn">${p.name}</div><div class="pp">${pmLine}</div></div>
     <div class="pt">${tags}${chvSvg()}</div></div>${preview}<div class="pb">${body}</div></div>`;
 }
 
+let _trowId = 0;
 function trow(color, name, who, when, overdue, blocker) {
-  const whoHtml = who ? who : '<span class="nob">⚠ Nobody assigned</span>';
-  return `<div class="tr"><div class="td ${color}"></div><div class="ti">
-    <div class="tn">${name}</div><div class="tm">${whoHtml}</div>
-    ${blocker ? `<div class="tb">↳ waiting on: ${blocker}</div>` : ''}
-    </div><div class="tw${overdue ? ' ov' : ''}">${when}</div></div>`;
+  const whoShort = who ? (who.length > 20 ? who.split(',')[0].trim() : who) : '<span class="nob">⚠ Nobody</span>';
+  const sep = ' - ';
+  if (blocker) {
+    return `<div class="tr-bl"><div class="tr"><div class="td ${color}"></div><div class="ti"><div class="tn">${name}${sep}${whoShort}</div></div><div class="tw${overdue ? ' ov' : ''}">${when}</div></div><div class="tb">↳ ${blocker}</div></div>`;
+  }
+  return `<div class="tr"><div class="td ${color}"></div><div class="ti"><div class="tn">${name}${sep}${whoShort}</div></div><div class="tw${overdue ? ' ov' : ''}">${when}</div></div>`;
+}
+
+function trowSection(color, items, renderFn, limit) {
+  limit = limit || 5;
+  if (items.length <= limit) return items.map(renderFn).join('');
+  const id = 'trs' + (++_trowId);
+  let h = items.slice(0, limit).map(renderFn).join('');
+  h += `<div id="${id}-rest" style="display:none">${items.slice(limit).map(renderFn).join('')}</div>`;
+  h += `<div class="show-more" onclick="document.getElementById('${id}-rest').style.display='block';this.style.display='none'">+ ${items.length - limit} more</div>`;
+  return h;
 }
 
 function chvSvg() {
