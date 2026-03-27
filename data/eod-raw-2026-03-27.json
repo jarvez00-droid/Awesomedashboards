@@ -1,0 +1,947 @@
+{
+  "date": "2026-03-27",
+  "has_sod_baseline": true,
+  "summary": {
+    "completed": 14,
+    "worse": 1,
+    "same": 6,
+    "improved": 2,
+    "no_issues": 5
+  },
+  "projects": [
+    {
+      "name": "CANDACE - JUSTIN P REFERRAL (CNG2025-522)",
+      "pm": "Marcio Oliveira",
+      "trend": "worse",
+      "completed": [],
+      "overdue": [],
+      "blocked": [
+        {
+          "name": "ROOFING: PURCHASE MATERIAL",
+          "due": "Mar 28",
+          "who": "Reynaldo Aquije, Romina Rey, Marjorie Serna",
+          "blocker": "ROOFING: SECURE PRICING",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "ROOFING: CONFIRM DELIVERY",
+          "due": "Mar 30",
+          "who": "Romina Rey",
+          "blocker": "ROOFING: PURCHASE MATERIAL",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "ROOFING: APROVE WO",
+          "due": "Mar 27",
+          "who": "Marcio Oliveira",
+          "blocker": "ROOFING: SUBMIT QUOTE",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "ROOFING: CONFIRM SCHEDULE",
+          "due": "Mar 28",
+          "who": "Marcio Oliveira",
+          "blocker": "ROOFING: APROVE WO",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "ROOFING: SUBMIT QUOTE",
+          "due": "Mar 27",
+          "who": "Marcio Oliveira",
+          "blocker": "ROOFING: CREATE SOW",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "ROOFING: INSTALL ROOFING",
+          "due": "Apr 01",
+          "who": "Nobody",
+          "blocker": "ROOFING: CONFIRM DELIVERY",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "ROOFING: BILL & PAYMENT",
+          "due": "Apr 10",
+          "who": "Nobody",
+          "blocker": "ROOFING: INSTALL ROOFING",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "ROOFING: SECURE PRICING",
+          "due": "Mar 28",
+          "who": "Nobody",
+          "blocker": "ROOFING: COMPELTE TAKEOFF",
+          "blocker_overdue": false,
+          "unassigned": true
+        }
+      ],
+      "coming_risky": [
+        {
+          "name": "ROOFING: PURCHASE MATERIAL",
+          "due": "Mar 28",
+          "when": "due tomorrow",
+          "who": "Reynaldo Aquije, Romina Rey, Marjorie Serna",
+          "risks": [
+            "blocked by ROOFING: SECURE PRICING"
+          ],
+          "blocker": "ROOFING: SECURE PRICING"
+        },
+        {
+          "name": "ROOFING: APROVE WO",
+          "due": "Mar 27",
+          "when": "due today",
+          "who": "Marcio Oliveira",
+          "risks": [
+            "blocked by ROOFING: SUBMIT QUOTE"
+          ],
+          "blocker": "ROOFING: SUBMIT QUOTE"
+        },
+        {
+          "name": "ROOFING: CONFIRM SCHEDULE",
+          "due": "Mar 28",
+          "when": "due tomorrow",
+          "who": "Marcio Oliveira",
+          "risks": [
+            "blocked by ROOFING: APROVE WO"
+          ],
+          "blocker": "ROOFING: APROVE WO"
+        },
+        {
+          "name": "ROOFING: SUBMIT QUOTE",
+          "due": "Mar 27",
+          "when": "due today",
+          "who": "Marcio Oliveira",
+          "risks": [
+            "blocked by ROOFING: CREATE SOW"
+          ],
+          "blocker": "ROOFING: CREATE SOW"
+        },
+        {
+          "name": "ROOFING: SECURE PRICING",
+          "due": "Mar 28",
+          "when": "due tomorrow",
+          "who": "Nobody",
+          "risks": [
+            "blocked by ROOFING: COMPELTE TAKEOFF",
+            "unassigned"
+          ],
+          "blocker": "ROOFING: COMPELTE TAKEOFF"
+        }
+      ],
+      "counts": {
+        "completed": 0,
+        "overdue": 0,
+        "blocked": 8,
+        "coming_risky": 5,
+        "sod_overdue": 0,
+        "sod_blocked": 0
+      }
+    },
+    {
+      "name": "Gaurav Bansal (KU-1225Avondale)",
+      "pm": "Jeff",
+      "trend": "same",
+      "completed": [],
+      "overdue": [
+        {
+          "name": "Distribution plan Version 1",
+          "days": 2,
+          "who": "Nobody"
+        },
+        {
+          "name": "Initial project kick off meeting",
+          "days": 2,
+          "who": "Majo Roman, Jeff, Romina Rey, Planning | Claudia Delgado"
+        },
+        {
+          "name": "Set of architectural final plans",
+          "days": 2,
+          "who": "Nobody"
+        },
+        {
+          "name": "CALL 811",
+          "days": 7,
+          "who": "Nobody"
+        },
+        {
+          "name": "811 INSPECTION",
+          "days": 2,
+          "who": "Nobody"
+        },
+        {
+          "name": "SCHEDULE DIG FOUNDATION AND PLUMBING DITCHES",
+          "days": 2,
+          "who": "Nobody"
+        },
+        {
+          "name": "MAKE SURE MATERIALS ARE ON SITE",
+          "days": 1,
+          "who": "Nobody"
+        }
+      ],
+      "blocked": [
+        {
+          "name": "811 INSPECTION",
+          "due": "Mar 25",
+          "who": "Nobody",
+          "blocker": "CALL 811",
+          "blocker_overdue": true,
+          "unassigned": true
+        },
+        {
+          "name": "DIG FOUNDATION AND PLUMBING DITCHES",
+          "due": "Mar 28",
+          "who": "Nobody",
+          "blocker": "SCHEDULE DIG FOUNDATION AND PLUMBING DITCHES",
+          "blocker_overdue": true,
+          "unassigned": true
+        },
+        {
+          "name": "INSPECTION - DIG FOUNDATION AND PLUMBING",
+          "due": "Mar 30",
+          "who": "Nobody",
+          "blocker": "DIG FOUNDATION AND PLUMBING DITCHES",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "PLACE FORM BOARD",
+          "due": "Apr 02",
+          "who": "Nobody",
+          "blocker": "SCHEDULE FORM BOARD",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "INSPECTION - FORM BOARD",
+          "due": "Apr 02",
+          "who": "Nobody",
+          "blocker": "PLACE FORM BOARD",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "CITY INSPECTION - FORM BOARD",
+          "due": "Apr 03",
+          "who": "Nobody",
+          "blocker": "PLACE FORM BOARD",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "IN GROUND PLUMBING",
+          "due": "Apr 06",
+          "who": "Nobody",
+          "blocker": "SCHEDULE - IN GROUND PLUMBING",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "INSPECTION - IN GROUND PLUMBING",
+          "due": "Apr 07",
+          "who": "Nobody",
+          "blocker": "IN GROUND PLUMBING",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "CITY INSPECTION - IN GROUND PLUMBING",
+          "due": "Apr 08",
+          "who": "Nobody",
+          "blocker": "IN GROUND PLUMBING",
+          "blocker_overdue": false,
+          "unassigned": true
+        }
+      ],
+      "coming_risky": [
+        {
+          "name": "Distribution plan Version 2",
+          "due": "Mar 27",
+          "when": "due today",
+          "who": "Nobody",
+          "risks": [
+            "unassigned"
+          ],
+          "blocker": ""
+        },
+        {
+          "name": "DIG FOUNDATION AND PLUMBING DITCHES",
+          "due": "Mar 28",
+          "when": "due tomorrow",
+          "who": "Nobody",
+          "risks": [
+            "blocked by SCHEDULE DIG FOUNDATION AND PLUMBING DITCHES",
+            "unassigned",
+            "blocker is overdue"
+          ],
+          "blocker": "SCHEDULE DIG FOUNDATION AND PLUMBING DITCHES"
+        },
+        {
+          "name": "SCHEDULE FORM BOARD",
+          "due": "Mar 28",
+          "when": "due tomorrow",
+          "who": "Nobody",
+          "risks": [
+            "unassigned"
+          ],
+          "blocker": ""
+        }
+      ],
+      "counts": {
+        "completed": 0,
+        "overdue": 7,
+        "blocked": 9,
+        "coming_risky": 3,
+        "sod_overdue": 7,
+        "sod_blocked": 9
+      }
+    },
+    {
+      "name": "Katie Holmes & Sean Springs",
+      "pm": "Jeff",
+      "trend": "same",
+      "completed": [],
+      "overdue": [
+        {
+          "name": "FRAMING: ERECT METAL FRAMING & COLUMNS",
+          "days": 1,
+          "who": "Nobody"
+        },
+        {
+          "name": "FRAMING: INTERIOR FRAMING",
+          "days": 1,
+          "who": "Nobody"
+        },
+        {
+          "name": "FRAMING: CONFIRM SCHEDULE",
+          "days": 1,
+          "who": "Jeff"
+        }
+      ],
+      "blocked": [
+        {
+          "name": "INSULATION: INSTALL INSULATION",
+          "due": "Apr 07",
+          "who": "Nobody",
+          "blocker": "DOORS AND WINDOWS: LELAND INSTALL NEW WINDOWS",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "PLUMBING: PLUMBING ROUGH IN",
+          "due": "Apr 17",
+          "who": "Jeff",
+          "blocker": "INSULATION: INSTALL INSULATION",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "FRAMING: INTERIOR WALL FRAMING & BLOCKING",
+          "due": "Apr 04",
+          "who": "Jeff",
+          "blocker": "FRAMING: PURCHASE MATERIAL",
+          "blocker_overdue": false,
+          "unassigned": false
+        }
+      ],
+      "coming_risky": [
+        {
+          "name": "FRAMING: PM INSPECTION / CC REPORT",
+          "due": "Mar 27",
+          "when": "due today",
+          "who": "Nobody",
+          "risks": [
+            "unassigned"
+          ],
+          "blocker": ""
+        },
+        {
+          "name": "FRAMING: CITY INSPECTION",
+          "due": "Mar 28",
+          "when": "due tomorrow",
+          "who": "Nobody",
+          "risks": [
+            "unassigned"
+          ],
+          "blocker": ""
+        }
+      ],
+      "counts": {
+        "completed": 0,
+        "overdue": 3,
+        "blocked": 3,
+        "coming_risky": 2,
+        "sod_overdue": 3,
+        "sod_blocked": 3
+      }
+    },
+    {
+      "name": "Stephanie and Marc Felton",
+      "pm": "Jeff, Marcio Oliveira",
+      "trend": "same",
+      "completed": [],
+      "overdue": [
+        {
+          "name": "BRICKS: PURCHASE MATERIAL",
+          "days": 1,
+          "who": "Marcio Oliveira, Romina Rey, Reynaldo Aquije"
+        }
+      ],
+      "blocked": [
+        {
+          "name": "INTERIOR DOORS AND TRIM: INSTALL INTERIOR TRIM AND DOORS",
+          "due": "Apr 03",
+          "who": "Nobody",
+          "blocker": "INTERIOR DOORS AND TRIM: CONFIRM SCHEDULE",
+          "blocker_overdue": false,
+          "unassigned": true
+        }
+      ],
+      "coming_risky": [],
+      "counts": {
+        "completed": 0,
+        "overdue": 1,
+        "blocked": 1,
+        "coming_risky": 0,
+        "sod_overdue": 1,
+        "sod_blocked": 1
+      }
+    },
+    {
+      "name": "Ginger Brown",
+      "pm": "Milagros Porturas",
+      "trend": "same",
+      "completed": [],
+      "overdue": [],
+      "blocked": [
+        {
+          "name": "PLUMBING TRIM",
+          "due": "Apr 13",
+          "who": "Eliseo Vasquez, Milagros Porturas",
+          "blocker": "SCHEDULE PLUMBER",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "PLUMBING TRIM - INSPECTION",
+          "due": "Apr 14",
+          "who": "Milagros Porturas",
+          "blocker": "PLUMBING TRIM",
+          "blocker_overdue": false,
+          "unassigned": false
+        }
+      ],
+      "coming_risky": [],
+      "counts": {
+        "completed": 0,
+        "overdue": 0,
+        "blocked": 2,
+        "coming_risky": 0,
+        "sod_overdue": 0,
+        "sod_blocked": 2
+      }
+    },
+    {
+      "name": "Lingyan Qiu (CNG2025-458)",
+      "pm": "Angel Pacheco, Jeff",
+      "trend": "same",
+      "completed": [
+        {
+          "name": "FRAMING: COMPLETE TAKEOFF",
+          "who": "Angel Pacheco, Romina Rey"
+        },
+        {
+          "name": "FRAMING: COMPLETE TAKEOFF CEDAR WOOD (Sunroom)",
+          "who": "Angel Pacheco, Romina Rey"
+        }
+      ],
+      "overdue": [],
+      "blocked": [
+        {
+          "name": "Foundation cure",
+          "due": "Apr 10",
+          "who": "Angel Pacheco",
+          "blocker": "Concrete pour - Foundation",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "FRAMING: FRAMING AND CORNICE",
+          "due": "Apr 16",
+          "who": "Angel Pacheco",
+          "blocker": "Foundation cure",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "DOORS AND WINDOWS: INSTALL EXTERIOR DOORS AND WINDOWS",
+          "due": "Apr 13",
+          "who": "Angel Pacheco",
+          "blocker": "WINDOWS: CONFIRM DELIVERY",
+          "blocker_overdue": false,
+          "unassigned": false
+        }
+      ],
+      "coming_risky": [],
+      "counts": {
+        "completed": 2,
+        "overdue": 0,
+        "blocked": 3,
+        "coming_risky": 0,
+        "sod_overdue": 0,
+        "sod_blocked": 3
+      }
+    },
+    {
+      "name": "Rohini Williams (CNG2025-496)",
+      "pm": "Milagros Porturas",
+      "trend": "same",
+      "completed": [],
+      "overdue": [],
+      "blocked": [
+        {
+          "name": "DIG FOUNDATION AND PLUMBING DITCHES",
+          "due": "Apr 10",
+          "who": "Nobody",
+          "blocker": "SCHEDULE DIG FOUNDATION AND PLUMBING DITCHES",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "INSPECTION",
+          "due": "Apr 11",
+          "who": "Nobody",
+          "blocker": "DIG FOUNDATION AND PLUMBING DITCHES",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "811 INSPECTION",
+          "due": "Apr 09",
+          "who": "Nobody",
+          "blocker": "CALL 811",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "PLACE FORM BOARD",
+          "due": "Apr 10",
+          "who": "Nobody",
+          "blocker": "SCHEDULE FORM BOARD",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "INSPECTION",
+          "due": "Apr 11",
+          "who": "Nobody",
+          "blocker": "PLACE FORM BOARD",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "IN GROUND PLUMBING",
+          "due": "Apr 09",
+          "who": "Nobody",
+          "blocker": "SCHEDULE PLUMBER",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "INSPECTION",
+          "due": "Apr 10",
+          "who": "Nobody",
+          "blocker": "IN GROUND PLUMBING",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "IN GROUND ELECTRICAL",
+          "due": "Apr 10",
+          "who": "Nobody",
+          "blocker": "SCHEDULE ELECTRICIAN",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "INSPECTION",
+          "due": "Apr 11",
+          "who": "Nobody",
+          "blocker": "IN GROUND ELECTRICAL",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "FOUNDATION POUR",
+          "due": "Apr 13",
+          "who": "Nobody",
+          "blocker": "SCHEDULE FOUNDATION CREW",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "PM INSPECTION",
+          "due": "Apr 14",
+          "who": "Nobody",
+          "blocker": "FOUNDATION POUR",
+          "blocker_overdue": false,
+          "unassigned": true
+        }
+      ],
+      "coming_risky": [],
+      "counts": {
+        "completed": 0,
+        "overdue": 0,
+        "blocked": 11,
+        "coming_risky": 0,
+        "sod_overdue": 0,
+        "sod_blocked": 11
+      }
+    },
+    {
+      "name": "Sergio Lares (212129)",
+      "pm": "Jeff, Milagros Porturas",
+      "trend": "improved",
+      "completed": [
+        {
+          "name": "COUNTERTOPS: TAKE MEASUREMENTS FOR COUNTERTOPS",
+          "who": "JC'S Countertops LLC, Milagros Porturas"
+        },
+        {
+          "name": "COUNTERTOPS: CONFIRM SCHEDULE",
+          "who": "Milagros Porturas, JC'S Countertops LLC"
+        },
+        {
+          "name": "COUNTERTOPS: RE SCHEDULE CREW",
+          "who": "Milagros Porturas, JC'S Countertops LLC"
+        },
+        {
+          "name": "CABINETS CO: CABINETS INSTALLATION",
+          "who": "Nobody"
+        },
+        {
+          "name": "CABINETS CO: PM INSPECTION / CC REPORT",
+          "who": "Nobody"
+        },
+        {
+          "name": "PLUMBING: CREATE SOW",
+          "who": "Milagros Porturas"
+        },
+        {
+          "name": "PLUMBING: SOURCE VENDORS",
+          "who": "Milagros Porturas"
+        },
+        {
+          "name": "PLUMBING: APPROVE WO",
+          "who": "Milagros Porturas"
+        },
+        {
+          "name": "APPLIANCES: CREATE SOW",
+          "who": "Milagros Porturas"
+        },
+        {
+          "name": "APPLIANCES: SOURCE VENDORS",
+          "who": "Milagros Porturas"
+        },
+        {
+          "name": "APPLIANCES: APPROVE WO",
+          "who": "Milagros Porturas"
+        }
+      ],
+      "overdue": [
+        {
+          "name": "ELECTRICAL: REQUEST CITY INSPECTION",
+          "days": 4,
+          "who": "Milagros Porturas"
+        },
+        {
+          "name": "ELECTRICAL: CITY INSPECTION",
+          "days": 3,
+          "who": "Milagros Porturas"
+        }
+      ],
+      "blocked": [
+        {
+          "name": "PLUMBING: PLUMBING TRIM",
+          "due": "Apr 01",
+          "who": "Eliseo Vasquez",
+          "blocker": "PLUMBING: CONFIRM SCHEDULE",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "PLUMBING: PM INSPECTION / CC REPORT",
+          "due": "Apr 02",
+          "who": "Milagros Porturas",
+          "blocker": "PLUMBING: PLUMBING TRIM",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "ELECTRICAL: ELECTRICAL TRIM",
+          "due": "Apr 01",
+          "who": "Marcos Ayala",
+          "blocker": "ELECTRICAL: CONFIRM SCHEDULE",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "COUNTERTOPS: PM INSPECTION / CC REPORT",
+          "due": "Apr 01",
+          "who": "Milagros Porturas",
+          "blocker": "COUNTERTOPS: INSTALL COUNTERTOPS",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "APPLIANCES: INSTALL APPLIANCES",
+          "due": "Apr 01",
+          "who": "Milagros Porturas",
+          "blocker": "APPLIANCES: CONFIRM SCHEDULE",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "APPLIANCES: PM INSPECTION / CC REPORT",
+          "due": "Apr 02",
+          "who": "Milagros Porturas",
+          "blocker": "APPLIANCES: INSTALL APPLIANCES",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "CLEANING: FINAL CLEANING",
+          "due": "Apr 06",
+          "who": "Nobody",
+          "blocker": "PUNCH LIST: WORK ON FINAL PUNCH LIST",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "CLEANING: PM INSPECTION / CC REPORT",
+          "due": "Apr 07",
+          "who": "Milagros Porturas",
+          "blocker": "CLEANING: FINAL CLEANING",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "PRE DELIVERY WALK THROUGH",
+          "due": "Mar 31",
+          "who": "Milagros Porturas",
+          "blocker": "SCHEDULE PRE DELIVERY WALK THROUGH WITH CLIENT",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "PUNCH LIST: CONFIRM SCHEDULE",
+          "due": "Apr 01",
+          "who": "Milagros Porturas",
+          "blocker": "PRE DELIVERY WALK THROUGH",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "PUNCH LIST: WORK ON FINAL PUNCH LIST",
+          "due": "Apr 02",
+          "who": "Nobody",
+          "blocker": "PUNCH LIST: CONFIRM SCHEDULE",
+          "blocker_overdue": false,
+          "unassigned": true
+        },
+        {
+          "name": "PROJECT DELIVERY",
+          "due": "Apr 08",
+          "who": "Milagros Porturas",
+          "blocker": "CLEANING: PM INSPECTION / CC REPORT",
+          "blocker_overdue": false,
+          "unassigned": false
+        }
+      ],
+      "coming_risky": [
+        {
+          "name": "FLOORING: BILL & PAYMENT",
+          "due": "Mar 27",
+          "when": "due today",
+          "who": "Nobody",
+          "risks": [
+            "unassigned"
+          ],
+          "blocker": ""
+        },
+        {
+          "name": "DEMO: BILL & PAYMENT",
+          "due": "Mar 27",
+          "when": "due today",
+          "who": "Nobody",
+          "risks": [
+            "unassigned"
+          ],
+          "blocker": ""
+        }
+      ],
+      "counts": {
+        "completed": 11,
+        "overdue": 2,
+        "blocked": 12,
+        "coming_risky": 2,
+        "sod_overdue": 10,
+        "sod_blocked": 15
+      }
+    },
+    {
+      "name": "Clifford Clack \u2014 Gym Addition",
+      "pm": "Angel Pacheco",
+      "trend": "improved",
+      "completed": [
+        {
+          "name": "Pre Pour inspection",
+          "who": "Clifford Clack, Angel Pacheco"
+        }
+      ],
+      "overdue": [],
+      "blocked": [
+        {
+          "name": "FRAMING: FRAMING AND CORNICE",
+          "due": "Apr 10",
+          "who": "Clifford Clack, Angel Pacheco",
+          "blocker": "Foundation cure",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "FRAMING: PM INSPECTION / CC REPORT",
+          "due": "Apr 13",
+          "who": "Clifford Clack, Angel Pacheco",
+          "blocker": "FRAMING: FRAMING AND CORNICE",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "Foundation cure",
+          "due": "Apr 07",
+          "who": "Clifford Clack, Angel Pacheco",
+          "blocker": "Concrete pour",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "ELECTRICAL ROUGH IN - WIP",
+          "due": "Apr 14",
+          "who": "Clifford Clack, Angel Pacheco, Brayan Ramos",
+          "blocker": "ELECTRICAL ROUGH IN - READY",
+          "blocker_overdue": false,
+          "unassigned": false
+        },
+        {
+          "name": "ELECTRICAL ROUGH IN - INSPECTION",
+          "due": "Apr 15",
+          "who": "Clifford Clack",
+          "blocker": "ELECTRICAL ROUGH IN - WIP",
+          "blocker_overdue": false,
+          "unassigned": false
+        }
+      ],
+      "coming_risky": [],
+      "counts": {
+        "completed": 1,
+        "overdue": 0,
+        "blocked": 5,
+        "coming_risky": 0,
+        "sod_overdue": 1,
+        "sod_blocked": 5
+      }
+    },
+    {
+      "name": "Kyle Aubry - Project 01",
+      "pm": "No PM",
+      "trend": "no_issues",
+      "completed": [],
+      "overdue": [],
+      "blocked": [],
+      "coming_risky": [],
+      "counts": {
+        "completed": 0,
+        "overdue": 0,
+        "blocked": 0,
+        "coming_risky": 0,
+        "sod_overdue": 0,
+        "sod_blocked": 0
+      }
+    },
+    {
+      "name": "Charles Harris \u2014 Argyle TX",
+      "pm": "No PM",
+      "trend": "no_issues",
+      "completed": [],
+      "overdue": [],
+      "blocked": [],
+      "coming_risky": [],
+      "counts": {
+        "completed": 0,
+        "overdue": 0,
+        "blocked": 0,
+        "coming_risky": 0,
+        "sod_overdue": 0,
+        "sod_blocked": 0
+      }
+    },
+    {
+      "name": "Martha Cockrell (CNG-20251199)",
+      "pm": "Jeff, Marcio Oliveira",
+      "trend": "no_issues",
+      "completed": [],
+      "overdue": [],
+      "blocked": [],
+      "coming_risky": [],
+      "counts": {
+        "completed": 0,
+        "overdue": 0,
+        "blocked": 0,
+        "coming_risky": 0,
+        "sod_overdue": 0,
+        "sod_blocked": 0
+      }
+    },
+    {
+      "name": "Stephen Bernard Patrick (CNG2025-468)",
+      "pm": "No PM",
+      "trend": "no_issues",
+      "completed": [],
+      "overdue": [],
+      "blocked": [],
+      "coming_risky": [],
+      "counts": {
+        "completed": 0,
+        "overdue": 0,
+        "blocked": 0,
+        "coming_risky": 0,
+        "sod_overdue": 0,
+        "sod_blocked": 0
+      }
+    },
+    {
+      "name": "Visionary Construction (CNG2025-499)",
+      "pm": "No PM",
+      "trend": "no_issues",
+      "completed": [],
+      "overdue": [],
+      "blocked": [],
+      "coming_risky": [],
+      "counts": {
+        "completed": 0,
+        "overdue": 0,
+        "blocked": 0,
+        "coming_risky": 0,
+        "sod_overdue": 0,
+        "sod_blocked": 0
+      }
+    }
+  ]
+}
