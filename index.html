@@ -741,20 +741,31 @@ function renderCfBody() {
     return td >= today && td < cutoff;
   });
 
-  // Compute window totals
+  // Compute window totals — separate paid vs unpaid
   let winIncome = 0, winOutgoing = 0;
+  let winPaidOut = 0, winPaidIn = 0;
+  let winUnpaidOut = 0, winUnpaidIn = 0;
   windowItems.forEach(t => {
-    if (t.type === 'income') winIncome += t.amount;
-    else winOutgoing += t.amount;
+    const amt = t.amount || 0;
+    if (t.type === 'income') {
+      winIncome += amt;
+      if (t.paid) winPaidIn += amt; else winUnpaidIn += amt;
+    } else {
+      winOutgoing += amt;
+      if (t.paid) winPaidOut += amt; else winUnpaidOut += amt;
+    }
   });
   const winNet = winIncome - winOutgoing;
-  const projectedBal = balance + winNet;
+  // Projected = bank balance + unpaid income - unpaid outgoing
+  // (paid transactions already reflected in bank balance)
+  const projectedBal = balance + winUnpaidIn - winUnpaidOut;
 
   // ── Stats (update every time) ──────────
-  statsEl.innerHTML = `<div class="stats" style="grid-template-columns:repeat(5,1fr);margin-bottom:16px">
-    <div class="st g"><div class="n">${cfFmt(winIncome)}</div><div class="l">Income</div></div>
-    <div class="st r"><div class="n">${cfFmt(winOutgoing)}</div><div class="l">Outgoing</div></div>
-    <div class="st ${winNet >= 0 ? 'g' : 'r'}"><div class="n">${cfFmt(winNet)}</div><div class="l">Net</div></div>
+  statsEl.innerHTML = `<div class="stats" style="grid-template-columns:repeat(6,1fr);margin-bottom:16px">
+    <div class="st g"><div class="n">${cfFmt(winUnpaidIn)}</div><div class="l">Incoming</div></div>
+    <div class="st r"><div class="n">${cfFmt(winUnpaidOut)}</div><div class="l">Outgoing</div></div>
+    <div class="st ${(winUnpaidIn - winUnpaidOut) >= 0 ? 'g' : 'r'}"><div class="n">${cfFmt(winUnpaidIn - winUnpaidOut)}</div><div class="l">Unpaid Net</div></div>
+    <div class="st" style="background:#3a3a4a"><div class="n" style="color:#888">${cfFmt(winPaidOut)}</div><div class="l" style="color:#666">Already Paid</div></div>
     <div class="st y"><div class="n">${windowItems.length}</div><div class="l">Payments</div></div>
     <div class="st ${projectedBal >= 0 ? 'g' : 'r'}"><div class="n">${cfFmt(projectedBal)}</div><div class="l">Projected</div></div>
   </div>`;
@@ -777,6 +788,7 @@ function renderCfBody() {
   sortedChartDates.forEach(ds => {
     let dayIn = 0, dayOut = 0;
     (byDay[ds] || []).forEach(t => {
+      if (t.paid) return; // Already reflected in bank balance
       if (t.type === 'income') dayIn += t.amount;
       else dayOut += t.amount;
     });
@@ -914,18 +926,23 @@ function renderCfBody() {
       const statusCls = t.paid ? 'paid' : (t.amount ? 'pending' : 'tbd');
       const statusLbl = t.paid ? '✓ Paid' : (t.amount ? 'Pending' : 'TBD');
 
-      // Update running balance
-      if (isIn) runningBal += t.amount;
-      else runningBal -= t.amount;
+      // Only unpaid items affect running balance (paid already in bank)
+      if (!t.paid) {
+        if (isIn) runningBal += t.amount;
+        else runningBal -= t.amount;
+      }
 
       const balCls = runningBal >= 0 ? 'pos' : 'neg';
+      const paidStyle = t.paid ? 'opacity:0.5;text-decoration:line-through' : '';
+      const paidBalLbl = t.paid ? '—' : cfFmt(runningBal);
+      const paidBalCls = t.paid ? '' : balCls;
 
-      html += `<div class="cf-pay">
+      html += `<div class="cf-pay" style="${paidStyle}">
         <span class="cf-pay-date">${dateLbl}</span>
         <span class="cf-pay-type ${typeCls}">${typeLabel}</span>
         <span class="cf-pay-name">${t.task} <span class="cf-pay-proj">— ${t.project}</span></span>
         <span class="cf-pay-amt ${typeCls}">${isIn ? '+' : '-'}${amtStr}</span>
-        <span class="cf-pay-bal ${balCls}">${cfFmt(runningBal)}</span>
+        <span class="cf-pay-bal ${paidBalCls}">${paidBalLbl}</span>
         <span class="cf-pay-status ${statusCls}">${statusLbl}</span>
       </div>`;
     });
