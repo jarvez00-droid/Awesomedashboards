@@ -616,6 +616,7 @@ function buildForecastCard(p) {
 // CASH FLOW
 // ═══════════════════════════════════════════
 let CF_DATA = null;
+let cfFromDate = new Date().toISOString().slice(0, 10); // "view from" date for cashflow
 let cfDays = 7;
 
 function cashflowGate(c) {
@@ -652,8 +653,9 @@ function cashflowGate(c) {
 async function loadAndRenderCashflow(c) {
   c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Cash Flow...</div></div>';
   const today = new Date().toISOString().slice(0, 10);
-  // Try today, then yesterday
-  for (const d of [today, new Date(Date.now() - 86400000).toISOString().slice(0, 10)]) {
+  // Try today, then walk back up to 7 days to find the latest data file
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
     try {
       const r = await fetch('data/cashflow-' + d + '.json');
       if (!r.ok) continue;
@@ -706,11 +708,19 @@ function renderCashflow(c) {
 
   let h = `
     <div class="page-title">Cash Flow</div>
-    <div class="page-sub">Payment projections · Updated ${d.date}</div>
-    <div class="cf-balance-row">
-      <span class="cf-balance-label">Current Cash Position:</span>
-      <input type="text" class="cf-balance-input" id="cf-bal" value="${balance ? cfFmt2(balance) : ''}" placeholder="$0.00">
-      <span class="cf-balance-saved" id="cf-saved" style="display:none">✓ Saved</span>
+    <div class="page-sub">Payment projections · Data from ${d.date}</div>
+    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
+      <div class="cf-balance-row" style="margin-bottom:0">
+        <span class="cf-balance-label">Cash Position:</span>
+        <input type="text" class="cf-balance-input" id="cf-bal" value="${balance ? cfFmt2(balance) : ''}" placeholder="$0.00">
+        <span class="cf-balance-saved" id="cf-saved" style="display:none">✓ Saved</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:12px;color:var(--txt2);font-weight:500">View from:</span>
+        <input type="date" id="cf-from-date" value="${cfFromDate}"
+          style="background:var(--card);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:5px 8px;font-size:12px;font-family:var(--sans);cursor:pointer">
+        <button id="cf-today-btn" style="background:var(--card);color:var(--txt2);border:1px solid var(--bdr);border-radius:6px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:var(--sans)">Today</button>
+      </div>
     </div>
     <div id="cf-stats"></div>
     <div class="cf-time-tabs" id="cf-tabs">
@@ -757,6 +767,17 @@ function renderCashflow(c) {
     renderCfBody();
   });
 
+  // "View from" date handler
+  document.getElementById('cf-from-date').addEventListener('change', e => {
+    cfFromDate = e.target.value;
+    renderCfBody();
+  });
+  document.getElementById('cf-today-btn').addEventListener('click', () => {
+    cfFromDate = new Date().toISOString().slice(0, 10);
+    document.getElementById('cf-from-date').value = cfFromDate;
+    renderCfBody();
+  });
+
   // Filter handlers
   document.getElementById('cf-filters').addEventListener('click', e => {
     const btn = e.target.closest('[data-tf]');
@@ -780,7 +801,7 @@ function renderCfBody() {
   if (!body || !statsEl || !CF_DATA) return;
   const d = CF_DATA;
   const balance = parseFloat(localStorage.getItem('cf_balance') || '0');
-  const today = new Date(d.date + 'T12:00:00');
+  const today = new Date(cfFromDate + 'T12:00:00');
   const cutoff = new Date(today.getTime() + cfDays * 86400000);
   const allItems = d.all_tasks || [];
 
