@@ -690,9 +690,18 @@ function cfGetMonday(dateStr) {
   return m.toISOString().slice(0,10);
 }
 
+let cfTypeFilter = 'all'; // 'all', 'in', 'out'
+let cfProjFilter = 'all'; // 'all' or project name
+
 function renderCashflow(c) {
   const d = CF_DATA;
   const balance = parseFloat(localStorage.getItem('cf_balance') || '0');
+
+  // Build project list for dropdown
+  const projSet = new Set();
+  (d.all_tasks || []).forEach(t => { if (t.project) projSet.add(t.project); });
+  const projects = [...projSet].sort();
+  const projOptions = projects.map(p => `<option value="${p}"${cfProjFilter===p?' selected':''}>${p}</option>`).join('');
 
   let h = `
     <div class="page-title">Cash Flow</div>
@@ -708,6 +717,17 @@ function renderCashflow(c) {
       <button class="cf-tt${cfDays===14?' on':''}" data-d="14">2 Weeks</button>
       <button class="cf-tt${cfDays===21?' on':''}" data-d="21">3 Weeks</button>
       <button class="cf-tt${cfDays===28?' on':''}" data-d="28">1 Month</button>
+    </div>
+    <div id="cf-filters" style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+      <div style="display:flex;gap:4px">
+        <button class="cf-tt${cfTypeFilter==='all'?' on':''}" data-tf="all">All</button>
+        <button class="cf-tt${cfTypeFilter==='in'?' on':''}" data-tf="in" style="color:#4ade80">↑ Income</button>
+        <button class="cf-tt${cfTypeFilter==='out'?' on':''}" data-tf="out" style="color:#f87171">↓ Expenses</button>
+      </div>
+      <select id="cf-proj-filter" style="background:var(--card);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:6px 10px;font-size:12px;font-family:var(--sans);min-width:180px;cursor:pointer">
+        <option value="all"${cfProjFilter==='all'?' selected':''}>All Projects</option>
+        ${projOptions}
+      </select>
     </div>
     <div id="cf-body"></div>`;
   c.innerHTML = h;
@@ -735,6 +755,20 @@ function renderCashflow(c) {
     renderCfBody();
   });
 
+  // Filter handlers
+  document.getElementById('cf-filters').addEventListener('click', e => {
+    const btn = e.target.closest('[data-tf]');
+    if (!btn) return;
+    cfTypeFilter = btn.dataset.tf;
+    document.querySelectorAll('[data-tf]').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    renderCfBody();
+  });
+  document.getElementById('cf-proj-filter').addEventListener('change', e => {
+    cfProjFilter = e.target.value;
+    renderCfBody();
+  });
+
   renderCfBody();
 }
 
@@ -748,11 +782,15 @@ function renderCfBody() {
   const cutoff = new Date(today.getTime() + cfDays * 86400000);
   const allItems = d.all_tasks || [];
 
-  // Filter items in time window
+  // Filter items in time window + type/project filters
   const windowItems = allItems.filter(t => {
     if (!t.due) return false;
     const td = new Date(t.due + 'T12:00:00');
-    return td >= today && td < cutoff;
+    if (td < today || td >= cutoff) return false;
+    if (cfTypeFilter === 'in' && t.type !== 'income') return false;
+    if (cfTypeFilter === 'out' && t.type === 'income') return false;
+    if (cfProjFilter !== 'all' && t.project !== cfProjFilter) return false;
+    return true;
   });
 
   // Compute window totals — separate paid vs unpaid
@@ -984,6 +1022,43 @@ function renderCfBody() {
   } else {
     html += '<div style="padding:12px;text-align:center;color:var(--dim);font-size:13px">No payments in this time window</div>';
   }
+
+  // ── Totals footer ──────────────────────
+  let totIn = 0, totOut = 0, totPaidIn = 0, totPaidOut = 0, cntIn = 0, cntOut = 0;
+  sorted.forEach(t => {
+    const amt = t.amount || 0;
+    if (t.type === 'income') { totIn += amt; cntIn++; if (t.paid) totPaidIn += amt; }
+    else { totOut += amt; cntOut++; if (t.paid) totPaidOut += amt; }
+  });
+  const totNet = totIn - totOut;
+  const totNetColor = totNet >= 0 ? '#4ade80' : '#f87171';
+  const filterLabel = cfTypeFilter === 'in' ? 'Income' : cfTypeFilter === 'out' ? 'Expenses' : 'All';
+  const projLabel = cfProjFilter === 'all' ? 'All Projects' : cfProjFilter;
+
+  html += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:12px 16px;margin-top:12px">
+    <div style="font-size:12px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">
+      Totals · ${filterLabel} · ${projLabel} · ${sorted.length} payment${sorted.length!==1?'s':''}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+      <div style="text-align:center">
+        <div style="font-size:18px;font-weight:700;color:#4ade80">${cfFmt(totIn)}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:2px">Total Income (${cntIn})</div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:18px;font-weight:700;color:#f87171">${cfFmt(totOut)}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:2px">Total Expenses (${cntOut})</div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:18px;font-weight:700;color:${totNetColor}">${cfFmt(totNet)}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:2px">Net</div>
+      </div>
+      <div style="text-align:center">
+        <div style="font-size:18px;font-weight:700;color:#888">${cfFmt(totPaidIn + totPaidOut)}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:2px">Already Paid</div>
+      </div>
+    </div>
+  </div>`;
+
   html += '</div>';
 
   body.innerHTML = html;
