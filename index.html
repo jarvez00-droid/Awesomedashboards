@@ -300,6 +300,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a data-p="projects">◧ Projects</a>
   <a data-p="weekly">▤ Weekly Forecast</a>
   <a data-p="cashflow">💰 Cash Flow</a>
+  <a data-p="fixed">📋 Fixed Costs</a>
   <a data-p="mgmt">▥ Management</a>
   <a data-p="archive">▦ Archive</a>
 </div>
@@ -331,6 +332,7 @@ function render() {
   else if (curPage === 'eod') loadAndRenderEOD(c);
   else if (curPage === 'weekly') weeklyGate(c);
   else if (curPage === 'cashflow') cashflowGate(c);
+  else if (curPage === 'fixed') fixedCostsGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
     const titles = {projects:'Project Dashboards',mgmt:'EOD Management'};
@@ -1148,6 +1150,233 @@ function renderCfBody() {
   </div>`;
 
   html += '</div>';
+
+  body.innerHTML = html;
+}
+
+// ── FIXED COSTS ─────────────────────────────────────────────────────────────
+let FC_DATA = null;
+let fcDays = 28;
+let fcFromDate = new Date().toISOString().slice(0,10);
+let fcTypeFilter = 'all';
+
+const FC_CATS = {
+  salaries:  {label:'Salaries',  color:'#818cf8', icon:'👤'},
+  utilities: {label:'Utilities', color:'#34d399', icon:'⚡'},
+  rent:      {label:'Rent',      color:'#fb923c', icon:'🏠'},
+  marketing: {label:'Marketing', color:'#e879f9', icon:'📣'},
+  others:    {label:'Others',    color:'#94a3b8', icon:'📦'},
+};
+
+function fixedCostsGate(c) {
+  if (sessionStorage.getItem('wk_auth') === '1') { loadAndRenderFixedCosts(c); return; }
+  c.innerHTML = `<div class="pw-gate">
+    <div class="pw-icon">📋</div>
+    <div class="pw-title">Fixed Costs — Management View</div>
+    <div class="pw-sub">Enter password to access.</div>
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
+    <button class="pw-btn" id="pw-btn">Unlock</button>
+    <div class="pw-deny" id="pw-deny" style="display:none">Access denied</div>
+  </div>`;
+  const inp = document.getElementById('pw-input'), btn = document.getElementById('pw-btn'), deny = document.getElementById('pw-deny');
+  function tryPw() {
+    if (inp.value === WEEKLY_PW) { sessionStorage.setItem('wk_auth','1'); loadAndRenderFixedCosts(c); }
+    else { inp.classList.add('pw-err'); deny.style.display=''; setTimeout(()=>inp.classList.remove('pw-err'),400); }
+  }
+  btn.addEventListener('click', tryPw);
+  inp.addEventListener('keydown', e => { if (e.key==='Enter') tryPw(); });
+  setTimeout(()=>inp.focus(),50);
+}
+
+async function loadAndRenderFixedCosts(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Fixed Costs...</div></div>';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(Date.now() - i * 86400000).toISOString().slice(0,10);
+    try {
+      const r = await fetch('data/fixed-costs-' + d + '.json');
+      if (!r.ok) continue;
+      FC_DATA = await r.json();
+      renderFixedCosts(c);
+      return;
+    } catch(e) {}
+  }
+  c.innerHTML = '<div class="empty"><div class="empty-i">📋</div><div class="empty-t">No Fixed Costs Data</div><div class="empty-d">Run generate_fixed_costs_json.py to generate data.</div></div>';
+}
+
+function renderFixedCosts(c) {
+  const d = FC_DATA;
+  const balance = parseFloat(localStorage.getItem('cf_balance') || '0');
+  const cats = Object.keys(FC_CATS);
+  const catOptions = cats.map(k => `<option value="${k}"${fcTypeFilter===k?' selected':''}>${FC_CATS[k].icon} ${FC_CATS[k].label}</option>`).join('');
+
+  c.innerHTML = `
+    <div class="page-title">Fixed Costs</div>
+    <div class="page-sub">Overhead & recurring payments · Data from ${d.date}</div>
+    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:12px;color:var(--txt2);font-weight:500">View from:</span>
+        <input type="date" id="fc-from-date" value="${fcFromDate}" style="background:var(--card);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:5px 8px;font-size:12px;font-family:var(--sans);cursor:pointer">
+        <button id="fc-today-btn" style="background:var(--card);color:var(--txt2);border:1px solid var(--bdr);border-radius:6px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:var(--sans)">Today</button>
+      </div>
+    </div>
+    <div id="fc-stats"></div>
+    <div class="cf-time-tabs" id="fc-tabs">
+      <button class="cf-tt${fcDays===7?' on':''}" data-fd="7">1 Week</button>
+      <button class="cf-tt${fcDays===14?' on':''}" data-fd="14">2 Weeks</button>
+      <button class="cf-tt${fcDays===21?' on':''}" data-fd="21">3 Weeks</button>
+      <button class="cf-tt${fcDays===28?' on':''}" data-fd="28">1 Month</button>
+      <button class="cf-tt${fcDays===90?' on':''}" data-fd="90">3 Months</button>
+    </div>
+    <div id="fc-filters" style="display:flex;gap:8px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+      <button class="cf-tt${fcTypeFilter==='all'?' on':''}" data-ft="all">All</button>
+      ${cats.map(k=>`<button class="cf-tt${fcTypeFilter===k?' on':''}" data-ft="${k}" style="color:${FC_CATS[k].color}">${FC_CATS[k].icon} ${FC_CATS[k].label}</button>`).join('')}
+    </div>
+    <div id="fc-body"></div>`;
+
+  document.getElementById('fc-from-date').addEventListener('change', e => { fcFromDate = e.target.value; renderFcBody(); });
+  document.getElementById('fc-today-btn').addEventListener('click', () => { fcFromDate = new Date().toISOString().slice(0,10); document.getElementById('fc-from-date').value = fcFromDate; renderFcBody(); });
+  document.getElementById('fc-tabs').addEventListener('click', e => {
+    const btn = e.target.closest('[data-fd]'); if (!btn) return;
+    fcDays = parseInt(btn.dataset.fd);
+    document.querySelectorAll('[data-fd]').forEach(b=>b.classList.remove('on')); btn.classList.add('on');
+    renderFcBody();
+  });
+  document.getElementById('fc-filters').addEventListener('click', e => {
+    const btn = e.target.closest('[data-ft]'); if (!btn) return;
+    fcTypeFilter = btn.dataset.ft;
+    document.querySelectorAll('[data-ft]').forEach(b=>b.classList.remove('on')); btn.classList.add('on');
+    renderFcBody();
+  });
+
+  renderFcBody();
+}
+
+function renderFcBody() {
+  const body = document.getElementById('fc-body');
+  const stats = document.getElementById('fc-stats');
+  if (!body || !stats || !FC_DATA) return;
+  const d = FC_DATA;
+  const balance = parseFloat(localStorage.getItem('cf_balance') || '0');
+  const today = new Date(fcFromDate + 'T12:00:00');
+  const cutoff = new Date(today.getTime() + fcDays * 86400000);
+  const allItems = d.all_tasks || [];
+
+  // Filter window + category
+  const windowItems = allItems.filter(t => {
+    if (!t.due) return false;
+    const td = new Date(t.due + 'T12:00:00');
+    if (td < today || td >= cutoff) return false;
+    if (fcTypeFilter !== 'all' && t.type !== fcTypeFilter) return false;
+    return true;
+  });
+
+  // Stats per category (always full window, ignore type filter)
+  const allWindow = allItems.filter(t => {
+    if (!t.due) return false;
+    const td = new Date(t.due + 'T12:00:00');
+    return td >= today && td < cutoff;
+  });
+
+  let totalUnpaid = 0, totalPaid = 0;
+  const byCat = {};
+  Object.keys(FC_CATS).forEach(k => byCat[k] = {total:0, paid:0, count:0});
+  allWindow.forEach(t => {
+    byCat[t.type] = byCat[t.type] || {total:0,paid:0,count:0};
+    byCat[t.type].total += t.amount;
+    byCat[t.type].count++;
+    if (t.paid) { byCat[t.type].paid += t.amount; totalPaid += t.amount; }
+    else totalUnpaid += t.amount;
+  });
+
+  // Category stat cards
+  let statHtml = `<div class="stats" style="grid-template-columns:repeat(5,1fr);margin-bottom:8px">`;
+  Object.entries(FC_CATS).forEach(([k, meta]) => {
+    const info = byCat[k] || {total:0,paid:0,count:0};
+    statHtml += `<div class="st" style="border-color:${meta.color}40;background:${meta.color}0d">
+      <div class="n" style="color:${meta.color}">${cfFmt(info.total)}</div>
+      <div class="l">${meta.icon} ${meta.label} (${info.count})</div>
+    </div>`;
+  });
+  statHtml += `</div>`;
+  statHtml += `<div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
+    <div class="st r"><div class="n">${cfFmt(totalUnpaid)}</div><div class="l">Unpaid</div></div>
+    <div class="st" style="background:#3a3a4a"><div class="n" style="color:#888">${cfFmt(totalPaid)}</div><div class="l" style="color:#666">Already Paid</div></div>
+    <div class="st ${(balance - totalUnpaid) >= 0 ? 'g' : 'r'}"><div class="n">${cfFmt(balance - totalUnpaid)}</div><div class="l">After Fixed Costs</div></div>
+  </div>`;
+  stats.innerHTML = statHtml;
+
+  // Payment list grouped by week
+  let html = '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:8px 12px">';
+  html += `<div class="cf-pay" style="border-bottom:1px solid var(--bdr);padding-bottom:4px;margin-bottom:2px">
+    <span class="cf-pay-date" style="font-weight:600;color:var(--txt)">Date</span>
+    <span class="cf-pay-type" style="background:none;border:none;color:var(--txt);font-weight:600">Type</span>
+    <span class="cf-pay-name" style="font-weight:600;color:var(--txt)">Payment</span>
+    <span class="cf-pay-amt" style="color:var(--txt)">Amount</span>
+    <span class="cf-pay-bal" style="color:var(--txt)">Status</span>
+  </div>`;
+
+  const sorted = [...windowItems].sort((a,b) => (a.due||'').localeCompare(b.due||''));
+  let currentWeek = '';
+  let totUnpaid = 0, totPaid2 = 0, totCnt = 0;
+
+  if (sorted.length) {
+    sorted.forEach(t => {
+      // Week header
+      const weekKey = cfGetMonday(t.due);
+      if (weekKey !== currentWeek) {
+        currentWeek = weekKey;
+        const wLabel = cfWeekRange(weekKey);
+        const wItems = sorted.filter(w => cfGetMonday(w.due) === weekKey);
+        const wTotal = wItems.reduce((s,w) => s + w.amount, 0);
+        const wPaid = wItems.filter(w=>w.paid).reduce((s,w)=>s+w.amount,0);
+        html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 4px 4px;margin-top:8px;border-top:2px solid var(--bdr)">
+          <span style="font-size:12px;font-weight:700;color:var(--txt)">📅 ${wLabel}</span>
+          <span style="font-size:11px;color:var(--dim)">OUT ${cfFmt(wTotal)} · <span style="color:#888">Paid ${cfFmt(wPaid)}</span></span>
+        </div>`;
+      }
+
+      const cat = FC_CATS[t.type] || {label:t.type, color:'#888', icon:'•'};
+      const dt = new Date(t.due + 'T12:00:00');
+      const dayName = DAYS[dt.getDay()];
+      const dateLbl = MONTHS[dt.getMonth()] + ' ' + dt.getDate() + '<br><span style="font-size:9px;color:var(--dim)">' + dayName + '</span>';
+      const amtStr = t.amount ? cfFmt2(t.amount) : 'TBD';
+      const paidStyle = t.paid ? 'opacity:0.5;text-decoration:line-through' : '';
+      const statusLbl = t.paid ? '✓ Paid' : (t.amount ? 'Pending' : 'TBD');
+      const statusCls = t.paid ? 'paid' : (t.amount ? 'pending' : 'tbd');
+
+      if (!t.paid) totUnpaid += t.amount; else totPaid2 += t.amount;
+      totCnt++;
+
+      html += `<div class="cf-pay" style="${paidStyle}">
+        <span class="cf-pay-date">${dateLbl}</span>
+        <span class="cf-pay-type" style="background:${cat.color}20;color:${cat.color};border:1px solid ${cat.color}40;font-size:10px">${cat.icon}</span>
+        <span class="cf-pay-name">${t.task}${t.parent ? ' <span class="cf-pay-proj">— '+t.parent+'</span>' : ''}</span>
+        <span class="cf-pay-amt out">-${amtStr}</span>
+        <span class="cf-pay-status ${statusCls}">${statusLbl}</span>
+      </div>`;
+    });
+  } else {
+    html += '<div style="padding:12px;text-align:center;color:var(--dim);font-size:13px">No payments in this time window</div>';
+  }
+
+  // Totals footer
+  const byCatFiltered = {};
+  sorted.forEach(t => { byCatFiltered[t.type] = (byCatFiltered[t.type]||0) + t.amount; });
+  html += `</div><div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:12px 16px;margin-top:12px">
+    <div style="font-size:12px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">
+      Totals · ${totCnt} payment${totCnt!==1?'s':''}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:10px">
+      ${Object.entries(FC_CATS).map(([k,meta]) => {
+        const amt = byCatFiltered[k]||0;
+        return `<div style="text-align:center"><div style="font-size:16px;font-weight:700;color:${meta.color}">${cfFmt(amt)}</div><div style="font-size:10px;color:var(--dim);margin-top:2px">${meta.icon} ${meta.label}</div></div>`;
+      }).join('')}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding-top:10px;border-top:1px solid var(--bdr)">
+      <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:#f87171">${cfFmt(totUnpaid)}</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Unpaid</div></div>
+      <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:#888">${cfFmt(totPaid2)}</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Already Paid</div></div>
+    </div>
+  </div>`;
 
   body.innerHTML = html;
 }
