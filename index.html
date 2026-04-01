@@ -300,7 +300,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a data-p="projects">◧ Projects</a>
   <a data-p="weekly">▤ Weekly Forecast</a>
   <a data-p="cashflow">💰 Cash Flow</a>
-  <a data-p="fixed">📋 Fixed Costs</a>
+  <a data-p="cfall">💰 Cash Flow + Fixed</a>
   <a data-p="mgmt">▥ Management</a>
   <a data-p="archive">▦ Archive</a>
 </div>
@@ -332,7 +332,7 @@ function render() {
   else if (curPage === 'eod') loadAndRenderEOD(c);
   else if (curPage === 'weekly') weeklyGate(c);
   else if (curPage === 'cashflow') cashflowGate(c);
-  else if (curPage === 'fixed') fixedCostsGate(c);
+  else if (curPage === 'cfall') cfAllGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
     const titles = {projects:'Project Dashboards',mgmt:'EOD Management'};
@@ -1154,25 +1154,27 @@ function renderCfBody() {
   body.innerHTML = html;
 }
 
-// ── FIXED COSTS ─────────────────────────────────────────────────────────────
-let FC_DATA = null;
-let fcDays = 28;
-let fcFromDate = new Date().toISOString().slice(0,10);
-let fcTypeFilter = 'all';
+// ── CASH FLOW + FIXED ──────────────────────────────────────────────────────
+let CFA_DATA = null; // merged data
+let cfaDays = 7;
+let cfaFromDate = new Date().toISOString().slice(0,10);
+let cfaTypeFilter = 'all';
+let cfaProjFilter = 'all';
 
 const FC_CATS = {
-  salaries:  {label:'Salaries',  color:'#818cf8', icon:'👤'},
-  utilities: {label:'Utilities', color:'#34d399', icon:'⚡'},
-  rent:      {label:'Rent',      color:'#fb923c', icon:'🏠'},
-  marketing: {label:'Marketing', color:'#e879f9', icon:'📣'},
-  others:    {label:'Others',    color:'#94a3b8', icon:'📦'},
+  salaries:  {label:'Salaries',  color:'#818cf8', icon:'👤', typeLabel:'SAL'},
+  utilities: {label:'Utilities', color:'#34d399', icon:'⚡', typeLabel:'UTL'},
+  rent:      {label:'Rent',      color:'#fb923c', icon:'🏠', typeLabel:'RNT'},
+  marketing: {label:'Marketing', color:'#e879f9', icon:'📣', typeLabel:'MKT'},
+  others:    {label:'Others',    color:'#94a3b8', icon:'📦', typeLabel:'OTH'},
 };
+const FC_TYPES = new Set(Object.keys(FC_CATS));
 
-function fixedCostsGate(c) {
-  if (sessionStorage.getItem('wk_auth') === '1') { loadAndRenderFixedCosts(c); return; }
+function cfAllGate(c) {
+  if (sessionStorage.getItem('wk_auth') === '1') { loadAndRenderCfAll(c); return; }
   c.innerHTML = `<div class="pw-gate">
-    <div class="pw-icon">📋</div>
-    <div class="pw-title">Fixed Costs — Management View</div>
+    <div class="pw-icon">💰</div>
+    <div class="pw-title">Cash Flow + Fixed — Management View</div>
     <div class="pw-sub">Enter password to access.</div>
     <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
     <button class="pw-btn" id="pw-btn">Unlock</button>
@@ -1180,7 +1182,7 @@ function fixedCostsGate(c) {
   </div>`;
   const inp = document.getElementById('pw-input'), btn = document.getElementById('pw-btn'), deny = document.getElementById('pw-deny');
   function tryPw() {
-    if (inp.value === WEEKLY_PW) { sessionStorage.setItem('wk_auth','1'); loadAndRenderFixedCosts(c); }
+    if (inp.value === WEEKLY_PW) { sessionStorage.setItem('wk_auth','1'); loadAndRenderCfAll(c); }
     else { inp.classList.add('pw-err'); deny.style.display=''; setTimeout(()=>inp.classList.remove('pw-err'),400); }
   }
   btn.addEventListener('click', tryPw);
@@ -1188,19 +1190,31 @@ function fixedCostsGate(c) {
   setTimeout(()=>inp.focus(),50);
 }
 
-async function loadAndRenderFixedCosts(c) {
-  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Fixed Costs...</div></div>';
+async function loadAndRenderCfAll(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Cash Flow + Fixed...</div></div>';
+  let cfData = null, fcData = null;
+  // Load cashflow
   for (let i = 0; i < 7; i++) {
     const d = new Date(Date.now() - i * 86400000).toISOString().slice(0,10);
-    try {
-      const r = await fetch('data/fixed-costs-' + d + '.json');
-      if (!r.ok) continue;
-      FC_DATA = await r.json();
-      renderFixedCosts(c);
-      return;
-    } catch(e) {}
+    try { const r = await fetch('data/cashflow-' + d + '.json'); if (r.ok) { cfData = await r.json(); break; } } catch(e) {}
   }
-  c.innerHTML = '<div class="empty"><div class="empty-i">📋</div><div class="empty-t">No Fixed Costs Data</div><div class="empty-d">Run generate_fixed_costs_json.py to generate data.</div></div>';
+  // Load fixed costs
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(Date.now() - i * 86400000).toISOString().slice(0,10);
+    try { const r = await fetch('data/fixed-costs-' + d + '.json'); if (r.ok) { fcData = await r.json(); break; } } catch(e) {}
+  }
+  if (!cfData && !fcData) {
+    c.innerHTML = '<div class="empty"><div class="empty-i">💰</div><div class="empty-t">No Data</div><div class="empty-d">Run generate_cashflow_json.py and generate_fixed_costs_json.py.</div></div>';
+    return;
+  }
+  // Merge: all cashflow tasks + fixed cost tasks (with project = "⚙ Fixed Costs")
+  const cfTasks = (cfData ? cfData.all_tasks : []) || [];
+  const fcTasks = ((fcData ? fcData.all_tasks : []) || []).map(t => ({...t, project: '⚙ Fixed Costs'}));
+  CFA_DATA = {
+    date: cfData ? cfData.date : fcData.date,
+    all_tasks: [...cfTasks, ...fcTasks],
+  };
+  renderCfAll(c);
 }
 
 function renderFixedCosts(c) {
