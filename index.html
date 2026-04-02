@@ -1356,6 +1356,113 @@ function renderMgmtBody() {
     <div class="st" style="background:#3a3a4a"><div class="n" style="color:#888">${cfFmt(winPaidAmt)}</div><div class="l" style="color:#666">Already Paid</div></div>
   </div>`;
 
+  // ── Chart ──────────────────────────────
+  // Group ALL window items by day (ignoring type/proj filter for chart)
+  const mByDay = {};
+  allWin.forEach(t => { if(!mByDay[t.due]) mByDay[t.due]=[]; mByDay[t.due].push(t); });
+  const mChartDates = [...new Set([...Object.keys(mByDay), d.date])].sort();
+  let mRunBal = balance, mRunBalG = balance, mRunBalP = balance;
+  const mChartPts = [];
+  mChartDates.forEach(ds => {
+    let dIn=0, dOut=0, dFixed=0, dPIn=0;
+    (mByDay[ds]||[]).forEach(t => {
+      if(t.paid) return;
+      if(t.type==='p_income'){dPIn+=t.amount; return;}
+      if(t.type==='income') dIn+=t.amount;
+      else if(mgmtIsFixed(t.type)) dFixed+=t.amount;
+      else dOut+=t.amount;
+    });
+    mRunBalG += dIn - dOut;               // gross (projects only)
+    mRunBal  += dIn - dOut - dFixed;      // net (all expenses)
+    mRunBalP  = mRunBal + dPIn;           // net + potential
+    mChartPts.push({date:ds, gross:mRunBalG, net:mRunBal, netP:mRunBalP, dayIn:dIn, dayOut:dOut+dFixed, dFixed});
+  });
+  const mHasFixed = mChartPts.some(p => p.gross !== p.net);
+  const mHasP = mChartPts.some(p => p.netP !== p.net);
+  const mAllBals = [balance, ...mChartPts.map(p=>p.gross), ...mChartPts.map(p=>p.net), ...mChartPts.map(p=>p.netP)];
+  const mMaxBal = Math.max(...mAllBals, 1), mMinBal = Math.min(...mAllBals, 0);
+
+  let html = '';
+  if (mChartPts.length > 0) {
+    const W = Math.max(mChartPts.length*60,400), H=180;
+    const padL=60,padR=20,padT=25,padB=35, plotW=W-padL-padR, plotH=H-padT-padB;
+    const yMin=Math.min(mMinBal,0), yMax=Math.max(mMaxBal,balance+1), yRange=yMax-yMin||1;
+    const toY=v=>padT+plotH-((v-yMin)/yRange*plotH);
+    const toX=i=>padL+(mChartPts.length>1?i/(mChartPts.length-1)*plotW:plotW/2);
+    const startY=toY(balance), zeroY=toY(0);
+
+    // Gross line path (projects only)
+    let grossPath='';
+    mChartPts.forEach((p,i)=>{grossPath+=(i===0?'M':'L')+`${toX(i)},${toY(p.gross)} `;});
+
+    // Net line path (all expenses)
+    let netPath='';
+    mChartPts.forEach((p,i)=>{netPath+=(i===0?'M':'L')+`${toX(i)},${toY(p.net)} `;});
+
+    const firstX=toX(0), lastX=toX(mChartPts.length-1);
+    const netArea=netPath+`L${lastX},${zeroY} L${firstX},${zeroY} Z`;
+
+    html += `<div class="cf-chart-wrap"><svg width="${W}" height="${H}" style="display:block;width:100%;max-width:${W}px" viewBox="0 0 ${W} ${H}">
+      <defs><linearGradient id="mcfg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--grn)" stop-opacity="0.15"/>
+        <stop offset="100%" stop-color="var(--grn)" stop-opacity="0"/>
+      </linearGradient></defs>`;
+
+    // Grid
+    const gridLines=4;
+    for(let i=0;i<=gridLines;i++){
+      const val=yMin+(yRange/gridLines)*i, y=toY(val);
+      html+=`<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--bdr)" stroke-width="1"/>`;
+      html+=`<text x="${padL-8}" y="${y+4}" text-anchor="end" fill="var(--dim)" font-size="10" font-family="var(--mono)">${cfFmt(val)}</text>`;
+    }
+    if(yMin<0) html+=`<line x1="${padL}" y1="${zeroY}" x2="${W-padR}" y2="${zeroY}" stroke="var(--dim)" stroke-width="1" stroke-dasharray="4,4"/>`;
+    html+=`<line x1="${padL}" y1="${startY}" x2="${W-padR}" y2="${startY}" stroke="var(--blu)" stroke-width="1" stroke-dasharray="2,4" opacity="0.5"/>`;
+
+    // Area fill under net line
+    html+=`<path d="${netArea}" fill="url(#mcfg)"/>`;
+
+    // Potential line (dashed yellow)
+    if(mHasP){
+      let pPath='';
+      mChartPts.forEach((p,i)=>{pPath+=(i===0?'M':'L')+`${toX(i)},${toY(p.netP)} `;});
+      html+=`<path d="${pPath}" fill="none" stroke="#facc15" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" opacity="0.7"/>`;
+      mChartPts.forEach((p,i)=>{
+        if(p.netP===p.net) return;
+        const x=toX(i),y=toY(p.netP);
+        html+=`<circle cx="${x}" cy="${y}" r="3" fill="#facc15" stroke="var(--bg)" stroke-width="1.5" opacity="0.8"/>`;
+        html+=`<text x="${x}" y="${y-10}" text-anchor="middle" fill="#facc15" font-size="9" font-weight="600" font-family="var(--mono)" opacity="0.8">${cfFmt(p.netP)}</text>`;
+      });
+    }
+
+    // Gross line (dashed light green — projects only, before fixed costs)
+    if(mHasFixed){
+      html+=`<path d="${grossPath}" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="6,4" stroke-linejoin="round" opacity="0.5"/>`;
+    }
+
+    // Net line (solid green — all expenses)
+    html+=`<path d="${netPath}" fill="none" stroke="var(--grn)" stroke-width="2.5" stroke-linejoin="round"/>`;
+
+    // Dots + labels on net line
+    mChartPts.forEach((p,i)=>{
+      const x=toX(i), y=toY(p.net);
+      const color = p.net>=0?'var(--grn)':'var(--red)';
+      html+=`<circle cx="${x}" cy="${y}" r="4" fill="${color}" stroke="var(--bg)" stroke-width="2"/>`;
+      const dt=new Date(p.date+'T12:00:00');
+      html+=`<text x="${x}" y="${H-14}" text-anchor="middle" fill="var(--txt2)" font-size="10" font-family="var(--mono)">${MONTHS[dt.getMonth()]} ${dt.getDate()}</text>`;
+      html+=`<text x="${x}" y="${H-4}" text-anchor="middle" fill="var(--dim)" font-size="9" font-family="var(--mono)">${DAYS[dt.getDay()]}</text>`;
+      html+=`<text x="${x}" y="${y-10}" text-anchor="middle" fill="${color}" font-size="10" font-weight="600" font-family="var(--mono)">${cfFmt(p.net)}</text>`;
+    });
+
+    html+='</svg>';
+    // Legend
+    let legend = '<span style="color:var(--grn)">● ━━ Net (all expenses)</span>';
+    if(mHasFixed) legend += ' <span style="color:#4ade8080">● ┅┅ Gross (projects only)</span>';
+    if(mHasP) legend += ' <span style="color:#facc15">● ┅┅ With Potential</span>';
+    html+=`<div style="display:flex;gap:16px;justify-content:center;margin-top:8px;font-size:11px">${legend}</div></div>`;
+  } else {
+    html += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:32px;text-align:center;margin-bottom:20px;color:var(--dim)">No payments in this time window</div>';
+  }
+
   // Payment list
   const sorted = [...windowItems].sort((a,b) => (a.due||'').localeCompare(b.due||''));
   let runBal = balance;
