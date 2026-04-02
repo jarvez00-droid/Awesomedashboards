@@ -324,6 +324,7 @@ document.getElementById('main-nav').addEventListener('click', e => {
 let EOD_DATA = null;
 let WEEKLY_DATA = null;
 const WEEKLY_PW = 'Thisisthepassword123!';
+const MGMT_PW = 'Awesome';
 
 function render() {
   const c = document.getElementById('content');
@@ -331,10 +332,11 @@ function render() {
   else if (curPage === 'eod') loadAndRenderEOD(c);
   else if (curPage === 'weekly') weeklyGate(c);
   else if (curPage === 'cashflow') cashflowGate(c);
+  else if (curPage === 'mgmt') mgmtGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
-    const titles = {projects:'Project Dashboards',mgmt:'EOD Management'};
-    const descs = {projects:'Live project status views. Coming soon.',mgmt:'Executive snapshot for the owner.'};
+    const titles = {projects:'Project Dashboards'};
+    const descs = {projects:'Live project status views. Coming soon.'};
     c.innerHTML = `<div class="empty"><div class="empty-i">📋</div><div class="empty-t">${titles[curPage]||'Coming Soon'}</div><div class="empty-d">${descs[curPage]||''}</div></div>`;
   }
 }
@@ -1148,6 +1150,301 @@ function renderCfBody() {
   </div>`;
 
   html += '</div>';
+
+  body.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════
+// MANAGEMENT TAB (cashflow + fixed costs)
+// ═══════════════════════════════════════════
+let MGMT_DATA = null;
+let mgmtFromDate = new Date().toISOString().slice(0,10);
+let mgmtDays = 7;
+let mgmtTypeFilter = 'all';
+let mgmtProjFilter = 'all';
+
+const MGMT_FC_CATS = {
+  salaries:  {label:'Salaries',  color:'#818cf8', icon:'👤', typeLabel:'SAL'},
+  utilities: {label:'Utilities', color:'#34d399', icon:'⚡', typeLabel:'UTL'},
+  rent:      {label:'Rent',      color:'#fb923c', icon:'🏠', typeLabel:'RNT'},
+  marketing: {label:'Marketing', color:'#e879f9', icon:'📣', typeLabel:'MKT'},
+  others:    {label:'Others',    color:'#94a3b8', icon:'📦', typeLabel:'OTH'},
+};
+const MGMT_FC_TYPES = new Set(Object.keys(MGMT_FC_CATS));
+
+function mgmtGate(c) {
+  if (sessionStorage.getItem('mgmt_auth') === '1') { loadAndRenderMgmt(c); return; }
+  c.innerHTML = `<div class="pw-gate">
+    <div class="pw-icon">▥</div>
+    <div class="pw-title">Management — Restricted</div>
+    <div class="pw-sub">Enter password to access.</div>
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
+    <button class="pw-btn" id="pw-btn">Unlock</button>
+    <div class="pw-deny" id="pw-deny" style="display:none">Access denied</div>
+  </div>`;
+  const inp = document.getElementById('pw-input'), btn = document.getElementById('pw-btn'), deny = document.getElementById('pw-deny');
+  function tryPw() {
+    if (inp.value === MGMT_PW) { sessionStorage.setItem('mgmt_auth','1'); loadAndRenderMgmt(c); }
+    else { inp.classList.add('pw-err'); deny.style.display=''; setTimeout(()=>inp.classList.remove('pw-err'),400); }
+  }
+  btn.addEventListener('click', tryPw);
+  inp.addEventListener('keydown', e => { if(e.key==='Enter') tryPw(); });
+  setTimeout(()=>inp.focus(),50);
+}
+
+async function loadAndRenderMgmt(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Management...</div></div>';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(Date.now() - i*86400000).toISOString().slice(0,10);
+    try {
+      const r = await fetch('data/management-' + d + '.json');
+      if (!r.ok) continue;
+      MGMT_DATA = await r.json();
+      renderMgmt(c);
+      return;
+    } catch(e) {}
+  }
+  c.innerHTML = '<div class="empty"><div class="empty-i">▥</div><div class="empty-t">No Management Data</div><div class="empty-d">Run generate_management_json.py to generate data.</div></div>';
+}
+
+function mgmtIsFixed(type) { return MGMT_FC_TYPES.has(type); }
+function mgmtTypeInfo(type) {
+  if (type === 'income')   return {label:'IN',  cls:'in',  color:'#4ade80', sign:'+'};
+  if (type === 'p_income') return {label:'P.IN', cls:'pin', color:'#facc15', sign:'+'};
+  if (type === 'subs')     return {label:'SUB',  cls:'out', color:'#f87171', sign:'-'};
+  if (type === 'materials')return {label:'MAT',  cls:'out', color:'#f87171', sign:'-'};
+  const fc = MGMT_FC_CATS[type];
+  if (fc) return {label:fc.typeLabel, cls:'out', color:fc.color, sign:'-'};
+  return {label:'OUT', cls:'out', color:'#f87171', sign:'-'};
+}
+
+function renderMgmt(c) {
+  const d = MGMT_DATA;
+  const balance = parseFloat(localStorage.getItem('cf_balance') || '0');
+  const projSet = new Set();
+  (d.all_tasks||[]).forEach(t => { if(t.project) projSet.add(t.project); });
+  const projects = [...projSet].sort();
+  const projOptions = projects.map(p => `<option value="${p}"${mgmtProjFilter===p?' selected':''}>${p}</option>`).join('');
+
+  c.innerHTML = `
+    <div class="page-title">Management</div>
+    <div class="page-sub">All project payments + fixed costs · Data from ${d.date}</div>
+    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:12px">
+      <div class="cf-balance-row" style="margin-bottom:0">
+        <span class="cf-balance-label">Cash Position:</span>
+        <input type="text" class="cf-balance-input" id="mgmt-bal" value="${balance ? cfFmt2(balance) : ''}" placeholder="$0.00">
+        <span class="cf-balance-saved" id="mgmt-saved" style="display:none">✓ Saved</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:12px;color:var(--txt2);font-weight:500">View from:</span>
+        <input type="date" id="mgmt-from-date" value="${mgmtFromDate}" style="background:var(--card);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:5px 8px;font-size:12px;font-family:var(--sans);cursor:pointer">
+        <button id="mgmt-today-btn" style="background:var(--card);color:var(--txt2);border:1px solid var(--bdr);border-radius:6px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:var(--sans)">Today</button>
+      </div>
+    </div>
+    <div id="mgmt-stats"></div>
+    <div class="cf-time-tabs" id="mgmt-tabs">
+      <button class="cf-tt${mgmtDays===7?' on':''}" data-md="7">1 Week</button>
+      <button class="cf-tt${mgmtDays===14?' on':''}" data-md="14">2 Weeks</button>
+      <button class="cf-tt${mgmtDays===21?' on':''}" data-md="21">3 Weeks</button>
+      <button class="cf-tt${mgmtDays===28?' on':''}" data-md="28">1 Month</button>
+      <button class="cf-tt${mgmtDays===90?' on':''}" data-md="90">3 Months</button>
+    </div>
+    <div id="mgmt-filters" style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+      <div style="display:flex;gap:4px;flex-wrap:wrap">
+        <button class="cf-tt${mgmtTypeFilter==='all'?' on':''}" data-mf="all">All</button>
+        <button class="cf-tt${mgmtTypeFilter==='in'?' on':''}" data-mf="in" style="color:#4ade80">↑ Income</button>
+        <button class="cf-tt${mgmtTypeFilter==='pin'?' on':''}" data-mf="pin" style="color:#facc15">⚡ Potential</button>
+        <button class="cf-tt${mgmtTypeFilter==='proj_out'?' on':''}" data-mf="proj_out" style="color:#f87171">↓ Project Exp</button>
+        <button class="cf-tt${mgmtTypeFilter==='fixed'?' on':''}" data-mf="fixed" style="color:#818cf8">⚙ Fixed Costs</button>
+      </div>
+      <select id="mgmt-proj-filter" style="background:var(--card);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:6px 10px;font-size:12px;font-family:var(--sans);min-width:180px;cursor:pointer">
+        <option value="all"${mgmtProjFilter==='all'?' selected':''}>All Projects</option>
+        ${projOptions}
+      </select>
+    </div>
+    <div id="mgmt-body"></div>`;
+
+  // Balance
+  const balInput = document.getElementById('mgmt-bal'), savedEl = document.getElementById('mgmt-saved');
+  balInput.addEventListener('change', () => {
+    const val = parseFloat(balInput.value.replace(/[^0-9.\-]/g,'')) || 0;
+    localStorage.setItem('cf_balance', val.toString());
+    balInput.value = cfFmt2(val); savedEl.style.display='';
+    setTimeout(()=>savedEl.style.display='none',2000); renderMgmtBody();
+  });
+  // Tabs
+  document.getElementById('mgmt-tabs').addEventListener('click', e => {
+    const btn = e.target.closest('[data-md]'); if(!btn) return;
+    mgmtDays = parseInt(btn.dataset.md);
+    document.querySelectorAll('[data-md]').forEach(b=>b.classList.remove('on')); btn.classList.add('on');
+    renderMgmtBody();
+  });
+  // Date
+  document.getElementById('mgmt-from-date').addEventListener('change', e => { mgmtFromDate=e.target.value; renderMgmtBody(); });
+  document.getElementById('mgmt-today-btn').addEventListener('click', () => { mgmtFromDate=new Date().toISOString().slice(0,10); document.getElementById('mgmt-from-date').value=mgmtFromDate; renderMgmtBody(); });
+  // Filters
+  document.getElementById('mgmt-filters').addEventListener('click', e => {
+    const btn = e.target.closest('[data-mf]'); if(!btn) return;
+    mgmtTypeFilter = btn.dataset.mf;
+    document.querySelectorAll('[data-mf]').forEach(b=>b.classList.remove('on')); btn.classList.add('on');
+    renderMgmtBody();
+  });
+  document.getElementById('mgmt-proj-filter').addEventListener('change', e => { mgmtProjFilter=e.target.value; renderMgmtBody(); });
+  renderMgmtBody();
+}
+
+function renderMgmtBody() {
+  const body = document.getElementById('mgmt-body');
+  const statsEl = document.getElementById('mgmt-stats');
+  if (!body || !statsEl || !MGMT_DATA) return;
+  const d = MGMT_DATA;
+  const balance = parseFloat(localStorage.getItem('cf_balance') || '0');
+  const today = new Date(mgmtFromDate + 'T12:00:00');
+  const cutoff = new Date(today.getTime() + mgmtDays * 86400000);
+  const allItems = d.all_tasks || [];
+
+  function passesFilter(t) {
+    if (mgmtTypeFilter === 'in') return t.type === 'income';
+    if (mgmtTypeFilter === 'pin') return t.type === 'p_income';
+    if (mgmtTypeFilter === 'proj_out') return t.type !== 'income' && t.type !== 'p_income' && !mgmtIsFixed(t.type);
+    if (mgmtTypeFilter === 'fixed') return mgmtIsFixed(t.type);
+    return true;
+  }
+
+  const windowItems = allItems.filter(t => {
+    if (!t.due) return false;
+    const td = new Date(t.due + 'T12:00:00');
+    if (td < today || td >= cutoff) return false;
+    if (!passesFilter(t)) return false;
+    if (mgmtProjFilter !== 'all' && t.project !== mgmtProjFilter) return false;
+    return true;
+  });
+
+  const allWin = allItems.filter(t => {
+    if (!t.due) return false;
+    const td = new Date(t.due + 'T12:00:00');
+    return td >= today && td < cutoff;
+  });
+
+  let winIn=0, winPIn=0, winProjOut=0, winFixed=0;
+  let winUnpaidIn=0, winUnpaidPIn=0, winUnpaidProjOut=0, winUnpaidFixed=0;
+  let winPaidAmt=0;
+  allWin.forEach(t => {
+    const a = t.amount||0;
+    if (t.type==='p_income') { winPIn+=a; if(!t.paid) winUnpaidPIn+=a; }
+    else if (t.type==='income') { winIn+=a; if(t.paid) winPaidAmt+=a; else winUnpaidIn+=a; }
+    else if (mgmtIsFixed(t.type)) { winFixed+=a; if(t.paid) winPaidAmt+=a; else winUnpaidFixed+=a; }
+    else { winProjOut+=a; if(t.paid) winPaidAmt+=a; else winUnpaidProjOut+=a; }
+  });
+
+  const grossProjected = balance + winUnpaidIn - winUnpaidProjOut;
+  const netProjected   = grossProjected - winUnpaidFixed;
+  const netWithP       = netProjected + winUnpaidPIn;
+
+  // Stats
+  statsEl.innerHTML = `
+  <div class="stats" style="grid-template-columns:repeat(4,1fr);margin-bottom:8px">
+    <div class="st g"><div class="n">${cfFmt(winUnpaidIn)}</div><div class="l">Income</div></div>
+    <div class="st" style="background:#433a1a;border-color:#6b5c1e"><div class="n" style="color:#facc15">${cfFmt(winUnpaidPIn)}</div><div class="l" style="color:#c9a80e">Potential</div></div>
+    <div class="st r"><div class="n">${cfFmt(winUnpaidProjOut)}</div><div class="l">Project Expenses</div></div>
+    <div class="st" style="border-color:#818cf840;background:#818cf80d"><div class="n" style="color:#818cf8">${cfFmt(winUnpaidFixed)}</div><div class="l" style="color:#818cf8">⚙ Fixed Costs</div></div>
+  </div>
+  <div class="stats" style="grid-template-columns:repeat(4,1fr);margin-bottom:16px">
+    <div class="st ${grossProjected>=0?'g':'r'}"><div class="n">${cfFmt(grossProjected)}</div><div class="l">Gross (no fixed)</div></div>
+    <div class="st ${netProjected>=0?'g':'r'}"><div class="n">${cfFmt(netProjected)}</div><div class="l">Net (all expenses)</div></div>
+    <div class="st" style="background:#433a1a;border-color:#6b5c1e"><div class="n" style="color:#facc15">${cfFmt(netWithP)}</div><div class="l" style="color:#c9a80e">Net (w/ potential)</div></div>
+    <div class="st" style="background:#3a3a4a"><div class="n" style="color:#888">${cfFmt(winPaidAmt)}</div><div class="l" style="color:#666">Already Paid</div></div>
+  </div>`;
+
+  // Payment list
+  const sorted = [...windowItems].sort((a,b) => (a.due||'').localeCompare(b.due||''));
+  let runBal = balance;
+  let currentWeek = '';
+
+  let html = '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:8px 12px">';
+  html += `<div class="cf-pay" style="border-bottom:1px solid var(--bdr);padding-bottom:4px;margin-bottom:2px">
+    <span class="cf-pay-date" style="font-weight:600;color:var(--txt)">Date</span>
+    <span class="cf-pay-type" style="background:none;border:none;color:var(--txt);font-weight:600">Type</span>
+    <span class="cf-pay-name" style="font-weight:600;color:var(--txt)">Payment</span>
+    <span class="cf-pay-amt" style="color:var(--txt)">Amount</span>
+    <span class="cf-pay-bal" style="color:var(--txt)">Balance</span>
+    <span class="cf-pay-status" style="background:none;border:none;color:var(--txt);font-weight:600">Status</span>
+  </div>`;
+
+  if (sorted.length) {
+    sorted.forEach(t => {
+      const weekKey = cfGetMonday(t.due);
+      if (weekKey !== currentWeek) {
+        currentWeek = weekKey;
+        const wItems = sorted.filter(w => cfGetMonday(w.due) === weekKey);
+        let wIn=0, wOut=0, wPIn=0;
+        wItems.forEach(w => {
+          if (w.type==='p_income') wPIn+=w.amount;
+          else if (w.type==='income') wIn+=w.amount;
+          else wOut+=w.amount;
+        });
+        const wNet=wIn-wOut, wNetColor=wNet>=0?'#4ade80':'#f87171';
+        const pPart = wPIn>0 ? ` · <span style="color:#facc15">⚡${cfFmt(wPIn)}</span>` : '';
+        html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 4px 4px;margin-top:8px;border-top:2px solid var(--bdr)">
+          <span style="font-size:12px;font-weight:700;color:var(--txt)">📅 ${cfWeekRange(weekKey)}</span>
+          <span style="font-size:11px;color:var(--dim)">IN ${cfFmt(wIn)}${pPart} · OUT ${cfFmt(wOut)} · <span style="color:${wNetColor};font-weight:600">NET ${cfFmt(wNet)}</span></span>
+        </div>`;
+      }
+
+      const ti = mgmtTypeInfo(t.type);
+      const isIn = t.type==='income'||t.type==='p_income';
+      const isPIn = t.type==='p_income';
+      const dt = new Date(t.due+'T12:00:00');
+      const dateLbl = MONTHS[dt.getMonth()]+' '+dt.getDate()+'<br><span style="font-size:9px;color:var(--dim)">'+DAYS[dt.getDay()]+'</span>';
+
+      if (!t.paid && !isPIn) { if(isIn) runBal+=t.amount; else runBal-=t.amount; }
+      const balLbl = t.paid ? '—' : cfFmt(runBal);
+      const balCls = t.paid ? '' : (runBal>=0?'pos':'neg');
+      const paidStyle = t.paid ? 'opacity:0.5;text-decoration:line-through' : '';
+      const statusLbl = t.paid ? '✓ Paid' : (t.amount?'Pending':'TBD');
+      const statusCls = t.paid ? 'paid' : (t.amount?'pending':'tbd');
+
+      html += `<div class="cf-pay" style="${paidStyle}">
+        <span class="cf-pay-date">${dateLbl}</span>
+        <span class="cf-pay-type" style="background:${ti.color}20;color:${ti.color};border:1px solid ${ti.color}40;font-size:10px">${ti.label}</span>
+        <span class="cf-pay-name">${t.task} <span class="cf-pay-proj">— ${t.project||''}</span></span>
+        <span class="cf-pay-amt ${ti.cls}">${ti.sign}${t.amount?cfFmt2(t.amount):'TBD'}</span>
+        <span class="cf-pay-bal ${balCls}">${balLbl}</span>
+        <span class="cf-pay-status ${statusCls}">${statusLbl}</span>
+      </div>`;
+    });
+  } else {
+    html += '<div style="padding:12px;text-align:center;color:var(--dim);font-size:13px">No payments in this time window</div>';
+  }
+
+  // Totals footer
+  let totIn=0,totPIn=0,totProjOut=0,totFixed=0,totPaid=0;
+  sorted.forEach(t => {
+    const a=t.amount||0;
+    if(t.type==='p_income') totPIn+=a;
+    else if(t.type==='income') totIn+=a;
+    else if(mgmtIsFixed(t.type)) totFixed+=a;
+    else totProjOut+=a;
+    if(t.paid) totPaid+=a;
+  });
+  const totNet=totIn-totProjOut-totFixed, totNetP=totNet+totPIn;
+
+  html += `</div><div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:12px 16px;margin-top:12px">
+    <div style="font-size:12px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">
+      Totals · ${sorted.length} payment${sorted.length!==1?'s':''}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px">
+      <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#4ade80">${cfFmt(totIn)}</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Income</div></div>
+      <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#facc15">${cfFmt(totPIn)}</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Potential</div></div>
+      <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#f87171">${cfFmt(totProjOut)}</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Project Exp</div></div>
+      <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#818cf8">${cfFmt(totFixed)}</div><div style="font-size:10px;color:var(--dim);margin-top:2px">⚙ Fixed Costs</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-top:10px;border-top:1px solid var(--bdr)">
+      <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:${totNet>=0?'#4ade80':'#f87171'}">${cfFmt(totNet)}</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Net (confirmed)</div></div>
+      <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:#facc15">${cfFmt(totNetP)}</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Net (w/ potential)</div></div>
+      <div style="text-align:center"><div style="font-size:18px;font-weight:700;color:#888">${cfFmt(totPaid)}</div><div style="font-size:10px;color:var(--dim);margin-top:2px">Already Paid</div></div>
+    </div>
+  </div>`;
 
   body.innerHTML = html;
 }
