@@ -1402,7 +1402,9 @@ function renderMgmtBody() {
     const firstX=toX(0), lastX=toX(mChartPts.length-1);
     const netArea=netPath+`L${lastX},${zeroY} L${firstX},${zeroY} Z`;
 
-    html += `<div class="cf-chart-wrap"><svg width="${W}" height="${H}" style="display:block;width:100%;max-width:${W}px" viewBox="0 0 ${W} ${H}">
+    html += `<div class="cf-chart-wrap" style="position:relative">
+      <div id="mgmt-chart-zoom" style="overflow:auto;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch;cursor:grab;position:relative">
+      <svg id="mgmt-chart-svg" width="${W}" height="${H}" style="display:block;min-width:${W}px" viewBox="0 0 ${W} ${H}">
       <defs><linearGradient id="mcfg" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="var(--grn)" stop-opacity="0.15"/>
         <stop offset="100%" stop-color="var(--grn)" stop-opacity="0"/>
@@ -1453,7 +1455,13 @@ function renderMgmtBody() {
       html+=`<text x="${x}" y="${y-10}" text-anchor="middle" fill="${color}" font-size="10" font-weight="600" font-family="var(--mono)">${cfFmt(p.net)}</text>`;
     });
 
-    html+='</svg>';
+    html+='</svg></div>';
+    // Zoom controls
+    html+=`<div style="display:flex;gap:6px;position:absolute;top:8px;right:8px;z-index:2">
+      <button id="mgmt-zoom-out" style="background:var(--card);border:1px solid var(--bdr);border-radius:4px;width:28px;height:28px;font-size:16px;cursor:pointer;color:var(--txt);display:flex;align-items:center;justify-content:center">−</button>
+      <button id="mgmt-zoom-reset" style="background:var(--card);border:1px solid var(--bdr);border-radius:4px;padding:0 8px;height:28px;font-size:10px;cursor:pointer;color:var(--dim);font-family:var(--mono)">1×</button>
+      <button id="mgmt-zoom-in" style="background:var(--card);border:1px solid var(--bdr);border-radius:4px;width:28px;height:28px;font-size:16px;cursor:pointer;color:var(--txt);display:flex;align-items:center;justify-content:center">+</button>
+    </div>`;
     // Legend
     let legend = '<span style="color:var(--grn)">● ━━ Net (all expenses)</span>';
     if(mHasFixed) legend += ' <span style="color:#4ade8080">● ┅┅ Gross (projects only)</span>';
@@ -1554,6 +1562,48 @@ function renderMgmtBody() {
   </div>`;
 
   body.innerHTML = html;
+
+  // ── Chart zoom ──────────────────────
+  const zoomWrap = document.getElementById('mgmt-chart-zoom');
+  const zoomSvg = document.getElementById('mgmt-chart-svg');
+  const zoomInBtn = document.getElementById('mgmt-zoom-in');
+  const zoomOutBtn = document.getElementById('mgmt-zoom-out');
+  const zoomResetBtn = document.getElementById('mgmt-zoom-reset');
+  if (zoomWrap && zoomSvg) {
+    let scale = 1;
+    const baseW = parseInt(zoomSvg.getAttribute('width'));
+    function applyZoom() {
+      zoomSvg.style.transform = `scale(${scale})`;
+      zoomSvg.style.transformOrigin = 'left top';
+      zoomSvg.style.minWidth = (baseW * scale) + 'px';
+      zoomSvg.style.height = (180 * scale) + 'px';
+      if (zoomResetBtn) zoomResetBtn.textContent = scale === 1 ? '1×' : scale.toFixed(1) + '×';
+    }
+    if (zoomInBtn) zoomInBtn.addEventListener('click', () => { scale = Math.min(scale + 0.5, 4); applyZoom(); });
+    if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => { scale = Math.max(scale - 0.5, 0.5); applyZoom(); });
+    if (zoomResetBtn) zoomResetBtn.addEventListener('click', () => { scale = 1; applyZoom(); });
+    let startDist = 0, startScale = 1;
+    zoomWrap.addEventListener('touchstart', e => {
+      if (e.touches.length === 2) {
+        startDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+        startScale = scale;
+      }
+    }, {passive: true});
+    zoomWrap.addEventListener('touchmove', e => {
+      if (e.touches.length === 2) {
+        const dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+        scale = Math.min(4, Math.max(0.5, startScale * (dist / startDist)));
+        applyZoom();
+      }
+    }, {passive: true});
+    zoomWrap.addEventListener('wheel', e => {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        scale = Math.min(4, Math.max(0.5, scale + (e.deltaY < 0 ? 0.25 : -0.25)));
+        applyZoom();
+      }
+    }, {passive: false});
+  }
 }
 
 async function loadAndRenderEOD(c) {
