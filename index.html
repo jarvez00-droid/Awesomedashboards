@@ -43,21 +43,53 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 
 /* Main */
 .main{max-width:1600px;margin:0 auto;padding:16px 32px;width:100%;box-sizing:border-box}
-@media(max-width:1400px){.main{padding:16px 16px;max-width:100%}}
-@media(max-width:1100px){.main{padding:12px 8px}}
+/* TV / smaller desktop: 1080p windowed or 720p */
 @media(max-width:1400px){
-  .stats{grid-template-columns:repeat(3,1fr)!important}
+  .main{padding:12px 12px;max-width:100%}
+  body{font-size:13px}
+  .page-title{font-size:18px!important}
+  .page-sub{font-size:11px!important}
+  .stats{grid-template-columns:repeat(3,1fr)!important;gap:6px!important}
+  .st .n{font-size:18px!important}
+  .st .l{font-size:10px!important}
   .cf-bk-grid4{grid-template-columns:repeat(2,1fr)!important}
   .cf-bk-grid5{grid-template-columns:repeat(3,1fr)!important}
-  .sod-top-grid{grid-template-columns:1fr!important}
+  .sod-top-grid{grid-template-columns:1fr!important;gap:12px!important}
+  .pn{font-size:14px!important}
+  .pp{font-size:11px!important}
+  .tg{font-size:9px!important;padding:1px 5px!important}
+  .preview{gap:4px!important}
+  .pv-head{font-size:9px!important}
+  .pv-name{font-size:11px!important}
+  .pv-sub{font-size:10px!important}
+  .pv-item{font-size:11px!important}
+  .tr{font-size:11px!important}
+  .tsl{font-size:10px!important}
+  .ph{padding:10px 12px!important}
+  .pb{padding:0 12px 12px!important}
+  .pc{margin-bottom:14px!important}
+  .pmc{padding:8px 10px!important}
+  .pmn{font-size:12px!important}
+  .pmd{font-size:10px!important}
+  .pmb{font-size:14px!important}
+  .sh{font-size:13px!important}
+  .top{padding:8px 12px!important}
+  .brand-name{font-size:13px!important}
+  .nav a{padding:6px 10px!important;font-size:12px!important}
 }
+/* Small screens: 720p TV or small laptop */
 @media(max-width:1100px){
+  .main{padding:8px 6px}
+  body{font-size:12px}
   .stats{grid-template-columns:repeat(2,1fr)!important}
+  .st .n{font-size:16px!important}
   .cf-bk-grid4{grid-template-columns:repeat(2,1fr)!important}
   .cf-bk-grid5{grid-template-columns:repeat(2,1fr)!important}
   .preview{grid-template-columns:repeat(2,1fr)!important}
   .pb-grid{grid-template-columns:1fr!important}
   .pb-3col{grid-template-columns:1fr 1fr!important}
+  .pn{font-size:13px!important}
+  .pc{margin-bottom:10px!important}
 }
 .page-title{font-size:22px;font-weight:700;margin-bottom:2px}
 .page-sub{font-size:13px;color:var(--txt2);margin-bottom:20px}
@@ -82,10 +114,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 
 /* Project card */
 .pc{background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);margin-bottom:20px;overflow:hidden;transition:border-color .15s;border-left:4px solid var(--bdr)}
-.pc.sev-r{border-left-color:var(--red);background:linear-gradient(135deg,rgba(248,113,113,.06) 0%,var(--card) 60%)}
-.pc.sev-o{border-left-color:var(--org);background:linear-gradient(135deg,rgba(251,146,60,.05) 0%,var(--card) 60%)}
-.pc.sev-b{border-left-color:var(--blu);background:linear-gradient(135deg,rgba(96,165,250,.04) 0%,var(--card) 60%)}
-.pc.sev-g{border-left-color:var(--grn);background:linear-gradient(135deg,rgba(52,211,153,.04) 0%,var(--card) 60%)}
+.pc.sev-r{border-left-color:var(--red);background:linear-gradient(135deg,rgba(240,68,56,.1) 0%,rgba(240,68,56,.03) 40%,var(--card) 100%)}
+.pc.sev-o{border-left-color:var(--org);background:linear-gradient(135deg,rgba(247,144,9,.08) 0%,rgba(247,144,9,.02) 40%,var(--card) 100%)}
+.pc.sev-b{border-left-color:var(--blu);background:linear-gradient(135deg,rgba(82,139,255,.07) 0%,rgba(82,139,255,.02) 40%,var(--card) 100%)}
+.pc.sev-g{border-left-color:var(--grn);background:linear-gradient(135deg,rgba(18,183,106,.07) 0%,rgba(18,183,106,.02) 40%,var(--card) 100%)}
 .pc:hover{border-color:var(--bdr-h)}.pc.sev-r:hover{border-left-color:var(--red)}.pc.sev-o:hover{border-left-color:var(--org)}.pc.sev-b:hover{border-left-color:var(--blu)}.pc.sev-g:hover{border-left-color:var(--grn)}
 .ph{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;background:rgba(255,255,255,.02)}
 .ph:hover{background:rgba(255,255,255,.04)}
@@ -2061,7 +2093,7 @@ function buildAnalysis(a) {
 
   const md = t => t.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 
-  return `<div class="pc sev-g" style="border-left-color:#34d399;background:linear-gradient(135deg,rgba(52,211,153,.06) 0%,var(--card) 60%)">
+  return `<div class="pc sev-g" style="border-left-color:#34d399;background:linear-gradient(135deg,rgba(18,183,106,.08) 0%,rgba(18,183,106,.02) 40%,var(--card) 100%)">
     <div class="ph" onclick="tog(this)">
       <div style="display:flex;align-items:center;gap:8px">
         <span style="font-size:18px">🟢</span>
