@@ -75,6 +75,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   .sh{font-size:13px!important}
   .pb-3col{grid-template-columns:1fr 1fr!important;gap:12px!important}
   .pb-3col .pay-side{grid-column:1/-1}
+  .wk-pies{grid-template-columns:repeat(3,1fr)!important}
   .top{padding:8px 12px!important}
   .brand-name{font-size:13px!important}
   .nav a{padding:6px 10px!important;font-size:12px!important}
@@ -91,6 +92,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   .pb-grid{grid-template-columns:1fr!important}
   .pb-3col{grid-template-columns:1fr!important}
   .pb-3col .pay-side{grid-column:auto}
+  .wk-pies{grid-template-columns:repeat(2,1fr)!important}
   .pn{font-size:13px!important}
   .pc{margin-bottom:10px!important}
 }
@@ -448,113 +450,134 @@ async function loadAndRenderWeekly(c) {
   c.innerHTML = '<div class="empty"><div class="empty-i">📊</div><div class="empty-t">No Weekly Report</div><div class="empty-d">The weekly report generates Monday at 7 AM.</div></div>';
 }
 
+// SVG doughnut chart helper
+function svgDonut(data, size, colors) {
+  // data: [{label, value, color}], size: diameter
+  const total = data.reduce((s, d) => s + d.value, 0);
+  if (!total) return `<svg width="${size}" height="${size}"></svg>`;
+  const cx = size / 2, cy = size / 2, r = size * 0.38, sw = size * 0.18;
+  let angle = -Math.PI / 2;
+  let paths = '';
+  data.forEach(d => {
+    if (!d.value) return;
+    const pct = d.value / total;
+    const a1 = angle;
+    const a2 = angle + pct * 2 * Math.PI;
+    const large = pct > 0.5 ? 1 : 0;
+    const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+    const x2 = cx + r * Math.cos(a2), y2 = cy + r * Math.sin(a2);
+    if (pct >= 0.999) {
+      paths += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${d.color}" stroke-width="${sw}"/>`;
+    } else {
+      paths += `<path d="M${x1},${y1} A${r},${r} 0 ${large} 1 ${x2},${y2}" fill="none" stroke="${d.color}" stroke-width="${sw}" stroke-linecap="round"/>`;
+    }
+    angle = a2;
+  });
+  paths += `<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" fill="var(--txt)" font-family="var(--mono)" font-size="${size*0.18}" font-weight="700">${total}</text>`;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${paths}</svg>`;
+}
+
 function renderWeekly(c) {
   const w = WEEKLY_DATA;
   const s = w.summary;
   const projs = w.project_summaries || {};
-  const pmMetrics = w.pm_metrics || {};
+  const pmChart = w.pm_chart_data || {};
+  const milestones = w.milestone_impacts || [];
   const analysisParas = w.analysis || [];
   const md = t => t.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 
-  const resRate = s.unique_overdue > 0 ? Math.round(s.overdue_resolved / s.unique_overdue * 100) : 0;
+  // Consistent PM colors
+  const PM_COLORS = {'Jeff':'#60a5fa','Angel Pacheco':'#f97316','Marcio Oliveira':'#a78bfa','Milagros':'#f472b6'};
+  const pmNames = Object.keys(pmChart);
+  const pmLegend = pmNames.map(n => `<span style="display:inline-flex;align-items:center;gap:4px;margin-right:12px"><span style="width:10px;height:10px;border-radius:50%;background:${PM_COLORS[n]||'#888'}"></span><span style="font-size:11px;color:var(--txt2)">${n}</span></span>`).join('');
 
   let h = `
     <div class="page-title">Weekly Report — Management View</div>
     <div class="page-sub">${w.week}</div>
 
-    <!-- ═══ SECTION 1: PAST WEEK REVIEW ═══ -->
     <div class="wk-zone review">
       <div class="wk-zone-header">
         <div class="wk-zone-title">📋 PAST WEEK REVIEW</div>
         <div class="wk-zone-dates">${w.week} · ${w.days_with_data} days of data</div>
       </div>
 
-    <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:4px">
-      <div class="st g"><div class="n">${s.tasks_completed}</div><div class="l">Completed</div></div>
-      <div class="st r"><div class="n">${s.unique_overdue}</div><div class="l">Unique Overdue</div></div>
-      <div class="st ${resRate >= 30 ? 'g' : resRate >= 15 ? 'y' : 'r'}"><div class="n">${resRate}%</div><div class="l">Resolved</div></div>
-    </div>
-    <div class="stats" style="grid-template-columns:repeat(4,1fr)">
-      <div class="st o"><div class="n">${s.total_pushed}</div><div class="l">Pushed</div></div>
-      <div class="st b"><div class="n">${s.total_pulled}</div><div class="l">Pulled Forward</div></div>
-      <div class="st y"><div class="n">+${s.total_push_days}d</div><div class="l">Days Pushed</div></div>
-      <div class="st ${s.cascades > 0 ? 'r' : 'g'}"><div class="n">${s.cascades}</div><div class="l">Cascades</div></div>
-    </div>`;
+    <!-- PM Legend -->
+    <div style="text-align:center;margin:12px 0 16px">${pmLegend}</div>
 
-  // ── Projects (primary view) ──
-  const projNames = Object.keys(projs).sort((a, b) => Math.abs(projs[b].net_shift_days) - Math.abs(projs[a].net_shift_days));
+    <!-- Pie Charts Row -->
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:20px" class="wk-pies">`;
+
+  // Build 6 pie charts: Completed, Unique Overdue, % Resolved, Pushed, Pulled, Early Finish
+  const metrics = [
+    {key:'completed', label:'Completed', total: s.tasks_completed},
+    {key:'unique_overdue', label:'Unique Overdue', total: s.unique_overdue},
+    {key:'resolved', label:'Resolved', total: s.overdue_resolved},
+    {key:'pushed', label:'Pushed', total: s.tasks_pushed},
+    {key:'pulled', label:'Pulled Forward', total: s.tasks_pulled},
+    {key:'early_finish', label:'Early Finish', total: s.early_finish},
+  ];
+
+  metrics.forEach(m => {
+    const data = pmNames.map(pm => ({label: pm, value: pmChart[pm][m.key] || 0, color: PM_COLORS[pm] || '#888'}));
+    h += `<div style="text-align:center">
+      ${svgDonut(data, 110, PM_COLORS)}
+      <div style="font-size:11px;font-weight:600;color:var(--txt);margin-top:4px">${m.label}</div>`;
+    // Individual numbers
+    h += '<div style="font-size:10px;color:var(--txt2);line-height:1.6;margin-top:2px">';
+    pmNames.forEach(pm => {
+      const v = pmChart[pm][m.key] || 0;
+      if (v > 0) h += `<div><span style="color:${PM_COLORS[pm]||'#888'}">●</span> ${pm.split(' ')[0]}: ${v}</div>`;
+    });
+    h += '</div></div>';
+  });
+
+  h += '</div>';
+
+  // ── Resolution % stat ──
+  h += `<div style="text-align:center;margin-bottom:20px;font-size:14px;color:var(--txt2)">Resolution Rate: <span style="font-weight:700;color:${s.resolution_pct >= 30 ? 'var(--grn)' : s.resolution_pct >= 15 ? 'var(--ylw)' : 'var(--red)'}">${s.resolution_pct}%</span> (${s.overdue_resolved} of ${s.unique_overdue} resolved)</div>`;
+
+  // ── Projects ──
+  const projNames = Object.keys(projs).sort((a, b) => Math.abs(projs[b].net_shift_days || 0) - Math.abs(projs[a].net_shift_days || 0));
   if (projNames.length) {
     h += '<div class="wk-section"><div class="wk-section-title">Projects</div>';
     projNames.forEach(pname => {
       const p = projs[pname];
-      if (!p.tasks_moved && !p.unique_overdue && !p.completed) return;
+      if (!p.tasks_pushed && !p.tasks_pulled && !p.unique_overdue && !p.completed) return;
 
       const pmLabel = p.pms && p.pms.length ? p.pms.join(', ') : 'No PM';
       let tags = '';
       if (p.unique_overdue) tags += `<span class="tg r">${p.unique_overdue} overdue</span>`;
       if (p.completed) tags += `<span class="tg gr">${p.completed} done</span>`;
+      if (p.early_finish) tags += `<span class="tg" style="background:rgba(52,211,153,.15);color:#34d399">${p.early_finish} early</span>`;
       if (p.net_shift_days > 0) tags += `<span class="tg o">+${p.net_shift_days}d drift</span>`;
       else if (p.net_shift_days < 0) tags += `<span class="tg gr">${p.net_shift_days}d ahead</span>`;
-      if (p.tasks_moved) tags += `<span class="tg b">${p.tasks_moved} moved</span>`;
-      if (p.cascades) tags += `<span class="tg r">${p.cascades} cascades</span>`;
+      if (p.tasks_pushed) tags += `<span class="tg b">${p.tasks_pushed} pushed</span>`;
+      if (p.tasks_pulled) tags += `<span class="tg" style="background:rgba(96,165,250,.15);color:#60a5fa">${p.tasks_pulled} pulled</span>`;
 
       const sev = p.net_shift_days >= 20 ? 'sev-r' : p.net_shift_days >= 5 ? 'sev-o' : p.unique_overdue > 5 ? 'sev-o' : 'sev-g';
 
       let body = '<div style="border-top:1px solid var(--bdr);margin-bottom:10px"></div>';
-      body += '<div class="pb-grid"><div>';
 
-      // Overdue summary
-      if (p.unique_overdue) {
-        body += `<div class="ts"><div class="tsl lr">Overdue (${p.unique_overdue})</div>`;
-        body += `<div class="tr"><div class="ti"><div class="tn" style="color:var(--txt2)">${p.overdue_resolved} resolved · ${p.chronic_overdue} stuck all week · ${p.unique_overdue - p.overdue_resolved} still open</div></div></div>`;
-        body += '</div>';
-      }
+      // Quick stats row
+      body += `<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--txt2);margin-bottom:10px">
+        <span>✅ ${p.completed} completed${p.early_finish ? ` (${p.early_finish} early)` : ''}</span>
+        <span>🔴 ${p.unique_overdue} overdue (${p.overdue_resolved} resolved, ${p.chronic_overdue} chronic)</span>
+        <span>📅 ${p.tasks_pushed} pushed · ${p.tasks_pulled} pulled · net ${p.net_shift_days > 0 ? '+' : ''}${p.net_shift_days}d</span>
+      </div>`;
 
-      // Completions
-      if (p.completed) {
-        body += `<div class="ts"><div class="tsl" style="color:var(--grn)">Completed (${p.completed})</div>`;
-        body += `<div class="tr"><div class="ti"><div class="tn" style="color:var(--txt2)">${p.completed_on_time} on time · ${p.completed - p.completed_on_time} late</div></div></div>`;
-        body += '</div>';
-      }
-
-      body += '</div><div>';
-
-      // Schedule moves
-      if (p.tasks_moved) {
-        body += `<div class="ts"><div class="tsl" style="color:var(--org)">Schedule Moves (${p.tasks_moved})</div>`;
-        body += `<div class="tr"><div class="ti"><div class="tn" style="color:var(--txt2)">${p.tasks_pushed} pushed · ${p.tasks_pulled} pulled · net ${p.net_shift_days > 0 ? '+' : ''}${p.net_shift_days} days</div></div></div>`;
-        if (p.no_impact_moves > 0) {
-          body += `<div class="tr"><div class="td g"></div><div class="ti"><div class="tn" style="color:var(--grn)">${p.no_impact_moves} of ${p.tasks_pushed} pushes had NO downstream impact</div></div></div>`;
-        }
-        // Top pushed tasks
-        if (p.top_pushed && p.top_pushed.length) {
-          p.top_pushed.forEach(tp => {
-            body += `<div class="tr"><div class="td ${tp.delta > 0 ? 'r' : 'g'}"></div><div class="ti"><div class="tn">${tp.task}</div></div><div class="tw${tp.delta > 0 ? ' ov' : ''}">${tp.delta > 0 ? '+' : ''}${tp.delta}d</div></div>`;
-          });
-        }
-        body += '</div>';
-      }
-
-      // Cascade details
-      if (p.cascade_details && p.cascade_details.length) {
-        body += `<div class="ts"><div class="tsl" style="color:var(--red)">⚡ Cascades</div>`;
-        p.cascade_details.forEach(cas => {
-          body += `<div class="tr"><div class="td r"></div><div class="ti"><div class="tn">${cas.source_task}</div><div class="tn" style="font-size:11px;color:var(--txt2)">+${cas.source_delta}d → ${cas.affected_count} downstream shifted +${cas.total_cascade_days}d</div></div></div>`;
+      // Milestone impacts for this project
+      const pMilestones = (p.milestone_impacts || []);
+      if (pMilestones.length) {
+        body += '<div class="ts"><div class="tsl" style="color:#818cf8">📌 Milestone Impact</div>';
+        pMilestones.forEach(mi => {
+          let desc = `<b>${mi.origin_task}</b> pushed +${mi.origin_delta}d`;
+          if (mi.chain_length > 0) desc += ` → cascaded through ${mi.chain_length} task${mi.chain_length>1?'s':''}`;
+          desc += ` → <b>${mi.milestone_task}</b> moved from ${mi.milestone_old_date} to ${mi.milestone_new_date}`;
+          if (mi.is_payment && mi.payment_amount) desc += ` <span style="color:#818cf8">($${mi.payment_amount.toLocaleString()})</span>`;
+          body += `<div class="tr" style="align-items:flex-start"><div class="td" style="background:${mi.is_payment ? '#818cf8' : 'var(--org)'}"></div><div class="ti"><div class="tn" style="font-size:12px;line-height:1.5">${desc}</div></div><div class="tw ov">+${mi.origin_delta}d</div></div>`;
         });
         body += '</div>';
       }
-
-      // Payment impacts
-      if (p.payment_impacts && p.payment_impacts.length) {
-        body += `<div class="ts"><div class="tsl" style="color:#818cf8">💰 Payment Milestones</div>`;
-        p.payment_impacts.forEach(pi => {
-          const amt = pi.amount ? '$' + pi.amount.toLocaleString() : 'TBD';
-          body += `<div class="tr"><div class="td" style="background:#818cf8"></div><div class="ti"><div class="tn">${pi.task}</div><div class="tn" style="font-size:11px;color:var(--txt2)">Delayed ${pi.days_delayed}d · ${amt}${pi.caused_by ? ' · caused by: ' + pi.caused_by : ''}</div></div></div>`;
-        });
-        body += '</div>';
-      }
-
-      body += '</div></div>';
 
       h += `<div class="pc ${sev}" style="margin-bottom:8px"><div class="ph" onclick="tog(this)"><div>
         <div class="pn">${pname}</div>
@@ -565,49 +588,14 @@ function renderWeekly(c) {
     h += '</div>';
   }
 
-  // ── PM Accountability Metrics ──
-  const pmNames = Object.keys(pmMetrics).sort((a, b) => {
-    const asc = {critical:0,concerning:1,needs_attention:2,acceptable:3,solid:4};
-    return (asc[pmMetrics[a].assessment]||2) - (asc[pmMetrics[b].assessment]||2);
-  });
-  if (pmNames.length) {
-    h += '<div class="wk-section"><div class="wk-section-title">PM Accountability</div><div class="wk-pm-grid">';
-    pmNames.forEach(pmn => {
-      const pm = pmMetrics[pmn];
-      const cls = pm.assessment === 'solid' ? 'imp' : pm.assessment === 'acceptable' ? 'stb' : 'dec';
-      const icon = pm.assessment === 'solid' ? '📈' : pm.assessment === 'acceptable' ? '➡️' : pm.assessment === 'critical' ? '🚨' : '📉';
-      const badge = {critical:'🔴 Critical',concerning:'🟡 Concerning',needs_attention:'🟠 Needs Attention',acceptable:'🔵 Acceptable',solid:'🟢 Solid'}[pm.assessment] || pm.assessment;
-
-      let detail = `<b>${badge}</b> · ${pm.project_count} project${pm.project_count > 1 ? 's' : ''}`;
-      detail += `<br>${pm.completed} completed · ${pm.overdue_unique} overdue (${pm.overdue_resolved} resolved, <b>${pm.chronic_overdue} chronic</b>)`;
-      detail += `<br>${pm.tasks_pushed} pushed (+${pm.net_push_days}d) · ${pm.tasks_pulled} pulled`;
-      if (pm.cascades) detail += ` · <span style="color:var(--red)">${pm.cascades} cascades</span>`;
-      if (pm.no_impact_moves > 0 && pm.tasks_pushed > 0) {
-        const pct = Math.round(pm.no_impact_moves / pm.tasks_pushed * 100);
-        detail += `<br><span style="color:var(--grn)">${pct}% of pushes = no impact</span>`;
-      }
-
-      let patHtml = '';
-      (pm.patterns || []).forEach(p => {
-        patHtml += `<div style="font-size:11px;margin-top:4px;padding:3px 6px;background:var(--bg);border-radius:4px;color:var(--txt2)">⚠ ${p}</div>`;
-      });
-
-      h += `<div class="wk-pm-card ${cls}">
-        <div class="wk-pm-trend">${icon}</div>
-        <div class="wk-pm-name">${pmn}</div>
-        <div class="wk-pm-detail">${detail}${patHtml}</div></div>`;
-    });
-    h += '</div></div>';
-  }
-
-  // ── AI Analysis ──
+  // ── Jade's Analysis ──
   if (analysisParas.length) {
     h += `<div class="pc sev-g" style="border-left-color:#34d399;background:linear-gradient(135deg,rgba(18,183,106,.08) 0%,rgba(18,183,106,.02) 40%,var(--card) 100%);margin-top:16px">
       <div class="ph" onclick="tog(this)">
         <div style="display:flex;align-items:center;gap:8px">
           <span style="font-size:18px">🟢</span>
           <div><div class="pn" style="color:#34d399">Jade's Weekly Analysis</div>
-          <div class="pp">Trends · patterns · recommendations</div></div>
+          <div class="pp">Trends · patterns · PM performance</div></div>
         </div>
         <div class="pt">${chvSvg()}</div>
       </div>
@@ -619,9 +607,7 @@ function renderWeekly(c) {
     </div>`;
   }
 
-  // Close REVIEW zone
   h += '</div>';
-
   h += '<div class="ft">Generated by Jade · Construction Nation Group · Weekly Report</div>';
   c.innerHTML = h;
 }
