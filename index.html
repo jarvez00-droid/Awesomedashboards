@@ -42,7 +42,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 .nav .cnt{font-family:var(--mono);font-size:11px;margin-left:3px;opacity:.7}
 
 /* Main */
-.main{max-width:1600px;margin:0 auto;padding:16px 32px}
+.main{max-width:1600px;margin:0 auto;padding:16px 32px;width:100%;box-sizing:border-box}
+@media(max-width:1400px){.main{padding:16px 20px}}
+@media(max-width:1100px){.main{padding:12px 12px}}
 .page-title{font-size:22px;font-weight:700;margin-bottom:2px}
 .page-sub{font-size:13px;color:var(--txt2);margin-bottom:20px}
 
@@ -869,6 +871,80 @@ function renderCfBody() {
     <div class="st y"><div class="n">${allWindowItems.length}</div><div class="l">Total Payments</div></div>
   </div>`;
 
+  // ── Payment Breakdown Summary ──────────
+  const unpaidByType = {materials: 0, subs: 0, income: 0, p_income: 0};
+  const unpaidCountByType = {materials: 0, subs: 0, income: 0, p_income: 0};
+  // Group unpaid by week
+  const unpaidByWeek = {}; // 'YYYY-WNN' → {materials, subs, income, p_income, total, dateLabel}
+  allWindowItems.filter(t => !t.paid).forEach(t => {
+    const tp = t.type || 'subs';
+    if (unpaidByType[tp] !== undefined) { unpaidByType[tp] += (t.amount||0); unpaidCountByType[tp]++; }
+    const dd = new Date(t.due + 'T12:00:00');
+    const jan1 = new Date(dd.getFullYear(), 0, 1);
+    const wn = Math.ceil(((dd - jan1) / 86400000 + jan1.getDay() + 1) / 7);
+    const wk = `${dd.getFullYear()}-W${String(wn).padStart(2,'0')}`;
+    if (!unpaidByWeek[wk]) {
+      // Find Monday of this week
+      const day = dd.getDay();
+      const mon = new Date(dd);
+      mon.setDate(mon.getDate() - ((day + 6) % 7));
+      const sun = new Date(mon);
+      sun.setDate(sun.getDate() + 6);
+      const fmt = d => `${d.getMonth()+1}/${d.getDate()}`;
+      unpaidByWeek[wk] = {materials: 0, subs: 0, income: 0, p_income: 0, total: 0, label: `${fmt(mon)} - ${fmt(sun)}`};
+    }
+    unpaidByWeek[wk][tp] += (t.amount||0);
+    unpaidByWeek[wk].total += (t.amount||0);
+  });
+
+  const totalUnpaidOut = unpaidByType.materials + unpaidByType.subs;
+  const bkCols = [
+    {label: '🔧 Materials', val: unpaidByType.materials, cnt: unpaidCountByType.materials, color: '#f87171'},
+    {label: '👷 Subs', val: unpaidByType.subs, cnt: unpaidCountByType.subs, color: '#fb923c'},
+    {label: '💰 Income', val: unpaidByType.income, cnt: unpaidCountByType.income, color: '#4ade80'},
+    {label: '⚡ Potential', val: unpaidByType.p_income, cnt: unpaidCountByType.p_income, color: '#facc15'},
+  ];
+
+  let bkHtml = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;cursor:pointer" onclick="const c=this.nextElementSibling;c.style.display=c.style.display==='none'?'block':'none';this.querySelector('svg').style.transform=c.style.display==='none'?'':'rotate(180deg)'">
+      <div style="font-size:13px;font-weight:600;color:var(--txt)">Payment Breakdown — <span style="color:var(--red)">${cfFmt(totalUnpaidOut)}</span> to pay</div>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--dim);transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div style="display:none">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+        ${bkCols.map(c => `<div style="text-align:center;padding:8px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--bdr)">
+          <div style="font-size:18px;font-weight:700;color:${c.color}">${cfFmt(c.val)}</div>
+          <div style="font-size:11px;color:var(--txt2);margin-top:2px">${c.label} (${c.cnt})</div>
+        </div>`).join('')}
+      </div>`;
+
+  // Weekly breakdown table
+  const weeks = Object.entries(unpaidByWeek).sort((a,b) => a[0].localeCompare(b[0]));
+  if (weeks.length) {
+    bkHtml += `<table style="width:100%;font-size:12px;border-collapse:collapse">
+      <tr style="border-bottom:1px solid var(--bdr);color:var(--txt2)">
+        <th style="text-align:left;padding:6px 4px;font-weight:600">Week</th>
+        <th style="text-align:right;padding:6px 4px;font-weight:600;color:#f87171">Materials</th>
+        <th style="text-align:right;padding:6px 4px;font-weight:600;color:#fb923c">Subs</th>
+        <th style="text-align:right;padding:6px 4px;font-weight:600;color:#4ade80">Income</th>
+        <th style="text-align:right;padding:6px 4px;font-weight:600">Net</th>
+      </tr>`;
+    weeks.forEach(([wk, v]) => {
+      const net = v.income - v.materials - v.subs;
+      bkHtml += `<tr style="border-bottom:1px solid rgba(33,39,47,.3)">
+        <td style="padding:5px 4px;color:var(--txt)">${v.label}</td>
+        <td style="text-align:right;padding:5px 4px;color:#f87171">${v.materials ? cfFmt(v.materials) : '—'}</td>
+        <td style="text-align:right;padding:5px 4px;color:#fb923c">${v.subs ? cfFmt(v.subs) : '—'}</td>
+        <td style="text-align:right;padding:5px 4px;color:#4ade80">${v.income ? cfFmt(v.income) : '—'}</td>
+        <td style="text-align:right;padding:5px 4px;font-weight:600;color:${net >= 0 ? '#4ade80' : '#f87171'}">${cfFmt(net)}</td>
+      </tr>`;
+    });
+    bkHtml += '</table>';
+  }
+  bkHtml += '</div></div>';
+
+  statsEl.innerHTML += bkHtml;
+
   // Group by day
   const byDay = {};
   windowItems.forEach(t => {
@@ -1363,6 +1439,91 @@ function renderMgmtBody() {
     <div class="st" style="background:#433a1a;border-color:#6b5c1e"><div class="n" style="color:#facc15">${cfFmt(netWithP)}</div><div class="l" style="color:#c9a80e">Net (w/ potential)</div></div>
     <div class="st" style="background:#3a3a4a"><div class="n" style="color:#888">${cfFmt(winPaidAmt)}</div><div class="l" style="color:#666">Already Paid</div></div>
   </div>`;
+
+  // ── Management Payment Breakdown ──────────
+  const mUnpaid = {materials: 0, subs: 0, income: 0, p_income: 0, salaries: 0, utilities: 0, rent: 0, marketing: 0, others: 0};
+  const mCnt = {materials: 0, subs: 0, income: 0, p_income: 0, salaries: 0, utilities: 0, rent: 0, marketing: 0, others: 0};
+  const FC_MAP = {'salaries':'salaries','utilities':'utilities','rent':'rent','marketing':'marketing','others':'others'};
+  const mByWeek = {};
+  allWin.filter(t => !t.paid).forEach(t => {
+    const tp = FC_MAP[t.type] || t.type || 'subs';
+    if (mUnpaid[tp] !== undefined) { mUnpaid[tp] += (t.amount||0); mCnt[tp]++; }
+    const dd = new Date(t.due + 'T12:00:00');
+    const jan1 = new Date(dd.getFullYear(), 0, 1);
+    const wn = Math.ceil(((dd - jan1) / 86400000 + jan1.getDay() + 1) / 7);
+    const wk = `${dd.getFullYear()}-W${String(wn).padStart(2,'0')}`;
+    if (!mByWeek[wk]) {
+      const day = dd.getDay(); const mon = new Date(dd); mon.setDate(mon.getDate() - ((day+6)%7));
+      const sun = new Date(mon); sun.setDate(sun.getDate()+6);
+      const fmt = d => `${d.getMonth()+1}/${d.getDate()}`;
+      mByWeek[wk] = {materials:0,subs:0,income:0,salaries:0,utilities:0,rent:0,marketing:0,others:0,total:0,label:`${fmt(mon)} - ${fmt(sun)}`};
+    }
+    const wtp = FC_MAP[t.type] || t.type || 'subs';
+    if (mByWeek[wk][wtp] !== undefined) mByWeek[wk][wtp] += (t.amount||0);
+    mByWeek[wk].total += (t.amount||0);
+  });
+
+  const mTotalOut = mUnpaid.materials + mUnpaid.subs + mUnpaid.salaries + mUnpaid.utilities + mUnpaid.rent + mUnpaid.marketing + mUnpaid.others;
+  const mTotalFixed = mUnpaid.salaries + mUnpaid.utilities + mUnpaid.rent + mUnpaid.marketing + mUnpaid.others;
+  const mBkCols = [
+    {label: '🔧 Materials', val: mUnpaid.materials, cnt: mCnt.materials, color: '#f87171'},
+    {label: '👷 Subs', val: mUnpaid.subs, cnt: mCnt.subs, color: '#fb923c'},
+    {label: '⚙ Fixed', val: mTotalFixed, cnt: mCnt.salaries+mCnt.utilities+mCnt.rent+mCnt.marketing+mCnt.others, color: '#818cf8'},
+    {label: '💰 Income', val: mUnpaid.income, cnt: mCnt.income, color: '#4ade80'},
+  ];
+
+  let mBk = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;cursor:pointer" onclick="const c=this.nextElementSibling;c.style.display=c.style.display==='none'?'block':'none';this.querySelector('svg').style.transform=c.style.display==='none'?'':'rotate(180deg)'">
+      <div style="font-size:13px;font-weight:600;color:var(--txt)">Payment Breakdown — <span style="color:var(--red)">${cfFmt(mTotalOut)}</span> total to pay</div>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--dim);transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div style="display:none">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+        ${mBkCols.map(c => `<div style="text-align:center;padding:8px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--bdr)">
+          <div style="font-size:18px;font-weight:700;color:${c.color}">${cfFmt(c.val)}</div>
+          <div style="font-size:11px;color:var(--txt2);margin-top:2px">${c.label} (${c.cnt})</div>
+        </div>`).join('')}
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px">
+        <div style="text-align:center;padding:6px;background:rgba(129,140,248,.06);border-radius:6px;border:1px solid rgba(129,140,248,.15)">
+          <div style="font-size:14px;font-weight:700;color:#818cf8">${cfFmt(mUnpaid.salaries)}</div><div style="font-size:10px;color:#818cf8">Salaries</div></div>
+        <div style="text-align:center;padding:6px;background:rgba(52,211,153,.06);border-radius:6px;border:1px solid rgba(52,211,153,.15)">
+          <div style="font-size:14px;font-weight:700;color:#34d399">${cfFmt(mUnpaid.utilities)}</div><div style="font-size:10px;color:#34d399">Utilities</div></div>
+        <div style="text-align:center;padding:6px;background:rgba(251,146,60,.06);border-radius:6px;border:1px solid rgba(251,146,60,.15)">
+          <div style="font-size:14px;font-weight:700;color:#fb923c">${cfFmt(mUnpaid.rent)}</div><div style="font-size:10px;color:#fb923c">Rent</div></div>
+        <div style="text-align:center;padding:6px;background:rgba(232,121,249,.06);border-radius:6px;border:1px solid rgba(232,121,249,.15)">
+          <div style="font-size:14px;font-weight:700;color:#e879f9">${cfFmt(mUnpaid.marketing)}</div><div style="font-size:10px;color:#e879f9">Marketing</div></div>
+        <div style="text-align:center;padding:6px;background:rgba(148,163,184,.06);border-radius:6px;border:1px solid rgba(148,163,184,.15)">
+          <div style="font-size:14px;font-weight:700;color:#94a3b8">${cfFmt(mUnpaid.others)}</div><div style="font-size:10px;color:#94a3b8">Others</div></div>
+      </div>`;
+
+  const mWeeks = Object.entries(mByWeek).sort((a,b) => a[0].localeCompare(b[0]));
+  if (mWeeks.length) {
+    mBk += `<table style="width:100%;font-size:12px;border-collapse:collapse">
+      <tr style="border-bottom:1px solid var(--bdr);color:var(--txt2)">
+        <th style="text-align:left;padding:6px 4px;font-weight:600">Week</th>
+        <th style="text-align:right;padding:6px 4px;font-weight:600;color:#f87171">Materials</th>
+        <th style="text-align:right;padding:6px 4px;font-weight:600;color:#fb923c">Subs</th>
+        <th style="text-align:right;padding:6px 4px;font-weight:600;color:#818cf8">Fixed</th>
+        <th style="text-align:right;padding:6px 4px;font-weight:600;color:#4ade80">Income</th>
+        <th style="text-align:right;padding:6px 4px;font-weight:600">Net</th>
+      </tr>`;
+    mWeeks.forEach(([wk, v]) => {
+      const fixedWk = v.salaries + v.utilities + v.rent + v.marketing + v.others;
+      const net = v.income - v.materials - v.subs - fixedWk;
+      mBk += `<tr style="border-bottom:1px solid rgba(33,39,47,.3)">
+        <td style="padding:5px 4px;color:var(--txt)">${v.label}</td>
+        <td style="text-align:right;padding:5px 4px;color:#f87171">${v.materials ? cfFmt(v.materials) : '—'}</td>
+        <td style="text-align:right;padding:5px 4px;color:#fb923c">${v.subs ? cfFmt(v.subs) : '—'}</td>
+        <td style="text-align:right;padding:5px 4px;color:#818cf8">${fixedWk ? cfFmt(fixedWk) : '—'}</td>
+        <td style="text-align:right;padding:5px 4px;color:#4ade80">${v.income ? cfFmt(v.income) : '—'}</td>
+        <td style="text-align:right;padding:5px 4px;font-weight:600;color:${net >= 0 ? '#4ade80' : '#f87171'}">${cfFmt(net)}</td>
+      </tr>`;
+    });
+    mBk += '</table>';
+  }
+  mBk += '</div></div>';
+  statsEl.innerHTML += mBk;
 
   // ── Chart ──────────────────────────────
   // Group ALL window items by day (ignoring type/proj filter for chart)
