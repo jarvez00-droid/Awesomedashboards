@@ -1701,23 +1701,23 @@ function renderSOD(c) {
   let h = `
     <div class="page-title">Schedule Check</div>
     <div class="page-sub">SOD Report · ${dateLabel} · 7:00 AM</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;align-items:start">
-      <div>
-        <div style="font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:8px">Schedule Overview</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;align-items:stretch">
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;display:flex;flex-direction:column">
+        <div style="font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:10px">Schedule Overview</div>
         <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:8px">
           <div class="st r"><div class="n">${s.overdue}</div><div class="l">Overdue (PM)</div></div>
           <div class="st o"><div class="n">${s.blocked}</div><div class="l">Blocked</div></div>
           <div class="st b"><div class="n">${s.active}</div><div class="l">Active</div></div>
         </div>
-        <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:0">
+        <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:0;flex:1;align-content:start">
           <div class="st y"><div class="n">${s.coming||s.next48||0}</div><div class="l">Coming 72h</div></div>
           <div class="st" style="border-color:rgba(129,140,248,.3);background:rgba(129,140,248,.06)"><div class="n" style="color:#818cf8">${s.payment_overdue||0}</div><div class="l" style="color:#818cf8">💰 Payments Due</div></div>
           <div class="st g"><div class="n">${s.role_gaps}</div><div class="l">Gaps</div></div>
         </div>
       </div>
-      <div>
-        <div style="font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:8px">PM Snapshot</div>
-        <div class="pmr" style="margin-top:0">${pmCards}</div>
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;display:flex;flex-direction:column">
+        <div style="font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:10px">PM Snapshot</div>
+        <div class="pmr" style="margin-top:0;flex:1;align-content:start">${pmCards}</div>
       </div>
     </div>
     <div class="alert"><span>⚠</span><div><b>Top concern:</b> ${s.concern}</div></div>
@@ -1760,81 +1760,19 @@ function buildPMSection(pms, isEOD) {
 
 function buildAnalysis(a) {
   if (!a) return '';
-  const ins = a.insights || [], warn = a.warnings || [], adv = a.advice || [];
-  if (!ins.length && !warn.length && !adv.length) return '';
+  const paras = a.paragraphs || [];
+  if (!paras.length) return '';
 
-  // Build flowing narrative text
-  let paragraphs = [];
-
-  // Trend paragraph
-  const trendIns = ins.filter(i => i.title.startsWith('Trend:'));
-  const weekIns = ins.filter(i => i.title.startsWith('This week'));
-  const progressIns = ins.filter(i => i.icon === '✅');
-  if (trendIns.length || weekIns.length) {
-    let p = '';
-    if (trendIns.length) {
-      const t = trendIns[0];
-      const dir = t.title.includes('WORSENING') ? 'things got worse' : t.title.includes('IMPROVING') ? 'we\'re improving' : 'things held steady';
-      p += `Compared to yesterday, <b>${dir}</b> — ${t.text}. `;
-    }
-    if (weekIns.length) p += weekIns[0].text + '. ';
-    if (progressIns.length) {
-      const names = progressIns.map(i => `<b>${i.title.split(':')[0]}</b>`);
-      p += `Good news: ${names.join(' and ')} showed progress clearing overdue items.`;
-    }
-    paragraphs.push(p);
-  }
-
-  // Warnings paragraph
-  const projWarns = warn.filter(w => w.icon === '🚨');
-  const chainWarns = warn.filter(w => w.icon === '⛓️');
-  const payWarn = warn.filter(w => w.icon === '💰');
-  if (projWarns.length || chainWarns.length || payWarn.length) {
-    let p = '';
-    if (projWarns.length) {
-      const wnames = projWarns.map(w => `<b>${w.project}</b> (${w.text.toLowerCase()})`);
-      p += `I'm watching ${wnames.join(', ')} — these need attention today. `;
-    }
-    if (chainWarns.length) {
-      const cnames = chainWarns.map(w => {
-        const ct = w.text.match(/^(\d+)/);
-        return `<b>${w.project}</b> (${ct ? ct[1] : 'several'} blocked)`;
-      });
-      p += `Blocked task chains are building up on ${cnames.join(', ')}. Clearing the upstream overdue tasks will unlock batches of work. `;
-    }
-    if (payWarn.length) {
-      p += payWarn[0].text;
-    }
-    paragraphs.push(p);
-  }
-
-  // Advice paragraph — personal, directed at PMs
-  if (adv.length) {
-    let p = '<b>My advice for today:</b> ';
-    const pmAdv = adv.filter(r => r.pm !== 'All PMs');
-    const allAdv = adv.filter(r => r.pm === 'All PMs');
-    if (pmAdv.length) {
-      const parts = pmAdv.map(r => {
-        const shortName = r.pm.split(' ')[0];
-        return `<b>${shortName}</b> — ${r.text.replace(r.pm + ' has ', '').replace(r.pm, shortName)}`;
-      });
-      p += parts.join(' ');
-    }
-    if (allAdv.length) {
-      p += ' ' + allAdv.map(r => r.text).join(' ');
-    }
-    paragraphs.push(p);
-  }
-
-  if (!paragraphs.length) return '';
+  // Convert **bold** markdown to <b>
+  const md = t => t.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 
   let h = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:16px 20px;margin-bottom:16px">
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
       <span style="font-size:18px">🟢</span>
       <div style="font-size:14px;font-weight:700;color:var(--txt)">Jade's Daily Brief</div>
     </div>
-    <div style="font-size:13px;line-height:1.7;color:var(--txt2)">
-      ${paragraphs.map(p => `<p style="margin:0 0 10px 0">${p}</p>`).join('')}
+    <div style="font-size:13px;line-height:1.8;color:var(--txt2)">
+      ${paras.map(p => `<p style="margin:0 0 12px 0">${md(p)}</p>`).join('')}
     </div>
   </div>`;
   return h;
