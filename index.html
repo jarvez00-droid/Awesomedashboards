@@ -1857,7 +1857,15 @@ function buildCard(p, open, isEOD) {
   body += '<div>';
   if (co.length) {
     body += '<div class="ts"><div class="tsl dt">Upcoming (72h)</div>';
-    body += trowSection('y', co, tk => trow('y', tk.n, tk.w, tk.when || ''), 8);
+    body += trowSection('y', co, tk => {
+      let warn = '';
+      if (tk.blocked_kind === 'overdue') warn = '<span style="background:rgba(248,113,113,.15);color:var(--red);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">⚠ blocked by overdue</span>';
+      else if (tk.blocked_kind === 'payment') warn = '<span style="background:rgba(129,140,248,.15);color:#818cf8;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">💰 blocked by payment</span>';
+      else if (tk.blocked_kind === 'active') warn = '<span style="background:rgba(96,165,250,.15);color:#60a5fa;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px">⏳ waiting on active task</span>';
+      else if (tk.blocked_kind === 'upcoming') warn = '<span style="background:rgba(250,204,21,.1);color:var(--ylw);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px">⏳ waiting on predecessor</span>';
+      const byLine = tk.blocked_by ? `<div style="font-size:10px;color:var(--dim);margin-top:1px">↳ ${tk.blocked_by}</div>` : '';
+      return `<div class="tr"><div class="td y"></div><div class="ti"><div class="tn">${tk.n} - ${tk.w||''}${warn}</div>${byLine}</div><div class="tw">${tk.when||''}</div></div>`;
+    }, 8);
     body += '</div>';
   }
   body += '</div>';
