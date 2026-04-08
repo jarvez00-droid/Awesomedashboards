@@ -520,12 +520,12 @@ function renderWeekly(c) {
     pushed:'#F04438', pulled:'#34d399', early_finish:'#38bdf8'
   };
   const metrics = [
-    {key:'completed', label:'Completed'},
-    {key:'unique_overdue', label:'Unique Overdue'},
-    {key:'resolved', label:'Overdue Resolved'},
-    {key:'pushed', label:'Pushed'},
-    {key:'pulled', label:'Pulled Forward'},
-    {key:'early_finish', label:'Early Finish'},
+    {key:'completed', label:'Tasks Completed', tip:'Tasks finished this week'},
+    {key:'unique_overdue', label:'Tasks Overdue', tip:'Tasks past their deadline that weren\u2019t done'},
+    {key:'resolved', label:'Overdue → Done', tip:'Tasks that were overdue but got completed this week'},
+    {key:'pushed', label:'Deadlines Pushed Back', tip:'Tasks whose deadlines were moved to later dates'},
+    {key:'pulled', label:'Deadlines Moved Up', tip:'Tasks whose deadlines were moved to earlier dates (good)'},
+    {key:'early_finish', label:'Finished Early', tip:'Tasks completed before their deadline'},
   ];
 
   metrics.forEach(m => {
@@ -534,13 +534,13 @@ function renderWeekly(c) {
     const total = data.reduce((s, d) => s + d.value, 0);
     h += `<div style="text-align:center">
       ${svgDonut(data, 120, PM_COLORS)}
-      <div style="font-size:13px;font-weight:600;color:${ringColor};margin-top:6px">${m.label}</div>`;
+      <div style="font-size:13px;font-weight:600;color:${ringColor};margin-top:6px" title="${m.tip || ''}">${m.label}</div>`;
     h += '<div style="font-size:12px;color:var(--txt2);line-height:1.7;margin-top:4px">';
     pmNames.forEach(pm => {
       const v = pmChart[pm][m.key] || 0;
       const at = pmChart[pm].active_total || 1;
       const pct = Math.round(v / at * 100);
-      if (v > 0) h += `<div><span style="color:${PM_COLORS[pm]||'#888'}">●</span> ${pm.split(' ')[0]}: ${v} — ${pct}%</div>`;
+      if (v > 0) h += `<div title="${v} out of ${at} total tasks assigned to ${pm} (${pct}%)"><span style="color:${PM_COLORS[pm]||'#888'}">●</span> ${pm.split(' ')[0]}: ${v} — ${pct}% of their tasks</div>`;
     });
     h += '</div></div>';
   });
@@ -548,7 +548,12 @@ function renderWeekly(c) {
   h += '</div>';
 
   // ── Resolution % stat ──
-  h += `<div style="text-align:center;margin-bottom:20px;font-size:15px;color:var(--txt2)">Overdue Resolution Rate: <span style="font-weight:700;font-size:18px;color:${s.resolution_pct >= 30 ? 'var(--grn)' : s.resolution_pct >= 15 ? 'var(--ylw)' : 'var(--red)'}">${s.resolution_pct}%</span> — ${s.overdue_resolved} of ${s.unique_overdue} overdue tasks were completed this week</div>`;
+  h += `<div style="text-align:center;margin-bottom:20px;font-size:15px;color:var(--txt2)">
+    How many overdue tasks got done this week:
+    <span style="font-weight:700;font-size:18px;color:${s.resolution_pct >= 30 ? 'var(--grn)' : s.resolution_pct >= 15 ? 'var(--ylw)' : 'var(--red)'}">${s.overdue_resolved} of ${s.unique_overdue}</span>
+    <span style="color:var(--dim)">(${s.resolution_pct}%)</span>
+    ${s.resolution_pct < 15 ? '— the backlog is growing' : s.resolution_pct < 30 ? '— improving but not enough' : '— good, backlog is shrinking'}
+  </div>`;
 
   // ── Project Analysis ──
   const projNames = Object.keys(projs).sort((a, b) => Math.abs(projs[b].net_shift_days || 0) - Math.abs(projs[a].net_shift_days || 0));
@@ -557,7 +562,7 @@ function renderWeekly(c) {
     return p.tasks_pushed || p.tasks_pulled || p.unique_overdue || p.completed;
   });
   if (activeProjs.length) {
-    h += '<div class="wk-section"><div class="wk-section-title">Project Analysis</div>';
+    h += '<div class="wk-section"><div class="wk-section-title">Project by Project — What Happened This Week</div>';
     activeProjs.forEach(pname => {
       const p = projs[pname];
       const pmLabel = p.pms && p.pms.length ? p.pms.join(', ') : 'No PM';
@@ -622,30 +627,30 @@ function renderWeekly(c) {
 
       // Quick stats bar
       body += `<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim);margin-bottom:10px;padding:8px 0;border-top:1px solid var(--bdr)">
-        <span style="color:var(--grn)">✅ ${p.completed} done</span>
-        <span style="color:var(--red)">🔴 ${p.unique_overdue} overdue</span>
-        <span>${p.overdue_resolved} resolved</span>
-        <span>${p.chronic_overdue} chronic</span>
-        <span style="color:var(--org)">📅 ${p.tasks_pushed} pushed</span>
-        <span style="color:var(--blu)">${p.tasks_pulled} pulled</span>
+        <span style="color:var(--grn)" title="Tasks completed this week">✅ ${p.completed} completed</span>
+        <span style="color:var(--red)" title="Tasks that were past their deadline at some point this week">🔴 ${p.unique_overdue} overdue</span>
+        <span title="Overdue tasks that the PM actually got done this week">${p.overdue_resolved} overdue→done</span>
+        <span title="Tasks that were overdue every single day of the week and never got touched">${p.chronic_overdue} stuck all week</span>
+        <span style="color:var(--org)" title="Tasks whose deadlines were pushed to later dates">📅 ${p.tasks_pushed} deadlines pushed</span>
+        <span style="color:var(--blu)" title="Tasks whose deadlines were moved to earlier dates">⬆ ${p.tasks_pulled} moved up</span>
       </div>`;
 
       // Collapsible task lists
       const taskSections = [];
       if (tasks.completed && tasks.completed.length) {
-        taskSections.push({label: `✅ Completed (${tasks.completed.length})`, color:'var(--grn)',
+        taskSections.push({label: `✅ Tasks Completed This Week (${tasks.completed.length})`, color:'var(--grn)',
           items: tasks.completed.map(t => `<div class="tr"><div class="td g"></div><div class="ti"><div class="tn">${t}</div></div></div>`)});
       }
       if (tasks.overdue && tasks.overdue.length) {
-        taskSections.push({label: `🔴 Still Overdue (${tasks.overdue.length})`, color:'var(--red)',
+        taskSections.push({label: `🔴 Still Overdue — Not Done Yet (${tasks.overdue.length})`, color:'var(--red)',
           items: tasks.overdue.map(t => `<div class="tr"><div class="td r"></div><div class="ti"><div class="tn">${t}</div></div></div>`)});
       }
       if (tasks.pushed && tasks.pushed.length) {
-        taskSections.push({label: `📅 Pushed (${tasks.pushed.length})`, color:'var(--org)',
+        taskSections.push({label: `📅 Deadlines Pushed Back (${tasks.pushed.length})`, color:'var(--org)',
           items: tasks.pushed.map(t => `<div class="tr"><div class="td o"></div><div class="ti"><div class="tn">${t.task}</div></div><div class="tw ov">${t.old} → ${t.new} (${t.delta>0?'+':''}${t.delta}d)</div></div>`)});
       }
       if (tasks.pulled && tasks.pulled.length) {
-        taskSections.push({label: `⬆ Pulled Forward (${tasks.pulled.length})`, color:'var(--blu)',
+        taskSections.push({label: `⬆ Deadlines Moved Up — Ahead of Schedule (${tasks.pulled.length})`, color:'var(--blu)',
           items: tasks.pulled.map(t => `<div class="tr"><div class="td b"></div><div class="ti"><div class="tn">${t}</div></div></div>`)});
       }
 
