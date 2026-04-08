@@ -589,39 +589,27 @@ function renderWeekly(c) {
       }
 
       // Milestone / Payment impacts
+      // Client income impacts
       const pMilestones = p.milestone_impacts || [];
       if (pMilestones.length) {
-        body += '<div style="margin-bottom:12px;padding:12px 14px;background:rgba(129,140,248,.06);border-radius:8px;border-left:3px solid #818cf8">';
-        body += `<div style="font-size:14px;font-weight:600;color:#818cf8;margin-bottom:8px">💰 Payment Milestones Pushed (${pMilestones.length})</div>`;
+        body += '<div style="margin-bottom:12px;padding:14px 16px;background:rgba(129,140,248,.06);border-radius:8px;border-left:4px solid #818cf8">';
+        body += `<div style="font-size:15px;font-weight:600;color:#818cf8;margin-bottom:10px">💰 Client Payments Delayed (${pMilestones.length})</div>`;
         pMilestones.forEach(mi => {
-          const amt = mi.payment_amount ? '$' + mi.payment_amount.toLocaleString() : 'TBD';
-          const typeLabel = {income:'Income',p_income:'Potential',subs:'Sub Payment',materials:'Material'}[mi.payment_type] || 'Payment';
-          const daysBadge = mi.payment_old_date !== mi.payment_new_date
-            ? `<span style="display:inline-block;background:var(--red-s);color:var(--red);font-weight:700;font-size:14px;padding:2px 8px;border-radius:4px;margin-right:8px">+${mi.origin_delta}d</span>`
-            : `<span style="display:inline-block;background:var(--org-s);color:var(--org);font-weight:700;font-size:13px;padding:2px 8px;border-radius:4px;margin-right:8px">⚠ at risk</span>`;
+          const amt = mi.payment_amount ? '$' + mi.payment_amount.toLocaleString() : 'Amount TBD';
+          const delayed = mi.payment_old_date !== mi.payment_new_date;
+          const daysBadge = delayed
+            ? `<span style="display:inline-block;background:var(--red-s);color:var(--red);font-weight:700;font-size:16px;padding:3px 10px;border-radius:6px;margin-right:10px">+${mi.origin_delta}d</span>`
+            : `<span style="display:inline-block;background:var(--org-s);color:var(--org);font-weight:700;font-size:14px;padding:3px 10px;border-radius:6px;margin-right:10px">⚠ at risk</span>`;
 
-          body += `<div style="padding:8px 0;border-bottom:1px solid rgba(129,140,248,.1)">
-            <div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:4px">
+          body += `<div style="padding:10px 0;border-bottom:1px solid rgba(129,140,248,.1)">
+            <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px">
               ${daysBadge}
-              <span style="font-size:14px;font-weight:600;color:var(--txt)">${mi.payment_task}</span>
-              <span style="font-size:12px;color:#818cf8">${typeLabel} · ${amt}</span>
+              <span style="font-size:15px;font-weight:600;color:var(--txt)">${mi.payment_task}</span>
+              <span style="font-size:14px;font-weight:600;color:#818cf8">${amt}</span>
             </div>
-            <div style="font-size:12px;color:var(--txt2);line-height:1.6;padding-left:4px">${mi.payment_old_date !== mi.payment_new_date ? mi.payment_old_date + ' → ' + mi.payment_new_date : 'Due: ' + mi.payment_old_date}</div>`;
-          // Show reason/why
-          if (mi.reason && mi.origin_task !== mi.payment_task) {
-            body += `<div style="font-size:12px;color:var(--dim);line-height:1.5;margin-top:2px;padding-left:4px">${md(mi.reason)}</div>`;
-          }
-          body += '</div>';
-        });
-        body += '</div>';
-      }
-
-      // Narrative milestones (text explanation)
-      if (n.milestones && n.milestones.length && !pMilestones.length) {
-        body += '<div style="margin-bottom:12px;padding:10px 14px;background:rgba(129,140,248,.06);border-radius:8px;border-left:3px solid #818cf8">';
-        body += '<div style="font-size:14px;font-weight:600;color:#818cf8;margin-bottom:6px">📌 Milestone Impact</div>';
-        n.milestones.forEach(m => {
-          body += `<div style="font-size:13px;line-height:1.7;color:var(--txt2);margin-bottom:6px">${md(m)}</div>`;
+            <div style="font-size:13px;color:var(--txt2);padding-left:4px">${delayed ? mi.payment_old_date + ' → ' + mi.payment_new_date : 'Due: ' + mi.payment_old_date}</div>
+            <div style="font-size:13px;color:var(--txt2);line-height:1.6;margin-top:6px;padding-left:4px">${md(mi.reason || '')}</div>
+          </div>`;
         });
         body += '</div>';
       }

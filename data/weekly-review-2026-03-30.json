@@ -13,18 +13,18 @@
     "early_finish": 0
   },
   "pm_chart_data": {
-    "Milagros": {
-      "completed": 21,
-      "unique_overdue": 28,
-      "resolved": 9,
-      "pushed": 23,
-      "pulled": 14,
+    "Marcio Oliveira": {
+      "completed": 8,
+      "unique_overdue": 49,
+      "resolved": 3,
+      "pushed": 22,
+      "pulled": 0,
       "early_finish": 0,
-      "active_total": 149,
+      "active_total": 138,
       "projects": [
-        "Sergio Lares (212129)",
-        "Ginger Brown",
-        "Rohini Williams (CNG2025-496)"
+        "Stephanie and Marc Felton",
+        "Martha Cockrell (CNG-20251199)",
+        "CANDACE - JUSTIN P REFERRAL (CNG2025-522)"
       ]
     },
     "Jeff": {
@@ -39,6 +39,20 @@
         "Katie Holmes & Sean Springs"
       ]
     },
+    "Milagros": {
+      "completed": 21,
+      "unique_overdue": 28,
+      "resolved": 9,
+      "pushed": 23,
+      "pulled": 14,
+      "early_finish": 0,
+      "active_total": 149,
+      "projects": [
+        "Sergio Lares (212129)",
+        "Ginger Brown",
+        "Rohini Williams (CNG2025-496)"
+      ]
+    },
     "Angel Pacheco": {
       "completed": 11,
       "unique_overdue": 26,
@@ -50,20 +64,6 @@
       "projects": [
         "Clifford Clack \u2014 Gym Addition",
         "Lingyan Qiu (CNG2025-458)"
-      ]
-    },
-    "Marcio Oliveira": {
-      "completed": 8,
-      "unique_overdue": 49,
-      "resolved": 3,
-      "pushed": 22,
-      "pulled": 0,
-      "early_finish": 0,
-      "active_total": 138,
-      "projects": [
-        "Stephanie and Marc Felton",
-        "Martha Cockrell (CNG-20251199)",
-        "CANDACE - JUSTIN P REFERRAL (CNG2025-522)"
       ]
     }
   },
@@ -122,44 +122,7 @@
       "tasks_pushed": 16,
       "tasks_pulled": 2,
       "net_shift_days": 48,
-      "milestone_impacts": [
-        {
-          "project": "Clifford Clack \u2014 Gym Addition",
-          "origin_task": "FOUNDATION: BILL & PAYMENT",
-          "origin_delta": 3,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "FOUNDATION: BILL & PAYMENT",
-          "payment_old_date": "2026-04-07",
-          "payment_new_date": "2026-04-10",
-          "payment_type": "subs",
-          "payment_amount": 4000.0,
-          "chain_length": 0
-        },
-        {
-          "project": "Clifford Clack \u2014 Gym Addition",
-          "origin_task": "FRAMING: PURCHASE MATERIAL",
-          "origin_delta": 1,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "FRAMING: PURCHASE MATERIAL",
-          "payment_old_date": "2026-04-02",
-          "payment_new_date": "2026-04-03",
-          "payment_type": "materials",
-          "payment_amount": 2300.0,
-          "chain_length": 0
-        },
-        {
-          "project": "Clifford Clack \u2014 Gym Addition",
-          "origin_task": "DOORS: PURCHASE MATERIALS",
-          "origin_delta": 5,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "DOORS: PURCHASE MATERIALS",
-          "payment_old_date": "2026-04-03",
-          "payment_new_date": "2026-04-08",
-          "payment_type": "materials",
-          "payment_amount": 1376.0,
-          "chain_length": 0
-        }
-      ],
+      "milestone_impacts": [],
       "narrative": {
         "headline": "Falling behind \u2014 more pushes than completions.",
         "trend": "negative",
@@ -168,11 +131,7 @@
           "8 tasks sat overdue all week \u2014 the PM should review these and either complete them or update the dates honestly.",
           "16 tasks were rescheduled (+54d total). At this volume, the schedule may not reflect the real situation on the ground."
         ],
-        "milestones": [
-          "**FOUNDATION: BILL & PAYMENT** (Subcontractor Payment, $4,000) was directly rescheduled +3d \u2014 moved from 2026-04-07 to 2026-04-10.",
-          "**FRAMING: PURCHASE MATERIAL** (Material Purchase, $2,300) was directly rescheduled +1d \u2014 moved from 2026-04-02 to 2026-04-03.",
-          "**DOORS: PURCHASE MATERIALS** (Material Purchase, $1,376) was directly rescheduled +5d \u2014 moved from 2026-04-03 to 2026-04-08."
-        ]
+        "milestones": []
       },
       "tasks": {
         "completed": [
@@ -309,24 +268,11 @@
           "project": "Ginger Brown",
           "origin_task": "RECEIVE GINGER'S PAYMENT",
           "origin_delta": 5,
-          "reason": "This payment task was directly rescheduled.",
+          "reason": "The client payment was directly rescheduled. We expected to collect amount TBD on 2026-04-02 but it's now pushed to 2026-04-07. That's 5 days of delayed income.",
           "payment_task": "RECEIVE GINGER'S PAYMENT",
           "payment_old_date": "2026-04-02",
           "payment_new_date": "2026-04-07",
-          "payment_type": "income",
           "payment_amount": 0.0,
-          "chain_length": 0
-        },
-        {
-          "project": "Ginger Brown",
-          "origin_task": "SIDING: BILL & PAYMENT",
-          "origin_delta": 13,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "SIDING: BILL & PAYMENT",
-          "payment_old_date": "2026-04-04",
-          "payment_new_date": "2026-04-17",
-          "payment_type": "subs",
-          "payment_amount": 920.0,
           "chain_length": 0
         }
       ],
@@ -340,8 +286,7 @@
           "10 tasks pulled forward \u2014 good proactive work."
         ],
         "milestones": [
-          "**RECEIVE GINGER'S PAYMENT** (Income, amount TBD) was directly rescheduled +5d \u2014 moved from 2026-04-02 to 2026-04-07.",
-          "**SIDING: BILL & PAYMENT** (Subcontractor Payment, $920) was directly rescheduled +13d \u2014 moved from 2026-04-04 to 2026-04-17."
+          "The client payment was directly rescheduled. We expected to collect amount TBD on 2026-04-02 but it's now pushed to 2026-04-07. That's 5 days of delayed income."
         ]
       },
       "tasks": {
@@ -522,68 +467,7 @@
       "tasks_pushed": 20,
       "tasks_pulled": 1,
       "net_shift_days": 48,
-      "milestone_impacts": [
-        {
-          "project": "Lingyan Qiu (CNG2025-458)",
-          "origin_task": "WINDOWS: SECURE PRICING",
-          "origin_delta": 3,
-          "reason": "**WINDOWS: SECURE PRICING** was pushed +3d, which cascaded through 1 dependent task. This delayed the payment milestone by +3d.",
-          "payment_task": "WINDOWS: PURCHASE MATERIAL",
-          "payment_old_date": "2026-04-01",
-          "payment_new_date": "2026-04-02",
-          "payment_type": "materials",
-          "payment_amount": 4163.03,
-          "chain_length": 1
-        },
-        {
-          "project": "Lingyan Qiu (CNG2025-458)",
-          "origin_task": "FLOORING: PURCHASE MATERIAL",
-          "origin_delta": 2,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "FLOORING: PURCHASE MATERIAL",
-          "payment_old_date": "2026-04-08",
-          "payment_new_date": "2026-04-10",
-          "payment_type": "materials",
-          "payment_amount": 2550.0,
-          "chain_length": 0
-        },
-        {
-          "project": "Lingyan Qiu (CNG2025-458)",
-          "origin_task": "EXTERIOR DOORS: PURCHASE MATERIAL",
-          "origin_delta": 2,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "EXTERIOR DOORS: PURCHASE MATERIAL",
-          "payment_old_date": "2026-04-01",
-          "payment_new_date": "2026-04-03",
-          "payment_type": "materials",
-          "payment_amount": 1811.0,
-          "chain_length": 0
-        },
-        {
-          "project": "Lingyan Qiu (CNG2025-458)",
-          "origin_task": "CONCRETE POUR: BILL & PAYMENT",
-          "origin_delta": 7,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "CONCRETE POUR: BILL & PAYMENT",
-          "payment_old_date": "2026-04-03",
-          "payment_new_date": "2026-04-10",
-          "payment_type": "subs",
-          "payment_amount": 8500.0,
-          "chain_length": 0
-        },
-        {
-          "project": "Lingyan Qiu (CNG2025-458)",
-          "origin_task": "FRAMING: PURCHASE MATERIALS",
-          "origin_delta": 1,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "FRAMING: PURCHASE MATERIALS",
-          "payment_old_date": "2026-04-02",
-          "payment_new_date": "2026-04-03",
-          "payment_type": "materials",
-          "payment_amount": 8038.0,
-          "chain_length": 0
-        }
-      ],
+      "milestone_impacts": [],
       "narrative": {
         "headline": "Falling behind \u2014 more pushes than completions.",
         "trend": "negative",
@@ -592,13 +476,7 @@
           "5 tasks sat overdue all week \u2014 the PM should review these and either complete them or update the dates honestly.",
           "20 tasks were rescheduled (+53d total). At this volume, the schedule may not reflect the real situation on the ground."
         ],
-        "milestones": [
-          "**WINDOWS: SECURE PRICING** was pushed +3d, which cascaded through 1 dependent task. This delayed the payment milestone by +3d. Payment **WINDOWS: PURCHASE MATERIAL** (Material Purchase, $4,163) moved from 2026-04-01 to 2026-04-02.",
-          "**FLOORING: PURCHASE MATERIAL** (Material Purchase, $2,550) was directly rescheduled +2d \u2014 moved from 2026-04-08 to 2026-04-10.",
-          "**EXTERIOR DOORS: PURCHASE MATERIAL** (Material Purchase, $1,811) was directly rescheduled +2d \u2014 moved from 2026-04-01 to 2026-04-03.",
-          "**CONCRETE POUR: BILL & PAYMENT** (Subcontractor Payment, $8,500) was directly rescheduled +7d \u2014 moved from 2026-04-03 to 2026-04-10.",
-          "**FRAMING: PURCHASE MATERIALS** (Material Purchase, $8,038) was directly rescheduled +1d \u2014 moved from 2026-04-02 to 2026-04-03."
-        ]
+        "milestones": []
       },
       "tasks": {
         "completed": [
@@ -732,44 +610,7 @@
       "tasks_pushed": 11,
       "tasks_pulled": 0,
       "net_shift_days": 69,
-      "milestone_impacts": [
-        {
-          "project": "Martha Cockrell (CNG-20251199)",
-          "origin_task": "GARAGE DOOR: PURCHASE MATERIAL",
-          "origin_delta": 6,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "GARAGE DOOR: PURCHASE MATERIAL",
-          "payment_old_date": "2026-03-31",
-          "payment_new_date": "2026-04-06",
-          "payment_type": "materials",
-          "payment_amount": 1536.0,
-          "chain_length": 0
-        },
-        {
-          "project": "Martha Cockrell (CNG-20251199)",
-          "origin_task": "FRAMING: PURCHASE MATERIAL",
-          "origin_delta": 2,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "FRAMING: PURCHASE MATERIAL",
-          "payment_old_date": "2026-04-01",
-          "payment_new_date": "2026-04-03",
-          "payment_type": "materials",
-          "payment_amount": 20305.0,
-          "chain_length": 0
-        },
-        {
-          "project": "Martha Cockrell (CNG-20251199)",
-          "origin_task": "FRAMING: BILL & PAYMENT",
-          "origin_delta": 14,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "FRAMING: BILL & PAYMENT",
-          "payment_old_date": "2026-04-03",
-          "payment_new_date": "2026-04-17",
-          "payment_type": "subs",
-          "payment_amount": 0.0,
-          "chain_length": 0
-        }
-      ],
+      "milestone_impacts": [],
       "narrative": {
         "headline": "Falling behind \u2014 more pushes than completions.",
         "trend": "negative",
@@ -778,11 +619,7 @@
           "16 tasks sat overdue all week \u2014 the PM should review these and either complete them or update the dates honestly.",
           "11 tasks were rescheduled (+69d total). At this volume, the schedule may not reflect the real situation on the ground."
         ],
-        "milestones": [
-          "**GARAGE DOOR: PURCHASE MATERIAL** (Material Purchase, $1,536) was directly rescheduled +6d \u2014 moved from 2026-03-31 to 2026-04-06.",
-          "**FRAMING: PURCHASE MATERIAL** (Material Purchase, $20,305) was directly rescheduled +2d \u2014 moved from 2026-04-01 to 2026-04-03.",
-          "**FRAMING: BILL & PAYMENT** (Subcontractor Payment, amount TBD) was directly rescheduled +14d \u2014 moved from 2026-04-03 to 2026-04-17."
-        ]
+        "milestones": []
       },
       "tasks": {
         "completed": [
@@ -899,11 +736,10 @@
           "project": "Sergio Lares (212129)",
           "origin_task": "ELECTRICAL: ELECTRICAL TRIM",
           "origin_delta": 1,
-          "reason": "This payment task was directly rescheduled.",
+          "reason": "The client payment was directly rescheduled. We expected to collect $2,557 on 2026-04-01 but it's now pushed to 2026-04-02. That's 1 day of delayed income.",
           "payment_task": "ELECTRICAL: ELECTRICAL TRIM",
           "payment_old_date": "2026-04-01",
           "payment_new_date": "2026-04-02",
-          "payment_type": "income",
           "payment_amount": 2556.84,
           "chain_length": 0
         },
@@ -911,36 +747,11 @@
           "project": "Sergio Lares (212129)",
           "origin_task": "PROJECT DELIVERY",
           "origin_delta": 2,
-          "reason": "This payment task was directly rescheduled.",
+          "reason": "The client payment was directly rescheduled. We expected to collect $1,375 on 2026-04-04 but it's now pushed to 2026-04-06. That's 2 days of delayed income.",
           "payment_task": "PROJECT DELIVERY",
           "payment_old_date": "2026-04-04",
           "payment_new_date": "2026-04-06",
-          "payment_type": "income",
           "payment_amount": 1375.0,
-          "chain_length": 0
-        },
-        {
-          "project": "Sergio Lares (212129)",
-          "origin_task": "COUNTERTOPS: BILL & PAYMENT",
-          "origin_delta": 1,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "COUNTERTOPS: BILL & PAYMENT",
-          "payment_old_date": "2026-04-10",
-          "payment_new_date": "2026-04-11",
-          "payment_type": "subs",
-          "payment_amount": 2800.0,
-          "chain_length": 0
-        },
-        {
-          "project": "Sergio Lares (212129)",
-          "origin_task": "ELECTRICAL: BILL & PAYMENT",
-          "origin_delta": 1,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "ELECTRICAL: BILL & PAYMENT",
-          "payment_old_date": "2026-04-02",
-          "payment_new_date": "2026-04-03",
-          "payment_type": "subs",
-          "payment_amount": 500.0,
           "chain_length": 0
         }
       ],
@@ -954,10 +765,8 @@
           "4 tasks pulled forward \u2014 good proactive work."
         ],
         "milestones": [
-          "**ELECTRICAL: ELECTRICAL TRIM** (Income, $2,557) was directly rescheduled +1d \u2014 moved from 2026-04-01 to 2026-04-02.",
-          "**PROJECT DELIVERY** (Income, $1,375) was directly rescheduled +2d \u2014 moved from 2026-04-04 to 2026-04-06.",
-          "**COUNTERTOPS: BILL & PAYMENT** (Subcontractor Payment, $2,800) was directly rescheduled +1d \u2014 moved from 2026-04-10 to 2026-04-11.",
-          "**ELECTRICAL: BILL & PAYMENT** (Subcontractor Payment, $500) was directly rescheduled +1d \u2014 moved from 2026-04-02 to 2026-04-03."
+          "The client payment was directly rescheduled. We expected to collect $2,557 on 2026-04-01 but it's now pushed to 2026-04-02. That's 1 day of delayed income.",
+          "The client payment was directly rescheduled. We expected to collect $1,375 on 2026-04-04 but it's now pushed to 2026-04-06. That's 2 days of delayed income."
         ]
       },
       "tasks": {
@@ -1068,44 +877,7 @@
       "tasks_pushed": 11,
       "tasks_pulled": 0,
       "net_shift_days": 53,
-      "milestone_impacts": [
-        {
-          "project": "Stephanie and Marc Felton",
-          "origin_task": "BRICKS: PURCHASE MATERIAL",
-          "origin_delta": 1,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "BRICKS: PURCHASE MATERIAL",
-          "payment_old_date": "2026-03-31",
-          "payment_new_date": "2026-04-01",
-          "payment_type": "materials",
-          "payment_amount": 5560.0,
-          "chain_length": 0
-        },
-        {
-          "project": "Stephanie and Marc Felton",
-          "origin_task": "INTERIOR DOORS: DELIVERY FEE PAYMENT",
-          "origin_delta": 6,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "INTERIOR DOORS: DELIVERY FEE PAYMENT",
-          "payment_old_date": "2026-03-27",
-          "payment_new_date": "2026-04-02",
-          "payment_type": "materials",
-          "payment_amount": 200.0,
-          "chain_length": 0
-        },
-        {
-          "project": "Stephanie and Marc Felton",
-          "origin_task": "DRYWALL: PURCHASE MATERIAL",
-          "origin_delta": 3,
-          "reason": "This payment task was directly rescheduled.",
-          "payment_task": "DRYWALL: PURCHASE MATERIAL",
-          "payment_old_date": "2026-03-31",
-          "payment_new_date": "2026-04-03",
-          "payment_type": "materials",
-          "payment_amount": 3184.84,
-          "chain_length": 0
-        }
-      ],
+      "milestone_impacts": [],
       "narrative": {
         "headline": "Falling behind \u2014 more pushes than completions.",
         "trend": "negative",
@@ -1114,11 +886,7 @@
           "15 tasks sat overdue all week \u2014 the PM should review these and either complete them or update the dates honestly.",
           "11 tasks were rescheduled (+53d total). At this volume, the schedule may not reflect the real situation on the ground."
         ],
-        "milestones": [
-          "**BRICKS: PURCHASE MATERIAL** (Material Purchase, $5,560) was directly rescheduled +1d \u2014 moved from 2026-03-31 to 2026-04-01.",
-          "**INTERIOR DOORS: DELIVERY FEE PAYMENT** (Material Purchase, $200) was directly rescheduled +6d \u2014 moved from 2026-03-27 to 2026-04-02.",
-          "**DRYWALL: PURCHASE MATERIAL** (Material Purchase, $3,185) was directly rescheduled +3d \u2014 moved from 2026-03-31 to 2026-04-03."
-        ]
+        "milestones": []
       },
       "tasks": {
         "completed": [
@@ -1222,203 +990,21 @@
       "project": "Ginger Brown",
       "origin_task": "RECEIVE GINGER'S PAYMENT",
       "origin_delta": 5,
-      "reason": "This payment task was directly rescheduled.",
+      "reason": "The client payment was directly rescheduled. We expected to collect amount TBD on 2026-04-02 but it's now pushed to 2026-04-07. That's 5 days of delayed income.",
       "payment_task": "RECEIVE GINGER'S PAYMENT",
       "payment_old_date": "2026-04-02",
       "payment_new_date": "2026-04-07",
-      "payment_type": "income",
       "payment_amount": 0.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Ginger Brown",
-      "origin_task": "SIDING: BILL & PAYMENT",
-      "origin_delta": 13,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "SIDING: BILL & PAYMENT",
-      "payment_old_date": "2026-04-04",
-      "payment_new_date": "2026-04-17",
-      "payment_type": "subs",
-      "payment_amount": 920.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Stephanie and Marc Felton",
-      "origin_task": "BRICKS: PURCHASE MATERIAL",
-      "origin_delta": 1,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "BRICKS: PURCHASE MATERIAL",
-      "payment_old_date": "2026-03-31",
-      "payment_new_date": "2026-04-01",
-      "payment_type": "materials",
-      "payment_amount": 5560.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Stephanie and Marc Felton",
-      "origin_task": "INTERIOR DOORS: DELIVERY FEE PAYMENT",
-      "origin_delta": 6,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "INTERIOR DOORS: DELIVERY FEE PAYMENT",
-      "payment_old_date": "2026-03-27",
-      "payment_new_date": "2026-04-02",
-      "payment_type": "materials",
-      "payment_amount": 200.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Stephanie and Marc Felton",
-      "origin_task": "DRYWALL: PURCHASE MATERIAL",
-      "origin_delta": 3,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "DRYWALL: PURCHASE MATERIAL",
-      "payment_old_date": "2026-03-31",
-      "payment_new_date": "2026-04-03",
-      "payment_type": "materials",
-      "payment_amount": 3184.84,
-      "chain_length": 0
-    },
-    {
-      "project": "Clifford Clack \u2014 Gym Addition",
-      "origin_task": "FOUNDATION: BILL & PAYMENT",
-      "origin_delta": 3,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "FOUNDATION: BILL & PAYMENT",
-      "payment_old_date": "2026-04-07",
-      "payment_new_date": "2026-04-10",
-      "payment_type": "subs",
-      "payment_amount": 4000.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Clifford Clack \u2014 Gym Addition",
-      "origin_task": "FRAMING: PURCHASE MATERIAL",
-      "origin_delta": 1,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "FRAMING: PURCHASE MATERIAL",
-      "payment_old_date": "2026-04-02",
-      "payment_new_date": "2026-04-03",
-      "payment_type": "materials",
-      "payment_amount": 2300.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Clifford Clack \u2014 Gym Addition",
-      "origin_task": "DOORS: PURCHASE MATERIALS",
-      "origin_delta": 5,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "DOORS: PURCHASE MATERIALS",
-      "payment_old_date": "2026-04-03",
-      "payment_new_date": "2026-04-08",
-      "payment_type": "materials",
-      "payment_amount": 1376.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Martha Cockrell (CNG-20251199)",
-      "origin_task": "GARAGE DOOR: PURCHASE MATERIAL",
-      "origin_delta": 6,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "GARAGE DOOR: PURCHASE MATERIAL",
-      "payment_old_date": "2026-03-31",
-      "payment_new_date": "2026-04-06",
-      "payment_type": "materials",
-      "payment_amount": 1536.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Martha Cockrell (CNG-20251199)",
-      "origin_task": "FRAMING: PURCHASE MATERIAL",
-      "origin_delta": 2,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "FRAMING: PURCHASE MATERIAL",
-      "payment_old_date": "2026-04-01",
-      "payment_new_date": "2026-04-03",
-      "payment_type": "materials",
-      "payment_amount": 20305.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Martha Cockrell (CNG-20251199)",
-      "origin_task": "FRAMING: BILL & PAYMENT",
-      "origin_delta": 14,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "FRAMING: BILL & PAYMENT",
-      "payment_old_date": "2026-04-03",
-      "payment_new_date": "2026-04-17",
-      "payment_type": "subs",
-      "payment_amount": 0.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Lingyan Qiu (CNG2025-458)",
-      "origin_task": "WINDOWS: SECURE PRICING",
-      "origin_delta": 3,
-      "reason": "**WINDOWS: SECURE PRICING** was pushed +3d, which cascaded through 1 dependent task. This delayed the payment milestone by +3d.",
-      "payment_task": "WINDOWS: PURCHASE MATERIAL",
-      "payment_old_date": "2026-04-01",
-      "payment_new_date": "2026-04-02",
-      "payment_type": "materials",
-      "payment_amount": 4163.03,
-      "chain_length": 1
-    },
-    {
-      "project": "Lingyan Qiu (CNG2025-458)",
-      "origin_task": "FLOORING: PURCHASE MATERIAL",
-      "origin_delta": 2,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "FLOORING: PURCHASE MATERIAL",
-      "payment_old_date": "2026-04-08",
-      "payment_new_date": "2026-04-10",
-      "payment_type": "materials",
-      "payment_amount": 2550.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Lingyan Qiu (CNG2025-458)",
-      "origin_task": "EXTERIOR DOORS: PURCHASE MATERIAL",
-      "origin_delta": 2,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "EXTERIOR DOORS: PURCHASE MATERIAL",
-      "payment_old_date": "2026-04-01",
-      "payment_new_date": "2026-04-03",
-      "payment_type": "materials",
-      "payment_amount": 1811.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Lingyan Qiu (CNG2025-458)",
-      "origin_task": "CONCRETE POUR: BILL & PAYMENT",
-      "origin_delta": 7,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "CONCRETE POUR: BILL & PAYMENT",
-      "payment_old_date": "2026-04-03",
-      "payment_new_date": "2026-04-10",
-      "payment_type": "subs",
-      "payment_amount": 8500.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Lingyan Qiu (CNG2025-458)",
-      "origin_task": "FRAMING: PURCHASE MATERIALS",
-      "origin_delta": 1,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "FRAMING: PURCHASE MATERIALS",
-      "payment_old_date": "2026-04-02",
-      "payment_new_date": "2026-04-03",
-      "payment_type": "materials",
-      "payment_amount": 8038.0,
       "chain_length": 0
     },
     {
       "project": "Sergio Lares (212129)",
       "origin_task": "ELECTRICAL: ELECTRICAL TRIM",
       "origin_delta": 1,
-      "reason": "This payment task was directly rescheduled.",
+      "reason": "The client payment was directly rescheduled. We expected to collect $2,557 on 2026-04-01 but it's now pushed to 2026-04-02. That's 1 day of delayed income.",
       "payment_task": "ELECTRICAL: ELECTRICAL TRIM",
       "payment_old_date": "2026-04-01",
       "payment_new_date": "2026-04-02",
-      "payment_type": "income",
       "payment_amount": 2556.84,
       "chain_length": 0
     },
@@ -1426,66 +1012,22 @@
       "project": "Sergio Lares (212129)",
       "origin_task": "PROJECT DELIVERY",
       "origin_delta": 2,
-      "reason": "This payment task was directly rescheduled.",
+      "reason": "The client payment was directly rescheduled. We expected to collect $1,375 on 2026-04-04 but it's now pushed to 2026-04-06. That's 2 days of delayed income.",
       "payment_task": "PROJECT DELIVERY",
       "payment_old_date": "2026-04-04",
       "payment_new_date": "2026-04-06",
-      "payment_type": "income",
       "payment_amount": 1375.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Sergio Lares (212129)",
-      "origin_task": "COUNTERTOPS: BILL & PAYMENT",
-      "origin_delta": 1,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "COUNTERTOPS: BILL & PAYMENT",
-      "payment_old_date": "2026-04-10",
-      "payment_new_date": "2026-04-11",
-      "payment_type": "subs",
-      "payment_amount": 2800.0,
-      "chain_length": 0
-    },
-    {
-      "project": "Sergio Lares (212129)",
-      "origin_task": "ELECTRICAL: BILL & PAYMENT",
-      "origin_delta": 1,
-      "reason": "This payment task was directly rescheduled.",
-      "payment_task": "ELECTRICAL: BILL & PAYMENT",
-      "payment_old_date": "2026-04-02",
-      "payment_new_date": "2026-04-03",
-      "payment_type": "subs",
-      "payment_amount": 500.0,
       "chain_length": 0
     }
   ],
   "analysis": [
-    "Only 14% of overdue tasks resolved this week (17 of 120). The backlog is growing, not shrinking.",
-    "No tasks were completed ahead of schedule this week.",
-    "**Ginger Brown:** The income **RECEIVE GINGER'S PAYMENT** was directly rescheduled +5d (from 2026-04-02 to 2026-04-07). Amount TBD \u2014 confirm with operations.",
-    "**Ginger Brown:** The sub payment **SIDING: BILL & PAYMENT** was directly rescheduled +13d (from 2026-04-04 to 2026-04-17). This is $920 that will arrive later than planned.",
-    "**Stephanie and Marc Felton:** The material purchase **BRICKS: PURCHASE MATERIAL** was directly rescheduled +1d (from 2026-03-31 to 2026-04-01). This is $5,560 that will arrive later than planned.",
-    "**Stephanie and Marc Felton:** The material purchase **INTERIOR DOORS: DELIVERY FEE PAYMENT** was directly rescheduled +6d (from 2026-03-27 to 2026-04-02). This is $200 that will arrive later than planned.",
-    "**Stephanie and Marc Felton:** The material purchase **DRYWALL: PURCHASE MATERIAL** was directly rescheduled +3d (from 2026-03-31 to 2026-04-03). This is $3,185 that will arrive later than planned.",
-    "**Clifford Clack \u2014 Gym Addition:** The sub payment **FOUNDATION: BILL & PAYMENT** was directly rescheduled +3d (from 2026-04-07 to 2026-04-10). This is $4,000 that will arrive later than planned.",
-    "**Clifford Clack \u2014 Gym Addition:** The material purchase **FRAMING: PURCHASE MATERIAL** was directly rescheduled +1d (from 2026-04-02 to 2026-04-03). This is $2,300 that will arrive later than planned.",
-    "**Clifford Clack \u2014 Gym Addition:** The material purchase **DOORS: PURCHASE MATERIALS** was directly rescheduled +5d (from 2026-04-03 to 2026-04-08). This is $1,376 that will arrive later than planned.",
-    "**Martha Cockrell (CNG-20251199):** The material purchase **GARAGE DOOR: PURCHASE MATERIAL** was directly rescheduled +6d (from 2026-03-31 to 2026-04-06). This is $1,536 that will arrive later than planned.",
-    "**Martha Cockrell (CNG-20251199):** The material purchase **FRAMING: PURCHASE MATERIAL** was directly rescheduled +2d (from 2026-04-01 to 2026-04-03). This is $20,305 that will arrive later than planned.",
-    "**Martha Cockrell (CNG-20251199):** The sub payment **FRAMING: BILL & PAYMENT** was directly rescheduled +14d (from 2026-04-03 to 2026-04-17). Amount TBD \u2014 confirm with operations.",
-    "**Lingyan Qiu (CNG2025-458):** **WINDOWS: SECURE PRICING** was pushed +3d, which cascaded through 1 dependent task. This delayed the payment milestone by +3d. The material purchase **WINDOWS: PURCHASE MATERIAL** moved from 2026-04-01 to 2026-04-02. $4,163 delayed.",
-    "**Lingyan Qiu (CNG2025-458):** The material purchase **FLOORING: PURCHASE MATERIAL** was directly rescheduled +2d (from 2026-04-08 to 2026-04-10). This is $2,550 that will arrive later than planned.",
-    "**Lingyan Qiu (CNG2025-458):** The material purchase **EXTERIOR DOORS: PURCHASE MATERIAL** was directly rescheduled +2d (from 2026-04-01 to 2026-04-03). This is $1,811 that will arrive later than planned.",
-    "**Lingyan Qiu (CNG2025-458):** The sub payment **CONCRETE POUR: BILL & PAYMENT** was directly rescheduled +7d (from 2026-04-03 to 2026-04-10). This is $8,500 that will arrive later than planned.",
-    "**Lingyan Qiu (CNG2025-458):** The material purchase **FRAMING: PURCHASE MATERIALS** was directly rescheduled +1d (from 2026-04-02 to 2026-04-03). This is $8,038 that will arrive later than planned.",
-    "**Sergio Lares (212129):** The income **ELECTRICAL: ELECTRICAL TRIM** was directly rescheduled +1d (from 2026-04-01 to 2026-04-02). This is $2,557 that will arrive later than planned.",
-    "**Sergio Lares (212129):** The income **PROJECT DELIVERY** was directly rescheduled +2d (from 2026-04-04 to 2026-04-06). This is $1,375 that will arrive later than planned.",
-    "**Sergio Lares (212129):** The sub payment **COUNTERTOPS: BILL & PAYMENT** was directly rescheduled +1d (from 2026-04-10 to 2026-04-11). This is $2,800 that will arrive later than planned.",
-    "**Sergio Lares (212129):** The sub payment **ELECTRICAL: BILL & PAYMENT** was directly rescheduled +1d (from 2026-04-02 to 2026-04-03). This is $500 that will arrive later than planned.",
-    "\ud83d\udcb0 **Cash flow impact this week:** 20 payment milestones delayed, totaling $71,676 in delayed payments.",
-    "**Marcio Oliveira:** pushed 22 tasks but completed 8 \u2014 more schedule changes than actual work getting done.",
-    "**Milagros:** steady week: 21 completed, 28 overdue, 23 pushed.",
-    "**Angel Pacheco:** pushed 36 tasks but completed 11 \u2014 more schedule changes than actual work getting done.",
-    "**Jeff:** 17 overdue tasks across 1 projects with only 1 completions \u2014 this PM is underwater."
+    "The team only cleared 17 of 120 overdue tasks this week \u2014 that's a 14% resolution rate. At this pace, the backlog keeps growing and projects fall further behind. We need PMs to actively knock out their oldest overdue items, not just reschedule them.",
+    "None of the 41 completed tasks were finished early. Everything came in on time or late. There's room to get ahead of the schedule instead of always catching up.",
+    "\ud83d\udcb0 **Bottom line for cash flow:** 3 client payments got delayed this week. That's $3,932 that was supposed to come in but won't arrive on time. The biggest hit is **RECEIVE GINGER'S PAYMENT** on Ginger Brown \u2014 pushed 5 days.",
+    "**What to do about it:** Review the pushed tasks that are blocking these payments. If the work is actually done but the schedule wasn't updated, fix the dates. If the work is genuinely behind, figure out what's needed to get it done this week \u2014 every day a payment sits delayed is a day the company waits for that money.",
+    "**Marcio Oliveira** spent more time rescheduling (22 tasks pushed) than completing work (8 done). That's a red flag \u2014 it means the schedule is being managed on paper but the actual work isn't moving.",
+    "**Milagros** completed 21 tasks but has 28 overdue (19% of their workload). Needs to pick up the pace.",
+    "**Angel Pacheco** spent more time rescheduling (36 tasks pushed) than completing work (11 done). That's a red flag \u2014 it means the schedule is being managed on paper but the actual work isn't moving.",
+    "**Jeff** is struggling \u2014 22% of their tasks were overdue this week and they only got 1 done. With 1 projects on their plate, they need support or a priority reset."
   ]
 }
