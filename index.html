@@ -451,11 +451,10 @@ async function loadAndRenderWeekly(c) {
 function renderWeekly(c) {
   const w = WEEKLY_DATA;
   const s = w.summary;
-  const pms = w.pm_summaries || {};
   const projs = w.project_summaries || {};
-  const cascades = w.cascades || [];
-  const payImpacts = w.payment_impacts || [];
-  const noImpactSample = w.no_impact_sample || [];
+  const pmMetrics = w.pm_metrics || {};
+  const analysisParas = w.analysis || [];
+  const md = t => t.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 
   const resRate = s.unique_overdue > 0 ? Math.round(s.overdue_resolved / s.unique_overdue * 100) : 0;
 
@@ -482,48 +481,15 @@ function renderWeekly(c) {
       <div class="st ${s.cascades > 0 ? 'r' : 'g'}"><div class="n">${s.cascades}</div><div class="l">Cascades</div></div>
     </div>`;
 
-  // ── PM Performance Cards ──
-  const pmNames = Object.keys(pms).sort((a, b) => (pms[b].overdue_unique || 0) - (pms[a].overdue_unique || 0));
-  if (pmNames.length) {
-    h += '<div class="wk-section"><div class="wk-section-title">PM Performance</div><div class="wk-pm-grid">';
-    pmNames.forEach(pmn => {
-      const pm = pms[pmn];
-      const pats = pm.patterns || [];
-      const hasBad = pats.some(p => p.type === 'falling_behind' || p.type === 'chronic_overdue' || p.type === 'heavy_pusher');
-      const hasGood = pats.some(p => p.type === 'strong_execution');
-      const cls = hasGood ? 'imp' : hasBad ? 'dec' : 'stb';
-      const icon = hasGood ? '📈' : hasBad ? '📉' : '➡️';
-
-      let detail = `${pm.completed} completed`;
-      if (pm.completed_on_time) detail += ` (${pm.completed_on_time} on time)`;
-      detail += `<br>Overdue: ${pm.overdue_unique} unique · ${pm.overdue_resolved} resolved · <b>${pm.overdue_still} still open</b>`;
-      detail += `<br>Schedule: ${pm.tasks_pushed} pushed (+${pm.total_days_pushed}d) · ${pm.tasks_pulled} pulled`;
-      if (pm.avg_push_days > 0) detail += ` · avg ${pm.avg_push_days}d/push`;
-      detail += `<br>${pm.projects.length} project${pm.projects.length !== 1 ? 's' : ''}`;
-
-      let patHtml = '';
-      pats.forEach(p => {
-        const colors = {heavy_pusher:'var(--org)',falling_behind:'var(--red)',chronic_overdue:'var(--red)',strong_execution:'var(--grn)'};
-        const icons = {heavy_pusher:'🔄',falling_behind:'📉',chronic_overdue:'🔴',strong_execution:'✅'};
-        patHtml += `<div style="font-size:11px;margin-top:4px;color:${colors[p.type]||'var(--txt2)'}">${icons[p.type]||'⚠'} ${p.detail}</div>`;
-      });
-
-      h += `<div class="wk-pm-card ${cls}">
-        <div class="wk-pm-trend">${icon}</div>
-        <div class="wk-pm-name">${pmn}</div>
-        <div class="wk-pm-detail">${detail}${patHtml}</div></div>`;
-    });
-    h += '</div></div>';
-  }
-
-  // ── Project Schedule Impact ──
+  // ── Projects (primary view) ──
   const projNames = Object.keys(projs).sort((a, b) => Math.abs(projs[b].net_shift_days) - Math.abs(projs[a].net_shift_days));
   if (projNames.length) {
-    h += '<div class="wk-section"><div class="wk-section-title">Project Schedule Impact</div>';
+    h += '<div class="wk-section"><div class="wk-section-title">Projects</div>';
     projNames.forEach(pname => {
       const p = projs[pname];
       if (!p.tasks_moved && !p.unique_overdue && !p.completed) return;
 
+      const pmLabel = p.pms && p.pms.length ? p.pms.join(', ') : 'No PM';
       let tags = '';
       if (p.unique_overdue) tags += `<span class="tg r">${p.unique_overdue} overdue</span>`;
       if (p.completed) tags += `<span class="tg gr">${p.completed} done</span>`;
@@ -535,41 +501,52 @@ function renderWeekly(c) {
       const sev = p.net_shift_days >= 20 ? 'sev-r' : p.net_shift_days >= 5 ? 'sev-o' : p.unique_overdue > 5 ? 'sev-o' : 'sev-g';
 
       let body = '<div style="border-top:1px solid var(--bdr);margin-bottom:10px"></div>';
-
-      // Impact analysis
       body += '<div class="pb-grid"><div>';
 
       // Overdue summary
       if (p.unique_overdue) {
         body += `<div class="ts"><div class="tsl lr">Overdue (${p.unique_overdue})</div>`;
-        body += `<div class="tr"><div class="ti"><div class="tn" style="color:var(--txt2)">${p.overdue_resolved} resolved during week · ${p.unique_overdue - p.overdue_resolved} still open</div></div></div>`;
+        body += `<div class="tr"><div class="ti"><div class="tn" style="color:var(--txt2)">${p.overdue_resolved} resolved · ${p.chronic_overdue} stuck all week · ${p.unique_overdue - p.overdue_resolved} still open</div></div></div>`;
         body += '</div>';
       }
 
-      // Moves breakdown
-      if (p.tasks_moved) {
-        body += `<div class="ts"><div class="tsl" style="color:var(--org)">Schedule Moves</div>`;
-        body += `<div class="tr"><div class="ti"><div class="tn" style="color:var(--txt2)">${p.tasks_pushed} pushed · ${p.tasks_pulled} pulled · net ${p.net_shift_days > 0 ? '+' : ''}${p.net_shift_days} days</div></div></div>`;
-        if (p.no_impact_moves > 0) {
-          body += `<div class="tr"><div class="td g"></div><div class="ti"><div class="tn" style="color:var(--grn)">${p.no_impact_moves} of ${p.tasks_pushed} pushes had NO downstream impact</div></div></div>`;
-        }
+      // Completions
+      if (p.completed) {
+        body += `<div class="ts"><div class="tsl" style="color:var(--grn)">Completed (${p.completed})</div>`;
+        body += `<div class="tr"><div class="ti"><div class="tn" style="color:var(--txt2)">${p.completed_on_time} on time · ${p.completed - p.completed_on_time} late</div></div></div>`;
         body += '</div>';
       }
 
       body += '</div><div>';
 
+      // Schedule moves
+      if (p.tasks_moved) {
+        body += `<div class="ts"><div class="tsl" style="color:var(--org)">Schedule Moves (${p.tasks_moved})</div>`;
+        body += `<div class="tr"><div class="ti"><div class="tn" style="color:var(--txt2)">${p.tasks_pushed} pushed · ${p.tasks_pulled} pulled · net ${p.net_shift_days > 0 ? '+' : ''}${p.net_shift_days} days</div></div></div>`;
+        if (p.no_impact_moves > 0) {
+          body += `<div class="tr"><div class="td g"></div><div class="ti"><div class="tn" style="color:var(--grn)">${p.no_impact_moves} of ${p.tasks_pushed} pushes had NO downstream impact</div></div></div>`;
+        }
+        // Top pushed tasks
+        if (p.top_pushed && p.top_pushed.length) {
+          p.top_pushed.forEach(tp => {
+            body += `<div class="tr"><div class="td ${tp.delta > 0 ? 'r' : 'g'}"></div><div class="ti"><div class="tn">${tp.task}</div></div><div class="tw${tp.delta > 0 ? ' ov' : ''}">${tp.delta > 0 ? '+' : ''}${tp.delta}d</div></div>`;
+          });
+        }
+        body += '</div>';
+      }
+
       // Cascade details
       if (p.cascade_details && p.cascade_details.length) {
-        body += `<div class="ts"><div class="tsl" style="color:var(--red)">⚡ Cascading Changes</div>`;
+        body += `<div class="ts"><div class="tsl" style="color:var(--red)">⚡ Cascades</div>`;
         p.cascade_details.forEach(cas => {
-          body += `<div class="tr"><div class="td r"></div><div class="ti"><div class="tn">${cas.source_task}</div><div class="tn" style="font-size:11px;color:var(--txt2)">Pushed ${cas.source_delta}d → ${cas.affected_count} downstream task${cas.affected_count > 1 ? 's' : ''} shifted +${cas.total_cascade_days}d</div></div></div>`;
+          body += `<div class="tr"><div class="td r"></div><div class="ti"><div class="tn">${cas.source_task}</div><div class="tn" style="font-size:11px;color:var(--txt2)">+${cas.source_delta}d → ${cas.affected_count} downstream shifted +${cas.total_cascade_days}d</div></div></div>`;
         });
         body += '</div>';
       }
 
       // Payment impacts
       if (p.payment_impacts && p.payment_impacts.length) {
-        body += `<div class="ts"><div class="tsl" style="color:#818cf8">💰 Payment Milestones Affected</div>`;
+        body += `<div class="ts"><div class="tsl" style="color:#818cf8">💰 Payment Milestones</div>`;
         p.payment_impacts.forEach(pi => {
           const amt = pi.amount ? '$' + pi.amount.toLocaleString() : 'TBD';
           body += `<div class="tr"><div class="td" style="background:#818cf8"></div><div class="ti"><div class="tn">${pi.task}</div><div class="tn" style="font-size:11px;color:var(--txt2)">Delayed ${pi.days_delayed}d · ${amt}${pi.caused_by ? ' · caused by: ' + pi.caused_by : ''}</div></div></div>`;
@@ -581,26 +558,65 @@ function renderWeekly(c) {
 
       h += `<div class="pc ${sev}" style="margin-bottom:8px"><div class="ph" onclick="tog(this)"><div>
         <div class="pn">${pname}</div>
-        <div class="pp">Completed: ${p.completed} · Overdue: ${p.unique_overdue}</div></div>
+        <div class="pp">PM: ${pmLabel}</div></div>
         <div class="pt">${tags}${chvSvg()}</div></div>
         <div class="pb">${body}</div></div>`;
     });
     h += '</div>';
   }
 
-  // ── No-Impact Moves (schedule noise) ──
-  if (s.no_impact_moves > 0) {
-    h += `<div class="wk-section"><div class="wk-section-title" style="color:var(--grn)">✅ Schedule Noise: ${s.no_impact_moves} of ${s.total_pushed} pushes had no downstream impact</div>`;
-    h += `<div style="font-size:12px;color:var(--txt2);margin-bottom:8px">These date changes didn't affect any dependent tasks — the schedule absorbed them without consequences.</div>`;
-    if (noImpactSample.length) {
-      h += '<div style="font-size:12px;color:var(--dim)">';
-      noImpactSample.forEach(ni => {
-        h += `<div style="padding:2px 0">• ${ni.task} [${ni.project}] +${ni.delta}d — no impact</div>`;
+  // ── PM Accountability Metrics ──
+  const pmNames = Object.keys(pmMetrics).sort((a, b) => {
+    const asc = {critical:0,concerning:1,needs_attention:2,acceptable:3,solid:4};
+    return (asc[pmMetrics[a].assessment]||2) - (asc[pmMetrics[b].assessment]||2);
+  });
+  if (pmNames.length) {
+    h += '<div class="wk-section"><div class="wk-section-title">PM Accountability</div><div class="wk-pm-grid">';
+    pmNames.forEach(pmn => {
+      const pm = pmMetrics[pmn];
+      const cls = pm.assessment === 'solid' ? 'imp' : pm.assessment === 'acceptable' ? 'stb' : 'dec';
+      const icon = pm.assessment === 'solid' ? '📈' : pm.assessment === 'acceptable' ? '➡️' : pm.assessment === 'critical' ? '🚨' : '📉';
+      const badge = {critical:'🔴 Critical',concerning:'🟡 Concerning',needs_attention:'🟠 Needs Attention',acceptable:'🔵 Acceptable',solid:'🟢 Solid'}[pm.assessment] || pm.assessment;
+
+      let detail = `<b>${badge}</b> · ${pm.project_count} project${pm.project_count > 1 ? 's' : ''}`;
+      detail += `<br>${pm.completed} completed · ${pm.overdue_unique} overdue (${pm.overdue_resolved} resolved, <b>${pm.chronic_overdue} chronic</b>)`;
+      detail += `<br>${pm.tasks_pushed} pushed (+${pm.net_push_days}d) · ${pm.tasks_pulled} pulled`;
+      if (pm.cascades) detail += ` · <span style="color:var(--red)">${pm.cascades} cascades</span>`;
+      if (pm.no_impact_moves > 0 && pm.tasks_pushed > 0) {
+        const pct = Math.round(pm.no_impact_moves / pm.tasks_pushed * 100);
+        detail += `<br><span style="color:var(--grn)">${pct}% of pushes = no impact</span>`;
+      }
+
+      let patHtml = '';
+      (pm.patterns || []).forEach(p => {
+        patHtml += `<div style="font-size:11px;margin-top:4px;padding:3px 6px;background:var(--bg);border-radius:4px;color:var(--txt2)">⚠ ${p}</div>`;
       });
-      if (s.no_impact_moves > noImpactSample.length) h += `<div style="padding:2px 0;color:var(--dim)">+ ${s.no_impact_moves - noImpactSample.length} more</div>`;
-      h += '</div>';
-    }
-    h += '</div>';
+
+      h += `<div class="wk-pm-card ${cls}">
+        <div class="wk-pm-trend">${icon}</div>
+        <div class="wk-pm-name">${pmn}</div>
+        <div class="wk-pm-detail">${detail}${patHtml}</div></div>`;
+    });
+    h += '</div></div>';
+  }
+
+  // ── AI Analysis ──
+  if (analysisParas.length) {
+    h += `<div class="pc sev-g" style="border-left-color:#34d399;background:linear-gradient(135deg,rgba(18,183,106,.08) 0%,rgba(18,183,106,.02) 40%,var(--card) 100%);margin-top:16px">
+      <div class="ph" onclick="tog(this)">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:18px">🟢</span>
+          <div><div class="pn" style="color:#34d399">Jade's Weekly Analysis</div>
+          <div class="pp">Trends · patterns · recommendations</div></div>
+        </div>
+        <div class="pt">${chvSvg()}</div>
+      </div>
+      <div class="pb" style="padding:8px 20px 16px">
+        <div style="font-size:13px;line-height:1.8;color:var(--txt2)">
+          ${analysisParas.map(p => '<p style="margin:0 0 12px 0">' + md(p) + '</p>').join('')}
+        </div>
+      </div>
+    </div>`;
   }
 
   // Close REVIEW zone
