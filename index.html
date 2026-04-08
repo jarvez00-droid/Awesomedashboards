@@ -507,26 +507,34 @@ function renderWeekly(c) {
     <!-- Pie Charts Row -->
     <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:20px" class="wk-pies">`;
 
-  // Build 6 pie charts: Completed, Unique Overdue, % Resolved, Pushed, Pulled, Early Finish
+  // Build 6 pie charts: Completed, Unique Overdue, Resolved, Pushed, Pulled, Early Finish
+  // Colors: green = completed/resolved/pulled, red = overdue/pushed, skyblue = early finish
+  const PIE_RING = {
+    completed:'#34d399', unique_overdue:'#F04438', resolved:'#34d399',
+    pushed:'#F04438', pulled:'#34d399', early_finish:'#38bdf8'
+  };
   const metrics = [
-    {key:'completed', label:'Completed', total: s.tasks_completed},
-    {key:'unique_overdue', label:'Unique Overdue', total: s.unique_overdue},
-    {key:'resolved', label:'Resolved', total: s.overdue_resolved},
-    {key:'pushed', label:'Pushed', total: s.tasks_pushed},
-    {key:'pulled', label:'Pulled Forward', total: s.tasks_pulled},
-    {key:'early_finish', label:'Early Finish', total: s.early_finish},
+    {key:'completed', label:'Completed'},
+    {key:'unique_overdue', label:'Unique Overdue'},
+    {key:'resolved', label:'Overdue Resolved'},
+    {key:'pushed', label:'Pushed'},
+    {key:'pulled', label:'Pulled Forward'},
+    {key:'early_finish', label:'Early Finish'},
   ];
 
   metrics.forEach(m => {
     const data = pmNames.map(pm => ({label: pm, value: pmChart[pm][m.key] || 0, color: PM_COLORS[pm] || '#888'}));
+    const ringColor = PIE_RING[m.key] || 'var(--txt2)';
+    const total = data.reduce((s, d) => s + d.value, 0);
     h += `<div style="text-align:center">
       ${svgDonut(data, 110, PM_COLORS)}
-      <div style="font-size:11px;font-weight:600;color:var(--txt);margin-top:4px">${m.label}</div>`;
-    // Individual numbers
+      <div style="font-size:11px;font-weight:600;color:${ringColor};margin-top:4px">${m.label}</div>`;
     h += '<div style="font-size:10px;color:var(--txt2);line-height:1.6;margin-top:2px">';
     pmNames.forEach(pm => {
       const v = pmChart[pm][m.key] || 0;
-      if (v > 0) h += `<div><span style="color:${PM_COLORS[pm]||'#888'}">●</span> ${pm.split(' ')[0]}: ${v}</div>`;
+      const at = pmChart[pm].active_total || 1;
+      const pct = Math.round(v / at * 100);
+      if (v > 0) h += `<div><span style="color:${PM_COLORS[pm]||'#888'}">●</span> ${pm.split(' ')[0]}: ${v} — ${pct}%</div>`;
     });
     h += '</div></div>';
   });
@@ -534,7 +542,7 @@ function renderWeekly(c) {
   h += '</div>';
 
   // ── Resolution % stat ──
-  h += `<div style="text-align:center;margin-bottom:20px;font-size:14px;color:var(--txt2)">Resolution Rate: <span style="font-weight:700;color:${s.resolution_pct >= 30 ? 'var(--grn)' : s.resolution_pct >= 15 ? 'var(--ylw)' : 'var(--red)'}">${s.resolution_pct}%</span> (${s.overdue_resolved} of ${s.unique_overdue} resolved)</div>`;
+  h += `<div style="text-align:center;margin-bottom:20px;font-size:14px;color:var(--txt2)">Overdue Resolution Rate: <span style="font-weight:700;color:${s.resolution_pct >= 30 ? 'var(--grn)' : s.resolution_pct >= 15 ? 'var(--ylw)' : 'var(--red)'}">${s.resolution_pct}%</span> — ${s.overdue_resolved} of ${s.unique_overdue} overdue tasks were completed this week</div>`;
 
   // ── Project Analysis ──
   const projNames = Object.keys(projs).sort((a, b) => Math.abs(projs[b].net_shift_days || 0) - Math.abs(projs[a].net_shift_days || 0));
