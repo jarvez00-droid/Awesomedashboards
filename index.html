@@ -571,9 +571,15 @@ function renderWeekly(c) {
 
       let tags = '';
       tags += `<span class="tg" style="background:${trend==='negative'?'var(--red-s)':'var(--org-s)'};color:${trendColor}">${trendIcon}</span>`;
-      if (p.net_shift_days > 0) tags += `<span class="tg o" style="font-size:14px;font-weight:700;padding:3px 10px">+${p.net_shift_days}d</span>`;
-      else if (p.net_shift_days < 0) tags += `<span class="tg gr" style="font-size:14px;font-weight:700;padding:3px 10px">${p.net_shift_days}d</span>`;
-      else tags += `<span class="tg" style="font-size:14px;font-weight:700;padding:3px 10px;background:var(--card);color:var(--dim)">0d</span>`;
+      // Schedule shift badge
+      if (p.net_shift_days > 0) tags += `<span class="tg o" style="font-size:14px;font-weight:700;padding:3px 10px" title="Schedule pushed back ${p.net_shift_days} days this week">📅 +${p.net_shift_days}d delayed</span>`;
+      else if (p.net_shift_days < 0) tags += `<span class="tg gr" style="font-size:14px;font-weight:700;padding:3px 10px" title="Schedule pulled forward ${Math.abs(p.net_shift_days)} days">📅 ${p.net_shift_days}d ahead</span>`;
+      else tags += `<span class="tg" style="font-size:14px;font-weight:700;padding:3px 10px;background:var(--card);color:var(--dim)">📅 0d</span>`;
+      // Income delay badge — only if this project has delayed client payments
+      if (p.income_delayed_days > 0) {
+        const amt = p.income_delayed_amount > 0 ? ' · $' + p.income_delayed_amount.toLocaleString() : '';
+        tags += `<span class="tg" style="font-size:14px;font-weight:700;padding:3px 10px;background:rgba(129,140,248,.15);color:#818cf8" title="Client income delayed by ${p.income_delayed_days} days">💰 income delayed ${p.income_delayed_days}d${amt}</span>`;
+      }
 
       let body = '<div style="border-top:1px solid var(--bdr);padding:12px 4px 4px">';
 
@@ -675,9 +681,14 @@ function renderWeekly(c) {
         </div>
         <div class="pt">${chvSvg()}</div>
       </div>
-      <div class="pb" style="padding:8px 20px 16px">
-        <div style="font-size:13px;line-height:1.8;color:var(--txt2)">
-          ${analysisParas.map(p => '<p style="margin:0 0 12px 0">' + md(p) + '</p>').join('')}
+      <div class="pb" style="padding:12px 20px 16px">
+        <div style="font-size:14px;line-height:1.8;color:var(--txt2)">
+          ${analysisParas.map(p => {
+            // Cash flow and action items get highlighted background
+            if (p.startsWith('💰')) return '<div style="background:rgba(129,140,248,.08);border-left:3px solid #818cf8;padding:10px 14px;border-radius:6px;margin:12px 0">' + md(p) + '</div>';
+            if (p.startsWith('**Action')) return '<div style="background:rgba(52,211,168,.08);border-left:3px solid #34d399;padding:10px 14px;border-radius:6px;margin:12px 0">' + md(p) + '</div>';
+            return '<p style="margin:0 0 14px 0">' + md(p) + '</p>';
+          }).join('')}
         </div>
       </div>
     </div>`;
