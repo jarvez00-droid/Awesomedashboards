@@ -1874,12 +1874,35 @@ function buildCard(p, open, isEOD) {
     }, 5);
     body += '</div>';
   }
-  if (co.length) {
-    body += '<div class="ts"><div class="tsl dt">Coming Up (72h)</div>';
-    body += trowSection('y', co, tk => {
-      const isStart = (tk.type === 'starts' || (tk.when||'').startsWith('starts'));
-      const label = isStart ? `<span style="color:#60a5fa">▶ ${tk.when}</span>` : `<span style="color:var(--ylw)">⏰ ${tk.when}</span>`;
-      return trow('y', tk.n, tk.w, label);
+  // Split coming into urgency groups
+  const coToday = co.filter(tk => tk.urgency === 'today');
+  const coTmrw = co.filter(tk => tk.urgency === 'tomorrow');
+  const coLater = co.filter(tk => tk.urgency === 'upcoming');
+
+  if (coToday.length) {
+    body += '<div class="ts"><div class="tsl" style="color:var(--red)">🔥 Due / Starting Today</div>';
+    body += trowSection('r', coToday, tk => {
+      const isStart = tk.type === 'starts';
+      const icon = isStart ? '▶ starts today' : '⏰ must finish today';
+      return `<div class="tr"><div class="td ${isStart?'b':'r'}"></div><div class="ti"><div class="tn">${tk.n} - ${tk.w||''}</div></div><div class="tw" style="font-size:10px;color:${isStart?'#60a5fa':'var(--red)'}">${icon}</div></div>`;
+    }, 10);
+    body += '</div>';
+  }
+  if (coTmrw.length) {
+    body += '<div class="ts"><div class="tsl" style="color:var(--ylw)">📅 Tomorrow</div>';
+    body += trowSection('y', coTmrw, tk => {
+      const isStart = tk.type === 'starts';
+      const icon = isStart ? '▶ starts' : '⏰ due';
+      return `<div class="tr"><div class="td ${isStart?'b':'y'}"></div><div class="ti"><div class="tn">${tk.n} - ${tk.w||''}</div></div><div class="tw" style="font-size:10px;color:var(--ylw)">${icon}</div></div>`;
+    }, 5);
+    body += '</div>';
+  }
+  if (coLater.length) {
+    body += '<div class="ts"><div class="tsl dt">📋 Coming Up</div>';
+    body += trowSection('y', coLater, tk => {
+      const isStart = tk.type === 'starts';
+      const icon = isStart ? `▶ ${tk.when}` : `⏰ ${tk.when}`;
+      return `<div class="tr"><div class="td ${isStart?'b':'y'}"></div><div class="ti"><div class="tn">${tk.n} - ${tk.w||''}</div></div><div class="tw" style="font-size:10px;color:var(--dim)">${icon}</div></div>`;
     }, 5);
     body += '</div>';
   }
