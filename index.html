@@ -1694,6 +1694,7 @@ function renderSOD(c) {
       <div class="st o"><div class="n">${s.blocked}</div><div class="l">Blocked</div></div>
       <div class="st b"><div class="n">${s.active}</div><div class="l">Active</div></div>
       <div class="st y"><div class="n">${s.coming||s.next48||0}</div><div class="l">Coming 72h</div></div>
+      <div class="st" style="border-color:rgba(129,140,248,.3);background:rgba(129,140,248,.06)"><div class="n" style="color:#818cf8">${s.payment_overdue||0}</div><div class="l" style="color:#818cf8">💰 Payments</div></div>
       <div class="st g"><div class="n">${s.role_gaps}</div><div class="l">Gaps</div></div>
     </div>
     <div class="alert"><span>⚠</span><div><b>Top concern:</b> ${s.concern}</div></div>
@@ -1753,6 +1754,8 @@ function buildCard(p, open, isEOD) {
   const ac = t.active || []; const co = t.coming || [];
   const pmLine = p.pm ? `PM: ${p.pm}` : '<span class="nob">⚠ No PM assigned</span>';
 
+  const pay = t.pay_overdue || [];
+
   // Tags
   let tags = '';
   if (isEOD && c.completed) tags += `<span class="tg gr">${c.completed} done</span>`;
@@ -1761,6 +1764,7 @@ function buildCard(p, open, isEOD) {
   if (c.bl) tags += `<span class="tg o">${c.bl} blocked</span>`;
   if (c.ac) tags += `<span class="tg b">${c.ac} active</span>`;
   if (c.co) tags += `<span class="tg y">${c.co} coming</span>`;
+  if (c.pay) tags += `<span class="tg" style="background:rgba(129,140,248,.15);color:#818cf8;border-color:rgba(129,140,248,.3)">${c.pay} payment</span>`;
 
   const sev = c.ov ? 'sev-r' : c.bl ? 'sev-o' : c.ac ? 'sev-b' : 'sev-g';
 
@@ -1812,6 +1816,16 @@ function buildCard(p, open, isEOD) {
     body += '</div>';
   }
   body += '</div>';
+
+  // Payment/Purchase Overdue
+  if (pay.length) {
+    body += '<div class="pb-full"><div class="ts"><div class="tsl" style="color:#818cf8">💰 Payment & Purchase Tasks (not PM-accountable)</div>';
+    body += trowSection('p', pay, tk => {
+      const ttShort = (tk.tt||'').replace(/^\d+\.\s*/, '').replace('Payment - ','');
+      return `<div class="tr"><div class="td" style="background:#818cf8"></div><div class="ti"><div class="tn">${tk.n} - <span style="color:#818cf8">${ttShort}</span></div></div><div class="tw ov">${tk.d}d</div></div>`;
+    }, 5);
+    body += '</div></div>';
+  }
 
   // Gaps
   if (g.p || g.v || g.pc) {
