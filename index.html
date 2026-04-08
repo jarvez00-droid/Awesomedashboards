@@ -388,6 +388,7 @@ document.getElementById('main-nav').addEventListener('click', e => {
 
 let EOD_DATA = null;
 let WEEKLY_DATA = null;
+let FORECAST_DATA = null;
 const WEEKLY_PW = 'Thisisthepassword123!';
 const MGMT_PW = 'Awesome';
 
@@ -449,6 +450,11 @@ async function loadAndRenderWeekly(c) {
       const r = await fetch('data/weekly-review-' + mon + '.json');
       if (!r.ok) continue;
       WEEKLY_DATA = await r.json();
+      // Also try to load forecast for this week
+      try {
+        const fr = await fetch('data/weekly-forecast-' + mon + '.json');
+        if (fr.ok) FORECAST_DATA = await fr.json();
+      } catch(e2) {}
       renderWeekly(c);
       return;
     } catch(e) {}
@@ -481,6 +487,239 @@ function svgDonut(data, size, colors) {
   });
   paths += `<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" fill="var(--txt)" font-family="var(--mono)" font-size="${size*0.18}" font-weight="700">${total}</text>`;
   return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${paths}</svg>`;
+}
+
+function buildForecast(fc) {
+  const fs = fc.summary;
+  const fmd = t => t.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  let h = '';
+
+  h += '<div class="wk-zone forecast" style="margin-top:24px">';
+  h += '<div class="wk-zone-header" style="background:linear-gradient(135deg,rgba(56,189,248,.12),rgba(56,189,248,.03))">';
+  h += '<div class="wk-zone-title" style="color:#38bdf8">🔮 THIS WEEK\'S FORECAST</div>';
+  h += '<div class="wk-zone-dates">' + fc.week + ' · Based on schedule as of ' + fc.snapshot_date + '</div>';
+  h += '</div>';
+
+  // Top Stats
+  h += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0">';
+  const stats = [
+    {val: fs.total_due_this_week, label: 'Tasks Due This Week', color: 'var(--txt)'},
+    {val: fs.already_overdue, label: 'Already Overdue (Backlog)', color: 'var(--red)'},
+    {val: fs.outdoor_tasks_due, label: 'Outdoor Tasks Due', color: '#f97316'},
+    {val: fs.blocked_by_overdue, label: 'Blocked by Overdue Work', color: 'var(--red)'},
+  ];
+  stats.forEach(st => {
+    h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:14px;text-align:center">';
+    h += '<div style="font-size:24px;font-weight:700;color:' + st.color + '">' + st.val + '</div>';
+    h += '<div style="font-size:12px;color:var(--dim)">' + st.label + '</div>';
+    h += '</div>';
+  });
+  h += '</div>';
+
+  // Weather Strip
+  h += '<div class="wk-section" style="margin-bottom:16px">';
+  h += '<div class="wk-section-title">🌤️ DFW Weather Forecast — Impact on Outdoor Work</div>';
+  h += '<div style="display:grid;grid-template-columns:repeat(' + Math.min((fc.weather||[]).length, 7) + ',1fr);gap:8px;margin-top:10px">';
+  (fc.weather || []).forEach(w => {
+    const bg = w.outdoor_risk==='stop' ? 'rgba(240,68,56,.12)' : w.outdoor_risk==='caution' ? 'rgba(249,115,22,.1)' : 'rgba(52,211,168,.06)';
+    const bdr = w.outdoor_risk==='stop' ? '#F04438' : w.outdoor_risk==='caution' ? '#f97316' : '#34d399';
+    const icon = w.outdoor_risk==='stop' ? '🛑' : w.outdoor_risk==='caution' ? '⚠️' : '☀️';
+    const riskLabel = w.outdoor_risk==='stop' ? 'NO OUTDOOR WORK' : w.outdoor_risk==='caution' ? 'MONITOR CONDITIONS' : 'GOOD TO WORK';
+    h += '<div style="background:' + bg + ';border:1px solid ' + bdr + ';border-radius:10px;padding:12px;text-align:center">';
+    h += '<div style="font-size:14px;font-weight:700;color:var(--txt)">' + w.day + '</div>';
+    h += '<div style="font-size:11px;color:var(--dim)">' + w.date + '</div>';
+    h += '<div style="font-size:20px;margin:6px 0">' + icon + '</div>';
+    h += '<div style="font-size:12px;color:var(--txt2)">' + w.high + '° / ' + w.low + '°</div>';
+    h += '<div style="font-size:11px;color:var(--dim);margin-top:2px">💧 ' + w.rain_pct + '%</div>';
+    h += '<div style="font-size:11px;color:var(--dim)">💨 ' + w.wind_mph + ' mph</div>';
+    h += '<div style="font-size:10px;font-weight:600;color:' + bdr + ';margin-top:6px">' + riskLabel + '</div>';
+    h += '</div>';
+  });
+  h += '</div></div>';
+
+  // Weather Alerts
+  if (fc.weather_alerts && fc.weather_alerts.length) {
+    h += '<div style="margin-bottom:16px">';
+    fc.weather_alerts.forEach(a => {
+      const abg = a.severity==='high' ? 'rgba(240,68,56,.08)' : 'rgba(249,115,22,.06)';
+      const abdr = a.severity==='high' ? '#F04438' : '#f97316';
+      h += '<div style="background:' + abg + ';border-left:3px solid ' + abdr + ';padding:10px 14px;border-radius:6px;margin:8px 0">';
+      h += '<div style="font-size:14px;color:var(--txt)">' + fmd(a.message) + '</div>';
+      if (a.tasks_affected && a.tasks_affected.length) {
+        h += '<div style="font-size:12px;color:var(--dim);margin-top:6px">Outdoor tasks at risk: ' + a.tasks_affected.join(', ') + '</div>';
+      }
+      h += '</div>';
+    });
+    h += '</div>';
+  }
+
+  // Cash Flow This Week
+  h += '<div class="wk-section" style="margin-bottom:16px">';
+  h += '<div class="wk-section-title">💰 Cash Flow This Week</div>';
+  h += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px">';
+  const cfIn = fc.cash_flow.income || 0;
+  const cfOut = fc.cash_flow.outgoing || 0;
+  const cfNet = fc.cash_flow.net || 0;
+  h += '<div style="background:rgba(52,211,168,.06);border:1px solid var(--bdr);border-radius:10px;padding:14px;text-align:center">';
+  h += '<div style="font-size:20px;font-weight:700;color:var(--grn)">$' + cfIn.toLocaleString() + '</div>';
+  h += '<div style="font-size:12px;color:var(--dim)">Expected Income</div></div>';
+  h += '<div style="background:rgba(240,68,56,.06);border:1px solid var(--bdr);border-radius:10px;padding:14px;text-align:center">';
+  h += '<div style="font-size:20px;font-weight:700;color:var(--red)">$' + cfOut.toLocaleString() + '</div>';
+  h += '<div style="font-size:12px;color:var(--dim)">Payments Going Out</div></div>';
+  const netBg = cfNet >= 0 ? 'rgba(52,211,168,.06)' : 'rgba(240,68,56,.06)';
+  const netColor = cfNet >= 0 ? 'var(--grn)' : 'var(--red)';
+  h += '<div style="background:' + netBg + ';border:1px solid var(--bdr);border-radius:10px;padding:14px;text-align:center">';
+  h += '<div style="font-size:20px;font-weight:700;color:' + netColor + '">$' + cfNet.toLocaleString() + '</div>';
+  h += '<div style="font-size:12px;color:var(--dim)">Net Cash Flow</div></div>';
+  h += '</div>';
+
+  // Top outgoing expandable
+  if (fc.cash_flow.top_outgoing && fc.cash_flow.top_outgoing.length) {
+    h += '<div style="margin-top:12px;cursor:pointer" onclick="var el=this.querySelector(\'.fc-out-list\');el.style.display=el.style.display===\'none\'?\'block\':\'none\'">';
+    h += '<div style="font-size:13px;color:var(--dim);display:flex;align-items:center;gap:6px">';
+    h += '📋 Biggest payments going out this week (click to see) ';
+    h += '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
+    h += '</div>';
+    h += '<div class="fc-out-list" style="display:none;margin-top:8px">';
+    fc.cash_flow.top_outgoing.forEach(t => {
+      h += '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:13px">';
+      h += '<div><span style="color:var(--txt2)">' + t.project + '</span> <span style="color:var(--dim)">· ' + t.task + '</span></div>';
+      h += '<div style="font-weight:600;color:var(--red);white-space:nowrap">$' + t.amount.toLocaleString() + '</div>';
+      h += '</div>';
+    });
+    h += '</div></div>';
+  }
+  h += '</div>';
+
+  // Project Cards
+  h += '<div class="wk-section">';
+  h += '<div class="wk-section-title">Project by Project — What to Watch This Week</div>';
+  Object.entries(fc.projects).forEach(function([pn, ps]) {
+    if (!ps.due_this_week && !ps.overdue_count) return;
+    const pmLabel = ps.pms && ps.pms.length ? ps.pms.join(', ') : 'No PM';
+    const riskLevel = ps.overdue_count >= 10 ? 'sev-r' : ps.overdue_count >= 3 ? 'sev-o' : ps.outdoor_due >= 5 ? 'sev-o' : 'sev-b';
+
+    let body = '<div style="border-top:1px solid var(--bdr);padding:12px 4px 4px">';
+
+    // Quick stats
+    body += '<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim);margin-bottom:12px">';
+    body += '<span style="color:var(--txt)" title="Tasks with deadlines this week">📋 ' + ps.due_this_week + ' due this week</span>';
+    body += '<span style="color:var(--red)" title="Tasks past their deadline, not done yet">🔴 ' + ps.overdue_count + ' overdue backlog</span>';
+    body += '<span style="color:#f97316" title="Tasks requiring outdoor conditions">🌧️ ' + ps.outdoor_due + ' outdoor</span>';
+    body += '<span title="Tasks starting this week">🆕 ' + ps.starting + ' starting</span>';
+    body += '</div>';
+
+    // Risks
+    if (ps.risks && ps.risks.length) {
+      body += '<div style="margin-bottom:12px">';
+      body += '<div style="font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">⚠️ Risks & Dangers</div>';
+      ps.risks.forEach(function(r) {
+        const rbg = r.startsWith('🔴') ? 'rgba(240,68,56,.06)' : r.startsWith('⛔') ? 'rgba(240,68,56,.08)' : 'rgba(249,115,22,.06)';
+        body += '<div style="font-size:13px;line-height:1.6;color:var(--txt2);padding:8px 12px;margin:4px 0;border-radius:6px;background:' + rbg + '">' + r + '</div>';
+      });
+      body += '</div>';
+    }
+
+    // Focus
+    if (ps.focus && ps.focus.length) {
+      body += '<div style="margin-bottom:12px">';
+      body += '<div style="font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">🎯 What to Focus On</div>';
+      ps.focus.forEach(function(f) {
+        body += '<div style="font-size:13px;line-height:1.6;color:var(--txt2);padding:8px 12px;margin:4px 0;border-radius:6px;background:rgba(56,189,248,.06)">' + f + '</div>';
+      });
+      body += '</div>';
+    }
+
+    // Suggestions
+    if (ps.suggestions && ps.suggestions.length) {
+      body += '<div style="margin-bottom:12px">';
+      body += '<div style="font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">💡 Suggestions & Alternatives</div>';
+      ps.suggestions.forEach(function(sg) {
+        body += '<div style="font-size:13px;line-height:1.6;color:var(--txt2);padding:8px 12px;margin:4px 0;border-radius:6px;background:rgba(52,211,168,.06)">' + sg + '</div>';
+      });
+      body += '</div>';
+    }
+
+    // Payments
+    const payOuts = (ps.payments || []).filter(function(p) { return p.direction === 'out' && p.amount > 0; });
+    if (payOuts.length) {
+      const payTotal = payOuts.reduce(function(s,p) { return s + p.amount; }, 0);
+      body += '<div style="margin-bottom:8px;cursor:pointer" onclick="var el=this.querySelector(\'.pay-list\');el.style.display=el.style.display===\'none\'?\'block\':\'none\'">';
+      body += '<div style="font-size:12px;font-weight:600;color:var(--dim);display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.5px">';
+      body += '💸 Payments Going Out (' + payOuts.length + ') — $' + payTotal.toLocaleString();
+      body += ' <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
+      body += '</div>';
+      body += '<div class="pay-list" style="display:none;margin-top:6px">';
+      payOuts.forEach(function(p) {
+        body += '<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:12px;border-bottom:1px solid var(--bdr)">';
+        body += '<span style="color:var(--txt2)">' + p.name + '</span>';
+        body += '<span style="color:var(--red);font-weight:600">$' + p.amount.toLocaleString() + '</span>';
+        body += '</div>';
+      });
+      body += '</div></div>';
+    }
+
+    // Outdoor tasks
+    if (ps.outdoor_tasks && ps.outdoor_tasks.length) {
+      body += '<div style="margin-bottom:8px;cursor:pointer" onclick="var el=this.querySelector(\'.out-list\');el.style.display=el.style.display===\'none\'?\'block\':\'none\'">';
+      body += '<div style="font-size:12px;font-weight:600;color:var(--dim);display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.5px">';
+      body += '🌧️ Outdoor Tasks (' + ps.outdoor_tasks.length + ') — Weather-Dependent';
+      body += ' <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
+      body += '</div>';
+      body += '<div class="out-list" style="display:none;margin-top:6px">';
+      ps.outdoor_tasks.forEach(function(t) { body += '<div style="padding:3px 0;font-size:12px;color:var(--txt2)">• ' + t + '</div>'; });
+      body += '</div></div>';
+    }
+
+    body += '</div>';
+
+    h += '<div class="pc ' + riskLevel + '" style="margin-bottom:12px">';
+    h += '<div class="ph" onclick="tog(this)">';
+    h += '<div style="display:flex;align-items:center;gap:8px;flex:1"><div>';
+    h += '<div class="pn">' + pn + '</div>';
+    h += '<div class="pp">' + pmLabel + '</div>';
+    h += '</div>';
+    h += '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-left:auto;margin-right:12px">';
+    h += '<span class="tg" style="font-size:13px;font-weight:700;padding:3px 10px;background:var(--card)">📋 ' + ps.due_this_week + ' due</span>';
+    if (ps.overdue_count) h += '<span class="tg o" style="font-size:13px;font-weight:700;padding:3px 10px">🔴 ' + ps.overdue_count + ' overdue</span>';
+    if (ps.outdoor_due) h += '<span class="tg" style="font-size:13px;font-weight:700;padding:3px 10px;background:rgba(249,115,22,.1);color:#f97316">🌧️ ' + ps.outdoor_due + ' outdoor</span>';
+    h += '</div></div>';
+    h += '<div class="pt">' + chvSvg() + '</div>';
+    h += '</div>';
+    h += '<div class="pb">' + body + '</div>';
+    h += '</div>';
+  });
+  h += '</div>';
+
+  // Jade Forecast Analysis
+  if (fc.analysis && fc.analysis.length) {
+    h += '<div class="pc sev-g" style="border-left-color:#38bdf8;background:linear-gradient(135deg,rgba(56,189,248,.08) 0%,rgba(56,189,248,.02) 40%,var(--card) 100%);margin-top:16px">';
+    h += '<div class="ph" onclick="tog(this)">';
+    h += '<div style="display:flex;align-items:center;gap:8px">';
+    h += '<span style="font-size:18px">🔮</span>';
+    h += '<div><div class="pn" style="color:#38bdf8">Jade\'s Forecast Analysis</div>';
+    h += '<div class="pp">Risks · cash flow · weather · priorities</div></div>';
+    h += '</div>';
+    h += '<div class="pt">' + chvSvg() + '</div>';
+    h += '</div>';
+    h += '<div class="pb" style="padding:12px 20px 16px">';
+    h += '<div style="font-size:14px;line-height:1.8;color:var(--txt2)">';
+    fc.analysis.forEach(function(p) {
+      if (p.indexOf('💰') === 0) {
+        h += '<div style="background:rgba(129,140,248,.08);border-left:3px solid #818cf8;padding:10px 14px;border-radius:6px;margin:12px 0">' + fmd(p) + '</div>';
+      } else if (p.indexOf('🌧') === 0 || p.indexOf('☀') === 0) {
+        h += '<div style="background:rgba(249,115,22,.06);border-left:3px solid #f97316;padding:10px 14px;border-radius:6px;margin:12px 0">' + fmd(p) + '</div>';
+      } else if (p.indexOf('⛔') === 0) {
+        h += '<div style="background:rgba(240,68,56,.06);border-left:3px solid #F04438;padding:10px 14px;border-radius:6px;margin:12px 0">' + fmd(p) + '</div>';
+      } else {
+        h += '<p style="margin:0 0 14px 0">' + fmd(p) + '</p>';
+      }
+    });
+    h += '</div></div></div>';
+  }
+
+  h += '</div>'; // close forecast zone
+  return h;
 }
 
 function renderWeekly(c) {
@@ -699,7 +938,15 @@ function renderWeekly(c) {
     </div>`;
   }
 
-  h += '</div>';
+  h += '</div>'; // close review zone
+
+  // ═══════════════════════════════════════════
+  // SECTION 2: THIS WEEK'S FORECAST
+  // ═══════════════════════════════════════════
+  if (FORECAST_DATA) {
+    h += buildForecast(FORECAST_DATA);
+  }
+
   h += '<div class="ft">Generated by Jade · Construction Nation Group · Weekly Report</div>';
   c.innerHTML = h;
 }
