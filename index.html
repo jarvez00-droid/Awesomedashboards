@@ -501,12 +501,13 @@ function buildForecast(fc) {
   h += '</div>';
 
   // Top Stats
-  h += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0">';
+  h += '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:16px 0">';
   const stats = [
     {val: fs.total_due_this_week, label: 'Tasks Due This Week', color: 'var(--txt)'},
     {val: fs.already_overdue, label: 'Already Overdue (Backlog)', color: 'var(--red)'},
     {val: fs.outdoor_tasks_due, label: 'Outdoor Tasks Due', color: '#f97316'},
     {val: fs.blocked_by_overdue, label: 'Blocked by Overdue Work', color: 'var(--red)'},
+    {val: fs.payments_blocked || 0, label: 'Payments Stuck (work not done)', color: '#818cf8'},
   ];
   stats.forEach(st => {
     h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:14px;text-align:center">';
@@ -657,6 +658,24 @@ function buildForecast(fc) {
         body += '</div>';
       });
       body += '</div></div>';
+    }
+
+    // Payment chains — stuck payments
+    var blockedChains = (ps.payment_chains || []).filter(function(c) { return c.status === 'blocked'; });
+    if (blockedChains.length) {
+      body += '<div style="margin-bottom:12px">';
+      body += '<div style="font-size:12px;font-weight:600;color:#818cf8;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">⛓️ Payments Stuck — Work Not Done Yet (' + blockedChains.length + ')</div>';
+      blockedChains.forEach(function(c) {
+        var amtStr = c.amount ? '$' + c.amount.toLocaleString() : 'amount TBD';
+        var dir = c.direction === 'in' ? '⬇️ income from client' : '⬆️ payment to sub/vendor';
+        body += '<div style="font-size:13px;line-height:1.6;color:var(--txt2);padding:8px 12px;margin:4px 0;border-radius:6px;background:rgba(129,140,248,.06);border-left:3px solid #818cf8">';
+        body += '<b>' + c.payment + '</b> (' + amtStr + ', ' + dir + ')<br>';
+        body += '<span style="color:var(--dim)">Stuck because:</span> "' + c.blocker + '" in the <b>' + c.group + '</b> group is <span style="color:var(--red)">' + c.days_blocked + ' days overdue</span>. ';
+        body += 'The payment can\'t happen until that work is finished.';
+        if (c.overdue_work_in_group > 1) body += ' (' + c.overdue_work_in_group + ' overdue tasks in this group)';
+        body += '</div>';
+      });
+      body += '</div>';
     }
 
     // Outdoor tasks
