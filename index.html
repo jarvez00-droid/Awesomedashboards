@@ -1704,15 +1704,13 @@ function renderSOD(c) {
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;align-items:stretch">
       <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;display:flex;flex-direction:column">
         <div style="font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:10px">Schedule Overview</div>
-        <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:8px">
-          <div class="st r"><div class="n">${s.overdue}</div><div class="l">Overdue (PM)</div></div>
-          <div class="st o"><div class="n">${s.blocked}</div><div class="l">Blocked (by overdue)</div></div>
+        <div class="stats" style="grid-template-columns:repeat(2,1fr);margin-bottom:8px">
+          <div class="st r"><div class="n">${s.overdue}</div><div class="l">Overdue</div></div>
           <div class="st b"><div class="n">${s.active}</div><div class="l">Active</div></div>
         </div>
-        <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:0;flex:1;align-content:start">
-          <div class="st y"><div class="n">${s.coming||s.next48||0}</div><div class="l">Coming 72h</div></div>
+        <div class="stats" style="grid-template-columns:repeat(2,1fr);margin-bottom:0;flex:1;align-content:start">
+          <div class="st y"><div class="n">${s.coming||0}</div><div class="l">Upcoming 72h</div></div>
           <div class="st" style="border-color:rgba(129,140,248,.3);background:rgba(129,140,248,.06)"><div class="n" style="color:#818cf8">${s.payment_overdue||0}</div><div class="l" style="color:#818cf8">💰 Payments Due</div></div>
-          <div class="st" style="border-color:rgba(250,204,21,.2);background:rgba(250,204,21,.04)"><div class="n" style="color:var(--ylw)">${s.sequenced||0}</div><div class="l" style="color:var(--ylw)">⏳ Sequenced</div></div>
         </div>
       </div>
       <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;display:flex;flex-direction:column">
@@ -1803,21 +1801,18 @@ function buildCard(p, open, isEOD) {
   let tags = '';
   if (isEOD && c.completed) tags += `<span class="tg gr">${c.completed} done</span>`;
   if (isEOD && c.resolved) tags += `<span class="tg gr">${c.resolved} cleared</span>`;
-  if (c.ov) tags += `<span class="tg r">${c.ov} late</span>`;
-  if (c.bl) tags += `<span class="tg o">${c.bl} blocked</span>`;
-  if (c.seq) tags += `<span class="tg" style="background:rgba(250,204,21,.1);color:var(--ylw);border-color:rgba(250,204,21,.2)">${c.seq} sequenced</span>`;
+  if (c.ov) tags += `<span class="tg r">${c.ov} overdue</span>`;
   if (c.ac) tags += `<span class="tg b">${c.ac} active</span>`;
-  if (c.co) tags += `<span class="tg y">${c.co} coming</span>`;
+  if (c.co) tags += `<span class="tg y">${c.co} upcoming</span>`;
   if (c.pay) tags += `<span class="tg" style="background:rgba(129,140,248,.15);color:#818cf8;border-color:rgba(129,140,248,.3)">${c.pay} payment</span>`;
 
-  const sev = c.ov ? 'sev-r' : c.bl ? 'sev-o' : c.ac ? 'sev-b' : 'sev-g';
+  const sev = c.ov ? 'sev-r' : c.ac ? 'sev-b' : c.co ? 'sev-g' : 'sev-g';
 
-  // Preview: 5 columns for desktop
-  let preview = `<div class="preview" style="grid-template-columns:${pay.length ? '1fr 1fr 1fr 1fr 1fr' : '1fr 1fr 1fr 1fr'}">`;
+  // Preview columns: Overdue, Active, Upcoming + optional Payments
+  let preview = `<div class="preview" style="grid-template-columns:${pay.length ? '1fr 1fr 1fr 1fr' : '1fr 1fr 1fr'}">`;
   preview += pvCol('Overdue', 'r', ov, tk => `${tk.n}`, tk => `${tk.d}d`);
   preview += pvCol('Active', 'b', ac, tk => `${tk.n}`, tk => tk.dt || 'active');
-  preview += pvCol('Blocked', 'o', bl, tk => `${tk.n}`, tk => tk.due || '');
-  preview += pvCol('Coming Up', 'y', co, tk => `${tk.n}`, tk => tk.when || '');
+  preview += pvCol('Upcoming', 'y', co, tk => `${tk.n}`, tk => tk.when || '');
   if (pay.length) {
     preview += `<div class="pv-col"><div class="pv-head" style="color:#818cf8">💰 Payments</div>`;
     pay.slice(0, 2).forEach(tk => {
@@ -1834,7 +1829,7 @@ function buildCard(p, open, isEOD) {
   const useThreeCol = pay.length > 0;
   let body = `<div class="${useThreeCol ? 'pb-3col' : 'pb-grid'}">`;
 
-  // Column 1: Overdue + Active (+ EOD extras)
+  // Column 1: Overdue + Active
   body += '<div>';
   if (isEOD && t.completed?.length) {
     body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Completed</div>';
@@ -1847,7 +1842,7 @@ function buildCard(p, open, isEOD) {
     body += '</div>';
   }
   if (ov.length) {
-    body += '<div class="ts"><div class="tsl lr">🔴 Overdue (PM)</div>';
+    body += '<div class="ts"><div class="tsl lr">Overdue</div>';
     body += trowSection('r', ov, tk => trow('r', tk.n, tk.w, tk.d + 'd', true), 5);
     body += '</div>';
   }
@@ -1858,52 +1853,11 @@ function buildCard(p, open, isEOD) {
   }
   body += '</div>';
 
-  // Column 2: Blocked + Coming
+  // Column 2: Upcoming (next 72h, not active, not overdue)
   body += '<div>';
-  const seq = t.sequenced || [];
-  if (bl.length) {
-    body += '<div class="ts"><div class="tsl bl">🚫 Blocked (by overdue tasks)</div>';
-    body += trowSection('o', bl, tk => trow('o', tk.n, tk.w, tk.due || '', false, tk.bl), 5);
-    body += '</div>';
-  }
-  if (seq.length) {
-    body += '<div class="ts"><div class="tsl" style="color:var(--ylw)">⏳ Sequenced (waiting on upcoming tasks)</div>';
-    body += trowSection('y', seq, tk => {
-      const blLabel = tk.bl ? `↳ after: ${tk.bl}` : '';
-      return `<div class="tr"><div class="td y"></div><div class="ti"><div class="tn">${tk.n} - ${tk.w||''}</div>${blLabel ? `<div style="font-size:10px;color:var(--dim);margin-top:1px">${blLabel}</div>` : ''}</div><div class="tw">${tk.due||''}</div></div>`;
-    }, 5);
-    body += '</div>';
-  }
-  // Split coming into urgency groups
-  const coToday = co.filter(tk => tk.urgency === 'today');
-  const coTmrw = co.filter(tk => tk.urgency === 'tomorrow');
-  const coLater = co.filter(tk => tk.urgency === 'upcoming');
-
-  if (coToday.length) {
-    body += '<div class="ts"><div class="tsl" style="color:var(--red)">🔥 Due / Starting Today</div>';
-    body += trowSection('r', coToday, tk => {
-      const isStart = tk.type === 'starts';
-      const icon = isStart ? '▶ starts today' : '⏰ must finish today';
-      return `<div class="tr"><div class="td ${isStart?'b':'r'}"></div><div class="ti"><div class="tn">${tk.n} - ${tk.w||''}</div></div><div class="tw" style="font-size:10px;color:${isStart?'#60a5fa':'var(--red)'}">${icon}</div></div>`;
-    }, 10);
-    body += '</div>';
-  }
-  if (coTmrw.length) {
-    body += '<div class="ts"><div class="tsl" style="color:var(--ylw)">📅 Tomorrow</div>';
-    body += trowSection('y', coTmrw, tk => {
-      const isStart = tk.type === 'starts';
-      const icon = isStart ? '▶ starts' : '⏰ due';
-      return `<div class="tr"><div class="td ${isStart?'b':'y'}"></div><div class="ti"><div class="tn">${tk.n} - ${tk.w||''}</div></div><div class="tw" style="font-size:10px;color:var(--ylw)">${icon}</div></div>`;
-    }, 5);
-    body += '</div>';
-  }
-  if (coLater.length) {
-    body += '<div class="ts"><div class="tsl dt">📋 Coming Up</div>';
-    body += trowSection('y', coLater, tk => {
-      const isStart = tk.type === 'starts';
-      const icon = isStart ? `▶ ${tk.when}` : `⏰ ${tk.when}`;
-      return `<div class="tr"><div class="td ${isStart?'b':'y'}"></div><div class="ti"><div class="tn">${tk.n} - ${tk.w||''}</div></div><div class="tw" style="font-size:10px;color:var(--dim)">${icon}</div></div>`;
-    }, 5);
+  if (co.length) {
+    body += '<div class="ts"><div class="tsl dt">Upcoming (72h)</div>';
+    body += trowSection('y', co, tk => trow('y', tk.n, tk.w, tk.when || ''), 8);
     body += '</div>';
   }
   body += '</div>';
