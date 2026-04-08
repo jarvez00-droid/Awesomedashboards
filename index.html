@@ -76,6 +76,12 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   .pb-3col{grid-template-columns:1fr 1fr!important;gap:12px!important}
   .pb-3col .pay-side{grid-column:1/-1}
   .wk-pies{grid-template-columns:repeat(3,1fr)!important}
+  .wk-zone-title{font-size:16px!important}
+  .wk-zone-dates{font-size:11px!important}
+  .wk-section-title{font-size:13px!important}
+  .wk-pm-name{font-size:13px!important}
+  .wk-pm-detail{font-size:11px!important}
+  .wk-pm-trend{font-size:14px!important}
   .top{padding:8px 12px!important}
   .brand-name{font-size:13px!important}
   .nav a{padding:6px 10px!important;font-size:12px!important}
@@ -489,7 +495,7 @@ function renderWeekly(c) {
   // Consistent PM colors
   const PM_COLORS = {'Jeff':'#60a5fa','Angel Pacheco':'#f97316','Marcio Oliveira':'#a78bfa','Milagros':'#f472b6'};
   const pmNames = Object.keys(pmChart);
-  const pmLegend = pmNames.map(n => `<span style="display:inline-flex;align-items:center;gap:4px;margin-right:12px"><span style="width:10px;height:10px;border-radius:50%;background:${PM_COLORS[n]||'#888'}"></span><span style="font-size:11px;color:var(--txt2)">${n}</span></span>`).join('');
+  const pmLegend = pmNames.map(n => `<span style="display:inline-flex;align-items:center;gap:5px;margin-right:16px"><span style="width:12px;height:12px;border-radius:50%;background:${PM_COLORS[n]||'#888'}"></span><span style="font-size:13px;color:var(--txt2)">${n}</span></span>`).join('');
 
   let h = `
     <div class="page-title">Weekly Report — Management View</div>
@@ -527,9 +533,9 @@ function renderWeekly(c) {
     const ringColor = PIE_RING[m.key] || 'var(--txt2)';
     const total = data.reduce((s, d) => s + d.value, 0);
     h += `<div style="text-align:center">
-      ${svgDonut(data, 110, PM_COLORS)}
-      <div style="font-size:11px;font-weight:600;color:${ringColor};margin-top:4px">${m.label}</div>`;
-    h += '<div style="font-size:10px;color:var(--txt2);line-height:1.6;margin-top:2px">';
+      ${svgDonut(data, 120, PM_COLORS)}
+      <div style="font-size:13px;font-weight:600;color:${ringColor};margin-top:6px">${m.label}</div>`;
+    h += '<div style="font-size:12px;color:var(--txt2);line-height:1.7;margin-top:4px">';
     pmNames.forEach(pm => {
       const v = pmChart[pm][m.key] || 0;
       const at = pmChart[pm].active_total || 1;
@@ -542,7 +548,7 @@ function renderWeekly(c) {
   h += '</div>';
 
   // ── Resolution % stat ──
-  h += `<div style="text-align:center;margin-bottom:20px;font-size:14px;color:var(--txt2)">Overdue Resolution Rate: <span style="font-weight:700;color:${s.resolution_pct >= 30 ? 'var(--grn)' : s.resolution_pct >= 15 ? 'var(--ylw)' : 'var(--red)'}">${s.resolution_pct}%</span> — ${s.overdue_resolved} of ${s.unique_overdue} overdue tasks were completed this week</div>`;
+  h += `<div style="text-align:center;margin-bottom:20px;font-size:15px;color:var(--txt2)">Overdue Resolution Rate: <span style="font-weight:700;font-size:18px;color:${s.resolution_pct >= 30 ? 'var(--grn)' : s.resolution_pct >= 15 ? 'var(--ylw)' : 'var(--red)'}">${s.resolution_pct}%</span> — ${s.overdue_resolved} of ${s.unique_overdue} overdue tasks were completed this week</div>`;
 
   // ── Project Analysis ──
   const projNames = Object.keys(projs).sort((a, b) => Math.abs(projs[b].net_shift_days || 0) - Math.abs(projs[a].net_shift_days || 0));
@@ -571,28 +577,28 @@ function renderWeekly(c) {
       let body = '<div style="border-top:1px solid var(--bdr);padding:12px 4px 4px">';
 
       // Headline + trend
-      body += `<div style="font-size:14px;font-weight:600;color:var(--txt);margin-bottom:6px">${n.headline || ''}</div>`;
-      body += `<div style="font-size:12px;color:${trendColor};margin-bottom:10px">${trendIcon} ${n.trend_text || ''}</div>`;
+      body += `<div style="font-size:16px;font-weight:600;color:var(--txt);margin-bottom:8px">${n.headline || ''}</div>`;
+      body += `<div style="font-size:14px;color:${trendColor};margin-bottom:12px">${trendIcon} ${n.trend_text || ''}</div>`;
 
       // Observations
       if (n.observations && n.observations.length) {
-        body += '<div style="font-size:12px;line-height:1.7;color:var(--txt2);margin-bottom:10px">';
-        n.observations.forEach(o => { body += `<p style="margin:0 0 6px">${o}</p>`; });
+        body += '<div style="font-size:14px;line-height:1.7;color:var(--txt2);margin-bottom:12px">';
+        n.observations.forEach(o => { body += `<p style="margin:0 0 8px">${o}</p>`; });
         body += '</div>';
       }
 
       // Milestone impacts
       if (n.milestones && n.milestones.length) {
-        body += '<div style="margin-bottom:10px;padding:8px 10px;background:rgba(129,140,248,.06);border-radius:6px;border-left:3px solid #818cf8">';
-        body += '<div style="font-size:11px;font-weight:600;color:#818cf8;margin-bottom:4px">📌 Milestone Impact</div>';
+        body += '<div style="margin-bottom:12px;padding:10px 14px;background:rgba(129,140,248,.06);border-radius:8px;border-left:3px solid #818cf8">';
+        body += '<div style="font-size:13px;font-weight:600;color:#818cf8;margin-bottom:6px">📌 Milestone Impact</div>';
         n.milestones.forEach(m => {
-          body += `<div style="font-size:12px;line-height:1.6;color:var(--txt2);margin-bottom:4px">${md(m)}</div>`;
+          body += `<div style="font-size:13px;line-height:1.7;color:var(--txt2);margin-bottom:6px">${md(m)}</div>`;
         });
         body += '</div>';
       }
 
       // Quick stats bar
-      body += `<div style="display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--dim);margin-bottom:8px;padding:6px 0;border-top:1px solid var(--bdr)">
+      body += `<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim);margin-bottom:10px;padding:8px 0;border-top:1px solid var(--bdr)">
         <span style="color:var(--grn)">✅ ${p.completed} done</span>
         <span style="color:var(--red)">🔴 ${p.unique_overdue} overdue</span>
         <span>${p.overdue_resolved} resolved</span>
@@ -621,10 +627,10 @@ function renderWeekly(c) {
       }
 
       taskSections.forEach(sec => {
-        body += `<div style="margin-bottom:6px">
-          <div style="font-size:11px;font-weight:600;color:${sec.color};cursor:pointer;padding:4px 0;display:flex;align-items:center;gap:6px" onclick="const el=this.nextElementSibling;const open=el.style.display!=='none';el.style.display=open?'none':'block';this.querySelector('svg').style.transform=open?'':'rotate(180deg)'">
+        body += `<div style="margin-bottom:8px">
+          <div style="font-size:13px;font-weight:600;color:${sec.color};cursor:pointer;padding:6px 0;display:flex;align-items:center;gap:6px" onclick="const el=this.nextElementSibling;const open=el.style.display!=='none';el.style.display=open?'none':'block';this.querySelector('svg').style.transform=open?'':'rotate(180deg)'">
             ${sec.label}
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
           <div style="display:none">${sec.items.join('')}</div>
         </div>`;
