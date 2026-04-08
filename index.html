@@ -1706,13 +1706,13 @@ function renderSOD(c) {
         <div style="font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:10px">Schedule Overview</div>
         <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:8px">
           <div class="st r"><div class="n">${s.overdue}</div><div class="l">Overdue (PM)</div></div>
-          <div class="st o"><div class="n">${s.blocked}</div><div class="l">Blocked</div></div>
+          <div class="st o"><div class="n">${s.blocked}</div><div class="l">Blocked (by overdue)</div></div>
           <div class="st b"><div class="n">${s.active}</div><div class="l">Active</div></div>
         </div>
         <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:0;flex:1;align-content:start">
           <div class="st y"><div class="n">${s.coming||s.next48||0}</div><div class="l">Coming 72h</div></div>
           <div class="st" style="border-color:rgba(129,140,248,.3);background:rgba(129,140,248,.06)"><div class="n" style="color:#818cf8">${s.payment_overdue||0}</div><div class="l" style="color:#818cf8">💰 Payments Due</div></div>
-          <div class="st g"><div class="n">${s.role_gaps}</div><div class="l">Gaps</div></div>
+          <div class="st" style="border-color:rgba(250,204,21,.2);background:rgba(250,204,21,.04)"><div class="n" style="color:var(--ylw)">${s.sequenced||0}</div><div class="l" style="color:var(--ylw)">⏳ Sequenced</div></div>
         </div>
       </div>
       <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;display:flex;flex-direction:column">
@@ -1805,6 +1805,7 @@ function buildCard(p, open, isEOD) {
   if (isEOD && c.resolved) tags += `<span class="tg gr">${c.resolved} cleared</span>`;
   if (c.ov) tags += `<span class="tg r">${c.ov} late</span>`;
   if (c.bl) tags += `<span class="tg o">${c.bl} blocked</span>`;
+  if (c.seq) tags += `<span class="tg" style="background:rgba(250,204,21,.1);color:var(--ylw);border-color:rgba(250,204,21,.2)">${c.seq} sequenced</span>`;
   if (c.ac) tags += `<span class="tg b">${c.ac} active</span>`;
   if (c.co) tags += `<span class="tg y">${c.co} coming</span>`;
   if (c.pay) tags += `<span class="tg" style="background:rgba(129,140,248,.15);color:#818cf8;border-color:rgba(129,140,248,.3)">${c.pay} payment</span>`;
@@ -1859,14 +1860,27 @@ function buildCard(p, open, isEOD) {
 
   // Column 2: Blocked + Coming
   body += '<div>';
+  const seq = t.sequenced || [];
   if (bl.length) {
-    body += '<div class="ts"><div class="tsl bl">Blocked</div>';
+    body += '<div class="ts"><div class="tsl bl">🚫 Blocked (by overdue tasks)</div>';
     body += trowSection('o', bl, tk => trow('o', tk.n, tk.w, tk.due || '', false, tk.bl), 5);
+    body += '</div>';
+  }
+  if (seq.length) {
+    body += '<div class="ts"><div class="tsl" style="color:var(--ylw)">⏳ Sequenced (waiting on upcoming tasks)</div>';
+    body += trowSection('y', seq, tk => {
+      const blLabel = tk.bl ? `↳ after: ${tk.bl}` : '';
+      return `<div class="tr"><div class="td y"></div><div class="ti"><div class="tn">${tk.n} - ${tk.w||''}</div>${blLabel ? `<div style="font-size:10px;color:var(--dim);margin-top:1px">${blLabel}</div>` : ''}</div><div class="tw">${tk.due||''}</div></div>`;
+    }, 5);
     body += '</div>';
   }
   if (co.length) {
     body += '<div class="ts"><div class="tsl dt">Coming Up (72h)</div>';
-    body += trowSection('y', co, tk => trow('y', tk.n, tk.w, tk.when || ''), 5);
+    body += trowSection('y', co, tk => {
+      const isStart = (tk.type === 'starts' || (tk.when||'').startsWith('starts'));
+      const label = isStart ? `<span style="color:#60a5fa">▶ ${tk.when}</span>` : `<span style="color:var(--ylw)">⏰ ${tk.when}</span>`;
+      return trow('y', tk.n, tk.w, label);
+    }, 5);
     body += '</div>';
   }
   body += '</div>';

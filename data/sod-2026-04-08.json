@@ -2,22 +2,22 @@
   "date": "2026-04-08",
   "summary": {
     "overdue": 17,
-    "blocked": 34,
+    "blocked": 8,
+    "sequenced": 22,
     "active": 25,
     "coming": 89,
     "role_gaps": 156,
-    "concern": "Lingyan Qiu (CNG2025-458) \u2014 1 overdue + 12 blocked tasks",
+    "concern": "Ginger Brown \u2014 5 overdue + 2 blocked tasks",
     "payment_overdue": 17
   },
   "analysis": {
     "paragraphs": [
-      "Things got worse overnight \u2014 overdue went up from 15 to 17 and blocked tasks jumped from 25 to 34. This needs to be addressed today. Looking at the bigger picture, we were at 30 overdue on 2026-04-01 \u2014 so the weekly trend is positive despite today's bump. Credit where it's due: CANDACE - JUSTIN P REFERRAL (CNG2025-522) cleared overdue items.",
-      "**Lingyan Qiu (CNG2025-458):** 12 tasks are blocked by PM overdue items \u2014 clearing even 1-2 upstream tasks could release a cascade of work.",
-      "**Ginger Brown:** 5 overdue PM tasks \u2014 prioritize clearing the oldest ones first, they're likely holding up downstream work. 2 of 6 blocked tasks are waiting on overdue payments \u2014 not a PM issue, it's a payment bottleneck. Escalate to Operations Manager or Management. 9 overdue payment/purchase tasks \u2014 material delays and sub scheduling will be affected. Escalate to Management.",
-      "**CANDACE - JUSTIN P REFERRAL (CNG2025-522):** 8 tasks are blocked by PM overdue items \u2014 clearing even 1-2 upstream tasks could release a cascade of work.",
+      "Things got worse overnight \u2014 overdue went up from 15 to 17. This needs to be addressed today. Looking at the bigger picture, we were at 30 overdue on 2026-04-01 \u2014 so the weekly trend is positive despite today's bump. Credit where it's due: CANDACE - JUSTIN P REFERRAL (CNG2025-522) cleared overdue items.",
+      "**Ginger Brown:** 5 overdue PM tasks \u2014 prioritize clearing the oldest ones first, they're likely holding up downstream work. 2 of 2 blocked tasks are waiting on overdue payments \u2014 not a PM issue, it's a payment bottleneck. Escalate to Operations Manager or Management. 9 overdue payment/purchase tasks \u2014 material delays and sub scheduling will be affected. Escalate to Management.",
       "**Martha Cockrell (CNG-20251199):** 6 overdue tasks with the oldest at 9 days \u2014 this looks like a stale schedule. The PM should review and reschedule rather than letting them pile up as false overdues.",
       "**Clifford Clack \u2014 Gym Addition:** 3 overdue PM tasks \u2014 prioritize clearing the oldest ones first, they're likely holding up downstream work.",
       "**Stephanie and Marc Felton:** 3 overdue payment/purchase tasks \u2014 material delays and sub scheduling will be affected. Escalate to Management.",
+      "**Lingyan Qiu (CNG2025-458):** 12 tasks are blocked by PM overdue items \u2014 clearing even 1-2 upstream tasks could release a cascade of work.",
       "**Sergio Lares (212129):** Schedule work is clean but 1 payment task needs attention from Operations.",
       "**Milagros Porturas:** 5 overdue across 1 project. Block 2 hours today to clear the backlog, oldest first. If tasks can't realistically be completed, update the schedule dates so we have accurate data.",
       "**Angel Pacheco:** 3 overdue \u2014 address today before they cascade into new blocked tasks.",
@@ -28,30 +28,30 @@
     {
       "name": "Angel Pacheco",
       "ov": 3,
-      "act": 10,
+      "act": 4,
       "proj": 2,
-      "ind": "green"
+      "ind": "yellow"
     },
     {
       "name": "Jeff",
       "ov": 1,
-      "act": 4,
+      "act": 3,
       "proj": 1,
-      "ind": "green"
+      "ind": "yellow"
     },
     {
       "name": "Marcio Oliveira",
       "ov": 0,
-      "act": 4,
+      "act": 2,
       "proj": 1,
       "ind": "clean"
     },
     {
       "name": "Milagros Porturas",
       "ov": 5,
-      "act": 6,
+      "act": 3,
       "proj": 1,
-      "ind": "yellow"
+      "ind": "red"
     }
   ],
   "projects": [
@@ -62,6 +62,7 @@
       "c": {
         "ov": 6,
         "bl": 0,
+        "seq": 0,
         "ac": 2,
         "co": 7,
         "pay": 0
@@ -105,6 +106,7 @@
           }
         ],
         "blocked": [],
+        "sequenced": [],
         "active": [
           {
             "n": "FRAMING: FRAMING AND CORNICE",
@@ -170,7 +172,8 @@
       "st": "issue",
       "c": {
         "ov": 5,
-        "bl": 6,
+        "bl": 2,
+        "seq": 4,
         "ac": 6,
         "co": 25,
         "pay": 9
@@ -210,40 +213,48 @@
         ],
         "blocked": [
           {
-            "n": "MECHANICAL: MECHANICAL TRIM",
-            "due": "04/20",
-            "w": "Angel Martinez",
-            "bl": "MECHANICAL: CONFIRM SCHEDULE (not started)"
-          },
-          {
-            "n": "MECHANICAL: PM INSPECTION / CC REPORT",
-            "due": "04/21",
-            "w": "Milagros Porturas",
-            "bl": "MECHANICAL: MECHANICAL TRIM (not started)"
-          },
-          {
             "n": "ELECTRICAL: ELECTRICAL TRIM",
             "due": "04/16",
             "w": "Marcos Ayala, Milagros Porturas",
-            "bl": "ELECTRICAL: CONFIRM SCHEDULE (not started)"
-          },
-          {
-            "n": "ELECTRICAL: PM INSPECTION / CC REPORT",
-            "due": "04/17",
-            "w": "Milagros Porturas",
-            "bl": "ELECTRICAL: ELECTRICAL TRIM (not started)"
+            "bl": "ELECTRICAL: BILL & PAYMENT (not started)",
+            "bt": "overdue"
           },
           {
             "n": "PLUMBING: PLUMBING TRIM",
             "due": "04/15",
             "w": "Eliseo Vasquez, Milagros Porturas",
-            "bl": "PLUMBING: CONFIRM SCHEDULE (not started)"
+            "bl": "PLUMBING: CONFIRM SCHEDULE (not started)",
+            "bt": "overdue"
+          }
+        ],
+        "sequenced": [
+          {
+            "n": "MECHANICAL: MECHANICAL TRIM",
+            "due": "04/20",
+            "w": "Angel Martinez",
+            "bl": "MECHANICAL: CONFIRM SCHEDULE",
+            "bt": "sequenced"
+          },
+          {
+            "n": "MECHANICAL: PM INSPECTION / CC REPORT",
+            "due": "04/21",
+            "w": "Milagros Porturas",
+            "bl": "MECHANICAL: MECHANICAL TRIM",
+            "bt": "sequenced"
+          },
+          {
+            "n": "ELECTRICAL: PM INSPECTION / CC REPORT",
+            "due": "04/17",
+            "w": "Milagros Porturas",
+            "bl": "ELECTRICAL: ELECTRICAL TRIM",
+            "bt": "sequenced"
           },
           {
             "n": "PLUMBING: PM INSPECTION / CC REPORT",
             "due": "04/16",
             "w": "Milagros Porturas",
-            "bl": "PLUMBING: PLUMBING TRIM (not started)"
+            "bl": "PLUMBING: PLUMBING TRIM",
+            "bt": "sequenced"
           }
         ],
         "active": [
@@ -494,7 +505,8 @@
       "st": "issue",
       "c": {
         "ov": 3,
-        "bl": 2,
+        "bl": 1,
+        "seq": 1,
         "ac": 6,
         "co": 16,
         "pay": 2
@@ -527,13 +539,17 @@
             "n": "FRAMING: FRAMING AND CORNICE",
             "due": "04/11",
             "w": "Clifford Clack, Angel Pacheco",
-            "bl": "Foundation cure (done)"
-          },
+            "bl": "Foundation cure (done)",
+            "bt": "overdue"
+          }
+        ],
+        "sequenced": [
           {
             "n": "FRAMING: PM INSPECTION / CC REPORT",
             "due": "04/13",
             "w": "Clifford Clack, Angel Pacheco",
-            "bl": "FRAMING: FRAMING AND CORNICE (not started)"
+            "bl": "FRAMING: FRAMING AND CORNICE",
+            "bt": "sequenced"
           }
         ],
         "active": [
@@ -683,182 +699,13 @@
       }
     },
     {
-      "name": "Lingyan Qiu (CNG2025-458)",
-      "pm": "Angel Pacheco, Jeff",
-      "st": "issue",
-      "c": {
-        "ov": 1,
-        "bl": 12,
-        "ac": 2,
-        "co": 7,
-        "pay": 2
-      },
-      "g": {
-        "p": 1,
-        "v": 11,
-        "pc": 0
-      },
-      "tasks": {
-        "overdue": [
-          {
-            "n": "FOUNDATION: RENT A PORTA POTTY",
-            "d": 2,
-            "w": "Angel Pacheco"
-          }
-        ],
-        "blocked": [
-          {
-            "n": "FRAMING: FRAMING AND CORNICE",
-            "due": "04/23",
-            "w": "Angel Pacheco",
-            "bl": "FOUNDATION: FOUNDATION CURE (20%)"
-          },
-          {
-            "n": "EXTERIOR SHEATHING: INSTALL EXTERIOR SHEATHING",
-            "due": "04/27",
-            "w": "\u26a0\ufe0f Nobody",
-            "bl": "FRAMING: FRAMING AND CORNICE (not started)"
-          },
-          {
-            "n": "DOORS AND WINDOWS: INSTALL EXTERIOR DOORS AND WINDOWS",
-            "due": "04/20",
-            "w": "Angel Pacheco",
-            "bl": "WINDOWS: CONFIRM DELIVERY (not started)"
-          },
-          {
-            "n": "PLUMBING: PLUMBING ROUGH IN",
-            "due": "04/24",
-            "w": "Angel Pacheco",
-            "bl": "PLUMBING: CONFIRM SCHEDULE (not started)"
-          },
-          {
-            "n": "ELECTRICAL: ELECTRICAL ROUGH IN",
-            "due": "04/18",
-            "w": "Brayan Ramos, Angel Pacheco",
-            "bl": "ELECTRICAL: CONFIRM SCHEDULE (not started)"
-          },
-          {
-            "n": "INSULATION: CONFIRM SCHEDULE",
-            "due": "04/22",
-            "w": "Angel Pacheco",
-            "bl": "INSULATION: APPROVE WO (not started)"
-          },
-          {
-            "n": "INSULATION: INSTALL INSULATION",
-            "due": "04/24",
-            "w": "\u26a0\ufe0f Nobody",
-            "bl": "INSULATION: CONFIRM SCHEDULE (done)"
-          },
-          {
-            "n": "INSULATION: PM INSPECTION / CC REPORT",
-            "due": "04/25",
-            "w": "Angel Pacheco",
-            "bl": "INSULATION: CONFIRM SCHEDULE (done)"
-          },
-          {
-            "n": "BRICKS: BRICK TIES",
-            "due": "04/28",
-            "w": "\u26a0\ufe0f Nobody",
-            "bl": "EXTERIOR SHEATHING: INSTALL EXTERIOR SHEATHING (not started)"
-          },
-          {
-            "n": "BRICKS: PM INSPECTION / CC REPORT",
-            "due": "04/29",
-            "w": "Angel Pacheco",
-            "bl": "BRICKS: BRICK TIES (not started)"
-          },
-          {
-            "n": "TILES: CONFIRM SCHEDULE",
-            "due": "04/21",
-            "w": "Angel Pacheco",
-            "bl": "TILES: APPROVE WO (not started)"
-          },
-          {
-            "n": "FLOORING: INSTALL HARDWOOD",
-            "due": "04/29",
-            "w": "Angel Pacheco, Romina Rey",
-            "bl": "FLOORING: CONFIRM DELIVERY (not started)"
-          }
-        ],
-        "active": [
-          {
-            "n": "FOUNDATION: FOUNDATION CURE (20%)",
-            "dt": "Mar 31-8",
-            "w": "Angel Pacheco"
-          },
-          {
-            "n": "BRICKS: COMPLETE TAKEOFF",
-            "dt": "Apr 7-9",
-            "w": "Angel Pacheco, Romina Rey"
-          }
-        ],
-        "coming": [
-          {
-            "n": "FOUNDATION: FOUNDATION CURE",
-            "w": "Angel Pacheco",
-            "when": "due today",
-            "type": "due"
-          },
-          {
-            "n": "BRICKS: COMPLETE TAKEOFF",
-            "w": "Angel Pacheco, Romina Rey",
-            "when": "due tomorrow",
-            "type": "due"
-          },
-          {
-            "n": "FLOORING: PURCHASE MATERIAL",
-            "w": "Angel Pacheco, Romina Rey",
-            "when": "due Fri",
-            "type": "due"
-          },
-          {
-            "n": "CONCRETE POUR: BILL & PAYMENT",
-            "w": "Efren Aguirre",
-            "when": "due Fri",
-            "type": "due"
-          },
-          {
-            "n": "FRAMING: PURCHASE MATERIALS",
-            "w": "Angel Pacheco, Romina Rey, Marjorie Serna",
-            "when": "due Fri",
-            "type": "due"
-          },
-          {
-            "n": "FRAMING: CONFIRM DELIVERY",
-            "w": "Angel Pacheco, Romina Rey",
-            "when": "due Fri",
-            "type": "due"
-          },
-          {
-            "n": "FRAMING: CONFIRM SCHEDULE",
-            "w": "Angel Pacheco",
-            "when": "due Sat",
-            "type": "due"
-          }
-        ],
-        "pay_overdue": [
-          {
-            "n": "WINDOWS: PURCHASE MATERIAL",
-            "d": 2,
-            "w": "Angel Pacheco, Romina Rey, Reynaldo Aquije",
-            "tt": "5. Payment - Materials"
-          },
-          {
-            "n": "EXTERIOR DOORS: PURCHASE MATERIAL",
-            "d": 2,
-            "w": "Romina Rey, Reynaldo Aquije",
-            "tt": "5. Payment - Materials"
-          }
-        ]
-      }
-    },
-    {
       "name": "Katie Holmes & Sean Springs",
       "pm": "Jeff",
       "st": "issue",
       "c": {
         "ov": 1,
-        "bl": 3,
+        "bl": 2,
+        "seq": 1,
         "ac": 2,
         "co": 5,
         "pay": 0
@@ -881,19 +728,24 @@
             "n": "PLUMBING: PLUMBING ROUGH IN",
             "due": "04/22",
             "w": "Jeff",
-            "bl": "PLUMBING: CONFIRM SCHEDULE (not started)"
-          },
-          {
-            "n": "ELECTRICAL: ELECTRICAL ROUGH IN",
-            "due": "04/24",
-            "w": "Jeff",
-            "bl": "PLUMBING: PLUMBING ROUGH IN (not started)"
+            "bl": "PLUMBING: CONFIRM SCHEDULE (not started)",
+            "bt": "overdue"
           },
           {
             "n": "FRAMING: INTERIOR WALL FRAMING & BLOCKING",
             "due": "04/18",
             "w": "Jeff",
-            "bl": "FRAMING: PURCHASE MATERIAL (not started)"
+            "bl": "DOORS AND WINDOWS: LELAND INSTALL NEW WINDOWS (not started)",
+            "bt": "overdue"
+          }
+        ],
+        "sequenced": [
+          {
+            "n": "ELECTRICAL: ELECTRICAL ROUGH IN",
+            "due": "04/24",
+            "w": "Jeff",
+            "bl": "PLUMBING: PLUMBING ROUGH IN",
+            "bt": "sequenced"
           }
         ],
         "active": [
@@ -949,7 +801,8 @@
       "st": "issue",
       "c": {
         "ov": 1,
-        "bl": 2,
+        "bl": 1,
+        "seq": 1,
         "ac": 4,
         "co": 14,
         "pay": 3
@@ -969,16 +822,20 @@
         ],
         "blocked": [
           {
-            "n": "INTERIOR PAINT: PAINT WALLS & CEILING",
-            "due": "04/17",
-            "w": "\u26a0\ufe0f Nobody",
-            "bl": "INTERIOR PAINT: CONFIRM SCHEDULE (not started)"
-          },
-          {
             "n": "CABINETS: INSTALL CABINETS, VANITIES",
             "due": "04/23",
             "w": "\u26a0\ufe0f Nobody",
-            "bl": "INTERIOR PAINT: PAINT WALLS & CEILING (not started)"
+            "bl": "CABINETS: CONFIRM SCHEDULE (not started)",
+            "bt": "overdue"
+          }
+        ],
+        "sequenced": [
+          {
+            "n": "INTERIOR PAINT: PAINT WALLS & CEILING",
+            "due": "04/17",
+            "w": "\u26a0\ufe0f Nobody",
+            "bl": "INTERIOR PAINT: CONFIRM SCHEDULE",
+            "bt": "sequenced"
           }
         ],
         "active": [
@@ -1112,12 +969,198 @@
       }
     },
     {
+      "name": "Lingyan Qiu (CNG2025-458)",
+      "pm": "Angel Pacheco, Jeff",
+      "st": "issue",
+      "c": {
+        "ov": 1,
+        "bl": 1,
+        "seq": 11,
+        "ac": 2,
+        "co": 7,
+        "pay": 2
+      },
+      "g": {
+        "p": 1,
+        "v": 11,
+        "pc": 0
+      },
+      "tasks": {
+        "overdue": [
+          {
+            "n": "FOUNDATION: RENT A PORTA POTTY",
+            "d": 2,
+            "w": "Angel Pacheco"
+          }
+        ],
+        "blocked": [
+          {
+            "n": "PLUMBING: PLUMBING ROUGH IN",
+            "due": "04/24",
+            "w": "Angel Pacheco",
+            "bl": "PLUMBING: CONFIRM SCHEDULE (not started)",
+            "bt": "overdue"
+          }
+        ],
+        "sequenced": [
+          {
+            "n": "FRAMING: FRAMING AND CORNICE",
+            "due": "04/23",
+            "w": "Angel Pacheco",
+            "bl": "FOUNDATION: FOUNDATION CURE",
+            "bt": "sequenced"
+          },
+          {
+            "n": "EXTERIOR SHEATHING: INSTALL EXTERIOR SHEATHING",
+            "due": "04/27",
+            "w": "\u26a0\ufe0f Nobody",
+            "bl": "FRAMING: FRAMING AND CORNICE",
+            "bt": "sequenced"
+          },
+          {
+            "n": "DOORS AND WINDOWS: INSTALL EXTERIOR DOORS AND WINDOWS",
+            "due": "04/20",
+            "w": "Angel Pacheco",
+            "bl": "WINDOWS: CONFIRM DELIVERY",
+            "bt": "sequenced"
+          },
+          {
+            "n": "ELECTRICAL: ELECTRICAL ROUGH IN",
+            "due": "04/18",
+            "w": "Brayan Ramos, Angel Pacheco",
+            "bl": "ELECTRICAL: CONFIRM SCHEDULE",
+            "bt": "sequenced"
+          },
+          {
+            "n": "INSULATION: CONFIRM SCHEDULE",
+            "due": "04/22",
+            "w": "Angel Pacheco",
+            "bl": "INSULATION: APPROVE WO",
+            "bt": "sequenced"
+          },
+          {
+            "n": "INSULATION: INSTALL INSULATION",
+            "due": "04/24",
+            "w": "\u26a0\ufe0f Nobody",
+            "bl": "INSULATION: CONFIRM SCHEDULE",
+            "bt": "sequenced"
+          },
+          {
+            "n": "INSULATION: PM INSPECTION / CC REPORT",
+            "due": "04/25",
+            "w": "Angel Pacheco",
+            "bl": "INSULATION: CONFIRM SCHEDULE",
+            "bt": "sequenced"
+          },
+          {
+            "n": "BRICKS: BRICK TIES",
+            "due": "04/28",
+            "w": "\u26a0\ufe0f Nobody",
+            "bl": "EXTERIOR SHEATHING: INSTALL EXTERIOR SHEATHING",
+            "bt": "sequenced"
+          },
+          {
+            "n": "BRICKS: PM INSPECTION / CC REPORT",
+            "due": "04/29",
+            "w": "Angel Pacheco",
+            "bl": "BRICKS: BRICK TIES",
+            "bt": "sequenced"
+          },
+          {
+            "n": "TILES: CONFIRM SCHEDULE",
+            "due": "04/21",
+            "w": "Angel Pacheco",
+            "bl": "TILES: APPROVE WO",
+            "bt": "sequenced"
+          },
+          {
+            "n": "FLOORING: INSTALL HARDWOOD",
+            "due": "04/29",
+            "w": "Angel Pacheco, Romina Rey",
+            "bl": "FLOORING: CONFIRM DELIVERY",
+            "bt": "sequenced"
+          }
+        ],
+        "active": [
+          {
+            "n": "FOUNDATION: FOUNDATION CURE (20%)",
+            "dt": "Mar 31-8",
+            "w": "Angel Pacheco"
+          },
+          {
+            "n": "BRICKS: COMPLETE TAKEOFF",
+            "dt": "Apr 7-9",
+            "w": "Angel Pacheco, Romina Rey"
+          }
+        ],
+        "coming": [
+          {
+            "n": "FOUNDATION: FOUNDATION CURE",
+            "w": "Angel Pacheco",
+            "when": "due today",
+            "type": "due"
+          },
+          {
+            "n": "BRICKS: COMPLETE TAKEOFF",
+            "w": "Angel Pacheco, Romina Rey",
+            "when": "due tomorrow",
+            "type": "due"
+          },
+          {
+            "n": "FLOORING: PURCHASE MATERIAL",
+            "w": "Angel Pacheco, Romina Rey",
+            "when": "due Fri",
+            "type": "due"
+          },
+          {
+            "n": "CONCRETE POUR: BILL & PAYMENT",
+            "w": "Efren Aguirre",
+            "when": "due Fri",
+            "type": "due"
+          },
+          {
+            "n": "FRAMING: PURCHASE MATERIALS",
+            "w": "Angel Pacheco, Romina Rey, Marjorie Serna",
+            "when": "due Fri",
+            "type": "due"
+          },
+          {
+            "n": "FRAMING: CONFIRM DELIVERY",
+            "w": "Angel Pacheco, Romina Rey",
+            "when": "due Fri",
+            "type": "due"
+          },
+          {
+            "n": "FRAMING: CONFIRM SCHEDULE",
+            "w": "Angel Pacheco",
+            "when": "due Sat",
+            "type": "due"
+          }
+        ],
+        "pay_overdue": [
+          {
+            "n": "WINDOWS: PURCHASE MATERIAL",
+            "d": 2,
+            "w": "Angel Pacheco, Romina Rey, Reynaldo Aquije",
+            "tt": "5. Payment - Materials"
+          },
+          {
+            "n": "EXTERIOR DOORS: PURCHASE MATERIAL",
+            "d": 2,
+            "w": "Romina Rey, Reynaldo Aquije",
+            "tt": "5. Payment - Materials"
+          }
+        ]
+      }
+    },
+    {
       "name": "CANDACE - JUSTIN P REFERRAL (CNG2025-522)",
       "pm": "Marcio Oliveira",
       "st": "issue",
       "c": {
         "ov": 0,
-        "bl": 8,
+        "bl": 1,
+        "seq": 3,
         "ac": 1,
         "co": 8,
         "pay": 0
@@ -1131,52 +1174,34 @@
         "overdue": [],
         "blocked": [
           {
-            "n": "ROOFING: PURCHASE MATERIAL",
-            "due": "04/10",
-            "w": "Reynaldo Aquije, Romina Rey, Marjorie Serna",
-            "bl": "ROOFING: SECURE PRICING (done)"
-          },
-          {
-            "n": "ROOFING: CONFIRM DELIVERY",
+            "n": "ROOFING: SUBMIT QUOTE",
             "due": "04/11",
-            "w": "Romina Rey",
-            "bl": "ROOFING: PURCHASE MATERIAL (not started)"
-          },
+            "w": "Marcio Oliveira",
+            "bl": "ROOFING: CREATE SOW (not started)",
+            "bt": "overdue"
+          }
+        ],
+        "sequenced": [
           {
             "n": "ROOFING: APROVE WO",
             "due": "04/11",
             "w": "Marcio Oliveira",
-            "bl": "ROOFING: SUBMIT QUOTE (not started)"
+            "bl": "ROOFING: SUBMIT QUOTE",
+            "bt": "sequenced"
           },
           {
             "n": "ROOFING: CONFIRM SCHEDULE",
             "due": "04/13",
             "w": "Marcio Oliveira",
-            "bl": "ROOFING: APROVE WO (not started)"
-          },
-          {
-            "n": "ROOFING: SUBMIT QUOTE",
-            "due": "04/11",
-            "w": "Marcio Oliveira",
-            "bl": "ROOFING: CREATE SOW (not started)"
+            "bl": "ROOFING: APROVE WO",
+            "bt": "sequenced"
           },
           {
             "n": "ROOFING: INSTALL ROOFING",
             "due": "04/14",
             "w": "\u26a0\ufe0f Nobody",
-            "bl": "ROOFING: CONFIRM DELIVERY (not started)"
-          },
-          {
-            "n": "ROOFING: BILL & PAYMENT",
-            "due": "04/15",
-            "w": "\u26a0\ufe0f Nobody",
-            "bl": "ROOFING: INSTALL ROOFING (not started)"
-          },
-          {
-            "n": "ROOFING: SECURE PRICING",
-            "due": "04/10",
-            "w": "\u26a0\ufe0f Nobody",
-            "bl": "ROOFING: COMPELTE TAKEOFF (not started)"
+            "bl": "ROOFING: CONFIRM DELIVERY",
+            "bt": "sequenced"
           }
         ],
         "active": [
@@ -1245,7 +1270,8 @@
       "st": "issue",
       "c": {
         "ov": 0,
-        "bl": 1,
+        "bl": 0,
+        "seq": 1,
         "ac": 2,
         "co": 7,
         "pay": 1
@@ -1257,12 +1283,14 @@
       },
       "tasks": {
         "overdue": [],
-        "blocked": [
+        "blocked": [],
+        "sequenced": [
           {
             "n": "PUNCH LIST: INSTALL CABINET",
             "due": "04/09",
             "w": "\u26a0\ufe0f Nobody",
-            "bl": "PUNCH LIST: PURCHASE CABINET (not started)"
+            "bl": "PUNCH LIST: PURCHASE CABINET",
+            "bt": "sequenced"
           }
         ],
         "active": [
