@@ -105,6 +105,11 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 .pc.op .pb{display:block}
 .pb-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .pb-full{grid-column:1/-1}
+.pb-3col{display:grid;grid-template-columns:2fr 2fr 1fr;gap:16px}
+.pb-3col .pay-side{background:rgba(129,140,248,.04);border:1px solid rgba(129,140,248,.15);border-radius:8px;padding:10px 12px}
+.pb-3col .pay-side .tsl{color:#818cf8;border-bottom-color:rgba(129,140,248,.2)}
+.pb-3col .pay-side .tr{border-bottom-color:rgba(129,140,248,.1)}
+.pb-3col .pay-side .td{background:#818cf8}
 
 @media(max-width:600px){
   .preview{grid-template-columns:1fr 1fr!important}
@@ -1768,18 +1773,28 @@ function buildCard(p, open, isEOD) {
 
   const sev = c.ov ? 'sev-r' : c.bl ? 'sev-o' : c.ac ? 'sev-b' : 'sev-g';
 
-  // Preview: 4 columns, max 2 per column
-  let preview = '<div class="preview" style="grid-template-columns:1fr 1fr 1fr 1fr">';
+  // Preview: 5 columns for desktop
+  let preview = `<div class="preview" style="grid-template-columns:${pay.length ? '1fr 1fr 1fr 1fr 1fr' : '1fr 1fr 1fr 1fr'}">`;
   preview += pvCol('Overdue', 'r', ov, tk => `${tk.n}`, tk => `${tk.d}d`);
   preview += pvCol('Active', 'b', ac, tk => `${tk.n}`, tk => tk.dt || 'active');
   preview += pvCol('Blocked', 'o', bl, tk => `${tk.n}`, tk => tk.due || '');
   preview += pvCol('Coming Up', 'y', co, tk => `${tk.n}`, tk => tk.when || '');
+  if (pay.length) {
+    preview += `<div class="pv-col"><div class="pv-head" style="color:#818cf8">💰 Payments</div>`;
+    pay.slice(0, 2).forEach(tk => {
+      const ttShort = (tk.tt||'').replace(/^\d+\.\s*/, '').replace('Payment - ','');
+      preview += `<div class="pv-item"><div class="pv-dot" style="background:#818cf8"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub">${ttShort} · ${tk.d}d</div></div></div>`;
+    });
+    if (pay.length > 2) preview += `<div class="pv-more">+${pay.length - 2} more</div>`;
+    preview += '</div>';
+  }
   preview += '</div>';
 
-  // Expanded: 2x2 grid
-  let body = '<div class="pb-grid">';
+  // Expanded body — 3 columns when payments exist, 2 otherwise
+  const useThreeCol = pay.length > 0;
+  let body = `<div class="${useThreeCol ? 'pb-3col' : 'pb-grid'}">`;
 
-  // Top-left: Overdue (+ EOD extras)
+  // Column 1: Overdue + Active (+ EOD extras)
   body += '<div>';
   if (isEOD && t.completed?.length) {
     body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Completed</div>';
@@ -1792,7 +1807,7 @@ function buildCard(p, open, isEOD) {
     body += '</div>';
   }
   if (ov.length) {
-    body += '<div class="ts"><div class="tsl lr">Overdue</div>';
+    body += '<div class="ts"><div class="tsl lr">🔴 Overdue (PM)</div>';
     body += trowSection('r', ov, tk => trow('r', tk.n, tk.w, tk.d + 'd', true), 5);
     body += '</div>';
   }
@@ -1803,7 +1818,7 @@ function buildCard(p, open, isEOD) {
   }
   body += '</div>';
 
-  // Top-right: Blocked
+  // Column 2: Blocked + Coming
   body += '<div>';
   if (bl.length) {
     body += '<div class="ts"><div class="tsl bl">Blocked</div>';
@@ -1817,19 +1832,21 @@ function buildCard(p, open, isEOD) {
   }
   body += '</div>';
 
-  // Payment/Purchase Overdue
-  if (pay.length) {
-    body += '<div class="pb-full"><div class="ts"><div class="tsl" style="color:#818cf8">💰 Payment & Purchase Tasks (not PM-accountable)</div>';
-    body += trowSection('p', pay, tk => {
+  // Column 3 (sidebar): Payment & Purchase tasks
+  if (useThreeCol) {
+    body += '<div class="pay-side">';
+    body += `<div class="ts"><div class="tsl">💰 Payments & Purchases</div>`;
+    body += `<div style="font-size:10px;color:rgba(129,140,248,.7);margin-bottom:8px;font-style:italic">Not counted in PM metrics</div>`;
+    pay.forEach(tk => {
       const ttShort = (tk.tt||'').replace(/^\d+\.\s*/, '').replace('Payment - ','');
-      return `<div class="tr"><div class="td" style="background:#818cf8"></div><div class="ti"><div class="tn">${tk.n} - <span style="color:#818cf8">${ttShort}</span></div></div><div class="tw ov">${tk.d}d</div></div>`;
-    }, 5);
+      body += `<div class="tr"><div class="td"></div><div class="ti"><div class="tn">${tk.n}</div><div style="font-size:10px;color:#818cf8">${ttShort}</div></div><div class="tw ov">${tk.d}d</div></div>`;
+    });
     body += '</div></div>';
   }
 
-  // Gaps
+  // Full-width: Gaps
   if (g.p || g.v || g.pc) {
-    body += '<div class="pb-full"><div class="ts"><div class="tsl gp">Role Gaps</div><div class="gl">';
+    body += `<div style="grid-column:1/-1"><div class="ts"><div class="tsl gp">Role Gaps</div><div class="gl">`;
     if (g.p) body += `<span class="gt">${g.p} no PM</span>`;
     if (g.v) body += `<span class="gt">${g.v} no Vendor</span>`;
     if (g.pc) body += `<span class="gt">${g.pc} no PurchCoord</span>`;
