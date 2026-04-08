@@ -732,6 +732,7 @@ function renderCashflow(c) {
         <input type="date" id="cf-from-date" value="${cfFromDate}"
           style="background:var(--card);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:5px 8px;font-size:12px;font-family:var(--sans);cursor:pointer">
         <button id="cf-today-btn" style="background:var(--card);color:var(--txt2);border:1px solid var(--bdr);border-radius:6px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:var(--sans)">Today</button>
+        <button id="cf-export-btn" style="background:#2563eb;color:#fff;border:none;border-radius:6px;padding:5px 12px;font-size:11px;cursor:pointer;font-family:var(--sans);font-weight:600;margin-left:8px">📥 Export CSV</button>
       </div>
     </div>
     <div id="cf-stats"></div>
@@ -788,6 +789,124 @@ function renderCashflow(c) {
     cfFromDate = new Date().toISOString().slice(0, 10);
     document.getElementById('cf-from-date').value = cfFromDate;
     renderCfBody();
+  });
+
+  // Export CSV modal
+  document.getElementById('cf-export-btn').addEventListener('click', () => {
+    // Remove existing modal
+    const old = document.getElementById('csv-modal');
+    if (old) old.remove();
+
+    const todayStr = new Date().toISOString().slice(0,10);
+    const in30 = new Date(Date.now() + 30*86400000).toISOString().slice(0,10);
+
+    const modal = document.createElement('div');
+    modal.id = 'csv-modal';
+    modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;display:flex;align-items:center;justify-content:center';
+    modal.innerHTML = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:24px;min-width:340px;max-width:440px">
+      <div style="font-size:16px;font-weight:700;color:var(--txt);margin-bottom:16px">📥 Export Payments CSV</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+        <div>
+          <label style="font-size:11px;color:var(--txt2);font-weight:600;display:block;margin-bottom:4px">From</label>
+          <input type="date" id="csv-from" value="${todayStr}" style="width:100%;background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:8px;font-size:13px;font-family:var(--sans);box-sizing:border-box">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--txt2);font-weight:600;display:block;margin-bottom:4px">To</label>
+          <input type="date" id="csv-to" value="${in30}" style="width:100%;background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:8px;font-size:13px;font-family:var(--sans);box-sizing:border-box">
+        </div>
+      </div>
+      <div style="margin-bottom:16px">
+        <label style="font-size:11px;color:var(--txt2);font-weight:600;display:block;margin-bottom:4px">Include</label>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <label style="font-size:12px;color:var(--txt);display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" id="csv-unpaid" checked> Unpaid</label>
+          <label style="font-size:12px;color:var(--txt);display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" id="csv-paid"> Already Paid</label>
+        </div>
+      </div>
+      <div style="margin-bottom:16px">
+        <label style="font-size:11px;color:var(--txt2);font-weight:600;display:block;margin-bottom:4px">Types</label>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <label style="font-size:12px;color:#f87171;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" id="csv-materials" checked> Materials</label>
+          <label style="font-size:12px;color:#fb923c;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" id="csv-subs" checked> Subs</label>
+          <label style="font-size:12px;color:#4ade80;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" id="csv-income" checked> Income</label>
+          <label style="font-size:12px;color:#facc15;display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" id="csv-potential"> Potential</label>
+        </div>
+      </div>
+      <div id="csv-preview" style="font-size:12px;color:var(--txt2);margin-bottom:16px;padding:8px;background:var(--bg);border-radius:6px"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button id="csv-cancel" style="background:none;color:var(--txt2);border:1px solid var(--bdr);border-radius:6px;padding:8px 16px;font-size:13px;cursor:pointer;font-family:var(--sans)">Cancel</button>
+        <button id="csv-download" style="background:#2563eb;color:#fff;border:none;border-radius:6px;padding:8px 16px;font-size:13px;cursor:pointer;font-family:var(--sans);font-weight:600">Download CSV</button>
+      </div>
+    </div>`;
+    document.body.appendChild(modal);
+
+    // Close on backdrop click
+    modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+    document.getElementById('csv-cancel').addEventListener('click', () => modal.remove());
+
+    function getCsvTasks() {
+      const from = document.getElementById('csv-from').value;
+      const to = document.getElementById('csv-to').value;
+      const inclUnpaid = document.getElementById('csv-unpaid').checked;
+      const inclPaid = document.getElementById('csv-paid').checked;
+      const types = new Set();
+      if (document.getElementById('csv-materials').checked) types.add('materials');
+      if (document.getElementById('csv-subs').checked) types.add('subs');
+      if (document.getElementById('csv-income').checked) types.add('income');
+      if (document.getElementById('csv-potential').checked) types.add('p_income');
+
+      return (CF_DATA.all_tasks || []).filter(t => {
+        if (!t.due) return false;
+        if (t.due < from || t.due > to) return false;
+        if (t.paid && !inclPaid) return false;
+        if (!t.paid && !inclUnpaid) return false;
+        if (!types.has(t.type)) return false;
+        return true;
+      }).sort((a,b) => a.due.localeCompare(b.due));
+    }
+
+    function updatePreview() {
+      const tasks = getCsvTasks();
+      let totalOut = 0, totalIn = 0;
+      tasks.forEach(t => {
+        if (t.type === 'income' || t.type === 'p_income') totalIn += (t.amount||0);
+        else totalOut += (t.amount||0);
+      });
+      document.getElementById('csv-preview').innerHTML = `<b>${tasks.length}</b> payments · <span style="color:#f87171">Out: ${cfFmt(totalOut)}</span> · <span style="color:#4ade80">In: ${cfFmt(totalIn)}</span> · <span style="font-weight:600;color:${totalIn-totalOut>=0?'#4ade80':'#f87171'}">Net: ${cfFmt(totalIn-totalOut)}</span>`;
+    }
+
+    // Update preview on any change
+    ['csv-from','csv-to','csv-unpaid','csv-paid','csv-materials','csv-subs','csv-income','csv-potential'].forEach(id => {
+      document.getElementById(id).addEventListener('change', updatePreview);
+    });
+    updatePreview();
+
+    // Download
+    document.getElementById('csv-download').addEventListener('click', () => {
+      const tasks = getCsvTasks();
+      const typeLabel = t => ({materials:'Materials',subs:'Subcontractor',income:'Income',p_income:'Potential Income'}[t.type]||t.type);
+      const rows = [['Date','Project','Task','Type','Assignee','Amount','Status']];
+      tasks.forEach(t => {
+        rows.push([
+          t.due,
+          `"${(t.project||'').replace(/"/g,'""')}"`,
+          `"${(t.task||'').replace(/"/g,'""')}"`,
+          typeLabel(t),
+          `"${(t.assignee||'Unassigned').replace(/"/g,'""')}"`,
+          (t.amount||0).toFixed(2),
+          t.paid ? 'Paid' : 'Unpaid'
+        ]);
+      });
+      const csv = rows.map(r => r.join(',')).join('\n');
+      const blob = new Blob([csv], {type: 'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const from = document.getElementById('csv-from').value;
+      const to = document.getElementById('csv-to').value;
+      a.href = url; a.download = `payments_${from}_to_${to}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+      modal.remove();
+    });
   });
 
   // Filter handlers
