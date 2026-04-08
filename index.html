@@ -43,8 +43,22 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 
 /* Main */
 .main{max-width:1600px;margin:0 auto;padding:16px 32px;width:100%;box-sizing:border-box}
-@media(max-width:1400px){.main{padding:16px 20px}}
-@media(max-width:1100px){.main{padding:12px 12px}}
+@media(max-width:1400px){.main{padding:16px 16px;max-width:100%}}
+@media(max-width:1100px){.main{padding:12px 8px}}
+@media(max-width:1400px){
+  .stats{grid-template-columns:repeat(3,1fr)!important}
+  .cf-bk-grid4{grid-template-columns:repeat(2,1fr)!important}
+  .cf-bk-grid5{grid-template-columns:repeat(3,1fr)!important}
+  .sod-top-grid{grid-template-columns:1fr!important}
+}
+@media(max-width:1100px){
+  .stats{grid-template-columns:repeat(2,1fr)!important}
+  .cf-bk-grid4{grid-template-columns:repeat(2,1fr)!important}
+  .cf-bk-grid5{grid-template-columns:repeat(2,1fr)!important}
+  .preview{grid-template-columns:repeat(2,1fr)!important}
+  .pb-grid{grid-template-columns:1fr!important}
+  .pb-3col{grid-template-columns:1fr 1fr!important}
+}
 .page-title{font-size:22px;font-weight:700;margin-bottom:2px}
 .page-sub{font-size:13px;color:var(--txt2);margin-bottom:20px}
 
@@ -1030,7 +1044,7 @@ function renderCfBody() {
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--dim);transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
     <div style="display:none">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+      <div class="cf-bk-grid4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
         ${bkCols.map(c => `<div style="text-align:center;padding:8px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--bdr)">
           <div style="font-size:18px;font-weight:700;color:${c.color}">${cfFmt(c.val)}</div>
           <div style="font-size:11px;color:var(--txt2);margin-top:2px">${c.label} (${c.cnt})</div>
@@ -1040,7 +1054,7 @@ function renderCfBody() {
   // Weekly breakdown table
   const weeks = Object.entries(unpaidByWeek).sort((a,b) => a[0].localeCompare(b[0]));
   if (weeks.length) {
-    bkHtml += `<table style="width:100%;font-size:12px;border-collapse:collapse">
+    bkHtml += `<div style="overflow-x:auto"><table style="width:100%;font-size:12px;border-collapse:collapse;min-width:400px">
       <tr style="border-bottom:1px solid var(--bdr);color:var(--txt2)">
         <th style="text-align:left;padding:6px 4px;font-weight:600">Week</th>
         <th style="text-align:right;padding:6px 4px;font-weight:600;color:#f87171">Materials</th>
@@ -1058,7 +1072,7 @@ function renderCfBody() {
         <td style="text-align:right;padding:5px 4px;font-weight:600;color:${net >= 0 ? '#4ade80' : '#f87171'}">${cfFmt(net)}</td>
       </tr>`;
     });
-    bkHtml += '</table>';
+    bkHtml += '</table></div>';
   }
   bkHtml += '</div></div>';
 
@@ -1597,13 +1611,13 @@ function renderMgmtBody() {
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--dim);transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
     <div style="display:none">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+      <div class="cf-bk-grid4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
         ${mBkCols.map(c => `<div style="text-align:center;padding:8px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--bdr)">
           <div style="font-size:18px;font-weight:700;color:${c.color}">${cfFmt(c.val)}</div>
           <div style="font-size:11px;color:var(--txt2);margin-top:2px">${c.label} (${c.cnt})</div>
         </div>`).join('')}
       </div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px">
+      <div class="cf-bk-grid5" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px">
         <div style="text-align:center;padding:6px;background:rgba(129,140,248,.06);border-radius:6px;border:1px solid rgba(129,140,248,.15)">
           <div style="font-size:14px;font-weight:700;color:#818cf8">${cfFmt(mUnpaid.salaries)}</div><div style="font-size:10px;color:#818cf8">Salaries</div></div>
         <div style="text-align:center;padding:6px;background:rgba(52,211,153,.06);border-radius:6px;border:1px solid rgba(52,211,153,.15)">
@@ -1618,7 +1632,7 @@ function renderMgmtBody() {
 
   const mWeeks = Object.entries(mByWeek).sort((a,b) => a[0].localeCompare(b[0]));
   if (mWeeks.length) {
-    mBk += `<table style="width:100%;font-size:12px;border-collapse:collapse">
+    mBk += `<div style="overflow-x:auto"><table style="width:100%;font-size:12px;border-collapse:collapse;min-width:480px">
       <tr style="border-bottom:1px solid var(--bdr);color:var(--txt2)">
         <th style="text-align:left;padding:6px 4px;font-weight:600">Week</th>
         <th style="text-align:right;padding:6px 4px;font-weight:600;color:#f87171">Materials</th>
@@ -1639,7 +1653,7 @@ function renderMgmtBody() {
         <td style="text-align:right;padding:5px 4px;font-weight:600;color:${net >= 0 ? '#4ade80' : '#f87171'}">${cfFmt(net)}</td>
       </tr>`;
     });
-    mBk += '</table>';
+    mBk += '</table></div>';
   }
   mBk += '</div></div>';
   statsEl.innerHTML += mBk;
@@ -1984,7 +1998,7 @@ function renderSOD(c) {
   let h = `
     <div class="page-title">Schedule Check</div>
     <div class="page-sub">SOD Report · ${dateLabel} · 7:00 AM</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;align-items:stretch">
+    <div class="sod-top-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;align-items:stretch">
       <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;display:flex;flex-direction:column">
         <div style="font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:10px">Schedule Overview</div>
         <div class="stats" style="grid-template-columns:repeat(2,1fr);margin-bottom:8px">
