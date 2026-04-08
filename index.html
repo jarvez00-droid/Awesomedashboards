@@ -354,9 +354,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 </div>
 
 <div class="nav" id="main-nav">
-  <a class="on" data-p="sod">☀ SOD</a>
-  <a data-p="eod">🌙 EOD</a>
-  <a data-p="projects">◧ Projects</a>
+  <a class="on" data-p="sod">📋 Projects Dashboard</a>
   <a data-p="weekly">▤ Weekly Forecast</a>
   <a data-p="cashflow">💰 Cash Flow</a>
   <a data-p="mgmt">▥ Management</a>
@@ -388,7 +386,6 @@ const MGMT_PW = 'Awesome';
 function render() {
   const c = document.getElementById('content');
   if (curPage === 'sod') renderSOD(c);
-  else if (curPage === 'eod') loadAndRenderEOD(c);
   else if (curPage === 'weekly') weeklyGate(c);
   else if (curPage === 'cashflow') cashflowGate(c);
   else if (curPage === 'mgmt') mgmtGate(c);
@@ -2031,8 +2028,8 @@ function renderSOD(c) {
   });
 
   let h = `
-    <div class="page-title">Schedule Check</div>
-    <div class="page-sub">SOD Report · ${dateLabel} · 7:00 AM</div>
+    <div class="page-title">Projects Dashboard</div>
+    <div class="page-sub">${dateLabel}</div>
     <div class="sod-top-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;align-items:stretch">
       <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;display:flex;flex-direction:column">
         <div style="font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:10px">Schedule Overview</div>
@@ -2384,7 +2381,7 @@ async function renderArchive(c) {
         const dayName = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d.getDay()];
         const dayLabel = MONTHS[d.getMonth()] + ' ' + d.getDate();
         const isEOD = rpt.type === 'eod';
-        const typeLabel = isEOD ? 'EOD Report' : 'SOD Report';
+        const typeLabel = isEOD ? 'EOD Report' : 'Projects Dashboard';
         const typeIcon = isEOD ? '🌙' : '☀';
         h += `<div class="pc" style="margin-bottom:4px"><div class="ph" onclick="loadArchiveDate('${rpt.date}','${rpt.type||'sod'}')" style="cursor:pointer">
           <div><div class="pn">${typeIcon} ${dayName}, ${dayLabel}</div><div class="pp">${typeLabel}</div></div>
@@ -2412,21 +2409,12 @@ async function loadArchiveDate(dateStr, type) {
   try {
     const r = await fetch('data/' + file + dateStr + '.json');
     if (!r.ok) throw new Error('not found');
-    if (isEOD) {
-      EOD_DATA = await r.json();
-      curDate = dateStr;
-      updateDateDisplay();
-      document.querySelectorAll('#main-nav a').forEach(x => x.classList.remove('on'));
-      document.querySelector('#main-nav a[data-p="eod"]').classList.add('on');
-      curPage = 'eod';
-    } else {
-      DATA = await r.json();
-      curDate = dateStr;
-      updateDateDisplay();
-      document.querySelectorAll('#main-nav a').forEach(x => x.classList.remove('on'));
-      document.querySelector('#main-nav a[data-p="sod"]').classList.add('on');
-      curPage = 'sod';
-    }
+    DATA = await r.json();
+    curDate = dateStr;
+    updateDateDisplay();
+    document.querySelectorAll('#main-nav a').forEach(x => x.classList.remove('on'));
+    document.querySelector('#main-nav a[data-p="sod"]').classList.add('on');
+    curPage = 'sod';
     render();
   } catch(e) {
     alert('Report not available for ' + dateStr);
