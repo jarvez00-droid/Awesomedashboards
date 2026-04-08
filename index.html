@@ -1720,6 +1720,7 @@ function renderSOD(c) {
       </div>
     </div>
     <div class="alert"><span>⚠</span><div><b>Top concern:</b> ${s.concern}</div></div>
+    ${buildAnalysis(DATA.analysis)}
     ${buildFilters(ps, issues, ok, DATA.pms)}
     <div id="plist">`;
   issues.forEach((p, i) => { h += buildCard(p, i === 0, false); });
@@ -1754,6 +1755,60 @@ function buildPMSection(pms, isEOD) {
     h += `<div class="pmc"><div><div class="pmn">${pm.name}</div><div class="pmd">${detail}</div></div><div class="pmb">${badge}</div></div>`;
   });
   return h + '</div>';
+}
+
+function buildAnalysis(a) {
+  if (!a) return '';
+  const ins = a.insights || [], warn = a.warnings || [], adv = a.advice || [];
+  if (!ins.length && !warn.length && !adv.length) return '';
+
+  let h = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:16px 20px;margin-bottom:16px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <span style="font-size:18px">🟢</span>
+      <div><div style="font-size:14px;font-weight:700;color:var(--txt)">Jade's Analysis</div>
+      <div style="font-size:11px;color:var(--dim)">Daily assessment · trends · recommendations</div></div>
+    </div>`;
+
+  if (ins.length) {
+    h += '<div style="margin-bottom:12px">';
+    ins.forEach(i => {
+      h += `<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(33,39,47,.3);font-size:13px">
+        <span>${i.icon}</span>
+        <div><span style="font-weight:600;color:var(--txt)">${i.title}</span>
+        <span style="color:var(--txt2);margin-left:6px">${i.text}</span></div>
+      </div>`;
+    });
+    h += '</div>';
+  }
+
+  if (warn.length) {
+    h += `<div style="margin-bottom:12px">
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--red);margin-bottom:6px">⚠ Warnings</div>`;
+    warn.forEach(w => {
+      h += `<div style="display:flex;gap:8px;padding:8px 10px;margin-bottom:4px;background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.15);border-radius:6px;font-size:12px">
+        <span>${w.icon}</span>
+        <div><span style="font-weight:600;color:var(--txt)">${w.project}:</span>
+        <span style="color:var(--txt2);margin-left:4px">${w.text}</span></div>
+      </div>`;
+    });
+    h += '</div>';
+  }
+
+  if (adv.length) {
+    h += `<div>
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--blu);margin-bottom:6px">💡 Recommendations</div>`;
+    adv.forEach(r => {
+      h += `<div style="display:flex;gap:8px;padding:8px 10px;margin-bottom:4px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.15);border-radius:6px;font-size:12px">
+        <span>${r.icon}</span>
+        <div><span style="font-weight:600;color:var(--txt)">${r.pm}:</span>
+        <span style="color:var(--txt2);margin-left:4px">${r.text}</span></div>
+      </div>`;
+    });
+    h += '</div>';
+  }
+
+  h += '</div>';
+  return h;
 }
 
 function buildOkCard(p) {
