@@ -536,52 +536,39 @@ function renderWeekly(c) {
   // ── Resolution % stat ──
   h += `<div style="text-align:center;margin-bottom:20px;font-size:14px;color:var(--txt2)">Resolution Rate: <span style="font-weight:700;color:${s.resolution_pct >= 30 ? 'var(--grn)' : s.resolution_pct >= 15 ? 'var(--ylw)' : 'var(--red)'}">${s.resolution_pct}%</span> (${s.overdue_resolved} of ${s.unique_overdue} resolved)</div>`;
 
-  // ── Projects ──
+  // ── Project Analysis ──
   const projNames = Object.keys(projs).sort((a, b) => Math.abs(projs[b].net_shift_days || 0) - Math.abs(projs[a].net_shift_days || 0));
-  if (projNames.length) {
-    h += '<div class="wk-section"><div class="wk-section-title">Projects</div>';
-    projNames.forEach(pname => {
+  const activeProjs = projNames.filter(pn => {
+    const p = projs[pn];
+    return p.tasks_pushed || p.tasks_pulled || p.unique_overdue || p.completed;
+  });
+  if (activeProjs.length) {
+    h += '<div class="wk-section"><div class="wk-section-title">Project Analysis</div>';
+    activeProjs.forEach(pname => {
       const p = projs[pname];
-      if (!p.tasks_pushed && !p.tasks_pulled && !p.unique_overdue && !p.completed) return;
-
       const pmLabel = p.pms && p.pms.length ? p.pms.join(', ') : 'No PM';
+
+      // Severity from narrative trend markers
+      const narrative = p.narrative || '';
+      const hasNeg = narrative.includes('📉');
+      const hasPos = narrative.includes('📈');
+      const sev = hasNeg ? 'sev-r' : p.net_shift_days >= 5 ? 'sev-o' : hasPos ? 'sev-g' : 'sev-b';
+
+      // Compact tags
       let tags = '';
-      if (p.unique_overdue) tags += `<span class="tg r">${p.unique_overdue} overdue</span>`;
-      if (p.completed) tags += `<span class="tg gr">${p.completed} done</span>`;
-      if (p.early_finish) tags += `<span class="tg" style="background:rgba(52,211,153,.15);color:#34d399">${p.early_finish} early</span>`;
-      if (p.net_shift_days > 0) tags += `<span class="tg o">+${p.net_shift_days}d drift</span>`;
-      else if (p.net_shift_days < 0) tags += `<span class="tg gr">${p.net_shift_days}d ahead</span>`;
-      if (p.tasks_pushed) tags += `<span class="tg b">${p.tasks_pushed} pushed</span>`;
-      if (p.tasks_pulled) tags += `<span class="tg" style="background:rgba(96,165,250,.15);color:#60a5fa">${p.tasks_pulled} pulled</span>`;
+      if (p.net_shift_days > 0) tags += `<span class="tg o">+${p.net_shift_days}d</span>`;
+      else if (p.net_shift_days < 0) tags += `<span class="tg gr">${p.net_shift_days}d</span>`;
+      if (hasNeg) tags += '<span class="tg r">📉</span>';
+      if (hasPos) tags += '<span class="tg gr">📈</span>';
 
-      const sev = p.net_shift_days >= 20 ? 'sev-r' : p.net_shift_days >= 5 ? 'sev-o' : p.unique_overdue > 5 ? 'sev-o' : 'sev-g';
-
-      let body = '<div style="border-top:1px solid var(--bdr);margin-bottom:10px"></div>';
-
-      // Quick stats row
-      body += `<div style="display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--txt2);margin-bottom:10px">
-        <span>✅ ${p.completed} completed${p.early_finish ? ` (${p.early_finish} early)` : ''}</span>
-        <span>🔴 ${p.unique_overdue} overdue (${p.overdue_resolved} resolved, ${p.chronic_overdue} chronic)</span>
-        <span>📅 ${p.tasks_pushed} pushed · ${p.tasks_pulled} pulled · net ${p.net_shift_days > 0 ? '+' : ''}${p.net_shift_days}d</span>
-      </div>`;
-
-      // Milestone impacts for this project
-      const pMilestones = (p.milestone_impacts || []);
-      if (pMilestones.length) {
-        body += '<div class="ts"><div class="tsl" style="color:#818cf8">📌 Milestone Impact</div>';
-        pMilestones.forEach(mi => {
-          let desc = `<b>${mi.origin_task}</b> pushed +${mi.origin_delta}d`;
-          if (mi.chain_length > 0) desc += ` → cascaded through ${mi.chain_length} task${mi.chain_length>1?'s':''}`;
-          desc += ` → <b>${mi.milestone_task}</b> moved from ${mi.milestone_old_date} to ${mi.milestone_new_date}`;
-          if (mi.is_payment && mi.payment_amount) desc += ` <span style="color:#818cf8">($${mi.payment_amount.toLocaleString()})</span>`;
-          body += `<div class="tr" style="align-items:flex-start"><div class="td" style="background:${mi.is_payment ? '#818cf8' : 'var(--org)'}"></div><div class="ti"><div class="tn" style="font-size:12px;line-height:1.5">${desc}</div></div><div class="tw ov">+${mi.origin_delta}d</div></div>`;
-        });
-        body += '</div>';
-      }
+      // Body = narrative text
+      let body = '<div style="border-top:1px solid var(--bdr);padding-top:10px">';
+      body += `<div style="font-size:13px;line-height:1.7;color:var(--txt2)">${md(narrative)}</div>`;
+      body += '</div>';
 
       h += `<div class="pc ${sev}" style="margin-bottom:8px"><div class="ph" onclick="tog(this)"><div>
         <div class="pn">${pname}</div>
-        <div class="pp">PM: ${pmLabel}</div></div>
+        <div class="pp">PM: ${pmLabel} · ${p.completed} done · ${p.unique_overdue} overdue · ${p.tasks_pushed} pushed</div></div>
         <div class="pt">${tags}${chvSvg()}</div></div>
         <div class="pb">${body}</div></div>`;
     });
