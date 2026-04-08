@@ -1703,6 +1703,7 @@ function renderSOD(c) {
     <div class="page-sub">SOD Report · ${dateLabel} · 7:00 AM</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;align-items:start">
       <div>
+        <div style="font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:8px">Schedule Overview</div>
         <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:8px">
           <div class="st r"><div class="n">${s.overdue}</div><div class="l">Overdue (PM)</div></div>
           <div class="st o"><div class="n">${s.blocked}</div><div class="l">Blocked</div></div>
@@ -1762,52 +1763,80 @@ function buildAnalysis(a) {
   const ins = a.insights || [], warn = a.warnings || [], adv = a.advice || [];
   if (!ins.length && !warn.length && !adv.length) return '';
 
+  // Build flowing narrative text
+  let paragraphs = [];
+
+  // Trend paragraph
+  const trendIns = ins.filter(i => i.title.startsWith('Trend:'));
+  const weekIns = ins.filter(i => i.title.startsWith('This week'));
+  const progressIns = ins.filter(i => i.icon === '✅');
+  if (trendIns.length || weekIns.length) {
+    let p = '';
+    if (trendIns.length) {
+      const t = trendIns[0];
+      const dir = t.title.includes('WORSENING') ? 'things got worse' : t.title.includes('IMPROVING') ? 'we\'re improving' : 'things held steady';
+      p += `Compared to yesterday, <b>${dir}</b> — ${t.text}. `;
+    }
+    if (weekIns.length) p += weekIns[0].text + '. ';
+    if (progressIns.length) {
+      const names = progressIns.map(i => `<b>${i.title.split(':')[0]}</b>`);
+      p += `Good news: ${names.join(' and ')} showed progress clearing overdue items.`;
+    }
+    paragraphs.push(p);
+  }
+
+  // Warnings paragraph
+  const projWarns = warn.filter(w => w.icon === '🚨');
+  const chainWarns = warn.filter(w => w.icon === '⛓️');
+  const payWarn = warn.filter(w => w.icon === '💰');
+  if (projWarns.length || chainWarns.length || payWarn.length) {
+    let p = '';
+    if (projWarns.length) {
+      const wnames = projWarns.map(w => `<b>${w.project}</b> (${w.text.toLowerCase()})`);
+      p += `I'm watching ${wnames.join(', ')} — these need attention today. `;
+    }
+    if (chainWarns.length) {
+      const cnames = chainWarns.map(w => {
+        const ct = w.text.match(/^(\d+)/);
+        return `<b>${w.project}</b> (${ct ? ct[1] : 'several'} blocked)`;
+      });
+      p += `Blocked task chains are building up on ${cnames.join(', ')}. Clearing the upstream overdue tasks will unlock batches of work. `;
+    }
+    if (payWarn.length) {
+      p += payWarn[0].text;
+    }
+    paragraphs.push(p);
+  }
+
+  // Advice paragraph — personal, directed at PMs
+  if (adv.length) {
+    let p = '<b>My advice for today:</b> ';
+    const pmAdv = adv.filter(r => r.pm !== 'All PMs');
+    const allAdv = adv.filter(r => r.pm === 'All PMs');
+    if (pmAdv.length) {
+      const parts = pmAdv.map(r => {
+        const shortName = r.pm.split(' ')[0];
+        return `<b>${shortName}</b> — ${r.text.replace(r.pm + ' has ', '').replace(r.pm, shortName)}`;
+      });
+      p += parts.join(' ');
+    }
+    if (allAdv.length) {
+      p += ' ' + allAdv.map(r => r.text).join(' ');
+    }
+    paragraphs.push(p);
+  }
+
+  if (!paragraphs.length) return '';
+
   let h = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:16px 20px;margin-bottom:16px">
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
       <span style="font-size:18px">🟢</span>
-      <div><div style="font-size:14px;font-weight:700;color:var(--txt)">Jade's Analysis</div>
-      <div style="font-size:11px;color:var(--dim)">Daily assessment · trends · recommendations</div></div>
-    </div>`;
-
-  if (ins.length) {
-    h += '<div style="margin-bottom:12px">';
-    ins.forEach(i => {
-      h += `<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(33,39,47,.3);font-size:13px">
-        <span>${i.icon}</span>
-        <div><span style="font-weight:600;color:var(--txt)">${i.title}</span>
-        <span style="color:var(--txt2);margin-left:6px">${i.text}</span></div>
-      </div>`;
-    });
-    h += '</div>';
-  }
-
-  if (warn.length) {
-    h += `<div style="margin-bottom:12px">
-      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--red);margin-bottom:6px">⚠ Warnings</div>`;
-    warn.forEach(w => {
-      h += `<div style="display:flex;gap:8px;padding:8px 10px;margin-bottom:4px;background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.15);border-radius:6px;font-size:12px">
-        <span>${w.icon}</span>
-        <div><span style="font-weight:600;color:var(--txt)">${w.project}:</span>
-        <span style="color:var(--txt2);margin-left:4px">${w.text}</span></div>
-      </div>`;
-    });
-    h += '</div>';
-  }
-
-  if (adv.length) {
-    h += `<div>
-      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--blu);margin-bottom:6px">💡 Recommendations</div>`;
-    adv.forEach(r => {
-      h += `<div style="display:flex;gap:8px;padding:8px 10px;margin-bottom:4px;background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.15);border-radius:6px;font-size:12px">
-        <span>${r.icon}</span>
-        <div><span style="font-weight:600;color:var(--txt)">${r.pm}:</span>
-        <span style="color:var(--txt2);margin-left:4px">${r.text}</span></div>
-      </div>`;
-    });
-    h += '</div>';
-  }
-
-  h += '</div>';
+      <div style="font-size:14px;font-weight:700;color:var(--txt)">Jade's Daily Brief</div>
+    </div>
+    <div style="font-size:13px;line-height:1.7;color:var(--txt2)">
+      ${paragraphs.map(p => `<p style="margin:0 0 10px 0">${p}</p>`).join('')}
+    </div>
+  </div>`;
   return h;
 }
 
