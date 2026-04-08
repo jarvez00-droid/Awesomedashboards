@@ -1708,9 +1708,10 @@ function renderSOD(c) {
           <div class="st r"><div class="n">${s.overdue}</div><div class="l">Overdue</div></div>
           <div class="st b"><div class="n">${s.active}</div><div class="l">Active</div></div>
         </div>
-        <div class="stats" style="grid-template-columns:repeat(2,1fr);margin-bottom:0;flex:1;align-content:start">
-          <div class="st y"><div class="n">${s.coming||0}</div><div class="l">Upcoming 72h</div></div>
-          <div class="st" style="border-color:rgba(129,140,248,.3);background:rgba(129,140,248,.06)"><div class="n" style="color:#818cf8">${s.payment_overdue||0}</div><div class="l" style="color:#818cf8">💰 Payments Due</div></div>
+        <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:0;flex:1;align-content:start">
+          <div class="st o"><div class="n">${s.active_blocked||0}</div><div class="l">Active Blocked</div></div>
+          <div class="st y"><div class="n">${s.coming||0}</div><div class="l">Upcoming</div></div>
+          <div class="st" style="border-color:rgba(129,140,248,.3);background:rgba(129,140,248,.06)"><div class="n" style="color:#818cf8">${s.payment_overdue||0}</div><div class="l" style="color:#818cf8">💰 Payments</div></div>
         </div>
       </div>
       <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;display:flex;flex-direction:column">
@@ -1803,15 +1804,19 @@ function buildCard(p, open, isEOD) {
   if (isEOD && c.resolved) tags += `<span class="tg gr">${c.resolved} cleared</span>`;
   if (c.ov) tags += `<span class="tg r">${c.ov} overdue</span>`;
   if (c.ac) tags += `<span class="tg b">${c.ac} active</span>`;
+  if (c.ab) tags += `<span class="tg o">${c.ab} active blocked</span>`;
   if (c.co) tags += `<span class="tg y">${c.co} upcoming</span>`;
   if (c.pay) tags += `<span class="tg" style="background:rgba(129,140,248,.15);color:#818cf8;border-color:rgba(129,140,248,.3)">${c.pay} payment</span>`;
 
   const sev = c.ov ? 'sev-r' : c.ac ? 'sev-b' : c.co ? 'sev-g' : 'sev-g';
 
-  // Preview columns: Overdue, Active, Upcoming + optional Payments
-  let preview = `<div class="preview" style="grid-template-columns:${pay.length ? '1fr 1fr 1fr 1fr' : '1fr 1fr 1fr'}">`;
+  const ab = t.active_blocked || [];
+  // Preview columns
+  const colCount = 3 + (ab.length?1:0) + (pay.length?1:0);
+  let preview = `<div class="preview" style="grid-template-columns:repeat(${colCount},1fr)">`;
   preview += pvCol('Overdue', 'r', ov, tk => `${tk.n}`, tk => `${tk.d}d`);
   preview += pvCol('Active', 'b', ac, tk => `${tk.n}`, tk => tk.dt || 'active');
+  if (ab.length) preview += pvCol('Active Blocked', 'o', ab, tk => `${tk.n}`, tk => tk.d ? `${tk.d}d late` : 'blocked');
   preview += pvCol('Upcoming', 'y', co, tk => `${tk.n}`, tk => tk.when || '');
   if (pay.length) {
     preview += `<div class="pv-col"><div class="pv-head" style="color:#818cf8">💰 Payments</div>`;
@@ -1844,6 +1849,18 @@ function buildCard(p, open, isEOD) {
   if (ov.length) {
     body += '<div class="ts"><div class="tsl lr">Overdue</div>';
     body += trowSection('r', ov, tk => trow('r', tk.n, tk.w, tk.d + 'd', true), 5);
+    body += '</div>';
+  }
+  if (ab.length) {
+    body += '<div class="ts"><div class="tsl" style="color:var(--org)">Active Blocked</div>';
+    body += trowSection('o', ab, tk => {
+      const kindTag = tk.bl_kind === 'payment' ? '<span style="background:rgba(129,140,248,.15);color:#818cf8;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">💰 payment</span>'
+        : tk.bl_kind === 'overdue' ? '<span style="background:rgba(248,113,113,.15);color:var(--red);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">⚠ overdue</span>'
+        : '<span style="background:rgba(250,204,21,.1);color:var(--ylw);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px">⏳ predecessor</span>';
+      const late = tk.d > 0 ? `${tk.d}d late` : 'today';
+      const byLine = tk.bl ? `<div style="font-size:10px;color:var(--dim);margin-top:1px">↳ waiting on: ${tk.bl}</div>` : '';
+      return `<div class="tr" style="flex-wrap:wrap"><div class="td o"></div><div class="ti"><div class="tn">${tk.n} - ${tk.w||''}${kindTag}</div>${byLine}</div><div class="tw ov">${late}</div></div>`;
+    }, 5);
     body += '</div>';
   }
   if (ac.length) {
