@@ -2052,7 +2052,7 @@ function renderSOD(c) {
       </div>
     </div>
     <div class="alert"><span>⚠</span><div><b>Top concern:</b> ${s.concern}</div></div>
-    ${buildAnalysis(DATA.analysis)}
+    ${buildAnalysis(DATA.analysis, '')}
     ${buildFilters(ps, issues, ok, DATA.pms)}
     <div id="plist">`;
   issues.forEach((p, i) => { h += buildCard(p, i === 0, false); });
@@ -2089,19 +2089,26 @@ function buildPMSection(pms, isEOD) {
   return h + '</div>';
 }
 
-function buildAnalysis(a) {
+function buildAnalysis(a, pmFilter) {
   if (!a) return '';
-  const paras = a.paragraphs || [];
-  if (!paras.length) return '';
-
   const md = t => t.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 
-  return `<div class="pc sev-g" style="border-left-color:#34d399;background:linear-gradient(135deg,rgba(18,183,106,.08) 0%,rgba(18,183,106,.02) 40%,var(--card) 100%)">
+  let paras, subtitle;
+  if (pmFilter && a.pm_briefs && a.pm_briefs[pmFilter]) {
+    paras = a.pm_briefs[pmFilter];
+    subtitle = `Analysis for ${pmFilter}`;
+  } else {
+    paras = a.paragraphs || [];
+    subtitle = 'Company overview · trend · advice';
+  }
+  if (!paras.length) return '';
+
+  return `<div id="jade-brief" class="pc sev-g" style="border-left-color:#34d399;background:linear-gradient(135deg,rgba(18,183,106,.08) 0%,rgba(18,183,106,.02) 40%,var(--card) 100%)">
     <div class="ph" onclick="tog(this)">
       <div style="display:flex;align-items:center;gap:8px">
         <span style="font-size:18px">🟢</span>
         <div><div class="pn" style="color:#34d399">Jade's Daily Brief</div>
-        <div class="pp">AI analysis · trend · advice</div></div>
+        <div class="pp">${subtitle}</div></div>
       </div>
       <div class="pt">${chvSvg()}</div>
     </div>
@@ -2336,6 +2343,16 @@ function filt(f, btn) {
 function filtPM(pm) {
   curPMFilter = pm;
   applyFilters();
+  // Update Jade's Brief based on PM selection
+  const briefEl = document.getElementById('jade-brief');
+  if (briefEl && DATA && DATA.analysis) {
+    const wasOpen = briefEl.classList.contains('op');
+    briefEl.outerHTML = buildAnalysis(DATA.analysis, pm);
+    if (wasOpen) {
+      const newBrief = document.getElementById('jade-brief');
+      if (newBrief) newBrief.classList.add('op');
+    }
+  }
 }
 
 // Archive page
