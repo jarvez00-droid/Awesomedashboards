@@ -3,7 +3,7 @@
   "week": "Apr 06 - Apr 12, 2026",
   "week_start": "2026-04-06",
   "week_end": "2026-04-12",
-  "generated_at": "2026-04-09T10:06:44.618809",
+  "generated_at": "2026-04-09T10:43:48.595451",
   "snapshot_date": "2026-04-09",
   "summary": {
     "total_due_this_week": 97,
@@ -16,18 +16,18 @@
     "cash_out": 66157,
     "cash_in": 0,
     "cash_net": -66157,
-    "rain_risk_days": 2,
+    "rain_risk_days": 4,
     "projects": 8
   },
-  "weather": [
+  "weather_this_week": [
     {
       "date": "2026-04-09",
       "day": "Thu",
-      "high": 79,
+      "high": 80,
       "low": 62,
       "rain_pct": 1,
       "rain_in": 0.0,
-      "wind_mph": 16,
+      "wind_mph": 12,
       "code": 3,
       "desc": "Overcast",
       "outdoor_risk": "good"
@@ -49,7 +49,7 @@
       "day": "Sat",
       "high": 79,
       "low": 62,
-      "rain_pct": 31,
+      "rain_pct": 27,
       "rain_in": 0.04,
       "wind_mph": 15,
       "code": 53,
@@ -61,7 +61,143 @@
       "day": "Sun",
       "high": 76,
       "low": 66,
-      "rain_pct": 64,
+      "rain_pct": 65,
+      "rain_in": 0.43,
+      "wind_mph": 17,
+      "code": 81,
+      "desc": "Moderate rain showers",
+      "outdoor_risk": "caution"
+    }
+  ],
+  "weather_next_week": [
+    {
+      "date": "2026-04-13",
+      "day": "Mon",
+      "high": 80,
+      "low": 68,
+      "rain_pct": 45,
+      "rain_in": 0.12,
+      "wind_mph": 16,
+      "code": 53,
+      "desc": "Moderate drizzle",
+      "outdoor_risk": "caution"
+    },
+    {
+      "date": "2026-04-14",
+      "day": "Tue",
+      "high": 78,
+      "low": 67,
+      "rain_pct": 27,
+      "rain_in": 0.08,
+      "wind_mph": 16,
+      "code": 51,
+      "desc": "Light drizzle",
+      "outdoor_risk": "good"
+    },
+    {
+      "date": "2026-04-15",
+      "day": "Wed",
+      "high": 81,
+      "low": 66,
+      "rain_pct": 34,
+      "rain_in": 0.04,
+      "wind_mph": 13,
+      "code": 51,
+      "desc": "Light drizzle",
+      "outdoor_risk": "good"
+    },
+    {
+      "date": "2026-04-16",
+      "day": "Thu",
+      "high": 82,
+      "low": 68,
+      "rain_pct": 34,
+      "rain_in": 0.01,
+      "wind_mph": 14,
+      "code": 51,
+      "desc": "Light drizzle",
+      "outdoor_risk": "good"
+    },
+    {
+      "date": "2026-04-17",
+      "day": "Fri",
+      "high": 77,
+      "low": 68,
+      "rain_pct": 20,
+      "rain_in": 0.0,
+      "wind_mph": 17,
+      "code": 3,
+      "desc": "Overcast",
+      "outdoor_risk": "good"
+    },
+    {
+      "date": "2026-04-18",
+      "day": "Sat",
+      "high": 80,
+      "low": 68,
+      "rain_pct": 20,
+      "rain_in": 0.02,
+      "wind_mph": 16,
+      "code": 51,
+      "desc": "Light drizzle",
+      "outdoor_risk": "good"
+    },
+    {
+      "date": "2026-04-19",
+      "day": "Sun",
+      "high": 81,
+      "low": 68,
+      "rain_pct": 16,
+      "rain_in": 0.06,
+      "wind_mph": 15,
+      "code": 51,
+      "desc": "Light drizzle",
+      "outdoor_risk": "good"
+    }
+  ],
+  "weather": [
+    {
+      "date": "2026-04-09",
+      "day": "Thu",
+      "high": 80,
+      "low": 62,
+      "rain_pct": 1,
+      "rain_in": 0.0,
+      "wind_mph": 12,
+      "code": 3,
+      "desc": "Overcast",
+      "outdoor_risk": "good"
+    },
+    {
+      "date": "2026-04-10",
+      "day": "Fri",
+      "high": 77,
+      "low": 63,
+      "rain_pct": 12,
+      "rain_in": 0.0,
+      "wind_mph": 13,
+      "code": 3,
+      "desc": "Overcast",
+      "outdoor_risk": "good"
+    },
+    {
+      "date": "2026-04-11",
+      "day": "Sat",
+      "high": 79,
+      "low": 62,
+      "rain_pct": 27,
+      "rain_in": 0.04,
+      "wind_mph": 15,
+      "code": 53,
+      "desc": "Moderate drizzle",
+      "outdoor_risk": "good"
+    },
+    {
+      "date": "2026-04-12",
+      "day": "Sun",
+      "high": 76,
+      "low": 66,
+      "rain_pct": 65,
       "rain_in": 0.43,
       "wind_mph": 17,
       "code": 81,
@@ -74,7 +210,14 @@
       "severity": "medium",
       "day": "Sun",
       "date": "2026-04-12",
-      "message": "\u26a0\ufe0f Sun 2026-04-12: Moderate rain showers \u2014 64% chance of rain. Monitor conditions before starting outdoor work.",
+      "message": "\u26a0\ufe0f Sun 2026-04-12: Moderate rain showers \u2014 65% chance of rain. Monitor conditions before starting outdoor work.",
+      "tasks_affected": []
+    },
+    {
+      "severity": "medium",
+      "day": "Mon",
+      "date": "2026-04-13",
+      "message": "\u26a0\ufe0f Mon 2026-04-13: Moderate drizzle \u2014 45% chance of rain. Monitor conditions before starting outdoor work.",
       "tasks_affected": []
     }
   ],
@@ -1127,7 +1270,7 @@
   "analysis": [
     "This week has 97 tasks due across 8 projects, with 63 tasks already overdue from previous weeks. That's a combined load of 160 items the team needs to manage.",
     "\ud83d\udcb0 **Cash flow alert:** $66,157 going out this week with $0 coming in. That's all materials and subcontractor payments. Make sure the bank balance can handle it, and chase any client payments that should have been collected already.",
-    "\ud83c\udf27\ufe0f **Weather note:** 1 day with possible rain. Not a full stop but PMs should monitor conditions, especially for the 34 outdoor tasks due this week.",
+    "\ud83c\udf27\ufe0f **Weather note:** 2 days with possible rain. Not a full stop but PMs should monitor conditions, especially for the 34 outdoor tasks due this week.",
     "\u26d4 **2 tasks are blocked** by overdue dependencies. These can't move until their prerequisites are done. The PMs responsible should treat those blockers as their #1 priority this week.",
     "\ud83d\udcb0 **Payment chain alert:** 17 payments across all projects are effectively blocked because the work that needs to happen before them is overdue. Even though the payment dates look fine in the schedule, these payments CANNOT happen until the prerequisite work is done.",
     "Of those, 2 are **client income payments** ($9,470). This is money that won't come in until the blocking work is cleared.",
