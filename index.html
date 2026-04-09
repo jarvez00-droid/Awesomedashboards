@@ -2355,7 +2355,7 @@ function renderSOD(c) {
         </div>
         <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-bottom:0;flex:1;align-content:start">
           <div class="st o"><div class="n">${s.active_blocked||0}</div><div class="l">Active Blocked</div></div>
-          <div class="st y"><div class="n">${s.coming||0}</div><div class="l">Upcoming</div></div>
+          <div class="st y" title="${s.coming||0} total upcoming in next 7 days, ${s.coming_unassigned||0} have no one assigned"><div class="n">${s.coming_unassigned||0}</div><div class="l">Upcoming Unassigned</div></div>
           <div class="st" style="border-color:rgba(129,140,248,.3);background:rgba(129,140,248,.06)"><div class="n" style="color:#818cf8">${s.payment_overdue||0}</div><div class="l" style="color:#818cf8">💰 Payments</div></div>
         </div>
       </div>
@@ -2435,13 +2435,24 @@ function buildAnalysis(a, pmFilter) {
 
 function buildOkCard(p) {
   const co = p.tasks?.coming || [];
+  const coUn = co.filter(tk => tk.unassigned);
+  const coAs = co.filter(tk => !tk.unassigned);
   const pmVal = p.pm || 'No PM';
-  const tags = co.length ? `<span class="tg y">${co.length} coming</span>` : '';
+  const tags = coUn.length ? `<span class="tg y">${coUn.length} unassigned</span>` : co.length ? `<span class="tg" style="background:rgba(250,204,21,.06);color:var(--dim);border-color:rgba(250,204,21,.2)">${co.length} upcoming</span>` : '';
+  let inner = '';
+  if (coUn.length) {
+    inner += `<div style="font-size:11px;font-weight:600;color:var(--red);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">⚠️ Unassigned (${coUn.length})</div>`;
+    inner += coUn.map(tk => `<div style="font-size:12px;padding:3px 0;border-bottom:1px solid rgba(33,39,47,.3)"><span style="color:var(--red);margin-right:6px">●</span>${tk.n} — <span style="color:var(--txt2)">${tk.when}</span></div>`).join('');
+  }
+  if (coAs.length) {
+    inner += `<div style="margin-top:6px;cursor:pointer" onclick="var el=this.querySelector('.ok-assigned');el.style.display=el.style.display==='none'?'block':'none'"><div style="font-size:11px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.5px">✅ Assigned (${coAs.length}) — Click to expand</div><div class="ok-assigned" style="display:none">${coAs.map(tk => `<div style="font-size:12px;padding:3px 0;border-bottom:1px solid rgba(33,39,47,.3)"><span style="margin-right:6px">●</span>${tk.n} — <span style="color:var(--txt2)">${tk.when} · ${tk.w}</span></div>`).join('')}</div></div>`;
+  }
+  if (!co.length) inner = '<div style="font-size:12px;color:var(--dim);font-style:italic">Nothing upcoming</div>';
   return `<div class="pc sev-g" data-st="ok" data-pm="${pmVal}"><div class="ph" onclick="tog(this)"><div>
     <div class="pn" style="color:var(--grn)">✓ ${p.name}</div>
     <div class="pp">${pmVal !== 'No PM' ? 'PM: '+pmVal : '<span class="nob">⚠ No PM assigned</span>'}</div></div>
     <div class="pt"><span class="tg gr">on track</span>${tags}${chvSvg()}</div></div>
-    <div class="pb"><div style="padding:4px 0"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--ylw);margin-bottom:6px">Coming Up (72h)</div>${co.length ? co.map(tk => `<div style="font-size:12px;padding:3px 0;border-bottom:1px solid rgba(33,39,47,.3)"><span style="margin-right:6px">●</span>${tk.n} — <span style="color:var(--txt2)">${tk.when} · ${tk.w}</span></div>`).join('') : '<div style="font-size:12px;color:var(--dim);font-style:italic">Nothing upcoming</div>'}</div></div></div>`;
+    <div class="pb"><div style="padding:4px 0"><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--ylw);margin-bottom:6px">Upcoming — Next 7 Days</div>${inner}</div></div></div>`;
 }
 
 function buildCard(p, open, isEOD) {
@@ -2461,7 +2472,8 @@ function buildCard(p, open, isEOD) {
   if (c.ov) tags += `<span class="tg r">${c.ov} overdue</span>`;
   if (c.ac) tags += `<span class="tg b">${c.ac} active</span>`;
   if (c.ab) tags += `<span class="tg o">${c.ab} active blocked</span>`;
-  if (c.co) tags += `<span class="tg y">${c.co} upcoming</span>`;
+  if (c.co_un) tags += `<span class="tg y">${c.co_un} upcoming unassigned</span>`;
+  else if (c.co) tags += `<span class="tg" style="background:rgba(250,204,21,.06);color:var(--dim);border-color:rgba(250,204,21,.2)">${c.co} upcoming</span>`;
   if (c.pay) tags += `<span class="tg" style="background:rgba(129,140,248,.15);color:#818cf8;border-color:rgba(129,140,248,.3)">${c.pay} payment</span>`;
 
   const sev = c.ov ? 'sev-r' : c.ac ? 'sev-b' : c.co ? 'sev-g' : 'sev-g';
@@ -2473,7 +2485,8 @@ function buildCard(p, open, isEOD) {
   preview += pvCol('Overdue', 'r', ov, tk => `${tk.n}`, tk => `${tk.d}d`);
   preview += pvCol('Active', 'b', ac, tk => `${tk.n}`, tk => tk.dt || 'active');
   preview += pvCol('Active Blocked', 'o', ab, tk => `${tk.n}`, tk => tk.d ? `${tk.d}d late` : 'blocked');
-  preview += pvCol('Upcoming', 'y', co, tk => `${tk.n}`, tk => tk.when || '');
+  const previewCo = co.filter(tk => tk.unassigned).length ? co.filter(tk => tk.unassigned) : co;
+  preview += pvCol('Upcoming' + (co.filter(tk=>tk.unassigned).length ? ' (unassigned)' : ''), 'y', previewCo, tk => `${tk.n}`, tk => tk.when || '');
   if (pay.length) {
     preview += `<div class="pv-col"><div class="pv-head" style="color:#818cf8">💰 Payments</div>`;
     pay.slice(0, 2).forEach(tk => {
@@ -2530,18 +2543,41 @@ function buildCard(p, open, isEOD) {
     body += trowSection('b', ac, tk => trow('b', tk.n, tk.w, tk.dt || ''), 5);
   } else { body += emptyMsg; }
   body += '</div>';
-  body += '<div class="ts"><div class="tsl dt">Upcoming (72h)</div>';
-  if (co.length) {
-    body += trowSection('y', co, tk => {
-      let warn = '';
-      if (tk.blocked_kind === 'overdue') warn = '<span style="background:rgba(248,113,113,.15);color:var(--red);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">⚠ blocked by overdue</span>';
-      else if (tk.blocked_kind === 'payment') warn = '<span style="background:rgba(129,140,248,.15);color:#818cf8;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">💰 blocked by payment</span>';
-      else if (tk.blocked_kind === 'active') warn = '<span style="background:rgba(96,165,250,.15);color:#60a5fa;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px">⏳ waiting on active task</span>';
-      else if (tk.blocked_kind === 'upcoming') warn = '<span style="background:rgba(250,204,21,.1);color:var(--ylw);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px">⏳ waiting on predecessor</span>';
-      const byLine = tk.blocked_by ? `<div style="font-size:10px;color:var(--dim);margin-top:1px">↳ ${tk.blocked_by}</div>` : '';
-      return `<div class="tr"><div class="td y"></div><div class="ti"><div class="tn">${tk.n} - ${tk.w||''}${warn}</div>${byLine}</div><div class="tw">${tk.when||''}</div></div>`;
-    }, 8);
-  } else { body += emptyMsg; }
+  // Split upcoming into unassigned (visible) and assigned (collapsed)
+  const coUnassigned = co.filter(tk => tk.unassigned);
+  const coAssigned = co.filter(tk => !tk.unassigned);
+
+  const upcomingRow = tk => {
+    let warn = '';
+    if (tk.blocked_kind === 'overdue') warn = '<span style="background:rgba(248,113,113,.15);color:var(--red);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">⚠ blocked by overdue</span>';
+    else if (tk.blocked_kind === 'payment') warn = '<span style="background:rgba(129,140,248,.15);color:#818cf8;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">💰 blocked by payment</span>';
+    else if (tk.blocked_kind === 'active') warn = '<span style="background:rgba(96,165,250,.15);color:#60a5fa;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px">⏳ waiting on active task</span>';
+    else if (tk.blocked_kind === 'upcoming') warn = '<span style="background:rgba(250,204,21,.1);color:var(--ylw);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px">⏳ waiting on predecessor</span>';
+    const byLine = tk.blocked_by ? `<div style="font-size:10px;color:var(--dim);margin-top:1px">↳ ${tk.blocked_by}</div>` : '';
+    return `<div class="tr"><div class="td y"></div><div class="ti"><div class="tn">${tk.n} — <span style="color:${tk.unassigned ? 'var(--red)' : 'var(--txt2)'}">${tk.w||''}</span>${warn}</div>${byLine}</div><div class="tw">${tk.when||''}</div></div>`;
+  };
+
+  body += `<div class="ts"><div class="tsl dt">Upcoming — Next 7 Days (${co.length} total)</div>`;
+
+  // Unassigned: always visible
+  if (coUnassigned.length) {
+    body += `<div style="font-size:11px;font-weight:600;color:var(--red);margin:6px 0 4px;text-transform:uppercase;letter-spacing:.5px">⚠️ Unassigned (${coUnassigned.length}) — Need someone assigned</div>`;
+    coUnassigned.forEach(tk => { body += upcomingRow(tk); });
+  }
+
+  // Assigned: collapsed by default
+  if (coAssigned.length) {
+    body += `<div style="margin-top:8px;cursor:pointer" onclick="var el=this.querySelector('.co-assigned');el.style.display=el.style.display==='none'?'block':'none';this.querySelector('svg').style.transform=el.style.display==='none'?'':'rotate(180deg)'">
+      <div style="font-size:11px;font-weight:600;color:var(--dim);display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.5px">
+        ✅ Assigned (${coAssigned.length}) — Click to expand
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="co-assigned" style="display:none">`;
+    coAssigned.forEach(tk => { body += upcomingRow(tk); });
+    body += '</div></div>';
+  }
+
+  if (!co.length) body += emptyMsg;
   body += '</div>';
   body += '</div>';
 

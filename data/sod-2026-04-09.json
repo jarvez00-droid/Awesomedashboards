@@ -4,7 +4,8 @@
     "overdue": 20,
     "active": 14,
     "active_blocked": 0,
-    "coming": 43,
+    "coming": 104,
+    "coming_unassigned": 25,
     "role_gaps": 152,
     "concern": "Martha Cockrell (CNG-20251199) \u2014 19 overdue tasks",
     "payment_overdue": 2
@@ -14,29 +15,32 @@
       "Good momentum \u2014 overdue count is down to 20. Well below the 7-day average of 40 \u2014 the team is making real progress. 4 projects cleared their overdue lists \u2014 well done.",
       "**Martha Cockrell (CNG-20251199):** The oldest overdue task is 22 days past due with 19 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up.",
       "**Marcio Oliveira:** Carrying 13 overdue and it's been growing \u2014 needs attention today.",
-      "43 tasks are scheduled to start in the next 72 hours. Heavy week ahead for Ginger Brown and Clifford Clack \u2014 Gym Addition \u2014 make sure resources are lined up."
+      "104 tasks are scheduled to start in the next 72 hours. Heavy week ahead for Ginger Brown and Clifford Clack \u2014 Gym Addition \u2014 make sure resources are lined up."
     ],
     "pm_briefs": {
       "Angel Pacheco": [
         "Angel Pacheco is completely clean \u2014 no overdue tasks. Keep this up.",
-        "**Lingyan Qiu (CNG2025-458):** Clean \u2014 1 tasks in progress."
+        "**Lingyan Qiu (CNG2025-458):** Clean \u2014 1 tasks in progress. 13 tasks starting soon \u2014 make sure subs and materials are confirmed.",
+        "**Clifford Clack \u2014 Gym Addition:** 24 tasks starting soon \u2014 make sure subs and materials are confirmed."
       ],
       "Jeff": [
         "Jeff is completely clean \u2014 no overdue tasks. Keep this up.",
         "**Martha Cockrell (CNG-20251199):** 19 overdue (oldest: 22d) \u2014 review and reschedule tasks that have truly slipped.",
-        "**Ginger Brown:** Clean \u2014 4 tasks in progress.",
+        "**Ginger Brown:** Clean \u2014 4 tasks in progress. 31 tasks starting soon \u2014 make sure subs and materials are confirmed.",
         "**Katie Holmes & Sean Springs:** Clean \u2014 2 tasks in progress.",
-        "**Lingyan Qiu (CNG2025-458):** Clean \u2014 1 tasks in progress.",
-        "**Sergio Lares (212129):** Clean \u2014 1 tasks in progress."
+        "**Lingyan Qiu (CNG2025-458):** Clean \u2014 1 tasks in progress. 13 tasks starting soon \u2014 make sure subs and materials are confirmed.",
+        "**Sergio Lares (212129):** Clean \u2014 1 tasks in progress.",
+        "**Clifford Clack \u2014 Gym Addition:** 24 tasks starting soon \u2014 make sure subs and materials are confirmed."
       ],
       "Marcio Oliveira": [
         "Marcio Oliveira's overdue has been growing over the past few days \u2014 now at 13. This needs to turn around today.",
         "**Martha Cockrell (CNG-20251199):** 19 overdue (oldest: 22d) \u2014 review and reschedule tasks that have truly slipped.",
+        "**CANDACE - JUSTIN P REFERRAL (CNG2025-522):** 12 tasks starting soon \u2014 make sure subs and materials are confirmed.",
         "**Recommendation:** Block 2 hours today to clear the oldest overdue tasks first. If a task is genuinely behind and can't be completed soon, update the schedule dates so we have accurate data."
       ],
       "Milagros Porturas": [
         "Milagros Porturas is completely clean \u2014 no overdue tasks. Keep this up.",
-        "**Ginger Brown:** Clean \u2014 4 tasks in progress.",
+        "**Ginger Brown:** Clean \u2014 4 tasks in progress. 31 tasks starting soon \u2014 make sure subs and materials are confirmed.",
         "**Sergio Lares (212129):** Clean \u2014 1 tasks in progress."
       ]
     }
@@ -80,7 +84,8 @@
         "ov": 19,
         "ac": 4,
         "ab": 0,
-        "co": 1,
+        "co": 7,
+        "co_un": 4,
         "pay": 0
       },
       "g": {
@@ -213,7 +218,48 @@
           {
             "n": "FRAMING: CONFIRM DELIVERY",
             "w": "\u26a0\ufe0f Nobody",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": true
+          },
+          {
+            "n": "FRAMING: FRAME THE BALCONY",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Tue",
+            "unassigned": true
+          },
+          {
+            "n": "DOORS AND WINDOWS: INSTALL EXTERIOR DOORS AND WINDOWS",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Wed",
+            "unassigned": true,
+            "blocked_by": "WINDOWS: CONFIRM DELIVERY",
+            "blocked_kind": "upcoming"
+          },
+          {
+            "n": "EXTERIOR SHEATHING: EXTERIOR SHEATHING INSTALLATION",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Thu",
+            "unassigned": true
+          },
+          {
+            "n": "FRAMING: PM INSPECTION / CC REPORT",
+            "w": "Jeff, Marcio Oliveira",
+            "when": "starts Mon",
+            "unassigned": false,
+            "blocked_by": "FRAMING: FRAMING AND CORNICE",
+            "blocked_kind": "active"
+          },
+          {
+            "n": "EXTERIOR SHEATHING: CONFIRM SCHEDULE FOR TAPE INSTALLATION",
+            "w": "Marcio Oliveira, Jeff",
+            "when": "starts Mon",
+            "unassigned": false
+          },
+          {
+            "n": "FRAMING: REQUEST CITY INSPECTION",
+            "w": "Jeff",
+            "when": "starts Tue",
+            "unassigned": false
           }
         ],
         "pay_overdue": []
@@ -227,7 +273,8 @@
         "ov": 1,
         "ac": 2,
         "ab": 0,
-        "co": 3,
+        "co": 8,
+        "co_un": 1,
         "pay": 2
       },
       "g": {
@@ -258,19 +305,52 @@
         "active_blocked": [],
         "coming": [
           {
+            "n": "INSULATION: PAYMENT RECEIVED",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Tue",
+            "unassigned": true
+          },
+          {
             "n": "DRYWALL: CONFIRM SCHEDULE",
             "w": "Marcio Oliveira",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "INTERIOR PAINT: SOURCE VENDORS",
             "w": "Marcio Oliveira, Jeff",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "INTERIOR PAINT: APPROVE WO",
             "w": "Marcio Oliveira, Jeff",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
+          },
+          {
+            "n": "INTERIOR PAINT: CONFIRM SCHEDULE",
+            "w": "Marcio Oliveira, Jeff",
+            "when": "starts Mon",
+            "unassigned": false
+          },
+          {
+            "n": "DRYWALL: PURCHASE MATERIAL",
+            "w": "Romina Rey, Reynaldo Aquije",
+            "when": "starts Mon",
+            "unassigned": false
+          },
+          {
+            "n": "INTERIOR DOORS AND TRIM: PM INSPECTION / CC REPORT",
+            "w": "Marcio Oliveira, Jeff",
+            "when": "starts Tue",
+            "unassigned": false
+          },
+          {
+            "n": "DRYWALL: CONFIRM DELIVERY",
+            "w": "Romina Rey",
+            "when": "starts Thu",
+            "unassigned": false
           }
         ],
         "pay_overdue": [
@@ -297,7 +377,8 @@
         "ov": 0,
         "ac": 4,
         "ab": 0,
-        "co": 9,
+        "co": 31,
+        "co_un": 9,
         "pay": 0
       },
       "g": {
@@ -334,49 +415,194 @@
           {
             "n": "ELECTRICAL TRIM: SECURE PRICING",
             "w": "\u26a0\ufe0f Nobody",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": true
+          },
+          {
+            "n": "ELECTRICAL TRIM: CONFIRM DELIVERY",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts in 2 days",
+            "unassigned": true
+          },
+          {
+            "n": "PAINT PORCH: COMPLETE TAKEOFF",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Mon",
+            "unassigned": true
+          },
+          {
+            "n": "PAINT PORCH: SECURE PRICING",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Mon",
+            "unassigned": true
+          },
+          {
+            "n": "SIDING: BILL & PAYMENT",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Mon",
+            "unassigned": true
+          },
+          {
+            "n": "APPLIANCES: INSTALL APPLIANCES",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Wed",
+            "unassigned": true
+          },
+          {
+            "n": "PLUMBING TRIM: CONFIRM DELIVERY (TOILETS)",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Wed",
+            "unassigned": true
+          },
+          {
+            "n": "CABINETS: BILL & PAYMENT",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Wed",
+            "unassigned": true
+          },
+          {
+            "n": "CABINETS: PAINT SHELVES & BASEBOARDS",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Wed",
+            "unassigned": true
           },
           {
             "n": "CABINETS: CONFIRM SCHEDULE",
             "w": "Milagros Porturas",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "PLUMBING: PLUMBING TRIM",
             "w": "Eliseo Vasquez, Milagros Porturas",
             "when": "starts in 2 days",
+            "unassigned": false,
             "blocked_by": "PLUMBING: CONFIRM SCHEDULE",
             "blocked_kind": "overdue"
           },
           {
             "n": "CABINETS: PAINT CABINETS, DOORS, STAIRS",
             "w": "Milagros Porturas",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
           },
           {
             "n": "ELECTRICAL TRIM: PURCHASE MATERIAL",
             "w": "Romina Rey, Reynaldo Aquije, Marjorie Serna",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
           },
           {
             "n": "SIDING: PM INSPECTION / CC REPORT",
             "w": "Milagros Porturas",
-            "when": "starts in 2 days"
-          },
-          {
-            "n": "ELECTRICAL TRIM: CONFIRM DELIVERY",
-            "w": "\u26a0\ufe0f Nobody",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
           },
           {
             "n": "CABINETS: PURCHASE STAIN",
             "w": "Milagros Porturas",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
           },
           {
             "n": "ELECTRICAL: CONFIRM SCHEDULE",
             "w": "Milagros Porturas",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
+          },
+          {
+            "n": "PLUMBING TRIM: PURCHASE MATERIAL (TOILETS)",
+            "w": "Romina Rey, Reynaldo Aquije, Marjorie Serna",
+            "when": "starts Mon",
+            "unassigned": false
+          },
+          {
+            "n": "APPLIANCES: CONFIRM SCHEDULE",
+            "w": "Milagros Porturas",
+            "when": "starts Mon",
+            "unassigned": false
+          },
+          {
+            "n": "INTERIOR PAINT: PURCHASE MATERIAL",
+            "w": "Romina Rey, Milagros Porturas",
+            "when": "starts Mon",
+            "unassigned": false
+          },
+          {
+            "n": "PAINT PORCH: CREATE SOW",
+            "w": "Milagros Porturas",
+            "when": "starts Tue",
+            "unassigned": false
+          },
+          {
+            "n": "PAINT PORCH: PURCHASE MATERIAL",
+            "w": "Milagros Porturas",
+            "when": "starts Tue",
+            "unassigned": false
+          },
+          {
+            "n": "INTERIOR PAINT: CONFIRM DELIVERY",
+            "w": "Romina Rey",
+            "when": "starts Tue",
+            "unassigned": false
+          },
+          {
+            "n": "ELECTRICAL: ELECTRICAL TRIM",
+            "w": "Marcos Ayala, Milagros Porturas",
+            "when": "starts Wed",
+            "unassigned": false,
+            "blocked_by": "ELECTRICAL: CONFIRM SCHEDULE",
+            "blocked_kind": "overdue"
+          },
+          {
+            "n": "MECHANICAL: CONFIRM SCHEDULE",
+            "w": "Milagros Porturas",
+            "when": "starts Wed",
+            "unassigned": false
+          },
+          {
+            "n": "GUTTERS: CREATE SOW",
+            "w": "Milagros Porturas",
+            "when": "starts Wed",
+            "unassigned": false
+          },
+          {
+            "n": "PORCH: SOURCE VENDORS",
+            "w": "Milagros Porturas",
+            "when": "starts Wed",
+            "unassigned": false
+          },
+          {
+            "n": "INTERIOT PAINT: CREATE SOW",
+            "w": "Milagros Porturas",
+            "when": "starts Wed",
+            "unassigned": false
+          },
+          {
+            "n": "PLUMBING: PM INSPECTION / CC REPORT",
+            "w": "Milagros Porturas",
+            "when": "starts Thu",
+            "unassigned": false,
+            "blocked_by": "PLUMBING: PLUMBING TRIM",
+            "blocked_kind": "upcoming"
+          },
+          {
+            "n": "GUTTERS: SOURCE VENDORS",
+            "w": "Milagros Porturas",
+            "when": "starts Thu",
+            "unassigned": false
+          },
+          {
+            "n": "POOL: CONFIRM SCHEDULE",
+            "w": "Milagros Porturas",
+            "when": "starts Thu",
+            "unassigned": false
+          },
+          {
+            "n": "INTERIOR PAINT: SOURCE VENDORS",
+            "w": "Milagros Porturas",
+            "when": "starts Thu",
+            "unassigned": false
           }
         ],
         "pay_overdue": []
@@ -390,7 +616,8 @@
         "ov": 0,
         "ac": 2,
         "ab": 0,
-        "co": 3,
+        "co": 4,
+        "co_un": 0,
         "pay": 0
       },
       "g": {
@@ -417,17 +644,28 @@
           {
             "n": "FRAMING: CONFIRM SCHEDULE",
             "w": "Jeff",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "FRAMING: CONFIRM DELIVERY",
             "w": "Jeff",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "DOORS AND WINDOWS: PM INSPECTION / CC REPORT",
             "w": "Jeff",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
+          },
+          {
+            "n": "FRAMING: INTERIOR WALL FRAMING & BLOCKING",
+            "w": "Jeff",
+            "when": "starts Mon",
+            "unassigned": false,
+            "blocked_by": "FRAMING: PURCHASE MATERIAL",
+            "blocked_kind": "upcoming"
           }
         ],
         "pay_overdue": []
@@ -441,7 +679,8 @@
         "ov": 0,
         "ac": 1,
         "ab": 0,
-        "co": 6,
+        "co": 13,
+        "co_un": 0,
         "pay": 0
       },
       "g": {
@@ -463,32 +702,84 @@
           {
             "n": "FLOORING: PURCHASE MATERIAL",
             "w": "Angel Pacheco, Romina Rey",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "CONCRETE POUR: BILL & PAYMENT",
             "w": "Efren Aguirre",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "FRAMING: PURCHASE MATERIALS",
             "w": "Angel Pacheco, Romina Rey, Marjorie Serna",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "FRAMING: CONFIRM DELIVERY",
             "w": "Angel Pacheco, Romina Rey",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "FOUNDATION: RENT A PORTA POTTY",
             "w": "Angel Pacheco",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
           },
           {
             "n": "FRAMING: CONFIRM SCHEDULE",
             "w": "Angel Pacheco",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
+          },
+          {
+            "n": "FRAMING: FRAMING AND CORNICE",
+            "w": "Angel Pacheco",
+            "when": "starts Mon",
+            "unassigned": false,
+            "blocked_by": "FOUNDATION: FOUNDATION CURE",
+            "blocked_kind": "active"
+          },
+          {
+            "n": "WINDOWS: PURCHASE MATERIAL",
+            "w": "Angel Pacheco, Romina Rey, Reynaldo Aquije",
+            "when": "starts Mon",
+            "unassigned": false
+          },
+          {
+            "n": "ELECTRICAL: CONFIRM SCHEDULE",
+            "w": "Brayan Ramos, Angel Pacheco",
+            "when": "starts Mon",
+            "unassigned": false
+          },
+          {
+            "n": "EXTERIOR DOORS: PURCHASE MATERIAL",
+            "w": "Romina Rey, Reynaldo Aquije",
+            "when": "starts Mon",
+            "unassigned": false
+          },
+          {
+            "n": "ELECTRICAL: ELECTRICAL ROUGH IN",
+            "w": "Brayan Ramos, Angel Pacheco",
+            "when": "starts Wed",
+            "unassigned": false,
+            "blocked_by": "ELECTRICAL: CONFIRM SCHEDULE",
+            "blocked_kind": "overdue"
+          },
+          {
+            "n": "MECHANICAL: CONFIRM SCHEDULE",
+            "w": "Angel Pacheco",
+            "when": "starts Wed",
+            "unassigned": false
+          },
+          {
+            "n": "PLUMBING: CONFIRM SCHEDULE",
+            "w": "Angel Pacheco",
+            "when": "starts Thu",
+            "unassigned": false
           }
         ],
         "pay_overdue": []
@@ -503,6 +794,7 @@
         "ac": 1,
         "ab": 0,
         "co": 5,
+        "co_un": 1,
         "pay": 0
       },
       "g": {
@@ -525,28 +817,33 @@
             "n": "PUNCH LIST: INSTALL CABINET",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts tomorrow",
+            "unassigned": true,
             "blocked_by": "PUNCH LIST: PURCHASE CABINET",
             "blocked_kind": "upcoming"
           },
           {
             "n": "COUNTERTOPS: BILL & PAYMENT",
             "w": "JC'S Countertops LLC",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "ELECTRICAL: BILL & PAYMENT",
             "w": "Marcos Ayala",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "Work Order 212129-54",
             "w": "Marcos Ayala",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "PUNCH LIST: PM INSPECTION / CC REPORT",
             "w": "Milagros Porturas",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
           }
         ],
         "pay_overdue": []
@@ -560,7 +857,8 @@
         "ov": 0,
         "ac": 0,
         "ab": 0,
-        "co": 9,
+        "co": 24,
+        "co_un": 5,
         "pay": 0
       },
       "g": {
@@ -574,51 +872,156 @@
         "active_blocked": [],
         "coming": [
           {
+            "n": "DOORS: PURCHASE MATERIALS",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts tomorrow",
+            "unassigned": true
+          },
+          {
+            "n": "FRAMING: CONFIRM DELIVERY",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts in 2 days",
+            "unassigned": true
+          },
+          {
+            "n": "ELECTRICAL: CONFIRM SCHEDULE",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Mon",
+            "unassigned": true
+          },
+          {
+            "n": "BRICKS: APPROVE WO",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Mon",
+            "unassigned": true
+          },
+          {
+            "n": "ROOF DECKING: SECURE PRICING",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Thu",
+            "unassigned": true
+          },
+          {
             "n": "FOUNDATION: BILL & PAYMENT",
             "w": "Efren Aguirre",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "FRAMING: PURCHASE MATERIAL",
             "w": "Angel Pacheco, Romina Rey, Marjorie Serna",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "FRAMING: CONFIRM SCHEDULE",
             "w": "Angel Pacheco",
-            "when": "starts tomorrow"
-          },
-          {
-            "n": "DOORS: PURCHASE MATERIALS",
-            "w": "\u26a0\ufe0f Nobody",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "WINDOWS: PURCHASE MATERIALS",
             "w": "Romina Rey, Marjorie Serna",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "FRAMING: FRAMING AND CORNICE",
             "w": "Clifford Clack, Angel Pacheco",
             "when": "starts in 2 days",
+            "unassigned": false,
             "blocked_by": "FOUNDATION: FOUNDATION CURE",
             "blocked_kind": "active"
           },
           {
             "n": "DOORS: CONFIRM DELIVERY",
             "w": "Angel Pacheco, Romina Rey",
-            "when": "starts in 2 days"
-          },
-          {
-            "n": "FRAMING: CONFIRM DELIVERY",
-            "w": "\u26a0\ufe0f Nobody",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
           },
           {
             "n": "WINDOWS: CONFIRM DELIVERY",
             "w": "Romina Rey",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
+          },
+          {
+            "n": "MECHANICAL: CONFIRM SCHEDULE",
+            "w": "Angel Pacheco",
+            "when": "starts Mon",
+            "unassigned": false
+          },
+          {
+            "n": "BRICK: PURCHASE MATERIAL",
+            "w": "Romina Rey",
+            "when": "starts Tue",
+            "unassigned": false
+          },
+          {
+            "n": "ELECTRICAL: ROUGH IN",
+            "w": "Angel Pacheco, Brayan Ramos",
+            "when": "starts Tue",
+            "unassigned": false
+          },
+          {
+            "n": "MECHANICAL: MINI SPLIT",
+            "w": "Angel Pacheco, Angel Martinez, Clifford Clack",
+            "when": "starts Tue",
+            "unassigned": false
+          },
+          {
+            "n": "FRAMING: PM INSPECTION / CC REPORT",
+            "w": "Clifford Clack, Angel Pacheco",
+            "when": "starts Wed",
+            "unassigned": false,
+            "blocked_by": "FRAMING: FRAMING AND CORNICE",
+            "blocked_kind": "active"
+          },
+          {
+            "n": "EXTERIOR SHEATHING: INSTALLATION",
+            "w": "Clifford Clack, Angel Pacheco",
+            "when": "starts Wed",
+            "unassigned": false
+          },
+          {
+            "n": "BRICK: CONFIRM DELIVERY",
+            "w": "Angel Pacheco, Romina Rey",
+            "when": "starts Wed",
+            "unassigned": false
+          },
+          {
+            "n": "MECHANICAL: PM INSPECTION / CC REPORT",
+            "w": "Angel Pacheco",
+            "when": "starts Wed",
+            "unassigned": false,
+            "blocked_by": "MECHANICAL: MECHANICAL TRIM",
+            "blocked_kind": "upcoming"
+          },
+          {
+            "n": "ROOF DECKING: COMPLETE TAKEOFF",
+            "w": "Angel Pacheco",
+            "when": "starts Wed",
+            "unassigned": false
+          },
+          {
+            "n": "ROOFING: CREATE SOW",
+            "w": "Angel Pacheco",
+            "when": "starts Wed",
+            "unassigned": false
+          },
+          {
+            "n": "ELECTRICAL: PM INSPECTION / CC REPORT",
+            "w": "Angel Pacheco",
+            "when": "starts Thu",
+            "unassigned": false,
+            "blocked_by": "ELECTRICAL: ELECTRICAL TRIM",
+            "blocked_kind": "upcoming"
+          },
+          {
+            "n": "ROOFING: SOURCE VENDORS",
+            "w": "Angel Pacheco",
+            "when": "starts Thu",
+            "unassigned": false
           }
         ],
         "pay_overdue": []
@@ -632,7 +1035,8 @@
         "ov": 0,
         "ac": 0,
         "ab": 0,
-        "co": 7,
+        "co": 12,
+        "co_un": 5,
         "pay": 0
       },
       "g": {
@@ -646,29 +1050,60 @@
         "active_blocked": [],
         "coming": [
           {
+            "n": "ROOFING: SECURE PRICING",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts tomorrow",
+            "unassigned": true
+          },
+          {
+            "n": "AFTER FRAMING AND SHEATHING",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Mon",
+            "unassigned": true
+          },
+          {
+            "n": "ROOFING: INSTALL ROOFING",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Tue",
+            "unassigned": true,
+            "blocked_by": "ROOFING: CONFIRM DELIVERY",
+            "blocked_kind": "upcoming"
+          },
+          {
+            "n": "FINAL PAYMENT",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Tue",
+            "unassigned": true
+          },
+          {
+            "n": "ROOFING: BILL & PAYMENT",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Wed",
+            "unassigned": true
+          },
+          {
             "n": "FRAMING: BILL & PAYMENT",
             "w": "Cesar Martinez",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "ROOFING: PURCHASE MATERIAL",
             "w": "Reynaldo Aquije, Romina Rey, Marjorie Serna",
-            "when": "starts tomorrow"
-          },
-          {
-            "n": "ROOFING: SECURE PRICING",
-            "w": "\u26a0\ufe0f Nobody",
-            "when": "starts tomorrow"
+            "when": "starts tomorrow",
+            "unassigned": false
           },
           {
             "n": "ROOFING: CONFIRM DELIVERY",
             "w": "Romina Rey",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
           },
           {
             "n": "ROOFING: APROVE WO",
             "w": "Marcio Oliveira",
             "when": "starts in 2 days",
+            "unassigned": false,
             "blocked_by": "ROOFING: SUBMIT QUOTE",
             "blocked_kind": "upcoming"
           },
@@ -676,13 +1111,23 @@
             "n": "ROOFING: SUBMIT QUOTE",
             "w": "Marcio Oliveira",
             "when": "starts in 2 days",
+            "unassigned": false,
             "blocked_by": "ROOFING: CREATE SOW",
             "blocked_kind": "upcoming"
           },
           {
             "n": "ROOFING: CREATE SOW",
             "w": "Marcio Oliveira",
-            "when": "starts in 2 days"
+            "when": "starts in 2 days",
+            "unassigned": false
+          },
+          {
+            "n": "ROOFING: CONFIRM SCHEDULE",
+            "w": "Marcio Oliveira",
+            "when": "starts Mon",
+            "unassigned": false,
+            "blocked_by": "ROOFING: APROVE WO",
+            "blocked_kind": "upcoming"
           }
         ],
         "pay_overdue": []
