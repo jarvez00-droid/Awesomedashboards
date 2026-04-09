@@ -2819,7 +2819,23 @@ function buildJadeRecommendations(allItems, balance) {
   const day21 = new Date(Date.now() + 21*86400000).toISOString().slice(0,10);
   const win = unpaid.filter(t => t.due && t.due >= today && t.due < day21);
 
-  // Rebuild project analysis (same logic as above but for recommendations)
+  // Compute danger days for summary
+  const _byDay = {};
+  win.forEach(t => {
+    if (!_byDay[t.due]) _byDay[t.due] = {in:0, out:0};
+    if (t.type==='income') _byDay[t.due].in += t.amount;
+    else if (t.type!=='p_income') _byDay[t.due].out += t.amount;
+  });
+  let _rb = balance;
+  const dangerDays = [];
+  let lowest = {bal: balance, date: today};
+  Object.keys(_byDay).sort().forEach(ds => {
+    _rb += _byDay[ds].in - _byDay[ds].out;
+    if (_rb < 0) dangerDays.push({date:ds, bal:_rb, deficit:Math.abs(_rb)});
+    if (_rb < lowest.bal) lowest = {bal:_rb, date:ds};
+  });
+
+  // Rebuild project analysis
   const projMap = {};
   win.forEach(t => {
     const p = t.project || 'Unknown';
