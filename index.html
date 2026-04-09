@@ -2150,8 +2150,8 @@ function renderMgmtBody() {
   // ── Assemble layout ──
   let html = '';
 
-  // Section 1: Breakdown + Calendar side by side
-  html += secTitle('📊', 'Breakdown & Daily Calendar', 'Where the money goes · Day-by-day cash flow');
+  // Section 1: Breakdown (left) + Payment List (right) — side by side
+  html += secTitle('📊', 'Breakdown & Payment Details', 'Category totals on the left · Full payment list on the right');
 
   let leftCol = '';
   leftCol += catCard('📦 Materials', '📦', wMat, '#fb923c', matItems, 'project');
@@ -2161,9 +2161,56 @@ function renderMgmtBody() {
   if (wPIn > 0) leftCol += catCard('⚡ Potential Income', '⚡', wPIn, '#facc15', pincItems, 'project');
   leftCol += weeklyTable;
 
-  let rightCol = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:14px 16px;max-height:650px;overflow-y:auto">
-    <div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:12px">📅 Daily Payment Calendar <span style="font-size:11px;color:var(--dim);font-weight:400">· Next 21 days from today</span></div>
-    ${calHtml || '<div style="font-size:11px;color:var(--dim);padding:8px 0">No payments in next 21 days</div>'}
+  // Payment List (compact, for sidebar)
+  const sorted = [...allWin].sort((a,b)=>(a.due||'').localeCompare(b.due||''));
+  let curWeek = '';
+  let payListHtml = '';
+  payListHtml += `<div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:8px">📋 All Payments · ${sorted.length} items</div>`;
+  payListHtml += `<div class="cf-pay" style="border-bottom:1px solid var(--bdr);padding-bottom:4px;margin-bottom:2px">
+    <span class="cf-pay-date" style="font-weight:600;color:var(--txt)">Date</span>
+    <span class="cf-pay-type" style="background:none;border:none;color:var(--txt);font-weight:600">Direction</span>
+    <span class="cf-pay-name" style="font-weight:600;color:var(--txt)">Payment</span>
+    <span class="cf-pay-amt" style="color:var(--txt)">Amount</span>
+    <span class="cf-pay-status" style="background:none;border:none;color:var(--txt);font-weight:600">Status</span>
+  </div>`;
+  if (sorted.length) {
+    sorted.forEach(t => {
+      const weekKey = cfGetMonday(t.due);
+      if (weekKey !== curWeek) {
+        curWeek = weekKey;
+        const wItems = sorted.filter(w=>cfGetMonday(w.due)===weekKey);
+        let wI=0,wO=0,wP=0;
+        wItems.forEach(w=>{if(w.type==='p_income')wP+=w.amount;else if(w.type==='income')wI+=w.amount;else wO+=w.amount;});
+        const wN=wI-wO;
+        payListHtml+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 4px 4px;margin-top:8px;border-top:2px solid var(--bdr)">
+          <span style="font-size:12px;font-weight:700;color:var(--txt)">📅 ${cfWeekRange(weekKey)}</span>
+          <span style="font-size:11px"><span style="color:#4ade80;font-weight:600">⬇ IN ${cfFmt(wI)}</span>${wP>0?' · <span style="color:#facc15">⚡'+cfFmt(wP)+'</span>':''} · <span style="color:#f87171;font-weight:600">⬆ OUT ${cfFmt(wO)}</span> · <span style="color:${wN>=0?'#4ade80':'#f87171'};font-weight:700">NET ${cfFmt(wN)}</span></span>
+        </div>`;
+      }
+      const ti=mgmtTypeInfo(t.type);
+      const isIn=t.type==='income'||t.type==='p_income';
+      const dt=new Date(t.due+'T12:00:00');
+      const dateLbl=MONTHS[dt.getMonth()]+' '+dt.getDate()+'<br><span style="font-size:9px;color:var(--dim)">'+DAYS[dt.getDay()]+'</span>';
+      const paidSt=t.paid?'opacity:0.5;text-decoration:line-through':'';
+      const statusLbl=t.paid?'✓ Paid':(t.amount?'Pending':'TBD');
+      const statusCls=t.paid?'paid':(t.amount?'pending':'tbd');
+      const dirLabel = isIn ? '⬇ INCOME' : '⬆ EXPENSE';
+      const dirColor = isIn ? '#4ade80' : '#f87171';
+      const dirBg = isIn ? 'rgba(74,222,128,.1)' : 'rgba(248,113,113,.1)';
+      payListHtml+=`<div class="cf-pay" style="${paidSt}">
+        <span class="cf-pay-date">${dateLbl}</span>
+        <span class="cf-pay-type" style="background:${dirBg};color:${dirColor};border:1px solid ${dirColor}40;font-size:10px;font-weight:700">${dirLabel}</span>
+        <span class="cf-pay-name">${t.task} <span class="cf-pay-proj">— ${t.project||''}</span></span>
+        <span class="cf-pay-amt" style="color:${dirColor};font-weight:700">${isIn?'+':'-'}${t.amount?cfFmt2(t.amount):'TBD'}</span>
+        <span class="cf-pay-status ${statusCls}">${statusLbl}</span>
+      </div>`;
+    });
+  } else {
+    payListHtml += '<div style="padding:12px;text-align:center;color:var(--dim)">No payments in this window</div>';
+  }
+
+  let rightCol = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:14px 16px;max-height:700px;overflow-y:auto">
+    ${payListHtml}
   </div>`;
 
   html += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:8px">
@@ -2213,40 +2260,32 @@ function renderMgmtBody() {
         <stop offset="100%" stop-color="var(--grn)" stop-opacity="0"/>
       </linearGradient></defs>`;
 
-    // Grid + labels
     const gridN=5;
     for(let i=0;i<=gridN;i++){
       const val=yMin+(yR/gridN)*i, y=toY(val);
       svg+=`<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--bdr)" stroke-width="1"/>`;
       svg+=`<text x="${padL-10}" y="${y+4}" text-anchor="end" fill="var(--dim)" font-size="11" font-family="var(--mono)">${cfFmt(val)}</text>`;
     }
-    // Zero baseline (bright neon)
     svg+=`<line x1="${padL}" y1="${zeroY}" x2="${W-padR}" y2="${zeroY}" stroke="#00ff88" stroke-width="2.5" opacity="0.9"/>`;
     svg+=`<rect x="${W-padR+2}" y="${zeroY-8}" width="30" height="16" rx="3" fill="#00ff88" opacity="0.15"/>`;
     svg+=`<text x="${W-padR+6}" y="${zeroY+4}" fill="#00ff88" font-size="11" font-weight="700" font-family="var(--mono)">$0</text>`;
-    // Starting balance line
     svg+=`<line x1="${padL}" y1="${startY}" x2="${W-padR}" y2="${startY}" stroke="var(--blu)" stroke-width="1" stroke-dasharray="3,6" opacity="0.4"/>`;
 
-    // Area fill
     let netPath='';
     pts.forEach((p,i)=>{netPath+=(i===0?'M':'L')+`${toX(i)},${toY(p.net)} `;});
     const firstX=toX(0),lastX=toX(pts.length-1);
     svg+=`<path d="${netPath}L${lastX},${zeroY} L${firstX},${zeroY} Z" fill="url(#mcfg2)"/>`;
 
-    // Potential line
     if(hasP){
       let pp='';pts.forEach((p,i)=>{pp+=(i===0?'M':'L')+`${toX(i)},${toY(p.netP)} `;});
       svg+=`<path d="${pp}" fill="none" stroke="#facc15" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" opacity="0.7"/>`;
     }
-    // Gross line
     if(hasFixed){
       let gp='';pts.forEach((p,i)=>{gp+=(i===0?'M':'L')+`${toX(i)},${toY(p.gross)} `;});
       svg+=`<path d="${gp}" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="6,4" stroke-linejoin="round" opacity="0.5"/>`;
     }
-    // Net line (main)
     svg+=`<path d="${netPath}" fill="none" stroke="var(--grn)" stroke-width="3" stroke-linejoin="round"/>`;
 
-    // Dots + labels
     pts.forEach((p,i)=>{
       const x=toX(i),y=toY(p.net);
       const c=p.net>=0?'var(--grn)':'var(--red)';
@@ -2258,74 +2297,301 @@ function renderMgmtBody() {
     });
     svg+='</svg>';
 
-    // Legend
     let legend = '<span style="color:var(--grn)">━━ Net (all expenses)</span>';
     if(hasFixed) legend+=' <span style="color:#4ade8080">┅┅ Gross (projects only)</span>';
     if(hasP) legend+=' <span style="color:#facc15">┅┅ With Potential</span>';
 
     html += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:16px;margin-bottom:8px">
-      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;max-height:380px">${svg}</div>
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;max-height:430px">${svg}</div>
       <div style="display:flex;gap:16px;justify-content:center;margin-top:10px;font-size:11px">${legend}
         <span style="color:#00ff88">━━ $0 baseline</span>
       </div>
     </div>`;
   }
 
-  // ── Section 3: Payment List ──
-  html += secTitle('📋', 'Payment List', 'Every individual payment in the window · Sorted by date');
-  const sorted = [...allWin].sort((a,b)=>(a.due||'').localeCompare(b.due||''));
-  let curWeek = '';
-
-  html += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:10px 14px">';
-  html += `<div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:8px">All Payments · ${sorted.length} items</div>`;
-  html += `<div class="cf-pay" style="border-bottom:1px solid var(--bdr);padding-bottom:4px;margin-bottom:2px">
-    <span class="cf-pay-date" style="font-weight:600;color:var(--txt)">Date</span>
-    <span class="cf-pay-type" style="background:none;border:none;color:var(--txt);font-weight:600">Direction</span>
-    <span class="cf-pay-name" style="font-weight:600;color:var(--txt)">Payment</span>
-    <span class="cf-pay-amt" style="color:var(--txt)">Amount</span>
-    <span class="cf-pay-status" style="background:none;border:none;color:var(--txt);font-weight:600">Status</span>
-  </div>`;
-
-  if (sorted.length) {
-    sorted.forEach(t => {
-      const weekKey = cfGetMonday(t.due);
-      if (weekKey !== curWeek) {
-        curWeek = weekKey;
-        const wItems = sorted.filter(w=>cfGetMonday(w.due)===weekKey);
-        let wI=0,wO=0,wP=0;
-        wItems.forEach(w=>{if(w.type==='p_income')wP+=w.amount;else if(w.type==='income')wI+=w.amount;else wO+=w.amount;});
-        const wN=wI-wO;
-        html+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 4px 4px;margin-top:8px;border-top:2px solid var(--bdr)">
-          <span style="font-size:12px;font-weight:700;color:var(--txt)">📅 ${cfWeekRange(weekKey)}</span>
-          <span style="font-size:11px;color:var(--dim)"><span style="color:#4ade80;font-weight:600">⬇ IN ${cfFmt(wI)}</span>${wP>0?' · <span style="color:#facc15">⚡'+cfFmt(wP)+'</span>':''} · <span style="color:#f87171;font-weight:600">⬆ OUT ${cfFmt(wO)}</span> · <span style="color:${wN>=0?'#4ade80':'#f87171'};font-weight:700">NET ${cfFmt(wN)}</span></span>
-        </div>`;
-      }
-      const ti=mgmtTypeInfo(t.type);
-      const isIn=t.type==='income'||t.type==='p_income';
-      const isPIn=t.type==='p_income';
-      const dt=new Date(t.due+'T12:00:00');
-      const dateLbl=MONTHS[dt.getMonth()]+' '+dt.getDate()+'<br><span style="font-size:9px;color:var(--dim)">'+DAYS[dt.getDay()]+'</span>';
-      const paidSt=t.paid?'opacity:0.5;text-decoration:line-through':'';
-      const statusLbl=t.paid?'✓ Paid':(t.amount?'Pending':'TBD');
-      const statusCls=t.paid?'paid':(t.amount?'pending':'tbd');
-      // Clear direction label
-      const dirLabel = isIn ? '⬇ INCOME' : '⬆ EXPENSE';
-      const dirColor = isIn ? '#4ade80' : '#f87171';
-      const dirBg = isIn ? 'rgba(74,222,128,.1)' : 'rgba(248,113,113,.1)';
-      html+=`<div class="cf-pay" style="${paidSt}">
-        <span class="cf-pay-date">${dateLbl}</span>
-        <span class="cf-pay-type" style="background:${dirBg};color:${dirColor};border:1px solid ${dirColor}40;font-size:10px;font-weight:700">${dirLabel}</span>
-        <span class="cf-pay-name">${t.task} <span class="cf-pay-proj">— ${t.project||''}</span></span>
-        <span class="cf-pay-amt" style="color:${dirColor};font-weight:700">${isIn?'+':'-'}${t.amount?cfFmt2(t.amount):'TBD'}</span>
-        <span class="cf-pay-status ${statusCls}">${statusLbl}</span>
-      </div>`;
-    });
-  } else {
-    html += '<div style="padding:12px;text-align:center;color:var(--dim)">No payments in this window</div>';
-  }
+  // Section 3: Daily Payment Calendar — full width
+  html += secTitle('📅', 'Daily Payment Calendar', 'Day-by-day cash position · Next 21 days from today');
+  html += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:16px">`;
+  html += calHtml || '<div style="font-size:12px;color:var(--dim);padding:12px 0;text-align:center">No payments in next 21 days</div>';
   html += '</div>';
 
+  // Section 4: Situation Evaluation — What-If Scenario Planner
+  html += secTitle('🎯', 'Situation Evaluation', 'Adjust payment timing to plan cash flow · Changes are local only — nothing is saved');
+  html += buildSituationEval(allWin, balance);
+
   body.innerHTML = html;
+
+  // Wire up situation eval events after DOM is ready
+  initSituationEval(allWin, balance);
+}
+
+// ═══ Situation Evaluation Engine ═══
+let scenarioItems = [];
+let scenarioManualItems = [];
+let scenarioNextId = 1;
+
+function buildSituationEval(allWin, balance) {
+  return `<div id="sit-eval" style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:16px">
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:16px">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div style="font-size:13px;font-weight:600;color:var(--txt)">Adjust Payments</div>
+          <div style="display:flex;gap:6px">
+            <button id="sit-reset" style="background:var(--bg);color:var(--dim);border:1px solid var(--bdr);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:var(--sans)">↺ Reset All</button>
+            <button id="sit-add" style="background:rgba(56,189,248,.1);color:#38bdf8;border:1px solid rgba(56,189,248,.3);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:var(--sans)">+ Add Item</button>
+          </div>
+        </div>
+        <div id="sit-list" style="max-height:400px;overflow-y:auto"></div>
+      </div>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:12px">Projected Outcome</div>
+        <div id="sit-result"></div>
+      </div>
+    </div>
+    <div id="sit-chart-wrap" style="margin-top:16px"></div>
+  </div>`;
+}
+
+function initSituationEval(allWin, balance) {
+  // Clone items for scenario
+  scenarioItems = allWin.filter(t=>!t.paid).map((t,i) => ({
+    id: 'orig_'+i,
+    task: t.task,
+    project: t.project||'',
+    type: t.type,
+    amount: t.amount||0,
+    originalDue: t.due,
+    due: t.due,
+    shift: 0,
+    isIn: t.type==='income'||t.type==='p_income',
+    delayed: false,
+    manual: false
+  }));
+  scenarioManualItems = [];
+  scenarioNextId = 1;
+
+  document.getElementById('sit-reset').addEventListener('click', () => {
+    scenarioItems.forEach(s => { s.due = s.originalDue; s.shift = 0; s.delayed = false; });
+    scenarioManualItems = [];
+    renderScenario(balance);
+  });
+
+  document.getElementById('sit-add').addEventListener('click', () => {
+    const id = 'manual_' + (scenarioNextId++);
+    const today = new Date().toISOString().slice(0,10);
+    scenarioManualItems.push({
+      id, task:'New Item', project:'Manual', type:'subs', amount:0,
+      originalDue:today, due:today, shift:0, isIn:false, delayed:false, manual:true
+    });
+    renderScenario(balance);
+  });
+
+  renderScenario(balance);
+}
+
+function renderScenario(balance) {
+  const listEl = document.getElementById('sit-list');
+  const resultEl = document.getElementById('sit-result');
+  const chartEl = document.getElementById('sit-chart-wrap');
+  if (!listEl || !resultEl) return;
+
+  const all = [...scenarioItems, ...scenarioManualItems].sort((a,b)=>(a.due||'').localeCompare(b.due||''));
+
+  // Group by: income vs expenses
+  const incomeItems = all.filter(x=>x.isIn);
+  const expenseItems = all.filter(x=>!x.isIn);
+
+  let listHtml = '';
+
+  // Income section
+  listHtml += `<div style="margin-bottom:12px">
+    <div style="font-size:12px;font-weight:700;color:#4ade80;margin-bottom:6px;padding:4px 0;border-bottom:1px solid rgba(74,222,128,.2)">⬇ INCOME · ${incomeItems.length} items · ${cfFmt(incomeItems.reduce((s,x)=>s+x.amount,0))}</div>`;
+  incomeItems.forEach(item => {
+    listHtml += renderScenarioRow(item, 'income');
+  });
+  listHtml += '</div>';
+
+  // Expense section
+  listHtml += `<div>
+    <div style="font-size:12px;font-weight:700;color:#f87171;margin-bottom:6px;padding:4px 0;border-bottom:1px solid rgba(248,113,113,.2)">⬆ EXPENSES · ${expenseItems.length} items · ${cfFmt(expenseItems.reduce((s,x)=>s+x.amount,0))}</div>`;
+  expenseItems.forEach(item => {
+    listHtml += renderScenarioRow(item, 'expense');
+  });
+  listHtml += '</div>';
+
+  listEl.innerHTML = listHtml;
+
+  // Wire shift buttons
+  listEl.querySelectorAll('[data-sit-id]').forEach(row => {
+    const id = row.dataset.sitId;
+    const item = all.find(x=>x.id===id);
+    if (!item) return;
+
+    const minusBtn = row.querySelector('.sit-minus');
+    const plusBtn = row.querySelector('.sit-plus');
+    const shiftInput = row.querySelector('.sit-shift');
+    const delBtn = row.querySelector('.sit-del');
+    const nameInput = row.querySelector('.sit-name');
+    const amtInput = row.querySelector('.sit-amt');
+    const typeSelect = row.querySelector('.sit-type-sel');
+
+    if (minusBtn) minusBtn.addEventListener('click', () => {
+      item.shift = Math.max(item.shift - 1, -30);
+      updateItemDue(item);
+      renderScenario(balance);
+    });
+    if (plusBtn) plusBtn.addEventListener('click', () => {
+      item.shift = Math.min(item.shift + 30, 90);
+      updateItemDue(item);
+      renderScenario(balance);
+    });
+    if (shiftInput) shiftInput.addEventListener('change', (e) => {
+      item.shift = Math.max(-30, Math.min(90, parseInt(e.target.value)||0));
+      updateItemDue(item);
+      renderScenario(balance);
+    });
+    if (delBtn) delBtn.addEventListener('click', () => {
+      scenarioManualItems = scenarioManualItems.filter(x=>x.id!==id);
+      renderScenario(balance);
+    });
+    if (nameInput) nameInput.addEventListener('change', e => { item.task = e.target.value; renderScenario(balance); });
+    if (amtInput) amtInput.addEventListener('change', e => { item.amount = parseFloat(e.target.value.replace(/[^0-9.]/g,''))||0; renderScenario(balance); });
+    if (typeSelect) typeSelect.addEventListener('change', e => {
+      item.type = e.target.value;
+      item.isIn = item.type==='income'||item.type==='p_income';
+      renderScenario(balance);
+    });
+  });
+
+  // Compute projected balance
+  const byDay = {};
+  all.forEach(item => {
+    if (!byDay[item.due]) byDay[item.due] = {in:0, out:0};
+    if (item.isIn) byDay[item.due].in += item.amount;
+    else byDay[item.due].out += item.amount;
+  });
+  const projDays = Object.keys(byDay).sort();
+  let projBal = balance;
+  let minBal = balance, minDate = '', curBal = balance;
+  const projPts = [{date:'start', bal:balance}];
+  projDays.forEach(ds => {
+    projBal += byDay[ds].in - byDay[ds].out;
+    projPts.push({date:ds, bal:projBal, dayIn:byDay[ds].in, dayOut:byDay[ds].out});
+    if (projBal < minBal) { minBal = projBal; minDate = ds; }
+  });
+  curBal = projBal;
+
+  // Adjusted items count
+  const adjusted = all.filter(x=>x.shift!==0).length;
+  const manualCount = scenarioManualItems.length;
+
+  resultEl.innerHTML = `
+    <div style="background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.2);border-radius:10px;padding:12px;margin-bottom:8px">
+      <div style="font-size:10px;color:var(--dim);margin-bottom:4px">Starting Balance</div>
+      <div style="font-size:18px;font-weight:700;color:var(--txt)">${cfFmt(balance)}</div>
+    </div>
+    <div style="background:${curBal>=0?'rgba(74,222,128,.05)':'rgba(248,113,113,.05)'};border:1px solid ${curBal>=0?'rgba(74,222,128,.2)':'rgba(248,113,113,.2)'};border-radius:10px;padding:12px;margin-bottom:8px">
+      <div style="font-size:10px;color:var(--dim);margin-bottom:4px">Projected End Balance</div>
+      <div style="font-size:18px;font-weight:700;color:${curBal>=0?'#4ade80':'#f87171'}">${cfFmt(curBal)}</div>
+    </div>
+    <div style="background:${minBal>=0?'rgba(74,222,128,.05)':'rgba(248,113,113,.05)'};border:1px solid ${minBal>=0?'rgba(74,222,128,.2)':'rgba(248,113,113,.2)'};border-radius:10px;padding:12px;margin-bottom:8px">
+      <div style="font-size:10px;color:var(--dim);margin-bottom:4px">Lowest Point</div>
+      <div style="font-size:18px;font-weight:700;color:${minBal>=0?'#facc15':'#f87171'}">${cfFmt(minBal)}</div>
+      ${minDate?'<div style="font-size:10px;color:var(--dim);margin-top:2px">on '+minDate+'</div>':''}
+    </div>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <div style="flex:1;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:8px;text-align:center">
+        <div style="font-size:16px;font-weight:700;color:#38bdf8">${adjusted}</div>
+        <div style="font-size:9px;color:var(--dim)">Adjusted</div>
+      </div>
+      <div style="flex:1;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:8px;text-align:center">
+        <div style="font-size:16px;font-weight:700;color:#e879f9">${manualCount}</div>
+        <div style="font-size:9px;color:var(--dim)">Manual</div>
+      </div>
+    </div>`;
+
+  // Mini scenario chart
+  if (projPts.length > 1) {
+    const cW=600, cH=180, cPL=55, cPR=15, cPT=15, cPB=25;
+    const cPW=cW-cPL-cPR, cPH=cH-cPT-cPB;
+    const bals = projPts.map(p=>p.bal);
+    const cMin=Math.min(...bals,0), cMax=Math.max(...bals,1), cR=cMax-cMin||1;
+    const cToY=v=>cPT+cPH-((v-cMin)/cR*cPH);
+    const cToX=i=>cPL+(projPts.length>1?i/(projPts.length-1)*cPW:cPW/2);
+    const cZeroY=cToY(0);
+
+    let cs = `<svg width="100%" height="${cH}" viewBox="0 0 ${cW} ${cH}" style="display:block">`;
+    cs+=`<line x1="${cPL}" y1="${cZeroY}" x2="${cW-cPR}" y2="${cZeroY}" stroke="#00ff88" stroke-width="1.5" opacity="0.6"/>`;
+    let cp='';
+    projPts.forEach((p,i)=>{cp+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.bal)} `;});
+    cs+=`<path d="${cp}L${cToX(projPts.length-1)},${cZeroY} L${cToX(0)},${cZeroY} Z" fill="rgba(74,222,128,.08)"/>`;
+    cs+=`<path d="${cp}" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linejoin="round"/>`;
+    projPts.forEach((p,i)=>{
+      const x=cToX(i), y=cToY(p.bal);
+      const c=p.bal>=0?'#4ade80':'#f87171';
+      cs+=`<circle cx="${x}" cy="${y}" r="3" fill="${c}"/>`;
+      if(i===0||i===projPts.length-1||p.bal===minBal){
+        cs+=`<text x="${x}" y="${y-8}" text-anchor="middle" fill="${c}" font-size="9" font-weight="700" font-family="var(--mono)">${cfFmt(p.bal)}</text>`;
+      }
+    });
+    cs+='</svg>';
+    chartEl.innerHTML = `<div style="background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:10px">
+      <div style="font-size:11px;font-weight:600;color:var(--txt);margin-bottom:6px">📈 Projected Cash Flow (with adjustments)</div>
+      ${cs}
+    </div>`;
+  }
+}
+
+function updateItemDue(item) {
+  const orig = new Date(item.originalDue+'T12:00:00');
+  orig.setDate(orig.getDate() + item.shift);
+  item.due = orig.toISOString().slice(0,10);
+  item.delayed = item.shift !== 0;
+}
+
+function renderScenarioRow(item, section) {
+  const color = item.isIn ? '#4ade80' : '#f87171';
+  const shiftColor = item.shift > 0 ? '#facc15' : item.shift < 0 ? '#38bdf8' : 'var(--dim)';
+  const shiftLabel = item.shift > 0 ? '+'+item.shift+'d' : item.shift < 0 ? item.shift+'d' : '0d';
+  const origDt = new Date(item.originalDue+'T12:00:00');
+  const newDt = new Date(item.due+'T12:00:00');
+  const origLbl = MONTHS[origDt.getMonth()]+' '+origDt.getDate();
+  const newLbl = MONTHS[newDt.getMonth()]+' '+newDt.getDate();
+  const dateLbl = item.shift !== 0 ? `<s style="color:var(--dim)">${origLbl}</s> → <b style="color:${shiftColor}">${newLbl}</b>` : origLbl;
+
+  if (item.manual) {
+    return `<div data-sit-id="${item.id}" style="display:flex;align-items:center;gap:6px;padding:5px 4px;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px;background:rgba(232,121,249,.04)">
+      <select class="sit-type-sel" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px 4px;font-size:10px;font-family:var(--sans);width:70px">
+        <option value="income"${item.type==='income'?' selected':''}>Income</option>
+        <option value="p_income"${item.type==='p_income'?' selected':''}>Potential</option>
+        <option value="subs"${item.type==='subs'?' selected':''}>Subs</option>
+        <option value="materials"${item.type==='materials'?' selected':''}>Materials</option>
+      </select>
+      <input class="sit-name" type="text" value="${item.task}" placeholder="Description" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px 6px;font-size:10px;flex:1;min-width:80px;font-family:var(--sans)">
+      <span style="color:var(--dim);font-size:10px">$</span>
+      <input class="sit-amt" type="text" value="${item.amount||''}" placeholder="0" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px 6px;font-size:10px;width:65px;text-align:right;font-family:var(--mono)">
+      <input type="date" value="${item.due}" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px 4px;font-size:10px;font-family:var(--sans)" onchange="
+        var all=[...scenarioItems,...scenarioManualItems];
+        var it=all.find(x=>x.id==='${item.id}');
+        if(it){it.due=this.value;it.originalDue=this.value;}
+        renderScenario(parseFloat(localStorage.getItem('cf_balance')||'0'));
+      ">
+      <button class="sit-del" style="background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.3);border-radius:4px;padding:2px 6px;font-size:10px;cursor:pointer;white-space:nowrap">✕</button>
+    </div>`;
+  }
+
+  return `<div data-sit-id="${item.id}" style="display:flex;align-items:center;gap:6px;padding:5px 4px;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px;${item.shift!==0?'background:rgba(250,204,21,.04)':''}">
+    <span style="color:var(--txt);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${item.task} — ${item.project}">${item.task}</span>
+    <span style="color:var(--dim);font-size:9px;white-space:nowrap;max-width:100px;overflow:hidden;text-overflow:ellipsis">${item.project}</span>
+    <span style="color:${color};font-weight:600;font-family:var(--mono);white-space:nowrap;min-width:60px;text-align:right">${item.isIn?'+':'-'}${cfFmt(item.amount)}</span>
+    <span style="font-size:10px;white-space:nowrap;min-width:100px;text-align:center">${dateLbl}</span>
+    <div style="display:flex;align-items:center;gap:2px;white-space:nowrap">
+      <button class="sit-minus" style="background:var(--bg);color:var(--txt2);border:1px solid var(--bdr);border-radius:4px;width:22px;height:22px;cursor:pointer;font-size:12px;line-height:1;font-family:var(--sans)">−</button>
+      <input class="sit-shift" type="number" value="${item.shift}" style="background:var(--bg);color:${shiftColor};border:1px solid var(--bdr);border-radius:4px;width:40px;height:22px;text-align:center;font-size:10px;font-weight:700;font-family:var(--mono)" title="Days to shift">
+      <button class="sit-plus" style="background:var(--bg);color:var(--txt2);border:1px solid var(--bdr);border-radius:4px;width:22px;height:22px;cursor:pointer;font-size:12px;line-height:1;font-family:var(--sans)">+</button>
+      <span style="color:${shiftColor};font-size:9px;min-width:18px">${shiftLabel}</span>
+    </div>
+  </div>`;
 }
 
 async function loadAndRenderEOD(c) {
