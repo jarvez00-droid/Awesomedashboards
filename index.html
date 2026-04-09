@@ -2463,23 +2463,30 @@ function renderScenario(balance) {
     });
   });
 
-  // Compute projected balance
+  // Compute projected balance with gross + potential lines
   const byDay = {};
   all.forEach(item => {
-    if (!byDay[item.due]) byDay[item.due] = {in:0, out:0};
-    if (item.isIn) byDay[item.due].in += item.amount;
-    else byDay[item.due].out += item.amount;
+    if (!byDay[item.due]) byDay[item.due] = {confIn:0, potIn:0, projOut:0, fixedOut:0};
+    if (item.type==='income') byDay[item.due].confIn += item.amount;
+    else if (item.type==='p_income') byDay[item.due].potIn += item.amount;
+    else if (mgmtIsFixed(item.type)) byDay[item.due].fixedOut += item.amount;
+    else byDay[item.due].projOut += item.amount;
   });
   const projDays = Object.keys(byDay).sort();
-  let projBal = balance;
+  let netBal = balance, grossBal = balance, netPotBal = balance;
   let minBal = balance, minDate = '', curBal = balance;
-  const projPts = [{date:'start', bal:balance}];
+  const projPts = [{date:'start', net:balance, gross:balance, netPot:balance}];
   projDays.forEach(ds => {
-    projBal += byDay[ds].in - byDay[ds].out;
-    projPts.push({date:ds, bal:projBal, dayIn:byDay[ds].in, dayOut:byDay[ds].out});
-    if (projBal < minBal) { minBal = projBal; minDate = ds; }
+    const dd = byDay[ds];
+    grossBal += dd.confIn - dd.projOut;
+    netBal += dd.confIn - dd.projOut - (mgmtIncludeFixed ? dd.fixedOut : 0);
+    netPotBal = netBal + dd.potIn;
+    projPts.push({date:ds, net:netBal, gross:grossBal, netPot:netPotBal, dayIn:dd.confIn, dayOut:dd.projOut+dd.fixedOut});
+    if (netBal < minBal) { minBal = netBal; minDate = ds; }
   });
-  curBal = projBal;
+  curBal = netBal;
+  const hasGross = projPts.some(p=>p.gross!==p.net);
+  const hasPot = projPts.some(p=>p.netPot!==p.net);
 
   // Adjusted items count
   const adjusted = all.filter(x=>x.shift!==0).length;
@@ -2510,34 +2517,61 @@ function renderScenario(balance) {
       </div>
     </div>`;
 
-  // Mini scenario chart
+  // Mini scenario chart with gross + potential lines
   if (projPts.length > 1) {
-    const cW=600, cH=180, cPL=55, cPR=15, cPT=15, cPB=25;
+    const cW=600, cH=220, cPL=55, cPR=15, cPT=15, cPB=30;
     const cPW=cW-cPL-cPR, cPH=cH-cPT-cPB;
-    const bals = projPts.map(p=>p.bal);
-    const cMin=Math.min(...bals,0), cMax=Math.max(...bals,1), cR=cMax-cMin||1;
+    const allVals = [...projPts.map(p=>p.net),...projPts.map(p=>p.gross),...projPts.map(p=>p.netPot)];
+    const cMin=Math.min(...allVals,0), cMax=Math.max(...allVals,1), cR=cMax-cMin||1;
     const cToY=v=>cPT+cPH-((v-cMin)/cR*cPH);
     const cToX=i=>cPL+(projPts.length>1?i/(projPts.length-1)*cPW:cPW/2);
     const cZeroY=cToY(0);
 
     let cs = `<svg width="100%" height="${cH}" viewBox="0 0 ${cW} ${cH}" style="display:block">`;
+    // Zero line
     cs+=`<line x1="${cPL}" y1="${cZeroY}" x2="${cW-cPR}" y2="${cZeroY}" stroke="#00ff88" stroke-width="1.5" opacity="0.6"/>`;
-    let cp='';
-    projPts.forEach((p,i)=>{cp+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.bal)} `;});
-    cs+=`<path d="${cp}L${cToX(projPts.length-1)},${cZeroY} L${cToX(0)},${cZeroY} Z" fill="rgba(74,222,128,.08)"/>`;
-    cs+=`<path d="${cp}" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linejoin="round"/>`;
+
+    // Net fill
+    let cpNet='';
+    projPts.forEach((p,i)=>{cpNet+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.net)} `;});
+    cs+=`<path d="${cpNet}L${cToX(projPts.length-1)},${cZeroY} L${cToX(0)},${cZeroY} Z" fill="rgba(74,222,128,.08)"/>`;
+
+    // Gross line (dashed green) — no fixed costs
+    if(hasGross){
+      let cpG='';
+      projPts.forEach((p,i)=>{cpG+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.gross)} `;});
+      cs+=`<path d="${cpG}" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="6,4" stroke-linejoin="round" opacity="0.5"/>`;
+    }
+    // Net + Potential line (neon pink)
+    if(hasPot){
+      let cpP='';
+      projPts.forEach((p,i)=>{cpP+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.netPot)} `;});
+      cs+=`<path d="${cpP}" fill="none" stroke="#ff2d95" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" opacity="0.8"/>`;
+    }
+    // Net line (solid green — main)
+    cs+=`<path d="${cpNet}" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linejoin="round"/>`;
+
+    // Dots on net line + labels at key points
     projPts.forEach((p,i)=>{
-      const x=cToX(i), y=cToY(p.bal);
-      const c=p.bal>=0?'#4ade80':'#f87171';
+      const x=cToX(i), y=cToY(p.net);
+      const c=p.net>=0?'#4ade80':'#f87171';
       cs+=`<circle cx="${x}" cy="${y}" r="3" fill="${c}"/>`;
-      if(i===0||i===projPts.length-1||p.bal===minBal){
-        cs+=`<text x="${x}" y="${y-8}" text-anchor="middle" fill="${c}" font-size="9" font-weight="700" font-family="var(--mono)">${cfFmt(p.bal)}</text>`;
+      if(i===0||i===projPts.length-1||p.net===minBal){
+        cs+=`<text x="${x}" y="${y-8}" text-anchor="middle" fill="${c}" font-size="9" font-weight="700" font-family="var(--mono)">${cfFmt(p.net)}</text>`;
       }
     });
     cs+='</svg>';
+
+    // Legend
+    let cLegend = '<span style="color:#4ade80">━━ Net</span>';
+    if(hasGross) cLegend += ' <span style="color:#4ade8080">┅┅ Gross (no fixed)</span>';
+    if(hasPot) cLegend += ' <span style="color:#ff2d95">┅┅ Net + Potential</span>';
+    cLegend += ' <span style="color:#00ff88">━━ $0</span>';
+
     chartEl.innerHTML = `<div style="background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:10px">
       <div style="font-size:11px;font-weight:600;color:var(--txt);margin-bottom:6px">📈 Projected Cash Flow (with adjustments)</div>
       ${cs}
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:6px;font-size:10px">${cLegend}</div>
     </div>`;
   }
 }
