@@ -2655,107 +2655,66 @@ function sitItemCell(item) {
   </div>`;
 }
 
-function buildJadeFinanceAnalysis(allItems, balance) {
-  const unpaid = allItems.filter(t => !t.paid);
-  const today = new Date().toISOString().slice(0,10);
-  const day21 = new Date(Date.now() + 21*86400000).toISOString().slice(0,10);
+function buildJadeFinanceAnalysis(allWin, balance) {
+  // Use allWin as-is — these are the visible items in the current date range
+  // Do NOT re-filter. Do NOT rely on starting balance for analysis.
+  const unpaid = allWin.filter(t => !t.paid);
+  const incItems = unpaid.filter(t => t.type==='income');
+  const potItems = unpaid.filter(t => t.type==='p_income');
+  const expItems = unpaid.filter(t => t.type!=='income' && t.type!=='p_income');
+  const totalIn = incItems.reduce((s,t) => s + t.amount, 0);
+  const totalPot = potItems.reduce((s,t) => s + t.amount, 0);
+  const totalOut = expItems.reduce((s,t) => s + t.amount, 0);
+  const netFlow = totalIn - totalOut;
 
-  // Window items (next 21 days)
-  const win = unpaid.filter(t => t.due && t.due >= today && t.due < day21);
-  const incItems = win.filter(t => t.type==='income');
-  const potItems = win.filter(t => t.type==='p_income');
-  const expItems = win.filter(t => t.type!=='income' && t.type!=='p_income');
-
-  // ── 1. Cash danger zones: find days where balance goes negative ──
+  // Day-by-day flow (balance-agnostic: start from 0)
   const byDay = {};
-  win.forEach(t => {
+  unpaid.forEach(t => {
+    if (!t.due) return;
     if (!byDay[t.due]) byDay[t.due] = {in:0, out:0, items:[]};
     if (t.type==='income') byDay[t.due].in += t.amount;
     else if (t.type!=='p_income') byDay[t.due].out += t.amount;
     byDay[t.due].items.push(t);
   });
   const sortedDays = Object.keys(byDay).sort();
-  let runBal = balance;
-  const dangerDays = [];
-  const dayBals = [];
+
+  // Cumulative net flow (starting from 0 — pure flow analysis)
+  let cumFlow = 0;
+  let worstFlow = 0, worstDate = '';
+  const flowPts = [];
   sortedDays.forEach(ds => {
-    runBal += byDay[ds].in - byDay[ds].out;
-    dayBals.push({date:ds, bal:runBal, in:byDay[ds].in, out:byDay[ds].out});
-    if (runBal < 0) dangerDays.push({date:ds, bal:runBal, deficit:Math.abs(runBal)});
+    cumFlow += byDay[ds].in - byDay[ds].out;
+    flowPts.push({date:ds, flow:cumFlow, in:byDay[ds].in, out:byDay[ds].out});
+    if (cumFlow < worstFlow) { worstFlow = cumFlow; worstDate = ds; }
   });
 
-  // Lowest point
-  let lowest = {bal: balance, date: today};
-  dayBals.forEach(d => { if (d.bal < lowest.bal) lowest = d; });
+  // Heavy outflow days (days where out > $10K)
+  const heavyDays = flowPts.filter(d => d.out > 10000).sort((a,b) => b.out - a.out);
 
-  // ── 2. Per-project: link expenses to income milestones ──
+  // Per-project mapping
   const projMap = {};
-  win.forEach(t => {
+  unpaid.forEach(t => {
     const p = t.project || 'Unknown';
-    if (!projMap[p]) projMap[p] = {income:[], expenses:[], totalIn:0, totalOut:0};
-    if (t.type==='income') { projMap[p].income.push(t); projMap[p].totalIn += t.amount; }
-    else if (t.type!=='p_income') { projMap[p].expenses.push(t); projMap[p].totalOut += t.amount; }
+    if (!projMap[p]) projMap[p] = {income:[], expenses:[], potIncome:[]};
+    if (t.type==='income') projMap[p].income.push(t);
+    else if (t.type==='p_income') projMap[p].potIncome.push(t);
+    else projMap[p].expenses.push(t);
   });
 
-  // Priority expenses: those in projects that have upcoming income (they unlock payments)
-  const priorityExp = [];
-  const safeToDelay = [];
-  const projInsights = [];
+  // Week buckets (relative: week 1/2/3 from first visible date)
+  const weeks = [{label:'Week 1',in:0,out:0,n:0},{label:'Week 2',in:0,out:0,n:0},{label:'Week 3+',in:0,out:0,n:0}];
+  if (sortedDays.length > 0) {
+    const firstDate = new Date(sortedDays[0]+'T12:00:00');
+    unpaid.forEach(t => {
+      if (!t.due) return;
+      const diff = Math.floor((new Date(t.due+'T12:00:00') - firstDate) / 86400000);
+      const wk = diff < 7 ? 0 : diff < 14 ? 1 : 2;
+      if (t.type==='income') weeks[wk].in += t.amount;
+      else if (t.type!=='p_income') weeks[wk].out += t.amount;
+      weeks[wk].n++;
+    });
+  }
 
-  Object.entries(projMap).sort((a,b) => b[1].totalIn - a[1].totalIn).forEach(([proj, data]) => {
-    if (data.income.length > 0 && data.expenses.length > 0) {
-      // This project has both income and expenses — expenses likely unlock income
-      const nextIncome = data.income.sort((a,b) => a.due.localeCompare(b.due))[0];
-      const blockingExp = data.expenses.filter(e => e.due <= nextIncome.due);
-      const nonBlockingExp = data.expenses.filter(e => e.due > nextIncome.due);
-
-      blockingExp.forEach(e => priorityExp.push({
-        ...e, reason: 'Unlocks ' + cfFmt(nextIncome.amount) + ' income on ' + nextIncome.due,
-        incomeAmount: nextIncome.amount, incomeDue: nextIncome.due, proj
-      }));
-      nonBlockingExp.forEach(e => safeToDelay.push({
-        ...e, reason: 'After income milestone — can be delayed', proj
-      }));
-
-      const roi = data.totalIn > 0 ? ((data.totalIn - data.totalOut) / data.totalOut * 100).toFixed(0) : 0;
-      projInsights.push({
-        proj, totalIn: data.totalIn, totalOut: data.totalOut,
-        nextIncome: nextIncome, blockingCount: blockingExp.length,
-        blockingTotal: blockingExp.reduce((s,e) => s + e.amount, 0),
-        roi: parseFloat(roi)
-      });
-    } else if (data.expenses.length > 0 && data.income.length === 0) {
-      // Expenses only — no upcoming income to unlock
-      data.expenses.forEach(e => safeToDelay.push({
-        ...e, reason: 'No upcoming income in this project', proj
-      }));
-    }
-  });
-
-  // Sort: priority by income unlock amount (biggest first), safe by amount (biggest first)
-  priorityExp.sort((a,b) => b.incomeAmount - a.incomeAmount || a.due.localeCompare(b.due));
-  safeToDelay.sort((a,b) => b.amount - a.amount);
-
-  // ── 3. Optimal payment order ──
-  // Strategy: pay priority items first (they unlock income), delay safe-to-delay items
-  // Within priority: pay cheapest ones first if they unlock big income (best ROI)
-  const payOrder = [...priorityExp].sort((a,b) => {
-    const roiA = a.incomeAmount / (a.amount || 1);
-    const roiB = b.incomeAmount / (b.amount || 1);
-    return roiB - roiA;
-  });
-
-  // ── 4. Week-by-week cash pressure ──
-  const weeks = [{label:'This Week',in:0,out:0,items:0},{label:'Week 2',in:0,out:0,items:0},{label:'Week 3',in:0,out:0,items:0}];
-  win.forEach(t => {
-    const daysDiff = Math.floor((new Date(t.due+'T12:00:00') - new Date(today+'T12:00:00')) / 86400000);
-    const wk = daysDiff < 7 ? 0 : daysDiff < 14 ? 1 : 2;
-    if (t.type==='income') weeks[wk].in += t.amount;
-    else if (t.type!=='p_income') weeks[wk].out += t.amount;
-    weeks[wk].items++;
-  });
-
-  // ── Build HTML ──
   let html = '';
 
   // Jade header
@@ -2763,81 +2722,84 @@ function buildJadeFinanceAnalysis(allItems, balance) {
     <div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#4ade80,#059669);display:flex;align-items:center;justify-content:center;font-size:20px">🟢</div>
     <div>
       <div style="font-size:15px;font-weight:700;color:var(--txt)">Jade's Financial Analysis</div>
-      <div style="font-size:11px;color:var(--dim)">Based on ${win.length} upcoming payments across ${Object.keys(projMap).length} projects · Next 21 days</div>
+      <div style="font-size:11px;color:var(--dim)">${unpaid.length} visible payments · ${Object.keys(projMap).length} projects · Analysis based on payment flows only (not current cash)</div>
     </div>
   </div>`;
 
-  // Week pressure overview
+  // Flow overview
+  html += `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+    <div style="background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.15);border-radius:10px;padding:12px;text-align:center">
+      <div style="font-size:18px;font-weight:700;color:#4ade80">${cfFmt(totalIn)}</div>
+      <div style="font-size:10px;color:var(--dim);margin-top:2px">Confirmed Income</div>
+    </div>
+    <div style="background:rgba(248,113,113,.05);border:1px solid rgba(248,113,113,.15);border-radius:10px;padding:12px;text-align:center">
+      <div style="font-size:18px;font-weight:700;color:#f87171">${cfFmt(totalOut)}</div>
+      <div style="font-size:10px;color:var(--dim);margin-top:2px">Total Expenses</div>
+    </div>
+    <div style="background:${netFlow>=0?'rgba(74,222,128,.05)':'rgba(248,113,113,.05)'};border:1px solid ${netFlow>=0?'rgba(74,222,128,.15)':'rgba(248,113,113,.15)'};border-radius:10px;padding:12px;text-align:center">
+      <div style="font-size:18px;font-weight:700;color:${netFlow>=0?'#4ade80':'#f87171'}">${netFlow>=0?'+':''}${cfFmt(netFlow)}</div>
+      <div style="font-size:10px;color:var(--dim);margin-top:2px">Net Cash Flow</div>
+    </div>
+    <div style="background:rgba(250,204,21,.05);border:1px solid rgba(250,204,21,.15);border-radius:10px;padding:12px;text-align:center">
+      <div style="font-size:18px;font-weight:700;color:#facc15">${cfFmt(totalPot)}</div>
+      <div style="font-size:10px;color:var(--dim);margin-top:2px">Potential (unconfirmed)</div>
+    </div>
+  </div>`;
+
+  // Week pressure
   html += `<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px">`;
   weeks.forEach(wk => {
     const net = wk.in - wk.out;
-    const netC = net >= 0 ? '#4ade80' : '#f87171';
-    const pressure = wk.out > wk.in * 2 ? 'HIGH' : wk.out > wk.in ? 'MODERATE' : 'LOW';
-    const presC = pressure === 'HIGH' ? '#f87171' : pressure === 'MODERATE' ? '#facc15' : '#4ade80';
+    const pressure = wk.out > 0 && wk.in === 0 ? 'DRAIN' : wk.out > wk.in * 2 ? 'HIGH' : wk.out > wk.in ? 'MODERATE' : wk.in > 0 ? 'POSITIVE' : 'QUIET';
+    const presC = {DRAIN:'#f87171',HIGH:'#f87171',MODERATE:'#facc15',POSITIVE:'#4ade80',QUIET:'var(--dim)'}[pressure];
     html += `<div style="background:var(--bg);border:1px solid var(--bdr);border-radius:10px;padding:12px">
-      <div style="font-size:12px;font-weight:700;color:var(--txt);margin-bottom:6px">${wk.label}</div>
-      <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px">
-        <span style="color:#4ade80">⬇ ${cfFmt(wk.in)}</span>
-        <span style="color:#f87171">⬆ ${cfFmt(wk.out)}</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <span style="font-size:13px;font-weight:700;color:var(--txt)">${wk.label}</span>
+        <span style="font-size:10px;font-weight:700;color:${presC};background:${presC}15;padding:2px 6px;border-radius:3px">${pressure}</span>
       </div>
-      <div style="font-size:13px;font-weight:700;color:${netC};margin-bottom:4px">Net: ${net>=0?'+':''}${cfFmt(net)}</div>
-      <div style="font-size:10px;font-weight:600;color:${presC}">Pressure: ${pressure}</div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px">
+        <span style="color:#4ade80;font-weight:600">⬇ ${cfFmt(wk.in)}</span>
+        <span style="color:#f87171;font-weight:600">⬆ ${cfFmt(wk.out)}</span>
+      </div>
+      <div style="font-size:14px;font-weight:700;color:${net>=0?'#4ade80':'#f87171'}">Net: ${net>=0?'+':''}${cfFmt(net)}</div>
     </div>`;
   });
   html += '</div>';
 
-  // Danger zones
-  if (dangerDays.length > 0) {
+  // Net flow warning
+  if (netFlow < 0) {
+    const gapAbs = Math.abs(netFlow);
     html += `<div style="background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.2);border-radius:10px;padding:14px;margin-bottom:12px">
-      <div style="font-size:13px;font-weight:700;color:#f87171;margin-bottom:8px">⚠ Cash Danger Zones — Balance Goes Negative</div>`;
-    dangerDays.forEach(d => {
+      <div style="font-size:13px;font-weight:700;color:#f87171;margin-bottom:4px">⚠ Cash Outflow Exceeds Income by ${cfFmt(gapAbs)}</div>
+      <div style="font-size:12px;color:var(--txt2)">In this window, you're spending ${cfFmt(totalOut)} but only receiving ${cfFmt(totalIn)}. This ${cfFmt(gapAbs)} gap must come from existing cash reserves or by deferring expenses.</div>
+    </div>`;
+  }
+
+  // Heavy outflow days
+  if (heavyDays.length > 0) {
+    html += `<div style="background:rgba(250,204,21,.04);border:1px solid rgba(250,204,21,.15);border-radius:10px;padding:14px;margin-bottom:12px">
+      <div style="font-size:13px;font-weight:700;color:#facc15;margin-bottom:8px">🔥 Heavy Outflow Days</div>`;
+    heavyDays.slice(0,5).forEach(d => {
       const dt = new Date(d.date+'T12:00:00');
-      html += `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(248,113,113,.1);font-size:12px">
-        <span style="color:var(--txt)">${DAYS[dt.getDay()]} ${MONTHS[dt.getMonth()]} ${dt.getDate()}</span>
-        <span style="color:#f87171;font-weight:700;font-family:var(--mono)">Balance: ${cfFmt(d.bal)} (need ${cfFmt(d.deficit)} more)</span>
+      html += `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(250,204,21,.08);font-size:12px">
+        <span style="color:var(--txt);font-weight:600">${DAYS[dt.getDay()]} ${MONTHS[dt.getMonth()]} ${dt.getDate()}</span>
+        <span style="color:#f87171;font-weight:700;font-family:var(--mono)">⬆ ${cfFmt(d.out)} going out${d.in>0?' · <span style="color:#4ade80">⬇ '+cfFmt(d.in)+' coming in</span>':''}</span>
       </div>`;
     });
     html += '</div>';
-  } else if (lowest.bal < balance * 0.2) {
-    html += `<div style="background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.2);border-radius:10px;padding:14px;margin-bottom:12px">
-      <div style="font-size:13px;font-weight:700;color:#facc15;margin-bottom:4px">⚠ Cash Gets Tight</div>
-      <div style="font-size:12px;color:var(--txt2)">Balance drops to <b style="color:#facc15">${cfFmt(lowest.bal)}</b> — that's ${balance>0?Math.round(lowest.bal/balance*100)+'% of starting cash':'dangerous'}. Buffer is thin.</div>
-    </div>`;
-  } else {
-    html += `<div style="background:rgba(74,222,128,.04);border:1px solid rgba(74,222,128,.15);border-radius:10px;padding:14px;margin-bottom:12px">
-      <div style="font-size:13px;font-weight:700;color:#4ade80">✅ Cash Position Looks OK</div>
-      <div style="font-size:12px;color:var(--txt2)">Balance stays positive. Lowest point: <b>${cfFmt(lowest.bal)}</b></div>
-    </div>`;
   }
 
   return html;
 }
 
-function buildJadeRecommendations(allItems, balance) {
-  const unpaid = allItems.filter(t => !t.paid);
-  const today = new Date().toISOString().slice(0,10);
-  const day21 = new Date(Date.now() + 21*86400000).toISOString().slice(0,10);
-  const win = unpaid.filter(t => t.due && t.due >= today && t.due < day21);
+function buildJadeRecommendations(allWin, balance) {
+  const unpaid = allWin.filter(t => !t.paid);
+  const totalIn = unpaid.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
+  const totalOut = unpaid.filter(t=>t.type!=='income'&&t.type!=='p_income').reduce((s,t)=>s+t.amount,0);
 
-  // Compute danger days for summary
-  const _byDay = {};
-  win.forEach(t => {
-    if (!_byDay[t.due]) _byDay[t.due] = {in:0, out:0};
-    if (t.type==='income') _byDay[t.due].in += t.amount;
-    else if (t.type!=='p_income') _byDay[t.due].out += t.amount;
-  });
-  let _rb = balance;
-  const dangerDays = [];
-  let lowest = {bal: balance, date: today};
-  Object.keys(_byDay).sort().forEach(ds => {
-    _rb += _byDay[ds].in - _byDay[ds].out;
-    if (_rb < 0) dangerDays.push({date:ds, bal:_rb, deficit:Math.abs(_rb)});
-    if (_rb < lowest.bal) lowest = {bal:_rb, date:ds};
-  });
-
-  // Rebuild project analysis
+  // Per-project: link expenses to income milestones
   const projMap = {};
-  win.forEach(t => {
+  unpaid.forEach(t => {
     const p = t.project || 'Unknown';
     if (!projMap[p]) projMap[p] = {income:[], expenses:[]};
     if (t.type==='income') projMap[p].income.push(t);
@@ -2850,145 +2812,169 @@ function buildJadeRecommendations(allItems, balance) {
 
   Object.entries(projMap).forEach(([proj, data]) => {
     if (data.income.length > 0 && data.expenses.length > 0) {
-      const nextInc = data.income.sort((a,b) => a.due.localeCompare(b.due))[0];
-      const before = data.expenses.filter(e => e.due <= nextInc.due).sort((a,b) => a.due.localeCompare(b.due));
+      const sortedIncome = data.income.sort((a,b) => a.due.localeCompare(b.due));
+      const nextInc = sortedIncome[0];
+      const before = data.expenses.filter(e => e.due <= nextInc.due);
       const after = data.expenses.filter(e => e.due > nextInc.due);
+
+      const spendToUnlock = before.reduce((s,e) => s + e.amount, 0);
+      const ratio = spendToUnlock > 0 ? nextInc.amount / spendToUnlock : 999;
+      const netGain = nextInc.amount - spendToUnlock;
 
       before.forEach(e => priorityPay.push({
         task: e.task, project: proj, amount: e.amount, due: e.due, type: e.type,
         unlocks: nextInc.amount, unlockDate: nextInc.due,
-        roi: nextInc.amount / (e.amount || 1)
+        ratio, netGain, spendToUnlock
       }));
       after.forEach(e => canDelay.push({
         task: e.task, project: proj, amount: e.amount, due: e.due, type: e.type,
-        reason: 'After income of ' + cfFmt(nextInc.amount) + ' on ' + nextInc.due
+        reason: 'After ' + cfFmt(nextInc.amount) + ' income on ' + nextInc.due
       }));
 
       projRecs.push({
-        proj, spend: before.reduce((s,e)=>s+e.amount,0), unlock: nextInc.amount,
-        incDate: nextInc.due, blockCount: before.length
+        proj, spend: spendToUnlock, unlock: nextInc.amount, incDate: nextInc.due,
+        blockCount: before.length, afterCount: after.length,
+        afterTotal: after.reduce((s,e)=>s+e.amount,0),
+        ratio, netGain,
+        totalExpense: data.expenses.reduce((s,e)=>s+e.amount,0),
+        totalIncome: data.income.reduce((s,t)=>s+t.amount,0)
       });
     } else if (data.expenses.length > 0) {
       data.expenses.forEach(e => canDelay.push({
         task: e.task, project: proj, amount: e.amount, due: e.due, type: e.type,
-        reason: 'No income expected from this project in 21 days'
+        reason: 'No income expected in visible window'
       }));
     }
   });
 
-  // Sort priority by ROI (best return per dollar spent)
-  priorityPay.sort((a,b) => b.roi - a.roi);
+  // Smart sort: prioritize by NET GAIN (absolute impact), not just ratio
+  // A 10x return on $500 (=$5K) is less impactful than 2x on $50K (=$100K)
+  priorityPay.sort((a,b) => b.netGain - a.netGain || b.ratio - a.ratio);
   canDelay.sort((a,b) => b.amount - a.amount);
+
+  // Sort project recs by absolute net gain
+  projRecs.sort((a,b) => b.netGain - a.netGain);
 
   let html = '';
 
-  // ── Priority Payments: Pay These First ──
+  // ── Priority Payments ──
   if (priorityPay.length > 0) {
     html += `<div style="background:rgba(74,222,128,.04);border:1px solid rgba(74,222,128,.2);border-radius:10px;padding:14px;margin-bottom:12px">
-      <div style="font-size:13px;font-weight:700;color:#4ade80;margin-bottom:8px">🎯 Priority Payments — Pay These to Unlock Income</div>
-      <div style="font-size:11px;color:var(--dim);margin-bottom:8px">These expenses are before an income milestone. Paying them keeps the project moving toward a payment.</div>`;
-    priorityPay.slice(0, 10).forEach((item, i) => {
-      const dt = new Date(item.due+'T12:00:00');
-      const roiLabel = item.roi >= 5 ? '🔥 HIGH ROI' : item.roi >= 2 ? '✓ GOOD ROI' : '';
-      const typeLabel = item.type==='materials'?'📦 Materials':'🔧 Sub';
-      html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(74,222,128,.08);font-size:12px">
-        <div style="flex:1">
-          <span style="color:var(--txt);font-weight:600">${i+1}. ${item.task}</span>
-          <span style="color:var(--dim);font-size:10px;margin-left:4px">${item.project} · ${typeLabel}</span>
-          ${roiLabel?'<span style="font-size:9px;color:#facc15;background:rgba(250,204,21,.1);padding:1px 5px;border-radius:3px;margin-left:4px">'+roiLabel+'</span>':''}
-        </div>
-        <div style="text-align:right;white-space:nowrap">
-          <span style="color:#f87171;font-weight:700;font-family:var(--mono)">Pay ${cfFmt(item.amount)}</span>
-          <span style="color:var(--dim);font-size:10px;margin:0 4px">→</span>
-          <span style="color:#4ade80;font-weight:700;font-family:var(--mono)">Unlocks ${cfFmt(item.unlocks)}</span>
-        </div>
-      </div>`;
+      <div style="font-size:13px;font-weight:700;color:#4ade80;margin-bottom:4px">🎯 Priority — Pay These to Unlock Income</div>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:10px">Ranked by net gain (income unlocked minus cost). Focus on payments that bring the most cash back.</div>`;
+
+    // Group by project for clarity
+    const byProj = {};
+    priorityPay.forEach(p => {
+      if (!byProj[p.project]) byProj[p.project] = {items:[], unlocks:p.unlocks, unlockDate:p.unlockDate, ratio:p.ratio, netGain:p.netGain, totalSpend:0};
+      byProj[p.project].items.push(p);
+      byProj[p.project].totalSpend += p.amount;
     });
-    // Summary
-    const totalSpend = priorityPay.reduce((s,e) => s+e.amount, 0);
-    const totalUnlock = [...new Set(priorityPay.map(e=>e.unlockDate+'|'+e.unlocks))].reduce((s,v) => s+parseFloat(v.split('|')[1]),0);
-    html += `<div style="display:flex;justify-content:space-between;padding:8px 0 0;font-size:12px;font-weight:700;border-top:1px solid rgba(74,222,128,.15);margin-top:4px">
-      <span style="color:var(--txt)">Total to invest:</span>
-      <span><span style="color:#f87171">${cfFmt(totalSpend)}</span> → unlocks up to <span style="color:#4ade80">${cfFmt(totalUnlock)}</span></span>
-    </div>`;
+
+    Object.entries(byProj).sort((a,b) => b[1].netGain - a[1].netGain).forEach(([proj, data]) => {
+      const dt = new Date(data.unlockDate+'T12:00:00');
+      const worthIt = data.netGain > 10000 ? '💰 HIGH IMPACT' : data.netGain > 0 ? '✓ POSITIVE' : '⚠ LOW RETURN';
+      const worthC = data.netGain > 10000 ? '#4ade80' : data.netGain > 0 ? '#facc15' : '#f87171';
+      html += `<div style="margin-bottom:10px;padding:8px;background:rgba(255,255,255,.02);border-radius:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <span style="font-size:12px;font-weight:700;color:var(--txt)">${proj}</span>
+          <span style="font-size:10px;font-weight:600;color:${worthC};background:${worthC}15;padding:2px 6px;border-radius:3px">${worthIt}</span>
+        </div>
+        <div style="font-size:11px;color:var(--txt2);margin-bottom:6px">
+          Spend <b style="color:#f87171">${cfFmt(data.totalSpend)}</b> (${data.items.length} payments) → Unlocks <b style="color:#4ade80">${cfFmt(data.unlocks)}</b> by ${MONTHS[dt.getMonth()]} ${dt.getDate()} · Net gain: <b style="color:${data.netGain>=0?'#4ade80':'#f87171'}">${data.netGain>=0?'+':''}${cfFmt(data.netGain)}</b> · ${data.ratio.toFixed(1)}x return
+        </div>`;
+      data.items.forEach(item => {
+        const typeIcon = item.type==='materials'?'📦':'🔧';
+        html += `<div style="display:flex;justify-content:space-between;padding:2px 0 2px 12px;font-size:11px;border-bottom:1px solid rgba(255,255,255,.03)">
+          <span style="color:var(--txt2)">${typeIcon} ${item.task}</span>
+          <span style="color:#f87171;font-weight:600;font-family:var(--mono)">${cfFmt(item.amount)}</span>
+        </div>`;
+      });
+      html += '</div>';
+    });
     html += '</div>';
   }
 
   // ── Safe to Delay ──
   if (canDelay.length > 0) {
+    const totalDelay = canDelay.reduce((s,e) => s + e.amount, 0);
     html += `<div style="background:rgba(250,204,21,.04);border:1px solid rgba(250,204,21,.15);border-radius:10px;padding:14px;margin-bottom:12px">
-      <div style="font-size:13px;font-weight:700;color:#facc15;margin-bottom:8px">⏸ Safe to Delay — Postpone If Cash Is Tight</div>
-      <div style="font-size:11px;color:var(--dim);margin-bottom:8px">These don't block any upcoming income. Delaying them won't stop project progress toward a payment.</div>`;
-    canDelay.slice(0, 10).forEach((item, i) => {
-      const typeLabel = item.type==='materials'?'📦':'🔧';
+      <div style="font-size:13px;font-weight:700;color:#facc15;margin-bottom:4px">⏸ Safe to Delay — ${cfFmt(totalDelay)} in Deferrable Expenses</div>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:10px">These don't block any income milestone. Postpone the biggest ones first if cash is tight.</div>`;
+    canDelay.slice(0, 12).forEach((item, i) => {
+      const typeIcon = item.type==='materials'?'📦':'🔧';
       html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(250,204,21,.06);font-size:12px">
-        <div style="flex:1">
-          <span style="color:var(--txt)">${typeLabel} ${item.task}</span>
-          <span style="color:var(--dim);font-size:10px;margin-left:4px">— ${item.project}</span>
-        </div>
+        <div style="flex:1"><span style="color:var(--txt)">${typeIcon} ${item.task}</span> <span style="color:var(--dim);font-size:10px">— ${item.project}</span></div>
         <div style="text-align:right;white-space:nowrap">
           <span style="color:#facc15;font-weight:700;font-family:var(--mono)">${cfFmt(item.amount)}</span>
           <span style="color:var(--dim);font-size:10px;margin-left:6px">${item.reason}</span>
         </div>
       </div>`;
     });
-    const totalDelay = canDelay.reduce((s,e) => s+e.amount, 0);
-    html += `<div style="padding:8px 0 0;font-size:12px;font-weight:700;border-top:1px solid rgba(250,204,21,.1);margin-top:4px">
-      <span style="color:var(--txt)">Potential to defer: <span style="color:#facc15">${cfFmt(totalDelay)}</span></span>
-    </div>`;
+    if (canDelay.length > 12) html += `<div style="font-size:10px;color:var(--dim);padding:4px 0">+ ${canDelay.length-12} more items</div>`;
     html += '</div>';
   }
 
   // ── Project Investment Map ──
   if (projRecs.length > 0) {
-    projRecs.sort((a,b) => (b.unlock/b.spend) - (a.unlock/a.spend));
     html += `<div style="background:var(--bg);border:1px solid var(--bdr);border-radius:10px;padding:14px;margin-bottom:12px">
-      <div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:8px">📊 Project Investment Map — Where Your Money Works Hardest</div>`;
+      <div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:4px">📊 Project Investment Map</div>
+      <div style="font-size:11px;color:var(--dim);margin-bottom:10px">Which projects return the most per dollar invested. Sorted by absolute net gain.</div>`;
     projRecs.forEach(pr => {
-      const ratio = pr.spend > 0 ? (pr.unlock / pr.spend).toFixed(1) : '∞';
-      const barW = Math.min(pr.unlock / (projRecs[0].unlock || 1) * 100, 100);
+      const barW = projRecs[0].netGain > 0 ? Math.min(Math.max(pr.netGain / projRecs[0].netGain * 100, 5), 100) : 50;
       const dt = new Date(pr.incDate+'T12:00:00');
-      html += `<div style="margin-bottom:8px">
-        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
-          <span style="color:var(--txt);font-weight:600">${pr.proj}</span>
-          <span style="font-size:11px">Spend <span style="color:#f87171;font-weight:600">${cfFmt(pr.spend)}</span> (${pr.blockCount} items) → Get <span style="color:#4ade80;font-weight:600">${cfFmt(pr.unlock)}</span> by ${MONTHS[dt.getMonth()]} ${dt.getDate()} · <span style="color:#38bdf8;font-weight:700">${ratio}x return</span></span>
+      const verdict = pr.netGain > 20000 ? '🟢 Strong' : pr.netGain > 5000 ? '🟡 Decent' : pr.netGain > 0 ? '🟠 Marginal' : '🔴 Negative';
+      html += `<div style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-bottom:3px">
+          <span style="color:var(--txt);font-weight:600">${pr.proj} <span style="font-size:10px;color:var(--dim);font-weight:400">${verdict}</span></span>
+          <span style="font-size:11px;color:var(--txt2)">Invest <span style="color:#f87171;font-weight:600">${cfFmt(pr.spend)}</span> → Get <span style="color:#4ade80;font-weight:600">${cfFmt(pr.unlock)}</span> by ${MONTHS[dt.getMonth()]} ${dt.getDate()} · <span style="color:#38bdf8;font-weight:700">${pr.ratio.toFixed(1)}x</span> · Net <span style="color:${pr.netGain>=0?'#4ade80':'#f87171'};font-weight:700">${pr.netGain>=0?'+':''}${cfFmt(pr.netGain)}</span></span>
         </div>
-        <div style="height:6px;background:rgba(255,255,255,.05);border-radius:3px">
-          <div style="height:100%;width:${barW}%;background:linear-gradient(90deg,#4ade80,#059669);border-radius:3px"></div>
-        </div>
+        <div style="height:6px;background:rgba(255,255,255,.05);border-radius:3px"><div style="height:100%;width:${barW}%;background:${pr.netGain>5000?'linear-gradient(90deg,#4ade80,#059669)':'linear-gradient(90deg,#facc15,#f59e0b)'};border-radius:3px"></div></div>
+        ${pr.afterCount>0?'<div style="font-size:10px;color:var(--dim);margin-top:2px">'+pr.afterCount+' more expenses ('+cfFmt(pr.afterTotal)+') after this milestone — safe to defer</div>':''}
       </div>`;
     });
     html += '</div>';
   }
 
-  // ── Jade's Summary ──
-  const totalIn = win.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
-  const totalOut = win.filter(t=>t.type!=='income'&&t.type!=='p_income').reduce((s,t)=>s+t.amount,0);
-  const endBal = balance + totalIn - totalOut;
+  // ── Jade's Bottom Line ──
+  let summaryParts = [];
 
-  let summaryText = '';
-  if (dangerDays.length > 0) {
-    const firstDanger = new Date(dangerDays[0].date+'T12:00:00');
-    summaryText = `<b style="color:#f87171">Critical:</b> Cash goes negative on ${MONTHS[firstDanger.getMonth()]} ${firstDanger.getDate()}. `;
-    if (canDelay.length > 0) {
-      summaryText += `Deferring the top ${Math.min(canDelay.length,3)} delay-safe expenses (${cfFmt(canDelay.slice(0,3).reduce((s,e)=>s+e.amount,0))}) could prevent this. `;
-    }
-    if (priorityPay.length > 0) {
-      summaryText += `Focus spending on priority items that unlock ${cfFmt(priorityPay.reduce((s,e)=>s+e.unlocks,0))} in income.`;
-    }
-  } else if (endBal < balance * 0.3) {
-    summaryText = `<b style="color:#facc15">Caution:</b> Balance drops to ${cfFmt(lowest.bal)} — you'll survive but it's tight. `;
-    if (priorityPay.length > 0) summaryText += `Good news: ${cfFmt(priorityPay.reduce((s,e)=>s+e.unlocks,0))} in income is coming if you keep priority payments on track. `;
-    if (canDelay.length > 0) summaryText += `You have ${cfFmt(canDelay.reduce((s,e)=>s+e.amount,0))} in safely deferrable expenses as a buffer.`;
+  // Assess overall flow
+  if (totalIn === 0 && totalOut > 0) {
+    summaryParts.push(`<b style="color:#f87171">All outflow, zero income.</b> Every dollar out comes from reserves. Defer what you can — ${canDelay.length > 0 ? cfFmt(canDelay.reduce((s,e)=>s+e.amount,0))+' is safely deferrable' : 'check which expenses can wait'}.`);
+  } else if (totalOut > totalIn * 3) {
+    summaryParts.push(`<b style="color:#f87171">Expenses are ${(totalOut/totalIn).toFixed(0)}x income.</b> Heavy cash drain. Prioritize only expenses that unlock the ${cfFmt(totalIn)} in income.`);
+  } else if (totalOut > totalIn) {
+    summaryParts.push(`<b style="color:#facc15">Net negative flow:</b> spending ${cfFmt(totalOut-totalIn)} more than earning in this window.`);
   } else {
-    summaryText = `<b style="color:#4ade80">Healthy:</b> Cash stays positive through 21 days. `;
-    if (priorityPay.length > 0) summaryText += `Keep priority payments flowing — ${cfFmt(priorityPay.reduce((s,e)=>s+e.unlocks,0))} in income depends on it. `;
-    summaryText += `End balance: ${cfFmt(endBal)}.`;
+    summaryParts.push(`<b style="color:#4ade80">Positive flow:</b> income exceeds expenses by ${cfFmt(totalIn-totalOut)}.`);
+  }
+
+  // Best investment advice
+  if (projRecs.length > 0) {
+    const best = projRecs[0];
+    if (best.netGain > 10000) {
+      summaryParts.push(`<b>Best move:</b> ${best.proj} — spend ${cfFmt(best.spend)} to unlock ${cfFmt(best.unlock)} (net +${cfFmt(best.netGain)}). This is the highest-impact investment.`);
+    } else if (best.netGain > 0) {
+      summaryParts.push(`<b>Best available:</b> ${best.proj} needs ${cfFmt(best.spend)} to unlock ${cfFmt(best.unlock)}, but the net gain is only ${cfFmt(best.netGain)}.`);
+    }
+    // Warn about low-return projects
+    const lowReturn = projRecs.filter(p => p.ratio < 1.5 && p.spend > 3000);
+    if (lowReturn.length > 0) {
+      summaryParts.push(`<b style="color:#facc15">Watch out:</b> ${lowReturn.map(p=>p.proj).join(', ')} ${lowReturn.length>1?'have':'has'} less than 1.5x return on ${cfFmt(lowReturn.reduce((s,p)=>s+p.spend,0))} in spending. Consider if these can wait for a better cash position.`);
+    }
+  }
+
+  // Delay recommendation
+  if (canDelay.length > 0 && totalOut > totalIn) {
+    const top3 = canDelay.slice(0,3);
+    const top3Total = top3.reduce((s,e)=>s+e.amount,0);
+    summaryParts.push(`<b>Quick relief:</b> Deferring the top ${top3.length} delay-safe items (${top3.map(e=>cfFmt(e.amount)).join(' + ')} = ${cfFmt(top3Total)}) would ease the biggest pressure.`);
   }
 
   html += `<div style="background:rgba(74,222,128,.03);border:1px solid rgba(74,222,128,.12);border-radius:10px;padding:14px">
-    <div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:6px">💡 Jade's Bottom Line</div>
-    <div style="font-size:12px;color:var(--txt2);line-height:1.6">${summaryText}</div>
+    <div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:8px">💡 Jade's Bottom Line</div>
+    <div style="font-size:12px;color:var(--txt2);line-height:1.7">${summaryParts.join('<br>')}</div>
   </div>`;
 
   return html;
