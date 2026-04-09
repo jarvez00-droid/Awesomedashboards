@@ -439,21 +439,25 @@ function weeklyGate(c) {
 
 async function loadAndRenderWeekly(c) {
   c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Weekly Report...</div></div>';
-  // Try current week's Monday, then previous Monday
+  // Try this Monday, previous Monday, and one more back (handles timezone edge cases)
   const now = new Date();
-  const dow = now.getDay() || 7; // Mon=1..Sun=7
-  const thisMon = new Date(now); thisMon.setDate(now.getDate() - (dow - 1));
+  // Use local date to avoid UTC timezone mismatch
+  const localY = now.getFullYear(), localM = now.getMonth(), localD = now.getDate();
+  const localNow = new Date(localY, localM, localD);
+  const dow = localNow.getDay() || 7; // Mon=1..Sun=7
+  const thisMon = new Date(localNow); thisMon.setDate(localD - (dow - 1));
   const prevMon = new Date(thisMon); prevMon.setDate(thisMon.getDate() - 7);
-  const fmt = d => d.toISOString().slice(0, 10);
-  // Load review — try this Monday, then previous Monday
-  for (const mon of [fmt(thisMon), fmt(prevMon)]) {
+  const prevPrevMon = new Date(prevMon); prevPrevMon.setDate(prevMon.getDate() - 7);
+  const fmt = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  // Load review — try this Monday, then previous two Mondays
+  for (const mon of [fmt(thisMon), fmt(prevMon), fmt(prevPrevMon)]) {
     try {
       const r = await fetch('data/weekly-review-' + mon + '.json');
       if (r.ok) { WEEKLY_DATA = await r.json(); break; }
     } catch(e) {}
   }
-  // Load forecast — try this Monday, then previous Monday (independent of review key)
-  for (const mon of [fmt(thisMon), fmt(prevMon)]) {
+  // Load forecast — try this Monday, then previous two Mondays
+  for (const mon of [fmt(thisMon), fmt(prevMon), fmt(prevPrevMon)]) {
     try {
       const fr = await fetch('data/weekly-forecast-' + mon + '.json');
       if (fr.ok) { FORECAST_DATA = await fr.json(); break; }
