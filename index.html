@@ -1745,6 +1745,7 @@ let mgmtFromDate = new Date().toISOString().slice(0,10);
 let mgmtDays = 7;
 let mgmtProjFilter = 'all';
 let mgmtIncludeFixed = true;
+let mgmtCustomEnd = '';
 
 const MGMT_FC_CATS = {
   salaries:  {label:'Salaries',  color:'#818cf8', icon:'👤'},
@@ -1824,7 +1825,12 @@ function renderMgmt(c) {
         ⚙ Fixed Costs: ${mgmtIncludeFixed?'ON':'OFF'}
       </button>
     </div>
-    <div id="mgmt-range" style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px"></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px">
+      <div id="mgmt-range" style="display:flex;gap:4px;flex-wrap:wrap"></div>
+      <span style="color:var(--dim);font-size:11px">or</span>
+      <span style="font-size:11px;color:var(--txt2)">to:</span>
+      <input type="date" id="mgmt-to" value="" style="background:var(--card);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:5px 8px;font-size:12px;font-family:var(--sans);cursor:pointer">
+    </div>
     <div id="mgmt-stats"></div>
     <div id="mgmt-body"></div>`;
 
@@ -1837,6 +1843,8 @@ function renderMgmt(c) {
     b.textContent = r.l;
     b.addEventListener('click', () => {
       mgmtDays = r.d;
+      mgmtCustomEnd = '';
+      const toEl = document.getElementById('mgmt-to'); if(toEl) toEl.value='';
       rangeEl.querySelectorAll('.cf-tt').forEach(x=>x.classList.remove('on'));
       b.classList.add('on');
       renderMgmtBody();
@@ -1857,6 +1865,15 @@ function renderMgmt(c) {
   document.getElementById('mgmt-today').addEventListener('click',()=>{mgmtFromDate=new Date().toISOString().slice(0,10);document.getElementById('mgmt-from').value=mgmtFromDate;renderMgmtBody();});
   document.getElementById('mgmt-proj').addEventListener('change',e=>{mgmtProjFilter=e.target.value;renderMgmtBody();});
   document.getElementById('mgmt-fc-tog').addEventListener('click',()=>{mgmtIncludeFixed=!mgmtIncludeFixed;renderMgmt(c);});
+  document.getElementById('mgmt-to').addEventListener('change',e=>{
+    mgmtCustomEnd=e.target.value;
+    if(mgmtCustomEnd){
+      const from=new Date(mgmtFromDate+'T12:00:00'), to=new Date(mgmtCustomEnd+'T12:00:00');
+      mgmtDays=Math.max(1,Math.round((to-from)/86400000));
+      document.querySelectorAll('#mgmt-range .cf-tt').forEach(b=>b.classList.remove('on'));
+    }
+    renderMgmtBody();
+  });
   renderMgmtBody();
 }
 
@@ -1900,25 +1917,41 @@ function renderMgmtBody() {
   const net = gross - wFixed;
   const netP = net + wPIn;
 
-  // ── 8 Stat Cards ──
-  const sc = (val,label,color,bg) => `<div style="text-align:center;padding:12px 8px;background:${bg||'var(--card)'};border:1px solid var(--bdr);border-radius:10px">
-    <div style="font-size:20px;font-weight:700;color:${color}">${cfFmt(val)}</div>
-    <div style="font-size:10px;color:var(--dim);margin-top:4px">${label}</div></div>`;
+  // ── Stat Cards — 3 groups ──
+  const sc = (val,label,color,bg,sub) => `<div style="text-align:center;padding:14px 8px;background:${bg||'var(--card)'};border:1px solid var(--bdr);border-radius:10px">
+    <div style="font-size:22px;font-weight:700;color:${color}">${cfFmt(val)}</div>
+    <div style="font-size:11px;color:var(--txt2);margin-top:4px;font-weight:600">${label}</div>
+    ${sub?'<div style="font-size:9px;color:var(--dim);margin-top:2px">'+sub+'</div>':''}</div>`;
 
-  statsEl.innerHTML = `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px">
-    ${sc(wIn,'Confirmed Income','#4ade80','rgba(74,222,128,.06)')}
-    ${sc(wPIn,'Potential Income','#facc15','rgba(250,204,21,.06)')}
-    ${sc(totalIncome,'Total Income','#4ade80','rgba(74,222,128,.03)')}
-    ${sc(wMat+wSub,'Project Expenses','#f87171','rgba(248,113,113,.06)')}
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px">
-    ${sc(wFixed,'Fixed Costs','#818cf8','rgba(129,140,248,.06)')}
-    ${sc(gross,'Gross (no fixed)','var(--grn)','rgba(74,222,128,.04)')}
-    ${sc(net,'Net (all expenses)',net>=0?'var(--grn)':'var(--red)',net>=0?'rgba(74,222,128,.04)':'rgba(248,113,113,.04)')}
-    ${sc(netP,'Net (w/ potential)',netP>=0?'#facc15':'var(--red)','rgba(250,204,21,.04)')}
+  statsEl.innerHTML = `
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:14px">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#4ade80;margin-bottom:10px">💰 INCOME</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        ${sc(wIn,'Confirmed','#4ade80','rgba(74,222,128,.06)',incItems.length+' payments')}
+        ${sc(wPIn,'Potential','#facc15','rgba(250,204,21,.06)',pincItems.length+' payments')}
+        ${sc(totalIncome,'Total','#4ade80','rgba(74,222,128,.03)','')}
+      </div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:14px">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#f87171;margin-bottom:10px">📤 EXPENSES</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        ${sc(wMat,'Materials','#fb923c','rgba(251,146,60,.06)',matItems.length+' payments')}
+        ${sc(wSub,'Subs','#f87171','rgba(248,113,113,.06)',subItems.length+' payments')}
+        ${sc(wFixed,'Fixed','#818cf8','rgba(129,140,248,.06)',fixedItems.length+' payments')}
+      </div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:14px">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--txt2);margin-bottom:10px">📊 BOTTOM LINE</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        ${sc(gross,'Gross','var(--grn)','rgba(74,222,128,.04)','no fixed costs')}
+        ${sc(net,'Net',net>=0?'var(--grn)':'var(--red)',net>=0?'rgba(74,222,128,.04)':'rgba(248,113,113,.04)','all expenses')}
+        ${sc(netP,'w/ Potential',netP>=0?'#facc15':'var(--red)','rgba(250,204,21,.04)','includes potential')}
+      </div>
+    </div>
   </div>`;
 
-  // ── Category Breakdown (expandable) ──
+  // ── Category Breakdown (expandable with detail) ──
   function catCard(title, icon, total, color, items, groupBy) {
     const groups = {};
     items.forEach(t => {
@@ -1931,9 +1964,32 @@ function renderMgmtBody() {
     let detail = '';
     sorted.forEach(([k,v]) => {
       const lbl = groupBy==='cat' ? (MGMT_FC_CATS[k]?MGMT_FC_CATS[k].icon+' '+MGMT_FC_CATS[k].label:k) : k;
-      detail += `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px">
-        <span style="color:var(--txt2)">${lbl} <span style="color:var(--dim)">(${v.items.length})</span></span>
-        <span style="color:${color};font-weight:600">${cfFmt(v.total)}</span>
+      const pct = total>0 ? Math.round(v.total/total*100) : 0;
+      // Bar width
+      const barW = total>0 ? Math.max(v.total/total*100, 2) : 0;
+      // Sub-items sorted by date
+      const subItems = v.items.sort((a,b)=>(a.due||'').localeCompare(b.due||''));
+      let subHtml = '';
+      subItems.forEach(si => {
+        const dt = si.due ? new Date(si.due+'T12:00:00') : null;
+        const dtLbl = dt ? MONTHS[dt.getMonth()]+' '+dt.getDate()+' ('+DAYS[dt.getDay()]+')' : '—';
+        subHtml += `<div style="display:flex;justify-content:space-between;padding:2px 0 2px 12px;font-size:10px;border-bottom:1px solid rgba(255,255,255,.02)">
+          <span style="color:var(--dim);min-width:90px">${dtLbl}</span>
+          <span style="color:var(--txt2);flex:1;margin:0 8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${si.task}</span>
+          <span style="color:${color};font-weight:600;white-space:nowrap;font-family:var(--mono)">${si.amount?cfFmt(si.amount):'TBD'}</span>
+        </div>`;
+      });
+
+      detail += `<div style="margin-bottom:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;cursor:pointer" onclick="var el=this.nextElementSibling;el.style.display=el.style.display==='none'?'block':'none'">
+          <div style="display:flex;align-items:center;gap:6px;flex:1">
+            <span style="color:var(--txt);font-size:12px;font-weight:500">${lbl}</span>
+            <span style="color:var(--dim);font-size:10px">${v.items.length} items · ${pct}%</span>
+          </div>
+          <span style="color:${color};font-weight:700;font-size:13px;font-family:var(--mono)">${cfFmt(v.total)}</span>
+        </div>
+        <div style="height:4px;background:rgba(255,255,255,.05);border-radius:2px;margin-bottom:2px"><div style="height:100%;width:${barW}%;background:${color};border-radius:2px;opacity:.7"></div></div>
+        <div style="display:none">${subHtml}</div>
       </div>`;
     });
     if (!sorted.length) detail = '<div style="font-size:11px;color:var(--dim);padding:6px 0">None</div>';
@@ -2017,8 +2073,9 @@ function renderMgmtBody() {
     calByDay[t.due].items.push(t);
   });
 
-  // Build all 21 days
+  // Build all 21 days with running balance
   let calHtml = '';
+  let calRunBal = balance;
   for (let i=0;i<21;i++) {
     const dd = new Date(calToday.getTime()+i*86400000);
     const ds = dd.toISOString().slice(0,10);
@@ -2027,29 +2084,43 @@ function renderMgmtBody() {
     const dayLabel = MONTHS[dd.getMonth()]+' '+dd.getDate();
     const isWeekend = dd.getDay()===0||dd.getDay()===6;
     const isToday = ds===new Date().toISOString().slice(0,10);
+    const isMon = dd.getDay()===1;
+
+    // Week separator
+    if (isMon && i>0) calHtml += '<div style="height:2px;background:var(--bdr);margin:6px 0"></div>';
 
     if (!dayData) {
-      calHtml += `<div style="padding:5px 8px;border-bottom:1px solid rgba(33,39,47,.15);opacity:.4;font-size:11px;color:var(--dim)">
-        ${isToday?'<b style="color:var(--txt)">TODAY</b> ':''}${dayName} ${dayLabel} — <i>no payments</i>
+      calHtml += `<div style="padding:5px 8px;border-bottom:1px solid rgba(33,39,47,.1);opacity:.4;font-size:11px;color:var(--dim);display:flex;justify-content:space-between">
+        <span>${isToday?'<b style="color:var(--txt)">TODAY</b> ':''}${dayName} ${dayLabel} — <i>no payments</i></span>
+        <span style="font-family:var(--mono);font-size:10px">Balance: ${cfFmt(calRunBal)}</span>
       </div>`;
       continue;
     }
 
-    const dnet = dayData.in - dayData.out;
+    const dIn = dayData.in;
+    const dOut = dayData.out;
+    // Update running balance (income adds, expenses subtract — skip p_income from balance)
+    const dInConfirmed = dayData.items.filter(t=>t.type==='income').reduce((s,t)=>s+(t.amount||0),0);
+    const dOutAll = dayData.items.filter(t=>t.type!=='income'&&t.type!=='p_income').reduce((s,t)=>s+(t.amount||0),0);
+    calRunBal += dInConfirmed - dOutAll;
+
+    const dnet = dIn - dOut;
     const netC = dnet>=0?'#4ade80':'#f87171';
-    const borderC = dayData.in>0&&dayData.out===0?'#4ade80':dayData.out>0&&dayData.in===0?'#f87171':'#facc15';
+    const borderC = dIn>0&&dOut===0?'#4ade80':dOut>0&&dIn===0?'#f87171':'#facc15';
+    const balC = calRunBal>=0?'#4ade80':'#f87171';
 
     calHtml += `<div style="margin-bottom:1px">
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;background:${isToday?'rgba(56,189,248,.08)':'rgba(255,255,255,.02)'};border-radius:6px;cursor:pointer;border-left:3px solid ${borderC}" onclick="var el=this.nextElementSibling;el.style.display=el.style.display==='none'?'block':'none'">
-        <div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 8px;background:${isToday?'rgba(56,189,248,.08)':'rgba(255,255,255,.02)'};border-radius:6px;cursor:pointer;border-left:3px solid ${borderC}" onclick="var el=this.nextElementSibling;el.style.display=el.style.display==='none'?'block':'none'">
+        <div style="flex:1">
           ${isToday?'<span style="font-size:9px;font-weight:700;color:#38bdf8;background:rgba(56,189,248,.15);padding:1px 5px;border-radius:3px;margin-right:4px">TODAY</span>':''}
           <span style="font-size:12px;font-weight:600;color:var(--txt)">${dayName} ${dayLabel}</span>
           <span style="font-size:10px;color:var(--dim);margin-left:4px">${dayData.items.length} item${dayData.items.length>1?'s':''}</span>
         </div>
-        <div style="display:flex;gap:10px;font-size:11px;font-weight:600;font-family:var(--mono)">
-          ${dayData.in>0?'<span style="color:#4ade80">+'+cfFmt(dayData.in)+'</span>':''}
-          ${dayData.out>0?'<span style="color:#f87171">-'+cfFmt(dayData.out)+'</span>':''}
-          <span style="color:${netC};min-width:60px;text-align:right">${dnet>=0?'+':''}${cfFmt(dnet)}</span>
+        <div style="display:flex;gap:8px;font-size:11px;font-weight:600;align-items:center">
+          ${dIn>0?'<span style="color:#4ade80">Income '+cfFmt(dIn)+'</span>':''}
+          ${dOut>0?'<span style="color:#f87171">Expenses '+cfFmt(dOut)+'</span>':''}
+          <span style="color:var(--dim)">·</span>
+          <span style="color:${balC};font-family:var(--mono);min-width:70px;text-align:right">Bal: ${cfFmt(calRunBal)}</span>
         </div>
       </div>
       <div style="display:none;padding:4px 0 6px 16px">`;
@@ -2057,13 +2128,14 @@ function renderMgmtBody() {
     dayData.items.sort((a,b)=>(b.amount||0)-(a.amount||0)).forEach(t => {
       const ti = mgmtTypeInfo(t.type);
       const isIn = t.type==='income'||t.type==='p_income';
-      calHtml += `<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:11px;border-bottom:1px solid rgba(33,39,47,.15)">
+      const typeText = t.type==='income'?'Income':t.type==='p_income'?'Potential':t.type==='materials'?'Materials':t.type==='subs'?'Sub Payment':MGMT_FC_CATS[t.type]?MGMT_FC_CATS[t.type].label:'Expense';
+      calHtml += `<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:11px;border-bottom:1px solid rgba(33,39,47,.1)">
         <div style="display:flex;align-items:center;gap:6px;flex:1;min-width:0;overflow:hidden">
-          <span style="background:${ti.color}20;color:${ti.color};border:1px solid ${ti.color}40;font-size:9px;padding:1px 4px;border-radius:3px;white-space:nowrap">${ti.label}</span>
+          <span style="background:${ti.color}20;color:${ti.color};border:1px solid ${ti.color}40;font-size:9px;padding:1px 5px;border-radius:3px;white-space:nowrap">${typeText}</span>
           <span style="color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.task}</span>
           <span style="color:var(--dim);font-size:9px;white-space:nowrap">— ${t.project||''}</span>
         </div>
-        <span style="color:${isIn?'#4ade80':'#f87171'};font-weight:600;white-space:nowrap;margin-left:8px;font-family:var(--mono)">${isIn?'+':'-'}${t.amount?cfFmt2(t.amount):'TBD'}</span>
+        <span style="color:${isIn?'#4ade80':'#f87171'};font-weight:600;white-space:nowrap;margin-left:8px;font-family:var(--mono)">${isIn?'+ ':'- '}${t.amount?cfFmt2(t.amount):'TBD'}</span>
       </div>`;
     });
     calHtml += '</div></div>';
