@@ -450,15 +450,22 @@ async function loadAndRenderWeekly(c) {
       const r = await fetch('data/weekly-review-' + mon + '.json');
       if (!r.ok) continue;
       WEEKLY_DATA = await r.json();
-      // Also try to load forecast for this week
-      try {
-        const fr = await fetch('data/weekly-forecast-' + mon + '.json');
-        if (fr.ok) FORECAST_DATA = await fr.json();
-      } catch(e2) {}
       renderWeekly(c);
-      return;
+      break;
     } catch(e) {}
   }
+  // Load forecast separately — always try this Monday first, then previous
+  for (const mon of [fmt(thisMon), fmt(prevMon)]) {
+    try {
+      const fr = await fetch('data/weekly-forecast-' + mon + '.json');
+      if (!fr.ok) continue;
+      FORECAST_DATA = await fr.json();
+      if (WEEKLY_DATA) renderWeekly(c); // re-render with forecast
+      return;
+    } catch(e2) {}
+  }
+  if (WEEKLY_DATA) return; // review loaded but no forecast — already rendered
+  c.innerHTML = '<div class="empty"><div class="empty-i">📊</div><div class="empty-t">No Weekly Report</div><div class="empty-d">The weekly report generates Monday at 7 AM.</div></div>';
   c.innerHTML = '<div class="empty"><div class="empty-i">📊</div><div class="empty-t">No Weekly Report</div><div class="empty-d">The weekly report generates Monday at 7 AM.</div></div>';
 }
 
