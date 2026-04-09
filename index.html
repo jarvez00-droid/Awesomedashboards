@@ -2334,16 +2334,17 @@ function buildSituationEval(allWin, balance) {
   return `<div id="sit-eval" style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:20px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
-        <div style="font-size:14px;font-weight:700;color:var(--txt)">What-If Scenario Planner</div>
-        <div style="font-size:11px;color:var(--dim);margin-top:2px">Delay payments, shift income dates, add manual items — see projected cash flow instantly</div>
+        <div style="font-size:14px;font-weight:700;color:var(--txt)">What-If Planner — Day by Day</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:2px">Postpone payments, delay income, add items — balance updates live for every day</div>
       </div>
       <div style="display:flex;gap:8px">
-        <button id="sit-reset" style="background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.25);border-radius:6px;padding:6px 14px;font-size:11px;cursor:pointer;font-family:var(--sans);font-weight:600">↺ Reset All</button>
-        <button id="sit-add" style="background:rgba(56,189,248,.08);color:#38bdf8;border:1px solid rgba(56,189,248,.25);border-radius:6px;padding:6px 14px;font-size:11px;cursor:pointer;font-family:var(--sans);font-weight:600">+ Add Manual Item</button>
+        <button id="sit-reset" style="background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.25);border-radius:6px;padding:6px 14px;font-size:11px;cursor:pointer;font-family:var(--sans);font-weight:600">↺ Reset</button>
+        <button id="sit-add-in" style="background:rgba(74,222,128,.08);color:#4ade80;border:1px solid rgba(74,222,128,.25);border-radius:6px;padding:6px 14px;font-size:11px;cursor:pointer;font-family:var(--sans);font-weight:600">+ Income</button>
+        <button id="sit-add-out" style="background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.25);border-radius:6px;padding:6px 14px;font-size:11px;cursor:pointer;font-family:var(--sans);font-weight:600">+ Expense</button>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 280px;gap:20px">
-      <div id="sit-list" style="max-height:500px;overflow-y:auto"></div>
+    <div style="display:grid;grid-template-columns:1fr 260px;gap:20px">
+      <div id="sit-days" style="max-height:600px;overflow-y:auto"></div>
       <div id="sit-result"></div>
     </div>
     <div id="sit-chart-wrap" style="margin-top:16px"></div>
@@ -2352,95 +2353,136 @@ function buildSituationEval(allWin, balance) {
 
 function initSituationEval(allWin, balance) {
   scenarioItems = allWin.filter(t=>!t.paid).map((t,i) => ({
-    id: 'orig_'+i,
-    task: t.task,
-    project: t.project||'',
-    type: t.type,
-    amount: t.amount||0,
-    originalDue: t.due,
-    due: t.due,
-    shift: 0,
-    isIn: t.type==='income'||t.type==='p_income',
-    delayed: false,
-    manual: false
+    id: 'orig_'+i, task: t.task, project: t.project||'', type: t.type,
+    amount: t.amount||0, originalDue: t.due, due: t.due, shift: 0,
+    isIn: t.type==='income'||t.type==='p_income', manual: false
   }));
   scenarioManualItems = [];
   scenarioNextId = 1;
 
   document.getElementById('sit-reset').addEventListener('click', () => {
-    scenarioItems.forEach(s => { s.due = s.originalDue; s.shift = 0; s.delayed = false; });
+    scenarioItems.forEach(s => { s.due = s.originalDue; s.shift = 0; });
     scenarioManualItems = [];
     renderScenario(balance);
   });
-
-  document.getElementById('sit-add').addEventListener('click', () => {
+  document.getElementById('sit-add-in').addEventListener('click', () => {
     const id = 'manual_' + (scenarioNextId++);
     const today = new Date().toISOString().slice(0,10);
-    scenarioManualItems.push({
-      id, task:'New Item', project:'Manual', type:'subs', amount:0,
-      originalDue:today, due:today, shift:0, isIn:false, delayed:false, manual:true
-    });
+    scenarioManualItems.push({ id, task:'New Income', project:'Manual', type:'income', amount:0, originalDue:today, due:today, shift:0, isIn:true, manual:true });
     renderScenario(balance);
   });
-
+  document.getElementById('sit-add-out').addEventListener('click', () => {
+    const id = 'manual_' + (scenarioNextId++);
+    const today = new Date().toISOString().slice(0,10);
+    scenarioManualItems.push({ id, task:'New Expense', project:'Manual', type:'subs', amount:0, originalDue:today, due:today, shift:0, isIn:false, manual:true });
+    renderScenario(balance);
+  });
   renderScenario(balance);
 }
 
 function renderScenario(balance) {
-  const listEl = document.getElementById('sit-list');
+  const daysEl = document.getElementById('sit-days');
   const resultEl = document.getElementById('sit-result');
   const chartEl = document.getElementById('sit-chart-wrap');
-  if (!listEl || !resultEl) return;
+  if (!daysEl || !resultEl) return;
 
-  const all = [...scenarioItems, ...scenarioManualItems].sort((a,b)=>(a.due||'').localeCompare(b.due||''));
-  const incomeItems = all.filter(x=>x.isIn);
-  const expenseItems = all.filter(x=>!x.isIn);
+  const all = [...scenarioItems, ...scenarioManualItems];
 
-  // ── Build list with table-style headers ──
-  let listHtml = '';
+  // Build day-by-day for 21 days from today
+  const calToday = new Date(new Date().toISOString().slice(0,10)+'T12:00:00');
+  const dayMap = {};
+  for (let i=0; i<21; i++) {
+    const dd = new Date(calToday.getTime()+i*86400000);
+    const ds = dd.toISOString().slice(0,10);
+    dayMap[ds] = {date:ds, items:[], dayObj:dd};
+  }
 
-  // Column header
-  const colHeader = `<div style="display:grid;grid-template-columns:1fr 90px 80px 110px;gap:6px;padding:4px 6px;font-size:10px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.3px;border-bottom:1px solid var(--bdr);margin-bottom:4px">
-    <span>Payment</span>
-    <span style="text-align:right">Amount</span>
-    <span style="text-align:center">Due Date</span>
-    <span style="text-align:center">Shift Days</span>
-  </div>`;
+  // Place items into days (only items within 21-day window)
+  all.forEach(item => {
+    if (dayMap[item.due]) dayMap[item.due].items.push(item);
+  });
 
-  // Income section
-  const incTotal = incomeItems.reduce((s,x)=>s+x.amount,0);
-  const incShifted = incomeItems.filter(x=>x.shift!==0).length;
-  listHtml += `<div style="margin-bottom:16px">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 6px;background:rgba(74,222,128,.06);border-radius:8px;margin-bottom:6px">
-      <span style="font-size:13px;font-weight:700;color:#4ade80">⬇ Income</span>
-      <span style="font-size:12px;color:var(--txt2)">${incomeItems.length} items · <b style="color:#4ade80">${cfFmt(incTotal)}</b>${incShifted?' · <span style="color:#facc15">'+incShifted+' shifted</span>':''}</span>
-    </div>
-    ${colHeader}`;
-  incomeItems.forEach(item => { listHtml += renderScenarioRow(item); });
-  if(!incomeItems.length) listHtml += '<div style="padding:8px;text-align:center;font-size:11px;color:var(--dim)">No income items</div>';
-  listHtml += '</div>';
+  const days = Object.values(dayMap).sort((a,b)=>a.date.localeCompare(b.date));
 
-  // Expense section
-  const expTotal = expenseItems.reduce((s,x)=>s+x.amount,0);
-  const expShifted = expenseItems.filter(x=>x.shift!==0).length;
-  listHtml += `<div>
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 6px;background:rgba(248,113,113,.06);border-radius:8px;margin-bottom:6px">
-      <span style="font-size:13px;font-weight:700;color:#f87171">⬆ Expenses</span>
-      <span style="font-size:12px;color:var(--txt2)">${expenseItems.length} items · <b style="color:#f87171">${cfFmt(expTotal)}</b>${expShifted?' · <span style="color:#facc15">'+expShifted+' shifted</span>':''}</span>
-    </div>
-    ${colHeader}`;
-  expenseItems.forEach(item => { listHtml += renderScenarioRow(item); });
-  if(!expenseItems.length) listHtml += '<div style="padding:8px;text-align:center;font-size:11px;color:var(--dim)">No expense items</div>';
-  listHtml += '</div>';
+  // Compute running balance
+  let runBal = balance;
+  let minBal = balance, minDate = '';
+  const projPts = [{date:'start', net:balance, gross:balance, netPot:balance}];
+  let grossBal = balance, netPotBal = balance;
 
-  listEl.innerHTML = listHtml;
+  days.forEach(day => {
+    let dConfIn=0, dPotIn=0, dProjOut=0, dFixedOut=0;
+    day.items.forEach(item => {
+      if (item.type==='income') dConfIn += item.amount;
+      else if (item.type==='p_income') dPotIn += item.amount;
+      else if (mgmtIsFixed(item.type)) dFixedOut += item.amount;
+      else dProjOut += item.amount;
+    });
+    grossBal += dConfIn - dProjOut;
+    runBal += dConfIn - dProjOut - (mgmtIncludeFixed ? dFixedOut : 0);
+    netPotBal = runBal + dPotIn;
+    day.balance = runBal;
+    day.totalIn = dConfIn + dPotIn;
+    day.totalOut = dProjOut + dFixedOut;
+    projPts.push({date:day.date, net:runBal, gross:grossBal, netPot:netPotBal});
+    if (runBal < minBal) { minBal = runBal; minDate = day.date; }
+  });
+
+  const endBal = runBal;
+  const adjusted = all.filter(x=>x.shift!==0).length;
+  const manualCount = scenarioManualItems.length;
+  const hasGross = projPts.some(p=>p.gross!==p.net);
+  const hasPot = projPts.some(p=>p.netPot!==p.net);
+
+  // ── Render day-by-day ──
+  let html = '';
+  days.forEach((day, di) => {
+    const dd = day.dayObj;
+    const dayName = DAYS[dd.getDay()];
+    const dayLabel = MONTHS[dd.getMonth()]+' '+dd.getDate();
+    const isToday = day.date === new Date().toISOString().slice(0,10);
+    const isMon = dd.getDay() === 1;
+    const hasItems = day.items.length > 0;
+    const balC = day.balance >= 0 ? '#4ade80' : '#f87171';
+    const balBg = day.balance >= 0 ? 'rgba(74,222,128,.06)' : 'rgba(248,113,113,.06)';
+
+    // Week separator
+    if (isMon && di > 0) html += '<div style="height:3px;background:var(--bdr);margin:8px 0;border-radius:2px"></div>';
+
+    // Day header
+    html += `<div style="margin-bottom:2px;border-radius:8px;overflow:hidden;border:1px solid ${isToday?'rgba(56,189,248,.3)':'rgba(255,255,255,.04)'}">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:${isToday?'rgba(56,189,248,.06)':'rgba(255,255,255,.02)'}">
+        <div style="display:flex;align-items:center;gap:8px">
+          ${isToday?'<span style="font-size:9px;font-weight:700;color:#38bdf8;background:rgba(56,189,248,.15);padding:2px 6px;border-radius:3px">TODAY</span>':''}
+          <span style="font-size:13px;font-weight:700;color:var(--txt)">${dayName}</span>
+          <span style="font-size:12px;color:var(--txt2)">${dayLabel}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:11px;font-weight:600">
+          ${day.totalIn>0?'<span style="color:#4ade80;background:rgba(74,222,128,.1);padding:2px 8px;border-radius:4px">⬇ IN '+cfFmt(day.totalIn)+'</span>':''}
+          ${day.totalOut>0?'<span style="color:#f87171;background:rgba(248,113,113,.1);padding:2px 8px;border-radius:4px">⬆ OUT '+cfFmt(day.totalOut)+'</span>':''}
+          <span style="color:${balC};background:${balBg};padding:3px 10px;border-radius:5px;font-size:12px;font-weight:700;font-family:var(--mono)">Balance: ${cfFmt(day.balance)}</span>
+        </div>
+      </div>`;
+
+    // Items for this day
+    if (hasItems) {
+      day.items.sort((a,b) => (a.isIn===b.isIn ? (b.amount-a.amount) : (a.isIn?-1:1)));
+      day.items.forEach(item => {
+        html += renderScenarioRow(item);
+      });
+    } else {
+      html += `<div style="padding:6px 12px;font-size:11px;color:var(--dim);font-style:italic">No payments</div>`;
+    }
+    html += '</div>';
+  });
+
+  daysEl.innerHTML = html;
 
   // ── Wire events ──
-  listEl.querySelectorAll('[data-sit-id]').forEach(row => {
+  daysEl.querySelectorAll('[data-sit-id]').forEach(row => {
     const id = row.dataset.sitId;
     const item = all.find(x=>x.id===id);
     if (!item) return;
-
     const minusBtn = row.querySelector('.sit-minus');
     const plusBtn = row.querySelector('.sit-plus');
     const shiftInput = row.querySelector('.sit-shift');
@@ -2451,18 +2493,15 @@ function renderScenario(balance) {
 
     if (minusBtn) minusBtn.addEventListener('click', () => {
       item.shift = Math.max(item.shift - 1, -30);
-      updateItemDue(item);
-      renderScenario(balance);
+      updateItemDue(item); renderScenario(balance);
     });
     if (plusBtn) plusBtn.addEventListener('click', () => {
       item.shift = Math.min(item.shift + 1, 90);
-      updateItemDue(item);
-      renderScenario(balance);
+      updateItemDue(item); renderScenario(balance);
     });
-    if (shiftInput) shiftInput.addEventListener('change', (e) => {
+    if (shiftInput) shiftInput.addEventListener('change', e => {
       item.shift = Math.max(-30, Math.min(90, parseInt(e.target.value)||0));
-      updateItemDue(item);
-      renderScenario(balance);
+      updateItemDue(item); renderScenario(balance);
     });
     if (delBtn) delBtn.addEventListener('click', () => {
       scenarioManualItems = scenarioManualItems.filter(x=>x.id!==id);
@@ -2477,63 +2516,40 @@ function renderScenario(balance) {
     });
   });
 
-  // ── Compute projected balances ──
-  const byDay = {};
-  all.forEach(item => {
-    if (!byDay[item.due]) byDay[item.due] = {confIn:0, potIn:0, projOut:0, fixedOut:0};
-    if (item.type==='income') byDay[item.due].confIn += item.amount;
-    else if (item.type==='p_income') byDay[item.due].potIn += item.amount;
-    else if (mgmtIsFixed(item.type)) byDay[item.due].fixedOut += item.amount;
-    else byDay[item.due].projOut += item.amount;
-  });
-  const projDays = Object.keys(byDay).sort();
-  let netBal = balance, grossBal = balance, netPotBal = balance;
-  let minBal = balance, minDate = '';
-  const projPts = [{date:'start', net:balance, gross:balance, netPot:balance}];
-  projDays.forEach(ds => {
-    const dd = byDay[ds];
-    grossBal += dd.confIn - dd.projOut;
-    netBal += dd.confIn - dd.projOut - (mgmtIncludeFixed ? dd.fixedOut : 0);
-    netPotBal = netBal + dd.potIn;
-    projPts.push({date:ds, net:netBal, gross:grossBal, netPot:netPotBal});
-    if (netBal < minBal) { minBal = netBal; minDate = ds; }
-  });
-  const endBal = netBal;
-  const hasGross = projPts.some(p=>p.gross!==p.net);
-  const hasPot = projPts.some(p=>p.netPot!==p.net);
-  const adjusted = all.filter(x=>x.shift!==0).length;
-  const manualCount = scenarioManualItems.length;
+  // ── Result panel ──
   const minDt = minDate ? new Date(minDate+'T12:00:00') : null;
   const minDateLbl = minDt ? MONTHS[minDt.getMonth()]+' '+minDt.getDate()+' ('+DAYS[minDt.getDay()]+')' : '';
 
-  // ── Result panel ──
   resultEl.innerHTML = `
-    <div style="background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.15);border-radius:10px;padding:14px;margin-bottom:10px">
-      <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.3px">Starting Cash</div>
-      <div style="font-size:22px;font-weight:700;color:var(--txt);margin-top:4px">${cfFmt(balance)}</div>
-    </div>
-    <div style="background:${endBal>=0?'rgba(74,222,128,.05)':'rgba(248,113,113,.05)'};border:1px solid ${endBal>=0?'rgba(74,222,128,.15)':'rgba(248,113,113,.15)'};border-radius:10px;padding:14px;margin-bottom:10px">
-      <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.3px">Projected End</div>
-      <div style="font-size:22px;font-weight:700;color:${endBal>=0?'#4ade80':'#f87171'};margin-top:4px">${cfFmt(endBal)}</div>
-      <div style="font-size:10px;color:var(--dim);margin-top:2px">${endBal>=balance?'▲':'▼'} ${cfFmt(Math.abs(endBal-balance))} from start</div>
-    </div>
-    <div style="background:${minBal>=0?'rgba(250,204,21,.05)':'rgba(248,113,113,.08)'};border:1px solid ${minBal>=0?'rgba(250,204,21,.15)':'rgba(248,113,113,.2)'};border-radius:10px;padding:14px;margin-bottom:10px">
-      <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.3px">⚠ Lowest Point</div>
-      <div style="font-size:22px;font-weight:700;color:${minBal>=0?'#facc15':'#f87171'};margin-top:4px">${cfFmt(minBal)}</div>
-      ${minDateLbl?'<div style="font-size:11px;color:var(--txt2);margin-top:2px">'+minDateLbl+'</div>':''}
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-      <div style="background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:10px;text-align:center">
-        <div style="font-size:18px;font-weight:700;color:${adjusted?'#facc15':'var(--dim)'}">${adjusted}</div>
-        <div style="font-size:9px;color:var(--dim);margin-top:2px">Shifted</div>
+    <div style="position:sticky;top:0">
+      <div style="background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.15);border-radius:10px;padding:14px;margin-bottom:10px">
+        <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.3px">Starting Cash</div>
+        <div style="font-size:22px;font-weight:700;color:var(--txt);margin-top:4px">${cfFmt(balance)}</div>
       </div>
-      <div style="background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:10px;text-align:center">
-        <div style="font-size:18px;font-weight:700;color:${manualCount?'#e879f9':'var(--dim)'}">${manualCount}</div>
-        <div style="font-size:9px;color:var(--dim);margin-top:2px">Manual</div>
+      <div style="background:${endBal>=0?'rgba(74,222,128,.05)':'rgba(248,113,113,.05)'};border:1px solid ${endBal>=0?'rgba(74,222,128,.15)':'rgba(248,113,113,.15)'};border-radius:10px;padding:14px;margin-bottom:10px">
+        <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.3px">Day 21 Balance</div>
+        <div style="font-size:22px;font-weight:700;color:${endBal>=0?'#4ade80':'#f87171'};margin-top:4px">${cfFmt(endBal)}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:2px">${endBal>=balance?'▲':'▼'} ${cfFmt(Math.abs(endBal-balance))}</div>
       </div>
+      <div style="background:${minBal>=0?'rgba(250,204,21,.05)':'rgba(248,113,113,.08)'};border:1px solid ${minBal>=0?'rgba(250,204,21,.15)':'rgba(248,113,113,.2)'};border-radius:10px;padding:14px;margin-bottom:10px">
+        <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.3px">⚠ Lowest Point</div>
+        <div style="font-size:22px;font-weight:700;color:${minBal>=0?'#facc15':'#f87171'};margin-top:4px">${cfFmt(minBal)}</div>
+        ${minDateLbl?'<div style="font-size:11px;color:var(--txt2);margin-top:2px">'+minDateLbl+'</div>':''}
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:18px;font-weight:700;color:${adjusted?'#facc15':'var(--dim)'}">${adjusted}</div>
+          <div style="font-size:9px;color:var(--dim);margin-top:2px">Shifted</div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:18px;font-weight:700;color:${manualCount?'#e879f9':'var(--dim)'}">${manualCount}</div>
+          <div style="font-size:9px;color:var(--dim);margin-top:2px">Manual</div>
+        </div>
+      </div>
+      ${adjusted>0?'<div style="font-size:10px;color:#facc15;background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.15);border-radius:6px;padding:8px;text-align:center">⚡ '+adjusted+' payment'+(adjusted>1?'s':'')+' shifted — balance reflects changes</div>':''}
     </div>`;
 
-  // ── Scenario chart ──
+  // ── Chart ──
   if (projPts.length > 1) {
     const cW=700, cH=220, cPL=60, cPR=20, cPT=20, cPB=30;
     const cPW=cW-cPL-cPR, cPH=cH-cPT-cPB;
@@ -2545,47 +2561,25 @@ function renderScenario(balance) {
 
     let cs = `<svg width="100%" height="${cH}" viewBox="0 0 ${cW} ${cH}" style="display:block">`;
     cs+=`<line x1="${cPL}" y1="${cZeroY}" x2="${cW-cPR}" y2="${cZeroY}" stroke="#00ff88" stroke-width="1.5" opacity="0.7"/>`;
-
-    // Net area fill
     let cpNet='';
     projPts.forEach((p,i)=>{cpNet+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.net)} `;});
     cs+=`<path d="${cpNet}L${cToX(projPts.length-1)},${cZeroY} L${cToX(0)},${cZeroY} Z" fill="rgba(74,222,128,.06)"/>`;
-
-    // Gross line (dashed green)
-    if(hasGross){
-      let cpG='';
-      projPts.forEach((p,i)=>{cpG+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.gross)} `;});
-      cs+=`<path d="${cpG}" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="5,4" stroke-linejoin="round" opacity="0.5"/>`;
-    }
-    // Net + Potential (neon pink)
-    if(hasPot){
-      let cpP='';
-      projPts.forEach((p,i)=>{cpP+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.netPot)} `;});
-      cs+=`<path d="${cpP}" fill="none" stroke="#ff2d95" stroke-width="2" stroke-dasharray="5,4" stroke-linejoin="round" opacity="0.8"/>`;
-    }
-    // Net (solid green)
+    if(hasGross){let cpG='';projPts.forEach((p,i)=>{cpG+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.gross)} `;});cs+=`<path d="${cpG}" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="5,4" stroke-linejoin="round" opacity="0.5"/>`;}
+    if(hasPot){let cpP='';projPts.forEach((p,i)=>{cpP+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.netPot)} `;});cs+=`<path d="${cpP}" fill="none" stroke="#ff2d95" stroke-width="2" stroke-dasharray="5,4" stroke-linejoin="round" opacity="0.8"/>`;}
     cs+=`<path d="${cpNet}" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linejoin="round"/>`;
-    // Dots + key labels
     projPts.forEach((p,i)=>{
-      const x=cToX(i), y=cToY(p.net);
-      const c=p.net>=0?'#4ade80':'#f87171';
+      const x=cToX(i),y=cToY(p.net),c=p.net>=0?'#4ade80':'#f87171';
       cs+=`<circle cx="${x}" cy="${y}" r="3" fill="${c}"/>`;
-      if(i===0||i===projPts.length-1||p.net===minBal){
-        cs+=`<text x="${x}" y="${y-8}" text-anchor="middle" fill="${c}" font-size="9" font-weight="700" font-family="var(--mono)">${cfFmt(p.net)}</text>`;
-      }
+      if(i===0||i===projPts.length-1||p.net===minBal){cs+=`<text x="${x}" y="${y-8}" text-anchor="middle" fill="${c}" font-size="9" font-weight="700" font-family="var(--mono)">${cfFmt(p.net)}</text>`;}
     });
     cs+='</svg>';
-
-    let cLeg = '<span style="color:#4ade80">━━ Net</span>';
-    if(hasGross) cLeg+=' <span style="color:#4ade8080">┅┅ Gross</span>';
-    if(hasPot) cLeg+=' <span style="color:#ff2d95">┅┅ Net + Potential</span>';
+    let cLeg='<span style="color:#4ade80">━━ Net</span>';
+    if(hasGross)cLeg+=' <span style="color:#4ade8080">┅┅ Gross</span>';
+    if(hasPot)cLeg+=' <span style="color:#ff2d95">┅┅ Net+Potential</span>';
     cLeg+=' <span style="color:#00ff88">━━ $0</span>';
-
-    chartEl.innerHTML = `<div style="background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:12px">
-      <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:8px">📈 Projected Cash Flow</div>
-      ${cs}
-      <div style="display:flex;gap:14px;justify-content:center;margin-top:8px;font-size:10px">${cLeg}</div>
-    </div>`;
+    chartEl.innerHTML=`<div style="background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:12px">
+      <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:8px">📈 Projected Cash Flow</div>${cs}
+      <div style="display:flex;gap:14px;justify-content:center;margin-top:8px;font-size:10px">${cLeg}</div></div>`;
   }
 }
 
@@ -2593,53 +2587,52 @@ function updateItemDue(item) {
   const orig = new Date(item.originalDue+'T12:00:00');
   orig.setDate(orig.getDate() + item.shift);
   item.due = orig.toISOString().slice(0,10);
-  item.delayed = item.shift !== 0;
 }
 
 function renderScenarioRow(item) {
   const color = item.isIn ? '#4ade80' : '#f87171';
-  const origDt = new Date(item.originalDue+'T12:00:00');
-  const newDt = new Date(item.due+'T12:00:00');
-  const origLbl = MONTHS[origDt.getMonth()]+' '+origDt.getDate();
-  const newLbl = MONTHS[newDt.getMonth()]+' '+newDt.getDate();
+  const dirLabel = item.isIn ? '⬇ IN' : '⬆ OUT';
+  const dirBg = item.isIn ? 'rgba(74,222,128,.08)' : 'rgba(248,113,113,.08)';
   const shifted = item.shift !== 0;
   const shiftColor = item.shift > 0 ? '#facc15' : item.shift < 0 ? '#38bdf8' : 'var(--dim)';
+  const origDt = new Date(item.originalDue+'T12:00:00');
+  const origLbl = MONTHS[origDt.getMonth()]+' '+origDt.getDate();
 
+  // Manual item
   if (item.manual) {
-    return `<div data-sit-id="${item.id}" style="display:grid;grid-template-columns:1fr 90px 80px 110px;gap:6px;align-items:center;padding:6px;border-bottom:1px solid rgba(255,255,255,.04);background:rgba(232,121,249,.04);border-radius:4px;margin-bottom:2px">
-      <div style="display:flex;align-items:center;gap:4px">
-        <select class="sit-type-sel" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px;font-size:10px;font-family:var(--sans)">
-          <option value="income"${item.type==='income'?' selected':''}>Income</option>
-          <option value="p_income"${item.type==='p_income'?' selected':''}>Potential</option>
-          <option value="subs"${item.type==='subs'?' selected':''}>Subs</option>
-          <option value="materials"${item.type==='materials'?' selected':''}>Materials</option>
-        </select>
-        <input class="sit-name" type="text" value="${item.task}" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px 4px;font-size:10px;flex:1;min-width:60px;font-family:var(--sans)">
-      </div>
-      <div style="text-align:right"><input class="sit-amt" type="text" value="${item.amount||''}" placeholder="$0" style="background:var(--bg);color:${color};border:1px solid var(--bdr);border-radius:4px;padding:2px 4px;font-size:11px;width:70px;text-align:right;font-weight:600;font-family:var(--mono)"></div>
-      <div style="text-align:center"><input type="date" value="${item.due}" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px;font-size:9px;font-family:var(--sans);width:75px" onchange="var it=[...scenarioItems,...scenarioManualItems].find(x=>x.id==='${item.id}');if(it){it.due=this.value;it.originalDue=this.value;}renderScenario(parseFloat(localStorage.getItem('cf_balance')||'0'));"></div>
-      <div style="text-align:center"><button class="sit-del" style="background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.2);border-radius:4px;padding:3px 8px;font-size:10px;cursor:pointer">✕ Remove</button></div>
+    return `<div data-sit-id="${item.id}" style="display:flex;align-items:center;gap:6px;padding:6px 12px;border-top:1px solid rgba(255,255,255,.04);background:rgba(232,121,249,.04)">
+      <span style="background:${dirBg};color:${color};font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap">${dirLabel}</span>
+      <select class="sit-type-sel" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px;font-size:10px;font-family:var(--sans)">
+        <option value="income"${item.type==='income'?' selected':''}>Income</option>
+        <option value="p_income"${item.type==='p_income'?' selected':''}>Potential</option>
+        <option value="subs"${item.type==='subs'?' selected':''}>Subs</option>
+        <option value="materials"${item.type==='materials'?' selected':''}>Materials</option>
+      </select>
+      <input class="sit-name" type="text" value="${item.task}" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:3px 6px;font-size:10px;flex:1;min-width:60px;font-family:var(--sans)">
+      <span style="font-size:10px;color:var(--dim)">$</span>
+      <input class="sit-amt" type="text" value="${item.amount||''}" placeholder="0" style="background:var(--bg);color:${color};border:1px solid var(--bdr);border-radius:4px;padding:3px 6px;font-size:11px;width:70px;text-align:right;font-weight:600;font-family:var(--mono)">
+      <button class="sit-del" style="background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.2);border-radius:4px;padding:3px 8px;font-size:10px;cursor:pointer">✕</button>
     </div>`;
   }
 
-  // Date display
-  let dateLbl = `<span style="color:var(--txt2);font-size:10px">${origLbl}</span>`;
+  // Real item
+  let shiftInfo = '';
   if (shifted) {
-    dateLbl = `<span style="font-size:9px"><s style="color:var(--dim)">${origLbl}</s><br><b style="color:${shiftColor}">${newLbl}</b></span>`;
+    shiftInfo = `<span style="font-size:9px;color:${shiftColor};background:${shiftColor}15;padding:1px 5px;border-radius:3px;margin-left:4px">moved from ${origLbl} (${item.shift>0?'+':''}${item.shift}d)</span>`;
   }
 
-  return `<div data-sit-id="${item.id}" style="display:grid;grid-template-columns:1fr 90px 80px 110px;gap:6px;align-items:center;padding:5px 6px;border-bottom:1px solid rgba(255,255,255,.03);${shifted?'background:rgba(250,204,21,.03);border-radius:4px':''}">
-    <div style="overflow:hidden">
-      <div style="font-size:11px;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${item.task}">${item.task}</div>
-      <div style="font-size:9px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${item.project}</div>
-    </div>
-    <div style="text-align:right;font-family:var(--mono);font-size:11px;font-weight:600;color:${color}">${item.isIn?'+':'-'}${cfFmt(item.amount)}</div>
-    <div style="text-align:center">${dateLbl}</div>
-    <div style="display:flex;align-items:center;justify-content:center;gap:3px">
-      <button class="sit-minus" style="background:var(--bg);color:var(--txt2);border:1px solid var(--bdr);border-radius:4px;width:24px;height:24px;cursor:pointer;font-size:14px;font-family:var(--sans);display:flex;align-items:center;justify-content:center">−</button>
-      <input class="sit-shift" type="number" value="${item.shift}" style="background:var(--bg);color:${shiftColor};border:1px solid ${shifted?shiftColor+'40':'var(--bdr)'};border-radius:4px;width:36px;height:24px;text-align:center;font-size:11px;font-weight:700;font-family:var(--mono)">
-      <button class="sit-plus" style="background:var(--bg);color:var(--txt2);border:1px solid var(--bdr);border-radius:4px;width:24px;height:24px;cursor:pointer;font-size:14px;font-family:var(--sans);display:flex;align-items:center;justify-content:center">+</button>
-      <span style="color:${shiftColor};font-size:9px;font-weight:600;min-width:14px">${shifted?(item.shift>0?'+':'')+item.shift+'d':''}</span>
+  const typeLabel = item.type==='income'?'Income':item.type==='p_income'?'Potential':item.type==='materials'?'Materials':item.type==='subs'?'Sub':MGMT_FC_CATS[item.type]?MGMT_FC_CATS[item.type].label:'Expense';
+
+  return `<div data-sit-id="${item.id}" style="display:flex;align-items:center;gap:8px;padding:5px 12px;border-top:1px solid rgba(255,255,255,.04);${shifted?'background:rgba(250,204,21,.03)':''}">
+    <span style="background:${dirBg};color:${color};font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;white-space:nowrap">${dirLabel}</span>
+    <span style="font-size:9px;color:var(--dim);white-space:nowrap">${typeLabel}</span>
+    <span style="font-size:11px;color:var(--txt);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${item.task} — ${item.project}">${item.task} <span style="color:var(--dim);font-size:9px">— ${item.project}</span></span>
+    ${shiftInfo}
+    <span style="font-size:12px;font-weight:700;color:${color};font-family:var(--mono);white-space:nowrap">${item.isIn?'+':'-'}${cfFmt(item.amount)}</span>
+    <div style="display:flex;align-items:center;gap:2px;white-space:nowrap">
+      <button class="sit-minus" title="Pull back 1 day" style="background:var(--bg);color:var(--txt2);border:1px solid var(--bdr);border-radius:4px;width:24px;height:24px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;font-family:var(--sans)">−</button>
+      <input class="sit-shift" type="number" value="${item.shift}" style="background:var(--bg);color:${shiftColor};border:1px solid ${shifted?shiftColor+'40':'var(--bdr)'};border-radius:4px;width:38px;height:24px;text-align:center;font-size:11px;font-weight:700;font-family:var(--mono)" title="Days to shift (negative=earlier, positive=later)">
+      <button class="sit-plus" title="Postpone 1 day" style="background:var(--bg);color:var(--txt2);border:1px solid var(--bdr);border-radius:4px;width:24px;height:24px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;font-family:var(--sans)">+</button>
     </div>
   </div>`;
 }
