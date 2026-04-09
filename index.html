@@ -2090,9 +2090,9 @@ function renderMgmtBody() {
     if (isMon && i>0) calHtml += '<div style="height:2px;background:var(--bdr);margin:6px 0"></div>';
 
     if (!dayData) {
-      calHtml += `<div style="padding:5px 8px;border-bottom:1px solid rgba(33,39,47,.1);opacity:.4;font-size:11px;color:var(--dim);display:flex;justify-content:space-between">
-        <span>${isToday?'<b style="color:var(--txt)">TODAY</b> ':''}${dayName} ${dayLabel} — <i>no payments</i></span>
-        <span style="font-family:var(--mono);font-size:10px">Balance: ${cfFmt(calRunBal)}</span>
+      calHtml += `<div style="padding:6px 8px;border-bottom:1px solid rgba(33,39,47,.15);font-size:11px;display:flex;justify-content:space-between;align-items:center;${isWeekend?'background:rgba(255,255,255,.01)':''}">
+        <span style="color:var(--txt2)">${isToday?'<span style="font-size:9px;font-weight:700;color:#38bdf8;background:rgba(56,189,248,.15);padding:1px 5px;border-radius:3px;margin-right:4px">TODAY</span>':''}${dayName} ${dayLabel} — <span style="color:var(--dim)">no payments</span></span>
+        <span style="font-family:var(--mono);font-size:10px;color:${calRunBal>=0?'var(--txt2)':'#f87171'}">Bal: ${cfFmt(calRunBal)}</span>
       </div>`;
       continue;
     }
@@ -2141,7 +2141,18 @@ function renderMgmtBody() {
     calHtml += '</div></div>';
   }
 
-  // ── Assemble layout: breakdown left + calendar right ──
+  // ── Section title helper ──
+  const secTitle = (icon, title, sub) => `<div style="display:flex;align-items:center;gap:10px;margin:24px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--bdr)">
+    <span style="font-size:18px">${icon}</span>
+    <div><div style="font-size:15px;font-weight:700;color:var(--txt)">${title}</div>${sub?'<div style="font-size:11px;color:var(--dim)">'+sub+'</div>':''}</div>
+  </div>`;
+
+  // ── Assemble layout ──
+  let html = '';
+
+  // Section 1: Breakdown + Calendar side by side
+  html += secTitle('📊', 'Breakdown & Daily Calendar', 'Where the money goes · Day-by-day cash flow');
+
   let leftCol = '';
   leftCol += catCard('📦 Materials', '📦', wMat, '#fb923c', matItems, 'project');
   leftCol += catCard('🔧 Subcontractors', '🔧', wSub, '#f87171', subItems, 'project');
@@ -2150,12 +2161,12 @@ function renderMgmtBody() {
   if (wPIn > 0) leftCol += catCard('⚡ Potential Income', '⚡', wPIn, '#facc15', pincItems, 'project');
   leftCol += weeklyTable;
 
-  let rightCol = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:14px 16px;max-height:600px;overflow-y:auto">
-    <div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:10px">📅 Daily Payment Calendar <span style="font-size:10px;color:var(--dim);font-weight:400">Next 21 days</span></div>
+  let rightCol = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:14px 16px;max-height:650px;overflow-y:auto">
+    <div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:12px">📅 Daily Payment Calendar <span style="font-size:11px;color:var(--dim);font-weight:400">· Next 21 days from today</span></div>
     ${calHtml || '<div style="font-size:11px;color:var(--dim);padding:8px 0">No payments in next 21 days</div>'}
   </div>`;
 
-  let html = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+  html += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:8px">
     <div>${leftCol}</div>
     <div>${rightCol}</div>
   </div>`;
@@ -2181,12 +2192,15 @@ function renderMgmtBody() {
     pts.push({date:ds,gross:runBalG,net:runBal,netP:runBalP,dayIn:dIn,dayOut:dOut+dFixed});
   });
 
+  // Section 2: Chart
+  html += secTitle('📈', 'Cash Flow Chart', 'Balance over time · Scroll to see all days');
+
   if (pts.length>0) {
     const hasFixed = pts.some(p=>p.gross!==p.net);
     const hasP = pts.some(p=>p.netP!==p.net);
     const allBals = [balance,...pts.map(p=>p.gross),...pts.map(p=>p.net),...pts.map(p=>p.netP)];
     const maxB=Math.max(...allBals,1), minB=Math.min(...allBals,0);
-    const W=Math.max(pts.length*70,600), H=350;
+    const W=Math.max(pts.length*80,800), H=350;
     const padL=70,padR=30,padT=30,padB=45,plotW=W-padL-padR,plotH=H-padT-padB;
     const yMin=Math.min(minB,0), yMax=Math.max(maxB,balance+1), yR=yMax-yMin||1;
     const toY=v=>padT+plotH-((v-yMin)/yR*plotH);
@@ -2206,9 +2220,10 @@ function renderMgmtBody() {
       svg+=`<line x1="${padL}" y1="${y}" x2="${W-padR}" y2="${y}" stroke="var(--bdr)" stroke-width="1"/>`;
       svg+=`<text x="${padL-10}" y="${y+4}" text-anchor="end" fill="var(--dim)" font-size="11" font-family="var(--mono)">${cfFmt(val)}</text>`;
     }
-    // Zero baseline (prominent)
-    svg+=`<line x1="${padL}" y1="${zeroY}" x2="${W-padR}" y2="${zeroY}" stroke="var(--txt2)" stroke-width="2" stroke-dasharray="6,4" opacity="0.6"/>`;
-    svg+=`<text x="${W-padR+4}" y="${zeroY+4}" fill="var(--txt2)" font-size="11" font-weight="600" font-family="var(--mono)">$0</text>`;
+    // Zero baseline (bright neon)
+    svg+=`<line x1="${padL}" y1="${zeroY}" x2="${W-padR}" y2="${zeroY}" stroke="#00ff88" stroke-width="2.5" opacity="0.9"/>`;
+    svg+=`<rect x="${W-padR+2}" y="${zeroY-8}" width="30" height="16" rx="3" fill="#00ff88" opacity="0.15"/>`;
+    svg+=`<text x="${W-padR+6}" y="${zeroY+4}" fill="#00ff88" font-size="11" font-weight="700" font-family="var(--mono)">$0</text>`;
     // Starting balance line
     svg+=`<line x1="${padL}" y1="${startY}" x2="${W-padR}" y2="${startY}" stroke="var(--blu)" stroke-width="1" stroke-dasharray="3,6" opacity="0.4"/>`;
 
@@ -2248,14 +2263,16 @@ function renderMgmtBody() {
     if(hasFixed) legend+=' <span style="color:#4ade8080">┅┅ Gross (projects only)</span>';
     if(hasP) legend+=' <span style="color:#facc15">┅┅ With Potential</span>';
 
-    html += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:16px;margin-bottom:20px">
-      <div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:12px">📈 Cash Flow Chart</div>
-      <div id="mgmt-chart-zoom" style="overflow-x:auto;-webkit-overflow-scrolling:touch">${svg}</div>
-      <div style="display:flex;gap:16px;justify-content:center;margin-top:10px;font-size:11px">${legend}</div>
+    html += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:16px;margin-bottom:8px">
+      <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;max-height:380px">${svg}</div>
+      <div style="display:flex;gap:16px;justify-content:center;margin-top:10px;font-size:11px">${legend}
+        <span style="color:#00ff88">━━ $0 baseline</span>
+      </div>
     </div>`;
   }
 
-  // ── Payment List ──
+  // ── Section 3: Payment List ──
+  html += secTitle('📋', 'Payment List', 'Every individual payment in the window · Sorted by date');
   const sorted = [...allWin].sort((a,b)=>(a.due||'').localeCompare(b.due||''));
   let listRunBal = balance;
   let curWeek = '';
