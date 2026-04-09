@@ -364,7 +364,6 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 <div class="nav" id="main-nav">
   <a class="on" data-p="sod">📋 Projects Dashboard</a>
   <a data-p="weekly">▤ Weekly Forecast</a>
-  <a data-p="cashflow">💰 Cash Flow</a>
   <a data-p="mgmt">▥ Management</a>
   <a data-p="archive">▦ Archive</a>
 </div>
@@ -396,7 +395,6 @@ function render() {
   const c = document.getElementById('content');
   if (curPage === 'sod') renderSOD(c);
   else if (curPage === 'weekly') loadAndRenderWeekly(c);
-  else if (curPage === 'cashflow') cashflowGate(c);
   else if (curPage === 'mgmt') mgmtGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
@@ -1747,6 +1745,7 @@ let mgmtFromDate = new Date().toISOString().slice(0,10);
 let mgmtDays = 7;
 let mgmtTypeFilter = 'all';
 let mgmtProjFilter = 'all';
+let mgmtIncludeFixed = true;  // toggle for fixed costs
 
 const MGMT_FC_CATS = {
   salaries:  {label:'Salaries',  color:'#818cf8', icon:'👤', typeLabel:'SAL'},
@@ -1846,6 +1845,9 @@ function renderMgmt(c) {
         <option value="all"${mgmtProjFilter==='all'?' selected':''}>All Projects</option>
         ${projOptions}
       </select>
+      <button id="mgmt-fixed-toggle" style="background:${mgmtIncludeFixed?'rgba(129,140,248,.15)':'var(--card)'};color:${mgmtIncludeFixed?'#818cf8':'var(--dim)'};border:1px solid ${mgmtIncludeFixed?'rgba(129,140,248,.4)':'var(--bdr)'};border-radius:6px;padding:6px 12px;font-size:12px;cursor:pointer;font-family:var(--sans);font-weight:600;transition:all .2s">
+        ⚙ Fixed Costs: ${mgmtIncludeFixed?'ON':'OFF'}
+      </button>
     </div>
     <div id="mgmt-body"></div>`;
 
@@ -1875,6 +1877,10 @@ function renderMgmt(c) {
     renderMgmtBody();
   });
   document.getElementById('mgmt-proj-filter').addEventListener('change', e => { mgmtProjFilter=e.target.value; renderMgmtBody(); });
+  document.getElementById('mgmt-fixed-toggle').addEventListener('click', () => {
+    mgmtIncludeFixed = !mgmtIncludeFixed;
+    renderMgmt(c);
+  });
   renderMgmtBody();
 }
 
@@ -1908,7 +1914,9 @@ function renderMgmtBody() {
   const allWin = allItems.filter(t => {
     if (!t.due) return false;
     const td = new Date(t.due + 'T12:00:00');
-    return td >= today && td < cutoff;
+    if (td < today || td >= cutoff) return false;
+    if (!mgmtIncludeFixed && mgmtIsFixed(t.type)) return false;
+    return true;
   });
 
   let winIn=0, winPIn=0, winProjOut=0, winFixed=0;
@@ -1973,58 +1981,122 @@ function renderMgmtBody() {
     {label: '💰 Income', val: mUnpaid.income, cnt: mCnt.income, color: '#4ade80'},
   ];
 
-  let mBk = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;margin-bottom:16px">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;cursor:pointer" onclick="const c=this.nextElementSibling;c.style.display=c.style.display==='none'?'block':'none';this.querySelector('svg').style.transform=c.style.display==='none'?'':'rotate(180deg)'">
-      <div style="font-size:13px;font-weight:600;color:var(--txt)">Payment Breakdown — <span style="color:var(--red)">${cfFmt(mTotalOut)}</span> total to pay</div>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--dim);transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div style="display:none">
-      <div class="cf-bk-grid4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
-        ${mBkCols.map(c => `<div style="text-align:center;padding:8px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--bdr)">
-          <div style="font-size:18px;font-weight:700;color:${c.color}">${cfFmt(c.val)}</div>
-          <div style="font-size:11px;color:var(--txt2);margin-top:2px">${c.label} (${c.cnt})</div>
-        </div>`).join('')}
-      </div>
-      <div class="cf-bk-grid5" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:12px">
-        <div style="text-align:center;padding:6px;background:rgba(129,140,248,.06);border-radius:6px;border:1px solid rgba(129,140,248,.15)">
-          <div style="font-size:14px;font-weight:700;color:#818cf8">${cfFmt(mUnpaid.salaries)}</div><div style="font-size:10px;color:#818cf8">Salaries</div></div>
-        <div style="text-align:center;padding:6px;background:rgba(52,211,153,.06);border-radius:6px;border:1px solid rgba(52,211,153,.15)">
-          <div style="font-size:14px;font-weight:700;color:#34d399">${cfFmt(mUnpaid.utilities)}</div><div style="font-size:10px;color:#34d399">Utilities</div></div>
-        <div style="text-align:center;padding:6px;background:rgba(251,146,60,.06);border-radius:6px;border:1px solid rgba(251,146,60,.15)">
-          <div style="font-size:14px;font-weight:700;color:#fb923c">${cfFmt(mUnpaid.rent)}</div><div style="font-size:10px;color:#fb923c">Rent</div></div>
-        <div style="text-align:center;padding:6px;background:rgba(232,121,249,.06);border-radius:6px;border:1px solid rgba(232,121,249,.15)">
-          <div style="font-size:14px;font-weight:700;color:#e879f9">${cfFmt(mUnpaid.marketing)}</div><div style="font-size:10px;color:#e879f9">Marketing</div></div>
-        <div style="text-align:center;padding:6px;background:rgba(148,163,184,.06);border-radius:6px;border:1px solid rgba(148,163,184,.15)">
-          <div style="font-size:14px;font-weight:700;color:#94a3b8">${cfFmt(mUnpaid.others)}</div><div style="font-size:10px;color:#94a3b8">Others</div></div>
-      </div>`;
+  // ── Side-by-side: Breakdown (left) + Daily Calendar (right) ──
+  // Build daily calendar data
+  const mByDayAll = {};
+  allWin.filter(t => !t.paid).forEach(t => {
+    if (!t.due) return;
+    if (!mByDayAll[t.due]) mByDayAll[t.due] = {in: 0, out: 0, items: []};
+    const isIn = t.type === 'income' || t.type === 'p_income';
+    if (isIn) mByDayAll[t.due].in += (t.amount||0);
+    else mByDayAll[t.due].out += (t.amount||0);
+    mByDayAll[t.due].items.push(t);
+  });
+  const calDates = Object.keys(mByDayAll).sort();
+
+  // Left: Payment Breakdown
+  let mBkLeft = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px">
+    <div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:12px">Payment Breakdown — <span style="color:var(--red)">${cfFmt(mTotalOut)}</span> total to pay</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px">
+      ${mBkCols.map(c => `<div style="text-align:center;padding:8px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--bdr)">
+        <div style="font-size:16px;font-weight:700;color:${c.color}">${cfFmt(c.val)}</div>
+        <div style="font-size:11px;color:var(--txt2);margin-top:2px">${c.label} (${c.cnt})</div>
+      </div>`).join('')}
+    </div>`;
+
+  if (mgmtIncludeFixed) {
+    mBkLeft += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px">
+      <div style="text-align:center;padding:6px;background:rgba(129,140,248,.06);border-radius:6px;border:1px solid rgba(129,140,248,.15)">
+        <div style="font-size:13px;font-weight:700;color:#818cf8">${cfFmt(mUnpaid.salaries)}</div><div style="font-size:10px;color:#818cf8">Salaries</div></div>
+      <div style="text-align:center;padding:6px;background:rgba(52,211,153,.06);border-radius:6px;border:1px solid rgba(52,211,153,.15)">
+        <div style="font-size:13px;font-weight:700;color:#34d399">${cfFmt(mUnpaid.utilities)}</div><div style="font-size:10px;color:#34d399">Utilities</div></div>
+      <div style="text-align:center;padding:6px;background:rgba(251,146,60,.06);border-radius:6px;border:1px solid rgba(251,146,60,.15)">
+        <div style="font-size:13px;font-weight:700;color:#fb923c">${cfFmt(mUnpaid.rent)}</div><div style="font-size:10px;color:#fb923c">Rent</div></div>
+      <div style="text-align:center;padding:6px;background:rgba(232,121,249,.06);border-radius:6px;border:1px solid rgba(232,121,249,.15)">
+        <div style="font-size:13px;font-weight:700;color:#e879f9">${cfFmt(mUnpaid.marketing)}</div><div style="font-size:10px;color:#e879f9">Marketing</div></div>
+      <div style="text-align:center;padding:6px;background:rgba(148,163,184,.06);border-radius:6px;border:1px solid rgba(148,163,184,.15)">
+        <div style="font-size:13px;font-weight:700;color:#94a3b8">${cfFmt(mUnpaid.others)}</div><div style="font-size:10px;color:#94a3b8">Others</div></div>
+    </div>`;
+  }
 
   const mWeeks = Object.entries(mByWeek).sort((a,b) => a[0].localeCompare(b[0]));
   if (mWeeks.length) {
-    mBk += `<div style="overflow-x:auto"><table style="width:100%;font-size:12px;border-collapse:collapse;min-width:480px">
+    mBkLeft += `<div style="overflow-x:auto"><table style="width:100%;font-size:11px;border-collapse:collapse">
       <tr style="border-bottom:1px solid var(--bdr);color:var(--txt2)">
-        <th style="text-align:left;padding:6px 4px;font-weight:600">Week</th>
-        <th style="text-align:right;padding:6px 4px;font-weight:600;color:#f87171">Materials</th>
-        <th style="text-align:right;padding:6px 4px;font-weight:600;color:#fb923c">Subs</th>
-        <th style="text-align:right;padding:6px 4px;font-weight:600;color:#818cf8">Fixed</th>
-        <th style="text-align:right;padding:6px 4px;font-weight:600;color:#4ade80">Income</th>
-        <th style="text-align:right;padding:6px 4px;font-weight:600">Net</th>
+        <th style="text-align:left;padding:5px 3px;font-weight:600">Week</th>
+        <th style="text-align:right;padding:5px 3px;font-weight:600;color:#f87171">Mat</th>
+        <th style="text-align:right;padding:5px 3px;font-weight:600;color:#fb923c">Subs</th>
+        ${mgmtIncludeFixed?'<th style="text-align:right;padding:5px 3px;font-weight:600;color:#818cf8">Fixed</th>':''}
+        <th style="text-align:right;padding:5px 3px;font-weight:600;color:#4ade80">In</th>
+        <th style="text-align:right;padding:5px 3px;font-weight:600">Net</th>
       </tr>`;
     mWeeks.forEach(([wk, v]) => {
       const fixedWk = v.salaries + v.utilities + v.rent + v.marketing + v.others;
-      const net = v.income - v.materials - v.subs - fixedWk;
-      mBk += `<tr style="border-bottom:1px solid rgba(33,39,47,.3)">
-        <td style="padding:5px 4px;color:var(--txt)">${v.label}</td>
-        <td style="text-align:right;padding:5px 4px;color:#f87171">${v.materials ? cfFmt(v.materials) : '—'}</td>
-        <td style="text-align:right;padding:5px 4px;color:#fb923c">${v.subs ? cfFmt(v.subs) : '—'}</td>
-        <td style="text-align:right;padding:5px 4px;color:#818cf8">${fixedWk ? cfFmt(fixedWk) : '—'}</td>
-        <td style="text-align:right;padding:5px 4px;color:#4ade80">${v.income ? cfFmt(v.income) : '—'}</td>
-        <td style="text-align:right;padding:5px 4px;font-weight:600;color:${net >= 0 ? '#4ade80' : '#f87171'}">${cfFmt(net)}</td>
+      const net = v.income - v.materials - v.subs - (mgmtIncludeFixed ? fixedWk : 0);
+      mBkLeft += `<tr style="border-bottom:1px solid rgba(33,39,47,.3)">
+        <td style="padding:4px 3px;color:var(--txt);font-size:10px">${v.label}</td>
+        <td style="text-align:right;padding:4px 3px;color:#f87171">${v.materials ? cfFmt(v.materials) : '—'}</td>
+        <td style="text-align:right;padding:4px 3px;color:#fb923c">${v.subs ? cfFmt(v.subs) : '—'}</td>
+        ${mgmtIncludeFixed?`<td style="text-align:right;padding:4px 3px;color:#818cf8">${fixedWk ? cfFmt(fixedWk) : '—'}</td>`:''}
+        <td style="text-align:right;padding:4px 3px;color:#4ade80">${v.income ? cfFmt(v.income) : '—'}</td>
+        <td style="text-align:right;padding:4px 3px;font-weight:600;color:${net >= 0 ? '#4ade80' : '#f87171'}">${cfFmt(net)}</td>
       </tr>`;
     });
-    mBk += '</table></div>';
+    mBkLeft += '</table></div>';
   }
-  mBk += '</div></div>';
-  statsEl.innerHTML += mBk;
+  mBkLeft += '</div>';
+
+  // Right: Daily Payment Calendar
+  let mBkRight = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px;max-height:500px;overflow-y:auto">
+    <div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:12px">📅 Daily Payment Calendar</div>`;
+
+  if (calDates.length) {
+    calDates.forEach(dateStr => {
+      const dayData = mByDayAll[dateStr];
+      const dt = new Date(dateStr + 'T12:00:00');
+      const dayName = DAYS[dt.getDay()];
+      const dayLabel = MONTHS[dt.getMonth()] + ' ' + dt.getDate();
+      const net = dayData.in - dayData.out;
+      const netColor = net >= 0 ? '#4ade80' : '#f87171';
+
+      mBkRight += `<div style="margin-bottom:2px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;background:rgba(255,255,255,.02);border-radius:6px;cursor:pointer;border-left:3px solid ${net>=0?'#4ade80':'#f87171'}" onclick="var el=this.nextElementSibling;el.style.display=el.style.display==='none'?'block':'none'">
+          <div>
+            <span style="font-size:12px;font-weight:600;color:var(--txt)">${dayName} ${dayLabel}</span>
+            <span style="font-size:10px;color:var(--dim);margin-left:6px">${dayData.items.length} item${dayData.items.length>1?'s':''}</span>
+          </div>
+          <div style="display:flex;gap:10px;font-size:11px;font-weight:600">
+            ${dayData.in > 0 ? '<span style="color:#4ade80">↑' + cfFmt(dayData.in) + '</span>' : ''}
+            ${dayData.out > 0 ? '<span style="color:#f87171">↓' + cfFmt(dayData.out) + '</span>' : ''}
+            <span style="color:${netColor}">${cfFmt(net)}</span>
+          </div>
+        </div>
+        <div style="display:none;padding:2px 0 6px 14px">`;
+
+      dayData.items.sort((a,b) => (b.amount||0) - (a.amount||0)).forEach(t => {
+        const ti = mgmtTypeInfo(t.type);
+        const isIn = t.type === 'income' || t.type === 'p_income';
+        mBkRight += `<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:11px;border-bottom:1px solid rgba(33,39,47,.2)">
+          <div style="display:flex;align-items:center;gap:6px;flex:1;min-width:0">
+            <span style="background:${ti.color}20;color:${ti.color};border:1px solid ${ti.color}40;font-size:9px;padding:1px 4px;border-radius:3px;white-space:nowrap">${ti.label}</span>
+            <span style="color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.task}</span>
+            <span style="color:var(--dim);font-size:9px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">— ${t.project||''}</span>
+          </div>
+          <span style="color:${isIn?'#4ade80':'#f87171'};font-weight:600;white-space:nowrap;margin-left:8px">${isIn?'+':'-'}${t.amount?cfFmt2(t.amount):'TBD'}</span>
+        </div>`;
+      });
+
+      mBkRight += '</div></div>';
+    });
+  } else {
+    mBkRight += '<div style="font-size:12px;color:var(--dim);font-style:italic;padding:8px 0">No pending payments in this window</div>';
+  }
+  mBkRight += '</div>';
+
+  // Side-by-side layout
+  statsEl.innerHTML += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+    ${mBkLeft}${mBkRight}
+  </div>`;
 
   // ── Chart ──────────────────────────────
   // Group ALL window items by day (ignoring type/proj filter for chart)
