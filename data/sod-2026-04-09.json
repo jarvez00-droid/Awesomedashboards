@@ -4,7 +4,7 @@
     "overdue": 20,
     "active": 14,
     "active_blocked": 0,
-    "coming": 104,
+    "coming": 105,
     "coming_unassigned": 25,
     "role_gaps": 152,
     "concern": "Martha Cockrell (CNG-20251199) \u2014 19 overdue tasks",
@@ -15,7 +15,7 @@
       "Good momentum \u2014 overdue count is down to 20. Well below the 7-day average of 40 \u2014 the team is making real progress. 4 projects cleared their overdue lists \u2014 well done.",
       "**Martha Cockrell (CNG-20251199):** The oldest overdue task is 22 days past due with 19 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up.",
       "**Marcio Oliveira:** Carrying 13 overdue and it's been growing \u2014 needs attention today.",
-      "104 tasks are scheduled to start in the next 72 hours. Heavy week ahead for Ginger Brown and Clifford Clack \u2014 Gym Addition \u2014 make sure resources are lined up."
+      "105 tasks are scheduled to start in the next 72 hours. Heavy week ahead for Ginger Brown and Clifford Clack \u2014 Gym Addition \u2014 make sure resources are lined up."
     ],
     "pm_briefs": {
       "Angel Pacheco": [
@@ -308,7 +308,10 @@
             "n": "INSULATION: PAYMENT RECEIVED",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts Tue",
-            "unassigned": true
+            "unassigned": true,
+            "is_payment": true,
+            "amount": 10640.0,
+            "pay_type": "income"
           },
           {
             "n": "DRYWALL: CONFIRM SCHEDULE",
@@ -338,7 +341,10 @@
             "n": "DRYWALL: PURCHASE MATERIAL",
             "w": "Romina Rey, Reynaldo Aquije",
             "when": "starts Mon",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 3184.84,
+            "pay_type": "materials"
           },
           {
             "n": "INTERIOR DOORS AND TRIM: PM INSPECTION / CC REPORT",
@@ -440,7 +446,10 @@
             "n": "SIDING: BILL & PAYMENT",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts Mon",
-            "unassigned": true
+            "unassigned": true,
+            "is_payment": true,
+            "amount": 920.0,
+            "pay_type": "subs"
           },
           {
             "n": "APPLIANCES: INSTALL APPLIANCES",
@@ -458,7 +467,10 @@
             "n": "CABINETS: BILL & PAYMENT",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts Wed",
-            "unassigned": true
+            "unassigned": true,
+            "is_payment": true,
+            "amount": 3150.0,
+            "pay_type": "subs"
           },
           {
             "n": "CABINETS: PAINT SHELVES & BASEBOARDS",
@@ -490,7 +502,10 @@
             "n": "ELECTRICAL TRIM: PURCHASE MATERIAL",
             "w": "Romina Rey, Reynaldo Aquije, Marjorie Serna",
             "when": "starts in 2 days",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 4000.0,
+            "pay_type": "materials"
           },
           {
             "n": "SIDING: PM INSPECTION / CC REPORT",
@@ -502,7 +517,10 @@
             "n": "CABINETS: PURCHASE STAIN",
             "w": "Milagros Porturas",
             "when": "starts in 2 days",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 0,
+            "pay_type": ""
           },
           {
             "n": "ELECTRICAL: CONFIRM SCHEDULE",
@@ -514,7 +532,10 @@
             "n": "PLUMBING TRIM: PURCHASE MATERIAL (TOILETS)",
             "w": "Romina Rey, Reynaldo Aquije, Marjorie Serna",
             "when": "starts Mon",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 1200.0,
+            "pay_type": "materials"
           },
           {
             "n": "APPLIANCES: CONFIRM SCHEDULE",
@@ -526,7 +547,10 @@
             "n": "INTERIOR PAINT: PURCHASE MATERIAL",
             "w": "Romina Rey, Milagros Porturas",
             "when": "starts Mon",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 1000.0,
+            "pay_type": "materials"
           },
           {
             "n": "PAINT PORCH: CREATE SOW",
@@ -538,7 +562,10 @@
             "n": "PAINT PORCH: PURCHASE MATERIAL",
             "w": "Milagros Porturas",
             "when": "starts Tue",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 350.0,
+            "pay_type": "materials"
           },
           {
             "n": "INTERIOR PAINT: CONFIRM DELIVERY",
@@ -616,7 +643,7 @@
         "ov": 0,
         "ac": 2,
         "ab": 0,
-        "co": 4,
+        "co": 5,
         "co_un": 0,
         "pay": 0
       },
@@ -648,16 +675,19 @@
             "unassigned": false
           },
           {
-            "n": "FRAMING: CONFIRM DELIVERY",
+            "n": "DOORS AND WINDOWS: PM INSPECTION / CC REPORT",
             "w": "Jeff",
             "when": "starts tomorrow",
             "unassigned": false
           },
           {
-            "n": "DOORS AND WINDOWS: PM INSPECTION / CC REPORT",
-            "w": "Jeff",
-            "when": "starts tomorrow",
-            "unassigned": false
+            "n": "FRAMING: PURCHASE MATERIAL",
+            "w": "Jeff, Reynaldo Aquije, Romina Rey",
+            "when": "starts in 2 days",
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 4835.0,
+            "pay_type": "materials"
           },
           {
             "n": "FRAMING: INTERIOR WALL FRAMING & BLOCKING",
@@ -666,6 +696,12 @@
             "unassigned": false,
             "blocked_by": "FRAMING: PURCHASE MATERIAL",
             "blocked_kind": "upcoming"
+          },
+          {
+            "n": "FRAMING: CONFIRM DELIVERY",
+            "w": "Jeff",
+            "when": "starts Mon",
+            "unassigned": false
           }
         ],
         "pay_overdue": []
@@ -703,19 +739,28 @@
             "n": "FLOORING: PURCHASE MATERIAL",
             "w": "Angel Pacheco, Romina Rey",
             "when": "starts tomorrow",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 2550.0,
+            "pay_type": "materials"
           },
           {
             "n": "CONCRETE POUR: BILL & PAYMENT",
             "w": "Efren Aguirre",
             "when": "starts tomorrow",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 8500.0,
+            "pay_type": "subs"
           },
           {
             "n": "FRAMING: PURCHASE MATERIALS",
             "w": "Angel Pacheco, Romina Rey, Marjorie Serna",
             "when": "starts tomorrow",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 6650.0,
+            "pay_type": "materials"
           },
           {
             "n": "FRAMING: CONFIRM DELIVERY",
@@ -747,7 +792,10 @@
             "n": "WINDOWS: PURCHASE MATERIAL",
             "w": "Angel Pacheco, Romina Rey, Reynaldo Aquije",
             "when": "starts Mon",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 4163.03,
+            "pay_type": "materials"
           },
           {
             "n": "ELECTRICAL: CONFIRM SCHEDULE",
@@ -759,7 +807,10 @@
             "n": "EXTERIOR DOORS: PURCHASE MATERIAL",
             "w": "Romina Rey, Reynaldo Aquije",
             "when": "starts Mon",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 1811.0,
+            "pay_type": "materials"
           },
           {
             "n": "ELECTRICAL: ELECTRICAL ROUGH IN",
@@ -825,13 +876,19 @@
             "n": "COUNTERTOPS: BILL & PAYMENT",
             "w": "JC'S Countertops LLC",
             "when": "starts tomorrow",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 2800.0,
+            "pay_type": "subs"
           },
           {
             "n": "ELECTRICAL: BILL & PAYMENT",
             "w": "Marcos Ayala",
             "when": "starts tomorrow",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 500.0,
+            "pay_type": "subs"
           },
           {
             "n": "Work Order 212129-54",
@@ -875,7 +932,10 @@
             "n": "DOORS: PURCHASE MATERIALS",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts tomorrow",
-            "unassigned": true
+            "unassigned": true,
+            "is_payment": true,
+            "amount": 1376.0,
+            "pay_type": "materials"
           },
           {
             "n": "FRAMING: CONFIRM DELIVERY",
@@ -905,13 +965,19 @@
             "n": "FOUNDATION: BILL & PAYMENT",
             "w": "Efren Aguirre",
             "when": "starts tomorrow",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 4000.0,
+            "pay_type": "subs"
           },
           {
             "n": "FRAMING: PURCHASE MATERIAL",
             "w": "Angel Pacheco, Romina Rey, Marjorie Serna",
             "when": "starts tomorrow",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 1860.0,
+            "pay_type": "materials"
           },
           {
             "n": "FRAMING: CONFIRM SCHEDULE",
@@ -923,7 +989,10 @@
             "n": "WINDOWS: PURCHASE MATERIALS",
             "w": "Romina Rey, Marjorie Serna",
             "when": "starts tomorrow",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 431.48,
+            "pay_type": "materials"
           },
           {
             "n": "FRAMING: FRAMING AND CORNICE",
@@ -955,7 +1024,10 @@
             "n": "BRICK: PURCHASE MATERIAL",
             "w": "Romina Rey",
             "when": "starts Tue",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 2352.0,
+            "pay_type": "materials"
           },
           {
             "n": "ELECTRICAL: ROUGH IN",
@@ -1073,25 +1145,37 @@
             "n": "FINAL PAYMENT",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts Tue",
-            "unassigned": true
+            "unassigned": true,
+            "is_payment": true,
+            "amount": 1565.0,
+            "pay_type": "income"
           },
           {
             "n": "ROOFING: BILL & PAYMENT",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts Wed",
-            "unassigned": true
+            "unassigned": true,
+            "is_payment": true,
+            "amount": 0.0,
+            "pay_type": "subs"
           },
           {
             "n": "FRAMING: BILL & PAYMENT",
             "w": "Cesar Martinez",
             "when": "starts tomorrow",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 2500.0,
+            "pay_type": "subs"
           },
           {
             "n": "ROOFING: PURCHASE MATERIAL",
             "w": "Reynaldo Aquije, Romina Rey, Marjorie Serna",
             "when": "starts tomorrow",
-            "unassigned": false
+            "unassigned": false,
+            "is_payment": true,
+            "amount": 500.0,
+            "pay_type": "materials"
           },
           {
             "n": "ROOFING: CONFIRM DELIVERY",

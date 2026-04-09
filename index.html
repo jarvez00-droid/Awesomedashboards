@@ -2584,14 +2584,56 @@ function buildCard(p, open, isEOD) {
   // Column 3 (sidebar): Payment & Purchase tasks
   if (useThreeCol) {
     body += '<div class="pay-side">';
-    body += `<div class="ts"><div class="tsl">💰 Payments & Purchases</div>`;
-    body += `<div style="font-size:10px;color:rgba(129,140,248,.7);margin-bottom:8px;font-style:italic">Not counted in PM metrics</div>`;
-    pay.forEach(tk => {
-      const ttShort = (tk.tt||'').replace(/^\d+\.\s*/, '').replace('Payment - ','');
-      const dueLabel = tk.d > 0 ? `<span style="color:var(--red);font-weight:600">past due: ${tk.d}d</span>` : tk.d === 0 ? '<span style="color:var(--ylw);font-weight:600">due today</span>' : `<span style="color:var(--dim)">due in ${Math.abs(tk.d)}d</span>`;
-      body += `<div class="tr" style="flex-wrap:wrap;gap:2px"><div class="td"></div><div class="ti"><div class="tn">${tk.n}</div><div style="font-size:10px;color:#818cf8">${ttShort}</div></div><div class="tw" style="font-size:10px">${dueLabel}</div></div>`;
-    });
-    body += '</div></div>';
+
+    // Overdue payments
+    if (pay.length) {
+      body += `<div class="ts"><div class="tsl" style="color:var(--red)">🔴 Overdue Payments (${pay.length})</div>`;
+      body += `<div style="font-size:10px;color:rgba(129,140,248,.7);margin-bottom:8px;font-style:italic">Not counted in PM metrics</div>`;
+      pay.forEach(tk => {
+        const ttShort = (tk.tt||'').replace(/^\d+\.\s*/, '').replace('Payment - ','');
+        const dueLabel = tk.d > 0 ? `<span style="color:var(--red);font-weight:600">past due: ${tk.d}d</span>` : tk.d === 0 ? '<span style="color:var(--ylw);font-weight:600">due today</span>' : `<span style="color:var(--dim)">due in ${Math.abs(tk.d)}d</span>`;
+        body += `<div class="tr" style="flex-wrap:wrap;gap:2px"><div class="td"></div><div class="ti"><div class="tn">${tk.n}</div><div style="font-size:10px;color:#818cf8">${ttShort}</div></div><div class="tw" style="font-size:10px">${dueLabel}</div></div>`;
+      });
+      body += '</div>';
+    }
+
+    // Upcoming payments from 7-day coming list
+    const payUpcoming = co.filter(tk => tk.is_payment);
+    if (payUpcoming.length) {
+      const payUpTotal = payUpcoming.reduce((s, tk) => s + (tk.amount || 0), 0);
+      const payIn = payUpcoming.filter(tk => tk.pay_type === 'income' || tk.pay_type === 'p_income');
+      const payOut = payUpcoming.filter(tk => tk.pay_type !== 'income' && tk.pay_type !== 'p_income');
+
+      body += `<div class="ts" style="margin-top:10px"><div class="tsl" style="color:var(--ylw)">📅 Upcoming Payments — Next 7 Days (${payUpcoming.length})</div>`;
+
+      if (payIn.length) {
+        const inTotal = payIn.reduce((s, tk) => s + (tk.amount || 0), 0);
+        body += `<div style="font-size:11px;font-weight:600;color:var(--grn);margin:6px 0 4px;text-transform:uppercase;letter-spacing:.5px">⬇️ Income Expected${inTotal ? ' — $' + inTotal.toLocaleString() : ''}</div>`;
+        payIn.forEach(tk => {
+          const amt = tk.amount ? '<span style="color:var(--grn);font-weight:600">$' + tk.amount.toLocaleString() + '</span>' : '<span style="color:var(--dim)">TBD</span>';
+          body += `<div class="tr" style="flex-wrap:wrap;gap:2px"><div class="td" style="background:var(--grn)"></div><div class="ti"><div class="tn">${tk.n}</div><div style="font-size:10px;color:var(--dim)">${tk.when} · ${tk.w}</div></div><div class="tw" style="font-size:10px">${amt}</div></div>`;
+        });
+      }
+
+      if (payOut.length) {
+        const outTotal = payOut.reduce((s, tk) => s + (tk.amount || 0), 0);
+        body += `<div style="font-size:11px;font-weight:600;color:#f97316;margin:6px 0 4px;text-transform:uppercase;letter-spacing:.5px">⬆️ Payments Going Out${outTotal ? ' — $' + outTotal.toLocaleString() : ''}</div>`;
+        payOut.forEach(tk => {
+          const amt = tk.amount ? '<span style="color:var(--red);font-weight:600">$' + tk.amount.toLocaleString() + '</span>' : '<span style="color:var(--dim)">TBD</span>';
+          const typeLabel = tk.pay_type === 'materials' ? '📦' : tk.pay_type === 'subs' ? '🔧' : '💳';
+          body += `<div class="tr" style="flex-wrap:wrap;gap:2px"><div class="td" style="background:#f97316"></div><div class="ti"><div class="tn">${typeLabel} ${tk.n}</div><div style="font-size:10px;color:var(--dim)">${tk.when} · ${tk.w}</div></div><div class="tw" style="font-size:10px">${amt}</div></div>`;
+        });
+      }
+
+      body += '</div>';
+    }
+
+    if (!pay.length && !payUpcoming.length) {
+      body += `<div class="ts"><div class="tsl">💰 Payments & Purchases</div>`;
+      body += '<div style="font-size:12px;color:var(--dim);font-style:italic;padding:8px 0">No payment tasks</div></div>';
+    }
+
+    body += '</div>';
   }
 
   // Full-width: Gaps
