@@ -2331,29 +2331,26 @@ let scenarioManualItems = [];
 let scenarioNextId = 1;
 
 function buildSituationEval(allWin, balance) {
-  return `<div id="sit-eval" style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:16px">
-    <div style="display:grid;grid-template-columns:1fr 300px;gap:16px">
+  return `<div id="sit-eval" style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:20px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
       <div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-          <div style="font-size:13px;font-weight:600;color:var(--txt)">Adjust Payments</div>
-          <div style="display:flex;gap:6px">
-            <button id="sit-reset" style="background:var(--bg);color:var(--dim);border:1px solid var(--bdr);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:var(--sans)">↺ Reset All</button>
-            <button id="sit-add" style="background:rgba(56,189,248,.1);color:#38bdf8;border:1px solid rgba(56,189,248,.3);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:var(--sans)">+ Add Item</button>
-          </div>
-        </div>
-        <div id="sit-list" style="max-height:400px;overflow-y:auto"></div>
+        <div style="font-size:14px;font-weight:700;color:var(--txt)">What-If Scenario Planner</div>
+        <div style="font-size:11px;color:var(--dim);margin-top:2px">Delay payments, shift income dates, add manual items — see projected cash flow instantly</div>
       </div>
-      <div>
-        <div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:12px">Projected Outcome</div>
-        <div id="sit-result"></div>
+      <div style="display:flex;gap:8px">
+        <button id="sit-reset" style="background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.25);border-radius:6px;padding:6px 14px;font-size:11px;cursor:pointer;font-family:var(--sans);font-weight:600">↺ Reset All</button>
+        <button id="sit-add" style="background:rgba(56,189,248,.08);color:#38bdf8;border:1px solid rgba(56,189,248,.25);border-radius:6px;padding:6px 14px;font-size:11px;cursor:pointer;font-family:var(--sans);font-weight:600">+ Add Manual Item</button>
       </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:20px">
+      <div id="sit-list" style="max-height:500px;overflow-y:auto"></div>
+      <div id="sit-result"></div>
     </div>
     <div id="sit-chart-wrap" style="margin-top:16px"></div>
   </div>`;
 }
 
 function initSituationEval(allWin, balance) {
-  // Clone items for scenario
   scenarioItems = allWin.filter(t=>!t.paid).map((t,i) => ({
     id: 'orig_'+i,
     task: t.task,
@@ -2396,32 +2393,49 @@ function renderScenario(balance) {
   if (!listEl || !resultEl) return;
 
   const all = [...scenarioItems, ...scenarioManualItems].sort((a,b)=>(a.due||'').localeCompare(b.due||''));
-
-  // Group by: income vs expenses
   const incomeItems = all.filter(x=>x.isIn);
   const expenseItems = all.filter(x=>!x.isIn);
 
+  // ── Build list with table-style headers ──
   let listHtml = '';
 
+  // Column header
+  const colHeader = `<div style="display:grid;grid-template-columns:1fr 90px 80px 110px;gap:6px;padding:4px 6px;font-size:10px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.3px;border-bottom:1px solid var(--bdr);margin-bottom:4px">
+    <span>Payment</span>
+    <span style="text-align:right">Amount</span>
+    <span style="text-align:center">Due Date</span>
+    <span style="text-align:center">Shift Days</span>
+  </div>`;
+
   // Income section
-  listHtml += `<div style="margin-bottom:12px">
-    <div style="font-size:12px;font-weight:700;color:#4ade80;margin-bottom:6px;padding:4px 0;border-bottom:1px solid rgba(74,222,128,.2)">⬇ INCOME · ${incomeItems.length} items · ${cfFmt(incomeItems.reduce((s,x)=>s+x.amount,0))}</div>`;
-  incomeItems.forEach(item => {
-    listHtml += renderScenarioRow(item, 'income');
-  });
+  const incTotal = incomeItems.reduce((s,x)=>s+x.amount,0);
+  const incShifted = incomeItems.filter(x=>x.shift!==0).length;
+  listHtml += `<div style="margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 6px;background:rgba(74,222,128,.06);border-radius:8px;margin-bottom:6px">
+      <span style="font-size:13px;font-weight:700;color:#4ade80">⬇ Income</span>
+      <span style="font-size:12px;color:var(--txt2)">${incomeItems.length} items · <b style="color:#4ade80">${cfFmt(incTotal)}</b>${incShifted?' · <span style="color:#facc15">'+incShifted+' shifted</span>':''}</span>
+    </div>
+    ${colHeader}`;
+  incomeItems.forEach(item => { listHtml += renderScenarioRow(item); });
+  if(!incomeItems.length) listHtml += '<div style="padding:8px;text-align:center;font-size:11px;color:var(--dim)">No income items</div>';
   listHtml += '</div>';
 
   // Expense section
+  const expTotal = expenseItems.reduce((s,x)=>s+x.amount,0);
+  const expShifted = expenseItems.filter(x=>x.shift!==0).length;
   listHtml += `<div>
-    <div style="font-size:12px;font-weight:700;color:#f87171;margin-bottom:6px;padding:4px 0;border-bottom:1px solid rgba(248,113,113,.2)">⬆ EXPENSES · ${expenseItems.length} items · ${cfFmt(expenseItems.reduce((s,x)=>s+x.amount,0))}</div>`;
-  expenseItems.forEach(item => {
-    listHtml += renderScenarioRow(item, 'expense');
-  });
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 6px;background:rgba(248,113,113,.06);border-radius:8px;margin-bottom:6px">
+      <span style="font-size:13px;font-weight:700;color:#f87171">⬆ Expenses</span>
+      <span style="font-size:12px;color:var(--txt2)">${expenseItems.length} items · <b style="color:#f87171">${cfFmt(expTotal)}</b>${expShifted?' · <span style="color:#facc15">'+expShifted+' shifted</span>':''}</span>
+    </div>
+    ${colHeader}`;
+  expenseItems.forEach(item => { listHtml += renderScenarioRow(item); });
+  if(!expenseItems.length) listHtml += '<div style="padding:8px;text-align:center;font-size:11px;color:var(--dim)">No expense items</div>';
   listHtml += '</div>';
 
   listEl.innerHTML = listHtml;
 
-  // Wire shift buttons
+  // ── Wire events ──
   listEl.querySelectorAll('[data-sit-id]').forEach(row => {
     const id = row.dataset.sitId;
     const item = all.find(x=>x.id===id);
@@ -2441,7 +2455,7 @@ function renderScenario(balance) {
       renderScenario(balance);
     });
     if (plusBtn) plusBtn.addEventListener('click', () => {
-      item.shift = Math.min(item.shift + 30, 90);
+      item.shift = Math.min(item.shift + 1, 90);
       updateItemDue(item);
       renderScenario(balance);
     });
@@ -2463,7 +2477,7 @@ function renderScenario(balance) {
     });
   });
 
-  // Compute projected balance with gross + potential lines
+  // ── Compute projected balances ──
   const byDay = {};
   all.forEach(item => {
     if (!byDay[item.due]) byDay[item.due] = {confIn:0, potIn:0, projOut:0, fixedOut:0};
@@ -2474,52 +2488,54 @@ function renderScenario(balance) {
   });
   const projDays = Object.keys(byDay).sort();
   let netBal = balance, grossBal = balance, netPotBal = balance;
-  let minBal = balance, minDate = '', curBal = balance;
+  let minBal = balance, minDate = '';
   const projPts = [{date:'start', net:balance, gross:balance, netPot:balance}];
   projDays.forEach(ds => {
     const dd = byDay[ds];
     grossBal += dd.confIn - dd.projOut;
     netBal += dd.confIn - dd.projOut - (mgmtIncludeFixed ? dd.fixedOut : 0);
     netPotBal = netBal + dd.potIn;
-    projPts.push({date:ds, net:netBal, gross:grossBal, netPot:netPotBal, dayIn:dd.confIn, dayOut:dd.projOut+dd.fixedOut});
+    projPts.push({date:ds, net:netBal, gross:grossBal, netPot:netPotBal});
     if (netBal < minBal) { minBal = netBal; minDate = ds; }
   });
-  curBal = netBal;
+  const endBal = netBal;
   const hasGross = projPts.some(p=>p.gross!==p.net);
   const hasPot = projPts.some(p=>p.netPot!==p.net);
-
-  // Adjusted items count
   const adjusted = all.filter(x=>x.shift!==0).length;
   const manualCount = scenarioManualItems.length;
+  const minDt = minDate ? new Date(minDate+'T12:00:00') : null;
+  const minDateLbl = minDt ? MONTHS[minDt.getMonth()]+' '+minDt.getDate()+' ('+DAYS[minDt.getDay()]+')' : '';
 
+  // ── Result panel ──
   resultEl.innerHTML = `
-    <div style="background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.2);border-radius:10px;padding:12px;margin-bottom:8px">
-      <div style="font-size:10px;color:var(--dim);margin-bottom:4px">Starting Balance</div>
-      <div style="font-size:18px;font-weight:700;color:var(--txt)">${cfFmt(balance)}</div>
+    <div style="background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.15);border-radius:10px;padding:14px;margin-bottom:10px">
+      <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.3px">Starting Cash</div>
+      <div style="font-size:22px;font-weight:700;color:var(--txt);margin-top:4px">${cfFmt(balance)}</div>
     </div>
-    <div style="background:${curBal>=0?'rgba(74,222,128,.05)':'rgba(248,113,113,.05)'};border:1px solid ${curBal>=0?'rgba(74,222,128,.2)':'rgba(248,113,113,.2)'};border-radius:10px;padding:12px;margin-bottom:8px">
-      <div style="font-size:10px;color:var(--dim);margin-bottom:4px">Projected End Balance</div>
-      <div style="font-size:18px;font-weight:700;color:${curBal>=0?'#4ade80':'#f87171'}">${cfFmt(curBal)}</div>
+    <div style="background:${endBal>=0?'rgba(74,222,128,.05)':'rgba(248,113,113,.05)'};border:1px solid ${endBal>=0?'rgba(74,222,128,.15)':'rgba(248,113,113,.15)'};border-radius:10px;padding:14px;margin-bottom:10px">
+      <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.3px">Projected End</div>
+      <div style="font-size:22px;font-weight:700;color:${endBal>=0?'#4ade80':'#f87171'};margin-top:4px">${cfFmt(endBal)}</div>
+      <div style="font-size:10px;color:var(--dim);margin-top:2px">${endBal>=balance?'▲':'▼'} ${cfFmt(Math.abs(endBal-balance))} from start</div>
     </div>
-    <div style="background:${minBal>=0?'rgba(74,222,128,.05)':'rgba(248,113,113,.05)'};border:1px solid ${minBal>=0?'rgba(74,222,128,.2)':'rgba(248,113,113,.2)'};border-radius:10px;padding:12px;margin-bottom:8px">
-      <div style="font-size:10px;color:var(--dim);margin-bottom:4px">Lowest Point</div>
-      <div style="font-size:18px;font-weight:700;color:${minBal>=0?'#facc15':'#f87171'}">${cfFmt(minBal)}</div>
-      ${minDate?'<div style="font-size:10px;color:var(--dim);margin-top:2px">on '+minDate+'</div>':''}
+    <div style="background:${minBal>=0?'rgba(250,204,21,.05)':'rgba(248,113,113,.08)'};border:1px solid ${minBal>=0?'rgba(250,204,21,.15)':'rgba(248,113,113,.2)'};border-radius:10px;padding:14px;margin-bottom:10px">
+      <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.3px">⚠ Lowest Point</div>
+      <div style="font-size:22px;font-weight:700;color:${minBal>=0?'#facc15':'#f87171'};margin-top:4px">${cfFmt(minBal)}</div>
+      ${minDateLbl?'<div style="font-size:11px;color:var(--txt2);margin-top:2px">'+minDateLbl+'</div>':''}
     </div>
-    <div style="display:flex;gap:8px;margin-top:8px">
-      <div style="flex:1;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:8px;text-align:center">
-        <div style="font-size:16px;font-weight:700;color:#38bdf8">${adjusted}</div>
-        <div style="font-size:9px;color:var(--dim)">Adjusted</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <div style="background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:18px;font-weight:700;color:${adjusted?'#facc15':'var(--dim)'}">${adjusted}</div>
+        <div style="font-size:9px;color:var(--dim);margin-top:2px">Shifted</div>
       </div>
-      <div style="flex:1;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:8px;text-align:center">
-        <div style="font-size:16px;font-weight:700;color:#e879f9">${manualCount}</div>
-        <div style="font-size:9px;color:var(--dim)">Manual</div>
+      <div style="background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:18px;font-weight:700;color:${manualCount?'#e879f9':'var(--dim)'}">${manualCount}</div>
+        <div style="font-size:9px;color:var(--dim);margin-top:2px">Manual</div>
       </div>
     </div>`;
 
-  // Mini scenario chart with gross + potential lines
+  // ── Scenario chart ──
   if (projPts.length > 1) {
-    const cW=600, cH=220, cPL=55, cPR=15, cPT=15, cPB=30;
+    const cW=700, cH=220, cPL=60, cPR=20, cPT=20, cPB=30;
     const cPW=cW-cPL-cPR, cPH=cH-cPT-cPB;
     const allVals = [...projPts.map(p=>p.net),...projPts.map(p=>p.gross),...projPts.map(p=>p.netPot)];
     const cMin=Math.min(...allVals,0), cMax=Math.max(...allVals,1), cR=cMax-cMin||1;
@@ -2528,30 +2544,28 @@ function renderScenario(balance) {
     const cZeroY=cToY(0);
 
     let cs = `<svg width="100%" height="${cH}" viewBox="0 0 ${cW} ${cH}" style="display:block">`;
-    // Zero line
-    cs+=`<line x1="${cPL}" y1="${cZeroY}" x2="${cW-cPR}" y2="${cZeroY}" stroke="#00ff88" stroke-width="1.5" opacity="0.6"/>`;
+    cs+=`<line x1="${cPL}" y1="${cZeroY}" x2="${cW-cPR}" y2="${cZeroY}" stroke="#00ff88" stroke-width="1.5" opacity="0.7"/>`;
 
-    // Net fill
+    // Net area fill
     let cpNet='';
     projPts.forEach((p,i)=>{cpNet+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.net)} `;});
-    cs+=`<path d="${cpNet}L${cToX(projPts.length-1)},${cZeroY} L${cToX(0)},${cZeroY} Z" fill="rgba(74,222,128,.08)"/>`;
+    cs+=`<path d="${cpNet}L${cToX(projPts.length-1)},${cZeroY} L${cToX(0)},${cZeroY} Z" fill="rgba(74,222,128,.06)"/>`;
 
-    // Gross line (dashed green) — no fixed costs
+    // Gross line (dashed green)
     if(hasGross){
       let cpG='';
       projPts.forEach((p,i)=>{cpG+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.gross)} `;});
-      cs+=`<path d="${cpG}" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="6,4" stroke-linejoin="round" opacity="0.5"/>`;
+      cs+=`<path d="${cpG}" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="5,4" stroke-linejoin="round" opacity="0.5"/>`;
     }
-    // Net + Potential line (neon pink)
+    // Net + Potential (neon pink)
     if(hasPot){
       let cpP='';
       projPts.forEach((p,i)=>{cpP+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.netPot)} `;});
-      cs+=`<path d="${cpP}" fill="none" stroke="#ff2d95" stroke-width="2" stroke-dasharray="6,4" stroke-linejoin="round" opacity="0.8"/>`;
+      cs+=`<path d="${cpP}" fill="none" stroke="#ff2d95" stroke-width="2" stroke-dasharray="5,4" stroke-linejoin="round" opacity="0.8"/>`;
     }
-    // Net line (solid green — main)
+    // Net (solid green)
     cs+=`<path d="${cpNet}" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linejoin="round"/>`;
-
-    // Dots on net line + labels at key points
+    // Dots + key labels
     projPts.forEach((p,i)=>{
       const x=cToX(i), y=cToY(p.net);
       const c=p.net>=0?'#4ade80':'#f87171';
@@ -2562,16 +2576,15 @@ function renderScenario(balance) {
     });
     cs+='</svg>';
 
-    // Legend
-    let cLegend = '<span style="color:#4ade80">━━ Net</span>';
-    if(hasGross) cLegend += ' <span style="color:#4ade8080">┅┅ Gross (no fixed)</span>';
-    if(hasPot) cLegend += ' <span style="color:#ff2d95">┅┅ Net + Potential</span>';
-    cLegend += ' <span style="color:#00ff88">━━ $0</span>';
+    let cLeg = '<span style="color:#4ade80">━━ Net</span>';
+    if(hasGross) cLeg+=' <span style="color:#4ade8080">┅┅ Gross</span>';
+    if(hasPot) cLeg+=' <span style="color:#ff2d95">┅┅ Net + Potential</span>';
+    cLeg+=' <span style="color:#00ff88">━━ $0</span>';
 
-    chartEl.innerHTML = `<div style="background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:10px">
-      <div style="font-size:11px;font-weight:600;color:var(--txt);margin-bottom:6px">📈 Projected Cash Flow (with adjustments)</div>
+    chartEl.innerHTML = `<div style="background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:12px">
+      <div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:8px">📈 Projected Cash Flow</div>
       ${cs}
-      <div style="display:flex;gap:12px;justify-content:center;margin-top:6px;font-size:10px">${cLegend}</div>
+      <div style="display:flex;gap:14px;justify-content:center;margin-top:8px;font-size:10px">${cLeg}</div>
     </div>`;
   }
 }
@@ -2583,47 +2596,50 @@ function updateItemDue(item) {
   item.delayed = item.shift !== 0;
 }
 
-function renderScenarioRow(item, section) {
+function renderScenarioRow(item) {
   const color = item.isIn ? '#4ade80' : '#f87171';
-  const shiftColor = item.shift > 0 ? '#facc15' : item.shift < 0 ? '#38bdf8' : 'var(--dim)';
-  const shiftLabel = item.shift > 0 ? '+'+item.shift+'d' : item.shift < 0 ? item.shift+'d' : '0d';
   const origDt = new Date(item.originalDue+'T12:00:00');
   const newDt = new Date(item.due+'T12:00:00');
   const origLbl = MONTHS[origDt.getMonth()]+' '+origDt.getDate();
   const newLbl = MONTHS[newDt.getMonth()]+' '+newDt.getDate();
-  const dateLbl = item.shift !== 0 ? `<s style="color:var(--dim)">${origLbl}</s> → <b style="color:${shiftColor}">${newLbl}</b>` : origLbl;
+  const shifted = item.shift !== 0;
+  const shiftColor = item.shift > 0 ? '#facc15' : item.shift < 0 ? '#38bdf8' : 'var(--dim)';
 
   if (item.manual) {
-    return `<div data-sit-id="${item.id}" style="display:flex;align-items:center;gap:6px;padding:5px 4px;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px;background:rgba(232,121,249,.04)">
-      <select class="sit-type-sel" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px 4px;font-size:10px;font-family:var(--sans);width:70px">
-        <option value="income"${item.type==='income'?' selected':''}>Income</option>
-        <option value="p_income"${item.type==='p_income'?' selected':''}>Potential</option>
-        <option value="subs"${item.type==='subs'?' selected':''}>Subs</option>
-        <option value="materials"${item.type==='materials'?' selected':''}>Materials</option>
-      </select>
-      <input class="sit-name" type="text" value="${item.task}" placeholder="Description" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px 6px;font-size:10px;flex:1;min-width:80px;font-family:var(--sans)">
-      <span style="color:var(--dim);font-size:10px">$</span>
-      <input class="sit-amt" type="text" value="${item.amount||''}" placeholder="0" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px 6px;font-size:10px;width:65px;text-align:right;font-family:var(--mono)">
-      <input type="date" value="${item.due}" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px 4px;font-size:10px;font-family:var(--sans)" onchange="
-        var all=[...scenarioItems,...scenarioManualItems];
-        var it=all.find(x=>x.id==='${item.id}');
-        if(it){it.due=this.value;it.originalDue=this.value;}
-        renderScenario(parseFloat(localStorage.getItem('cf_balance')||'0'));
-      ">
-      <button class="sit-del" style="background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.3);border-radius:4px;padding:2px 6px;font-size:10px;cursor:pointer;white-space:nowrap">✕</button>
+    return `<div data-sit-id="${item.id}" style="display:grid;grid-template-columns:1fr 90px 80px 110px;gap:6px;align-items:center;padding:6px;border-bottom:1px solid rgba(255,255,255,.04);background:rgba(232,121,249,.04);border-radius:4px;margin-bottom:2px">
+      <div style="display:flex;align-items:center;gap:4px">
+        <select class="sit-type-sel" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px;font-size:10px;font-family:var(--sans)">
+          <option value="income"${item.type==='income'?' selected':''}>Income</option>
+          <option value="p_income"${item.type==='p_income'?' selected':''}>Potential</option>
+          <option value="subs"${item.type==='subs'?' selected':''}>Subs</option>
+          <option value="materials"${item.type==='materials'?' selected':''}>Materials</option>
+        </select>
+        <input class="sit-name" type="text" value="${item.task}" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px 4px;font-size:10px;flex:1;min-width:60px;font-family:var(--sans)">
+      </div>
+      <div style="text-align:right"><input class="sit-amt" type="text" value="${item.amount||''}" placeholder="$0" style="background:var(--bg);color:${color};border:1px solid var(--bdr);border-radius:4px;padding:2px 4px;font-size:11px;width:70px;text-align:right;font-weight:600;font-family:var(--mono)"></div>
+      <div style="text-align:center"><input type="date" value="${item.due}" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:4px;padding:2px;font-size:9px;font-family:var(--sans);width:75px" onchange="var it=[...scenarioItems,...scenarioManualItems].find(x=>x.id==='${item.id}');if(it){it.due=this.value;it.originalDue=this.value;}renderScenario(parseFloat(localStorage.getItem('cf_balance')||'0'));"></div>
+      <div style="text-align:center"><button class="sit-del" style="background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.2);border-radius:4px;padding:3px 8px;font-size:10px;cursor:pointer">✕ Remove</button></div>
     </div>`;
   }
 
-  return `<div data-sit-id="${item.id}" style="display:flex;align-items:center;gap:6px;padding:5px 4px;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px;${item.shift!==0?'background:rgba(250,204,21,.04)':''}">
-    <span style="color:var(--txt);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${item.task} — ${item.project}">${item.task}</span>
-    <span style="color:var(--dim);font-size:9px;white-space:nowrap;max-width:100px;overflow:hidden;text-overflow:ellipsis">${item.project}</span>
-    <span style="color:${color};font-weight:600;font-family:var(--mono);white-space:nowrap;min-width:60px;text-align:right">${item.isIn?'+':'-'}${cfFmt(item.amount)}</span>
-    <span style="font-size:10px;white-space:nowrap;min-width:100px;text-align:center">${dateLbl}</span>
-    <div style="display:flex;align-items:center;gap:2px;white-space:nowrap">
-      <button class="sit-minus" style="background:var(--bg);color:var(--txt2);border:1px solid var(--bdr);border-radius:4px;width:22px;height:22px;cursor:pointer;font-size:12px;line-height:1;font-family:var(--sans)">−</button>
-      <input class="sit-shift" type="number" value="${item.shift}" style="background:var(--bg);color:${shiftColor};border:1px solid var(--bdr);border-radius:4px;width:40px;height:22px;text-align:center;font-size:10px;font-weight:700;font-family:var(--mono)" title="Days to shift">
-      <button class="sit-plus" style="background:var(--bg);color:var(--txt2);border:1px solid var(--bdr);border-radius:4px;width:22px;height:22px;cursor:pointer;font-size:12px;line-height:1;font-family:var(--sans)">+</button>
-      <span style="color:${shiftColor};font-size:9px;min-width:18px">${shiftLabel}</span>
+  // Date display
+  let dateLbl = `<span style="color:var(--txt2);font-size:10px">${origLbl}</span>`;
+  if (shifted) {
+    dateLbl = `<span style="font-size:9px"><s style="color:var(--dim)">${origLbl}</s><br><b style="color:${shiftColor}">${newLbl}</b></span>`;
+  }
+
+  return `<div data-sit-id="${item.id}" style="display:grid;grid-template-columns:1fr 90px 80px 110px;gap:6px;align-items:center;padding:5px 6px;border-bottom:1px solid rgba(255,255,255,.03);${shifted?'background:rgba(250,204,21,.03);border-radius:4px':''}">
+    <div style="overflow:hidden">
+      <div style="font-size:11px;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${item.task}">${item.task}</div>
+      <div style="font-size:9px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${item.project}</div>
+    </div>
+    <div style="text-align:right;font-family:var(--mono);font-size:11px;font-weight:600;color:${color}">${item.isIn?'+':'-'}${cfFmt(item.amount)}</div>
+    <div style="text-align:center">${dateLbl}</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:3px">
+      <button class="sit-minus" style="background:var(--bg);color:var(--txt2);border:1px solid var(--bdr);border-radius:4px;width:24px;height:24px;cursor:pointer;font-size:14px;font-family:var(--sans);display:flex;align-items:center;justify-content:center">−</button>
+      <input class="sit-shift" type="number" value="${item.shift}" style="background:var(--bg);color:${shiftColor};border:1px solid ${shifted?shiftColor+'40':'var(--bdr)'};border-radius:4px;width:36px;height:24px;text-align:center;font-size:11px;font-weight:700;font-family:var(--mono)">
+      <button class="sit-plus" style="background:var(--bg);color:var(--txt2);border:1px solid var(--bdr);border-radius:4px;width:24px;height:24px;cursor:pointer;font-size:14px;font-family:var(--sans);display:flex;align-items:center;justify-content:center">+</button>
+      <span style="color:${shiftColor};font-size:9px;font-weight:600;min-width:14px">${shifted?(item.shift>0?'+':'')+item.shift+'d':''}</span>
     </div>
   </div>`;
 }
