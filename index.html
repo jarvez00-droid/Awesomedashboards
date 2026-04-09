@@ -395,7 +395,7 @@ const MGMT_PW = 'Awesome';
 function render() {
   const c = document.getElementById('content');
   if (curPage === 'sod') renderSOD(c);
-  else if (curPage === 'weekly') weeklyGate(c);
+  else if (curPage === 'weekly') loadAndRenderWeekly(c);
   else if (curPage === 'cashflow') cashflowGate(c);
   else if (curPage === 'mgmt') mgmtGate(c);
   else if (curPage === 'archive') renderArchive(c);
