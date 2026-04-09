@@ -2116,11 +2116,11 @@ function renderMgmtBody() {
           <span style="font-size:12px;font-weight:600;color:var(--txt)">${dayName} ${dayLabel}</span>
           <span style="font-size:10px;color:var(--dim);margin-left:4px">${dayData.items.length} item${dayData.items.length>1?'s':''}</span>
         </div>
-        <div style="display:flex;gap:8px;font-size:11px;font-weight:600;align-items:center">
-          ${dIn>0?'<span style="color:#4ade80">Income '+cfFmt(dIn)+'</span>':''}
-          ${dOut>0?'<span style="color:#f87171">Expenses '+cfFmt(dOut)+'</span>':''}
-          <span style="color:var(--dim)">·</span>
-          <span style="color:${balC};font-family:var(--mono);min-width:70px;text-align:right">Bal: ${cfFmt(calRunBal)}</span>
+        <div style="display:flex;gap:10px;font-size:11px;font-weight:600;align-items:center">
+          ${dIn>0?'<span style="color:#4ade80;background:rgba(74,222,128,.1);padding:2px 6px;border-radius:4px">⬇ IN '+cfFmt(dIn)+'</span>':''}
+          ${dOut>0?'<span style="color:#f87171;background:rgba(248,113,113,.1);padding:2px 6px;border-radius:4px">⬆ OUT '+cfFmt(dOut)+'</span>':''}
+          <span style="color:var(--dim)">│</span>
+          <span style="color:${balC};font-family:var(--mono);font-weight:700;min-width:80px;text-align:right">Balance: ${cfFmt(calRunBal)}</span>
         </div>
       </div>
       <div style="display:none;padding:4px 0 6px 16px">`;
@@ -2200,14 +2200,14 @@ function renderMgmtBody() {
     const hasP = pts.some(p=>p.netP!==p.net);
     const allBals = [balance,...pts.map(p=>p.gross),...pts.map(p=>p.net),...pts.map(p=>p.netP)];
     const maxB=Math.max(...allBals,1), minB=Math.min(...allBals,0);
-    const W=Math.max(pts.length*80,800), H=350;
+    const W=Math.max(pts.length*80,1200), H=400;
     const padL=70,padR=30,padT=30,padB=45,plotW=W-padL-padR,plotH=H-padT-padB;
     const yMin=Math.min(minB,0), yMax=Math.max(maxB,balance+1), yR=yMax-yMin||1;
     const toY=v=>padT+plotH-((v-yMin)/yR*plotH);
     const toX=i=>padL+(pts.length>1?i/(pts.length-1)*plotW:plotW/2);
     const zeroY=toY(0), startY=toY(balance);
 
-    let svg = `<svg id="mgmt-chart-svg" width="${W}" height="${H}" style="display:block;min-width:${W}px" viewBox="0 0 ${W} ${H}">
+    let svg = `<svg id="mgmt-chart-svg" width="100%" height="${H}" style="display:block;min-width:${W}px" viewBox="0 0 ${W} ${H}">
       <defs><linearGradient id="mcfg2" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%" stop-color="var(--grn)" stop-opacity="0.15"/>
         <stop offset="100%" stop-color="var(--grn)" stop-opacity="0"/>
@@ -2274,17 +2274,15 @@ function renderMgmtBody() {
   // ── Section 3: Payment List ──
   html += secTitle('📋', 'Payment List', 'Every individual payment in the window · Sorted by date');
   const sorted = [...allWin].sort((a,b)=>(a.due||'').localeCompare(b.due||''));
-  let listRunBal = balance;
   let curWeek = '';
 
   html += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:10px 14px">';
   html += `<div style="font-size:13px;font-weight:600;color:var(--txt);margin-bottom:8px">All Payments · ${sorted.length} items</div>`;
   html += `<div class="cf-pay" style="border-bottom:1px solid var(--bdr);padding-bottom:4px;margin-bottom:2px">
     <span class="cf-pay-date" style="font-weight:600;color:var(--txt)">Date</span>
-    <span class="cf-pay-type" style="background:none;border:none;color:var(--txt);font-weight:600">Type</span>
+    <span class="cf-pay-type" style="background:none;border:none;color:var(--txt);font-weight:600">Direction</span>
     <span class="cf-pay-name" style="font-weight:600;color:var(--txt)">Payment</span>
     <span class="cf-pay-amt" style="color:var(--txt)">Amount</span>
-    <span class="cf-pay-bal" style="color:var(--txt)">Balance</span>
     <span class="cf-pay-status" style="background:none;border:none;color:var(--txt);font-weight:600">Status</span>
   </div>`;
 
@@ -2299,7 +2297,7 @@ function renderMgmtBody() {
         const wN=wI-wO;
         html+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 4px 4px;margin-top:8px;border-top:2px solid var(--bdr)">
           <span style="font-size:12px;font-weight:700;color:var(--txt)">📅 ${cfWeekRange(weekKey)}</span>
-          <span style="font-size:11px;color:var(--dim)">IN ${cfFmt(wI)}${wP>0?' · <span style="color:#facc15">⚡'+cfFmt(wP)+'</span>':''} · OUT ${cfFmt(wO)} · <span style="color:${wN>=0?'#4ade80':'#f87171'};font-weight:600">NET ${cfFmt(wN)}</span></span>
+          <span style="font-size:11px;color:var(--dim)"><span style="color:#4ade80;font-weight:600">⬇ IN ${cfFmt(wI)}</span>${wP>0?' · <span style="color:#facc15">⚡'+cfFmt(wP)+'</span>':''} · <span style="color:#f87171;font-weight:600">⬆ OUT ${cfFmt(wO)}</span> · <span style="color:${wN>=0?'#4ade80':'#f87171'};font-weight:700">NET ${cfFmt(wN)}</span></span>
         </div>`;
       }
       const ti=mgmtTypeInfo(t.type);
@@ -2307,18 +2305,18 @@ function renderMgmtBody() {
       const isPIn=t.type==='p_income';
       const dt=new Date(t.due+'T12:00:00');
       const dateLbl=MONTHS[dt.getMonth()]+' '+dt.getDate()+'<br><span style="font-size:9px;color:var(--dim)">'+DAYS[dt.getDay()]+'</span>';
-      if(!t.paid&&!isPIn){if(isIn)listRunBal+=t.amount;else listRunBal-=t.amount;}
-      const balLbl=t.paid?'—':cfFmt(listRunBal);
-      const balCls=t.paid?'':(listRunBal>=0?'pos':'neg');
       const paidSt=t.paid?'opacity:0.5;text-decoration:line-through':'';
       const statusLbl=t.paid?'✓ Paid':(t.amount?'Pending':'TBD');
       const statusCls=t.paid?'paid':(t.amount?'pending':'tbd');
+      // Clear direction label
+      const dirLabel = isIn ? '⬇ INCOME' : '⬆ EXPENSE';
+      const dirColor = isIn ? '#4ade80' : '#f87171';
+      const dirBg = isIn ? 'rgba(74,222,128,.1)' : 'rgba(248,113,113,.1)';
       html+=`<div class="cf-pay" style="${paidSt}">
         <span class="cf-pay-date">${dateLbl}</span>
-        <span class="cf-pay-type" style="background:${ti.color}20;color:${ti.color};border:1px solid ${ti.color}40;font-size:10px">${ti.label}</span>
+        <span class="cf-pay-type" style="background:${dirBg};color:${dirColor};border:1px solid ${dirColor}40;font-size:10px;font-weight:700">${dirLabel}</span>
         <span class="cf-pay-name">${t.task} <span class="cf-pay-proj">— ${t.project||''}</span></span>
-        <span class="cf-pay-amt ${ti.cls}">${ti.sign}${t.amount?cfFmt2(t.amount):'TBD'}</span>
-        <span class="cf-pay-bal ${balCls}">${balLbl}</span>
+        <span class="cf-pay-amt" style="color:${dirColor};font-weight:700">${isIn?'+':'-'}${t.amount?cfFmt2(t.amount):'TBD'}</span>
         <span class="cf-pay-status ${statusCls}">${statusLbl}</span>
       </div>`;
     });
