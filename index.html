@@ -582,41 +582,76 @@ function buildForecast(fc) {
     h += '</div>';
   }
 
-  // Cash Flow This Week
+  // Income Alerts — Warning System
+  const ia = fc.income_alerts || {};
+  const iaItems = ia.items || [];
+  const iaBlocked = iaItems.filter(i => i.risk === 'blocked');
+  const iaAtRisk = iaItems.filter(i => i.risk === 'at_risk');
+  const iaOnTrack = iaItems.filter(i => i.risk === 'on_track');
+
   h += '<div class="wk-section" style="margin-bottom:16px">';
-  h += '<div class="wk-section-title">💰 Cash Flow This Week</div>';
-  h += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px">';
-  const cfIn = fc.cash_flow.income || 0;
-  const cfOut = fc.cash_flow.outgoing || 0;
-  const cfNet = fc.cash_flow.net || 0;
+  h += '<div class="wk-section-title">🚨 Income Watch — Upcoming Payments & Risks</div>';
+
+  // Summary cards
+  h += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px;margin-bottom:14px">';
   h += '<div style="background:rgba(52,211,168,.06);border:1px solid var(--bdr);border-radius:10px;padding:14px;text-align:center">';
-  h += '<div style="font-size:20px;font-weight:700;color:var(--grn)">$' + cfIn.toLocaleString() + '</div>';
-  h += '<div style="font-size:12px;color:var(--dim)">Expected Income</div></div>';
-  h += '<div style="background:rgba(240,68,56,.06);border:1px solid var(--bdr);border-radius:10px;padding:14px;text-align:center">';
-  h += '<div style="font-size:20px;font-weight:700;color:var(--red)">$' + cfOut.toLocaleString() + '</div>';
-  h += '<div style="font-size:12px;color:var(--dim)">Payments Going Out</div></div>';
-  const netBg = cfNet >= 0 ? 'rgba(52,211,168,.06)' : 'rgba(240,68,56,.06)';
-  const netColor = cfNet >= 0 ? 'var(--grn)' : 'var(--red)';
-  h += '<div style="background:' + netBg + ';border:1px solid var(--bdr);border-radius:10px;padding:14px;text-align:center">';
-  h += '<div style="font-size:20px;font-weight:700;color:' + netColor + '">$' + cfNet.toLocaleString() + '</div>';
-  h += '<div style="font-size:12px;color:var(--dim)">Net Cash Flow</div></div>';
+  h += '<div style="font-size:20px;font-weight:700;color:var(--grn)">$' + (ia.total_upcoming_income||0).toLocaleString() + '</div>';
+  h += '<div style="font-size:11px;color:var(--dim);margin-top:2px">Total Upcoming Income</div></div>';
+  h += '<div style="background:rgba(52,211,168,.04);border:1px solid rgba(52,211,168,.15);border-radius:10px;padding:14px;text-align:center">';
+  h += '<div style="font-size:20px;font-weight:700;color:#4ade80">$' + (ia.on_track_income||0).toLocaleString() + '</div>';
+  h += '<div style="font-size:11px;color:var(--dim);margin-top:2px">✅ On Track</div></div>';
+  h += '<div style="background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.15);border-radius:10px;padding:14px;text-align:center">';
+  h += '<div style="font-size:20px;font-weight:700;color:#facc15">$' + (ia.at_risk_income||0).toLocaleString() + '</div>';
+  h += '<div style="font-size:11px;color:var(--dim);margin-top:2px">⚠ At Risk</div></div>';
+  h += '<div style="background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.15);border-radius:10px;padding:14px;text-align:center">';
+  h += '<div style="font-size:20px;font-weight:700;color:#f87171">$' + (ia.blocked_income||0).toLocaleString() + '</div>';
+  h += '<div style="font-size:11px;color:var(--dim);margin-top:2px">🛑 Blocked</div></div>';
   h += '</div>';
 
-  // Top outgoing expandable
-  if (fc.cash_flow.top_outgoing && fc.cash_flow.top_outgoing.length) {
-    h += '<div style="margin-top:12px;cursor:pointer" onclick="var el=this.querySelector(\'.fc-out-list\');el.style.display=el.style.display===\'none\'?\'block\':\'none\'">';
-    h += '<div style="font-size:13px;color:var(--dim);display:flex;align-items:center;gap:6px">';
-    h += '📋 Biggest payments going out this week (click to see) ';
-    h += '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>';
-    h += '</div>';
-    h += '<div class="fc-out-list" style="display:none;margin-top:8px">';
-    fc.cash_flow.top_outgoing.forEach(t => {
-      h += '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--bdr);font-size:13px">';
-      h += '<div><span style="color:var(--txt2)">' + t.project + '</span> <span style="color:var(--dim)">· ' + t.task + '</span></div>';
-      h += '<div style="font-weight:600;color:var(--red);white-space:nowrap">$' + t.amount.toLocaleString() + '</div>';
+  // Individual income items
+  if (iaItems.length > 0) {
+    iaItems.forEach(item => {
+      const riskC = item.risk === 'blocked' ? '#f87171' : item.risk === 'at_risk' ? '#facc15' : '#4ade80';
+      const riskBg = item.risk === 'blocked' ? 'rgba(248,113,113,.04)' : item.risk === 'at_risk' ? 'rgba(250,204,21,.04)' : 'rgba(74,222,128,.03)';
+      const riskIcon = item.risk === 'blocked' ? '🛑' : item.risk === 'at_risk' ? '⚠️' : '✅';
+      const riskLabel = item.risk === 'blocked' ? 'BLOCKED' : item.risk === 'at_risk' ? 'AT RISK' : 'ON TRACK';
+      const dt = new Date(item.due + 'T12:00:00');
+      const dateLbl = MONTHS[dt.getMonth()] + ' ' + dt.getDate() + ' (' + DAYS[dt.getDay()] + ')';
+
+      h += '<div style="background:' + riskBg + ';border:1px solid ' + riskC + '20;border-left:4px solid ' + riskC + ';border-radius:8px;padding:12px 14px;margin-bottom:8px">';
+      h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
+      h += '<div style="display:flex;align-items:center;gap:8px">';
+      h += '<span style="font-size:10px;font-weight:700;color:' + riskC + ';background:' + riskC + '15;padding:2px 8px;border-radius:4px">' + riskIcon + ' ' + riskLabel + '</span>';
+      h += '<span style="font-size:13px;font-weight:700;color:var(--txt)">' + item.project + '</span>';
+      h += '</div>';
+      h += '<span style="font-size:16px;font-weight:700;color:#4ade80;font-family:var(--mono)">$' + (item.amount||0).toLocaleString() + '</span>';
+      h += '</div>';
+      h += '<div style="font-size:12px;color:var(--txt2);margin-bottom:4px">' + item.payment + ' · Due <b>' + dateLbl + '</b></div>';
+
+      if (item.risk === 'blocked' && item.blocker) {
+        h += '<div style="background:rgba(248,113,113,.06);border-radius:6px;padding:8px 10px;margin-top:6px">';
+        h += '<div style="font-size:11px;font-weight:600;color:#f87171;margin-bottom:4px">⛔ Blocked by: ' + item.blocker + '</div>';
+        h += '<div style="font-size:11px;color:var(--txt2)">This task must be completed before this income can be collected. <b>Do not delay or reassign resources from this task.</b></div>';
+        h += '</div>';
+      }
+
+      if (item.risk === 'at_risk' && item.group_overdue_tasks && item.group_overdue_tasks.length > 0) {
+        h += '<div style="background:rgba(250,204,21,.06);border-radius:6px;padding:8px 10px;margin-top:6px">';
+        h += '<div style="font-size:11px;font-weight:600;color:#facc15;margin-bottom:4px">⚠ ' + item.group_overdue_count + ' overdue task' + (item.group_overdue_count > 1 ? 's' : '') + ' in this group:</div>';
+        item.group_overdue_tasks.forEach(function(t) {
+          h += '<div style="font-size:11px;color:var(--txt2);padding:2px 0 2px 8px">• ' + t.name + (t.due ? ' (due ' + t.due + ')' : '') + '</div>';
+        });
+        h += '<div style="font-size:11px;color:var(--txt2);margin-top:4px"><b>These overdue tasks risk pushing this income payment.</b> Prioritize them.</div>';
+        h += '</div>';
+      }
+
+      if (item.risk === 'on_track') {
+        h += '<div style="font-size:11px;color:var(--dim);margin-top:4px">✅ All prerequisite work is on schedule. Keep it moving.</div>';
+      }
       h += '</div>';
     });
-    h += '</div></div>';
+  } else {
+    h += '<div style="padding:12px;text-align:center;font-size:12px;color:var(--dim)">No income payments found in the forecast window.</div>';
   }
   h += '</div>';
 
