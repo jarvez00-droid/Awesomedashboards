@@ -2431,6 +2431,7 @@ function buildSituationEval(allWin, balance) {
         </div>
         <button id="sit-show-add" style="background:rgba(56,189,248,.08);color:#38bdf8;border:1px solid rgba(56,189,248,.25);border-radius:6px;padding:7px 16px;font-size:13px;cursor:pointer;font-family:var(--sans);font-weight:700">＋ Add Item</button>
         <button id="sit-export" style="background:rgba(56,189,248,.08);color:#38bdf8;border:1px solid rgba(56,189,248,.25);border-radius:6px;padding:7px 16px;font-size:13px;cursor:pointer;font-family:var(--sans);font-weight:600">⬇ CSV</button>
+        <button id="sit-export-pdf" style="background:rgba(232,121,249,.08);color:#e879f9;border:1px solid rgba(232,121,249,.25);border-radius:6px;padding:7px 16px;font-size:13px;cursor:pointer;font-family:var(--sans);font-weight:600">📄 PDF</button>
         <button id="sit-reset" style="background:rgba(248,113,113,.06);color:#f87171;border:1px solid rgba(248,113,113,.2);border-radius:6px;padding:7px 16px;font-size:13px;cursor:pointer;font-family:var(--sans);font-weight:600">↺ Reset</button>
       </div>
     </div>
@@ -2560,6 +2561,7 @@ function initSituationEval(allWin, balance) {
   });
 
   document.getElementById('sit-export').addEventListener('click', () => sitExportCSV());
+  document.getElementById('sit-export-pdf').addEventListener('click', () => sitExportPDF());
 
   document.getElementById('sit-batch-apply').addEventListener('click', () => {
     const days = parseInt(document.getElementById('sit-batch-days').value) || 0;
@@ -2603,43 +2605,168 @@ function sitExportCSV() {
   daySlots.forEach((d,i) => dayIndex[d.date] = i);
   all.forEach(item => { const idx = dayIndex[item.due]; if (idx !== undefined) daySlots[idx].items.push(item); });
 
-  // Compute running balance (start from 0 for CSV — pure scenario)
-  let bal = 0;
-  const rows = [['Date','Day','Item','Project','Type','Direction','Amount','Day Net','Running Balance','Shifted','Original Date']];
-  daySlots.forEach(day => {
+  const balance = parseFloat(localStorage.getItem('cf_balance') || '0');
+  let bal = balance;
+  const rows = [];
+
+  // Header
+  rows.push(['CASH FLOW SCENARIO — ' + new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'})]);
+  rows.push(['Starting Balance:,' + '$' + balance.toLocaleString()]);
+  rows.push([]);
+  rows.push(['Date','Day','Item','Project','Type','Direction','Amount','Day Income','Day Expenses','Day Net','Running Balance','Shifted','Original Date']);
+
+  let weekIn = 0, weekOut = 0, weekNum = 1;
+
+  daySlots.forEach((day, di) => {
     const dayName = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][day.obj.getDay()];
-    let dayNet = 0;
+    const isMon = day.obj.getDay() === 1;
+
+    // Week separator at Monday (except first day)
+    if (isMon && di > 0) {
+      const weekNet = weekIn - weekOut;
+      const netSign = weekNet >= 0 ? '+' : '';
+      rows.push([]);
+      rows.push([
+        '','','─── WEEK ' + weekNum + ' SUMMARY ───','','','',
+        '','$' + weekIn.toLocaleString(),'$' + weekOut.toLocaleString(),
+        netSign + '$' + weekNet.toLocaleString(),
+        '$' + Math.round(bal).toLocaleString(),'',''
+      ]);
+      rows.push([]);
+      weekNum++;
+      weekIn = 0;
+      weekOut = 0;
+    }
+
+    let dayIncome = 0, dayExpense = 0;
+
     if (day.items.length === 0) {
-      rows.push([day.date, dayName, '', '', '', '', '', '0', String(Math.round(bal)), '', '']);
+      rows.push([day.date, dayName, '(no payments)', '', '', '', '', '$0', '$0', '$0', '$' + Math.round(bal).toLocaleString(), '', '']);
     } else {
-      day.items.forEach(item => {
+      day.items.forEach((item, ii) => {
         const amt = item.isIn ? item.amount : -item.amount;
-        dayNet += amt;
         bal += amt;
+        if (item.isIn) { dayIncome += item.amount; weekIn += item.amount; }
+        else { dayExpense += item.amount; weekOut += item.amount; }
+
         rows.push([
-          day.date, dayName,
+          ii === 0 ? day.date : '',
+          ii === 0 ? dayName : '',
           '"' + (item.task||'').replace(/"/g,'""') + '"',
           '"' + (item.project||'').replace(/"/g,'""') + '"',
-          item.type,
-          item.isIn ? 'IN' : 'OUT',
-          item.amount.toFixed(2),
-          dayNet.toFixed(2),
-          bal.toFixed(2),
+          item.type === 'income' ? 'Income' : item.type === 'p_income' ? 'Potential' : item.type === 'materials' ? 'Materials' : item.type === 'subs' ? 'Subs' : item.type,
+          item.isIn ? 'IN ⬇' : 'OUT ⬆',
+          '$' + item.amount.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2}),
+          '', '', '',
+          '$' + Math.round(bal).toLocaleString(),
           item.shift !== 0 ? (item.shift > 0 ? '+'+item.shift+'d' : item.shift+'d') : '',
           item.shift !== 0 ? item.originalDue : ''
         ]);
       });
+
+      // Day totals row
+      const dayNet = dayIncome - dayExpense;
+      const dayNetSign = dayNet >= 0 ? '+' : '';
+      rows.push([
+        '', '', '  ── Day Total ──', '', '', '',
+        '', '$' + dayIncome.toLocaleString(), '$' + dayExpense.toLocaleString(),
+        dayNetSign + '$' + dayNet.toLocaleString(),
+        '$' + Math.round(bal).toLocaleString(), '', ''
+      ]);
     }
   });
 
-  const csv = rows.map(r => r.join(',')).join('\n');
-  const blob = new Blob([csv], { type: 'text/csv' });
+  // Final week summary
+  const weekNet = weekIn - weekOut;
+  const netSign = weekNet >= 0 ? '+' : '';
+  rows.push([]);
+  rows.push([
+    '','','─── WEEK ' + weekNum + ' SUMMARY ───','','','',
+    '','$' + weekIn.toLocaleString(),'$' + weekOut.toLocaleString(),
+    netSign + '$' + weekNet.toLocaleString(),
+    '$' + Math.round(bal).toLocaleString(),'',''
+  ]);
+
+  // Grand totals
+  const totalIn = all.filter(x => x.isIn && dayIndex[x.due] !== undefined).reduce((s,x) => s + x.amount, 0);
+  const totalOut = all.filter(x => !x.isIn && dayIndex[x.due] !== undefined).reduce((s,x) => s + x.amount, 0);
+  const totalNet = totalIn - totalOut;
+  const totalNetSign = totalNet >= 0 ? '+' : '';
+  rows.push([]);
+  rows.push(['════════════════════════════════════════']);
+  rows.push([
+    '','','GRAND TOTAL (28 DAYS)','','','',
+    '','$' + totalIn.toLocaleString(),'$' + totalOut.toLocaleString(),
+    totalNetSign + '$' + totalNet.toLocaleString(),
+    '$' + Math.round(bal).toLocaleString(),'',''
+  ]);
+  rows.push(['Starting Balance:,' + '$' + balance.toLocaleString()]);
+  rows.push(['Ending Balance:,' + '$' + Math.round(bal).toLocaleString()]);
+  rows.push(['Items Shifted:,' + all.filter(x => x.shift !== 0).length]);
+  rows.push(['Manual Items:,' + scenarioManualItems.length]);
+
+  const csv = rows.map(r => Array.isArray(r) ? r.join(',') : r).join('\n');
+  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
   a.download = 'cashflow-scenario-' + new Date().toISOString().slice(0,10) + '.csv';
   a.click();
   URL.revokeObjectURL(url);
+}
+
+function sitExportPDF() {
+  // Grab the calendar overview and bar chart SVG, render to a printable page
+  const chartWrap = document.getElementById('sit-chart-wrap');
+  if (!chartWrap) return;
+
+  const summaryEl = document.getElementById('sit-summary');
+  const summaryHtml = summaryEl ? summaryEl.innerHTML : '';
+
+  // Clone the chart content
+  const content = chartWrap.innerHTML;
+
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html>
+<html><head><title>Cash Flow Scenario — ${new Date().toLocaleDateString()}</title>
+<style>
+  @page { size: landscape; margin: 15mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a2e; padding: 20px; }
+  .header { text-align: center; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid #e5e7eb; }
+  .header h1 { font-size: 22px; font-weight: 800; color: #1a1a2e; }
+  .header p { font-size: 13px; color: #6b7280; margin-top: 4px; }
+  .summary { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; padding: 12px; background: #f9fafb; border-radius: 8px; }
+  .summary .pill { padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; border: 1px solid #e5e7eb; }
+  .section { margin-bottom: 24px; }
+  .section-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; color: #1a1a2e; }
+  svg { max-width: 100%; height: auto; }
+  svg text { fill: #1a1a2e !important; }
+  svg line[stroke="rgba(255,255,255,.04)"] { stroke: #e5e7eb !important; }
+  svg line[stroke="#00ff88"] { stroke: #059669 !important; }
+  svg text[fill="#00ff88"] { fill: #059669 !important; }
+  svg text[fill="rgba(255,255,255,.3)"], svg text[fill="rgba(255,255,255,.4)"], svg text[fill="rgba(255,255,255,.5)"], svg text[fill="rgba(255,255,255,.35)"], svg text[fill="rgba(255,255,255,.6)"] { fill: #4b5563 !important; }
+  svg text[fill="#38bdf8"] { fill: #0284c7 !important; }
+  svg rect[fill="rgba(248,113,113,.06)"] { fill: #fef2f2 !important; }
+  svg path[stroke="#38bdf8"] { stroke: #0284c7 !important; }
+  svg path[fill="rgba(74,222,128,.07)"] { fill: rgba(74,222,128,.12) !important; }
+  @media print {
+    body { padding: 0; }
+    .no-print { display: none; }
+  }
+</style>
+</head><body>
+  <div class="header">
+    <h1>💰 Cash Flow Scenario</h1>
+    <p>Generated ${new Date().toLocaleDateString('en-US', {weekday:'long', year:'numeric', month:'long', day:'numeric'})} · Construction Nation Group</p>
+    <p>Starting Balance: $${parseFloat(localStorage.getItem('cf_balance')||'0').toLocaleString()}</p>
+  </div>
+  ${content}
+  <div class="no-print" style="text-align:center;margin-top:20px">
+    <button onclick="window.print()" style="background:#2563eb;color:#fff;border:none;padding:12px 32px;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer">🖨 Print / Save as PDF</button>
+  </div>
+</body></html>`);
+  win.document.close();
 }
 
 function renderScenario(balance) {
