@@ -2891,40 +2891,8 @@ function renderScenario(balance) {
     });
   });
 
-  // Chart
-  if (projPts.length > 1) {
-    const cW=1000, cH=250, cPL=70, cPR=20, cPT=20, cPB=32;
-    const cPW=cW-cPL-cPR, cPH=cH-cPT-cPB;
-    const allVals=[...projPts.map(p=>p.net),...(hasGross?projPts.map(p=>p.gross):[]),...(hasPot?projPts.map(p=>p.netPot):[])];
-    const cMin=Math.min(...allVals,0), cMax=Math.max(...allVals,1), cR=cMax-cMin||1;
-    const cToY=v=>cPT+cPH-((v-cMin)/cR*cPH);
-    const cToX=i=>cPL+(projPts.length>1?i/(projPts.length-1)*cPW:cPW/2);
-    const cZeroY=cToY(0);
-    let cs=`<svg width="100%" height="${cH}" viewBox="0 0 ${cW} ${cH}" style="display:block">`;
-    cs+=`<line x1="${cPL}" y1="${cZeroY}" x2="${cW-cPR}" y2="${cZeroY}" stroke="#00ff88" stroke-width="1.5" opacity="0.8" stroke-dasharray="4,3"/>`;
-    let cpN=''; projPts.forEach((p,i)=>{cpN+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.net)} `;});
-    cs+=`<path d="${cpN}L${cToX(projPts.length-1)},${cZeroY} L${cToX(0)},${cZeroY} Z" fill="rgba(74,222,128,.07)"/>`;
-    if(hasGross){let g='';projPts.forEach((p,i)=>{g+=(i===0?'M':'L')+`${cToX(i)},${cToY(p.gross)} `;});cs+=`<path d="${g}" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>`;}
-    if(hasPot){let pp='';projPts.forEach((pt,i)=>{pp+=(i===0?'M':'L')+`${cToX(i)},${cToY(pt.netPot)} `;});cs+=`<path d="${pp}" fill="none" stroke="#ff2d95" stroke-width="2" stroke-dasharray="5,4" opacity="0.8"/>`;}
-    cs+=`<path d="${cpN}" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linejoin="round"/>`;
-    projPts.forEach((p,i)=>{
-      const x=cToX(i),y=cToY(p.net),c=p.net>=0?'#4ade80':'#f87171';
-      cs+=`<circle cx="${x}" cy="${y}" r="3.5" fill="${c}"/>`;
-      if(i===0||i===projPts.length-1||p.net===minBal){
-        cs+=`<text x="${x}" y="${y-10}" text-anchor="middle" fill="${c}" font-size="10" font-weight="700" font-family="monospace">${cfFmt(p.net)}</text>`;
-      }
-    });
-    cs+='</svg>';
-    let leg='<span style="color:#4ade80;font-size:12px">━━ Net Balance</span>';
-    if(hasGross)leg+=' &nbsp;<span style="color:#4ade8080;font-size:12px">┅┅ Gross (no fixed)</span>';
-    if(hasPot)leg+=' &nbsp;<span style="color:#ff2d95;font-size:12px">┅┅ +Potential</span>';
-    leg+=' &nbsp;<span style="color:#00ff88;font-size:12px">- - $0</span>';
-    chartEl.innerHTML=`<div style="background:var(--bg);border:1px solid var(--bdr);border-radius:10px;padding:16px">
-      <div style="font-size:14px;font-weight:600;color:var(--txt);margin-bottom:10px">📈 Projected Cash Flow</div>
-      ${cs}
-      <div style="display:flex;gap:16px;justify-content:center;margin-top:8px">${leg}</div>
-    </div>`;
-  }
+  // Calendar overview + bar chart
+  chartEl.innerHTML = buildSitOverview(daySlots, balance, projPts, minBal, minDate);
 }
 
 function updateItemDue(item) {
@@ -2987,6 +2955,209 @@ function sitItemCell(item, balance) {
       <button class="sit-postpone" data-days="1" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:4px;width:28px;height:28px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center" title="Postpone 1 day">▸</button>
     </div>
   </div>`;
+}
+
+
+function buildSitOverview(daySlots, balance, projPts, minBal, minDate) {
+  // ── Calendar Overview ──
+  // 3 rows (weeks) x 7 columns (Mon-Sun)
+  // Each cell shows: day, income total, expense total, balance color-coded
+
+  let cal = '';
+  cal += `<div style="margin-bottom:20px">`;
+  cal += `<div style="font-size:15px;font-weight:700;color:var(--txt);margin-bottom:10px">📅 21-Day Overview</div>`;
+
+  // Day headers
+  cal += `<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px">`;
+  ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(d => {
+    cal += `<div style="text-align:center;font-size:11px;font-weight:700;color:#b0b8c8;padding:4px">${d}</div>`;
+  });
+  cal += `</div>`;
+
+  // Find the day-of-week offset for first day
+  const firstDow = daySlots[0].obj.getDay(); // 0=Sun
+  const monOffset = firstDow === 0 ? 6 : firstDow - 1; // convert to Mon=0
+
+  // Build grid cells
+  cal += `<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px">`;
+
+  // Empty cells before first day
+  for (let e = 0; e < monOffset; e++) {
+    cal += `<div style="min-height:80px"></div>`;
+  }
+
+  const today = new Date().toISOString().slice(0,10);
+  const maxIn = Math.max(...daySlots.map(d => d.sumIn), 1);
+  const maxOut = Math.max(...daySlots.map(d => d.sumOut), 1);
+  const maxFlow = Math.max(maxIn, maxOut);
+
+  daySlots.forEach((day, di) => {
+    const dd = day.obj;
+    const dayNum = dd.getDate();
+    const isToday = day.date === today;
+    const isWeekend = dd.getDay() === 0 || dd.getDay() === 6;
+    const hasItems = day.items.length > 0;
+    const incTotal = day.sumIn;
+    const expTotal = day.sumOut;
+
+    // Balance-based cell color
+    let cellBg, cellBorder;
+    if (day.bal < 0) {
+      cellBg = 'rgba(248,113,113,.12)';
+      cellBorder = '2px solid #f87171';
+    } else if (day.bal < balance * 0.2) {
+      cellBg = 'rgba(250,204,21,.08)';
+      cellBorder = '1px solid rgba(250,204,21,.3)';
+    } else if (incTotal > expTotal && incTotal > 0) {
+      cellBg = 'rgba(74,222,128,.06)';
+      cellBorder = '1px solid rgba(74,222,128,.2)';
+    } else if (expTotal > 10000) {
+      cellBg = 'rgba(248,113,113,.06)';
+      cellBorder = '1px solid rgba(248,113,113,.2)';
+    } else {
+      cellBg = isWeekend ? 'rgba(255,255,255,.01)' : 'rgba(255,255,255,.03)';
+      cellBorder = '1px solid rgba(255,255,255,.06)';
+    }
+
+    if (isToday) cellBorder = '2px solid #38bdf8';
+
+    cal += `<div style="min-height:90px;background:${cellBg};border:${cellBorder};border-radius:8px;padding:6px 8px;display:flex;flex-direction:column;position:relative">`;
+
+    // Day number
+    cal += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">`;
+    cal += `<span style="font-size:14px;font-weight:800;color:${isToday?'#38bdf8':'#fff'}">${dayNum}</span>`;
+    if (isToday) cal += `<span style="font-size:8px;font-weight:700;color:#38bdf8;background:rgba(56,189,248,.2);padding:1px 4px;border-radius:2px">TODAY</span>`;
+    cal += `</div>`;
+
+    // Mini bar chart — income bar (green) vs expense bar (red) side by side
+    if (hasItems) {
+      const barH = 20;
+      const inW = maxFlow > 0 ? Math.max(incTotal / maxFlow * 100, incTotal > 0 ? 8 : 0) : 0;
+      const outW = maxFlow > 0 ? Math.max(expTotal / maxFlow * 100, expTotal > 0 ? 8 : 0) : 0;
+      cal += `<div style="display:flex;gap:2px;align-items:end;height:${barH}px;margin-bottom:4px">`;
+      if (inW > 0) cal += `<div style="width:${inW}%;height:100%;background:#4ade80;border-radius:2px;min-width:4px" title="In: $${incTotal.toLocaleString()}"></div>`;
+      if (outW > 0) cal += `<div style="width:${outW}%;height:100%;background:#f87171;border-radius:2px;min-width:4px" title="Out: $${expTotal.toLocaleString()}"></div>`;
+      cal += `</div>`;
+
+      // Amounts
+      if (incTotal > 0) cal += `<div style="font-size:10px;font-weight:700;color:#4ade80;font-family:var(--mono)">+${cfFmt(incTotal)}</div>`;
+      if (expTotal > 0) cal += `<div style="font-size:10px;font-weight:700;color:#f87171;font-family:var(--mono)">-${cfFmt(expTotal)}</div>`;
+    } else {
+      cal += `<div style="flex:1"></div>`;
+    }
+
+    // Balance at bottom
+    const balC = day.bal >= 0 ? '#4ade80' : '#f87171';
+    cal += `<div style="margin-top:auto;font-size:11px;font-weight:800;color:${balC};font-family:var(--mono);text-align:right">${cfFmt(day.bal)}</div>`;
+    if (day.bal < 0) cal += `<div style="font-size:8px;color:#f87171;text-align:right;font-weight:700">⚠ NEG</div>`;
+
+    cal += `</div>`;
+  });
+
+  cal += `</div></div>`;
+
+  // ── Bar Chart: Daily In vs Out + Balance Line ──
+  let chart = '';
+  chart += `<div style="background:var(--bg);border:1px solid var(--bdr);border-radius:10px;padding:16px;margin-bottom:16px">`;
+  chart += `<div style="font-size:15px;font-weight:700;color:var(--txt);margin-bottom:12px">📊 Daily Cash Flow Bars</div>`;
+
+  const cW = 1000, cH = 280, cPL = 70, cPR = 40, cPT = 25, cPB = 50;
+  const cPW = cW - cPL - cPR;
+  const cPH = cH - cPT - cPB;
+  const barW = Math.floor(cPW / daySlots.length) - 4;
+
+  // Find scales
+  const maxBar = Math.max(...daySlots.map(d => Math.max(d.sumIn, d.sumOut)), 1);
+  const balVals = projPts.map(p => p.net);
+  const balMin = Math.min(...balVals, 0);
+  const balMax = Math.max(...balVals, 1);
+  const balRange = balMax - balMin || 1;
+
+  const barToH = v => Math.max(v / maxBar * (cPH * 0.55), v > 0 ? 2 : 0);
+  const balToY = v => cPT + (cPH * 0.35) + (cPH * 0.55) - ((v - balMin) / balRange * (cPH * 0.55));
+  const zeroY = cPT + cPH * 0.55; // zero line for bars
+
+  let svg = `<svg width="100%" height="${cH}" viewBox="0 0 ${cW} ${cH}" style="display:block">`;
+
+  // Background danger zone (where balance < 0)
+  const bZeroY = balToY(0);
+  if (balMin < 0) {
+    svg += `<rect x="${cPL}" y="${bZeroY}" width="${cPW}" height="${cPT + cPH - bZeroY}" fill="rgba(248,113,113,.06)" rx="4"/>`;
+  }
+
+  // Grid lines
+  [0.25, 0.5, 0.75, 1].forEach(pct => {
+    const y = zeroY - pct * (cPH * 0.55);
+    const val = Math.round(maxBar * pct);
+    svg += `<line x1="${cPL}" y1="${y}" x2="${cW-cPR}" y2="${y}" stroke="rgba(255,255,255,.04)" stroke-width="1"/>`;
+    svg += `<text x="${cPL-6}" y="${y+4}" text-anchor="end" fill="rgba(255,255,255,.3)" font-size="9" font-family="monospace">$${val>=1000?(val/1000).toFixed(0)+'K':val}</text>`;
+  });
+
+  // $0 baseline for balance
+  svg += `<line x1="${cPL}" y1="${bZeroY}" x2="${cW-cPR}" y2="${bZeroY}" stroke="#00ff88" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>`;
+  svg += `<text x="${cW-cPR+4}" y="${bZeroY+4}" fill="#00ff88" font-size="9" font-weight="700" font-family="monospace">$0</text>`;
+
+  // Bars + balance points
+  const balPts = [];
+  daySlots.forEach((day, i) => {
+    const x = cPL + i * (cPW / daySlots.length) + (cPW / daySlots.length - barW) / 2;
+    const midX = x + barW / 2;
+
+    // Income bar (green, going up)
+    if (day.sumIn > 0) {
+      const h = barToH(day.sumIn);
+      svg += `<rect x="${x}" y="${zeroY - h}" width="${barW/2 - 1}" height="${h}" fill="#4ade80" rx="2" opacity="0.85"/>`;
+    }
+    // Expense bar (red, going up from same baseline)
+    if (day.sumOut > 0) {
+      const h = barToH(day.sumOut);
+      svg += `<rect x="${x + barW/2 + 1}" y="${zeroY - h}" width="${barW/2 - 1}" height="${h}" fill="#f87171" rx="2" opacity="0.85"/>`;
+    }
+
+    // Balance point (using projPts which has index offset by 1)
+    const bp = projPts[i + 1];
+    if (bp) {
+      const by = balToY(bp.net);
+      balPts.push({x: midX, y: by, val: bp.net});
+    }
+
+    // Day label
+    const dd = day.obj;
+    const dlbl = DAYS[dd.getDay()].slice(0,1) + dd.getDate();
+    const isToday = day.date === new Date().toISOString().slice(0,10);
+    svg += `<text x="${midX}" y="${cH - 6}" text-anchor="middle" fill="${isToday?'#38bdf8':'rgba(255,255,255,.4)'}" font-size="${isToday?'10':'9'}" font-weight="${isToday?'700':'400'}" font-family="monospace">${dlbl}</text>`;
+    if (isToday) svg += `<line x1="${midX}" y1="${cPT}" x2="${midX}" y2="${cH - cPB}" stroke="rgba(56,189,248,.2)" stroke-width="1" stroke-dasharray="3,3"/>`;
+  });
+
+  // Balance line
+  if (balPts.length > 1) {
+    let path = '';
+    balPts.forEach((p, i) => { path += (i === 0 ? 'M' : 'L') + `${p.x},${p.y} `; });
+    svg += `<path d="${path}" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round" opacity="0.9"/>`;
+    // Dots at key points
+    balPts.forEach((p, i) => {
+      const c = p.val >= 0 ? '#4ade80' : '#f87171';
+      if (i === 0 || i === balPts.length - 1 || p.val === minBal) {
+        svg += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="${c}" stroke="var(--bg)" stroke-width="2"/>`;
+        svg += `<text x="${p.x}" y="${p.y - 10}" text-anchor="middle" fill="${c}" font-size="10" font-weight="700" font-family="monospace">${cfFmt(p.val)}</text>`;
+      }
+    });
+  }
+
+  svg += '</svg>';
+
+  // Legend
+  chart += svg;
+  chart += `<div style="display:flex;gap:20px;justify-content:center;margin-top:8px;font-size:12px">
+    <span><span style="display:inline-block;width:12px;height:12px;background:#4ade80;border-radius:2px;vertical-align:middle;margin-right:4px"></span> Income</span>
+    <span><span style="display:inline-block;width:12px;height:12px;background:#f87171;border-radius:2px;vertical-align:middle;margin-right:4px"></span> Expenses</span>
+    <span style="color:#38bdf8">━━ Balance</span>
+    <span style="color:#00ff88">- - $0</span>
+    ${balMin < 0 ? '<span style="color:#f87171;background:rgba(248,113,113,.1);padding:2px 6px;border-radius:3px">RED = negative balance zone</span>' : ''}
+  </div>`;
+  chart += `</div>`;
+
+  return cal + chart;
 }
 
 function buildJadeFinanceAnalysis(allWin, balance) {
