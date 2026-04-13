@@ -1923,16 +1923,19 @@ function renderMgmtBody() {
   const allItems = d.all_tasks||[];
 
   // ALL unpaid items with due dates — for analysis + simulator (full scope)
+  const todayStr = today.toISOString().slice(0,10);
   const allUnpaid = allItems.filter(t => {
     if (!t.due || t.paid) return false;
-    const td = new Date(t.due+'T12:00:00');
-    if (td < today) return false; // skip past-due for forward analysis
     if (!mgmtIncludeFixed && mgmtIsFixed(t.type)) return false;
     if (mgmtProjFilter!=='all' && t.project!==mgmtProjFilter) return false;
     return true;
   });
+  // Mark overdue items
+  allUnpaid.forEach(t => { t._overdue = t.due < todayStr; });
+  const overdueItems = allUnpaid.filter(t => t._overdue);
+  const futureItems = allUnpaid.filter(t => !t._overdue);
   // Data scope for banners
-  const unpaidDates = allUnpaid.map(t=>t.due).sort();
+  const unpaidDates = futureItems.map(t=>t.due).sort();
   const dataLastDate = unpaidDates.length > 0 ? unpaidDates[unpaidDates.length-1] : null;
   const dataDays = dataLastDate ? Math.ceil((new Date(dataLastDate+'T12:00:00') - today) / 86400000) : 0;
 
@@ -2366,7 +2369,7 @@ function renderMgmtBody() {
   html += secTitle('🧠', "Jade's Financial Analysis", 'Analyzing ALL ' + allUnpaid.length + ' unpaid payments through ' + scopeLbl + ' (' + dataDays + ' days of data)');
   html += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:20px;margin-bottom:8px">`;
   html += `<div style="background:rgba(56,189,248,.04);border:1px solid rgba(56,189,248,.15);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#b0b8c8">
-    📊 <b style="color:#38bdf8">Data Scope:</b> ${allUnpaid.length} unpaid payments from <b>today</b> through <b>${scopeLbl}</b> (${dataDays} days).
+    📊 <b style="color:#38bdf8">Data Scope:</b> ${allUnpaid.length} unpaid payments (${overdueItems.length > 0 ? '<b style="color:#f87171">' + overdueItems.length + ' overdue</b> + ' : ''}${futureItems.length} upcoming) through <b>${scopeLbl}</b> (${dataDays} days).
     Source: JobTread payment tasks across ${new Set(allUnpaid.map(t=>t.project)).size} active projects.
     Types: Income, Potential Income, Sub Payments, Materials${mgmtIncludeFixed ? ', Fixed Costs (salaries, rent, utilities, marketing)' : ''}.
     ${dataDays < 30 ? '<span style="color:#facc15">⚠ Limited data — only ' + dataDays + ' days ahead. Longer-term analysis not possible.</span>' : dataDays >= 90 ? '<span style="color:#4ade80">✅ Strong data depth — ' + dataDays + ' days gives reliable multi-month projections.</span>' : '<span style="color:#b0b8c8">' + dataDays + ' days of forward visibility.</span>'}
@@ -2630,7 +2633,7 @@ function sitExportCSV() {
   }
   const dayIndex = {};
   daySlots.forEach((d,i) => dayIndex[d.date] = i);
-  all.forEach(item => { const idx = dayIndex[item.due]; if (idx !== undefined) daySlots[idx].items.push(item); });
+  all.forEach(item => { let idx = dayIndex[item.due]; if (idx === undefined && item._overdue) idx = 0; if (idx !== undefined) daySlots[idx].items.push(item); });
 
   const balance = parseFloat(localStorage.getItem('cf_balance') || '0');
   let bal = balance;
@@ -2821,7 +2824,7 @@ function renderScenario(balance) {
   }
   const dayIndex = {};
   daySlots.forEach((d,i) => dayIndex[d.date] = i);
-  all.forEach(item => { const idx = dayIndex[item.due]; if (idx !== undefined) daySlots[idx].items.push(item); });
+  all.forEach(item => { let idx = dayIndex[item.due]; if (idx === undefined && item._overdue) idx = 0; if (idx !== undefined) daySlots[idx].items.push(item); });
 
   // Compute running balance
   let runBal = balance, grossBal = balance, netPotBal = balance;
@@ -3111,7 +3114,7 @@ function sitItemCell(item, balance) {
   return `<div data-sit-id="${item.id}" style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:5px;${isRemoved?'opacity:.35;text-decoration:line-through;':''}${shifted?'background:rgba(250,204,21,.04);':''}${isSelected?'background:rgba(250,204,21,.08);border-left:3px solid #facc15;padding-left:7px;':''}">
     <input type="checkbox" class="sit-cb" ${isSelected?'checked':''} style="cursor:pointer;width:16px;height:16px;flex-shrink:0;accent-color:#facc15" title="Select for batch">
     <div style="flex:1;min-width:0">
-      <div style="font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${item.task}">${item.task}${isRemoved?' <span style="font-size:9px;color:#f87171;background:rgba(248,113,113,.15);padding:1px 5px;border-radius:3px;text-decoration:none">REMOVED</span>':''}</div>
+      <div style="font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${item.task}">${item.task}${isRemoved?' <span style="font-size:9px;color:#f87171;background:rgba(248,113,113,.15);padding:1px 5px;border-radius:3px;text-decoration:none">REMOVED</span>':''}${item._overdue && !shifted?' <span style="font-size:9px;font-weight:700;color:#f97316;background:rgba(249,115,22,.15);padding:1px 5px;border-radius:3px;text-decoration:none">OVERDUE (due '+item.originalDue+')</span>':''}</div>
       <div style="font-size:13px;font-weight:500;color:#b0b8c8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${item.project}</div>
       ${movedTag}
     </div>
@@ -3189,11 +3192,15 @@ function buildSitOverview(daySlots, balance, projPts, minBal, minDate) {
 
     if (isToday) cellBorder = '2px solid #38bdf8';
 
-    cal += `<div style="min-height:90px;background:${cellBg};border:${cellBorder};border-radius:8px;padding:6px 8px;display:flex;flex-direction:column;position:relative">`;
+    cal += `<div style="min-height:100px;background:${cellBg};border:${cellBorder};border-radius:8px;padding:6px 8px;display:flex;flex-direction:column;position:relative">`;
 
-    // Day number
+    // Day label — month + number
+    const monShort = MONTHS[dd.getMonth()].slice(0,3);
     cal += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">`;
-    cal += `<span style="font-size:14px;font-weight:800;color:${isToday?'#38bdf8':'#fff'}">${dayNum}</span>`;
+    cal += `<div>`;
+    cal += `<div style="font-size:9px;font-weight:700;color:${isToday?'#38bdf8':'#b0b8c8'};text-transform:uppercase;letter-spacing:.5px">${monShort}</div>`;
+    cal += `<span style="font-size:16px;font-weight:800;color:${isToday?'#38bdf8':'#fff'}">${dayNum}</span>`;
+    cal += `</div>`;
     if (isToday) cal += `<span style="font-size:8px;font-weight:700;color:#38bdf8;background:rgba(56,189,248,.2);padding:1px 4px;border-radius:2px">TODAY</span>`;
     cal += `</div>`;
 
