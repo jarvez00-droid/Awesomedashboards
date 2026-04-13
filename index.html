@@ -2400,7 +2400,7 @@ const SIT_SAVE_KEY = 'jade_sit_v4';
 // Save scenario state to localStorage
 function sitSave() {
   const state = {
-    items: scenarioItems.map(x => ({ id: x.id, shift: x.shift, due: x.due })),
+    items: scenarioItems.map(x => ({ id: x.id, shift: x.shift, due: x.due, _removed: x._removed || false })),
     manual: scenarioManualItems,
     savedAt: new Date().toISOString(),
     dataVersion: window._mgmtDataVersion || ''
@@ -2422,6 +2422,7 @@ function sitLoad() {
       if (shiftMap[item.id]) {
         item.shift = shiftMap[item.id].shift;
         item.due = shiftMap[item.id].due;
+        item._removed = shiftMap[item.id]._removed || false;
       }
     });
     // Restore manual items
@@ -2505,7 +2506,7 @@ function initSituationEval(allWin, balance, dataDays) {
   }
 
   document.getElementById('sit-reset').addEventListener('click', () => {
-    scenarioItems.forEach(s => { s.due = s.originalDue; s.shift = 0; });
+    scenarioItems.forEach(s => { s.due = s.originalDue; s.shift = 0; s._removed = false; });
     scenarioManualItems = [];
     scenarioSelected = new Set();
     sitClearSave();
@@ -2830,6 +2831,7 @@ function renderScenario(balance) {
   daySlots.forEach(day => {
     let dConfIn=0, dPotIn=0, dProjOut=0, dFixedOut=0;
     day.items.forEach(item => {
+      if (item._removed) return; // skip removed items from calculations
       if (item.type==='income') dConfIn += item.amount;
       else if (item.type==='p_income') dPotIn += item.amount;
       else if (mgmtIsFixed(item.type)) dFixedOut += item.amount;
@@ -2872,6 +2874,7 @@ function renderScenario(balance) {
     </div>
     ${adjusted>0?'<div style="padding:6px 12px;background:rgba(250,204,21,.06);border-radius:8px;border:1px solid rgba(250,204,21,.15);font-size:13px;color:#facc15;font-weight:600">'+adjusted+' shifted</div>':''}
     ${manualCount>0?'<div style="padding:6px 12px;background:rgba(232,121,249,.06);border-radius:8px;border:1px solid rgba(232,121,249,.15);font-size:13px;color:#e879f9;font-weight:600">'+manualCount+' manual</div>':''}
+    ${all.filter(x=>x._removed).length>0?'<div style="padding:6px 12px;background:rgba(248,113,113,.06);border-radius:8px;border:1px solid rgba(248,113,113,.15);font-size:13px;color:#f87171;font-weight:600">'+all.filter(x=>x._removed).length+' removed</div>':''}
     ${selCount>0?'<div style="padding:6px 12px;background:rgba(250,204,21,.08);border-radius:8px;border:1px solid rgba(250,204,21,.3);font-size:13px;color:#facc15;font-weight:600">'+selCount+' selected — use batch bar above</div>':''}
   </div>`;
 
@@ -3031,6 +3034,14 @@ function renderScenario(balance) {
     const delBtn = el.querySelector('.sit-del');
     if (delBtn) delBtn.addEventListener('click', () => {
       scenarioManualItems = scenarioManualItems.filter(x => x.id !== id);
+      sitSave();
+      renderScenario(balance);
+    });
+
+    const delReal = el.querySelector('.sit-del-real');
+    if (delReal) delReal.addEventListener('click', () => {
+      item._removed = !item._removed;
+      sitSave();
       renderScenario(balance);
     });
 
@@ -3096,10 +3107,11 @@ function sitItemCell(item, balance) {
     movedTag = `<span style="font-size:11px;font-weight:600;color:${shiftColor};background:${shiftColor}18;padding:2px 6px;border-radius:3px;white-space:nowrap">from ${origLbl} (${item.shift>0?'+':''}${item.shift}d)</span>`;
   }
 
-  return `<div data-sit-id="${item.id}" style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:5px;${shifted?'background:rgba(250,204,21,.04);':''}${isSelected?'background:rgba(250,204,21,.08);border-left:3px solid #facc15;padding-left:7px;':''}">
+  const isRemoved = item._removed;
+  return `<div data-sit-id="${item.id}" style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:5px;${isRemoved?'opacity:.35;text-decoration:line-through;':''}${shifted?'background:rgba(250,204,21,.04);':''}${isSelected?'background:rgba(250,204,21,.08);border-left:3px solid #facc15;padding-left:7px;':''}">
     <input type="checkbox" class="sit-cb" ${isSelected?'checked':''} style="cursor:pointer;width:16px;height:16px;flex-shrink:0;accent-color:#facc15" title="Select for batch">
     <div style="flex:1;min-width:0">
-      <div style="font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${item.task}">${item.task}</div>
+      <div style="font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${item.task}">${item.task}${isRemoved?' <span style="font-size:9px;color:#f87171;background:rgba(248,113,113,.15);padding:1px 5px;border-radius:3px;text-decoration:none">REMOVED</span>':''}</div>
       <div style="font-size:13px;font-weight:500;color:#b0b8c8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${item.project}</div>
       ${movedTag}
     </div>
@@ -3109,6 +3121,7 @@ function sitItemCell(item, balance) {
       <input class="sit-shift-input" type="number" value="${item.shift}" style="background:var(--bg);color:${shifted?shiftColor:'#b0b8c8'};border:1px solid ${shifted?shiftColor+'60':'var(--bdr)'};border-radius:4px;width:44px;height:28px;text-align:center;font-size:14px;font-weight:700;font-family:var(--mono)" title="Days shifted (negative = earlier)">
       <button class="sit-postpone" data-days="1" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:4px;width:28px;height:28px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center" title="Postpone 1 day">▸</button>
     </div>
+    <button class="sit-del-real" style="background:${isRemoved?'rgba(74,222,128,.1)':'rgba(248,113,113,.06)'};color:${isRemoved?'#4ade80':'#f87171'};border:1px solid ${isRemoved?'rgba(74,222,128,.2)':'rgba(248,113,113,.2)'};border-radius:5px;width:28px;height:28px;cursor:pointer;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0" title="${isRemoved?'Restore item':'Remove from scenario'}">${isRemoved?'↩':'✕'}</button>
   </div>`;
 }
 
@@ -3295,12 +3308,15 @@ function buildSitOverview(daySlots, balance, projPts, minBal, minDate) {
     balPts.forEach((p, i) => { path += (i === 0 ? 'M' : 'L') + `${p.x},${p.y} `; });
     svg += `<path d="${path}" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round" opacity="0.9"/>`;
     // Dots at key points
+    // Show balance on every day — alternate above/below to avoid overlap
     balPts.forEach((p, i) => {
       const c = p.val >= 0 ? '#4ade80' : '#f87171';
-      if (i === 0 || i === balPts.length - 1 || p.val === minBal) {
-        svg += `<circle cx="${p.x}" cy="${p.y}" r="6" fill="${c}" stroke="var(--bg)" stroke-width="2.5"/>`;
-        svg += `<text x="${p.x}" y="${p.y - 14}" text-anchor="middle" fill="${c}" font-size="14" font-weight="700" font-family="monospace">${cfFmt(p.val)}</text>`;
-      }
+      const isKey = i === 0 || i === balPts.length - 1 || p.val === minBal;
+      svg += `<circle cx="${p.x}" cy="${p.y}" r="${isKey ? 6 : 3.5}" fill="${c}" ${isKey ? 'stroke="var(--bg)" stroke-width="2.5"' : ''}/>`;
+      // Label position: alternate above/below to prevent overlap
+      const above = i % 2 === 0;
+      const ly = above ? p.y - 12 : p.y + 16;
+      svg += `<text x="${p.x}" y="${ly}" text-anchor="middle" fill="${c}" font-size="${isKey ? '13' : '10'}" font-weight="${isKey ? '700' : '600'}" font-family="monospace" opacity="${isKey ? '1' : '.7'}">${cfFmt(p.val)}</text>`;
     });
   }
 
