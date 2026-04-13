@@ -1922,7 +1922,21 @@ function renderMgmtBody() {
   const cutoff = new Date(today.getTime()+mgmtDays*86400000);
   const allItems = d.all_tasks||[];
 
-  // Filter window items
+  // ALL unpaid items with due dates — for analysis + simulator (full scope)
+  const allUnpaid = allItems.filter(t => {
+    if (!t.due || t.paid) return false;
+    const td = new Date(t.due+'T12:00:00');
+    if (td < today) return false; // skip past-due for forward analysis
+    if (!mgmtIncludeFixed && mgmtIsFixed(t.type)) return false;
+    if (mgmtProjFilter!=='all' && t.project!==mgmtProjFilter) return false;
+    return true;
+  });
+  // Data scope for banners
+  const unpaidDates = allUnpaid.map(t=>t.due).sort();
+  const dataLastDate = unpaidDates.length > 0 ? unpaidDates[unpaidDates.length-1] : null;
+  const dataDays = dataLastDate ? Math.ceil((new Date(dataLastDate+'T12:00:00') - today) / 86400000) : 0;
+
+  // Filter window items (for breakdown display only)
   const allWin = allItems.filter(t => {
     if (!t.due) return false;
     const td = new Date(t.due+'T12:00:00');
@@ -2344,13 +2358,21 @@ function renderMgmtBody() {
 
   // Section 4: Situation Evaluation — What-If Scenario Planner
   html += secTitle('🎯', 'Situation Evaluation', 'Adjust payment timing to plan cash flow · Changes are local only — nothing is saved');
-  html += buildSituationEval(allWin, balance);
+  html += buildSituationEval(allUnpaid, balance, dataDays, dataLastDate);
 
   // Section 5: Jade's Financial Deep Analysis
-  html += secTitle('🧠', "Jade's Financial Analysis", 'Deep analysis of payment priorities, danger zones, and cash flow optimization');
+  const scopeEnd = dataLastDate ? new Date(dataLastDate+'T12:00:00') : new Date();
+  const scopeLbl = dataLastDate ? MONTHS[scopeEnd.getMonth()] + ' ' + scopeEnd.getDate() + ', ' + scopeEnd.getFullYear() : '—';
+  html += secTitle('🧠', "Jade's Financial Analysis", 'Analyzing ALL ' + allUnpaid.length + ' unpaid payments through ' + scopeLbl + ' (' + dataDays + ' days of data)');
   html += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:20px;margin-bottom:8px">`;
-  html += buildJadeFinanceAnalysis(allWin, balance);
-  html += buildJadeRecommendations(allWin, balance);
+  html += `<div style="background:rgba(56,189,248,.04);border:1px solid rgba(56,189,248,.15);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#b0b8c8">
+    📊 <b style="color:#38bdf8">Data Scope:</b> ${allUnpaid.length} unpaid payments from <b>today</b> through <b>${scopeLbl}</b> (${dataDays} days).
+    Source: JobTread payment tasks across ${new Set(allUnpaid.map(t=>t.project)).size} active projects.
+    Types: Income, Potential Income, Sub Payments, Materials${mgmtIncludeFixed ? ', Fixed Costs (salaries, rent, utilities, marketing)' : ''}.
+    ${dataDays < 30 ? '<span style="color:#facc15">⚠ Limited data — only ' + dataDays + ' days ahead. Longer-term analysis not possible.</span>' : dataDays >= 90 ? '<span style="color:#4ade80">✅ Strong data depth — ' + dataDays + ' days gives reliable multi-month projections.</span>' : '<span style="color:#b0b8c8">' + dataDays + ' days of forward visibility.</span>'}
+  </div>`;
+  html += buildJadeFinanceAnalysis(allUnpaid, balance);
+  html += buildJadeRecommendations(allUnpaid, balance);
   html += '</div>';
 
   // Section 6: Full Payment List
@@ -2362,7 +2384,7 @@ function renderMgmtBody() {
   body.innerHTML = html;
 
   // Wire up situation eval events after DOM is ready
-  initSituationEval(allWin, balance);
+  initSituationEval(allUnpaid, balance, dataDays);
 }
 
 // ═══ Situation Evaluation Engine ═══
@@ -2413,12 +2435,15 @@ function sitClearSave() {
   localStorage.removeItem(SIT_SAVE_KEY);
 }
 
-function buildSituationEval(allWin, balance) {
+function buildSituationEval(allWin, balance, dataDays, dataLastDate) {
+  // Store data range for use in renderScenario
+  window._sitDataDays = Math.min(Math.max(dataDays || 28, 14), 120); // min 14, max 120
+  window._sitDataLastDate = dataLastDate;
   return `<div id="sit-eval" style="background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:24px">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:12px;flex-wrap:wrap">
       <div>
         <div style="font-size:16px;font-weight:700;color:var(--txt)">🎯 What-If Planner</div>
-        <div style="font-size:12px;color:var(--dim);margin-top:3px">Select items → batch postpone · Shifts are saved locally and survive page refresh until data updates</div>
+        <div style="font-size:12px;color:var(--dim);margin-top:3px">Simulating ${allWin.length} unpaid payments over ${window._sitDataDays} days ${window._sitDataLastDate ? '(through ' + window._sitDataLastDate + ')' : ''} · Select items → batch postpone · Saved locally until data updates</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <div id="sit-batch-bar" style="display:none;align-items:center;gap:8px;background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.25);border-radius:8px;padding:6px 12px">
@@ -2462,7 +2487,7 @@ function buildSituationEval(allWin, balance) {
   </div>`;
 }
 
-function initSituationEval(allWin, balance) {
+function initSituationEval(allWin, balance, dataDays) {
   scenarioItems = allWin.filter(t=>!t.paid).map((t,i) => ({
     id: 'orig_'+i, task: t.task, project: t.project||'', type: t.type,
     amount: t.amount||0, originalDue: t.due, due: t.due, shift: 0,
@@ -2597,7 +2622,8 @@ function sitExportCSV() {
   const all = [...scenarioItems, ...scenarioManualItems];
   const calToday = new Date(new Date().toISOString().slice(0,10)+'T12:00:00');
   const daySlots = [];
-  for (let i = 0; i < 28; i++) {
+  const _simDays = window._sitDataDays || 28;
+  for (let i = 0; i < _simDays; i++) {
     const dd = new Date(calToday.getTime() + i * 86400000);
     daySlots.push({ date: dd.toISOString().slice(0,10), obj: dd, items: [] });
   }
@@ -2695,7 +2721,7 @@ function sitExportCSV() {
   rows.push([]);
   rows.push(['════════════════════════════════════════']);
   rows.push([
-    '','','GRAND TOTAL (28 DAYS)','','','',
+    '','','GRAND TOTAL (' + _simDays + ' DAYS)','','','',
     '','$' + totalIn.toLocaleString(),'$' + totalOut.toLocaleString(),
     totalNetSign + '$' + totalNet.toLocaleString(),
     '$' + Math.round(bal).toLocaleString(),'',''
@@ -2787,7 +2813,8 @@ function renderScenario(balance) {
   // Build 21 days
   const calToday = new Date(new Date().toISOString().slice(0,10)+'T12:00:00');
   const daySlots = [];
-  for (let i = 0; i < 28; i++) {
+  const _simDays = window._sitDataDays || 28;
+  for (let i = 0; i < _simDays; i++) {
     const dd = new Date(calToday.getTime() + i * 86400000);
     daySlots.push({ date: dd.toISOString().slice(0,10), obj: dd, items: [] });
   }
@@ -2835,7 +2862,7 @@ function renderScenario(balance) {
     </div>
     <span style="color:var(--dim);font-size:18px">→</span>
     <div style="padding:8px 14px;background:${endBal>=0?'rgba(74,222,128,.06)':'rgba(248,113,113,.06)'};border-radius:8px;border:1px solid ${endBal>=0?'rgba(74,222,128,.15)':'rgba(248,113,113,.15)'}">
-      <span style="font-size:11px;color:var(--dim)">Day 28: </span>
+      <span style="font-size:11px;color:var(--dim)">Day ${daySlots.length}: </span>
       <span style="font-size:16px;font-weight:700;color:${endBal>=0?'#4ade80':'#f87171'}">${cfFmt(endBal)}</span>
     </div>
     <div style="padding:8px 14px;background:${minBal>=0?'rgba(250,204,21,.06)':'rgba(248,113,113,.06)'};border-radius:8px;border:1px solid ${minBal>=0?'rgba(250,204,21,.15)':'rgba(248,113,113,.15)'}">
@@ -2854,7 +2881,8 @@ function renderScenario(balance) {
   // ── Day cards grouped by collapsible weeks ──
   // Group days into weeks (7 days each)
   const weeks = [];
-  for (let w = 0; w < 4; w++) {
+  const _numWeeks = Math.ceil(daySlots.length / 7);
+  for (let w = 0; w < _numWeeks; w++) {
     const start = w * 7;
     const end = Math.min(start + 7, daySlots.length);
     const wDays = daySlots.slice(start, end);
@@ -3092,7 +3120,7 @@ function buildSitOverview(daySlots, balance, projPts, minBal, minDate) {
 
   let cal = '';
   cal += `<div style="margin-bottom:20px">`;
-  cal += `<div style="font-size:15px;font-weight:700;color:var(--txt);margin-bottom:10px">📅 28-Day Overview</div>`;
+  cal += `<div style="font-size:15px;font-weight:700;color:var(--txt);margin-bottom:10px">📅 ${daySlots.length}-Day Overview</div>`;
 
   // Day headers
   cal += `<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px">`;
