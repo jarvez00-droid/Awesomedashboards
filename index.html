@@ -2858,18 +2858,26 @@ function sitItemCell(item, balance) {
   const selBorder = isSelected ? 'border-left:3px solid #facc15;' : '';
 
   if (item.manual) {
-    return `<div data-sit-id="${item.id}" style="display:flex;align-items:center;gap:6px;padding:6px 4px;flex-wrap:wrap;${selBorder}${selBg}">
-      <input type="checkbox" class="sit-cb" style="cursor:pointer;width:16px;height:16px;accent-color:#facc15" title="Select for batch">
-      <select class="sit-type-sel" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:4px;padding:3px 6px;font-size:13px;font-weight:600;font-family:var(--sans)">
-        <option value="income"${item.type==='income'?' selected':''}>Income</option>
-        <option value="p_income"${item.type==='p_income'?' selected':''}>Potential</option>
-        <option value="subs"${item.type==='subs'?' selected':''}>Subs</option>
-        <option value="materials"${item.type==='materials'?' selected':''}>Materials</option>
-      </select>
-      <input class="sit-name" type="text" value="${item.task}" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:4px;padding:3px 8px;font-size:14px;font-weight:600;width:120px;font-family:var(--sans)">
-      <input class="sit-amt" type="text" value="${item.amount||''}" placeholder="0" style="background:var(--bg);color:${color};border:1px solid var(--bdr);border-radius:4px;padding:3px 8px;font-size:14px;width:80px;text-align:right;font-weight:700;font-family:var(--mono)">
-      <button class="sit-postpone" data-days="1" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:4px;padding:3px 8px;font-size:13px;font-weight:600;cursor:pointer">+1d</button>
-      <button class="sit-del" style="background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.3);border-radius:4px;padding:3px 8px;font-size:13px;font-weight:600;cursor:pointer">✕</button>
+    const amtStr = item.amount ? cfFmt(item.amount) : '$0';
+    const typeLabel = item.type==='income'?'⬇':'⬆';
+    let movedTag = '';
+    if (shifted) {
+      movedTag = `<span style="font-size:11px;font-weight:600;color:${shiftColor};background:${shiftColor}18;padding:2px 6px;border-radius:3px;white-space:nowrap">from ${origLbl} (${item.shift>0?'+':''}${item.shift}d)</span>`;
+    }
+    return `<div data-sit-id="${item.id}" style="display:flex;align-items:center;gap:6px;padding:5px;border-radius:5px;background:rgba(232,121,249,.04);border-left:3px solid #e879f9;${isSelected?'background:rgba(250,204,21,.08);border-left:3px solid #facc15;':''}">
+      <input type="checkbox" class="sit-cb" ${isSelected?'checked':''} style="cursor:pointer;width:16px;height:16px;flex-shrink:0;accent-color:#facc15" title="Select for batch">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:15px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${item.task}">${typeLabel} ${item.task} <span style="font-size:10px;font-weight:600;color:#e879f9;background:rgba(232,121,249,.15);padding:1px 5px;border-radius:3px;vertical-align:middle">MANUAL</span></div>
+        <div style="font-size:13px;font-weight:500;color:#b0b8c8">${item.project || '—'}</div>
+        ${movedTag}
+      </div>
+      <span style="font-size:16px;font-weight:700;color:${color};font-family:var(--mono);white-space:nowrap">${amtStr}</span>
+      <div style="display:flex;align-items:center;gap:2px;white-space:nowrap">
+        <button class="sit-postpone" data-days="-1" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:4px;width:28px;height:28px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center" title="Pull 1 day earlier">◂</button>
+        <input class="sit-shift-input" type="number" value="${item.shift}" style="background:var(--bg);color:${shifted?shiftColor:'#b0b8c8'};border:1px solid ${shifted?shiftColor+'60':'var(--bdr)'};border-radius:4px;width:44px;height:28px;text-align:center;font-size:14px;font-weight:700;font-family:var(--mono)" title="Days shifted">
+        <button class="sit-postpone" data-days="1" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:4px;width:28px;height:28px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center" title="Postpone 1 day">▸</button>
+      </div>
+      <button class="sit-del" style="background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.3);border-radius:5px;width:28px;height:28px;cursor:pointer;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center" title="Remove">✕</button>
     </div>`;
   }
 
