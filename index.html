@@ -2435,37 +2435,22 @@ function buildSituationEval(allWin, balance) {
       </div>
     </div>
     <div id="sit-add-form" style="display:none;background:rgba(56,189,248,.04);border:2px solid rgba(56,189,248,.2);border-radius:10px;padding:16px;margin-bottom:14px">
-      <div style="font-size:14px;font-weight:700;color:#38bdf8;margin-bottom:12px">＋ New Item</div>
-      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-        <div style="display:flex;flex-direction:column;gap:3px">
-          <label style="font-size:11px;font-weight:600;color:#b0b8c8">Type</label>
-          <select id="sit-new-type" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:6px;padding:8px 12px;font-size:14px;font-weight:600;font-family:var(--sans);min-width:130px">
-            <option value="income">⬇ Income</option>
-            <option value="p_income">⬇ Potential Income</option>
-            <option value="subs" selected>⬆ Sub Payment</option>
-            <option value="materials">⬆ Materials</option>
-          </select>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:3px">
-          <label style="font-size:11px;font-weight:600;color:#b0b8c8">Name</label>
-          <input id="sit-new-name" type="text" placeholder="e.g. Framing payment" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:6px;padding:8px 12px;font-size:14px;font-weight:600;width:200px;font-family:var(--sans)">
-        </div>
-        <div style="display:flex;flex-direction:column;gap:3px">
-          <label style="font-size:11px;font-weight:600;color:#b0b8c8">Amount ($)</label>
-          <input id="sit-new-amt" type="text" placeholder="5000" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:6px;padding:8px 12px;font-size:14px;font-weight:700;width:120px;font-family:var(--mono);text-align:right">
-        </div>
-        <div style="display:flex;flex-direction:column;gap:3px">
-          <label style="font-size:11px;font-weight:600;color:#b0b8c8">Date</label>
-          <input id="sit-new-date" type="date" value="${new Date().toISOString().slice(0,10)}" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:6px;padding:8px 12px;font-size:14px;font-weight:600;font-family:var(--sans);cursor:pointer">
-        </div>
-        <div style="display:flex;flex-direction:column;gap:3px">
-          <label style="font-size:11px;color:transparent">.</label>
-          <div style="display:flex;gap:8px">
-            <button id="sit-confirm-add" style="background:#4ade80;color:#1a1a2e;border:none;border-radius:6px;padding:8px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--sans)">✓ Confirm</button>
-            <button id="sit-cancel-add" style="background:rgba(255,255,255,.05);color:var(--dim);border:1px solid var(--bdr);border-radius:6px;padding:8px 14px;font-size:14px;cursor:pointer;font-family:var(--sans)">Cancel</button>
-          </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="font-size:14px;font-weight:700;color:#38bdf8">＋ Add Items</div>
+        <div style="display:flex;gap:8px">
+          <button id="sit-add-row" style="background:rgba(56,189,248,.08);color:#38bdf8;border:1px solid rgba(56,189,248,.25);border-radius:6px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer">+ Another Row</button>
+          <button id="sit-confirm-add" style="background:#4ade80;color:#1a1a2e;border:none;border-radius:6px;padding:8px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--sans)">✓ Add All</button>
+          <button id="sit-cancel-add" style="background:rgba(255,255,255,.05);color:var(--dim);border:1px solid var(--bdr);border-radius:6px;padding:8px 14px;font-size:13px;cursor:pointer">Cancel</button>
         </div>
       </div>
+      <div style="display:grid;grid-template-columns:140px 1fr 110px 150px 30px;gap:8px;align-items:center;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--bdr)">
+        <span style="font-size:11px;font-weight:700;color:#b0b8c8">TYPE</span>
+        <span style="font-size:11px;font-weight:700;color:#b0b8c8">NAME</span>
+        <span style="font-size:11px;font-weight:700;color:#b0b8c8">AMOUNT</span>
+        <span style="font-size:11px;font-weight:700;color:#b0b8c8">DATE</span>
+        <span></span>
+      </div>
+      <div id="sit-add-rows"></div>
     </div>
     <div id="sit-save-banner" style="display:none;font-size:11px;color:#facc15;background:rgba(250,204,21,.06);border:1px solid rgba(250,204,21,.15);border-radius:6px;padding:6px 12px;margin-bottom:10px">
       💾 Saved scenario loaded — shifts restored from your last session
@@ -2501,10 +2486,52 @@ function initSituationEval(allWin, balance) {
     renderScenario(balance);
   });
 
-  // Show/hide add form
+  // Bulk add form
+  function sitAddRowHtml() {
+    const today = new Date().toISOString().slice(0,10);
+    return `<div class="sit-bulk-row" style="display:grid;grid-template-columns:140px 1fr 110px 150px 30px;gap:8px;align-items:center;margin-bottom:6px">
+      <select class="sit-br-type" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:5px;padding:7px 8px;font-size:13px;font-weight:600;font-family:var(--sans)">
+        <option value="income">⬇ Income</option>
+        <option value="p_income">⬇ Potential</option>
+        <option value="subs" selected>⬆ Subs</option>
+        <option value="materials">⬆ Materials</option>
+      </select>
+      <input class="sit-br-name" type="text" placeholder="Payment name" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:5px;padding:7px 10px;font-size:14px;font-weight:600;font-family:var(--sans)">
+      <input class="sit-br-amt" type="text" placeholder="$0" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:5px;padding:7px 10px;font-size:14px;font-weight:700;font-family:var(--mono);text-align:right">
+      <input class="sit-br-date" type="date" value="${today}" style="background:var(--bg);color:#fff;border:1px solid var(--bdr);border-radius:5px;padding:7px 10px;font-size:13px;font-weight:600;font-family:var(--sans);cursor:pointer">
+      <button class="sit-br-del" style="background:none;color:#f87171;border:none;font-size:16px;cursor:pointer;padding:0" title="Remove row">✕</button>
+    </div>`;
+  }
+
+  function sitInitFormRows() {
+    const container = document.getElementById('sit-add-rows');
+    container.innerHTML = sitAddRowHtml();
+    container.querySelectorAll('.sit-br-del').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (container.querySelectorAll('.sit-bulk-row').length > 1) btn.closest('.sit-bulk-row').remove();
+      });
+    });
+  }
+
   document.getElementById('sit-show-add').addEventListener('click', () => {
     const form = document.getElementById('sit-add-form');
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    if (form.style.display === 'none') {
+      form.style.display = 'block';
+      sitInitFormRows();
+    } else {
+      form.style.display = 'none';
+    }
+  });
+
+  document.getElementById('sit-add-row').addEventListener('click', () => {
+    const container = document.getElementById('sit-add-rows');
+    container.insertAdjacentHTML('beforeend', sitAddRowHtml());
+    // Wire delete for new row
+    const rows = container.querySelectorAll('.sit-bulk-row');
+    const lastRow = rows[rows.length - 1];
+    lastRow.querySelector('.sit-br-del').addEventListener('click', () => {
+      if (container.querySelectorAll('.sit-bulk-row').length > 1) lastRow.remove();
+    });
   });
 
   document.getElementById('sit-cancel-add').addEventListener('click', () => {
@@ -2512,19 +2539,24 @@ function initSituationEval(allWin, balance) {
   });
 
   document.getElementById('sit-confirm-add').addEventListener('click', () => {
-    const type = document.getElementById('sit-new-type').value;
-    const name = document.getElementById('sit-new-name').value.trim() || (type==='income'||type==='p_income' ? 'New Income' : 'New Expense');
-    const amt = parseFloat((document.getElementById('sit-new-amt').value||'0').replace(/[^0-9.]/g,'')) || 0;
-    const date = document.getElementById('sit-new-date').value || new Date().toISOString().slice(0,10);
-    const isIn = type==='income' || type==='p_income';
-    const id = 'manual_' + (scenarioNextId++);
-    scenarioManualItems.unshift({ id, task:name, project:'(manual)', type, amount:amt, originalDue:date, due:date, shift:0, isIn, manual:true });
-    sitSave();
-    // Reset form fields
-    document.getElementById('sit-new-name').value = '';
-    document.getElementById('sit-new-amt').value = '';
-    document.getElementById('sit-add-form').style.display = 'none';
-    renderScenario(balance);
+    const rows = document.querySelectorAll('#sit-add-rows .sit-bulk-row');
+    let added = 0;
+    rows.forEach(row => {
+      const type = row.querySelector('.sit-br-type').value;
+      const name = row.querySelector('.sit-br-name').value.trim();
+      const amt = parseFloat((row.querySelector('.sit-br-amt').value||'0').replace(/[^0-9.]/g,'')) || 0;
+      const date = row.querySelector('.sit-br-date').value || new Date().toISOString().slice(0,10);
+      if (!name && !amt) return; // skip empty rows
+      const isIn = type==='income' || type==='p_income';
+      const id = 'manual_' + (scenarioNextId++);
+      scenarioManualItems.unshift({ id, task: name || (isIn ? 'New Income' : 'New Expense'), project:'(manual)', type, amount:amt, originalDue:date, due:date, shift:0, isIn, manual:true });
+      added++;
+    });
+    if (added > 0) {
+      sitSave();
+      document.getElementById('sit-add-form').style.display = 'none';
+      renderScenario(balance);
+    }
   });
 
   document.getElementById('sit-export').addEventListener('click', () => sitExportCSV());
@@ -2712,40 +2744,53 @@ function renderScenario(balance) {
     const expItems = day.items.filter(x => !x.isIn).sort((a,b) => (b.manual?1:0) - (a.manual?1:0));
     const maxRows = Math.max(incItems.length, expItems.length, 1);
 
+    // Week separator — big bold line on Monday
     if (isMon && di > 0) {
-      t += `<tr><td colspan="5" style="padding:0;height:3px;background:linear-gradient(90deg,#38bdf840,var(--bdr),transparent)"></td></tr>`;
+      const weekNum = Math.ceil((di+1)/7);
+      t += `<tr><td colspan="5" style="padding:6px 14px;background:rgba(56,189,248,.08);border-top:3px solid #38bdf8;border-bottom:1px solid var(--bdr)">
+        <span style="font-size:12px;font-weight:700;color:#38bdf8;letter-spacing:1px">── WEEK ${weekNum} ──</span>
+      </td></tr>`;
     }
 
-    const rowBg = isToday ? 'rgba(56,189,248,.05)' : (isWeekend ? 'rgba(255,255,255,.01)' : '');
-    const dangerBg = day.bal < 0 ? 'rgba(248,113,113,.04)' : '';
-    const bg = dangerBg || rowBg;
+    // Alternating day backgrounds for clear separation
+    const evenDay = di % 2 === 0;
+    const baseBg = evenDay ? 'rgba(255,255,255,.02)' : 'rgba(0,0,0,.02)';
+    const todayBg = 'rgba(56,189,248,.06)';
+    const dangerBg = day.bal < 0 ? 'rgba(248,113,113,.05)' : '';
+    const bg = isToday ? todayBg : (dangerBg || baseBg);
 
-    t += `<tr style="background:${bg}">`;
-    // Day cell rowspan
-    t += `<td rowspan="${maxRows}" style="padding:12px 14px;vertical-align:top;border-right:1px solid var(--bdr)">
-      ${isToday ? '<div style="font-size:10px;font-weight:700;color:#38bdf8;background:rgba(56,189,248,.15);padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:4px">TODAY</div><br>' : ''}
-      <span style="font-size:16px;font-weight:700;color:var(--txt)">${dayName}</span><br>
-      <span style="font-size:13px;color:var(--txt2)">${dayLabel}</span>
+    // Day header row — spans the full width as a clear label
+    const dayHasItems = incItems.length > 0 || expItems.length > 0;
+    const itemCount = incItems.length + expItems.length;
+    t += `<tr style="background:${bg};border-top:2px solid rgba(255,255,255,.08)">`;
+    t += `<td rowspan="${maxRows + 1}" style="padding:14px;vertical-align:top;border-right:2px solid rgba(255,255,255,.08);background:${isToday?'rgba(56,189,248,.1)':dangerBg?'rgba(248,113,113,.06)':evenDay?'rgba(255,255,255,.04)':'rgba(255,255,255,.01)'}">
+      ${isToday ? '<div style="font-size:11px;font-weight:700;color:#38bdf8;background:rgba(56,189,248,.2);padding:3px 10px;border-radius:4px;display:inline-block;margin-bottom:5px;letter-spacing:.5px">▶ TODAY</div><br>' : ''}
+      <div style="font-size:18px;font-weight:800;color:#fff;line-height:1.2">${dayName}</div>
+      <div style="font-size:14px;font-weight:600;color:#b0b8c8;margin-top:2px">${dayLabel}</div>
+      ${itemCount > 0 ? '<div style="font-size:11px;color:var(--dim);margin-top:6px">'+itemCount+' item'+(itemCount>1?'s':'')+'</div>' : '<div style="font-size:11px;color:var(--dim);margin-top:6px">no items</div>'}
     </td>`;
-    t += `<td style="padding:8px 12px;vertical-align:top;border-right:1px solid rgba(255,255,255,.05)">${incItems.length > 0 ? sitItemCell(incItems[0], balance) : '<span style="color:var(--dim);font-size:12px">—</span>'}</td>`;
-    t += `<td style="padding:8px 12px;vertical-align:top;border-right:1px solid rgba(255,255,255,.05)">${expItems.length > 0 ? sitItemCell(expItems[0], balance) : '<span style="color:var(--dim);font-size:12px">—</span>'}</td>`;
+    // First data row
+    t += `<td style="padding:8px 12px;vertical-align:top;border-right:1px solid rgba(255,255,255,.06)">${incItems.length > 0 ? sitItemCell(incItems[0], balance) : '<span style="color:var(--dim);font-size:12px">—</span>'}</td>`;
+    t += `<td style="padding:8px 12px;vertical-align:top;border-right:1px solid rgba(255,255,255,.06)">${expItems.length > 0 ? sitItemCell(expItems[0], balance) : '<span style="color:var(--dim);font-size:12px">—</span>'}</td>`;
 
     const netLabel = day.net === 0 ? '—' : ((day.net > 0 ? '+' : '') + cfFmt(day.net));
-    t += `<td rowspan="${maxRows}" style="text-align:right;padding:12px 14px;vertical-align:middle;font-family:var(--mono);font-weight:700;font-size:15px;color:${netC};border-right:1px solid var(--bdr)">${netLabel}</td>`;
-    t += `<td rowspan="${maxRows}" style="text-align:right;padding:12px 14px;vertical-align:middle">
-      <div style="font-family:var(--mono);font-weight:700;font-size:18px;color:${balC}">${cfFmt(day.bal)}</div>
-      ${day.bal < 0 ? '<div style="font-size:10px;color:#f87171;font-weight:700;margin-top:3px">⚠ NEGATIVE</div>' : ''}
+    t += `<td rowspan="${maxRows + 1}" style="text-align:right;padding:14px;vertical-align:middle;font-family:var(--mono);font-weight:700;font-size:16px;color:${netC};border-right:2px solid rgba(255,255,255,.08)">${netLabel}</td>`;
+    t += `<td rowspan="${maxRows + 1}" style="text-align:right;padding:14px;vertical-align:middle;background:${dangerBg?'rgba(248,113,113,.04)':''}">
+      <div style="font-family:var(--mono);font-weight:800;font-size:20px;color:${balC}">${cfFmt(day.bal)}</div>
+      ${day.bal < 0 ? '<div style="font-size:11px;color:#f87171;font-weight:700;margin-top:3px">⚠ NEGATIVE</div>' : ''}
     </td>`;
     t += '</tr>';
 
+    // Additional item rows
     for (let r = 1; r < maxRows; r++) {
       t += `<tr style="background:${bg}">`;
-      t += `<td style="padding:4px 12px;vertical-align:top;border-right:1px solid rgba(255,255,255,.05)">${r < incItems.length ? sitItemCell(incItems[r], balance) : ''}</td>`;
-      t += `<td style="padding:4px 12px;vertical-align:top;border-right:1px solid rgba(255,255,255,.05)">${r < expItems.length ? sitItemCell(expItems[r], balance) : ''}</td>`;
+      t += `<td style="padding:4px 12px;vertical-align:top;border-right:1px solid rgba(255,255,255,.06)">${r < incItems.length ? sitItemCell(incItems[r], balance) : ''}</td>`;
+      t += `<td style="padding:4px 12px;vertical-align:top;border-right:1px solid rgba(255,255,255,.06)">${r < expItems.length ? sitItemCell(expItems[r], balance) : ''}</td>`;
       t += '</tr>';
     }
 
-    t += `<tr><td colspan="5" style="padding:0;height:1px;background:var(--bdr);opacity:.4"></td></tr>`;
+    // Empty spacer row for visual breathing room
+    t += `<tr style="background:${bg}"><td style="padding:0;height:4px" colspan="2"></td></tr>`;
   });
 
   t += '</tbody></table>';
