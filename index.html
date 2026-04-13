@@ -2723,86 +2723,119 @@ function renderScenario(balance) {
 
   // ── Table ──
 
-  // ── Table as day cards ──
+
+  // ── Day cards grouped by collapsible weeks ──
+  // Group days into weeks (7 days each)
+  const weeks = [];
+  for (let w = 0; w < 3; w++) {
+    const start = w * 7;
+    const end = Math.min(start + 7, daySlots.length);
+    const wDays = daySlots.slice(start, end);
+    let wIn = 0, wOut = 0;
+    wDays.forEach(d => { wIn += d.sumIn; wOut += d.sumOut; });
+    const lastDay = wDays[wDays.length - 1];
+    const firstDay = wDays[0];
+    const hasToday = wDays.some(d => d.date === new Date().toISOString().slice(0,10));
+    weeks.push({ num: w + 1, days: wDays, wIn, wOut, startBal: w === 0 ? balance : daySlots[start - 1].bal, endBal: lastDay.bal, firstDate: firstDay, lastDate: lastDay, hasToday });
+  }
+
   let t = '';
+  weeks.forEach(wk => {
+    const wNet = wk.wIn - wk.wOut;
+    const wNetC = wNet >= 0 ? '#4ade80' : '#f87171';
+    const endC = wk.endBal >= 0 ? '#4ade80' : '#f87171';
+    const startLbl = MONTHS[wk.firstDate.obj.getMonth()] + ' ' + wk.firstDate.obj.getDate();
+    const endLbl = MONTHS[wk.lastDate.obj.getMonth()] + ' ' + wk.lastDate.obj.getDate();
+    // Current week starts open, others closed
+    const isOpen = wk.hasToday;
+    const wkId = 'sit-wk-' + wk.num;
 
-  daySlots.forEach((day, di) => {
-    const dd = day.obj;
-    const dayName = DAYS[dd.getDay()];
-    const dayLabel = MONTHS[dd.getMonth()] + ' ' + dd.getDate();
-    const isToday = day.date === new Date().toISOString().slice(0, 10);
-    const isMon = dd.getDay() === 1;
-    const isWeekend = dd.getDay() === 0 || dd.getDay() === 6;
-    const balC = day.bal >= 0 ? '#4ade80' : '#f87171';
-    const netC = day.net > 0 ? '#4ade80' : (day.net < 0 ? '#f87171' : 'var(--dim)');
-    const incItems = day.items.filter(x => x.isIn).sort((a,b) => (b.manual?1:0) - (a.manual?1:0));
-    const expItems = day.items.filter(x => !x.isIn).sort((a,b) => (b.manual?1:0) - (a.manual?1:0));
-    const hasItems = incItems.length > 0 || expItems.length > 0;
+    t += `<div style="border:1px solid rgba(255,255,255,.08);border-radius:12px;margin-bottom:10px;overflow:hidden">`;
 
-    // Week separator
-    if (isMon && di > 0) {
-      const weekNum = Math.ceil((di+1)/7);
-      t += `<div style="padding:10px 16px;background:rgba(56,189,248,.1);border-top:3px solid #38bdf8;margin-top:8px;border-radius:4px">
-        <span style="font-size:13px;font-weight:800;color:#38bdf8;letter-spacing:2px">── WEEK ${weekNum} ──</span>
-      </div>`;
-    }
+    // Week header — clickable toggle
+    t += `<div onclick="var b=document.getElementById('${wkId}');b.style.display=b.style.display==='none'?'block':'none';var arr=this.querySelector('.sit-wk-arr');arr.textContent=b.style.display==='none'?'▸':'▾'" style="display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:rgba(56,189,248,.06);cursor:pointer;user-select:none;border-bottom:1px solid rgba(56,189,248,.12)">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="sit-wk-arr" style="font-size:16px;color:#38bdf8;font-weight:700;width:16px">${isOpen ? '▾' : '▸'}</span>
+        <span style="font-size:16px;font-weight:800;color:#38bdf8">Week ${wk.num}</span>
+        <span style="font-size:14px;font-weight:600;color:#b0b8c8">${startLbl} – ${endLbl}</span>
+        ${wk.hasToday ? '<span style="font-size:10px;font-weight:700;color:#38bdf8;background:rgba(56,189,248,.2);padding:2px 8px;border-radius:4px">THIS WEEK</span>' : ''}
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;font-size:13px">
+        <div style="text-align:right">
+          <span style="color:var(--dim)">In: </span>
+          <span style="color:#4ade80;font-weight:700;font-family:var(--mono)">${cfFmt(wk.wIn)}</span>
+        </div>
+        <div style="text-align:right">
+          <span style="color:var(--dim)">Out: </span>
+          <span style="color:#f87171;font-weight:700;font-family:var(--mono)">${cfFmt(wk.wOut)}</span>
+        </div>
+        <div style="text-align:right">
+          <span style="color:var(--dim)">Net: </span>
+          <span style="color:${wNetC};font-weight:700;font-family:var(--mono)">${wNet>=0?'+':''}${cfFmt(wNet)}</span>
+        </div>
+        <div style="text-align:right;min-width:80px">
+          <span style="color:var(--dim)">End: </span>
+          <span style="color:${endC};font-weight:800;font-size:16px;font-family:var(--mono)">${cfFmt(wk.endBal)}</span>
+        </div>
+      </div>
+    </div>`;
 
-    // Day card
-    const cardBorder = isToday ? '2px solid #38bdf8' : day.bal < 0 ? '2px solid rgba(248,113,113,.4)' : '1px solid rgba(255,255,255,.08)';
-    const cardBg = isToday ? 'rgba(56,189,248,.06)' : day.bal < 0 ? 'rgba(248,113,113,.04)' : (di % 2 === 0 ? 'rgba(255,255,255,.02)' : 'transparent');
+    // Week body — collapsible
+    t += `<div id="${wkId}" style="display:${isOpen ? 'block' : 'none'}">`;
 
-    t += `<div style="border:${cardBorder};border-radius:10px;margin:6px 0;background:${cardBg};overflow:hidden">`;
+    wk.days.forEach((day, dayIdx) => {
+      const dd = day.obj;
+      const dayName = DAYS[dd.getDay()];
+      const dayLabel = MONTHS[dd.getMonth()] + ' ' + dd.getDate();
+      const isToday = day.date === new Date().toISOString().slice(0,10);
+      const balC = day.bal >= 0 ? '#4ade80' : '#f87171';
+      const netC = day.net > 0 ? '#4ade80' : (day.net < 0 ? '#f87171' : 'var(--dim)');
+      const incItems = day.items.filter(x => x.isIn).sort((a,b) => (b.manual?1:0) - (a.manual?1:0));
+      const expItems = day.items.filter(x => !x.isIn).sort((a,b) => (b.manual?1:0) - (a.manual?1:0));
+      const hasItems = incItems.length > 0 || expItems.length > 0;
 
-    // Day header bar
-    const headerBg = isToday ? 'rgba(56,189,248,.12)' : day.bal < 0 ? 'rgba(248,113,113,.08)' : 'rgba(255,255,255,.04)';
-    t += `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:${headerBg};border-bottom:1px solid rgba(255,255,255,.06)">`;
-    t += `<div style="display:flex;align-items:center;gap:12px">`;
-    if (isToday) t += `<span style="font-size:11px;font-weight:800;color:#38bdf8;background:rgba(56,189,248,.2);padding:3px 10px;border-radius:4px;letter-spacing:1px">▶ TODAY</span>`;
-    t += `<span style="font-size:18px;font-weight:800;color:#fff">${dayName}</span>`;
-    t += `<span style="font-size:15px;font-weight:600;color:#b0b8c8">${dayLabel}</span>`;
-    if (!hasItems) t += `<span style="font-size:12px;color:var(--dim)">— no payments</span>`;
-    t += `</div>`;
-    t += `<div style="display:flex;align-items:center;gap:16px">`;
-    const netLabel = day.net === 0 ? '' : ((day.net > 0 ? '+' : '') + cfFmt(day.net));
-    if (netLabel) t += `<div style="text-align:right"><div style="font-size:11px;color:var(--dim)">day net</div><div style="font-size:16px;font-weight:700;color:${netC};font-family:var(--mono)">${netLabel}</div></div>`;
-    t += `<div style="text-align:right"><div style="font-size:11px;color:var(--dim)">balance</div><div style="font-size:20px;font-weight:800;color:${balC};font-family:var(--mono)">${cfFmt(day.bal)}</div>`;
-    if (day.bal < 0) t += `<div style="font-size:10px;color:#f87171;font-weight:700">⚠ NEGATIVE</div>`;
-    t += `</div>`;
-    t += `</div></div>`;
+      const cardBorder = isToday ? 'border-left:4px solid #38bdf8;' : day.bal < 0 ? 'border-left:4px solid #f87171;' : 'border-left:4px solid transparent;';
+      const cardBg = isToday ? 'rgba(56,189,248,.04)' : day.bal < 0 ? 'rgba(248,113,113,.03)' : (dayIdx % 2 === 0 ? 'rgba(255,255,255,.015)' : 'transparent');
 
-    // Item grid — income left, expenses right
-    if (hasItems) {
-      t += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:40px">`;
-      // Income column
-      t += `<div style="padding:10px 14px;border-right:2px solid rgba(255,255,255,.06)">`;
-      if (incItems.length > 0) {
-        incItems.forEach(item => { t += `<div style="margin-bottom:4px">${sitItemCell(item, balance)}</div>`; });
-      } else {
-        t += `<span style="font-size:12px;color:var(--dim)">—</span>`;
+      t += `<div style="${cardBorder}background:${cardBg};border-bottom:1px solid rgba(255,255,255,.05);padding:0">`;
+
+      // Day header
+      t += `<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:rgba(255,255,255,.02)">`;
+      t += `<div style="display:flex;align-items:center;gap:10px">`;
+      if (isToday) t += `<span style="font-size:10px;font-weight:800;color:#38bdf8;background:rgba(56,189,248,.2);padding:2px 8px;border-radius:4px">TODAY</span>`;
+      t += `<span style="font-size:17px;font-weight:800;color:#fff">${dayName}</span>`;
+      t += `<span style="font-size:14px;font-weight:600;color:#b0b8c8">${dayLabel}</span>`;
+      if (!hasItems) t += `<span style="font-size:12px;color:var(--dim)">— no payments</span>`;
+      else t += `<span style="font-size:12px;color:var(--dim)">${incItems.length + expItems.length} item${(incItems.length+expItems.length)>1?'s':''}</span>`;
+      t += `</div>`;
+      t += `<div style="display:flex;align-items:center;gap:14px">`;
+      const netLabel = day.net === 0 ? '' : ((day.net > 0 ? '+' : '') + cfFmt(day.net));
+      if (netLabel) t += `<span style="font-size:15px;font-weight:700;color:${netC};font-family:var(--mono)">${netLabel}</span>`;
+      t += `<span style="font-size:18px;font-weight:800;color:${balC};font-family:var(--mono)">${cfFmt(day.bal)}</span>`;
+      if (day.bal < 0) t += `<span style="font-size:10px;color:#f87171;font-weight:700">⚠</span>`;
+      t += `</div></div>`;
+
+      // Items
+      if (hasItems) {
+        t += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:0">`;
+        t += `<div style="padding:8px 14px;border-right:1px solid rgba(255,255,255,.04)">`;
+        if (incItems.length > 0) { incItems.forEach(item => { t += `<div style="margin-bottom:3px">${sitItemCell(item, balance)}</div>`; }); }
+        else { t += `<span style="font-size:11px;color:var(--dim)">—</span>`; }
+        t += `</div>`;
+        t += `<div style="padding:8px 14px">`;
+        if (expItems.length > 0) { expItems.forEach(item => { t += `<div style="margin-bottom:3px">${sitItemCell(item, balance)}</div>`; }); }
+        else { t += `<span style="font-size:11px;color:var(--dim)">—</span>`; }
+        t += `</div></div>`;
       }
-      t += `</div>`;
-      // Expense column
-      t += `<div style="padding:10px 14px">`;
-      if (expItems.length > 0) {
-        expItems.forEach(item => { t += `<div style="margin-bottom:4px">${sitItemCell(item, balance)}</div>`; });
-      } else {
-        t += `<span style="font-size:12px;color:var(--dim)">—</span>`;
-      }
-      t += `</div>`;
-      t += `</div>`;
-    }
 
-    t += `</div>`; // end day card
+      t += `</div>`; // end day
+    });
+
+    t += `</div>`; // end week body
+    t += `</div>`; // end week container
   });
 
-  tableEl.innerHTML = `<div style="display:grid;grid-template-columns:1fr;gap:0">
-    <div style="display:flex;padding:10px 16px;font-size:13px;font-weight:700;border-bottom:2px solid var(--bdr);margin-bottom:4px">
-      <div style="flex:1;color:#4ade80">⬇ Income</div>
-      <div style="flex:1;color:#f87171">⬆ Expenses</div>
-    </div>
-    ${t}
-  </div>`;
-
+  tableEl.innerHTML = t;
 
   // Wire controls
   tableEl.querySelectorAll('[data-sit-id]').forEach(el => {
