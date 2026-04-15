@@ -1918,43 +1918,55 @@ function renderMgmtBody() {
   if (!body || !statsEl || !MGMT_DATA) return;
   const d = MGMT_DATA;
   const balance = parseFloat(localStorage.getItem('cf_balance')||'0');
-  const today = new Date(mgmtFromDate+'T12:00:00');
-  const cutoff = new Date(today.getTime()+mgmtDays*86400000);
+  const winStart = new Date(mgmtFromDate+'T12:00:00');
+  const cutoff = new Date(winStart.getTime()+mgmtDays*86400000);
+  const realToday = new Date(new Date().toISOString().slice(0,10)+'T12:00:00');
+  const realTodayStr = realToday.toISOString().slice(0,10);
   const allItems = d.all_tasks||[];
 
   // ALL unpaid items with due dates — for analysis + simulator (full scope)
-  const todayStr = today.toISOString().slice(0,10);
   const allUnpaid = allItems.filter(t => {
     if (!t.due || t.paid) return false;
     if (!mgmtIncludeFixed && mgmtIsFixed(t.type)) return false;
     if (mgmtProjFilter!=='all' && t.project!==mgmtProjFilter) return false;
     return true;
   });
-  // Mark overdue items
-  allUnpaid.forEach(t => { t._overdue = t.due < todayStr; });
+  // Mark overdue items (based on REAL today, not picker date)
+  allUnpaid.forEach(t => { t._overdue = t.due < realTodayStr; });
   const overdueItems = allUnpaid.filter(t => t._overdue);
   const futureItems = allUnpaid.filter(t => !t._overdue);
   // Data scope for banners
-  const unpaidDates = futureItems.map(t=>t.due).sort();
+  const unpaidDates = allUnpaid.map(t=>t.due).sort();
+  const dataFirstDate = unpaidDates.length > 0 ? unpaidDates[0] : null;
   const dataLastDate = unpaidDates.length > 0 ? unpaidDates[unpaidDates.length-1] : null;
-  const dataDays = dataLastDate ? Math.ceil((new Date(dataLastDate+'T12:00:00') - today) / 86400000) : 0;
+  const dataDays = dataLastDate ? Math.ceil((new Date(dataLastDate+'T12:00:00') - realToday) / 86400000) : 0;
 
-  // Filter window items (for breakdown display only)
+  // Filter window items — includes BOTH paid and unpaid in the date range
   const allWin = allItems.filter(t => {
     if (!t.due) return false;
     const td = new Date(t.due+'T12:00:00');
-    if (td<today||td>=cutoff) return false;
+    if (td<winStart||td>=cutoff) return false;
     if (!mgmtIncludeFixed && mgmtIsFixed(t.type)) return false;
     if (mgmtProjFilter!=='all' && t.project!==mgmtProjFilter) return false;
     return true;
   });
 
-  // Tallies
+  // Also include overdue items in the window (unpaid items before winStart)
+  const overdueInWin = allUnpaid.filter(t => {
+    const td = new Date(t.due+'T12:00:00');
+    return td < winStart;
+  });
+  // Combined: window items + overdue (for display)
+  const allWinPlusOverdue = [...allWin, ...overdueInWin];
+
+  // Tallies — unpaid items in window + overdue
   let wIn=0,wPIn=0,wProjOut=0,wFixed=0,wMat=0,wSub=0;
+  let wOverdueIn=0, wOverdueOut=0;
   const matByProj={},subByProj={},incByProj={},pincByProj={};
   const fixedByCat={salaries:0,utilities:0,rent:0,marketing:0,systems:0,others:0};
-  const matItems=[],subItems=[],incItems=[],pincItems=[],fixedItems=[];
+  const matItems=[],subItems=[],incItems=[],pincItems=[],fixedItems=[],overdueDisplayItems=[];
 
+  // Count window items (unpaid only for totals)
   allWin.filter(t=>!t.paid).forEach(t => {
     const a=t.amount||0;
     if (t.type==='income') { wIn+=a; incByProj[t.project]=(incByProj[t.project]||0)+a; incItems.push(t); }
@@ -1962,6 +1974,14 @@ function renderMgmtBody() {
     else if (t.type==='materials') { wProjOut+=a; wMat+=a; matByProj[t.project]=(matByProj[t.project]||0)+a; matItems.push(t); }
     else if (mgmtIsFixed(t.type)) { wFixed+=a; fixedByCat[t.type]=(fixedByCat[t.type]||0)+a; fixedItems.push(t); }
     else { wProjOut+=a; wSub+=a; subByProj[t.project]=(subByProj[t.project]||0)+a; subItems.push(t); }
+  });
+
+  // Count overdue items separately
+  overdueItems.forEach(t => {
+    const a=t.amount||0;
+    overdueDisplayItems.push(t);
+    if (t.type==='income'||t.type==='p_income') wOverdueIn+=a;
+    else wOverdueOut+=a;
   });
 
   const totalIncome = wIn + wPIn;
@@ -1975,7 +1995,33 @@ function renderMgmtBody() {
     <div style="font-size:11px;color:var(--txt2);margin-top:4px;font-weight:600">${label}</div>
     ${sub?'<div style="font-size:9px;color:var(--dim);margin-top:2px">'+sub+'</div>':''}</div>`;
 
-  statsEl.innerHTML = `
+  // Overdue alert banner
+  let overdueHtml = '';
+  if (overdueItems.length > 0) {
+    const odByType = {};
+    overdueItems.forEach(t => {
+      const tp = t.type==='income'?'Income':t.type==='p_income'?'Potential':t.type==='materials'?'Materials':t.type==='subs'?'Subs':mgmtIsFixed(t.type)?'Fixed':'Other';
+      odByType[tp] = (odByType[tp]||0) + (t.amount||0);
+    });
+    const odTotal = wOverdueIn + wOverdueOut;
+    let odList = overdueItems.sort((a,b)=>a.due.localeCompare(b.due)).map(t => {
+      const c = (t.type==='income'||t.type==='p_income') ? '#4ade80' : '#f87171';
+      const dir = (t.type==='income'||t.type==='p_income') ? '⬇ IN' : '⬆ OUT';
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid rgba(248,113,113,.1)">
+        <div style="flex:1;min-width:0"><span style="font-size:12px;color:#f97316;font-weight:700;margin-right:6px">${t.due}</span><span style="font-size:12px;color:#fff">${t.task}</span><span style="font-size:11px;color:var(--dim);margin-left:6px">${t.project}</span></div>
+        <span style="font-size:12px;font-weight:700;color:${c};font-family:var(--mono);white-space:nowrap">${dir} ${cfFmt(t.amount||0)}</span>
+      </div>`;
+    }).join('');
+    overdueHtml = `<div style="background:rgba(248,113,113,.06);border:2px solid rgba(248,113,113,.3);border-radius:12px;padding:14px;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="font-size:14px;font-weight:700;color:#f87171">🔴 ${overdueItems.length} OVERDUE PAYMENT${overdueItems.length>1?'S':''} — ${cfFmt(odTotal)} unpaid</div>
+        <div style="font-size:11px;color:var(--dim)">${wOverdueIn>0?'IN: '+cfFmt(wOverdueIn)+' · ':''}OUT: ${cfFmt(wOverdueOut)}</div>
+      </div>
+      <div style="max-height:200px;overflow-y:auto">${odList}</div>
+    </div>`;
+  }
+
+  statsEl.innerHTML = overdueHtml + `
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
     <div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:14px">
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#4ade80;margin-bottom:10px">💰 INCOME</div>
@@ -2105,16 +2151,24 @@ function renderMgmtBody() {
     weeklyTable += '</table></div>';
   }
 
-  // ── Daily Calendar (always 21 days from today) ──
-  const calToday = new Date(new Date().toISOString().slice(0,10)+'T12:00:00');
-  const cal21 = new Date(calToday.getTime()+21*86400000);
-  const calItems = allItems.filter(t => {
-    if (!t.due || t.paid) return false;
+  // ── Daily Calendar (from picker start date, 21 days) ──
+  const calStart = new Date(mgmtFromDate+'T12:00:00');
+  const cal21 = new Date(calStart.getTime()+21*86400000);
+  // Include unpaid items in range + overdue items pinned to start date
+  const calItems = [];
+  allItems.filter(t => {
+    if (!t.due) return false;
     const td = new Date(t.due+'T12:00:00');
-    if (td<calToday||td>=cal21) return false;
-    if (!mgmtIncludeFixed && mgmtIsFixed(t.type)) return false;
-    if (mgmtProjFilter!=='all' && t.project!==mgmtProjFilter) return false;
-    return true;
+    if (td>=calStart && td<cal21) {
+      if (!mgmtIncludeFixed && mgmtIsFixed(t.type)) return false;
+      if (mgmtProjFilter!=='all' && t.project!==mgmtProjFilter) return false;
+      calItems.push(t);
+    }
+    return false;
+  });
+  // Add overdue items to first day
+  overdueItems.forEach(t => {
+    calItems.push({...t, due: mgmtFromDate, _overdueOriginal: t.due});
   });
   const calByDay = {};
   calItems.forEach(t => {
@@ -2129,7 +2183,7 @@ function renderMgmtBody() {
   let calHtml = '';
   let calRunBal = balance;
   for (let i=0;i<21;i++) {
-    const dd = new Date(calToday.getTime()+i*86400000);
+    const dd = new Date(calStart.getTime()+i*86400000);
     const ds = dd.toISOString().slice(0,10);
     const dayData = calByDay[ds];
     const dayName = DAYS[dd.getDay()];
@@ -2151,9 +2205,9 @@ function renderMgmtBody() {
 
     const dIn = dayData.in;
     const dOut = dayData.out;
-    // Update running balance (income adds, expenses subtract — skip p_income from balance)
-    const dInConfirmed = dayData.items.filter(t=>t.type==='income').reduce((s,t)=>s+(t.amount||0),0);
-    const dOutAll = dayData.items.filter(t=>t.type!=='income'&&t.type!=='p_income').reduce((s,t)=>s+(t.amount||0),0);
+    // Update running balance (unpaid only — income adds, expenses subtract — skip p_income from balance)
+    const dInConfirmed = dayData.items.filter(t=>!t.paid&&t.type==='income').reduce((s,t)=>s+(t.amount||0),0);
+    const dOutAll = dayData.items.filter(t=>!t.paid&&t.type!=='income'&&t.type!=='p_income').reduce((s,t)=>s+(t.amount||0),0);
     calRunBal += dInConfirmed - dOutAll;
 
     const dnet = dIn - dOut;
@@ -2181,11 +2235,17 @@ function renderMgmtBody() {
       const ti = mgmtTypeInfo(t.type);
       const isIn = t.type==='income'||t.type==='p_income';
       const typeText = t.type==='income'?'Income':t.type==='p_income'?'Potential':t.type==='materials'?'Materials':t.type==='subs'?'Sub Payment':MGMT_FC_CATS[t.type]?MGMT_FC_CATS[t.type].label:'Expense';
-      calHtml += `<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:11px;border-bottom:1px solid rgba(33,39,47,.1)">
+      const isPaid = t.paid;
+      const isOD = t._overdueOriginal;
+      const rowOpacity = isPaid ? 'opacity:.45;' : '';
+      const paidTag = isPaid ? '<span style="font-size:8px;font-weight:700;color:#4ade80;background:rgba(74,222,128,.15);padding:1px 4px;border-radius:2px;margin-left:4px">PAID</span>' : '';
+      const odTag = isOD ? '<span style="font-size:8px;font-weight:700;color:#f97316;background:rgba(249,115,22,.15);padding:1px 4px;border-radius:2px;margin-left:4px">OVERDUE from '+t._overdueOriginal+'</span>' : '';
+      calHtml += `<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:11px;border-bottom:1px solid rgba(33,39,47,.1);${rowOpacity}">
         <div style="display:flex;align-items:center;gap:6px;flex:1;min-width:0;overflow:hidden">
           <span style="background:${ti.color}20;color:${ti.color};border:1px solid ${ti.color}40;font-size:9px;padding:1px 5px;border-radius:3px;white-space:nowrap">${typeText}</span>
-          <span style="color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.task}</span>
+          <span style="color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;${isPaid?'text-decoration:line-through;':''}">${t.task}</span>
           <span style="color:var(--dim);font-size:9px;white-space:nowrap">— ${t.project||''}</span>
+          ${paidTag}${odTag}
         </div>
         <span style="color:${isIn?'#4ade80':'#f87171'};font-weight:600;white-space:nowrap;margin-left:8px;font-family:var(--mono)">${isIn?'+ ':'- '}${t.amount?cfFmt2(t.amount):'TBD'}</span>
       </div>`;
@@ -2354,9 +2414,10 @@ function renderMgmtBody() {
   }
 
   // Section 3: Daily Payment Calendar — full width
-  html += secTitle('📅', 'Daily Payment Calendar', 'Day-by-day cash position · Next 21 days from today');
+  const calOverdueNote = overdueItems.length > 0 ? ' · <span style="color:#f87171">🔴 ' + overdueItems.length + ' overdue included in first day</span>' : '';
+  html += secTitle('📅', 'Daily Payment Calendar', 'Day-by-day cash position · 21 days from ' + mgmtFromDate + calOverdueNote);
   html += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:16px">`;
-  html += calHtml || '<div style="font-size:12px;color:var(--dim);padding:12px 0;text-align:center">No payments in next 21 days</div>';
+  html += calHtml || '<div style="font-size:12px;color:var(--dim);padding:12px 0;text-align:center">No payments in this range</div>';
   html += '</div>';
 
   // Section 4: Situation Evaluation — What-If Scenario Planner
