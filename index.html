@@ -2556,7 +2556,8 @@ function initSituationEval(allWin, balance, dataDays) {
   scenarioItems = allWin.filter(t=>!t.paid).map((t,i) => ({
     id: 'orig_'+i, task: t.task, project: t.project||'', type: t.type,
     amount: t.amount||0, originalDue: t.due, due: t.due, shift: 0,
-    isIn: t.type==='income'||t.type==='p_income', manual: false
+    isIn: t.type==='income'||t.type==='p_income', manual: false,
+    _overdue: t._overdue || false
   }));
   scenarioManualItems = [];
   scenarioNextId = 1;
