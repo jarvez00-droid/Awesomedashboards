@@ -2021,7 +2021,9 @@ function renderMgmtBody() {
     </div>`;
   }
 
-  statsEl.innerHTML = overdueHtml + `
+  const projCfHtml = buildProjectCashflowView(allItems, realTodayStr);
+
+  statsEl.innerHTML = overdueHtml + projCfHtml + `
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
     <div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:14px">
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#4ade80;margin-bottom:10px">💰 INCOME</div>
@@ -2498,6 +2500,240 @@ function sitLoad() {
 
 function sitClearSave() {
   localStorage.removeItem(SIT_SAVE_KEY);
+}
+
+function buildProjectCashflowView(allItems, realTodayStr) {
+  // Get all project items (exclude fixed costs), unpaid only
+  const projItems = allItems.filter(t => t.due && t.project && t.project !== '⚙ Fixed Costs');
+
+  // Group by project
+  const byProj = {};
+  projItems.forEach(t => {
+    if (!byProj[t.project]) byProj[t.project] = { income: [], expense: [], paid: [], unpaid: [] };
+    const p = byProj[t.project];
+    const isIn = t.type === 'income' || t.type === 'p_income';
+    if (isIn) p.income.push(t);
+    else p.expense.push(t);
+    if (t.paid) p.paid.push(t);
+    else p.unpaid.push(t);
+  });
+
+  // Sort projects by total unpaid outflow (biggest first)
+  const projNames = Object.keys(byProj).sort((a, b) => {
+    const aOut = byProj[a].expense.filter(t => !t.paid).reduce((s, t) => s + (t.amount || 0), 0);
+    const bOut = byProj[b].expense.filter(t => !t.paid).reduce((s, t) => s + (t.amount || 0), 0);
+    return bOut - aOut;
+  });
+
+  if (projNames.length === 0) return '';
+
+  // Build 3-month weekly buckets
+  const today = new Date(realTodayStr + 'T12:00:00');
+  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  // Generate week boundaries for 13 weeks (3 months)
+  const weeks = [];
+  let wStart = new Date(today);
+  // Align to Monday
+  const dayOfWeek = wStart.getDay();
+  const diff = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+  wStart.setDate(wStart.getDate() + diff);
+  for (let w = 0; w < 13; w++) {
+    const wEnd = new Date(wStart.getTime() + 6 * 86400000);
+    weeks.push({
+      start: wStart.toISOString().slice(0, 10),
+      end: wEnd.toISOString().slice(0, 10),
+      label: monthNames[wStart.getMonth()] + ' ' + wStart.getDate(),
+      month: wStart.getMonth()
+    });
+    wStart = new Date(wStart.getTime() + 7 * 86400000);
+  }
+
+  function getWeekIdx(due) {
+    for (let i = 0; i < weeks.length; i++) {
+      if (due >= weeks[i].start && due <= weeks[i].end) return i;
+    }
+    if (due < weeks[0].start) return -1; // overdue
+    return -2; // beyond range
+  }
+
+  // Grand totals
+  let grandIn = 0, grandOut = 0, grandOverdueIn = 0, grandOverdueOut = 0;
+
+  let html = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:16px;margin-bottom:16px">`;
+  html += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">`;
+  html += `<div><span style="font-size:16px;font-weight:800;color:var(--txt)">📊 Project Cash Flow — 3 Month View</span>`;
+  html += `<div style="font-size:11px;color:var(--dim);margin-top:2px">What you owe, what you'll receive, and when — per project. Unpaid items only.</div></div>`;
+  html += `</div>`;
+
+  projNames.forEach(projName => {
+    const p = byProj[projName];
+    const unpaidIn = p.income.filter(t => !t.paid);
+    const unpaidOut = p.expense.filter(t => !t.paid);
+    const totalIn = unpaidIn.reduce((s, t) => s + (t.amount || 0), 0);
+    const totalOut = unpaidOut.reduce((s, t) => s + (t.amount || 0), 0);
+    const net = totalIn - totalOut;
+
+    if (unpaidIn.length === 0 && unpaidOut.length === 0) return;
+
+    grandIn += totalIn;
+    grandOut += totalOut;
+
+    // Classify overdue
+    const overdueIn = unpaidIn.filter(t => t.due < realTodayStr);
+    const overdueOut = unpaidOut.filter(t => t.due < realTodayStr);
+    const odInAmt = overdueIn.reduce((s, t) => s + (t.amount || 0), 0);
+    const odOutAmt = overdueOut.reduce((s, t) => s + (t.amount || 0), 0);
+    grandOverdueIn += odInAmt;
+    grandOverdueOut += odOutAmt;
+
+    // Build weekly breakdown for this project
+    const weeklyIn = new Array(13).fill(0);
+    const weeklyOut = new Array(13).fill(0);
+    const weeklyItems = weeks.map(() => []);
+    let overdueAmt = 0;
+    const overdueItemsList = [];
+
+    [...unpaidIn, ...unpaidOut].forEach(t => {
+      const wi = getWeekIdx(t.due);
+      const isIn = t.type === 'income' || t.type === 'p_income';
+      const amt = t.amount || 0;
+      if (wi === -1) {
+        overdueAmt += amt;
+        overdueItemsList.push(t);
+      } else if (wi >= 0) {
+        if (isIn) weeklyIn[wi] += amt;
+        else weeklyOut[wi] += amt;
+        weeklyItems[wi].push(t);
+      }
+    });
+
+    // Find max for bar scaling
+    const allWeekVals = [...weeklyIn, ...weeklyOut];
+    const maxVal = Math.max(...allWeekVals, 1);
+
+    // Project card
+    const netColor = net >= 0 ? '#4ade80' : '#f87171';
+    const netSign = net >= 0 ? '+' : '';
+
+    html += `<div style="border:1px solid var(--bdr);border-radius:10px;margin-bottom:10px;overflow:hidden">`;
+
+    // Header — clickable to expand
+    html += `<div class="proj-cf-hdr" style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;cursor:pointer;background:rgba(255,255,255,.02);transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.04)'" onmouseout="this.style.background='rgba(255,255,255,.02)'" onclick="var b=this.nextElementSibling;var a=this.querySelector('.proj-cf-arrow');if(b.style.display==='none'){b.style.display='block';a.textContent='▾'}else{b.style.display='none';a.textContent='▸'}">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="proj-cf-arrow" style="font-size:12px;color:var(--dim)">▸</span>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--txt)">${projName}</div>
+          <div style="font-size:11px;color:var(--dim);margin-top:1px">${unpaidIn.length + unpaidOut.length} unpaid payments${overdueItemsList.length > 0 ? ' · <span style="color:#f97316">' + overdueItemsList.length + ' overdue</span>' : ''}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;align-items:center;font-size:13px;font-weight:700;font-family:var(--mono)">
+        ${totalIn > 0 ? '<span style="color:#4ade80">⬇ ' + cfFmt(totalIn) + '</span>' : ''}
+        ${totalOut > 0 ? '<span style="color:#f87171">⬆ ' + cfFmt(totalOut) + '</span>' : ''}
+        <span style="color:${netColor};border-left:1px solid var(--bdr);padding-left:12px">${netSign}${cfFmt(net)}</span>
+      </div>
+    </div>`;
+
+    // Expandable body
+    html += `<div style="display:none;padding:0 14px 14px">`;
+
+    // Overdue section if any
+    if (overdueItemsList.length > 0) {
+      html += `<div style="background:rgba(248,113,113,.05);border:1px solid rgba(248,113,113,.2);border-radius:8px;padding:10px;margin-bottom:10px">`;
+      html += `<div style="font-size:12px;font-weight:700;color:#f87171;margin-bottom:6px">🔴 OVERDUE — ${cfFmt(odInAmt + odOutAmt)} (${overdueItemsList.length} items)</div>`;
+      overdueItemsList.sort((a, b) => a.due.localeCompare(b.due)).forEach(t => {
+        const isIn = t.type === 'income' || t.type === 'p_income';
+        html += `<div style="display:flex;justify-content:space-between;padding:2px 0;font-size:11px">
+          <span style="color:var(--dim)">${t.due}</span>
+          <span style="color:var(--txt);flex:1;margin:0 8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.task}</span>
+          <span style="font-weight:600;color:${isIn ? '#4ade80' : '#f87171'};font-family:var(--mono)">${isIn ? '⬇' : '⬆'} ${cfFmt(t.amount || 0)}</span>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+
+    // Timeline bar chart — 13 weeks
+    html += `<div style="overflow-x:auto">`;
+    html += `<div style="display:grid;grid-template-columns:repeat(13,1fr);gap:3px;min-width:700px">`;
+
+    // Month headers
+    let prevMonth = -1;
+    weeks.forEach((w, i) => {
+      const showMonth = w.month !== prevMonth;
+      prevMonth = w.month;
+      html += `<div style="text-align:center;font-size:9px;font-weight:700;color:${showMonth ? '#38bdf8' : 'transparent'};padding-bottom:2px">${showMonth ? monthNames[w.month].toUpperCase() : '.'}</div>`;
+    });
+
+    // Bars
+    weeks.forEach((w, i) => {
+      const inH = maxVal > 0 ? Math.max(weeklyIn[i] / maxVal * 60, weeklyIn[i] > 0 ? 3 : 0) : 0;
+      const outH = maxVal > 0 ? Math.max(weeklyOut[i] / maxVal * 60, weeklyOut[i] > 0 ? 3 : 0) : 0;
+      const isThisWeek = realTodayStr >= w.start && realTodayStr <= w.end;
+      const border = isThisWeek ? 'border:2px solid #38bdf8;' : 'border:1px solid var(--bdr);';
+
+      html += `<div style="background:var(--bg);${border}border-radius:6px;padding:4px;text-align:center;min-height:80px;display:flex;flex-direction:column;justify-content:flex-end;position:relative">`;
+
+      // Week label
+      html += `<div style="font-size:8px;color:${isThisWeek ? '#38bdf8' : 'var(--dim)'};font-weight:${isThisWeek ? '700' : '400'};margin-bottom:4px;position:absolute;top:3px;left:0;right:0;text-align:center">${w.label}${isThisWeek ? ' ◂' : ''}</div>`;
+
+      // Amounts on top of bars
+      if (weeklyIn[i] > 0) html += `<div style="font-size:8px;color:#4ade80;font-weight:600;font-family:var(--mono)">${cfFmt(weeklyIn[i])}</div>`;
+      if (weeklyOut[i] > 0) html += `<div style="font-size:8px;color:#f87171;font-weight:600;font-family:var(--mono)">${cfFmt(weeklyOut[i])}</div>`;
+
+      // Bars side by side
+      html += `<div style="display:flex;gap:2px;justify-content:center;align-items:flex-end;min-height:${Math.max(inH, outH, 4)}px">`;
+      if (weeklyIn[i] > 0) html += `<div style="width:40%;height:${inH}px;background:#4ade80;border-radius:2px 2px 0 0;min-height:3px"></div>`;
+      if (weeklyOut[i] > 0) html += `<div style="width:40%;height:${outH}px;background:#f87171;border-radius:2px 2px 0 0;min-height:3px"></div>`;
+      if (weeklyIn[i] === 0 && weeklyOut[i] === 0) html += `<div style="width:80%;height:1px;background:var(--bdr)"></div>`;
+      html += `</div>`;
+
+      html += `</div>`;
+    });
+
+    html += `</div></div>`; // end grid + scroll
+
+    // Item list by week
+    html += `<div style="margin-top:10px">`;
+    weeks.forEach((w, i) => {
+      const items = weeklyItems[i];
+      if (items.length === 0) return;
+      html += `<div style="margin-bottom:6px">`;
+      html += `<div style="font-size:10px;font-weight:700;color:var(--dim);padding:3px 0;border-bottom:1px solid var(--bdr)">${w.label} — ${MONTHS[new Date(w.end+'T12:00:00').getMonth()]} ${new Date(w.end+'T12:00:00').getDate()}</div>`;
+      items.sort((a, b) => a.due.localeCompare(b.due)).forEach(t => {
+        const isIn = t.type === 'income' || t.type === 'p_income';
+        const typeTag = t.type === 'income' ? 'Income' : t.type === 'p_income' ? 'Potential' : t.type === 'materials' ? 'Materials' : 'Subs';
+        const tagColor = isIn ? '#4ade80' : (t.type === 'materials' ? '#fb923c' : '#f87171');
+        html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:2px 4px;font-size:11px;border-bottom:1px solid rgba(33,39,47,.08)">
+          <div style="display:flex;align-items:center;gap:6px;flex:1;min-width:0">
+            <span style="font-size:9px;color:${tagColor};background:${tagColor}15;border:1px solid ${tagColor}30;padding:0 4px;border-radius:3px;white-space:nowrap">${typeTag}</span>
+            <span style="color:var(--dim);font-size:9px;white-space:nowrap">${t.due}</span>
+            <span style="color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.task}</span>
+          </div>
+          <span style="font-weight:600;color:${tagColor};font-family:var(--mono);white-space:nowrap">${isIn ? '+' : '-'}${cfFmt(t.amount || 0)}</span>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+    html += `</div>`;
+
+    html += `</div>`; // end expandable body
+    html += `</div>`; // end project card
+  });
+
+  // Grand summary bar
+  const grandNet = grandIn - grandOut;
+  html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(56,189,248,.04);border:1px solid rgba(56,189,248,.15);border-radius:8px;margin-top:4px">
+    <span style="font-size:13px;font-weight:700;color:var(--txt)">ALL PROJECTS — 3 Month Total</span>
+    <div style="display:flex;gap:16px;font-size:14px;font-weight:700;font-family:var(--mono)">
+      ${grandOverdueIn + grandOverdueOut > 0 ? '<span style="color:#f97316">🔴 ' + cfFmt(grandOverdueIn + grandOverdueOut) + ' overdue</span>' : ''}
+      <span style="color:#4ade80">⬇ ${cfFmt(grandIn)}</span>
+      <span style="color:#f87171">⬆ ${cfFmt(grandOut)}</span>
+      <span style="color:${grandNet >= 0 ? '#4ade80' : '#f87171'};border-left:1px solid var(--bdr);padding-left:12px">${grandNet >= 0 ? '+' : ''}${cfFmt(grandNet)}</span>
+    </div>
+  </div>`;
+
+  html += `</div>`;
+  return html;
 }
 
 function buildSituationEval(allWin, balance, dataDays, dataLastDate) {
