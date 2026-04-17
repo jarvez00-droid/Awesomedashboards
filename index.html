@@ -4588,6 +4588,10 @@ function renderFullCashflow(c) {
   const d = FC_DATA;
   if (!d) return;
 
+  // Remove stale form overlay (will be recreated fresh by fcAddItemForm)
+  const oldForm = document.getElementById('fc-add-form');
+  if (oldForm) oldForm.remove();
+
   fcLoadState();
   fcBalance = parseFloat(localStorage.getItem('fc_balance') || '0');
 
@@ -4688,25 +4692,7 @@ function renderFullCashflow(c) {
 
   html += `</div>`;
 
-  // Add Item Form (hidden overlay)
-  html += `<div id="fc-add-form" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:999;align-items:center;justify-content:center">
-    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:20px;width:400px;max-width:90vw">
-      <div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:12px">Add Manual Item</div>
-      <div style="display:grid;gap:8px">
-        <select id="fc-add-type" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:8px;font-size:12px">
-          <option value="income">💰 Income</option>
-          <option value="subs">🔧 Expense</option>
-        </select>
-        <input id="fc-add-name" type="text" placeholder="Description (e.g. Client deposit)" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:8px;font-size:12px">
-        <input id="fc-add-amount" type="text" placeholder="Amount (e.g. 5000)" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:8px;font-size:12px">
-        <input id="fc-add-date" type="date" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:8px;font-size:12px">
-        <div style="display:flex;gap:8px;margin-top:4px">
-          <button onclick="fcConfirmAdd()" style="flex:1;background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.25);border-radius:6px;padding:8px;font-weight:600;cursor:pointer">✓ Add</button>
-          <button onclick="document.getElementById('fc-add-form').style.display='none'" style="flex:1;background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.2);border-radius:6px;padding:8px;font-weight:600;cursor:pointer">✕ Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>`;
+  // Add item form is created dynamically on document.body by fcAddItemForm()
 
   c.innerHTML = html;
 
@@ -4728,8 +4714,6 @@ function renderFullCashflow(c) {
     balInput.addEventListener('blur', () => { balInput.value = fcBalance === 0 ? '$0.00' : cfFmt2(fcBalance); });
   }
 
-  const dateInput = document.getElementById('fc-add-date');
-  if (dateInput) dateInput.value = todayStr;
 }
 
 // ── Per-project calendar with income milestone sections ──
@@ -4876,8 +4860,48 @@ function fcSlide(dir) {
 }
 
 function fcAddItemForm() {
-  const form = document.getElementById('fc-add-form');
-  if (form) form.style.display = 'flex';
+  // Create overlay on document.body (not inside #content) to avoid z-index issues
+  let form = document.getElementById('fc-add-form');
+  if (form) { form.style.display = 'flex'; return; }
+
+  const todayStr = new Date().toISOString().slice(0, 10);
+  form = document.createElement('div');
+  form.id = 'fc-add-form';
+  form.style.cssText = 'display:flex;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:9999;align-items:center;justify-content:center';
+  form.innerHTML = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:20px;width:420px;max-width:90vw">
+    <div style="font-size:15px;font-weight:700;color:var(--txt);margin-bottom:14px">➕ Add Manual Item</div>
+    <div style="display:grid;gap:10px">
+      <div>
+        <label style="font-size:11px;font-weight:600;color:var(--dim);display:block;margin-bottom:3px">TYPE</label>
+        <select id="fc-add-type" style="width:100%;background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:10px;font-size:13px">
+          <option value="income">💰 Income (money coming in)</option>
+          <option value="subs">🔧 Expense (money going out)</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:600;color:var(--dim);display:block;margin-bottom:3px">DESCRIPTION</label>
+        <input id="fc-add-name" type="text" placeholder="e.g. Client deposit, Material purchase" style="width:100%;background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:10px;font-size:13px;box-sizing:border-box">
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:600;color:var(--dim);display:block;margin-bottom:3px">AMOUNT ($)</label>
+        <input id="fc-add-amount" type="text" placeholder="e.g. 5000" style="width:100%;background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:10px;font-size:13px;font-family:var(--mono);box-sizing:border-box">
+      </div>
+      <div>
+        <label style="font-size:11px;font-weight:600;color:var(--dim);display:block;margin-bottom:3px">DATE</label>
+        <input id="fc-add-date" type="date" value="${todayStr}" style="width:100%;background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:10px;font-size:13px;box-sizing:border-box">
+      </div>
+      <div style="display:flex;gap:8px;margin-top:4px">
+        <button id="fc-add-confirm" style="flex:1;background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.25);border-radius:6px;padding:10px;font-weight:700;font-size:13px;cursor:pointer">✓ Add</button>
+        <button id="fc-add-cancel" style="flex:1;background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.2);border-radius:6px;padding:10px;font-weight:700;font-size:13px;cursor:pointer">✕ Cancel</button>
+      </div>
+    </div>
+  </div>`;
+  document.body.appendChild(form);
+  document.getElementById('fc-add-confirm').addEventListener('click', fcConfirmAdd);
+  document.getElementById('fc-add-cancel').addEventListener('click', () => { form.style.display = 'none'; });
+  // Close on backdrop click
+  form.addEventListener('click', (e) => { if (e.target === form) form.style.display = 'none'; });
+  setTimeout(() => document.getElementById('fc-add-name').focus(), 100);
 }
 
 function fcConfirmAdd() {
@@ -4885,7 +4909,8 @@ function fcConfirmAdd() {
   const name = document.getElementById('fc-add-name').value.trim();
   const amount = parseFloat((document.getElementById('fc-add-amount').value || '').replace(/[$,]/g, '')) || 0;
   const due = document.getElementById('fc-add-date').value;
-  if (!name || !due) return;
+  if (!name) { document.getElementById('fc-add-name').style.borderColor='#f87171'; return; }
+  if (!due) { document.getElementById('fc-add-date').style.borderColor='#f87171'; return; }
 
   fcManualItems.push({
     id: 'fcm_' + fcNextManualId++,
@@ -4899,7 +4924,8 @@ function fcConfirmAdd() {
   });
 
   fcSaveState();
-  document.getElementById('fc-add-form').style.display = 'none';
+  const form = document.getElementById('fc-add-form');
+  if (form) form.style.display = 'none';
   renderFullCashflow(document.getElementById('content'));
 }
 
