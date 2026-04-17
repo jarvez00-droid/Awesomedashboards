@@ -4626,6 +4626,7 @@ function renderFullCashflow(c) {
     <input type="text" id="fc-balance" value="${fcBalance === 0 ? '$0.00' : cfFmt2(fcBalance)}" style="background:var(--card);color:#4ade80;border:1px solid var(--bdr);border-radius:6px;padding:6px 10px;font-size:14px;font-weight:700;font-family:var(--mono);width:140px;text-align:right">
   </div>`;
   html += `<button onclick="fcAddItemForm()" style="background:rgba(56,189,248,.12);color:#38bdf8;border:1px solid rgba(56,189,248,.2);border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer">＋ Add Item</button>`;
+  html += `<button onclick="fcExportPDF()" style="background:rgba(167,139,250,.12);color:#a78bfa;border:1px solid rgba(167,139,250,.2);border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer">📄 Export PDF</button>`;
   html += `</div>`;
 
   // ── PROJECT SLIDER ──
@@ -4649,15 +4650,17 @@ function renderFullCashflow(c) {
   </div>`;
 
   // Project summary stats
-  html += `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bdr)">`;
-  const pStat = (lbl, val, color) => `<div style="background:var(--card);padding:12px;text-align:center">
+  const curNetRemaining = curUnpaidIn - curUnpaidOut;
+  html += `<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--bdr)">`;
+  const pStat = (lbl, val, color, big) => `<div style="background:var(--card);padding:12px;text-align:center">
     <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--dim)">${lbl}</div>
-    <div style="font-size:16px;font-weight:800;color:${color};font-family:var(--mono);margin-top:4px">${cfFmt(val)}</div>
+    <div style="font-size:${big?'20':'16'}px;font-weight:800;color:${color};font-family:var(--mono);margin-top:4px">${(val >= 0 && big ? '+' : '')}${cfFmt(val)}</div>
   </div>`;
   html += pStat('Total In', curIn, '#4ade80');
   html += pStat('Total Out', curOut, '#f87171');
   html += pStat('Remaining In', curUnpaidIn, '#38bdf8');
   html += pStat('Remaining Out', curUnpaidOut, '#fb923c');
+  html += pStat('Net Remaining', curNetRemaining, curNetRemaining >= 0 ? '#4ade80' : '#f87171', true);
   html += `</div>`;
 
   // Project calendar — with income milestone sections
@@ -4933,6 +4936,206 @@ function fcDeleteManual(id) {
   fcManualItems = fcManualItems.filter(t => t.id !== id);
   fcSaveState();
   renderFullCashflow(document.getElementById('content'));
+}
+
+function fcExportPDF() {
+  const d = FC_DATA;
+  if (!d) return;
+
+  const allItems = [...(d.all_tasks || []), ...fcManualItems].filter(t => t.due && t.project && t.project !== '⚙ Fixed Costs' && !mgmtIsFixed(t.type));
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayLabel = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+  // Group by project
+  const byProj = {};
+  allItems.forEach(t => {
+    if (!byProj[t.project]) byProj[t.project] = [];
+    byProj[t.project].push(t);
+  });
+  const projNames = Object.keys(byProj).sort((a, b) => {
+    const aT = byProj[a].reduce((s, t) => s + (t.amount || 0), 0);
+    const bT = byProj[b].reduce((s, t) => s + (t.amount || 0), 0);
+    return bT - aT;
+  });
+
+  const fmt = (n) => '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  let html = `<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>Cash Flow Report — ${todayStr}</title>
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; color: #1a1a1a; margin: 20px; line-height: 1.4; }
+  h1 { font-size: 18px; margin-bottom: 2px; }
+  h2 { font-size: 14px; margin-top: 20px; margin-bottom: 6px; border-bottom: 2px solid #333; padding-bottom: 3px; }
+  h3 { font-size: 12px; margin-top: 14px; margin-bottom: 4px; color: #444; }
+  .meta { font-size: 10px; color: #666; margin-bottom: 16px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 10px; }
+  th { background: #f0f0f0; font-weight: 700; text-align: left; padding: 4px 6px; border: 1px solid #ccc; }
+  td { padding: 3px 6px; border: 1px solid #ddd; }
+  .right { text-align: right; }
+  .bold { font-weight: 700; }
+  .green { color: #16a34a; }
+  .red { color: #dc2626; }
+  .blue { color: #2563eb; }
+  .gray { color: #888; }
+  .paid { text-decoration: line-through; color: #999; }
+  .summary-row { background: #f8f8f8; font-weight: 700; }
+  .section-banner { background: #e8f4fd; padding: 6px 8px; margin: 6px 0; border-radius: 4px; font-size: 10px; }
+  .warning-banner { background: #fef2f2; padding: 6px 8px; margin: 6px 0; border-radius: 4px; font-size: 10px; color: #991b1b; }
+  .grand-table td { padding: 5px 8px; font-size: 11px; }
+  @media print { body { margin: 10px; } h1 { font-size: 16px; } }
+  .page-break { page-break-before: always; }
+</style></head><body>
+<h1>💰 Construction Nation Group — Cash Flow Report</h1>
+<div class="meta">Generated: ${todayLabel} · Data from: ${d.date || todayStr} · Bank Balance: ${fmt(fcBalance)}</div>`;
+
+  // ── EXECUTIVE SUMMARY ──
+  let grandTotalIn = 0, grandTotalOut = 0, grandUnpaidIn = 0, grandUnpaidOut = 0;
+  projNames.forEach(p => {
+    const items = byProj[p];
+    items.forEach(t => {
+      const isIn = t.type === 'income' || t.type === 'p_income';
+      if (isIn) { grandTotalIn += (t.amount || 0); if (!t.paid) grandUnpaidIn += (t.amount || 0); }
+      else { grandTotalOut += (t.amount || 0); if (!t.paid) grandUnpaidOut += (t.amount || 0); }
+    });
+  });
+
+  html += `<h2>Executive Summary</h2>
+  <table class="grand-table"><tr>
+    <th>Metric</th><th class="right">Amount</th>
+  </tr>
+  <tr><td>Bank Balance</td><td class="right bold">${fmt(fcBalance)}</td></tr>
+  <tr><td>Total Income (all projects)</td><td class="right green">${fmt(grandTotalIn)}</td></tr>
+  <tr><td>Total Expenses (all projects)</td><td class="right red">${fmt(grandTotalOut)}</td></tr>
+  <tr><td>Remaining Income (unpaid)</td><td class="right blue">${fmt(grandUnpaidIn)}</td></tr>
+  <tr><td>Remaining Expenses (unpaid)</td><td class="right red">${fmt(grandUnpaidOut)}</td></tr>
+  <tr class="summary-row"><td>Net Remaining (In - Out)</td><td class="right ${grandUnpaidIn - grandUnpaidOut >= 0 ? 'green' : 'red'}">${grandUnpaidIn - grandUnpaidOut >= 0 ? '+' : '-'}${fmt(grandUnpaidIn - grandUnpaidOut)}</td></tr>
+  <tr class="summary-row"><td>Projected Balance (Bank + Net)</td><td class="right ${fcBalance + grandUnpaidIn - grandUnpaidOut >= 0 ? 'green' : 'red'}">${fmt(fcBalance + grandUnpaidIn - grandUnpaidOut)}</td></tr>
+  </table>`;
+
+  // ── PROJECT SUMMARY TABLE ──
+  html += `<h2>Project Overview</h2>
+  <table><tr>
+    <th>Project</th><th class="right">Total In</th><th class="right">Total Out</th>
+    <th class="right">Remaining In</th><th class="right">Remaining Out</th><th class="right">Net Remaining</th>
+  </tr>`;
+  projNames.forEach(p => {
+    const items = byProj[p];
+    let tIn = 0, tOut = 0, uIn = 0, uOut = 0;
+    items.forEach(t => {
+      const isIn = t.type === 'income' || t.type === 'p_income';
+      if (isIn) { tIn += (t.amount || 0); if (!t.paid) uIn += (t.amount || 0); }
+      else { tOut += (t.amount || 0); if (!t.paid) uOut += (t.amount || 0); }
+    });
+    const net = uIn - uOut;
+    html += `<tr>
+      <td class="bold">${p}</td>
+      <td class="right green">${fmt(tIn)}</td><td class="right red">${fmt(tOut)}</td>
+      <td class="right blue">${fmt(uIn)}</td><td class="right red">${fmt(uOut)}</td>
+      <td class="right bold ${net >= 0 ? 'green' : 'red'}">${net >= 0 ? '+' : '-'}${fmt(net)}</td>
+    </tr>`;
+  });
+  html += `<tr class="summary-row">
+    <td class="bold">ALL PROJECTS</td>
+    <td class="right green">${fmt(grandTotalIn)}</td><td class="right red">${fmt(grandTotalOut)}</td>
+    <td class="right blue">${fmt(grandUnpaidIn)}</td><td class="right red">${fmt(grandUnpaidOut)}</td>
+    <td class="right bold ${grandUnpaidIn - grandUnpaidOut >= 0 ? 'green' : 'red'}">${grandUnpaidIn - grandUnpaidOut >= 0 ? '+' : '-'}${fmt(grandUnpaidIn - grandUnpaidOut)}</td>
+  </tr></table>`;
+
+  // ── PER-PROJECT DETAIL ──
+  projNames.forEach((p, pi) => {
+    const items = byProj[p].sort((a, b) => (a.due || '').localeCompare(b.due || ''));
+    let uIn = 0, uOut = 0;
+    items.forEach(t => {
+      const isIn = t.type === 'income' || t.type === 'p_income';
+      if (!t.paid) { if (isIn) uIn += (t.amount || 0); else uOut += (t.amount || 0); }
+    });
+    const net = uIn - uOut;
+
+    if (pi > 0 && pi % 2 === 0) html += '<div class="page-break"></div>';
+    html += `<h2>${p}</h2>`;
+    html += `<div class="meta">Remaining In: <span class="blue bold">${fmt(uIn)}</span> · Remaining Out: <span class="red bold">${fmt(uOut)}</span> · Net: <span class="${net >= 0 ? 'green' : 'red'} bold">${net >= 0 ? '+' : '-'}${fmt(net)}</span> · ${items.length} total payments</div>`;
+
+    // Income milestones section
+    const incomeItems = items.filter(t => t.type === 'income' || t.type === 'p_income');
+    if (incomeItems.length > 0) {
+      html += `<h3>Income Milestones</h3><table><tr><th>Date</th><th>Description</th><th class="right">Amount</th><th>Status</th></tr>`;
+      incomeItems.forEach(t => {
+        html += `<tr><td>${t.due}</td><td${t.paid ? ' class="paid"' : ''}>${t.task}</td><td class="right green">${fmt(t.amount || 0)}</td><td>${t.paid ? '✅ Paid' : '⏳ Pending'}</td></tr>`;
+      });
+      html += `</table>`;
+    }
+
+    // Full payment timeline with expense-to-income sections
+    html += `<h3>Full Timeline</h3><table><tr><th>Date</th><th>Type</th><th>Description</th><th class="right">Amount</th><th>Status</th></tr>`;
+    let secExpTotal = 0, secExpCount = 0;
+    items.forEach(t => {
+      const isIn = t.type === 'income' || t.type === 'p_income';
+      const typeLabel = t.type === 'income' ? 'Income' : t.type === 'p_income' ? 'Potential' : t.type === 'materials' ? 'Materials' : 'Subs';
+
+      if (!isIn && !t.paid) { secExpTotal += (t.amount || 0); secExpCount++; }
+
+      html += `<tr><td>${t.due}</td><td>${typeLabel}</td><td${t.paid ? ' class="paid"' : ''}>${t.task}${t._manual ? ' (MANUAL)' : ''}</td>
+        <td class="right ${isIn ? 'green' : 'red'}">${isIn ? '+' : '-'}${fmt(t.amount || 0)}</td>
+        <td>${t.paid ? '✅ Paid' : (t.due < todayStr ? '🔴 Overdue' : '⏳')}</td></tr>`;
+
+      if (isIn) {
+        const incAmt = t.paid ? 0 : (t.amount || 0);
+        const netAfter = incAmt - secExpTotal;
+        html += `<tr class="summary-row"><td colspan="3" style="font-size:10px">📊 Expenses to collect this income: <span class="red bold">${fmt(secExpTotal)}</span> (${secExpCount} unpaid) → Net after income: <span class="${netAfter >= 0 ? 'green' : 'red'} bold">${netAfter >= 0 ? '+' : '-'}${fmt(netAfter)}</span></td><td></td><td></td></tr>`;
+        secExpTotal = 0; secExpCount = 0;
+      }
+    });
+    if (secExpTotal > 0) {
+      html += `<tr class="summary-row"><td colspan="3" style="font-size:10px">⚠️ Remaining expenses with no income: <span class="red bold">${fmt(secExpTotal)}</span> (${secExpCount} unpaid)</td><td></td><td></td></tr>`;
+    }
+    html += `</table>`;
+  });
+
+  // ── GLOBAL DAILY CASH FLOW ──
+  html += '<div class="page-break"></div>';
+  html += `<h2>Global Daily Cash Flow</h2>`;
+  html += `<div class="meta">All projects combined · Starting balance: ${fmt(fcBalance)}</div>`;
+
+  const globalByDay = {};
+  allItems.filter(t => !t.paid).forEach(t => {
+    const key = t.due < todayStr ? todayStr : t.due;
+    if (!globalByDay[key]) globalByDay[key] = { in: 0, out: 0, items: [] };
+    const isIn = t.type === 'income' || t.type === 'p_income';
+    if (isIn) globalByDay[key].in += (t.amount || 0);
+    else globalByDay[key].out += (t.amount || 0);
+    globalByDay[key].items.push(t);
+  });
+  const globalDays = Object.keys(globalByDay).sort();
+
+  html += `<table><tr><th>Date</th><th>Day</th><th class="right">Income</th><th class="right">Expenses</th><th class="right">Net</th><th class="right">Balance</th><th>Details</th></tr>`;
+  let runBal = fcBalance;
+  globalDays.forEach(day => {
+    const dd = new Date(day + 'T12:00:00');
+    const dayName = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dd.getDay()];
+    const gd = globalByDay[day];
+    const net = gd.in - gd.out;
+    runBal += net;
+    const details = gd.items.map(t => {
+      const isIn = t.type === 'income' || t.type === 'p_income';
+      return (isIn ? '+' : '-') + fmt(t.amount || 0) + ' ' + t.task + ' (' + (t.project || '') + ')';
+    }).join('; ');
+    html += `<tr><td>${day}</td><td>${dayName}</td>
+      <td class="right green">${gd.in > 0 ? fmt(gd.in) : ''}</td>
+      <td class="right red">${gd.out > 0 ? fmt(gd.out) : ''}</td>
+      <td class="right bold ${net >= 0 ? 'green' : 'red'}">${net >= 0 ? '+' : '-'}${fmt(net)}</td>
+      <td class="right bold ${runBal >= 0 ? 'green' : 'red'}">${fmt(runBal)}</td>
+      <td style="font-size:9px;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${details}</td></tr>`;
+  });
+  html += `</table>`;
+
+  html += `<div class="meta" style="margin-top:20px">End of report · Generated by Jade · Construction Nation Group</div>`;
+  html += `</body></html>`;
+
+  // Open in new window for print
+  const win = window.open('', '_blank');
+  win.document.write(html);
+  win.document.close();
+  win.onload = () => { win.print(); };
 }
 
 function fcSaveState() {
