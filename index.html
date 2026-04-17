@@ -365,6 +365,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a class="on" data-p="sod">📋 Projects Dashboard</a>
   <a data-p="weekly">▤ Weekly Forecast</a>
   <a data-p="mgmt">▥ Management</a>
+  <a data-p="fcash">💰 Full Cash Flow</a>
   <a data-p="archive">▦ Archive</a>
 </div>
 
@@ -396,6 +397,7 @@ function render() {
   if (curPage === 'sod') renderSOD(c);
   else if (curPage === 'weekly') loadAndRenderWeekly(c);
   else if (curPage === 'mgmt') mgmtGate(c);
+  else if (curPage === 'fcash') fcGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
     const titles = {projects:'Project Dashboards'};
@@ -4525,6 +4527,413 @@ async function loadData() {
   render();
 }
 loadData();
+
+// ── Full Cashflow Tab ──
+// ── Full Cashflow Tab ──
+// Password-gated, loads management data (all_tasks), shows per-project slider + global calendar
+
+let FC_DATA = null;
+let fcBalance = 0;
+let fcCurProj = 0; // index into project list (0 = first project)
+let fcManualItems = []; // {id, task, project:'Manual', type:'income'|'subs', amount, due}
+let fcNextManualId = 1;
+const FC_SAVE_KEY = 'jade_fc_v1';
+
+function fcGate(c) {
+  if (sessionStorage.getItem('fc_auth') === '1') {
+    loadAndRenderFC(c);
+    return;
+  }
+  c.innerHTML = `<div class="pw"><div class="pw-icon">💰</div>
+    <div class="pw-title">Full Cash Flow — Restricted</div>
+    <div class="pw-sub">Enter password to access.</div>
+    <input type="password" id="fc-pw-input" placeholder="Password" autocomplete="off">
+    <button class="pw-btn" id="fc-pw-btn">Unlock</button>
+    <div class="pw-deny" id="fc-pw-deny" style="display:none">Access denied</div>
+  </div>`;
+  const inp = document.getElementById('fc-pw-input');
+  const btn = document.getElementById('fc-pw-btn');
+  const deny = document.getElementById('fc-pw-deny');
+  function tryPw() {
+    if (inp.value === MGMT_PW) {
+      sessionStorage.setItem('fc_auth', '1');
+      loadAndRenderFC(c);
+    } else {
+      inp.classList.add('pw-err');
+      deny.style.display = '';
+      setTimeout(() => inp.classList.remove('pw-err'), 400);
+    }
+  }
+  btn.addEventListener('click', tryPw);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') tryPw(); });
+  setTimeout(() => inp.focus(), 50);
+}
+
+async function loadAndRenderFC(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Full Cash Flow...</div></div>';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+    try {
+      const r = await fetch('data/management-' + d + '.json');
+      if (!r.ok) continue;
+      FC_DATA = await r.json();
+      renderFullCashflow(c);
+      return;
+    } catch (e) {}
+  }
+  c.innerHTML = '<div class="empty"><div class="empty-i">💰</div><div class="empty-t">No Data</div></div>';
+}
+
+function renderFullCashflow(c) {
+  const d = FC_DATA;
+  if (!d) return;
+
+  // Load saved state
+  fcLoadState();
+
+  // Get balance from localStorage or default
+  fcBalance = parseFloat(localStorage.getItem('fc_balance') || '0');
+
+  // All project tasks (exclude fixed costs)
+  const allItems = [...(d.all_tasks || []), ...fcManualItems];
+  const projItems = allItems.filter(t => t.due && t.project && t.project !== '⚙ Fixed Costs');
+
+  // Get unique projects sorted by total value
+  const projTotals = {};
+  projItems.forEach(t => {
+    if (!projTotals[t.project]) projTotals[t.project] = 0;
+    projTotals[t.project] += (t.amount || 0);
+  });
+  const projNames = Object.keys(projTotals).sort((a, b) => projTotals[b] - projTotals[a]);
+
+  if (projNames.length === 0) {
+    c.innerHTML = '<div class="empty"><div class="empty-i">💰</div><div class="empty-t">No project data</div></div>';
+    return;
+  }
+
+  // Clamp current project index
+  if (fcCurProj >= projNames.length) fcCurProj = 0;
+
+  const todayStr = new Date().toISOString().slice(0, 10);
+
+  // Build HTML
+  let html = '';
+  html += `<div class="page-title" style="margin-bottom:4px">Full Cash Flow</div>`;
+  html += `<div style="font-size:12px;color:var(--dim);margin-bottom:16px">Complete payment timeline per project + global overview · Data from ${d.date || '?'}</div>`;
+
+  // ── Controls bar ──
+  html += `<div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap">`;
+  html += `<div style="display:flex;align-items:center;gap:6px">
+    <span style="font-size:12px;font-weight:600;color:var(--txt2)">Bank Balance:</span>
+    <input type="text" id="fc-balance" value="${fcBalance === 0 ? '$0.00' : cfFmt2(fcBalance)}" style="background:var(--card);color:#4ade80;border:1px solid var(--bdr);border-radius:6px;padding:6px 10px;font-size:14px;font-weight:700;font-family:var(--mono);width:140px;text-align:right">
+  </div>`;
+  html += `<button onclick="fcAddItemForm()" style="background:rgba(56,189,248,.12);color:#38bdf8;border:1px solid rgba(56,189,248,.2);border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer">＋ Add Item</button>`;
+  html += `</div>`;
+
+  // ── Project Slider ──
+  const curProjName = projNames[fcCurProj];
+  const curProjItems = projItems.filter(t => t.project === curProjName);
+  const curIn = curProjItems.filter(t => t.type === 'income' || t.type === 'p_income').reduce((s, t) => s + (t.amount || 0), 0);
+  const curOut = curProjItems.filter(t => t.type !== 'income' && t.type !== 'p_income').reduce((s, t) => s + (t.amount || 0), 0);
+  const curNet = curIn - curOut;
+  const curUnpaidIn = curProjItems.filter(t => !t.paid && (t.type === 'income' || t.type === 'p_income')).reduce((s, t) => s + (t.amount || 0), 0);
+  const curUnpaidOut = curProjItems.filter(t => !t.paid && t.type !== 'income' && t.type !== 'p_income').reduce((s, t) => s + (t.amount || 0), 0);
+
+  html += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;margin-bottom:16px;overflow:hidden">`;
+
+  // Slider header
+  html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:rgba(56,189,248,.04);border-bottom:1px solid var(--bdr)">
+    <button id="fc-prev" onclick="fcSlide(-1)" style="background:var(--card);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:6px 12px;font-size:16px;cursor:pointer;font-weight:700">◂</button>
+    <div style="text-align:center;flex:1">
+      <div style="font-size:16px;font-weight:800;color:var(--txt)">${curProjName}</div>
+      <div style="font-size:11px;color:var(--dim)">${fcCurProj + 1} of ${projNames.length} projects · ${curProjItems.length} payments</div>
+    </div>
+    <button id="fc-next" onclick="fcSlide(1)" style="background:var(--card);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:6px 12px;font-size:16px;cursor:pointer;font-weight:700">▸</button>
+  </div>`;
+
+  // Project summary stats
+  html += `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bdr)">`;
+  const pStat = (lbl, val, color) => `<div style="background:var(--card);padding:12px;text-align:center">
+    <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--dim)">${lbl}</div>
+    <div style="font-size:16px;font-weight:800;color:${color};font-family:var(--mono);margin-top:4px">${cfFmt(val)}</div>
+  </div>`;
+  html += pStat('Total In', curIn, '#4ade80');
+  html += pStat('Total Out', curOut, '#f87171');
+  html += pStat('Remaining In', curUnpaidIn, '#38bdf8');
+  html += pStat('Remaining Out', curUnpaidOut, '#fb923c');
+  html += `</div>`;
+
+  // Project day-by-day calendar
+  html += `<div id="fc-proj-cal" style="padding:8px 12px;max-height:500px;overflow-y:auto">`;
+  html += fcBuildDayCal(curProjItems, todayStr, 0, false); // no running balance for per-project
+  html += `</div>`;
+
+  html += `</div>`; // end project card
+
+  // ── Global Calendar ──
+  html += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;overflow:hidden">`;
+
+  // Global header
+  const allGlobalItems = allItems.filter(t => t.due); // include fixed costs in global
+  const gIn = allGlobalItems.filter(t => !t.paid && (t.type === 'income' || t.type === 'p_income')).reduce((s, t) => s + (t.amount || 0), 0);
+  const gOut = allGlobalItems.filter(t => !t.paid && t.type !== 'income' && t.type !== 'p_income').reduce((s, t) => s + (t.amount || 0), 0);
+
+  html += `<div style="padding:14px 16px;border-bottom:1px solid var(--bdr)">
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-size:15px;font-weight:800;color:var(--txt)">🌐 Global Cash Flow Calendar</div>
+        <div style="font-size:11px;color:var(--dim)">All projects + fixed costs · Includes manual items</div>
+      </div>
+      <div style="display:flex;gap:12px;font-size:13px;font-weight:700;font-family:var(--mono)">
+        <span style="color:#4ade80">⬇ ${cfFmt(gIn)}</span>
+        <span style="color:#f87171">⬆ ${cfFmt(gOut)}</span>
+        <span style="color:${gIn - gOut >= 0 ? '#4ade80' : '#f87171'}">NET ${cfFmt(gIn - gOut)}</span>
+      </div>
+    </div>
+  </div>`;
+
+  html += `<div id="fc-global-cal" style="padding:8px 12px;max-height:700px;overflow-y:auto">`;
+  html += fcBuildDayCal(allGlobalItems, todayStr, fcBalance, true);
+  html += `</div>`;
+
+  html += `</div>`; // end global card
+
+  // ── Add Item Form (hidden) ──
+  html += `<div id="fc-add-form" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:999;display:none;align-items:center;justify-content:center">
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:20px;width:400px;max-width:90vw">
+      <div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:12px">Add Manual Item</div>
+      <div style="display:grid;gap:8px">
+        <select id="fc-add-type" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:8px;font-size:12px">
+          <option value="income">💰 Income</option>
+          <option value="subs">🔧 Expense</option>
+        </select>
+        <input id="fc-add-name" type="text" placeholder="Description (e.g. Client deposit)" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:8px;font-size:12px">
+        <input id="fc-add-amount" type="text" placeholder="Amount (e.g. 5000)" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:8px;font-size:12px">
+        <input id="fc-add-date" type="date" style="background:var(--bg);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;padding:8px;font-size:12px">
+        <div style="display:flex;gap:8px;margin-top:4px">
+          <button onclick="fcConfirmAdd()" style="flex:1;background:rgba(74,222,128,.15);color:#4ade80;border:1px solid rgba(74,222,128,.25);border-radius:6px;padding:8px;font-weight:600;cursor:pointer">✓ Add</button>
+          <button onclick="document.getElementById('fc-add-form').style.display='none'" style="flex:1;background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.2);border-radius:6px;padding:8px;font-weight:600;cursor:pointer">✕ Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  c.innerHTML = html;
+
+  // Wire up balance input
+  const balInput = document.getElementById('fc-balance');
+  if (balInput) {
+    balInput.addEventListener('change', () => {
+      const v = parseFloat(balInput.value.replace(/[$,]/g, '')) || 0;
+      fcBalance = v;
+      localStorage.setItem('fc_balance', v.toString());
+      balInput.value = cfFmt2(v);
+      // Re-render global calendar
+      const gc = document.getElementById('fc-global-cal');
+      if (gc) {
+        const allGI = [...(FC_DATA.all_tasks || []), ...fcManualItems].filter(t => t.due);
+        gc.innerHTML = fcBuildDayCal(allGI, todayStr, v, true);
+      }
+    });
+    balInput.addEventListener('focus', () => {
+      balInput.value = fcBalance.toString();
+      balInput.select();
+    });
+    balInput.addEventListener('blur', () => {
+      balInput.value = fcBalance === 0 ? '$0.00' : cfFmt2(fcBalance);
+    });
+  }
+
+  // Set default date on add form
+  const dateInput = document.getElementById('fc-add-date');
+  if (dateInput) dateInput.value = todayStr;
+}
+
+function fcSlide(dir) {
+  const d = FC_DATA;
+  if (!d) return;
+  const allItems = [...(d.all_tasks || []), ...fcManualItems];
+  const projItems = allItems.filter(t => t.due && t.project && t.project !== '⚙ Fixed Costs');
+  const projTotals = {};
+  projItems.forEach(t => { if (!projTotals[t.project]) projTotals[t.project] = 0; projTotals[t.project] += (t.amount || 0); });
+  const projNames = Object.keys(projTotals).sort((a, b) => projTotals[b] - projTotals[a]);
+
+  fcCurProj += dir;
+  if (fcCurProj < 0) fcCurProj = projNames.length - 1;
+  if (fcCurProj >= projNames.length) fcCurProj = 0;
+
+  renderFullCashflow(document.getElementById('content'));
+}
+
+function fcAddItemForm() {
+  const form = document.getElementById('fc-add-form');
+  if (form) form.style.display = 'flex';
+}
+
+function fcConfirmAdd() {
+  const type = document.getElementById('fc-add-type').value;
+  const name = document.getElementById('fc-add-name').value.trim();
+  const amount = parseFloat((document.getElementById('fc-add-amount').value || '').replace(/[$,]/g, '')) || 0;
+  const due = document.getElementById('fc-add-date').value;
+  if (!name || !due) return;
+
+  fcManualItems.push({
+    id: 'fcm_' + fcNextManualId++,
+    task: name,
+    project: 'Manual',
+    type: type,
+    amount: amount,
+    due: due,
+    paid: false,
+    _manual: true
+  });
+
+  fcSaveState();
+  document.getElementById('fc-add-form').style.display = 'none';
+  renderFullCashflow(document.getElementById('content'));
+}
+
+function fcDeleteManual(id) {
+  fcManualItems = fcManualItems.filter(t => t.id !== id);
+  fcSaveState();
+  renderFullCashflow(document.getElementById('content'));
+}
+
+function fcSaveState() {
+  localStorage.setItem(FC_SAVE_KEY, JSON.stringify({ items: fcManualItems, nextId: fcNextManualId }));
+}
+
+function fcLoadState() {
+  try {
+    const raw = localStorage.getItem(FC_SAVE_KEY);
+    if (raw) {
+      const s = JSON.parse(raw);
+      fcManualItems = s.items || [];
+      fcNextManualId = s.nextId || 1;
+    }
+  } catch (e) {}
+}
+
+function fcBuildDayCal(items, todayStr, startBalance, showRunningBal) {
+  // Group by day
+  const byDay = {};
+  items.forEach(t => {
+    if (!t.due) return;
+    const key = t.due < todayStr && !t.paid ? todayStr : t.due; // pin overdue to today
+    if (!byDay[key]) byDay[key] = { items: [] };
+    byDay[key].items.push({ ...t, _overdueFrom: t.due < todayStr && !t.paid ? t.due : null });
+  });
+
+  const days = Object.keys(byDay).sort();
+  if (days.length === 0) return '<div style="font-size:12px;color:var(--dim);padding:12px;text-align:center">No payments found</div>';
+
+  let html = '';
+  let runBal = startBalance;
+  let prevMonth = '';
+
+  days.forEach((day, idx) => {
+    const dd = new Date(day + 'T12:00:00');
+    const dayName = DAYS[dd.getDay()];
+    const monthName = MONTHS[dd.getMonth()];
+    const dayLabel = monthName + ' ' + dd.getDate();
+    const isToday = day === todayStr;
+    const isWeekend = dd.getDay() === 0 || dd.getDay() === 6;
+    const isMon = dd.getDay() === 1;
+    const isPast = day < todayStr;
+
+    // Month separator
+    const monthKey = dd.getFullYear() + '-' + dd.getMonth();
+    if (monthKey !== prevMonth && idx > 0) {
+      html += `<div style="padding:8px 0 4px;margin-top:8px;border-top:2px solid var(--bdr)">
+        <span style="font-size:13px;font-weight:700;color:var(--txt)">${monthName} ${dd.getFullYear()}</span>
+      </div>`;
+    }
+    prevMonth = monthKey;
+
+    // Week separator
+    if (isMon && idx > 0) html += '<div style="height:1px;background:var(--bdr);margin:4px 0"></div>';
+
+    const dayItems = byDay[day].items;
+
+    // Calculate day totals
+    let dIn = 0, dOut = 0;
+    dayItems.forEach(t => {
+      const isIn = t.type === 'income' || t.type === 'p_income';
+      if (t.paid) return; // skip paid from totals
+      if (isIn) dIn += (t.amount || 0);
+      else dOut += (t.amount || 0);
+    });
+
+    if (showRunningBal) {
+      runBal += dIn - dOut;
+    }
+
+    const dNet = dIn - dOut;
+    const borderC = dIn > 0 && dOut === 0 ? '#4ade80' : dOut > 0 && dIn === 0 ? '#f87171' : (dIn > 0 && dOut > 0 ? '#facc15' : 'var(--bdr)');
+    const balC = runBal >= 0 ? '#4ade80' : '#f87171';
+
+    // Day has no unpaid items — skip display if all paid
+    const hasUnpaid = dayItems.some(t => !t.paid);
+    const hasPaid = dayItems.some(t => t.paid);
+
+    // Day header (clickable to expand)
+    const dayId = 'fc-day-' + day.replace(/-/g, '');
+    html += `<div style="margin-bottom:1px">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 8px;background:${isToday ? 'rgba(56,189,248,.08)' : isPast ? 'rgba(255,255,255,.01)' : 'rgba(255,255,255,.02)'};border-radius:6px;cursor:pointer;border-left:3px solid ${borderC}" onclick="var el=document.getElementById('${dayId}');el.style.display=el.style.display==='none'?'block':'none'">
+        <div style="flex:1">
+          ${isToday ? '<span style="font-size:9px;font-weight:700;color:#38bdf8;background:rgba(56,189,248,.15);padding:1px 5px;border-radius:3px;margin-right:4px">TODAY</span>' : ''}
+          ${isPast ? '<span style="font-size:9px;font-weight:700;color:#f97316;background:rgba(249,115,22,.1);padding:1px 5px;border-radius:3px;margin-right:4px">PAST</span>' : ''}
+          <span style="font-size:12px;font-weight:600;color:var(--txt)">${dayName} ${dayLabel}</span>
+          <span style="font-size:10px;color:var(--dim);margin-left:4px">${dayItems.length} item${dayItems.length !== 1 ? 's' : ''}</span>
+        </div>
+        <div style="display:flex;gap:10px;font-size:11px;font-weight:600;align-items:center">
+          ${dIn > 0 ? '<span style="color:#4ade80;background:rgba(74,222,128,.1);padding:2px 6px;border-radius:4px">⬇ IN ' + cfFmt(dIn) + '</span>' : ''}
+          ${dOut > 0 ? '<span style="color:#f87171;background:rgba(248,113,113,.1);padding:2px 6px;border-radius:4px">⬆ OUT ' + cfFmt(dOut) + '</span>' : ''}
+          ${showRunningBal ? '<span style="color:var(--dim)">│</span><span style="color:' + balC + ';font-family:var(--mono);font-weight:700;min-width:80px;text-align:right">Bal: ' + cfFmt(runBal) + '</span>' : ''}
+        </div>
+      </div>
+      <div id="${dayId}" style="display:none;padding:4px 0 6px 16px">`;
+
+    // Sort: income first, then by amount desc
+    dayItems.sort((a, b) => {
+      const aIn = a.type === 'income' || a.type === 'p_income' ? 0 : 1;
+      const bIn = b.type === 'income' || b.type === 'p_income' ? 0 : 1;
+      if (aIn !== bIn) return aIn - bIn;
+      return (b.amount || 0) - (a.amount || 0);
+    });
+
+    dayItems.forEach(t => {
+      const isIn = t.type === 'income' || t.type === 'p_income';
+      const typeText = t.type === 'income' ? 'Income' : t.type === 'p_income' ? 'Potential' : t.type === 'materials' ? 'Materials' : t.type === 'subs' ? 'Subs' : mgmtTypeInfo(t.type).label || 'Expense';
+      const tagColor = isIn ? '#4ade80' : (t.type === 'materials' ? '#fb923c' : '#f87171');
+      const isPaid = t.paid;
+      const isManual = t._manual;
+      const odFrom = t._overdueFrom;
+      const rowOpacity = isPaid ? 'opacity:.45;' : '';
+
+      html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:11px;border-bottom:1px solid rgba(33,39,47,.1);${rowOpacity}">
+        <div style="display:flex;align-items:center;gap:5px;flex:1;min-width:0;overflow:hidden">
+          <span style="background:${tagColor}20;color:${tagColor};border:1px solid ${tagColor}40;font-size:9px;padding:1px 5px;border-radius:3px;white-space:nowrap">${typeText}</span>
+          <span style="color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;${isPaid ? 'text-decoration:line-through;' : ''}">${t.task}</span>
+          <span style="color:var(--dim);font-size:9px;white-space:nowrap">— ${t.project || ''}</span>
+          ${isPaid ? '<span style="font-size:8px;font-weight:700;color:#4ade80;background:rgba(74,222,128,.15);padding:1px 4px;border-radius:2px">PAID</span>' : ''}
+          ${odFrom ? '<span style="font-size:8px;font-weight:700;color:#f97316;background:rgba(249,115,22,.15);padding:1px 4px;border-radius:2px">OVERDUE ' + odFrom + '</span>' : ''}
+          ${isManual ? '<span style="font-size:8px;font-weight:700;color:#a78bfa;background:rgba(167,139,250,.15);padding:1px 4px;border-radius:2px">MANUAL</span>' : ''}
+        </div>
+        <div style="display:flex;align-items:center;gap:4px;white-space:nowrap">
+          <span style="color:${isIn ? '#4ade80' : '#f87171'};font-weight:600;font-family:var(--mono)">${isIn ? '+ ' : '- '}${t.amount ? cfFmt2(t.amount) : 'TBD'}</span>
+          ${isManual ? '<button onclick="fcDeleteManual(\'' + t.id + '\')" style="background:none;border:none;color:#f87171;cursor:pointer;font-size:12px;padding:0 2px" title="Delete">✕</button>' : ''}
+        </div>
+      </div>`;
+    });
+
+    html += `</div></div>`; // end detail + day
+  });
+
+  return html;
+}
+
+
 </script>
 </body>
 </html>
