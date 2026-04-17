@@ -5085,6 +5085,7 @@ function fcBuildCalendarGrid(items, todayStr, startBalance) {
 
       // Hidden detail panel (full width, inserted after this cell)
       if (hasData) {
+        const detBalColor = dayBal >= 0 ? '#4ade80' : '#f87171';
         html += `<div id="${dayId}" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:998;align-items:center;justify-content:center" onclick="if(event.target===this)this.style.display='none'">
           <div style="background:var(--card);border:1px solid var(--bdr);border-radius:12px;padding:16px;width:500px;max-width:90vw;max-height:80vh;overflow-y:auto" onclick="event.stopPropagation()">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
@@ -5095,7 +5096,7 @@ function fcBuildCalendarGrid(items, todayStr, startBalance) {
               <div style="display:flex;gap:10px;font-size:12px;font-weight:700;font-family:var(--mono)">
                 ${dIn > 0 ? '<span style="color:#4ade80">⬇ ' + cfFmt(dIn) + '</span>' : ''}
                 ${dOut > 0 ? '<span style="color:#f87171">⬆ ' + cfFmt(dOut) + '</span>' : ''}
-                <span style="color:${balColor}">Bal: ${cfFmt(dayBal)}</span>
+                <span style="color:${detBalColor}">Bal: ${cfFmt(dayBal)}</span>
               </div>
             </div>`;
 
