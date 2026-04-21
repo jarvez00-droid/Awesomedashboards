@@ -2336,8 +2336,9 @@ function financeRenderBucketContent(start, end, rowId, live) {
   const fmtK = n => (n<0?'-':'') + '$' + Math.abs(Math.round(n||0)).toLocaleString();
   const fmtDate = iso => { if (!iso) return '—'; const dt = new Date(iso + 'T12:00:00'); const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return `${MS[dt.getMonth()]} ${dt.getDate()}`; };
 
-  const allEvents = (d.timeline || []).concat(((d.fixed_cost_events||{}).forward)||[]);
-  const bucketEvents = allEvents.filter(e => e.date >= start && e.date <= end);
+  // d.timeline already contains ALL events (including fixed-cost and debt).
+  // fixed_cost_events.forward is a subset of timeline — do NOT concat or you'll double-count.
+  const bucketEvents = (d.timeline || []).filter(e => e.date >= start && e.date <= end);
   if (!bucketEvents.length) return '<div style="padding:14px;color:var(--dim);font-size:12px">No events in this period.</div>';
 
   const byProj = {};
