@@ -1840,36 +1840,156 @@ async function loadAndRenderFinance(c) {
 
 function renderFinance(c) {
   const d = FINANCE_DATA;
-  const fmt = n => '$' + (n||0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
-  const fmtK = n => '$' + Math.round(n||0).toLocaleString();
-  const bal = d.summary.current_balance || 0;
-  const burn = d.summary.monthly_burn || 0;
-  const months = d.summary.months_runway;
-  const weeks = d.summary.weeks_runway;
-  const runwayCls = (months == null) ? 'g' : (months < 1 ? 'r' : months < 3 ? 'y' : 'g');
-  const runwayDisp = months == null ? '—' : (months < 1 ? `${Math.round((weeks||0)*7)}d` : `${months}mo`);
+  const s = d.summary;
+  const fmt = n => (n<0?'-':'') + '$' + Math.abs(n||0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  const fmtK = n => (n<0?'-':'') + '$' + Math.abs(Math.round(n||0)).toLocaleString();
+  const fmtDate = iso => {
+    if (!iso) return '—';
+    const dt = new Date(iso + 'T12:00:00');
+    const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${MS[dt.getMonth()]} ${dt.getDate()}`;
+  };
+  const amountCls = n => n > 0 ? 'style="color:var(--grn);font-weight:600"' : 'style="color:var(--red);font-weight:600"';
+  const amountSign = n => (n > 0 ? '+' : '') + fmt(n);
+
+  const bal = s.current_balance || 0;
+  const projected = s.projected_end_balance || 0;
+  const forward_net = s.net_window || 0;
+  const overdue_net = s.overdue_net || 0;
+  const breakdown = s.runway_breakdown_date;
+
+  // Runway stat — date when balance first goes negative
+  let runwayCls = 'g', runwayDisp = '∞';
+  if (breakdown) {
+    const today = new Date(d.date + 'T12:00:00');
+    const brk = new Date(breakdown + 'T12:00:00');
+    const daysOut = Math.max(0, Math.ceil((brk - today) / 86400000));
+    runwayCls = daysOut <= 14 ? 'r' : daysOut <= 45 ? 'y' : 'b';
+    runwayDisp = daysOut === 0 ? 'today' : `${daysOut}d`;
+  }
 
   let h = `
     <div class="page-title">Finance</div>
-    <div class="page-sub">Bank balance + fixed costs · Data from ${d.date}</div>
+    <div class="page-sub">Balance · Projects · Fixed costs · Next 90 days · As of ${d.date}</div>
 
     <div class="stats">
       <div class="st g"><div class="n">${fmtK(bal)}</div><div class="l">Current Balance</div></div>
-      <div class="st r"><div class="n">${fmtK(burn)}</div><div class="l">Monthly Burn</div></div>
-      <div class="st ${runwayCls}"><div class="n">${runwayDisp}</div><div class="l">Runway</div></div>
-      <div class="st b"><div class="n">${d.fixed_costs.by_category.length}</div><div class="l">Categories</div></div>
-      <div class="st y"><div class="n">${d.fixed_costs.by_category.reduce((s,c)=>s+c.count,0)}</div><div class="l">Fixed-cost items</div></div>
+      <div class="st ${projected >= 0 ? 'g' : 'r'}"><div class="n">${fmtK(projected)}</div><div class="l">Projected 90d End</div></div>
+      <div class="st ${runwayCls}"><div class="n">${runwayDisp}</div><div class="l">Runs Negative</div></div>
+      <div class="st b"><div class="n">${fmtK(forward_net)}</div><div class="l">Forward Net (90d)</div></div>
+      <div class="st ${overdue_net >= 0 ? 'g' : 'r'}"><div class="n">${fmtK(overdue_net)}</div><div class="l">Overdue Backlog Net</div></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;font-size:12px">
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Incoming (next 90d)</div>
+        <div style="color:var(--grn);font-family:var(--mono);font-weight:700;font-size:16px">+${fmtK(s.incoming_window)}</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Outgoing (next 90d)</div>
+        <div style="color:var(--red);font-family:var(--mono);font-weight:700;font-size:16px">-${fmtK(s.outgoing_window)}</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Overdue To Collect</div>
+        <div style="color:var(--grn);font-family:var(--mono);font-weight:700;font-size:16px">+${fmtK(s.overdue_incoming)}</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Overdue To Pay</div>
+        <div style="color:var(--red);font-family:var(--mono);font-weight:700;font-size:16px">-${fmtK(s.overdue_outgoing)}</div>
+      </div>
     </div>`;
 
-  if (months != null && months < 1) {
-    h += `<div class="alert"><div><b>⚠ Low runway.</b> Current balance covers about ${Math.round((weeks||0)*7)} days of fixed costs at the current burn rate (${fmtK(burn)}/mo).</div></div>`;
+  if (breakdown) {
+    const today = new Date(d.date + 'T12:00:00');
+    const brk = new Date(breakdown + 'T12:00:00');
+    const daysOut = Math.max(0, Math.ceil((brk - today) / 86400000));
+    if (daysOut <= 30) {
+      h += `<div class="alert"><div><b>⚠ Cash runs negative in ${daysOut === 0 ? 'today' : daysOut + ' days'}</b> (on ${fmtDate(breakdown)}) at current projected in/out flow. Collect overdue income or delay outflows.</div></div>`;
+    }
   }
 
-  // Bank balance history
+  // ── Forward timeline ──
+  h += `<div class="sh">Forward Timeline · ${d.timeline.length} events next 90 days</div>`;
+  h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:0;overflow:hidden">';
+  if (!d.timeline.length) {
+    h += '<div style="padding:12px;color:var(--dim)">No forward events.</div>';
+  } else {
+    h += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">';
+    h += '<thead style="background:var(--raised);position:sticky;top:0"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
+    h += '<th style="padding:8px">Date</th><th style="padding:8px">Event</th><th style="padding:8px">Project</th><th style="padding:8px">Type</th><th style="padding:8px;text-align:right">Amount</th><th style="padding:8px;text-align:right">Running Balance</th>';
+    h += '</tr></thead><tbody>';
+    d.timeline.forEach(e => {
+      const rb = e.running_balance;
+      const rbStyle = rb < 0 ? 'color:var(--red);font-weight:700' : 'color:var(--txt);font-weight:600';
+      h += '<tr style="border-top:1px solid rgba(33,39,47,.3)">';
+      h += `<td style="padding:6px 8px;font-family:var(--mono);white-space:nowrap">${fmtDate(e.date)}</td>`;
+      h += `<td style="padding:6px 8px">${e.label || ''}</td>`;
+      h += `<td style="padding:6px 8px;color:var(--txt2);font-size:11px;white-space:nowrap">${e.project || '—'}</td>`;
+      h += `<td style="padding:6px 8px;color:var(--txt2);font-size:11px">${e.kind.replace(/_/g, ' ')}</td>`;
+      h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono)" ${amountCls(e.amount)}>${amountSign(e.amount)}</td>`;
+      h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono);${rbStyle}">${fmt(rb)}</td>`;
+      h += '</tr>';
+    });
+    h += '</tbody></table></div>';
+  }
+  h += '</div>';
+
+  // ── Overdue backlog ──
+  if (d.overdue && d.overdue.length) {
+    h += `<div class="pc sev-r" style="margin-top:16px">`;
+    h += `<div class="ph" onclick="tog(this)">`;
+    h += `<div><div class="pn">🕑 Overdue Backlog · ${d.overdue.length} items</div>`;
+    h += `<div class="pp">To collect: <b style="color:var(--grn)">+${fmtK(s.overdue_incoming)}</b> · To pay: <b style="color:var(--red)">-${fmtK(s.overdue_outgoing)}</b> · Net: <b>${fmtK(s.overdue_net)}</b></div></div>`;
+    h += `<div class="pt">${chvSvg()}</div></div>`;
+    h += `<div class="pb"><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:6px">`;
+    h += '<thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
+    h += '<th style="padding:6px 8px">Original Due</th><th style="padding:6px 8px">Days Overdue</th><th style="padding:6px 8px">Event</th><th style="padding:6px 8px">Project</th><th style="padding:6px 8px;text-align:right">Amount</th>';
+    h += '</tr></thead><tbody>';
+    d.overdue.forEach(e => {
+      h += '<tr style="border-top:1px solid rgba(33,39,47,.3)">';
+      h += `<td style="padding:6px 8px;font-family:var(--mono);white-space:nowrap">${fmtDate(e.date)}</td>`;
+      h += `<td style="padding:6px 8px;color:var(--red);font-family:var(--mono)">${e.days_overdue}d</td>`;
+      h += `<td style="padding:6px 8px">${e.label || ''}</td>`;
+      h += `<td style="padding:6px 8px;color:var(--txt2);font-size:11px;white-space:nowrap">${e.project || '—'}</td>`;
+      h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono)" ${amountCls(e.amount)}>${amountSign(e.amount)}</td>`;
+      h += '</tr>';
+    });
+    h += '</tbody></table></div></div></div>';
+  }
+
+  // ── By project ──
+  h += `<div class="sh">By Project · Next 90 days</div>`;
+  d.by_project.forEach(p => {
+    const sev = p.net < 0 ? 'sev-r' : p.net > 0 ? 'sev-g' : 'sev-b';
+    h += `<div class="pc ${sev}" style="margin-bottom:8px">`;
+    h += `<div class="ph" onclick="tog(this)">`;
+    h += `<div><div class="pn">${p.project}</div>`;
+    h += `<div class="pp">${p.event_count} events · In <b style="color:var(--grn)">+${fmtK(p.inflow)}</b> · Out <b style="color:var(--red)">-${fmtK(p.outflow)}</b> · Net <b>${fmtK(p.net)}</b>`;
+    if (p.overdue_in || p.overdue_out) {
+      h += ` · <span style="color:var(--ylw)">Overdue: +${fmtK(p.overdue_in)} / -${fmtK(p.overdue_out)}</span>`;
+    }
+    h += `</div></div>`;
+    h += `<div class="pt">${chvSvg()}</div></div>`;
+    h += `<div class="pb"><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:6px">`;
+    h += '<thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
+    h += '<th style="padding:6px 8px">Date</th><th style="padding:6px 8px">Event</th><th style="padding:6px 8px">Type</th><th style="padding:6px 8px;text-align:right">Amount</th>';
+    h += '</tr></thead><tbody>';
+    p.events.forEach(e => {
+      h += '<tr style="border-top:1px solid rgba(33,39,47,.3)">';
+      h += `<td style="padding:5px 8px;font-family:var(--mono);white-space:nowrap">${fmtDate(e.date)}</td>`;
+      h += `<td style="padding:5px 8px">${e.label || ''}</td>`;
+      h += `<td style="padding:5px 8px;color:var(--txt2);font-size:11px">${e.kind.replace(/_/g, ' ')}</td>`;
+      h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono)" ${amountCls(e.amount)}>${amountSign(e.amount)}</td>`;
+      h += '</tr>';
+    });
+    h += '</tbody></table></div></div></div>';
+  });
+
+  // ── Bank balance history ──
   h += '<div class="sh">Bank Balance History</div>';
   h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:12px;overflow-x:auto">';
   if (!d.bank.history.length) {
-    h += '<div style="color:var(--dim);font-size:13px">No snapshots yet. Log one via: <code>@jade log balance $X</code></div>';
+    h += '<div style="color:var(--dim);font-size:13px">No snapshots yet. Log one via <code>@jade log balance $X</code></div>';
   } else {
     h += '<table style="width:100%;border-collapse:collapse;font-size:13px">';
     h += '<thead><tr style="text-align:left;color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.5px">';
@@ -1887,7 +2007,7 @@ function renderFinance(c) {
   }
   h += '</div>';
 
-  // Fixed costs grouped by category (collapsible)
+  // ── Fixed costs by category (unchanged section) ──
   h += `<div class="sh">Fixed Costs by Category · ${fmtK(d.fixed_costs.total_monthly_equivalent)}/mo</div>`;
   d.fixed_costs.by_category.forEach(cat => {
     h += `<div class="pc sev-b" style="margin-bottom:8px">`;
@@ -1912,7 +2032,7 @@ function renderFinance(c) {
     h += '</tbody></table></div></div></div>';
   });
 
-  h += `<div class="ft">Generated ${d.generated_at} · Source: finance.db (SQLite) + fixed-costs Google Sheet · Log new balance via <code>@jade log balance $X</code></div>`;
+  h += `<div class="ft">Generated ${d.generated_at} · Sources: JobTread (cashflow ${d.sources.cashflow_date || '—'}) + Google Sheet (fixed costs ${d.sources.fixed_costs_date || '—'}) + finance.db (SQLite)</div>`;
 
   c.innerHTML = h;
 }
