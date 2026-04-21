@@ -1959,7 +1959,7 @@ async function financeAddEntry(kind) {
     if (data.balance) data.balance = parseFloat(data.balance);
     const result = await financeApi(path, { method: 'POST', body: JSON.stringify(data) });
     if (result.state) FINANCE_DATA = result.state;
-    renderFinance(document.getElementById('content'));
+    financeSafeRender();
   });
 }
 
@@ -1980,44 +1980,26 @@ async function financeVoidRow(kind, rowId) {
       body: JSON.stringify({ table, row_id: rowId, reason: reason.trim() }),
     });
     if (result.state) FINANCE_DATA = result.state;
-    renderFinance(document.getElementById('content'));
+    financeSafeRender();
   } catch (e) {
     alert('Void failed: ' + e.message);
   }
 }
 
-async function financeMoveDate(sourceId, currentDate, originalDate, label) {
-  const newDate = prompt(`Move "${label}" to which date? (YYYY-MM-DD)\n\nCurrent: ${currentDate}${originalDate !== currentDate ? ' (overridden from ' + originalDate + ')' : ''}\nLeave blank to clear any override.`, currentDate);
-  if (newDate == null) return;
-  try {
-    if (newDate.trim() === '' || newDate === originalDate) {
-      await financeApi('/scenario-override/' + encodeURIComponent(sourceId), { method: 'DELETE' });
-    } else {
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(newDate.trim())) {
-        alert('Please use YYYY-MM-DD format.');
-        return;
-      }
-      await financeApi('/scenario-override', {
-        method: 'POST',
-        body: JSON.stringify({
-          source_id: sourceId,
-          scenario_date: newDate.trim(),
-          original_date: originalDate,
-          label: label,
-        }),
-      });
-    }
-    const result = await financeApi('/state');
-    FINANCE_DATA = result;
-    renderFinance(document.getElementById('content'));
-  } catch (e) {
-    alert('Scenario update failed: ' + e.message);
-  }
+function financeMoveDate(sourceId, currentDate, originalDate, label) {
+  // Delegate to the modal-based picker
+  financeMoveDateModal(sourceId, currentDate, originalDate, label);
 }
 
 function financeSetUnit(u) {
   window._financeUnit = u;
-  renderFinance(document.getElementById('content'));
+  window._financeExpandedBuckets = new Set(); // reset open buckets on unit change
+  financeSafeRender();
+}
+
+function financeSetView(v) {
+  window._financeView = v; // 'table' or 'calendar'
+  financeSafeRender();
 }
 
 function financeToggleBucket(id) {
@@ -2025,8 +2007,159 @@ function financeToggleBucket(id) {
   const chv = document.getElementById(id + '-chv');
   if (!detail) return;
   const open = detail.style.display !== 'none';
-  detail.style.display = open ? 'none' : '';
-  if (chv) chv.textContent = open ? '▸' : '▾';
+  window._financeExpandedBuckets = window._financeExpandedBuckets || new Set();
+  if (open) {
+    detail.style.display = 'none';
+    if (chv) chv.textContent = '▸';
+    window._financeExpandedBuckets.delete(id);
+  } else {
+    // Lazy render: fill content on first expand
+    const cell = detail.querySelector('td');
+    if (cell && !cell.innerHTML.trim()) {
+      const start = detail.dataset.bucketStart;
+      const end = detail.dataset.bucketEnd;
+      cell.innerHTML = financeRenderBucketContent(start, end, id, window._financeLive === true);
+    }
+    detail.style.display = '';
+    if (chv) chv.textContent = '▾';
+    window._financeExpandedBuckets.add(id);
+  }
+}
+
+function financeRenderBucketContent(start, end, rowId, live) {
+  const d = FINANCE_DATA;
+  if (!d) return '<div style="padding:14px;color:var(--dim)">No data.</div>';
+  const fmt = n => (n<0?'-':'') + '$' + Math.abs(n||0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  const fmtK = n => (n<0?'-':'') + '$' + Math.abs(Math.round(n||0)).toLocaleString();
+  const fmtDate = iso => { if (!iso) return '—'; const dt = new Date(iso + 'T12:00:00'); const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return `${MS[dt.getMonth()]} ${dt.getDate()}`; };
+
+  const allEvents = (d.timeline || []).concat(((d.fixed_cost_events||{}).forward)||[]);
+  const bucketEvents = allEvents.filter(e => e.date >= start && e.date <= end);
+  if (!bucketEvents.length) return '<div style="padding:14px;color:var(--dim);font-size:12px">No events in this period.</div>';
+
+  const byProj = {};
+  bucketEvents.forEach(e => {
+    const p = e.source_type === 'fixed_cost' ? 'Fixed Costs' : e.source_type === 'debt' ? 'Debts' : (e.project || 'Other');
+    (byProj[p] = byProj[p] || []).push(e);
+  });
+  const specialGroups = {'Fixed Costs': 1, 'Debts': 2};
+  const projKeys = Object.keys(byProj).sort((a, bb) => {
+    const sa = specialGroups[a] || 0, sb = specialGroups[bb] || 0;
+    if (sa !== sb) return sa - sb;  // real projects first, then Fixed Costs, then Debts
+    const na = byProj[a].reduce((s, e) => s + e.amount, 0);
+    const nb = byProj[bb].reduce((s, e) => s + e.amount, 0);
+    return Math.abs(nb) - Math.abs(na);
+  });
+
+  const PAGE = 15;
+  let html = '<div style="padding:10px 20px 14px">';
+  projKeys.forEach(p => {
+    const events = byProj[p].sort((a, bb) => a.date.localeCompare(bb.date));
+    const net = events.reduce((s, e) => s + e.amount, 0);
+    const inflow = events.filter(e => e.amount > 0).reduce((s, e) => s + e.amount, 0);
+    const outflow = events.filter(e => e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
+    const projColor = p === 'Fixed Costs' ? 'var(--org)' : p === 'Debts' ? '#9B8AFB' : net >= 0 ? 'var(--grn)' : 'var(--red)';
+    html += `<div style="margin-top:10px;padding:8px 10px;background:var(--card);border-left:3px solid ${projColor};border-radius:0 6px 6px 0">`;
+    html += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:13px">`;
+    html += `<b>${p}</b> <span style="color:var(--txt2);font-size:11px;margin-left:6px">${events.length} event${events.length>1?'s':''}</span>`;
+    html += `<span style="color:var(--txt2);font-size:12px">`;
+    if (inflow) html += `<span style="color:var(--grn);margin-right:10px">+${fmtK(inflow)}</span>`;
+    if (outflow) html += `<span style="color:var(--red);margin-right:10px">-${fmtK(outflow)}</span>`;
+    html += `<span style="font-weight:700;color:${net>=0?'var(--grn)':'var(--red)'}">${net>=0?'+':''}${fmtK(net)}</span>`;
+    html += `</span></div>`;
+    html += `<div style="font-size:12px">`;
+    events.forEach((e, idx) => {
+      const hiddenStyle = idx >= PAGE ? `display:none` : '';
+      const hiddenAttr = idx >= PAGE ? `data-hidden-in="${rowId}-${p.replace(/[^a-z0-9]/gi,'_')}"` : '';
+      const moveHandler = `financeMoveDate(${JSON.stringify(e.source_id)}, ${JSON.stringify(e.date)}, ${JSON.stringify(e.original_date)}, ${JSON.stringify(e.label||'')})`;
+      const canVoid = live && ['petty_cash','misc_expense','non_project_income','bank_snapshot'].includes(e.source_type);
+      const dbId = (e.source_id||'').replace(/^(pc|misc|npi|bs)-/, '');
+      const voidHandler = `financeVoidRow(${JSON.stringify(e.source_type)}, ${dbId})`;
+      html += `<div ${hiddenAttr} style="display:flex;align-items:center;padding:3px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3);${hiddenStyle}">`;
+      html += `<span style="font-family:var(--mono);color:${e.moved?'var(--ylw)':'var(--txt2)'};white-space:nowrap;width:62px">${fmtDate(e.date)}</span>`;
+      html += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}</span>`;
+      html += `<span style="font-family:var(--mono);${e.amount>=0?'color:var(--grn)':'color:var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
+      if (live) html += `<a href="#" onclick="event.preventDefault();event.stopPropagation();${moveHandler}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
+      if (canVoid) html += `<a href="#" onclick="event.preventDefault();event.stopPropagation();${voidHandler}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
+      else html += `<span style="width:12px"></span>`;
+      html += `</div>`;
+    });
+    if (events.length > PAGE) {
+      const pKey = p.replace(/[^a-z0-9]/gi,'_');
+      html += `<div id="${rowId}-${pKey}-more" style="padding:6px 0;font-size:11px">
+        <a href="#" onclick="event.preventDefault();event.stopPropagation();document.querySelectorAll('[data-hidden-in=\\'${rowId}-${pKey}\\']').forEach(el=>el.style.display='');this.parentElement.remove();" style="color:var(--blu);text-decoration:none">Show all ${events.length} events →</a>
+      </div>`;
+    }
+    html += `</div></div>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+function financeShowAll(id) {
+  const hidden = document.querySelectorAll(`[data-hidden-in="${id}"]`);
+  hidden.forEach(el => el.style.display = '');
+  const btn = document.getElementById(id + '-showmore');
+  if (btn) btn.remove();
+}
+
+function financeSafeRender() {
+  try {
+    renderFinance(document.getElementById('content'));
+  } catch (e) {
+    console.error('renderFinance failed:', e);
+    const c = document.getElementById('content');
+    c.innerHTML = `<div class="page-title">Finance</div>
+      <div class="alert"><div><b>Render error.</b> ${e.message}
+        <div style="margin-top:8px"><button onclick="loadAndRenderFinance(document.getElementById('content'))" style="padding:7px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer">Reload from API</button>
+        <button onclick="localStorage.removeItem('finance_api_url');localStorage.removeItem('finance_api_token');window._financeLive=false;loadAndRenderFinance(document.getElementById('content'))" style="margin-left:6px;padding:7px 14px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">Clear API settings</button></div>
+      </div></div>`;
+  }
+}
+
+function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
+  const body = `
+    <div style="font-size:13px;color:var(--txt2);margin-bottom:2px"><b style="color:var(--txt)">${label}</b></div>
+    <div style="font-size:11px;color:var(--dim);margin-bottom:8px">Original date: ${originalDate || currentDate}${currentDate !== originalDate ? ' · Currently moved to: ' + currentDate : ''}</div>
+    <label style="font-size:12px;color:var(--txt2)">New date</label>
+    <input name="date" type="date" value="${currentDate}" required style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:10px 12px;font-size:14px;border-radius:6px;font-family:var(--mono)">
+    <div style="font-size:11px;color:var(--dim);margin-top:6px">This creates a scenario override. Click "Reset" below to revert to the original date.</div>
+    <div style="margin-top:4px"><button type="button" id="scenario-reset-btn" style="padding:6px 10px;font-size:11px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px;cursor:pointer">Reset to original</button></div>
+  `;
+  const modal = financeModal('Move payment date', body, async (data) => {
+    if (!data.date || !/^\d{4}-\d{2}-\d{2}$/.test(data.date)) {
+      throw new Error('Please pick a valid date.');
+    }
+    if (data.date === originalDate) {
+      await financeApi('/scenario-override/' + encodeURIComponent(sourceId), { method: 'DELETE' });
+    } else {
+      await financeApi('/scenario-override', {
+        method: 'POST',
+        body: JSON.stringify({
+          source_id: sourceId,
+          scenario_date: data.date,
+          original_date: originalDate,
+          label: label,
+        }),
+      });
+    }
+    const result = await financeApi('/state');
+    FINANCE_DATA = result;
+    financeSafeRender();
+  });
+  // Wire reset button
+  setTimeout(() => {
+    const btn = modal.querySelector('#scenario-reset-btn');
+    if (btn) btn.addEventListener('click', async () => {
+      try {
+        await financeApi('/scenario-override/' + encodeURIComponent(sourceId), { method: 'DELETE' });
+        const result = await financeApi('/state');
+        FINANCE_DATA = result;
+        modal.remove();
+        financeSafeRender();
+      } catch (e) { alert('Reset failed: ' + e.message); }
+    });
+  }, 100);
 }
 
 async function financeResetScenarios() {
@@ -2034,7 +2167,7 @@ async function financeResetScenarios() {
   try {
     const result = await financeApi('/scenario-reset', { method: 'POST' });
     if (result.state) FINANCE_DATA = result.state;
-    renderFinance(document.getElementById('content'));
+    financeSafeRender();
   } catch (e) {
     alert('Reset failed: ' + e.message);
   }
@@ -2068,7 +2201,7 @@ async function loadAndRenderFinance(c) {
     try {
       FINANCE_DATA = await financeApi('/state');
       window._financeLive = true;
-      renderFinance(c);
+      try { renderFinance(c); } catch (err) { console.error('renderFinance error:', err); c.innerHTML='<div class="alert"><b>Render error.</b> '+err.message+'</div>'; }
       return;
     } catch (e) {
       console.warn('Finance API unavailable, falling back to static JSON:', e.message);
@@ -2079,9 +2212,9 @@ async function loadAndRenderFinance(c) {
   // Priority 2 — static JSON published to dashboard-site/data
   for (let i=0;i<7;i++){
     const d=new Date(Date.now()-i*86400000).toISOString().slice(0,10);
-    try{const r=await fetch('data/finance-'+d+'.json');if(!r.ok)continue;FINANCE_DATA=await r.json();renderFinance(c);return;}catch(e){}
+    try{const r=await fetch('data/finance-'+d+'.json');if(!r.ok)continue;FINANCE_DATA=await r.json();financeSafeRender();return;}catch(e){}
   }
-  try{const r=await fetch('data/finance-latest.json');if(r.ok){FINANCE_DATA=await r.json();renderFinance(c);return;}}catch(e){}
+  try{const r=await fetch('data/finance-latest.json');if(r.ok){FINANCE_DATA=await r.json();financeSafeRender();return;}}catch(e){}
   c.innerHTML='<div class="empty"><div class="empty-i">💵</div><div class="empty-t">No Finance Data</div><div class="empty-d">Run: python3 generate_finance_json.py</div></div>';
 }
 
@@ -2204,9 +2337,9 @@ function renderFinance(c) {
     h += '<th style="padding:10px 12px;text-align:right">Closing Balance</th>';
     h += '<th style="padding:10px 12px;text-align:right">Events</th>';
     h += '</tr></thead><tbody>';
-    // Pre-filter the full event set (timeline + fixed-cost forward) per bucket for drill-down
-    const allEvents = (d.timeline || []).concat((d.fixed_cost_events && d.fixed_cost_events.forward) || []);
-    const eventsInBucket = (b) => allEvents.filter(e => e.date >= b.start && e.date <= b.end);
+    // Lazy-render bucket drill-downs — only render content when user expands a bucket.
+    // The full event list can be 600+ events; rendering all at once is slow.
+    const expanded = window._financeExpandedBuckets || new Set();
     buckets.forEach((b, idx) => {
       const cb = b.closing_balance;
       const cbStyle = cb == null ? 'color:var(--dim)' : (cb < 0 ? 'color:var(--red);font-weight:700' : 'color:var(--txt);font-weight:600');
@@ -2214,8 +2347,9 @@ function renderFinance(c) {
       const fc = fcByKey[b.key];
       const fcAmt = fc ? fc.outflow : 0;
       const rowId = 'bkt-' + unit + '-' + idx;
+      const isOpen = expanded.has(rowId);
       h += `<tr id="${rowId}-row" style="border-top:1px solid rgba(33,39,47,.3);cursor:pointer" onclick="financeToggleBucket('${rowId}')">`;
-      h += `<td style="padding:8px 12px;text-align:center;color:var(--dim)"><span id="${rowId}-chv">▸</span></td>`;
+      h += `<td style="padding:8px 12px;text-align:center;color:var(--dim)"><span id="${rowId}-chv">${isOpen?'▾':'▸'}</span></td>`;
       h += `<td style="padding:8px 12px;font-weight:500">${b.label}</td>`;
       h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--grn)">+${fmtK(b.inflow)}</td>`;
       h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--red)">-${fmtK(b.outflow)}</td>`;
@@ -2224,58 +2358,9 @@ function renderFinance(c) {
       h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${cbStyle}">${cb==null?'—':fmt(cb)}</td>`;
       h += `<td style="padding:8px 12px;text-align:right;color:var(--txt2);font-size:11px">${b.count}</td>`;
       h += '</tr>';
-      // Hidden detail row with per-project breakdown
-      const bucketEvents = eventsInBucket(b);
-      const byProj = {};
-      bucketEvents.forEach(e => {
-        const p = e.source_type === 'fixed_cost' ? 'Fixed Costs' : (e.project || 'Other');
-        (byProj[p] = byProj[p] || []).push(e);
-      });
-      const projKeys = Object.keys(byProj).sort((a, bb) => {
-        if (a === 'Fixed Costs') return 1; if (bb === 'Fixed Costs') return -1;
-        const na = byProj[a].reduce((s, e) => s + e.amount, 0);
-        const nb = byProj[bb].reduce((s, e) => s + e.amount, 0);
-        return Math.abs(nb) - Math.abs(na);
-      });
-      h += `<tr id="${rowId}-detail" style="display:none;background:var(--bg)"><td colspan="8" style="padding:0">`;
-      if (!bucketEvents.length) {
-        h += '<div style="padding:14px;color:var(--dim);font-size:12px">No events in this period.</div>';
-      } else {
-        h += '<div style="padding:10px 20px 14px">';
-        projKeys.forEach(p => {
-          const events = byProj[p];
-          const net = events.reduce((s, e) => s + e.amount, 0);
-          const inflow = events.filter(e => e.amount > 0).reduce((s, e) => s + e.amount, 0);
-          const outflow = events.filter(e => e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
-          const projColor = p === 'Fixed Costs' ? 'var(--org)' : net >= 0 ? 'var(--grn)' : 'var(--red)';
-          h += `<div style="margin-top:10px;padding:8px 10px;background:var(--card);border-left:3px solid ${projColor};border-radius:0 6px 6px 0">`;
-          h += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:13px">`;
-          h += `<b>${p}</b>`;
-          h += `<span style="color:var(--txt2);font-size:12px">`;
-          if (inflow) h += `<span style="color:var(--grn);margin-right:10px">+${fmtK(inflow)}</span>`;
-          if (outflow) h += `<span style="color:var(--red);margin-right:10px">-${fmtK(outflow)}</span>`;
-          h += `<span style="font-weight:700;color:${net>=0?'var(--grn)':'var(--red)'}">${net>=0?'+':''}${fmtK(net)}</span>`;
-          h += `</span></div>`;
-          // event list
-          h += `<div style="font-size:12px">`;
-          events.sort((a, bb) => a.date.localeCompare(bb.date)).forEach(e => {
-            const moveHandler = `financeMoveDate(${JSON.stringify(e.source_id)}, ${JSON.stringify(e.date)}, ${JSON.stringify(e.original_date)}, ${JSON.stringify(e.label||'')})`;
-            const canVoid = live && ['petty_cash','misc_expense','non_project_income','bank_snapshot'].includes(e.source_type);
-            const dbId = (e.source_id||'').replace(/^(pc|misc|npi|bs)-/, '');
-            const voidHandler = `financeVoidRow(${JSON.stringify(e.source_type)}, ${dbId})`;
-            h += `<div style="display:flex;align-items:center;padding:3px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3)">`;
-            h += `<span style="font-family:var(--mono);color:${e.moved?'var(--ylw)':'var(--txt2)'};white-space:nowrap;width:62px">${fmtDate(e.date)}</span>`;
-            h += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}</span>`;
-            h += `<span style="font-family:var(--mono);${e.amount>=0?'color:var(--grn)':'color:var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
-            if (live) h += `<a href="#" onclick="event.preventDefault();event.stopPropagation();${moveHandler}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
-            if (canVoid) h += `<a href="#" onclick="event.preventDefault();event.stopPropagation();${voidHandler}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
-            else h += `<span style="width:12px"></span>`;
-            h += `</div>`;
-          });
-          h += `</div></div>`;
-        });
-        h += '</div>';
-      }
+      // Detail row — empty placeholder, filled lazily on expand
+      h += `<tr id="${rowId}-detail" data-bucket-start="${b.start}" data-bucket-end="${b.end}" style="display:${isOpen?'':'none'};background:var(--bg)"><td colspan="8" style="padding:0">`;
+      h += isOpen ? financeRenderBucketContent(b.start, b.end, rowId, live) : '';
       h += '</td></tr>';
     });
     h += '</tbody></table></div>';
