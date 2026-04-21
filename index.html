@@ -2026,6 +2026,78 @@ function financeToggleBucket(id) {
   }
 }
 
+function financeRenderCalendar(dayBuckets, fcByKey) {
+  // Group day-buckets by YYYY-MM
+  const fmtK = n => (n<0?'-':'') + '$' + Math.abs(Math.round(n||0)).toLocaleString();
+  const byMonth = {};
+  dayBuckets.forEach(b => {
+    const mk = b.key.slice(0, 7);
+    if (!byMonth[mk]) byMonth[mk] = {};
+    byMonth[mk][b.key] = b;
+  });
+  const todayStr = new Date().toISOString().slice(0,10);
+  let html = '<div style="display:flex;flex-direction:column;gap:22px">';
+  Object.keys(byMonth).sort().forEach(mk => {
+    const [y, mo] = mk.split('-').map(Number);
+    const firstDay = new Date(y, mo-1, 1);
+    const lastDay = new Date(y, mo, 0).getDate();
+    // Monday=0 alignment
+    const startWeekday = (firstDay.getDay() + 6) % 7;
+    const monthName = firstDay.toLocaleString('default', { month: 'long', year: 'numeric' });
+    html += `<div>`;
+    html += `<div style="font-size:14px;font-weight:700;color:var(--txt);margin-bottom:8px">${monthName}</div>`;
+    html += `<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">`;
+    ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(d => {
+      html += `<div style="font-size:10px;color:var(--dim);text-align:center;padding:2px 0;font-weight:600;text-transform:uppercase;letter-spacing:.5px">${d}</div>`;
+    });
+    for (let i = 0; i < startWeekday; i++) html += '<div></div>';
+    for (let day = 1; day <= lastDay; day++) {
+      const ds = `${y}-${String(mo).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+      const b = byMonth[mk][ds];
+      const isToday = ds === todayStr;
+      const net = b ? b.net : 0;
+      const count = b ? b.count : 0;
+      const cb = b ? b.closing_balance : null;
+      const bgColor = net > 0 ? 'rgba(18,183,106,.14)'
+                    : net < 0 ? 'rgba(240,68,56,.10)'
+                    : 'var(--card)';
+      const borderColor = isToday ? 'var(--blu)' : 'var(--bdr)';
+      const borderWidth = isToday ? '2px' : '1px';
+      const clickable = b ? `cursor:pointer` : 'cursor:default';
+      const clickAttr = b ? ` onclick="financeOpenDay('${ds}')"` : '';
+      html += `<div${clickAttr} style="${clickable};background:${bgColor};border:${borderWidth} solid ${borderColor};border-radius:5px;padding:6px;min-height:74px;display:flex;flex-direction:column;gap:2px" title="${b ? count + ' events' : ''}">`;
+      html += `<div style="font-size:11px;font-weight:${isToday?'700':'500'};color:${isToday?'var(--blu)':'var(--txt)'}">${day}${isToday?' ★':''}</div>`;
+      if (b) {
+        const netCol = net > 0 ? 'var(--grn)' : net < 0 ? 'var(--red)' : 'var(--txt2)';
+        html += `<div style="font-size:11px;font-family:var(--mono);color:${netCol};font-weight:700">${net>0?'+':''}${fmtK(net)}</div>`;
+        if (cb != null) html += `<div style="font-size:9px;font-family:var(--mono);color:${cb<0?'var(--red)':'var(--dim)'}">${cb<0?'':'='}${fmtK(cb)}</div>`;
+        html += `<div style="font-size:9px;color:var(--dim);margin-top:auto">${count} evt${count!==1?'s':''}</div>`;
+      }
+      html += `</div>`;
+    }
+    html += '</div></div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function financeOpenDay(dateStr) {
+  const content = financeRenderBucketContent(dateStr, dateStr, 'cal-' + dateStr, window._financeLive === true);
+  const bg = document.createElement('div');
+  bg.setAttribute('data-modal', '1');
+  bg.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;display:flex;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto';
+  bg.innerHTML = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);max-width:760px;width:100%">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--bdr)">
+      <div style="font-size:15px;font-weight:700">${new Date(dateStr+'T12:00:00').toLocaleDateString(undefined, {weekday:'long',year:'numeric',month:'long',day:'numeric'})}</div>
+      <button type="button" data-close style="background:none;border:none;color:var(--txt2);font-size:22px;cursor:pointer">×</button>
+    </div>
+    <div>${content}</div>
+  </div>`;
+  bg.querySelector('[data-close]').addEventListener('click', () => bg.remove());
+  bg.addEventListener('click', e => { if (e.target === bg) bg.remove(); });
+  document.body.appendChild(bg);
+}
+
 function financeRenderBucketContent(start, end, rowId, live) {
   const d = FINANCE_DATA;
   if (!d) return '<div style="padding:14px;color:var(--dim)">No data.</div>';
@@ -2252,21 +2324,26 @@ function renderFinance(c) {
   const hasOverrides = (d.sources && d.sources.scenario_overrides_count) || 0;
 
   let h = `
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:4px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:12px">
       <div>
         <div class="page-title">Finance</div>
-        <div class="page-sub">Balance · Projects · Fixed costs · Next 90 days · As of ${d.date}
+        <div class="page-sub">Balance · Projects · Fixed costs · 365-day forecast · As of ${d.date}
           ${live ? '<span style="color:var(--grn);font-weight:600;margin-left:8px">● LIVE</span>' : '<span style="color:var(--ylw);margin-left:8px">● read-only (static JSON)</span>'}
         </div>
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <button onclick="financeAddEntry('bank')" ${live?'':'disabled'} style="padding:7px 12px;font-size:12px;font-weight:600;background:${live?'var(--grn)':'var(--card-h)'};color:#fff;border:none;border-radius:6px;cursor:${live?'pointer':'not-allowed'};opacity:${live?'1':'.5'}">+ Balance</button>
-        <button onclick="financeAddEntry('petty')" ${live?'':'disabled'} style="padding:7px 12px;font-size:12px;font-weight:600;background:${live?'var(--org)':'var(--card-h)'};color:#fff;border:none;border-radius:6px;cursor:${live?'pointer':'not-allowed'};opacity:${live?'1':'.5'}">+ Petty Cash</button>
-        <button onclick="financeAddEntry('misc')" ${live?'':'disabled'} style="padding:7px 12px;font-size:12px;font-weight:600;background:${live?'var(--red)':'var(--card-h)'};color:#fff;border:none;border-radius:6px;cursor:${live?'pointer':'not-allowed'};opacity:${live?'1':'.5'}">+ Misc</button>
-        <button onclick="financeAddEntry('income')" ${live?'':'disabled'} style="padding:7px 12px;font-size:12px;font-weight:600;background:${live?'var(--blu)':'var(--card-h)'};color:#fff;border:none;border-radius:6px;cursor:${live?'pointer':'not-allowed'};opacity:${live?'1':'.5'}">+ Income</button>
-        ${hasOverrides ? `<button onclick="financeResetScenarios()" style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--ylw);border-radius:6px;cursor:pointer">↺ Reset ${hasOverrides} overrides</button>` : ''}
+        ${hasOverrides ? `<button onclick="financeResetScenarios()" style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--ylw);border-radius:6px;cursor:pointer">↺ Reset ${hasOverrides} scenario${hasOverrides>1?'s':''}</button>` : ''}
         <button onclick="financeShowConfig()" style="padding:7px 12px;font-size:12px;font-weight:500;background:var(--card);color:var(--txt2);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">⚙ Settings</button>
       </div>
+    </div>
+
+    <!-- Prominent Quick Add bar (always visible when LIVE) -->
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.8px;font-weight:700">${live?'Quick add →':'Read-only — enable API in ⚙ Settings to add entries'}</span>
+      <button onclick="financeAddEntry('bank')" ${live?'':'disabled'} style="padding:8px 14px;font-size:13px;font-weight:600;background:${live?'var(--grn)':'var(--card-h)'};color:#fff;border:none;border-radius:6px;cursor:${live?'pointer':'not-allowed'};opacity:${live?'1':'.4'}">💵 Bank Balance</button>
+      <button onclick="financeAddEntry('petty')" ${live?'':'disabled'} style="padding:8px 14px;font-size:13px;font-weight:600;background:${live?'var(--org)':'var(--card-h)'};color:#fff;border:none;border-radius:6px;cursor:${live?'pointer':'not-allowed'};opacity:${live?'1':'.4'}">🧾 Petty Cash</button>
+      <button onclick="financeAddEntry('misc')" ${live?'':'disabled'} style="padding:8px 14px;font-size:13px;font-weight:600;background:${live?'var(--red)':'var(--card-h)'};color:#fff;border:none;border-radius:6px;cursor:${live?'pointer':'not-allowed'};opacity:${live?'1':'.4'}">💸 Misc Expense</button>
+      <button onclick="financeAddEntry('income')" ${live?'':'disabled'} style="padding:8px 14px;font-size:13px;font-weight:600;background:${live?'var(--blu)':'var(--card-h)'};color:#fff;border:none;border-radius:6px;cursor:${live?'pointer':'not-allowed'};opacity:${live?'1':'.4'}">💰 Income</button>
     </div>
     ${!live ? `<div class="alert" style="background:var(--ylw-s);border-color:var(--ylw-b);color:var(--ylw)"><div><b>Read-only mode.</b> You're seeing the static JSON snapshot from the last dashboard refresh. To enable Add/Edit/Scenario buttons, click ⚙ Settings and enter the tunnel URL + bearer token from the Mac. ${window._financeApiError ? '<span style="opacity:.7"> (last error: '+window._financeApiError+')</span>' : ''}</div></div>` : ''}
 
@@ -2308,11 +2385,16 @@ function renderFinance(c) {
 
   // ── Time-unit slider + aggregated summary ──
   const unit = window._financeUnit || 'week';
+  const view = window._financeView || 'table';
   const pill = (val, label) => `<button onclick="financeSetUnit('${val}')" style="padding:7px 18px;font-size:13px;font-weight:600;background:${unit===val?'var(--blu)':'transparent'};color:${unit===val?'#fff':'var(--txt2)'};border:none;border-radius:4px;cursor:pointer;transition:all .12s">${label}</button>`;
+  const viewPill = (val, label) => `<button onclick="financeSetView('${val}')" style="padding:7px 14px;font-size:12px;font-weight:600;background:${view===val?'var(--pur)':'transparent'};color:${view===val?'#fff':'var(--txt2)'};border:none;border-radius:4px;cursor:pointer;transition:all .12s">${label}</button>`;
   h += `<div class="sh" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
     <span>Cashflow Summary</span>
-    <div style="display:inline-flex;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px">
-      ${pill('day','Day')}${pill('week','Week')}${pill('month','Month')}
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      ${unit === 'day' ? `<div style="display:inline-flex;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px">${viewPill('table','Table')}${viewPill('calendar','Calendar')}</div>` : ''}
+      <div style="display:inline-flex;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px">
+        ${pill('day','Day')}${pill('week','Week')}${pill('month','Month')}
+      </div>
     </div>
   </div>`;
 
@@ -2322,10 +2404,20 @@ function renderFinance(c) {
   const fcByKey = {};
   fcBuckets.forEach(b => fcByKey[b.key] = b);
 
-  h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:0;overflow:hidden;margin-bottom:20px">';
-  if (!buckets.length) {
-    h += '<div style="padding:14px;color:var(--dim)">No forward events.</div>';
+  // Calendar view — only in Day mode
+  if (unit === 'day' && view === 'calendar') {
+    h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:18px;margin-bottom:20px">';
+    if (!buckets.length) {
+      h += '<div style="color:var(--dim)">No forward events.</div>';
+    } else {
+      h += financeRenderCalendar(buckets, fcByKey);
+      h += '<div style="margin-top:14px;font-size:11px;color:var(--dim);display:flex;gap:16px;flex-wrap:wrap"><span><span style="display:inline-block;width:10px;height:10px;background:rgba(18,183,106,.3);border:1px solid var(--grn);border-radius:2px;vertical-align:middle"></span> net positive day</span><span><span style="display:inline-block;width:10px;height:10px;background:rgba(240,68,56,.2);border:1px solid var(--red);border-radius:2px;vertical-align:middle"></span> net negative day</span><span>Click any day for its breakdown</span></div>';
+    }
+    h += '</div>';
+  } else if (!buckets.length) {
+    h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px;color:var(--dim);margin-bottom:20px">No forward events.</div>';
   } else {
+    h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:0;overflow:hidden;margin-bottom:20px">';
     h += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">';
     h += '<thead style="background:var(--raised)"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
     h += '<th style="padding:10px 12px;width:20px"></th>';
