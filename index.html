@@ -366,6 +366,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a data-p="weekly">▤ Weekly Forecast</a>
   <a data-p="mgmt">▥ Management</a>
   <a data-p="fcash">💰 Full Cash Flow</a>
+  <a data-p="finance">💵 Finance</a>
   <a data-p="archive">▦ Archive</a>
 </div>
 
@@ -389,6 +390,7 @@ document.getElementById('main-nav').addEventListener('click', e => {
 let EOD_DATA = null;
 let WEEKLY_DATA = null;
 let FORECAST_DATA = null;
+let FINANCE_DATA = null;
 const WEEKLY_PW = 'Thisisthepassword123!';
 const MGMT_PW = 'Awesome';
 
@@ -398,6 +400,7 @@ function render() {
   else if (curPage === 'weekly') loadAndRenderWeekly(c);
   else if (curPage === 'mgmt') mgmtGate(c);
   else if (curPage === 'fcash') fcGate(c);
+  else if (curPage === 'finance') financeGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
     const titles = {projects:'Project Dashboards'};
@@ -1804,6 +1807,117 @@ function mgmtTypeInfo(type) {
   return {label:'OUT', cls:'out', color:'#f87171', sign:'-'};
 }
 
+// ── Finance tab ──────────────────────────────────────────────────
+function financeGate(c) {
+  if (sessionStorage.getItem('mgmt_auth')==='1') { loadAndRenderFinance(c); return; }
+  c.innerHTML = `<div class="pw-gate">
+    <div class="pw-icon">💵</div>
+    <div class="pw-title">Finance — Restricted</div>
+    <div class="pw-sub">Enter password to access.</div>
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
+    <button class="pw-btn" id="pw-btn">Unlock</button>
+    <div class="pw-deny" id="pw-deny" style="display:none">Access denied</div>
+  </div>`;
+  const inp=document.getElementById('pw-input'),btn=document.getElementById('pw-btn'),deny=document.getElementById('pw-deny');
+  function tryPw(){
+    if(inp.value===MGMT_PW){sessionStorage.setItem('mgmt_auth','1');loadAndRenderFinance(c);}
+    else{inp.classList.add('pw-err');deny.style.display='';setTimeout(()=>inp.classList.remove('pw-err'),400);}
+  }
+  btn.addEventListener('click',tryPw);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')tryPw();});
+  setTimeout(()=>inp.focus(),50);
+}
+
+async function loadAndRenderFinance(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Finance...</div></div>';
+  for (let i=0;i<7;i++){
+    const d=new Date(Date.now()-i*86400000).toISOString().slice(0,10);
+    try{const r=await fetch('data/finance-'+d+'.json');if(!r.ok)continue;FINANCE_DATA=await r.json();renderFinance(c);return;}catch(e){}
+  }
+  try{const r=await fetch('data/finance-latest.json');if(r.ok){FINANCE_DATA=await r.json();renderFinance(c);return;}}catch(e){}
+  c.innerHTML='<div class="empty"><div class="empty-i">💵</div><div class="empty-t">No Finance Data</div><div class="empty-d">Run: python3 generate_finance_json.py</div></div>';
+}
+
+function renderFinance(c) {
+  const d = FINANCE_DATA;
+  const fmt = n => '$' + (n||0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  const fmtK = n => '$' + Math.round(n||0).toLocaleString();
+  const bal = d.summary.current_balance || 0;
+  const burn = d.summary.monthly_burn || 0;
+  const months = d.summary.months_runway;
+  const weeks = d.summary.weeks_runway;
+  const runwayCls = (months == null) ? 'g' : (months < 1 ? 'r' : months < 3 ? 'y' : 'g');
+  const runwayDisp = months == null ? '—' : (months < 1 ? `${Math.round((weeks||0)*7)}d` : `${months}mo`);
+
+  let h = `
+    <div class="page-title">Finance</div>
+    <div class="page-sub">Bank balance + fixed costs · Data from ${d.date}</div>
+
+    <div class="stats">
+      <div class="st g"><div class="n">${fmtK(bal)}</div><div class="l">Current Balance</div></div>
+      <div class="st r"><div class="n">${fmtK(burn)}</div><div class="l">Monthly Burn</div></div>
+      <div class="st ${runwayCls}"><div class="n">${runwayDisp}</div><div class="l">Runway</div></div>
+      <div class="st b"><div class="n">${d.fixed_costs.by_category.length}</div><div class="l">Categories</div></div>
+      <div class="st y"><div class="n">${d.fixed_costs.by_category.reduce((s,c)=>s+c.count,0)}</div><div class="l">Fixed-cost items</div></div>
+    </div>`;
+
+  if (months != null && months < 1) {
+    h += `<div class="alert"><div><b>⚠ Low runway.</b> Current balance covers about ${Math.round((weeks||0)*7)} days of fixed costs at the current burn rate (${fmtK(burn)}/mo).</div></div>`;
+  }
+
+  // Bank balance history
+  h += '<div class="sh">Bank Balance History</div>';
+  h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:12px;overflow-x:auto">';
+  if (!d.bank.history.length) {
+    h += '<div style="color:var(--dim);font-size:13px">No snapshots yet. Log one via: <code>@jade log balance $X</code></div>';
+  } else {
+    h += '<table style="width:100%;border-collapse:collapse;font-size:13px">';
+    h += '<thead><tr style="text-align:left;color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.5px">';
+    h += '<th style="padding:4px 8px">Date</th><th style="padding:4px 8px">Account</th><th style="padding:4px 8px;text-align:right">Balance</th><th style="padding:4px 8px">Note</th>';
+    h += '</tr></thead><tbody>';
+    d.bank.history.forEach(r => {
+      h += '<tr style="border-top:1px solid rgba(33,39,47,.3)">';
+      h += `<td style="padding:6px 8px;font-family:var(--mono)">${r.date}</td>`;
+      h += `<td style="padding:6px 8px;color:var(--txt2)">${r.account}</td>`;
+      h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono);font-weight:600">${fmt(r.balance)}</td>`;
+      h += `<td style="padding:6px 8px;color:var(--txt2)">${r.note || ''}</td>`;
+      h += '</tr>';
+    });
+    h += '</tbody></table>';
+  }
+  h += '</div>';
+
+  // Fixed costs grouped by category (collapsible)
+  h += `<div class="sh">Fixed Costs by Category · ${fmtK(d.fixed_costs.total_monthly_equivalent)}/mo</div>`;
+  d.fixed_costs.by_category.forEach(cat => {
+    h += `<div class="pc sev-b" style="margin-bottom:8px">`;
+    h += `<div class="ph" onclick="tog(this)">`;
+    h += `<div><div class="pn">${cat.category}</div>`;
+    h += `<div class="pp">${cat.count} items · ${fmtK(cat.total_monthly_equivalent)}/mo</div></div>`;
+    h += `<div class="pt">${chvSvg()}</div></div>`;
+    h += `<div class="pb"><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:8px">`;
+    h += `<thead><tr style="text-align:left;color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.5px">`;
+    h += `<th style="padding:4px 8px">Name</th><th style="padding:4px 8px;text-align:right">Amount</th><th style="padding:4px 8px">Frequency</th><th style="padding:4px 8px">Pay days</th><th style="padding:4px 8px;text-align:right">~Monthly</th>`;
+    h += `</tr></thead><tbody>`;
+    cat.items.forEach(it => {
+      const days = [it.payment_day, it.payment_day_2].filter(x=>x!=null).join(', ') || '—';
+      h += '<tr style="border-top:1px solid rgba(33,39,47,.3)">';
+      h += `<td style="padding:5px 8px">${it.name}</td>`;
+      h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono)">${fmt(it.amount)}</td>`;
+      h += `<td style="padding:5px 8px;color:var(--txt2)">${it.frequency}</td>`;
+      h += `<td style="padding:5px 8px;color:var(--txt2);font-family:var(--mono)">${days}</td>`;
+      h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);font-weight:600">${fmt(it.monthly_equivalent)}</td>`;
+      h += '</tr>';
+    });
+    h += '</tbody></table></div></div></div>';
+  });
+
+  h += `<div class="ft">Generated ${d.generated_at} · Source: finance.db (SQLite) + fixed-costs Google Sheet · Log new balance via <code>@jade log balance $X</code></div>`;
+
+  c.innerHTML = h;
+}
+
+// ── Management tab ───────────────────────────────────────────────
 function mgmtGate(c) {
   if (sessionStorage.getItem('mgmt_auth')==='1') { loadAndRenderMgmt(c); return; }
   c.innerHTML = `<div class="pw-gate">
