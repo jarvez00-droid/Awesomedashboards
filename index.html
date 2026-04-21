@@ -1997,6 +1997,94 @@ function financeSetUnit(u) {
   financeSafeRender();
 }
 
+function financeSetRange(r) {
+  window._financeRange = r;
+  window._financeExpandedBuckets = new Set();
+  financeSafeRender();
+}
+
+function financeRangeEndDate(data) {
+  const range = window._financeRange || 'eoy';
+  const today = new Date(data.date + 'T12:00:00');
+  if (range === 'eoy') {
+    return new Date(today.getFullYear(), 11, 31);
+  }
+  if (range === 'full') {
+    // 365 days from today (the backend's full window)
+    return new Date(data.window_end + 'T12:00:00');
+  }
+  const days = { '30d': 30, '90d': 90, '6mo': 180, '12mo': 365 }[range];
+  const end = new Date(today);
+  end.setDate(end.getDate() + (days || 365));
+  return end;
+}
+
+function financeFilterByRange(data) {
+  const rangeEnd = financeRangeEndDate(data);
+  const rangeEndStr = rangeEnd.toISOString().slice(0, 10);
+
+  const tl = (data.timeline || []).filter(e => e.date <= rangeEndStr);
+  const fcFwd = ((data.fixed_cost_events || {}).forward || []).filter(e => e.date <= rangeEndStr);
+
+  const agg = {}, aggFixed = {};
+  ['day', 'week', 'month'].forEach(u => {
+    agg[u] = ((data.aggregated && data.aggregated[u]) || []).filter(b => b.start <= rangeEndStr);
+    aggFixed[u] = ((data.aggregated_fixed && data.aggregated_fixed[u]) || []).filter(b => b.start <= rangeEndStr);
+  });
+
+  // Recompute summary for the range
+  const totalIn = tl.filter(e => e.amount > 0).reduce((s, e) => s + e.amount, 0);
+  const totalOut = tl.filter(e => e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
+  const startBal = data.summary.current_balance;
+  const projected = startBal + totalIn - totalOut;
+  const breakdown = tl.find(e => e.running_balance !== null && e.running_balance < 0);
+
+  // Recompute by_project for the range (keep overdue totals from original)
+  const origProjOverdue = {};
+  (data.by_project || []).forEach(p => {
+    origProjOverdue[p.project] = { in: p.overdue_in || 0, out: p.overdue_out || 0 };
+  });
+  const projMap = {};
+  tl.forEach(e => {
+    if (e.source_type === 'fixed_cost' || e.source_type === 'debt') return;
+    const p = e.project || 'Other';
+    if (!projMap[p]) projMap[p] = { project: p, net: 0, inflow: 0, outflow: 0, overdue_in: 0, overdue_out: 0, events: [] };
+    projMap[p].net += e.amount;
+    if (e.amount > 0) projMap[p].inflow += e.amount;
+    else projMap[p].outflow += Math.abs(e.amount);
+    projMap[p].events.push(e);
+  });
+  Object.keys(projMap).forEach(pn => {
+    projMap[pn].net = Math.round(projMap[pn].net * 100) / 100;
+    projMap[pn].inflow = Math.round(projMap[pn].inflow * 100) / 100;
+    projMap[pn].outflow = Math.round(projMap[pn].outflow * 100) / 100;
+    projMap[pn].event_count = projMap[pn].events.length;
+    const o = origProjOverdue[pn];
+    if (o) { projMap[pn].overdue_in = o.in; projMap[pn].overdue_out = o.out; }
+  });
+  const projectsFiltered = Object.values(projMap).sort((a, b) => Math.abs(b.net) - Math.abs(a.net));
+
+  return {
+    ...data,
+    _rangeEnd: rangeEndStr,
+    window_end: rangeEndStr,
+    timeline: tl,
+    fixed_cost_events: { ...data.fixed_cost_events, forward: fcFwd },
+    aggregated: agg,
+    aggregated_fixed: aggFixed,
+    by_project: projectsFiltered,
+    summary: {
+      ...data.summary,
+      incoming_window: Math.round(totalIn * 100) / 100,
+      outgoing_window: Math.round(totalOut * 100) / 100,
+      net_window: Math.round((totalIn - totalOut) * 100) / 100,
+      projected_end_balance: Math.round(projected * 100) / 100,
+      runway_breakdown_date: breakdown ? breakdown.date : null,
+      event_count: tl.length,
+    },
+  };
+}
+
 function financeSetView(v) {
   window._financeView = v; // 'table' or 'calendar'
   financeSafeRender();
@@ -2291,7 +2379,8 @@ async function loadAndRenderFinance(c) {
 }
 
 function renderFinance(c) {
-  const d = FINANCE_DATA;
+  if (!FINANCE_DATA) return;
+  const d = financeFilterByRange(FINANCE_DATA);
   const s = d.summary;
   const fmt = n => (n<0?'-':'') + '$' + Math.abs(n||0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
   const fmtK = n => (n<0?'-':'') + '$' + Math.abs(Math.round(n||0)).toLocaleString();
@@ -2301,7 +2390,7 @@ function renderFinance(c) {
     const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     return `${MS[dt.getMonth()]} ${dt.getDate()}`;
   };
-  const amountCls = n => n > 0 ? 'style="color:var(--grn);font-weight:600"' : 'style="color:var(--red);font-weight:600"';
+  const amountCol = n => n > 0 ? 'var(--grn)' : 'var(--red)';
   const amountSign = n => (n > 0 ? '+' : '') + fmt(n);
 
   const bal = s.current_balance || 0;
@@ -2383,19 +2472,29 @@ function renderFinance(c) {
     }
   }
 
-  // ── Time-unit slider + aggregated summary ──
+  // ── Range selector + time-unit slider + aggregated summary ──
   const unit = window._financeUnit || 'week';
   const view = window._financeView || 'table';
+  const range = window._financeRange || 'eoy';
   const pill = (val, label) => `<button onclick="financeSetUnit('${val}')" style="padding:7px 18px;font-size:13px;font-weight:600;background:${unit===val?'var(--blu)':'transparent'};color:${unit===val?'#fff':'var(--txt2)'};border:none;border-radius:4px;cursor:pointer;transition:all .12s">${label}</button>`;
   const viewPill = (val, label) => `<button onclick="financeSetView('${val}')" style="padding:7px 14px;font-size:12px;font-weight:600;background:${view===val?'var(--pur)':'transparent'};color:${view===val?'#fff':'var(--txt2)'};border:none;border-radius:4px;cursor:pointer;transition:all .12s">${label}</button>`;
+  const rangePill = (val, label) => `<button onclick="financeSetRange('${val}')" style="padding:6px 12px;font-size:12px;font-weight:600;background:${range===val?'var(--acc)':'transparent'};color:${range===val?'#fff':'var(--txt2)'};border:none;border-radius:4px;cursor:pointer;transition:all .12s">${label}</button>`;
+  const endDisp = (() => { const dt = new Date(d._rangeEnd + 'T12:00:00'); return dt.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'}); })();
   h += `<div class="sh" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-    <span>Cashflow Summary</span>
+    <span>Cashflow Summary <span style="font-size:11px;color:var(--dim);font-weight:400;margin-left:6px">through ${endDisp}</span></span>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
       ${unit === 'day' ? `<div style="display:inline-flex;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px">${viewPill('table','Table')}${viewPill('calendar','Calendar')}</div>` : ''}
       <div style="display:inline-flex;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px">
         ${pill('day','Day')}${pill('week','Week')}${pill('month','Month')}
       </div>
     </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
+    <span style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;font-weight:600">Range:</span>
+    <div style="display:inline-flex;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px">
+      ${rangePill('30d','30d')}${rangePill('90d','90d')}${rangePill('6mo','6 mo')}${rangePill('eoy','Until EOY')}${rangePill('12mo','12 mo')}${rangePill('full','Full')}
+    </div>
+    <span style="font-size:11px;color:var(--dim)">Stats + runway update as you change this</span>
   </div>`;
 
   const buckets = (d.aggregated && d.aggregated[unit]) || [];
@@ -2475,7 +2574,7 @@ function renderFinance(c) {
       h += `<td style="padding:6px 8px;color:var(--red);font-family:var(--mono)">${e.days_overdue}d</td>`;
       h += `<td style="padding:6px 8px">${e.label || ''}</td>`;
       h += `<td style="padding:6px 8px;color:var(--txt2);font-size:11px;white-space:nowrap">${e.project || '—'}</td>`;
-      h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono)" ${amountCls(e.amount)}>${amountSign(e.amount)}</td>`;
+      h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono);color:${amountCol(e.amount)};font-weight:600">${amountSign(e.amount)}</td>`;
       h += '</tr>';
     });
     h += '</tbody></table></div></div></div>';
@@ -2530,7 +2629,7 @@ function renderFinance(c) {
       h += `</td>`;
       h += `<td style="padding:5px 8px">${e.label || ''}</td>`;
       h += `<td style="padding:5px 8px;color:var(--txt2);font-size:11px">${e.kind.replace(/_/g, ' ')}</td>`;
-      h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono)" ${amountCls(e.amount)}>${amountSign(e.amount)}</td>`;
+      h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${amountCol(e.amount)};font-weight:600">${amountSign(e.amount)}</td>`;
       h += `<td></td>`;
       h += '</tr>';
     });
