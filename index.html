@@ -2455,9 +2455,8 @@ function renderFinance(c) {
       h += isOpen ? financeRenderBucketContent(b.start, b.end, rowId, live) : '';
       h += '</td></tr>';
     });
-    h += '</tbody></table></div>';
+    h += '</tbody></table></div></div>';  // close scroll wrapper + outer card
   }
-  h += '</div>';
 
   // ── Overdue backlog ──
   if (d.overdue && d.overdue.length) {
