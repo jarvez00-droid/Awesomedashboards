@@ -2006,11 +2006,13 @@ function financeSetRange(r) {
 function financeRangeEndDate(data) {
   const range = window._financeRange || 'eoy';
   const today = new Date(data.date + 'T12:00:00');
+  if (range === 'custom' && window._financeCustomEnd) {
+    return new Date(window._financeCustomEnd + 'T12:00:00');
+  }
   if (range === 'eoy') {
     return new Date(today.getFullYear(), 11, 31);
   }
   if (range === 'full') {
-    // 365 days from today (the backend's full window)
     return new Date(data.window_end + 'T12:00:00');
   }
   const days = { '30d': 30, '90d': 90, '6mo': 180, '12mo': 365 }[range];
@@ -2169,6 +2171,147 @@ function financeRenderCalendar(dayBuckets, fcByKey) {
   return html;
 }
 
+function financeRenderPettyCashSection(live) {
+  const d = FINANCE_DATA;
+  const log = d.petty_cash_log || [];
+  const byDate = {};
+  let totalAll = 0;
+  log.forEach(r => { (byDate[r.date] = byDate[r.date] || []).push(r); totalAll += r.amount; });
+
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayEntries = byDate[todayStr] || [];
+  const todayTotal = todayEntries.reduce((s, r) => s + r.amount, 0);
+  const thirtyAgo = new Date(); thirtyAgo.setDate(thirtyAgo.getDate() - 30);
+  const last30Total = log.filter(r => new Date(r.date + 'T12:00:00') >= thirtyAgo).reduce((s, r) => s + r.amount, 0);
+
+  let h = `<div class="sh">🧾 Petty Cash Log <span style="font-size:11px;color:var(--dim);font-weight:400;margin-left:6px">click any day to view / add entries</span></div>`;
+
+  h += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:10px">
+      <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px">Today</div>
+      <div style="font-size:18px;color:var(--red);font-family:var(--mono);font-weight:700">-$${Math.round(todayTotal).toLocaleString()}</div>
+      <div style="font-size:11px;color:var(--txt2)">${todayEntries.length} entr${todayEntries.length===1?'y':'ies'}</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:10px">
+      <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px">Last 30 days</div>
+      <div style="font-size:18px;color:var(--red);font-family:var(--mono);font-weight:700">-$${Math.round(last30Total).toLocaleString()}</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:10px">
+      <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px">All time</div>
+      <div style="font-size:18px;color:var(--red);font-family:var(--mono);font-weight:700">-$${Math.round(totalAll).toLocaleString()}</div>
+      <div style="font-size:11px;color:var(--txt2)">${log.length} entr${log.length===1?'y':'ies'}</div>
+    </div>
+  </div>`;
+
+  // Calendar: previous, current, next month
+  const now = new Date();
+  const months = [];
+  for (let i = -1; i <= 1; i++) {
+    const mo = new Date(now.getFullYear(), now.getMonth() + i, 1);
+    months.push({ year: mo.getFullYear(), month: mo.getMonth() + 1 });
+  }
+
+  h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:16px">';
+  h += '<div style="display:flex;flex-direction:column;gap:18px">';
+  months.forEach(({ year, month }) => {
+    const firstDay = new Date(year, month - 1, 1);
+    const lastDay = new Date(year, month, 0).getDate();
+    const startWeekday = (firstDay.getDay() + 6) % 7;
+    const monthName = firstDay.toLocaleString('default', { month: 'long', year: 'numeric' });
+    h += `<div>`;
+    h += `<div style="font-size:14px;font-weight:700;margin-bottom:8px">${monthName}</div>`;
+    h += `<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">`;
+    ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(dn => {
+      h += `<div style="font-size:10px;color:var(--dim);text-align:center;padding:2px 0;font-weight:600;text-transform:uppercase;letter-spacing:.5px">${dn}</div>`;
+    });
+    for (let i = 0; i < startWeekday; i++) h += '<div></div>';
+    for (let day = 1; day <= lastDay; day++) {
+      const ds = `${year}-${String(month).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+      const entries = byDate[ds] || [];
+      const total = entries.reduce((s, r) => s + r.amount, 0);
+      const isToday = ds === todayStr;
+      const has = entries.length > 0;
+      const bgColor = has ? 'rgba(247,144,9,.16)' : 'var(--bg)';
+      const borderColor = isToday ? 'var(--blu)' : 'var(--bdr)';
+      const borderWidth = isToday ? '2px' : '1px';
+      h += `<div ${live?`class="fin-petty-day" data-date="${ds}"`:''} style="cursor:${live?'pointer':'default'};background:${bgColor};border:${borderWidth} solid ${borderColor};border-radius:5px;padding:6px;min-height:64px;display:flex;flex-direction:column;gap:2px">`;
+      h += `<div style="font-size:11px;font-weight:${isToday?'700':'500'};color:${isToday?'var(--blu)':'var(--txt)'}">${day}${isToday?' ★':''}</div>`;
+      if (has) {
+        h += `<div style="font-size:11px;font-family:var(--mono);color:var(--red);font-weight:600">-$${Math.round(total).toLocaleString()}</div>`;
+        h += `<div style="font-size:9px;color:var(--dim);margin-top:auto">${entries.length} entr${entries.length===1?'y':'ies'}</div>`;
+      } else if (live) {
+        h += `<div style="font-size:9px;color:var(--dim);margin-top:auto">+ add</div>`;
+      }
+      h += `</div>`;
+    }
+    h += '</div></div>';
+  });
+  h += '</div>';
+
+  // Recent entries list below calendar
+  if (log.length) {
+    h += '<div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--bdr)">';
+    h += '<div style="font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Recent entries</div>';
+    const recent = log.slice().sort((a, b) => b.date.localeCompare(a.date) || b.id - a.id).slice(0, 10);
+    recent.forEach(r => {
+      h += `<div style="display:flex;align-items:center;gap:10px;padding:5px 0;border-top:1px solid rgba(33,39,47,.3);font-size:12px">`;
+      h += `<span style="font-family:var(--mono);color:var(--txt2);white-space:nowrap;width:72px">${r.date}</span>`;
+      h += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.description||'—'}</span>`;
+      h += `<span style="color:var(--txt2);font-size:11px;white-space:nowrap">${r.category||''}</span>`;
+      h += `<span style="font-family:var(--mono);color:var(--red);font-weight:600;white-space:nowrap">-$${r.amount.toLocaleString()}</span>`;
+      if (live) h += `<a href="#" class="fin-void" data-kind="petty_cash" data-id="${r.id}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
+      h += `</div>`;
+    });
+    h += '</div>';
+  }
+  h += '</div>';
+  return h;
+}
+
+function financeOpenPettyDay(dateStr) {
+  const live = window._financeLive === true;
+  const entries = (FINANCE_DATA.petty_cash_log || []).filter(r => r.date === dateStr);
+  const total = entries.reduce((s, r) => s + r.amount, 0);
+
+  let body = '';
+  if (entries.length) {
+    body += `<div style="margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--bdr)">
+      <div style="font-size:13px;color:var(--txt2);margin-bottom:8px">${entries.length} entr${entries.length===1?'y':'ies'} totaling <b style="color:var(--red)">-$${total.toLocaleString()}</b></div>`;
+    entries.forEach(r => {
+      body += `<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-top:1px solid rgba(33,39,47,.3);font-size:13px">
+        <span style="font-family:var(--mono);color:var(--red);font-weight:700;min-width:80px;text-align:right">-$${r.amount.toLocaleString()}</span>
+        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis">${r.description || '—'}</span>
+        <span style="color:var(--txt2);font-size:11px;white-space:nowrap">${r.category || ''}</span>
+        <a href="#" class="fin-void" data-kind="petty_cash" data-id="${r.id}" title="Void" style="color:var(--red);text-decoration:none;font-size:16px">×</a>
+      </div>`;
+    });
+    body += '</div>';
+  } else {
+    body += '<div style="margin-bottom:14px;font-size:13px;color:var(--dim);font-style:italic">No petty cash entries for this day yet.</div>';
+  }
+
+  body += `<div style="font-size:13px;font-weight:600;margin-bottom:10px">➕ Add new entry</div>
+    <label style="font-size:12px;color:var(--txt2)">Amount ($)</label>
+    <input name="amount" type="number" step="0.01" required placeholder="50.00" style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:10px 12px;font-size:14px;border-radius:6px;font-family:var(--mono)">
+    <label style="font-size:12px;color:var(--txt2)">Description</label>
+    <input name="description" required placeholder="e.g. gas for Angel's truck" style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:8px 10px;font-size:13px;border-radius:6px">
+    <label style="font-size:12px;color:var(--txt2)">Category</label>
+    <input name="category" placeholder="Gas / Tools / Office / ..." style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:8px 10px;font-size:13px;border-radius:6px">
+    <label style="font-size:12px;color:var(--txt2)">Project (optional)</label>
+    <input name="project_id" placeholder="Project name" style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:8px 10px;font-size:13px;border-radius:6px">
+  `;
+
+  const displayDate = new Date(dateStr + 'T12:00:00').toLocaleDateString(undefined, { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+  financeModal(`Petty Cash · ${displayDate}`, body, async (data) => {
+    if (!live) throw new Error('API not configured');
+    data.amount = parseFloat(data.amount);
+    data.date = dateStr;
+    const result = await financeApi('/petty', { method: 'POST', body: JSON.stringify(data) });
+    if (result.state) FINANCE_DATA = result.state;
+    financeSafeRender();
+  });
+}
+
 function financeOpenDay(dateStr) {
   const content = financeRenderBucketContent(dateStr, dateStr, 'cal-' + dateStr, window._financeLive === true);
   const bg = document.createElement('div');
@@ -2266,30 +2409,26 @@ function financeInstallClickHandler() {
   window._financeClickInstalled = true;
   document.addEventListener('click', e => {
     const m = e.target.closest('.fin-move');
-    if (m) {
-      e.preventDefault(); e.stopPropagation();
-      financeMoveDate(m.dataset.src, m.dataset.date, m.dataset.orig, m.dataset.label);
-      return;
-    }
+    if (m) { e.preventDefault(); e.stopPropagation(); financeMoveDate(m.dataset.src, m.dataset.date, m.dataset.orig, m.dataset.label); return; }
     const v = e.target.closest('.fin-void');
-    if (v) {
-      e.preventDefault(); e.stopPropagation();
-      financeVoidRow(v.dataset.kind, parseInt(v.dataset.id, 10));
-      return;
-    }
+    if (v) { e.preventDefault(); e.stopPropagation(); financeVoidRow(v.dataset.kind, parseInt(v.dataset.id, 10)); return; }
     const s = e.target.closest('.fin-showmore');
-    if (s) {
-      e.preventDefault(); e.stopPropagation();
-      const tg = s.dataset.target;
-      document.querySelectorAll(`[data-hidden-in="${tg}"]`).forEach(el => el.style.display = '');
-      s.remove();
-      return;
-    }
+    if (s) { e.preventDefault(); e.stopPropagation(); const tg = s.dataset.target; document.querySelectorAll(`[data-hidden-in="${tg}"]`).forEach(el => el.style.display = ''); s.remove(); return; }
     const d = e.target.closest('.fin-openday');
-    if (d) {
+    if (d) { e.preventDefault(); e.stopPropagation(); financeOpenDay(d.dataset.date); return; }
+    const pd = e.target.closest('.fin-petty-day');
+    if (pd) { e.preventDefault(); e.stopPropagation(); financeOpenPettyDay(pd.dataset.date); return; }
+    const pick = e.target.closest('.fin-pick-end');
+    if (pick) {
       e.preventDefault(); e.stopPropagation();
-      financeOpenDay(d.dataset.date);
-      return;
+      const cur = window._financeCustomEnd || '';
+      const val = prompt('End date for the range (YYYY-MM-DD). Leave blank to clear and use preset.', cur);
+      if (val === null) return;
+      if (val.trim() === '') { window._financeCustomEnd = null; window._financeRange = 'eoy'; }
+      else if (!/^\d{4}-\d{2}-\d{2}$/.test(val.trim())) { alert('Use YYYY-MM-DD format'); return; }
+      else { window._financeCustomEnd = val.trim(); window._financeRange = 'custom'; }
+      window._financeExpandedBuckets = new Set();
+      financeSafeRender();
     }
   });
 }
@@ -2449,11 +2588,18 @@ function renderFinance(c) {
   const live = window._financeLive === true;
   const hasOverrides = (d.sources && d.sources.scenario_overrides_count) || 0;
 
+  // Range info
+  const rangeEnd = new Date(d._rangeEnd + 'T12:00:00');
+  const todayDt = new Date(d.date + 'T12:00:00');
+  const rangeDays = Math.max(1, Math.round((rangeEnd - todayDt) / 86400000));
+  const rangeEndFmt = rangeEnd.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  const rangeLbl = { '30d':'30d','90d':'90d','6mo':'6mo','12mo':'12mo','eoy':'EOY','full':'365d','custom':'custom' }[window._financeRange || 'eoy'] || 'range';
+
   let h = `
     <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:12px">
       <div>
         <div class="page-title">Finance</div>
-        <div class="page-sub">Balance · Projects · Fixed costs · 365-day forecast · As of ${d.date}
+        <div class="page-sub">Balance · Projects · Fixed costs · <b style="color:var(--txt)">Today → ${rangeEndFmt}</b> (${rangeDays} days) · As of ${d.date}
           ${live ? '<span style="color:var(--grn);font-weight:600;margin-left:8px">● LIVE</span>' : '<span style="color:var(--ylw);margin-left:8px">● read-only (static JSON)</span>'}
         </div>
       </div>
@@ -2475,19 +2621,19 @@ function renderFinance(c) {
 
     <div class="stats">
       <div class="st g"><div class="n">${fmtK(bal)}</div><div class="l">Current Balance</div></div>
-      <div class="st ${projected >= 0 ? 'g' : 'r'}"><div class="n">${fmtK(projected)}</div><div class="l">Projected 90d End</div></div>
+      <div class="st ${projected >= 0 ? 'g' : 'r'}"><div class="n">${fmtK(projected)}</div><div class="l">Projected ${rangeLbl} End</div></div>
       <div class="st ${runwayCls}"><div class="n">${runwayDisp}</div><div class="l">Runs Negative</div></div>
-      <div class="st b"><div class="n">${fmtK(forward_net)}</div><div class="l">Forward Net (90d)</div></div>
+      <div class="st b"><div class="n">${fmtK(forward_net)}</div><div class="l">Net ${rangeLbl}</div></div>
       <div class="st ${overdue_net >= 0 ? 'g' : 'r'}"><div class="n">${fmtK(overdue_net)}</div><div class="l">Overdue Backlog Net</div></div>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;font-size:12px">
       <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px">
-        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Incoming (next 90d)</div>
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Incoming (${rangeLbl})</div>
         <div style="color:var(--grn);font-family:var(--mono);font-weight:700;font-size:16px">+${fmtK(s.incoming_window)}</div>
       </div>
       <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px">
-        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Outgoing (next 90d)</div>
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Outgoing (${rangeLbl})</div>
         <div style="color:var(--red);font-family:var(--mono);font-weight:700;font-size:16px">-${fmtK(s.outgoing_window)}</div>
       </div>
       <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px">
@@ -2527,11 +2673,13 @@ function renderFinance(c) {
     </div>
   </div>
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
-    <span style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;font-weight:600">Range:</span>
+    <span style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;font-weight:600">From today through:</span>
     <div style="display:inline-flex;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px">
-      ${rangePill('30d','30d')}${rangePill('90d','90d')}${rangePill('6mo','6 mo')}${rangePill('eoy','Until EOY')}${rangePill('12mo','12 mo')}${rangePill('full','Full')}
+      ${rangePill('30d','+30d')}${rangePill('90d','+90d')}${rangePill('6mo','+6mo')}${rangePill('eoy','EOY')}${rangePill('12mo','+12mo')}${rangePill('full','Full')}${rangePill('custom','Custom…')}
     </div>
-    <span style="font-size:11px;color:var(--dim)">Stats + runway update as you change this</span>
+    <span style="font-size:11px;color:var(--txt);font-weight:600">${rangeEndFmt}</span>
+    <span style="font-size:11px;color:var(--dim)">(${rangeDays} days) — stats + runway update live</span>
+    ${window._financeRange === 'custom' ? `<a href="#" class="fin-pick-end" style="font-size:11px;color:var(--blu);text-decoration:underline">pick date</a>` : ''}
   </div>`;
 
   const buckets = (d.aggregated && d.aggregated[unit]) || [];
@@ -2616,6 +2764,9 @@ function renderFinance(c) {
     });
     h += '</tbody></table></div></div></div>';
   }
+
+  // ── Petty Cash calendar + log ──
+  h += financeRenderPettyCashSection(live);
 
   // ── By project ── (each card: mini aggregated table in selected unit + full event detail under a toggle)
   h += `<div class="sh">By Project · ${unit.charAt(0).toUpperCase()+unit.slice(1)}ly breakdown</div>`;
