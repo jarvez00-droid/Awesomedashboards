@@ -3,7 +3,7 @@
   "week": "Apr 20 - Apr 26, 2026",
   "week_start": "2026-04-20",
   "week_end": "2026-04-26",
-  "generated_at": "2026-04-21T07:03:20.641285",
+  "generated_at": "2026-04-21T10:01:12.590051",
   "snapshot_date": "2026-04-21",
   "summary": {
     "total_due_this_week": 91,
@@ -13,9 +13,9 @@
     "blocked_by_overdue": 2,
     "payments_blocked": 15,
     "payments_on_track": 19,
-    "income_blocked": 0,
+    "income_blocked": 1,
     "income_at_risk": 0,
-    "income_on_track": 0,
+    "income_on_track": 2,
     "rain_risk_days": 1,
     "projects": 8
   },
@@ -23,10 +23,10 @@
     {
       "date": "2026-04-21",
       "day": "Tue",
-      "high": 62,
-      "low": 58,
-      "rain_pct": 93,
-      "rain_in": 0.67,
+      "high": 66,
+      "low": 57,
+      "rain_pct": 97,
+      "rain_in": 0.54,
       "wind_mph": 11,
       "code": 63,
       "desc": "Moderate rain",
@@ -35,20 +35,20 @@
     {
       "date": "2026-04-22",
       "day": "Wed",
-      "high": 72,
-      "low": 60,
+      "high": 74,
+      "low": 61,
       "rain_pct": 10,
-      "rain_in": 0.02,
-      "wind_mph": 11,
-      "code": 51,
-      "desc": "Light drizzle",
+      "rain_in": 0.04,
+      "wind_mph": 10,
+      "code": 53,
+      "desc": "Moderate drizzle",
       "outdoor_risk": "good"
     },
     {
       "date": "2026-04-23",
       "day": "Thu",
       "high": 80,
-      "low": 65,
+      "low": 66,
       "rain_pct": 6,
       "rain_in": 0.02,
       "wind_mph": 17,
@@ -159,7 +159,7 @@
       "day": "Sat",
       "high": 69,
       "low": 55,
-      "rain_pct": 26,
+      "rain_pct": 24,
       "rain_in": 0.0,
       "wind_mph": 11,
       "code": 3,
@@ -174,8 +174,8 @@
       "rain_pct": 27,
       "rain_in": 0.0,
       "wind_mph": 12,
-      "code": 45,
-      "desc": "Fog",
+      "code": 3,
+      "desc": "Overcast",
       "outdoor_risk": "good"
     }
   ],
@@ -183,10 +183,10 @@
     {
       "date": "2026-04-21",
       "day": "Tue",
-      "high": 62,
-      "low": 58,
-      "rain_pct": 93,
-      "rain_in": 0.67,
+      "high": 66,
+      "low": 57,
+      "rain_pct": 97,
+      "rain_in": 0.54,
       "wind_mph": 11,
       "code": 63,
       "desc": "Moderate rain",
@@ -195,20 +195,20 @@
     {
       "date": "2026-04-22",
       "day": "Wed",
-      "high": 72,
-      "low": 60,
+      "high": 74,
+      "low": 61,
       "rain_pct": 10,
-      "rain_in": 0.02,
-      "wind_mph": 11,
-      "code": 51,
-      "desc": "Light drizzle",
+      "rain_in": 0.04,
+      "wind_mph": 10,
+      "code": 53,
+      "desc": "Moderate drizzle",
       "outdoor_risk": "good"
     },
     {
       "date": "2026-04-23",
       "day": "Thu",
       "high": 80,
-      "low": 65,
+      "low": 66,
       "rain_pct": 6,
       "rain_in": 0.02,
       "wind_mph": 17,
@@ -258,7 +258,7 @@
       "severity": "high",
       "day": "Tue",
       "date": "2026-04-21",
-      "message": "\ud83d\uded1 Tue 2026-04-21: Moderate rain \u2014 93% chance of rain, winds up to 11 mph. Outdoor work should be rescheduled.",
+      "message": "\ud83d\uded1 Tue 2026-04-21: Moderate rain \u2014 97% chance of rain, winds up to 11 mph. Outdoor work should be rescheduled.",
       "tasks_affected": [
         "FRAMING: CONFIRM DELIVERY",
         "FRAMING: CONFIRM DELIVERY",
@@ -295,14 +295,151 @@
     }
   ],
   "income_alerts": {
-    "total_upcoming_income": 0,
-    "blocked_income": 0,
-    "at_risk_income": 0,
-    "on_track_income": 0,
-    "items": [],
-    "blocked_count": 0,
-    "at_risk_count": 0,
-    "on_track_count": 0
+    "total_upcoming_income": 58426,
+    "blocked_income": 1565,
+    "at_risk_income": 22117,
+    "on_track_income": 34744,
+    "items": [
+      {
+        "project": "CANDACE - JUSTIN P REFERRAL (CNG2025-522)",
+        "payment": "AFTER FRAMING AND SHEATHING",
+        "amount": 4130.0,
+        "due": "2026-04-24",
+        "status": "on_track",
+        "blocker": null,
+        "blocker_due": null,
+        "group": "",
+        "group_overdue_count": 1,
+        "group_overdue_tasks": [
+          {
+            "name": "ROOFING: CONFIRM SCHEDULE",
+            "due": "",
+            "pm": ""
+          }
+        ],
+        "risk": "at_risk"
+      },
+      {
+        "project": "Clifford Clack \u2014 Gym Addition",
+        "payment": "MILESTONE: MEP",
+        "amount": 7346.74,
+        "due": "2026-04-24",
+        "status": "on_track",
+        "blocker": null,
+        "blocker_due": null,
+        "group": "",
+        "group_overdue_count": 10,
+        "group_overdue_tasks": [
+          {
+            "name": "Concrete Income 1",
+            "due": "",
+            "pm": ""
+          },
+          {
+            "name": "FOUNDATION: BILL & PAYMENT",
+            "due": "",
+            "pm": ""
+          },
+          {
+            "name": "ROOF DECKING: COMPLETE TAKEOFF",
+            "due": "",
+            "pm": ""
+          },
+          {
+            "name": "ROOFING: CREATE SOW",
+            "due": "",
+            "pm": ""
+          },
+          {
+            "name": "BRICK: PURCHASE MATERIAL",
+            "due": "",
+            "pm": ""
+          }
+        ],
+        "risk": "at_risk"
+      },
+      {
+        "project": "Stephanie and Marc Felton",
+        "payment": "INSULATION: PAYMENT RECEIVED",
+        "amount": 10640.0,
+        "due": "2026-04-25",
+        "status": "on_track",
+        "blocker": null,
+        "blocker_due": null,
+        "group": "",
+        "group_overdue_count": 10,
+        "group_overdue_tasks": [
+          {
+            "name": "DOORS AND WINDOWS: REQUEST BANK PAYMENT",
+            "due": "",
+            "pm": ""
+          },
+          {
+            "name": "DOORS AND WINDOWS: RECEIVE PAYMENT",
+            "due": "",
+            "pm": ""
+          },
+          {
+            "name": "INSULATION: REQUEST BANK PAYMENT",
+            "due": "",
+            "pm": ""
+          },
+          {
+            "name": "INSULATION: BILL & PAYMENT",
+            "due": "",
+            "pm": ""
+          },
+          {
+            "name": "INTERIOR DOORS AND TRIM: BILL & PAYMENT",
+            "due": "",
+            "pm": ""
+          }
+        ],
+        "risk": "at_risk"
+      },
+      {
+        "project": "CANDACE - JUSTIN P REFERRAL (CNG2025-522)",
+        "payment": "FINAL PAYMENT",
+        "amount": 1565.0,
+        "due": "2026-04-27",
+        "status": "blocked",
+        "blocker": "ROOFING: CONFIRM SCHEDULE",
+        "blocker_due": "2026-04-20",
+        "group": "NO GROUP",
+        "group_overdue_count": 0,
+        "group_overdue_tasks": [],
+        "risk": "blocked"
+      },
+      {
+        "project": "Stephanie and Marc Felton",
+        "payment": "BRICKS: PAYMENT RECEIVED",
+        "amount": 25274.0,
+        "due": "2026-05-04",
+        "status": "on_track",
+        "blocker": null,
+        "blocker_due": null,
+        "group": "BRICKS",
+        "group_overdue_count": 0,
+        "group_overdue_tasks": [],
+        "risk": "on_track"
+      },
+      {
+        "project": "Stephanie and Marc Felton",
+        "payment": "DRYWALL: RECEIVE BANK PAYMENT",
+        "amount": 9470.5,
+        "due": "2026-05-04",
+        "status": "on_track",
+        "blocker": null,
+        "blocker_due": null,
+        "group": "DRYWALL",
+        "group_overdue_count": 0,
+        "group_overdue_tasks": [],
+        "risk": "on_track"
+      }
+    ],
+    "blocked_count": 1,
+    "at_risk_count": 3,
+    "on_track_count": 2
   },
   "projects": {
     "Clifford Clack \u2014 Gym Addition": {
@@ -340,8 +477,8 @@
         {
           "name": "MECHANICAL: BILL & PAYMENT",
           "endDate": "2026-04-25",
-          "amount": 0,
-          "type": "",
+          "amount": 1000.0,
+          "type": "subs",
           "direction": "out"
         }
       ],
@@ -349,8 +486,8 @@
         {
           "payment": "MECHANICAL: BILL & PAYMENT",
           "payment_due": "2026-04-25",
-          "amount": 0,
-          "type": "",
+          "amount": 1000.0,
+          "type": "subs",
           "direction": "out",
           "group": "MECHANICAL ROUGH IN",
           "blocker": null,
@@ -363,8 +500,8 @@
         {
           "payment": "FOUNDATION: BILL & PAYMENT",
           "payment_due": "2026-04-17",
-          "amount": 0,
-          "type": "",
+          "amount": 4000.0,
+          "type": "subs",
           "direction": "out",
           "group": "FOUNDATION",
           "blocker": "Concrete Income 1",
@@ -377,8 +514,8 @@
         {
           "payment": "ELECTRICAL: BILL & PAYMENT",
           "payment_due": "2026-05-02",
-          "amount": 0,
-          "type": "",
+          "amount": 600.0,
+          "type": "subs",
           "direction": "out",
           "group": "ELECTRICAL ROUGH IN",
           "blocker": null,
@@ -391,8 +528,8 @@
         {
           "payment": "BRICK: BILLL & PAYMENT",
           "payment_due": "2026-05-08",
-          "amount": 0,
-          "type": "",
+          "amount": 1312.0,
+          "type": "subs",
           "direction": "out",
           "group": "BRICKS",
           "blocker": "BRICK: PURCHASE MATERIAL",
@@ -405,8 +542,8 @@
         {
           "payment": "FRAMING: BILL & PAYMENT",
           "payment_due": "2026-05-06",
-          "amount": 0,
-          "type": "",
+          "amount": 1955.0,
+          "type": "subs",
           "direction": "out",
           "group": "FRAMING",
           "blocker": "FRAMING: PURCHASE MATERIAL",
@@ -419,8 +556,8 @@
         {
           "payment": "ROOFING: BILL & PAYMENT",
           "payment_due": "2026-05-02",
-          "amount": 0,
-          "type": "",
+          "amount": 510.0,
+          "type": "subs",
           "direction": "out",
           "group": "ROOFING",
           "blocker": "ROOF DECKING: SECURE PRICING",
@@ -496,12 +633,12 @@
       "risks": [
         "\ud83d\udd34 11 tasks already overdue. This backlog is slowing down everything else on the project.",
         "\u26d4 \"FRAMING: FRAMING AND CORNICE\" (due 2026-04-23) can't start \u2014 it's waiting on \"FRAMING: CONFIRM SCHEDULE\" which is 1 days overdue.",
-        "\ud83c\udf27\ufe0f 5 outdoor tasks due on Tue 2026-04-21 \u2014 weather shows 93% rain chance. Have a backup plan.",
+        "\ud83c\udf27\ufe0f 5 outdoor tasks due on Tue 2026-04-21 \u2014 weather shows 97% rain chance. Have a backup plan.",
         "\ud83c\udf27\ufe0f 1 outdoor task due on Sat 2026-04-25 \u2014 weather shows 18% rain chance. Have a backup plan.",
-        "\ud83d\udcb0 **FOUNDATION: BILL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"Concrete Income 1\" in the same work group is 8 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the FOUNDATION group that need to be cleared first.",
-        "\ud83d\udcb0 **BRICK: BILLL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"BRICK: PURCHASE MATERIAL\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the BRICKS group that need to be cleared first.",
-        "\ud83d\udcb0 **FRAMING: BILL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"FRAMING: PURCHASE MATERIAL\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the FRAMING group that need to be cleared first.",
-        "\ud83d\udcb0 **ROOFING: BILL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"ROOF DECKING: SECURE PRICING\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 4 overdue tasks in the ROOFING group that need to be cleared first."
+        "\ud83d\udcb0 **FOUNDATION: BILL & PAYMENT** ($4,000, payment TO sub/vendor) is blocked because \"Concrete Income 1\" in the same work group is 8 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the FOUNDATION group that need to be cleared first.",
+        "\ud83d\udcb0 **BRICK: BILLL & PAYMENT** ($1,312, payment TO sub/vendor) is blocked because \"BRICK: PURCHASE MATERIAL\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the BRICKS group that need to be cleared first.",
+        "\ud83d\udcb0 **FRAMING: BILL & PAYMENT** ($1,955, payment TO sub/vendor) is blocked because \"FRAMING: PURCHASE MATERIAL\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the FRAMING group that need to be cleared first.",
+        "\ud83d\udcb0 **ROOFING: BILL & PAYMENT** ($510, payment TO sub/vendor) is blocked because \"ROOF DECKING: SECURE PRICING\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 4 overdue tasks in the ROOFING group that need to be cleared first."
       ],
       "focus": [
         "Heavy week: 28 tasks due. The PM should prioritize which ones actually need to get done vs which can slide."
@@ -523,17 +660,17 @@
         {
           "name": "INSULATION: PAYMENT RECEIVED",
           "endDate": "2026-04-20",
-          "amount": 0,
-          "type": "",
-          "direction": "out"
+          "amount": 10640.0,
+          "type": "income",
+          "direction": "in"
         }
       ],
       "payment_chains": [
         {
           "payment": "BRICKS: BILL & PAYMENT",
           "payment_due": "2026-04-30",
-          "amount": 0,
-          "type": "",
+          "amount": 7530.0,
+          "type": "subs",
           "direction": "out",
           "group": "BRICKS",
           "blocker": null,
@@ -560,9 +697,9 @@
         {
           "payment": "BRICKS: PAYMENT RECEIVED",
           "payment_due": "2026-05-04",
-          "amount": 0,
-          "type": "",
-          "direction": "out",
+          "amount": 25274.0,
+          "type": "income",
+          "direction": "in",
           "group": "BRICKS",
           "blocker": null,
           "blocker_due": null,
@@ -588,9 +725,9 @@
         {
           "payment": "DRYWALL: RECEIVE BANK PAYMENT",
           "payment_due": "2026-05-04",
-          "amount": 0,
-          "type": "",
-          "direction": "out",
+          "amount": 9470.5,
+          "type": "income",
+          "direction": "in",
           "group": "DRYWALL",
           "blocker": null,
           "blocker_due": null,
@@ -602,8 +739,8 @@
         {
           "payment": "DRYWALL: BILL & PAYMENT",
           "payment_due": "2026-04-29",
-          "amount": 0,
-          "type": "",
+          "amount": 3959.0,
+          "type": "subs",
           "direction": "out",
           "group": "DRYWALL",
           "blocker": null,
@@ -616,8 +753,8 @@
         {
           "payment": "INTERIOR PAINT: BILL & PAYMENT",
           "payment_due": "2026-05-02",
-          "amount": 0,
-          "type": "",
+          "amount": 7086.0,
+          "type": "subs",
           "direction": "out",
           "group": "INTERIOR PAINT",
           "blocker": null,
@@ -694,6 +831,7 @@
         "\ud83d\udd34 10 tasks already overdue. This backlog is slowing down everything else on the project."
       ],
       "focus": [
+        "\ud83d\udcb0 $10,640 in client income expected. Prioritize the work that triggers this payment.",
         "Heavy week: 26 tasks due. The PM should prioritize which ones actually need to get done vs which can slide."
       ],
       "suggestions": []
@@ -717,15 +855,15 @@
         {
           "name": "FRAMING: BILL & PAYMENT",
           "endDate": "2026-04-24",
-          "amount": 0,
-          "type": "",
+          "amount": 12763.0,
+          "type": "subs",
           "direction": "out"
         },
         {
           "name": "DOORS AND WINDOWS: BILL & PAYMENT",
           "endDate": "2026-04-24",
-          "amount": 0,
-          "type": "",
+          "amount": 350.0,
+          "type": "subs",
           "direction": "out"
         }
       ],
@@ -733,8 +871,8 @@
         {
           "payment": "FRAMING: BILL & PAYMENT",
           "payment_due": "2026-04-24",
-          "amount": 0,
-          "type": "",
+          "amount": 12763.0,
+          "type": "subs",
           "direction": "out",
           "group": "GARAGE FRAMING",
           "blocker": "FRAMING: REQUEST CITY INSPECTION",
@@ -761,8 +899,8 @@
         {
           "payment": "DOORS AND WINDOWS: BILL & PAYMENT",
           "payment_due": "2026-04-24",
-          "amount": 0,
-          "type": "",
+          "amount": 350.0,
+          "type": "subs",
           "direction": "out",
           "group": "DOORS AND WINDOWS",
           "blocker": "EXTERIOR DOORS & WINDOWS: COMPLETE TAKEOFF (EXTERIOR DOORS)",
@@ -775,8 +913,8 @@
         {
           "payment": "GARAGE DOOR: BILL & PAYMENT",
           "payment_due": "2026-05-08",
-          "amount": 0,
-          "type": "",
+          "amount": 384.0,
+          "type": "subs",
           "direction": "out",
           "group": "GARAGE DOOR",
           "blocker": null,
@@ -846,11 +984,12 @@
       "risks": [
         "\ud83d\udfe1 9 overdue tasks need attention before they cascade into this week's work.",
         "\ud83c\udf27\ufe0f 1 outdoor task due on Sat 2026-04-25 \u2014 weather shows 18% rain chance. Have a backup plan.",
-        "\ud83d\udcb0 **FRAMING: BILL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"FRAMING: REQUEST CITY INSPECTION\" in the same work group is 3 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the GARAGE FRAMING group that need to be cleared first.",
+        "\ud83d\udcb0 **FRAMING: BILL & PAYMENT** ($12,763, payment TO sub/vendor) is blocked because \"FRAMING: REQUEST CITY INSPECTION\" in the same work group is 3 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the GARAGE FRAMING group that need to be cleared first.",
         "\ud83d\udcb0 **Follow up on WO for Eliseo on Ginger Brown. Submit payment record reflecting multiple work orders.** (amount TBD, payment TO sub/vendor) is blocked because \"Make sure we purchase doors and windows\" in the same work group is 50 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the NO GROUP group that need to be cleared first.",
-        "\ud83d\udcb0 **DOORS AND WINDOWS: BILL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"EXTERIOR DOORS & WINDOWS: COMPLETE TAKEOFF (EXTERIOR DOORS)\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the DOORS AND WINDOWS group that need to be cleared first."
+        "\ud83d\udcb0 **DOORS AND WINDOWS: BILL & PAYMENT** ($350, payment TO sub/vendor) is blocked because \"EXTERIOR DOORS & WINDOWS: COMPLETE TAKEOFF (EXTERIOR DOORS)\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the DOORS AND WINDOWS group that need to be cleared first."
       ],
       "focus": [
+        "\ud83d\udcb0 $13,113 in payments going out this week. Make sure the work is inspected and approved before paying.",
         "Heavy week: 16 tasks due. The PM should prioritize which ones actually need to get done vs which can slide."
       ],
       "suggestions": [
@@ -875,8 +1014,8 @@
         {
           "payment": "CONCRETE POUR: BILL & PAYMENT",
           "payment_due": "2026-04-17",
-          "amount": 0,
-          "type": "",
+          "amount": 8500.0,
+          "type": "subs",
           "direction": "out",
           "group": "1ST STORY ADDITION",
           "blocker": "FOUNDATION: RENT A PORTA POTTY",
@@ -889,8 +1028,8 @@
         {
           "payment": "FRAMING: BILL & PAYMENT",
           "payment_due": "2026-05-08",
-          "amount": 0,
-          "type": "",
+          "amount": 6000.0,
+          "type": "subs",
           "direction": "out",
           "group": "FRAMING",
           "blocker": "FRAMING: PURCHASE MATERIALS",
@@ -903,8 +1042,8 @@
         {
           "payment": "BRICKS: BILL & PAYMENT",
           "payment_due": "2026-05-09",
-          "amount": 0,
-          "type": "",
+          "amount": 1220.0,
+          "type": "subs",
           "direction": "out",
           "group": "BRICKS & EXTERIOR SHEATING",
           "blocker": null,
@@ -961,10 +1100,10 @@
       ],
       "risks": [
         "\ud83d\udfe1 7 overdue tasks need attention before they cascade into this week's work.",
-        "\ud83c\udf27\ufe0f 3 outdoor tasks due on Tue 2026-04-21 \u2014 weather shows 93% rain chance. Have a backup plan.",
+        "\ud83c\udf27\ufe0f 3 outdoor tasks due on Tue 2026-04-21 \u2014 weather shows 97% rain chance. Have a backup plan.",
         "\ud83c\udf27\ufe0f 1 outdoor task due on Sat 2026-04-25 \u2014 weather shows 18% rain chance. Have a backup plan.",
-        "\ud83d\udcb0 **CONCRETE POUR: BILL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"FOUNDATION: RENT A PORTA POTTY\" in the same work group is 5 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the 1ST STORY ADDITION group that need to be cleared first.",
-        "\ud83d\udcb0 **FRAMING: BILL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"FRAMING: PURCHASE MATERIALS\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the FRAMING group that need to be cleared first."
+        "\ud83d\udcb0 **CONCRETE POUR: BILL & PAYMENT** ($8,500, payment TO sub/vendor) is blocked because \"FOUNDATION: RENT A PORTA POTTY\" in the same work group is 5 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the 1ST STORY ADDITION group that need to be cleared first.",
+        "\ud83d\udcb0 **FRAMING: BILL & PAYMENT** ($6,000, payment TO sub/vendor) is blocked because \"FRAMING: PURCHASE MATERIALS\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the FRAMING group that need to be cleared first."
       ],
       "focus": [],
       "suggestions": [
@@ -986,8 +1125,8 @@
         {
           "name": "CABINETS: BILL & PAYMENT",
           "endDate": "2026-04-23",
-          "amount": 0,
-          "type": "",
+          "amount": 3150.0,
+          "type": "subs",
           "direction": "out"
         }
       ],
@@ -995,8 +1134,8 @@
         {
           "payment": "SIDING: BILL & PAYMENT",
           "payment_due": "2026-04-27",
-          "amount": 0,
-          "type": "",
+          "amount": 750.0,
+          "type": "subs",
           "direction": "out",
           "group": "SIDING + EXTERIOR PAINT",
           "blocker": null,
@@ -1009,8 +1148,8 @@
         {
           "payment": "SIDING: BILL & PAYMENT",
           "payment_due": "2026-04-27",
-          "amount": 0,
-          "type": "",
+          "amount": 750.0,
+          "type": "subs",
           "direction": "out",
           "group": "SIDING + EXTERIOR PAINT",
           "blocker": null,
@@ -1023,8 +1162,8 @@
         {
           "payment": "CABINETS: BILL & PAYMENT",
           "payment_due": "2026-04-18",
-          "amount": 0,
-          "type": "",
+          "amount": 3150.0,
+          "type": "subs",
           "direction": "out",
           "group": "CABINETS - DOORS -SHELVES STAIN PAINT",
           "blocker": "CABINETS: PURCHASE STAIN",
@@ -1037,8 +1176,8 @@
         {
           "payment": "CABINETS: BILL & PAYMENT",
           "payment_due": "2026-04-23",
-          "amount": 0,
-          "type": "",
+          "amount": 3150.0,
+          "type": "subs",
           "direction": "out",
           "group": "CABINETS - DOORS -SHELVES STAIN PAINT",
           "blocker": "CABINETS: PURCHASE STAIN",
@@ -1051,8 +1190,8 @@
         {
           "payment": "CABINETS: BILL & PAYMENT",
           "payment_due": "2026-05-01",
-          "amount": 0,
-          "type": "",
+          "amount": 3150.0,
+          "type": "subs",
           "direction": "out",
           "group": "CABINETS - DOORS -SHELVES STAIN PAINT",
           "blocker": "CABINETS: PURCHASE STAIN",
@@ -1065,8 +1204,8 @@
         {
           "payment": "ELECTRICAL: BILL & PAYMENT",
           "payment_due": "2026-05-11",
-          "amount": 0,
-          "type": "",
+          "amount": 3275.0,
+          "type": "subs",
           "direction": "out",
           "group": "ELECTRICAL TRIM",
           "blocker": null,
@@ -1079,8 +1218,8 @@
         {
           "payment": "PLUMBING: BILL & PAYMENT",
           "payment_due": "2026-05-05",
-          "amount": 0,
-          "type": "",
+          "amount": 4000.0,
+          "type": "subs",
           "direction": "out",
           "group": "PLUMBING TRIM",
           "blocker": null,
@@ -1093,8 +1232,8 @@
         {
           "payment": "PORCH: BILL & PAYMENT",
           "payment_due": "2026-05-12",
-          "amount": 0,
-          "type": "",
+          "amount": 500.0,
+          "type": "subs",
           "direction": "out",
           "group": "PAINT PORCH",
           "blocker": null,
@@ -1107,8 +1246,8 @@
         {
           "payment": "MECHANICAL: BILL & PAYMENT",
           "payment_due": "2026-05-12",
-          "amount": 0,
-          "type": "",
+          "amount": 7500.0,
+          "type": "subs",
           "direction": "out",
           "group": "MECHANICAL TRIM",
           "blocker": null,
@@ -1148,9 +1287,9 @@
       "risks": [
         "\ud83d\udfe1 4 overdue tasks need attention before they cascade into this week's work.",
         "\ud83c\udf27\ufe0f 1 outdoor task due on Sat 2026-04-25 \u2014 weather shows 18% rain chance. Have a backup plan.",
-        "\ud83d\udcb0 **CABINETS: BILL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"CABINETS: PURCHASE STAIN\" in the same work group is 4 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the CABINETS - DOORS -SHELVES STAIN PAINT group that need to be cleared first.",
-        "\ud83d\udcb0 **CABINETS: BILL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"CABINETS: PURCHASE STAIN\" in the same work group is 4 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the CABINETS - DOORS -SHELVES STAIN PAINT group that need to be cleared first.",
-        "\ud83d\udcb0 **CABINETS: BILL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"CABINETS: PURCHASE STAIN\" in the same work group is 4 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the CABINETS - DOORS -SHELVES STAIN PAINT group that need to be cleared first."
+        "\ud83d\udcb0 **CABINETS: BILL & PAYMENT** ($3,150, payment TO sub/vendor) is blocked because \"CABINETS: PURCHASE STAIN\" in the same work group is 4 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the CABINETS - DOORS -SHELVES STAIN PAINT group that need to be cleared first.",
+        "\ud83d\udcb0 **CABINETS: BILL & PAYMENT** ($3,150, payment TO sub/vendor) is blocked because \"CABINETS: PURCHASE STAIN\" in the same work group is 4 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the CABINETS - DOORS -SHELVES STAIN PAINT group that need to be cleared first.",
+        "\ud83d\udcb0 **CABINETS: BILL & PAYMENT** ($3,150, payment TO sub/vendor) is blocked because \"CABINETS: PURCHASE STAIN\" in the same work group is 4 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the CABINETS - DOORS -SHELVES STAIN PAINT group that need to be cleared first."
       ],
       "focus": [],
       "suggestions": []
@@ -1170,8 +1309,8 @@
         {
           "payment": "FRAMING: BILL & PAYMENT",
           "payment_due": "2026-05-01",
-          "amount": 0,
-          "type": "",
+          "amount": 9000.0,
+          "type": "subs",
           "direction": "out",
           "group": "FRAMING 2",
           "blocker": null,
@@ -1184,8 +1323,8 @@
         {
           "payment": "PLUMBING: BILL & PAYMENT",
           "payment_due": "2026-05-02",
-          "amount": 0,
-          "type": "",
+          "amount": 3000.0,
+          "type": "subs",
           "direction": "out",
           "group": "PLUMBING ROUGH IN",
           "blocker": null,
@@ -1211,7 +1350,7 @@
         }
       ],
       "risks": [
-        "\ud83c\udf27\ufe0f 3 outdoor tasks due on Tue 2026-04-21 \u2014 weather shows 93% rain chance. Have a backup plan."
+        "\ud83c\udf27\ufe0f 3 outdoor tasks due on Tue 2026-04-21 \u2014 weather shows 97% rain chance. Have a backup plan."
       ],
       "focus": [],
       "suggestions": []
@@ -1243,15 +1382,15 @@
         {
           "name": "FRAMING: BILL & PAYMENT",
           "endDate": "2026-04-22",
-          "amount": 0,
-          "type": "",
+          "amount": 2500.0,
+          "type": "subs",
           "direction": "out"
         },
         {
           "name": "ROOFING: BILL & PAYMENT",
           "endDate": "2026-04-23",
-          "amount": 0,
-          "type": "",
+          "amount": 0.0,
+          "type": "subs",
           "direction": "out"
         }
       ],
@@ -1259,8 +1398,8 @@
         {
           "payment": "FRAMING: BILL & PAYMENT",
           "payment_due": "2026-04-22",
-          "amount": 0,
-          "type": "",
+          "amount": 2500.0,
+          "type": "subs",
           "direction": "out",
           "group": "NO GROUP",
           "blocker": "ROOFING: CONFIRM SCHEDULE",
@@ -1273,8 +1412,8 @@
         {
           "payment": "ROOFING: BILL & PAYMENT",
           "payment_due": "2026-04-23",
-          "amount": 0,
-          "type": "",
+          "amount": 0.0,
+          "type": "subs",
           "direction": "out",
           "group": "NO GROUP",
           "blocker": "ROOFING: CONFIRM SCHEDULE",
@@ -1287,9 +1426,9 @@
         {
           "payment": "FINAL PAYMENT",
           "payment_due": "2026-04-27",
-          "amount": 0,
-          "type": "",
-          "direction": "out",
+          "amount": 1565.0,
+          "type": "income",
+          "direction": "in",
           "group": "NO GROUP",
           "blocker": "ROOFING: CONFIRM SCHEDULE",
           "blocker_due": "2026-04-20",
@@ -1309,9 +1448,9 @@
       ],
       "risks": [
         "\u26d4 \"ROOFING: INSTALL ROOFING\" (due 2026-04-22) can't start \u2014 it's waiting on \"ROOFING: CONFIRM SCHEDULE\" which is 1 days overdue.",
-        "\ud83d\udcb0 **FRAMING: BILL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"ROOFING: CONFIRM SCHEDULE\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the NO GROUP group that need to be cleared first.",
+        "\ud83d\udcb0 **FRAMING: BILL & PAYMENT** ($2,500, payment TO sub/vendor) is blocked because \"ROOFING: CONFIRM SCHEDULE\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the NO GROUP group that need to be cleared first.",
         "\ud83d\udcb0 **ROOFING: BILL & PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"ROOFING: CONFIRM SCHEDULE\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the NO GROUP group that need to be cleared first.",
-        "\ud83d\udcb0 **FINAL PAYMENT** (amount TBD, payment TO sub/vendor) is blocked because \"ROOFING: CONFIRM SCHEDULE\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the NO GROUP group that need to be cleared first."
+        "\ud83d\udcb0 **FINAL PAYMENT** ($1,565, income FROM client) is blocked because \"ROOFING: CONFIRM SCHEDULE\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the NO GROUP group that need to be cleared first."
       ],
       "focus": [],
       "suggestions": [
@@ -1363,7 +1502,9 @@
     "\ud83c\udf27\ufe0f **Weather risk:** 2 days this week are likely too bad for outdoor work. 31 outdoor tasks are due this week \u2014 the PMs should plan around the weather and front-load outdoor work on the clear days.",
     "\u26d4 **2 tasks are blocked** by overdue dependencies. These can't move until their prerequisites are done. The PMs responsible should treat those blockers as their #1 priority this week.",
     "\ud83d\udcb0 **Payment chain alert:** 15 payments across all projects are effectively blocked because the work that needs to happen before them is overdue. Even though the payment dates look fine in the schedule, these payments CANNOT happen until the prerequisite work is done.",
-    "15 are **sub/material payments** (amounts TBD) \u2014 the work isn't done so these shouldn't be paid yet either.",
+    "Of those, 1 are **client income payments** ($1,565). This is money that won't come in until the blocking work is cleared.",
+    "14 are **sub/material payments** ($47,340) \u2014 the work isn't done so these shouldn't be paid yet either.",
+    "\ud83d\udea8 **Income at risk:** 1 client payment ($1,565) is blocked by overdue work. Do NOT delay the tasks that lead to these payments \u2014 they're your path to cash.",
     "**Clifford Clack \u2014 Gym Addition** has the heaviest load: 28 tasks due. With 11 already overdue, the PM needs to ruthlessly prioritize.",
     "**Stephanie and Marc Felton** has the heaviest load: 26 tasks due. With 10 already overdue, the PM needs to ruthlessly prioritize.",
     "**Martha Cockrell (CNG-20251199)** has the heaviest load: 16 tasks due. With 9 already overdue, the PM needs to ruthlessly prioritize."
