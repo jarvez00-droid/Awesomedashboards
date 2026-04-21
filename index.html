@@ -2152,7 +2152,7 @@ function financeRenderCalendar(dayBuckets, fcByKey) {
       const borderColor = isToday ? 'var(--blu)' : 'var(--bdr)';
       const borderWidth = isToday ? '2px' : '1px';
       const clickable = b ? `cursor:pointer` : 'cursor:default';
-      const clickAttr = b ? ` onclick="financeOpenDay('${ds}')"` : '';
+      const clickAttr = b ? ` class="fin-openday" data-date="${ds}"` : '';
       html += `<div${clickAttr} style="${clickable};background:${bgColor};border:${borderWidth} solid ${borderColor};border-radius:5px;padding:6px;min-height:74px;display:flex;flex-direction:column;gap:2px" title="${b ? count + ' events' : ''}">`;
       html += `<div style="font-size:11px;font-weight:${isToday?'700':'500'};color:${isToday?'var(--blu)':'var(--txt)'}">${day}${isToday?' ★':''}</div>`;
       if (b) {
@@ -2228,26 +2228,24 @@ function financeRenderBucketContent(start, end, rowId, live) {
     html += `<span style="font-weight:700;color:${net>=0?'var(--grn)':'var(--red)'}">${net>=0?'+':''}${fmtK(net)}</span>`;
     html += `</span></div>`;
     html += `<div style="font-size:12px">`;
+    const pKey = p.replace(/[^a-z0-9]/gi,'_');
+    const hideKey = `${rowId}-${pKey}`;
     events.forEach((e, idx) => {
-      const hiddenStyle = idx >= PAGE ? `display:none` : '';
-      const hiddenAttr = idx >= PAGE ? `data-hidden-in="${rowId}-${p.replace(/[^a-z0-9]/gi,'_')}"` : '';
-      const moveHandler = `financeMoveDate(${JSON.stringify(e.source_id)}, ${JSON.stringify(e.date)}, ${JSON.stringify(e.original_date)}, ${JSON.stringify(e.label||'')})`;
+      const hidden = idx >= PAGE;
       const canVoid = live && ['petty_cash','misc_expense','non_project_income','bank_snapshot'].includes(e.source_type);
       const dbId = (e.source_id||'').replace(/^(pc|misc|npi|bs)-/, '');
-      const voidHandler = `financeVoidRow(${JSON.stringify(e.source_type)}, ${dbId})`;
-      html += `<div ${hiddenAttr} style="display:flex;align-items:center;padding:3px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3);${hiddenStyle}">`;
+      html += `<div ${hidden?`data-hidden-in="${financeAttr(hideKey)}"`:''} style="display:${hidden?'none':'flex'};align-items:center;padding:3px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3)">`;
       html += `<span style="font-family:var(--mono);color:${e.moved?'var(--ylw)':'var(--txt2)'};white-space:nowrap;width:62px">${fmtDate(e.date)}</span>`;
       html += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}</span>`;
-      html += `<span style="font-family:var(--mono);${e.amount>=0?'color:var(--grn)':'color:var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
-      if (live) html += `<a href="#" onclick="event.preventDefault();event.stopPropagation();${moveHandler}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
-      if (canVoid) html += `<a href="#" onclick="event.preventDefault();event.stopPropagation();${voidHandler}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
+      html += `<span style="font-family:var(--mono);color:${e.amount>=0?'var(--grn)':'var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
+      if (live) html += `<a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
+      if (canVoid) html += `<a href="#" class="fin-void" data-kind="${financeAttr(e.source_type)}" data-id="${dbId}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
       else html += `<span style="width:12px"></span>`;
       html += `</div>`;
     });
     if (events.length > PAGE) {
-      const pKey = p.replace(/[^a-z0-9]/gi,'_');
-      html += `<div id="${rowId}-${pKey}-more" style="padding:6px 0;font-size:11px">
-        <a href="#" onclick="event.preventDefault();event.stopPropagation();document.querySelectorAll('[data-hidden-in=\\'${rowId}-${pKey}\\']').forEach(el=>el.style.display='');this.parentElement.remove();" style="color:var(--blu);text-decoration:none">Show all ${events.length} events →</a>
+      html += `<div style="padding:6px 0;font-size:11px">
+        <a href="#" class="fin-showmore" data-target="${financeAttr(hideKey)}" style="color:var(--blu);text-decoration:none">Show all ${events.length} events →</a>
       </div>`;
     }
     html += `</div></div>`;
@@ -2263,7 +2261,46 @@ function financeShowAll(id) {
   if (btn) btn.remove();
 }
 
+function financeInstallClickHandler() {
+  if (window._financeClickInstalled) return;
+  window._financeClickInstalled = true;
+  document.addEventListener('click', e => {
+    const m = e.target.closest('.fin-move');
+    if (m) {
+      e.preventDefault(); e.stopPropagation();
+      financeMoveDate(m.dataset.src, m.dataset.date, m.dataset.orig, m.dataset.label);
+      return;
+    }
+    const v = e.target.closest('.fin-void');
+    if (v) {
+      e.preventDefault(); e.stopPropagation();
+      financeVoidRow(v.dataset.kind, parseInt(v.dataset.id, 10));
+      return;
+    }
+    const s = e.target.closest('.fin-showmore');
+    if (s) {
+      e.preventDefault(); e.stopPropagation();
+      const tg = s.dataset.target;
+      document.querySelectorAll(`[data-hidden-in="${tg}"]`).forEach(el => el.style.display = '');
+      s.remove();
+      return;
+    }
+    const d = e.target.closest('.fin-openday');
+    if (d) {
+      e.preventDefault(); e.stopPropagation();
+      financeOpenDay(d.dataset.date);
+      return;
+    }
+  });
+}
+
+// HTML-attribute-safe escape for data-* values.
+function financeAttr(s) {
+  return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function financeSafeRender() {
+  financeInstallClickHandler();
   try {
     renderFinance(document.getElementById('content'));
   } catch (e) {
@@ -2621,11 +2658,10 @@ function renderFinance(c) {
     h += '<th style="padding:6px 8px">Date</th><th style="padding:6px 8px">Event</th><th style="padding:6px 8px">Type</th><th style="padding:6px 8px;text-align:right">Amount</th><th style="padding:6px 8px;width:24px"></th>';
     h += '</tr></thead><tbody>';
     p.events.forEach(e => {
-      const moveHandler = `financeMoveDate(${JSON.stringify(e.source_id)}, ${JSON.stringify(e.date)}, ${JSON.stringify(e.original_date)}, ${JSON.stringify(e.label||'')})`;
       h += `<tr style="border-top:1px solid rgba(33,39,47,.3);${e.moved?'background:rgba(234,170,8,.06)':''}">`;
       h += `<td style="padding:5px 8px;font-family:var(--mono);white-space:nowrap">`;
       h += `<span style="color:${e.moved?'var(--ylw)':'var(--txt)'}">${fmtDate(e.date)}</span>`;
-      if (live) h += ` <a href="#" onclick="event.preventDefault();${moveHandler}" title="Move date" style="color:var(--dim);text-decoration:none;margin-left:4px">📅</a>`;
+      if (live) h += ` <a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" title="Move date" style="color:var(--dim);text-decoration:none;margin-left:4px">📅</a>`;
       h += `</td>`;
       h += `<td style="padding:5px 8px">${e.label || ''}</td>`;
       h += `<td style="padding:5px 8px;color:var(--txt2);font-size:11px">${e.kind.replace(/_/g, ' ')}</td>`;
@@ -2649,12 +2685,11 @@ function renderFinance(c) {
     h += '<th style="padding:8px">Date</th><th style="padding:8px">Item</th><th style="padding:8px">Category</th><th style="padding:8px">Frequency</th><th style="padding:8px;text-align:right">Amount</th>';
     h += '</tr></thead><tbody>';
     fcForward.forEach(e => {
-      const moveHandler = `financeMoveDate(${JSON.stringify(e.source_id)}, ${JSON.stringify(e.date)}, ${JSON.stringify(e.original_date)}, ${JSON.stringify(e.label||'')})`;
       const freq = (e.meta && e.meta.frequency) || e.category || '—';
       h += `<tr style="border-top:1px solid rgba(33,39,47,.3);${e.moved?'background:rgba(234,170,8,.06)':''}">`;
       h += `<td style="padding:6px 8px;font-family:var(--mono);white-space:nowrap">`;
       h += `<span style="color:${e.moved?'var(--ylw)':'var(--txt)'}">${fmtDate(e.date)}</span>`;
-      if (live) h += ` <a href="#" onclick="event.preventDefault();${moveHandler}" title="Move payment date" style="color:var(--dim);text-decoration:none;margin-left:4px">📅</a>`;
+      if (live) h += ` <a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" title="Move payment date" style="color:var(--dim);text-decoration:none;margin-left:4px">📅</a>`;
       if (e.moved) h += ` <span style="font-size:10px;color:var(--ylw)">moved</span>`;
       h += `</td>`;
       h += `<td style="padding:6px 8px">${e.label || ''}</td>`;
@@ -2686,7 +2721,7 @@ function renderFinance(c) {
       h += `<td style="padding:6px 8px;color:var(--txt2)">${r.account}</td>`;
       h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono);font-weight:600">${fmt(r.balance)}</td>`;
       h += `<td style="padding:6px 8px;color:var(--txt2)">${r.note || ''}</td>`;
-      h += `<td style="padding:6px 8px;text-align:center">${live ? `<a href="#" onclick="event.preventDefault();financeVoidRow('bank_snapshot', ${r.id})" title="Void" style="color:var(--red);text-decoration:none">×</a>` : ''}</td>`;
+      h += `<td style="padding:6px 8px;text-align:center">${live ? `<a href="#" class="fin-void" data-kind="bank_snapshot" data-id="${r.id}" title="Void" style="color:var(--red);text-decoration:none">×</a>` : ''}</td>`;
       h += '</tr>';
     });
     h += '</tbody></table>';
