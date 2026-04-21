@@ -2020,6 +2020,15 @@ function financeSetUnit(u) {
   renderFinance(document.getElementById('content'));
 }
 
+function financeToggleBucket(id) {
+  const detail = document.getElementById(id + '-detail');
+  const chv = document.getElementById(id + '-chv');
+  if (!detail) return;
+  const open = detail.style.display !== 'none';
+  detail.style.display = open ? 'none' : '';
+  if (chv) chv.textContent = open ? '▸' : '▾';
+}
+
 async function financeResetScenarios() {
   if (!confirm('Clear ALL scenario date overrides and return to base dates?')) return;
   try {
@@ -2186,6 +2195,7 @@ function renderFinance(c) {
   } else {
     h += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">';
     h += '<thead style="background:var(--raised)"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
+    h += '<th style="padding:10px 12px;width:20px"></th>';
     h += '<th style="padding:10px 12px">Period</th>';
     h += '<th style="padding:10px 12px;text-align:right">Inflow</th>';
     h += '<th style="padding:10px 12px;text-align:right">Outflow</th>';
@@ -2194,13 +2204,18 @@ function renderFinance(c) {
     h += '<th style="padding:10px 12px;text-align:right">Closing Balance</th>';
     h += '<th style="padding:10px 12px;text-align:right">Events</th>';
     h += '</tr></thead><tbody>';
-    buckets.forEach(b => {
+    // Pre-filter the full event set (timeline + fixed-cost forward) per bucket for drill-down
+    const allEvents = (d.timeline || []).concat((d.fixed_cost_events && d.fixed_cost_events.forward) || []);
+    const eventsInBucket = (b) => allEvents.filter(e => e.date >= b.start && e.date <= b.end);
+    buckets.forEach((b, idx) => {
       const cb = b.closing_balance;
       const cbStyle = cb == null ? 'color:var(--dim)' : (cb < 0 ? 'color:var(--red);font-weight:700' : 'color:var(--txt);font-weight:600');
       const netStyle = b.net >= 0 ? 'color:var(--grn);font-weight:600' : 'color:var(--red);font-weight:600';
       const fc = fcByKey[b.key];
       const fcAmt = fc ? fc.outflow : 0;
-      h += '<tr style="border-top:1px solid rgba(33,39,47,.3)">';
+      const rowId = 'bkt-' + unit + '-' + idx;
+      h += `<tr id="${rowId}-row" style="border-top:1px solid rgba(33,39,47,.3);cursor:pointer" onclick="financeToggleBucket('${rowId}')">`;
+      h += `<td style="padding:8px 12px;text-align:center;color:var(--dim)"><span id="${rowId}-chv">▸</span></td>`;
       h += `<td style="padding:8px 12px;font-weight:500">${b.label}</td>`;
       h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--grn)">+${fmtK(b.inflow)}</td>`;
       h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--red)">-${fmtK(b.outflow)}</td>`;
@@ -2209,51 +2224,63 @@ function renderFinance(c) {
       h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${cbStyle}">${cb==null?'—':fmt(cb)}</td>`;
       h += `<td style="padding:8px 12px;text-align:right;color:var(--txt2);font-size:11px">${b.count}</td>`;
       h += '</tr>';
+      // Hidden detail row with per-project breakdown
+      const bucketEvents = eventsInBucket(b);
+      const byProj = {};
+      bucketEvents.forEach(e => {
+        const p = e.source_type === 'fixed_cost' ? 'Fixed Costs' : (e.project || 'Other');
+        (byProj[p] = byProj[p] || []).push(e);
+      });
+      const projKeys = Object.keys(byProj).sort((a, bb) => {
+        if (a === 'Fixed Costs') return 1; if (bb === 'Fixed Costs') return -1;
+        const na = byProj[a].reduce((s, e) => s + e.amount, 0);
+        const nb = byProj[bb].reduce((s, e) => s + e.amount, 0);
+        return Math.abs(nb) - Math.abs(na);
+      });
+      h += `<tr id="${rowId}-detail" style="display:none;background:var(--bg)"><td colspan="8" style="padding:0">`;
+      if (!bucketEvents.length) {
+        h += '<div style="padding:14px;color:var(--dim);font-size:12px">No events in this period.</div>';
+      } else {
+        h += '<div style="padding:10px 20px 14px">';
+        projKeys.forEach(p => {
+          const events = byProj[p];
+          const net = events.reduce((s, e) => s + e.amount, 0);
+          const inflow = events.filter(e => e.amount > 0).reduce((s, e) => s + e.amount, 0);
+          const outflow = events.filter(e => e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
+          const projColor = p === 'Fixed Costs' ? 'var(--org)' : net >= 0 ? 'var(--grn)' : 'var(--red)';
+          h += `<div style="margin-top:10px;padding:8px 10px;background:var(--card);border-left:3px solid ${projColor};border-radius:0 6px 6px 0">`;
+          h += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:13px">`;
+          h += `<b>${p}</b>`;
+          h += `<span style="color:var(--txt2);font-size:12px">`;
+          if (inflow) h += `<span style="color:var(--grn);margin-right:10px">+${fmtK(inflow)}</span>`;
+          if (outflow) h += `<span style="color:var(--red);margin-right:10px">-${fmtK(outflow)}</span>`;
+          h += `<span style="font-weight:700;color:${net>=0?'var(--grn)':'var(--red)'}">${net>=0?'+':''}${fmtK(net)}</span>`;
+          h += `</span></div>`;
+          // event list
+          h += `<div style="font-size:12px">`;
+          events.sort((a, bb) => a.date.localeCompare(bb.date)).forEach(e => {
+            const moveHandler = `financeMoveDate(${JSON.stringify(e.source_id)}, ${JSON.stringify(e.date)}, ${JSON.stringify(e.original_date)}, ${JSON.stringify(e.label||'')})`;
+            const canVoid = live && ['petty_cash','misc_expense','non_project_income','bank_snapshot'].includes(e.source_type);
+            const dbId = (e.source_id||'').replace(/^(pc|misc|npi|bs)-/, '');
+            const voidHandler = `financeVoidRow(${JSON.stringify(e.source_type)}, ${dbId})`;
+            h += `<div style="display:flex;align-items:center;padding:3px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3)">`;
+            h += `<span style="font-family:var(--mono);color:${e.moved?'var(--ylw)':'var(--txt2)'};white-space:nowrap;width:62px">${fmtDate(e.date)}</span>`;
+            h += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}</span>`;
+            h += `<span style="font-family:var(--mono);${e.amount>=0?'color:var(--grn)':'color:var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
+            if (live) h += `<a href="#" onclick="event.preventDefault();event.stopPropagation();${moveHandler}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
+            if (canVoid) h += `<a href="#" onclick="event.preventDefault();event.stopPropagation();${voidHandler}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
+            else h += `<span style="width:12px"></span>`;
+            h += `</div>`;
+          });
+          h += `</div></div>`;
+        });
+        h += '</div>';
+      }
+      h += '</td></tr>';
     });
     h += '</tbody></table></div>';
   }
   h += '</div>';
-
-  // ── Detail timeline (collapsible; 303 events by default closed) ──
-  h += `<div class="pc" style="margin-bottom:16px">`;
-  h += `<div class="ph" onclick="tog(this)">`;
-  h += `<div><div class="pn">All ${d.timeline.length} Events · Running Balance</div>`;
-  h += `<div class="pp">Every inflow and outflow, day by day, with rolling balance · 90-day window</div></div>`;
-  h += `<div class="pt">${chvSvg()}</div></div>`;
-  h += `<div class="pb"><div style="overflow-x:auto;max-height:500px;overflow-y:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">`;
-  if (!d.timeline.length) {
-    h += '</table><div style="padding:12px;color:var(--dim)">No forward events.</div></div></div></div>';
-  } else {
-    h += '<thead style="background:var(--raised);position:sticky;top:0;z-index:1"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
-    h += '<th style="padding:8px">Date</th><th style="padding:8px">Event</th><th style="padding:8px">Project</th><th style="padding:8px">Type</th><th style="padding:8px;text-align:right">Amount</th><th style="padding:8px;text-align:right">Running Balance</th><th style="padding:8px;width:24px"></th>';
-    h += '</tr></thead><tbody>';
-    d.timeline.forEach(e => {
-      const rb = e.running_balance;
-      const rbStyle = rb < 0 ? 'color:var(--red);font-weight:700' : 'color:var(--txt);font-weight:600';
-      const canVoid = live && ['petty_cash','misc_expense','non_project_income','bank_snapshot'].includes(e.source_type);
-      const moveHandler = `financeMoveDate(${JSON.stringify(e.source_id)}, ${JSON.stringify(e.date)}, ${JSON.stringify(e.original_date)}, ${JSON.stringify(e.label||'')})`;
-      const dbId = (e.source_id||'').replace(/^(pc|misc|npi|bs)-/, '');
-      const voidKind = e.source_type;
-      const voidHandler = `financeVoidRow(${JSON.stringify(voidKind)}, ${dbId})`;
-      const rowStyle = e.moved ? 'background:rgba(234,170,8,.06)' : '';
-      h += `<tr style="border-top:1px solid rgba(33,39,47,.3);${rowStyle}">`;
-      h += `<td style="padding:6px 8px;font-family:var(--mono);white-space:nowrap">`;
-      h += `<span style="color:${e.moved?'var(--ylw)':'var(--txt)'}">${fmtDate(e.date)}</span>`;
-      if (live) h += ` <a href="#" onclick="event.preventDefault();${moveHandler}" title="Move date (scenario)" style="color:var(--dim);text-decoration:none;margin-left:4px">📅</a>`;
-      if (e.moved) h += ` <span style="font-size:10px;color:var(--ylw)">moved</span>`;
-      h += `</td>`;
-      h += `<td style="padding:6px 8px">${e.label || ''}</td>`;
-      h += `<td style="padding:6px 8px;color:var(--txt2);font-size:11px;white-space:nowrap">${e.project || '—'}</td>`;
-      h += `<td style="padding:6px 8px;color:var(--txt2);font-size:11px">${e.kind.replace(/_/g, ' ')}</td>`;
-      h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono)" ${amountCls(e.amount)}>${amountSign(e.amount)}</td>`;
-      h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono);${rbStyle}">${fmt(rb)}</td>`;
-      h += `<td style="padding:6px 8px;text-align:center;width:24px">`;
-      if (canVoid) h += `<a href="#" onclick="event.preventDefault();${voidHandler}" title="Void (mark deleted)" style="color:var(--red);text-decoration:none">×</a>`;
-      h += `</td>`;
-      h += '</tr>';
-    });
-    h += '</tbody></table></div></div></div>';
-  }
 
   // ── Overdue backlog ──
   if (d.overdue && d.overdue.length) {
