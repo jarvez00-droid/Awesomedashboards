@@ -2171,6 +2171,54 @@ function financeRenderCalendar(dayBuckets, fcByKey) {
   return html;
 }
 
+function financeToggleProjBucket(rowId, project, start, end) {
+  const detail = document.getElementById(rowId + '-detail');
+  const chv = document.getElementById(rowId + '-chv');
+  if (!detail) return;
+  const open = detail.style.display !== 'none';
+  if (open) {
+    detail.style.display = 'none';
+    if (chv) chv.textContent = '▸';
+  } else {
+    const cell = detail.querySelector('td');
+    if (cell && !cell.innerHTML.trim()) {
+      cell.innerHTML = financeRenderProjBucket(project, start, end, window._financeLive === true);
+    }
+    detail.style.display = '';
+    if (chv) chv.textContent = '▾';
+  }
+}
+
+function financeRenderProjBucket(project, start, end, live) {
+  const d = FINANCE_DATA;
+  if (!d) return '<div style="padding:12px;color:var(--dim);font-size:12px">No data.</div>';
+  const fmt = n => (n<0?'-':'') + '$' + Math.abs(n||0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  const fmtDate = iso => { if (!iso) return '—'; const dt = new Date(iso+'T12:00:00'); const MS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return `${MS[dt.getMonth()]} ${dt.getDate()}`; };
+  // Project events within date range (exclude overhead source_types — they're their own category)
+  const events = (d.timeline || []).filter(e =>
+    e.date >= start && e.date <= end &&
+    e.source_type !== 'fixed_cost' && e.source_type !== 'debt' &&
+    ((e.project || 'Other') === project)
+  ).sort((a, b) => a.date.localeCompare(b.date));
+  if (!events.length) return '<div style="padding:10px 16px;color:var(--dim);font-size:12px">No events for this project in this period.</div>';
+  let html = '<div style="padding:8px 16px 12px;background:var(--bg)">';
+  events.forEach(e => {
+    const canVoid = live && ['petty_cash','misc_expense','non_project_income','bank_snapshot'].includes(e.source_type);
+    const dbId = (e.source_id||'').replace(/^(pc|misc|npi|bs)-/, '');
+    html += `<div style="display:flex;align-items:center;padding:4px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3);font-size:12px">`;
+    html += `<span style="font-family:var(--mono);color:${e.moved?'var(--ylw)':'var(--txt2)'};white-space:nowrap;width:62px">${fmtDate(e.date)}</span>`;
+    html += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}</span>`;
+    html += `<span style="color:var(--txt2);font-size:11px">${e.kind.replace(/_/g,' ')}</span>`;
+    html += `<span style="font-family:var(--mono);color:${e.amount>=0?'var(--grn)':'var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
+    if (live) html += ` <a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
+    if (canVoid) html += ` <a href="#" class="fin-void" data-kind="${financeAttr(e.source_type)}" data-id="${dbId}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
+    else html += `<span style="width:12px"></span>`;
+    html += `</div>`;
+  });
+  html += '</div>';
+  return html;
+}
+
 function financeRenderPettyCashSection(live) {
   const d = FINANCE_DATA;
   const log = d.petty_cash_log || [];
@@ -2419,6 +2467,12 @@ function financeInstallClickHandler() {
     if (d) { e.preventDefault(); e.stopPropagation(); financeOpenDay(d.dataset.date); return; }
     const pd = e.target.closest('.fin-petty-day');
     if (pd) { e.preventDefault(); e.stopPropagation(); financeOpenPettyDay(pd.dataset.date); return; }
+    const pb = e.target.closest('.fin-proj-bucket');
+    if (pb) {
+      e.preventDefault(); e.stopPropagation();
+      financeToggleProjBucket(pb.dataset.rowid, pb.dataset.project, pb.dataset.start, pb.dataset.end);
+      return;
+    }
     const pick = e.target.closest('.fin-pick-end');
     if (pick) {
       e.preventDefault(); e.stopPropagation();
@@ -2769,12 +2823,13 @@ function renderFinance(c) {
   // ── Petty Cash calendar + log ──
   h += financeRenderPettyCashSection(live);
 
-  // ── By project ── (each card: mini aggregated table in selected unit + full event detail under a toggle)
-  h += `<div class="sh">By Project · ${unit.charAt(0).toUpperCase()+unit.slice(1)}ly breakdown</div>`;
+  // ── By project ── each card: per-period table where each row is clickable to show events
+  h += `<div class="sh">By Project · ${unit.charAt(0).toUpperCase()+unit.slice(1)}ly breakdown <span style="font-size:11px;color:var(--dim);font-weight:400;margin-left:6px">click any period row to see its events</span></div>`;
   const projAggUnit = d.project_aggregated && d.project_aggregated[unit] || {};
-  d.by_project.forEach(p => {
+  d.by_project.forEach((p, pIdx) => {
     const sev = p.net < 0 ? 'sev-r' : p.net > 0 ? 'sev-g' : 'sev-b';
     const projBuckets = projAggUnit[p.project] || [];
+    const projSlug = 'pr' + pIdx + '_' + unit;
     h += `<div class="pc ${sev}" style="margin-bottom:8px">`;
     h += `<div class="ph" onclick="tog(this)">`;
     h += `<div><div class="pn">${p.project}</div>`;
@@ -2785,43 +2840,29 @@ function renderFinance(c) {
     h += `</div></div>`;
     h += `<div class="pt">${chvSvg()}</div></div>`;
     h += `<div class="pb">`;
-    // Mini aggregated table for this project
     if (projBuckets.length) {
       h += `<div style="overflow-x:auto;margin-top:8px"><table style="width:100%;border-collapse:collapse;font-size:12px">`;
       h += '<thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
-      h += '<th style="padding:6px 8px">Period</th><th style="padding:6px 8px;text-align:right">In</th><th style="padding:6px 8px;text-align:right">Out</th><th style="padding:6px 8px;text-align:right">Net</th><th style="padding:6px 8px;text-align:right">#</th>';
+      h += '<th style="padding:6px 8px;width:16px"></th><th style="padding:6px 8px">Period</th><th style="padding:6px 8px;text-align:right">In</th><th style="padding:6px 8px;text-align:right">Out</th><th style="padding:6px 8px;text-align:right">Net</th><th style="padding:6px 8px;text-align:right">#</th>';
       h += '</tr></thead><tbody>';
-      projBuckets.forEach(b => {
+      projBuckets.forEach((b, bIdx) => {
+        const rowId = projSlug + '_' + bIdx;
         const netStyle = b.net >= 0 ? 'color:var(--grn);font-weight:600' : 'color:var(--red);font-weight:600';
-        h += '<tr style="border-top:1px solid rgba(33,39,47,.3)">';
+        h += `<tr class="fin-proj-bucket" data-rowid="${rowId}" data-project="${financeAttr(p.project)}" data-start="${b.start}" data-end="${b.end}" style="border-top:1px solid rgba(33,39,47,.3);cursor:pointer">`;
+        h += `<td style="padding:5px 8px;color:var(--dim);text-align:center"><span id="${rowId}-chv">▸</span></td>`;
         h += `<td style="padding:5px 8px">${b.label}</td>`;
         h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${b.inflow>0?'var(--grn)':'var(--dim)'}">${b.inflow>0?'+'+fmtK(b.inflow):'—'}</td>`;
         h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${b.outflow>0?'var(--red)':'var(--dim)'}">${b.outflow>0?'-'+fmtK(b.outflow):'—'}</td>`;
         h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);${netStyle}">${b.net>=0?'+':''}${fmtK(b.net)}</td>`;
         h += `<td style="padding:5px 8px;text-align:right;color:var(--txt2);font-size:11px">${b.count}</td>`;
         h += '</tr>';
+        // Lazy-filled detail row
+        h += `<tr id="${rowId}-detail" style="display:none;background:var(--bg)"><td colspan="6" style="padding:0"></td></tr>`;
       });
       h += '</tbody></table></div>';
+    } else {
+      h += '<div style="padding:10px;color:var(--dim);font-size:12px">No events in this period.</div>';
     }
-    // Full event list for this project (nested collapsible)
-    h += `<details style="margin-top:10px"><summary style="cursor:pointer;font-size:11px;color:var(--dim);padding:6px 0">Show ${p.events.length} individual events</summary>`;
-    h += `<div style="overflow-x:auto;margin-top:6px"><table style="width:100%;border-collapse:collapse;font-size:12px">`;
-    h += '<thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
-    h += '<th style="padding:6px 8px">Date</th><th style="padding:6px 8px">Event</th><th style="padding:6px 8px">Type</th><th style="padding:6px 8px;text-align:right">Amount</th><th style="padding:6px 8px;width:24px"></th>';
-    h += '</tr></thead><tbody>';
-    p.events.forEach(e => {
-      h += `<tr style="border-top:1px solid rgba(33,39,47,.3);${e.moved?'background:rgba(234,170,8,.06)':''}">`;
-      h += `<td style="padding:5px 8px;font-family:var(--mono);white-space:nowrap">`;
-      h += `<span style="color:${e.moved?'var(--ylw)':'var(--txt)'}">${fmtDate(e.date)}</span>`;
-      if (live) h += ` <a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" title="Move date" style="color:var(--dim);text-decoration:none;margin-left:4px">📅</a>`;
-      h += `</td>`;
-      h += `<td style="padding:5px 8px">${e.label || ''}</td>`;
-      h += `<td style="padding:5px 8px;color:var(--txt2);font-size:11px">${e.kind.replace(/_/g, ' ')}</td>`;
-      h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${amountCol(e.amount)};font-weight:600">${amountSign(e.amount)}</td>`;
-      h += `<td></td>`;
-      h += '</tr>';
-    });
-    h += '</tbody></table></div></details>';
     h += `</div></div>`;
   });
 
