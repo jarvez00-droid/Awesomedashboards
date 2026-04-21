@@ -2015,6 +2015,11 @@ async function financeMoveDate(sourceId, currentDate, originalDate, label) {
   }
 }
 
+function financeSetUnit(u) {
+  window._financeUnit = u;
+  renderFinance(document.getElementById('content'));
+}
+
 async function financeResetScenarios() {
   if (!confirm('Clear ALL scenario date overrides and return to base dates?')) return;
   try {
@@ -2159,14 +2164,67 @@ function renderFinance(c) {
     }
   }
 
-  // ── Forward timeline ──
-  h += `<div class="sh">Forward Timeline · ${d.timeline.length} events next 90 days</div>`;
-  h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:0;overflow:hidden">';
-  if (!d.timeline.length) {
-    h += '<div style="padding:12px;color:var(--dim)">No forward events.</div>';
+  // ── Time-unit slider + aggregated summary ──
+  const unit = window._financeUnit || 'week';
+  const pill = (val, label) => `<button onclick="financeSetUnit('${val}')" style="padding:7px 18px;font-size:13px;font-weight:600;background:${unit===val?'var(--blu)':'transparent'};color:${unit===val?'#fff':'var(--txt2)'};border:none;border-radius:4px;cursor:pointer;transition:all .12s">${label}</button>`;
+  h += `<div class="sh" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+    <span>Cashflow Summary</span>
+    <div style="display:inline-flex;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px">
+      ${pill('day','Day')}${pill('week','Week')}${pill('month','Month')}
+    </div>
+  </div>`;
+
+  const buckets = (d.aggregated && d.aggregated[unit]) || [];
+  const fcBuckets = (d.aggregated_fixed && d.aggregated_fixed[unit]) || [];
+  // Map fixed-cost outflow by bucket key
+  const fcByKey = {};
+  fcBuckets.forEach(b => fcByKey[b.key] = b);
+
+  h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:0;overflow:hidden;margin-bottom:20px">';
+  if (!buckets.length) {
+    h += '<div style="padding:14px;color:var(--dim)">No forward events.</div>';
   } else {
-    h += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">';
-    h += '<thead style="background:var(--raised);position:sticky;top:0"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
+    h += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">';
+    h += '<thead style="background:var(--raised)"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
+    h += '<th style="padding:10px 12px">Period</th>';
+    h += '<th style="padding:10px 12px;text-align:right">Inflow</th>';
+    h += '<th style="padding:10px 12px;text-align:right">Outflow</th>';
+    h += '<th style="padding:10px 12px;text-align:right">Fixed costs</th>';
+    h += '<th style="padding:10px 12px;text-align:right">Net</th>';
+    h += '<th style="padding:10px 12px;text-align:right">Closing Balance</th>';
+    h += '<th style="padding:10px 12px;text-align:right">Events</th>';
+    h += '</tr></thead><tbody>';
+    buckets.forEach(b => {
+      const cb = b.closing_balance;
+      const cbStyle = cb == null ? 'color:var(--dim)' : (cb < 0 ? 'color:var(--red);font-weight:700' : 'color:var(--txt);font-weight:600');
+      const netStyle = b.net >= 0 ? 'color:var(--grn);font-weight:600' : 'color:var(--red);font-weight:600';
+      const fc = fcByKey[b.key];
+      const fcAmt = fc ? fc.outflow : 0;
+      h += '<tr style="border-top:1px solid rgba(33,39,47,.3)">';
+      h += `<td style="padding:8px 12px;font-weight:500">${b.label}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--grn)">+${fmtK(b.inflow)}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--red)">-${fmtK(b.outflow)}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--org)">-${fmtK(fcAmt)}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${netStyle}">${b.net>=0?'+':''}${fmtK(b.net)}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${cbStyle}">${cb==null?'—':fmt(cb)}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;color:var(--txt2);font-size:11px">${b.count}</td>`;
+      h += '</tr>';
+    });
+    h += '</tbody></table></div>';
+  }
+  h += '</div>';
+
+  // ── Detail timeline (collapsible; 303 events by default closed) ──
+  h += `<div class="pc" style="margin-bottom:16px">`;
+  h += `<div class="ph" onclick="tog(this)">`;
+  h += `<div><div class="pn">All ${d.timeline.length} Events · Running Balance</div>`;
+  h += `<div class="pp">Every inflow and outflow, day by day, with rolling balance · 90-day window</div></div>`;
+  h += `<div class="pt">${chvSvg()}</div></div>`;
+  h += `<div class="pb"><div style="overflow-x:auto;max-height:500px;overflow-y:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">`;
+  if (!d.timeline.length) {
+    h += '</table><div style="padding:12px;color:var(--dim)">No forward events.</div></div></div></div>';
+  } else {
+    h += '<thead style="background:var(--raised);position:sticky;top:0;z-index:1"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
     h += '<th style="padding:8px">Date</th><th style="padding:8px">Event</th><th style="padding:8px">Project</th><th style="padding:8px">Type</th><th style="padding:8px;text-align:right">Amount</th><th style="padding:8px;text-align:right">Running Balance</th><th style="padding:8px;width:24px"></th>';
     h += '</tr></thead><tbody>';
     d.timeline.forEach(e => {
@@ -2194,9 +2252,8 @@ function renderFinance(c) {
       h += `</td>`;
       h += '</tr>';
     });
-    h += '</tbody></table></div>';
+    h += '</tbody></table></div></div></div>';
   }
-  h += '</div>';
 
   // ── Overdue backlog ──
   if (d.overdue && d.overdue.length) {
@@ -2221,10 +2278,12 @@ function renderFinance(c) {
     h += '</tbody></table></div></div></div>';
   }
 
-  // ── By project ──
-  h += `<div class="sh">By Project · Next 90 days</div>`;
+  // ── By project ── (each card: mini aggregated table in selected unit + full event detail under a toggle)
+  h += `<div class="sh">By Project · ${unit.charAt(0).toUpperCase()+unit.slice(1)}ly breakdown</div>`;
+  const projAggUnit = d.project_aggregated && d.project_aggregated[unit] || {};
   d.by_project.forEach(p => {
     const sev = p.net < 0 ? 'sev-r' : p.net > 0 ? 'sev-g' : 'sev-b';
+    const projBuckets = projAggUnit[p.project] || [];
     h += `<div class="pc ${sev}" style="margin-bottom:8px">`;
     h += `<div class="ph" onclick="tog(this)">`;
     h += `<div><div class="pn">${p.project}</div>`;
@@ -2234,20 +2293,77 @@ function renderFinance(c) {
     }
     h += `</div></div>`;
     h += `<div class="pt">${chvSvg()}</div></div>`;
-    h += `<div class="pb"><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:6px">`;
+    h += `<div class="pb">`;
+    // Mini aggregated table for this project
+    if (projBuckets.length) {
+      h += `<div style="overflow-x:auto;margin-top:8px"><table style="width:100%;border-collapse:collapse;font-size:12px">`;
+      h += '<thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
+      h += '<th style="padding:6px 8px">Period</th><th style="padding:6px 8px;text-align:right">In</th><th style="padding:6px 8px;text-align:right">Out</th><th style="padding:6px 8px;text-align:right">Net</th><th style="padding:6px 8px;text-align:right">#</th>';
+      h += '</tr></thead><tbody>';
+      projBuckets.forEach(b => {
+        const netStyle = b.net >= 0 ? 'color:var(--grn);font-weight:600' : 'color:var(--red);font-weight:600';
+        h += '<tr style="border-top:1px solid rgba(33,39,47,.3)">';
+        h += `<td style="padding:5px 8px">${b.label}</td>`;
+        h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${b.inflow>0?'var(--grn)':'var(--dim)'}">${b.inflow>0?'+'+fmtK(b.inflow):'—'}</td>`;
+        h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${b.outflow>0?'var(--red)':'var(--dim)'}">${b.outflow>0?'-'+fmtK(b.outflow):'—'}</td>`;
+        h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);${netStyle}">${b.net>=0?'+':''}${fmtK(b.net)}</td>`;
+        h += `<td style="padding:5px 8px;text-align:right;color:var(--txt2);font-size:11px">${b.count}</td>`;
+        h += '</tr>';
+      });
+      h += '</tbody></table></div>';
+    }
+    // Full event list for this project (nested collapsible)
+    h += `<details style="margin-top:10px"><summary style="cursor:pointer;font-size:11px;color:var(--dim);padding:6px 0">Show ${p.events.length} individual events</summary>`;
+    h += `<div style="overflow-x:auto;margin-top:6px"><table style="width:100%;border-collapse:collapse;font-size:12px">`;
     h += '<thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
-    h += '<th style="padding:6px 8px">Date</th><th style="padding:6px 8px">Event</th><th style="padding:6px 8px">Type</th><th style="padding:6px 8px;text-align:right">Amount</th>';
+    h += '<th style="padding:6px 8px">Date</th><th style="padding:6px 8px">Event</th><th style="padding:6px 8px">Type</th><th style="padding:6px 8px;text-align:right">Amount</th><th style="padding:6px 8px;width:24px"></th>';
     h += '</tr></thead><tbody>';
     p.events.forEach(e => {
-      h += '<tr style="border-top:1px solid rgba(33,39,47,.3)">';
-      h += `<td style="padding:5px 8px;font-family:var(--mono);white-space:nowrap">${fmtDate(e.date)}</td>`;
+      const moveHandler = `financeMoveDate(${JSON.stringify(e.source_id)}, ${JSON.stringify(e.date)}, ${JSON.stringify(e.original_date)}, ${JSON.stringify(e.label||'')})`;
+      h += `<tr style="border-top:1px solid rgba(33,39,47,.3);${e.moved?'background:rgba(234,170,8,.06)':''}">`;
+      h += `<td style="padding:5px 8px;font-family:var(--mono);white-space:nowrap">`;
+      h += `<span style="color:${e.moved?'var(--ylw)':'var(--txt)'}">${fmtDate(e.date)}</span>`;
+      if (live) h += ` <a href="#" onclick="event.preventDefault();${moveHandler}" title="Move date" style="color:var(--dim);text-decoration:none;margin-left:4px">📅</a>`;
+      h += `</td>`;
       h += `<td style="padding:5px 8px">${e.label || ''}</td>`;
       h += `<td style="padding:5px 8px;color:var(--txt2);font-size:11px">${e.kind.replace(/_/g, ' ')}</td>`;
       h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono)" ${amountCls(e.amount)}>${amountSign(e.amount)}</td>`;
+      h += `<td></td>`;
       h += '</tr>';
     });
-    h += '</tbody></table></div></div></div>';
+    h += '</tbody></table></div></details>';
+    h += `</div></div>`;
   });
+
+  // ── Upcoming fixed-cost payments (with date-edit handles) ──
+  const fcForward = (d.fixed_cost_events && d.fixed_cost_events.forward) || [];
+  h += `<div class="sh">Upcoming Fixed Cost Payments · ${fcForward.length} events</div>`;
+  h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:0;overflow:hidden;margin-bottom:20px">';
+  if (!fcForward.length) {
+    h += '<div style="padding:12px;color:var(--dim)">No upcoming fixed-cost payments.</div>';
+  } else {
+    h += '<div style="overflow-x:auto;max-height:360px;overflow-y:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">';
+    h += '<thead style="background:var(--raised);position:sticky;top:0;z-index:1"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
+    h += '<th style="padding:8px">Date</th><th style="padding:8px">Item</th><th style="padding:8px">Category</th><th style="padding:8px">Frequency</th><th style="padding:8px;text-align:right">Amount</th>';
+    h += '</tr></thead><tbody>';
+    fcForward.forEach(e => {
+      const moveHandler = `financeMoveDate(${JSON.stringify(e.source_id)}, ${JSON.stringify(e.date)}, ${JSON.stringify(e.original_date)}, ${JSON.stringify(e.label||'')})`;
+      const freq = (e.meta && e.meta.frequency) || e.category || '—';
+      h += `<tr style="border-top:1px solid rgba(33,39,47,.3);${e.moved?'background:rgba(234,170,8,.06)':''}">`;
+      h += `<td style="padding:6px 8px;font-family:var(--mono);white-space:nowrap">`;
+      h += `<span style="color:${e.moved?'var(--ylw)':'var(--txt)'}">${fmtDate(e.date)}</span>`;
+      if (live) h += ` <a href="#" onclick="event.preventDefault();${moveHandler}" title="Move payment date" style="color:var(--dim);text-decoration:none;margin-left:4px">📅</a>`;
+      if (e.moved) h += ` <span style="font-size:10px;color:var(--ylw)">moved</span>`;
+      h += `</td>`;
+      h += `<td style="padding:6px 8px">${e.label || ''}</td>`;
+      h += `<td style="padding:6px 8px;color:var(--txt2);font-size:11px">${e.category || '—'}</td>`;
+      h += `<td style="padding:6px 8px;color:var(--txt2);font-size:11px">${freq}</td>`;
+      h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono);color:var(--red)">-${fmt(Math.abs(e.amount))}</td>`;
+      h += '</tr>';
+    });
+    h += '</tbody></table></div>';
+  }
+  h += '</div>';
 
   // ── Bank balance history ──
   h += '<div class="sh">Bank Balance History</div>';
