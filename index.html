@@ -2210,6 +2210,7 @@ function financeRenderProjBucket(project, start, end, live) {
     html += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}</span>`;
     html += `<span style="color:var(--txt2);font-size:11px">${e.kind.replace(/_/g,' ')}</span>`;
     html += `<span style="font-family:var(--mono);color:${e.amount>=0?'var(--grn)':'var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
+    if (live) html += ` <a href="#" class="fin-edit-amount" data-src="${financeAttr(e.source_id)}" data-amount="${e.amount}" data-label="${financeAttr(e.label||'')}" data-type="${financeAttr(e.source_type)}" title="Edit amount" style="color:var(--dim);text-decoration:none">✎</a>`;
     if (live) html += ` <a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
     if (canVoid) html += ` <a href="#" class="fin-void" data-kind="${financeAttr(e.source_type)}" data-id="${dbId}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
     else html += `<span style="width:12px"></span>`;
@@ -2473,6 +2474,12 @@ function financeInstallClickHandler() {
       financeToggleProjBucket(pb.dataset.rowid, pb.dataset.project, pb.dataset.start, pb.dataset.end);
       return;
     }
+    const ea = e.target.closest('.fin-edit-amount');
+    if (ea) {
+      e.preventDefault(); e.stopPropagation();
+      financeEditAmount(ea.dataset.src, parseFloat(ea.dataset.amount), ea.dataset.label, ea.dataset.type);
+      return;
+    }
     const pick = e.target.closest('.fin-pick-end');
     if (pick) {
       e.preventDefault(); e.stopPropagation();
@@ -2506,6 +2513,39 @@ function financeSafeRender() {
         <button onclick="localStorage.removeItem('finance_api_url');localStorage.removeItem('finance_api_token');window._financeLive=false;loadAndRenderFinance(document.getElementById('content'))" style="margin-left:6px;padding:7px 14px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">Clear API settings</button></div>
       </div></div>`;
   }
+}
+
+function financeEditAmount(sourceId, currentAmount, label, sourceType) {
+  const abs = Math.abs(currentAmount);
+  const direction = currentAmount >= 0 ? 'income' : 'outflow';
+  const isSQLite = /^(pc-|misc-|npi-|bs-)/.test(sourceId || '');
+  const kindNote = isSQLite
+    ? "This is a SQLite-logged entry. We'll void the existing row and insert a corrected one — original stays in the audit trail."
+    : "This is an external event (JobTread / fixed cost / debt). We'll apply a scenario amount override — the source data stays unchanged.";
+  financeModal('Modify amount', `
+    <div style="font-size:13px;color:var(--txt2);margin-bottom:2px"><b style="color:var(--txt)">${label || '(no label)'}</b></div>
+    <div style="font-size:11px;color:var(--dim);margin-bottom:10px">Current: <b style="color:${direction==='income'?'var(--grn)':'var(--red)'}">${direction==='income'?'+':'-'}$${abs.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</b> (${direction})</div>
+    <label style="font-size:12px;color:var(--txt2)">New amount ($)</label>
+    <input name="amount" type="number" step="0.01" min="0.01" value="${abs}" required style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:10px 12px;font-size:14px;border-radius:6px;font-family:var(--mono)">
+    <label style="font-size:12px;color:var(--txt2);margin-top:6px">Reason (optional)</label>
+    <input name="reason" placeholder="e.g. typo correction" style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:8px 10px;font-size:13px;border-radius:6px">
+    <div style="font-size:11px;color:var(--dim);margin-top:6px">Enter the amount as a positive number. The direction (${direction}) will be preserved automatically.</div>
+    <div style="font-size:11px;color:var(--dim);margin-top:6px;padding:8px;background:rgba(129,140,248,.06);border-left:2px solid var(--acc);border-radius:4px">${kindNote}</div>
+  `, async (data) => {
+    const newAmt = parseFloat(data.amount);
+    if (isNaN(newAmt) || newAmt <= 0) throw new Error('Amount must be a positive number');
+    await financeApi('/edit-amount', {
+      method: 'POST',
+      body: JSON.stringify({
+        source_id: sourceId,
+        new_amount: newAmt,
+        reason: (data.reason || '').trim() || 'amount edited via dashboard',
+      }),
+    });
+    const result = await financeApi('/state');
+    FINANCE_DATA = result;
+    financeSafeRender();
+  });
 }
 
 function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
@@ -2882,6 +2922,7 @@ function renderFinance(c) {
       h += `<tr style="border-top:1px solid rgba(33,39,47,.3);${e.moved?'background:rgba(234,170,8,.06)':''}">`;
       h += `<td style="padding:6px 8px;font-family:var(--mono);white-space:nowrap">`;
       h += `<span style="color:${e.moved?'var(--ylw)':'var(--txt)'}">${fmtDate(e.date)}</span>`;
+      if (live) h += ` <a href="#" class="fin-edit-amount" data-src="${financeAttr(e.source_id)}" data-amount="${e.amount}" data-label="${financeAttr(e.label||'')}" data-type="${financeAttr(e.source_type)}" title="Edit amount" style="color:var(--dim);text-decoration:none;margin-left:4px">✎</a>`;
       if (live) h += ` <a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" title="Move payment date" style="color:var(--dim);text-decoration:none;margin-left:4px">📅</a>`;
       if (e.moved) h += ` <span style="font-size:10px;color:var(--ylw)">moved</span>`;
       h += `</td>`;
