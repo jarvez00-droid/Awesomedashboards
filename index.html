@@ -2431,6 +2431,7 @@ function financeRenderBucketContent(start, end, rowId, live) {
       html += `<span style="font-family:var(--mono);color:${e.moved?'var(--ylw)':'var(--txt2)'};white-space:nowrap;width:62px">${fmtDate(e.date)}</span>`;
       html += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}</span>`;
       html += `<span style="font-family:var(--mono);color:${e.amount>=0?'var(--grn)':'var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
+      if (live) html += `<a href="#" class="fin-edit-amount" data-src="${financeAttr(e.source_id)}" data-amount="${e.amount}" data-label="${financeAttr(e.label||'')}" data-type="${financeAttr(e.source_type)}" title="Edit amount" style="color:var(--dim);text-decoration:none;margin-right:4px">✎</a>`;
       if (live) html += `<a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
       if (canVoid) html += `<a href="#" class="fin-void" data-kind="${financeAttr(e.source_type)}" data-id="${dbId}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
       else html += `<span style="width:12px"></span>`;
