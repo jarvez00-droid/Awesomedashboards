@@ -367,6 +367,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a data-p="mgmt">▥ Management</a>
   <a data-p="fcash">💰 Full Cash Flow</a>
   <a data-p="finance">💵 Finance</a>
+  <a data-p="scash">🔮 Scenario Cashflow</a>
   <a data-p="archive">▦ Archive</a>
 </div>
 
@@ -401,6 +402,7 @@ function render() {
   else if (curPage === 'mgmt') mgmtGate(c);
   else if (curPage === 'fcash') fcGate(c);
   else if (curPage === 'finance') financeGate(c);
+  else if (curPage === 'scash') scashGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
     const titles = {projects:'Project Dashboards'};
@@ -2648,6 +2650,124 @@ async function loadAndRenderFinance(c) {
   }
   try{const r=await fetch('data/finance-latest.json');if(r.ok){FINANCE_DATA=await r.json();financeSafeRender();return;}}catch(e){}
   c.innerHTML='<div class="empty"><div class="empty-i">💵</div><div class="empty-t">No Finance Data</div><div class="empty-d">Run: python3 generate_finance_json.py</div></div>';
+}
+
+// ─── Scenario Cashflow tab ──────────────────────────────────────────
+// Reuses the Finance renderer by swapping FINANCE_DATA with the scenario state.
+// Adds a top banner summarizing the scenario projects.
+function scashGate(c) {
+  if (sessionStorage.getItem('mgmt_auth')==='1') { loadAndRenderScash(c); return; }
+  c.innerHTML = `<div class="pw-gate">
+    <div class="pw-icon">🔮</div>
+    <div class="pw-title">Scenario Cashflow — Restricted</div>
+    <div class="pw-sub">Enter password to access.</div>
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
+    <button class="pw-btn" id="pw-btn">Unlock</button>
+    <div class="pw-deny" id="pw-deny" style="display:none">Access denied</div>
+  </div>`;
+  const inp=document.getElementById('pw-input'),btn=document.getElementById('pw-btn'),deny=document.getElementById('pw-deny');
+  function tryPw(){
+    if(inp.value===MGMT_PW){sessionStorage.setItem('mgmt_auth','1');loadAndRenderScash(c);}
+    else{inp.classList.add('pw-err');deny.style.display='';setTimeout(()=>inp.classList.remove('pw-err'),400);}
+  }
+  btn.addEventListener('click',tryPw);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')tryPw();});
+  setTimeout(()=>inp.focus(),50);
+}
+
+async function loadAndRenderScash(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Scenario Cashflow...</div></div>';
+  let scenData = null;
+  // Priority 1 — live API
+  if (financeApiConfigured()) {
+    try {
+      scenData = await financeApi('/scenario-cashflow-state');
+    } catch (e) {
+      console.warn('Scenario API unavailable, falling back to static JSON:', e.message);
+    }
+  }
+  // Priority 2 — static JSON
+  if (!scenData) {
+    for (let i=0;i<7;i++){
+      const d=new Date(Date.now()-i*86400000).toISOString().slice(0,10);
+      try{const r=await fetch('data/scenario-cashflow-'+d+'.json');if(!r.ok)continue;scenData=await r.json();break;}catch(e){}
+    }
+  }
+  if (!scenData) {
+    try{const r=await fetch('data/scenario-cashflow-latest.json');if(r.ok)scenData=await r.json();}catch(e){}
+  }
+  if (!scenData) {
+    c.innerHTML='<div class="empty"><div class="empty-i">🔮</div><div class="empty-t">No Scenario Cashflow Data</div><div class="empty-d">Run: python3 generate_scenario_cashflow_json.py</div></div>';
+    return;
+  }
+  renderScash(c, scenData);
+}
+
+function renderScash(c, scenData) {
+  // Swap FINANCE_DATA, call renderFinance, then inject scenario banner
+  const _saved = FINANCE_DATA;
+  FINANCE_DATA = scenData;
+  try {
+    renderFinance(c);
+  } catch (err) {
+    console.error('renderScash: renderFinance failed:', err);
+    FINANCE_DATA = _saved;
+    c.innerHTML = '<div class="alert"><b>Render error.</b> ' + (err.message || err) + '</div>';
+    return;
+  }
+  // Leave FINANCE_DATA pointing at scenData while tab is active — range filtering
+  // happens via renderFinance which reads FINANCE_DATA. Restore on tab switch.
+
+  // Inject scenario banner at top of page
+  const ss = scenData.scenario_summary || {};
+  const projects = scenData.scenario_projects || [];
+  const fmt = n => (n<0?'-':'') + '$' + Math.abs(n||0).toLocaleString(undefined, {minimumFractionDigits:0, maximumFractionDigits:0});
+  const fmtDate = iso => {
+    if (!iso) return '—';
+    const dt = new Date(iso + 'T12:00:00');
+    const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${MS[dt.getMonth()]} ${dt.getDate()}`;
+  };
+  const rows = projects.map(p => {
+    const netColor = p.net >= 0 ? 'var(--grn)' : 'var(--red)';
+    return `<tr>
+      <td style="padding:6px 10px">${p.project_name}</td>
+      <td style="padding:6px 10px;color:var(--mut);font-size:12px">${fmtDate(p.start_date)}</td>
+      <td style="padding:6px 10px;text-align:right;color:var(--grn)">${fmt(p.inflow)}</td>
+      <td style="padding:6px 10px;text-align:right;color:var(--red)">${fmt(p.outflow)}</td>
+      <td style="padding:6px 10px;text-align:right;color:${netColor};font-weight:600">${fmt(p.net)}</td>
+      <td style="padding:6px 10px;text-align:right;color:var(--mut);font-size:12px">${p.event_count||0} events</td>
+    </tr>`;
+  }).join('');
+  const netColor = (ss.total_net||0) >= 0 ? 'var(--grn)' : 'var(--red)';
+  const banner = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px;margin:0 0 16px 0">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:10px">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--txt)">🔮 Scenario: 5 projects added to real finance state</div>
+        <div style="font-size:11px;color:var(--mut)">These projects are NOT in JobTread — planning only. Numbers are rough.</div>
+      </div>
+      <div style="font-size:13px;color:var(--mut)">
+        Total in <span style="color:var(--grn);font-weight:600">${fmt(ss.total_inflow||0)}</span> ·
+        Total out <span style="color:var(--red);font-weight:600">${fmt(ss.total_outflow||0)}</span> ·
+        Net <span style="color:${netColor};font-weight:600">${fmt(ss.total_net||0)}</span>
+      </div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead>
+        <tr style="color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.5px">
+          <th style="padding:6px 10px;text-align:left">Project</th>
+          <th style="padding:6px 10px;text-align:left">Starts</th>
+          <th style="padding:6px 10px;text-align:right">Inflow</th>
+          <th style="padding:6px 10px;text-align:right">Outflow</th>
+          <th style="padding:6px 10px;text-align:right">Net</th>
+          <th style="padding:6px 10px;text-align:right"></th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </div>`;
+  // Prepend the banner inside the main content container
+  c.insertAdjacentHTML('afterbegin', banner);
 }
 
 function renderFinance(c) {
