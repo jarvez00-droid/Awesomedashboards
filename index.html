@@ -368,6 +368,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a data-p="fcash">💰 Full Cash Flow</a>
   <a data-p="finance">💵 Finance</a>
   <a data-p="scash">🔮 Scenario Cashflow</a>
+  <a data-p="miles">🎯 Milestones</a>
   <a data-p="archive">▦ Archive</a>
 </div>
 
@@ -403,6 +404,7 @@ function render() {
   else if (curPage === 'fcash') fcGate(c);
   else if (curPage === 'finance') financeGate(c);
   else if (curPage === 'scash') scashGate(c);
+  else if (curPage === 'miles') milesGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
     const titles = {projects:'Project Dashboards'};
@@ -2701,6 +2703,142 @@ async function loadAndRenderScash(c) {
     return;
   }
   renderScash(c, scenData);
+}
+
+// ─── Milestones tab ─────────────────────────────────────────────────
+// Per-project table: each Payment - Income milestone with the investment
+// needed (subs + materials) to unlock that payment.
+function milesGate(c) {
+  if (sessionStorage.getItem('mgmt_auth')==='1') { loadAndRenderMiles(c); return; }
+  c.innerHTML = `<div class="pw-gate">
+    <div class="pw-icon">🎯</div>
+    <div class="pw-title">Milestones — Restricted</div>
+    <div class="pw-sub">Enter password to access.</div>
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
+    <button class="pw-btn" id="pw-btn">Unlock</button>
+    <div class="pw-deny" id="pw-deny" style="display:none">Access denied</div>
+  </div>`;
+  const inp=document.getElementById('pw-input'),btn=document.getElementById('pw-btn'),deny=document.getElementById('pw-deny');
+  function tryPw(){
+    if(inp.value===MGMT_PW){sessionStorage.setItem('mgmt_auth','1');loadAndRenderMiles(c);}
+    else{inp.classList.add('pw-err');deny.style.display='';setTimeout(()=>inp.classList.remove('pw-err'),400);}
+  }
+  btn.addEventListener('click',tryPw);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')tryPw();});
+  setTimeout(()=>inp.focus(),50);
+}
+
+async function loadAndRenderMiles(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Milestones...</div></div>';
+  let data = null;
+  if (financeApiConfigured()) {
+    try { data = await financeApi('/state'); } catch (e) {}
+  }
+  if (!data) {
+    for (let i=0;i<7;i++){
+      const d=new Date(Date.now()-i*86400000).toISOString().slice(0,10);
+      try{const r=await fetch('data/finance-'+d+'.json');if(!r.ok)continue;data=await r.json();break;}catch(e){}
+    }
+  }
+  if (!data) {
+    try{const r=await fetch('data/finance-latest.json');if(r.ok)data=await r.json();}catch(e){}
+  }
+  if (!data) {
+    c.innerHTML='<div class="empty"><div class="empty-i">🎯</div><div class="empty-t">No Milestone Data</div></div>';
+    return;
+  }
+  renderMiles(c, data);
+}
+
+function renderMiles(c, data) {
+  const fmt = n => (n<0?'-':'') + '$' + Math.abs(Math.round(n||0)).toLocaleString();
+  const fmtDate = iso => {
+    if (!iso) return '—';
+    const dt = new Date(iso + 'T12:00:00');
+    const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${MS[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`;
+  };
+  const projects = (data.by_project || []).filter(p => (p.milestones || []).length > 0);
+
+  if (!projects.length) {
+    c.innerHTML = '<div class="empty"><div class="empty-i">🎯</div><div class="empty-t">No milestones yet</div><div class="empty-d">Payment - Income tasks haven\'t been added to any project.</div></div>';
+    return;
+  }
+
+  // Summary totals
+  let totPay = 0, totInvest = 0;
+  projects.forEach(p => (p.milestones || []).forEach(m => { totPay += m.payment || 0; totInvest += m.invest_before || 0; }));
+
+  const head = `<div class="page-title">🎯 Milestones — Investment Needed per Client Payment</div>
+    <div class="page-sub">For each client payment milestone: how much we need to spend on subs + materials BEFORE that payment comes in.</div>
+    <div style="display:flex;gap:16px;margin:12px 0 20px 0;flex-wrap:wrap">
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px">
+        <div style="font-size:11px;color:var(--mut);text-transform:uppercase">Total milestones</div>
+        <div style="font-size:22px;font-weight:700">${projects.reduce((s,p)=>s+(p.milestones||[]).filter(m=>!m.trailing).length,0)} across ${projects.length} projects</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px">
+        <div style="font-size:11px;color:var(--mut);text-transform:uppercase">Total client payments</div>
+        <div style="font-size:22px;font-weight:700;color:var(--grn)">${fmt(totPay)}</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px">
+        <div style="font-size:11px;color:var(--mut);text-transform:uppercase">Total investment needed</div>
+        <div style="font-size:22px;font-weight:700;color:var(--red)">${fmt(totInvest)}</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px">
+        <div style="font-size:11px;color:var(--mut);text-transform:uppercase">Net margin</div>
+        <div style="font-size:22px;font-weight:700;color:${(totPay-totInvest)>=0?'var(--grn)':'var(--red)'}">${fmt(totPay-totInvest)}</div>
+      </div>
+    </div>`;
+
+  const projectSections = projects.map(p => {
+    const ms = p.milestones || [];
+    const pPay = ms.reduce((s,m)=>s+(m.payment||0),0);
+    const pInvest = ms.reduce((s,m)=>s+(m.invest_before||0),0);
+    const pNet = pPay - pInvest;
+    const rows = ms.map((m,i) => {
+      const netColor = m.net_after >= 0 ? 'var(--grn)' : 'var(--red)';
+      const rowStyle = m.trailing ? 'background:rgba(200,100,100,.08)' : '';
+      const label = m.trailing ? `<span style="color:var(--mut);font-style:italic">${m.label}</span>` : m.label;
+      return `<tr style="${rowStyle}">
+        <td style="padding:7px 10px;color:var(--mut);font-size:12px">${i+1}</td>
+        <td style="padding:7px 10px;white-space:nowrap">${fmtDate(m.date)}</td>
+        <td style="padding:7px 10px;max-width:360px">${label}</td>
+        <td style="padding:7px 10px;text-align:right;color:var(--grn);font-weight:600">${m.payment>0?fmt(m.payment):'—'}</td>
+        <td style="padding:7px 10px;text-align:right;color:var(--red)">${m.invest_before>0?fmt(m.invest_before):'—'}</td>
+        <td style="padding:7px 10px;text-align:right;color:${netColor};font-weight:600">${fmt(m.net_after)}</td>
+        <td style="padding:7px 10px;text-align:right;color:var(--mut);font-size:12px">${fmt(m.cumulative_invest)}</td>
+      </tr>`;
+    }).join('');
+
+    return `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:14px 16px;margin:0 0 16px 0">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:10px">
+        <div style="font-size:15px;font-weight:700">${p.project}</div>
+        <div style="font-size:12px;color:var(--mut)">
+          Pay <span style="color:var(--grn);font-weight:600">${fmt(pPay)}</span> ·
+          Invest <span style="color:var(--red);font-weight:600">${fmt(pInvest)}</span> ·
+          Net <span style="color:${pNet>=0?'var(--grn)':'var(--red)'};font-weight:600">${fmt(pNet)}</span>
+        </div>
+      </div>
+      <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:720px">
+        <thead>
+          <tr style="color:var(--mut);font-size:10px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--bdr)">
+            <th style="padding:8px 10px;text-align:left;width:30px">#</th>
+            <th style="padding:8px 10px;text-align:left">Date</th>
+            <th style="padding:8px 10px;text-align:left">Milestone</th>
+            <th style="padding:8px 10px;text-align:right">Client Pays</th>
+            <th style="padding:8px 10px;text-align:right">Invest Before</th>
+            <th style="padding:8px 10px;text-align:right">Net After</th>
+            <th style="padding:8px 10px;text-align:right">Cum. Invest</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+      </div>
+    </div>`;
+  }).join('');
+
+  c.innerHTML = head + projectSections;
 }
 
 function renderScash(c, scenData) {
