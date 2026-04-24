@@ -1967,6 +1967,20 @@ async function financeAddEntry(kind) {
   });
 }
 
+async function financeToggleConfirm(sourceId, currentlyConfirmed) {
+  if (!sourceId) return;
+  try {
+    const result = await financeApi('/confirmation', {
+      method: 'POST',
+      body: JSON.stringify({ source_id: sourceId, confirmed: !currentlyConfirmed }),
+    });
+    if (result && result.state) FINANCE_DATA = result.state;
+    financeSafeRender();
+  } catch (e) {
+    alert('Toggle failed: ' + e.message);
+  }
+}
+
 async function financeVoidRow(kind, rowId) {
   const tableMap = {
     petty_cash: 'petty_cash',
@@ -2431,7 +2445,15 @@ function financeRenderBucketContent(start, end, rowId, live) {
       const hidden = idx >= PAGE;
       const canVoid = live && ['petty_cash','misc_expense','non_project_income','bank_snapshot'].includes(e.source_type);
       const dbId = (e.source_id||'').replace(/^(pc|misc|npi|bs)-/, '');
+      const isConf = !!e.confirmed;
       html += `<div ${hidden?`data-hidden-in="${financeAttr(hideKey)}"`:''} style="display:${hidden?'none':'flex'};align-items:center;padding:3px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3)">`;
+      // Confirmation toggle (live mode only — needs API)
+      if (live) {
+        const tip = isConf ? 'Confirmed — click to mark Potential' : 'Potential — click to mark Confirmed';
+        html += `<a href="#" class="fin-confirm" data-src="${financeAttr(e.source_id)}" data-confirmed="${isConf?1:0}" title="${tip}" style="color:${isConf?'var(--grn)':'var(--dim)'};text-decoration:none;font-size:14px;width:18px;text-align:center">${isConf?'☑':'☐'}</a>`;
+      } else {
+        html += `<span title="${isConf?'Confirmed':'Potential'}" style="color:${isConf?'var(--grn)':'var(--dim)'};font-size:14px;width:18px;text-align:center">${isConf?'☑':'☐'}</span>`;
+      }
       html += `<span style="font-family:var(--mono);color:${e.moved?'var(--ylw)':'var(--txt2)'};white-space:nowrap;width:62px">${fmtDate(e.date)}</span>`;
       html += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}</span>`;
       html += `<span style="font-family:var(--mono);color:${e.amount>=0?'var(--grn)':'var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
@@ -2483,6 +2505,12 @@ function financeInstallClickHandler() {
     if (ea) {
       e.preventDefault(); e.stopPropagation();
       financeEditAmount(ea.dataset.src, parseFloat(ea.dataset.amount), ea.dataset.label, ea.dataset.type);
+      return;
+    }
+    const cf = e.target.closest('.fin-confirm');
+    if (cf) {
+      e.preventDefault(); e.stopPropagation();
+      financeToggleConfirm(cf.dataset.src, cf.dataset.confirmed === '1');
       return;
     }
     const pick = e.target.closest('.fin-pick-end');
@@ -3060,11 +3088,15 @@ function renderFinance(c) {
     h += '<thead style="background:var(--raised)"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
     h += '<th style="padding:10px 12px;width:20px"></th>';
     h += '<th style="padding:10px 12px">Period</th>';
-    h += '<th style="padding:10px 12px;text-align:right">Inflow</th>';
-    h += '<th style="padding:10px 12px;text-align:right">Outflow</th>';
+    h += '<th style="padding:10px 12px;text-align:right" title="All events (confirmed + potential)">Inflow (Pot.)</th>';
+    h += '<th style="padding:10px 12px;text-align:right" title="Only events explicitly confirmed">Inflow (Conf.)</th>';
+    h += '<th style="padding:10px 12px;text-align:right">Outflow (Pot.)</th>';
+    h += '<th style="padding:10px 12px;text-align:right">Outflow (Conf.)</th>';
     h += '<th style="padding:10px 12px;text-align:right">Fixed costs</th>';
-    h += '<th style="padding:10px 12px;text-align:right">Net</th>';
-    h += '<th style="padding:10px 12px;text-align:right">Closing Balance</th>';
+    h += '<th style="padding:10px 12px;text-align:right">Net (Pot.)</th>';
+    h += '<th style="padding:10px 12px;text-align:right">Net (Conf.)</th>';
+    h += '<th style="padding:10px 12px;text-align:right">Close (Pot.)</th>';
+    h += '<th style="padding:10px 12px;text-align:right">Close (Conf.)</th>';
     h += '<th style="padding:10px 12px;text-align:right">Events</th>';
     h += '</tr></thead><tbody>';
     // Lazy-render bucket drill-downs — only render content when user expands a bucket.
@@ -3072,24 +3104,34 @@ function renderFinance(c) {
     const expanded = window._financeExpandedBuckets || new Set();
     buckets.forEach((b, idx) => {
       const cb = b.closing_balance;
+      const cbC = b.closing_balance_confirmed;
       const cbStyle = cb == null ? 'color:var(--dim)' : (cb < 0 ? 'color:var(--red);font-weight:700' : 'color:var(--txt);font-weight:600');
+      const cbCStyle = cbC == null ? 'color:var(--dim)' : (cbC < 0 ? 'color:var(--red);font-weight:700' : 'color:var(--txt);font-weight:600');
       const netStyle = b.net >= 0 ? 'color:var(--grn);font-weight:600' : 'color:var(--red);font-weight:600';
+      const netCStyle = (b.net_confirmed||0) >= 0 ? 'color:var(--grn);font-weight:600' : 'color:var(--red);font-weight:600';
       const fc = fcByKey[b.key];
       const fcAmt = fc ? fc.outflow : 0;
       const rowId = 'bkt-' + unit + '-' + idx;
       const isOpen = expanded.has(rowId);
+      const inC = b.inflow_confirmed||0;
+      const outC = b.outflow_confirmed||0;
+      const netC = b.net_confirmed||0;
       h += `<tr id="${rowId}-row" style="border-top:1px solid rgba(33,39,47,.3);cursor:pointer" onclick="financeToggleBucket('${rowId}')">`;
       h += `<td style="padding:8px 12px;text-align:center;color:var(--dim)"><span id="${rowId}-chv">${isOpen?'▾':'▸'}</span></td>`;
       h += `<td style="padding:8px 12px;font-weight:500">${b.label}</td>`;
       h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--grn)">+${fmtK(b.inflow)}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:${inC>0?'var(--grn)':'var(--dim)'}">${inC>0?'+'+fmtK(inC):'—'}</td>`;
       h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--red)">-${fmtK(b.outflow)}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:${outC>0?'var(--red)':'var(--dim)'}">${outC>0?'-'+fmtK(outC):'—'}</td>`;
       h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--org)">-${fmtK(fcAmt)}</td>`;
       h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${netStyle}">${b.net>=0?'+':''}${fmtK(b.net)}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${netCStyle}">${netC>=0?'+':''}${fmtK(netC)}</td>`;
       h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${cbStyle}">${cb==null?'—':fmt(cb)}</td>`;
-      h += `<td style="padding:8px 12px;text-align:right;color:var(--txt2);font-size:11px">${b.count}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${cbCStyle}">${cbC==null?'—':fmt(cbC)}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;color:var(--txt2);font-size:11px">${b.count_confirmed||0}/${b.count}</td>`;
       h += '</tr>';
       // Detail row — empty placeholder, filled lazily on expand
-      h += `<tr id="${rowId}-detail" data-bucket-start="${b.start}" data-bucket-end="${b.end}" style="display:${isOpen?'':'none'};background:var(--bg)"><td colspan="8" style="padding:0">`;
+      h += `<tr id="${rowId}-detail" data-bucket-start="${b.start}" data-bucket-end="${b.end}" style="display:${isOpen?'':'none'};background:var(--bg)"><td colspan="12" style="padding:0">`;
       h += isOpen ? financeRenderBucketContent(b.start, b.end, rowId, live) : '';
       h += '</td></tr>';
     });
