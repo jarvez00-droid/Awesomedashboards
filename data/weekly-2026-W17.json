@@ -1,0 +1,199 @@
+{
+  "week": "2026-W17",
+  "period": "Apr 20 - Apr 26, 2026",
+  "generated_at": "2026-04-27T07:15:00",
+  "summary": {
+    "tasks_completed": 19,
+    "unique_overdue": 80,
+    "overdue_resolved": 15,
+    "resolution_pct": 19,
+    "tasks_pushed": 154,
+    "tasks_pulled": 14,
+    "early_finish": 2
+  },
+  "pm_chart_data": {
+    "Milagros": {
+      "completed": 5,
+      "unique_overdue": 16,
+      "resolved": 4,
+      "pushed": 14,
+      "pulled": 6,
+      "early_finish": 0,
+      "active_total": 102,
+      "projects": [
+        "Rohini Williams (CNG2025-496)",
+        "Ginger Brown",
+        "Sergio Lares (212129)"
+      ]
+    },
+    "Jeff": {
+      "completed": 8,
+      "unique_overdue": 34,
+      "resolved": 5,
+      "pushed": 74,
+      "pulled": 8,
+      "early_finish": 2,
+      "active_total": 188,
+      "projects": [
+        "Stephanie and Marc Felton",
+        "CANDACE - JUSTIN P REFERRAL (CNG2025-522)",
+        "Martha Cockrell (CNG-20251199)"
+      ]
+    },
+    "Angel Pacheco": {
+      "completed": 6,
+      "unique_overdue": 30,
+      "resolved": 6,
+      "pushed": 66,
+      "pulled": 0,
+      "early_finish": 0,
+      "active_total": 207,
+      "projects": [
+        "Katie Holmes & Sean Springs",
+        "Clifford Clack \u2014 Gym Addition",
+        "Lingyan Qiu (CNG2025-458)"
+      ]
+    }
+  },
+  "milestone_impacts": [
+    {
+      "project": "Stephanie and Marc Felton",
+      "origin_task": "BRICKS: PAYMENT RECEIVED",
+      "origin_delta": 4,
+      "reason": "The client payment was directly rescheduled. We expected to collect $25,274 on 2026-05-04 but it's now pushed to 2026-05-08. That's 4 days of delayed income.",
+      "payment_task": "BRICKS: PAYMENT RECEIVED",
+      "payment_old_date": "2026-05-04",
+      "payment_new_date": "2026-05-08",
+      "payment_amount": 25274.0,
+      "chain_length": 0
+    },
+    {
+      "project": "Stephanie and Marc Felton",
+      "origin_task": "INSULATION: PAYMENT RECEIVED",
+      "origin_delta": 8,
+      "reason": "The client payment was directly rescheduled. We expected to collect $10,640 on 2026-04-20 but it's now pushed to 2026-04-28. That's 8 days of delayed income.",
+      "payment_task": "INSULATION: PAYMENT RECEIVED",
+      "payment_old_date": "2026-04-20",
+      "payment_new_date": "2026-04-28",
+      "payment_amount": 10640.0,
+      "chain_length": 0
+    },
+    {
+      "project": "CANDACE - JUSTIN P REFERRAL (CNG2025-522)",
+      "origin_task": "AFTER FRAMING AND SHEATHING",
+      "origin_delta": 7,
+      "reason": "The client payment was directly rescheduled. We expected to collect $4,130 on 2026-04-24 but it's now pushed to 2026-05-01. That's 7 days of delayed income.",
+      "payment_task": "AFTER FRAMING AND SHEATHING",
+      "payment_old_date": "2026-04-24",
+      "payment_new_date": "2026-05-01",
+      "payment_amount": 4130.0,
+      "chain_length": 0
+    },
+    {
+      "project": "Sergio Lares (212129)",
+      "origin_task": "CLEANING: FINAL CLEANING",
+      "origin_delta": 11,
+      "reason": "**CLEANING: FINAL CLEANING** got delayed 11 days, pushing 2 tasks downstream. Because of this, the client payment ($1,375) moved from 2026-04-22 to 2026-05-04 \u2014 that's **12 days of delayed income**. To recover: prioritize completing the blocking tasks so the payment can be invoiced sooner.",
+      "payment_task": "PROJECT DELIVERY",
+      "payment_old_date": "2026-04-22",
+      "payment_new_date": "2026-05-04",
+      "payment_amount": 1375.0,
+      "chain_length": 2
+    }
+  ],
+  "analysis": [
+    "15 of 80 overdue tasks got done this week (19%). It's progress, but not enough to shrink the backlog. The team needs to keep this momentum and do more.",
+    "\ud83d\udcb0 **Cash flow impact this week:** 4 client payments were delayed, totaling **$41,419** in income that won't arrive on time.",
+    "**Stephanie and Marc Felton \u2014 BRICKS: PAYMENT RECEIVED** ($25,274): This client payment was pushed 4 days (from 2026-05-04 to 2026-05-08). Why? The work tied to this payment isn't done yet, so the payment date had to move. To get this money sooner, the PM needs to finish the prerequisite work and invoice the client.",
+    "**Stephanie and Marc Felton \u2014 INSULATION: PAYMENT RECEIVED** ($10,640): This client payment was pushed 8 days (from 2026-04-20 to 2026-04-28). Why? The work tied to this payment isn't done yet, so the payment date had to move. To get this money sooner, the PM needs to finish the prerequisite work and invoice the client.",
+    "**CANDACE - JUSTIN P REFERRAL (CNG2025-522) \u2014 AFTER FRAMING AND SHEATHING** ($4,130): This client payment was pushed 7 days (from 2026-04-24 to 2026-05-01). Why? The work tied to this payment isn't done yet, so the payment date had to move. To get this money sooner, the PM needs to finish the prerequisite work and invoice the client.",
+    "**Sergio Lares (212129) \u2014 PROJECT DELIVERY** ($1,375): Delayed 11 days (from 2026-04-22 to 2026-05-04). The root cause was **CLEANING: FINAL CLEANING** getting pushed back, which cascaded through 2 tasks and eventually delayed this payment. To recover: get the upstream work unblocked so the payment milestone can move back on track.",
+    "**Action needed:** For each delayed payment, check if the blocking work is actually done but the schedule wasn't updated (just fix the dates), or if it's genuinely behind (figure out what's needed to close it out). Every day a payment sits delayed is a day the company waits for that money.",
+    "**Jeff** spent more time rescheduling (74 tasks pushed) than completing work (8 done). That's a red flag \u2014 it means the schedule is being managed on paper but the actual work isn't moving.",
+    "**Angel Pacheco** spent more time rescheduling (66 tasks pushed) than completing work (6 done). That's a red flag \u2014 it means the schedule is being managed on paper but the actual work isn't moving.",
+    "**Milagros** spent more time rescheduling (14 tasks pushed) than completing work (5 done). That's a red flag \u2014 it means the schedule is being managed on paper but the actual work isn't moving."
+  ],
+  "projects": {
+    "CANDACE - JUSTIN P REFERRAL (CNG2025-522)": {
+      "week_summary": "Framing inspection overdue 3 days. Roofing pushed 6 days. Client payment $4,130 delayed 7 days. Siding prep stalled.",
+      "completed": 1,
+      "overdue": 5,
+      "pushed": 4,
+      "pulled": 0,
+      "net_shift_days": 26,
+      "trend": "negative"
+    },
+    "Clifford Clack \u2014 Gym Addition": {
+      "week_summary": "Major schedule collapse: 41 tasks pushed, +396 drift days. Roofing, bricks, windows, doors all cascading 13-17 days. Framing inspection Apr 30 is gate to everything.",
+      "completed": 3,
+      "overdue": 15,
+      "pushed": 41,
+      "pulled": 0,
+      "net_shift_days": 396,
+      "trend": "negative"
+    },
+    "Ginger Brown": {
+      "week_summary": "Steady progress with 5 completions. Cabinets painting wrapping up, siding pushed 8+ days. Plumbing trim pulled forward \u2014 Milagros keeping this project close to on track.",
+      "completed": 5,
+      "overdue": 7,
+      "pushed": 8,
+      "pulled": 6,
+      "net_shift_days": -1,
+      "trend": "stable"
+    },
+    "Katie Holmes & Sean Springs": {
+      "week_summary": "Minimal movement \u2014 only 1 task done. Plumbing rough-in chain entirely overdue. Framing inspection due Apr 28. Garage door pushed 20 days.",
+      "completed": 1,
+      "overdue": 6,
+      "pushed": 2,
+      "pulled": 0,
+      "net_shift_days": 38,
+      "trend": "flat"
+    },
+    "Lingyan Qiu (CNG2025-458)": {
+      "week_summary": "Falling behind with 23 pushes (+171 drift days). Framing schedule unconfirmed blocking entire chain. Exterior doors pushed 19 days. Framing must start this week.",
+      "completed": 2,
+      "overdue": 9,
+      "pushed": 23,
+      "pulled": 0,
+      "net_shift_days": 171,
+      "trend": "negative"
+    },
+    "Martha Cockrell (CNG-20251199)": {
+      "week_summary": "Heavy drift (+293 days) across 32 pushed tasks. Doors & windows chain pushed 14 days. 2 early finishes. Framing inspection and roofing delivery are immediate priorities.",
+      "completed": 2,
+      "overdue": 13,
+      "pushed": 32,
+      "pulled": 0,
+      "net_shift_days": 293,
+      "trend": "negative"
+    },
+    "Rohini Williams (CNG2025-496)": {
+      "week_summary": "Zero progress. 6 tasks overdue every day with no resolution. Foundation and plumbing prep completely stalled. PM needs to clear SOW/vendor tasks immediately.",
+      "completed": 0,
+      "overdue": 6,
+      "pushed": 0,
+      "pulled": 0,
+      "net_shift_days": 0,
+      "trend": "negative"
+    },
+    "Sergio Lares (212129)": {
+      "week_summary": "Stalled at finish line. Punch list and cleaning both overdue, cascading to final payment ($1,375 pushed 12 days). Needs immediate closeout push.",
+      "completed": 0,
+      "overdue": 3,
+      "pushed": 6,
+      "pulled": 0,
+      "net_shift_days": 69,
+      "trend": "flat"
+    },
+    "Stephanie and Marc Felton": {
+      "week_summary": "Falling behind with 38 tasks pushed (+189 drift days). Drywall overdue, interior paint/flooring SOW chains stalled. $35,914 in client payments delayed. Jeff needs to clear SOW backlogs.",
+      "completed": 5,
+      "overdue": 16,
+      "pushed": 38,
+      "pulled": 8,
+      "net_shift_days": 189,
+      "trend": "negative"
+    }
+  }
+}
