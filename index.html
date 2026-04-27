@@ -367,9 +367,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a data-p="mgmt">▥ Management</a>
   <a data-p="fcash">💰 Full Cash Flow</a>
   <a data-p="finance">💵 Finance</a>
+  <a data-p="financeV2">💵² Finance V2</a>
   <a data-p="scash">🔮 Scenario Cashflow</a>
   <a data-p="miles">🎯 Milestones</a>
-  <a data-p="ledger">📒 Ledger</a>
   <a data-p="archive">▦ Archive</a>
 </div>
 
@@ -403,10 +403,10 @@ function render() {
   else if (curPage === 'weekly') loadAndRenderWeekly(c);
   else if (curPage === 'mgmt') mgmtGate(c);
   else if (curPage === 'fcash') fcGate(c);
-  else if (curPage === 'finance') financeGate(c);
+  else if (curPage === 'finance') { window._financeV2 = false; financeGate(c); }
+  else if (curPage === 'financeV2') { window._financeV2 = true; financeGate(c); }
   else if (curPage === 'scash') scashGate(c);
   else if (curPage === 'miles') milesGate(c);
-  else if (curPage === 'ledger') ledgerGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
     const titles = {projects:'Project Dashboards'};
@@ -2871,31 +2871,14 @@ function renderMiles(c, data) {
   c.innerHTML = head + projectSections;
 }
 
-// ─── Ledger tab — real accounting transactions ──────────────────────
-let LEDGER_DATA = null;
-let LEDGER_FILTER = { year: null, month: null, day: null, kind: null, search: '' };
-
-function ledgerGate(c) {
-  if (sessionStorage.getItem('mgmt_auth')==='1') { loadAndRenderLedger(c); return; }
-  c.innerHTML = `<div class="pw-gate">
-    <div class="pw-icon">📒</div>
-    <div class="pw-title">Ledger — Restricted</div>
-    <div class="pw-sub">Enter password to access.</div>
-    <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
-    <button class="pw-btn" id="pw-btn">Unlock</button>
-    <div class="pw-deny" id="pw-deny" style="display:none">Access denied</div>
-  </div>`;
-  const inp=document.getElementById('pw-input'),btn=document.getElementById('pw-btn'),deny=document.getElementById('pw-deny');
-  function tryPw(){
-    if(inp.value===MGMT_PW){sessionStorage.setItem('mgmt_auth','1');loadAndRenderLedger(c);}
-    else{inp.classList.add('pw-err');deny.style.display='';setTimeout(()=>inp.classList.remove('pw-err'),400);}
-  }
-  btn.addEventListener('click',tryPw);
-  inp.addEventListener('keydown',e=>{if(e.key==='Enter')tryPw();});
-  setTimeout(()=>inp.focus(),50);
+// (Ledger tab and all its handlers were removed. Real-accounting features will be
+//  rebuilt inside the Finance V2 sandbox.)
+async function loadAndRenderLedger(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">📒</div><div class="empty-t">Ledger has been folded into Finance V2</div></div>';
 }
 
-async function loadAndRenderLedger(c) {
+/* legacy ledger code kept commented out for reference — safe to delete later
+async function _legacy_loadAndRenderLedger(c) {
   c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Ledger...</div></div>';
   if (!financeApiConfigured()) {
     c.innerHTML = '<div class="empty"><div class="empty-i">📒</div><div class="empty-t">Ledger requires the Finance API</div><div class="empty-d">Configure the Finance API URL + token in the Finance tab settings.</div></div>';
@@ -3224,6 +3207,7 @@ async function ledgerOpenAttachModal(tid) {
     } catch (e) { alert('Upload failed: ' + (e.message||e)); }
   };
 }
+*/  // end legacy ledger block
 
 function renderScash(c, scenData) {
   // Swap FINANCE_DATA, call renderFinance, then inject scenario banner
