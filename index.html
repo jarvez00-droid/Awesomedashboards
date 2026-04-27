@@ -2539,6 +2539,10 @@ function financeSafeRender() {
   financeInstallClickHandler();
   try {
     renderFinance(document.getElementById('content'));
+    // Finance V2 — append V2-only management panels at the top
+    if (window._financeV2) {
+      v2InjectPendingPaymentsManager(document.getElementById('content'));
+    }
   } catch (e) {
     console.error('renderFinance failed:', e);
     const c = document.getElementById('content');
@@ -3208,6 +3212,201 @@ async function ledgerOpenAttachModal(tid) {
   };
 }
 */  // end legacy ledger block
+
+// ─── Finance V2 — Pending Payments / Debts manager ─────────────────
+// Appends a CRUD panel ABOVE the regular Finance content when V2 is active.
+// Data comes from the SQLite pending_payments table via the live API.
+async function v2InjectPendingPaymentsManager(container) {
+  // Idempotent: remove any existing panel first
+  const existing = document.getElementById('v2-pp-panel');
+  if (existing) existing.remove();
+
+  // Insert anchor at top of container
+  const anchor = document.createElement('div');
+  anchor.id = 'v2-pp-panel';
+  anchor.style.cssText = 'margin-bottom:18px';
+  anchor.innerHTML = `<div class="empty" style="padding:14px"><div class="empty-i">⏳</div><div class="empty-t">Loading pending payments…</div></div>`;
+  container.insertBefore(anchor, container.firstChild);
+
+  if (!financeApiConfigured()) {
+    anchor.innerHTML = `<div class="alert" style="background:var(--ylw-s);border-color:var(--ylw-b);color:var(--ylw)">
+      <div><b>V2 needs the live API.</b> Open ⚙ Settings (below) and enter the tunnel URL + bearer token to use V2 features.</div></div>`;
+    return;
+  }
+
+  let data;
+  try {
+    data = await financeApi('/pending-payments?include_paid=true');
+  } catch (e) {
+    anchor.innerHTML = `<div class="alert"><div><b>Could not load pending payments.</b> ${e.message||e}</div></div>`;
+    return;
+  }
+  v2RenderPendingPanel(anchor, data.pending_payments || []);
+}
+
+function v2RenderPendingPanel(panel, rows) {
+  const fmt = n => '$' + Math.abs(n||0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  const fmtDate = iso => {
+    if (!iso) return '—';
+    const dt = new Date(iso + 'T12:00:00');
+    const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${MS[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`;
+  };
+
+  const today = new Date().toISOString().slice(0,10);
+  const upcoming = rows.filter(r => !r.paid && r.due_date >= today);
+  const overdue = rows.filter(r => !r.paid && r.due_date < today);
+  const paid = rows.filter(r => r.paid);
+
+  const upTotal = upcoming.reduce((s,r)=>s+r.amount, 0);
+  const overTotal = overdue.reduce((s,r)=>s+r.amount, 0);
+  const paidTotal = paid.reduce((s,r)=>s+r.amount, 0);
+
+  const groupBadge = g => g ? `<span style="display:inline-block;font-size:10px;padding:1px 6px;border-radius:8px;background:var(--card-h);color:var(--mut);margin-left:6px">${g.replace(/</g,'&lt;')}</span>` : '';
+  const catBadge = c => c ? `<span style="display:inline-block;font-size:10px;padding:1px 6px;border-radius:8px;background:rgba(75,134,253,.15);color:var(--blu);margin-left:6px">${c.replace(/</g,'&lt;')}</span>` : '';
+
+  const rowHtml = (r, kind) => {
+    const dueColor = kind === 'overdue' ? 'var(--red)' : kind === 'paid' ? 'var(--mut)' : 'var(--txt)';
+    return `<tr style="border-top:1px solid rgba(33,39,47,.3)" data-pp-id="${r.id}">
+      <td style="padding:7px 10px;color:${dueColor};font-family:var(--mono);white-space:nowrap;font-weight:${kind==='overdue'?'700':'400'}">${fmtDate(r.due_date)}</td>
+      <td style="padding:7px 10px;font-weight:600">${(r.payee||'').replace(/</g,'&lt;')}${catBadge(r.category)}${groupBadge(r.group_label)}</td>
+      <td style="padding:7px 10px;color:var(--mut);font-size:12px">${(r.details||'').replace(/</g,'&lt;')}</td>
+      <td style="padding:7px 10px;text-align:right;font-family:var(--mono);color:${kind==='paid'?'var(--mut)':'var(--red)'};font-weight:600">${kind==='paid'?'(paid) ':'-'}${fmt(r.amount)}</td>
+      <td style="padding:7px 10px;text-align:right;white-space:nowrap">
+        ${r.paid
+          ? `<span style="color:var(--grn);font-size:11px;margin-right:8px">✔ ${fmtDate(r.paid_date)}</span><a href="#" class="v2-pp-unpay" data-id="${r.id}" title="Unmark paid" style="color:var(--mut);text-decoration:none;margin-right:4px">↺</a>`
+          : `<a href="#" class="v2-pp-pay" data-id="${r.id}" title="Mark paid (today)" style="color:var(--grn);text-decoration:none;margin-right:8px;font-weight:600">✔ Paid</a>`}
+        <a href="#" class="v2-pp-edit" data-id="${r.id}" title="Edit" style="color:var(--blu);text-decoration:none;margin-right:6px">✎</a>
+        <a href="#" class="v2-pp-void" data-id="${r.id}" title="Void / delete" style="color:var(--red);text-decoration:none">×</a>
+      </td>
+    </tr>`;
+  };
+
+  const sectionTable = (label, color, count, total, items, kind) => {
+    if (!items.length) return '';
+    return `<div style="margin-top:10px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <div style="font-size:12px;font-weight:700;color:${color};text-transform:uppercase;letter-spacing:.5px">${label} <span style="color:var(--mut);font-weight:400;margin-left:6px">${count} item${count!==1?'s':''}</span></div>
+        <div style="font-size:12px;color:${color};font-family:var(--mono);font-weight:700">${fmt(total)}</div>
+      </div>
+      <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">
+          <th style="padding:6px 10px">Due</th><th style="padding:6px 10px">Payee</th>
+          <th style="padding:6px 10px">Details</th><th style="padding:6px 10px;text-align:right">Amount</th>
+          <th style="padding:6px 10px;text-align:right">Actions</th>
+        </tr></thead><tbody>${items.map(r => rowHtml(r, kind)).join('')}</tbody>
+      </table></div>
+    </div>`;
+  };
+
+  panel.innerHTML = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px 16px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px">
+      <div>
+        <div style="font-size:14px;font-weight:700">📑 Pending Payments / Debts <span style="font-size:11px;color:var(--mut);margin-left:6px">(V2 — replaces the Google Sheet)</span></div>
+        <div style="font-size:11px;color:var(--mut)">${rows.length} record${rows.length!==1?'s':''} in SQLite. Adds, edits, and "mark paid" all save permanently.</div>
+      </div>
+      <button class="v2-pp-add" style="padding:7px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:13px">+ Add Payment</button>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 6px">
+      <div style="background:var(--card-h);border-radius:6px;padding:6px 12px"><div style="font-size:10px;color:var(--mut);text-transform:uppercase">Overdue</div><div style="font-size:18px;font-weight:700;color:var(--red);font-family:var(--mono)">${fmt(overTotal)}</div><div style="font-size:10px;color:var(--mut)">${overdue.length} item${overdue.length!==1?'s':''}</div></div>
+      <div style="background:var(--card-h);border-radius:6px;padding:6px 12px"><div style="font-size:10px;color:var(--mut);text-transform:uppercase">Upcoming</div><div style="font-size:18px;font-weight:700;color:var(--ylw);font-family:var(--mono)">${fmt(upTotal)}</div><div style="font-size:10px;color:var(--mut)">${upcoming.length} item${upcoming.length!==1?'s':''}</div></div>
+      <div style="background:var(--card-h);border-radius:6px;padding:6px 12px"><div style="font-size:10px;color:var(--mut);text-transform:uppercase">Paid (history)</div><div style="font-size:18px;font-weight:700;color:var(--grn);font-family:var(--mono)">${fmt(paidTotal)}</div><div style="font-size:10px;color:var(--mut)">${paid.length} item${paid.length!==1?'s':''}</div></div>
+    </div>
+    ${sectionTable('Overdue', 'var(--red)', overdue.length, overTotal, overdue, 'overdue')}
+    ${sectionTable('Upcoming', 'var(--ylw)', upcoming.length, upTotal, upcoming, 'upcoming')}
+    ${sectionTable('Paid', 'var(--grn)', paid.length, paidTotal, paid, 'paid')}
+    ${rows.length === 0 ? `<div style="padding:14px;text-align:center;color:var(--mut);font-size:13px">No pending payments yet. Click <b>+ Add Payment</b> to create the first one.</div>` : ''}
+  </div>`;
+
+  // Wire actions
+  panel.querySelectorAll('.v2-pp-add').forEach(b => b.onclick = e => { e.preventDefault(); v2OpenPendingForm(null); });
+  panel.querySelectorAll('.v2-pp-edit').forEach(b => b.onclick = e => {
+    e.preventDefault();
+    const r = rows.find(x => x.id == b.dataset.id);
+    if (r) v2OpenPendingForm(r);
+  });
+  panel.querySelectorAll('.v2-pp-pay').forEach(b => b.onclick = async e => {
+    e.preventDefault();
+    if (!confirm('Mark this payment as paid (today)?')) return;
+    try {
+      await financeApi('/pending-payment/' + b.dataset.id + '/mark-paid', { method: 'POST', body: JSON.stringify({}) });
+      financeSafeRender();
+    } catch (err) { alert('Mark paid failed: ' + err.message); }
+  });
+  panel.querySelectorAll('.v2-pp-unpay').forEach(b => b.onclick = async e => {
+    e.preventDefault();
+    if (!confirm('Unmark as paid? It will go back to the upcoming/overdue list.')) return;
+    try {
+      await financeApi('/pending-payment/' + b.dataset.id + '/unmark-paid', { method: 'POST', body: JSON.stringify({}) });
+      financeSafeRender();
+    } catch (err) { alert('Unmark failed: ' + err.message); }
+  });
+  panel.querySelectorAll('.v2-pp-void').forEach(b => b.onclick = async e => {
+    e.preventDefault();
+    const reason = prompt('Reason for voiding this payment? (audit trail — kept in DB)');
+    if (reason === null) return;
+    try {
+      await financeApi('/pending-payment/' + b.dataset.id + '/void', { method: 'POST', body: JSON.stringify({ reason: reason.trim() || 'voided via V2' }) });
+      financeSafeRender();
+    } catch (err) { alert('Void failed: ' + err.message); }
+  });
+}
+
+function v2OpenPendingForm(existing) {
+  const isEdit = !!existing;
+  const today = new Date().toISOString().slice(0,10);
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  const cats = ['debt','salary','service','refund','travel','tax','other'];
+  const catOpts = cats.map(c => `<option value="${c}" ${existing && existing.category === c ? 'selected':''}>${c}</option>`).join('');
+  overlay.innerHTML = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:20px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto">
+    <div style="font-size:16px;font-weight:700;margin-bottom:14px">${isEdit ? '✎ Edit' : '+ Add'} Pending Payment</div>
+    <form id="v2-pp-form" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px">
+      <label style="grid-column:1/3">Payee (to whom) <input type="text" name="payee" required value="${(existing?.payee||'').replace(/"/g,'&quot;')}" placeholder="e.g. Office Landlord, Banco X, Subcontractor name" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>
+      <label>Due date <input type="date" name="due_date" required value="${existing?.due_date || today}" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>
+      <label>Amount $ <input type="number" name="amount" step="0.01" min="0.01" required value="${existing?.amount || ''}" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>
+      <label>Category
+        <select name="category" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px">
+          <option value="">—</option>${catOpts}
+        </select>
+      </label>
+      <label>Group (optional) <input type="text" name="group_label" value="${(existing?.group_label||'').replace(/"/g,'&quot;')}" placeholder="e.g. Equipment Loan #1" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>
+      <label style="grid-column:1/3">Details <input type="text" name="details" value="${(existing?.details||'').replace(/"/g,'&quot;')}" placeholder="What this payment is for" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>
+      <label style="grid-column:1/3">Notes <textarea name="notes" rows="2" placeholder="Optional notes, terms, contract reference, etc." style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px">${(existing?.notes||'').replace(/</g,'&lt;')}</textarea></label>
+      <div style="grid-column:1/3;display:flex;gap:8px;justify-content:flex-end;margin-top:6px">
+        <button type="button" id="v2-pp-cancel" style="padding:8px 14px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">Cancel</button>
+        <button type="submit" style="padding:8px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600">${isEdit ? 'Save changes' : 'Add Payment'}</button>
+      </div>
+    </form>
+  </div>`;
+  document.body.appendChild(overlay);
+  document.getElementById('v2-pp-cancel').onclick = () => overlay.remove();
+  overlay.onclick = ev => { if (ev.target === overlay) overlay.remove(); };
+  document.getElementById('v2-pp-form').onsubmit = async ev => {
+    ev.preventDefault();
+    const f = ev.target;
+    const body = {
+      payee: f.payee.value.trim(),
+      amount: parseFloat(f.amount.value),
+      due_date: f.due_date.value,
+      category: f.category.value || null,
+      group_label: f.group_label.value.trim() || null,
+      details: f.details.value.trim() || null,
+      notes: f.notes.value.trim() || null,
+    };
+    try {
+      if (isEdit) {
+        await financeApi('/pending-payment/' + existing.id + '/edit', { method: 'POST', body: JSON.stringify(body) });
+      } else {
+        await financeApi('/pending-payment', { method: 'POST', body: JSON.stringify(body) });
+      }
+      overlay.remove();
+      financeSafeRender();
+    } catch (err) {
+      alert('Save failed: ' + (err.message||err));
+    }
+  };
+}
 
 function renderScash(c, scenData) {
   // Swap FINANCE_DATA, call renderFinance, then inject scenario banner
