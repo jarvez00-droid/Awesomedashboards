@@ -369,6 +369,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a data-p="finance">💵 Finance</a>
   <a data-p="scash">🔮 Scenario Cashflow</a>
   <a data-p="miles">🎯 Milestones</a>
+  <a data-p="ledger">📒 Ledger</a>
   <a data-p="archive">▦ Archive</a>
 </div>
 
@@ -405,6 +406,7 @@ function render() {
   else if (curPage === 'finance') financeGate(c);
   else if (curPage === 'scash') scashGate(c);
   else if (curPage === 'miles') milesGate(c);
+  else if (curPage === 'ledger') ledgerGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
     const titles = {projects:'Project Dashboards'};
@@ -1827,13 +1829,13 @@ function financeApiConfigured() {
 async function financeApi(path, options={}) {
   const {url, token} = financeApiConfig();
   if (!url || !token) throw new Error('API not configured (open Settings)');
+  // For FormData uploads, do NOT set Content-Type — let browser add the multipart boundary.
+  const isFormData = options.body instanceof FormData;
+  const baseHeaders = { 'Authorization': 'Bearer ' + token };
+  if (!isFormData) baseHeaders['Content-Type'] = 'application/json';
   const res = await fetch(url + path, {
     ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token,
-      ...(options.headers||{}),
-    },
+    headers: { ...baseHeaders, ...(options.headers||{}) },
   });
   const text = await res.text();
   let body;
@@ -2867,6 +2869,360 @@ function renderMiles(c, data) {
   }).join('');
 
   c.innerHTML = head + projectSections;
+}
+
+// ─── Ledger tab — real accounting transactions ──────────────────────
+let LEDGER_DATA = null;
+let LEDGER_FILTER = { year: null, month: null, day: null, kind: null, search: '' };
+
+function ledgerGate(c) {
+  if (sessionStorage.getItem('mgmt_auth')==='1') { loadAndRenderLedger(c); return; }
+  c.innerHTML = `<div class="pw-gate">
+    <div class="pw-icon">📒</div>
+    <div class="pw-title">Ledger — Restricted</div>
+    <div class="pw-sub">Enter password to access.</div>
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
+    <button class="pw-btn" id="pw-btn">Unlock</button>
+    <div class="pw-deny" id="pw-deny" style="display:none">Access denied</div>
+  </div>`;
+  const inp=document.getElementById('pw-input'),btn=document.getElementById('pw-btn'),deny=document.getElementById('pw-deny');
+  function tryPw(){
+    if(inp.value===MGMT_PW){sessionStorage.setItem('mgmt_auth','1');loadAndRenderLedger(c);}
+    else{inp.classList.add('pw-err');deny.style.display='';setTimeout(()=>inp.classList.remove('pw-err'),400);}
+  }
+  btn.addEventListener('click',tryPw);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')tryPw();});
+  setTimeout(()=>inp.focus(),50);
+}
+
+async function loadAndRenderLedger(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Ledger...</div></div>';
+  if (!financeApiConfigured()) {
+    c.innerHTML = '<div class="empty"><div class="empty-i">📒</div><div class="empty-t">Ledger requires the Finance API</div><div class="empty-d">Configure the Finance API URL + token in the Finance tab settings.</div></div>';
+    return;
+  }
+  try {
+    const params = new URLSearchParams();
+    if (LEDGER_FILTER.year) {
+      const y = LEDGER_FILTER.year, m = LEDGER_FILTER.month, day = LEDGER_FILTER.day;
+      if (day) {
+        const ds = `${y}-${String(m).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+        params.set('since', ds); params.set('until', ds);
+      } else if (m) {
+        const start = `${y}-${String(m).padStart(2,'0')}-01`;
+        const lastDay = new Date(y, m, 0).getDate();
+        const end = `${y}-${String(m).padStart(2,'0')}-${String(lastDay).padStart(2,'0')}`;
+        params.set('since', start); params.set('until', end);
+      } else {
+        params.set('since', `${y}-01-01`);
+        params.set('until', `${y}-12-31`);
+      }
+    }
+    if (LEDGER_FILTER.kind) params.set('kind', LEDGER_FILTER.kind);
+    const r = await financeApi('/transactions?' + params.toString());
+    LEDGER_DATA = r;
+    renderLedger(c);
+  } catch (e) {
+    c.innerHTML = '<div class="alert"><b>Ledger load failed.</b> ' + (e.message||e) + '</div>';
+  }
+}
+
+function renderLedger(c) {
+  const d = LEDGER_DATA || {};
+  const txs = d.transactions || [];
+  const bal = d.real_balance || {};
+  const fmt = n => (n<0?'-':'') + '$' + Math.abs(n||0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  const fmtDate = iso => {
+    if (!iso) return '—';
+    const dt = new Date(iso + 'T12:00:00');
+    const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${MS[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`;
+  };
+  const search = (LEDGER_FILTER.search || '').toLowerCase();
+  const filtered = !search ? txs : txs.filter(t => {
+    const blob = [t.description, t.vendor, t.notes, t.reference_number, t.project_name, t.category]
+      .filter(Boolean).join(' ').toLowerCase();
+    return blob.includes(search);
+  });
+
+  const totIn = filtered.filter(t=>t.kind==='in').reduce((s,t)=>s+t.amount,0);
+  const totOut = filtered.filter(t=>t.kind==='out').reduce((s,t)=>s+t.amount,0);
+
+  // Year-month tree for the sidebar
+  const byYM = {};
+  txs.forEach(t => {
+    const y = t.date.slice(0,4), m = t.date.slice(5,7);
+    if (!byYM[y]) byYM[y] = {};
+    if (!byYM[y][m]) byYM[y][m] = 0;
+    byYM[y][m] += 1;
+  });
+  const years = Object.keys(byYM).sort().reverse();
+
+  let h = '<div class="page-title">📒 Ledger — Real Accounting Transactions</div>';
+  h += '<div class="page-sub">Permanent record of every actual income/expense. Search by date, type, vendor. Attach invoices.</div>';
+
+  // Top stats
+  h += `<div style="display:flex;gap:14px;margin:12px 0 16px;flex-wrap:wrap">
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;min-width:180px">
+      <div style="font-size:11px;color:var(--mut);text-transform:uppercase">Real Balance (${bal.account||'primary'})</div>
+      <div style="font-size:24px;font-weight:700;color:${(bal.balance||0)>=0?'var(--grn)':'var(--red)'}">${fmt(bal.balance||0)}</div>
+      <div style="font-size:10px;color:var(--mut)">anchor ${bal.anchor_snapshot_date||'—'} ${fmt(bal.anchor_snapshot_balance||0)} ${(bal.net_since_snapshot||0)>=0?'+':''}${fmt(bal.net_since_snapshot||0)} since</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;min-width:160px">
+      <div style="font-size:11px;color:var(--mut);text-transform:uppercase">Income (filtered)</div>
+      <div style="font-size:22px;font-weight:700;color:var(--grn)">${fmt(totIn)}</div>
+      <div style="font-size:10px;color:var(--mut)">${filtered.filter(t=>t.kind==='in').length} txs</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;min-width:160px">
+      <div style="font-size:11px;color:var(--mut);text-transform:uppercase">Expenses (filtered)</div>
+      <div style="font-size:22px;font-weight:700;color:var(--red)">${fmt(totOut)}</div>
+      <div style="font-size:10px;color:var(--mut)">${filtered.filter(t=>t.kind==='out').length} txs</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;min-width:160px">
+      <div style="font-size:11px;color:var(--mut);text-transform:uppercase">Net (filtered)</div>
+      <div style="font-size:22px;font-weight:700;color:${(totIn-totOut)>=0?'var(--grn)':'var(--red)'}">${fmt(totIn-totOut)}</div>
+    </div>
+  </div>`;
+
+  // Filter bar
+  const yf = LEDGER_FILTER.year, mf = LEDGER_FILTER.month, df = LEDGER_FILTER.day;
+  h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;margin-bottom:14px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <button class="ld-newtx" style="padding:7px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600">+ Add Transaction</button>
+      <span style="color:var(--mut);font-size:12px;margin-left:6px">Filter:</span>
+      <button class="ld-flt" data-y="" data-m="" data-d="" style="padding:5px 10px;background:${!yf?'var(--blu)':'var(--card-h)'};color:${!yf?'#fff':'var(--txt)'};border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:12px">All time</button>`;
+  years.slice(0,4).forEach(y => {
+    h += `<button class="ld-flt" data-y="${y}" data-m="" data-d="" style="padding:5px 10px;background:${yf==y&&!mf?'var(--blu)':'var(--card-h)'};color:${yf==y&&!mf?'#fff':'var(--txt)'};border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:12px">${y}</button>`;
+  });
+  if (yf) {
+    const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    Object.keys(byYM[yf]||{}).sort().forEach(m => {
+      const sel = yf==yf && mf==m;
+      h += `<button class="ld-flt" data-y="${yf}" data-m="${m}" data-d="" style="padding:5px 10px;background:${sel?'var(--blu)':'var(--card-h)'};color:${sel?'#fff':'var(--txt)'};border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:11px">${MS[parseInt(m,10)-1]}</button>`;
+    });
+  }
+  h += `<span style="color:var(--mut);font-size:12px;margin-left:6px">Type:</span>
+    <button class="ld-kind" data-k="" style="padding:5px 10px;background:${!LEDGER_FILTER.kind?'var(--blu)':'var(--card-h)'};color:${!LEDGER_FILTER.kind?'#fff':'var(--txt)'};border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:12px">All</button>
+    <button class="ld-kind" data-k="in" style="padding:5px 10px;background:${LEDGER_FILTER.kind==='in'?'var(--grn)':'var(--card-h)'};color:${LEDGER_FILTER.kind==='in'?'#fff':'var(--txt)'};border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:12px">Income</button>
+    <button class="ld-kind" data-k="out" style="padding:5px 10px;background:${LEDGER_FILTER.kind==='out'?'var(--red)':'var(--card-h)'};color:${LEDGER_FILTER.kind==='out'?'#fff':'var(--txt)'};border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:12px">Expenses</button>
+    <input type="text" id="ld-search" placeholder="Search description, vendor, ref#..." value="${(LEDGER_FILTER.search||'').replace(/"/g,'&quot;')}" style="padding:5px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;font-size:12px;flex:1;min-width:150px">
+    </div>
+  </div>`;
+
+  // Transactions table
+  if (!filtered.length) {
+    h += '<div class="empty"><div class="empty-i">📭</div><div class="empty-t">No transactions match the filter</div><div class="empty-d">Click + Add Transaction to log a new entry, or change the filters above.</div></div>';
+  } else {
+    h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden">';
+    h += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px;min-width:900px">';
+    h += '<thead style="background:var(--raised)"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
+    h += '<th style="padding:8px 10px">Date</th><th style="padding:8px 10px">Type</th><th style="padding:8px 10px;text-align:right">Amount</th>';
+    h += '<th style="padding:8px 10px">Category</th><th style="padding:8px 10px">Description</th>';
+    h += '<th style="padding:8px 10px">Vendor</th><th style="padding:8px 10px">Method</th><th style="padding:8px 10px">Ref#</th>';
+    h += '<th style="padding:8px 10px">Project</th><th style="padding:8px 10px;text-align:center">📎</th><th style="padding:8px 10px;width:30px"></th>';
+    h += '</tr></thead><tbody>';
+    filtered.forEach(t => {
+      const isIn = t.kind === 'in';
+      const amtColor = isIn ? 'var(--grn)' : 'var(--red)';
+      const sign = isIn ? '+' : '-';
+      const atts = t.attachments || [];
+      h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+        <td style="padding:7px 10px;font-family:var(--mono);white-space:nowrap">${fmtDate(t.date)}</td>
+        <td style="padding:7px 10px"><span style="display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;background:${isIn?'rgba(18,183,106,.15)':'rgba(240,68,56,.15)'};color:${amtColor}">${isIn?'IN':'OUT'}</span></td>
+        <td style="padding:7px 10px;font-family:var(--mono);text-align:right;color:${amtColor};font-weight:600">${sign}${fmt(t.amount)}</td>
+        <td style="padding:7px 10px;color:var(--mut);font-size:11px">${t.category||'—'}</td>
+        <td style="padding:7px 10px;max-width:280px">${(t.description||'').replace(/</g,'&lt;')}</td>
+        <td style="padding:7px 10px">${(t.vendor||'').replace(/</g,'&lt;')}</td>
+        <td style="padding:7px 10px;color:var(--mut);font-size:11px">${t.payment_method||'—'}</td>
+        <td style="padding:7px 10px;font-family:var(--mono);font-size:11px;color:var(--mut)">${t.reference_number||'—'}</td>
+        <td style="padding:7px 10px;font-size:11px;color:var(--mut)">${(t.project_name||'—').replace(/</g,'&lt;')}</td>
+        <td style="padding:7px 10px;text-align:center">
+          <a href="#" class="ld-attach" data-tid="${t.id}" title="${atts.length?atts.length+' file(s) attached — click to view/add':'Add invoice/receipt'}" style="color:${atts.length?'var(--blu)':'var(--dim)'};text-decoration:none">${atts.length?'📎'+atts.length:'➕'}</a>
+        </td>
+        <td style="padding:7px 10px;text-align:center"><a href="#" class="ld-void" data-tid="${t.id}" title="Void this transaction" style="color:var(--red);text-decoration:none">×</a></td>
+      </tr>`;
+    });
+    h += '</tbody></table></div></div>';
+  }
+
+  c.innerHTML = h;
+  // Wire search input
+  const si = document.getElementById('ld-search');
+  if (si) {
+    let to = null;
+    si.addEventListener('input', () => {
+      LEDGER_FILTER.search = si.value;
+      clearTimeout(to);
+      to = setTimeout(() => renderLedger(c), 200);
+    });
+  }
+}
+
+// Click delegation for ledger
+document.addEventListener('click', e => {
+  const c = document.getElementById('content');
+  const flt = e.target.closest('.ld-flt');
+  if (flt) {
+    e.preventDefault();
+    LEDGER_FILTER.year = flt.dataset.y || null;
+    LEDGER_FILTER.month = flt.dataset.m || null;
+    LEDGER_FILTER.day = flt.dataset.d || null;
+    loadAndRenderLedger(c);
+    return;
+  }
+  const k = e.target.closest('.ld-kind');
+  if (k) {
+    e.preventDefault();
+    LEDGER_FILTER.kind = k.dataset.k || null;
+    loadAndRenderLedger(c);
+    return;
+  }
+  const nb = e.target.closest('.ld-newtx');
+  if (nb) { e.preventDefault(); ledgerOpenAddModal(); return; }
+  const ab = e.target.closest('.ld-attach');
+  if (ab) { e.preventDefault(); ledgerOpenAttachModal(parseInt(ab.dataset.tid, 10)); return; }
+  const vb = e.target.closest('.ld-void');
+  if (vb) { e.preventDefault(); ledgerVoidTx(parseInt(vb.dataset.tid, 10)); return; }
+});
+
+function ledgerOpenAddModal() {
+  const today = new Date().toISOString().slice(0,10);
+  const overlay = document.createElement('div');
+  overlay.id = 'ld-modal';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  overlay.innerHTML = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:20px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto">
+    <div style="font-size:16px;font-weight:700;margin-bottom:14px">+ Add Transaction</div>
+    <form id="ld-form" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px">
+      <label style="grid-column:1/3">Date <input type="date" name="date" value="${today}" required style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>
+      <label>Type
+        <select name="kind" required style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px">
+          <option value="out">Expense (out)</option><option value="in">Income (in)</option>
+        </select>
+      </label>
+      <label>Amount $ <input type="number" name="amount" step="0.01" min="0.01" required style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>
+      <label>Category
+        <select name="category" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px">
+          <option value="">—</option><option value="income">income</option><option value="p_income">p_income</option>
+          <option value="subs">subs</option><option value="materials">materials</option>
+          <option value="fixed_cost">fixed_cost</option><option value="petty_cash">petty_cash</option>
+          <option value="misc">misc</option><option value="transfer">transfer</option><option value="refund">refund</option>
+          <option value="owner_contrib">owner_contrib</option><option value="owner_draw">owner_draw</option>
+          <option value="adjustment">adjustment</option><option value="debt">debt</option><option value="other">other</option>
+        </select>
+      </label>
+      <label>Account <input type="text" name="account" value="primary" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>
+      <label style="grid-column:1/3">Description <input type="text" name="description" placeholder="What this transaction is for" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>
+      <label>Vendor / Payer <input type="text" name="vendor" placeholder="e.g. Home Depot" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>
+      <label>Payment Method
+        <select name="payment_method" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px">
+          <option value="">—</option><option>cash</option><option>check</option><option>wire</option><option>zelle</option><option>ach</option><option>credit_card</option><option>debit_card</option><option>other</option>
+        </select>
+      </label>
+      <label>Reference # <input type="text" name="reference_number" placeholder="check# / wire ref / etc" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>
+      <label>Project (optional) <input type="text" name="project_name" placeholder="e.g. Ginger Brown" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>
+      <label style="grid-column:1/3">Notes <textarea name="notes" rows="2" style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></textarea></label>
+      <label style="grid-column:1/3">Attach invoice/receipt (optional) <input type="file" name="attachment" style="width:100%;padding:6px 0;color:var(--txt)"></label>
+      <div style="grid-column:1/3;display:flex;gap:8px;justify-content:flex-end;margin-top:6px">
+        <button type="button" id="ld-cancel" style="padding:8px 14px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">Cancel</button>
+        <button type="submit" style="padding:8px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600">Save Transaction</button>
+      </div>
+    </form>
+  </div>`;
+  document.body.appendChild(overlay);
+  document.getElementById('ld-cancel').onclick = () => overlay.remove();
+  overlay.onclick = ev => { if (ev.target === overlay) overlay.remove(); };
+  document.getElementById('ld-form').onsubmit = async ev => {
+    ev.preventDefault();
+    const f = ev.target;
+    const body = {
+      date: f.date.value, kind: f.kind.value, amount: parseFloat(f.amount.value),
+      category: f.category.value || null, account: f.account.value || 'primary',
+      description: f.description.value || null, vendor: f.vendor.value || null,
+      payment_method: f.payment_method.value || null,
+      reference_number: f.reference_number.value || null,
+      project_name: f.project_name.value || null, notes: f.notes.value || null,
+    };
+    try {
+      const r = await financeApi('/transaction', { method: 'POST', body: JSON.stringify(body) });
+      const tid = r.transaction_id;
+      const file = f.attachment.files[0];
+      if (file && tid) {
+        const fd = new FormData(); fd.append('file', file);
+        await financeApi('/transaction/' + tid + '/attach', { method: 'POST', body: fd, isFormData: true });
+      }
+      overlay.remove();
+      loadAndRenderLedger(document.getElementById('content'));
+    } catch (err) {
+      alert('Save failed: ' + (err.message || err));
+    }
+  };
+}
+
+async function ledgerVoidTx(tid) {
+  const reason = prompt('Reason for voiding this transaction? (kept for audit trail)');
+  if (!reason || !reason.trim()) return;
+  try {
+    await financeApi('/transaction/' + tid + '/void', { method: 'POST', body: JSON.stringify({ reason: reason.trim() }) });
+    loadAndRenderLedger(document.getElementById('content'));
+  } catch (e) { alert('Void failed: ' + (e.message||e)); }
+}
+
+async function ledgerOpenAttachModal(tid) {
+  // Fetch full transaction (with attachments)
+  let tx;
+  try { tx = await financeApi('/transaction/' + tid); }
+  catch (e) { alert('Load failed: ' + (e.message||e)); return; }
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  const apiBase = (localStorage.getItem('finance_api_url') || '').replace(/\/$/, '');
+  const tok = localStorage.getItem('finance_api_token') || '';
+  const atts = tx.attachments || [];
+  const attRows = atts.map(a => `<div style="display:flex;align-items:center;gap:10px;padding:6px 8px;border:1px solid var(--bdr);border-radius:6px;margin-bottom:6px">
+    <span style="flex:1;font-size:13px">📄 ${(a.filename||'').replace(/</g,'&lt;')} <span style="color:var(--mut);font-size:11px">(${(a.size_bytes/1024).toFixed(1)} KB)</span></span>
+    <button class="ld-att-dl" data-aid="${a.id}" style="padding:4px 10px;background:var(--blu);color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:11px">Download</button>
+  </div>`).join('') || '<div style="color:var(--mut);font-size:12px">No files attached yet.</div>';
+  overlay.innerHTML = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:20px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto">
+    <div style="font-size:15px;font-weight:700;margin-bottom:8px">📎 Attachments — Transaction #${tid}</div>
+    <div style="font-size:12px;color:var(--mut);margin-bottom:14px">${tx.date} · ${tx.kind==='in'?'+':'-'}$${(tx.amount||0).toLocaleString()} · ${tx.description||'—'}</div>
+    <div style="margin-bottom:14px">${attRows}</div>
+    <form id="ld-att-form" style="display:flex;gap:8px;align-items:center">
+      <input type="file" name="file" required style="flex:1;color:var(--txt);font-size:12px">
+      <button type="submit" style="padding:8px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600">Upload</button>
+    </form>
+    <div style="margin-top:12px;text-align:right">
+      <button id="ld-att-close" style="padding:7px 14px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">Close</button>
+    </div>
+  </div>`;
+  document.body.appendChild(overlay);
+  document.getElementById('ld-att-close').onclick = () => overlay.remove();
+  overlay.onclick = ev => { if (ev.target === overlay) overlay.remove(); };
+  // Wire download buttons
+  overlay.querySelectorAll('.ld-att-dl').forEach(b => {
+    b.onclick = async () => {
+      const aid = b.dataset.aid;
+      try {
+        const resp = await fetch(apiBase + '/attachment/' + aid, { headers: { 'Authorization': 'Bearer ' + tok } });
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        const blob = await resp.blob();
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        const att = atts.find(x => x.id == aid);
+        a.download = att ? att.filename : 'attachment';
+        a.click();
+      } catch (e) { alert('Download failed: ' + (e.message||e)); }
+    };
+  });
+  document.getElementById('ld-att-form').onsubmit = async ev => {
+    ev.preventDefault();
+    const f = ev.target.file.files[0];
+    if (!f) return;
+    const fd = new FormData(); fd.append('file', f);
+    try {
+      await financeApi('/transaction/' + tid + '/attach', { method: 'POST', body: fd, isFormData: true });
+      overlay.remove();
+      loadAndRenderLedger(document.getElementById('content'));
+    } catch (e) { alert('Upload failed: ' + (e.message||e)); }
+  };
 }
 
 function renderScash(c, scenData) {
