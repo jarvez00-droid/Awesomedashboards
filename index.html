@@ -3703,7 +3703,7 @@ function renderFinance(c) {
   // ── Petty Cash calendar + log ──
   h += financeRenderPettyCashSection(live);
 
-  // ── By project ── each card: per-period table where each row is clickable to show events
+  // ── By project ── each card: milestones table + per-period bucket table
   h += `<div class="sh">By Project · ${unit.charAt(0).toUpperCase()+unit.slice(1)}ly breakdown <span style="font-size:11px;color:var(--dim);font-weight:400;margin-left:6px">click any period row to see its events</span></div>`;
   const projAggUnit = d.project_aggregated && d.project_aggregated[unit] || {};
   d.by_project.forEach((p, pIdx) => {
@@ -3712,14 +3712,62 @@ function renderFinance(c) {
     const projSlug = 'pr' + pIdx + '_' + unit;
     h += `<div class="pc ${sev}" style="margin-bottom:8px">`;
     h += `<div class="ph" onclick="tog(this)">`;
-    h += `<div><div class="pn">${p.project}</div>`;
+    h += `<div><div class="pn">${p.project}${p.is_planning?' <span style="font-size:10px;font-weight:600;padding:1px 6px;border-radius:8px;background:rgba(75,134,253,.15);color:var(--blu);margin-left:6px">PLANNING</span>':''}</div>`;
     h += `<div class="pp">${p.event_count} events · In <b style="color:var(--grn)">+${fmtK(p.inflow)}</b> · Out <b style="color:var(--red)">-${fmtK(p.outflow)}</b> · Net <b>${fmtK(p.net)}</b>`;
     if (p.overdue_in || p.overdue_out) {
       h += ` · <span style="color:var(--ylw)">Overdue: +${fmtK(p.overdue_in)} / -${fmtK(p.overdue_out)}</span>`;
     }
+    if (p.milestones && p.milestones.length) {
+      const realMs = p.milestones.filter(m => !m.trailing).length;
+      h += ` · <b style="color:var(--blu)">${realMs} milestone${realMs!==1?'s':''}</b>`;
+    }
     h += `</div></div>`;
     h += `<div class="pt">${chvSvg()}</div></div>`;
     h += `<div class="pb">`;
+
+    // ── Milestones detail table ──
+    if (p.milestones && p.milestones.length) {
+      const ms = p.milestones;
+      const totPay = ms.reduce((s,m)=>s+(m.payment||0), 0);
+      const totInvest = ms.reduce((s,m)=>s+(m.invest_before||0), 0);
+      const totNet = totPay - totInvest;
+      h += `<div style="margin-top:8px;padding:8px 10px;background:rgba(75,134,253,.05);border-left:3px solid var(--blu);border-radius:0 6px 6px 0">`;
+      h += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">`;
+      h += `<div style="font-size:11px;font-weight:700;color:var(--blu);text-transform:uppercase;letter-spacing:.5px">🎯 Milestones — Investment Needed Per Client Payment</div>`;
+      h += `<div style="font-size:11px;color:var(--txt2)">Pay <b style="color:var(--grn)">+${fmtK(totPay)}</b> · Invest <b style="color:var(--red)">-${fmtK(totInvest)}</b> · Net <b style="color:${totNet>=0?'var(--grn)':'var(--red)'}">${totNet>=0?'+':''}${fmtK(totNet)}</b></div>`;
+      h += `</div>`;
+      h += `<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">`;
+      h += `<thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">`;
+      h += `<th style="padding:5px 8px;width:24px">#</th>`;
+      h += `<th style="padding:5px 8px">Date</th>`;
+      h += `<th style="padding:5px 8px">Milestone</th>`;
+      h += `<th style="padding:5px 8px;text-align:right">Client Pays</th>`;
+      h += `<th style="padding:5px 8px;text-align:right">Invest Before</th>`;
+      h += `<th style="padding:5px 8px;text-align:right">Net After</th>`;
+      h += `<th style="padding:5px 8px;text-align:right">Cum. Invest</th>`;
+      h += `</tr></thead><tbody>`;
+      ms.forEach((m, mi) => {
+        const netColor = m.net_after >= 0 ? 'var(--grn)' : 'var(--red)';
+        const rowBg = m.trailing ? 'background:rgba(240,68,56,.06)' : '';
+        const labelHtml = m.trailing
+          ? `<span style="color:var(--mut);font-style:italic">${(m.label||'').replace(/</g,'&lt;')}</span>`
+          : (m.label||'').replace(/</g,'&lt;');
+        h += `<tr style="border-top:1px solid rgba(33,39,47,.3);${rowBg}">`;
+        h += `<td style="padding:5px 8px;color:var(--mut);font-size:11px">${mi+1}</td>`;
+        h += `<td style="padding:5px 8px;font-family:var(--mono);white-space:nowrap">${m.date ? fmtDate(m.date) : '—'}</td>`;
+        h += `<td style="padding:5px 8px;max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${(m.label||'').replace(/"/g,'&quot;')}">${labelHtml}</td>`;
+        h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${m.payment>0?'var(--grn)':'var(--dim)'};font-weight:600">${m.payment>0?'+'+fmtK(m.payment):'—'}</td>`;
+        h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${m.invest_before>0?'var(--red)':'var(--dim)'}">${m.invest_before>0?'-'+fmtK(m.invest_before):'—'}</td>`;
+        h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${netColor};font-weight:600">${m.net_after>=0?'+':''}${fmtK(m.net_after)}</td>`;
+        h += `<td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:var(--mut);font-size:11px">${fmtK(m.cumulative_invest)}</td>`;
+        h += `</tr>`;
+      });
+      h += `</tbody></table></div></div>`;
+    } else if (p.event_count > 0) {
+      h += `<div style="margin-top:8px;padding:8px 10px;color:var(--dim);font-size:11px;font-style:italic">No client payment milestones in this project (only outflows). Add Payment - Income tasks in JobTread to see milestone breakdown.</div>`;
+    }
+
+    // ── Per-period bucket table ──
     if (projBuckets.length) {
       h += `<div style="overflow-x:auto;margin-top:8px"><table style="width:100%;border-collapse:collapse;font-size:12px">`;
       h += '<thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
