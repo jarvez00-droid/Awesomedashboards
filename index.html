@@ -1964,8 +1964,8 @@ async function financeAddEntry(kind) {
     if (data.amount) data.amount = parseFloat(data.amount);
     if (data.balance) data.balance = parseFloat(data.balance);
     const result = await financeApi(path, { method: 'POST', body: JSON.stringify(data) });
-    if (result.state) FINANCE_DATA = result.state;
-    financeSafeRender();
+    // Ignore embedded state — re-fetch scoped to current scenario (state may be baseline)
+    loadAndRenderFinance(document.getElementById('content'));
   });
 }
 
@@ -1999,15 +1999,19 @@ async function financeVoidRow(kind, rowId) {
       method: 'POST',
       body: JSON.stringify({ table, row_id: rowId, reason: reason.trim() }),
     });
-    if (result.state) FINANCE_DATA = result.state;
-    financeSafeRender();
+    // Ignore embedded state — re-fetch scoped to current scenario (state may be baseline)
+    loadAndRenderFinance(document.getElementById('content'));
   } catch (e) {
     alert('Void failed: ' + e.message);
   }
 }
 
 function financeMoveDate(sourceId, currentDate, originalDate, label) {
-  // Delegate to the modal-based picker
+  const scen = getCurrentScenario();
+  if (scen === 'baseline') {
+    alert("Baseline is read-only.\n\nClick a simulation tab above (or '+ New Simulation') to move dates. Each simulation is independent.");
+    return;
+  }
   financeMoveDateModal(sourceId, currentDate, originalDate, label);
 }
 
@@ -2399,8 +2403,8 @@ function financeOpenPettyDay(dateStr) {
     data.amount = parseFloat(data.amount);
     data.date = dateStr;
     const result = await financeApi('/petty', { method: 'POST', body: JSON.stringify(data) });
-    if (result.state) FINANCE_DATA = result.state;
-    financeSafeRender();
+    // Ignore embedded state — re-fetch scoped to current scenario (state may be baseline)
+    loadAndRenderFinance(document.getElementById('content'));
   });
 }
 
@@ -2580,11 +2584,12 @@ function financeSafeRender() {
 }
 
 function financeEditAmount(sourceId, currentAmount, label, sourceType) {
-  // Edits go INTO a scenario. Baseline is read-only — guide user to create/pick one.
+  // Edits go INTO a scenario. Baseline is read-only — block.
   const scen = getCurrentScenario();
   const isSQLite = /^(pc-|misc-|npi-|bs-)/.test(sourceId || '');
   if (scen === 'baseline' && !isSQLite) {
-    if (!confirm("You're on Baseline — edits would create a 'default' working scenario.\n\nProceed to edit, or click Cancel to switch to a named simulation first.")) return;
+    alert("Baseline is read-only.\n\nClick a simulation tab above (or '+ New Simulation') to make edits. Each simulation is independent.");
+    return;
   }
   const abs = Math.abs(currentAmount);
   const direction = currentAmount >= 0 ? 'income' : 'outflow';
@@ -2655,11 +2660,13 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
     const btn = modal.querySelector('#scenario-reset-btn');
     if (btn) btn.addEventListener('click', async () => {
       try {
-        await financeApi('/scenario-override/' + encodeURIComponent(sourceId), { method: 'DELETE' });
-        const result = await financeApi('/state');
-        FINANCE_DATA = result;
+        const scen = getCurrentScenario();
+        const targetScen = (scen === 'baseline') ? 'default' : scen;
+        await financeApi('/scenario-override/' + encodeURIComponent(sourceId)
+                         + '?scenario=' + encodeURIComponent(targetScen),
+                         { method: 'DELETE' });
         modal.remove();
-        financeSafeRender();
+        loadAndRenderFinance(document.getElementById('content'));
       } catch (e) { alert('Reset failed: ' + e.message); }
     });
   }, 100);
