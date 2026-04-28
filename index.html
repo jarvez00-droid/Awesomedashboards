@@ -2562,6 +2562,8 @@ function financeSafeRender() {
   financeInstallClickHandler();
   try {
     renderFinance(document.getElementById('content'));
+    // Inject scenario selector at the very top of the Finance page (V1 + V2)
+    injectScenarioSelector(document.getElementById('content'));
     // Finance V2 — append V2-only management panels at the top
     if (window._financeV2) {
       v2InjectPendingPaymentsManager(document.getElementById('content'));
@@ -2578,9 +2580,14 @@ function financeSafeRender() {
 }
 
 function financeEditAmount(sourceId, currentAmount, label, sourceType) {
+  // Edits go INTO a scenario. Baseline is read-only — guide user to create/pick one.
+  const scen = getCurrentScenario();
+  const isSQLite = /^(pc-|misc-|npi-|bs-)/.test(sourceId || '');
+  if (scen === 'baseline' && !isSQLite) {
+    if (!confirm("You're on Baseline — edits would create a 'default' working scenario.\n\nProceed to edit, or click Cancel to switch to a named simulation first.")) return;
+  }
   const abs = Math.abs(currentAmount);
   const direction = currentAmount >= 0 ? 'income' : 'outflow';
-  const isSQLite = /^(pc-|misc-|npi-|bs-)/.test(sourceId || '');
   const kindNote = isSQLite
     ? "This is a SQLite-logged entry. We'll void the existing row and insert a corrected one — original stays in the audit trail."
     : "This is an external event (JobTread / fixed cost / debt). We'll apply a scenario amount override — the source data stays unchanged.";
@@ -2596,17 +2603,17 @@ function financeEditAmount(sourceId, currentAmount, label, sourceType) {
   `, async (data) => {
     const newAmt = parseFloat(data.amount);
     if (isNaN(newAmt) || newAmt <= 0) throw new Error('Amount must be a positive number');
+    const targetScen = (scen === 'baseline') ? 'default' : scen;
     await financeApi('/edit-amount', {
       method: 'POST',
       body: JSON.stringify({
         source_id: sourceId,
         new_amount: newAmt,
         reason: (data.reason || '').trim() || 'amount edited via dashboard',
+        scenario_name: targetScen,
       }),
     });
-    const result = await financeApi('/state');
-    FINANCE_DATA = result;
-    financeSafeRender();
+    loadAndRenderFinance(document.getElementById('content'));
   });
 }
 
@@ -2623,8 +2630,12 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
     if (!data.date || !/^\d{4}-\d{2}-\d{2}$/.test(data.date)) {
       throw new Error('Please pick a valid date.');
     }
+    const scen = getCurrentScenario();
+    const targetScen = (scen === 'baseline') ? 'default' : scen;
     if (data.date === originalDate) {
-      await financeApi('/scenario-override/' + encodeURIComponent(sourceId), { method: 'DELETE' });
+      await financeApi('/scenario-override/' + encodeURIComponent(sourceId)
+                       + '?scenario=' + encodeURIComponent(targetScen),
+                       { method: 'DELETE' });
     } else {
       await financeApi('/scenario-override', {
         method: 'POST',
@@ -2633,12 +2644,11 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
           scenario_date: data.date,
           original_date: originalDate,
           label: label,
+          scenario_name: targetScen,
         }),
       });
     }
-    const result = await financeApi('/state');
-    FINANCE_DATA = result;
-    financeSafeRender();
+    loadAndRenderFinance(document.getElementById('content'));
   });
   // Wire reset button
   setTimeout(() => {
@@ -2656,11 +2666,12 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
 }
 
 async function financeResetScenarios() {
-  if (!confirm('Clear ALL scenario date overrides and return to base dates?')) return;
+  const scen = getCurrentScenario();
+  const target = (scen === 'baseline') ? 'default' : scen;
+  if (!confirm(`Clear all overrides in scenario "${target}" and return its events to the baseline?`)) return;
   try {
-    const result = await financeApi('/scenario-reset', { method: 'POST' });
-    if (result.state) FINANCE_DATA = result.state;
-    financeSafeRender();
+    await financeApi('/scenario-reset?scenario=' + encodeURIComponent(target), { method: 'POST' });
+    loadAndRenderFinance(document.getElementById('content'));
   } catch (e) {
     alert('Reset failed: ' + e.message);
   }
@@ -2692,9 +2703,13 @@ async function loadAndRenderFinance(c) {
   // Priority 1 — live API (CRUD-capable)
   if (financeApiConfigured()) {
     try {
-      FINANCE_DATA = await financeApi('/state');
+      const scen = getCurrentScenario();
+      const path = (scen && scen !== 'baseline')
+        ? '/scenario-state?scenario=' + encodeURIComponent(scen)
+        : '/state';
+      FINANCE_DATA = await financeApi(path);
       window._financeLive = true;
-      try { renderFinance(c); } catch (err) { console.error('renderFinance error:', err); c.innerHTML='<div class="alert"><b>Render error.</b> '+err.message+'</div>'; }
+      try { financeSafeRender(); } catch (err) { console.error('renderFinance error:', err); c.innerHTML='<div class="alert"><b>Render error.</b> '+err.message+'</div>'; }
       return;
     } catch (e) {
       console.warn('Finance API unavailable, falling back to static JSON:', e.message);
@@ -3235,6 +3250,141 @@ async function ledgerOpenAttachModal(tid) {
   };
 }
 */  // end legacy ledger block
+
+// ─── Scenario simulations — selector + create + PDF download ─────────
+// Renders a tab strip above the cashflow that lets the user switch between
+// Baseline (read-only mirror) and named simulations. Each tab is an isolated
+// scenario; edits/moves on the page write into the selected scenario.
+function getCurrentScenario() {
+  return localStorage.getItem('finance_scenario') || 'baseline';
+}
+function setCurrentScenario(name) {
+  localStorage.setItem('finance_scenario', name || 'baseline');
+}
+
+async function injectScenarioSelector(container) {
+  const existing = document.getElementById('fin-scenario-bar');
+  if (existing) existing.remove();
+  if (!financeApiConfigured()) return;  // no API → nothing to do
+
+  const bar = document.createElement('div');
+  bar.id = 'fin-scenario-bar';
+  bar.style.cssText = 'background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:8px 12px;margin-bottom:14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap';
+  bar.innerHTML = `<span style="font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-right:4px">🔬 Scenario:</span><span style="color:var(--dim);font-size:12px">loading…</span>`;
+  container.insertBefore(bar, container.firstChild);
+
+  let data;
+  try {
+    data = await financeApi('/scenarios');
+  } catch (e) {
+    bar.innerHTML = `<span style="color:var(--red);font-size:12px">Could not load scenarios: ${e.message||e}</span>`;
+    return;
+  }
+
+  const current = getCurrentScenario();
+  // Auto-default to baseline if the selected scenario no longer exists
+  const knownNames = new Set((data.scenarios || []).map(s => s.name));
+  const cur = knownNames.has(current) ? current : 'baseline';
+  if (cur !== current) setCurrentScenario(cur);
+
+  let html = `<span style="font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-right:4px">🔬 Scenario:</span>`;
+  (data.scenarios || []).forEach(s => {
+    const isActive = s.name === cur;
+    const badge = s.is_baseline ? '📊' : '🧪';
+    const bg = isActive ? (s.color || 'var(--blu)') : 'var(--card-h)';
+    const fg = isActive ? '#fff' : 'var(--txt)';
+    const bd = isActive ? bg : 'var(--bdr)';
+    const safeName = (s.name||'').replace(/"/g, '&quot;');
+    html += `<button class="fin-scen-pick" data-name="${safeName}" style="padding:6px 12px;background:${bg};color:${fg};border:1px solid ${bd};border-radius:6px;cursor:pointer;font-size:12px;font-weight:${isActive?'700':'500'}">${badge} ${(s.name||'').replace(/</g,'&lt;')}</button>`;
+  });
+  // Action buttons for the current scenario
+  html += `<div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap">`;
+  html += `<button class="fin-scen-new" style="padding:6px 12px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:12px">+ New Simulation</button>`;
+  if (cur !== 'baseline') {
+    html += `<button class="fin-scen-pdf" data-name="${cur.replace(/"/g,'&quot;')}" style="padding:6px 12px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:12px">📄 Download PDF</button>`;
+    html += `<button class="fin-scen-rename" data-name="${cur.replace(/"/g,'&quot;')}" style="padding:6px 12px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:12px">✎ Rename</button>`;
+    html += `<button class="fin-scen-delete" data-name="${cur.replace(/"/g,'&quot;')}" style="padding:6px 12px;background:var(--card-h);color:var(--red);border:1px solid var(--red);border-radius:6px;cursor:pointer;font-size:12px">× Delete</button>`;
+  }
+  html += `</div>`;
+  // Status / scenario summary line
+  if (FINANCE_DATA && FINANCE_DATA.scenario && FINANCE_DATA.scenario.name !== 'baseline') {
+    const s = FINANCE_DATA.scenario;
+    html += `<div style="width:100%;font-size:11px;color:var(--mut);margin-top:6px;padding-top:6px;border-top:1px solid rgba(33,39,47,.3)">
+      Scenario data: <b>${s.overrides_count}</b> modified · <b>${s.additions_count}</b> added · <b>${s.deletions_count}</b> deleted
+      &nbsp;·&nbsp; <i>Edits/moves/deletes on this page are scoped to <b>${cur.replace(/</g,'&lt;')}</b>.</i>
+    </div>`;
+  } else {
+    html += `<div style="width:100%;font-size:11px;color:var(--mut);margin-top:6px;padding-top:6px;border-top:1px solid rgba(33,39,47,.3)">
+      <i>Baseline view — read-only summary of unmodified data. Switch to or create a simulation to make changes.</i>
+    </div>`;
+  }
+  bar.innerHTML = html;
+  wireScenarioBar(bar);
+}
+
+function wireScenarioBar(bar) {
+  bar.querySelectorAll('.fin-scen-pick').forEach(b => b.onclick = e => {
+    e.preventDefault();
+    setCurrentScenario(b.dataset.name);
+    loadAndRenderFinance(document.getElementById('content'));
+  });
+  const nb = bar.querySelector('.fin-scen-new');
+  if (nb) nb.onclick = async e => {
+    e.preventDefault();
+    const name = prompt('Name this simulation (e.g. "Worst-case Q3", "Drop Brandy", "Push Charles +30d"):');
+    if (!name || !name.trim()) return;
+    const cloneFromBase = confirm(
+      'Clone the current scenario\'s edits into the new one?\n\n' +
+      '• OK = start from current view (copy edits)\n' +
+      '• Cancel = start clean (no edits)'
+    );
+    try {
+      await financeApi('/scenarios', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: name.trim(),
+          clone_from: cloneFromBase ? getCurrentScenario() : null,
+        }),
+      });
+      setCurrentScenario(name.trim());
+      loadAndRenderFinance(document.getElementById('content'));
+    } catch (err) {
+      alert('Failed to create scenario: ' + (err.message||err));
+    }
+  };
+  const pdfb = bar.querySelector('.fin-scen-pdf');
+  if (pdfb) pdfb.onclick = e => {
+    e.preventDefault();
+    const url = (localStorage.getItem('finance_api_url') || '').replace(/\/$/, '')
+      + '/scenario-diff/' + encodeURIComponent(pdfb.dataset.name) + '/print'
+      + '?token=' + encodeURIComponent(localStorage.getItem('finance_api_token') || '');
+    window.open(url, '_blank');
+  };
+  const rb = bar.querySelector('.fin-scen-rename');
+  if (rb) rb.onclick = async e => {
+    e.preventDefault();
+    const newName = prompt('New name for "' + rb.dataset.name + '":', rb.dataset.name);
+    if (!newName || !newName.trim() || newName === rb.dataset.name) return;
+    // Rename = create new + copy + delete old
+    try {
+      await financeApi('/scenarios', { method: 'POST',
+        body: JSON.stringify({ name: newName.trim(), clone_from: rb.dataset.name }) });
+      await financeApi('/scenarios/' + encodeURIComponent(rb.dataset.name), { method: 'DELETE' });
+      setCurrentScenario(newName.trim());
+      loadAndRenderFinance(document.getElementById('content'));
+    } catch (err) { alert('Rename failed: ' + (err.message||err)); }
+  };
+  const db = bar.querySelector('.fin-scen-delete');
+  if (db) db.onclick = async e => {
+    e.preventDefault();
+    if (!confirm('Delete simulation "' + db.dataset.name + '"? All its overrides/additions/deletions will be voided. (Audit trail kept in DB.)')) return;
+    try {
+      await financeApi('/scenarios/' + encodeURIComponent(db.dataset.name), { method: 'DELETE' });
+      setCurrentScenario('baseline');
+      loadAndRenderFinance(document.getElementById('content'));
+    } catch (err) { alert('Delete failed: ' + (err.message||err)); }
+  };
+}
 
 // ─── Finance V2 — Pending Payments / Debts manager ─────────────────
 // Appends a CRUD panel ABOVE the regular Finance content when V2 is active.
