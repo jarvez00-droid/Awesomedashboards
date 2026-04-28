@@ -2063,31 +2063,35 @@ function financeFilterByRange(data) {
 
   // Recompute by_project for the range — but preserve milestones, is_planning,
   // and overdue totals from the original so range-filtering doesn't strip them.
-  // ALSO ensure every project from the original by_project remains in the result,
-  // even if it has zero events in the filtered range (so the user can still see
-  // its milestones / planning status / metadata).
+  // Every project from the original by_project remains in the result, even if it
+  // has zero events in the filtered range, so the user always sees its milestones.
   const origByProj = {};
   (data.by_project || []).forEach(p => { origByProj[p.project] = p; });
   const projMap = {};
-  // Start by populating projMap with every original project (zeroed out for range)
   Object.values(origByProj).forEach(orig => {
     projMap[orig.project] = {
       ...orig,                              // preserves milestones, is_planning, planning_event_count
       project: orig.project,
+      // Range-scoped totals (will be zero if no events in window)
       net: 0, inflow: 0, outflow: 0,
       overdue_in: orig.overdue_in || 0,
       overdue_out: orig.overdue_out || 0,
       events: [],
+      // Full-window snapshots (do NOT shrink with range)
+      total_event_count: orig.event_count || 0,
+      total_inflow: orig.inflow || 0,
+      total_outflow: orig.outflow || 0,
+      total_net: orig.net || 0,
     };
   });
-  // Now add filtered timeline events
   tl.forEach(e => {
     if (e.source_type === 'fixed_cost' || e.source_type === 'debt') return;
     const p = e.project || 'Other';
     if (!projMap[p]) {
       projMap[p] = { project: p, net: 0, inflow: 0, outflow: 0,
                      overdue_in: 0, overdue_out: 0, events: [],
-                     milestones: [], is_planning: false };
+                     milestones: [], is_planning: false,
+                     total_event_count: 0, total_inflow: 0, total_outflow: 0, total_net: 0 };
     }
     projMap[p].net += e.amount;
     if (e.amount > 0) projMap[p].inflow += e.amount;
@@ -2100,12 +2104,9 @@ function financeFilterByRange(data) {
     projMap[pn].outflow = Math.round(projMap[pn].outflow * 100) / 100;
     projMap[pn].event_count = projMap[pn].events.length;
   });
-  // Sort: prefer projects with activity, then by abs(net), then by name
+  // Sort by full-window net (NOT range-scoped) so all projects ranked by total scale
   const projectsFiltered = Object.values(projMap).sort((a, b) => {
-    const aHas = a.event_count > 0 ? 1 : 0;
-    const bHas = b.event_count > 0 ? 1 : 0;
-    if (aHas !== bHas) return bHas - aHas;
-    return Math.abs(b.net) - Math.abs(a.net);
+    return Math.abs(b.total_net) - Math.abs(a.total_net);
   });
 
   return {
@@ -3732,10 +3733,18 @@ function renderFinance(c) {
     const sev = p.net < 0 ? 'sev-r' : p.net > 0 ? 'sev-g' : 'sev-b';
     const projBuckets = projAggUnit[p.project] || [];
     const projSlug = 'pr' + pIdx + '_' + unit;
-    h += `<div class="pc ${sev}" style="margin-bottom:8px">`;
+    // Use full-window totals for severity (so range filter doesn't gray a real project)
+    const totNet = p.total_net || 0;
+    const sevFull = totNet < 0 ? 'sev-r' : totNet > 0 ? 'sev-g' : 'sev-b';
+    h += `<div class="pc ${sevFull}" style="margin-bottom:8px">`;
     h += `<div class="ph" onclick="tog(this)">`;
     h += `<div><div class="pn">${p.project}${p.is_planning?' <span style="font-size:10px;font-weight:600;padding:1px 6px;border-radius:8px;background:rgba(75,134,253,.15);color:var(--blu);margin-left:6px">PLANNING</span>':''}</div>`;
-    h += `<div class="pp">${p.event_count} events · In <b style="color:var(--grn)">+${fmtK(p.inflow)}</b> · Out <b style="color:var(--red)">-${fmtK(p.outflow)}</b> · Net <b>${fmtK(p.net)}</b>`;
+    // Header line: full-window totals (don't shrink with range filter), with range-scoped numbers in parens if different
+    const inRange = p.event_count !== p.total_event_count;
+    h += `<div class="pp">${p.total_event_count||p.event_count} events · In <b style="color:var(--grn)">+${fmtK(p.total_inflow||p.inflow)}</b> · Out <b style="color:var(--red)">-${fmtK(p.total_outflow||p.outflow)}</b> · Net <b style="color:${(p.total_net||p.net)>=0?'var(--grn)':'var(--red)'}">${fmtK(p.total_net||p.net)}</b>`;
+    if (inRange && p.event_count > 0) {
+      h += ` <span style="font-size:10px;color:var(--mut)">(${p.event_count} in current range)</span>`;
+    }
     if (p.overdue_in || p.overdue_out) {
       h += ` · <span style="color:var(--ylw)">Overdue: +${fmtK(p.overdue_in)} / -${fmtK(p.overdue_out)}</span>`;
     }
@@ -3789,7 +3798,7 @@ function renderFinance(c) {
         h += `</tr>`;
       });
       h += `</tbody></table></div></div>`;
-    } else if (p.event_count > 0) {
+    } else if ((p.total_event_count||p.event_count) > 0) {
       h += `<div style="margin-top:8px;padding:8px 10px;color:var(--dim);font-size:11px;font-style:italic">No client payment milestones in this project (only outflows). Add Payment - Income tasks in JobTread to see milestone breakdown.</div>`;
     }
 
