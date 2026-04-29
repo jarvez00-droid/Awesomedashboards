@@ -2713,18 +2713,34 @@ function financeGate(c) {
 
 async function loadAndRenderFinance(c) {
   c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Finance...</div></div>';
+  const activeScen = getCurrentScenario();
   // Priority 1 — live API (CRUD-capable)
   if (financeApiConfigured()) {
     try {
-      const scen = getCurrentScenario();
-      const path = (scen && scen !== 'baseline')
-        ? '/scenario-state?scenario=' + encodeURIComponent(scen)
+      const path = (activeScen && activeScen !== 'baseline')
+        ? '/scenario-state?scenario=' + encodeURIComponent(activeScen)
         : '/state';
       FINANCE_DATA = await financeApi(path);
       window._financeLive = true;
       try { financeSafeRender(); } catch (err) { console.error('renderFinance error:', err); c.innerHTML='<div class="alert"><b>Render error.</b> '+err.message+'</div>'; }
       return;
     } catch (e) {
+      // CRITICAL: if user is on a named scenario and API fails, do NOT silently fall back
+      // to baseline static JSON — that would make the scenario "appear to reset" and the
+      // user could lose work. Show a clear error and let them retry.
+      if (activeScen && activeScen !== 'baseline') {
+        c.innerHTML = `<div class="alert" style="background:rgba(240,68,56,.1);border:1px solid var(--red)">
+          <b>Live API unreachable — scenario "${activeScen}" can't load right now.</b>
+          <div style="font-size:12px;margin-top:6px;color:var(--txt2)">${(e.message||e)}</div>
+          <div style="font-size:12px;margin-top:6px">Your saved data is safe in the database. Don't make new edits until the API is back.</div>
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button onclick="loadAndRenderFinance(document.getElementById('content'))" style="padding:7px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer">↻ Retry</button>
+            <button onclick="setCurrentScenario('baseline');loadAndRenderFinance(document.getElementById('content'))" style="padding:7px 14px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">View Baseline (read-only)</button>
+          </div>
+        </div>`;
+        return;
+      }
+      // Baseline can fall back to static JSON safely (just current data, no scenario context to lose)
       console.warn('Finance API unavailable, falling back to static JSON:', e.message);
       window._financeLive = false;
       window._financeApiError = e.message;
@@ -3291,14 +3307,28 @@ async function injectScenarioSelector(container) {
     data = await financeApi('/scenarios');
   } catch (e) {
     bar.innerHTML = `<span style="color:var(--red);font-size:12px">Could not load scenarios: ${e.message||e}</span>`;
-    return;
+    return;  // do NOT touch localStorage on error
   }
 
   const current = getCurrentScenario();
-  // Auto-default to baseline if the selected scenario no longer exists
-  const knownNames = new Set((data.scenarios || []).map(s => s.name));
-  const cur = knownNames.has(current) ? current : 'baseline';
-  if (cur !== current) setCurrentScenario(cur);
+  const list = (data && Array.isArray(data.scenarios)) ? data.scenarios : null;
+  // Only auto-switch to baseline if we got a SUCCESSFUL non-empty response
+  // AND the current scenario is explicitly not in the list. Empty/malformed
+  // responses leave the selection untouched (avoids spurious resets on transient
+  // backend hiccups).
+  let cur = current;
+  if (list && list.length > 0) {
+    const knownNames = new Set(list.map(s => s.name));
+    if (!knownNames.has(current)) {
+      console.warn('Scenario "' + current + '" not in API list, falling back to baseline');
+      cur = 'baseline';
+      setCurrentScenario(cur);
+    }
+  }
+  if (!list) {
+    bar.innerHTML = `<span style="color:var(--ylw);font-size:12px">⚠ Scenario list malformed; staying on "${current}"</span>`;
+    return;
+  }
 
   let html = `<span style="font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-right:4px">🔬 Scenario:</span>`;
   (data.scenarios || []).forEach(s => {
