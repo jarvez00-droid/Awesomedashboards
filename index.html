@@ -2684,6 +2684,16 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
   }, 100);
 }
 
+function financePrintSummary() {
+  const cfg = financeApiConfig();
+  if (!cfg.url || !cfg.token) {
+    alert('Open ⚙ Settings and configure the Tunnel URL + Bearer token first.');
+    return;
+  }
+  const url = cfg.url.replace(/\/+$/, '') + '/cashflow-print?token=' + encodeURIComponent(cfg.token);
+  window.open(url, '_blank');
+}
+
 async function financeResetScenarios() {
   if (!confirm('Clear ALL date/amount overrides and return to base data?')) return;
   try {
@@ -3764,7 +3774,8 @@ function renderFinance(c) {
         </div>
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <button onclick="financeResetScenarios()" style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--ylw);border-radius:6px;cursor:pointer">↺ Reset scenario${hasOverrides ? ' ('+hasOverrides+' edit'+(hasOverrides>1?'s':'')+')' : ''}</button>
+        <button onclick="financePrintSummary()" style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">📄 Print Summary</button>
+        <button onclick="financeResetScenarios()" style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--ylw);border-radius:6px;cursor:pointer">↺ Reset edits${hasOverrides ? ' ('+hasOverrides+')' : ''}</button>
         <button onclick="financeShowConfig()" style="padding:7px 12px;font-size:12px;font-weight:500;background:var(--card);color:var(--txt2);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">⚙ Settings</button>
       </div>
     </div>
