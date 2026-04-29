@@ -1973,16 +1973,17 @@ async function financeToggleConfirm(sourceId, currentlyConfirmed) {
   if (!sourceId) return;
   try {
     const scen = getCurrentScenario();
-    await financeApi('/confirmation', {
+    const result = await financeApi('/confirmation', {
       method: 'POST',
       body: JSON.stringify({
         source_id: sourceId,
         confirmed: !currentlyConfirmed,
-        scenario_name: scen,    // CRITICAL: scope to current scenario
+        scenario_name: scen,    // scope to current scenario
       }),
     });
-    // Re-fetch full state for the current scenario (don't trust the embedded state field)
-    loadAndRenderFinance(document.getElementById('content'));
+    // Trust the embedded state — the API builds it for the same scenario we passed
+    if (result && result.state) FINANCE_DATA = result.state;
+    financeSafeRender();
   } catch (e) {
     alert('Toggle failed: ' + e.message);
   }
@@ -2614,7 +2615,7 @@ function financeEditAmount(sourceId, currentAmount, label, sourceType) {
     const newAmt = parseFloat(data.amount);
     if (isNaN(newAmt) || newAmt <= 0) throw new Error('Amount must be a positive number');
     const targetScen = (scen === 'baseline') ? 'default' : scen;
-    await financeApi('/edit-amount', {
+    const result = await financeApi('/edit-amount', {
       method: 'POST',
       body: JSON.stringify({
         source_id: sourceId,
@@ -2623,7 +2624,8 @@ function financeEditAmount(sourceId, currentAmount, label, sourceType) {
         scenario_name: targetScen,
       }),
     });
-    loadAndRenderFinance(document.getElementById('content'));
+    if (result && result.state) FINANCE_DATA = result.state;
+    financeSafeRender();
   });
 }
 
@@ -2642,12 +2644,13 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
     }
     const scen = getCurrentScenario();
     const targetScen = (scen === 'baseline') ? 'default' : scen;
+    let result;
     if (data.date === originalDate) {
-      await financeApi('/scenario-override/' + encodeURIComponent(sourceId)
+      result = await financeApi('/scenario-override/' + encodeURIComponent(sourceId)
                        + '?scenario=' + encodeURIComponent(targetScen),
                        { method: 'DELETE' });
     } else {
-      await financeApi('/scenario-override', {
+      result = await financeApi('/scenario-override', {
         method: 'POST',
         body: JSON.stringify({
           source_id: sourceId,
@@ -2658,7 +2661,8 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
         }),
       });
     }
-    loadAndRenderFinance(document.getElementById('content'));
+    if (result && result.state) FINANCE_DATA = result.state;
+    financeSafeRender();
   });
   // Wire reset button
   setTimeout(() => {
