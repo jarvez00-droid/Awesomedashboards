@@ -1972,12 +1972,17 @@ async function financeAddEntry(kind) {
 async function financeToggleConfirm(sourceId, currentlyConfirmed) {
   if (!sourceId) return;
   try {
-    const result = await financeApi('/confirmation', {
+    const scen = getCurrentScenario();
+    await financeApi('/confirmation', {
       method: 'POST',
-      body: JSON.stringify({ source_id: sourceId, confirmed: !currentlyConfirmed }),
+      body: JSON.stringify({
+        source_id: sourceId,
+        confirmed: !currentlyConfirmed,
+        scenario_name: scen,    // CRITICAL: scope to current scenario
+      }),
     });
-    if (result && result.state) FINANCE_DATA = result.state;
-    financeSafeRender();
+    // Re-fetch full state for the current scenario (don't trust the embedded state field)
+    loadAndRenderFinance(document.getElementById('content'));
   } catch (e) {
     alert('Toggle failed: ' + e.message);
   }
