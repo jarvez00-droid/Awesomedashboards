@@ -2675,9 +2675,15 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
 async function financeResetScenarios() {
   const scen = getCurrentScenario();
   const target = (scen === 'baseline') ? 'default' : scen;
-  if (!confirm(`Clear all overrides in scenario "${target}" and return its events to the baseline?`)) return;
+  const baselineNote = (scen === 'baseline')
+    ? "\n\n(You're on Baseline — this clears the legacy 'default' working bucket where pre-scenario edits/additions live.)"
+    : '';
+  if (!confirm(`Clear ALL scenario data in "${target}":\n  · Date/amount overrides\n  · New events you added\n  · Deletions\n${baselineNote}`)) return;
   try {
-    await financeApi('/scenario-reset?scenario=' + encodeURIComponent(target), { method: 'POST' });
+    const r = await financeApi('/scenario-reset?scenario=' + encodeURIComponent(target), { method: 'POST' });
+    const c = r && r.counts ? r.counts : {};
+    const total = (c.overrides||0) + (c.additions||0) + (c.deletions||0);
+    if (total === 0) alert('Nothing to reset — scenario was already clean.');
     loadAndRenderFinance(document.getElementById('content'));
   } catch (e) {
     alert('Reset failed: ' + e.message);
@@ -3687,7 +3693,14 @@ function renderFinance(c) {
   }
 
   const live = window._financeLive === true;
-  const hasOverrides = (d.sources && d.sources.scenario_overrides_count) || 0;
+  // Count ALL scenario data (overrides + additions + deletions) for the active scenario.
+  // On baseline, this surfaces the legacy 'default' bucket counts so the Reset button
+  // can clear leftover edits/adds/deletes from the previous workflow.
+  const scenInfo = (d.scenario || {});
+  const hasOverrides = (scenInfo.overrides_count || 0)
+    + (scenInfo.additions_count || 0)
+    + (scenInfo.deletions_count || 0)
+    || (d.sources && d.sources.scenario_overrides_count) || 0;
 
   // Range info
   const rangeEnd = new Date(d._rangeEnd + 'T12:00:00');
@@ -3705,7 +3718,7 @@ function renderFinance(c) {
         </div>
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
-        ${hasOverrides ? `<button onclick="financeResetScenarios()" style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--ylw);border-radius:6px;cursor:pointer">↺ Reset ${hasOverrides} scenario${hasOverrides>1?'s':''}</button>` : ''}
+        <button onclick="financeResetScenarios()" style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--ylw);border-radius:6px;cursor:pointer">↺ Reset scenario${hasOverrides ? ' ('+hasOverrides+' edit'+(hasOverrides>1?'s':'')+')' : ''}</button>
         <button onclick="financeShowConfig()" style="padding:7px 12px;font-size:12px;font-weight:500;background:var(--card);color:var(--txt2);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">⚙ Settings</button>
       </div>
     </div>
