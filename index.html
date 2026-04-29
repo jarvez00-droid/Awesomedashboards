@@ -367,7 +367,6 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a data-p="mgmt">▥ Management</a>
   <a data-p="fcash">💰 Full Cash Flow</a>
   <a data-p="finance">💵 Finance</a>
-  <a data-p="financeV2">💵² Finance V2</a>
   <a data-p="scash">🔮 Scenario Cashflow</a>
   <a data-p="miles">🎯 Milestones</a>
   <a data-p="archive">▦ Archive</a>
@@ -403,8 +402,7 @@ function render() {
   else if (curPage === 'weekly') loadAndRenderWeekly(c);
   else if (curPage === 'mgmt') mgmtGate(c);
   else if (curPage === 'fcash') fcGate(c);
-  else if (curPage === 'finance') { window._financeV2 = false; financeGate(c); }
-  else if (curPage === 'financeV2') { window._financeV2 = true; financeGate(c); }
+  else if (curPage === 'finance') financeGate(c);
   else if (curPage === 'scash') scashGate(c);
   else if (curPage === 'miles') milesGate(c);
   else if (curPage === 'archive') renderArchive(c);
@@ -1973,14 +1971,12 @@ async function financeToggleConfirm(sourceId, currentlyConfirmed) {
   if (!sourceId) return;
   const newConfirmed = !currentlyConfirmed;
   try {
-    const scen = getCurrentScenario();
     // Tiny request → tiny response. Avoids massive state payloads through the tunnel.
     await financeApi('/confirmation', {
       method: 'POST',
       body: JSON.stringify({
         source_id: sourceId,
         confirmed: newConfirmed,
-        scenario_name: scen,
       }),
     });
     // Update FINANCE_DATA in place — flip the confirmed flag on this event
@@ -2046,11 +2042,7 @@ async function financeVoidRow(kind, rowId) {
 }
 
 function financeMoveDate(sourceId, currentDate, originalDate, label) {
-  const scen = getCurrentScenario();
-  if (scen === 'baseline') {
-    alert("Baseline is read-only.\n\nClick a simulation tab above (or '+ New Simulation') to move dates. Each simulation is independent.");
-    return;
-  }
+  // Delegate to the modal-based picker
   financeMoveDateModal(sourceId, currentDate, originalDate, label);
 }
 
@@ -2605,12 +2597,6 @@ function financeSafeRender() {
   financeInstallClickHandler();
   try {
     renderFinance(document.getElementById('content'));
-    // Inject scenario selector at the very top of the Finance page (V1 + V2)
-    injectScenarioSelector(document.getElementById('content'));
-    // Finance V2 — append V2-only management panels at the top
-    if (window._financeV2) {
-      v2InjectPendingPaymentsManager(document.getElementById('content'));
-    }
   } catch (e) {
     console.error('renderFinance failed:', e);
     const c = document.getElementById('content');
@@ -2623,15 +2609,9 @@ function financeSafeRender() {
 }
 
 function financeEditAmount(sourceId, currentAmount, label, sourceType) {
-  // Edits go INTO a scenario. Baseline is read-only — block.
-  const scen = getCurrentScenario();
-  const isSQLite = /^(pc-|misc-|npi-|bs-)/.test(sourceId || '');
-  if (scen === 'baseline' && !isSQLite) {
-    alert("Baseline is read-only.\n\nClick a simulation tab above (or '+ New Simulation') to make edits. Each simulation is independent.");
-    return;
-  }
   const abs = Math.abs(currentAmount);
   const direction = currentAmount >= 0 ? 'income' : 'outflow';
+  const isSQLite = /^(pc-|misc-|npi-|bs-)/.test(sourceId || '');
   const kindNote = isSQLite
     ? "This is a SQLite-logged entry. We'll void the existing row and insert a corrected one — original stays in the audit trail."
     : "This is an external event (JobTread / fixed cost / debt). We'll apply a scenario amount override — the source data stays unchanged.";
@@ -2647,14 +2627,12 @@ function financeEditAmount(sourceId, currentAmount, label, sourceType) {
   `, async (data) => {
     const newAmt = parseFloat(data.amount);
     if (isNaN(newAmt) || newAmt <= 0) throw new Error('Amount must be a positive number');
-    const targetScen = (scen === 'baseline') ? 'default' : scen;
     const result = await financeApi('/edit-amount', {
       method: 'POST',
       body: JSON.stringify({
         source_id: sourceId,
         new_amount: newAmt,
         reason: (data.reason || '').trim() || 'amount edited via dashboard',
-        scenario_name: targetScen,
       }),
     });
     if (result && result.state) FINANCE_DATA = result.state;
@@ -2675,13 +2653,9 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
     if (!data.date || !/^\d{4}-\d{2}-\d{2}$/.test(data.date)) {
       throw new Error('Please pick a valid date.');
     }
-    const scen = getCurrentScenario();
-    const targetScen = (scen === 'baseline') ? 'default' : scen;
     let result;
     if (data.date === originalDate) {
-      result = await financeApi('/scenario-override/' + encodeURIComponent(sourceId)
-                       + '?scenario=' + encodeURIComponent(targetScen),
-                       { method: 'DELETE' });
+      result = await financeApi('/scenario-override/' + encodeURIComponent(sourceId), { method: 'DELETE' });
     } else {
       result = await financeApi('/scenario-override', {
         method: 'POST',
@@ -2690,7 +2664,6 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
           scenario_date: data.date,
           original_date: originalDate,
           label: label,
-          scenario_name: targetScen,
         }),
       });
     }
@@ -2702,31 +2675,21 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
     const btn = modal.querySelector('#scenario-reset-btn');
     if (btn) btn.addEventListener('click', async () => {
       try {
-        const scen = getCurrentScenario();
-        const targetScen = (scen === 'baseline') ? 'default' : scen;
-        await financeApi('/scenario-override/' + encodeURIComponent(sourceId)
-                         + '?scenario=' + encodeURIComponent(targetScen),
-                         { method: 'DELETE' });
+        const result = await financeApi('/scenario-override/' + encodeURIComponent(sourceId), { method: 'DELETE' });
+        if (result && result.state) FINANCE_DATA = result.state;
         modal.remove();
-        loadAndRenderFinance(document.getElementById('content'));
+        financeSafeRender();
       } catch (e) { alert('Reset failed: ' + e.message); }
     });
   }, 100);
 }
 
 async function financeResetScenarios() {
-  const scen = getCurrentScenario();
-  const target = (scen === 'baseline') ? 'default' : scen;
-  const baselineNote = (scen === 'baseline')
-    ? "\n\n(You're on Baseline — this clears the legacy 'default' working bucket where pre-scenario edits/additions live.)"
-    : '';
-  if (!confirm(`Clear ALL scenario data in "${target}":\n  · Date/amount overrides\n  · New events you added\n  · Deletions\n${baselineNote}`)) return;
+  if (!confirm('Clear ALL date/amount overrides and return to base data?')) return;
   try {
-    const r = await financeApi('/scenario-reset?scenario=' + encodeURIComponent(target), { method: 'POST' });
-    const c = r && r.counts ? r.counts : {};
-    const total = (c.overrides||0) + (c.additions||0) + (c.deletions||0);
-    if (total === 0) alert('Nothing to reset — scenario was already clean.');
-    loadAndRenderFinance(document.getElementById('content'));
+    const result = await financeApi('/scenario-reset', { method: 'POST' });
+    if (result && result.state) FINANCE_DATA = result.state;
+    financeSafeRender();
   } catch (e) {
     alert('Reset failed: ' + e.message);
   }
@@ -2755,34 +2718,14 @@ function financeGate(c) {
 
 async function loadAndRenderFinance(c) {
   c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Finance...</div></div>';
-  const activeScen = getCurrentScenario();
   // Priority 1 — live API (CRUD-capable)
   if (financeApiConfigured()) {
     try {
-      const path = (activeScen && activeScen !== 'baseline')
-        ? '/scenario-state?scenario=' + encodeURIComponent(activeScen)
-        : '/state';
-      FINANCE_DATA = await financeApi(path);
+      FINANCE_DATA = await financeApi('/state');
       window._financeLive = true;
       try { financeSafeRender(); } catch (err) { console.error('renderFinance error:', err); c.innerHTML='<div class="alert"><b>Render error.</b> '+err.message+'</div>'; }
       return;
     } catch (e) {
-      // CRITICAL: if user is on a named scenario and API fails, do NOT silently fall back
-      // to baseline static JSON — that would make the scenario "appear to reset" and the
-      // user could lose work. Show a clear error and let them retry.
-      if (activeScen && activeScen !== 'baseline') {
-        c.innerHTML = `<div class="alert" style="background:rgba(240,68,56,.1);border:1px solid var(--red)">
-          <b>Live API unreachable — scenario "${activeScen}" can't load right now.</b>
-          <div style="font-size:12px;margin-top:6px;color:var(--txt2)">${(e.message||e)}</div>
-          <div style="font-size:12px;margin-top:6px">Your saved data is safe in the database. Don't make new edits until the API is back.</div>
-          <div style="margin-top:10px;display:flex;gap:8px">
-            <button onclick="loadAndRenderFinance(document.getElementById('content'))" style="padding:7px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer">↻ Retry</button>
-            <button onclick="setCurrentScenario('baseline');loadAndRenderFinance(document.getElementById('content'))" style="padding:7px 14px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">View Baseline (read-only)</button>
-          </div>
-        </div>`;
-        return;
-      }
-      // Baseline can fall back to static JSON safely (just current data, no scenario context to lose)
       console.warn('Finance API unavailable, falling back to static JSON:', e.message);
       window._financeLive = false;
       window._financeApiError = e.message;
