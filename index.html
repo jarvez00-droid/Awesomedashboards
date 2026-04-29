@@ -1971,18 +1971,51 @@ async function financeAddEntry(kind) {
 
 async function financeToggleConfirm(sourceId, currentlyConfirmed) {
   if (!sourceId) return;
+  const newConfirmed = !currentlyConfirmed;
   try {
     const scen = getCurrentScenario();
-    const result = await financeApi('/confirmation', {
+    // Tiny request → tiny response. Avoids massive state payloads through the tunnel.
+    await financeApi('/confirmation', {
       method: 'POST',
       body: JSON.stringify({
         source_id: sourceId,
-        confirmed: !currentlyConfirmed,
-        scenario_name: scen,    // scope to current scenario
+        confirmed: newConfirmed,
+        scenario_name: scen,
       }),
     });
-    // Trust the embedded state — the API builds it for the same scenario we passed
-    if (result && result.state) FINANCE_DATA = result.state;
+    // Update FINANCE_DATA in place — flip the confirmed flag on this event
+    if (FINANCE_DATA) {
+      const updateEvent = e => { if (e && e.source_id === sourceId) e.confirmed = newConfirmed; };
+      (FINANCE_DATA.timeline || []).forEach(updateEvent);
+      (FINANCE_DATA.overdue || []).forEach(updateEvent);
+      // Per-project events arrays are duplicates of the same dicts above — same in-place update
+      (FINANCE_DATA.by_project || []).forEach(p => (p.events || []).forEach(updateEvent));
+      // Recompute running_balance_confirmed walking the timeline (only confirmed events count)
+      const startBal = (FINANCE_DATA.bank && FINANCE_DATA.bank.current_balance) || 0;
+      let runConf = startBal;
+      (FINANCE_DATA.timeline || []).forEach(e => {
+        if (e.confirmed) runConf += (e.amount || 0);
+        e.running_balance_confirmed = Math.round(runConf * 100) / 100;
+      });
+      // Update aggregates' confirmed totals + counts
+      ['day','week','month'].forEach(unit => {
+        const bs = (FINANCE_DATA.aggregated && FINANCE_DATA.aggregated[unit]) || [];
+        bs.forEach(b => {
+          const inWin = (FINANCE_DATA.timeline || []).filter(e => e.date >= b.start && e.date <= b.end);
+          const conf = inWin.filter(e => e.confirmed);
+          b.inflow_confirmed = Math.round(conf.filter(e=>e.amount>0).reduce((s,e)=>s+e.amount,0)*100)/100;
+          b.outflow_confirmed = Math.round(conf.filter(e=>e.amount<0).reduce((s,e)=>s+Math.abs(e.amount),0)*100)/100;
+          b.net_confirmed = Math.round((b.inflow_confirmed - b.outflow_confirmed)*100)/100;
+          b.count_confirmed = conf.length;
+          // closing_balance_confirmed = running_balance_confirmed of last event in bucket
+          let cb = null;
+          for (let i = inWin.length - 1; i >= 0; i--) {
+            if (inWin[i].running_balance_confirmed != null) { cb = inWin[i].running_balance_confirmed; break; }
+          }
+          if (cb !== null) b.closing_balance_confirmed = cb;
+        });
+      });
+    }
     financeSafeRender();
   } catch (e) {
     alert('Toggle failed: ' + e.message);
