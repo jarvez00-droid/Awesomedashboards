@@ -3344,6 +3344,7 @@ async function injectScenarioSelector(container) {
   html += `<div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap">`;
   html += `<button class="fin-scen-new" style="padding:6px 12px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:12px">+ New Simulation</button>`;
   if (cur !== 'baseline') {
+    html += `<button class="fin-scen-bank" data-name="${cur.replace(/"/g,'&quot;')}" style="padding:6px 12px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:12px">💵 Set Bank Balance</button>`;
     html += `<button class="fin-scen-pdf" data-name="${cur.replace(/"/g,'&quot;')}" style="padding:6px 12px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:12px">📄 Download PDF</button>`;
     html += `<button class="fin-scen-rename" data-name="${cur.replace(/"/g,'&quot;')}" style="padding:6px 12px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer;font-size:12px">✎ Rename</button>`;
     html += `<button class="fin-scen-delete" data-name="${cur.replace(/"/g,'&quot;')}" style="padding:6px 12px;background:var(--card-h);color:var(--red);border:1px solid var(--red);border-radius:6px;cursor:pointer;font-size:12px">× Delete</button>`;
@@ -3352,9 +3353,14 @@ async function injectScenarioSelector(container) {
   // Status / scenario summary line
   if (FINANCE_DATA && FINANCE_DATA.scenario && FINANCE_DATA.scenario.name !== 'baseline') {
     const s = FINANCE_DATA.scenario;
+    const bk = (FINANCE_DATA.bank || {});
+    const fmt = n => '$' + Math.abs(Math.round(n||0)).toLocaleString();
+    const bankStatus = bk.overridden_for_scenario
+      ? ` · 💵 <b style="color:var(--ylw)">Bank override: ${fmt(bk.current_balance)}</b> (real: ${fmt(bk.actual_balance)})`
+      : '';
     html += `<div style="width:100%;font-size:11px;color:var(--mut);margin-top:6px;padding-top:6px;border-top:1px solid rgba(33,39,47,.3)">
-      Scenario data: <b>${s.overrides_count}</b> modified · <b>${s.additions_count}</b> added · <b>${s.deletions_count}</b> deleted
-      &nbsp;·&nbsp; <i>Edits/moves/deletes on this page are scoped to <b>${cur.replace(/</g,'&lt;')}</b>.</i>
+      Scenario data: <b>${s.overrides_count}</b> modified · <b>${s.additions_count}</b> added · <b>${s.deletions_count}</b> deleted${bankStatus}
+      &nbsp;·&nbsp; <i>Edits scoped to <b>${cur.replace(/</g,'&lt;')}</b>.</i>
     </div>`;
   } else {
     html += `<div style="width:100%;font-size:11px;color:var(--mut);margin-top:6px;padding-top:6px;border-top:1px solid rgba(33,39,47,.3)">
@@ -3394,6 +3400,31 @@ function wireScenarioBar(bar) {
     } catch (err) {
       alert('Failed to create scenario: ' + (err.message||err));
     }
+  };
+  const bb = bar.querySelector('.fin-scen-bank');
+  if (bb) bb.onclick = async e => {
+    e.preventDefault();
+    const cur = bb.dataset.name;
+    const fd = (FINANCE_DATA && FINANCE_DATA.bank) || {};
+    const currentValue = fd.overridden_for_scenario ? fd.current_balance : '';
+    const promptText = fd.overridden_for_scenario
+      ? `Current scenario bank override: $${currentValue.toLocaleString()}\nReal balance: $${(fd.actual_balance||0).toLocaleString()}\n\nNew override (or leave blank to clear and use real balance):`
+      : `Real bank balance: $${(fd.actual_balance||0).toLocaleString()}\n\nWhat-if balance for "${cur}" (in $, e.g. 75000):`;
+    const v = prompt(promptText, currentValue || '');
+    if (v === null) return;
+    const trimmed = v.trim();
+    let body;
+    if (!trimmed) {
+      body = { scenario_name: cur, balance: null };
+    } else {
+      const num = parseFloat(trimmed.replace(/[^\d.\-]/g, ''));
+      if (isNaN(num)) { alert('Invalid number'); return; }
+      body = { scenario_name: cur, balance: num };
+    }
+    try {
+      await financeApi('/scenario-bank-override', { method: 'POST', body: JSON.stringify(body) });
+      loadAndRenderFinance(document.getElementById('content'));
+    } catch (err) { alert('Failed: ' + (err.message||err)); }
   };
   const pdfb = bar.querySelector('.fin-scen-pdf');
   if (pdfb) pdfb.onclick = e => {
