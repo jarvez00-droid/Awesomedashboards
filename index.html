@@ -2811,12 +2811,14 @@ function sectionKpis(d) {
     ${sub ? `<div style="font-size:10px;color:var(--mut);margin-top:2px">${sub}</div>` : ''}
   </div>`;
   const balColor = (k.current_balance||0) >= 0 ? 'var(--grn)' : 'var(--red)';
-  const projColor = (k.projected_end_balance_365d||0) >= 0 ? 'var(--grn)' : 'var(--red)';
+  const projColor = (k.projected_end_balance_quarter||0) >= 0 ? 'var(--grn)' : 'var(--red)';
+  const qLabel = k.projected_end_quarter_label || 'quarter';
+  const qSub = k.projected_end_quarter_date ? `End of ${qLabel} · ${k.projected_end_quarter_date}` : `End of ${qLabel}`;
   return `<div class="sh">📊 Live KPIs</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
       ${card('Current Balance', fmtMoney0(k.current_balance), balColor)}
       ${card('Monthly Burn', fmtMoney0(k.monthly_burn), 'var(--red)', 'Fixed costs / mo')}
-      ${card('Projected End (365d)', fmtMoney0(k.projected_end_balance_365d), projColor)}
+      ${card('Projected End ('+qLabel+')', fmtMoney0(k.projected_end_balance_quarter), projColor, qSub)}
       ${card('Active Projects', k.active_project_count, 'var(--grn)', 'Building / signed')}
       ${card('Planning Projects', k.planning_project_count, 'var(--blu)', 'Pre-construction / pipeline')}
     </div>
