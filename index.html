@@ -2721,15 +2721,741 @@ function orgMgmtGate(c) {
   setTimeout(()=>inp.focus(),50);
 }
 
-function renderOrgMgmt(c) {
-  c.innerHTML = `
-    <div class="page-title">🎯 Management</div>
-    <div class="page-sub">Operating system for the leadership team — Jonas, Reynaldo, Jose, Milagros</div>
-    <div class="empty" style="margin-top:24px">
-      <div class="empty-i">🚧</div>
-      <div class="empty-t">Coming soon</div>
-      <div class="empty-d">Awaiting feature selection — see the chat for the proposal.</div>
+// Management tab — leadership operating system
+let MGMT_DATA_FULL = null;
+const MGMT_MEMBERS = ['Jonas', 'Reynaldo', 'Jose', 'Milagros'];
+const KANBAN_COLS = [
+  { key: 'backlog',     label: 'Backlog',     color: '#6b7280' },
+  { key: 'this_week',   label: 'This Week',   color: '#3b82f6' },
+  { key: 'in_progress', label: 'In Progress', color: '#f59e0b' },
+  { key: 'blocked',     label: 'Blocked',     color: '#ef4444' },
+  { key: 'done',        label: 'Done',        color: '#10b981' },
+];
+
+async function renderOrgMgmt(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Management...</div></div>';
+  if (!financeApiConfigured()) {
+    c.innerHTML = '<div class="empty"><div class="empty-i">🎯</div><div class="empty-t">Management requires the Finance API</div><div class="empty-d">Open ⚙ Settings on the Finance tab and configure the tunnel URL + token.</div></div>';
+    return;
+  }
+  try {
+    MGMT_DATA_FULL = await financeApi('/management-state');
+  } catch (e) {
+    c.innerHTML = '<div class="alert"><b>Could not load Management data.</b> ' + (e.message||e) + '</div>';
+    return;
+  }
+  paintOrgMgmt(c);
+  installOrgMgmtClickHandler();
+}
+
+function fmtMoney0(n) { return (n<0?'-':'') + '$' + Math.abs(Math.round(n||0)).toLocaleString(); }
+function fmtMoney2(n) { return (n<0?'-':'') + '$' + Math.abs(n||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtDateShort(iso) {
+  if (!iso) return '—';
+  const dt = new Date(iso + 'T12:00:00');
+  const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return MS[dt.getMonth()] + ' ' + dt.getDate() + ', ' + dt.getFullYear();
+}
+function htmlEsc(s) { return String(s==null?'':s).replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function attrEsc(s) { return String(s==null?'':s).replace(/&/g,'&amp;').replace(/"/g,'&quot;'); }
+
+function paintOrgMgmt(c) {
+  const d = MGMT_DATA_FULL || {};
+  const sections = [
+    `<div class="page-title">🎯 Management</div>
+     <div class="page-sub">Operating system for the leadership team — Jonas, Reynaldo, Jose, Milagros</div>`,
+    sectionStrategy(d),
+    sectionKpis(d),
+    sectionOkrs(d),
+    sectionKanbans(d),
+    sectionDecisions(d),
+    sectionAgenda(d),
+    sectionProjectHealth(d),
+    sectionRisks(d),
+    sectionInitiatives(d),
+    sectionTeam(d),
+    sectionVendors(d),
+  ];
+  c.innerHTML = sections.join('\n');
+}
+
+// ── Strategy banner (mission / vision / quarter focus / north-star) ──
+function sectionStrategy(d) {
+  const s = d.strategy || {};
+  const mission = (s.mission && s.mission.value) || '';
+  const vision = (s.vision && s.vision.value) || '';
+  const q_focus = (s.q_focus && s.q_focus.value) || '';
+  const north_star = (s.north_star && s.north_star.value) || '';
+  const cell = (label, val, key) => `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;flex:1;min-width:220px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+      <div style="font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;font-weight:700">${label}</div>
+      <a href="#" class="mg-strat-edit" data-key="${key}" data-label="${attrEsc(label)}" data-val="${attrEsc(val)}" style="font-size:11px;color:var(--blu);text-decoration:none">✎ Edit</a>
+    </div>
+    <div style="font-size:13px;color:${val?'var(--txt)':'var(--mut)'};font-style:${val?'normal':'italic'}">${val ? htmlEsc(val) : 'Click Edit to set'}</div>
+  </div>`;
+  return `<div class="sh">📜 Strategy Canvas</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
+      ${cell('Mission', mission, 'mission')}
+      ${cell('Vision', vision, 'vision')}
+      ${cell('This Quarter Focus', q_focus, 'q_focus')}
+      ${cell('North-Star Metric', north_star, 'north_star')}
     </div>`;
+}
+
+// ── KPIs ──
+function sectionKpis(d) {
+  const k = d.kpis || {};
+  const card = (label, val, color, sub) => `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;min-width:160px">
+    <div style="font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;font-weight:700">${label}</div>
+    <div style="font-size:22px;font-weight:700;color:${color||'var(--txt)'};margin-top:2px">${val}</div>
+    ${sub ? `<div style="font-size:10px;color:var(--mut);margin-top:2px">${sub}</div>` : ''}
+  </div>`;
+  const balColor = (k.current_balance||0) >= 0 ? 'var(--grn)' : 'var(--red)';
+  const projColor = (k.projected_end_balance_365d||0) >= 0 ? 'var(--grn)' : 'var(--red)';
+  const runwayColor = (k.months_runway||0) >= 6 ? 'var(--grn)' : (k.months_runway||0) >= 2 ? 'var(--ylw)' : 'var(--red)';
+  return `<div class="sh">📊 Live KPIs</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
+      ${card('Current Balance', fmtMoney0(k.current_balance), balColor)}
+      ${card('Monthly Burn', fmtMoney0(k.monthly_burn), 'var(--red)', 'Fixed costs / mo')}
+      ${card('Months Runway', (k.months_runway==null?'—':k.months_runway), runwayColor, 'balance ÷ burn')}
+      ${card('Projected End (365d)', fmtMoney0(k.projected_end_balance_365d), projColor)}
+      ${card('Active Projects', k.active_project_count, 'var(--blu)')}
+      ${card('Overdue Items', k.overdue_count, (k.overdue_count||0)>0?'var(--ylw)':'var(--grn)')}
+    </div>
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;margin-bottom:18px">
+      <div style="font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:6px">Pipeline (incoming - outgoing)</div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:13px">
+        ${pipelineCell('30 days', k.pipeline_30d)}
+        ${pipelineCell('60 days', k.pipeline_60d)}
+        ${pipelineCell('90 days', k.pipeline_90d)}
+      </div>
+    </div>`;
+}
+function pipelineCell(label, p) {
+  if (!p) return '';
+  const netColor = p.net >= 0 ? 'var(--grn)' : 'var(--red)';
+  return `<div style="flex:1;min-width:180px">
+    <div style="font-size:10px;color:var(--mut);text-transform:uppercase">${label}</div>
+    <div style="margin-top:2px"><span style="color:var(--grn)">+${fmtMoney0(p.in)}</span> · <span style="color:var(--red)">-${fmtMoney0(p.out)}</span> · Net <b style="color:${netColor}">${(p.net>=0?'+':'')+fmtMoney0(p.net)}</b></div>
+  </div>`;
+}
+
+// ── OKRs ──
+function sectionOkrs(d) {
+  const okrs = d.okrs || [];
+  const byQ = {};
+  okrs.forEach(o => { (byQ[o.quarter] = byQ[o.quarter] || []).push(o); });
+  const quarters = Object.keys(byQ).sort().reverse();
+  const today = new Date();
+  const curQ = `${today.getFullYear()}-Q${Math.floor(today.getMonth()/3)+1}`;
+  let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
+    🎯 OKRs (Objectives + Key Results)
+    <button class="mg-okr-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add OKR</button>
+  </div>`;
+  if (!okrs.length) {
+    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No OKRs yet. Click + Add OKR to set the team's objectives for ${curQ}.</div></div>`;
+    return h;
+  }
+  for (const q of quarters) {
+    h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;margin-bottom:10px">
+      <div style="font-size:13px;font-weight:700;margin-bottom:6px">${q}</div>
+      <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
+          <th style="padding:5px 8px">Owner</th><th style="padding:5px 8px">Objective</th>
+          <th style="padding:5px 8px">Key Result</th>
+          <th style="padding:5px 8px;text-align:right">Target</th>
+          <th style="padding:5px 8px;text-align:right">Current</th>
+          <th style="padding:5px 8px">Status</th>
+          <th style="padding:5px 8px">Progress</th>
+          <th style="padding:5px 8px;width:30px"></th>
+        </tr></thead><tbody>`;
+    for (const o of byQ[q]) {
+      const pct = o.target_value && o.target_value !== 0
+        ? Math.round(((o.current_value||0) / o.target_value) * 100) : 0;
+      const sColor = {on_track:'var(--grn)', at_risk:'var(--ylw)', off_track:'var(--red)', done:'var(--blu)'}[o.status] || 'var(--mut)';
+      h += `<tr style="border-top:1px solid rgba(33,39,47,.3)" data-okr-id="${o.id}">
+        <td style="padding:5px 8px"><b>${htmlEsc(o.owner||'—')}</b></td>
+        <td style="padding:5px 8px">${htmlEsc(o.objective)}</td>
+        <td style="padding:5px 8px;color:var(--mut)">${htmlEsc(o.key_result)}</td>
+        <td style="padding:5px 8px;text-align:right;font-family:var(--mono)">${o.target_value!=null ? (o.target_value+(o.unit? ' '+o.unit:'')) : '—'}</td>
+        <td style="padding:5px 8px;text-align:right;font-family:var(--mono)">${o.current_value!=null ? (o.current_value+(o.unit? ' '+o.unit:'')) : '—'}</td>
+        <td style="padding:5px 8px"><span style="display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:600;background:rgba(75,134,253,.15);color:${sColor}">${(o.status||'').replace(/_/g,' ')}</span></td>
+        <td style="padding:5px 8px"><div style="width:80px;height:6px;background:var(--card-h);border-radius:3px;overflow:hidden"><div style="width:${Math.min(100,Math.max(0,pct))}%;height:100%;background:${sColor}"></div></div><span style="font-size:10px;color:var(--mut)">${pct}%</span></td>
+        <td style="padding:5px 8px;text-align:right"><a href="#" class="mg-okr-edit" data-id="${o.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-okr-del" data-id="${o.id}" style="color:var(--red);text-decoration:none">×</a></td>
+      </tr>`;
+    }
+    h += `</tbody></table></div></div>`;
+  }
+  return h;
+}
+
+// ── Kanbans (one column per member) ──
+function sectionKanbans(d) {
+  const cards = (d.kanban && d.kanban.active) || [];
+  const archCount = (d.kanban && d.kanban.archived_count) || 0;
+  const byMember = {};
+  MGMT_MEMBERS.forEach(m => { byMember[m] = {}; KANBAN_COLS.forEach(c => byMember[m][c.key] = []); });
+  cards.forEach(c => {
+    const mem = c.member;
+    if (!byMember[mem]) byMember[mem] = {};
+    if (!byMember[mem][c.column_name]) byMember[mem][c.column_name] = [];
+    byMember[mem][c.column_name].push(c);
+  });
+  let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
+    📋 Kanbans (per member)
+    <span style="font-size:11px;color:var(--mut)">${archCount} archived</span>
+  </div>`;
+  for (const m of MGMT_MEMBERS) {
+    const total = Object.values(byMember[m]||{}).reduce((s,arr)=>s+arr.length, 0);
+    h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div style="font-size:14px;font-weight:700">${m} <span style="font-size:11px;color:var(--mut);font-weight:400">${total} active card${total!==1?'s':''}</span></div>
+        <button class="mg-kanban-add" data-member="${m}" style="padding:5px 10px;background:var(--blu);color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:11px;font-weight:600">+ Add Card</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;font-size:11px">`;
+    for (const col of KANBAN_COLS) {
+      const items = (byMember[m] && byMember[m][col.key]) || [];
+      h += `<div style="background:var(--card-h);border-top:3px solid ${col.color};border-radius:4px;padding:6px;min-height:80px">
+        <div style="font-size:10px;color:${col.color};font-weight:700;text-transform:uppercase;margin-bottom:4px;display:flex;justify-content:space-between">
+          ${col.label}<span style="color:var(--mut);font-weight:400">${items.length}</span>
+        </div>`;
+      for (const card of items) {
+        const overdue = card.due_date && card.due_date < new Date().toISOString().slice(0,10);
+        h += `<div class="mg-kanban-card" data-id="${card.id}" style="background:var(--card);border:1px solid ${overdue?'var(--red)':'var(--bdr)'};border-radius:4px;padding:5px 7px;margin-bottom:4px;cursor:pointer">
+          <div style="font-size:11px;font-weight:600">${htmlEsc(card.title)}</div>
+          ${card.due_date ? `<div style="font-size:9px;color:${overdue?'var(--red)':'var(--mut)'};margin-top:2px">📅 ${fmtDateShort(card.due_date)}${overdue?' (late)':''}</div>` : ''}
+          ${card.project_name ? `<div style="font-size:9px;color:var(--mut)">📁 ${htmlEsc(card.project_name)}</div>` : ''}
+        </div>`;
+      }
+      h += `</div>`;
+    }
+    h += `</div></div>`;
+  }
+  return h;
+}
+
+// ── Decisions log ──
+function sectionDecisions(d) {
+  const decs = d.decisions || [];
+  let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
+    📝 Decision Log
+    <button class="mg-dec-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Decision</button>
+  </div>`;
+  if (!decs.length) {
+    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No decisions logged yet.</div></div>`;
+    return h;
+  }
+  h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:18px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr style="background:var(--card-h);text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
+      <th style="padding:7px 10px">Date</th><th style="padding:7px 10px">Decision</th>
+      <th style="padding:7px 10px">By</th><th style="padding:7px 10px">Owner</th>
+      <th style="padding:7px 10px">Due</th><th style="padding:7px 10px">Status</th>
+      <th style="padding:7px 10px;width:50px"></th>
+    </tr></thead><tbody>`;
+  for (const x of decs) {
+    const sColor = {open:'var(--ylw)', done:'var(--grn)', dropped:'var(--mut)'}[x.status] || 'var(--mut)';
+    h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+      <td style="padding:6px 10px;white-space:nowrap;font-family:var(--mono);font-size:11px">${fmtDateShort(x.decided_at)}</td>
+      <td style="padding:6px 10px"><b>${htmlEsc(x.decision)}</b>${x.context?`<div style="font-size:10px;color:var(--mut);margin-top:2px">${htmlEsc(x.context)}</div>`:''}</td>
+      <td style="padding:6px 10px;color:var(--mut)">${htmlEsc(x.decided_by||'—')}</td>
+      <td style="padding:6px 10px"><b>${htmlEsc(x.owner||'—')}</b></td>
+      <td style="padding:6px 10px;font-family:var(--mono);font-size:11px">${x.due_date?fmtDateShort(x.due_date):'—'}</td>
+      <td style="padding:6px 10px"><span style="color:${sColor};font-weight:600;text-transform:uppercase;font-size:10px">${x.status}</span></td>
+      <td style="padding:6px 10px;text-align:right"><a href="#" class="mg-dec-edit" data-id="${x.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-dec-del" data-id="${x.id}" style="color:var(--red);text-decoration:none">×</a></td>
+    </tr>`;
+  }
+  h += `</tbody></table></div>`;
+  return h;
+}
+
+// ── Meeting agenda ──
+function sectionAgenda(d) {
+  const items = (d.agenda && d.agenda.active) || [];
+  const archCount = (d.agenda && d.agenda.archived_count) || 0;
+  // Group by week_of
+  const byWeek = {};
+  items.forEach(i => { (byWeek[i.week_of] = byWeek[i.week_of] || []).push(i); });
+  const weeks = Object.keys(byWeek).sort().reverse();
+  let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
+    🗓️ Weekly Meeting Agenda
+    <span><span style="font-size:11px;color:var(--mut);margin-right:8px">${archCount} archived</span><button class="mg-agenda-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Item</button></span>
+  </div>`;
+  if (!items.length) {
+    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No active agenda items.</div></div>`;
+    return h;
+  }
+  for (const w of weeks) {
+    h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;margin-bottom:10px">
+      <div style="font-size:12px;font-weight:700;margin-bottom:6px">Week of ${fmtDateShort(w)}</div>
+      <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
+          <th style="padding:5px 8px;width:30px">P</th><th style="padding:5px 8px">Item</th>
+          <th style="padding:5px 8px">Raised By</th><th style="padding:5px 8px">Status</th>
+          <th style="padding:5px 8px;width:80px"></th>
+        </tr></thead><tbody>`;
+    for (const i of byWeek[w]) {
+      const sColor = {open:'var(--blu)', discussed:'var(--grn)', dropped:'var(--mut)'}[i.status] || 'var(--mut)';
+      h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+        <td style="padding:5px 8px;text-align:center;color:var(--mut)">${i.priority}</td>
+        <td style="padding:5px 8px"><b>${htmlEsc(i.item)}</b>${i.notes?`<div style="font-size:10px;color:var(--mut)">${htmlEsc(i.notes)}</div>`:''}</td>
+        <td style="padding:5px 8px;color:var(--mut)">${htmlEsc(i.raised_by||'—')}</td>
+        <td style="padding:5px 8px"><span style="color:${sColor};font-weight:600;font-size:10px;text-transform:uppercase">${i.status}</span></td>
+        <td style="padding:5px 8px;text-align:right"><a href="#" class="mg-agenda-archive" data-id="${i.id}" title="Archive" style="color:var(--blu);text-decoration:none;margin-right:4px">📁</a><a href="#" class="mg-agenda-edit" data-id="${i.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-agenda-del" data-id="${i.id}" style="color:var(--red);text-decoration:none">×</a></td>
+      </tr>`;
+    }
+    h += `</tbody></table></div></div>`;
+  }
+  return h;
+}
+
+// ── Project Health (RAG) ──
+function sectionProjectHealth(d) {
+  const ph = d.project_health || [];
+  const all = d.all_projects || [];
+  const byName = {};
+  ph.forEach(p => { byName[p.project_name] = p; });
+  let h = `<div class="sh">🩺 Project Health (RAG)</div>
+    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:18px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr style="background:var(--card-h);text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
+        <th style="padding:7px 10px">Project</th><th style="padding:7px 10px;text-align:center">Schedule</th>
+        <th style="padding:7px 10px;text-align:center">Budget</th><th style="padding:7px 10px;text-align:center">Client</th>
+        <th style="padding:7px 10px">Notes</th><th style="padding:7px 10px;width:50px"></th>
+      </tr></thead><tbody>`;
+  for (const proj of all) {
+    const p = byName[proj] || {schedule_rag:'green', budget_rag:'green', client_rag:'green'};
+    const dot = (rag) => `<span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:${rag==='red'?'var(--red)':rag==='yellow'?'var(--ylw)':'var(--grn)'}"></span>`;
+    h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+      <td style="padding:6px 10px"><b>${htmlEsc(proj)}</b></td>
+      <td style="padding:6px 10px;text-align:center">${dot(p.schedule_rag)}</td>
+      <td style="padding:6px 10px;text-align:center">${dot(p.budget_rag)}</td>
+      <td style="padding:6px 10px;text-align:center">${dot(p.client_rag)}</td>
+      <td style="padding:6px 10px;color:var(--mut);font-size:11px">${htmlEsc(p.notes||'')}</td>
+      <td style="padding:6px 10px;text-align:right"><a href="#" class="mg-ph-edit" data-name="${attrEsc(proj)}" data-s="${p.schedule_rag||'green'}" data-b="${p.budget_rag||'green'}" data-c="${p.client_rag||'green'}" data-notes="${attrEsc(p.notes||'')}" style="color:var(--blu);text-decoration:none">✎</a></td>
+    </tr>`;
+  }
+  h += `</tbody></table></div>`;
+  return h;
+}
+
+// ── Risks ──
+function sectionRisks(d) {
+  const risks = d.risks || [];
+  let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
+    ⚠️ Risk Register
+    <button class="mg-risk-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Risk</button>
+  </div>`;
+  if (!risks.length) {
+    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No risks logged.</div></div>`;
+    return h;
+  }
+  h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:18px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr style="background:var(--card-h);text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
+        <th style="padding:7px 10px">Risk</th><th style="padding:7px 10px;text-align:center">I×L</th>
+        <th style="padding:7px 10px">Owner</th><th style="padding:7px 10px">Mitigation</th>
+        <th style="padding:7px 10px">Status</th><th style="padding:7px 10px;width:50px"></th>
+      </tr></thead><tbody>`;
+  for (const r of risks) {
+    const score = (r.impact||0) * (r.likelihood||0);
+    const sColor = score >= 16 ? 'var(--red)' : score >= 9 ? 'var(--ylw)' : 'var(--grn)';
+    h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+      <td style="padding:6px 10px"><b>${htmlEsc(r.title)}</b></td>
+      <td style="padding:6px 10px;text-align:center"><span style="background:${sColor};color:#fff;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700">${r.impact}×${r.likelihood}=${score}</span></td>
+      <td style="padding:6px 10px"><b>${htmlEsc(r.owner||'—')}</b></td>
+      <td style="padding:6px 10px;color:var(--mut);font-size:11px">${htmlEsc(r.mitigation||'—')}</td>
+      <td style="padding:6px 10px"><span style="font-size:10px;font-weight:600;text-transform:uppercase">${r.status}</span></td>
+      <td style="padding:6px 10px;text-align:right"><a href="#" class="mg-risk-edit" data-id="${r.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-risk-del" data-id="${r.id}" style="color:var(--red);text-decoration:none">×</a></td>
+    </tr>`;
+  }
+  h += `</tbody></table></div>`;
+  return h;
+}
+
+// ── Initiatives ──
+function sectionInitiatives(d) {
+  const items = d.initiatives || [];
+  let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
+    🚀 Strategic Initiatives
+    <button class="mg-init-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Initiative</button>
+  </div>`;
+  if (!items.length) {
+    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No initiatives.</div></div>`;
+    return h;
+  }
+  h += `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-bottom:18px">`;
+  for (const i of items) {
+    const sColor = {planning:'var(--blu)', in_progress:'var(--ylw)', done:'var(--grn)', dropped:'var(--mut)'}[i.status] || 'var(--mut)';
+    h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+        <div><b>${htmlEsc(i.title)}</b><div style="font-size:11px;color:var(--mut)">Owner: ${htmlEsc(i.owner||'—')}</div></div>
+        <span style="font-size:10px;font-weight:600;color:${sColor};text-transform:uppercase">${(i.status||'').replace(/_/g,' ')}</span>
+      </div>
+      ${i.description?`<div style="font-size:11px;color:var(--mut);margin-top:4px">${htmlEsc(i.description)}</div>`:''}
+      <div style="margin-top:8px"><div style="width:100%;height:6px;background:var(--card-h);border-radius:3px;overflow:hidden"><div style="width:${i.progress_pct||0}%;height:100%;background:${sColor}"></div></div><div style="font-size:10px;color:var(--mut);margin-top:2px">${i.progress_pct||0}% · ${fmtDateShort(i.start_date)} → ${fmtDateShort(i.target_date)}</div></div>
+      <div style="margin-top:6px;text-align:right"><a href="#" class="mg-init-edit" data-id="${i.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎ Edit</a><a href="#" class="mg-init-del" data-id="${i.id}" style="color:var(--red);text-decoration:none">× Delete</a></div>
+    </div>`;
+  }
+  h += `</div>`;
+  return h;
+}
+
+// ── Team Roster ──
+function sectionTeam(d) {
+  const team = d.team || [];
+  let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
+    👥 Team Roster (Ownership Map)
+    <button class="mg-team-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Member</button>
+  </div>`;
+  if (!team.length) {
+    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No team members yet.</div></div>`;
+    return h;
+  }
+  h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:18px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr style="background:var(--card-h);text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
+        <th style="padding:7px 10px">Name</th><th style="padding:7px 10px">Role</th>
+        <th style="padding:7px 10px">Responsibilities</th><th style="padding:7px 10px">Contact</th>
+        <th style="padding:7px 10px;width:50px"></th>
+      </tr></thead><tbody>`;
+  for (const m of team) {
+    h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+      <td style="padding:6px 10px"><b>${htmlEsc(m.name)}</b></td>
+      <td style="padding:6px 10px">${htmlEsc(m.role||'—')}</td>
+      <td style="padding:6px 10px;color:var(--mut)">${htmlEsc(m.responsibilities||'—')}</td>
+      <td style="padding:6px 10px;font-size:11px;color:var(--mut)">${htmlEsc(m.contact||'—')}</td>
+      <td style="padding:6px 10px;text-align:right"><a href="#" class="mg-team-edit" data-id="${m.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-team-del" data-id="${m.id}" style="color:var(--red);text-decoration:none">×</a></td>
+    </tr>`;
+  }
+  h += `</tbody></table></div>`;
+  return h;
+}
+
+// ── Vendors ──
+function sectionVendors(d) {
+  const vs = d.vendors || [];
+  let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
+    🔧 Vendor / Sub Roster
+    <button class="mg-vendor-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Vendor</button>
+  </div>`;
+  if (!vs.length) {
+    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No vendors yet.</div></div>`;
+    return h;
+  }
+  h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:18px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr style="background:var(--card-h);text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
+        <th style="padding:7px 10px">Vendor</th><th style="padding:7px 10px">Category</th>
+        <th style="padding:7px 10px">Contact</th><th style="padding:7px 10px;text-align:center">Rating</th>
+        <th style="padding:7px 10px">Terms</th><th style="padding:7px 10px">Capacity</th>
+        <th style="padding:7px 10px;width:50px"></th>
+      </tr></thead><tbody>`;
+  for (const v of vs) {
+    const stars = '★'.repeat(v.rating||0) + '☆'.repeat(5-(v.rating||0));
+    h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+      <td style="padding:6px 10px"><b>${htmlEsc(v.name)}</b></td>
+      <td style="padding:6px 10px;color:var(--mut);font-size:11px">${htmlEsc(v.category||'—')}</td>
+      <td style="padding:6px 10px;font-size:11px">${htmlEsc(v.contact||'—')}</td>
+      <td style="padding:6px 10px;text-align:center;color:var(--ylw)">${stars}</td>
+      <td style="padding:6px 10px;font-size:11px;color:var(--mut)">${htmlEsc(v.payment_terms||'—')}</td>
+      <td style="padding:6px 10px;font-size:11px;color:var(--mut)">${htmlEsc(v.capacity_notes||'—')}</td>
+      <td style="padding:6px 10px;text-align:right"><a href="#" class="mg-vendor-edit" data-id="${v.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-vendor-del" data-id="${v.id}" style="color:var(--red);text-decoration:none">×</a></td>
+    </tr>`;
+  }
+  h += `</tbody></table></div>`;
+  return h;
+}
+
+// ── Click delegation: a single handler routes all CRUD button clicks ──
+function installOrgMgmtClickHandler() {
+  if (window._orgmgmtClickInstalled) return;
+  window._orgmgmtClickInstalled = true;
+  document.addEventListener('click', e => {
+    if (curPage !== 'orgmgmt') return;
+    const handlers = [
+      ['.mg-strat-edit',   e => mgStrategyEdit(e.dataset.key, e.dataset.label, e.dataset.val)],
+      ['.mg-okr-add',      ()=>mgOkrForm(null)],
+      ['.mg-okr-edit',     e => mgOkrForm(parseInt(e.dataset.id,10))],
+      ['.mg-okr-del',      e => mgDelete('/okr/'+e.dataset.id, 'OKR')],
+      ['.mg-kanban-add',   e => mgKanbanForm(null, e.dataset.member)],
+      ['.mg-kanban-card',  e => mgKanbanForm(parseInt(e.dataset.id,10))],
+      ['.mg-dec-add',      ()=>mgDecisionForm(null)],
+      ['.mg-dec-edit',     e => mgDecisionForm(parseInt(e.dataset.id,10))],
+      ['.mg-dec-del',      e => mgDelete('/decision/'+e.dataset.id, 'decision')],
+      ['.mg-risk-add',     ()=>mgRiskForm(null)],
+      ['.mg-risk-edit',    e => mgRiskForm(parseInt(e.dataset.id,10))],
+      ['.mg-risk-del',     e => mgDelete('/risk/'+e.dataset.id, 'risk')],
+      ['.mg-init-add',     ()=>mgInitForm(null)],
+      ['.mg-init-edit',    e => mgInitForm(parseInt(e.dataset.id,10))],
+      ['.mg-init-del',     e => mgDelete('/initiative/'+e.dataset.id, 'initiative')],
+      ['.mg-team-add',     ()=>mgTeamForm(null)],
+      ['.mg-team-edit',    e => mgTeamForm(parseInt(e.dataset.id,10))],
+      ['.mg-team-del',     e => mgDelete('/team-member/'+e.dataset.id, 'team member')],
+      ['.mg-vendor-add',   ()=>mgVendorForm(null)],
+      ['.mg-vendor-edit',  e => mgVendorForm(parseInt(e.dataset.id,10))],
+      ['.mg-vendor-del',   e => mgDelete('/vendor/'+e.dataset.id, 'vendor')],
+      ['.mg-agenda-add',   ()=>mgAgendaForm(null)],
+      ['.mg-agenda-edit',  e => mgAgendaForm(parseInt(e.dataset.id,10))],
+      ['.mg-agenda-del',   e => mgDelete('/agenda/'+e.dataset.id, 'agenda item')],
+      ['.mg-agenda-archive', e => mgArchive('/agenda/'+e.dataset.id+'/archive')],
+      ['.mg-ph-edit',      e => mgProjectHealthForm(e.dataset.name, e.dataset.s, e.dataset.b, e.dataset.c, e.dataset.notes)],
+    ];
+    for (const [sel, fn] of handlers) {
+      const t = e.target.closest(sel);
+      if (t) { e.preventDefault(); fn(t); return; }
+    }
+  });
+}
+
+async function mgRefresh() {
+  try { MGMT_DATA_FULL = await financeApi('/management-state'); paintOrgMgmt(document.getElementById('content')); }
+  catch (e) { alert('Refresh failed: ' + (e.message||e)); }
+}
+
+async function mgDelete(path, label) {
+  if (!confirm('Delete this ' + label + '? (kept in audit trail)')) return;
+  try { await financeApi(path, { method:'DELETE' }); mgRefresh(); }
+  catch (e) { alert('Delete failed: ' + (e.message||e)); }
+}
+async function mgArchive(path) {
+  try { await financeApi(path, { method:'POST', body:'{}' }); mgRefresh(); }
+  catch (e) { alert('Archive failed: ' + (e.message||e)); }
+}
+
+// ── Generic modal helper ──
+function mgModal(title, fields, onSubmit, existingValues) {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  const fieldsHtml = fields.map(fd => {
+    const v = (existingValues && existingValues[fd.name]) ?? fd.default ?? '';
+    if (fd.type === 'select') {
+      const opts = fd.options.map(o => `<option value="${o.value}" ${o.value===v?'selected':''}>${o.label}</option>`).join('');
+      return `<label style="grid-column:${fd.span||1}/${(fd.span||1)+1}">${fd.label}<select name="${fd.name}" ${fd.required?'required':''} style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px">${opts}</select></label>`;
+    }
+    if (fd.type === 'textarea') {
+      return `<label style="grid-column:1/3">${fd.label}<textarea name="${fd.name}" rows="${fd.rows||2}" ${fd.required?'required':''} style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px">${htmlEsc(v)}</textarea></label>`;
+    }
+    return `<label style="grid-column:${fd.span?'1/3':''}">${fd.label}<input type="${fd.type||'text'}" name="${fd.name}" value="${attrEsc(v)}" ${fd.required?'required':''} ${fd.step?`step="${fd.step}"`:''} ${fd.min?`min="${fd.min}"`:''} ${fd.placeholder?`placeholder="${attrEsc(fd.placeholder)}"`:''} style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>`;
+  }).join('');
+  overlay.innerHTML = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:20px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto">
+    <div style="font-size:16px;font-weight:700;margin-bottom:14px">${title}</div>
+    <form id="mg-form" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px">
+      ${fieldsHtml}
+      <div style="grid-column:1/3;display:flex;gap:8px;justify-content:flex-end;margin-top:6px">
+        <button type="button" id="mg-cancel" style="padding:8px 14px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">Cancel</button>
+        <button type="submit" style="padding:8px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:600">Save</button>
+      </div>
+    </form>
+  </div>`;
+  document.body.appendChild(overlay);
+  document.getElementById('mg-cancel').onclick = () => overlay.remove();
+  overlay.onclick = ev => { if (ev.target === overlay) overlay.remove(); };
+  document.getElementById('mg-form').onsubmit = async ev => {
+    ev.preventDefault();
+    const body = {};
+    new FormData(ev.target).forEach((v,k) => { if (v!=='') body[k] = v; });
+    try { await onSubmit(body); overlay.remove(); mgRefresh(); }
+    catch (e) { alert('Save failed: ' + (e.message||e)); }
+  };
+}
+
+function mgFindById(arr, id) { return (arr||[]).find(x => x.id === id); }
+const ownerOpts = [{value:'',label:'—'}, ...MGMT_MEMBERS.map(m=>({value:m,label:m}))];
+
+function mgOkrForm(id) {
+  const ex = id ? mgFindById(MGMT_DATA_FULL.okrs, id) : null;
+  const today = new Date();
+  const defaultQ = `${today.getFullYear()}-Q${Math.floor(today.getMonth()/3)+1}`;
+  mgModal((ex?'Edit':'Add')+' OKR', [
+    {name:'quarter', label:'Quarter', type:'text', required:true, placeholder:'2026-Q2', default:defaultQ},
+    {name:'owner', label:'Owner', type:'select', options:ownerOpts},
+    {name:'objective', label:'Objective', type:'text', span:2, required:true},
+    {name:'key_result', label:'Key Result', type:'text', span:2, required:true},
+    {name:'target_value', label:'Target', type:'number', step:'any'},
+    {name:'current_value', label:'Current', type:'number', step:'any'},
+    {name:'unit', label:'Unit', type:'text', placeholder:'$, %, count, etc.'},
+    {name:'status', label:'Status', type:'select', options:[
+      {value:'on_track',label:'On track'},{value:'at_risk',label:'At risk'},
+      {value:'off_track',label:'Off track'},{value:'done',label:'Done'}]},
+    {name:'notes', label:'Notes', type:'textarea'},
+  ], async body => {
+    if (body.target_value !== undefined) body.target_value = parseFloat(body.target_value);
+    if (body.current_value !== undefined) body.current_value = parseFloat(body.current_value);
+    const path = id ? `/okr/${id}/edit` : '/okr';
+    await financeApi(path, { method:'POST', body: JSON.stringify(body) });
+  }, ex);
+}
+
+function mgKanbanForm(id, defaultMember) {
+  const ex = id ? mgFindById((MGMT_DATA_FULL.kanban||{}).active || [], id) : null;
+  const projectOpts = [{value:'',label:'—'}, ...((MGMT_DATA_FULL.all_projects||[]).map(p=>({value:p,label:p})))];
+  mgModal((ex?'Edit':'Add')+' Card', [
+    {name:'member', label:'Member', type:'select', required:true,
+      options:MGMT_MEMBERS.map(m=>({value:m,label:m})), default: defaultMember || (ex && ex.member)},
+    {name:'column_name', label:'Column', type:'select', default:'this_week',
+      options:KANBAN_COLS.map(c=>({value:c.key,label:c.label}))},
+    {name:'title', label:'Title', type:'text', span:2, required:true},
+    {name:'description', label:'Description', type:'textarea'},
+    {name:'due_date', label:'Due date', type:'date'},
+    {name:'project_name', label:'Project (optional)', type:'select', options:projectOpts},
+  ], async body => {
+    if (body.sort_order !== undefined) body.sort_order = parseInt(body.sort_order, 10);
+    const path = id ? `/kanban/${id}/edit` : '/kanban';
+    await financeApi(path, { method:'POST', body: JSON.stringify(body) });
+  }, ex);
+  // Add an Archive button when editing
+  if (id) {
+    setTimeout(() => {
+      const f = document.getElementById('mg-form');
+      if (f) {
+        const archBtn = document.createElement('button');
+        archBtn.type = 'button';
+        archBtn.textContent = '📁 Archive';
+        archBtn.style.cssText = 'padding:8px 14px;background:var(--ylw);color:#000;border:none;border-radius:6px;cursor:pointer;margin-right:auto';
+        archBtn.onclick = async () => {
+          if (!confirm('Archive this card? (moves to history)')) return;
+          await financeApi('/kanban/'+id+'/archive', { method:'POST', body:'{}' });
+          document.querySelector('div[style*="position:fixed"]').remove();
+          mgRefresh();
+        };
+        f.querySelector('div[style*="justify-content:flex-end"]').prepend(archBtn);
+      }
+    }, 50);
+  }
+}
+
+function mgDecisionForm(id) {
+  const ex = id ? mgFindById(MGMT_DATA_FULL.decisions, id) : null;
+  const today = new Date().toISOString().slice(0,10);
+  mgModal((ex?'Edit':'Add')+' Decision', [
+    {name:'decided_at', label:'Decided on', type:'date', required:true, default:today},
+    {name:'status', label:'Status', type:'select', default:'open',
+      options:[{value:'open',label:'Open'},{value:'done',label:'Done'},{value:'dropped',label:'Dropped'}]},
+    {name:'decision', label:'Decision', type:'text', span:2, required:true},
+    {name:'context', label:'Why / context', type:'textarea'},
+    {name:'decided_by', label:'Decided by', type:'text', placeholder:'comma-separated names'},
+    {name:'owner', label:'Follow-through owner', type:'select', options:ownerOpts},
+    {name:'due_date', label:'Due date', type:'date'},
+    {name:'notes', label:'Notes', type:'textarea'},
+  ], async body => {
+    const path = id ? `/decision/${id}/edit` : '/decision';
+    await financeApi(path, { method:'POST', body: JSON.stringify(body) });
+  }, ex);
+}
+
+function mgRiskForm(id) {
+  const ex = id ? mgFindById(MGMT_DATA_FULL.risks, id) : null;
+  mgModal((ex?'Edit':'Add')+' Risk', [
+    {name:'title', label:'Risk', type:'text', span:2, required:true},
+    {name:'impact', label:'Impact (1-5)', type:'number', min:'1', default:'3'},
+    {name:'likelihood', label:'Likelihood (1-5)', type:'number', min:'1', default:'3'},
+    {name:'owner', label:'Owner', type:'select', options:ownerOpts},
+    {name:'status', label:'Status', type:'select', default:'open',
+      options:[{value:'open',label:'Open'},{value:'mitigated',label:'Mitigated'},
+              {value:'closed',label:'Closed'},{value:'materialized',label:'Materialized'}]},
+    {name:'mitigation', label:'Mitigation plan', type:'textarea'},
+    {name:'last_review', label:'Last reviewed', type:'date'},
+    {name:'notes', label:'Notes', type:'textarea'},
+  ], async body => {
+    if (body.impact) body.impact = parseInt(body.impact, 10);
+    if (body.likelihood) body.likelihood = parseInt(body.likelihood, 10);
+    const path = id ? `/risk/${id}/edit` : '/risk';
+    await financeApi(path, { method:'POST', body: JSON.stringify(body) });
+  }, ex);
+}
+
+function mgInitForm(id) {
+  const ex = id ? mgFindById(MGMT_DATA_FULL.initiatives, id) : null;
+  mgModal((ex?'Edit':'Add')+' Initiative', [
+    {name:'title', label:'Title', type:'text', span:2, required:true},
+    {name:'owner', label:'Owner', type:'select', options:ownerOpts},
+    {name:'status', label:'Status', type:'select', default:'planning',
+      options:[{value:'planning',label:'Planning'},{value:'in_progress',label:'In Progress'},
+              {value:'done',label:'Done'},{value:'dropped',label:'Dropped'}]},
+    {name:'description', label:'Description', type:'textarea'},
+    {name:'start_date', label:'Start date', type:'date'},
+    {name:'target_date', label:'Target date', type:'date'},
+    {name:'progress_pct', label:'Progress %', type:'number', min:'0'},
+    {name:'notes', label:'Notes', type:'textarea'},
+  ], async body => {
+    if (body.progress_pct) body.progress_pct = parseInt(body.progress_pct, 10);
+    const path = id ? `/initiative/${id}/edit` : '/initiative';
+    await financeApi(path, { method:'POST', body: JSON.stringify(body) });
+  }, ex);
+}
+
+function mgTeamForm(id) {
+  const ex = id ? mgFindById(MGMT_DATA_FULL.team, id) : null;
+  mgModal((ex?'Edit':'Add')+' Team Member', [
+    {name:'name', label:'Name', type:'text', required:true},
+    {name:'role', label:'Role', type:'text'},
+    {name:'responsibilities', label:'Responsibilities', type:'textarea'},
+    {name:'contact', label:'Contact', type:'text', span:2},
+    {name:'notes', label:'Notes', type:'textarea'},
+  ], async body => {
+    const path = id ? `/team-member/${id}/edit` : '/team-member';
+    await financeApi(path, { method:'POST', body: JSON.stringify(body) });
+  }, ex);
+}
+
+function mgVendorForm(id) {
+  const ex = id ? mgFindById(MGMT_DATA_FULL.vendors, id) : null;
+  mgModal((ex?'Edit':'Add')+' Vendor / Sub', [
+    {name:'name', label:'Name', type:'text', required:true},
+    {name:'category', label:'Category', type:'text', placeholder:'electrical, plumbing, framing...'},
+    {name:'contact', label:'Contact', type:'text', span:2},
+    {name:'rating', label:'Rating (1-5)', type:'number', min:'1'},
+    {name:'last_used_date', label:'Last used', type:'date'},
+    {name:'payment_terms', label:'Payment terms', type:'text', span:2},
+    {name:'capacity_notes', label:'Capacity notes', type:'textarea'},
+    {name:'notes', label:'Notes', type:'textarea'},
+  ], async body => {
+    if (body.rating) body.rating = parseInt(body.rating, 10);
+    const path = id ? `/vendor/${id}/edit` : '/vendor';
+    await financeApi(path, { method:'POST', body: JSON.stringify(body) });
+  }, ex);
+}
+
+function mgAgendaForm(id) {
+  const ex = id ? mgFindById((MGMT_DATA_FULL.agenda||{}).active || [], id) : null;
+  // Default to Monday of current week
+  const d = new Date();
+  d.setDate(d.getDate() - d.getDay() + 1);  // Monday
+  const monday = d.toISOString().slice(0,10);
+  mgModal((ex?'Edit':'Add')+' Agenda Item', [
+    {name:'week_of', label:'Week of (Mon)', type:'date', required:true, default:monday},
+    {name:'priority', label:'Priority (1-5)', type:'number', min:'1', default:'3'},
+    {name:'item', label:'Item', type:'text', span:2, required:true},
+    {name:'raised_by', label:'Raised by', type:'select', options:ownerOpts},
+    {name:'status', label:'Status', type:'select', default:'open',
+      options:[{value:'open',label:'Open'},{value:'discussed',label:'Discussed'},{value:'dropped',label:'Dropped'}]},
+    {name:'notes', label:'Notes', type:'textarea'},
+  ], async body => {
+    if (body.priority) body.priority = parseInt(body.priority, 10);
+    const path = id ? `/agenda/${id}/edit` : '/agenda';
+    await financeApi(path, { method:'POST', body: JSON.stringify(body) });
+  }, ex);
+}
+
+function mgStrategyEdit(key, label, currentValue) {
+  const v = prompt('Set ' + label + ':', currentValue || '');
+  if (v === null) return;
+  financeApi('/strategy', { method:'POST', body: JSON.stringify({key, value:v}) })
+    .then(() => mgRefresh()).catch(e => alert('Save failed: ' + (e.message||e)));
+}
+
+function mgProjectHealthForm(name, s, b, c, notes) {
+  const ragOpts = [{value:'green',label:'🟢 Green'},{value:'yellow',label:'🟡 Yellow'},{value:'red',label:'🔴 Red'}];
+  mgModal('Project Health: ' + name, [
+    {name:'schedule_rag', label:'Schedule', type:'select', options:ragOpts, default:s},
+    {name:'budget_rag', label:'Budget', type:'select', options:ragOpts, default:b},
+    {name:'client_rag', label:'Client', type:'select', options:ragOpts, default:c},
+    {name:'notes', label:'Notes', type:'textarea', default:notes},
+  ], async body => {
+    body.project_name = name;
+    body.last_review = new Date().toISOString().slice(0,10);
+    await financeApi('/project-health', { method:'POST', body: JSON.stringify(body) });
+  });
 }
 
 function financeGate(c) {
