@@ -364,12 +364,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 <div class="nav" id="main-nav">
   <a class="on" data-p="sod">📋 Projects Dashboard</a>
   <a data-p="weekly">▤ Weekly Forecast</a>
-  <a data-p="mgmt">▥ Management</a>
-  <a data-p="fcash">💰 Full Cash Flow</a>
   <a data-p="finance">💵 Finance</a>
-  <a data-p="financeV2">💵² Finance V2</a>
-  <a data-p="scash">🔮 Scenario Cashflow</a>
-  <a data-p="miles">🎯 Milestones</a>
+  <a data-p="orgmgmt">🎯 Management</a>
   <a data-p="archive">▦ Archive</a>
 </div>
 
@@ -401,12 +397,8 @@ function render() {
   const c = document.getElementById('content');
   if (curPage === 'sod') renderSOD(c);
   else if (curPage === 'weekly') loadAndRenderWeekly(c);
-  else if (curPage === 'mgmt') mgmtGate(c);
-  else if (curPage === 'fcash') fcGate(c);
   else if (curPage === 'finance') { window._financeV2 = false; financeGate(c); }
-  else if (curPage === 'financeV2') { window._financeV2 = true; financeGate(c); }
-  else if (curPage === 'scash') scashGate(c);
-  else if (curPage === 'miles') milesGate(c);
+  else if (curPage === 'orgmgmt') orgMgmtGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
     const titles = {projects:'Project Dashboards'};
@@ -2708,6 +2700,38 @@ async function financeResetScenarios() {
 }
 
 // ── Finance tab — gate/load ───────────────────────────────────────
+// ─── Management tab — team OKRs, kanbans, etc. (Phase 1: placeholder) ────
+function orgMgmtGate(c) {
+  if (sessionStorage.getItem('mgmt_auth')==='1') { renderOrgMgmt(c); return; }
+  c.innerHTML = `<div class="pw-gate">
+    <div class="pw-icon">🎯</div>
+    <div class="pw-title">Management — Restricted</div>
+    <div class="pw-sub">Enter password to access.</div>
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
+    <button class="pw-btn" id="pw-btn">Unlock</button>
+    <div class="pw-deny" id="pw-deny" style="display:none">Access denied</div>
+  </div>`;
+  const inp=document.getElementById('pw-input'),btn=document.getElementById('pw-btn'),deny=document.getElementById('pw-deny');
+  function tryPw(){
+    if(inp.value===MGMT_PW){sessionStorage.setItem('mgmt_auth','1');renderOrgMgmt(c);}
+    else{inp.classList.add('pw-err');deny.style.display='';setTimeout(()=>inp.classList.remove('pw-err'),400);}
+  }
+  btn.addEventListener('click',tryPw);
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')tryPw();});
+  setTimeout(()=>inp.focus(),50);
+}
+
+function renderOrgMgmt(c) {
+  c.innerHTML = `
+    <div class="page-title">🎯 Management</div>
+    <div class="page-sub">Operating system for the leadership team — Jonas, Reynaldo, Jose, Milagros</div>
+    <div class="empty" style="margin-top:24px">
+      <div class="empty-i">🚧</div>
+      <div class="empty-t">Coming soon</div>
+      <div class="empty-d">Awaiting feature selection — see the chat for the proposal.</div>
+    </div>`;
+}
+
 function financeGate(c) {
   if (sessionStorage.getItem('mgmt_auth')==='1') { loadAndRenderFinance(c); return; }
   c.innerHTML = `<div class="pw-gate">
