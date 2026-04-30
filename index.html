@@ -2723,10 +2723,10 @@ function orgMgmtGate(c) {
 
 // Management tab — leadership operating system
 let MGMT_DATA_FULL = null;
+let MGMT_WEEK_OFFSET = 0;          // -N = past, 0 = current, +N = future
 const MGMT_MEMBERS = ['Jonas', 'Reynaldo', 'Jose', 'Milagros'];
 const KANBAN_COLS = [
-  { key: 'backlog',     label: 'Backlog',     color: '#6b7280' },
-  { key: 'this_week',   label: 'This Week',   color: '#3b82f6' },
+  { key: 'todo',        label: 'To do',       color: '#6b7280' },
   { key: 'in_progress', label: 'In Progress', color: '#f59e0b' },
   { key: 'blocked',     label: 'Blocked',     color: '#ef4444' },
   { key: 'done',        label: 'Done',        color: '#10b981' },
@@ -2739,7 +2739,7 @@ async function renderOrgMgmt(c) {
     return;
   }
   try {
-    MGMT_DATA_FULL = await financeApi('/management-state');
+    MGMT_DATA_FULL = await financeApi('/management-state?week_offset=' + MGMT_WEEK_OFFSET);
   } catch (e) {
     c.innerHTML = '<div class="alert"><b>Could not load Management data.</b> ' + (e.message||e) + '</div>';
     return;
@@ -2812,15 +2812,13 @@ function sectionKpis(d) {
   </div>`;
   const balColor = (k.current_balance||0) >= 0 ? 'var(--grn)' : 'var(--red)';
   const projColor = (k.projected_end_balance_365d||0) >= 0 ? 'var(--grn)' : 'var(--red)';
-  const runwayColor = (k.months_runway||0) >= 6 ? 'var(--grn)' : (k.months_runway||0) >= 2 ? 'var(--ylw)' : 'var(--red)';
   return `<div class="sh">📊 Live KPIs</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
       ${card('Current Balance', fmtMoney0(k.current_balance), balColor)}
       ${card('Monthly Burn', fmtMoney0(k.monthly_burn), 'var(--red)', 'Fixed costs / mo')}
-      ${card('Months Runway', (k.months_runway==null?'—':k.months_runway), runwayColor, 'balance ÷ burn')}
       ${card('Projected End (365d)', fmtMoney0(k.projected_end_balance_365d), projColor)}
-      ${card('Active Projects', k.active_project_count, 'var(--blu)')}
-      ${card('Overdue Items', k.overdue_count, (k.overdue_count||0)>0?'var(--ylw)':'var(--grn)')}
+      ${card('Active Projects', k.active_project_count, 'var(--grn)', 'Building / signed')}
+      ${card('Planning Projects', k.planning_project_count, 'var(--blu)', 'Pre-construction / pipeline')}
     </div>
     <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;margin-bottom:18px">
       <div style="font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:6px">Pipeline (incoming - outgoing)</div>
@@ -2889,47 +2887,114 @@ function sectionOkrs(d) {
   return h;
 }
 
-// ── Kanbans (one column per member) ──
+// ── Weekly Planner Kanban (day-by-day per member, with week nav) ──
 function sectionKanbans(d) {
-  const cards = (d.kanban && d.kanban.active) || [];
-  const archCount = (d.kanban && d.kanban.archived_count) || 0;
-  const byMember = {};
-  MGMT_MEMBERS.forEach(m => { byMember[m] = {}; KANBAN_COLS.forEach(c => byMember[m][c.key] = []); });
-  cards.forEach(c => {
-    const mem = c.member;
-    if (!byMember[mem]) byMember[mem] = {};
-    if (!byMember[mem][c.column_name]) byMember[mem][c.column_name] = [];
-    byMember[mem][c.column_name].push(c);
+  const k = d.kanban || {};
+  const cards = k.cards || [];
+  const backlog = k.backlog || [];
+  const archCount = k.archived_count || 0;
+  const monday = k.monday || new Date().toISOString().slice(0,10);
+  const sunday = k.sunday || new Date().toISOString().slice(0,10);
+  const todayStr = new Date().toISOString().slice(0,10);
+  const isCurrentWeek = MGMT_WEEK_OFFSET === 0;
+  const dayLabels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const days = [];
+  const md = new Date(monday + 'T12:00:00');
+  for (let i = 0; i < 7; i++) {
+    const dt = new Date(md); dt.setDate(md.getDate() + i);
+    days.push({
+      date: dt.toISOString().slice(0,10),
+      label: dayLabels[i],
+      day: dt.getDate(),
+      month: dt.getMonth() + 1,
+      isToday: dt.toISOString().slice(0,10) === todayStr,
+    });
+  }
+  // Group cards by member + day
+  const byMemberDay = {};
+  MGMT_MEMBERS.forEach(m => {
+    byMemberDay[m] = {};
+    days.forEach(d => byMemberDay[m][d.date] = []);
   });
+  cards.forEach(c => {
+    if (!c.member || !c.due_date) return;
+    if (!byMemberDay[c.member]) {
+      byMemberDay[c.member] = {};
+      days.forEach(d => byMemberDay[c.member][d.date] = []);
+    }
+    if (byMemberDay[c.member][c.due_date]) byMemberDay[c.member][c.due_date].push(c);
+  });
+  // Group backlog by member
+  const backlogByMember = {};
+  MGMT_MEMBERS.forEach(m => backlogByMember[m] = []);
+  backlog.forEach(c => {
+    if (!c.member) return;
+    if (!backlogByMember[c.member]) backlogByMember[c.member] = [];
+    backlogByMember[c.member].push(c);
+  });
+
+  const fmtMonDay = (m, d) => ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m-1] + ' ' + d;
+  const weekLabel = `${fmtMonDay(days[0].month, days[0].day)} – ${fmtMonDay(days[6].month, days[6].day)}, ${md.getFullYear()}`;
+
   let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
-    📋 Kanbans (per member)
+    📋 Weekly Planners (per member)
     <span style="font-size:11px;color:var(--mut)">${archCount} archived</span>
+  </div>
+  <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+    <div style="display:flex;gap:6px;align-items:center">
+      <button class="mg-week-nav" data-d="-1" style="padding:5px 10px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px;cursor:pointer">◀ Prev</button>
+      <button class="mg-week-nav" data-d="0" ${isCurrentWeek?'disabled style="padding:5px 10px;background:var(--blu);color:#fff;border:none;border-radius:5px;font-weight:600"':'style="padding:5px 10px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px;cursor:pointer"'}>This week</button>
+      <button class="mg-week-nav" data-d="1" style="padding:5px 10px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px;cursor:pointer">Next ▶</button>
+      <span style="margin-left:10px;font-weight:700;font-size:14px">${weekLabel}</span>
+      ${MGMT_WEEK_OFFSET !== 0 ? `<span style="font-size:11px;color:var(--mut)">(${MGMT_WEEK_OFFSET > 0 ? '+' : ''}${MGMT_WEEK_OFFSET} from current)</span>` : ''}
+    </div>
+    <div style="display:flex;gap:6px">
+      <input type="date" id="mg-week-jump" value="${monday}" style="padding:4px 6px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px;font-size:11px">
+      <button class="mg-week-jump-btn" style="padding:5px 10px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px;cursor:pointer;font-size:11px">Jump</button>
+    </div>
   </div>`;
+
   for (const m of MGMT_MEMBERS) {
-    const total = Object.values(byMember[m]||{}).reduce((s,arr)=>s+arr.length, 0);
+    const totalWeek = days.reduce((s,d) => s + (byMemberDay[m][d.date]||[]).length, 0);
+    const totalBacklog = (backlogByMember[m] || []).length;
     h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;margin-bottom:10px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div style="font-size:14px;font-weight:700">${m} <span style="font-size:11px;color:var(--mut);font-weight:400">${total} active card${total!==1?'s':''}</span></div>
-        <button class="mg-kanban-add" data-member="${m}" style="padding:5px 10px;background:var(--blu);color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:11px;font-weight:600">+ Add Card</button>
+        <div style="font-size:14px;font-weight:700">${m} <span style="font-size:11px;color:var(--mut);font-weight:400">${totalWeek} this week · ${totalBacklog} in backlog</span></div>
+        <button class="mg-kanban-add" data-member="${m}" style="padding:5px 10px;background:var(--blu);color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:11px;font-weight:600">+ Add Task</button>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;font-size:11px">`;
-    for (const col of KANBAN_COLS) {
-      const items = (byMember[m] && byMember[m][col.key]) || [];
-      h += `<div style="background:var(--card-h);border-top:3px solid ${col.color};border-radius:4px;padding:6px;min-height:80px">
-        <div style="font-size:10px;color:${col.color};font-weight:700;text-transform:uppercase;margin-bottom:4px;display:flex;justify-content:space-between">
-          ${col.label}<span style="color:var(--mut);font-weight:400">${items.length}</span>
-        </div>`;
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px">`;
+    for (const day of days) {
+      const items = byMemberDay[m][day.date] || [];
+      const isPastDay = day.date < todayStr;
+      const headerBg = day.isToday ? 'var(--blu)' : (isPastDay ? 'var(--card-h)' : 'var(--card-h)');
+      const headerColor = day.isToday ? '#fff' : 'var(--mut)';
+      h += `<div style="background:var(--card-h);border-radius:5px;min-height:90px;display:flex;flex-direction:column">
+        <div style="background:${headerBg};color:${headerColor};padding:4px 6px;border-radius:5px 5px 0 0;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:10px;font-weight:700">${day.label}</span>
+          <span style="font-size:11px;font-weight:${day.isToday?'700':'400'}">${day.day}</span>
+        </div>
+        <div class="mg-day-cell" data-member="${m}" data-date="${day.date}" style="padding:4px;flex:1;cursor:pointer" title="Click to add a task for ${day.label} ${day.day}">`;
       for (const card of items) {
-        const overdue = card.due_date && card.due_date < new Date().toISOString().slice(0,10);
-        h += `<div class="mg-kanban-card" data-id="${card.id}" style="background:var(--card);border:1px solid ${overdue?'var(--red)':'var(--bdr)'};border-radius:4px;padding:5px 7px;margin-bottom:4px;cursor:pointer">
-          <div style="font-size:11px;font-weight:600">${htmlEsc(card.title)}</div>
-          ${card.due_date ? `<div style="font-size:9px;color:${overdue?'var(--red)':'var(--mut)'};margin-top:2px">📅 ${fmtDateShort(card.due_date)}${overdue?' (late)':''}</div>` : ''}
+        const isDone = card.column_name === 'done';
+        const colorMeta = KANBAN_COLS.find(c => c.key === card.column_name) || KANBAN_COLS[0];
+        h += `<div class="mg-kanban-card" data-id="${card.id}" style="background:var(--card);border-left:3px solid ${colorMeta.color};border-radius:3px;padding:4px 6px;margin-bottom:3px;cursor:pointer;${isDone?'opacity:.6':''}" onclick="event.stopPropagation()">
+          <div style="font-size:11px;font-weight:600;${isDone?'text-decoration:line-through':''}">${htmlEsc(card.title)}</div>
           ${card.project_name ? `<div style="font-size:9px;color:var(--mut)">📁 ${htmlEsc(card.project_name)}</div>` : ''}
         </div>`;
       }
+      h += `</div></div>`;
+    }
+    h += `</div>`;
+    // Backlog row
+    if (totalBacklog > 0) {
+      h += `<div style="margin-top:6px;padding:6px 8px;background:var(--card-h);border-radius:5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <span style="font-size:10px;color:var(--mut);font-weight:700;text-transform:uppercase">Backlog (no date)</span>`;
+      for (const card of backlogByMember[m]) {
+        h += `<div class="mg-kanban-card" data-id="${card.id}" style="background:var(--card);border:1px solid var(--bdr);border-radius:3px;padding:3px 6px;font-size:11px;cursor:pointer">${htmlEsc(card.title)}</div>`;
+      }
       h += `</div>`;
     }
-    h += `</div></div>`;
+    h += `</div>`;
   }
   return h;
 }
@@ -3008,14 +3073,19 @@ function sectionAgenda(d) {
   return h;
 }
 
-// ── Project Health (RAG) ──
+// ── Project Health (RAG) — active projects only ──
 function sectionProjectHealth(d) {
   const ph = d.project_health || [];
-  const all = d.all_projects || [];
+  // Only ACTIVE projects (real, building) — planning projects are pre-construction
+  const all = d.active_projects || d.all_projects || [];
   const byName = {};
   ph.forEach(p => { byName[p.project_name] = p; });
-  let h = `<div class="sh">🩺 Project Health (RAG)</div>
-    <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:18px">
+  let h = `<div class="sh">🩺 Project Health (RAG) <span style="font-size:11px;color:var(--mut);font-weight:400">— active projects only</span></div>`;
+  if (!all.length) {
+    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No active projects right now.</div></div>`;
+    return h;
+  }
+  h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:18px">
     <table style="width:100%;border-collapse:collapse;font-size:12px">
       <thead><tr style="background:var(--card-h);text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
         <th style="padding:7px 10px">Project</th><th style="padding:7px 10px;text-align:center">Schedule</th>
@@ -3174,6 +3244,9 @@ function installOrgMgmtClickHandler() {
     if (curPage !== 'orgmgmt') return;
     const handlers = [
       ['.mg-strat-edit',   e => mgStrategyEdit(e.dataset.key, e.dataset.label, e.dataset.val)],
+      ['.mg-week-nav',     e => { const d=parseInt(e.dataset.d,10); MGMT_WEEK_OFFSET = (d===0?0:MGMT_WEEK_OFFSET+d); renderOrgMgmt(document.getElementById('content')); }],
+      ['.mg-week-jump-btn', () => { const v = document.getElementById('mg-week-jump').value; if (v) { const tgt=new Date(v+'T12:00:00'); const today=new Date(); const monday=new Date(today); monday.setDate(today.getDate()-today.getDay()+1); MGMT_WEEK_OFFSET = Math.round((tgt - monday) / (7*86400000)); renderOrgMgmt(document.getElementById('content')); } }],
+      ['.mg-day-cell',     e => mgKanbanForm(null, e.dataset.member, e.dataset.date)],
       ['.mg-okr-add',      ()=>mgOkrForm(null)],
       ['.mg-okr-edit',     e => mgOkrForm(parseInt(e.dataset.id,10))],
       ['.mg-okr-del',      e => mgDelete('/okr/'+e.dataset.id, 'OKR')],
@@ -3286,17 +3359,21 @@ function mgOkrForm(id) {
   }, ex);
 }
 
-function mgKanbanForm(id, defaultMember) {
-  const ex = id ? mgFindById((MGMT_DATA_FULL.kanban||{}).active || [], id) : null;
+function mgKanbanForm(id, defaultMember, defaultDueDate) {
+  // Look in week + backlog cards
+  const k = MGMT_DATA_FULL.kanban || {};
+  const allCards = (k.cards || []).concat(k.backlog || []);
+  const ex = id ? mgFindById(allCards, id) : null;
   const projectOpts = [{value:'',label:'—'}, ...((MGMT_DATA_FULL.all_projects||[]).map(p=>({value:p,label:p})))];
-  mgModal((ex?'Edit':'Add')+' Card', [
+  mgModal((ex?'Edit':'Add')+' Task', [
     {name:'member', label:'Member', type:'select', required:true,
       options:MGMT_MEMBERS.map(m=>({value:m,label:m})), default: defaultMember || (ex && ex.member)},
-    {name:'column_name', label:'Column', type:'select', default:'this_week',
+    {name:'column_name', label:'Status', type:'select', default:'todo',
       options:KANBAN_COLS.map(c=>({value:c.key,label:c.label}))},
     {name:'title', label:'Title', type:'text', span:2, required:true},
     {name:'description', label:'Description', type:'textarea'},
-    {name:'due_date', label:'Due date', type:'date'},
+    {name:'due_date', label:'Due date (blank = backlog)', type:'date',
+      default: (ex && ex.due_date) || defaultDueDate || ''},
     {name:'project_name', label:'Project (optional)', type:'select', options:projectOpts},
   ], async body => {
     if (body.sort_order !== undefined) body.sort_order = parseInt(body.sort_order, 10);
