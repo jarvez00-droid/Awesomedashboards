@@ -367,6 +367,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a data-p="mgmt">▥ Management</a>
   <a data-p="fcash">💰 Full Cash Flow</a>
   <a data-p="finance">💵 Finance</a>
+  <a data-p="financeV2">💵² Finance V2</a>
   <a data-p="scash">🔮 Scenario Cashflow</a>
   <a data-p="miles">🎯 Milestones</a>
   <a data-p="archive">▦ Archive</a>
@@ -402,7 +403,8 @@ function render() {
   else if (curPage === 'weekly') loadAndRenderWeekly(c);
   else if (curPage === 'mgmt') mgmtGate(c);
   else if (curPage === 'fcash') fcGate(c);
-  else if (curPage === 'finance') financeGate(c);
+  else if (curPage === 'finance') { window._financeV2 = false; financeGate(c); }
+  else if (curPage === 'financeV2') { window._financeV2 = true; financeGate(c); }
   else if (curPage === 'scash') scashGate(c);
   else if (curPage === 'miles') milesGate(c);
   else if (curPage === 'archive') renderArchive(c);
@@ -2728,10 +2730,13 @@ function financeGate(c) {
 
 async function loadAndRenderFinance(c) {
   c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Finance...</div></div>';
+  const isV2 = !!window._financeV2;
+  const apiPath = isV2 ? '/state-v2' : '/state';
+  const fileSlug = isV2 ? 'finance-v2' : 'finance';
   // Priority 1 — live API (CRUD-capable)
   if (financeApiConfigured()) {
     try {
-      FINANCE_DATA = await financeApi('/state');
+      FINANCE_DATA = await financeApi(apiPath);
       window._financeLive = true;
       try { financeSafeRender(); } catch (err) { console.error('renderFinance error:', err); c.innerHTML='<div class="alert"><b>Render error.</b> '+err.message+'</div>'; }
       return;
@@ -2741,12 +2746,12 @@ async function loadAndRenderFinance(c) {
       window._financeApiError = e.message;
     }
   }
-  // Priority 2 — static JSON published to dashboard-site/data
+  // Priority 2 — static JSON published to dashboard-site/data (v1 OR v2 file slug)
   for (let i=0;i<7;i++){
     const d=new Date(Date.now()-i*86400000).toISOString().slice(0,10);
-    try{const r=await fetch('data/finance-'+d+'.json');if(!r.ok)continue;FINANCE_DATA=await r.json();financeSafeRender();return;}catch(e){}
+    try{const r=await fetch('data/' + fileSlug + '-'+d+'.json');if(!r.ok)continue;FINANCE_DATA=await r.json();financeSafeRender();return;}catch(e){}
   }
-  try{const r=await fetch('data/finance-latest.json');if(r.ok){FINANCE_DATA=await r.json();financeSafeRender();return;}}catch(e){}
+  try{const r=await fetch('data/' + fileSlug + '-latest.json');if(r.ok){FINANCE_DATA=await r.json();financeSafeRender();return;}}catch(e){}
   c.innerHTML='<div class="empty"><div class="empty-i">💵</div><div class="empty-t">No Finance Data</div><div class="empty-d">Run: python3 generate_finance_json.py</div></div>';
 }
 
@@ -3768,7 +3773,7 @@ function renderFinance(c) {
   let h = `
     <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:12px">
       <div>
-        <div class="page-title">Finance</div>
+        <div class="page-title">${window._financeV2 ? 'Finance V2 <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px;background:rgba(75,134,253,.15);color:var(--blu);margin-left:8px;vertical-align:middle">overhead-trim simulation</span>' : 'Finance'}</div>
         <div class="page-sub">Balance · Projects · Fixed costs · <b style="color:var(--txt)">Today → ${rangeEndFmt}</b> (${rangeDays} days) · As of ${d.date}
           ${live ? '<span style="color:var(--grn);font-weight:600;margin-left:8px">● LIVE</span>' : '<span style="color:var(--ylw);margin-left:8px">● read-only (static JSON)</span>'}
         </div>
