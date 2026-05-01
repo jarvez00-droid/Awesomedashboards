@@ -2725,6 +2725,7 @@ function orgMgmtGate(c) {
 let MGMT_DATA_FULL = null;
 let MGMT_WEEK_OFFSET = 0;          // -N = past, 0 = current, +N = future
 let MGMT_DEPT_FILTER = '';         // '' = All; otherwise one of MGMT_DEPTS keys
+let MGMT_DEC_QUARTER = '';         // '' = current quarter; 'all' = all-time; or 'YYYY-QN'
 const MGMT_MEMBERS = ['Jonas', 'Reynaldo', 'Jose', 'Milagros'];
 const KANBAN_COLS = [
   { key: 'todo',        label: 'To do',       color: '#6b7280' },
@@ -2779,11 +2780,8 @@ function paintOrgMgmt(c) {
     sectionKanbans(d),
     sectionDecisions(d),
     sectionAgenda(d),
-    sectionProjectHealth(d),
     sectionRisks(d),
     sectionInitiatives(d),
-    sectionTeam(d),
-    sectionVendors(d),
   ];
   c.innerHTML = sections.join('\n');
 }
@@ -2898,18 +2896,15 @@ function sectionOkrs(d) {
   return h;
 }
 
-// ── Weekly Planner Kanban (day-by-day per member, with week nav) ──
+// ── Weekly Planner Kanban — 3-column layout: Backlog | 7-day grid | Completed ──
 function sectionKanbans(d) {
   const k = d.kanban || {};
-  const allCards = k.cards || [];
-  const allBacklog = k.backlog || [];
-  // Apply department filter (client-side; backend stores `department` per card)
   const deptKeep = c => !MGMT_DEPT_FILTER || c.department === MGMT_DEPT_FILTER;
-  const cards = allCards.filter(deptKeep);
-  const backlog = allBacklog.filter(deptKeep);
+  const cells     = (k.cards     || []).filter(deptKeep);
+  const backlog   = (k.backlog   || []).filter(deptKeep);
+  const completed = (k.completed || []).filter(deptKeep);
   const archCount = k.archived_count || 0;
   const monday = k.monday || new Date().toISOString().slice(0,10);
-  const sunday = k.sunday || new Date().toISOString().slice(0,10);
   const todayStr = new Date().toISOString().slice(0,10);
   const isCurrentWeek = MGMT_WEEK_OFFSET === 0;
   const dayLabels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
@@ -2925,31 +2920,63 @@ function sectionKanbans(d) {
       isToday: dt.toISOString().slice(0,10) === todayStr,
     });
   }
-  // Group cards by member + day
-  const byMemberDay = {};
-  MGMT_MEMBERS.forEach(m => {
-    byMemberDay[m] = {};
-    days.forEach(d => byMemberDay[m][d.date] = []);
-  });
-  cards.forEach(c => {
-    if (!c.member || !c.due_date) return;
-    if (!byMemberDay[c.member]) {
-      byMemberDay[c.member] = {};
-      days.forEach(d => byMemberDay[c.member][d.date] = []);
+  // Group cells by member+day, backlog and completed by member
+  const byMemberDay = {}, backlogByMember = {}, completedByMember = {};
+  for (const m of MGMT_MEMBERS) {
+    byMemberDay[m] = {}; days.forEach(dy => byMemberDay[m][dy.date] = []);
+    backlogByMember[m] = []; completedByMember[m] = [];
+  }
+  const ensureMember = (obj, m, fillDays) => {
+    if (!obj[m]) {
+      obj[m] = fillDays ? {} : [];
+      if (fillDays) days.forEach(dy => obj[m][dy.date] = []);
     }
+  };
+  for (const c of cells) {
+    if (!c.member || !c.due_date) continue;
+    ensureMember(byMemberDay, c.member, true);
     if (byMemberDay[c.member][c.due_date]) byMemberDay[c.member][c.due_date].push(c);
-  });
-  // Group backlog by member
-  const backlogByMember = {};
-  MGMT_MEMBERS.forEach(m => backlogByMember[m] = []);
-  backlog.forEach(c => {
-    if (!c.member) return;
-    if (!backlogByMember[c.member]) backlogByMember[c.member] = [];
+  }
+  for (const c of backlog) {
+    if (!c.member) continue;
+    ensureMember(backlogByMember, c.member, false);
     backlogByMember[c.member].push(c);
-  });
+  }
+  for (const c of completed) {
+    if (!c.member) continue;
+    ensureMember(completedByMember, c.member, false);
+    completedByMember[c.member].push(c);
+  }
 
-  const fmtMonDay = (m, d) => ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m-1] + ' ' + d;
+  const fmtMonDay = (mm, dd) => ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][mm-1] + ' ' + dd;
   const weekLabel = `${fmtMonDay(days[0].month, days[0].day)} – ${fmtMonDay(days[6].month, days[6].day)}, ${md.getFullYear()}`;
+
+  // Single card renderer reused everywhere — supports complete/uncomplete + drag-friendly width
+  const renderCard = (card, opts) => {
+    opts = opts || {};
+    const isDone = !!card.completed_at;
+    const colorMeta = KANBAN_COLS.find(c => c.key === card.column_name) || KANBAN_COLS[0];
+    const deptMeta = card.department ? MGMT_DEPTS.find(dp => dp.key === card.department) : null;
+    const isOverdue = !isDone && card.due_date && card.due_date < todayStr;
+    const accent = isDone ? '#10b981' : (isOverdue ? '#ef4444' : (deptMeta ? deptMeta.color : colorMeta.color));
+    const overdueTag = isOverdue
+      ? `<span style="display:inline-block;margin-left:4px;padding:1px 4px;background:#ef4444;color:#fff;border-radius:3px;font-size:8px;font-weight:700;text-transform:uppercase">overdue</span>` : '';
+    const completeBtn = isDone
+      ? `<button class="mg-kanban-uncomplete" data-id="${card.id}" title="Reopen task" style="padding:2px 5px;background:transparent;color:var(--mut);border:1px solid var(--bdr);border-radius:3px;cursor:pointer;font-size:9px">↺</button>`
+      : `<button class="mg-kanban-complete" data-id="${card.id}" title="Mark complete" style="padding:2px 5px;background:#10b981;color:#fff;border:none;border-radius:3px;cursor:pointer;font-size:9px;font-weight:700">✓</button>`;
+    const due = card.due_date && !opts.hideDueDate
+      ? `<span style="font-size:9px;color:${isOverdue?'#ef4444':'var(--mut)'};margin-left:4px">${card.due_date.slice(5)}</span>` : '';
+    const completedAt = isDone && opts.showCompletedDate
+      ? `<span style="font-size:9px;color:#10b981;margin-left:4px">✓ ${card.completed_at.slice(5)}</span>` : '';
+    return `<div class="mg-kanban-card" data-id="${card.id}" style="background:var(--card);border-left:3px solid ${accent};border-radius:3px;padding:4px 6px;margin-bottom:3px;cursor:pointer;${isDone?'opacity:.7':''}" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:4px">
+        <div style="flex:1;font-size:11px;font-weight:600;${isDone?'text-decoration:line-through':''}">${htmlEsc(card.title)}${due}${completedAt}${overdueTag}</div>
+        ${completeBtn}
+      </div>
+      ${deptMeta ? `<div style="display:inline-block;margin-top:2px;padding:1px 5px;background:${deptMeta.color};color:#fff;border-radius:8px;font-size:8px;font-weight:700;text-transform:uppercase">${deptMeta.label}</div>` : ''}
+      ${card.project_name ? `<div style="font-size:9px;color:var(--mut)">📁 ${htmlEsc(card.project_name)}</div>` : ''}
+    </div>`;
+  };
 
   let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
     📋 Weekly Planners (per member)
@@ -2979,79 +3006,117 @@ function sectionKanbans(d) {
   </div>`;
 
   for (const m of MGMT_MEMBERS) {
-    const totalWeek = days.reduce((s,d) => s + (byMemberDay[m][d.date]||[]).length, 0);
-    const totalBacklog = (backlogByMember[m] || []).length;
+    const cellTotal      = days.reduce((s,dy) => s + (byMemberDay[m][dy.date]||[]).length, 0);
+    const backlogTotal   = (backlogByMember[m] || []).length;
+    const completedTotal = (completedByMember[m] || []).length;
     h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;margin-bottom:10px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div style="font-size:14px;font-weight:700">${m} <span style="font-size:11px;color:var(--mut);font-weight:400">${totalWeek} this week · ${totalBacklog} in backlog</span></div>
+        <div style="font-size:14px;font-weight:700">${m} <span style="font-size:11px;color:var(--mut);font-weight:400">${cellTotal} this week · ${backlogTotal} in backlog · ${completedTotal} done ${isCurrentWeek?'this week':'(visible week)'}</span></div>
         <button class="mg-kanban-add" data-member="${m}" style="padding:5px 10px;background:var(--blu);color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:11px;font-weight:600">+ Add Task</button>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px">`;
+      <div style="display:grid;grid-template-columns:minmax(180px, 1fr) minmax(0, 4fr) minmax(180px, 1fr);gap:8px">
+        <!-- BACKLOG (left) -->
+        <div style="background:var(--card-h);border:1px dashed var(--bdr);border-radius:6px;padding:6px 8px;display:flex;flex-direction:column">
+          <div style="font-size:10px;font-weight:700;color:#f59e0b;text-transform:uppercase;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">
+            📥 Backlog <span style="background:#f59e0b;color:#fff;padding:1px 6px;border-radius:8px;font-size:9px">${backlogTotal}</span>
+          </div>
+          <div class="mg-day-cell" data-member="${m}" data-date="" style="flex:1;min-height:80px;cursor:pointer" title="Click to add a backlog task (no date)">`;
+    if (backlogByMember[m].length) {
+      for (const card of backlogByMember[m]) h += renderCard(card, {});
+    } else {
+      h += `<div style="font-size:10px;color:var(--mut);font-style:italic;padding:4px 0">No backlog · click to add</div>`;
+    }
+    h += `</div></div>
+        <!-- 7-DAY GRID (middle) -->
+        <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px">`;
     for (const day of days) {
       const items = byMemberDay[m][day.date] || [];
       const isPastDay = day.date < todayStr;
-      const headerBg = day.isToday ? 'var(--blu)' : (isPastDay ? 'var(--card-h)' : 'var(--card-h)');
+      const headerBg = day.isToday ? 'var(--blu)' : 'var(--card-h)';
       const headerColor = day.isToday ? '#fff' : 'var(--mut)';
-      h += `<div style="background:var(--card-h);border-radius:5px;min-height:90px;display:flex;flex-direction:column">
+      h += `<div style="background:var(--card-h);border-radius:5px;min-height:90px;display:flex;flex-direction:column;${isPastDay && isCurrentWeek?'opacity:.7':''}">
         <div style="background:${headerBg};color:${headerColor};padding:4px 6px;border-radius:5px 5px 0 0;display:flex;justify-content:space-between;align-items:center">
           <span style="font-size:10px;font-weight:700">${day.label}</span>
           <span style="font-size:11px;font-weight:${day.isToday?'700':'400'}">${day.day}</span>
         </div>
         <div class="mg-day-cell" data-member="${m}" data-date="${day.date}" style="padding:4px;flex:1;cursor:pointer" title="Click to add a task for ${day.label} ${day.day}">`;
-      for (const card of items) {
-        const isDone = card.column_name === 'done';
-        const colorMeta = KANBAN_COLS.find(c => c.key === card.column_name) || KANBAN_COLS[0];
-        const deptMeta = card.department ? MGMT_DEPTS.find(dp => dp.key === card.department) : null;
-        h += `<div class="mg-kanban-card" data-id="${card.id}" style="background:var(--card);border-left:3px solid ${colorMeta.color};border-radius:3px;padding:4px 6px;margin-bottom:3px;cursor:pointer;${isDone?'opacity:.6':''}" onclick="event.stopPropagation()">
-          <div style="font-size:11px;font-weight:600;${isDone?'text-decoration:line-through':''}">${htmlEsc(card.title)}</div>
-          ${deptMeta ? `<div style="display:inline-block;margin-top:2px;padding:1px 5px;background:${deptMeta.color};color:#fff;border-radius:8px;font-size:8px;font-weight:700;text-transform:uppercase">${deptMeta.label}</div>` : ''}
-          ${card.project_name ? `<div style="font-size:9px;color:var(--mut)">📁 ${htmlEsc(card.project_name)}</div>` : ''}
-        </div>`;
-      }
+      for (const card of items) h += renderCard(card, {hideDueDate: true});
       h += `</div></div>`;
     }
-    h += `</div>`;
-    // Backlog row
-    if (totalBacklog > 0) {
-      h += `<div style="margin-top:6px;padding:6px 8px;background:var(--card-h);border-radius:5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-        <span style="font-size:10px;color:var(--mut);font-weight:700;text-transform:uppercase">Backlog (no date)</span>`;
-      for (const card of backlogByMember[m]) {
-        const deptMeta = card.department ? MGMT_DEPTS.find(dp => dp.key === card.department) : null;
-        const leftBar = deptMeta ? `border-left:3px solid ${deptMeta.color};` : '';
-        h += `<div class="mg-kanban-card" data-id="${card.id}" style="background:var(--card);border:1px solid var(--bdr);${leftBar}border-radius:3px;padding:3px 6px;font-size:11px;cursor:pointer">${htmlEsc(card.title)}${deptMeta?` <span style="font-size:8px;color:${deptMeta.color};font-weight:700;text-transform:uppercase;margin-left:4px">${deptMeta.label}</span>`:''}</div>`;
-      }
-      h += `</div>`;
+    h += `</div>
+        <!-- COMPLETED (right) -->
+        <div style="background:var(--card-h);border:1px dashed #10b981;border-radius:6px;padding:6px 8px;display:flex;flex-direction:column">
+          <div style="font-size:10px;font-weight:700;color:#10b981;text-transform:uppercase;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center">
+            ✓ Completed <span style="background:#10b981;color:#fff;padding:1px 6px;border-radius:8px;font-size:9px">${completedTotal}</span>
+          </div>
+          <div style="flex:1;min-height:80px">`;
+    if (completedByMember[m].length) {
+      for (const card of completedByMember[m]) h += renderCard(card, {showCompletedDate: true});
+    } else {
+      h += `<div style="font-size:10px;color:var(--mut);font-style:italic;padding:4px 0">Nothing completed ${isCurrentWeek?'yet this week':'this week'}</div>`;
     }
-    h += `</div>`;
+    h += `</div></div>
+      </div>
+    </div>`;
   }
   return h;
 }
 
-// ── Decisions log ──
+// ── Decision Journal — multi-owner + quarter filter ──
 function sectionDecisions(d) {
   const decs = d.decisions || [];
+  // Build the set of distinct quarters across all decisions for the filter UI.
+  const quarterOf = iso => {
+    if (!iso) return null;
+    const dt = new Date(iso + 'T12:00:00');
+    return dt.getFullYear() + '-Q' + (Math.floor(dt.getMonth()/3) + 1);
+  };
+  const todayQ = (() => { const t = new Date(); return t.getFullYear() + '-Q' + (Math.floor(t.getMonth()/3) + 1); })();
+  const allQuarters = Array.from(new Set(decs.map(x => quarterOf(x.decided_at)).filter(Boolean))).sort().reverse();
+  // Active quarter ('' means default = current quarter).
+  const activeQuarter = MGMT_DEC_QUARTER || todayQ;
+  const showAll = MGMT_DEC_QUARTER === 'all';
+  const filtered = showAll ? decs : decs.filter(x => quarterOf(x.decided_at) === activeQuarter);
+
   let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
-    📝 Decision Log
+    📝 Decision Journal <span style="font-size:11px;color:var(--mut);font-weight:400;margin-left:6px">${decs.length} total · viewing ${showAll?'all-time':activeQuarter}</span>
     <button class="mg-dec-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Decision</button>
-  </div>`;
-  if (!decs.length) {
-    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No decisions logged yet.</div></div>`;
+  </div>
+  <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:8px 12px;margin-bottom:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+    <span style="font-size:10px;color:var(--mut);font-weight:700;text-transform:uppercase;margin-right:4px">Quarter</span>`;
+  const qPill = (key, label, active) => `<button class="mg-dec-quarter" data-q="${key}" style="padding:4px 10px;background:${active?'var(--blu)':'var(--card-h)'};color:${active?'#fff':'var(--txt)'};border:1px solid ${active?'var(--blu)':'var(--bdr)'};border-radius:14px;cursor:pointer;font-size:11px;font-weight:${active?'700':'500'}">${label}</button>`;
+  h += qPill('', 'This quarter (' + todayQ + ')', !MGMT_DEC_QUARTER);
+  for (const q of allQuarters) {
+    if (q === todayQ) continue;
+    h += qPill(q, q, MGMT_DEC_QUARTER === q);
+  }
+  h += qPill('all', 'All-time', showAll);
+  h += `</div>`;
+
+  if (!filtered.length) {
+    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No decisions in ${showAll?'the journal':activeQuarter} yet.</div></div>`;
     return h;
   }
   h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:18px">
     <table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr style="background:var(--card-h);text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
       <th style="padding:7px 10px">Date</th><th style="padding:7px 10px">Decision</th>
-      <th style="padding:7px 10px">By</th><th style="padding:7px 10px">Owner</th>
+      <th style="padding:7px 10px">By</th><th style="padding:7px 10px">Follow-through</th>
       <th style="padding:7px 10px">Due</th><th style="padding:7px 10px">Status</th>
       <th style="padding:7px 10px;width:50px"></th>
     </tr></thead><tbody>`;
-  for (const x of decs) {
+  // Render owner as a list of chips (comma-separated string from DB)
+  const ownerChips = s => {
+    const list = (s||'').split(',').map(x=>x.trim()).filter(Boolean);
+    if (!list.length) return '<span style="color:var(--mut)">—</span>';
+    return list.map(n => `<span style="display:inline-block;background:var(--card-h);border:1px solid var(--bdr);padding:1px 7px;border-radius:10px;font-size:10px;margin-right:3px">${htmlEsc(n)}</span>`).join('');
+  };
+  for (const x of filtered) {
     const sColor = {open:'var(--ylw)', done:'var(--grn)', dropped:'var(--mut)'}[x.status] || 'var(--mut)';
     h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
       <td style="padding:6px 10px;white-space:nowrap;font-family:var(--mono);font-size:11px">${fmtDateShort(x.decided_at)}</td>
       <td style="padding:6px 10px"><b>${htmlEsc(x.decision)}</b>${x.context?`<div style="font-size:10px;color:var(--mut);margin-top:2px">${htmlEsc(x.context)}</div>`:''}</td>
       <td style="padding:6px 10px;color:var(--mut)">${htmlEsc(x.decided_by||'—')}</td>
-      <td style="padding:6px 10px"><b>${htmlEsc(x.owner||'—')}</b></td>
+      <td style="padding:6px 10px">${ownerChips(x.owner)}</td>
       <td style="padding:6px 10px;font-family:var(--mono);font-size:11px">${x.due_date?fmtDateShort(x.due_date):'—'}</td>
       <td style="padding:6px 10px"><span style="color:${sColor};font-weight:600;text-transform:uppercase;font-size:10px">${x.status}</span></td>
       <td style="padding:6px 10px;text-align:right"><a href="#" class="mg-dec-edit" data-id="${x.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-dec-del" data-id="${x.id}" style="color:var(--red);text-decoration:none">×</a></td>
@@ -3061,208 +3126,153 @@ function sectionDecisions(d) {
   return h;
 }
 
-// ── Meeting agenda ──
+// ── Meeting Agenda Journal — visible week only; navigates with planner ──
 function sectionAgenda(d) {
-  const items = (d.agenda && d.agenda.active) || [];
-  const archCount = (d.agenda && d.agenda.archived_count) || 0;
-  // Group by week_of
-  const byWeek = {};
-  items.forEach(i => { (byWeek[i.week_of] = byWeek[i.week_of] || []).push(i); });
-  const weeks = Object.keys(byWeek).sort().reverse();
+  const a = d.agenda || {};
+  const items = a.items || [];
+  const weekOf = a.week_of || '';
+  const archCount = a.archived_count || 0;
+  const totalActive = a.all_active_count || 0;
+  const isCurrentWeek = MGMT_WEEK_OFFSET === 0;
   let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
-    🗓️ Weekly Meeting Agenda
-    <span><span style="font-size:11px;color:var(--mut);margin-right:8px">${archCount} archived</span><button class="mg-agenda-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Item</button></span>
+    🗓️ Meeting Agenda Journal <span style="font-size:11px;color:var(--mut);font-weight:400;margin-left:6px">${totalActive} active across all weeks · ${archCount} archived · viewing week of ${fmtDateShort(weekOf)}${isCurrentWeek?' (this week)':''}</span>
+    <button class="mg-agenda-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Item</button>
+  </div>
+  <div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:8px 12px;margin-bottom:8px;font-size:11px;color:var(--mut)">
+    Use the week navigator at the top of the planner to jump between weeks — the agenda journal follows it.
   </div>`;
   if (!items.length) {
-    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No active agenda items.</div></div>`;
+    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No agenda items recorded for the week of ${fmtDateShort(weekOf)}.</div></div>`;
     return h;
   }
-  for (const w of weeks) {
-    h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;margin-bottom:10px">
-      <div style="font-size:12px;font-weight:700;margin-bottom:6px">Week of ${fmtDateShort(w)}</div>
-      <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">
-        <thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
-          <th style="padding:5px 8px;width:30px">P</th><th style="padding:5px 8px">Item</th>
-          <th style="padding:5px 8px">Raised By</th><th style="padding:5px 8px">Status</th>
-          <th style="padding:5px 8px;width:80px"></th>
-        </tr></thead><tbody>`;
-    for (const i of byWeek[w]) {
-      const sColor = {open:'var(--blu)', discussed:'var(--grn)', dropped:'var(--mut)'}[i.status] || 'var(--mut)';
-      h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
-        <td style="padding:5px 8px;text-align:center;color:var(--mut)">${i.priority}</td>
-        <td style="padding:5px 8px"><b>${htmlEsc(i.item)}</b>${i.notes?`<div style="font-size:10px;color:var(--mut)">${htmlEsc(i.notes)}</div>`:''}</td>
-        <td style="padding:5px 8px;color:var(--mut)">${htmlEsc(i.raised_by||'—')}</td>
-        <td style="padding:5px 8px"><span style="color:${sColor};font-weight:600;font-size:10px;text-transform:uppercase">${i.status}</span></td>
-        <td style="padding:5px 8px;text-align:right"><a href="#" class="mg-agenda-archive" data-id="${i.id}" title="Archive" style="color:var(--blu);text-decoration:none;margin-right:4px">📁</a><a href="#" class="mg-agenda-edit" data-id="${i.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-agenda-del" data-id="${i.id}" style="color:var(--red);text-decoration:none">×</a></td>
-      </tr>`;
-    }
-    h += `</tbody></table></div></div>`;
-  }
-  return h;
-}
-
-// ── Project Health (RAG) — active projects only ──
-function sectionProjectHealth(d) {
-  const ph = d.project_health || [];
-  // Only ACTIVE projects (real, building) — planning projects are pre-construction
-  const all = d.active_projects || d.all_projects || [];
-  const byName = {};
-  ph.forEach(p => { byName[p.project_name] = p; });
-  let h = `<div class="sh">🩺 Project Health (RAG) <span style="font-size:11px;color:var(--mut);font-weight:400">— active projects only</span></div>`;
-  if (!all.length) {
-    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No active projects right now.</div></div>`;
-    return h;
-  }
-  h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:18px">
-    <table style="width:100%;border-collapse:collapse;font-size:12px">
-      <thead><tr style="background:var(--card-h);text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
-        <th style="padding:7px 10px">Project</th><th style="padding:7px 10px;text-align:center">Schedule</th>
-        <th style="padding:7px 10px;text-align:center">Budget</th><th style="padding:7px 10px;text-align:center">Client</th>
-        <th style="padding:7px 10px">Notes</th><th style="padding:7px 10px;width:50px"></th>
+  h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;margin-bottom:18px">
+    <div style="font-size:12px;font-weight:700;margin-bottom:6px">Week of ${fmtDateShort(weekOf)}</div>
+    <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
+        <th style="padding:5px 8px;width:30px">P</th><th style="padding:5px 8px">Item</th>
+        <th style="padding:5px 8px">Raised By</th><th style="padding:5px 8px">Status</th>
+        <th style="padding:5px 8px;width:80px"></th>
       </tr></thead><tbody>`;
-  for (const proj of all) {
-    const p = byName[proj] || {schedule_rag:'green', budget_rag:'green', client_rag:'green'};
-    const dot = (rag) => `<span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:${rag==='red'?'var(--red)':rag==='yellow'?'var(--ylw)':'var(--grn)'}"></span>`;
+  for (const i of items) {
+    const sColor = {open:'var(--blu)', discussed:'var(--grn)', dropped:'var(--mut)'}[i.status] || 'var(--mut)';
     h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
-      <td style="padding:6px 10px"><b>${htmlEsc(proj)}</b></td>
-      <td style="padding:6px 10px;text-align:center">${dot(p.schedule_rag)}</td>
-      <td style="padding:6px 10px;text-align:center">${dot(p.budget_rag)}</td>
-      <td style="padding:6px 10px;text-align:center">${dot(p.client_rag)}</td>
-      <td style="padding:6px 10px;color:var(--mut);font-size:11px">${htmlEsc(p.notes||'')}</td>
-      <td style="padding:6px 10px;text-align:right"><a href="#" class="mg-ph-edit" data-name="${attrEsc(proj)}" data-s="${p.schedule_rag||'green'}" data-b="${p.budget_rag||'green'}" data-c="${p.client_rag||'green'}" data-notes="${attrEsc(p.notes||'')}" style="color:var(--blu);text-decoration:none">✎</a></td>
+      <td style="padding:5px 8px;text-align:center;color:var(--mut)">${i.priority}</td>
+      <td style="padding:5px 8px"><b>${htmlEsc(i.item)}</b>${i.notes?`<div style="font-size:10px;color:var(--mut)">${htmlEsc(i.notes)}</div>`:''}</td>
+      <td style="padding:5px 8px;color:var(--mut)">${htmlEsc(i.raised_by||'—')}</td>
+      <td style="padding:5px 8px"><span style="color:${sColor};font-weight:600;font-size:10px;text-transform:uppercase">${i.status}</span></td>
+      <td style="padding:5px 8px;text-align:right"><a href="#" class="mg-agenda-archive" data-id="${i.id}" title="Archive" style="color:var(--blu);text-decoration:none;margin-right:4px">📁</a><a href="#" class="mg-agenda-edit" data-id="${i.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-agenda-del" data-id="${i.id}" style="color:var(--red);text-decoration:none">×</a></td>
     </tr>`;
   }
-  h += `</tbody></table></div>`;
+  h += `</tbody></table></div></div>`;
   return h;
 }
 
-// ── Risks ──
+// ── Risk Register — grouped by 4 statuses ──
+const RISK_STATUSES = [
+  { key:'unmanaged',    label:'Unmanaged',    color:'#ef4444', desc:'open, no mitigation in place' },
+  { key:'mitigated',    label:'Mitigated',    color:'#f59e0b', desc:'mitigation plan active' },
+  { key:'materialized', label:'Materialized', color:'#8b5cf6', desc:'risk happened — incident' },
+  { key:'avoided',      label:'Avoided',      color:'#10b981', desc:'risk closed — won’t happen' },
+];
 function sectionRisks(d) {
   const risks = d.risks || [];
+  const byStatus = {};
+  for (const s of RISK_STATUSES) byStatus[s.key] = [];
+  for (const r of risks) {
+    const k = byStatus[r.status] ? r.status : 'unmanaged';
+    byStatus[k].push(r);
+  }
   let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
-    ⚠️ Risk Register
+    ⚠️ Risk Register <span style="font-size:11px;color:var(--mut);font-weight:400;margin-left:6px">${risks.length} total</span>
     <button class="mg-risk-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Risk</button>
   </div>`;
   if (!risks.length) {
     h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No risks logged.</div></div>`;
     return h;
   }
-  h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:18px">
-    <table style="width:100%;border-collapse:collapse;font-size:12px">
-      <thead><tr style="background:var(--card-h);text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
-        <th style="padding:7px 10px">Risk</th><th style="padding:7px 10px;text-align:center">I×L</th>
-        <th style="padding:7px 10px">Owner</th><th style="padding:7px 10px">Mitigation</th>
-        <th style="padding:7px 10px">Status</th><th style="padding:7px 10px;width:50px"></th>
-      </tr></thead><tbody>`;
-  for (const r of risks) {
-    const score = (r.impact||0) * (r.likelihood||0);
-    const sColor = score >= 16 ? 'var(--red)' : score >= 9 ? 'var(--ylw)' : 'var(--grn)';
-    h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
-      <td style="padding:6px 10px"><b>${htmlEsc(r.title)}</b></td>
-      <td style="padding:6px 10px;text-align:center"><span style="background:${sColor};color:#fff;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700">${r.impact}×${r.likelihood}=${score}</span></td>
-      <td style="padding:6px 10px"><b>${htmlEsc(r.owner||'—')}</b></td>
-      <td style="padding:6px 10px;color:var(--mut);font-size:11px">${htmlEsc(r.mitigation||'—')}</td>
-      <td style="padding:6px 10px"><span style="font-size:10px;font-weight:600;text-transform:uppercase">${r.status}</span></td>
-      <td style="padding:6px 10px;text-align:right"><a href="#" class="mg-risk-edit" data-id="${r.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-risk-del" data-id="${r.id}" style="color:var(--red);text-decoration:none">×</a></td>
-    </tr>`;
+  for (const s of RISK_STATUSES) {
+    const list = byStatus[s.key];
+    h += `<div style="background:var(--card);border:1px solid var(--bdr);border-left:4px solid ${s.color};border-radius:8px;margin-bottom:10px;overflow:hidden">
+      <div style="background:var(--card-h);padding:7px 12px;display:flex;justify-content:space-between;align-items:center">
+        <div><b style="color:${s.color};text-transform:uppercase;font-size:11px;letter-spacing:.5px">${s.label}</b> <span style="font-size:11px;color:var(--mut);margin-left:6px">${s.desc}</span></div>
+        <span style="background:${s.color};color:#fff;padding:1px 8px;border-radius:10px;font-size:10px;font-weight:700">${list.length}</span>
+      </div>`;
+    if (!list.length) {
+      h += `<div style="padding:10px 14px;color:var(--mut);font-size:12px;font-style:italic">None.</div></div>`;
+      continue;
+    }
+    h += `<table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;background:var(--card)">
+      <th style="padding:6px 12px">Risk</th><th style="padding:6px 12px;text-align:center">I×L</th>
+      <th style="padding:6px 12px">Owner</th><th style="padding:6px 12px">Mitigation</th>
+      <th style="padding:6px 12px;width:50px"></th>
+    </tr></thead><tbody>`;
+    for (const r of list) {
+      const score = (r.impact||0) * (r.likelihood||0);
+      const scColor = score >= 16 ? '#ef4444' : score >= 9 ? '#f59e0b' : '#10b981';
+      h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+        <td style="padding:6px 12px"><b>${htmlEsc(r.title)}</b></td>
+        <td style="padding:6px 12px;text-align:center"><span style="background:${scColor};color:#fff;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700">${r.impact}×${r.likelihood}=${score}</span></td>
+        <td style="padding:6px 12px"><b>${htmlEsc(r.owner||'—')}</b></td>
+        <td style="padding:6px 12px;color:var(--mut);font-size:11px">${htmlEsc(r.mitigation||'—')}</td>
+        <td style="padding:6px 12px;text-align:right"><a href="#" class="mg-risk-edit" data-id="${r.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-risk-del" data-id="${r.id}" style="color:var(--red);text-decoration:none">×</a></td>
+      </tr>`;
+    }
+    h += `</tbody></table></div>`;
   }
-  h += `</tbody></table></div>`;
+  h += `<div style="margin-bottom:8px"></div>`;
   return h;
 }
 
-// ── Initiatives ──
+// ── Strategic Initiatives — Active vs Past (accomplished/dropped/failed) ──
+const INIT_STATUSES = [
+  { key:'active',       label:'Active',       color:'#3b82f6' },
+  { key:'accomplished', label:'Accomplished', color:'#10b981' },
+  { key:'dropped',      label:'Dropped',      color:'#6b7280' },
+  { key:'failed',       label:'Failed',       color:'#ef4444' },
+];
 function sectionInitiatives(d) {
   const items = d.initiatives || [];
+  const active = items.filter(i => i.status === 'active');
+  const past = items.filter(i => i.status !== 'active');
   let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
-    🚀 Strategic Initiatives
+    🚀 Strategic Initiatives <span style="font-size:11px;color:var(--mut);font-weight:400;margin-left:6px">${active.length} active · ${past.length} past</span>
     <button class="mg-init-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Initiative</button>
   </div>`;
   if (!items.length) {
-    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No initiatives.</div></div>`;
+    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No initiatives yet.</div></div>`;
     return h;
   }
-  h += `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-bottom:18px">`;
-  for (const i of items) {
-    const sColor = {planning:'var(--blu)', in_progress:'var(--ylw)', done:'var(--grn)', dropped:'var(--mut)'}[i.status] || 'var(--mut)';
-    h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+  const renderCard = (i) => {
+    const meta = INIT_STATUSES.find(s => s.key === i.status) || INIT_STATUSES[0];
+    return `<div style="background:var(--card);border:1px solid var(--bdr);border-left:4px solid ${meta.color};border-radius:8px;padding:10px 14px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;gap:8px">
         <div><b>${htmlEsc(i.title)}</b><div style="font-size:11px;color:var(--mut)">Owner: ${htmlEsc(i.owner||'—')}</div></div>
-        <span style="font-size:10px;font-weight:600;color:${sColor};text-transform:uppercase">${(i.status||'').replace(/_/g,' ')}</span>
+        <span style="font-size:10px;font-weight:700;color:#fff;background:${meta.color};padding:2px 8px;border-radius:10px;text-transform:uppercase;white-space:nowrap">${meta.label}</span>
       </div>
       ${i.description?`<div style="font-size:11px;color:var(--mut);margin-top:4px">${htmlEsc(i.description)}</div>`:''}
-      <div style="margin-top:8px"><div style="width:100%;height:6px;background:var(--card-h);border-radius:3px;overflow:hidden"><div style="width:${i.progress_pct||0}%;height:100%;background:${sColor}"></div></div><div style="font-size:10px;color:var(--mut);margin-top:2px">${i.progress_pct||0}% · ${fmtDateShort(i.start_date)} → ${fmtDateShort(i.target_date)}</div></div>
+      <div style="margin-top:8px"><div style="width:100%;height:6px;background:var(--card-h);border-radius:3px;overflow:hidden"><div style="width:${i.progress_pct||0}%;height:100%;background:${meta.color}"></div></div><div style="font-size:10px;color:var(--mut);margin-top:2px">${i.progress_pct||0}% · ${fmtDateShort(i.start_date)} → ${fmtDateShort(i.target_date)}</div></div>
       <div style="margin-top:6px;text-align:right"><a href="#" class="mg-init-edit" data-id="${i.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎ Edit</a><a href="#" class="mg-init-del" data-id="${i.id}" style="color:var(--red);text-decoration:none">× Delete</a></div>
     </div>`;
+  };
+  h += `<div style="font-size:12px;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Active</div>`;
+  if (!active.length) {
+    h += `<div class="empty" style="padding:10px;margin-bottom:12px"><div style="color:var(--mut);font-size:12px;font-style:italic">No active initiatives.</div></div>`;
+  } else {
+    h += `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-bottom:14px">`;
+    for (const i of active) h += renderCard(i);
+    h += `</div>`;
   }
-  h += `</div>`;
+  if (past.length) {
+    h += `<div style="font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Past</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-bottom:18px">`;
+    for (const i of past) h += renderCard(i);
+    h += `</div>`;
+  }
   return h;
 }
 
-// ── Team Roster ──
-function sectionTeam(d) {
-  const team = d.team || [];
-  let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
-    👥 Team Roster (Ownership Map)
-    <button class="mg-team-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Member</button>
-  </div>`;
-  if (!team.length) {
-    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No team members yet.</div></div>`;
-    return h;
-  }
-  h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:18px">
-    <table style="width:100%;border-collapse:collapse;font-size:12px">
-      <thead><tr style="background:var(--card-h);text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
-        <th style="padding:7px 10px">Name</th><th style="padding:7px 10px">Role</th>
-        <th style="padding:7px 10px">Responsibilities</th><th style="padding:7px 10px">Contact</th>
-        <th style="padding:7px 10px;width:50px"></th>
-      </tr></thead><tbody>`;
-  for (const m of team) {
-    h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
-      <td style="padding:6px 10px"><b>${htmlEsc(m.name)}</b></td>
-      <td style="padding:6px 10px">${htmlEsc(m.role||'—')}</td>
-      <td style="padding:6px 10px;color:var(--mut)">${htmlEsc(m.responsibilities||'—')}</td>
-      <td style="padding:6px 10px;font-size:11px;color:var(--mut)">${htmlEsc(m.contact||'—')}</td>
-      <td style="padding:6px 10px;text-align:right"><a href="#" class="mg-team-edit" data-id="${m.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-team-del" data-id="${m.id}" style="color:var(--red);text-decoration:none">×</a></td>
-    </tr>`;
-  }
-  h += `</tbody></table></div>`;
-  return h;
-}
-
-// ── Vendors ──
-function sectionVendors(d) {
-  const vs = d.vendors || [];
-  let h = `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
-    🔧 Vendor / Sub Roster
-    <button class="mg-vendor-add" style="padding:6px 12px;background:var(--blu);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">+ Add Vendor</button>
-  </div>`;
-  if (!vs.length) {
-    h += `<div class="empty" style="padding:14px"><div style="color:var(--mut);font-size:13px">No vendors yet.</div></div>`;
-    return h;
-  }
-  h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;overflow:hidden;margin-bottom:18px">
-    <table style="width:100%;border-collapse:collapse;font-size:12px">
-      <thead><tr style="background:var(--card-h);text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase">
-        <th style="padding:7px 10px">Vendor</th><th style="padding:7px 10px">Category</th>
-        <th style="padding:7px 10px">Contact</th><th style="padding:7px 10px;text-align:center">Rating</th>
-        <th style="padding:7px 10px">Terms</th><th style="padding:7px 10px">Capacity</th>
-        <th style="padding:7px 10px;width:50px"></th>
-      </tr></thead><tbody>`;
-  for (const v of vs) {
-    const stars = '★'.repeat(v.rating||0) + '☆'.repeat(5-(v.rating||0));
-    h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
-      <td style="padding:6px 10px"><b>${htmlEsc(v.name)}</b></td>
-      <td style="padding:6px 10px;color:var(--mut);font-size:11px">${htmlEsc(v.category||'—')}</td>
-      <td style="padding:6px 10px;font-size:11px">${htmlEsc(v.contact||'—')}</td>
-      <td style="padding:6px 10px;text-align:center;color:var(--ylw)">${stars}</td>
-      <td style="padding:6px 10px;font-size:11px;color:var(--mut)">${htmlEsc(v.payment_terms||'—')}</td>
-      <td style="padding:6px 10px;font-size:11px;color:var(--mut)">${htmlEsc(v.capacity_notes||'—')}</td>
-      <td style="padding:6px 10px;text-align:right"><a href="#" class="mg-vendor-edit" data-id="${v.id}" style="color:var(--blu);text-decoration:none;margin-right:4px">✎</a><a href="#" class="mg-vendor-del" data-id="${v.id}" style="color:var(--red);text-decoration:none">×</a></td>
-    </tr>`;
-  }
-  h += `</tbody></table></div>`;
-  return h;
-}
+// (Team Roster, Vendor Roster, and Project Health sections were removed
+//  per user request — backend storage is preserved but no longer rendered.)
 
 // ── Click delegation: a single handler routes all CRUD button clicks ──
 function installOrgMgmtClickHandler() {
@@ -3281,26 +3291,22 @@ function installOrgMgmtClickHandler() {
       ['.mg-okr-del',      e => mgDelete('/okr/'+e.dataset.id, 'OKR')],
       ['.mg-kanban-add',   e => mgKanbanForm(null, e.dataset.member)],
       ['.mg-kanban-card',  e => mgKanbanForm(parseInt(e.dataset.id,10))],
+      ['.mg-kanban-complete',   async e => { await financeApi('/kanban/'+e.dataset.id+'/complete', { method:'POST', body:'{}' }); await mgRefresh(); }],
+      ['.mg-kanban-uncomplete', async e => { await financeApi('/kanban/'+e.dataset.id+'/uncomplete', { method:'POST', body:'{}' }); await mgRefresh(); }],
       ['.mg-dec-add',      ()=>mgDecisionForm(null)],
       ['.mg-dec-edit',     e => mgDecisionForm(parseInt(e.dataset.id,10))],
       ['.mg-dec-del',      e => mgDelete('/decision/'+e.dataset.id, 'decision')],
+      ['.mg-dec-quarter',  e => { MGMT_DEC_QUARTER = e.dataset.q || ''; paintOrgMgmt(document.getElementById('content')); }],
       ['.mg-risk-add',     ()=>mgRiskForm(null)],
       ['.mg-risk-edit',    e => mgRiskForm(parseInt(e.dataset.id,10))],
       ['.mg-risk-del',     e => mgDelete('/risk/'+e.dataset.id, 'risk')],
       ['.mg-init-add',     ()=>mgInitForm(null)],
       ['.mg-init-edit',    e => mgInitForm(parseInt(e.dataset.id,10))],
       ['.mg-init-del',     e => mgDelete('/initiative/'+e.dataset.id, 'initiative')],
-      ['.mg-team-add',     ()=>mgTeamForm(null)],
-      ['.mg-team-edit',    e => mgTeamForm(parseInt(e.dataset.id,10))],
-      ['.mg-team-del',     e => mgDelete('/team-member/'+e.dataset.id, 'team member')],
-      ['.mg-vendor-add',   ()=>mgVendorForm(null)],
-      ['.mg-vendor-edit',  e => mgVendorForm(parseInt(e.dataset.id,10))],
-      ['.mg-vendor-del',   e => mgDelete('/vendor/'+e.dataset.id, 'vendor')],
       ['.mg-agenda-add',   ()=>mgAgendaForm(null)],
       ['.mg-agenda-edit',  e => mgAgendaForm(parseInt(e.dataset.id,10))],
       ['.mg-agenda-del',   e => mgDelete('/agenda/'+e.dataset.id, 'agenda item')],
       ['.mg-agenda-archive', e => mgArchive('/agenda/'+e.dataset.id+'/archive')],
-      ['.mg-ph-edit',      e => mgProjectHealthForm(e.dataset.name, e.dataset.s, e.dataset.b, e.dataset.c, e.dataset.notes)],
     ];
     for (const [sel, fn] of handlers) {
       const t = e.target.closest(sel);
@@ -3337,6 +3343,15 @@ function mgModal(title, fields, onSubmit, existingValues) {
     if (fd.type === 'textarea') {
       return `<label style="grid-column:1/3">${fd.label}<textarea name="${fd.name}" rows="${fd.rows||2}" ${fd.required?'required':''} style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px">${htmlEsc(v)}</textarea></label>`;
     }
+    if (fd.type === 'multi-checkbox') {
+      // v is a comma-separated string of selected values
+      const selected = new Set(String(v||'').split(',').map(s=>s.trim()).filter(Boolean));
+      const boxes = fd.options.map(o => {
+        const checked = selected.has(o.value) ? 'checked' : '';
+        return `<label style="display:inline-flex;align-items:center;gap:4px;font-weight:400;background:var(--card-h);border:1px solid var(--bdr);padding:4px 10px;border-radius:14px;font-size:12px;cursor:pointer;margin:2px"><input type="checkbox" name="${fd.name}__multi" value="${attrEsc(o.value)}" ${checked} style="margin:0">${o.label}</label>`;
+      }).join('');
+      return `<label style="grid-column:1/3">${fd.label}<div style="display:flex;flex-wrap:wrap;gap:2px;padding:4px 0">${boxes}</div></label>`;
+    }
     return `<label style="grid-column:${fd.span?'1/3':''}">${fd.label}<input type="${fd.type||'text'}" name="${fd.name}" value="${attrEsc(v)}" ${fd.required?'required':''} ${fd.step?`step="${fd.step}"`:''} ${fd.min?`min="${fd.min}"`:''} ${fd.placeholder?`placeholder="${attrEsc(fd.placeholder)}"`:''} style="width:100%;padding:6px 8px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px"></label>`;
   }).join('');
   overlay.innerHTML = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:20px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto">
@@ -3355,7 +3370,20 @@ function mgModal(title, fields, onSubmit, existingValues) {
   document.getElementById('mg-form').onsubmit = async ev => {
     ev.preventDefault();
     const body = {};
-    new FormData(ev.target).forEach((v,k) => { if (v!=='') body[k] = v; });
+    const multi = {};
+    new FormData(ev.target).forEach((v,k) => {
+      if (k.endsWith('__multi')) {
+        const base = k.slice(0, -7);
+        (multi[base] = multi[base] || []).push(v);
+      } else if (v !== '') {
+        body[k] = v;
+      }
+    });
+    // Always emit a string for multi fields (even when empty) so the row
+    // can be cleared by un-checking everything.
+    for (const fd of fields) {
+      if (fd.type === 'multi-checkbox') body[fd.name] = (multi[fd.name] || []).join(', ');
+    }
     try { await onSubmit(body); overlay.remove(); mgRefresh(); }
     catch (e) { alert('Save failed: ' + (e.message||e)); }
   };
@@ -3436,14 +3464,15 @@ function mgKanbanForm(id, defaultMember, defaultDueDate) {
 function mgDecisionForm(id) {
   const ex = id ? mgFindById(MGMT_DATA_FULL.decisions, id) : null;
   const today = new Date().toISOString().slice(0,10);
+  const memberOpts = MGMT_MEMBERS.map(m => ({value:m, label:m}));
   mgModal((ex?'Edit':'Add')+' Decision', [
     {name:'decided_at', label:'Decided on', type:'date', required:true, default:today},
     {name:'status', label:'Status', type:'select', default:'open',
       options:[{value:'open',label:'Open'},{value:'done',label:'Done'},{value:'dropped',label:'Dropped'}]},
     {name:'decision', label:'Decision', type:'text', span:2, required:true},
     {name:'context', label:'Why / context', type:'textarea'},
-    {name:'decided_by', label:'Decided by', type:'text', placeholder:'comma-separated names'},
-    {name:'owner', label:'Follow-through owner', type:'select', options:ownerOpts},
+    {name:'decided_by', label:'Decided by', type:'text', placeholder:'comma-separated names', span:2},
+    {name:'owner', label:'Follow-through owners (multi-select)', type:'multi-checkbox', options:memberOpts},
     {name:'due_date', label:'Due date', type:'date'},
     {name:'notes', label:'Notes', type:'textarea'},
   ], async body => {
@@ -3459,9 +3488,9 @@ function mgRiskForm(id) {
     {name:'impact', label:'Impact (1-5)', type:'number', min:'1', default:'3'},
     {name:'likelihood', label:'Likelihood (1-5)', type:'number', min:'1', default:'3'},
     {name:'owner', label:'Owner', type:'select', options:ownerOpts},
-    {name:'status', label:'Status', type:'select', default:'open',
-      options:[{value:'open',label:'Open'},{value:'mitigated',label:'Mitigated'},
-              {value:'closed',label:'Closed'},{value:'materialized',label:'Materialized'}]},
+    {name:'status', label:'Status', type:'select', default:'unmanaged',
+      options:[{value:'unmanaged',label:'Unmanaged'},{value:'mitigated',label:'Mitigated'},
+              {value:'materialized',label:'Materialized'},{value:'avoided',label:'Avoided'}]},
     {name:'mitigation', label:'Mitigation plan', type:'textarea'},
     {name:'last_review', label:'Last reviewed', type:'date'},
     {name:'notes', label:'Notes', type:'textarea'},
@@ -3478,9 +3507,9 @@ function mgInitForm(id) {
   mgModal((ex?'Edit':'Add')+' Initiative', [
     {name:'title', label:'Title', type:'text', span:2, required:true},
     {name:'owner', label:'Owner', type:'select', options:ownerOpts},
-    {name:'status', label:'Status', type:'select', default:'planning',
-      options:[{value:'planning',label:'Planning'},{value:'in_progress',label:'In Progress'},
-              {value:'done',label:'Done'},{value:'dropped',label:'Dropped'}]},
+    {name:'status', label:'Status', type:'select', default:'active',
+      options:[{value:'active',label:'Active'},{value:'accomplished',label:'Accomplished'},
+              {value:'dropped',label:'Dropped'},{value:'failed',label:'Failed'}]},
     {name:'description', label:'Description', type:'textarea'},
     {name:'start_date', label:'Start date', type:'date'},
     {name:'target_date', label:'Target date', type:'date'},
@@ -3493,46 +3522,19 @@ function mgInitForm(id) {
   }, ex);
 }
 
-function mgTeamForm(id) {
-  const ex = id ? mgFindById(MGMT_DATA_FULL.team, id) : null;
-  mgModal((ex?'Edit':'Add')+' Team Member', [
-    {name:'name', label:'Name', type:'text', required:true},
-    {name:'role', label:'Role', type:'text'},
-    {name:'responsibilities', label:'Responsibilities', type:'textarea'},
-    {name:'contact', label:'Contact', type:'text', span:2},
-    {name:'notes', label:'Notes', type:'textarea'},
-  ], async body => {
-    const path = id ? `/team-member/${id}/edit` : '/team-member';
-    await financeApi(path, { method:'POST', body: JSON.stringify(body) });
-  }, ex);
-}
-
-function mgVendorForm(id) {
-  const ex = id ? mgFindById(MGMT_DATA_FULL.vendors, id) : null;
-  mgModal((ex?'Edit':'Add')+' Vendor / Sub', [
-    {name:'name', label:'Name', type:'text', required:true},
-    {name:'category', label:'Category', type:'text', placeholder:'electrical, plumbing, framing...'},
-    {name:'contact', label:'Contact', type:'text', span:2},
-    {name:'rating', label:'Rating (1-5)', type:'number', min:'1'},
-    {name:'last_used_date', label:'Last used', type:'date'},
-    {name:'payment_terms', label:'Payment terms', type:'text', span:2},
-    {name:'capacity_notes', label:'Capacity notes', type:'textarea'},
-    {name:'notes', label:'Notes', type:'textarea'},
-  ], async body => {
-    if (body.rating) body.rating = parseInt(body.rating, 10);
-    const path = id ? `/vendor/${id}/edit` : '/vendor';
-    await financeApi(path, { method:'POST', body: JSON.stringify(body) });
-  }, ex);
-}
-
 function mgAgendaForm(id) {
-  const ex = id ? mgFindById((MGMT_DATA_FULL.agenda||{}).active || [], id) : null;
-  // Default to Monday of current week
-  const d = new Date();
-  d.setDate(d.getDate() - d.getDay() + 1);  // Monday
-  const monday = d.toISOString().slice(0,10);
+  // Try to find existing item across all weeks; the journal payload only ships
+  // the visible week, so fall back to a small flat list when adding new.
+  const a = MGMT_DATA_FULL.agenda || {};
+  const ex = id ? mgFindById(a.items || [], id) : null;
+  // Default new items to the Monday of the visible week (so adding from a past
+  // week's view stays in that journal week).
+  const visibleMonday = a.week_of || (() => {
+    const d = new Date(); d.setDate(d.getDate() - d.getDay() + 1);
+    return d.toISOString().slice(0,10);
+  })();
   mgModal((ex?'Edit':'Add')+' Agenda Item', [
-    {name:'week_of', label:'Week of (Mon)', type:'date', required:true, default:monday},
+    {name:'week_of', label:'Week of (Mon)', type:'date', required:true, default:visibleMonday},
     {name:'priority', label:'Priority (1-5)', type:'number', min:'1', default:'3'},
     {name:'item', label:'Item', type:'text', span:2, required:true},
     {name:'raised_by', label:'Raised by', type:'select', options:ownerOpts},
@@ -3551,20 +3553,6 @@ function mgStrategyEdit(key, label, currentValue) {
   if (v === null) return;
   financeApi('/strategy', { method:'POST', body: JSON.stringify({key, value:v}) })
     .then(() => mgRefresh()).catch(e => alert('Save failed: ' + (e.message||e)));
-}
-
-function mgProjectHealthForm(name, s, b, c, notes) {
-  const ragOpts = [{value:'green',label:'🟢 Green'},{value:'yellow',label:'🟡 Yellow'},{value:'red',label:'🔴 Red'}];
-  mgModal('Project Health: ' + name, [
-    {name:'schedule_rag', label:'Schedule', type:'select', options:ragOpts, default:s},
-    {name:'budget_rag', label:'Budget', type:'select', options:ragOpts, default:b},
-    {name:'client_rag', label:'Client', type:'select', options:ragOpts, default:c},
-    {name:'notes', label:'Notes', type:'textarea', default:notes},
-  ], async body => {
-    body.project_name = name;
-    body.last_review = new Date().toISOString().slice(0,10);
-    await financeApi('/project-health', { method:'POST', body: JSON.stringify(body) });
-  });
 }
 
 function financeGate(c) {
