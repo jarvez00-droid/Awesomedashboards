@@ -2968,7 +2968,7 @@ function sectionKanbans(d) {
       ? `<span style="font-size:9px;color:${isOverdue?'#ef4444':'var(--mut)'};margin-left:4px">${card.due_date.slice(5)}</span>` : '';
     const completedAt = isDone && opts.showCompletedDate
       ? `<span style="font-size:9px;color:#10b981;margin-left:4px">✓ ${card.completed_at.slice(5)}</span>` : '';
-    return `<div class="mg-kanban-card" data-id="${card.id}" style="background:var(--card);border-left:3px solid ${accent};border-radius:3px;padding:4px 6px;margin-bottom:3px;cursor:pointer;${isDone?'opacity:.7':''}" onclick="event.stopPropagation()">
+    return `<div class="mg-kanban-card" data-id="${card.id}" style="background:var(--card);border-left:3px solid ${accent};border-radius:3px;padding:4px 6px;margin-bottom:3px;cursor:pointer;${isDone?'opacity:.7':''}">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:4px">
         <div style="flex:1;font-size:11px;font-weight:600;${isDone?'text-decoration:line-through':''}">${htmlEsc(card.title)}${due}${completedAt}${overdueTag}</div>
         ${completeBtn}
@@ -3285,14 +3285,16 @@ function installOrgMgmtClickHandler() {
       ['.mg-week-nav',     e => { const d=parseInt(e.dataset.d,10); MGMT_WEEK_OFFSET = (d===0?0:MGMT_WEEK_OFFSET+d); renderOrgMgmt(document.getElementById('content')); }],
       ['.mg-week-jump-btn', () => { const v = document.getElementById('mg-week-jump').value; if (v) { const tgt=new Date(v+'T12:00:00'); const today=new Date(); const monday=new Date(today); monday.setDate(today.getDate()-today.getDay()+1); MGMT_WEEK_OFFSET = Math.round((tgt - monday) / (7*86400000)); renderOrgMgmt(document.getElementById('content')); } }],
       ['.mg-dept-filter',  e => { MGMT_DEPT_FILTER = e.dataset.dept || ''; paintOrgMgmt(document.getElementById('content')); }],
+      // Kanban card buttons / body MUST come before .mg-day-cell, since cards
+      // are nested inside day cells and we use first-match scanning.
+      ['.mg-kanban-complete',   async e => { await financeApi('/kanban/'+e.dataset.id+'/complete', { method:'POST', body:'{}' }); await mgRefresh(); }],
+      ['.mg-kanban-uncomplete', async e => { await financeApi('/kanban/'+e.dataset.id+'/uncomplete', { method:'POST', body:'{}' }); await mgRefresh(); }],
+      ['.mg-kanban-card',  e => mgKanbanForm(parseInt(e.dataset.id,10))],
+      ['.mg-kanban-add',   e => mgKanbanForm(null, e.dataset.member)],
       ['.mg-day-cell',     e => mgKanbanForm(null, e.dataset.member, e.dataset.date)],
       ['.mg-okr-add',      ()=>mgOkrForm(null)],
       ['.mg-okr-edit',     e => mgOkrForm(parseInt(e.dataset.id,10))],
       ['.mg-okr-del',      e => mgDelete('/okr/'+e.dataset.id, 'OKR')],
-      ['.mg-kanban-add',   e => mgKanbanForm(null, e.dataset.member)],
-      ['.mg-kanban-card',  e => mgKanbanForm(parseInt(e.dataset.id,10))],
-      ['.mg-kanban-complete',   async e => { await financeApi('/kanban/'+e.dataset.id+'/complete', { method:'POST', body:'{}' }); await mgRefresh(); }],
-      ['.mg-kanban-uncomplete', async e => { await financeApi('/kanban/'+e.dataset.id+'/uncomplete', { method:'POST', body:'{}' }); await mgRefresh(); }],
       ['.mg-dec-add',      ()=>mgDecisionForm(null)],
       ['.mg-dec-edit',     e => mgDecisionForm(parseInt(e.dataset.id,10))],
       ['.mg-dec-del',      e => mgDelete('/decision/'+e.dataset.id, 'decision')],
