@@ -3,7 +3,7 @@
   "week": "Apr 27 - May 03, 2026",
   "week_start": "2026-04-27",
   "week_end": "2026-05-03",
-  "generated_at": "2026-05-01T07:05:58.061304",
+  "generated_at": "2026-05-01T10:01:38.019371",
   "snapshot_date": "2026-05-01",
   "summary": {
     "total_due_this_week": 80,
@@ -23,32 +23,32 @@
     {
       "date": "2026-05-01",
       "day": "Fri",
-      "high": 68,
-      "low": 57,
-      "rain_pct": 37,
-      "rain_in": 0.02,
+      "high": 67,
+      "low": 58,
+      "rain_pct": 41,
+      "rain_in": 0.03,
       "wind_mph": 12,
       "code": 51,
       "desc": "Light drizzle",
-      "outdoor_risk": "good"
+      "outdoor_risk": "caution"
     },
     {
       "date": "2026-05-02",
       "day": "Sat",
-      "high": 76,
-      "low": 52,
+      "high": 77,
+      "low": 55,
       "rain_pct": 2,
       "rain_in": 0.0,
       "wind_mph": 8,
-      "code": 2,
-      "desc": "Partly cloudy",
+      "code": 3,
+      "desc": "Overcast",
       "outdoor_risk": "good"
     },
     {
       "date": "2026-05-03",
       "day": "Sun",
       "high": 80,
-      "low": 60,
+      "low": 58,
       "rain_pct": 1,
       "rain_in": 0.0,
       "wind_mph": 14,
@@ -138,41 +138,41 @@
       "rain_pct": 6,
       "rain_in": 0.18,
       "wind_mph": 12,
-      "code": 80,
-      "desc": "Slight rain showers",
-      "outdoor_risk": "caution"
+      "code": 95,
+      "desc": "Thunderstorm",
+      "outdoor_risk": "stop"
     }
   ],
   "weather": [
     {
       "date": "2026-05-01",
       "day": "Fri",
-      "high": 68,
-      "low": 57,
-      "rain_pct": 37,
-      "rain_in": 0.02,
+      "high": 67,
+      "low": 58,
+      "rain_pct": 41,
+      "rain_in": 0.03,
       "wind_mph": 12,
       "code": 51,
       "desc": "Light drizzle",
-      "outdoor_risk": "good"
+      "outdoor_risk": "caution"
     },
     {
       "date": "2026-05-02",
       "day": "Sat",
-      "high": 76,
-      "low": 52,
+      "high": 77,
+      "low": 55,
       "rain_pct": 2,
       "rain_in": 0.0,
       "wind_mph": 8,
-      "code": 2,
-      "desc": "Partly cloudy",
+      "code": 3,
+      "desc": "Overcast",
       "outdoor_risk": "good"
     },
     {
       "date": "2026-05-03",
       "day": "Sun",
       "high": 80,
-      "low": 60,
+      "low": 58,
       "rain_pct": 1,
       "rain_in": 0.0,
       "wind_mph": 14,
@@ -183,11 +183,25 @@
   ],
   "weather_alerts": [
     {
-      "severity": "medium",
+      "severity": "high",
       "day": "Sun",
       "date": "2026-05-10",
-      "message": "\u26a0\ufe0f Sun 2026-05-10: Slight rain showers \u2014 6% chance of rain. Monitor conditions before starting outdoor work.",
+      "message": "\ud83d\uded1 Sun 2026-05-10: Thunderstorm \u2014 6% chance of rain, winds up to 12 mph. Outdoor work should be rescheduled.",
       "tasks_affected": []
+    },
+    {
+      "severity": "medium",
+      "day": "Fri",
+      "date": "2026-05-01",
+      "message": "\u26a0\ufe0f Fri 2026-05-01: Light drizzle \u2014 41% chance of rain. Monitor conditions before starting outdoor work.",
+      "tasks_affected": [
+        "EXTERIOR DOORS & TRIMS: APPROVE WO",
+        "EXTERIOR DOORS & TRIMS: SECURE PRICING",
+        "EXTERIOR DOORS & TRIMS: INSTALL MISSING WINDOW",
+        "EXTERIOR: SOURCE VENDORS",
+        "FRAMING: INTERIOR WALL FRAMING & BLOCKING",
+        "ROOFING: CONFIRM SCHEDULE"
+      ]
     }
   ],
   "income_alerts": {
@@ -609,6 +623,7 @@
       ],
       "risks": [
         "\ud83d\udd34 11 tasks already overdue. This backlog is slowing down everything else on the project.",
+        "\ud83c\udf27\ufe0f 1 outdoor task due on Fri 2026-05-01 \u2014 weather shows 41% rain chance. Have a backup plan.",
         "\ud83d\udcb0 **FLOORING: BILL & PAYMENT (FLOORING)** ($1,200, payment TO sub/vendor) is blocked because \"FLOORING: PURCHASE MATERIAL (BASEBOARDS)\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 4 overdue tasks in the FLOORING group that need to be cleared first.",
         "\ud83d\udcb0 **FLOORING: BILL & PAYMENT (BASEBOARDS)** ($317, payment TO sub/vendor) is blocked because \"FLOORING: PURCHASE MATERIAL (BASEBOARDS)\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 4 overdue tasks in the FLOORING group that need to be cleared first."
       ],
@@ -744,12 +759,15 @@
       ],
       "risks": [
         "\ud83d\udfe1 9 overdue tasks need attention before they cascade into this week's work.",
+        "\ud83c\udf27\ufe0f 3 outdoor tasks due on Fri 2026-05-01 \u2014 weather shows 41% rain chance. Have a backup plan.",
         "\ud83d\udcb0 **FRAMING: BILL & PAYMENT** ($475, payment TO sub/vendor) is blocked because \"FRAMING: PURCHASE MATERIAL\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 6 overdue tasks in the FRAMING group that need to be cleared first."
       ],
       "focus": [
         "Moderate load: 13 tasks due this week."
       ],
-      "suggestions": []
+      "suggestions": [
+        "With outdoor work at risk from weather, try to front-load outdoor tasks early in the week when conditions are better."
+      ]
     },
     "Martha Cockrell (CNG-20251199)": {
       "pms": [],
@@ -1067,6 +1085,7 @@
       ],
       "risks": [
         "\ud83d\udfe1 5 overdue tasks need attention before they cascade into this week's work.",
+        "\ud83c\udf27\ufe0f 1 outdoor task due on Fri 2026-05-01 \u2014 weather shows 41% rain chance. Have a backup plan.",
         "\ud83d\udcb0 **ELECTRICAL: BILL & PAYMENT** ($10,313, payment TO sub/vendor) is blocked because \"ELECTRICAL: APPROVE WO\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the ELECTRICAL ROUGH IN group that need to be cleared first.",
         "\ud83d\udcb0 **MECHANICAL: BILL & PAYMENT** ($4,302, payment TO sub/vendor) is blocked because \"MECHANICAL: CREATE SOW\" in the same work group is 2 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the MECHANICAL ROUGH IN group that need to be cleared first."
       ],
@@ -1322,6 +1341,7 @@
         }
       ],
       "risks": [
+        "\ud83c\udf27\ufe0f 1 outdoor task due on Fri 2026-05-01 \u2014 weather shows 41% rain chance. Have a backup plan.",
         "\ud83d\udcb0 **ROOFING: BILL & PAYMENT** ($1,000, payment TO sub/vendor) is blocked because \"FRAMING / FOUNDATION: SCHEDULE AN INSPECTION (Copy)\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the NO GROUP group that need to be cleared first.",
         "\ud83d\udcb0 **FINAL PAYMENT** ($1,565, income FROM client) is blocked because \"FRAMING / FOUNDATION: SCHEDULE AN INSPECTION (Copy)\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the NO GROUP group that need to be cleared first."
       ],
@@ -1466,7 +1486,7 @@
   },
   "analysis": [
     "This week has 80 tasks due across 10 projects, with 43 tasks already overdue from previous weeks. That's a combined load of 123 items the team needs to manage.",
-    "\ud83c\udf27\ufe0f **Weather note:** 1 day with possible rain. Not a full stop but PMs should monitor conditions, especially for the 29 outdoor tasks due this week.",
+    "\ud83c\udf27\ufe0f **Weather risk:** 1 day this week is likely too bad for outdoor work. 29 outdoor tasks are due this week \u2014 the PMs should plan around the weather and front-load outdoor work on the clear days.",
     "\ud83d\udcb0 **Payment chain alert:** 10 payments across all projects are effectively blocked because the work that needs to happen before them is overdue. Even though the payment dates look fine in the schedule, these payments CANNOT happen until the prerequisite work is done.",
     "Of those, 1 are **client income payments** ($1,565). This is money that won't come in until the blocking work is cleared.",
     "9 are **sub/material payments** ($18,341) \u2014 the work isn't done so these shouldn't be paid yet either.",
