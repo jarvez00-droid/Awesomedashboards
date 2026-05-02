@@ -2964,6 +2964,10 @@ function sectionKanbans(d) {
     const completeBtn = isDone
       ? `<button class="mg-kanban-uncomplete" data-id="${card.id}" title="Reopen task" style="padding:2px 5px;background:transparent;color:var(--mut);border:1px solid var(--bdr);border-radius:3px;cursor:pointer;font-size:9px">↺</button>`
       : `<button class="mg-kanban-complete" data-id="${card.id}" title="Mark complete" style="padding:2px 5px;background:#10b981;color:#fff;border:none;border-radius:3px;cursor:pointer;font-size:9px;font-weight:700">✓</button>`;
+    // Send-to-backlog button: visible only when the card has a due date AND
+    // isn't already done (sending a completed card to backlog would be weird).
+    const backlogBtn = !isDone && card.due_date
+      ? `<button class="mg-kanban-backlog" data-id="${card.id}" title="Move to backlog (clear due date)" style="padding:2px 5px;background:transparent;color:#f59e0b;border:1px solid #f59e0b;border-radius:3px;cursor:pointer;font-size:9px;margin-right:3px">📥</button>` : '';
     const due = card.due_date && !opts.hideDueDate
       ? `<span style="font-size:9px;color:${isOverdue?'#ef4444':'var(--mut)'};margin-left:4px">${card.due_date.slice(5)}</span>` : '';
     const completedAt = isDone && opts.showCompletedDate
@@ -2971,7 +2975,7 @@ function sectionKanbans(d) {
     return `<div class="mg-kanban-card" data-id="${card.id}" style="background:var(--card);border-left:3px solid ${accent};border-radius:3px;padding:4px 6px;margin-bottom:3px;cursor:pointer;${isDone?'opacity:.7':''}">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:4px">
         <div style="flex:1;font-size:11px;font-weight:600;${isDone?'text-decoration:line-through':''}">${htmlEsc(card.title)}${due}${completedAt}${overdueTag}</div>
-        ${completeBtn}
+        <div style="display:flex;align-items:center;gap:3px">${backlogBtn}${completeBtn}</div>
       </div>
       ${deptMeta ? `<div style="display:inline-block;margin-top:2px;padding:1px 5px;background:${deptMeta.color};color:#fff;border-radius:8px;font-size:8px;font-weight:700;text-transform:uppercase">${deptMeta.label}</div>` : ''}
       ${card.project_name ? `<div style="font-size:9px;color:var(--mut)">📁 ${htmlEsc(card.project_name)}</div>` : ''}
@@ -3287,8 +3291,27 @@ function installOrgMgmtClickHandler() {
       ['.mg-dept-filter',  e => { MGMT_DEPT_FILTER = e.dataset.dept || ''; paintOrgMgmt(document.getElementById('content')); }],
       // Kanban card buttons / body MUST come before .mg-day-cell, since cards
       // are nested inside day cells and we use first-match scanning.
-      ['.mg-kanban-complete',   async e => { await financeApi('/kanban/'+e.dataset.id+'/complete', { method:'POST', body:'{}' }); await mgRefresh(); }],
-      ['.mg-kanban-uncomplete', async e => { await financeApi('/kanban/'+e.dataset.id+'/uncomplete', { method:'POST', body:'{}' }); await mgRefresh(); }],
+      // Optimistic in-place updates on these so the UI flips instantly; the
+      // network call still persists in the background.
+      ['.mg-kanban-complete',   async e => {
+        const id = parseInt(e.dataset.id,10);
+        const today = new Date().toISOString().slice(0,10);
+        mgKanbanOptimistic(id, c => { c.completed_at = today; c.column_name = 'done'; });
+        try { await financeApi('/kanban/'+id+'/complete', { method:'POST', body:'{}' }); }
+        catch(err) { alert('Complete failed: '+(err.message||err)); await mgRefresh(); }
+      }],
+      ['.mg-kanban-uncomplete', async e => {
+        const id = parseInt(e.dataset.id,10);
+        mgKanbanOptimistic(id, c => { c.completed_at = null; c.column_name = 'todo'; });
+        try { await financeApi('/kanban/'+id+'/uncomplete', { method:'POST', body:'{}' }); }
+        catch(err) { alert('Reopen failed: '+(err.message||err)); await mgRefresh(); }
+      }],
+      ['.mg-kanban-backlog',    async e => {
+        const id = parseInt(e.dataset.id,10);
+        mgKanbanOptimistic(id, c => { c.due_date = null; });
+        try { await financeApi('/kanban/'+id+'/move-to-backlog', { method:'POST', body:'{}' }); }
+        catch(err) { alert('Move to backlog failed: '+(err.message||err)); await mgRefresh(); }
+      }],
       ['.mg-kanban-card',  e => mgKanbanForm(parseInt(e.dataset.id,10))],
       ['.mg-kanban-add',   e => mgKanbanForm(null, e.dataset.member)],
       ['.mg-day-cell',     e => mgKanbanForm(null, e.dataset.member, e.dataset.date)],
@@ -3318,18 +3341,51 @@ function installOrgMgmtClickHandler() {
 }
 
 async function mgRefresh() {
-  try { MGMT_DATA_FULL = await financeApi('/management-state'); paintOrgMgmt(document.getElementById('content')); }
-  catch (e) { alert('Refresh failed: ' + (e.message||e)); }
+  try {
+    MGMT_DATA_FULL = await financeApi('/management-state?week_offset=' + MGMT_WEEK_OFFSET);
+    paintOrgMgmt(document.getElementById('content'));
+  } catch (e) { alert('Refresh failed: ' + (e.message||e)); }
 }
 
 async function mgDelete(path, label) {
   if (!confirm('Delete this ' + label + '? (kept in audit trail)')) return;
-  try { await financeApi(path, { method:'DELETE' }); mgRefresh(); }
+  try { await financeApi(path, { method:'DELETE' }); await mgRefresh(); }
   catch (e) { alert('Delete failed: ' + (e.message||e)); }
 }
 async function mgArchive(path) {
-  try { await financeApi(path, { method:'POST', body:'{}' }); mgRefresh(); }
+  try { await financeApi(path, { method:'POST', body:'{}' }); await mgRefresh(); }
   catch (e) { alert('Archive failed: ' + (e.message||e)); }
+}
+
+// Optimistic in-place update for kanban actions — repaints instantly.
+// Mutator receives the card and modifies its fields; we re-bucket the visible
+// week (cards / completed / backlog) and repaint without a network round-trip.
+// The caller is responsible for kicking off the persistence call separately.
+function mgKanbanOptimistic(cardId, mutator) {
+  if (!MGMT_DATA_FULL || !MGMT_DATA_FULL.kanban) return;
+  const k = MGMT_DATA_FULL.kanban;
+  const all = (k.cards||[]).concat(k.completed||[], k.backlog||[]);
+  // De-duplicate (a card can be in cards AND backlog if it's overdue+visible)
+  const byId = new Map();
+  for (const c of all) byId.set(c.id, c);
+  const card = byId.get(cardId);
+  if (!card) return;
+  mutator(card);
+  // Re-bucket
+  const today = (new Date()).toISOString().slice(0,10);
+  const mon = k.monday, sun = k.sunday;
+  const cards = [], completed = [], backlog = [];
+  for (const c of byId.values()) {
+    if (c.completed_at) {
+      if (mon && sun && c.completed_at >= mon && c.completed_at <= sun) completed.push(c);
+      // (cards completed in other weeks aren't visible — they live in DB only)
+      continue;
+    }
+    if (c.due_date && mon && sun && c.due_date >= mon && c.due_date <= sun) cards.push(c);
+    if (!c.due_date || c.due_date < today) backlog.push(c);
+  }
+  k.cards = cards; k.completed = completed; k.backlog = backlog;
+  paintOrgMgmt(document.getElementById('content'));
 }
 
 // ── Generic modal helper ──
@@ -3371,6 +3427,8 @@ function mgModal(title, fields, onSubmit, existingValues) {
   overlay.onclick = ev => { if (ev.target === overlay) overlay.remove(); };
   document.getElementById('mg-form').onsubmit = async ev => {
     ev.preventDefault();
+    const submitBtn = ev.target.querySelector('button[type="submit"]');
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Saving…'; }
     const body = {};
     const multi = {};
     new FormData(ev.target).forEach((v,k) => {
@@ -3386,8 +3444,14 @@ function mgModal(title, fields, onSubmit, existingValues) {
     for (const fd of fields) {
       if (fd.type === 'multi-checkbox') body[fd.name] = (multi[fd.name] || []).join(', ');
     }
-    try { await onSubmit(body); overlay.remove(); mgRefresh(); }
-    catch (e) { alert('Save failed: ' + (e.message||e)); }
+    try {
+      await onSubmit(body);
+      await mgRefresh();    // wait for repaint before closing the modal
+      overlay.remove();
+    } catch (e) {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Save'; }
+      alert('Save failed: ' + (e.message||e));
+    }
   };
 }
 
