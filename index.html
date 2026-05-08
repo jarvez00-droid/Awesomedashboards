@@ -2699,6 +2699,149 @@ async function financeResetScenarios() {
   }
 }
 
+// ── Manual Entries Audit ─────────────────────────────────────────
+// Lets the user see every manually-entered row in the DB (misc_expenses,
+// non_project_income, petty_cash, scenarios, confirmations, bank_snapshots,
+// transactions, pending_payments) and either delete individual rows or wipe
+// a whole category. The page is the source of truth — what's gone is gone
+// (rows are soft-deleted via voided=1 except event_confirmations which are
+// hard-deleted because that table has no voided column).
+
+const FINANCE_AUDIT_CATEGORIES = [
+  { key:'misc_expenses',       label:'💸 Misc Expenses',       deletePath: id => '/misc/'+id,    cols:['date','amount','category','description'] },
+  { key:'non_project_income',  label:'💰 Non-project Income',  deletePath: id => '/income/'+id,  cols:['date','amount','source','description'] },
+  { key:'petty_cash',          label:'🧾 Petty Cash',          deletePath: id => '/petty/'+id,   cols:['date','amount','category','description'] },
+  { key:'pending_payments',    label:'⏳ Pending Payments',    deletePath: id => '/pending-payment/'+id+'/void', method:'POST', cols:['due_date','amount','label','status'] },
+  { key:'transactions',        label:'📒 Transactions',        deletePath: id => '/transaction/'+id+'/void', method:'POST', body:'{"reason":"manual delete"}', cols:['date','amount','kind','category','label'] },
+  { key:'scenario_overrides',  label:'🔀 Scenario Overrides',  deletePath: id => '/scenario-override/'+(id), wipeOnly:true, cols:['scenario_name','source_id','scenario_date','scenario_amount','label'] },
+  { key:'scenario_additions',  label:'➕ Scenario Additions',  wipeOnly:true, cols:['scenario_name','date','amount','kind','label'] },
+  { key:'scenario_deletions',  label:'➖ Scenario Deletions',  wipeOnly:true, cols:['scenario_name','source_id','label_snapshot','date_snapshot'] },
+  { key:'event_confirmations', label:'✅ Event Confirmations', wipeOnly:true, cols:['source_id','confirmed','note','set_at'] },
+  { key:'bank_snapshots',      label:'🏦 Bank Snapshots',      deletePath: id => '/bank/'+id,    cols:['date','balance','note'], note:'Wipe-all keeps the most recent.' },
+];
+
+async function financeOpenAudit() {
+  let inv;
+  try { inv = await financeApi('/admin/manual-entries'); }
+  catch (e) { alert('Could not load audit: ' + e.message); return; }
+
+  const total = Object.values(inv).reduce((s, v) => s + (v.count||0), 0);
+  const overlay = document.createElement('div');
+  overlay.id = 'finance-audit-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  overlay.innerHTML = `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:10px;padding:20px;max-width:1100px;width:100%;max-height:90vh;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <div style="font-size:18px;font-weight:700">🧹 Manual Entries Audit</div>
+      <button id="audit-close" style="padding:6px 12px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">Close</button>
+    </div>
+    <div style="font-size:12px;color:var(--mut);margin-bottom:14px">${total} manually-entered rows in the database. Expand a category to see each row and delete individually, or use Wipe to clear a whole category. Bank Snapshots Wipe keeps the most recent balance.</div>
+    <div id="audit-body"></div>
+    <div style="margin-top:18px;padding:14px;background:rgba(239,68,68,.08);border:1px solid #ef4444;border-radius:8px">
+      <div style="font-size:13px;font-weight:700;color:#ef4444;margin-bottom:6px">Nuclear option</div>
+      <div style="font-size:12px;color:var(--txt);margin-bottom:8px">Wipe ALL ${total} manually-entered rows across every category. JobTread tasks and Google-Sheet fixed costs are NOT touched. Most recent bank balance is kept.</div>
+      <button id="audit-wipe-all" style="padding:8px 14px;background:#ef4444;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:700">💣 Wipe Everything Manual</button>
+    </div>
+  </div>`;
+  document.body.appendChild(overlay);
+  document.getElementById('audit-close').onclick = () => overlay.remove();
+  overlay.onclick = e => { if (e.target === overlay) overlay.remove(); };
+
+  const renderBody = () => {
+    const body = document.getElementById('audit-body');
+    let h = '';
+    for (const cat of FINANCE_AUDIT_CATEGORIES) {
+      const info = inv[cat.key] || { count:0, rows:[] };
+      const open = sessionStorage.getItem('audit_open_' + cat.key) === '1';
+      h += `<details ${open?'open':''} style="margin-bottom:8px;background:var(--card-h);border:1px solid var(--bdr);border-radius:6px" data-cat="${cat.key}">
+        <summary style="padding:10px 12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;list-style:none">
+          <span style="font-weight:700">${cat.label} <span style="color:var(--mut);font-weight:400;font-size:12px">(${info.count})</span></span>
+          ${info.count > 0 ? `<button class="audit-wipe-cat" data-cat="${cat.key}" style="padding:4px 10px;background:#f59e0b;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:11px;font-weight:600">Wipe ${cat.label.replace(/^[^a-zA-Z]+/,'').trim()}</button>` : ''}
+        </summary>`;
+      if (info.count === 0) {
+        h += `<div style="padding:8px 14px;color:var(--mut);font-style:italic;font-size:12px">empty</div>`;
+      } else {
+        h += `<div style="overflow-x:auto;padding:0 8px 8px"><table style="width:100%;border-collapse:collapse;font-size:11px"><thead><tr style="text-align:left;color:var(--dim);text-transform:uppercase;font-size:10px">
+          <th style="padding:5px 8px">id</th>`;
+        for (const c of cat.cols) h += `<th style="padding:5px 8px">${c}</th>`;
+        h += `<th style="padding:5px 8px;width:50px"></th></tr></thead><tbody>`;
+        for (const r of info.rows.slice(0, 200)) {
+          h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+            <td style="padding:4px 8px;font-family:var(--mono);color:var(--mut)">${r.id}</td>`;
+          for (const c of cat.cols) {
+            let v = r[c];
+            if (typeof v === 'number' && c === 'amount') v = '$' + v.toLocaleString();
+            if (typeof v === 'number' && c === 'balance') v = '$' + v.toLocaleString();
+            h += `<td style="padding:4px 8px">${financeAttr(v ?? '—')}</td>`;
+          }
+          if (cat.deletePath && !cat.wipeOnly) {
+            h += `<td style="padding:4px 8px;text-align:right"><button class="audit-row-del" data-cat="${cat.key}" data-id="${r.id}" style="padding:2px 6px;background:transparent;color:#ef4444;border:1px solid #ef4444;border-radius:3px;cursor:pointer;font-size:10px;font-weight:700">×</button></td>`;
+          } else {
+            h += `<td style="padding:4px 8px"></td>`;
+          }
+          h += `</tr>`;
+        }
+        if (info.rows.length > 200) h += `<tr><td colspan="${cat.cols.length+2}" style="padding:6px 8px;color:var(--mut);font-style:italic;font-size:11px">…${info.rows.length - 200} more rows hidden. Use Wipe to clear all.</td></tr>`;
+        h += `</tbody></table></div>`;
+      }
+      h += `</details>`;
+    }
+    body.innerHTML = h;
+    // Persist details open/closed state
+    body.querySelectorAll('details').forEach(el => {
+      el.addEventListener('toggle', () => sessionStorage.setItem('audit_open_' + el.dataset.cat, el.open ? '1' : '0'));
+    });
+    // Per-row delete
+    body.querySelectorAll('.audit-row-del').forEach(btn => {
+      btn.onclick = async ev => {
+        ev.preventDefault();
+        const cat = FINANCE_AUDIT_CATEGORIES.find(c => c.key === btn.dataset.cat);
+        const id = btn.dataset.id;
+        if (!confirm('Delete row ' + id + ' from ' + cat.label + '?')) return;
+        try {
+          await financeApi(cat.deletePath(id), { method: cat.method || 'DELETE', body: cat.body });
+          inv = await financeApi('/admin/manual-entries');
+          renderBody();
+        } catch (e) { alert('Delete failed: ' + e.message); }
+      };
+    });
+    // Per-category wipe
+    body.querySelectorAll('.audit-wipe-cat').forEach(btn => {
+      btn.onclick = async ev => {
+        ev.preventDefault();
+        const cat = FINANCE_AUDIT_CATEGORIES.find(c => c.key === btn.dataset.cat);
+        const info = inv[cat.key] || { count:0 };
+        if (!confirm(`Wipe all ${info.count} rows from ${cat.label}? ${cat.note||''}`)) return;
+        try {
+          await financeApi('/admin/wipe-manual-entries', {
+            method: 'POST',
+            body: JSON.stringify({ categories: [cat.key] }),
+          });
+          inv = await financeApi('/admin/manual-entries');
+          renderBody();
+        } catch (e) { alert('Wipe failed: ' + e.message); }
+      };
+    });
+  };
+  renderBody();
+
+  document.getElementById('audit-wipe-all').onclick = async () => {
+    const counts = FINANCE_AUDIT_CATEGORIES.map(c => `${c.label}: ${(inv[c.key]||{count:0}).count}`).join('\n');
+    if (!confirm('💣 Wipe EVERYTHING manual:\n\n' + counts + '\n\nThis cannot be undone (rows are soft-deleted but the dashboard treats voided=1 as gone).\n\nProceed?')) return;
+    try {
+      await financeApi('/admin/wipe-manual-entries', {
+        method: 'POST',
+        body: JSON.stringify({ categories: FINANCE_AUDIT_CATEGORIES.map(c => c.key) }),
+      });
+      overlay.remove();
+      // Reload finance state so the dashboard reflects the wipe
+      try {
+        FINANCE_DATA = await financeApi('/state');
+        financeSafeRender();
+      } catch (e) { location.reload(); }
+    } catch (e) { alert('Wipe failed: ' + e.message); }
+  };
+}
+
 // ── Finance tab — gate/load ───────────────────────────────────────
 // ─── Management tab — team OKRs, kanbans, etc. (Phase 1: placeholder) ────
 function orgMgmtGate(c) {
@@ -4693,6 +4836,7 @@ function renderFinance(c) {
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
         <button onclick="financePrintSummary()" style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">📄 Print Summary</button>
+        <button onclick="financeOpenAudit()" ${live?'':'disabled'} style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--ylw);border-radius:6px;cursor:${live?'pointer':'not-allowed'};opacity:${live?'1':'.4'}" title="See and clear every manually-entered row">🧹 Audit Manual Entries</button>
         <button onclick="financeResetScenarios()" style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--ylw);border-radius:6px;cursor:pointer">↺ Reset edits${hasOverrides ? ' ('+hasOverrides+')' : ''}</button>
         <button onclick="financeShowConfig()" style="padding:7px 12px;font-size:12px;font-weight:500;background:var(--card);color:var(--txt2);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">⚙ Settings</button>
       </div>
