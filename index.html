@@ -7517,193 +7517,133 @@ function buildOkCard(p) {
 function buildCard(p, open, isEOD) {
   const c = p.c || {};
   const g = p.g || {};
-  const t = p.tasks || {};
-  const ov = t.overdue || []; const bl = t.blocked || [];
-  const ac = t.active || []; const co = t.coming || [];
+  // NEW data shape: p.pm_tasks (PM-accountable) + p.backoffice_tasks
+  // (payments / purchases / additional expenses). Older SOD snapshots only
+  // have `p.tasks` — fall back to those so date-prev navigation still works.
+  const legacyTasks = p.tasks || {};
+  const pmT = p.pm_tasks || {};
+  const boT = p.backoffice_tasks || {};
+  const pmOv = pmT.overdue || legacyTasks.overdue || [];
+  const pmAc = pmT.active || legacyTasks.active || [];
+  const pmAb = pmT.active_blocked || legacyTasks.active_blocked || [];
+  const pmUp = pmT.upcoming || (legacyTasks.coming || []).filter(tk => !tk.is_payment);
+  const boOv = boT.overdue || legacyTasks.pay_overdue || [];
+  const boTd = boT.today || [];
+  const boUp = boT.upcoming || (legacyTasks.coming || []).filter(tk => tk.is_payment);
   const pmLine = p.pm ? `PM: ${p.pm}` : '<span class="nob">⚠ No PM assigned</span>';
 
-  const pay = t.pay_overdue || [];
-
-  // Tags
+  // Tags — counts in the card header
   let tags = '';
   if (isEOD && c.completed) tags += `<span class="tg gr">${c.completed} done</span>`;
   if (isEOD && c.resolved) tags += `<span class="tg gr">${c.resolved} cleared</span>`;
   if (c.ov) tags += `<span class="tg r">${c.ov} overdue</span>`;
   if (c.ac) tags += `<span class="tg b">${c.ac} active</span>`;
   if (c.ab) tags += `<span class="tg o">${c.ab} active blocked</span>`;
-  if (c.co_un) tags += `<span class="tg y">${c.co_un} upcoming unassigned</span>`;
-  else if (c.co) tags += `<span class="tg" style="background:rgba(250,204,21,.06);color:var(--dim);border-color:rgba(250,204,21,.2)">${c.co} upcoming</span>`;
-  if (c.pay) tags += `<span class="tg" style="background:rgba(129,140,248,.15);color:#818cf8;border-color:rgba(129,140,248,.3)">${c.pay} payment</span>`;
-
-  const sev = c.ov ? 'sev-r' : c.ac ? 'sev-b' : c.co ? 'sev-g' : 'sev-g';
-
-  const ab = t.active_blocked || [];
-  // Preview: always 4 standard columns + optional payments
-  const colCount = 4 + (pay.length ? 1 : 0);
-  let preview = `<div class="preview" style="grid-template-columns:repeat(${colCount},1fr)">`;
-  preview += pvCol('Overdue', 'r', ov, tk => `${tk.n}`, tk => `${tk.d}d`);
-  preview += pvCol('Active', 'b', ac, tk => `${tk.n}`, tk => tk.dt || 'active');
-  preview += pvCol('Active Blocked', 'o', ab, tk => `${tk.n}`, tk => tk.d ? `${tk.d}d late` : 'blocked');
-  const previewCo = co.filter(tk => tk.unassigned).length ? co.filter(tk => tk.unassigned) : co;
-  preview += pvCol('Upcoming' + (co.filter(tk=>tk.unassigned).length ? ' (unassigned)' : ''), 'y', previewCo, tk => `${tk.n}`, tk => tk.when || '');
-  if (pay.length) {
-    preview += `<div class="pv-col"><div class="pv-head" style="color:#818cf8">💰 Payments</div>`;
-    pay.slice(0, 2).forEach(tk => {
-      const ttShort = (tk.tt||'').replace(/^\d+\.\s*/, '').replace('Payment - ','');
-      const pvDue = tk.d > 0 ? `past due: ${tk.d}d` : tk.d === 0 ? 'due today' : `due in ${Math.abs(tk.d)}d`;
-      preview += `<div class="pv-item"><div class="pv-dot" style="background:#818cf8"></div><div class="pv-txt"><div class="pv-name">${tk.n}</div><div class="pv-sub" style="color:#818cf8">${ttShort} · ${pvDue}</div></div></div>`;
-    });
-    if (pay.length > 2) preview += `<div class="pv-more">+${pay.length - 2} more</div>`;
-    preview += '</div>';
+  if (c.up) tags += `<span class="tg y">${c.up} upcoming</span>`;
+  if (c.bo_ov || c.bo_today || c.bo_up) {
+    const boTotal = (c.bo_ov||0) + (c.bo_today||0) + (c.bo_up||0);
+    tags += `<span class="tg" style="background:rgba(129,140,248,.15);color:#818cf8;border-color:rgba(129,140,248,.3)">${boTotal} backoffice</span>`;
   }
-  preview += '</div>';
 
-  // Expanded body — 3 columns when payments exist, 2 otherwise
-  const useThreeCol = pay.length > 0;
-  let body = `<div class="${useThreeCol ? 'pb-3col' : 'pb-grid'}">`;
+  const sev = c.ov ? 'sev-r' : c.ac ? 'sev-b' : 'sev-g';
+
+  // ── Preview: 4 columns (Overdue / Active / Active Blocked / Upcoming-15d) ──
+  let preview = `<div class="preview" style="grid-template-columns:repeat(4,1fr)">`;
+  preview += pvCol('Overdue', 'r', pmOv, tk => `${tk.n}`, tk => `${tk.d}d`);
+  preview += pvCol('Active', 'b', pmAc, tk => `${tk.n}`, tk => tk.dt || 'active');
+  preview += pvCol('Active Blocked', 'o', pmAb, tk => `${tk.n}`, tk => tk.d ? `${tk.d}d late` : 'blocked');
+  preview += pvCol('Upcoming (15d)', 'y', pmUp, tk => `${tk.unassigned?'⚠ ':''}${tk.n}`, tk => tk.when || '');
+  preview += '</div>';
 
   const emptyMsg = '<div style="font-size:11px;color:var(--dim);font-style:italic;padding:4px 0">None</div>';
 
-  // Column 1: Overdue + Active Blocked
-  body += '<div>';
-  if (isEOD && t.completed?.length) {
+  // ── Body: 70/30 split (PM Tasks left · Backoffice Tasks right) ──
+  // Row that picks ⚠ vs the assignee name, no separate "Unassigned"/"Assigned" splits.
+  const flatRow = (color, tk, dueOrWhen, isOverdue) => {
+    const w = tk.unassigned
+      ? '<span class="nob">⚠ Nobody</span>'
+      : (tk.w && tk.w !== '⚠️ Nobody' ? tk.w.split(',')[0].trim() : '<span class="nob">⚠ Nobody</span>');
+    return `<div class="tr"><div class="td ${color}"></div><div class="ti"><div class="tn">${tk.n} <span style="color:var(--dim)">— ${w}</span></div></div><div class="tw${isOverdue?' ov':''}">${dueOrWhen||''}</div></div>`;
+  };
+  const blockedRow = tk => {
+    const kindTag = tk.bl_kind === 'payment' ? '<span style="background:rgba(129,140,248,.15);color:#818cf8;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">💰 payment</span>'
+      : tk.bl_kind === 'overdue' ? '<span style="background:rgba(248,113,113,.15);color:var(--red);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">⚠ overdue</span>'
+      : '<span style="background:rgba(250,204,21,.1);color:var(--ylw);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px">⏳ predecessor</span>';
+    const late = tk.d > 0 ? `${tk.d}d late` : 'today';
+    const byLine = tk.bl ? `<div style="font-size:10px;color:var(--dim);margin-top:1px">↳ waiting on: ${tk.bl}</div>` : '';
+    return `<div class="tr" style="flex-wrap:wrap"><div class="td o"></div><div class="ti"><div class="tn">${tk.n} <span style="color:var(--dim)">— ${tk.w||''}</span>${kindTag}</div>${byLine}</div><div class="tw ov">${late}</div></div>`;
+  };
+
+  let body = `<div style="display:grid;grid-template-columns:7fr 3fr;gap:14px">`;
+
+  // ── LEFT 70%: PM Tasks ───────────────────────────────────────
+  body += `<div>
+    <div style="font-size:11px;font-weight:700;color:var(--txt);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--bdr)">📋 PM Tasks</div>`;
+
+  if (isEOD && p.tasks?.completed?.length) {
     body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Completed</div>';
-    body += trowSection('g', t.completed, tk => trow('g', tk.n, tk.w, '✓'), 5);
+    body += trowSection('g', p.tasks.completed, tk => trow('g', tk.n, tk.w, '✓'), 5);
     body += '</div>';
   }
-  if (isEOD && t.resolved?.length) {
+  if (isEOD && p.tasks?.resolved?.length) {
     body += '<div class="ts"><div class="tsl" style="color:var(--grn)">✅ Resolved</div>';
-    body += trowSection('g', t.resolved, tk => trow('g', tk.n, tk.w, 'clear'), 5);
+    body += trowSection('g', p.tasks.resolved, tk => trow('g', tk.n, tk.w, 'clear'), 5);
     body += '</div>';
   }
   body += '<div class="ts"><div class="tsl lr">Overdue</div>';
-  if (ov.length) {
-    body += trowSection('r', ov, tk => trow('r', tk.n, tk.w, tk.d + 'd', true), 5);
-  } else { body += emptyMsg; }
+  body += pmOv.length ? trowSection('r', pmOv, tk => flatRow('r', tk, tk.d + 'd', true), 5) : emptyMsg;
+  body += '</div>';
+  body += '<div class="ts"><div class="tsl ac">Active</div>';
+  body += pmAc.length ? trowSection('b', pmAc, tk => flatRow('b', tk, tk.dt || '', false), 5) : emptyMsg;
   body += '</div>';
   body += '<div class="ts"><div class="tsl" style="color:var(--org)">Active Blocked</div>';
-  if (ab.length) {
-    body += trowSection('o', ab, tk => {
-      const kindTag = tk.bl_kind === 'payment' ? '<span style="background:rgba(129,140,248,.15);color:#818cf8;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">💰 payment</span>'
-        : tk.bl_kind === 'overdue' ? '<span style="background:rgba(248,113,113,.15);color:var(--red);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">⚠ overdue</span>'
-        : '<span style="background:rgba(250,204,21,.1);color:var(--ylw);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px">⏳ predecessor</span>';
-      const late = tk.d > 0 ? `${tk.d}d late` : 'today';
-      const byLine = tk.bl ? `<div style="font-size:10px;color:var(--dim);margin-top:1px">↳ waiting on: ${tk.bl}</div>` : '';
-      return `<div class="tr" style="flex-wrap:wrap"><div class="td o"></div><div class="ti"><div class="tn">${tk.n} - ${tk.w||''}${kindTag}</div>${byLine}</div><div class="tw ov">${late}</div></div>`;
-    }, 5);
-  } else { body += emptyMsg; }
+  body += pmAb.length ? trowSection('o', pmAb, blockedRow, 5) : emptyMsg;
   body += '</div>';
+  body += `<div class="ts"><div class="tsl dt">Upcoming — Next 15 Days (${pmUp.length})</div>`;
+  body += pmUp.length ? trowSection('y', pmUp, tk => flatRow('y', tk, tk.when || '', false), 8) : emptyMsg;
   body += '</div>';
 
-  // Column 2: Active + Upcoming
-  body += '<div>';
-  body += '<div class="ts"><div class="tsl ac">Active</div>';
-  if (ac.length) {
-    body += trowSection('b', ac, tk => trow('b', tk.n, tk.w, tk.dt || ''), 5);
-  } else { body += emptyMsg; }
-  body += '</div>';
-  // Split upcoming into unassigned (visible) and assigned (collapsed)
-  const coUnassigned = co.filter(tk => tk.unassigned);
-  const coAssigned = co.filter(tk => !tk.unassigned);
-
-  const upcomingRow = tk => {
-    let warn = '';
-    if (tk.blocked_kind === 'overdue') warn = '<span style="background:rgba(248,113,113,.15);color:var(--red);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">⚠ blocked by overdue</span>';
-    else if (tk.blocked_kind === 'payment') warn = '<span style="background:rgba(129,140,248,.15);color:#818cf8;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px;font-weight:600">💰 blocked by payment</span>';
-    else if (tk.blocked_kind === 'active') warn = '<span style="background:rgba(96,165,250,.15);color:#60a5fa;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px">⏳ waiting on active task</span>';
-    else if (tk.blocked_kind === 'upcoming') warn = '<span style="background:rgba(250,204,21,.1);color:var(--ylw);font-size:9px;padding:1px 5px;border-radius:3px;margin-left:6px">⏳ waiting on predecessor</span>';
-    const byLine = tk.blocked_by ? `<div style="font-size:10px;color:var(--dim);margin-top:1px">↳ ${tk.blocked_by}</div>` : '';
-    return `<div class="tr"><div class="td y"></div><div class="ti"><div class="tn">${tk.n} — <span style="color:${tk.unassigned ? 'var(--red)' : 'var(--txt2)'}">${tk.w||''}</span>${warn}</div>${byLine}</div><div class="tw">${tk.when||''}</div></div>`;
-  };
-
-  body += `<div class="ts"><div class="tsl dt">Upcoming — Next 7 Days (${co.length} total)</div>`;
-
-  // Unassigned: always visible
-  if (coUnassigned.length) {
-    body += `<div style="font-size:11px;font-weight:600;color:var(--red);margin:6px 0 4px;text-transform:uppercase;letter-spacing:.5px">⚠️ Unassigned (${coUnassigned.length}) — Need someone assigned</div>`;
-    coUnassigned.forEach(tk => { body += upcomingRow(tk); });
-  }
-
-  // Assigned: collapsed by default
-  if (coAssigned.length) {
-    body += `<div style="margin-top:8px;cursor:pointer" onclick="var el=this.querySelector('.co-assigned');el.style.display=el.style.display==='none'?'block':'none';this.querySelector('svg').style.transform=el.style.display==='none'?'':'rotate(180deg)'">
-      <div style="font-size:11px;font-weight:600;color:var(--dim);display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.5px">
-        ✅ Assigned (${coAssigned.length}) — Click to expand
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="co-assigned" style="display:none">`;
-    coAssigned.forEach(tk => { body += upcomingRow(tk); });
-    body += '</div></div>';
-  }
-
-  if (!co.length) body += emptyMsg;
-  body += '</div>';
-  body += '</div>';
-
-  // Column 3 (sidebar): Payment & Purchase tasks
-  if (useThreeCol) {
-    body += '<div class="pay-side">';
-
-    // Overdue payments
-    if (pay.length) {
-      body += `<div class="ts"><div class="tsl" style="color:var(--red)">🔴 Overdue Payments (${pay.length})</div>`;
-      body += `<div style="font-size:10px;color:rgba(129,140,248,.7);margin-bottom:8px;font-style:italic">Not counted in PM metrics</div>`;
-      pay.forEach(tk => {
-        const ttShort = (tk.tt||'').replace(/^\d+\.\s*/, '').replace('Payment - ','');
-        const dueLabel = tk.d > 0 ? `<span style="color:var(--red);font-weight:600">past due: ${tk.d}d</span>` : tk.d === 0 ? '<span style="color:var(--ylw);font-weight:600">due today</span>' : `<span style="color:var(--dim)">due in ${Math.abs(tk.d)}d</span>`;
-        body += `<div class="tr" style="flex-wrap:wrap;gap:2px"><div class="td"></div><div class="ti"><div class="tn">${tk.n}</div><div style="font-size:10px;color:#818cf8">${ttShort}</div></div><div class="tw" style="font-size:10px">${dueLabel}</div></div>`;
-      });
-      body += '</div>';
-    }
-
-    // Upcoming payments from 7-day coming list
-    const payUpcoming = co.filter(tk => tk.is_payment);
-    if (payUpcoming.length) {
-      const payUpTotal = payUpcoming.reduce((s, tk) => s + (tk.amount || 0), 0);
-      const payIn = payUpcoming.filter(tk => tk.pay_type === 'income' || tk.pay_type === 'p_income');
-      const payOut = payUpcoming.filter(tk => tk.pay_type !== 'income' && tk.pay_type !== 'p_income');
-
-      body += `<div class="ts" style="margin-top:10px"><div class="tsl" style="color:var(--ylw)">📅 Upcoming Payments — Next 7 Days (${payUpcoming.length})</div>`;
-
-      if (payIn.length) {
-        const inTotal = payIn.reduce((s, tk) => s + (tk.amount || 0), 0);
-        body += `<div style="font-size:11px;font-weight:600;color:var(--grn);margin:6px 0 4px;text-transform:uppercase;letter-spacing:.5px">⬇️ Income Expected${inTotal ? ' — $' + inTotal.toLocaleString() : ''}</div>`;
-        payIn.forEach(tk => {
-          const amt = tk.amount ? '<span style="color:var(--grn);font-weight:600">$' + tk.amount.toLocaleString() + '</span>' : '<span style="color:var(--dim)">TBD</span>';
-          body += `<div class="tr" style="flex-wrap:wrap;gap:2px"><div class="td" style="background:var(--grn)"></div><div class="ti"><div class="tn">${tk.n}</div><div style="font-size:10px;color:var(--dim)">${tk.when} · ${tk.w}</div></div><div class="tw" style="font-size:10px">${amt}</div></div>`;
-        });
-      }
-
-      if (payOut.length) {
-        const outTotal = payOut.reduce((s, tk) => s + (tk.amount || 0), 0);
-        body += `<div style="font-size:11px;font-weight:600;color:#f97316;margin:6px 0 4px;text-transform:uppercase;letter-spacing:.5px">⬆️ Payments Going Out${outTotal ? ' — $' + outTotal.toLocaleString() : ''}</div>`;
-        payOut.forEach(tk => {
-          const amt = tk.amount ? '<span style="color:var(--red);font-weight:600">$' + tk.amount.toLocaleString() + '</span>' : '<span style="color:var(--dim)">TBD</span>';
-          const typeLabel = tk.pay_type === 'materials' ? '📦' : tk.pay_type === 'subs' ? '🔧' : '💳';
-          body += `<div class="tr" style="flex-wrap:wrap;gap:2px"><div class="td" style="background:#f97316"></div><div class="ti"><div class="tn">${typeLabel} ${tk.n}</div><div style="font-size:10px;color:var(--dim)">${tk.when} · ${tk.w}</div></div><div class="tw" style="font-size:10px">${amt}</div></div>`;
-        });
-      }
-
-      body += '</div>';
-    }
-
-    if (!pay.length && !payUpcoming.length) {
-      body += `<div class="ts"><div class="tsl">💰 Payments & Purchases</div>`;
-      body += '<div style="font-size:12px;color:var(--dim);font-style:italic;padding:8px 0">No payment tasks</div></div>';
-    }
-
-    body += '</div>';
-  }
-
-  // Full-width: Gaps
+  // Role gaps (only inside PM column — they refer to PM-relevant role coverage)
   if (g.p || g.v || g.pc) {
-    body += `<div style="grid-column:1/-1"><div class="ts"><div class="tsl gp">Role Gaps</div><div class="gl">`;
+    body += `<div class="ts" style="margin-top:8px"><div class="tsl gp">Role Gaps</div><div class="gl">`;
     if (g.p) body += `<span class="gt">${g.p} no PM</span>`;
     if (g.v) body += `<span class="gt">${g.v} no Vendor</span>`;
     if (g.pc) body += `<span class="gt">${g.pc} no PurchCoord</span>`;
-    body += '</div></div></div>';
+    body += '</div></div>';
   }
+
   body += '</div>';
+
+  // ── RIGHT 30%: Backoffice Tasks ──────────────────────────────
+  const boRow = tk => {
+    const w = tk.unassigned
+      ? '<span class="nob">⚠ Nobody</span>'
+      : (tk.w && tk.w !== '⚠️ Nobody' ? tk.w.split(',')[0].trim() : '<span class="nob">⚠ Nobody</span>');
+    const amt = tk.amount ? `<span style="font-weight:600;color:${tk.pay_type==='income'||tk.pay_type==='p_income'?'var(--grn)':'#f97316'}">$${tk.amount.toLocaleString()}</span>` : '<span style="color:var(--dim)">TBD</span>';
+    const ttPill = tk.tt_short ? `<span style="display:inline-block;background:rgba(129,140,248,.15);color:#818cf8;font-size:8px;padding:1px 5px;border-radius:3px;font-weight:700;margin-right:4px">${tk.tt_short}</span>` : '';
+    let dueLabel;
+    if (tk.d !== undefined) dueLabel = `<span style="color:var(--red);font-weight:600">${tk.d}d late</span>`;
+    else if (tk.when !== undefined) dueLabel = tk.when;
+    else dueLabel = 'today';
+    return `<div class="tr" style="flex-wrap:wrap;gap:2px"><div class="td" style="background:#818cf8"></div><div class="ti" style="min-width:0"><div class="tn" style="font-size:11px">${ttPill}${tk.n}</div><div style="font-size:10px;color:var(--dim);overflow:hidden;text-overflow:ellipsis">${w} · ${amt}</div></div><div class="tw" style="font-size:10px">${dueLabel}</div></div>`;
+  };
+
+  body += `<div>
+    <div style="font-size:11px;font-weight:700;color:#818cf8;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--bdr)">💰 Backoffice Tasks
+      <div style="font-size:9px;color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0;margin-top:2px;font-style:italic">Not counted in PM metrics</div>
+    </div>`;
+  body += `<div class="ts"><div class="tsl lr">Overdue (${boOv.length})</div>`;
+  body += boOv.length ? trowSection('r', boOv, boRow, 8) : emptyMsg;
+  body += '</div>';
+  body += `<div class="ts"><div class="tsl" style="color:var(--ylw)">Due Today (${boTd.length})</div>`;
+  body += boTd.length ? trowSection('y', boTd, boRow, 8) : emptyMsg;
+  body += '</div>';
+  body += `<div class="ts"><div class="tsl dt">Upcoming — Next 7 Days (${boUp.length})</div>`;
+  body += boUp.length ? trowSection('y', boUp, boRow, 8) : emptyMsg;
+  body += '</div>';
+  body += '</div>';  // /right column
+
+  body += '</div>';  // /70-30 grid
 
   return `<div class="pc ${sev}${open ? ' op' : ''}" data-st="issue" data-pm="${p.pm||'No PM'}"><div class="ph" onclick="tog(this)"><div>
     <div class="pn">${p.name}</div><div class="pp">${pmLine}</div></div>
