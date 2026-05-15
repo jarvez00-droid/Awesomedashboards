@@ -3,7 +3,7 @@
   "week": "May 11 - May 17, 2026",
   "week_start": "2026-05-11",
   "week_end": "2026-05-17",
-  "generated_at": "2026-05-15T07:02:33.796256",
+  "generated_at": "2026-05-15T10:02:41.179886",
   "snapshot_date": "2026-05-15",
   "summary": {
     "total_due_this_week": 122,
@@ -23,9 +23,9 @@
     {
       "date": "2026-05-15",
       "day": "Fri",
-      "high": 91,
-      "low": 70,
-      "rain_pct": 5,
+      "high": 89,
+      "low": 69,
+      "rain_pct": 7,
       "rain_in": 0.0,
       "wind_mph": 19,
       "code": 3,
@@ -36,10 +36,10 @@
       "date": "2026-05-16",
       "day": "Sat",
       "high": 88,
-      "low": 70,
+      "low": 69,
       "rain_pct": 3,
       "rain_in": 0.0,
-      "wind_mph": 19,
+      "wind_mph": 18,
       "code": 3,
       "desc": "Overcast",
       "outdoor_risk": "good"
@@ -66,9 +66,9 @@
       "rain_pct": 47,
       "rain_in": 0.03,
       "wind_mph": 20,
-      "code": 53,
-      "desc": "Moderate drizzle",
-      "outdoor_risk": "caution"
+      "code": 95,
+      "desc": "Thunderstorm",
+      "outdoor_risk": "stop"
     },
     {
       "date": "2026-05-19",
@@ -78,9 +78,9 @@
       "rain_pct": 54,
       "rain_in": 0.18,
       "wind_mph": 17,
-      "code": 55,
-      "desc": "Dense drizzle",
-      "outdoor_risk": "caution"
+      "code": 95,
+      "desc": "Thunderstorm",
+      "outdoor_risk": "stop"
     },
     {
       "date": "2026-05-20",
@@ -147,9 +147,9 @@
     {
       "date": "2026-05-15",
       "day": "Fri",
-      "high": 91,
-      "low": 70,
-      "rain_pct": 5,
+      "high": 89,
+      "low": 69,
+      "rain_pct": 7,
       "rain_in": 0.0,
       "wind_mph": 19,
       "code": 3,
@@ -160,10 +160,10 @@
       "date": "2026-05-16",
       "day": "Sat",
       "high": 88,
-      "low": 70,
+      "low": 69,
       "rain_pct": 3,
       "rain_in": 0.0,
-      "wind_mph": 19,
+      "wind_mph": 18,
       "code": 3,
       "desc": "Overcast",
       "outdoor_risk": "good"
@@ -183,24 +183,24 @@
   ],
   "weather_alerts": [
     {
+      "severity": "high",
+      "day": "Mon",
+      "date": "2026-05-18",
+      "message": "\ud83d\uded1 Mon 2026-05-18: Thunderstorm \u2014 47% chance of rain, winds up to 20 mph. Outdoor work should be rescheduled.",
+      "tasks_affected": []
+    },
+    {
+      "severity": "high",
+      "day": "Tue",
+      "date": "2026-05-19",
+      "message": "\ud83d\uded1 Tue 2026-05-19: Thunderstorm \u2014 54% chance of rain, winds up to 17 mph. Outdoor work should be rescheduled.",
+      "tasks_affected": []
+    },
+    {
       "severity": "medium",
       "day": "Sun",
       "date": "2026-05-17",
       "message": "\u26a0\ufe0f Sun 2026-05-17: Light drizzle \u2014 17% chance of rain. Monitor conditions before starting outdoor work.",
-      "tasks_affected": []
-    },
-    {
-      "severity": "medium",
-      "day": "Mon",
-      "date": "2026-05-18",
-      "message": "\u26a0\ufe0f Mon 2026-05-18: Moderate drizzle \u2014 47% chance of rain. Monitor conditions before starting outdoor work.",
-      "tasks_affected": []
-    },
-    {
-      "severity": "medium",
-      "day": "Tue",
-      "date": "2026-05-19",
-      "message": "\u26a0\ufe0f Tue 2026-05-19: Dense drizzle \u2014 54% chance of rain. Monitor conditions before starting outdoor work.",
       "tasks_affected": []
     },
     {
@@ -688,8 +688,8 @@
         {
           "payment": "ROOFING: BILL & PAYMENT",
           "payment_due": "2026-05-29",
-          "amount": 510.0,
-          "type": "subs",
+          "amount": 0,
+          "type": "",
           "direction": "out",
           "group": "ROOFING",
           "blocker": null,
@@ -1961,7 +1961,7 @@
   },
   "analysis": [
     "This week has 122 tasks due across 10 projects, with 52 tasks already overdue from previous weeks. That's a combined load of 174 items the team needs to manage.",
-    "\ud83c\udf27\ufe0f **Weather note:** 5 days with possible rain. Not a full stop but PMs should monitor conditions, especially for the 42 outdoor tasks due this week.",
+    "\ud83c\udf27\ufe0f **Weather risk:** 2 days this week are likely too bad for outdoor work. 42 outdoor tasks are due this week \u2014 the PMs should plan around the weather and front-load outdoor work on the clear days.",
     "\u26d4 **1 task is blocked** by overdue dependencies. These can't move until their prerequisites are done. The PMs responsible should treat those blockers as their #1 priority this week.",
     "\ud83d\udcb0 **Payment chain alert:** 29 payments across all projects are effectively blocked because the work that needs to happen before them is overdue. Even though the payment dates look fine in the schedule, these payments CANNOT happen until the prerequisite work is done.",
     "Of those, 3 are **client income payments** ($36,751). This is money that won't come in until the blocking work is cleared.",
