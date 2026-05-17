@@ -3,7 +3,7 @@
   "week": "May 11 - May 17, 2026",
   "week_start": "2026-05-11",
   "week_end": "2026-05-17",
-  "generated_at": "2026-05-17T07:02:08.872067",
+  "generated_at": "2026-05-17T10:02:20.385929",
   "snapshot_date": "2026-05-17",
   "summary": {
     "total_due_this_week": 73,
@@ -25,8 +25,8 @@
       "day": "Sun",
       "high": 88,
       "low": 76,
-      "rain_pct": 12,
-      "rain_in": 0.02,
+      "rain_pct": 11,
+      "rain_in": 0.0,
       "wind_mph": 22,
       "code": 95,
       "desc": "Thunderstorm",
@@ -37,9 +37,9 @@
     {
       "date": "2026-05-18",
       "day": "Mon",
-      "high": 92,
-      "low": 77,
-      "rain_pct": 13,
+      "high": 89,
+      "low": 76,
+      "rain_pct": 14,
       "rain_in": 0.0,
       "wind_mph": 23,
       "code": 95,
@@ -53,7 +53,7 @@
       "low": 70,
       "rain_pct": 51,
       "rain_in": 0.55,
-      "wind_mph": 18,
+      "wind_mph": 17,
       "code": 95,
       "desc": "Thunderstorm",
       "outdoor_risk": "stop"
@@ -125,8 +125,8 @@
       "day": "Sun",
       "high": 88,
       "low": 76,
-      "rain_pct": 12,
-      "rain_in": 0.02,
+      "rain_pct": 11,
+      "rain_in": 0.0,
       "wind_mph": 22,
       "code": 95,
       "desc": "Thunderstorm",
@@ -138,21 +138,21 @@
       "severity": "high",
       "day": "Sun",
       "date": "2026-05-17",
-      "message": "\ud83d\uded1 Sun 2026-05-17: Thunderstorm \u2014 12% chance of rain, winds up to 22 mph. Outdoor work should be rescheduled.",
+      "message": "\ud83d\uded1 Sun 2026-05-17: Thunderstorm \u2014 11% chance of rain, winds up to 22 mph. Outdoor work should be rescheduled.",
       "tasks_affected": []
     },
     {
       "severity": "high",
       "day": "Mon",
       "date": "2026-05-18",
-      "message": "\ud83d\uded1 Mon 2026-05-18: Thunderstorm \u2014 13% chance of rain, winds up to 23 mph. Outdoor work should be rescheduled.",
+      "message": "\ud83d\uded1 Mon 2026-05-18: Thunderstorm \u2014 14% chance of rain, winds up to 23 mph. Outdoor work should be rescheduled.",
       "tasks_affected": []
     },
     {
       "severity": "high",
       "day": "Tue",
       "date": "2026-05-19",
-      "message": "\ud83d\uded1 Tue 2026-05-19: Thunderstorm \u2014 51% chance of rain, winds up to 18 mph. Outdoor work should be rescheduled.",
+      "message": "\ud83d\uded1 Tue 2026-05-19: Thunderstorm \u2014 51% chance of rain, winds up to 17 mph. Outdoor work should be rescheduled.",
       "tasks_affected": []
     },
     {
@@ -436,8 +436,8 @@
         {
           "payment": "PLUMBING: BILL & PAYMENT (Final payment)",
           "payment_due": "2026-06-03",
-          "amount": 3525.0,
-          "type": "subs",
+          "amount": 0,
+          "type": "",
           "direction": "out",
           "group": "PLUMBING ROUGH IN",
           "blocker": "PLUMBING: CONFIRM SCHEDULE",
@@ -528,7 +528,7 @@
         "\ud83d\udd34 15 tasks already overdue. This backlog is slowing down everything else on the project.",
         "\ud83d\udcb0 **FRAMING: BILL & PAYMENT** ($5,000, payment TO sub/vendor) is blocked because \"FRAMING: PM INSPECTION / CC REPORT\" in the same work group is 2 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the FRAMING group that need to be cleared first.",
         "\ud83d\udcb0 **DRYBOX: RECEIVE PAYMENT** ($20,970, income FROM client) is blocked because \"FRAMING: PM INSPECTION / CC REPORT\" in the same work group is 2 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the FRAMING group that need to be cleared first.",
-        "\ud83d\udcb0 **PLUMBING: BILL & PAYMENT (Final payment)** ($3,525, payment TO sub/vendor) is blocked because \"PLUMBING: CONFIRM SCHEDULE\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the PLUMBING ROUGH IN group that need to be cleared first."
+        "\ud83d\udcb0 **PLUMBING: BILL & PAYMENT (Final payment)** (amount TBD, payment TO sub/vendor) is blocked because \"PLUMBING: CONFIRM SCHEDULE\" in the same work group is 1 days overdue. This payment can't happen until that work is finished and inspected. There are 2 overdue tasks in the PLUMBING ROUGH IN group that need to be cleared first."
       ],
       "focus": [
         "\ud83d\udcb0 $20,970 in client income expected. Prioritize the work that triggers this payment.",
@@ -553,7 +553,7 @@
         {
           "name": "FRAMING: BILL & PAYMENT",
           "endDate": "2026-05-16",
-          "amount": 3000.0,
+          "amount": 150.0,
           "type": "subs",
           "direction": "out"
         },
@@ -625,7 +625,7 @@
         {
           "payment": "FRAMING: BILL & PAYMENT",
           "payment_due": "2026-05-16",
-          "amount": 3000.0,
+          "amount": 150.0,
           "type": "subs",
           "direction": "out",
           "group": "EXTERIOR SHEATHING",
@@ -734,7 +734,6 @@
         "\ud83d\udcb0 **ROOFING: BILL & PAYMENT (FINAL PAYMENT)** ($950, payment TO sub/vendor) is blocked because \"TALK TO INSPECTOR\" in the same work group is 2 days overdue. This payment can't happen until that work is finished and inspected. There is 1 overdue task in the ROOFING group that need to be cleared first."
       ],
       "focus": [
-        "\ud83d\udcb0 $6,945 in payments going out this week. Make sure the work is inspected and approved before paying.",
         "Moderate load: 12 tasks due this week."
       ],
       "suggestions": []
@@ -818,7 +817,7 @@
         {
           "payment": "MECHANICAL electric hvac: BILL & PAYMENT (DOWN PAYMENT)",
           "payment_due": "2026-05-18",
-          "amount": 6454.0,
+          "amount": 2000.0,
           "type": "subs",
           "direction": "out",
           "group": "MECHANICAL ROUGH IN",
@@ -2013,7 +2012,7 @@
     "\ud83c\udf27\ufe0f **Weather risk:** 3 days this week are likely too bad for outdoor work. 19 outdoor tasks are due this week \u2014 the PMs should plan around the weather and front-load outdoor work on the clear days.",
     "\ud83d\udcb0 **Payment chain alert:** 30 payments across all projects are effectively blocked because the work that needs to happen before them is overdue. Even though the payment dates look fine in the schedule, these payments CANNOT happen until the prerequisite work is done.",
     "Of those, 5 are **client income payments** ($59,493). This is money that won't come in until the blocking work is cleared.",
-    "25 are **sub/material payments** ($37,565) \u2014 the work isn't done so these shouldn't be paid yet either.",
+    "25 are **sub/material payments** ($34,040) \u2014 the work isn't done so these shouldn't be paid yet either.",
     "\ud83d\udea8 **Income at risk:** 5 client payments ($59,493) are blocked by overdue work. Do NOT delay the tasks that lead to these payments \u2014 they're your path to cash.",
     "**Lingyan Qiu (CNG2025-458)** has the heaviest load: 15 tasks due. With 15 already overdue, the PM needs to ruthlessly prioritize."
   ]
