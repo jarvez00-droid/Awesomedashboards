@@ -365,6 +365,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a class="on" data-p="sod">📋 Projects Dashboard</a>
   <a data-p="weekly">▤ Weekly Forecast</a>
   <a data-p="finance">💵 Finance</a>
+  <a data-p="productivity">📈 Productivity</a>
   <a data-p="orgmgmt">🎯 Management</a>
   <a data-p="archive">▦ Archive</a>
 </div>
@@ -398,6 +399,7 @@ function render() {
   if (curPage === 'sod') renderSOD(c);
   else if (curPage === 'weekly') loadAndRenderWeekly(c);
   else if (curPage === 'finance') { window._financeV2 = false; financeGate(c); }
+  else if (curPage === 'productivity') productivityGate(c);
   else if (curPage === 'orgmgmt') orgMgmtGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else {
@@ -2974,6 +2976,175 @@ async function financeOpenAudit() {
 
 // ── Finance tab — gate/load ───────────────────────────────────────
 // ─── Management tab — team OKRs, kanbans, etc. (Phase 1: placeholder) ────
+// ── Productivity Report tab ─────────────────────────────────────────
+let PRODUCTIVITY_DATA = null;
+let PRODUCTIVITY_LIVE = false;
+
+function productivityGate(c) {
+  if (sessionStorage.getItem('mgmt_auth') === '1') { loadAndRenderProductivity(c); return; }
+  c.innerHTML = `<div class="pw-gate">
+    <div class="pw-icon">📈</div>
+    <div class="pw-title">Productivity Report — Restricted</div>
+    <div class="pw-sub">Enter password to access.</div>
+    <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
+    <button class="pw-btn" id="pw-btn">Unlock</button>
+    <div class="pw-deny" id="pw-deny" style="display:none">Access denied</div>
+  </div>`;
+  const inp=document.getElementById('pw-input'),btn=document.getElementById('pw-btn'),deny=document.getElementById('pw-deny');
+  function tryPw(){
+    if(inp.value===MGMT_PW){sessionStorage.setItem('mgmt_auth','1');loadAndRenderProductivity(c);}
+    else{deny.style.display='block';inp.value='';}
+  }
+  btn.addEventListener('click', tryPw);
+  inp.addEventListener('keydown', e => { if(e.key==='Enter') tryPw(); });
+  inp.focus();
+}
+
+async function loadAndRenderProductivity(c) {
+  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Productivity…</div></div>';
+  PRODUCTIVITY_LIVE = false;
+  // Priority 1: live API (allows editing % and regenerating)
+  if (financeApiConfigured()) {
+    try {
+      PRODUCTIVITY_DATA = await financeApi('/productivity');
+      PRODUCTIVITY_LIVE = true;
+      renderProductivity(c);
+      return;
+    } catch (e) {
+      console.warn('Productivity API unavailable, falling back to static JSON:', e.message);
+    }
+  }
+  // Priority 2: static JSON
+  try {
+    const r = await fetch('data/productivity-latest.json');
+    if (r.ok) {
+      PRODUCTIVITY_DATA = await r.json();
+      renderProductivity(c);
+      return;
+    }
+  } catch (e) {}
+  c.innerHTML = `<div class="alert"><b>No productivity report yet.</b> Once the backend generator runs (auto on Friday cron, or via API <code>POST /productivity/regenerate</code>), data will appear here.</div>`;
+}
+
+function renderProductivity(c) {
+  const d = PRODUCTIVITY_DATA;
+  const live = PRODUCTIVITY_LIVE;
+  const t = d.totals || {};
+  const fmt = (n) => '$' + (Math.round((n||0)*100)/100).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  let h = '';
+
+  h += `<div class="page-title">📈 Productivity Report</div>`;
+  h += `<div class="page-sub">Week <b>${d.week_iso || '—'}</b> · ${d.week_start} → ${d.week_end} · ${live ? 'live ✓ editable' : 'static (read-only)'} · ${d.used_snapshot_for_finish_detection ? 'snapshot-verified' : 'endDate-fallback'}</div>`;
+
+  // Big totals
+  const profitAttrColor = (t.profit_attributed_this_week || 0) >= 0 ? 'var(--grn)' : 'var(--red)';
+  h += `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0 20px">
+    <div class="stat-card"><div class="stat-label">This week's profit</div><div class="stat-value" style="color:${profitAttrColor}">${fmt(t.profit_attributed_this_week)}</div></div>
+    <div class="stat-card"><div class="stat-label">Profit potential (active groups)</div><div class="stat-value">${fmt(t.profit_potential)}</div></div>
+    <div class="stat-card"><div class="stat-label">Sold (active)</div><div class="stat-value">${fmt(t.sold)}</div></div>
+    <div class="stat-card"><div class="stat-label">Expenses (active)</div><div class="stat-value">${fmt(t.expenses)}</div></div>
+    <div class="stat-card"><div class="stat-label">Finished groups</div><div class="stat-value">${t.groups_finished_this_week || 0}</div></div>
+    <div class="stat-card"><div class="stat-label">In progress</div><div class="stat-value">${t.groups_in_progress || 0}</div></div>
+  </div>`;
+
+  if (live) {
+    h += `<div style="margin-bottom:14px"><button id="prod-regen" style="padding:7px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;font-weight:600;cursor:pointer">↻ Regenerate report</button>
+      <span style="color:var(--dim);font-size:11px;margin-left:8px">Re-runs generate_productivity_report.py against current JobTread state.</span></div>`;
+  }
+
+  if (!d.by_project || !d.by_project.length) {
+    h += '<div style="padding:20px;color:var(--dim)">No groups with activity this week.</div>';
+    c.innerHTML = h;
+    if (live) document.getElementById('prod-regen').onclick = productivityRegenerate;
+    return;
+  }
+
+  d.by_project.forEach(p => {
+    h += `<div class="pc sev-b" style="margin-bottom:8px"><div class="ph" onclick="tog(this)">
+      <div><div class="pn">${(p.project_name || '').replace(/</g, '&lt;')}</div>
+      <div class="pp">${p.group_count} groups · attribution ${fmt(p.attribution)}</div></div>
+      <div class="pt">${chvSvg()}</div></div>
+      <div class="pb"><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:8px">
+      <thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">
+        <th style="padding:5px 8px">Trade (group)</th>
+        <th style="padding:5px 8px">Status</th>
+        <th style="padding:5px 8px;text-align:right">Sold</th>
+        <th style="padding:5px 8px;text-align:right">Expenses</th>
+        <th style="padding:5px 8px;text-align:right">Profit</th>
+        <th style="padding:5px 8px;text-align:center">Cum %</th>
+        <th style="padding:5px 8px;text-align:right">Δ %</th>
+        <th style="padding:5px 8px;text-align:right">This week</th>
+      </tr></thead><tbody>`;
+    p.groups.forEach(g => {
+      const profitColor = g.profit >= 0 ? 'var(--grn)' : 'var(--red)';
+      const attrColor = g.attribution >= 0 ? 'var(--grn)' : 'var(--red)';
+      const statusBadge = g.status === 'finished'
+        ? '<span style="background:rgba(74,222,128,.12);color:var(--grn);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600">FINISHED</span>'
+        : '<span style="background:rgba(96,165,250,.12);color:var(--blu);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600">IN PROGRESS</span>';
+      const pctCell = (live && g.status !== 'finished')
+        ? `<input type="number" min="0" max="100" step="1" value="${g.this_pct}" class="prod-pct-input" data-pid="${p.project_id}" data-gid="${g.group_id}" style="width:60px;padding:3px 6px;text-align:right;background:var(--input);border:1px solid var(--bdr);color:var(--txt);border-radius:4px;font-family:var(--mono)" /> %`
+        : `<span style="font-family:var(--mono)">${g.this_pct}%</span>`;
+      h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+        <td style="padding:5px 8px">${(g.group_name || '').replace(/</g, '&lt;')}</td>
+        <td style="padding:5px 8px">${statusBadge}</td>
+        <td style="padding:5px 8px;text-align:right;font-family:var(--mono)">${fmt(g.sold)}</td>
+        <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:var(--red)">${fmt(g.expenses_total)}</td>
+        <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${profitColor};font-weight:600">${fmt(g.profit)}</td>
+        <td style="padding:5px 8px;text-align:center">${pctCell}</td>
+        <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:var(--txt2)">${g.delta_pct}%</td>
+        <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${attrColor};font-weight:600">${fmt(g.attribution)}</td>
+      </tr>`;
+    });
+    h += '</tbody></table></div></div></div>';
+  });
+
+  h += `<div class="ft">Generated ${d.generated_at} · Week ${d.week_iso} · Source: data/dashboard/productivity-${d.week_iso}.json</div>`;
+
+  c.innerHTML = h;
+  if (live) {
+    document.getElementById('prod-regen').onclick = productivityRegenerate;
+    // Wire % inputs (debounced, only fire on blur or Enter)
+    document.querySelectorAll('.prod-pct-input').forEach(inp => {
+      const commit = async () => {
+        const v = parseFloat(inp.value);
+        if (isNaN(v) || v < 0 || v > 100) { alert('Enter a number 0–100.'); return; }
+        inp.disabled = true;
+        try {
+          await financeApi('/productivity/set-percent', {
+            method: 'POST',
+            body: JSON.stringify({
+              week_iso: d.week_iso,
+              project_id: inp.dataset.pid,
+              group_id: inp.dataset.gid,
+              percent: v,
+            }),
+          });
+          // Re-fetch report to pull updated attribution
+          PRODUCTIVITY_DATA = await financeApi('/productivity');
+          renderProductivity(document.getElementById('content'));
+        } catch (e) {
+          alert('Save failed: ' + e.message);
+          inp.disabled = false;
+        }
+      };
+      inp.addEventListener('blur', commit);
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); inp.blur(); } });
+    });
+  }
+}
+
+async function productivityRegenerate() {
+  const btn = document.getElementById('prod-regen');
+  if (btn) { btn.disabled = true; btn.textContent = '↻ Regenerating…'; }
+  try {
+    PRODUCTIVITY_DATA = await financeApi('/productivity/regenerate', { method: 'POST' });
+    renderProductivity(document.getElementById('content'));
+  } catch (e) {
+    alert('Regenerate failed: ' + e.message);
+    if (btn) { btn.disabled = false; btn.textContent = '↻ Regenerate report'; }
+  }
+}
+
 function orgMgmtGate(c) {
   if (sessionStorage.getItem('mgmt_auth')==='1') { renderOrgMgmt(c); return; }
   c.innerHTML = `<div class="pw-gate">
