@@ -3120,6 +3120,8 @@ function renderProductivity(c) {
       <thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">
           <th style="padding:5px 8px">Trade (group)</th>
         <th style="padding:5px 8px">Status</th>
+        <th style="padding:5px 8px;font-family:var(--mono);font-size:10px">Start</th>
+        <th style="padding:5px 8px;font-family:var(--mono);font-size:10px">End</th>
         <th style="padding:5px 8px;text-align:right">Sold</th>
         <th style="padding:5px 8px;text-align:right">Expenses</th>
         <th style="padding:5px 8px;text-align:right">Profit</th>
@@ -3143,9 +3145,13 @@ function renderProductivity(c) {
         : `<span style="font-family:var(--mono);color:${hasPrice?'var(--txt)':'var(--dim)'}">${hasPrice ? g.this_pct+'%' : '—'}</span>`;
       const profitCell = hasPrice ? fmt(g.profit) : '<span style="color:var(--dim)">—</span>';
       const attrCell = hasPrice ? fmt(g.attribution) : '<span style="color:var(--dim)">—</span>';
+      const sd = g.action_start_min ? new Date(g.action_start_min + 'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '—';
+      const ed = g.action_end_max ? new Date(g.action_end_max + 'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '—';
       h += `<tr style="border-top:1px solid rgba(33,39,47,.3)${!hasPrice?';background:rgba(234,170,8,.04)':''}">
-        <td style="padding:5px 8px">${(g.group_name || '').replace(/</g, '&lt;')}</td>
+        <td style="padding:5px 8px">${(g.group_name || '').replace(/</g, '&lt;')}${(g.action_count||1)>1?` <span style="color:var(--dim);font-size:10px">·${g.action_count}</span>`:''}</td>
         <td style="padding:5px 8px">${statusBadge}</td>
+        <td style="padding:5px 8px;font-family:var(--mono);color:var(--txt2);font-size:11px">${sd}</td>
+        <td style="padding:5px 8px;font-family:var(--mono);color:var(--txt2);font-size:11px">${ed}</td>
         <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${hasPrice?'var(--txt)':'var(--dim)'}">${hasPrice ? fmt(g.sold) : '—'}</td>
         <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:var(--red)">${fmt(g.expenses_total)}</td>
         <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${profitColor};font-weight:600">${profitCell}</td>
