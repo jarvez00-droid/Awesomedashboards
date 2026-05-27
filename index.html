@@ -3040,12 +3040,17 @@ function renderProductivity(c) {
   const profitAttrColor = (t.profit_attributed_this_week || 0) >= 0 ? 'var(--grn)' : 'var(--red)';
   h += `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0 20px">
     <div class="stat-card"><div class="stat-label">This week's profit</div><div class="stat-value" style="color:${profitAttrColor}">${fmt(t.profit_attributed_this_week)}</div></div>
-    <div class="stat-card"><div class="stat-label">Profit potential (active groups)</div><div class="stat-value">${fmt(t.profit_potential)}</div></div>
-    <div class="stat-card"><div class="stat-label">Sold (active)</div><div class="stat-value">${fmt(t.sold)}</div></div>
-    <div class="stat-card"><div class="stat-label">Expenses (active)</div><div class="stat-value">${fmt(t.expenses)}</div></div>
+    <div class="stat-card"><div class="stat-label">Profit potential (priced groups)</div><div class="stat-value">${fmt(t.profit_potential)}</div></div>
+    <div class="stat-card"><div class="stat-label">Sold (priced)</div><div class="stat-value">${fmt(t.sold)}</div></div>
+    <div class="stat-card"><div class="stat-label">Expenses (priced)</div><div class="stat-value">${fmt(t.expenses)}</div></div>
     <div class="stat-card"><div class="stat-label">Finished groups</div><div class="stat-value">${t.groups_finished_this_week || 0}</div></div>
     <div class="stat-card"><div class="stat-label">In progress</div><div class="stat-value">${t.groups_in_progress || 0}</div></div>
   </div>`;
+  if ((t.groups_missing_price || 0) > 0) {
+    h += `<div style="background:rgba(234,170,8,.08);border:1px solid rgba(234,170,8,.3);border-radius:6px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:var(--txt)">
+      ⚠ <b>${t.groups_missing_price}</b> group${t.groups_missing_price>1?'s':''} have no price set on their Action Task — ${fmt(t.expense_missing_price)} of expenses recognized but no revenue. These are listed below but excluded from the profit roll-up (no price ≠ "sold for $0"). Set a price in JobTread, then ↻ Regenerate.
+    </div>`;
+  }
 
   if (live) {
     h += `<div style="margin-bottom:14px"><button id="prod-regen" style="padding:7px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;font-weight:600;cursor:pointer">↻ Regenerate report</button>
@@ -3066,33 +3071,39 @@ function renderProductivity(c) {
       <div class="pt">${chvSvg()}</div></div>
       <div class="pb"><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:8px">
       <thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">
-        <th style="padding:5px 8px">Trade (group)</th>
+          <th style="padding:5px 8px">Trade (group)</th>
         <th style="padding:5px 8px">Status</th>
         <th style="padding:5px 8px;text-align:right">Sold</th>
         <th style="padding:5px 8px;text-align:right">Expenses</th>
         <th style="padding:5px 8px;text-align:right">Profit</th>
-        <th style="padding:5px 8px;text-align:center">Cum %</th>
-        <th style="padding:5px 8px;text-align:right">Δ %</th>
+        <th style="padding:5px 8px;text-align:center">% Done</th>
         <th style="padding:5px 8px;text-align:right">This week</th>
       </tr></thead><tbody>`;
     p.groups.forEach(g => {
-      const profitColor = g.profit >= 0 ? 'var(--grn)' : 'var(--red)';
+      const hasPrice = g.has_price !== false && g.sold > 0;
+      const profitColor = !hasPrice ? 'var(--dim)' : (g.profit >= 0 ? 'var(--grn)' : 'var(--red)');
       const attrColor = g.attribution >= 0 ? 'var(--grn)' : 'var(--red)';
-      const statusBadge = g.status === 'finished'
-        ? '<span style="background:rgba(74,222,128,.12);color:var(--grn);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600">FINISHED</span>'
-        : '<span style="background:rgba(96,165,250,.12);color:var(--blu);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600">IN PROGRESS</span>';
-      const pctCell = (live && g.status !== 'finished')
+      let statusBadge;
+      if (!hasPrice) {
+        statusBadge = '<span style="background:rgba(234,170,8,.15);color:var(--ylw);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600">NEEDS PRICE</span>';
+      } else if (g.status === 'finished') {
+        statusBadge = '<span style="background:rgba(74,222,128,.12);color:var(--grn);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600">FINISHED</span>';
+      } else {
+        statusBadge = '<span style="background:rgba(96,165,250,.12);color:var(--blu);padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600">IN PROGRESS</span>';
+      }
+      const pctCell = (live && hasPrice && g.status !== 'finished')
         ? `<input type="number" min="0" max="100" step="1" value="${g.this_pct}" class="prod-pct-input" data-pid="${p.project_id}" data-gid="${g.group_id}" style="width:60px;padding:3px 6px;text-align:right;background:var(--input);border:1px solid var(--bdr);color:var(--txt);border-radius:4px;font-family:var(--mono)" /> %`
-        : `<span style="font-family:var(--mono)">${g.this_pct}%</span>`;
-      h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+        : `<span style="font-family:var(--mono);color:${hasPrice?'var(--txt)':'var(--dim)'}">${hasPrice ? g.this_pct+'%' : '—'}</span>`;
+      const profitCell = hasPrice ? fmt(g.profit) : '<span style="color:var(--dim)">—</span>';
+      const attrCell = hasPrice ? fmt(g.attribution) : '<span style="color:var(--dim)">—</span>';
+      h += `<tr style="border-top:1px solid rgba(33,39,47,.3)${!hasPrice?';background:rgba(234,170,8,.04)':''}">
         <td style="padding:5px 8px">${(g.group_name || '').replace(/</g, '&lt;')}</td>
         <td style="padding:5px 8px">${statusBadge}</td>
-        <td style="padding:5px 8px;text-align:right;font-family:var(--mono)">${fmt(g.sold)}</td>
+        <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${hasPrice?'var(--txt)':'var(--dim)'}">${hasPrice ? fmt(g.sold) : '—'}</td>
         <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:var(--red)">${fmt(g.expenses_total)}</td>
-        <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${profitColor};font-weight:600">${fmt(g.profit)}</td>
+        <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${profitColor};font-weight:600">${profitCell}</td>
         <td style="padding:5px 8px;text-align:center">${pctCell}</td>
-        <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:var(--txt2)">${g.delta_pct}%</td>
-        <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${attrColor};font-weight:600">${fmt(g.attribution)}</td>
+        <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${attrColor};font-weight:600">${attrCell}</td>
       </tr>`;
     });
     h += '</tbody></table></div></div></div>';
