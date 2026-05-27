@@ -3171,24 +3171,38 @@ function renderProductivity(c) {
     document.querySelectorAll('button.prod-tab').forEach(btn => {
       btn.addEventListener('click', () => productivityChangeWeek(btn.dataset.week));
     });
-    // Wire % inputs (debounced, only fire on blur or Enter)
+    // Wire % inputs — save to sqlite, then update in-memory data + re-render
+    // (no full refetch; numbers move instantly).
     document.querySelectorAll('.prod-pct-input').forEach(inp => {
       const commit = async () => {
         const v = parseFloat(inp.value);
         if (isNaN(v) || v < 0 || v > 100) { alert('Enter a number 0–100.'); return; }
+        const origPct = parseFloat(inp.defaultValue);
+        if (v === origPct) return;  // no-op
         inp.disabled = true;
+        const pid = inp.dataset.pid, gid = inp.dataset.gid;
         try {
           await financeApi('/productivity/set-percent', {
             method: 'POST',
-            body: JSON.stringify({
-              week_iso: d.week_iso,
-              project_id: inp.dataset.pid,
-              group_id: inp.dataset.gid,
-              percent: v,
-            }),
+            body: JSON.stringify({week_iso: d.week_iso, project_id: pid, group_id: gid, percent: v}),
           });
-          // Re-fetch report to pull updated attribution
-          PRODUCTIVITY_DATA = await financeApi('/productivity');
+          // Recompute attribution in memory: percent × profit (per-group), then roll up
+          for (const p of PRODUCTIVITY_DATA.by_project) {
+            if (p.project_id !== pid) continue;
+            for (const g of p.groups) {
+              if (g.group_id !== gid) continue;
+              g.this_pct = v;
+              g.user_set = true;
+              g.attribution = g.has_price === false || (g.has_price !== true && !(g.sold > 0))
+                ? 0
+                : Math.round((v / 100) * g.profit * 100) / 100;
+            }
+            p.attribution = Math.round(p.groups.reduce((s, gg) => s + (gg.attribution || 0), 0) * 100) / 100;
+          }
+          // Re-sort projects by attribution (matches generator behavior)
+          PRODUCTIVITY_DATA.by_project.sort((a, b) => b.attribution - a.attribution);
+          PRODUCTIVITY_DATA.totals.profit_attributed_this_week =
+            Math.round(PRODUCTIVITY_DATA.by_project.reduce((s, p) => s + (p.attribution || 0), 0) * 100) / 100;
           renderProductivity(document.getElementById('content'));
         } catch (e) {
           alert('Save failed: ' + e.message);
