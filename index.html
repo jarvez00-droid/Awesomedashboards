@@ -3000,13 +3000,40 @@ function productivityGate(c) {
   inp.focus();
 }
 
-async function loadAndRenderProductivity(c) {
+let PRODUCTIVITY_WEEKS = [];        // list of {week_iso, start, end, has_report}
+let PRODUCTIVITY_SELECTED = null;   // currently displayed week_iso
+
+async function loadAndRenderProductivity(c, weekIso) {
   c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Productivity…</div></div>';
   PRODUCTIVITY_LIVE = false;
+
   // Priority 1: live API (allows editing % and regenerating)
   if (financeApiConfigured()) {
     try {
-      PRODUCTIVITY_DATA = await financeApi('/productivity');
+      // Pull weeks list (only need once per render, but cheap)
+      const weeksRes = await financeApi('/productivity/weeks');
+      PRODUCTIVITY_WEEKS = (weeksRes && weeksRes.weeks) || [];
+      // Default to the most recent week WITH a report. If none, the newest candidate.
+      if (!weekIso) {
+        const withReport = PRODUCTIVITY_WEEKS.find(w => w.has_report);
+        weekIso = (withReport || PRODUCTIVITY_WEEKS[0] || {}).week_iso;
+      }
+      PRODUCTIVITY_SELECTED = weekIso;
+      const path = weekIso ? `/productivity?week=${encodeURIComponent(weekIso)}` : '/productivity';
+      try {
+        PRODUCTIVITY_DATA = await financeApi(path);
+      } catch (e) {
+        // 404 → offer to generate
+        const sel = PRODUCTIVITY_WEEKS.find(w => w.week_iso === weekIso);
+        if (sel && confirm(`No report yet for ${sel.week_iso} (${sel.start} → ${sel.end}). Generate it now?`)) {
+          PRODUCTIVITY_DATA = await financeApi(`/productivity/regenerate?target_date=${sel.end}`, { method: 'POST' });
+          // Refresh weeks list so has_report flips true
+          const w2 = await financeApi('/productivity/weeks');
+          PRODUCTIVITY_WEEKS = (w2 && w2.weeks) || PRODUCTIVITY_WEEKS;
+        } else {
+          throw e;
+        }
+      }
       PRODUCTIVITY_LIVE = true;
       renderProductivity(c);
       return;
@@ -3014,16 +3041,23 @@ async function loadAndRenderProductivity(c) {
       console.warn('Productivity API unavailable, falling back to static JSON:', e.message);
     }
   }
-  // Priority 2: static JSON
+
+  // Priority 2: static JSON (single week only — week picker requires live API)
   try {
-    const r = await fetch('data/productivity-latest.json');
+    const url = weekIso ? `data/productivity-${weekIso}.json` : 'data/productivity-latest.json';
+    const r = await fetch(url);
     if (r.ok) {
       PRODUCTIVITY_DATA = await r.json();
+      PRODUCTIVITY_SELECTED = PRODUCTIVITY_DATA.week_iso || null;
       renderProductivity(c);
       return;
     }
   } catch (e) {}
   c.innerHTML = `<div class="alert"><b>No productivity report yet.</b> Once the backend generator runs (auto on Friday cron, or via API <code>POST /productivity/regenerate</code>), data will appear here.</div>`;
+}
+
+function productivityChangeWeek(weekIso) {
+  loadAndRenderProductivity(document.getElementById('content'), weekIso);
 }
 
 function renderProductivity(c) {
@@ -3034,7 +3068,24 @@ function renderProductivity(c) {
   let h = '';
 
   h += `<div class="page-title">📈 Productivity Report</div>`;
-  h += `<div class="page-sub">Week <b>${d.week_iso || '—'}</b> · ${d.week_start} → ${d.week_end} · ${live ? 'live ✓ editable' : 'static (read-only)'} · ${d.used_snapshot_for_finish_detection ? 'snapshot-verified' : 'endDate-fallback'}</div>`;
+  // Week selector — live mode only (needs API to fetch other weeks)
+  let weekPicker = '';
+  if (live && PRODUCTIVITY_WEEKS && PRODUCTIVITY_WEEKS.length) {
+    const opts = PRODUCTIVITY_WEEKS.map(w => {
+      const startD = new Date(w.start + 'T12:00:00');
+      const endD = new Date(w.end + 'T12:00:00');
+      const fmtMD = dt => dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      const label = `${w.week_iso}  ·  ${fmtMD(startD)} – ${fmtMD(endD)}${w.has_report ? '' : '  (not yet generated)'}`;
+      const selected = (w.week_iso === PRODUCTIVITY_SELECTED) ? ' selected' : '';
+      return `<option value="${w.week_iso}"${selected}>${label}</option>`;
+    }).join('');
+    weekPicker = `<label style="font-size:11px;color:var(--dim);margin-right:6px">Week:</label>
+      <select id="prod-week-picker" style="padding:5px 8px;background:var(--input);border:1px solid var(--bdr);color:var(--txt);border-radius:6px;font-family:var(--mono);font-size:12px">${opts}</select>`;
+  }
+  h += `<div class="page-sub" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+    <div>Week <b>${d.week_iso || '—'}</b> · ${d.week_start} → ${d.week_end} · ${live ? 'live ✓ editable' : 'static (read-only)'} · ${d.used_snapshot_for_finish_detection ? 'snapshot-verified' : 'endDate-fallback'}</div>
+    <div>${weekPicker}</div>
+  </div>`;
 
   // Big totals
   const profitAttrColor = (t.profit_attributed_this_week || 0) >= 0 ? 'var(--grn)' : 'var(--red)';
@@ -3114,6 +3165,11 @@ function renderProductivity(c) {
   c.innerHTML = h;
   if (live) {
     document.getElementById('prod-regen').onclick = productivityRegenerate;
+    // Week picker change handler
+    const wp = document.getElementById('prod-week-picker');
+    if (wp) {
+      wp.addEventListener('change', e => productivityChangeWeek(e.target.value));
+    }
     // Wire % inputs (debounced, only fire on blur or Enter)
     document.querySelectorAll('.prod-pct-input').forEach(inp => {
       const commit = async () => {
@@ -3148,7 +3204,15 @@ async function productivityRegenerate() {
   const btn = document.getElementById('prod-regen');
   if (btn) { btn.disabled = true; btn.textContent = '↻ Regenerating…'; }
   try {
-    PRODUCTIVITY_DATA = await financeApi('/productivity/regenerate', { method: 'POST' });
+    // Regenerate for the currently-selected week (uses its end date)
+    const sel = (PRODUCTIVITY_WEEKS || []).find(w => w.week_iso === PRODUCTIVITY_SELECTED);
+    const path = sel ? `/productivity/regenerate?target_date=${sel.end}` : '/productivity/regenerate';
+    PRODUCTIVITY_DATA = await financeApi(path, { method: 'POST' });
+    // Refresh weeks so has_report flips true if this was new
+    try {
+      const w2 = await financeApi('/productivity/weeks');
+      PRODUCTIVITY_WEEKS = (w2 && w2.weeks) || PRODUCTIVITY_WEEKS;
+    } catch (e) {}
     renderProductivity(document.getElementById('content'));
   } catch (e) {
     alert('Regenerate failed: ' + e.message);
