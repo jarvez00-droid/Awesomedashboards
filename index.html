@@ -3111,6 +3111,55 @@ function renderProductivity(c) {
     return;
   }
 
+  // ── Per-project profit overview (this week) + grand total ──────────
+  h += `<div class="sh">Per-Project Profit · this week</div>`;
+  h += `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);overflow:hidden;margin-bottom:20px">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead style="background:var(--raised)"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">
+        <th style="padding:8px 12px">Project</th>
+        <th style="padding:8px 12px;text-align:right">Groups</th>
+        <th style="padding:8px 12px;text-align:right">Sold (priced)</th>
+        <th style="padding:8px 12px;text-align:right">Expenses (priced)</th>
+        <th style="padding:8px 12px;text-align:right">Profit potential</th>
+        <th style="padding:8px 12px;text-align:right">This week</th>
+      </tr></thead><tbody>`;
+  let sumSold = 0, sumExp = 0, sumPot = 0, sumAttr = 0;
+  d.by_project.forEach(p => {
+    let pSold = 0, pExp = 0, pPot = 0;
+    (p.groups || []).forEach(g => {
+      const priced = g.has_price === true || (g.has_price !== false && g.sold > 0);
+      if (priced) {
+        pSold += g.sold || 0;
+        pExp += g.expenses_total || 0;
+        pPot += g.profit || 0;
+      }
+    });
+    sumSold += pSold;
+    sumExp += pExp;
+    sumPot += pPot;
+    sumAttr += p.attribution || 0;
+    const attrColor = (p.attribution || 0) >= 0 ? 'var(--grn)' : 'var(--red)';
+    const potColor = pPot >= 0 ? 'var(--txt)' : 'var(--red)';
+    h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+      <td style="padding:7px 12px">${(p.project_name || '').replace(/</g, '&lt;')}</td>
+      <td style="padding:7px 12px;text-align:right;font-family:var(--mono);color:var(--txt2)">${p.group_count || 0}</td>
+      <td style="padding:7px 12px;text-align:right;font-family:var(--mono)">${fmt(pSold)}</td>
+      <td style="padding:7px 12px;text-align:right;font-family:var(--mono);color:var(--red)">${fmt(pExp)}</td>
+      <td style="padding:7px 12px;text-align:right;font-family:var(--mono);color:${potColor}">${fmt(pPot)}</td>
+      <td style="padding:7px 12px;text-align:right;font-family:var(--mono);color:${attrColor};font-weight:700">${fmt(p.attribution || 0)}</td>
+    </tr>`;
+  });
+  const totColor = sumAttr >= 0 ? 'var(--grn)' : 'var(--red)';
+  h += `<tr style="border-top:2px solid var(--bdr);background:rgba(96,165,250,.06)">
+    <td style="padding:10px 12px;font-weight:700">TOTAL · ${d.by_project.length} projects</td>
+    <td style="padding:10px 12px;text-align:right;font-family:var(--mono);font-weight:700">${d.by_project.reduce((s, p) => s + (p.group_count || 0), 0)}</td>
+    <td style="padding:10px 12px;text-align:right;font-family:var(--mono);font-weight:700">${fmt(sumSold)}</td>
+    <td style="padding:10px 12px;text-align:right;font-family:var(--mono);font-weight:700;color:var(--red)">${fmt(sumExp)}</td>
+    <td style="padding:10px 12px;text-align:right;font-family:var(--mono);font-weight:700">${fmt(sumPot)}</td>
+    <td style="padding:10px 12px;text-align:right;font-family:var(--mono);font-weight:800;font-size:14px;color:${totColor}">${fmt(sumAttr)}</td>
+  </tr>`;
+  h += `</tbody></table></div>`;
+
   d.by_project.forEach(p => {
     h += `<div class="pc sev-b" style="margin-bottom:8px"><div class="ph" onclick="tog(this)">
       <div><div class="pn">${(p.project_name || '').replace(/</g, '&lt;')}</div>
