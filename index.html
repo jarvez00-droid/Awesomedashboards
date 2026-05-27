@@ -3068,24 +3068,20 @@ function renderProductivity(c) {
   let h = '';
 
   h += `<div class="page-title">📈 Productivity Report</div>`;
-  // Week selector — live mode only (needs API to fetch other weeks)
-  let weekPicker = '';
-  if (live && PRODUCTIVITY_WEEKS && PRODUCTIVITY_WEEKS.length) {
-    const opts = PRODUCTIVITY_WEEKS.map(w => {
-      const startD = new Date(w.start + 'T12:00:00');
-      const endD = new Date(w.end + 'T12:00:00');
-      const fmtMD = dt => dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-      const label = `${w.week_iso}  ·  ${fmtMD(startD)} – ${fmtMD(endD)}${w.has_report ? '' : '  (not yet generated)'}`;
-      const selected = (w.week_iso === PRODUCTIVITY_SELECTED) ? ' selected' : '';
-      return `<option value="${w.week_iso}"${selected}>${label}</option>`;
-    }).join('');
-    weekPicker = `<label style="font-size:11px;color:var(--dim);margin-right:6px">Week:</label>
-      <select id="prod-week-picker" style="padding:5px 8px;background:var(--input);border:1px solid var(--bdr);color:var(--txt);border-radius:6px;font-family:var(--mono);font-size:12px">${opts}</select>`;
+  // This Week / Previous Week tabs — live mode only
+  let tabs = '';
+  if (live && PRODUCTIVITY_WEEKS && PRODUCTIVITY_WEEKS.length >= 2) {
+    const fmtMD = iso => new Date(iso + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const wThis = PRODUCTIVITY_WEEKS[0];  // most recent (current/in-flight)
+    const wPrev = PRODUCTIVITY_WEEKS[1];  // previous complete week
+    const tabBtn = (w, label) => {
+      const active = w.week_iso === PRODUCTIVITY_SELECTED;
+      return `<button class="prod-tab" data-week="${w.week_iso}" style="padding:8px 18px;border:1px solid var(--bdr);background:${active?'var(--blu)':'var(--card)'};color:${active?'#fff':'var(--txt)'};border-radius:6px;font-weight:600;cursor:pointer;font-size:13px">${label} <span style="font-weight:400;font-size:11px;opacity:.85">${fmtMD(w.start)} – ${fmtMD(w.end)}</span></button>`;
+    };
+    tabs = `<div style="display:flex;gap:8px;margin:14px 0 10px">${tabBtn(wThis, '📅 This Week')}${tabBtn(wPrev, '⏮ Previous Week')}</div>`;
   }
-  h += `<div class="page-sub" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-    <div>Week <b>${d.week_iso || '—'}</b> · ${d.week_start} → ${d.week_end} · ${live ? 'live ✓ editable' : 'static (read-only)'} · ${d.used_snapshot_for_finish_detection ? 'snapshot-verified' : 'endDate-fallback'}</div>
-    <div>${weekPicker}</div>
-  </div>`;
+  h += tabs;
+  h += `<div class="page-sub">Showing <b>${d.week_iso || '—'}</b> · ${d.week_start} → ${d.week_end} · ${live ? 'live ✓ editable' : 'static (read-only)'} · ${d.used_snapshot_for_finish_detection ? 'snapshot-verified' : 'endDate-fallback'}</div>`;
 
   // Big totals
   const profitAttrColor = (t.profit_attributed_this_week || 0) >= 0 ? 'var(--grn)' : 'var(--red)';
@@ -3165,11 +3161,10 @@ function renderProductivity(c) {
   c.innerHTML = h;
   if (live) {
     document.getElementById('prod-regen').onclick = productivityRegenerate;
-    // Week picker change handler
-    const wp = document.getElementById('prod-week-picker');
-    if (wp) {
-      wp.addEventListener('change', e => productivityChangeWeek(e.target.value));
-    }
+    // Tab click handlers
+    document.querySelectorAll('button.prod-tab').forEach(btn => {
+      btn.addEventListener('click', () => productivityChangeWeek(btn.dataset.week));
+    });
     // Wire % inputs (debounced, only fire on blur or Enter)
     document.querySelectorAll('.prod-pct-input').forEach(inp => {
       const commit = async () => {
