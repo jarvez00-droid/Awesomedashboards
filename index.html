@@ -3199,16 +3199,20 @@ function renderProductivity(c) {
       const attrCell = hasPrice ? fmt(g.attribution) : '<span style="color:var(--dim)">—</span>';
       const sd = g.action_start_min ? new Date(g.action_start_min + 'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '—';
       const ed = g.action_end_max ? new Date(g.action_end_max + 'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '—';
-      h += `<tr style="border-top:1px solid rgba(33,39,47,.3)${!hasPrice?';background:rgba(234,170,8,.04)':''}">
-        <td style="padding:5px 8px">${(g.group_name || '').replace(/</g, '&lt;')}${(g.action_count||1)>1?` <span style="color:var(--dim);font-size:10px">·${g.action_count}</span>`:''}</td>
+      const rowId = `prod-row-${p.project_id}-${g.group_id}`;
+      h += `<tr class="prod-row" data-target="${rowId}" style="border-top:1px solid rgba(33,39,47,.3)${!hasPrice?';background:rgba(234,170,8,.04)':''};cursor:pointer">
+        <td style="padding:5px 8px"><span class="prod-chevron" style="display:inline-block;width:10px;color:var(--dim);transform:rotate(0deg);transition:transform .15s">▶</span> ${(g.group_name || '').replace(/</g, '&lt;')}${(g.action_count||1)>1?` <span style="color:var(--dim);font-size:10px">·${g.action_count}</span>`:''}</td>
         <td style="padding:5px 8px">${statusBadge}</td>
         <td style="padding:5px 8px;font-family:var(--mono);color:var(--txt2);font-size:11px">${sd}</td>
         <td style="padding:5px 8px;font-family:var(--mono);color:var(--txt2);font-size:11px">${ed}</td>
         <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${hasPrice?'var(--txt)':'var(--dim)'}">${hasPrice ? fmt(g.sold) : '—'}</td>
         <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:var(--red)">${fmt(g.expenses_total)}</td>
         <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${profitColor};font-weight:600">${profitCell}</td>
-        <td style="padding:5px 8px;text-align:center">${pctCell}</td>
+        <td style="padding:5px 8px;text-align:center" onclick="event.stopPropagation()">${pctCell}</td>
         <td style="padding:5px 8px;text-align:right;font-family:var(--mono);color:${attrColor};font-weight:600">${attrCell}</td>
+      </tr>
+      <tr id="${rowId}" style="display:none">
+        <td colspan="9" style="padding:0">${prodRenderBreakdown(g)}</td>
       </tr>`;
     });
     h += '</tbody></table></div></div></div>';
@@ -3221,6 +3225,17 @@ function renderProductivity(c) {
     document.getElementById('prod-regen').onclick = productivityRegenerate;
     const pbtn = document.getElementById('prod-print');
     if (pbtn) pbtn.onclick = productivityPrintByPM;
+    // Row expand/collapse
+    document.querySelectorAll('tr.prod-row').forEach(tr => {
+      tr.addEventListener('click', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+        const target = document.getElementById(tr.dataset.target);
+        if (!target) return;
+        const chev = tr.querySelector('.prod-chevron');
+        if (target.style.display === 'none') { target.style.display = ''; if (chev) chev.style.transform = 'rotate(90deg)'; }
+        else { target.style.display = 'none'; if (chev) chev.style.transform = 'rotate(0deg)'; }
+      });
+    });
     // Tab click handlers
     document.querySelectorAll('button.prod-tab').forEach(btn => {
       btn.addEventListener('click', () => productivityChangeWeek(btn.dataset.week));
@@ -3267,6 +3282,45 @@ function renderProductivity(c) {
       inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); inp.blur(); } });
     });
   }
+}
+
+function prodRenderBreakdown(g) {
+  const fmt = (n) => '$' + (Math.round((n||0)*100)/100).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const esc = (s) => (s || '').replace(/</g, '&lt;');
+  const renderLines = (lines, label, color) => {
+    if (!lines || !lines.length) return `<div style="padding:6px 10px;color:var(--dim);font-size:11px;font-style:italic">${label}: none</div>`;
+    let total = 0;
+    const rows = lines.map(l => {
+      total += l.amount || 0;
+      const doneTag = l.progress === 1 ? '<span style="color:var(--grn);font-size:9px;margin-left:4px">✓</span>' : '';
+      return `<tr>
+        <td style="padding:3px 8px">${esc(l.name)}${doneTag}</td>
+        <td style="padding:3px 8px;color:var(--txt2);font-size:11px">${esc(l.description) || '<span style="color:var(--dim)">—</span>'}</td>
+        <td style="padding:3px 8px;text-align:right;font-family:var(--mono);color:${color}">${fmt(l.amount)}</td>
+      </tr>`;
+    }).join('');
+    return `<div style="padding:6px 10px">
+      <div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;font-weight:600">${label} · ${fmt(total)}</div>
+      <table style="width:100%;border-collapse:collapse;font-size:11px;background:var(--card-h);border-radius:4px">
+        <thead><tr style="text-align:left;color:var(--dim);font-size:9px;text-transform:uppercase">
+          <th style="padding:3px 8px;width:38%">Line item</th>
+          <th style="padding:3px 8px">Description</th>
+          <th style="padding:3px 8px;text-align:right;width:90px">Amount</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+  };
+  return `<div style="background:rgba(33,39,47,.15);padding:8px 0;border-bottom:1px solid var(--bdr)">
+    <div style="padding:0 10px 4px 10px;color:var(--blu);font-size:11px;font-weight:600">▼ Breakdown · ${esc(g.group_name)}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+      <div style="background:rgba(74,222,128,.05);border-left:3px solid var(--grn)">${renderLines(g.action_lines, '↗ Sold — Action Tasks', 'var(--grn)')}</div>
+      <div style="background:rgba(239,68,68,.04);border-left:3px solid var(--red)">${renderLines(g.subs_lines, '↘ Payment – Subs', 'var(--red)')}${renderLines(g.materials_lines, '↘ Payment – Materials', 'var(--red)')}${renderLines(g.additional_lines, '↘ Additional Expenses', 'var(--red)')}</div>
+    </div>
+    <div style="padding:6px 10px;font-size:11px;color:var(--txt2);border-top:1px dashed var(--bdr);margin-top:4px">
+      <b>Sold</b> ${fmt(g.sold)} − <b>Expenses</b> ${fmt(g.expenses_total)} = <b>Profit</b> <span style="color:${g.profit >= 0 ? 'var(--grn)' : 'var(--red)'};font-weight:600">${fmt(g.profit)}</span>${g.this_pct ? ` × <b>${g.this_pct}%</b> = <b>${fmt(g.attribution)}</b> attributed this week` : ''}
+    </div>
+  </div>`;
 }
 
 function productivityPrintByPM() {
