@@ -3100,8 +3100,11 @@ function renderProductivity(c) {
   }
 
   if (live) {
-    h += `<div style="margin-bottom:14px"><button id="prod-regen" style="padding:7px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;font-weight:600;cursor:pointer">↻ Regenerate report</button>
-      <span style="color:var(--dim);font-size:11px;margin-left:8px">Re-runs generate_productivity_report.py against current JobTread state.</span></div>`;
+    h += `<div style="margin-bottom:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <button id="prod-regen" style="padding:7px 14px;background:var(--blu);color:#fff;border:none;border-radius:6px;font-weight:600;cursor:pointer">↻ Regenerate report</button>
+      <button id="prod-print" style="padding:7px 14px;background:var(--grn);color:#fff;border:none;border-radius:6px;font-weight:600;cursor:pointer">🖨 Print by PM</button>
+      <span style="color:var(--dim);font-size:11px">Opens a clean per-PM consolidated view, ready to print or save as PDF.</span>
+    </div>`;
   }
 
   if (!d.by_project || !d.by_project.length) {
@@ -3216,6 +3219,8 @@ function renderProductivity(c) {
   c.innerHTML = h;
   if (live) {
     document.getElementById('prod-regen').onclick = productivityRegenerate;
+    const pbtn = document.getElementById('prod-print');
+    if (pbtn) pbtn.onclick = productivityPrintByPM;
     // Tab click handlers
     document.querySelectorAll('button.prod-tab').forEach(btn => {
       btn.addEventListener('click', () => productivityChangeWeek(btn.dataset.week));
@@ -3262,6 +3267,17 @@ function renderProductivity(c) {
       inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); inp.blur(); } });
     });
   }
+}
+
+function productivityPrintByPM() {
+  const cfg = financeApiConfig();
+  if (!cfg.url || !cfg.token) {
+    alert('Configure the Tunnel URL + Bearer token in ⚙ Settings first.');
+    return;
+  }
+  const week = PRODUCTIVITY_SELECTED || (PRODUCTIVITY_DATA && PRODUCTIVITY_DATA.week_iso);
+  const url = cfg.url.replace(/\/+$/, '') + '/productivity-print?token=' + encodeURIComponent(cfg.token) + (week ? '&week=' + encodeURIComponent(week) : '');
+  window.open(url, '_blank');
 }
 
 async function productivityRegenerate() {
