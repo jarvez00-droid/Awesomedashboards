@@ -455,14 +455,14 @@ async function loadAndRenderWeekly(c) {
   // Load review — try this Monday, then previous two Mondays
   for (const mon of [fmt(thisMon), fmt(prevMon), fmt(prevPrevMon)]) {
     try {
-      const r = await fetch('data/weekly-review-' + mon + '.json');
+      const r = await fetch('data/weekly-review-' + mon + '.json', {cache:'no-store'});
       if (r.ok) { WEEKLY_DATA = await r.json(); break; }
     } catch(e) {}
   }
   // Load forecast — try this Monday, then previous two Mondays
   for (const mon of [fmt(thisMon), fmt(prevMon), fmt(prevPrevMon)]) {
     try {
-      const fr = await fetch('data/weekly-forecast-' + mon + '.json');
+      const fr = await fetch('data/weekly-forecast-' + mon + '.json', {cache:'no-store'});
       if (fr.ok) { FORECAST_DATA = await fr.json(); break; }
     } catch(e) {}
   }
@@ -1089,7 +1089,7 @@ async function loadAndRenderCashflow(c) {
   for (let i = 0; i < 7; i++) {
     const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
     try {
-      const r = await fetch('data/cashflow-' + d + '.json');
+      const r = await fetch('data/cashflow-' + d + '.json', {cache:'no-store'});
       if (!r.ok) continue;
       CF_DATA = await r.json();
       renderCashflow(c);
@@ -4403,9 +4403,9 @@ async function loadAndRenderFinance(c) {
   // Priority 2 — static JSON published to dashboard-site/data (v1 OR v2 file slug)
   for (let i=0;i<7;i++){
     const d=new Date(Date.now()-i*86400000).toISOString().slice(0,10);
-    try{const r=await fetch('data/' + fileSlug + '-'+d+'.json');if(!r.ok)continue;FINANCE_DATA=await r.json();financeSafeRender();return;}catch(e){}
+    try{const r=await fetch('data/' + fileSlug + '-'+d+'.json', {cache:'no-store'});if(!r.ok)continue;FINANCE_DATA=await r.json();financeSafeRender();return;}catch(e){}
   }
-  try{const r=await fetch('data/' + fileSlug + '-latest.json');if(r.ok){FINANCE_DATA=await r.json();financeSafeRender();return;}}catch(e){}
+  try{const r=await fetch('data/' + fileSlug + '-latest.json', {cache:'no-store'});if(r.ok){FINANCE_DATA=await r.json();financeSafeRender();return;}}catch(e){}
   c.innerHTML='<div class="empty"><div class="empty-i">💵</div><div class="empty-t">No Finance Data</div><div class="empty-d">Run: python3 generate_finance_json.py</div></div>';
 }
 
@@ -4447,11 +4447,11 @@ async function loadAndRenderScash(c) {
   if (!scenData) {
     for (let i=0;i<7;i++){
       const d=new Date(Date.now()-i*86400000).toISOString().slice(0,10);
-      try{const r=await fetch('data/scenario-cashflow-'+d+'.json');if(!r.ok)continue;scenData=await r.json();break;}catch(e){}
+      try{const r=await fetch('data/scenario-cashflow-'+d+'.json', {cache:'no-store'});if(!r.ok)continue;scenData=await r.json();break;}catch(e){}
     }
   }
   if (!scenData) {
-    try{const r=await fetch('data/scenario-cashflow-latest.json');if(r.ok)scenData=await r.json();}catch(e){}
+    try{const r=await fetch('data/scenario-cashflow-latest.json', {cache:'no-store'});if(r.ok)scenData=await r.json();}catch(e){}
   }
   if (!scenData) {
     c.innerHTML='<div class="empty"><div class="empty-i">🔮</div><div class="empty-t">No Scenario Cashflow Data</div><div class="empty-d">Run: python3 generate_scenario_cashflow_json.py</div></div>';
@@ -4492,11 +4492,11 @@ async function loadAndRenderMiles(c) {
   if (!data) {
     for (let i=0;i<7;i++){
       const d=new Date(Date.now()-i*86400000).toISOString().slice(0,10);
-      try{const r=await fetch('data/finance-'+d+'.json');if(!r.ok)continue;data=await r.json();break;}catch(e){}
+      try{const r=await fetch('data/finance-'+d+'.json', {cache:'no-store'});if(!r.ok)continue;data=await r.json();break;}catch(e){}
     }
   }
   if (!data) {
-    try{const r=await fetch('data/finance-latest.json');if(r.ok)data=await r.json();}catch(e){}
+    try{const r=await fetch('data/finance-latest.json', {cache:'no-store'});if(r.ok)data=await r.json();}catch(e){}
   }
   if (!data) {
     c.innerHTML='<div class="empty"><div class="empty-i">🎯</div><div class="empty-t">No Milestone Data</div></div>';
@@ -5863,7 +5863,7 @@ async function loadAndRenderMgmt(c) {
   c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading Management...</div></div>';
   for (let i=0;i<7;i++){
     const d=new Date(Date.now()-i*86400000).toISOString().slice(0,10);
-    try{const r=await fetch('data/management-'+d+'.json');if(!r.ok)continue;MGMT_DATA=await r.json();window._mgmtDataVersion=d+'_'+(MGMT_DATA.generated_at||'');renderMgmt(c);return;}catch(e){}
+    try{const r=await fetch('data/management-'+d+'.json', {cache:'no-store'});if(!r.ok)continue;MGMT_DATA=await r.json();window._mgmtDataVersion=d+'_'+(MGMT_DATA.generated_at||'');renderMgmt(c);return;}catch(e){}
   }
   c.innerHTML='<div class="empty"><div class="empty-i">▥</div><div class="empty-t">No Management Data</div><div class="empty-d">Run generate_management_json.py</div></div>';
 }
@@ -7947,7 +7947,7 @@ async function loadAndRenderEOD(c) {
   c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Loading EOD...</div></div>';
   const dateToLoad = curDate || new Date().toISOString().slice(0,10);
   try {
-    const r = await fetch('data/eod-' + dateToLoad + '.json');
+    const r = await fetch('data/eod-' + dateToLoad + '.json', {cache:'no-store'});
     if (!r.ok) throw new Error('not found');
     EOD_DATA = await r.json();
     renderEOD(c);
@@ -8376,7 +8376,7 @@ function filtPM(pm) {
 // Archive page
 async function renderArchive(c) {
   try {
-    const r = await fetch('data/archive-index.json');
+    const r = await fetch('data/archive-index.json', {cache:'no-store'});
     if (!r.ok) throw new Error('not found');
     const idx = await r.json();
     const reports = (idx.reports || []).sort((a, b) => b.date.localeCompare(a.date));
@@ -8428,7 +8428,7 @@ async function loadArchiveDate(dateStr, type) {
   const isEOD = type === 'eod';
   const file = isEOD ? 'eod-' : 'sod-';
   try {
-    const r = await fetch('data/' + file + dateStr + '.json');
+    const r = await fetch('data/' + file + dateStr + '.json', {cache:'no-store'});
     if (!r.ok) throw new Error('not found');
     DATA = await r.json();
     curDate = dateStr;
@@ -8458,7 +8458,7 @@ function updateDateDisplay() {
 document.getElementById('prev-btn').addEventListener('click', async () => {
   const prev = new Date(new Date(curDate + 'T12:00:00').getTime() - 86400000).toISOString().slice(0, 10);
   try {
-    const r = await fetch('data/sod-' + prev + '.json');
+    const r = await fetch('data/sod-' + prev + '.json', {cache:'no-store'});
     if (!r.ok) throw new Error('not found');
     DATA = await r.json();
     curDate = prev;
@@ -8470,7 +8470,7 @@ document.getElementById('prev-btn').addEventListener('click', async () => {
 document.getElementById('next-btn').addEventListener('click', async () => {
   const next = new Date(new Date(curDate + 'T12:00:00').getTime() + 86400000).toISOString().slice(0, 10);
   try {
-    const r = await fetch('data/sod-' + next + '.json');
+    const r = await fetch('data/sod-' + next + '.json', {cache:'no-store'});
     if (!r.ok) throw new Error('not found');
     DATA = await r.json();
     curDate = next;
@@ -8482,7 +8482,7 @@ document.getElementById('next-btn').addEventListener('click', async () => {
 async function loadData() {
   const today = new Date().toISOString().slice(0, 10);
   try {
-    const r = await fetch('data/sod-' + today + '.json');
+    const r = await fetch('data/sod-' + today + '.json', {cache:'no-store'});
     if (!r.ok) throw new Error('not found');
     DATA = await r.json();
     curDate = today;
@@ -8490,7 +8490,7 @@ async function loadData() {
     // Try yesterday if today isn't available yet
     const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
     try {
-      const r2 = await fetch('data/sod-' + yesterday + '.json');
+      const r2 = await fetch('data/sod-' + yesterday + '.json', {cache:'no-store'});
       DATA = await r2.json();
       curDate = yesterday;
     } catch(e2) {
@@ -8549,7 +8549,7 @@ async function loadAndRenderFC(c) {
   for (let i = 0; i < 7; i++) {
     const d = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
     try {
-      const r = await fetch('data/management-' + d + '.json');
+      const r = await fetch('data/management-' + d + '.json', {cache:'no-store'});
       if (!r.ok) continue;
       FC_DATA = await r.json();
       renderFullCashflow(c);
