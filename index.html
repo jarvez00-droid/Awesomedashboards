@@ -1968,50 +1968,60 @@ async function financePayQueueLoad() {
   const host = document.getElementById('pay-queue-body');
   const summary = document.getElementById('pay-queue-summary');
   if (!host) return;
+  // Local money formatter — module-scoped fmt() isn't in scope here.
+  const $ = (n) => '$' + (Math.round((n || 0) * 100) / 100).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
   try {
     const r = await financeApi('/fixed-cost/pending');
     const pending = (r && r.pending) || [];
+    pending.sort((a, b) => a.scheduled_date.localeCompare(b.scheduled_date) || a.name.localeCompare(b.name));
     const today = new Date().toISOString().slice(0, 10);
     const total = pending.reduce((s, p) => s + (p.amount || 0), 0);
     const overdueCount = pending.filter(p => p.scheduled_date < today).length;
     if (summary) {
       summary.innerHTML = pending.length
-        ? `<b>${pending.length}</b> due · <b style="color:var(--red)">${fmt(total)}</b> total${overdueCount ? ` · <span style="color:var(--ylw)">${overdueCount} overdue</span>` : ''}`
+        ? `<b>${pending.length}</b> to pay · <b style="color:var(--red)">${$(total)}</b> total${overdueCount ? ` · <span style="color:var(--ylw)">${overdueCount} past due</span>` : ''}`
         : `<span style="color:var(--grn)">✓ all caught up</span>`;
     }
     if (!pending.length) {
       host.innerHTML = '<div style="padding:18px;color:var(--grn);font-size:13px;text-align:center">🎉 No fixed costs due. Caught up.</div>';
       return;
     }
-    // Group by scheduled_date (each day gets its own header)
-    const byDate = {};
-    pending.forEach(p => { (byDate[p.scheduled_date] = byDate[p.scheduled_date] || []).push(p); });
-    let h = '';
-    Object.keys(byDate).sort().forEach(d => {
-      const items = byDate[d];
-      const sub = items.reduce((s, p) => s + p.amount, 0);
-      const dt = new Date(d + 'T12:00:00');
-      const days = Math.floor((new Date(today + 'T12:00:00') - dt) / 86400000);
-      const overdueTag = days > 0 ? `<span style="color:var(--ylw);font-weight:600">· ${days}d overdue</span>` : (days === 0 ? '<span style="color:var(--blu)">· today</span>' : '');
-      h += `<div style="padding:8px 14px;background:var(--raised);border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center">
-        <div style="font-weight:700;font-size:13px">${dt.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'})} ${overdueTag}</div>
-        <div style="font-family:var(--mono);color:var(--red);font-weight:700">${fmt(sub)}</div>
-      </div>
-      <table style="width:100%;border-collapse:collapse;font-size:12px">
-        <tbody>`;
-      items.forEach(p => {
-        h += `<tr style="border-bottom:1px solid rgba(33,39,47,.3)">
-          <td style="padding:7px 14px">${(p.name || '').replace(/</g, '&lt;')}</td>
-          <td style="padding:7px 8px;color:var(--txt2);font-size:11px">${(p.category || '—')}</td>
-          <td style="padding:7px 8px;color:var(--txt2);font-size:11px">${(p.frequency || '')}</td>
-          <td style="padding:7px 8px;text-align:right;font-family:var(--mono);color:var(--red);font-weight:600">${fmt(p.amount)}</td>
-          <td style="padding:7px 14px;text-align:right;width:90px">
-            <button class="pay-btn" data-rule="${p.rule_id}" data-date="${p.scheduled_date}" data-amount="${p.amount}" data-name="${(p.name || '').replace(/"/g, '&quot;')}" style="padding:4px 12px;background:var(--grn);color:#fff;border:none;border-radius:5px;font-weight:700;cursor:pointer;font-size:11px">PAID</button>
-          </td>
-        </tr>`;
-      });
-      h += '</tbody></table>';
+    // ── FLAT LIST: every pending occurrence appears on today's queue
+    //    regardless of when it was originally scheduled. The "Original Due"
+    //    column shows the scheduled date + days-overdue badge so you know
+    //    how stale each obligation is. Tomorrow's load will show them all
+    //    again (with badges incremented) until you click PAID.
+    const dtToday = new Date(today + 'T12:00:00');
+    let h = `<div style="padding:10px 14px;background:linear-gradient(135deg,#7f1d1d,#991b1b);color:#fff;display:flex;justify-content:space-between;align-items:center">
+      <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:.8">Pay these today</div><div style="font-weight:700;font-size:14px">${dtToday.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'})}</div></div>
+      <div style="text-align:right"><div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:.8">Total due</div><div style="font-size:20px;font-weight:800;font-family:var(--mono)">${$(total)}</div></div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead style="background:var(--raised)"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">
+        <th style="padding:6px 14px">Original Due</th>
+        <th style="padding:6px 8px">Name</th>
+        <th style="padding:6px 8px">Category</th>
+        <th style="padding:6px 8px;text-align:right">Amount</th>
+        <th style="padding:6px 14px;width:90px"></th>
+      </tr></thead>
+      <tbody>`;
+    pending.forEach(p => {
+      const dt = new Date(p.scheduled_date + 'T12:00:00');
+      const days = Math.floor((dtToday - dt) / 86400000);
+      const overdueTag = days > 0
+        ? `<span style="background:rgba(234,170,8,.15);color:var(--ylw);padding:1px 6px;border-radius:3px;font-size:9px;font-weight:700;margin-left:6px">${days}d OVERDUE</span>`
+        : (days === 0 ? '<span style="background:rgba(96,165,250,.15);color:var(--blu);padding:1px 6px;border-radius:3px;font-size:9px;font-weight:700;margin-left:6px">DUE TODAY</span>' : '');
+      h += `<tr style="border-top:1px solid rgba(33,39,47,.3)">
+        <td style="padding:7px 14px;font-family:var(--mono);font-size:11px;color:var(--txt2);white-space:nowrap">${dt.toLocaleDateString('en-US', {month:'short',day:'numeric'})}${overdueTag}</td>
+        <td style="padding:7px 8px;font-weight:600">${(p.name || '').replace(/</g, '&lt;')}</td>
+        <td style="padding:7px 8px;color:var(--txt2);font-size:11px">${(p.category || '—')}</td>
+        <td style="padding:7px 8px;text-align:right;font-family:var(--mono);color:var(--red);font-weight:700">${$(p.amount)}</td>
+        <td style="padding:7px 14px;text-align:right">
+          <button class="pay-btn" data-rule="${p.rule_id}" data-date="${p.scheduled_date}" data-amount="${p.amount}" style="padding:5px 14px;background:var(--grn);color:#fff;border:none;border-radius:5px;font-weight:700;cursor:pointer;font-size:11px">PAID</button>
+        </td>
+      </tr>`;
     });
+    h += '</tbody></table>';
     host.innerHTML = h;
     host.querySelectorAll('button.pay-btn').forEach(btn => {
       btn.addEventListener('click', async () => {
