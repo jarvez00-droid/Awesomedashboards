@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-01T12:38:49",
+  "generated_at": "2026-06-01T12:49:59",
   "date": "2026-06-01",
   "source": "sqlite:fixed_costs",
   "sheet_id": null,
@@ -8,25 +8,38 @@
     "end": "2026-09-29"
   },
   "summary": {
-    "total_tasks": 162,
-    "total_amount": 215759.6,
+    "total_tasks": 181,
+    "total_amount": 239166.6,
     "by_type": {
       "others": {
-        "tasks": 53,
-        "amount": 41617.6
+        "tasks": 72,
+        "amount": 60949.6
       },
       "salaries": {
         "tasks": 85,
-        "amount": 152302.0
+        "amount": 155177.0
       },
       "utilities": {
         "tasks": 24,
-        "amount": 21840.0
+        "amount": 23040.0
       }
     },
-    "rule_count": 29
+    "rule_count": 33
   },
   "tasks": [
+    {
+      "id": "fc-rule562-2026-05-05",
+      "task": "Henry (5th)",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 1000.0,
+      "due": "2026-05-05",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 562
+    },
     {
       "id": "fc-rule546-2026-05-11",
       "task": "STARNES & BAILEY (LAWYERS)",
@@ -132,6 +145,19 @@
       "rule_id": 531
     },
     {
+      "id": "fc-rule563-2026-05-20",
+      "task": "Henry (20th)",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 500.0,
+      "due": "2026-05-20",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 563
+    },
+    {
       "id": "fc-rule530-2026-05-28",
       "task": "ANGEL PACHECO",
       "project": "FIXED COSTS",
@@ -149,7 +175,7 @@
       "task": "CLAUDIA DELGADO",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 750.0,
+      "amount": 1500.0,
       "due": "2026-05-28",
       "paid": false,
       "source": "sqlite",
@@ -201,13 +227,26 @@
       "task": "JOSE ANDRES ROBLES",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1050.0,
+      "amount": 875.0,
       "due": "2026-05-28",
       "paid": false,
       "source": "sqlite",
       "category_raw": "Salary",
       "frequency": "monthly",
       "rule_id": 536
+    },
+    {
+      "id": "fc-rule559-2026-05-28",
+      "task": "Karla",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 500.0,
+      "due": "2026-05-28",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 559
     },
     {
       "id": "fc-rule534-2026-05-28",
@@ -260,6 +299,19 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 531
+    },
+    {
+      "id": "fc-rule561-2026-06-01",
+      "task": "Accountant",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 2000.0,
+      "due": "2026-06-01",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 561
     },
     {
       "id": "fc-rule557-2026-06-01",
@@ -353,6 +405,19 @@
       "rule_id": 554
     },
     {
+      "id": "fc-rule560-2026-06-01",
+      "task": "Krishna",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 1333.0,
+      "due": "2026-06-01",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 560
+    },
+    {
       "id": "fc-rule544-2026-06-01",
       "task": "Luz",
       "project": "FIXED COSTS",
@@ -392,24 +457,11 @@
       "rule_id": 547
     },
     {
-      "id": "fc-rule548-2026-06-01",
-      "task": "Milagros",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 1000.0,
-      "due": "2026-06-01",
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Legal",
-      "frequency": "monthly",
-      "rule_id": 548
-    },
-    {
       "id": "fc-rule541-2026-06-01",
       "task": "Office",
       "project": "FIXED COSTS",
       "type": "utilities",
-      "amount": 1800.0,
+      "amount": 2100.0,
       "due": "2026-06-01",
       "paid": false,
       "source": "sqlite",
@@ -494,6 +546,19 @@
       "category_raw": "Legal",
       "frequency": "monthly",
       "rule_id": 545
+    },
+    {
+      "id": "fc-rule562-2026-06-05",
+      "task": "Henry (5th)",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 1000.0,
+      "due": "2026-06-05",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 562
     },
     {
       "id": "fc-rule546-2026-06-11",
@@ -600,6 +665,19 @@
       "rule_id": 531
     },
     {
+      "id": "fc-rule563-2026-06-20",
+      "task": "Henry (20th)",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 500.0,
+      "due": "2026-06-20",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 563
+    },
+    {
       "id": "fc-rule530-2026-06-28",
       "task": "ANGEL PACHECO",
       "project": "FIXED COSTS",
@@ -617,7 +695,7 @@
       "task": "CLAUDIA DELGADO",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 750.0,
+      "amount": 1500.0,
       "due": "2026-06-28",
       "paid": false,
       "source": "sqlite",
@@ -669,13 +747,26 @@
       "task": "JOSE ANDRES ROBLES",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1050.0,
+      "amount": 875.0,
       "due": "2026-06-28",
       "paid": false,
       "source": "sqlite",
       "category_raw": "Salary",
       "frequency": "monthly",
       "rule_id": 536
+    },
+    {
+      "id": "fc-rule559-2026-06-28",
+      "task": "Karla",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 500.0,
+      "due": "2026-06-28",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 559
     },
     {
       "id": "fc-rule534-2026-06-28",
@@ -728,6 +819,19 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 531
+    },
+    {
+      "id": "fc-rule561-2026-07-01",
+      "task": "Accountant",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 2000.0,
+      "due": "2026-07-01",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 561
     },
     {
       "id": "fc-rule557-2026-07-01",
@@ -821,6 +925,19 @@
       "rule_id": 554
     },
     {
+      "id": "fc-rule560-2026-07-01",
+      "task": "Krishna",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 1333.0,
+      "due": "2026-07-01",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 560
+    },
+    {
       "id": "fc-rule544-2026-07-01",
       "task": "Luz",
       "project": "FIXED COSTS",
@@ -860,24 +977,11 @@
       "rule_id": 547
     },
     {
-      "id": "fc-rule548-2026-07-01",
-      "task": "Milagros",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 1000.0,
-      "due": "2026-07-01",
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Legal",
-      "frequency": "monthly",
-      "rule_id": 548
-    },
-    {
       "id": "fc-rule541-2026-07-01",
       "task": "Office",
       "project": "FIXED COSTS",
       "type": "utilities",
-      "amount": 1800.0,
+      "amount": 2100.0,
       "due": "2026-07-01",
       "paid": false,
       "source": "sqlite",
@@ -962,6 +1066,19 @@
       "category_raw": "Legal",
       "frequency": "monthly",
       "rule_id": 545
+    },
+    {
+      "id": "fc-rule562-2026-07-05",
+      "task": "Henry (5th)",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 1000.0,
+      "due": "2026-07-05",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 562
     },
     {
       "id": "fc-rule546-2026-07-11",
@@ -1068,6 +1185,19 @@
       "rule_id": 531
     },
     {
+      "id": "fc-rule563-2026-07-20",
+      "task": "Henry (20th)",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 500.0,
+      "due": "2026-07-20",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 563
+    },
+    {
       "id": "fc-rule530-2026-07-28",
       "task": "ANGEL PACHECO",
       "project": "FIXED COSTS",
@@ -1085,7 +1215,7 @@
       "task": "CLAUDIA DELGADO",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 750.0,
+      "amount": 1500.0,
       "due": "2026-07-28",
       "paid": false,
       "source": "sqlite",
@@ -1137,13 +1267,26 @@
       "task": "JOSE ANDRES ROBLES",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1050.0,
+      "amount": 875.0,
       "due": "2026-07-28",
       "paid": false,
       "source": "sqlite",
       "category_raw": "Salary",
       "frequency": "monthly",
       "rule_id": 536
+    },
+    {
+      "id": "fc-rule559-2026-07-28",
+      "task": "Karla",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 500.0,
+      "due": "2026-07-28",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 559
     },
     {
       "id": "fc-rule534-2026-07-28",
@@ -1196,6 +1339,19 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 531
+    },
+    {
+      "id": "fc-rule561-2026-08-01",
+      "task": "Accountant",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 2000.0,
+      "due": "2026-08-01",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 561
     },
     {
       "id": "fc-rule557-2026-08-01",
@@ -1289,6 +1445,19 @@
       "rule_id": 554
     },
     {
+      "id": "fc-rule560-2026-08-01",
+      "task": "Krishna",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 1333.0,
+      "due": "2026-08-01",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 560
+    },
+    {
       "id": "fc-rule544-2026-08-01",
       "task": "Luz",
       "project": "FIXED COSTS",
@@ -1328,24 +1497,11 @@
       "rule_id": 547
     },
     {
-      "id": "fc-rule548-2026-08-01",
-      "task": "Milagros",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 1000.0,
-      "due": "2026-08-01",
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Legal",
-      "frequency": "monthly",
-      "rule_id": 548
-    },
-    {
       "id": "fc-rule541-2026-08-01",
       "task": "Office",
       "project": "FIXED COSTS",
       "type": "utilities",
-      "amount": 1800.0,
+      "amount": 2100.0,
       "due": "2026-08-01",
       "paid": false,
       "source": "sqlite",
@@ -1430,6 +1586,19 @@
       "category_raw": "Legal",
       "frequency": "monthly",
       "rule_id": 545
+    },
+    {
+      "id": "fc-rule562-2026-08-05",
+      "task": "Henry (5th)",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 1000.0,
+      "due": "2026-08-05",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 562
     },
     {
       "id": "fc-rule546-2026-08-11",
@@ -1536,6 +1705,19 @@
       "rule_id": 531
     },
     {
+      "id": "fc-rule563-2026-08-20",
+      "task": "Henry (20th)",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 500.0,
+      "due": "2026-08-20",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 563
+    },
+    {
       "id": "fc-rule530-2026-08-28",
       "task": "ANGEL PACHECO",
       "project": "FIXED COSTS",
@@ -1553,7 +1735,7 @@
       "task": "CLAUDIA DELGADO",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 750.0,
+      "amount": 1500.0,
       "due": "2026-08-28",
       "paid": false,
       "source": "sqlite",
@@ -1605,13 +1787,26 @@
       "task": "JOSE ANDRES ROBLES",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1050.0,
+      "amount": 875.0,
       "due": "2026-08-28",
       "paid": false,
       "source": "sqlite",
       "category_raw": "Salary",
       "frequency": "monthly",
       "rule_id": 536
+    },
+    {
+      "id": "fc-rule559-2026-08-28",
+      "task": "Karla",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 500.0,
+      "due": "2026-08-28",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 559
     },
     {
       "id": "fc-rule534-2026-08-28",
@@ -1664,6 +1859,19 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 531
+    },
+    {
+      "id": "fc-rule561-2026-09-01",
+      "task": "Accountant",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 2000.0,
+      "due": "2026-09-01",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 561
     },
     {
       "id": "fc-rule557-2026-09-01",
@@ -1757,6 +1965,19 @@
       "rule_id": 554
     },
     {
+      "id": "fc-rule560-2026-09-01",
+      "task": "Krishna",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 1333.0,
+      "due": "2026-09-01",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 560
+    },
+    {
       "id": "fc-rule544-2026-09-01",
       "task": "Luz",
       "project": "FIXED COSTS",
@@ -1796,24 +2017,11 @@
       "rule_id": 547
     },
     {
-      "id": "fc-rule548-2026-09-01",
-      "task": "Milagros",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 1000.0,
-      "due": "2026-09-01",
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Legal",
-      "frequency": "monthly",
-      "rule_id": 548
-    },
-    {
       "id": "fc-rule541-2026-09-01",
       "task": "Office",
       "project": "FIXED COSTS",
       "type": "utilities",
-      "amount": 1800.0,
+      "amount": 2100.0,
       "due": "2026-09-01",
       "paid": false,
       "source": "sqlite",
@@ -1898,6 +2106,19 @@
       "category_raw": "Legal",
       "frequency": "monthly",
       "rule_id": 545
+    },
+    {
+      "id": "fc-rule562-2026-09-05",
+      "task": "Henry (5th)",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 1000.0,
+      "due": "2026-09-05",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 562
     },
     {
       "id": "fc-rule546-2026-09-11",
@@ -2004,6 +2225,19 @@
       "rule_id": 531
     },
     {
+      "id": "fc-rule563-2026-09-20",
+      "task": "Henry (20th)",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 500.0,
+      "due": "2026-09-20",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 563
+    },
+    {
       "id": "fc-rule530-2026-09-28",
       "task": "ANGEL PACHECO",
       "project": "FIXED COSTS",
@@ -2021,7 +2255,7 @@
       "task": "CLAUDIA DELGADO",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 750.0,
+      "amount": 1500.0,
       "due": "2026-09-28",
       "paid": false,
       "source": "sqlite",
@@ -2073,13 +2307,26 @@
       "task": "JOSE ANDRES ROBLES",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1050.0,
+      "amount": 875.0,
       "due": "2026-09-28",
       "paid": false,
       "source": "sqlite",
       "category_raw": "Salary",
       "frequency": "monthly",
       "rule_id": 536
+    },
+    {
+      "id": "fc-rule559-2026-09-28",
+      "task": "Karla",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 500.0,
+      "due": "2026-09-28",
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 559
     },
     {
       "id": "fc-rule534-2026-09-28",
