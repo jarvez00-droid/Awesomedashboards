@@ -1963,6 +1963,84 @@ async function financeAddEntry(kind) {
   });
 }
 
+// ── Fixed Costs Pay Queue ─────────────────────────────────────────────
+async function financePayQueueLoad() {
+  const host = document.getElementById('pay-queue-body');
+  const summary = document.getElementById('pay-queue-summary');
+  if (!host) return;
+  try {
+    const r = await financeApi('/fixed-cost/pending');
+    const pending = (r && r.pending) || [];
+    const today = new Date().toISOString().slice(0, 10);
+    const total = pending.reduce((s, p) => s + (p.amount || 0), 0);
+    const overdueCount = pending.filter(p => p.scheduled_date < today).length;
+    if (summary) {
+      summary.innerHTML = pending.length
+        ? `<b>${pending.length}</b> due · <b style="color:var(--red)">${fmt(total)}</b> total${overdueCount ? ` · <span style="color:var(--ylw)">${overdueCount} overdue</span>` : ''}`
+        : `<span style="color:var(--grn)">✓ all caught up</span>`;
+    }
+    if (!pending.length) {
+      host.innerHTML = '<div style="padding:18px;color:var(--grn);font-size:13px;text-align:center">🎉 No fixed costs due. Caught up.</div>';
+      return;
+    }
+    // Group by scheduled_date (each day gets its own header)
+    const byDate = {};
+    pending.forEach(p => { (byDate[p.scheduled_date] = byDate[p.scheduled_date] || []).push(p); });
+    let h = '';
+    Object.keys(byDate).sort().forEach(d => {
+      const items = byDate[d];
+      const sub = items.reduce((s, p) => s + p.amount, 0);
+      const dt = new Date(d + 'T12:00:00');
+      const days = Math.floor((new Date(today + 'T12:00:00') - dt) / 86400000);
+      const overdueTag = days > 0 ? `<span style="color:var(--ylw);font-weight:600">· ${days}d overdue</span>` : (days === 0 ? '<span style="color:var(--blu)">· today</span>' : '');
+      h += `<div style="padding:8px 14px;background:var(--raised);border-bottom:1px solid var(--bdr);display:flex;justify-content:space-between;align-items:center">
+        <div style="font-weight:700;font-size:13px">${dt.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'})} ${overdueTag}</div>
+        <div style="font-family:var(--mono);color:var(--red);font-weight:700">${fmt(sub)}</div>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <tbody>`;
+      items.forEach(p => {
+        h += `<tr style="border-bottom:1px solid rgba(33,39,47,.3)">
+          <td style="padding:7px 14px">${(p.name || '').replace(/</g, '&lt;')}</td>
+          <td style="padding:7px 8px;color:var(--txt2);font-size:11px">${(p.category || '—')}</td>
+          <td style="padding:7px 8px;color:var(--txt2);font-size:11px">${(p.frequency || '')}</td>
+          <td style="padding:7px 8px;text-align:right;font-family:var(--mono);color:var(--red);font-weight:600">${fmt(p.amount)}</td>
+          <td style="padding:7px 14px;text-align:right;width:90px">
+            <button class="pay-btn" data-rule="${p.rule_id}" data-date="${p.scheduled_date}" data-amount="${p.amount}" data-name="${(p.name || '').replace(/"/g, '&quot;')}" style="padding:4px 12px;background:var(--grn);color:#fff;border:none;border-radius:5px;font-weight:700;cursor:pointer;font-size:11px">PAID</button>
+          </td>
+        </tr>`;
+      });
+      h += '</tbody></table>';
+    });
+    host.innerHTML = h;
+    host.querySelectorAll('button.pay-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        btn.textContent = '…';
+        try {
+          await financeApi('/fixed-cost/pay', {
+            method: 'POST',
+            body: JSON.stringify({
+              rule_id: parseInt(btn.dataset.rule, 10),
+              scheduled_date: btn.dataset.date,
+              amount: parseFloat(btn.dataset.amount),
+              note: 'paid via dashboard',
+            }),
+          });
+          // Re-fetch the pay queue (row disappears)
+          financePayQueueLoad();
+        } catch (e) {
+          alert(`Mark paid failed: ${e.message}`);
+          btn.disabled = false;
+          btn.textContent = 'PAID';
+        }
+      });
+    });
+  } catch (e) {
+    host.innerHTML = `<div style="padding:14px;color:var(--red);font-size:13px">Failed to load pay queue: ${e.message}</div>`;
+  }
+}
+
 // ── Fixed Costs Control — rule-level CRUD ────────────────────────────
 async function financeFixedCostLoad() {
   const host = document.getElementById('fc-control-body');
@@ -5691,6 +5769,18 @@ function renderFinance(c) {
   h += '</div>';
 
   // ── Fixed costs by category (unchanged section) ──
+  // ── Fixed Costs Pay Queue (live API mode only) ─────────────────
+  if (live) {
+    h += `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
+      <span>💰 Fixed Costs Due — Pay Queue</span>
+      <span id="pay-queue-summary" style="font-size:12px;font-weight:400;color:var(--dim)"></span>
+    </div>`;
+    h += `<div style="font-size:11px;color:var(--dim);margin-bottom:8px">Each row stays here until you click <b>Paid</b>. Once paid, it's logged as a transaction and disappears. New unpaid days roll up automatically.</div>`;
+    h += `<div id="pay-queue-body" style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);margin-bottom:24px;overflow:hidden">
+      <div style="padding:14px;color:var(--dim);font-size:13px">Loading pay queue…</div>
+    </div>`;
+  }
+
   // ── Fixed Costs Control (rule-level CRUD) — live API mode only ──
   if (live) {
     h += `<div class="sh" style="display:flex;justify-content:space-between;align-items:center">
@@ -5731,9 +5821,10 @@ function renderFinance(c) {
 
   c.innerHTML = h;
 
-  // Live mode: populate the Fixed Costs Control section async (one GET /fixed-costs call)
+  // Live mode: populate the pay queue + Fixed Costs Control section async
   if (window._financeLive === true) {
     financeFixedCostLoad();
+    financePayQueueLoad();
   }
 }
 
