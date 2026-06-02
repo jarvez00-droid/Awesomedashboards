@@ -2770,9 +2770,11 @@ function finPaidBtn(e, live) {
 async function financeJtPaid(taskId, projectId, label) {
   if (!confirm(`Mark "${label}" as PAID and check it DONE in JobTread?\n\nThis updates the live schedule — the task leaves overdue/active everywhere.`)) return;
   try {
-    await financeApi('/jobtread/set-paid', { method: 'POST', body: JSON.stringify({ task_id: taskId, project_id: projectId, paid: true }) });
-    document.querySelectorAll(`[data-jt-row="${taskId}"]`).forEach(el => el.remove());
-    financeFlash(`✓ "${label}" marked paid in JobTread — cashflow totals refresh within ~20 min.`);
+    const result = await financeApi('/jobtread/set-paid', { method: 'POST', body: JSON.stringify({ task_id: taskId, project_id: projectId, paid: true }) });
+    // Apply the fresh state so the Cashflow Summary TOTALS recompute now (not just the row).
+    if (result && result.state) { FINANCE_DATA = result.state; financeSafeRender(); }
+    else document.querySelectorAll(`[data-jt-row="${taskId}"]`).forEach(el => el.remove());
+    financeFlash(`✓ "${label}" marked paid in JobTread — cashflow updated. (Full Cash Flow tab updates in ~30s.)`);
   } catch (err) {
     alert('Could not mark paid in JobTread:\n' + err.message);
   }
