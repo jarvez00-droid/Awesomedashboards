@@ -2249,9 +2249,29 @@ async function financeVoidRow(kind, rowId) {
   }
 }
 
-function financeMoveDate(sourceId, currentDate, originalDate, label) {
-  // Delegate to the modal-based picker
-  financeMoveDateModal(sourceId, currentDate, originalDate, label);
+function financeMoveDate(sourceId, currentDate, originalDate, label, taskId, projectId, sourceType) {
+  // JobTread payment tasks → change the real date in JobTread (live schedule).
+  // Everything else (fixed costs, petty, manual) → local what-if scenario override.
+  if (sourceType === 'jobtread' && taskId) {
+    financeJtMoveModal(taskId, projectId, currentDate, label);
+  } else {
+    financeMoveDateModal(sourceId, currentDate, originalDate, label);
+  }
+}
+
+function financeJtMoveModal(taskId, projectId, currentDate, label) {
+  const body = `
+    <div style="font-size:13px;color:var(--txt2);margin-bottom:2px"><b style="color:var(--txt)">${label}</b></div>
+    <div style="font-size:11px;color:var(--dim);margin-bottom:8px">Changes this task's date <b>directly in JobTread</b> (updates the live schedule).</div>
+    <label style="font-size:12px;color:var(--txt2)">New date</label>
+    <input name="date" type="date" value="${currentDate}" required style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:10px 12px;font-size:14px;border-radius:6px;font-family:var(--mono)">
+  `;
+  financeModal('Move date in JobTread', body, async (data) => {
+    if (!data.date || !/^\d{4}-\d{2}-\d{2}$/.test(data.date)) throw new Error('Please pick a valid date.');
+    const result = await financeApi('/jobtread/set-date', { method: 'POST', body: JSON.stringify({ task_id: taskId, project_id: projectId, date: data.date }) });
+    if (result && result.state) { FINANCE_DATA = result.state; financeSafeRender(); }
+    financeFlash(`✓ "${label}" moved to ${data.date} in JobTread. (Full Cash Flow tab updates in ~30s.)`);
+  });
 }
 
 function financeSetUnit(u) {
@@ -2499,7 +2519,7 @@ function financeRenderProjBucket(project, start, end, live) {
     html += `<span style="font-family:var(--mono);color:${e.amount>=0?'var(--grn)':'var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
     html += finPaidBtn(e, live);
     if (live) html += ` <a href="#" class="fin-edit-amount" data-src="${financeAttr(e.source_id)}" data-amount="${e.amount}" data-label="${financeAttr(e.label||'')}" data-type="${financeAttr(e.source_type)}" title="Edit amount" style="color:var(--dim);text-decoration:none">✎</a>`;
-    if (live) html += ` <a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
+    if (live) html += ` <a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" data-task="${financeAttr((e.meta&&e.meta.taskId)||'')}" data-project="${financeAttr((e.meta&&e.meta.projectId)||'')}" data-type="${financeAttr(e.source_type)}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
     if (canVoid) html += ` <a href="#" class="fin-void" data-kind="${financeAttr(e.source_type)}" data-id="${dbId}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
     else html += `<span style="width:12px"></span>`;
     html += `</div>`;
@@ -2730,7 +2750,7 @@ function financeRenderBucketContent(start, end, rowId, live) {
       html += `<span style="font-family:var(--mono);color:${e.amount>=0?'var(--grn)':'var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
       html += finPaidBtn(e, live);
       if (live) html += `<a href="#" class="fin-edit-amount" data-src="${financeAttr(e.source_id)}" data-amount="${e.amount}" data-label="${financeAttr(e.label||'')}" data-type="${financeAttr(e.source_type)}" title="Edit amount" style="color:var(--dim);text-decoration:none;margin-right:4px">✎</a>`;
-      if (live) html += `<a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
+      if (live) html += `<a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" data-task="${financeAttr((e.meta&&e.meta.taskId)||'')}" data-project="${financeAttr((e.meta&&e.meta.projectId)||'')}" data-type="${financeAttr(e.source_type)}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
       if (canVoid) html += `<a href="#" class="fin-void" data-kind="${financeAttr(e.source_type)}" data-id="${dbId}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
       else html += `<span style="width:12px"></span>`;
       html += `</div>`;
@@ -2792,7 +2812,7 @@ function financeInstallClickHandler() {
   window._financeClickInstalled = true;
   document.addEventListener('click', e => {
     const m = e.target.closest('.fin-move');
-    if (m) { e.preventDefault(); e.stopPropagation(); financeMoveDate(m.dataset.src, m.dataset.date, m.dataset.orig, m.dataset.label); return; }
+    if (m) { e.preventDefault(); e.stopPropagation(); financeMoveDate(m.dataset.src, m.dataset.date, m.dataset.orig, m.dataset.label, m.dataset.task, m.dataset.project, m.dataset.type); return; }
     const v = e.target.closest('.fin-void');
     if (v) { e.preventDefault(); e.stopPropagation(); financeVoidRow(v.dataset.kind, parseInt(v.dataset.id, 10)); return; }
     const s = e.target.closest('.fin-showmore');
