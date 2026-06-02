@@ -2491,11 +2491,13 @@ function financeRenderProjBucket(project, start, end, live) {
   events.forEach(e => {
     const canVoid = live && ['petty_cash','misc_expense','non_project_income','bank_snapshot'].includes(e.source_type);
     const dbId = (e.source_id||'').replace(/^(pc|misc|npi|bs)-/, '');
-    html += `<div style="display:flex;align-items:center;padding:4px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3);font-size:12px">`;
+    const jtRow = (e.source_type==='jobtread' && e.meta && e.meta.taskId) ? ` data-jt-row="${financeAttr(e.meta.taskId)}"` : '';
+    html += `<div${jtRow} style="display:flex;align-items:center;padding:4px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3);font-size:12px">`;
     html += `<span style="font-family:var(--mono);color:${e.moved?'var(--ylw)':'var(--txt2)'};white-space:nowrap;width:62px">${fmtDate(e.date)}</span>`;
-    html += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}</span>`;
+    html += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}${finAssigneeTag(e)}</span>`;
     html += `<span style="color:var(--txt2);font-size:11px">${e.kind.replace(/_/g,' ')}</span>`;
     html += `<span style="font-family:var(--mono);color:${e.amount>=0?'var(--grn)':'var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
+    html += finPaidBtn(e, live);
     if (live) html += ` <a href="#" class="fin-edit-amount" data-src="${financeAttr(e.source_id)}" data-amount="${e.amount}" data-label="${financeAttr(e.label||'')}" data-type="${financeAttr(e.source_type)}" title="Edit amount" style="color:var(--dim);text-decoration:none">✎</a>`;
     if (live) html += ` <a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
     if (canVoid) html += ` <a href="#" class="fin-void" data-kind="${financeAttr(e.source_type)}" data-id="${dbId}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
@@ -2714,7 +2716,8 @@ function financeRenderBucketContent(start, end, rowId, live) {
       const canVoid = live && ['petty_cash','misc_expense','non_project_income','bank_snapshot'].includes(e.source_type);
       const dbId = (e.source_id||'').replace(/^(pc|misc|npi|bs)-/, '');
       const isConf = !!e.confirmed;
-      html += `<div ${hidden?`data-hidden-in="${financeAttr(hideKey)}"`:''} style="display:${hidden?'none':'flex'};align-items:center;padding:3px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3)">`;
+      const jtRow = (e.source_type==='jobtread' && e.meta && e.meta.taskId) ? ` data-jt-row="${financeAttr(e.meta.taskId)}"` : '';
+      html += `<div ${hidden?`data-hidden-in="${financeAttr(hideKey)}"`:''}${jtRow} style="display:${hidden?'none':'flex'};align-items:center;padding:3px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3)">`;
       // Confirmation toggle (live mode only — needs API)
       if (live) {
         const tip = isConf ? 'Confirmed — click to mark Potential' : 'Potential — click to mark Confirmed';
@@ -2723,8 +2726,9 @@ function financeRenderBucketContent(start, end, rowId, live) {
         html += `<span title="${isConf?'Confirmed':'Potential'}" style="color:${isConf?'var(--grn)':'var(--dim)'};font-size:14px;width:18px;text-align:center">${isConf?'☑':'☐'}</span>`;
       }
       html += `<span style="font-family:var(--mono);color:${e.moved?'var(--ylw)':'var(--txt2)'};white-space:nowrap;width:62px">${fmtDate(e.date)}</span>`;
-      html += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}</span>`;
+      html += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}${finAssigneeTag(e)}</span>`;
       html += `<span style="font-family:var(--mono);color:${e.amount>=0?'var(--grn)':'var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
+      html += finPaidBtn(e, live);
       if (live) html += `<a href="#" class="fin-edit-amount" data-src="${financeAttr(e.source_id)}" data-amount="${e.amount}" data-label="${financeAttr(e.label||'')}" data-type="${financeAttr(e.source_type)}" title="Edit amount" style="color:var(--dim);text-decoration:none;margin-right:4px">✎</a>`;
       if (live) html += `<a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
       if (canVoid) html += `<a href="#" class="fin-void" data-kind="${financeAttr(e.source_type)}" data-id="${dbId}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
@@ -2747,6 +2751,38 @@ function financeShowAll(id) {
   hidden.forEach(el => el.style.display = '');
   const btn = document.getElementById(id + '-showmore');
   if (btn) btn.remove();
+}
+
+// ── JobTread payment-task assignee tag + PAID button (live mode only) ──
+// Assignee shows next to the task name. PAID marks the task done (progress=1)
+// in JobTread via POST /jobtread/set-paid, then optimistically drops the row.
+function finAssigneeTag(e) {
+  const a = e && e.meta && e.meta.assignedTo;
+  return a ? ` <span style="color:var(--dim);font-weight:400;font-size:11px">· ${a}</span>` : '';
+}
+function finPaidBtn(e, live) {
+  if (!live || !e || e.source_type !== 'jobtread') return '';
+  const tid = e.meta && e.meta.taskId;
+  if (!tid) return '';
+  const pid = (e.meta && e.meta.projectId) || '';
+  return ` <a href="#" class="fin-jt-paid" data-task="${financeAttr(tid)}" data-project="${financeAttr(pid)}" data-label="${financeAttr(e.label||'')}" title="Mark this payment PAID + done in JobTread" style="font-size:10px;font-weight:700;color:#fff;background:var(--grn);padding:2px 7px;border-radius:4px;text-decoration:none;white-space:nowrap;margin-left:6px">✓ PAID</a>`;
+}
+async function financeJtPaid(taskId, projectId, label) {
+  if (!confirm(`Mark "${label}" as PAID and check it DONE in JobTread?\n\nThis updates the live schedule — the task leaves overdue/active everywhere.`)) return;
+  try {
+    await financeApi('/jobtread/set-paid', { method: 'POST', body: JSON.stringify({ task_id: taskId, project_id: projectId, paid: true }) });
+    document.querySelectorAll(`[data-jt-row="${taskId}"]`).forEach(el => el.remove());
+    financeFlash(`✓ "${label}" marked paid in JobTread — cashflow totals refresh within ~20 min.`);
+  } catch (err) {
+    alert('Could not mark paid in JobTread:\n' + err.message);
+  }
+}
+function financeFlash(msg) {
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--grn);color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:600;z-index:2000;box-shadow:0 4px 16px rgba(0,0,0,.3);max-width:90%;text-align:center';
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 4500);
 }
 
 function financeInstallClickHandler() {
@@ -2773,6 +2809,12 @@ function financeInstallClickHandler() {
     if (ea) {
       e.preventDefault(); e.stopPropagation();
       financeEditAmount(ea.dataset.src, parseFloat(ea.dataset.amount), ea.dataset.label, ea.dataset.type);
+      return;
+    }
+    const jp = e.target.closest('.fin-jt-paid');
+    if (jp) {
+      e.preventDefault(); e.stopPropagation();
+      financeJtPaid(jp.dataset.task, jp.dataset.project, jp.dataset.label);
       return;
     }
     const cf = e.target.closest('.fin-confirm');
@@ -5608,10 +5650,11 @@ function renderFinance(c) {
       const projNet = items.reduce((t, e) => t + e.amount, 0);
       h += `<tr style="background:var(--raised)"><td colspan="4" style="padding:7px 8px;font-weight:700;color:var(--txt)">${proj} <span style="font-weight:400;color:var(--dim);font-size:11px">· ${items.length} item${items.length !== 1 ? 's' : ''} · net <span style="color:${projNet >= 0 ? 'var(--grn)' : 'var(--red)'}">${fmtK(projNet)}</span></span></td></tr>`;
       items.forEach(e => {
-        h += '<tr style="border-top:1px solid rgba(33,39,47,.3)">';
+        const _jt = (e.source_type==='jobtread' && e.meta && e.meta.taskId) ? ` data-jt-row="${financeAttr(e.meta.taskId)}"` : '';
+        h += `<tr style="border-top:1px solid rgba(33,39,47,.3)"${_jt}>`;
         h += `<td style="padding:6px 8px 6px 18px;font-family:var(--mono);white-space:nowrap">${fmtDate(e.date)}</td>`;
         h += `<td style="padding:6px 8px;color:var(--red);font-family:var(--mono)">${e.days_overdue}d</td>`;
-        h += `<td style="padding:6px 8px">${e.label || ''}</td>`;
+        h += `<td style="padding:6px 8px">${e.label || ''}${finAssigneeTag(e)}${finPaidBtn(e, live)}</td>`;
         h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono);color:${amountCol(e.amount)};font-weight:600">${amountSign(e.amount)}</td>`;
         h += '</tr>';
       });
