@@ -5587,7 +5587,37 @@ function renderFinance(c) {
     h += '</tbody></table></div></div>';  // close scroll wrapper + outer card
   }
 
-  // ── Overdue Backlog section removed per Rey 2026-06-02 (unused) ──
+  // ── Overdue backlog (grouped by project) ──
+  if (d.overdue && d.overdue.length) {
+    h += `<div class="pc sev-r" style="margin-top:16px">`;
+    h += `<div class="ph" onclick="tog(this)">`;
+    h += `<div><div class="pn">🕑 Overdue Backlog · ${d.overdue.length} items</div>`;
+    h += `<div class="pp">To collect: <b style="color:var(--grn)">+${fmtK(s.overdue_incoming)}</b> · To pay: <b style="color:var(--red)">-${fmtK(s.overdue_outgoing)}</b> · Net: <b>${fmtK(s.overdue_net)}</b></div></div>`;
+    h += `<div class="pt">${chvSvg()}</div></div>`;
+    h += `<div class="pb"><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:6px">`;
+    h += '<thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
+    h += '<th style="padding:6px 8px">Original Due</th><th style="padding:6px 8px">Days Overdue</th><th style="padding:6px 8px">Event</th><th style="padding:6px 8px;text-align:right">Amount</th>';
+    h += '</tr></thead><tbody>';
+    // Group overdue items by project (biggest $ exposure first; items oldest-due first)
+    const _ovGroups = {};
+    d.overdue.forEach(e => { const p = e.project || '—'; (_ovGroups[p] = _ovGroups[p] || []).push(e); });
+    const _ovProjects = Object.keys(_ovGroups).sort((a, b) =>
+      _ovGroups[b].reduce((t, e) => t + Math.abs(e.amount), 0) - _ovGroups[a].reduce((t, e) => t + Math.abs(e.amount), 0));
+    _ovProjects.forEach(proj => {
+      const items = _ovGroups[proj].slice().sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+      const projNet = items.reduce((t, e) => t + e.amount, 0);
+      h += `<tr style="background:var(--raised)"><td colspan="4" style="padding:7px 8px;font-weight:700;color:var(--txt)">${proj} <span style="font-weight:400;color:var(--dim);font-size:11px">· ${items.length} item${items.length !== 1 ? 's' : ''} · net <span style="color:${projNet >= 0 ? 'var(--grn)' : 'var(--red)'}">${fmtK(projNet)}</span></span></td></tr>`;
+      items.forEach(e => {
+        h += '<tr style="border-top:1px solid rgba(33,39,47,.3)">';
+        h += `<td style="padding:6px 8px 6px 18px;font-family:var(--mono);white-space:nowrap">${fmtDate(e.date)}</td>`;
+        h += `<td style="padding:6px 8px;color:var(--red);font-family:var(--mono)">${e.days_overdue}d</td>`;
+        h += `<td style="padding:6px 8px">${e.label || ''}</td>`;
+        h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono);color:${amountCol(e.amount)};font-weight:600">${amountSign(e.amount)}</td>`;
+        h += '</tr>';
+      });
+    });
+    h += '</tbody></table></div></div></div>';
+  }
 
   // ── Petty Cash Log section removed per Rey 2026-06-02 (unused) ──
 
