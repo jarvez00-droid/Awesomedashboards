@@ -2780,6 +2780,13 @@ function finAssigneeTag(e) {
   const a = e && e.meta && e.meta.assignedTo;
   return a ? ` <span style="color:var(--dim);font-weight:400;font-size:11px">· ${a}</span>` : '';
 }
+// Confirmed (☑) / Potential (☐) toggle — same mechanism as the cashflow drill-down.
+function finConfirmToggle(e, live) {
+  const isConf = !!e.confirmed;
+  if (!live) return `<span title="${isConf?'Confirmed':'Potential'}" style="color:${isConf?'var(--grn)':'var(--dim)'};font-size:14px;margin-right:8px;vertical-align:middle">${isConf?'☑':'☐'}</span>`;
+  const tip = isConf ? 'Confirmed — click to mark Potential' : 'Potential — click to mark Confirmed';
+  return `<a href="#" class="fin-confirm" data-src="${financeAttr(e.source_id)}" data-confirmed="${isConf?1:0}" title="${tip}" style="color:${isConf?'var(--grn)':'var(--dim)'};text-decoration:none;font-size:14px;margin-right:8px;vertical-align:middle">${isConf?'☑':'☐'}</a>`;
+}
 function finPaidBtn(e, live) {
   if (!live || !e || e.source_type !== 'jobtread') return '';
   const tid = e.meta && e.meta.taskId;
@@ -5676,7 +5683,7 @@ function renderFinance(c) {
         h += `<tr style="border-top:1px solid rgba(33,39,47,.3)"${_jt}>`;
         h += `<td style="padding:6px 8px 6px 18px;font-family:var(--mono);white-space:nowrap">${fmtDate(e.date)}</td>`;
         h += `<td style="padding:6px 8px;color:var(--red);font-family:var(--mono)">${e.days_overdue}d</td>`;
-        h += `<td style="padding:6px 8px">${e.label || ''}${finAssigneeTag(e)}${finPaidBtn(e, live)}</td>`;
+        h += `<td style="padding:6px 8px">${finConfirmToggle(e, live)}${e.label || ''}${finAssigneeTag(e)}${finPaidBtn(e, live)}</td>`;
         h += `<td style="padding:6px 8px;text-align:right;font-family:var(--mono);color:${amountCol(e.amount)};font-weight:600">${amountSign(e.amount)}</td>`;
         h += '</tr>';
       });
