@@ -2813,6 +2813,16 @@ function financeFlash(msg) {
   document.body.appendChild(t);
   setTimeout(() => t.remove(), 4500);
 }
+// On-demand: roll every overdue unpaid PAYMENT (not income) forward to today in JobTread.
+async function financeRollOverdue() {
+  if (!confirm("Roll ALL overdue unpaid PAYMENTS (Subs/Materials, not income) forward to TODAY in JobTread?\n\nUnpaid bills will land on today's payment list — in JobTread and here. Income is never moved.")) return;
+  try {
+    await financeApi('/jobtread/roll-overdue', { method: 'POST' });
+    financeFlash('⏭ Rolling overdue payments to today in JobTread… the dashboard updates in ~1 min (or hit refresh).');
+  } catch (err) {
+    alert('Could not roll overdue payments:\n' + err.message);
+  }
+}
 
 function financeInstallClickHandler() {
   if (window._financeClickInstalled) return;
@@ -2846,6 +2856,8 @@ function financeInstallClickHandler() {
       financeJtPaid(jp.dataset.task, jp.dataset.project, jp.dataset.label);
       return;
     }
+    const ro = e.target.closest('.fin-roll-overdue');
+    if (ro) { e.preventDefault(); e.stopPropagation(); financeRollOverdue(); return; }
     const cf = e.target.closest('.fin-confirm');
     if (cf) {
       e.preventDefault(); e.stopPropagation();
@@ -5663,7 +5675,7 @@ function renderFinance(c) {
     h += `<div class="pc sev-r" style="margin-top:16px">`;
     h += `<div class="ph" onclick="tog(this)">`;
     h += `<div><div class="pn">🕑 Overdue Backlog · ${d.overdue.length} items</div>`;
-    h += `<div class="pp">To collect: <b style="color:var(--grn)">+${fmtK(s.overdue_incoming)}</b> · To pay: <b style="color:var(--red)">-${fmtK(s.overdue_outgoing)}</b> · Net: <b>${fmtK(s.overdue_net)}</b></div></div>`;
+    h += `<div class="pp">To collect: <b style="color:var(--grn)">+${fmtK(s.overdue_incoming)}</b> · To pay: <b style="color:var(--red)">-${fmtK(s.overdue_outgoing)}</b> · Net: <b>${fmtK(s.overdue_net)}</b>${live ? ` · <a href="#" class="fin-roll-overdue" title="Move overdue unpaid payments to today in JobTread" style="color:var(--ylw);font-weight:700;text-decoration:none">⏭ Roll unpaid payments → today</a>` : ''}</div></div>`;
     h += `<div class="pt">${chvSvg()}</div></div>`;
     h += `<div class="pb"><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;margin-top:6px">`;
     h += '<thead><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
