@@ -2189,7 +2189,7 @@ async function financeToggleConfirm(sourceId, currentlyConfirmed) {
     });
     // Update FINANCE_DATA in place — flip the confirmed flag on this event
     if (FINANCE_DATA) {
-      const updateEvent = e => { if (e && e.source_id === sourceId) e.confirmed = newConfirmed; };
+      const updateEvent = e => { if (e && (e.confirm_key || e.source_id) === sourceId) e.confirmed = newConfirmed; };
       (FINANCE_DATA.timeline || []).forEach(updateEvent);
       (FINANCE_DATA.overdue || []).forEach(updateEvent);
       // Per-project events arrays are duplicates of the same dicts above — same in-place update
@@ -2741,7 +2741,7 @@ function financeRenderBucketContent(start, end, rowId, live) {
       // Confirmation toggle (live mode only — needs API)
       if (live) {
         const tip = isConf ? 'Confirmed — click to mark Potential' : 'Potential — click to mark Confirmed';
-        html += `<a href="#" class="fin-confirm" data-src="${financeAttr(e.source_id)}" data-confirmed="${isConf?1:0}" title="${tip}" style="color:${isConf?'var(--grn)':'var(--dim)'};text-decoration:none;font-size:14px;width:18px;text-align:center">${isConf?'☑':'☐'}</a>`;
+        html += `<a href="#" class="fin-confirm" data-src="${financeAttr(e.confirm_key || e.source_id)}" data-confirmed="${isConf?1:0}" title="${tip}" style="color:${isConf?'var(--grn)':'var(--dim)'};text-decoration:none;font-size:14px;width:18px;text-align:center">${isConf?'☑':'☐'}</a>`;
       } else {
         html += `<span title="${isConf?'Confirmed':'Potential'}" style="color:${isConf?'var(--grn)':'var(--dim)'};font-size:14px;width:18px;text-align:center">${isConf?'☑':'☐'}</span>`;
       }
@@ -2785,7 +2785,7 @@ function finConfirmToggle(e, live) {
   const isConf = !!e.confirmed;
   if (!live) return `<span title="${isConf?'Confirmed':'Potential'}" style="color:${isConf?'var(--grn)':'var(--dim)'};font-size:14px;margin-right:8px;vertical-align:middle">${isConf?'☑':'☐'}</span>`;
   const tip = isConf ? 'Confirmed — click to mark Potential' : 'Potential — click to mark Confirmed';
-  return `<a href="#" class="fin-confirm" data-src="${financeAttr(e.source_id)}" data-confirmed="${isConf?1:0}" title="${tip}" style="color:${isConf?'var(--grn)':'var(--dim)'};text-decoration:none;font-size:14px;margin-right:8px;vertical-align:middle">${isConf?'☑':'☐'}</a>`;
+  return `<a href="#" class="fin-confirm" data-src="${financeAttr(e.confirm_key || e.source_id)}" data-confirmed="${isConf?1:0}" title="${tip}" style="color:${isConf?'var(--grn)':'var(--dim)'};text-decoration:none;font-size:14px;margin-right:8px;vertical-align:middle">${isConf?'☑':'☐'}</a>`;
 }
 function finPaidBtn(e, live) {
   if (!live || !e || e.source_type !== 'jobtread') return '';
