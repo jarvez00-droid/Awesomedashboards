@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-04T19:35:11",
+  "generated_at": "2026-06-05T00:19:14",
   "week_iso": "2026-W23",
   "week_start": "2026-05-30",
   "week_end": "2026-06-05",
-  "used_snapshot_for_finish_detection": false,
+  "used_snapshot_for_finish_detection": true,
   "by_project": [
     {
       "project_id": "22NxUEJKTj6C",
@@ -1560,6 +1560,103 @@
           "user_set": false
         }
       ]
+    },
+    {
+      "project_id": "22PK9BhEJtZn",
+      "project_name": "Lingyan Qiu (CNG2025-458)",
+      "pm": "Angel Pacheco",
+      "group_count": 1,
+      "attribution": 0.0,
+      "groups": [
+        {
+          "project_id": "22PK9BhEJtZn",
+          "project_name": "Lingyan Qiu (CNG2025-458)",
+          "group_id": "22PTrtqf5Yyu",
+          "group_name": "BRICKS & EXTERIOR SHEATING",
+          "parent_group_id": "22PRaHit9kkb",
+          "action_count": 2,
+          "action_task_ids": [
+            "22PRaHgk7LHG",
+            "22PRaKpTBh92"
+          ],
+          "action_task_names": [
+            "BRICKS: BRICK TIES",
+            "BRICKS: INSTALL BRICKS"
+          ],
+          "action_progresses": [
+            1,
+            null
+          ],
+          "action_starts": [
+            "2026-06-02",
+            "2026-06-15"
+          ],
+          "action_ends": [
+            "2026-06-02",
+            "2026-06-16"
+          ],
+          "action_start_min": "2026-06-02",
+          "action_end_max": "2026-06-16",
+          "action_lines": [
+            {
+              "task_id": "22PRaHgk7LHG",
+              "name": "BRICKS: BRICK TIES",
+              "description": "",
+              "amount": 0.0,
+              "progress": 1,
+              "end_date": "2026-06-02"
+            },
+            {
+              "task_id": "22PRaKpTBh92",
+              "name": "BRICKS: INSTALL BRICKS",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-06-16"
+            }
+          ],
+          "subs_lines": [
+            {
+              "task_id": "22PUTCaEEkPC",
+              "name": "BRICK TIES: BILL & PAYMENT",
+              "description": "-$200.00",
+              "amount": 200.0,
+              "progress": null,
+              "end_date": "2026-06-05"
+            },
+            {
+              "task_id": "22PUTChsiRNJ",
+              "name": "BRICKS: BILL & PAYMENT",
+              "description": "-1220",
+              "amount": 1220.0,
+              "progress": null,
+              "end_date": "2026-06-26"
+            }
+          ],
+          "materials_lines": [
+            {
+              "task_id": "22PUVW6gJeqQ",
+              "name": "BRICKS: PURCHASE MATERIAL",
+              "description": "-4570",
+              "amount": 4570.0,
+              "progress": null,
+              "end_date": "2026-06-08"
+            }
+          ],
+          "additional_lines": [],
+          "sold": 0.0,
+          "expenses_subs": 1420.0,
+          "expenses_materials": 4570.0,
+          "expenses_additional": 0,
+          "expenses_total": 5990.0,
+          "profit": -5990.0,
+          "status": "in_progress",
+          "has_price": false,
+          "this_pct": 0.0,
+          "attribution": 0.0,
+          "user_set": false
+        }
+      ]
     }
   ],
   "by_pm": [
@@ -1628,8 +1725,8 @@
     },
     {
       "pm": "Angel Pacheco",
-      "project_count": 1,
-      "group_count": 4,
+      "project_count": 2,
+      "group_count": 5,
       "sold": 6220.0,
       "expenses": 2482.48,
       "profit_potential": 3737.52,
@@ -1640,6 +1737,12 @@
           "project_name": "Clifford Clack \u2014 Gym Addition",
           "attribution": 0.0,
           "group_count": 4
+        },
+        {
+          "project_id": "22PK9BhEJtZn",
+          "project_name": "Lingyan Qiu (CNG2025-458)",
+          "attribution": 0.0,
+          "group_count": 1
         }
       ]
     }
@@ -1649,10 +1752,10 @@
     "expenses": 50640.54,
     "profit_potential": 29527.46,
     "profit_attributed_this_week": 16656.04,
-    "groups_in_progress": 15,
+    "groups_in_progress": 16,
     "groups_finished_this_week": 3,
-    "groups_missing_price": 10,
-    "expense_missing_price": 21766.0,
-    "project_count": 6
+    "groups_missing_price": 11,
+    "expense_missing_price": 27756.0,
+    "project_count": 7
   }
 }
