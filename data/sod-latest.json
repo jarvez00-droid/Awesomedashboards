@@ -2,11 +2,11 @@
   "date": "2026-06-10",
   "summary": {
     "overdue": 81,
-    "active": 26,
+    "active": 25,
     "active_blocked": 2,
     "coming": 169,
     "coming_unassigned": 85,
-    "role_gaps": 295,
+    "role_gaps": 294,
     "concern": "Katie Holmes & Sean Springs \u2014 23 overdue tasks",
     "payment_overdue": 60,
     "hidden_no_pm": [
@@ -19,7 +19,7 @@
   },
   "analysis": {
     "paragraphs": [
-      "Overdue climbed to 81 \u2014 we need to reverse this today. This is above the 7-day average of 63 \u2014 the trend is heading the wrong direction. 26 tasks are actively in progress \u2014 that's solid execution across the board. 2 tasks should be active but are stuck waiting on blockers \u2014 these need immediate attention.",
+      "Overdue climbed to 81 \u2014 we need to reverse this today. This is above the 7-day average of 63 \u2014 the trend is heading the wrong direction. 25 tasks are actively in progress \u2014 that's solid execution across the board. 2 tasks should be active but are stuck waiting on blockers \u2014 these need immediate attention.",
       "**Katie Holmes & Sean Springs:** The oldest overdue task is 22 days past due with 23 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. **4 upcoming tasks unassigned** \u2014 assign people now or they'll start late. $34,268 in payments coming due this week \u2014 prepare funds.",
       "**Stephanie and Marc Felton:** The oldest overdue task is 27 days past due with 13 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. **30 upcoming tasks unassigned** \u2014 assign people now or they'll start late. $52,197 in payments coming due this week \u2014 prepare funds.",
       "**Clifford Clack \u2014 Gym Addition:** The oldest overdue task is 9 days past due with 11 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. **7 upcoming tasks unassigned** \u2014 assign people now or they'll start late. 7 payment tasks due this week.",
@@ -60,7 +60,7 @@
     {
       "name": "Angel Pacheco",
       "ov": 31,
-      "act": 3,
+      "act": 2,
       "proj": 3,
       "ind": "red"
     },
@@ -834,9 +834,7 @@
             "n": "INSULATION: PM INSPECTION / CC REPORT",
             "w": "Jeff, Angel Pacheco",
             "when": "starts in 2 days",
-            "unassigned": false,
-            "blocked_by": "INSULATION: INSTALL INSULATION",
-            "blocked_kind": "upcoming"
+            "unassigned": false
           },
           {
             "n": "INSULATION: REQUEST CITY INSPECTION",
@@ -2097,7 +2095,7 @@
       "st": "issue",
       "c": {
         "ov": 11,
-        "ac": 5,
+        "ac": 4,
         "ab": 0,
         "up": 25,
         "bo_ov": 3,
@@ -2109,7 +2107,7 @@
       },
       "g": {
         "p": 27,
-        "v": 30,
+        "v": 29,
         "pc": 3
       },
       "pm_tasks": {
@@ -2172,11 +2170,6 @@
         ],
         "active": [
           {
-            "n": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
-            "dt": "Jun 10-10",
-            "w": "Clifford Clack, Angel Pacheco, Romina Rey"
-          },
-          {
             "n": "DOORS AND WINDOWS: PM INSPECTION / CC REPORT",
             "dt": "Jun 10-10",
             "w": "Clifford Clack, Angel Pacheco"
@@ -2218,6 +2211,12 @@
             "when": "tomorrow"
           },
           {
+            "n": "INSULATION: REQUEST CITY INSPECTION",
+            "w": "\u26a0\ufe0f Nobody",
+            "unassigned": true,
+            "when": "tomorrow"
+          },
+          {
             "n": "SHEETROCK: HANG SHEETROCK",
             "w": "Clifford Clack, Angel Pacheco",
             "unassigned": false,
@@ -2233,12 +2232,6 @@
             "n": "SHEETROCK: PM INSPECTION / CC REPORT",
             "w": "Angel Pacheco",
             "unassigned": false,
-            "when": "in 2 days"
-          },
-          {
-            "n": "INSULATION: REQUEST CITY INSPECTION",
-            "w": "\u26a0\ufe0f Nobody",
-            "unassigned": true,
             "when": "in 2 days"
           },
           {
@@ -2592,11 +2585,6 @@
         ],
         "active": [
           {
-            "n": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
-            "dt": "Jun 10-10",
-            "w": "Clifford Clack, Angel Pacheco, Romina Rey"
-          },
-          {
             "n": "DOORS AND WINDOWS: PM INSPECTION / CC REPORT",
             "dt": "Jun 10-10",
             "w": "Clifford Clack, Angel Pacheco"
@@ -2620,6 +2608,12 @@
         "active_blocked": [],
         "coming": [
           {
+            "n": "INSULATION: REQUEST CITY INSPECTION",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts tomorrow",
+            "unassigned": true
+          },
+          {
             "n": "MECHANICAL: BILL & PAYMENT",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts in 2 days",
@@ -2627,12 +2621,6 @@
             "is_payment": true,
             "amount": 900.0,
             "pay_type": "subs"
-          },
-          {
-            "n": "INSULATION: REQUEST CITY INSPECTION",
-            "w": "\u26a0\ufe0f Nobody",
-            "when": "starts in 2 days",
-            "unassigned": true
           },
           {
             "n": "INSULATION: THIRD PARTY INSPECTION",
@@ -2682,9 +2670,7 @@
             "n": "INSULATION: PM INSPECTION / CC REPORT",
             "w": "Angel Pacheco",
             "when": "starts tomorrow",
-            "unassigned": false,
-            "blocked_by": "INSULATION: INSTALL INSULATION",
-            "blocked_kind": "upcoming"
+            "unassigned": false
           },
           {
             "n": "INSULATION: INSTALL CEILING INSULATION",
