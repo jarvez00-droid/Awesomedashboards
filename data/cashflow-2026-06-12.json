@@ -1,6 +1,6 @@
 {
   "date": "2026-06-12",
-  "generated_at": "2026-06-12T17:10:47.715858",
+  "generated_at": "2026-06-12T17:32:30.780783",
   "summary": {
     "total_payment_tasks": 747,
     "total_income": 577405.81,
@@ -9,11 +9,11 @@
     "total_net": 259157.5,
     "pending_income": 1767331.06,
     "pending_p_income": 0,
-    "pending_outgoing": 1394867.2,
+    "pending_outgoing": 1393367.2,
     "paid_income": 316605.71,
     "paid_p_income": 0,
-    "paid_outgoing": 220709.86,
-    "unpaid_net": 372463.86,
+    "paid_outgoing": 222209.86,
+    "unpaid_net": 373963.86,
     "weeks_covered": 6
   },
   "weeks": [
@@ -51,15 +51,15 @@
       "is_past": false,
       "income": 44100.0,
       "p_income": 0,
-      "subs": 26845.0,
+      "subs": 25345.0,
       "materials": 8791.0,
       "additional": 0,
-      "outgoing": 35636.0,
-      "net": 8464.0,
+      "outgoing": 34136.0,
+      "net": 9964.0,
       "income_paid": 0,
       "p_income_paid": 0,
       "outgoing_paid": 500.0,
-      "task_count": 30,
+      "task_count": 29,
       "items": [
         {
           "project": "Stephanie and Marc Felton",
@@ -206,14 +206,6 @@
           "paid": false
         },
         {
-          "project": "Kyle Aubry - Project 01",
-          "task": "ELECTRICAL ROUGH IN: downpayment",
-          "type": "subs",
-          "amount": 1500.0,
-          "due": "2026-06-12",
-          "paid": false
-        },
-        {
           "project": "Lingyan Qiu (CNG2025-458)",
           "task": "BRICK TIES: BILL & PAYMENT",
           "type": "subs",
@@ -310,15 +302,15 @@
       "is_past": false,
       "income": 174418.51,
       "p_income": 0,
-      "subs": 56390.0,
+      "subs": 59090.0,
       "materials": 14702.47,
       "additional": 0,
-      "outgoing": 71092.47,
-      "net": 103326.04,
+      "outgoing": 73792.47,
+      "net": 100626.04,
       "income_paid": 0,
       "p_income_paid": 0,
-      "outgoing_paid": 0,
-      "task_count": 55,
+      "outgoing_paid": 1500.0,
+      "task_count": 57,
       "items": [
         {
           "project": "Katie Holmes & Sean Springs",
@@ -431,6 +423,14 @@
           "amount": 500.0,
           "due": "2026-06-15",
           "paid": false
+        },
+        {
+          "project": "Kyle Aubry - Project 01",
+          "task": "ELECTRICAL ROUGH IN: downpayment",
+          "type": "subs",
+          "amount": 1500.0,
+          "due": "2026-06-15",
+          "paid": true
         },
         {
           "project": "Stephanie and Marc Felton",
@@ -682,6 +682,14 @@
         },
         {
           "project": "Lingyan Qiu (CNG2025-458)",
+          "task": "INSULATION: BILL & PAYMENT",
+          "type": "subs",
+          "amount": 1200.0,
+          "due": "2026-06-19",
+          "paid": false
+        },
+        {
+          "project": "Lingyan Qiu (CNG2025-458)",
           "task": "Mechanical bill & payment FINAL",
           "type": "subs",
           "amount": 1400.0,
@@ -769,15 +777,15 @@
       "is_past": false,
       "income": 86939.35,
       "p_income": 0,
-      "subs": 49135.3,
+      "subs": 47935.3,
       "materials": 59831.0,
       "additional": 0,
-      "outgoing": 108966.3,
-      "net": -22026.95,
+      "outgoing": 107766.3,
+      "net": -20826.95,
       "income_paid": 42000.0,
       "p_income_paid": 0,
       "outgoing_paid": 0,
-      "task_count": 55,
+      "task_count": 54,
       "items": [
         {
           "project": "Stephanie and Marc Felton",
@@ -856,14 +864,6 @@
           "task": "EXTERIOR: PURCHASE MATERIAL",
           "type": "materials",
           "amount": 1600.0,
-          "due": "2026-06-22",
-          "paid": false
-        },
-        {
-          "project": "Lingyan Qiu (CNG2025-458)",
-          "task": "INSULATION: BILL & PAYMENT",
-          "type": "subs",
-          "amount": 1200.0,
           "due": "2026-06-22",
           "paid": false
         },
@@ -4240,20 +4240,6 @@
       "external": false
     },
     {
-      "project": "Kyle Aubry - Project 01",
-      "task": "ELECTRICAL ROUGH IN: downpayment",
-      "type": "subs",
-      "amount": 1500.0,
-      "due": "2026-06-12",
-      "paid": false,
-      "assignee": "ELECTRICAL ROUGH IN",
-      "assignedTo": "",
-      "taskId": "22PYYwb5FQfx",
-      "projectId": "22Nx8Uut2Qxs",
-      "planning": false,
-      "external": false
-    },
-    {
       "project": "Lingyan Qiu (CNG2025-458)",
       "task": "BRICK TIES: BILL & PAYMENT",
       "type": "subs",
@@ -4599,6 +4585,20 @@
       "assignee": "SHEETROCK",
       "assignedTo": "",
       "taskId": "22PW3i5sJHrW",
+      "projectId": "22Nx8Uut2Qxs",
+      "planning": false,
+      "external": false
+    },
+    {
+      "project": "Kyle Aubry - Project 01",
+      "task": "ELECTRICAL ROUGH IN: downpayment",
+      "type": "subs",
+      "amount": 1500.0,
+      "due": "2026-06-15",
+      "paid": true,
+      "assignee": "ELECTRICAL ROUGH IN",
+      "assignedTo": "",
+      "taskId": "22PYYwb5FQfx",
       "projectId": "22Nx8Uut2Qxs",
       "planning": false,
       "external": false
@@ -5039,6 +5039,20 @@
     },
     {
       "project": "Lingyan Qiu (CNG2025-458)",
+      "task": "INSULATION: BILL & PAYMENT",
+      "type": "subs",
+      "amount": 1200.0,
+      "due": "2026-06-19",
+      "paid": false,
+      "assignee": "INSULATION",
+      "assignedTo": "",
+      "taskId": "22PUTETpvmN5",
+      "projectId": "22PK9BhEJtZn",
+      "planning": false,
+      "external": false
+    },
+    {
+      "project": "Lingyan Qiu (CNG2025-458)",
       "task": "Mechanical bill & payment FINAL",
       "type": "subs",
       "amount": 1400.0,
@@ -5314,20 +5328,6 @@
       "assignedTo": "Romina Rey, Jeff",
       "taskId": "22PV9eApudys",
       "projectId": "22P2cmNJZcwJ",
-      "planning": false,
-      "external": false
-    },
-    {
-      "project": "Lingyan Qiu (CNG2025-458)",
-      "task": "INSULATION: BILL & PAYMENT",
-      "type": "subs",
-      "amount": 1200.0,
-      "due": "2026-06-22",
-      "paid": false,
-      "assignee": "INSULATION",
-      "assignedTo": "",
-      "taskId": "22PUTETpvmN5",
-      "projectId": "22PK9BhEJtZn",
       "planning": false,
       "external": false
     },
