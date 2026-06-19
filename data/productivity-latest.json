@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-18T18:42:20",
+  "generated_at": "2026-06-19T00:02:58",
   "week_iso": "2026-W25",
   "week_start": "2026-06-13",
   "week_end": "2026-06-19",
-  "used_snapshot_for_finish_detection": false,
+  "used_snapshot_for_finish_detection": true,
   "by_project": [
     {
       "project_id": "22Nx8Uut2Qxs",
@@ -67,9 +67,174 @@
       "project_id": "22NxUEJKTj6C",
       "project_name": "Ginger Brown",
       "pm": "Milagros Porturas",
-      "group_count": 4,
+      "group_count": 5,
       "attribution": 0.0,
       "groups": [
+        {
+          "project_id": "22NxUEJKTj6C",
+          "project_name": "Ginger Brown",
+          "group_id": "22PMhvM22xuh",
+          "group_name": "ELECTRICAL TRIM",
+          "parent_group_id": "22PMhvM22xuX",
+          "action_count": 3,
+          "action_task_ids": [
+            "22PMhvM22xup",
+            "22PWP7BQj9Di",
+            "22PYbd5UdLFf"
+          ],
+          "action_task_names": [
+            "ELECTRICAL: ELECTRICAL TRIM",
+            "MAIN PANEL INSTALLATION",
+            "ELECTRIC: ELECTRICAL fixes"
+          ],
+          "action_progresses": [
+            null,
+            1,
+            1
+          ],
+          "action_starts": [
+            "2026-06-16",
+            "2026-05-05",
+            "2026-06-12"
+          ],
+          "action_ends": [
+            "2026-06-20",
+            "2026-06-04",
+            "2026-06-13"
+          ],
+          "action_start_min": "2026-05-05",
+          "action_end_max": "2026-06-20",
+          "action_lines": [
+            {
+              "task_id": "22PMhvM22xup",
+              "name": "ELECTRICAL: ELECTRICAL TRIM",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-06-20"
+            },
+            {
+              "task_id": "22PWP7BQj9Di",
+              "name": "MAIN PANEL INSTALLATION",
+              "description": "8055",
+              "amount": 8055.0,
+              "progress": 1,
+              "end_date": "2026-06-04"
+            },
+            {
+              "task_id": "22PYbd5UdLFf",
+              "name": "ELECTRIC: ELECTRICAL fixes",
+              "description": "",
+              "amount": 0.0,
+              "progress": 1,
+              "end_date": "2026-06-13"
+            }
+          ],
+          "subs_lines": [
+            {
+              "task_id": "22PWP7LeLUGq",
+              "name": "ELECTRICAL TRIM: BILL PAYMENT1",
+              "description": "-2000",
+              "amount": 2000.0,
+              "progress": 1,
+              "end_date": "2026-04-29"
+            },
+            {
+              "task_id": "22PWUuHKvt3x",
+              "name": "ELECTRICAL TRIM: BILL PAYMENT 2",
+              "description": "-2000",
+              "amount": 2000.0,
+              "progress": 1,
+              "end_date": "2026-04-30"
+            },
+            {
+              "task_id": "22PWP7NT7HF6",
+              "name": "ELECTRIC: main panel",
+              "description": "-500",
+              "amount": 500.0,
+              "progress": null,
+              "end_date": "2026-06-18"
+            },
+            {
+              "task_id": "22PWPCemfvKX",
+              "name": "ELECTRIC TRIM: BILL PAYMENT",
+              "description": "-750",
+              "amount": 750.0,
+              "progress": null,
+              "end_date": "2026-06-26"
+            },
+            {
+              "task_id": "22PWPCy3VzzU",
+              "name": "ELECTRIC: BILL PAYMENT 5",
+              "description": "2500",
+              "amount": 2500.0,
+              "progress": null,
+              "end_date": "2026-07-10"
+            },
+            {
+              "task_id": "22PY2y7HkpeM",
+              "name": "ELECTRIC: BILL DOWNPAYMENT - maybe (Copy)",
+              "description": "-750",
+              "amount": 750.0,
+              "progress": 1,
+              "end_date": "2026-06-11"
+            }
+          ],
+          "materials_lines": [
+            {
+              "task_id": "22PTrdzEHEza",
+              "name": "ELECTRICAL TRIM: PURCHASE (DIMMER SWITCHES + LIGHT BULBS)",
+              "description": "-300",
+              "amount": 300.0,
+              "progress": 1,
+              "end_date": "2026-05-18"
+            },
+            {
+              "task_id": "22PW6Y7tz56Y",
+              "name": "ELECTRICAL TRIM: PURCHASE (FIREPLACE)",
+              "description": "-216.49",
+              "amount": 216.49,
+              "progress": 1,
+              "end_date": "2026-04-24"
+            },
+            {
+              "task_id": "22PWqzdx6VzG",
+              "name": "ELECTRICAL TRIM: PURCHASE (CEILING FAN)",
+              "description": "-500",
+              "amount": 500.0,
+              "progress": 1,
+              "end_date": "2026-05-15"
+            },
+            {
+              "task_id": "22PXNtXCMZNH",
+              "name": "ELECTRCIAL TRIM: DECORATIVE LIGHTS",
+              "description": "3500",
+              "amount": 3500.0,
+              "progress": 1,
+              "end_date": "2026-05-26"
+            },
+            {
+              "task_id": "22PYDCXZe9Fi",
+              "name": "ELECTRCIAL TRIM: DECORATIVE LIGHTS missing",
+              "description": "150",
+              "amount": 150.0,
+              "progress": 1,
+              "end_date": "2026-05-27"
+            }
+          ],
+          "additional_lines": [],
+          "sold": 8055.0,
+          "expenses_subs": 8500.0,
+          "expenses_materials": 4666.49,
+          "expenses_additional": 0,
+          "expenses_total": 13166.49,
+          "profit": -5111.49,
+          "status": "in_progress",
+          "has_price": true,
+          "this_pct": 0.0,
+          "attribution": -0.0,
+          "user_set": false
+        },
         {
           "project_id": "22NxUEJKTj6C",
           "project_name": "Ginger Brown",
@@ -895,10 +1060,10 @@
     {
       "pm": "Milagros Porturas",
       "project_count": 2,
-      "group_count": 5,
-      "sold": 21710.0,
-      "expenses": 9164.96,
-      "profit_potential": 12545.04,
+      "group_count": 6,
+      "sold": 29765.0,
+      "expenses": 22331.45,
+      "profit_potential": 7433.55,
       "attribution": 0.0,
       "projects": [
         {
@@ -911,7 +1076,7 @@
           "project_id": "22NxUEJKTj6C",
           "project_name": "Ginger Brown",
           "attribution": 0.0,
-          "group_count": 4
+          "group_count": 5
         }
       ]
     },
@@ -957,11 +1122,11 @@
     }
   ],
   "totals": {
-    "sold": 21710.0,
-    "expenses": 9164.96,
-    "profit_potential": 12545.04,
+    "sold": 29765.0,
+    "expenses": 22331.45,
+    "profit_potential": 7433.55,
     "profit_attributed_this_week": 0.0,
-    "groups_in_progress": 5,
+    "groups_in_progress": 6,
     "groups_finished_this_week": 5,
     "groups_missing_price": 8,
     "expense_missing_price": 16171.44,
