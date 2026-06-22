@@ -2,13 +2,13 @@
   "date": "2026-06-22",
   "summary": {
     "overdue": 39,
-    "active": 15,
-    "active_blocked": 2,
+    "active": 16,
+    "active_blocked": 1,
     "coming": 152,
     "coming_unassigned": 76,
     "role_gaps": 262,
     "concern": "Stephanie and Marc Felton \u2014 12 overdue tasks",
-    "payment_overdue": 22,
+    "payment_overdue": 18,
     "hidden_no_pm": [
       "Charles Harris \u2014 Argyle TX",
       "Shaan Lagisetty (CNG-20251169)",
@@ -19,7 +19,7 @@
   },
   "analysis": {
     "paragraphs": [
-      "Good momentum \u2014 overdue count is down to 39. This is above the 7-day average of 35 \u2014 the trend is heading the wrong direction. 15 tasks are actively in progress \u2014 that's solid execution across the board. 2 tasks should be active but are stuck waiting on blockers \u2014 these need immediate attention.",
+      "Good momentum \u2014 overdue count is down to 39. This is above the 7-day average of 35 \u2014 the trend is heading the wrong direction. 16 tasks are actively in progress \u2014 that's solid execution across the board. 1 task should be active but is stuck waiting on blockers \u2014 these need immediate attention.",
       "**Stephanie and Marc Felton:** The oldest overdue task is 35 days past due with 12 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. **13 upcoming tasks unassigned** \u2014 assign people now or they'll start late. $24,741 in payments coming due this week \u2014 prepare funds.",
       "**Ginger Brown:** The oldest overdue task is 23 days past due with 10 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. **13 upcoming tasks unassigned** \u2014 assign people now or they'll start late. 9 payment tasks due this week.",
       "**Rohini Williams (CNG2025-496):** Overdue count is climbing \u2014 now at 9. The PM needs to get ahead of this before it cascades. **16 upcoming tasks unassigned** \u2014 assign people now or they'll start late.",
@@ -30,7 +30,7 @@
       "**Milagros Porturas:** 8 overdue across 2 projects.",
       "**Angel Pacheco:** 5 overdue across 2 projects.",
       "**Jeff:** Down to 4 overdue \u2014 making progress.",
-      "152 tasks starting in the next 7 days. **76 of those have nobody assigned** \u2014 these need a name on them before they're due or they'll become overdue with no accountability. 12 overdue payments are holding up the pipeline \u2014 every day these sit, the schedule slips further. **$73,614 in payments going out this week** across 38 tasks \u2014 make sure funds are available. $10,506 expected in from 1 client payment. Heavy week ahead for Katie Holmes & Sean Springs and Ginger Brown \u2014 make sure resources are lined up."
+      "152 tasks starting in the next 7 days. **76 of those have nobody assigned** \u2014 these need a name on them before they're due or they'll become overdue with no accountability. 10 overdue payments are holding up the pipeline \u2014 every day these sit, the schedule slips further. **$73,614 in payments going out this week** across 38 tasks \u2014 make sure funds are available. $10,506 expected in from 1 client payment. Heavy week ahead for Katie Holmes & Sean Springs and Ginger Brown \u2014 make sure resources are lined up."
     ],
     "pm_briefs": {
       "Angel Pacheco": [
@@ -50,7 +50,7 @@
         "Milagros Porturas is trending in the right direction \u2014 overdue is down to 8. Keep the momentum going.",
         "**Ginger Brown:** 10 overdue (oldest: 23d) \u2014 review and reschedule tasks that have truly slipped. **13 upcoming unassigned** \u2014 assign before they start. 25 tasks starting this week \u2014 make sure subs and materials are confirmed.",
         "**Rohini Williams (CNG2025-496):** 9 overdue \u2014 oldest first. **16 upcoming unassigned** \u2014 assign before they start. 16 tasks starting this week \u2014 make sure subs and materials are confirmed.",
-        "**Kyle Aubry - Project 01:** 1 active-blocked \u2014 clear the blockers to keep moving. **17 upcoming unassigned** \u2014 assign before they start. 23 tasks starting this week \u2014 make sure subs and materials are confirmed.",
+        "**Kyle Aubry - Project 01:** **17 upcoming unassigned** \u2014 assign before they start. 23 tasks starting this week \u2014 make sure subs and materials are confirmed.",
         "**Recommendation:** Block 2 hours today to clear the oldest overdue tasks first. If a task is genuinely behind and can't be completed soon, update the schedule dates so we have accurate data."
       ]
     }
@@ -3575,15 +3575,15 @@
       "st": "issue",
       "c": {
         "ov": 1,
-        "ac": 4,
-        "ab": 1,
+        "ac": 5,
+        "ab": 0,
         "up": 25,
-        "bo_ov": 2,
+        "bo_ov": 0,
         "bo_today": 4,
         "bo_up": 6,
         "co": 23,
         "co_un": 17,
-        "pay": 2
+        "pay": 0
       },
       "g": {
         "p": 46,
@@ -3599,6 +3599,11 @@
           }
         ],
         "active": [
+          {
+            "n": "SHEETROCK: HANG SHEETROCK",
+            "dt": "Jun 22-23",
+            "w": "\u26a0\ufe0f Nobody"
+          },
           {
             "n": "KITCHEN FLOOR TILES: CREATE SOW",
             "dt": "Jun 22-22",
@@ -3620,15 +3625,7 @@
             "w": "\u26a0\ufe0f Nobody"
           }
         ],
-        "active_blocked": [
-          {
-            "n": "SHEETROCK: HANG SHEETROCK",
-            "d": 0,
-            "w": "\u26a0\ufe0f Nobody",
-            "bl": "SHEETROCK: CONFIRM DELIVERY",
-            "bl_kind": "payment"
-          }
-        ],
+        "active_blocked": [],
         "upcoming": [
           {
             "n": "KITCHEN FLOOR TILES: SOURCE VENDOR",
@@ -3783,30 +3780,7 @@
         ]
       },
       "backoffice_tasks": {
-        "overdue": [
-          {
-            "n": "SHEETROCK: SECURE PRICING",
-            "w": "\u26a0\ufe0f Nobody",
-            "unassigned": true,
-            "due": "2026-06-19",
-            "tt": "2. Purchases",
-            "tt_short": "PUR",
-            "amount": 0,
-            "pay_type": "",
-            "d": 3
-          },
-          {
-            "n": "SHEETROCK: CONFIRM DELIVERY",
-            "w": "Romina Rey",
-            "unassigned": false,
-            "due": "2026-06-20",
-            "tt": "2. Purchases",
-            "tt_short": "PUR",
-            "amount": 0,
-            "pay_type": "",
-            "d": 2
-          }
-        ],
+        "overdue": [],
         "today": [
           {
             "n": "CARPET: COMPLETE TAKEOFF",
@@ -3928,6 +3902,11 @@
         ],
         "active": [
           {
+            "n": "SHEETROCK: HANG SHEETROCK",
+            "dt": "Jun 22-23",
+            "w": "\u26a0\ufe0f Nobody"
+          },
+          {
             "n": "KITCHEN FLOOR TILES: CREATE SOW",
             "dt": "Jun 22-22",
             "w": "\u26a0\ufe0f Nobody"
@@ -3948,15 +3927,7 @@
             "w": "\u26a0\ufe0f Nobody"
           }
         ],
-        "active_blocked": [
-          {
-            "n": "SHEETROCK: HANG SHEETROCK",
-            "d": 0,
-            "w": "\u26a0\ufe0f Nobody",
-            "bl": "SHEETROCK: CONFIRM DELIVERY",
-            "bl_kind": "payment"
-          }
-        ],
+        "active_blocked": [],
         "coming": [
           {
             "n": "KITCHEN FLOOR TILES: SOURCE VENDOR",
@@ -4030,7 +4001,7 @@
             "when": "starts Sat",
             "unassigned": true,
             "blocked_by": "SHEETROCK: HANG SHEETROCK",
-            "blocked_kind": "upcoming"
+            "blocked_kind": "active"
           },
           {
             "n": "INSULATION: CONFIRM SCHEDULE",
@@ -4113,20 +4084,7 @@
             "pay_type": "materials"
           }
         ],
-        "pay_overdue": [
-          {
-            "n": "SHEETROCK: SECURE PRICING",
-            "d": 3,
-            "w": "\u26a0\ufe0f Nobody",
-            "tt": "2. Purchases"
-          },
-          {
-            "n": "SHEETROCK: CONFIRM DELIVERY",
-            "d": 2,
-            "w": "Romina Rey",
-            "tt": "2. Purchases"
-          }
-        ]
+        "pay_overdue": []
       }
     },
     {
