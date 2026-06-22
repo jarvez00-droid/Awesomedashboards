@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-06-21T23:47:28",
-  "date": "2026-06-21",
+  "generated_at": "2026-06-22T00:09:07",
+  "date": "2026-06-22",
   "source": "sqlite:fixed_costs",
   "sheet_id": null,
   "window": {
-    "start": "2026-05-22",
-    "end": "2026-10-19"
+    "start": "2026-05-23",
+    "end": "2026-10-20"
   },
   "summary": {
-    "total_tasks": 162,
-    "total_amount": 204091.2,
+    "total_tasks": 163,
+    "total_amount": 204591.2,
     "by_type": {
       "others": {
-        "tasks": 70,
-        "amount": 58269.6
+        "tasks": 71,
+        "amount": 58769.6
       },
       "salaries": {
         "tasks": 68,
@@ -33,10 +33,10 @@
       "project": "FIXED COSTS",
       "type": "others",
       "amount": 500.0,
-      "due": "2026-06-21",
+      "due": "2026-06-22",
       "original_due": "2026-06-20",
       "rolled_forward": true,
-      "days_overdue": 1,
+      "days_overdue": 2,
       "paid": false,
       "source": "sqlite",
       "category_raw": "Other",
@@ -49,10 +49,10 @@
       "project": "FIXED COSTS",
       "type": "others",
       "amount": 1000.0,
-      "due": "2026-06-21",
+      "due": "2026-06-22",
       "original_due": "2026-06-05",
       "rolled_forward": true,
-      "days_overdue": 16,
+      "days_overdue": 17,
       "paid": false,
       "source": "sqlite",
       "category_raw": "Other",
@@ -65,10 +65,10 @@
       "project": "FIXED COSTS",
       "type": "others",
       "amount": 1000.0,
-      "due": "2026-06-21",
+      "due": "2026-06-22",
       "original_due": "2026-06-01",
       "rolled_forward": true,
-      "days_overdue": 20,
+      "days_overdue": 21,
       "paid": false,
       "source": "sqlite",
       "category_raw": "Legal",
@@ -2618,6 +2618,22 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 531
+    },
+    {
+      "id": "fc-rule563-2026-10-20",
+      "task": "Henry (20th)",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 500.0,
+      "due": "2026-10-20",
+      "original_due": "2026-10-20",
+      "rolled_forward": false,
+      "days_overdue": 0,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 563
     }
   ]
 }
