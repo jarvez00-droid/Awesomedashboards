@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T18:36:52",
+  "generated_at": "2026-06-23T18:47:13",
   "today": "2026-06-23",
   "rule": "Ingreso = SOLO Action Task + Critical Path (NO pagos de cliente). Menos Subs+Materiales+Additional = Producido por trade, repartido entre los dias de EJECUCION del action task (la compra de material o el pago al sub en otra semana NO mueven la fecha). Sumado por semana por proyecto; menos fijos = Produccion Neta.",
   "params": {
@@ -14,20 +14,23 @@
     ],
     "special_included": [
       "Brandy Sexton"
-    ]
+    ],
+    "project_starts": {
+      "Kyle Aubry": "2026-06-01"
+    }
   },
   "totals": {
-    "produced": 165251.56,
-    "produced_ineff": 139671.85,
+    "produced": 141900.28,
+    "produced_ineff": 116766.18,
     "fixed": 83076.96,
-    "net": 82174.6,
-    "net_ineff": 56594.89,
+    "net": 58823.32,
+    "net_ineff": 33689.22,
     "weeks": 8,
-    "avg_weekly_net": 10271.83,
+    "avg_weekly_net": 7352.91,
     "weeks_positive": 7,
     "weeks_positive_ineff": 6,
     "weeks_negative": 1,
-    "avg_weekly_produced": 20656.44
+    "avg_weekly_produced": 17737.53
   },
   "timeline": [
     {
@@ -93,11 +96,11 @@
       "label": "16\u201322 may",
       "label_moy": "may S3",
       "label_short": "16 may",
-      "produced": 66085.17,
-      "produced_ineff": 59181.16,
+      "produced": 43563.89,
+      "produced_ineff": 37009.06,
       "fixed": 10384.62,
-      "net": 55700.55,
-      "cumulative_net": 59703.44,
+      "net": 33179.27,
+      "cumulative_net": 37182.16,
       "active_count": 7,
       "active_projects": [
         "Brandy Sexton",
@@ -109,7 +112,6 @@
         "Stephanie Felton"
       ],
       "by_project": {
-        "Kyle Aubry": 22521.28,
         "Stephanie Felton": -334.91,
         "Katie Holmes": 17747.86,
         "Clifford Clack": 1070.0,
@@ -125,11 +127,11 @@
       "label": "23\u201329 may",
       "label_moy": "may S4",
       "label_short": "23 may",
-      "produced": 16625.61,
-      "produced_ineff": 12034.3,
+      "produced": 15795.61,
+      "produced_ineff": 11300.73,
       "fixed": 10384.62,
-      "net": 6240.99,
-      "cumulative_net": 65944.43,
+      "net": 5410.99,
+      "cumulative_net": 42593.15,
       "active_count": 7,
       "active_projects": [
         "Brandy Sexton",
@@ -141,7 +143,6 @@
         "Stephanie Felton"
       ],
       "by_project": {
-        "Kyle Aubry": 830.0,
         "Stephanie Felton": 602.58,
         "Lingyan Qiu": 4526.8,
         "Rohini Williams": 713.63,
@@ -159,7 +160,7 @@
       "produced_ineff": 10739.42,
       "fixed": 10384.62,
       "net": 2518.82,
-      "cumulative_net": 68463.25,
+      "cumulative_net": 45111.97,
       "active_count": 7,
       "active_projects": [
         "Brandy Sexton",
@@ -190,7 +191,7 @@
       "produced_ineff": 12359.53,
       "fixed": 10384.62,
       "net": 4841.53,
-      "cumulative_net": 73304.78,
+      "cumulative_net": 49953.5,
       "active_count": 6,
       "active_projects": [
         "Clifford Clack",
@@ -219,7 +220,7 @@
       "produced_ineff": 16318.1,
       "fixed": 10384.62,
       "net": 10074.87,
-      "cumulative_net": 83379.65,
+      "cumulative_net": 60028.37,
       "active_count": 6,
       "active_projects": [
         "Clifford Clack",
@@ -247,7 +248,7 @@
       "produced_ineff": 7901.67,
       "fixed": 10384.62,
       "net": -1205.05,
-      "cumulative_net": 82174.6,
+      "cumulative_net": 58823.32,
       "active_count": 6,
       "active_projects": [
         "Clifford Clack",
@@ -340,32 +341,6 @@
       "last_week": "2026-W23"
     },
     {
-      "project": "Kyle Aubry",
-      "revenue": 37698.69,
-      "cost": 11751.49,
-      "produced": 25947.2,
-      "produced_ineff": 24184.48,
-      "margin_pct": 68.8,
-      "weeks": {
-        "2026-W24": 1417.5,
-        "2026-W21": 22521.28,
-        "2026-W22": 830.0,
-        "2026-W23": 598.5,
-        "2026-W25": 428.85,
-        "2026-W26": 151.08
-      },
-      "weeks_ineff": {
-        "2026-W24": 890.63,
-        "2026-W21": 22172.1,
-        "2026-W22": 733.57,
-        "2026-W23": 296.63,
-        "2026-W25": 115.87,
-        "2026-W26": -24.31
-      },
-      "first_week": "2026-W21",
-      "last_week": "2026-W26"
-    },
-    {
       "project": "Stephanie Felton",
       "revenue": 50151.05,
       "cost": 29676.89,
@@ -444,6 +419,28 @@
       },
       "first_week": "2026-W19",
       "last_week": "2026-W24"
+    },
+    {
+      "project": "Kyle Aubry",
+      "revenue": 11376.69,
+      "cost": 8780.77,
+      "produced": 2595.92,
+      "produced_ineff": 1278.81,
+      "margin_pct": 22.8,
+      "weeks": {
+        "2026-W24": 1417.5,
+        "2026-W23": 598.5,
+        "2026-W25": 428.85,
+        "2026-W26": 151.08
+      },
+      "weeks_ineff": {
+        "2026-W24": 890.63,
+        "2026-W23": 296.63,
+        "2026-W25": 115.87,
+        "2026-W26": -24.31
+      },
+      "first_week": "2026-W23",
+      "last_week": "2026-W26"
     }
   ],
   "by_pm": [
@@ -452,10 +449,10 @@
       "produced": 85352.09,
       "produced_ineff": 72826.18,
       "revenue": 168858.22,
-      "overhead": 41777.66,
-      "net": 43574.43,
-      "net_ineff": 31048.52,
-      "overhead_share_pct": 50.3,
+      "overhead": 45331.17,
+      "net": 40020.92,
+      "net_ineff": 27495.01,
+      "overhead_share_pct": 54.6,
       "projects": [
         "Clifford Clack",
         "Katie Holmes",
@@ -478,10 +475,10 @@
       "produced": 33478.09,
       "produced_ineff": 26638.56,
       "revenue": 79075.0,
-      "overhead": 19564.16,
-      "net": 13913.93,
-      "net_ineff": 7074.4,
-      "overhead_share_pct": 23.5,
+      "overhead": 21228.24,
+      "net": 12249.85,
+      "net_ineff": 5410.32,
+      "overhead_share_pct": 25.6,
       "projects": [
         "Brandy Sexton",
         "Rohini Williams"
@@ -497,36 +494,14 @@
       }
     },
     {
-      "pm": "Milagros Porturas",
-      "produced": 25947.2,
-      "produced_ineff": 24184.48,
-      "revenue": 37698.69,
-      "overhead": 9327.13,
-      "net": 16620.07,
-      "net_ineff": 14857.35,
-      "overhead_share_pct": 11.2,
-      "projects": [
-        "Kyle Aubry"
-      ],
-      "margin_pct": 68.8,
-      "weeks": {
-        "2026-W24": 1417.5,
-        "2026-W21": 22521.28,
-        "2026-W22": 830.0,
-        "2026-W23": 598.5,
-        "2026-W25": 428.85,
-        "2026-W26": 151.08
-      }
-    },
-    {
       "pm": "Jeff",
       "produced": 20474.16,
       "produced_ineff": 16022.63,
       "revenue": 50151.05,
-      "overhead": 12408.01,
-      "net": 8066.15,
-      "net_ineff": 3614.62,
-      "overhead_share_pct": 14.9,
+      "overhead": 13463.4,
+      "net": 7010.76,
+      "net_ineff": 2559.23,
+      "overhead_share_pct": 16.2,
       "projects": [
         "Stephanie Felton"
       ],
@@ -539,13 +514,33 @@
         "2026-W22": 602.58,
         "2026-W26": 2195.11
       }
+    },
+    {
+      "pm": "Milagros Porturas",
+      "produced": 2595.92,
+      "produced_ineff": 1278.81,
+      "revenue": 11376.69,
+      "overhead": 3054.15,
+      "net": -458.23,
+      "net_ineff": -1775.34,
+      "overhead_share_pct": 3.7,
+      "projects": [
+        "Kyle Aubry"
+      ],
+      "margin_pct": 22.8,
+      "weeks": {
+        "2026-W24": 1417.5,
+        "2026-W23": 598.5,
+        "2026-W25": 428.85,
+        "2026-W26": 151.08
+      }
     }
   ],
   "data_quality": {
-    "orphan_trades": 9,
-    "orphan_cost": 14658.78,
-    "priced_trades": 51,
-    "total_trades": 60,
+    "orphan_trades": 8,
+    "orphan_cost": 12738.78,
+    "priced_trades": 48,
+    "total_trades": 56,
     "by_project": [
       {
         "project": "Stephanie Felton",
@@ -582,17 +577,6 @@
         ]
       },
       {
-        "project": "Kyle Aubry",
-        "orphan_trades": 1,
-        "orphan_cost": 1920.0,
-        "examples": [
-          {
-            "trade": "EXTERIOR FINISHES (HARDIE, SIDING & TRIMS)",
-            "cost": 1920.0
-          }
-        ]
-      },
-      {
         "project": "Brandy Sexton",
         "orphan_trades": 2,
         "orphan_cost": 1000.0,
@@ -623,18 +607,6 @@
   },
   "flags": [
     {
-      "project": "Kyle Aubry",
-      "trade": "DEMO (SOFFIT)",
-      "revenue": 2250.0,
-      "cost": 0,
-      "produced": 2250.0,
-      "margin_pct": 100.0,
-      "ratio": null,
-      "start": "2026-05-21",
-      "end": "2026-05-21",
-      "severity": "alta"
-    },
-    {
       "project": "Stephanie Felton",
       "trade": "ROOFING",
       "revenue": 25300.0,
@@ -656,18 +628,6 @@
       "ratio": 11.1,
       "start": "2026-06-10",
       "end": "2026-07-03",
-      "severity": "alta"
-    },
-    {
-      "project": "Kyle Aubry",
-      "trade": "EXTERIOR DOORS & TRIMS",
-      "revenue": 22010.0,
-      "cost": 2070.72,
-      "produced": 19939.28,
-      "margin_pct": 90.6,
-      "ratio": 10.6,
-      "start": "2026-05-20",
-      "end": "2026-05-21",
       "severity": "alta"
     },
     {
