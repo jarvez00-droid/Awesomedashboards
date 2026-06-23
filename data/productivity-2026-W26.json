@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T18:26:54",
+  "generated_at": "2026-06-23T18:48:39",
   "week_iso": "2026-W26",
   "week_start": "2026-06-20",
   "week_end": "2026-06-26",
@@ -18,24 +18,39 @@
           "group_id": "22PVxnughCcm",
           "group_name": "SHEETROCK",
           "parent_group_id": "22PWS6WjDD7e",
-          "action_count": 1,
+          "action_count": 4,
           "action_task_ids": [
-            "22PVxnugkYhQ"
+            "22PVxnugkYhQ",
+            "22PYUbhscVzn",
+            "22PYUhFewNhe",
+            "22PYUaJQMB2k"
           ],
           "action_task_names": [
-            "SHEETROCK: HANG SHEETROCK"
+            "SHEETROCK: HANG SHEETROCK",
+            "SHEETROCK: FILL VENTS SPACES",
+            "CEILING: Remove Pop Corn & Fur downs",
+            "SHEETROCK: TAPE, BED & TEXTURE"
           ],
           "action_progresses": [
+            null,
+            null,
+            1,
             null
           ],
           "action_starts": [
-            "2026-06-22"
+            "2026-06-22",
+            "2026-06-22",
+            "2026-06-15",
+            "2026-06-24"
           ],
           "action_ends": [
-            "2026-06-23"
+            "2026-06-23",
+            "2026-06-23",
+            "2026-06-16",
+            "2026-06-27"
           ],
-          "action_start_min": "2026-06-22",
-          "action_end_max": "2026-06-23",
+          "action_start_min": "2026-06-15",
+          "action_end_max": "2026-06-27",
           "action_lines": [
             {
               "task_id": "22PVxnugkYhQ",
@@ -44,17 +59,75 @@
               "amount": 1862.0,
               "progress": null,
               "end_date": "2026-06-23"
+            },
+            {
+              "task_id": "22PYUbhscVzn",
+              "name": "SHEETROCK: FILL VENTS SPACES",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-06-23"
+            },
+            {
+              "task_id": "22PYUhFewNhe",
+              "name": "CEILING: Remove Pop Corn & Fur downs",
+              "description": "",
+              "amount": 0.0,
+              "progress": 1,
+              "end_date": "2026-06-16"
+            },
+            {
+              "task_id": "22PYUaJQMB2k",
+              "name": "SHEETROCK: TAPE, BED & TEXTURE",
+              "description": "2429",
+              "amount": 2429.0,
+              "progress": null,
+              "end_date": "2026-06-27"
             }
           ],
-          "subs_lines": [],
-          "materials_lines": [],
+          "subs_lines": [
+            {
+              "task_id": "22PW3i5sJHrW",
+              "name": "SHEETROCK: BILL & PAYMENT",
+              "description": "300",
+              "amount": 300.0,
+              "progress": 1,
+              "end_date": "2026-06-16"
+            },
+            {
+              "task_id": "22PZCrXHZi5f",
+              "name": "SHEETROCK: BILL & PAYMENT",
+              "description": "1750",
+              "amount": 1750.0,
+              "progress": null,
+              "end_date": "2026-06-26"
+            },
+            {
+              "task_id": "22PZK6Q7LHZ4",
+              "name": "SHEETROCK: BILL & PAYMENT (Copy)",
+              "description": "1750",
+              "amount": 1750.0,
+              "progress": null,
+              "end_date": "2026-07-10"
+            }
+          ],
+          "materials_lines": [
+            {
+              "task_id": "22PZK6ZXysJ5",
+              "name": "SHEETROCK: PURCHASE SHEETROCK",
+              "description": "",
+              "amount": 0.0,
+              "progress": 1,
+              "end_date": "2026-06-19"
+            }
+          ],
           "additional_lines": [],
-          "sold": 1862.0,
-          "expenses_subs": 0,
-          "expenses_materials": 0,
+          "sold": 4291.0,
+          "expenses_subs": 3800.0,
+          "expenses_materials": 0.0,
           "expenses_additional": 0,
-          "expenses_total": 0,
-          "profit": 1862.0,
+          "expenses_total": 3800.0,
+          "profit": 491.0,
           "status": "in_progress",
           "has_price": true,
           "this_pct": 0.0,
@@ -707,9 +780,105 @@
       "project_id": "22P2cmNJZcwJ",
       "project_name": "Stephanie and Marc Felton",
       "pm": "Jeff",
-      "group_count": 1,
+      "group_count": 2,
       "attribution": 0.0,
       "groups": [
+        {
+          "project_id": "22P2cmNJZcwJ",
+          "project_name": "Stephanie and Marc Felton",
+          "group_id": "22PV9YT6xpWd",
+          "group_name": "FLOORING",
+          "parent_group_id": null,
+          "action_count": 2,
+          "action_task_ids": [
+            "22PV9YTVNhJZ",
+            "22PYNgaxcnGX"
+          ],
+          "action_task_names": [
+            "FLOORING: INSTALL FLOORING",
+            "FLOORING: INSTALL BASEBOARD"
+          ],
+          "action_progresses": [
+            1,
+            null
+          ],
+          "action_starts": [
+            "2026-05-27",
+            "2026-06-20"
+          ],
+          "action_ends": [
+            "2026-05-29",
+            "2026-06-20"
+          ],
+          "action_start_min": "2026-05-27",
+          "action_end_max": "2026-06-20",
+          "action_lines": [
+            {
+              "task_id": "22PV9YTVNhJZ",
+              "name": "FLOORING: INSTALL FLOORING",
+              "description": "13643",
+              "amount": 13643.0,
+              "progress": 1,
+              "end_date": "2026-05-29"
+            },
+            {
+              "task_id": "22PYNgaxcnGX",
+              "name": "FLOORING: INSTALL BASEBOARD",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-06-20"
+            }
+          ],
+          "subs_lines": [
+            {
+              "task_id": "22PV9YTdGdzq",
+              "name": "FLOORING: BILL & PAYMENT (FLOORING)",
+              "description": "-1625",
+              "amount": 1625.0,
+              "progress": 1,
+              "end_date": "2026-06-23"
+            },
+            {
+              "task_id": "22PV9a2gzAfc",
+              "name": "FLOORING: Standard Payment (BASEBOARDS)",
+              "description": "-700",
+              "amount": 700.0,
+              "progress": null,
+              "end_date": "2026-06-24"
+            }
+          ],
+          "materials_lines": [
+            {
+              "task_id": "22PV9ZGpB7iK",
+              "name": "FLOORING: PURCHASE MATERIAL",
+              "description": "-3400",
+              "amount": 3400.0,
+              "progress": 1,
+              "end_date": "2026-05-20"
+            },
+            {
+              "task_id": "22PV9YTAT7tT",
+              "name": "FLOORING: PURCHASE MATERIAL (BASEBOARDS)",
+              "description": "-481.44",
+              "amount": 481.44,
+              "progress": 1,
+              "end_date": "2026-05-29"
+            }
+          ],
+          "additional_lines": [],
+          "sold": 13643.0,
+          "expenses_subs": 2325.0,
+          "expenses_materials": 3881.44,
+          "expenses_additional": 0,
+          "expenses_total": 6206.44,
+          "profit": 7436.56,
+          "status": "in_progress",
+          "has_price": true,
+          "this_pct": 0.0,
+          "attribution": 0.0,
+          "user_set": false
+        },
         {
           "project_id": "22P2cmNJZcwJ",
           "project_name": "Stephanie and Marc Felton",
@@ -757,15 +926,117 @@
               "end_date": "2026-07-04"
             }
           ],
-          "subs_lines": [],
+          "subs_lines": [
+            {
+              "task_id": "22PVDYmPmLe2",
+              "name": "GLASS: BILL & PAYMENT",
+              "description": "840",
+              "amount": 840.0,
+              "progress": null,
+              "end_date": "2026-07-08"
+            }
+          ],
           "materials_lines": [],
           "additional_lines": [],
           "sold": 0.0,
-          "expenses_subs": 0,
+          "expenses_subs": 840.0,
           "expenses_materials": 0,
           "expenses_additional": 0,
-          "expenses_total": 0,
-          "profit": 0.0,
+          "expenses_total": 840.0,
+          "profit": -840.0,
+          "status": "in_progress",
+          "has_price": false,
+          "this_pct": 0.0,
+          "attribution": 0.0,
+          "user_set": false
+        }
+      ]
+    },
+    {
+      "project_id": "22P2j3sQMKqz",
+      "project_name": "Katie Holmes & Sean Springs",
+      "pm": "Angel Pacheco",
+      "group_count": 1,
+      "attribution": 0.0,
+      "groups": [
+        {
+          "project_id": "22P2j3sQMKqz",
+          "project_name": "Katie Holmes & Sean Springs",
+          "group_id": "22PUPsdnPH4i",
+          "group_name": "DOORS AND WINDOWS",
+          "parent_group_id": null,
+          "action_count": 3,
+          "action_task_ids": [
+            "22PUKhuPX33K",
+            "22PUSfdw2Y9J",
+            "22PXYuGwWYS2"
+          ],
+          "action_task_names": [
+            "DOORS AND WINDOWS: LELAND INSTALL NEW WINDOWS",
+            "GARAGE DOOR: ASM MEETING WITH CLIENT",
+            "GARAGE DOORS: INSTALLATION"
+          ],
+          "action_progresses": [
+            1,
+            1,
+            null
+          ],
+          "action_starts": [
+            "2026-04-07",
+            "2026-04-06",
+            "2026-06-25"
+          ],
+          "action_ends": [
+            "2026-04-09",
+            "2026-04-09",
+            "2026-06-25"
+          ],
+          "action_start_min": "2026-04-06",
+          "action_end_max": "2026-06-25",
+          "action_lines": [
+            {
+              "task_id": "22PUKhuPX33K",
+              "name": "DOORS AND WINDOWS: LELAND INSTALL NEW WINDOWS",
+              "description": "Set insulated windows and prehung metal or fiberglass doors.",
+              "amount": 0.0,
+              "progress": 1,
+              "end_date": "2026-04-09"
+            },
+            {
+              "task_id": "22PUSfdw2Y9J",
+              "name": "GARAGE DOOR: ASM MEETING WITH CLIENT",
+              "description": "",
+              "amount": 0.0,
+              "progress": 1,
+              "end_date": "2026-04-09"
+            },
+            {
+              "task_id": "22PXYuGwWYS2",
+              "name": "GARAGE DOORS: INSTALLATION",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-06-25"
+            }
+          ],
+          "subs_lines": [
+            {
+              "task_id": "22PUSep8PHLa",
+              "name": "GARAGE DOOR: PURCHASE DOOR",
+              "description": "-2800",
+              "amount": 2800.0,
+              "progress": null,
+              "end_date": "2026-06-23"
+            }
+          ],
+          "materials_lines": [],
+          "additional_lines": [],
+          "sold": 0.0,
+          "expenses_subs": 2800.0,
+          "expenses_materials": 0,
+          "expenses_additional": 0,
+          "expenses_total": 2800.0,
+          "profit": -2800.0,
           "status": "in_progress",
           "has_price": false,
           "this_pct": 0.0,
@@ -910,30 +1181,39 @@
           ],
           "subs_lines": [
             {
-              "task_id": "22PUnN6BKCEJ",
-              "name": "CUSTOM CARPENTRY: BILLS & PAYMENT",
-              "description": "-1400",
-              "amount": 1400.0,
-              "progress": null,
-              "end_date": "2026-06-29"
-            },
-            {
               "task_id": "22PYmTxyuCYe",
               "name": "CUSTOM CARPENTRY: DOWNPAYMENT",
               "description": "1400",
               "amount": 1400.0,
               "progress": null,
               "end_date": "2026-06-23"
+            },
+            {
+              "task_id": "22PUnN6BKCEJ",
+              "name": "CUSTOM CARPENTRY: BILLS & PAYMENT",
+              "description": "-1400",
+              "amount": 1400.0,
+              "progress": null,
+              "end_date": "2026-06-29"
             }
           ],
-          "materials_lines": [],
+          "materials_lines": [
+            {
+              "task_id": "22PZRBZgshW2",
+              "name": "SECRET DOOR HARDWARE: PURCHASE MATERIAL",
+              "description": "-144.38",
+              "amount": 144.38,
+              "progress": 1,
+              "end_date": "2026-06-19"
+            }
+          ],
           "additional_lines": [],
           "sold": 0.0,
           "expenses_subs": 2800.0,
-          "expenses_materials": 0,
+          "expenses_materials": 144.38,
           "expenses_additional": 0,
-          "expenses_total": 2800.0,
-          "profit": -2800.0,
+          "expenses_total": 2944.38,
+          "profit": -2944.38,
           "status": "in_progress",
           "has_price": false,
           "this_pct": 0.0,
@@ -1137,6 +1417,14 @@
               "amount": 3898.0,
               "progress": null,
               "end_date": "2026-07-07"
+            },
+            {
+              "task_id": "22PYxyE9zuH5",
+              "name": "FRAMING: SPECIAL PAYMENT",
+              "description": "3000",
+              "amount": 3000.0,
+              "progress": null,
+              "end_date": "2026-06-26"
             }
           ],
           "materials_lines": [
@@ -1151,11 +1439,11 @@
           ],
           "additional_lines": [],
           "sold": 0.0,
-          "expenses_subs": 3898.0,
+          "expenses_subs": 6898.0,
           "expenses_materials": 4710.0,
           "expenses_additional": 0,
-          "expenses_total": 8608.0,
-          "profit": -8608.0,
+          "expenses_total": 11608.0,
+          "profit": -11608.0,
           "status": "in_progress",
           "has_price": false,
           "this_pct": 0.0,
@@ -1170,9 +1458,9 @@
       "pm": "Milagros Porturas",
       "project_count": 2,
       "group_count": 7,
-      "sold": 19598.0,
-      "expenses": 20331.45,
-      "profit_potential": -733.45,
+      "sold": 22027.0,
+      "expenses": 24131.45,
+      "profit_potential": -2104.45,
       "attribution": 0.0,
       "projects": [
         {
@@ -1192,29 +1480,35 @@
     {
       "pm": "Jeff",
       "project_count": 1,
-      "group_count": 1,
-      "sold": 0.0,
-      "expenses": 0.0,
-      "profit_potential": 0.0,
+      "group_count": 2,
+      "sold": 13643.0,
+      "expenses": 6206.44,
+      "profit_potential": 7436.56,
       "attribution": 0.0,
       "projects": [
         {
           "project_id": "22P2cmNJZcwJ",
           "project_name": "Stephanie and Marc Felton",
           "attribution": 0.0,
-          "group_count": 1
+          "group_count": 2
         }
       ]
     },
     {
       "pm": "Angel Pacheco",
-      "project_count": 1,
-      "group_count": 3,
+      "project_count": 2,
+      "group_count": 4,
       "sold": 4653.0,
       "expenses": 1752.36,
       "profit_potential": 2900.64,
       "attribution": 0.0,
       "projects": [
+        {
+          "project_id": "22P2j3sQMKqz",
+          "project_name": "Katie Holmes & Sean Springs",
+          "attribution": 0.0,
+          "group_count": 1
+        },
         {
           "project_id": "22PCPuWPndkt",
           "project_name": "Clifford Clack \u2014 Gym Addition",
@@ -1242,14 +1536,14 @@
     }
   ],
   "totals": {
-    "sold": 24251.0,
-    "expenses": 22083.81,
-    "profit_potential": 2167.19,
+    "sold": 40323.0,
+    "expenses": 32090.25,
+    "profit_potential": 8232.75,
     "profit_attributed_this_week": 0.0,
-    "groups_in_progress": 12,
+    "groups_in_progress": 14,
     "groups_finished_this_week": 1,
-    "groups_missing_price": 9,
-    "expense_missing_price": 22426.71,
-    "project_count": 5
+    "groups_missing_price": 10,
+    "expense_missing_price": 29211.09,
+    "project_count": 6
   }
 }
