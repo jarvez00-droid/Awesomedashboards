@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Productividad Neta — ¿Producimos dinero?</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0f141b;--card:#171e27;--card2:#1d2630;--line:#2a3540;--tx:#e6edf3;--mut:#9aa7b4;
+--grn:#2ea043;--grnbg:#1a5a2b;--red:#f85149;--redbg:#5a1f1f;--blu:#388bfd;--amb:#d29922;--accent:#58a6ff;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:20px}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:16px;margin:30px 0 12px;color:var(--tx);border-left:3px solid var(--accent);padding-left:9px}
+.sub{color:var(--mut);font-size:13px}
+.rule{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:10px 13px;margin:12px 0;color:var(--mut);font-size:12.5px}
+.rule b{color:var(--tx)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin:16px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 15px}
+.kpi .lab{color:var(--mut);font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
+.kpi .val{font-size:23px;font-weight:700;margin-top:5px}
+.kpi .note{font-size:11.5px;color:var(--mut);margin-top:3px}
+.pos{color:var(--grn)} .neg{color:var(--red)} .amb{color:var(--amb)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:12px 0}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
+button.tg{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:7px;padding:7px 13px;cursor:pointer;font-size:13px}
+button.tg.on{background:var(--accent);color:#0b1117;border-color:var(--accent);font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{padding:7px 9px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{color:var(--mut);font-weight:600;position:sticky;top:0;background:var(--card)}
+tr.hl{background:var(--card2)}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:12px;font-weight:600}
+.badge.red{background:var(--redbg);color:#ffb4ab} .badge.grn{background:var(--grnbg);color:#7ee2a0}
+.tablewrap{overflow-x:auto}
+.chip{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:6px;padding:2px 8px;margin:2px;font-size:11.5px;cursor:pointer;color:var(--mut)}
+.chip.on{color:var(--tx);border-color:var(--accent)}
+.brandy{border:1px solid var(--amb)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.mtx td,.mtx th{text-align:center}
+.foot{color:var(--mut);font-size:12px;margin-top:24px;border-top:1px solid var(--line);padding-top:14px}
+small.t{color:var(--mut)}
+.flex{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+#gate{display:flex;align-items:center;justify-content:center;min-height:80vh}
+.gatebox{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 32px;max-width:360px;text-align:center}
+.gatebox input{width:100%;padding:10px;margin:12px 0;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--tx);font-size:14px}
+.gatebox button{width:100%;padding:10px;border-radius:8px;border:0;background:var(--accent);color:#0b1117;font-weight:600;cursor:pointer}
+.warn{background:#3a2a0a;border:1px solid var(--amb);border-radius:8px;padding:10px 13px;color:#f0d58c;font-size:12.5px;margin:10px 0}
+</style></head><body>
+<div id="gate"><div class="gatebox">
+  <div style="font-size:34px">💰🔒</div>
+  <h1 style="font-size:18px">Productividad Neta</h1>
+  <div class="sub">Vista restringida · gerencia</div>
+  <input type="password" id="pw" placeholder="Contraseña" onkeydown="if(event.key==='Enter')tryPw()">
+  <button onclick="tryPw()">Entrar</button>
+  <div class="sub" id="pwerr" style="color:var(--red);margin-top:8px;visibility:hidden">Contraseña incorrecta</div>
+</div></div>
+<div class="wrap" id="app" style="display:none">
+
+<div class="flex">
+  <div><h1>Productividad Neta — ¿Producimos dinero?</h1>
+  <div class="sub" id="sub"></div></div>
+  <div id="verdict"></div>
+</div>
+<div class="rule" id="rule"></div>
+
+<div class="kpis" id="kpis"></div>
+
+<h2>Vista general · semana a semana</h2>
+<div class="card">
+  <div class="controls">
+    <button class="tg on" id="b-sem">Producido vs Overhead</button>
+    <button class="tg" id="b-acum">Neta acumulada</button>
+  </div>
+  <canvas id="mainChart" height="118"></canvas>
+  <div class="tablewrap" style="margin-top:14px"><table id="weekTable"></table></div>
+</div>
+
+<h2>Por proyecto</h2>
+<div class="card">
+  <div class="sub" style="margin-bottom:8px">Producido por proyecto y semana. Clic en un chip para resaltar / ocultar.</div>
+  <div id="projChips"></div>
+  <canvas id="projChart" height="115"></canvas>
+  <div class="tablewrap" style="margin-top:14px"><table id="projTable"></table></div>
+</div>
+
+<h2>👷 Por PM · ¿cada PM cubre su parte del overhead?</h2>
+<div class="card">
+  <div class="sub" style="margin-bottom:8px">Overhead asignado a cada PM según su participación en el ingreso reconocido. Neta = producido − overhead.</div>
+  <canvas id="pmChart" height="105"></canvas>
+  <div class="tablewrap" style="margin-top:14px"><table id="pmTable"></table></div>
+</div>
+
+<h2>🔎 Calidad de datos · producción invisible</h2>
+<div class="card" id="dqCard"></div>
+
+<h2>🧪 Caso Brandy · nuevo formato (prueba)</h2>
+<div class="card brandy">
+  <div id="brandyHead"></div>
+  <div class="grid2" style="margin-top:12px">
+    <div>
+      <div class="sub" style="margin-bottom:6px">Producción de Brandy por semana</div>
+      <canvas id="brandyChart" height="150"></canvas>
+    </div>
+    <div>
+      <div class="sub" style="margin-bottom:6px">Resultado neto = Producido − Overhead prorrateado</div>
+      <table class="mtx" id="brandyMatrix"></table>
+      <div class="controls" style="margin-top:10px">
+        <button class="tg on" id="bm-eq">Equal-split (por # proyectos)</button>
+        <button class="tg" id="bm-rw">Ponderado por venta</button>
+      </div>
+      <div class="sub" id="brandyAlloc"></div>
+    </div>
+  </div>
+  <div class="tablewrap" style="margin-top:14px"><table id="brandyTrades"></table></div>
+</div>
+
+<div class="foot" id="foot"></div>
+</div>
+
+<script>
+const EMBEDDED = {"generated_at": "2026-06-23T13:41:27", "today": "2026-06-23", "rule": "Ingreso(Action Task + Critical Path) - (Subs + Materiales + Additional) = Producido; por semana por proyecto; menos fijos prorrateados = Produccion Neta.", "params": {"weekly_fixed": 18000.0, "window_start": "2026-05-02", "excluded": ["CANDACE - JUSTIN P REFERRAL", "Ginger Brown"], "special_included": ["Brandy Sexton"]}, "totals": {"produced": 111354.07, "fixed": 144000.0, "net": -32645.93, "weeks": 8, "avg_weekly_net": -4080.74, "weeks_positive": 3, "weeks_negative": 5, "avg_weekly_produced": 13919.26}, "timeline": [{"week_iso": "2026-W19", "week_start": "2026-05-02", "week_end": "2026-05-08", "produced": 23367.53, "fixed": 18000.0, "net": 5367.53, "cumulative_net": 5367.53, "active_count": 6, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Katie Holmes": 24258.12, "Clifford Clack": 1065.39, "Lingyan Qiu": 715.0, "Brandy Sexton": -2670.98}}, {"week_iso": "2026-W20", "week_start": "2026-05-09", "week_end": "2026-05-15", "produced": -685.0, "fixed": 18000.0, "net": -18685.0, "cumulative_net": -13317.47, "active_count": 6, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Stephanie Felton": -1400.0, "Clifford Clack": 1315.0, "Brandy Sexton": -600.0}}, {"week_iso": "2026-W21", "week_start": "2026-05-16", "week_end": "2026-05-22", "produced": 30807.29, "fixed": 18000.0, "net": 12807.29, "cumulative_net": -510.18, "active_count": 7, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": 21289.28, "Katie Holmes": -12968.79, "Clifford Clack": 820.0, "Lingyan Qiu": 18920.15, "Rohini Williams": 3488.0, "Brandy Sexton": -741.35}}, {"week_iso": "2026-W22", "week_start": "2026-05-23", "week_end": "2026-05-29", "produced": 24992.86, "fixed": 18000.0, "net": 6992.86, "cumulative_net": 6482.68, "active_count": 7, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": 1162.0, "Stephanie Felton": 7436.56, "Lingyan Qiu": 9696.0, "Brandy Sexton": 6698.3}}, {"week_iso": "2026-W23", "week_start": "2026-05-30", "week_end": "2026-06-05", "produced": 3211.14, "fixed": 18000.0, "net": -14788.86, "cumulative_net": -8306.18, "active_count": 7, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": 1840.0, "Stephanie Felton": 652.29, "Clifford Clack": 900.0, "Brandy Sexton": -181.15}}, {"week_iso": "2026-W24", "week_start": "2026-06-06", "week_end": "2026-06-12", "produced": 16095.5, "fixed": 18000.0, "net": -1904.5, "cumulative_net": -10210.68, "active_count": 6, "active_projects": ["Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": 28.0, "Stephanie Felton": 8778.0, "Clifford Clack": 3415.5, "Rohini Williams": 3874.0}}, {"week_iso": "2026-W25", "week_start": "2026-06-13", "week_end": "2026-06-19", "produced": 11702.75, "fixed": 18000.0, "net": -6297.25, "cumulative_net": -16507.93, "active_count": 6, "active_projects": ["Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": 3460.0, "Stephanie Felton": -2850.0, "Clifford Clack": 6725.0, "Lingyan Qiu": 4367.75}}, {"week_iso": "2026-W26", "week_start": "2026-06-20", "week_end": "2026-06-26", "produced": 1862.0, "fixed": 18000.0, "net": -16138.0, "cumulative_net": -32645.93, "active_count": 6, "active_projects": ["Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": 1862.0}}], "by_project": [{"project": "Lingyan Qiu", "revenue": 75744.0, "cost": 42045.1, "produced": 33698.9, "margin_pct": 44.5, "weeks": {"2026-W21": 18920.15, "2026-W25": 4367.75, "2026-W22": 9696.0, "2026-W19": 715.0}, "first_week": "2026-W19", "last_week": "2026-W25"}, {"project": "Kyle Aubry", "revenue": 34512.0, "cost": 4870.72, "produced": 29641.28, "margin_pct": 85.9, "weeks": {"2026-W24": 28.0, "2026-W22": 1162.0, "2026-W23": 1840.0, "2026-W25": 3460.0, "2026-W26": 1862.0, "2026-W21": 21289.28}, "first_week": "2026-W21", "last_week": "2026-W26"}, {"project": "Clifford Clack", "revenue": 29277.0, "cost": 15036.11, "produced": 14240.89, "margin_pct": 48.6, "weeks": {"2026-W23": 900.0, "2026-W19": 1065.39, "2026-W20": 1315.0, "2026-W25": 6725.0, "2026-W24": 3415.5, "2026-W21": 820.0}, "first_week": "2026-W19", "last_week": "2026-W25"}, {"project": "Stephanie Felton", "revenue": 44192.0, "cost": 31575.15, "produced": 12616.85, "margin_pct": 28.6, "weeks": {"2026-W20": -1400.0, "2026-W23": 652.29, "2026-W24": 8778.0, "2026-W25": -2850.0, "2026-W22": 7436.56}, "first_week": "2026-W20", "last_week": "2026-W25"}, {"project": "Katie Holmes", "revenue": 44607.0, "cost": 33317.67, "produced": 11289.33, "margin_pct": 25.3, "weeks": {"2026-W21": -12968.79, "2026-W19": 24258.12}, "first_week": "2026-W19", "last_week": "2026-W21"}, {"project": "Rohini Williams", "revenue": 17662.0, "cost": 10300.0, "produced": 7362.0, "margin_pct": 41.7, "weeks": {"2026-W21": 3488.0, "2026-W24": 3874.0}, "first_week": "2026-W21", "last_week": "2026-W24"}, {"project": "Brandy Sexton", "revenue": 29880.0, "cost": 27375.18, "produced": 2504.82, "margin_pct": 8.4, "weeks": {"2026-W22": 6698.3, "2026-W19": -2670.98, "2026-W20": -600.0, "2026-W21": -741.35, "2026-W23": -181.15}, "first_week": "2026-W19", "last_week": "2026-W23"}], "by_pm": [{"pm": "Angel Pacheco", "produced": 59229.12, "revenue": 149628.0, "overhead": 78102.44, "net": -18873.32, "overhead_share_pct": 54.2, "projects": ["Clifford Clack", "Katie Holmes", "Lingyan Qiu"], "margin_pct": 39.6, "weeks": {"2026-W21": 6771.36, "2026-W19": 26038.51, "2026-W23": 900.0, "2026-W20": 1315.0, "2026-W25": 11092.75, "2026-W24": 3415.5, "2026-W22": 9696.0}}, {"pm": "Milagros Porturas", "produced": 29641.28, "revenue": 34512.0, "overhead": 18014.48, "net": 11626.8, "overhead_share_pct": 12.5, "projects": ["Kyle Aubry"], "margin_pct": 85.9, "weeks": {"2026-W24": 28.0, "2026-W22": 1162.0, "2026-W23": 1840.0, "2026-W25": 3460.0, "2026-W26": 1862.0, "2026-W21": 21289.28}}, {"pm": "Jeff", "produced": 12616.85, "revenue": 44192.0, "overhead": 23067.23, "net": -10450.38, "overhead_share_pct": 16.0, "projects": ["Stephanie Felton"], "margin_pct": 28.6, "weeks": {"2026-W20": -1400.0, "2026-W23": 652.29, "2026-W24": 8778.0, "2026-W25": -2850.0, "2026-W22": 7436.56}}, {"pm": "Giselle Garcia", "produced": 9866.82, "revenue": 47542.0, "overhead": 24815.85, "net": -14949.03, "overhead_share_pct": 17.2, "projects": ["Brandy Sexton", "Rohini Williams"], "margin_pct": 20.8, "weeks": {"2026-W21": 2746.65, "2026-W24": 3874.0, "2026-W22": 6698.3, "2026-W19": -2670.98, "2026-W20": -600.0, "2026-W23": -181.15}}], "data_quality": {"orphan_trades": 19, "orphan_cost": 39542.58, "priced_trades": 31, "total_trades": 51, "by_project": [{"project": "Brandy Sexton", "orphan_trades": 10, "orphan_cost": 18315.18, "examples": [{"trade": "DEMO INTERIOR", "cost": 650.0, "week": "2026-W19"}, {"trade": "ELECTRICAL ROUGH IN", "cost": 600.0, "week": "2026-W19"}, {"trade": "FRAMING", "cost": 520.98, "week": "2026-W19"}, {"trade": "PLUMBING ROUGH IN", "cost": 900.0, "week": "2026-W19"}, {"trade": "SHEETROCK", "cost": 600.0, "week": "2026-W20"}, {"trade": "COUNTERTOPS", "cost": 11491.7, "week": "2026-W22"}]}, {"project": "Katie Holmes", "orphan_trades": 3, "orphan_cost": 12968.79, "examples": [{"trade": "PLUMBING ROUGH IN", "cost": 5468.79, "week": "2026-W21"}, {"trade": "ELECTRICAL ROUGH IN", "cost": 5500.0, "week": "2026-W21"}, {"trade": "MECHANICAL ROUGH IN", "cost": 2000.0, "week": "2026-W21"}]}, {"project": "Stephanie Felton", "orphan_trades": 2, "orphan_cost": 4250.0, "examples": [{"trade": "DOORS AND WINDOWS", "cost": 1400.0, "week": "2026-W20"}, {"trade": "COUNTERTOPS", "cost": 2850.0, "week": "2026-W25"}]}, {"project": "Clifford Clack", "orphan_trades": 2, "orphan_cost": 2108.61, "examples": [{"trade": "FRAMING", "cost": 1858.61, "week": "2026-W19"}, {"trade": "PLUMBING", "cost": 250.0, "week": "2026-W21"}]}, {"project": "Kyle Aubry", "orphan_trades": 2, "orphan_cost": 1900.0, "examples": [{"trade": "FRAMING: pony wall", "cost": 1000.0, "week": "2026-W24"}, {"trade": "EXTERIOR FINISHES (HARDIE, SIDING & TRIMS)", "cost": 900.0, "week": "2026-W21"}]}], "note": "Trades con costo pero ingreso=$0 -> el producido real es un PISO, no techo. Cargar el ingreso por-trade (Action/Critical Path) cierra la fuga."}, "brandy": {"project": "Brandy Sexton", "contract": 30975.0, "revenue_tasktree": 29880.0, "cost_tasktree": 27375.18, "cost_payments": 34839.0, "produced_tasktree": 2504.82, "produced_payments": -3864.0, "margin_tasktree_pct": 8.4, "margin_payments_pct": -12.5, "by_week": {"2026-W19": -2670.98, "2026-W20": -600.0, "2026-W21": -741.35, "2026-W22": 6698.3, "2026-W23": -181.15}, "active_weeks": ["2026-W19", "2026-W20", "2026-W21", "2026-W22", "2026-W23"], "overhead_equal": 13714.29, "overhead_revwt": 8820.0, "net_equal_tasktree": -11209.47, "net_revwt_tasktree": -6315.18, "net_equal_payments": -17578.29, "net_revwt_payments": -12684.0, "allocation_detail": [{"week": "2026-W19", "active": 6, "equal": 3000.0, "revwt": 1881.8, "brandy_share_pct": 10.5}, {"week": "2026-W20", "active": 6, "equal": 3000.0, "revwt": 1881.8, "brandy_share_pct": 10.5}, {"week": "2026-W21", "active": 7, "equal": 2571.43, "revwt": 1685.47, "brandy_share_pct": 9.4}, {"week": "2026-W22", "active": 7, "equal": 2571.43, "revwt": 1685.47, "brandy_share_pct": 9.4}, {"week": "2026-W23", "active": 7, "equal": 2571.43, "revwt": 1685.47, "brandy_share_pct": 9.4}], "trades": [{"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "CABINETS", "revenue": 23900.0, "cost": 5710.0, "produced": 18190.0, "date": "2026-05-27", "start": "2026-05-06", "end": "2026-05-27", "week": "2026-W22", "week_start": "2026-05-23", "week_end": "2026-05-29"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "CABINET PAINTING", "revenue": 5980.0, "cost": 3350.0, "produced": 2630.0, "date": "2026-06-03", "start": "2026-05-19", "end": "2026-06-03", "week": "2026-W23", "week_start": "2026-05-30", "week_end": "2026-06-05"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "BASEBOARDS AND TRIM", "revenue": 0.0, "cost": 0, "produced": 0.0, "date": "2026-05-16", "start": "2026-05-16", "end": "2026-05-16", "week": "2026-W21", "week_start": "2026-05-16", "week_end": "2026-05-22"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "INTERIOR PAINT", "revenue": 0.0, "cost": 480.0, "produced": -480.0, "date": "2026-05-30", "start": "2026-05-28", "end": "2026-05-30", "week": "2026-W23", "week_start": "2026-05-30", "week_end": "2026-06-05"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "FRAMING", "revenue": 0.0, "cost": 520.98, "produced": -520.98, "date": "2026-05-05", "start": "2026-05-04", "end": "2026-05-05", "week": "2026-W19", "week_start": "2026-05-02", "week_end": "2026-05-08"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "ELECTRICAL ROUGH IN", "revenue": 0.0, "cost": 600.0, "produced": -600.0, "date": "2026-05-07", "start": "2026-05-06", "end": "2026-05-07", "week": "2026-W19", "week_start": "2026-05-02", "week_end": "2026-05-08"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "SHEETROCK", "revenue": 0.0, "cost": 600.0, "produced": -600.0, "date": "2026-05-13", "start": "2026-05-09", "end": "2026-05-13", "week": "2026-W20", "week_start": "2026-05-09", "week_end": "2026-05-15"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "DEMO INTERIOR", "revenue": 0.0, "cost": 650.0, "produced": -650.0, "date": "2026-05-02", "start": "2026-05-02", "end": "2026-05-02", "week": "2026-W19", "week_start": "2026-05-02", "week_end": "2026-05-08"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "WINDOWS", "revenue": 0.0, "cost": 741.35, "produced": -741.35, "date": "2026-05-16", "start": "2026-05-16", "end": "2026-05-16", "week": "2026-W21", "week_start": "2026-05-16", "week_end": "2026-05-22"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "PLUMBING ROUGH IN", "revenue": 0.0, "cost": 900.0, "produced": -900.0, "date": "2026-05-05", "start": "2026-05-05", "end": "2026-05-05", "week": "2026-W19", "week_start": "2026-05-02", "week_end": "2026-05-08"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "ELECTRICAL TRIM", "revenue": 0.0, "cost": 950.0, "produced": -950.0, "date": "2026-06-04", "start": "2026-05-26", "end": "2026-06-04", "week": "2026-W23", "week_start": "2026-05-30", "week_end": "2026-06-05"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "PLUMBING TRIM", "revenue": 0.0, "cost": 1381.15, "produced": -1381.15, "date": "2026-06-03", "start": "2026-05-25", "end": "2026-06-03", "week": "2026-W23", "week_start": "2026-05-30", "week_end": "2026-06-05"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "COUNTERTOPS", "revenue": 0.0, "cost": 11491.7, "produced": -11491.7, "date": "2026-05-29", "start": "2026-05-22", "end": "2026-05-29", "week": "2026-W22", "week_start": "2026-05-23", "week_end": "2026-05-29"}]}, "project_contracts": {"Kyle Aubry": 34512.0, "Stephanie Felton": 69492.0, "Katie Holmes": 44607.0, "Clifford Clack": 39627.0, "Martha Cockrell": 0, "Lingyan Qiu": 91880.0, "Rohini Williams": 19705.0, "Brandy Sexton": 30975.0}};
+const PW = 'Awesome';   // mismo gate de gerencia que el dashboard principal (sessionStorage compartido)
+let DATA = EMBEDDED;
+function tryPw(){
+  if(document.getElementById('pw').value===PW){ sessionStorage.setItem('mgmt_auth','1'); load(); }
+  else { document.getElementById('pwerr').style.visibility='visible'; }
+}
+function load(){
+  document.getElementById('gate').style.display='none';
+  document.getElementById('app').style.display='block';
+  // En vivo (Vercel) trae el JSON fresco que el cron auto-pushea; local cae al embebido.
+  fetch('data/net-productivity-latest.json?_='+Date.now())
+    .then(r=>r.ok?r.json():null).then(j=>{ if(j&&j.timeline){DATA=j;} renderAll(); })
+    .catch(()=>renderAll());
+}
+if(sessionStorage.getItem('mgmt_auth')==='1'){ load(); }
+else { setTimeout(()=>{const e=document.getElementById('pw');if(e)e.focus();},60); }
+
+function renderAll(){
+const fmt = n => (n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('en-US');
+const fmtk = n => (n<0?'-':'')+'$'+(Math.abs(n)/1000).toFixed(1)+'k';
+const T = DATA.totals, TL = DATA.timeline, BP = DATA.by_project, B = DATA.brandy;
+const cssv = k => getComputedStyle(document.documentElement).getPropertyValue(k).trim();
+const GRN=cssv('--grn'), RED=cssv('--red'), BLU=cssv('--blu'), MUT=cssv('--mut'), AMB=cssv('--amb');
+Chart.defaults.color = cssv('--mut'); Chart.defaults.borderColor = cssv('--line'); Chart.defaults.font.size=11;
+
+document.getElementById('sub').textContent =
+  `${DATA.params.window_start} → ${DATA.today}  ·  ${T.weeks} semanas  ·  fijo prorrateado ${fmt(DATA.params.weekly_fixed)}/sem  ·  generado ${DATA.generated_at.replace('T',' ')}`;
+document.getElementById('rule').innerHTML = '<b>Regla:</b> ' + DATA.rule +
+  ` &nbsp;·&nbsp; <b>Excluidos:</b> ${DATA.params.excluded.join(', ')}. &nbsp;<b>Incluido especial:</b> ${DATA.params.special_included.join(', ')}.`;
+const vb = document.getElementById('verdict');
+vb.innerHTML = T.net>0 ? `<span class="badge grn">PRODUCES ${fmt(T.net)} netos</span>`
+                       : `<span class="badge red">POR DEBAJO DEL BREAKEVEN · ${fmt(T.net)}</span>`;
+
+// KPIs
+const kpiDefs = [
+  ['Producido (margen)', fmt(T.produced), `~${fmt(T.avg_weekly_produced)}/sem`, 'pos'],
+  ['Overhead prorrateado', fmt(T.fixed), `${fmt(DATA.params.weekly_fixed)}/sem × ${T.weeks}`, ''],
+  ['Producción NETA', fmt(T.net), `~${fmt(T.avg_weekly_net)}/sem`, T.net>0?'pos':'neg'],
+  ['Semanas sobre breakeven', `${T.weeks_positive}/${T.weeks}`, `${T.weeks_negative} por debajo`, T.weeks_positive>T.weeks_negative?'pos':'amb'],
+  ['Margen bruto', (()=>{let r=BP.reduce((a,p)=>a+p.revenue,0),pr=BP.reduce((a,p)=>a+p.produced,0);return r?Math.round(100*pr/r)+'%':'—';})(), 'ingreso reconocido', 'pos'],
+  ['Cobertura overhead', Math.round(100*T.produced/T.fixed)+'%', 'del fijo cubierto', T.produced>=T.fixed?'pos':'amb'],
+];
+document.getElementById('kpis').innerHTML = kpiDefs.map(([l,v,n,c])=>
+  `<div class="kpi"><div class="lab">${l}</div><div class="val ${c}">${v}</div><div class="note">${n}</div></div>`).join('');
+
+// ---- main chart ----
+const labels = TL.map(t=>t.week_iso.replace('2026-',''));
+const ranges = TL.map(t=>`${t.week_start.slice(5)}→${t.week_end.slice(5)}`);
+let mainChart;
+function drawMain(mode){
+  if(mainChart) mainChart.destroy();
+  const ctx = document.getElementById('mainChart');
+  if(mode==='sem'){
+    mainChart = new Chart(ctx,{type:'bar',data:{labels,datasets:[
+      {label:'Producido', data:TL.map(t=>t.produced),
+        backgroundColor:TL.map(t=>t.net>0?GRN:RED), borderRadius:4, order:2},
+      {label:'Overhead', type:'line', data:TL.map(t=>t.fixed), borderColor:AMB,
+        borderDash:[6,4], pointRadius:0, borderWidth:2, order:1},
+    ]},options:optBase('Producido por semana vs línea de overhead')});
+  } else {
+    mainChart = new Chart(ctx,{type:'line',data:{labels,datasets:[
+      {label:'Neta acumulada', data:TL.map(t=>t.cumulative_net), borderColor:BLU,
+        backgroundColor:'rgba(56,139,253,.12)', fill:true, tension:.25, pointRadius:3,
+        segment:{borderColor:c=>c.p1.parsed.y<0?RED:GRN}},
+    ]},options:optBase('Producción neta acumulada (cruzar 0 = recuperar overhead)')});
+  }
+}
+function optBase(title){return {responsive:true,plugins:{legend:{display:true,position:'bottom'},
+  title:{display:false},tooltip:{callbacks:{
+    title:(it)=>`${it[0].label}  (${ranges[it[0].dataIndex]})`,
+    label:(c)=>`${c.dataset.label}: ${fmt(c.parsed.y)}`,
+    afterbody:(it)=>{const t=TL[it[0].dataIndex];return `Neta: ${fmt(t.net)}\nAcum: ${fmt(t.cumulative_net)}\nActivos: ${t.active_count}`;}}}},
+  scales:{y:{ticks:{callback:v=>fmtk(v)}},x:{grid:{display:false}}}};}
+drawMain('sem');
+document.getElementById('b-sem').onclick=()=>{tog('b-sem','b-acum');drawMain('sem');};
+document.getElementById('b-acum').onclick=()=>{tog('b-acum','b-sem');drawMain('acum');};
+function tog(on,off){document.getElementById(on).classList.add('on');document.getElementById(off).classList.remove('on');}
+
+// week table
+document.getElementById('weekTable').innerHTML =
+  '<thead><tr><th>Semana</th><th>Rango</th><th>Producido</th><th>Overhead</th><th>Neta</th><th>Acumulada</th><th>Activos</th></tr></thead><tbody>'
+  + TL.map(t=>`<tr><td>${t.week_iso.replace('2026-','')}</td><td><small class="t">${t.week_start.slice(5)}→${t.week_end.slice(5)}</small></td>
+     <td>${fmt(t.produced)}</td><td><small class="t">${fmt(t.fixed)}</small></td>
+     <td class="${t.net>0?'pos':'neg'}">${fmt(t.net)}</td>
+     <td class="${t.cumulative_net>0?'pos':'neg'}">${fmt(t.cumulative_net)}</td><td>${t.active_count}</td></tr>`).join('')
+  + `</tbody><tfoot><tr class="hl"><td><b>TOTAL</b></td><td></td><td><b>${fmt(T.produced)}</b></td><td>${fmt(T.fixed)}</td>
+     <td class="${T.net>0?'pos':'neg'}"><b>${fmt(T.net)}</b></td><td></td><td></td></tr></tfoot>`;
+
+// ---- by project ----
+const palette=['#58a6ff','#3fb950','#d29922','#db61a2','#a371f7','#f0883e','#56d4dd','#e34c26'];
+const projNames = BP.map(p=>p.project);
+const projColor = Object.fromEntries(projNames.map((n,i)=>[n,palette[i%palette.length]]));
+const hidden = new Set();
+let projChart;
+function drawProj(){
+  if(projChart) projChart.destroy();
+  const ds = BP.filter(p=>!hidden.has(p.project)).map(p=>({
+    label:p.project, data:TL.map(t=>+(p.weeks[t.week_iso]||0).toFixed(0)),
+    backgroundColor:projColor[p.project], borderRadius:3, stack:'s'}));
+  projChart = new Chart(document.getElementById('projChart'),{type:'bar',
+    data:{labels,datasets:ds},options:{responsive:true,plugins:{legend:{display:false},
+      tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${fmt(c.parsed.y)}`}}},
+    scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,ticks:{callback:v=>fmtk(v)}}}}});
+}
+document.getElementById('projChips').innerHTML = BP.map(p=>
+  `<span class="chip on" data-p="${p.project}" style="border-color:${projColor[p.project]}">
+    <span style="color:${projColor[p.project]}">●</span> ${p.project} · ${fmt(p.produced)}</span>`).join('');
+document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
+  const p=c.dataset.p; if(hidden.has(p)){hidden.delete(p);c.classList.add('on');}else{hidden.add(p);c.classList.remove('on');}
+  drawProj();
+});
+drawProj();
+
+// project table (proj x week heatmap)
+const wkIds = TL.map(t=>t.week_iso);
+let ph='<thead><tr><th>Proyecto</th>'+wkIds.map(w=>`<th>${w.replace('2026-','')}</th>`).join('')+'<th>Total</th><th>Margen</th></tr></thead><tbody>';
+BP.forEach(p=>{
+  ph+=`<tr><td><span style="color:${projColor[p.project]}">●</span> ${p.project}</td>`+
+    wkIds.map(w=>{let v=p.weeks[w]||0;let c=v>0?'pos':(v<0?'neg':'');return `<td class="${c}">${v?fmt(v):'·'}</td>`;}).join('')+
+    `<td><b>${fmt(p.produced)}</b></td><td class="${p.margin_pct>=30?'pos':(p.margin_pct<15?'neg':'amb')}">${p.margin_pct!=null?p.margin_pct+'%':'—'}</td></tr>`;
+});
+ph+='</tbody>';
+document.getElementById('projTable').innerHTML=ph;
+
+// ---- Brandy ----
+const compMargin = (()=>{let r=BP.reduce((a,p)=>a+p.revenue,0),pr=BP.reduce((a,p)=>a+p.produced,0);return r?Math.round(100*pr/r):0;})();
+document.getElementById('brandyHead').innerHTML =
+ `<div class="flex"><div>
+   <b>Brandy Sexton</b> — contrato <b>${fmt(B.contract)}</b> · activo ${B.active_weeks.map(w=>w.replace('2026-','')).join(', ')}.
+   Margen bruto <b class="${B.margin_tasktree_pct>=30?'pos':'neg'}">${B.margin_tasktree_pct}%</b>
+   <small class="t">(vs ${compMargin}% promedio empresa)</small></div>
+   <span class="badge ${(B.net_revwt_tasktree>0)?'grn':'red'}">${(B.net_revwt_tasktree>0&&B.net_equal_tasktree>0)?'Produjo':'Perdió dinero'}</span></div>
+   <div class="sub" style="margin-top:8px">Dos bases de costo: <b>task-tree</b> (lo cargado en tareas: producido ${fmt(B.produced_tasktree)}) ·
+   <b>caja/pagos</b> (lo realmente pagado a subs+materiales: producido ${fmt(B.produced_payments)}, margen ${B.margin_payments_pct}%).
+   El formato salió <b>muy por debajo</b> del margen normal de la empresa.</div>`;
+
+new Chart(document.getElementById('brandyChart'),{type:'bar',
+  data:{labels:Object.keys(B.by_week).map(w=>w.replace('2026-','')),
+    datasets:[{label:'Producido',data:Object.values(B.by_week),
+      backgroundColor:Object.values(B.by_week).map(v=>v>0?GRN:RED),borderRadius:3}]},
+  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.y)}}},
+    scales:{y:{ticks:{callback:v=>fmtk(v)}},x:{grid:{display:false}}}}});
+
+function brandyMatrix(method){
+  const oh = method==='eq'?B.overhead_equal:B.overhead_revwt;
+  const netT = method==='eq'?B.net_equal_tasktree:B.net_revwt_tasktree;
+  const netC = method==='eq'?B.net_equal_payments:B.net_revwt_payments;
+  document.getElementById('brandyMatrix').innerHTML =
+   `<thead><tr><th>Base de costo</th><th>Producido</th><th>− Overhead</th><th>= Neta</th></tr></thead><tbody>
+    <tr><td>Task-tree</td><td>${fmt(B.produced_tasktree)}</td><td>${fmt(oh)}</td><td class="${netT>0?'pos':'neg'}"><b>${fmt(netT)}</b></td></tr>
+    <tr><td>Caja / pagos</td><td>${fmt(B.produced_payments)}</td><td>${fmt(oh)}</td><td class="${netC>0?'pos':'neg'}"><b>${fmt(netC)}</b></td></tr></tbody>`;
+  const avgShare = B.allocation_detail.length?(B.allocation_detail.reduce((a,d)=>a+d.brandy_share_pct,0)/B.allocation_detail.length).toFixed(1):0;
+  document.getElementById('brandyAlloc').innerHTML = method==='eq'
+    ? `Equal-split: cada semana activa Brandy carga <b>overhead / # proyectos activos</b>. Total overhead asignado: <b>${fmt(B.overhead_equal)}</b>.`
+    : `Ponderado por venta: Brandy carga overhead según su <b>precio de venta vs. el de los proyectos activos</b> (~${avgShare}% del overhead semanal). Total asignado: <b>${fmt(B.overhead_revwt)}</b>.`;
+}
+brandyMatrix('eq');
+document.getElementById('bm-eq').onclick=()=>{tog('bm-eq','bm-rw');brandyMatrix('eq');};
+document.getElementById('bm-rw').onclick=()=>{tog('bm-rw','bm-eq');brandyMatrix('rw');};
+
+document.getElementById('brandyTrades').innerHTML =
+ '<thead><tr><th>Trade</th><th>Ingreso</th><th>Costo</th><th>Producido</th><th>Fin</th></tr></thead><tbody>'
+ + B.trades.map(t=>`<tr><td>${t.trade}</td><td>${fmt(t.revenue)}</td><td>${fmt(t.cost)}</td>
+    <td class="${t.produced>0?'pos':(t.produced<0?'neg':'')}">${fmt(t.produced)}</td><td><small class="t">${t.end||'—'}</small></td></tr>`).join('')
+ + `</tbody><tfoot><tr class="hl"><td><b>TOTAL</b></td><td><b>${fmt(B.revenue_tasktree)}</b></td><td><b>${fmt(B.cost_tasktree)}</b></td><td class="${B.produced_tasktree>0?'pos':'neg'}"><b>${fmt(B.produced_tasktree)}</b></td><td></td></tr></tfoot>`;
+document.querySelector('#brandyTrades').insertAdjacentHTML('afterend',
+  '<div class="sub" style="margin-top:6px">⚠ Nota: en el formato viejo el ingreso se concentró en pocos trades (CABINETS), por eso los demás aparecen en rojo. El <b>total del proyecto</b> es la cifra válida.</div>');
+
+// ---- Por PM ----
+const PM = DATA.by_pm||[];
+new Chart(document.getElementById('pmChart'),{type:'bar',
+  data:{labels:PM.map(p=>p.pm),datasets:[
+    {label:'Producido',data:PM.map(p=>p.produced),backgroundColor:GRN,borderRadius:3},
+    {label:'Overhead asignado',data:PM.map(p=>p.overhead),backgroundColor:AMB,borderRadius:3},
+  ]},options:{responsive:true,plugins:{legend:{position:'bottom'},
+    tooltip:{callbacks:{afterbody:it=>{const p=PM[it[0].dataIndex];return `Neta: ${fmt(p.net)}  ·  Margen: ${p.margin_pct}%`;}}}},
+    scales:{y:{ticks:{callback:v=>fmtk(v)}},x:{grid:{display:false}}}}});
+document.getElementById('pmTable').innerHTML =
+ '<thead><tr><th>PM</th><th>Producido</th><th>Overhead (share)</th><th>Neta</th><th>Margen</th><th>Proyectos</th></tr></thead><tbody>'
+ + PM.map(p=>`<tr><td><b>${p.pm}</b></td><td>${fmt(p.produced)}</td><td>${fmt(p.overhead)} <small class="t">${p.overhead_share_pct}%</small></td>
+    <td class="${p.net>0?'pos':'neg'}"><b>${fmt(p.net)}</b></td>
+    <td class="${p.margin_pct>=30?'pos':(p.margin_pct<15?'neg':'amb')}">${p.margin_pct!=null?p.margin_pct+'%':'—'}</td>
+    <td><small class="t">${p.projects.map(x=>x.split(' (')[0]).join(', ')}</small></td></tr>`).join('')
+ +'</tbody>';
+
+// ---- Calidad de datos ----
+const DQ = DATA.data_quality||{by_project:[]};
+document.getElementById('dqCard').innerHTML =
+ `<div class="warn">⚠ <b>${DQ.orphan_trades} trades tienen costo pero ingreso $0</b> → ocultan <b>${fmt(DQ.orphan_cost)}</b> de costo no compensado.
+   El producido mostrado es un <b>PISO</b>: al cargar esos ingresos por-trade, la producción neta sube y se acerca al breakeven.</div>
+  <div class="sub" style="margin-bottom:8px">${DQ.priced_trades}/${DQ.total_trades} trades con precio cargado. Proyectos a corregir (cargar ingreso en Action Task / Critical Path):</div>
+  <div class="tablewrap"><table><thead><tr><th>Proyecto</th><th>Trades sin precio</th><th>Costo oculto</th><th>Ejemplos</th></tr></thead><tbody>`
+  + (DQ.by_project||[]).map(x=>`<tr><td>${x.project}</td><td>${x.orphan_trades}</td><td class="neg">${fmt(x.orphan_cost)}</td>
+     <td><small class="t">${(x.examples||[]).map(e=>e.trade).slice(0,4).join(', ')}</small></td></tr>`).join('')
+  + `</tbody></table></div>`;
+
+document.getElementById('foot').innerHTML =
+ `<b>Metodología:</b> ${DATA.rule} Cada trade se reconoce en la semana de su fecha de fin (max endDate de Action/Critical Path).
+  Fijo prorrateado = ${fmt(DATA.params.weekly_fixed)}/sem (salarios+utilities recurrentes; configurable vía WEEKLY_FIXED).
+  Overhead por PM asignado por participación en el ingreso reconocido.
+  <br><b>Salvedades:</b> (1) reconocimiento por finalización es <i>grumoso</i> semana a semana — el total del periodo es más fiable que una semana suelta;
+  (2) la semana en curso es parcial; (3) ingreso no cargado por-trade subestima el producido (piso, no techo);
+  (4) trabajo de julio (backlog) aún no se reconoce. Datos: <code>data/net-productivity-latest.json</code> · Regenerar: <code>python3 generate_net_productivity.py --html</code>.`;
+}  // fin renderAll
+</script></body></html>
