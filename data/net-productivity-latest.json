@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-23T13:41:27",
+  "generated_at": "2026-06-23T14:48:54",
   "today": "2026-06-23",
-  "rule": "Ingreso(Action Task + Critical Path) - (Subs + Materiales + Additional) = Producido; por semana por proyecto; menos fijos prorrateados = Produccion Neta.",
+  "rule": "Ingreso(Action Task + Critical Path) - (Subs + Materiales + Additional) = Producido por trade, repartido entre los dias de ejecucion (cada dia suma a su semana Sat->Fri); sumado por semana por proyecto; menos fijos prorrateados = Produccion Neta.",
   "params": {
     "weekly_fixed": 18000.0,
     "window_start": "2026-05-02",
@@ -14,24 +14,24 @@
     ]
   },
   "totals": {
-    "produced": 111354.07,
+    "produced": 100209.81,
     "fixed": 144000.0,
-    "net": -32645.93,
+    "net": -43790.19,
     "weeks": 8,
-    "avg_weekly_net": -4080.74,
-    "weeks_positive": 3,
-    "weeks_negative": 5,
-    "avg_weekly_produced": 13919.26
+    "avg_weekly_net": -5473.77,
+    "weeks_positive": 1,
+    "weeks_negative": 7,
+    "avg_weekly_produced": 12526.23
   },
   "timeline": [
     {
       "week_iso": "2026-W19",
       "week_start": "2026-05-02",
       "week_end": "2026-05-08",
-      "produced": 23367.53,
+      "produced": 11277.46,
       "fixed": 18000.0,
-      "net": 5367.53,
-      "cumulative_net": 5367.53,
+      "net": -6722.54,
+      "cumulative_net": -6722.54,
       "active_count": 6,
       "active_projects": [
         "Brandy Sexton",
@@ -42,20 +42,22 @@
         "Stephanie Felton"
       ],
       "by_project": {
-        "Katie Holmes": 24258.12,
-        "Clifford Clack": 1065.39,
-        "Lingyan Qiu": 715.0,
-        "Brandy Sexton": -2670.98
+        "Stephanie Felton": 731.5,
+        "Katie Holmes": 5757.73,
+        "Clifford Clack": 2519.44,
+        "Lingyan Qiu": 1802.39,
+        "Rohini Williams": 656.93,
+        "Brandy Sexton": -190.53
       }
     },
     {
       "week_iso": "2026-W20",
       "week_start": "2026-05-09",
       "week_end": "2026-05-15",
-      "produced": -685.0,
+      "produced": 4541.68,
       "fixed": 18000.0,
-      "net": -18685.0,
-      "cumulative_net": -13317.47,
+      "net": -13458.32,
+      "cumulative_net": -20180.86,
       "active_count": 6,
       "active_projects": [
         "Brandy Sexton",
@@ -66,19 +68,22 @@
         "Stephanie Felton"
       ],
       "by_project": {
-        "Stephanie Felton": -1400.0,
-        "Clifford Clack": 1315.0,
-        "Brandy Sexton": -600.0
+        "Stephanie Felton": -668.5,
+        "Katie Holmes": -4180.07,
+        "Clifford Clack": 657.5,
+        "Lingyan Qiu": 1087.39,
+        "Rohini Williams": 2457.63,
+        "Brandy Sexton": 5187.73
       }
     },
     {
       "week_iso": "2026-W21",
       "week_start": "2026-05-16",
       "week_end": "2026-05-22",
-      "produced": 30807.29,
+      "produced": 43733.32,
       "fixed": 18000.0,
-      "net": 12807.29,
-      "cumulative_net": -510.18,
+      "net": 25733.32,
+      "cumulative_net": 5552.46,
       "active_count": 7,
       "active_projects": [
         "Brandy Sexton",
@@ -90,22 +95,23 @@
         "Stephanie Felton"
       ],
       "by_project": {
-        "Kyle Aubry": 21289.28,
-        "Katie Holmes": -12968.79,
+        "Kyle Aubry": 21621.28,
+        "Stephanie Felton": 917.87,
+        "Katie Holmes": -6444.95,
         "Clifford Clack": 820.0,
-        "Lingyan Qiu": 18920.15,
-        "Rohini Williams": 3488.0,
-        "Brandy Sexton": -741.35
+        "Lingyan Qiu": 20343.21,
+        "Rohini Williams": 2208.49,
+        "Brandy Sexton": 4267.42
       }
     },
     {
       "week_iso": "2026-W22",
       "week_start": "2026-05-23",
       "week_end": "2026-05-29",
-      "produced": 24992.86,
+      "produced": 10469.8,
       "fixed": 18000.0,
-      "net": 6992.86,
-      "cumulative_net": 6482.68,
+      "net": -7530.2,
+      "cumulative_net": -1977.74,
       "active_count": 7,
       "active_projects": [
         "Brandy Sexton",
@@ -117,20 +123,21 @@
         "Stephanie Felton"
       ],
       "by_project": {
-        "Kyle Aubry": 1162.0,
-        "Stephanie Felton": 7436.56,
-        "Lingyan Qiu": 9696.0,
-        "Brandy Sexton": 6698.3
+        "Kyle Aubry": 830.0,
+        "Stephanie Felton": 9610.48,
+        "Lingyan Qiu": 5476.8,
+        "Rohini Williams": 713.63,
+        "Brandy Sexton": -6161.11
       }
     },
     {
       "week_iso": "2026-W23",
       "week_start": "2026-05-30",
       "week_end": "2026-06-05",
-      "produced": 3211.14,
+      "produced": 7847.02,
       "fixed": 18000.0,
-      "net": -14788.86,
-      "cumulative_net": -8306.18,
+      "net": -10152.98,
+      "cumulative_net": -12130.72,
       "active_count": 7,
       "active_projects": [
         "Brandy Sexton",
@@ -142,20 +149,22 @@
         "Stephanie Felton"
       ],
       "by_project": {
-        "Kyle Aubry": 1840.0,
-        "Stephanie Felton": 652.29,
-        "Clifford Clack": 900.0,
-        "Brandy Sexton": -181.15
+        "Kyle Aubry": 2611.0,
+        "Stephanie Felton": 4778.26,
+        "Clifford Clack": 1115.73,
+        "Lingyan Qiu": -772.9,
+        "Rohini Williams": 713.63,
+        "Brandy Sexton": -598.7
       }
     },
     {
       "week_iso": "2026-W24",
       "week_start": "2026-06-06",
       "week_end": "2026-06-12",
-      "produced": 16095.5,
+      "produced": 8138.96,
       "fixed": 18000.0,
-      "net": -1904.5,
-      "cumulative_net": -10210.68,
+      "net": -9861.04,
+      "cumulative_net": -21991.76,
       "active_count": 6,
       "active_projects": [
         "Clifford Clack",
@@ -166,20 +175,21 @@
         "Stephanie Felton"
       ],
       "by_project": {
-        "Kyle Aubry": 28.0,
-        "Stephanie Felton": 8778.0,
-        "Clifford Clack": 3415.5,
-        "Rohini Williams": 3874.0
+        "Kyle Aubry": 1852.0,
+        "Stephanie Felton": 3108.98,
+        "Clifford Clack": 3918.88,
+        "Lingyan Qiu": -1352.58,
+        "Rohini Williams": 611.68
       }
     },
     {
       "week_iso": "2026-W25",
       "week_start": "2026-06-13",
       "week_end": "2026-06-19",
-      "produced": 11702.75,
+      "produced": 13590.53,
       "fixed": 18000.0,
-      "net": -6297.25,
-      "cumulative_net": -16507.93,
+      "net": -4409.47,
+      "cumulative_net": -26401.23,
       "active_count": 6,
       "active_projects": [
         "Clifford Clack",
@@ -190,20 +200,20 @@
         "Stephanie Felton"
       ],
       "by_project": {
-        "Kyle Aubry": 3460.0,
-        "Stephanie Felton": -2850.0,
-        "Clifford Clack": 6725.0,
-        "Lingyan Qiu": 4367.75
+        "Kyle Aubry": 865.0,
+        "Stephanie Felton": 2481.98,
+        "Clifford Clack": 7228.38,
+        "Lingyan Qiu": 3015.17
       }
     },
     {
       "week_iso": "2026-W26",
       "week_start": "2026-06-20",
       "week_end": "2026-06-26",
-      "produced": 1862.0,
+      "produced": 611.04,
       "fixed": 18000.0,
-      "net": -16138.0,
-      "cumulative_net": -32645.93,
+      "net": -17388.96,
+      "cumulative_net": -43790.19,
       "active_count": 6,
       "active_projects": [
         "Clifford Clack",
@@ -214,26 +224,15 @@
         "Stephanie Felton"
       ],
       "by_project": {
-        "Kyle Aubry": 1862.0
+        "Kyle Aubry": 1862.0,
+        "Stephanie Felton": 2232.56,
+        "Katie Holmes": -2500.0,
+        "Clifford Clack": -210.62,
+        "Lingyan Qiu": -772.9
       }
     }
   ],
   "by_project": [
-    {
-      "project": "Lingyan Qiu",
-      "revenue": 75744.0,
-      "cost": 42045.1,
-      "produced": 33698.9,
-      "margin_pct": 44.5,
-      "weeks": {
-        "2026-W21": 18920.15,
-        "2026-W25": 4367.75,
-        "2026-W22": 9696.0,
-        "2026-W19": 715.0
-      },
-      "first_week": "2026-W19",
-      "last_week": "2026-W25"
-    },
     {
       "project": "Kyle Aubry",
       "revenue": 34512.0,
@@ -241,61 +240,71 @@
       "produced": 29641.28,
       "margin_pct": 85.9,
       "weeks": {
-        "2026-W24": 28.0,
-        "2026-W22": 1162.0,
-        "2026-W23": 1840.0,
-        "2026-W25": 3460.0,
-        "2026-W26": 1862.0,
-        "2026-W21": 21289.28
+        "2026-W24": 1852.0,
+        "2026-W21": 21621.28,
+        "2026-W22": 830.0,
+        "2026-W23": 2611.0,
+        "2026-W25": 865.0,
+        "2026-W26": 1862.0
       },
       "first_week": "2026-W21",
       "last_week": "2026-W26"
     },
     {
-      "project": "Clifford Clack",
-      "revenue": 29277.0,
-      "cost": 15036.11,
-      "produced": 14240.89,
-      "margin_pct": 48.6,
+      "project": "Lingyan Qiu",
+      "revenue": 72350.53,
+      "cost": 43523.96,
+      "produced": 28826.57,
+      "margin_pct": 39.8,
       "weeks": {
-        "2026-W23": 900.0,
-        "2026-W19": 1065.39,
-        "2026-W20": 1315.0,
-        "2026-W25": 6725.0,
-        "2026-W24": 3415.5,
-        "2026-W21": 820.0
+        "2026-W23": -772.9,
+        "2026-W24": -1352.58,
+        "2026-W25": 3015.17,
+        "2026-W26": -772.9,
+        "2026-W21": 20343.21,
+        "2026-W19": 1802.39,
+        "2026-W20": 1087.39,
+        "2026-W22": 5476.8
       },
       "first_week": "2026-W19",
-      "last_week": "2026-W25"
+      "last_week": "2026-W26"
     },
     {
       "project": "Stephanie Felton",
-      "revenue": 44192.0,
-      "cost": 31575.15,
-      "produced": 12616.85,
-      "margin_pct": 28.6,
+      "revenue": 47140.17,
+      "cost": 23947.05,
+      "produced": 23193.12,
+      "margin_pct": 49.2,
       "weeks": {
-        "2026-W20": -1400.0,
-        "2026-W23": 652.29,
-        "2026-W24": 8778.0,
-        "2026-W25": -2850.0,
-        "2026-W22": 7436.56
-      },
-      "first_week": "2026-W20",
-      "last_week": "2026-W25"
-    },
-    {
-      "project": "Katie Holmes",
-      "revenue": 44607.0,
-      "cost": 33317.67,
-      "produced": 11289.33,
-      "margin_pct": 25.3,
-      "weeks": {
-        "2026-W21": -12968.79,
-        "2026-W19": 24258.12
+        "2026-W20": -668.5,
+        "2026-W21": 917.87,
+        "2026-W22": 9610.48,
+        "2026-W23": 4778.26,
+        "2026-W19": 731.5,
+        "2026-W24": 3108.98,
+        "2026-W25": 2481.98,
+        "2026-W26": 2232.56
       },
       "first_week": "2026-W19",
-      "last_week": "2026-W21"
+      "last_week": "2026-W26"
+    },
+    {
+      "project": "Clifford Clack",
+      "revenue": 33264.9,
+      "cost": 17215.6,
+      "produced": 16049.3,
+      "margin_pct": 48.2,
+      "weeks": {
+        "2026-W26": -210.62,
+        "2026-W23": 1115.73,
+        "2026-W19": 2519.44,
+        "2026-W20": 657.5,
+        "2026-W25": 7228.38,
+        "2026-W24": 3918.88,
+        "2026-W21": 820.0
+      },
+      "first_week": "2026-W19",
+      "last_week": "2026-W26"
     },
     {
       "project": "Rohini Williams",
@@ -304,10 +313,14 @@
       "produced": 7362.0,
       "margin_pct": 41.7,
       "weeks": {
-        "2026-W21": 3488.0,
-        "2026-W24": 3874.0
+        "2026-W19": 656.93,
+        "2026-W20": 2457.63,
+        "2026-W21": 2208.49,
+        "2026-W22": 713.63,
+        "2026-W23": 713.63,
+        "2026-W24": 611.68
       },
-      "first_week": "2026-W21",
+      "first_week": "2026-W19",
       "last_week": "2026-W24"
     },
     {
@@ -317,106 +330,125 @@
       "produced": 2504.82,
       "margin_pct": 8.4,
       "weeks": {
-        "2026-W22": 6698.3,
-        "2026-W19": -2670.98,
-        "2026-W20": -600.0,
-        "2026-W21": -741.35,
-        "2026-W23": -181.15
+        "2026-W19": -190.53,
+        "2026-W20": 5187.73,
+        "2026-W21": 4267.42,
+        "2026-W22": -6161.11,
+        "2026-W23": -598.7
       },
       "first_week": "2026-W19",
       "last_week": "2026-W23"
+    },
+    {
+      "project": "Katie Holmes",
+      "revenue": 13939.69,
+      "cost": 21306.98,
+      "produced": -7367.29,
+      "margin_pct": -52.9,
+      "weeks": {
+        "2026-W26": -2500.0,
+        "2026-W19": 5757.73,
+        "2026-W20": -4180.07,
+        "2026-W21": -6444.95
+      },
+      "first_week": "2026-W19",
+      "last_week": "2026-W26"
     }
   ],
   "by_pm": [
     {
       "pm": "Angel Pacheco",
-      "produced": 59229.12,
-      "revenue": 149628.0,
-      "overhead": 78102.44,
-      "net": -18873.32,
-      "overhead_share_pct": 54.2,
+      "produced": 37508.59,
+      "revenue": 119555.12,
+      "overhead": 69210.0,
+      "net": -31701.41,
+      "overhead_share_pct": 48.1,
       "projects": [
         "Clifford Clack",
         "Katie Holmes",
         "Lingyan Qiu"
       ],
-      "margin_pct": 39.6,
+      "margin_pct": 31.4,
       "weeks": {
-        "2026-W21": 6771.36,
-        "2026-W19": 26038.51,
-        "2026-W23": 900.0,
-        "2026-W20": 1315.0,
-        "2026-W25": 11092.75,
-        "2026-W24": 3415.5,
-        "2026-W22": 9696.0
+        "2026-W26": -3483.52,
+        "2026-W19": 10079.56,
+        "2026-W20": -2435.18,
+        "2026-W21": 14718.26,
+        "2026-W23": 342.83,
+        "2026-W25": 10243.55,
+        "2026-W24": 2566.3,
+        "2026-W22": 5476.8
       }
     },
     {
       "pm": "Milagros Porturas",
       "produced": 29641.28,
       "revenue": 34512.0,
-      "overhead": 18014.48,
-      "net": 11626.8,
-      "overhead_share_pct": 12.5,
+      "overhead": 19978.86,
+      "net": 9662.42,
+      "overhead_share_pct": 13.9,
       "projects": [
         "Kyle Aubry"
       ],
       "margin_pct": 85.9,
       "weeks": {
-        "2026-W24": 28.0,
-        "2026-W22": 1162.0,
-        "2026-W23": 1840.0,
-        "2026-W25": 3460.0,
-        "2026-W26": 1862.0,
-        "2026-W21": 21289.28
+        "2026-W24": 1852.0,
+        "2026-W21": 21621.28,
+        "2026-W22": 830.0,
+        "2026-W23": 2611.0,
+        "2026-W25": 865.0,
+        "2026-W26": 1862.0
       }
     },
     {
       "pm": "Jeff",
-      "produced": 12616.85,
-      "revenue": 44192.0,
-      "overhead": 23067.23,
-      "net": -10450.38,
-      "overhead_share_pct": 16.0,
+      "produced": 23193.12,
+      "revenue": 47140.17,
+      "overhead": 27289.26,
+      "net": -4096.14,
+      "overhead_share_pct": 19.0,
       "projects": [
         "Stephanie Felton"
       ],
-      "margin_pct": 28.6,
+      "margin_pct": 49.2,
       "weeks": {
-        "2026-W20": -1400.0,
-        "2026-W23": 652.29,
-        "2026-W24": 8778.0,
-        "2026-W25": -2850.0,
-        "2026-W22": 7436.56
+        "2026-W20": -668.5,
+        "2026-W21": 917.87,
+        "2026-W22": 9610.48,
+        "2026-W23": 4778.26,
+        "2026-W19": 731.5,
+        "2026-W24": 3108.98,
+        "2026-W25": 2481.98,
+        "2026-W26": 2232.56
       }
     },
     {
       "pm": "Giselle Garcia",
       "produced": 9866.82,
       "revenue": 47542.0,
-      "overhead": 24815.85,
-      "net": -14949.03,
-      "overhead_share_pct": 17.2,
+      "overhead": 27521.88,
+      "net": -17655.06,
+      "overhead_share_pct": 19.1,
       "projects": [
         "Brandy Sexton",
         "Rohini Williams"
       ],
       "margin_pct": 20.8,
       "weeks": {
-        "2026-W21": 2746.65,
-        "2026-W24": 3874.0,
-        "2026-W22": 6698.3,
-        "2026-W19": -2670.98,
-        "2026-W20": -600.0,
-        "2026-W23": -181.15
+        "2026-W19": 466.4,
+        "2026-W20": 7645.36,
+        "2026-W21": 6475.91,
+        "2026-W22": -5447.48,
+        "2026-W23": 114.93,
+        "2026-W24": 611.68
       }
     }
   ],
   "data_quality": {
-    "orphan_trades": 19,
-    "orphan_cost": 39542.58,
-    "priced_trades": 31,
-    "total_trades": 51,
+    "orphan_trades": 22,
+    "orphan_cost": 45474.43,
+    "priced_trades": 33,
+    "total_trades": 56,
     "by_project": [
       {
         "project": "Brandy Sexton",
@@ -425,55 +457,61 @@
         "examples": [
           {
             "trade": "DEMO INTERIOR",
-            "cost": 650.0,
-            "week": "2026-W19"
+            "cost": 650.0
           },
           {
             "trade": "ELECTRICAL ROUGH IN",
-            "cost": 600.0,
-            "week": "2026-W19"
+            "cost": 600.0
           },
           {
             "trade": "FRAMING",
-            "cost": 520.98,
-            "week": "2026-W19"
+            "cost": 520.98
           },
           {
             "trade": "PLUMBING ROUGH IN",
-            "cost": 900.0,
-            "week": "2026-W19"
+            "cost": 900.0
           },
           {
             "trade": "SHEETROCK",
-            "cost": 600.0,
-            "week": "2026-W20"
+            "cost": 600.0
           },
           {
             "trade": "COUNTERTOPS",
-            "cost": 11491.7,
-            "week": "2026-W22"
+            "cost": 11491.7
           }
         ]
       },
       {
         "project": "Katie Holmes",
-        "orphan_trades": 3,
-        "orphan_cost": 12968.79,
+        "orphan_trades": 4,
+        "orphan_cost": 14947.95,
         "examples": [
           {
+            "trade": "INSULATION",
+            "cost": 2500.0
+          },
+          {
             "trade": "PLUMBING ROUGH IN",
-            "cost": 5468.79,
-            "week": "2026-W21"
+            "cost": 4947.95
           },
           {
             "trade": "ELECTRICAL ROUGH IN",
-            "cost": 5500.0,
-            "week": "2026-W21"
+            "cost": 5500.0
           },
           {
             "trade": "MECHANICAL ROUGH IN",
-            "cost": 2000.0,
-            "week": "2026-W21"
+            "cost": 2000.0
+          }
+        ]
+      },
+      {
+        "project": "Lingyan Qiu",
+        "orphan_trades": 1,
+        "orphan_cost": 4250.97,
+        "examples": [
+          {
+            "trade": "BRICKS & EXTERIOR SHEATING",
+            "cost": 4250.97
           }
         ]
       },
@@ -484,30 +522,11 @@
         "examples": [
           {
             "trade": "DOORS AND WINDOWS",
-            "cost": 1400.0,
-            "week": "2026-W20"
+            "cost": 1400.0
           },
           {
             "trade": "COUNTERTOPS",
-            "cost": 2850.0,
-            "week": "2026-W25"
-          }
-        ]
-      },
-      {
-        "project": "Clifford Clack",
-        "orphan_trades": 2,
-        "orphan_cost": 2108.61,
-        "examples": [
-          {
-            "trade": "FRAMING",
-            "cost": 1858.61,
-            "week": "2026-W19"
-          },
-          {
-            "trade": "PLUMBING",
-            "cost": 250.0,
-            "week": "2026-W21"
+            "cost": 2850.0
           }
         ]
       },
@@ -518,13 +537,30 @@
         "examples": [
           {
             "trade": "FRAMING: pony wall",
-            "cost": 1000.0,
-            "week": "2026-W24"
+            "cost": 1000.0
           },
           {
             "trade": "EXTERIOR FINISHES (HARDIE, SIDING & TRIMS)",
-            "cost": 900.0,
-            "week": "2026-W21"
+            "cost": 900.0
+          }
+        ]
+      },
+      {
+        "project": "Clifford Clack",
+        "orphan_trades": 3,
+        "orphan_cost": 1810.33,
+        "examples": [
+          {
+            "trade": "ELECTRICAL TRIM",
+            "cost": 498.27
+          },
+          {
+            "trade": "FRAMING",
+            "cost": 1062.06
+          },
+          {
+            "trade": "PLUMBING",
+            "cost": 250.0
           }
         ]
       }
@@ -542,11 +578,11 @@
     "margin_tasktree_pct": 8.4,
     "margin_payments_pct": -12.5,
     "by_week": {
-      "2026-W19": -2670.98,
-      "2026-W20": -600.0,
-      "2026-W21": -741.35,
-      "2026-W22": 6698.3,
-      "2026-W23": -181.15
+      "2026-W19": -190.53,
+      "2026-W20": 5187.73,
+      "2026-W21": 4267.41,
+      "2026-W22": -6161.1,
+      "2026-W23": -598.7
     },
     "active_weeks": [
       "2026-W19",
@@ -608,10 +644,7 @@
         "produced": 18190.0,
         "date": "2026-05-27",
         "start": "2026-05-06",
-        "end": "2026-05-27",
-        "week": "2026-W22",
-        "week_start": "2026-05-23",
-        "week_end": "2026-05-29"
+        "end": "2026-05-27"
       },
       {
         "project_id": "22PLKSsB4aeV",
@@ -622,10 +655,7 @@
         "produced": 2630.0,
         "date": "2026-06-03",
         "start": "2026-05-19",
-        "end": "2026-06-03",
-        "week": "2026-W23",
-        "week_start": "2026-05-30",
-        "week_end": "2026-06-05"
+        "end": "2026-06-03"
       },
       {
         "project_id": "22PLKSsB4aeV",
@@ -636,10 +666,7 @@
         "produced": 0.0,
         "date": "2026-05-16",
         "start": "2026-05-16",
-        "end": "2026-05-16",
-        "week": "2026-W21",
-        "week_start": "2026-05-16",
-        "week_end": "2026-05-22"
+        "end": "2026-05-16"
       },
       {
         "project_id": "22PLKSsB4aeV",
@@ -650,10 +677,7 @@
         "produced": -480.0,
         "date": "2026-05-30",
         "start": "2026-05-28",
-        "end": "2026-05-30",
-        "week": "2026-W23",
-        "week_start": "2026-05-30",
-        "week_end": "2026-06-05"
+        "end": "2026-05-30"
       },
       {
         "project_id": "22PLKSsB4aeV",
@@ -664,10 +688,7 @@
         "produced": -520.98,
         "date": "2026-05-05",
         "start": "2026-05-04",
-        "end": "2026-05-05",
-        "week": "2026-W19",
-        "week_start": "2026-05-02",
-        "week_end": "2026-05-08"
+        "end": "2026-05-05"
       },
       {
         "project_id": "22PLKSsB4aeV",
@@ -678,10 +699,7 @@
         "produced": -600.0,
         "date": "2026-05-07",
         "start": "2026-05-06",
-        "end": "2026-05-07",
-        "week": "2026-W19",
-        "week_start": "2026-05-02",
-        "week_end": "2026-05-08"
+        "end": "2026-05-07"
       },
       {
         "project_id": "22PLKSsB4aeV",
@@ -692,10 +710,7 @@
         "produced": -600.0,
         "date": "2026-05-13",
         "start": "2026-05-09",
-        "end": "2026-05-13",
-        "week": "2026-W20",
-        "week_start": "2026-05-09",
-        "week_end": "2026-05-15"
+        "end": "2026-05-13"
       },
       {
         "project_id": "22PLKSsB4aeV",
@@ -706,10 +721,7 @@
         "produced": -650.0,
         "date": "2026-05-02",
         "start": "2026-05-02",
-        "end": "2026-05-02",
-        "week": "2026-W19",
-        "week_start": "2026-05-02",
-        "week_end": "2026-05-08"
+        "end": "2026-05-02"
       },
       {
         "project_id": "22PLKSsB4aeV",
@@ -720,10 +732,7 @@
         "produced": -741.35,
         "date": "2026-05-16",
         "start": "2026-05-16",
-        "end": "2026-05-16",
-        "week": "2026-W21",
-        "week_start": "2026-05-16",
-        "week_end": "2026-05-22"
+        "end": "2026-05-16"
       },
       {
         "project_id": "22PLKSsB4aeV",
@@ -734,10 +743,7 @@
         "produced": -900.0,
         "date": "2026-05-05",
         "start": "2026-05-05",
-        "end": "2026-05-05",
-        "week": "2026-W19",
-        "week_start": "2026-05-02",
-        "week_end": "2026-05-08"
+        "end": "2026-05-05"
       },
       {
         "project_id": "22PLKSsB4aeV",
@@ -748,10 +754,7 @@
         "produced": -950.0,
         "date": "2026-06-04",
         "start": "2026-05-26",
-        "end": "2026-06-04",
-        "week": "2026-W23",
-        "week_start": "2026-05-30",
-        "week_end": "2026-06-05"
+        "end": "2026-06-04"
       },
       {
         "project_id": "22PLKSsB4aeV",
@@ -762,10 +765,7 @@
         "produced": -1381.15,
         "date": "2026-06-03",
         "start": "2026-05-25",
-        "end": "2026-06-03",
-        "week": "2026-W23",
-        "week_start": "2026-05-30",
-        "week_end": "2026-06-05"
+        "end": "2026-06-03"
       },
       {
         "project_id": "22PLKSsB4aeV",
@@ -776,10 +776,7 @@
         "produced": -11491.7,
         "date": "2026-05-29",
         "start": "2026-05-22",
-        "end": "2026-05-29",
-        "week": "2026-W22",
-        "week_start": "2026-05-23",
-        "week_end": "2026-05-29"
+        "end": "2026-05-29"
       }
     ]
   },
