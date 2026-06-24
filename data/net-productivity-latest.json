@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T18:48:40",
+  "generated_at": "2026-06-23T21:42:43",
   "today": "2026-06-23",
   "rule": "Ingreso = SOLO Action Task + Critical Path (NO pagos de cliente). Menos Subs+Materiales+Additional = Producido por trade, repartido entre los dias de EJECUCION del action task (la compra de material o el pago al sub en otra semana NO mueven la fecha). Sumado por semana por proyecto; menos fijos = Produccion Neta.",
   "params": {
@@ -20,17 +20,17 @@
     }
   },
   "totals": {
-    "produced": 141900.28,
-    "produced_ineff": 116766.18,
+    "produced": 141705.28,
+    "produced_ineff": 116679.93,
     "fixed": 83076.96,
-    "net": 58823.32,
-    "net_ineff": 33689.22,
+    "net": 58628.32,
+    "net_ineff": 33602.97,
     "weeks": 8,
-    "avg_weekly_net": 7352.91,
+    "avg_weekly_net": 7328.54,
     "weeks_positive": 7,
     "weeks_positive_ineff": 6,
     "weeks_negative": 1,
-    "avg_weekly_produced": 17737.53
+    "avg_weekly_produced": 17713.16
   },
   "timeline": [
     {
@@ -156,11 +156,11 @@
       "label": "30 may\u20135 jun",
       "label_moy": "may S5",
       "label_short": "30 may",
-      "produced": 12903.44,
-      "produced_ineff": 10739.42,
+      "produced": 12708.44,
+      "produced_ineff": 10653.17,
       "fixed": 10384.62,
-      "net": 2518.82,
-      "cumulative_net": 45111.97,
+      "net": 2323.82,
+      "cumulative_net": 44916.97,
       "active_count": 7,
       "active_projects": [
         "Brandy Sexton",
@@ -172,7 +172,7 @@
         "Stephanie Felton"
       ],
       "by_project": {
-        "Kyle Aubry": 598.5,
+        "Kyle Aubry": 403.5,
         "Stephanie Felton": 5741.01,
         "Clifford Clack": 1265.73,
         "Lingyan Qiu": 1123.09,
@@ -191,7 +191,7 @@
       "produced_ineff": 12359.53,
       "fixed": 10384.62,
       "net": 4841.53,
-      "cumulative_net": 49953.5,
+      "cumulative_net": 49758.5,
       "active_count": 6,
       "active_projects": [
         "Clifford Clack",
@@ -220,7 +220,7 @@
       "produced_ineff": 16318.1,
       "fixed": 10384.62,
       "net": 10074.87,
-      "cumulative_net": 60028.37,
+      "cumulative_net": 59833.37,
       "active_count": 6,
       "active_projects": [
         "Clifford Clack",
@@ -248,7 +248,7 @@
       "produced_ineff": 7901.67,
       "fixed": 10384.62,
       "net": -1205.05,
-      "cumulative_net": 58823.32,
+      "cumulative_net": 58628.32,
       "active_count": 6,
       "active_projects": [
         "Clifford Clack",
@@ -422,20 +422,20 @@
     },
     {
       "project": "Kyle Aubry",
-      "revenue": 11376.69,
-      "cost": 8780.77,
-      "produced": 2595.92,
-      "produced_ineff": 1278.81,
-      "margin_pct": 22.8,
+      "revenue": 10456.69,
+      "cost": 8055.77,
+      "produced": 2400.92,
+      "produced_ineff": 1192.56,
+      "margin_pct": 23.0,
       "weeks": {
         "2026-W24": 1417.5,
-        "2026-W23": 598.5,
+        "2026-W23": 403.5,
         "2026-W25": 428.85,
         "2026-W26": 151.08
       },
       "weeks_ineff": {
         "2026-W24": 890.63,
-        "2026-W23": 296.63,
+        "2026-W23": 210.38,
         "2026-W25": 115.87,
         "2026-W26": -24.31
       },
@@ -449,10 +449,10 @@
       "produced": 85352.09,
       "produced_ineff": 72826.18,
       "revenue": 168858.22,
-      "overhead": 45331.17,
-      "net": 40020.92,
-      "net_ineff": 27495.01,
-      "overhead_share_pct": 54.6,
+      "overhead": 45466.34,
+      "net": 39885.75,
+      "net_ineff": 27359.84,
+      "overhead_share_pct": 54.7,
       "projects": [
         "Clifford Clack",
         "Katie Holmes",
@@ -475,9 +475,9 @@
       "produced": 33478.09,
       "produced_ineff": 26638.56,
       "revenue": 79075.0,
-      "overhead": 21228.24,
-      "net": 12249.85,
-      "net_ineff": 5410.32,
+      "overhead": 21291.53,
+      "net": 12186.56,
+      "net_ineff": 5347.03,
       "overhead_share_pct": 25.6,
       "projects": [
         "Brandy Sexton",
@@ -498,10 +498,10 @@
       "produced": 20474.16,
       "produced_ineff": 16022.63,
       "revenue": 50151.05,
-      "overhead": 13463.4,
-      "net": 7010.76,
-      "net_ineff": 2559.23,
-      "overhead_share_pct": 16.2,
+      "overhead": 13503.55,
+      "net": 6970.61,
+      "net_ineff": 2519.08,
+      "overhead_share_pct": 16.3,
       "projects": [
         "Stephanie Felton"
       ],
@@ -517,20 +517,20 @@
     },
     {
       "pm": "Milagros Porturas",
-      "produced": 2595.92,
-      "produced_ineff": 1278.81,
-      "revenue": 11376.69,
-      "overhead": 3054.15,
-      "net": -458.23,
-      "net_ineff": -1775.34,
-      "overhead_share_pct": 3.7,
+      "produced": 2400.92,
+      "produced_ineff": 1192.56,
+      "revenue": 10456.69,
+      "overhead": 2815.54,
+      "net": -414.62,
+      "net_ineff": -1622.98,
+      "overhead_share_pct": 3.4,
       "projects": [
         "Kyle Aubry"
       ],
-      "margin_pct": 22.8,
+      "margin_pct": 23.0,
       "weeks": {
         "2026-W24": 1417.5,
-        "2026-W23": 598.5,
+        "2026-W23": 403.5,
         "2026-W25": 428.85,
         "2026-W26": 151.08
       }
@@ -714,11 +714,11 @@
       "2026-W23"
     ],
     "overhead_equal": 7912.09,
-    "overhead_revwt": 6361.71,
+    "overhead_revwt": 6368.51,
     "net_equal": 17464.0,
-    "net_revwt": 19014.38,
+    "net_revwt": 19007.58,
     "net_equal_ineff": 12379.46,
-    "net_revwt_ineff": 13929.84,
+    "net_revwt_ineff": 13923.04,
     "allocation_detail": [
       {
         "week": "2026-W19",
@@ -741,7 +741,7 @@
         "week_label": "16\u201322 may",
         "active": 7,
         "equal": 1483.52,
-        "revwt": 1230.69,
+        "revwt": 1232.96,
         "brandy_share_pct": 11.9
       },
       {
@@ -749,7 +749,7 @@
         "week_label": "23\u201329 may",
         "active": 7,
         "equal": 1483.52,
-        "revwt": 1230.69,
+        "revwt": 1232.96,
         "brandy_share_pct": 11.9
       },
       {
@@ -757,7 +757,7 @@
         "week_label": "30 may\u20135 jun",
         "active": 7,
         "equal": 1483.52,
-        "revwt": 1230.69,
+        "revwt": 1232.96,
         "brandy_share_pct": 11.9
       }
     ],
@@ -933,7 +933,7 @@
     ]
   },
   "project_contracts": {
-    "Kyle Aubry": 39019.0,
+    "Kyle Aubry": 38099.0,
     "Stephanie Felton": 85894.0,
     "Katie Holmes": 121245.5,
     "Clifford Clack": 42097.0,
