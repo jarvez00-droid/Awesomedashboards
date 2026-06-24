@@ -1,12 +1,13 @@
 {
-  "generated_at": "2026-06-23T22:29:02",
+  "generated_at": "2026-06-23T22:33:25",
   "today": "2026-06-23",
   "rule": "Ingreso = SOLO Action Task + Critical Path (NO pagos de cliente). Menos Subs+Materiales+Additional = Producido por trade, repartido entre los dias de EJECUCION del action task (la compra de material o el pago al sub en otra semana NO mueven la fecha). Sumado por semana por proyecto; menos fijos = Produccion Neta.",
   "params": {
     "weekly_fixed": 10384.62,
     "monthly_fixed": 45000.0,
     "window_start": "2026-05-02",
-    "cost_inefficiency": 0.2,
+    "cost_inefficiency": 0.1,
+    "revenue_reduction": 0.1,
     "high_margin_flag": 0.6,
     "overhead_sim_weekly": 15500.0,
     "excluded": [
@@ -22,14 +23,14 @@
   },
   "totals": {
     "produced": 143712.74,
-    "produced_ineff": 106571.35,
+    "produced_ineff": 92200.06,
     "fixed": 83076.96,
     "net": 60635.78,
-    "net_ineff": 23494.39,
+    "net_ineff": 9123.1,
     "weeks": 8,
     "avg_weekly_net": 7579.47,
     "weeks_positive": 7,
-    "weeks_positive_ineff": 4,
+    "weeks_positive_ineff": 3,
     "weeks_negative": 1,
     "avg_weekly_produced": 17964.09
   },
@@ -42,7 +43,7 @@
       "label_moy": "may S1",
       "label_short": "2 may",
       "produced": 12044.44,
-      "produced_ineff": 8752.77,
+      "produced_ineff": 7548.32,
       "fixed": 10384.62,
       "net": 1659.82,
       "cumulative_net": 1659.82,
@@ -70,7 +71,7 @@
       "label_moy": "may S2",
       "label_short": "9 may",
       "produced": 15452.13,
-      "produced_ineff": 11466.93,
+      "produced_ineff": 9921.71,
       "fixed": 10384.62,
       "net": 5067.51,
       "cumulative_net": 6727.33,
@@ -99,7 +100,7 @@
       "label_moy": "may S3",
       "label_short": "16 may",
       "produced": 43790.93,
-      "produced_ineff": 34848.58,
+      "produced_ineff": 30469.5,
       "fixed": 10384.62,
       "net": 33406.31,
       "cumulative_net": 40133.64,
@@ -130,7 +131,7 @@
       "label_moy": "may S4",
       "label_short": "23 may",
       "produced": 15336.59,
-      "produced_ineff": 9343.39,
+      "produced_ineff": 7809.75,
       "fixed": 10384.62,
       "net": 4951.97,
       "cumulative_net": 45085.61,
@@ -159,7 +160,7 @@
       "label_moy": "may S5",
       "label_short": "30 may",
       "produced": 11101.86,
-      "produced_ineff": 8361.5,
+      "produced_ineff": 7251.3,
       "fixed": 10384.62,
       "net": 717.24,
       "cumulative_net": 45802.85,
@@ -190,7 +191,7 @@
       "label_moy": "jun S1",
       "label_short": "6 jun",
       "produced": 17637.82,
-      "produced_ineff": 13408.36,
+      "produced_ineff": 11644.56,
       "fixed": 10384.62,
       "net": 7253.2,
       "cumulative_net": 53056.05,
@@ -219,7 +220,7 @@
       "label_moy": "jun S2",
       "label_short": "13 jun",
       "produced": 20901.25,
-      "produced_ineff": 14809.02,
+      "produced_ineff": 12718.88,
       "fixed": 10384.62,
       "net": 10516.63,
       "cumulative_net": 63572.68,
@@ -247,7 +248,7 @@
       "label_moy": "jun S3",
       "label_short": "20 jun",
       "produced": 7447.72,
-      "produced_ineff": 5580.8,
+      "produced_ineff": 4836.04,
       "fixed": 10384.62,
       "net": -2936.9,
       "cumulative_net": 60635.78,
@@ -275,7 +276,7 @@
       "revenue": 98482.07,
       "cost": 57712.05,
       "produced": 40770.02,
-      "produced_ineff": 29227.61,
+      "produced_ineff": 25150.61,
       "margin_pct": 41.4,
       "weeks": {
         "2026-W21": 17464.91,
@@ -288,14 +289,14 @@
         "2026-W26": 2102.14
       },
       "weeks_ineff": {
-        "2026-W21": 13788.62,
-        "2026-W25": 6882.78,
-        "2026-W19": 337.3,
-        "2026-W20": 171.22,
-        "2026-W22": 3106.64,
-        "2026-W23": 996.91,
-        "2026-W24": 2146.08,
-        "2026-W26": 1798.06
+        "2026-W21": 12042.14,
+        "2026-W25": 5918.93,
+        "2026-W19": 152.28,
+        "2026-W20": 12.29,
+        "2026-W22": 2653.96,
+        "2026-W23": 884.6,
+        "2026-W24": 1898.57,
+        "2026-W26": 1587.86
       },
       "first_week": "2026-W19",
       "last_week": "2026-W26"
@@ -305,7 +306,7 @@
       "revenue": 50760.25,
       "cost": 22110.0,
       "produced": 28650.25,
-      "produced_ineff": 24228.25,
+      "produced_ineff": 21363.22,
       "margin_pct": 56.4,
       "weeks": {
         "2026-W26": 3628.25,
@@ -313,9 +314,9 @@
         "2026-W21": 17747.86
       },
       "weeks_ineff": {
-        "2026-W26": 2628.25,
-        "2026-W20": 6193.29,
-        "2026-W21": 15406.71
+        "2026-W26": 2265.43,
+        "2026-W20": 5465.87,
+        "2026-W21": 13631.93
       },
       "first_week": "2026-W20",
       "last_week": "2026-W26"
@@ -325,7 +326,7 @@
       "revenue": 59273.0,
       "cost": 32896.91,
       "produced": 26376.09,
-      "produced_ineff": 19796.71,
+      "produced_ineff": 17159.1,
       "margin_pct": 44.5,
       "weeks": {
         "2026-W19": 3722.4,
@@ -335,11 +336,11 @@
         "2026-W23": 1921.48
       },
       "weeks_ineff": {
-        "2026-W19": 2913.68,
-        "2026-W20": 3909.92,
-        "2026-W21": 4900.21,
-        "2026-W22": 6874.58,
-        "2026-W23": 1198.32
+        "2026-W19": 2541.44,
+        "2026-W20": 3472.56,
+        "2026-W21": 4259.6,
+        "2026-W22": 5879.33,
+        "2026-W23": 1006.16
       },
       "first_week": "2026-W19",
       "last_week": "2026-W23"
@@ -349,7 +350,7 @@
       "revenue": 52594.23,
       "cost": 32526.89,
       "produced": 20067.35,
-      "produced_ineff": 13561.97,
+      "produced_ineff": 11555.23,
       "margin_pct": 38.2,
       "weeks": {
         "2026-W23": 4134.43,
@@ -360,12 +361,12 @@
         "2026-W26": 1277.06
       },
       "weeks_ineff": {
-        "2026-W23": 3044.33,
-        "2026-W24": 5546.33,
-        "2026-W25": 5573.33,
-        "2026-W21": -495.67,
-        "2026-W22": -1148.83,
-        "2026-W26": 1042.47
+        "2026-W23": 2630.88,
+        "2026-W24": 4798.33,
+        "2026-W25": 4836.59,
+        "2026-W21": -462.18,
+        "2026-W22": -1163.18,
+        "2026-W26": 914.75
       },
       "first_week": "2026-W21",
       "last_week": "2026-W26"
@@ -375,7 +376,7 @@
       "revenue": 35734.9,
       "cost": 19705.26,
       "produced": 16029.64,
-      "produced_ineff": 12088.59,
+      "produced_ineff": 10485.62,
       "margin_pct": 44.9,
       "weeks": {
         "2026-W23": 1265.73,
@@ -387,13 +388,13 @@
         "2026-W21": 1070.0
       },
       "weeks_ineff": {
-        "2026-W23": 1044.94,
-        "2026-W19": 5183.5,
-        "2026-W20": 497.5,
-        "2026-W25": 1761.2,
-        "2026-W24": 2828.2,
-        "2026-W26": 193.25,
-        "2026-W21": 580.0
+        "2026-W23": 918.37,
+        "2026-W19": 4589.15,
+        "2026-W20": 431.75,
+        "2026-W25": 1472.56,
+        "2026-W24": 2436.31,
+        "2026-W26": 164.49,
+        "2026-W21": 473.0
       },
       "first_week": "2026-W19",
       "last_week": "2026-W26"
@@ -403,7 +404,7 @@
       "revenue": 19802.0,
       "cost": 12700.0,
       "produced": 7102.0,
-      "produced_ineff": 4562.0,
+      "produced_ineff": 3851.8,
       "margin_pct": 35.9,
       "weeks": {
         "2026-W19": 528.36,
@@ -414,12 +415,12 @@
         "2026-W24": 611.68
       },
       "weeks_ineff": {
-        "2026-W19": 318.29,
-        "2026-W20": 695.0,
-        "2026-W21": 668.71,
-        "2026-W22": 511.0,
-        "2026-W23": 1931.0,
-        "2026-W24": 438.0
+        "2026-W19": 265.45,
+        "2026-W20": 539.24,
+        "2026-W21": 525.01,
+        "2026-W22": 439.64,
+        "2026-W23": 1705.64,
+        "2026-W24": 376.83
       },
       "first_week": "2026-W19",
       "last_week": "2026-W24"
@@ -429,7 +430,7 @@
       "revenue": 12773.15,
       "cost": 8055.77,
       "produced": 4717.38,
-      "produced_ineff": 3106.23,
+      "produced_ineff": 2634.49,
       "margin_pct": 36.9,
       "weeks": {
         "2026-W24": 3152.25,
@@ -438,10 +439,10 @@
         "2026-W26": 152.62
       },
       "weeks_ineff": {
-        "2026-W24": 2449.75,
-        "2026-W23": 146.0,
-        "2026-W25": 591.71,
-        "2026-W26": -81.23
+        "2026-W24": 2134.52,
+        "2026-W23": 105.65,
+        "2026-W25": 490.8,
+        "2026-W26": -96.49
       },
       "first_week": "2026-W23",
       "last_week": "2026-W26"
@@ -451,11 +452,11 @@
     {
       "pm": "Angel Pacheco",
       "produced": 85449.9,
-      "produced_ineff": 65544.45,
+      "produced_ineff": 56999.47,
       "revenue": 184977.22,
       "overhead": 46649.76,
       "net": 38800.14,
-      "net_ineff": 18894.69,
+      "net_ineff": 10349.71,
       "overhead_share_pct": 56.2,
       "projects": [
         "Clifford Clack",
@@ -477,11 +478,11 @@
     {
       "pm": "Giselle Garcia",
       "produced": 33478.09,
-      "produced_ineff": 24358.71,
+      "produced_ineff": 21010.89,
       "revenue": 79075.0,
       "overhead": 19942.08,
       "net": 13536.01,
-      "net_ineff": 4416.63,
+      "net_ineff": 1068.81,
       "overhead_share_pct": 24.0,
       "projects": [
         "Brandy Sexton",
@@ -500,11 +501,11 @@
     {
       "pm": "Jeff",
       "produced": 20067.34,
-      "produced_ineff": 13561.97,
+      "produced_ineff": 11555.24,
       "revenue": 52594.23,
       "overhead": 13263.84,
       "net": 6803.5,
-      "net_ineff": 298.13,
+      "net_ineff": -1708.6,
       "overhead_share_pct": 16.0,
       "projects": [
         "Stephanie Felton"
@@ -522,11 +523,11 @@
     {
       "pm": "Milagros Porturas",
       "produced": 4717.38,
-      "produced_ineff": 3106.23,
+      "produced_ineff": 2634.49,
       "revenue": 12773.15,
       "overhead": 3221.29,
       "net": 1496.09,
-      "net_ineff": -115.06,
+      "net_ineff": -586.8,
       "overhead_share_pct": 3.9,
       "projects": [
         "Kyle Aubry"
@@ -693,7 +694,7 @@
     "revenue": 59273.0,
     "cost": 33896.91,
     "produced": 25376.09,
-    "produced_ineff": 18596.71,
+    "produced_ineff": 16059.1,
     "margin_pct": 42.8,
     "by_week": {
       "2026-W19": 3722.4,
@@ -713,8 +714,8 @@
     "overhead_revwt": 6180.33,
     "net_equal": 17464.0,
     "net_revwt": 19195.76,
-    "net_equal_ineff": 10684.62,
-    "net_revwt_ineff": 12416.38,
+    "net_equal_ineff": 8147.01,
+    "net_revwt_ineff": 9878.77,
     "allocation_detail": [
       {
         "week": "2026-W19",
