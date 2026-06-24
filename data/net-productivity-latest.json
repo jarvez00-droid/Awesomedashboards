@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-24T09:17:40",
+  "generated_at": "2026-06-24T10:22:49",
   "today": "2026-06-24",
   "rule": "Ingreso = SOLO Action Task + Critical Path (NO pagos de cliente). Menos Subs+Materiales+Additional = Producido por trade, repartido entre los dias de EJECUCION del action task (la compra de material o el pago al sub en otra semana NO mueven la fecha). Sumado por semana por proyecto; menos fijos = Produccion Neta.",
   "params": {
@@ -543,7 +543,7 @@
   ],
   "data_quality": {
     "orphan_trades": 7,
-    "orphan_cost": 9531.88,
+    "orphan_cost": 9427.78,
     "priced_trades": 51,
     "total_trades": 58,
     "by_project": [
@@ -561,11 +561,11 @@
       {
         "project": "Stephanie Felton",
         "orphan_trades": 2,
-        "orphan_cost": 3017.14,
+        "orphan_cost": 2913.04,
         "examples": [
           {
             "trade": "PAINT",
-            "cost": 1665.6
+            "cost": 1561.5
           },
           {
             "trade": "CROWNMOLDING",
