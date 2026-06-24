@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-24T05:41:08",
+  "generated_at": "2026-06-24T06:02:41",
   "today": "2026-06-24",
   "rule": "Ingreso = SOLO Action Task + Critical Path (NO pagos de cliente). Menos Subs+Materiales+Additional = Producido por trade, repartido entre los dias de EJECUCION del action task (la compra de material o el pago al sub en otra semana NO mueven la fecha). Sumado por semana por proyecto; menos fijos = Produccion Neta.",
   "params": {
@@ -542,10 +542,10 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 8,
-    "orphan_cost": 10513.34,
+    "orphan_trades": 7,
+    "orphan_cost": 9531.88,
     "priced_trades": 51,
-    "total_trades": 59,
+    "total_trades": 58,
     "by_project": [
       {
         "project": "Lingyan Qiu",
@@ -575,16 +575,12 @@
       },
       {
         "project": "Clifford Clack",
-        "orphan_trades": 3,
-        "orphan_cost": 2052.01,
+        "orphan_trades": 2,
+        "orphan_cost": 1070.55,
         "examples": [
           {
             "trade": "ELECTRICAL TRIM",
             "cost": 622.84
-          },
-          {
-            "trade": "CUSTOM CARPENTRY",
-            "cost": 981.46
           },
           {
             "trade": "CEILING MOULDING",
