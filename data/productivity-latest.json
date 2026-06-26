@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T07:05:29",
+  "generated_at": "2026-06-26T07:27:23",
   "week_iso": "2026-W26",
   "week_start": "2026-06-20",
   "week_end": "2026-06-26",
@@ -215,6 +215,137 @@
           "expenses_additional": 0,
           "expenses_total": 1752.36,
           "profit": 2900.64,
+          "status": "in_progress",
+          "has_price": true,
+          "this_pct": 0.0,
+          "attribution": 0.0,
+          "user_set": false
+        }
+      ]
+    },
+    {
+      "project_id": "22Nx8Uut2Qxs",
+      "project_name": "Kyle Aubry - Project 01",
+      "pm": "Milagros Porturas",
+      "group_count": 1,
+      "attribution": 0.0,
+      "groups": [
+        {
+          "project_id": "22Nx8Uut2Qxs",
+          "project_name": "Kyle Aubry - Project 01",
+          "group_id": "22PZpW7zdQm3",
+          "group_name": "SHEETROCK",
+          "parent_group_id": "22PZpW5Ehb75",
+          "action_count": 4,
+          "action_task_ids": [
+            "22PZpW87YH9Q",
+            "22PZpW88FizE",
+            "22PZpW88g6gM",
+            "22PZpW8A5smK"
+          ],
+          "action_task_names": [
+            "CEILING: Remove Pop Corn & Fur downs",
+            "SHEETROCK: HANG SHEETROCK",
+            "SHEETROCK: FILL VENTS SPACES",
+            "SHEETROCK: TAPE, BED & TEXTURE"
+          ],
+          "action_progresses": [
+            1,
+            null,
+            null,
+            null
+          ],
+          "action_starts": [
+            "2026-06-15",
+            "2026-06-22",
+            "2026-06-22",
+            "2026-06-24"
+          ],
+          "action_ends": [
+            "2026-06-16",
+            "2026-06-23",
+            "2026-06-23",
+            "2026-06-29"
+          ],
+          "action_start_min": "2026-06-15",
+          "action_end_max": "2026-06-29",
+          "action_lines": [
+            {
+              "task_id": "22PZpW87YH9Q",
+              "name": "CEILING: Remove Pop Corn & Fur downs",
+              "description": "2148",
+              "amount": 2148.0,
+              "progress": 1,
+              "end_date": "2026-06-16"
+            },
+            {
+              "task_id": "22PZpW88FizE",
+              "name": "SHEETROCK: HANG SHEETROCK",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-06-23"
+            },
+            {
+              "task_id": "22PZpW88g6gM",
+              "name": "SHEETROCK: FILL VENTS SPACES",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-06-23"
+            },
+            {
+              "task_id": "22PZpW8A5smK",
+              "name": "SHEETROCK: TAPE, BED & TEXTURE",
+              "description": "2148",
+              "amount": 2148.0,
+              "progress": null,
+              "end_date": "2026-06-29"
+            }
+          ],
+          "subs_lines": [
+            {
+              "task_id": "22PZpW8BPVvt",
+              "name": "SHEETROCK: BILL & PAYMENT",
+              "description": "300",
+              "amount": 300.0,
+              "progress": 1,
+              "end_date": "2026-06-16"
+            },
+            {
+              "task_id": "22PZpW8BmK2a",
+              "name": "SHEETROCK: BILL & PAYMENT",
+              "description": "1750",
+              "amount": 1750.0,
+              "progress": null,
+              "end_date": "2026-06-26"
+            },
+            {
+              "task_id": "22PZpW8CAaT3",
+              "name": "SHEETROCK: BILL & PAYMENT (Copy)",
+              "description": "1750",
+              "amount": 1750.0,
+              "progress": null,
+              "end_date": "2026-07-03"
+            }
+          ],
+          "materials_lines": [
+            {
+              "task_id": "22PZpW86TGAB",
+              "name": "SHEETROCK: PURCHASE SHEETROCK",
+              "description": "",
+              "amount": 0.0,
+              "progress": 1,
+              "end_date": "2026-06-19"
+            }
+          ],
+          "additional_lines": [],
+          "sold": 4296.0,
+          "expenses_subs": 3800.0,
+          "expenses_materials": 0.0,
+          "expenses_additional": 0,
+          "expenses_total": 3800.0,
+          "profit": 496.0,
           "status": "in_progress",
           "has_price": true,
           "this_pct": 0.0,
@@ -1229,13 +1360,19 @@
     },
     {
       "pm": "Milagros Porturas",
-      "project_count": 1,
-      "group_count": 6,
-      "sold": 17736.0,
-      "expenses": 20331.45,
-      "profit_potential": -2595.45,
+      "project_count": 2,
+      "group_count": 7,
+      "sold": 22032.0,
+      "expenses": 24131.45,
+      "profit_potential": -2099.45,
       "attribution": 0.0,
       "projects": [
+        {
+          "project_id": "22Nx8Uut2Qxs",
+          "project_name": "Kyle Aubry - Project 01",
+          "attribution": 0.0,
+          "group_count": 1
+        },
         {
           "project_id": "22NxUEJKTj6C",
           "project_name": "Ginger Brown",
@@ -1280,14 +1417,14 @@
     }
   ],
   "totals": {
-    "sold": 39395.0,
-    "expenses": 31290.25,
-    "profit_potential": 8104.75,
+    "sold": 43691.0,
+    "expenses": 35090.25,
+    "profit_potential": 8600.75,
     "profit_attributed_this_week": 363.0,
-    "groups_in_progress": 10,
+    "groups_in_progress": 11,
     "groups_finished_this_week": 3,
     "groups_missing_price": 8,
     "expense_missing_price": 21558.71,
-    "project_count": 5
+    "project_count": 6
   }
 }
