@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T13:47:10",
+  "generated_at": "2026-06-26T15:38:18",
   "today": "2026-06-26",
   "rule": "Ingreso = SOLO Action Task + Critical Path (NO pagos de cliente). Menos Subs+Materiales+Additional = Producido por trade, repartido entre los dias de EJECUCION del action task (la compra de material o el pago al sub en otra semana NO mueven la fecha). Sumado por semana por proyecto; menos fijos = Produccion Neta.",
   "params": {
@@ -224,12 +224,13 @@
       "fixed": 10384.62,
       "net": 8014.16,
       "cumulative_net": 70802.24,
-      "active_count": 5,
+      "active_count": 6,
       "active_projects": [
         "Clifford Clack",
         "Katie Holmes",
         "Kyle Aubry",
         "Lingyan Qiu",
+        "Rohini Williams",
         "Stephanie Felton"
       ],
       "by_project": {
@@ -251,12 +252,13 @@
       "fixed": 10384.62,
       "net": 6727.5,
       "cumulative_net": 77529.74,
-      "active_count": 5,
+      "active_count": 6,
       "active_projects": [
         "Clifford Clack",
         "Katie Holmes",
         "Kyle Aubry",
         "Lingyan Qiu",
+        "Rohini Williams",
         "Stephanie Felton"
       ],
       "by_project": {
@@ -540,11 +542,22 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 7,
-    "orphan_cost": 5098.23,
+    "orphan_trades": 8,
+    "orphan_cost": 39567.81,
     "priced_trades": 52,
-    "total_trades": 59,
+    "total_trades": 60,
     "by_project": [
+      {
+        "project": "Rohini Williams",
+        "orphan_trades": 1,
+        "orphan_cost": 34469.58,
+        "examples": [
+          {
+            "trade": "FRAMING",
+            "cost": 34469.58
+          }
+        ]
+      },
       {
         "project": "Stephanie Felton",
         "orphan_trades": 2,
