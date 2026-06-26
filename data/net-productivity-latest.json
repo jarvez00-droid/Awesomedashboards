@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26T00:32:13",
+  "generated_at": "2026-06-26T05:15:25",
   "today": "2026-06-26",
   "rule": "Ingreso = SOLO Action Task + Critical Path (NO pagos de cliente). Menos Subs+Materiales+Additional = Producido por trade, repartido entre los dias de EJECUCION del action task (la compra de material o el pago al sub en otra semana NO mueven la fecha). Sumado por semana por proyecto; menos fijos = Produccion Neta.",
   "params": {
@@ -542,10 +542,10 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 10,
-    "orphan_cost": 8991.0,
+    "orphan_trades": 11,
+    "orphan_cost": 9601.95,
     "priced_trades": 51,
-    "total_trades": 61,
+    "total_trades": 62,
     "by_project": [
       {
         "project": "Stephanie Felton",
@@ -586,6 +586,21 @@
         ]
       },
       {
+        "project": "Rohini Williams",
+        "orphan_trades": 2,
+        "orphan_cost": 1610.95,
+        "examples": [
+          {
+            "trade": "FRAMING",
+            "cost": 610.95
+          },
+          {
+            "trade": "DEMO INTERIOR",
+            "cost": 1000.0
+          }
+        ]
+      },
+      {
         "project": "Lingyan Qiu",
         "orphan_trades": 1,
         "orphan_cost": 1333.67,
@@ -593,17 +608,6 @@
           {
             "trade": "DRYWALL",
             "cost": 1333.67
-          }
-        ]
-      },
-      {
-        "project": "Rohini Williams",
-        "orphan_trades": 1,
-        "orphan_cost": 1000.0,
-        "examples": [
-          {
-            "trade": "DEMO INTERIOR",
-            "cost": 1000.0
           }
         ]
       },
