@@ -10,16 +10,16 @@
     "concern": "Martha Cockrell (CNG-20251199) \u2014 43 overdue tasks",
     "payment_overdue": 56,
     "hidden_no_pm": [
+      "Karim-Merchant",
       "Charles Harris \u2014 Argyle TX",
       "Shaan Lagisetty (CNG-20251169)",
-      "Karim-Merchant",
       "Job CNG2030",
       "Job INTERNALTEST2"
     ]
   },
   "analysis": {
     "paragraphs": [
-      "Overdue climbed to 113 \u2014 we need to reverse this today. This is above the 7-day average of 56 \u2014 the trend is heading the wrong direction. 26 tasks are actively in progress \u2014 that's solid execution across the board. 1 task should be active but is stuck waiting on blockers \u2014 these need immediate attention.",
+      "Overdue climbed to 121 \u2014 we need to reverse this today. This is above the 7-day average of 56 \u2014 the trend is heading the wrong direction. 26 tasks are actively in progress \u2014 that's solid execution across the board. 1 task should be active but is stuck waiting on blockers \u2014 these need immediate attention.",
       "**Martha Cockrell (CNG-20251199):** The oldest overdue task is 60 days past due with 43 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. **21 upcoming tasks unassigned** \u2014 assign people now or they'll start late.",
       "**Stephanie and Marc Felton:** The oldest overdue task is 39 days past due with 27 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. **23 upcoming tasks unassigned** \u2014 assign people now or they'll start late. 7 payment tasks due this week.",
       "**Ginger Brown:** The oldest overdue task is 27 days past due with 17 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. **9 upcoming tasks unassigned** \u2014 assign people now or they'll start late. $44,175 in payments coming due this week \u2014 prepare funds.",
@@ -31,7 +31,7 @@
       "**Milagros Porturas:** 9 overdue across 1 project.",
       "**Angel Pacheco:** 8 overdue across 2 projects.",
       "**Jeff:** Down to 3 overdue \u2014 making progress.",
-      "234 tasks starting in the next 7 days. **183 of those have nobody assigned** \u2014 these need a name on them before they're due or they'll become overdue with no accountability. 29 overdue payments are holding up the pipeline \u2014 every day these sit, the schedule slips further. **$686,734 in payments going out this week** across 29 tasks \u2014 make sure funds are available. $56,431 expected in from 3 client payments. Heavy week ahead for Rohini Williams (CNG2025-496) and Stephanie and Marc Felton \u2014 make sure resources are lined up."
+      "240 tasks starting in the next 7 days. **189 of those have nobody assigned** \u2014 these need a name on them before they're due or they'll become overdue with no accountability. 29 overdue payments are holding up the pipeline \u2014 every day these sit, the schedule slips further. **$686,734 in payments going out this week** across 31 tasks \u2014 make sure funds are available. $56,431 expected in from 3 client payments. Heavy week ahead for Rohini Williams (CNG2025-496) and Stephanie and Marc Felton \u2014 make sure resources are lined up."
     ],
     "pm_briefs": {
       "Angel Pacheco": [
@@ -4263,7 +4263,9 @@
             "n": "FRAMING: CONFIRM TAKEOFF DETAILS",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts tomorrow",
-            "unassigned": true
+            "unassigned": true,
+            "blocked_by": "FRAMING: CC CHECKLIST: BEFORE SOW",
+            "blocked_kind": "overdue"
           },
           {
             "n": "FRAMING: SECURE PRICING & ETA",
@@ -4311,7 +4313,9 @@
             "n": "FRAMING: CREATE SOW REPORT & SOURCE VENDORS",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts in 2 days",
-            "unassigned": true
+            "unassigned": true,
+            "blocked_by": "FRAMING: CONFIRM TAKEOFF DETAILS",
+            "blocked_kind": "overdue"
           },
           {
             "n": "FRAMING: PURCHASE MATERIALS",
@@ -4377,7 +4381,9 @@
             "n": "FRAMING: SELECT VENDOR & SEND WO",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts in 3 days",
-            "unassigned": true
+            "unassigned": true,
+            "blocked_by": "FRAMING: CREATE SOW REPORT & SOURCE VENDORS",
+            "blocked_kind": "overdue"
           },
           {
             "n": "FRAMING: DELIVERY ETA",
@@ -4467,7 +4473,9 @@
             "n": "FRAMING: CONFIRM SCHEDULE WITH SUB",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts Tue",
-            "unassigned": true
+            "unassigned": true,
+            "blocked_by": "FRAMING: SELECT VENDOR & SEND WO",
+            "blocked_kind": "overdue"
           },
           {
             "n": "DOORS AND WINDOWS: CONFIRM SCHEDULE WITH SUB",
@@ -4539,7 +4547,9 @@
             "n": "FRAMING: CC CHECKLIST - PM INSPECTION (BEFORE)",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts Wed",
-            "unassigned": true
+            "unassigned": true,
+            "blocked_by": "FRAMING: CONFIRM SCHEDULE WITH SUB",
+            "blocked_kind": "overdue"
           },
           {
             "n": "DOORS AND WINDOWS: CC CHECKLIST - PM INSPECTION (BEFORE)",
