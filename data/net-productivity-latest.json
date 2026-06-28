@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-27T21:16:08",
+  "generated_at": "2026-06-27T21:39:35",
   "today": "2026-06-27",
   "rule": "Ingreso = SOLO Action Task + Critical Path (NO pagos de cliente). Menos Subs+Materiales+Additional = Producido por trade, repartido entre los dias de EJECUCION del action task (la compra de material o el pago al sub en otra semana NO mueven la fecha). Sumado por semana por proyecto; menos fijos = Produccion Neta.",
   "params": {
@@ -603,18 +603,18 @@
   ],
   "data_quality": {
     "orphan_trades": 6,
-    "orphan_cost": 14858.52,
+    "orphan_cost": 17358.52,
     "priced_trades": 54,
     "total_trades": 60,
     "by_project": [
       {
         "project": "Martha Cockrell",
         "orphan_trades": 1,
-        "orphan_cost": 12000.0,
+        "orphan_cost": 14500.0,
         "examples": [
           {
             "trade": "FRAMING",
-            "cost": 12000.0
+            "cost": 14500.0
           }
         ]
       },
@@ -800,11 +800,11 @@
       "2026-W23"
     ],
     "overhead_equal": 7726.65,
-    "overhead_revwt": 5104.01,
+    "overhead_revwt": 5081.46,
     "net_equal": 17649.44,
-    "net_revwt": 20272.08,
+    "net_revwt": 20294.63,
     "net_equal_ineff": 8332.45,
-    "net_revwt_ineff": 10955.09,
+    "net_revwt_ineff": 10977.64,
     "allocation_detail": [
       {
         "week": "2026-W19",
@@ -843,8 +843,8 @@
         "week_label": "30 may\u20135 jun",
         "active": 8,
         "equal": 1298.08,
-        "revwt": 983.14,
-        "brandy_share_pct": 9.5
+        "revwt": 960.59,
+        "brandy_share_pct": 9.3
       }
     ],
     "trades": [
@@ -1023,7 +1023,7 @@
     "Stephanie Felton": 100485.0,
     "Katie Holmes": 121245.5,
     "Clifford Clack": 50920.0,
-    "Martha Cockrell": 7720.0,
+    "Martha Cockrell": 22417.65,
     "Lingyan Qiu": 139193.0,
     "Rohini Williams": 106831.0,
     "Brandy Sexton": 59273.0,
