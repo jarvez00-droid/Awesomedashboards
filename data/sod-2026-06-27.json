@@ -4,9 +4,9 @@
     "overdue": 78,
     "active": 23,
     "active_blocked": 2,
-    "coming": 246,
-    "coming_unassigned": 199,
-    "role_gaps": 447,
+    "coming": 249,
+    "coming_unassigned": 202,
+    "role_gaps": 450,
     "concern": "Stephanie and Marc Felton \u2014 34 overdue tasks",
     "payment_overdue": 28,
     "hidden_no_pm": [
@@ -27,11 +27,11 @@
       "**Kyle Aubry - Project 01:** The oldest overdue task is 12 days past due with 7 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. **16 upcoming tasks unassigned** \u2014 assign people now or they'll start late. $17,524 in payments coming due this week \u2014 prepare funds.",
       "**Lingyan Qiu (CNG2025-458):** The oldest overdue task is 11 days past due with 7 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. **25 upcoming tasks unassigned** \u2014 assign people now or they'll start late. 7 payment tasks due this week.",
       "**Katie Holmes & Sean Springs:** 3 overdue \u2014 tackle the oldest first, they're the most likely to cascade. **9 upcoming tasks unassigned** \u2014 assign people now or they'll start late. $25,531 in payments coming due this week \u2014 prepare funds.",
-      "**Martha Cockrell (CNG-20251199):** 2 upcoming tasks still unassigned.",
+      "**Martha Cockrell (CNG-20251199):** **5 upcoming tasks unassigned** \u2014 assign people now or they'll start late.",
       "**Angel Pacheco:** 11 overdue across 2 projects.",
       "**Milagros Porturas:** 8 overdue across 1 project.",
       "**Jeff:** Down to 4 overdue \u2014 making progress.",
-      "254 tasks starting in the next 7 days. **207 of those have nobody assigned** \u2014 these need a name on them before they're due or they'll become overdue with no accountability. 15 overdue payments are holding up the pipeline \u2014 every day these sit, the schedule slips further. **$265,981 in payments going out this week** across 47 tasks \u2014 make sure funds are available. $24,888 expected in from 5 client payments. Heavy week ahead for Rohini Williams (CNG2025-496) and Ginger Brown \u2014 make sure resources are lined up."
+      "257 tasks starting in the next 7 days. **210 of those have nobody assigned** \u2014 these need a name on them before they're due or they'll become overdue with no accountability. 15 overdue payments are holding up the pipeline \u2014 every day these sit, the schedule slips further. **$265,981 in payments going out this week** across 48 tasks \u2014 make sure funds are available. $24,888 expected in from 5 client payments. Heavy week ahead for Rohini Williams (CNG2025-496) and Ginger Brown \u2014 make sure resources are lined up."
     ],
     "pm_briefs": {
       "Angel Pacheco": [
@@ -45,7 +45,7 @@
       "Jeff": [
         "Jeff is trending in the right direction \u2014 overdue is down to 4. Keep the momentum going.",
         "**Stephanie and Marc Felton:** 34 overdue (oldest: 40d) \u2014 review and reschedule tasks that have truly slipped. **26 upcoming unassigned** \u2014 assign before they start. 32 tasks starting this week \u2014 make sure subs and materials are confirmed.",
-        "**Martha Cockrell (CNG-20251199):** Clean \u2014 1 tasks in progress. 2 upcoming unassigned.",
+        "**Martha Cockrell (CNG-20251199):** Clean \u2014 1 tasks in progress. **5 upcoming unassigned** \u2014 assign before they start.",
         "**Recommendation:** Knock out the 4 overdue today \u2014 each one risks cascading into blocked tasks downstream."
       ],
       "Milagros Porturas": [
@@ -6353,25 +6353,25 @@
         "ov": 0,
         "ac": 1,
         "ab": 0,
-        "up": 2,
+        "up": 4,
         "bo_ov": 0,
         "bo_today": 0,
-        "bo_up": 0,
-        "co": 2,
-        "co_un": 2,
+        "bo_up": 1,
+        "co": 5,
+        "co_un": 5,
         "pay": 0
       },
       "g": {
-        "p": 4,
-        "v": 4,
-        "pc": 0
+        "p": 7,
+        "v": 7,
+        "pc": 1
       },
       "pm_tasks": {
         "overdue": [],
         "active": [
           {
             "n": "FRAMING: EXECUTE EXTERIOR SHEATHING (80%)",
-            "dt": "Jun 25-27",
+            "dt": "Jun 25-29",
             "w": "\u26a0\ufe0f Nobody"
           }
         ],
@@ -6384,24 +6384,48 @@
             "when": "in 2 days"
           },
           {
+            "n": "FRAMING: STAIRS",
+            "w": "\u26a0\ufe0f Nobody",
+            "unassigned": true,
+            "when": "in 2 days"
+          },
+          {
             "n": "FRAMING: CONTINUE DEMO AND REINFORCEMENT 1ST FLOOR",
             "w": "\u26a0\ufe0f Nobody",
             "unassigned": true,
             "when": "in 3 days"
+          },
+          {
+            "n": "DOORS AND WINDOWS: INSTALL",
+            "w": "\u26a0\ufe0f Nobody",
+            "unassigned": true,
+            "when": "Wed"
           }
         ]
       },
       "backoffice_tasks": {
         "overdue": [],
         "today": [],
-        "upcoming": []
+        "upcoming": [
+          {
+            "n": "DOORS AND WINDOWS: PURCHASE DOORS AND WINDOWS",
+            "w": "\u26a0\ufe0f Nobody",
+            "unassigned": true,
+            "due": "2026-06-29",
+            "tt": "2. Purchases",
+            "tt_short": "PUR",
+            "amount": 0,
+            "pay_type": "",
+            "when": "in 2 days"
+          }
+        ]
       },
       "tasks": {
         "overdue": [],
         "active": [
           {
             "n": "FRAMING: EXECUTE EXTERIOR SHEATHING (80%)",
-            "dt": "Jun 25-27",
+            "dt": "Jun 25-29",
             "w": "\u26a0\ufe0f Nobody"
           }
         ],
@@ -6414,9 +6438,30 @@
             "unassigned": true
           },
           {
+            "n": "FRAMING: STAIRS",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts in 2 days",
+            "unassigned": true
+          },
+          {
+            "n": "DOORS AND WINDOWS: PURCHASE DOORS AND WINDOWS",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts in 2 days",
+            "unassigned": true,
+            "is_payment": true,
+            "amount": 0,
+            "pay_type": ""
+          },
+          {
             "n": "FRAMING: CONTINUE DEMO AND REINFORCEMENT 1ST FLOOR",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts in 3 days",
+            "unassigned": true
+          },
+          {
+            "n": "DOORS AND WINDOWS: INSTALL",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Wed",
             "unassigned": true
           }
         ],
