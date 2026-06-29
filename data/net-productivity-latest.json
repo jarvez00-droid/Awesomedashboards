@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T11:31:55",
+  "generated_at": "2026-06-29T11:50:53",
   "today": "2026-06-29",
   "horizon": "2026-07-17",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -885,19 +885,23 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 11,
-    "orphan_cost": 21318.86,
+    "orphan_trades": 12,
+    "orphan_cost": 28205.28,
     "priced_trades": 51,
-    "total_trades": 62,
+    "total_trades": 63,
     "by_project": [
       {
         "project": "Stephanie Felton",
-        "orphan_trades": 6,
-        "orphan_cost": 16743.86,
+        "orphan_trades": 7,
+        "orphan_cost": 23630.28,
         "examples": [
           {
             "trade": "PLUMBING TRIM",
             "cost": 6120.36
+          },
+          {
+            "trade": "EXTERIOR FINISH (BRICK PAINT)",
+            "cost": 6886.42
           },
           {
             "trade": "PAINT",
@@ -914,10 +918,6 @@
           {
             "trade": "GLASS",
             "cost": 840.0
-          },
-          {
-            "trade": "CROWNMOLDING",
-            "cost": 1351.54
           }
         ]
       },
