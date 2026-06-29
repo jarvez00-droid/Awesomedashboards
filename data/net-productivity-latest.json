@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T18:37:22",
+  "generated_at": "2026-06-28T19:01:42",
   "today": "2026-06-28",
   "rule": "Ingreso = SOLO Action Task + Critical Path (NO pagos de cliente). Menos Subs+Materiales+Additional = Producido por trade, repartido entre los dias de EJECUCION del action task (la compra de material o el pago al sub en otra semana NO mueven la fecha). Sumado por semana por proyecto; menos fijos = Produccion Neta.",
   "params": {
@@ -22,17 +22,17 @@
     }
   },
   "totals": {
-    "produced": 60517.52,
-    "produced_ineff": -4769.44,
+    "produced": 59033.78,
+    "produced_ineff": -6188.74,
     "fixed": 93461.58,
-    "net": -32944.06,
-    "net_ineff": -98231.02,
+    "net": -34427.8,
+    "net_ineff": -99650.32,
     "weeks": 9,
-    "avg_weekly_net": -3660.45,
+    "avg_weekly_net": -3825.31,
     "weeks_positive": 6,
     "weeks_positive_ineff": 4,
     "weeks_negative": 3,
-    "avg_weekly_produced": 6724.17
+    "avg_weekly_produced": 6559.31
   },
   "timeline": [
     {
@@ -251,11 +251,11 @@
       "label": "20\u201326 jun",
       "label_moy": "jun S3",
       "label_short": "20 jun",
-      "produced": -17412.36,
-      "produced_ineff": -26572.11,
+      "produced": -17906.94,
+      "produced_ineff": -27045.21,
       "fixed": 10384.62,
-      "net": -27796.98,
-      "cumulative_net": 37796.99,
+      "net": -28291.56,
+      "cumulative_net": 37302.41,
       "active_count": 7,
       "active_projects": [
         "Clifford Clack",
@@ -272,7 +272,7 @@
         "Katie Holmes": 3278.25,
         "Clifford Clack": 2585.94,
         "Lingyan Qiu": 5250.89,
-        "Rohini Williams": -32501.38
+        "Rohini Williams": -32995.96
       }
     },
     {
@@ -282,11 +282,11 @@
       "label": "27 jun\u20133 jul",
       "label_moy": "jun S4",
       "label_short": "27 jun",
-      "produced": -60356.43,
-      "produced_ineff": -69635.71,
+      "produced": -61345.59,
+      "produced_ineff": -70581.91,
       "fixed": 10384.62,
-      "net": -70741.05,
-      "cumulative_net": -32944.06,
+      "net": -71730.21,
+      "cumulative_net": -34427.8,
       "active_count": 8,
       "active_projects": [
         "Clifford Clack",
@@ -304,7 +304,7 @@
         "Katie Holmes": 2185.5,
         "Clifford Clack": 134.83,
         "Lingyan Qiu": 2614.78,
-        "Rohini Williams": -65832.9
+        "Rohini Williams": -66822.06
       }
     }
   ],
@@ -471,11 +471,11 @@
     },
     {
       "project": "Rohini Williams",
-      "revenue": 25033.82,
-      "cost": 109757.89,
-      "produced": -84724.07,
-      "produced_ineff": -98203.24,
-      "margin_pct": -338.4,
+      "revenue": 23969.77,
+      "cost": 110177.58,
+      "produced": -86207.81,
+      "produced_ineff": -99622.54,
+      "margin_pct": -359.7,
       "weeks": {
         "2026-W19": 868.71,
         "2026-W20": 4628.25,
@@ -484,8 +484,8 @@
         "2026-W22": 484.25,
         "2026-W24": 484.25,
         "2026-W25": 484.25,
-        "2026-W26": -32501.38,
-        "2026-W27": -65832.9
+        "2026-W26": -32995.96,
+        "2026-W27": -66822.06
       },
       "weeks_ineff": {
         "2026-W19": 703.27,
@@ -495,8 +495,8 @@
         "2026-W22": 298.32,
         "2026-W24": 298.32,
         "2026-W25": 298.32,
-        "2026-W26": -36345.82,
-        "2026-W27": -73203.04
+        "2026-W26": -36818.92,
+        "2026-W27": -74149.24
       },
       "first_week": "2026-W19",
       "last_week": "2026-W27"
@@ -508,10 +508,10 @@
       "produced": 94274.71,
       "produced_ineff": 63156.51,
       "revenue": 202728.35,
-      "overhead": 53119.32,
-      "net": 41155.39,
-      "net_ineff": 10037.19,
-      "overhead_share_pct": 56.8,
+      "overhead": 53278.25,
+      "net": 40996.46,
+      "net_ineff": 9878.26,
+      "overhead_share_pct": 57.0,
       "projects": [
         "Clifford Clack",
         "Katie Holmes",
@@ -535,10 +535,10 @@
       "produced": 18469.91,
       "produced_ineff": 9013.32,
       "revenue": 56517.93,
-      "overhead": 14808.95,
-      "net": 3660.96,
-      "net_ineff": -5795.63,
-      "overhead_share_pct": 15.8,
+      "overhead": 14853.26,
+      "net": 3616.65,
+      "net_ineff": -5839.94,
+      "overhead_share_pct": 15.9,
       "projects": [
         "Stephanie Felton"
       ],
@@ -558,9 +558,9 @@
       "produced": 6120.89,
       "produced_ineff": 4104.91,
       "revenue": 13140.33,
-      "overhead": 3443.06,
-      "net": 2677.83,
-      "net_ineff": 661.85,
+      "overhead": 3453.36,
+      "net": 2667.53,
+      "net_ineff": 651.55,
       "overhead_share_pct": 3.7,
       "projects": [
         "Kyle Aubry"
@@ -576,18 +576,18 @@
     },
     {
       "pm": "Giselle Garcia",
-      "produced": -58347.98,
-      "produced_ineff": -81044.16,
-      "revenue": 84306.82,
-      "overhead": 22090.25,
-      "net": -80438.23,
-      "net_ineff": -103134.41,
-      "overhead_share_pct": 23.6,
+      "produced": -59831.72,
+      "produced_ineff": -82463.46,
+      "revenue": 83242.77,
+      "overhead": 21876.71,
+      "net": -81708.43,
+      "net_ineff": -104340.17,
+      "overhead_share_pct": 23.4,
       "projects": [
         "Brandy Sexton",
         "Rohini Williams"
       ],
-      "margin_pct": -69.2,
+      "margin_pct": -71.9,
       "weeks": {
         "2026-W19": 4591.11,
         "2026-W20": 9001.85,
@@ -596,8 +596,8 @@
         "2026-W22": 10436.85,
         "2026-W24": 484.25,
         "2026-W25": 484.25,
-        "2026-W26": -32501.38,
-        "2026-W27": -65832.9
+        "2026-W26": -32995.96,
+        "2026-W27": -66822.06
       }
     }
   ],
@@ -788,51 +788,51 @@
       "2026-W23"
     ],
     "overhead_equal": 7726.65,
-    "overhead_revwt": 5019.99,
+    "overhead_revwt": 5193.21,
     "net_equal": 17649.44,
-    "net_revwt": 20356.1,
+    "net_revwt": 20182.88,
     "net_equal_ineff": 8332.45,
-    "net_revwt_ineff": 11039.11,
+    "net_revwt_ineff": 10865.89,
     "allocation_detail": [
       {
         "week": "2026-W19",
         "week_label": "2\u20138 may",
         "active": 6,
         "equal": 1730.77,
-        "revwt": 1065.02,
-        "brandy_share_pct": 10.3
+        "revwt": 1103.96,
+        "brandy_share_pct": 10.6
       },
       {
         "week": "2026-W20",
         "week_label": "9\u201315 may",
         "active": 6,
         "equal": 1730.77,
-        "revwt": 1065.02,
-        "brandy_share_pct": 10.3
+        "revwt": 1103.96,
+        "brandy_share_pct": 10.6
       },
       {
         "week": "2026-W21",
         "week_label": "16\u201322 may",
         "active": 7,
         "equal": 1483.52,
-        "revwt": 986.26,
-        "brandy_share_pct": 9.5
+        "revwt": 1019.56,
+        "brandy_share_pct": 9.8
       },
       {
         "week": "2026-W22",
         "week_label": "23\u201329 may",
         "active": 7,
         "equal": 1483.52,
-        "revwt": 986.26,
-        "brandy_share_pct": 9.5
+        "revwt": 1019.56,
+        "brandy_share_pct": 9.8
       },
       {
         "week": "2026-W23",
         "week_label": "30 may\u20135 jun",
         "active": 8,
         "equal": 1298.08,
-        "revwt": 917.44,
-        "brandy_share_pct": 8.8
+        "revwt": 946.18,
+        "brandy_share_pct": 9.1
       }
     ],
     "trades": [
@@ -1013,7 +1013,7 @@
     "Clifford Clack": 50920.0,
     "Martha Cockrell": 46816.15,
     "Lingyan Qiu": 139193.0,
-    "Rohini Williams": 106831.0,
+    "Rohini Williams": 86447.0,
     "Brandy Sexton": 59273.0,
     "Karim Merchant": 0.0
   }
