@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T10:45:08",
+  "generated_at": "2026-06-29T11:31:55",
   "today": "2026-06-29",
   "horizon": "2026-07-17",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -54,8 +54,8 @@
       ],
       "periods": 7,
       "positive": [
-        3,
-        2
+        4,
+        3
       ]
     },
     "monthly": {
@@ -301,17 +301,17 @@
       "label_moy": "jun S4",
       "label_short": "27 jun",
       "prod": [
-        39249.6,
-        33167.42
+        31417.12,
+        25812.94
       ],
       "fixed": 11045.26,
       "net": [
-        28204.34,
-        22122.16
+        20371.86,
+        14767.68
       ],
       "cum": [
-        20932.55,
-        8469.41
+        13100.07,
+        1114.93
       ],
       "active_count": 8,
       "active_projects": [
@@ -340,8 +340,8 @@
           4817.9
         ],
         "Martha Cockrell": [
-          15334.08,
-          13577.3
+          7501.6,
+          6222.82
         ],
         "Lingyan Qiu": [
           6614.28,
@@ -361,17 +361,17 @@
       "label_moy": "jul S1",
       "label_short": "4 jul",
       "prod": [
-        34533.33,
-        27765.81
+        36491.45,
+        29604.43
       ],
       "fixed": 11045.26,
       "net": [
-        23488.07,
-        16720.55
+        25446.19,
+        18559.17
       ],
       "cum": [
-        44420.62,
-        25189.96
+        38546.26,
+        19674.1
       ],
       "active_count": 7,
       "active_projects": [
@@ -399,8 +399,8 @@
           1352.53
         ],
         "Martha Cockrell": [
-          17118.17,
-          12864.83
+          19076.29,
+          14703.45
         ],
         "Lingyan Qiu": [
           586.13,
@@ -420,13 +420,13 @@
       "label_moy": "jul S2",
       "label_short": "11 jul",
       "prod": [
-        9063.51,
-        7820.93
+        14937.87,
+        13336.79
       ],
       "fixed": 11045.26,
       "net": [
-        -1981.75,
-        -3224.33
+        3892.61,
+        2291.53
       ],
       "cum": [
         42438.87,
@@ -453,8 +453,8 @@
           1519.22
         ],
         "Martha Cockrell": [
-          4569.88,
-          4128.23
+          10444.24,
+          9644.09
         ],
         "Lingyan Qiu": [
           463.04,
@@ -575,17 +575,17 @@
       ],
       "margin_pct": 35.3,
       "weeks": {
-        "2026-W27": [
-          15334.08,
-          13577.3
-        ],
         "2026-W28": [
-          17118.17,
-          12864.83
+          19076.29,
+          14703.45
         ],
         "2026-W29": [
-          4569.88,
-          4128.23
+          10444.24,
+          9644.09
+        ],
+        "2026-W27": [
+          7501.6,
+          6222.82
         ],
         "2026-W25": [
           1205.48,
@@ -1046,8 +1046,8 @@
       "produced": 10580.47,
       "margin_pct": 68.9,
       "ratio": 3.2,
-      "start": "2026-07-01",
-      "end": "2026-07-03",
+      "start": "2026-07-10",
+      "end": "2026-07-13",
       "severity": "media"
     },
     {
