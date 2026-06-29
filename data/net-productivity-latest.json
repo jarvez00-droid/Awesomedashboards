@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T09:06:06",
+  "generated_at": "2026-06-29T09:31:05",
   "today": "2026-06-29",
   "horizon": "2026-07-17",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -39,8 +39,8 @@
   ],
   "totals": {
     "prod": [
-      123855.69,
-      103792.46
+      119755.69,
+      99282.46
     ],
     "prod_todate": [
       58124.62,
@@ -49,8 +49,8 @@
     "weekly": {
       "fixed": 77316.82,
       "net": [
-        46538.87,
-        26475.64
+        42438.87,
+        21965.64
       ],
       "periods": 7,
       "positive": [
@@ -61,8 +61,8 @@
     "monthly": {
       "fixed": 95725.6,
       "net": [
-        28130.09,
-        8066.86
+        24030.09,
+        3556.86
       ],
       "periods": 2,
       "positive": [
@@ -301,17 +301,17 @@
       "label_moy": "jun S4",
       "label_short": "27 jun",
       "prod": [
-        40160.72,
-        34169.64
+        39249.6,
+        33167.42
       ],
       "fixed": 11045.26,
       "net": [
-        29115.46,
-        23124.38
+        28204.34,
+        22122.16
       ],
       "cum": [
-        21843.67,
-        9471.63
+        20932.55,
+        8469.41
       ],
       "active_count": 8,
       "active_projects": [
@@ -340,8 +340,8 @@
           4817.9
         ],
         "Martha Cockrell": [
-          16245.19,
-          14579.53
+          15334.08,
+          13577.3
         ],
         "Lingyan Qiu": [
           6614.28,
@@ -361,17 +361,17 @@
       "label_moy": "jul S1",
       "label_short": "4 jul",
       "prod": [
-        37722.22,
-        31273.59
+        34533.33,
+        27765.81
       ],
       "fixed": 11045.26,
       "net": [
-        26676.96,
-        20228.33
+        23488.07,
+        16720.55
       ],
       "cum": [
-        48520.63,
-        29699.96
+        44420.62,
+        25189.96
       ],
       "active_count": 7,
       "active_projects": [
@@ -399,8 +399,8 @@
           1352.53
         ],
         "Martha Cockrell": [
-          20307.06,
-          16372.61
+          17118.17,
+          12864.83
         ],
         "Lingyan Qiu": [
           586.13,
@@ -429,8 +429,8 @@
         -3224.33
       ],
       "cum": [
-        46538.88,
-        26475.63
+        42438.87,
+        21965.63
       ],
       "active_count": 6,
       "active_projects": [
@@ -521,17 +521,17 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        65731.07,
-        54849.9
+        61631.07,
+        50339.9
       ],
       "fixed": 47862.8,
       "net": [
-        17868.27,
-        6987.1
+        13768.27,
+        2477.1
       ],
       "cum": [
-        28130.09,
-        8066.86
+        24030.09,
+        3556.86
       ],
       "is_future": true,
       "is_partial": false,
@@ -549,8 +549,8 @@
           4252.06
         ],
         "Martha Cockrell": [
-          34360.54,
-          29119.78
+          30260.54,
+          24609.78
         ],
         "Lingyan Qiu": [
           3323.76,
@@ -568,20 +568,20 @@
       "project": "Martha Cockrell",
       "revenue": 108275.26,
       "revenue_gross": 131866.12,
-      "cost": 65947.65,
+      "cost": 70047.65,
       "prod": [
-        42327.61,
-        35732.84
+        38227.61,
+        31222.84
       ],
-      "margin_pct": 39.1,
+      "margin_pct": 35.3,
       "weeks": {
         "2026-W27": [
-          16245.19,
-          14579.53
+          15334.08,
+          13577.3
         ],
         "2026-W28": [
-          20307.06,
-          16372.61
+          17118.17,
+          12864.83
         ],
         "2026-W29": [
           4569.88,
@@ -594,8 +594,8 @@
       },
       "months": {
         "2026-07": [
-          34360.54,
-          29119.78
+          30260.54,
+          24609.78
         ],
         "2026-06": [
           7967.07,
