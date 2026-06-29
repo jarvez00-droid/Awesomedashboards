@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T14:13:23",
+  "generated_at": "2026-06-29T14:29:47",
   "today": "2026-06-29",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -2555,14 +2555,14 @@
   ],
   "data_quality": {
     "orphan_trades": 36,
-    "orphan_cost": 265374.54,
+    "orphan_cost": 275374.54,
     "priced_trades": 175,
     "total_trades": 211,
     "by_project": [
       {
         "project": "Charles Harris",
         "orphan_trades": 16,
-        "orphan_cost": 214208.0,
+        "orphan_cost": 224208.0,
         "examples": [
           {
             "trade": "PROJECT CLEANING - FRAMING",
@@ -3417,6 +3417,14 @@
           "n_exp": 3
         },
         {
+          "trade": "SIDING",
+          "income": 0.0,
+          "expense": 35000.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 1
+        },
+        {
           "trade": "IN GROUND PLUMBING",
           "income": 20000.0,
           "expense": 11475.0,
@@ -3428,14 +3436,6 @@
           "trade": "CABINETS",
           "income": 0.0,
           "expense": 25440.0,
-          "grouped": true,
-          "n_inc": 0,
-          "n_exp": 1
-        },
-        {
-          "trade": "SIDING",
-          "income": 0.0,
-          "expense": 25000.0,
           "grouped": true,
           "n_inc": 0,
           "n_exp": 1
@@ -3570,7 +3570,7 @@
         }
       ],
       "total_income": 366715.7,
-      "total_expense": 423110.82,
+      "total_expense": 433110.82,
       "loose_amount": 0
     },
     {
