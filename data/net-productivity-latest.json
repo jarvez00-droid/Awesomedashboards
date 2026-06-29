@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-29T08:12:46",
+  "generated_at": "2026-06-29T08:41:38",
   "today": "2026-06-29",
-  "horizon": "2026-07-17",
+  "horizon": "2026-07-18",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
   "params": {
     "weekly_fixed": 11045.26,
@@ -39,20 +39,20 @@
   ],
   "totals": {
     "prod": [
-      102081.65,
-      86824.47
+      120055.44,
+      99862.21
     ],
     "prod_todate": [
-      57775.76,
-      49550.0
+      60559.81,
+      51222.26
     ],
     "weekly": {
-      "fixed": 77316.82,
+      "fixed": 88362.08,
       "net": [
-        24764.83,
-        9507.65
+        31693.36,
+        11500.13
       ],
-      "periods": 7,
+      "periods": 8,
       "positive": [
         3,
         2
@@ -61,13 +61,13 @@
     "monthly": {
       "fixed": 95725.6,
       "net": [
-        6356.05,
-        -8901.13
+        24329.84,
+        4136.61
       ],
       "periods": 2,
       "positive": [
-        1,
-        1
+        2,
+        2
       ]
     }
   },
@@ -187,17 +187,17 @@
       "label_moy": "jun S2",
       "label_short": "13 jun",
       "prod": [
-        9707.8,
-        7637.27
+        10913.28,
+        8289.75
       ],
       "fixed": 11045.26,
       "net": [
-        -1337.46,
-        -3407.99
+        -131.98,
+        -2755.51
       ],
       "cum": [
-        -6706.99,
-        -11031.71
+        -5501.51,
+        -10379.23
       ],
       "active_count": 7,
       "active_projects": [
@@ -224,6 +224,10 @@
           1220.0,
           960.0
         ],
+        "Martha Cockrell": [
+          1205.48,
+          652.48
+        ],
         "Lingyan Qiu": [
           3896.78,
           2784.96
@@ -238,17 +242,17 @@
       "label_moy": "jun S3",
       "label_short": "20 jun",
       "prod": [
-        8549.15,
-        7214.89
+        9274.98,
+        7771.74
       ],
       "fixed": 11045.26,
       "net": [
-        -2496.11,
-        -3830.37
+        -1770.28,
+        -3273.52
       ],
       "cum": [
-        -9203.1,
-        -14862.08
+        -7271.79,
+        -13652.75
       ],
       "active_count": 7,
       "active_projects": [
@@ -284,8 +288,8 @@
           1867.84
         ],
         "Rohini Williams": [
-          725.83,
-          556.86
+          1451.65,
+          1113.72
         ]
       }
     },
@@ -297,17 +301,17 @@
       "label_moy": "jun S4",
       "label_short": "27 jun",
       "prod": [
-        44196.4,
-        38852.03
+        42922.29,
+        36509.12
       ],
       "fixed": 11045.26,
       "net": [
-        33151.14,
-        27806.77
+        31877.03,
+        25463.86
       ],
       "cum": [
-        23948.04,
-        12944.69
+        24605.24,
+        11811.11
       ],
       "active_count": 8,
       "active_projects": [
@@ -336,16 +340,16 @@
           4817.9
         ],
         "Martha Cockrell": [
-          19555.05,
-          18705.05
+          19006.77,
+          16919.0
         ],
         "Lingyan Qiu": [
           6614.28,
           5287.27
         ],
         "Rohini Williams": [
-          5631.39,
-          4151.15
+          4905.56,
+          3594.3
         ]
       }
     },
@@ -357,17 +361,17 @@
       "label_moy": "jul S1",
       "label_short": "4 jul",
       "prod": [
-        18413.68,
-        14960.78
+        32337.14,
+        26885.01
       ],
       "fixed": 11045.26,
       "net": [
-        7368.42,
-        3915.52
+        21291.88,
+        15839.75
       ],
       "cum": [
-        31316.46,
-        16860.21
+        45897.12,
+        27650.86
       ],
       "active_count": 7,
       "active_projects": [
@@ -395,8 +399,8 @@
           1352.53
         ],
         "Martha Cockrell": [
-          998.52,
-          59.8
+          14921.98,
+          11984.03
         ],
         "Lingyan Qiu": [
           586.13,
@@ -416,17 +420,17 @@
       "label_moy": "jul S2",
       "label_short": "11 jul",
       "prod": [
-        4493.63,
-        3692.7
+        7965.67,
+        6222.17
       ],
       "fixed": 11045.26,
       "net": [
-        -6551.63,
-        -7352.56
+        -3079.59,
+        -4823.09
       ],
       "cum": [
-        24764.83,
-        9507.65
+        42817.53,
+        22827.77
       ],
       "active_count": 6,
       "active_projects": [
@@ -448,6 +452,10 @@
           1824.26,
           1519.22
         ],
+        "Martha Cockrell": [
+          3472.04,
+          2529.46
+        ],
         "Lingyan Qiu": [
           463.04,
           386.37
@@ -457,6 +465,39 @@
           556.86
         ]
       }
+    },
+    {
+      "week_iso": "2026-W30",
+      "week_start": "2026-07-18",
+      "week_end": "2026-07-24",
+      "label": "18\u201324 jul",
+      "label_moy": "jul S3",
+      "label_short": "18 jul",
+      "prod": [
+        -78.92,
+        -282.38
+      ],
+      "fixed": 11045.26,
+      "net": [
+        -11124.18,
+        -11327.64
+      ],
+      "cum": [
+        31693.35,
+        11500.13
+      ],
+      "active_count": 1,
+      "active_projects": [
+        "Martha Cockrell"
+      ],
+      "is_future": true,
+      "is_partial": false,
+      "by_project": {
+        "Martha Cockrell": [
+          -78.92,
+          -282.38
+        ]
+      }
     }
   ],
   "timeline_month": [
@@ -464,17 +505,17 @@
       "month": "2026-06",
       "label": "jun 2026",
       "prod": [
-        57775.76,
-        49550.0
+        60559.81,
+        51222.26
       ],
       "fixed": 47862.8,
       "net": [
-        9912.96,
-        1687.2
+        12697.01,
+        3359.46
       ],
       "cum": [
-        9912.96,
-        1687.2
+        12697.01,
+        3359.46
       ],
       "is_future": false,
       "is_partial": true,
@@ -496,16 +537,16 @@
           8983.8
         ],
         "Martha Cockrell": [
-          8344.03,
-          7777.36
+          10402.25,
+          8892.77
         ],
         "Lingyan Qiu": [
           14787.2,
           12846.87
         ],
         "Rohini Williams": [
-          5323.58,
-          4478.74
+          6049.41,
+          5035.6
         ]
       }
     },
@@ -513,17 +554,17 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        44305.89,
-        37274.47
+        59495.63,
+        48639.95
       ],
       "fixed": 47862.8,
       "net": [
-        -3556.91,
-        -10588.33
+        11632.83,
+        777.15
       ],
       "cum": [
-        6356.05,
-        -8901.13
+        24329.84,
+        4136.61
       ],
       "is_future": true,
       "is_partial": false,
@@ -541,16 +582,16 @@
           4252.06
         ],
         "Martha Cockrell": [
-          12209.54,
-          10987.49
+          28125.11,
+          22909.83
         ],
         "Lingyan Qiu": [
           3323.76,
           2020.75
         ],
         "Rohini Williams": [
-          13597.61,
-          11094.28
+          12871.78,
+          10537.42
         ]
       }
     }
@@ -558,36 +599,48 @@
   "by_project": [
     {
       "project": "Martha Cockrell",
-      "revenue": 38440.73,
-      "revenue_gross": 46816.15,
-      "cost": 17887.16,
+      "revenue": 105775.01,
+      "revenue_gross": 128821.12,
+      "cost": 67247.65,
       "prod": [
-        20553.57,
-        18764.85
+        38527.36,
+        31802.59
       ],
-      "margin_pct": 53.5,
+      "margin_pct": 36.4,
       "weeks": {
         "2026-W27": [
-          19555.05,
-          18705.05
+          19006.77,
+          16919.0
         ],
         "2026-W28": [
-          998.52,
-          59.8
+          14921.98,
+          11984.03
+        ],
+        "2026-W29": [
+          3472.04,
+          2529.46
+        ],
+        "2026-W25": [
+          1205.48,
+          652.48
+        ],
+        "2026-W30": [
+          -78.92,
+          -282.38
         ]
       },
       "months": {
-        "2026-06": [
-          8344.03,
-          7777.36
-        ],
         "2026-07": [
-          12209.54,
-          10987.49
+          28125.11,
+          22909.83
+        ],
+        "2026-06": [
+          10402.25,
+          8892.77
         ]
       },
-      "first_week": "2026-W27",
-      "last_week": "2026-W28"
+      "first_week": "2026-W25",
+      "last_week": "2026-W30"
     },
     {
       "project": "Rohini Williams",
@@ -605,12 +658,12 @@
           1694.45
         ],
         "2026-W26": [
-          725.83,
-          556.86
+          1451.65,
+          1113.72
         ],
         "2026-W27": [
-          5631.39,
-          4151.15
+          4905.56,
+          3594.3
         ],
         "2026-W29": [
           725.83,
@@ -623,12 +676,12 @@
       },
       "months": {
         "2026-06": [
-          5323.58,
-          4478.74
+          6049.41,
+          5035.6
         ],
         "2026-07": [
-          13597.61,
-          11094.28
+          12871.78,
+          10537.42
         ]
       },
       "first_week": "2026-W23",
@@ -869,34 +922,11 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 15,
-    "orphan_cost": 53818.86,
-    "priced_trades": 45,
-    "total_trades": 60,
+    "orphan_trades": 11,
+    "orphan_cost": 21318.86,
+    "priced_trades": 50,
+    "total_trades": 61,
     "by_project": [
-      {
-        "project": "Martha Cockrell",
-        "orphan_trades": 4,
-        "orphan_cost": 32500.0,
-        "examples": [
-          {
-            "trade": "FRAMING",
-            "cost": 14500.0
-          },
-          {
-            "trade": "ELECTRICAL ROUGH IN",
-            "cost": 6000.0
-          },
-          {
-            "trade": "MECHANICAL ROUGH IN",
-            "cost": 8000.0
-          },
-          {
-            "trade": "PLUMBING ROUGH IN",
-            "cost": 4000.0
-          }
-        ]
-      },
       {
         "project": "Stephanie Felton",
         "orphan_trades": 6,
@@ -986,18 +1016,6 @@
       "severity": "alta"
     },
     {
-      "project": "Martha Cockrell",
-      "trade": "EXTERNAL DOORS AND WINDOWS",
-      "revenue": 14197.65,
-      "cost": 0,
-      "produced": 14197.65,
-      "margin_pct": 100.0,
-      "ratio": null,
-      "start": "2026-07-01",
-      "end": "2026-07-01",
-      "severity": "alta"
-    },
-    {
       "project": "Rohini Williams",
       "trade": "IN GROUND ELECTRICAL",
       "revenue": 2140.0,
@@ -1011,14 +1029,14 @@
     },
     {
       "project": "Martha Cockrell",
-      "trade": "ELECTRICAL ROUGH IN",
-      "revenue": 12250.0,
-      "cost": 2000.0,
-      "produced": 10250.0,
-      "margin_pct": 83.7,
-      "ratio": 6.1,
-      "start": "2026-06-29",
-      "end": "2026-06-30",
+      "trade": "PLUMBING ROUGH IN",
+      "revenue": 7980.0,
+      "cost": 1500.0,
+      "produced": 6480.0,
+      "margin_pct": 81.2,
+      "ratio": 5.3,
+      "start": "2026-07-02",
+      "end": "2026-07-07",
       "severity": "alta"
     },
     {
@@ -1034,6 +1052,30 @@
       "severity": "alta"
     },
     {
+      "project": "Martha Cockrell",
+      "trade": "ELECTRICAL ROUGH IN",
+      "revenue": 13510.0,
+      "cost": 3010.0,
+      "produced": 10500.0,
+      "margin_pct": 77.7,
+      "ratio": 4.5,
+      "start": "2026-06-29",
+      "end": "2026-06-30",
+      "severity": "alta"
+    },
+    {
+      "project": "Martha Cockrell",
+      "trade": "ELECTRICAL ROUGH IN",
+      "revenue": 28217.0,
+      "cost": 7700.0,
+      "produced": 20517.0,
+      "margin_pct": 72.7,
+      "ratio": 3.7,
+      "start": "2026-07-07",
+      "end": "2026-07-11",
+      "severity": "media"
+    },
+    {
       "project": "Clifford Clack",
       "trade": "CEILING MOULDING",
       "revenue": 2700.0,
@@ -1043,6 +1085,18 @@
       "ratio": 3.4,
       "start": "2026-06-30",
       "end": "2026-06-30",
+      "severity": "media"
+    },
+    {
+      "project": "Martha Cockrell",
+      "trade": "PLUMBING ROUGH IN",
+      "revenue": 15360.47,
+      "cost": 4780.0,
+      "produced": 10580.47,
+      "margin_pct": 68.9,
+      "ratio": 3.2,
+      "start": "2026-07-01",
+      "end": "2026-07-03",
       "severity": "media"
     },
     {
@@ -1077,8 +1131,8 @@
       "produced": 8909.0,
       "margin_pct": 64.1,
       "ratio": 2.8,
-      "start": "2026-07-06",
-      "end": "2026-07-10",
+      "start": "2026-07-05",
+      "end": "2026-07-09",
       "severity": "media"
     },
     {
@@ -1101,8 +1155,8 @@
       "produced": 6035.0,
       "margin_pct": 60.1,
       "ratio": 2.5,
-      "start": "2026-07-06",
-      "end": "2026-07-10",
+      "start": "2026-07-05",
+      "end": "2026-07-09",
       "severity": "media"
     }
   ],
