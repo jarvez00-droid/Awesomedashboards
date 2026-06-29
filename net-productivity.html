@@ -64,12 +64,7 @@ small.t{color:var(--mut)}
 </div>
 <div class="rule" id="rule"></div>
 
-<div class="controls" style="margin:14px 0 2px">
-  <button class="tg on" id="m-real">Real</button>
-  <button class="tg" id="m-ineff">Ineficiencia</button>
-  <button class="tg" id="m-overhead">Overhead $15,500/sem</button>
-  <button class="tg" id="m-both">Ineficiencia + Overhead</button>
-</div>
+<div class="controls" id="scenBtns" style="margin:14px 0 2px"></div>
 <div class="sub" id="modeNote" style="margin:2px 0 0"></div>
 
 <div class="kpis" id="kpis"></div>
@@ -92,32 +87,18 @@ small.t{color:var(--mut)}
   <div class="tablewrap" style="margin-top:14px"><table id="projTable"></table></div>
 </div>
 
-<h2>👷 Por PM · ¿cada PM cubre su parte del overhead?</h2>
-<div class="card">
-  <div class="sub" style="margin-bottom:8px">Overhead asignado a cada PM según su participación en el ingreso reconocido. Neta = producido − overhead.</div>
-  <canvas id="pmChart" height="105"></canvas>
-  <div class="tablewrap" style="margin-top:14px"><table id="pmTable"></table></div>
-</div>
-
 <h2>🔎 Calidad de datos · producción invisible</h2>
 <div class="card" id="dqCard"></div>
 
 <h2>🚩 Flags · margen demasiado alto vs costo</h2>
 <div class="card" id="flagsCard"></div>
 
-<h2>🧪 Caso Brandy · nuevo formato (prueba)</h2>
+<h2>🏠 Caso Brandy · proyecto archivado (producción bruta)</h2>
 <div class="card brandy">
   <div id="brandyHead"></div>
-  <div class="grid2" style="margin-top:12px">
-    <div>
-      <div class="sub" style="margin-bottom:6px">Producción de Brandy por semana</div>
-      <canvas id="brandyChart" height="150"></canvas>
-    </div>
-    <div>
-      <div class="sub" style="margin-bottom:6px">Resultado neto = Producido − Overhead prorrateado</div>
-      <table class="mtx" id="brandyMatrix"></table>
-      <div class="sub" id="brandyAlloc" style="margin-top:10px"></div>
-    </div>
+  <div style="margin-top:12px">
+    <div class="sub" style="margin-bottom:6px">Producción bruta de Brandy por semana (escenario seleccionado)</div>
+    <canvas id="brandyChart" height="110"></canvas>
   </div>
   <div class="tablewrap" style="margin-top:14px"><table id="brandyTrades"></table></div>
 </div>
@@ -126,10 +107,10 @@ small.t{color:var(--mut)}
 </div>
 
 <script>
-const EMBEDDED = {"generated_at": "2026-06-29T06:46:01", "today": "2026-06-29", "rule": "Ingreso = SOLO Action Task + Critical Path (NO pagos de cliente). Menos Subs+Materiales+Additional = Producido por trade, repartido entre los dias de EJECUCION del action task (la compra de material o el pago al sub en otra semana NO mueven la fecha). Sumado por semana por proyecto; menos fijos = Produccion Neta.", "params": {"weekly_fixed": 10384.62, "monthly_fixed": 45000.0, "window_start": "2026-05-02", "cost_inefficiency": 0.1, "revenue_reduction": 0.1, "high_margin_flag": 0.6, "overhead_sim_weekly": 15500.0, "excluded": ["CANDACE - JUSTIN P REFERRAL", "Ginger Brown"], "special_included": ["Brandy Sexton"], "project_starts": {"Kyle Aubry": "2026-06-01"}}, "totals": {"produced": 171122.42, "produced_ineff": 113689.4, "fixed": 93461.58, "net": 77660.84, "net_ineff": 20227.82, "weeks": 9, "avg_weekly_net": 8628.98, "weeks_positive": 8, "weeks_positive_ineff": 6, "weeks_negative": 1, "avg_weekly_produced": 19013.6}, "timeline": [{"week_iso": "2026-W19", "week_start": "2026-05-02", "week_end": "2026-05-08", "label": "2–8 may", "label_moy": "may S1", "label_short": "2 may", "produced": 12384.79, "produced_ineff": 7986.14, "fixed": 10384.62, "net": 2000.17, "cumulative_net": 2000.17, "active_count": 6, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Clifford Clack": 5943.5, "Lingyan Qiu": 1850.18, "Rohini Williams": 868.71, "Brandy Sexton": 3722.4}}, {"week_iso": "2026-W20", "week_start": "2026-05-09", "week_end": "2026-05-15", "label": "9–15 may", "label_moy": "may S2", "label_short": "9 may", "produced": 18522.75, "produced_ineff": 13410.39, "fixed": 10384.62, "net": 8138.13, "cumulative_net": 10138.3, "active_count": 6, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Katie Holmes": 7274.14, "Clifford Clack": 657.5, "Lingyan Qiu": 1589.26, "Rohini Williams": 4628.25, "Brandy Sexton": 4373.6}}, {"week_iso": "2026-W21", "week_start": "2026-05-16", "week_end": "2026-05-22", "label": "16–22 may", "label_moy": "may S3", "label_short": "16 may", "produced": 46366.2, "produced_ineff": 33406.6, "fixed": 10384.62, "net": 35981.58, "cumulative_net": 46119.88, "active_count": 7, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Stephanie Felton": -358.83, "Katie Holmes": 17747.86, "Clifford Clack": 1070.0, "Lingyan Qiu": 17464.91, "Rohini Williams": 4036.25, "Brandy Sexton": 6406.01}}, {"week_iso": "2026-W22", "week_start": "2026-05-23", "week_end": "2026-05-29", "label": "23–29 may", "label_moy": "may S4", "label_short": "23 may", "produced": 14706.58, "produced_ineff": 7279.4, "fixed": 10384.62, "net": 4321.96, "cumulative_net": 50441.84, "active_count": 7, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Stephanie Felton": -257.07, "Lingyan Qiu": 4526.8, "Rohini Williams": 484.25, "Brandy Sexton": 9952.6}}, {"week_iso": "2026-W23", "week_start": "2026-05-30", "week_end": "2026-06-05", "label": "30 may–5 jun", "label_moy": "may S5", "label_short": "30 may", "produced": 10359.48, "produced_ineff": 6763.14, "fixed": 10384.62, "net": -25.14, "cumulative_net": 50416.7, "active_count": 8, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Martha Cockrell", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": 403.5, "Stephanie Felton": 3038.38, "Clifford Clack": 1240.35, "Lingyan Qiu": 1131.52, "Rohini Williams": 2624.25, "Brandy Sexton": 1921.48}}, {"week_iso": "2026-W24", "week_start": "2026-06-06", "week_end": "2026-06-12", "label": "6–12 jun", "label_moy": "jun S1", "label_short": "6 jun", "produced": 16366.93, "produced_ineff": 10570.73, "fixed": 10384.62, "net": 5982.31, "cumulative_net": 56399.01, "active_count": 7, "active_projects": ["Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Martha Cockrell", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": 3152.25, "Stephanie Felton": 6383.88, "Clifford Clack": 3859.66, "Lingyan Qiu": 2486.89, "Rohini Williams": 484.25}}, {"week_iso": "2026-W25", "week_start": "2026-06-13", "week_end": "2026-06-19", "label": "13–19 jun", "label_moy": "jun S2", "label_short": "13 jun", "produced": 19512.16, "produced_ineff": 11983.41, "fixed": 10384.62, "net": 9127.54, "cumulative_net": 65526.55, "active_count": 7, "active_projects": ["Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Martha Cockrell", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": 1442.14, "Stephanie Felton": 6271.25, "Clifford Clack": 1664.16, "Lingyan Qiu": 9650.36, "Rohini Williams": 484.25}}, {"week_iso": "2026-W26", "week_start": "2026-06-20", "week_end": "2026-06-26", "label": "20–26 jun", "label_moy": "jun S3", "label_short": "20 jun", "produced": 16190.18, "produced_ineff": 10476.28, "fixed": 10384.62, "net": 5805.56, "cumulative_net": 71332.11, "active_count": 7, "active_projects": ["Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Martha Cockrell", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": 873.44, "Stephanie Felton": 3100.5, "Katie Holmes": 3278.25, "Clifford Clack": 2558.18, "Lingyan Qiu": 5250.89, "Rohini Williams": 1128.92}}, {"week_iso": "2026-W27", "week_start": "2026-06-27", "week_end": "2026-07-03", "label": "27 jun–3 jul", "label_moy": "jun S4", "label_short": "27 jun", "produced": 16713.35, "produced_ineff": 11813.31, "fixed": 10384.62, "net": 6328.73, "cumulative_net": 77660.84, "active_count": 8, "active_projects": ["Clifford Clack", "Karim Merchant", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Martha Cockrell", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": 878.33, "Stephanie Felton": 437.69, "Katie Holmes": 3278.25, "Clifford Clack": 190.35, "Martha Cockrell": 5865.0, "Lingyan Qiu": 3922.17, "Rohini Williams": 2141.56}}], "by_project": [{"project": "Lingyan Qiu", "revenue": 109581.86, "cost": 61708.87, "produced": 47872.99, "produced_ineff": 30743.91, "margin_pct": 43.7, "weeks": {"2026-W19": 1850.18, "2026-W20": 1589.26, "2026-W21": 17464.91, "2026-W24": 2486.89, "2026-W25": 9650.36, "2026-W26": 5250.89, "2026-W27": 3922.17, "2026-W23": 1131.52, "2026-W22": 4526.8}, "weeks_ineff": {"2026-W19": 152.28, "2026-W20": 12.29, "2026-W21": 12042.14, "2026-W24": 2006.61, "2026-W25": 6026.97, "2026-W26": 3992.36, "2026-W27": 2895.54, "2026-W23": 961.77, "2026-W22": 2653.96}, "first_week": "2026-W19", "last_week": "2026-W27"}, {"project": "Katie Holmes", "revenue": 59388.5, "cost": 27810.0, "produced": 31578.5, "produced_ineff": 22858.65, "margin_pct": 53.2, "weeks": {"2026-W20": 7274.14, "2026-W21": 17747.86, "2026-W26": 3278.25, "2026-W27": 3278.25}, "weeks_ineff": {"2026-W20": 5465.87, "2026-W21": 13631.93, "2026-W26": 1880.42, "2026-W27": 1880.42}, "first_week": "2026-W20", "last_week": "2026-W27"}, {"project": "Brandy Sexton", "revenue": 59273.0, "cost": 32896.91, "produced": 26376.09, "produced_ineff": 17159.1, "margin_pct": 44.5, "weeks": {"2026-W19": 3722.4, "2026-W20": 4373.6, "2026-W21": 6406.01, "2026-W22": 9952.6, "2026-W23": 1921.48}, "weeks_ineff": {"2026-W19": 2541.44, "2026-W20": 3472.56, "2026-W21": 4259.6, "2026-W22": 5879.33, "2026-W23": 1006.16}, "first_week": "2026-W19", "last_week": "2026-W23"}, {"project": "Stephanie Felton", "revenue": 57002.4, "cost": 38386.59, "produced": 18615.8, "produced_ineff": 9076.9, "margin_pct": 32.7, "weeks": {"2026-W23": 3038.38, "2026-W24": 6383.88, "2026-W25": 6271.25, "2026-W21": -358.83, "2026-W22": -257.07, "2026-W26": 3100.5, "2026-W27": 437.69}, "weeks_ineff": {"2026-W23": 1561.39, "2026-W24": 3728.84, "2026-W25": 3767.1, "2026-W21": -495.19, "2026-W22": -1552.21, "2026-W26": 1876.18, "2026-W27": 190.79}, "first_week": "2026-W21", "last_week": "2026-W27"}, {"project": "Clifford Clack", "revenue": 38894.09, "cost": 21710.39, "produced": 17183.7, "produced_ineff": 11123.25, "margin_pct": 44.2, "weeks": {"2026-W26": 2558.18, "2026-W23": 1240.35, "2026-W19": 5943.5, "2026-W20": 657.5, "2026-W25": 1664.16, "2026-W24": 3859.66, "2026-W27": 190.35, "2026-W21": 1070.0}, "weeks_ineff": {"2026-W26": 1382.21, "2026-W23": 903.85, "2026-W19": 4589.15, "2026-W20": 431.75, "2026-W25": 831.99, "2026-W24": 2402.44, "2026-W27": 108.85, "2026-W21": 473.0}, "first_week": "2026-W19", "last_week": "2026-W27"}, {"project": "Rohini Williams", "revenue": 25582.21, "cost": 8701.52, "produced": 16880.69, "produced_ineff": 13452.32, "margin_pct": 66.0, "weeks": {"2026-W19": 868.71, "2026-W20": 4628.25, "2026-W21": 4036.25, "2026-W23": 2624.25, "2026-W22": 484.25, "2026-W24": 484.25, "2026-W25": 484.25, "2026-W26": 1128.92, "2026-W27": 2141.56}, "weeks_ineff": {"2026-W19": 703.27, "2026-W20": 4027.92, "2026-W21": 3495.12, "2026-W23": 2224.32, "2026-W22": 298.32, "2026-W24": 298.32, "2026-W25": 298.32, "2026-W26": 718.45, "2026-W27": 1388.24}, "first_week": "2026-W19", "last_week": "2026-W27"}, {"project": "Kyle Aubry", "revenue": 14639.0, "cost": 7889.33, "produced": 6749.67, "produced_ineff": 4496.83, "margin_pct": 46.1, "weeks": {"2026-W24": 3152.25, "2026-W23": 403.5, "2026-W25": 1442.14, "2026-W26": 873.44, "2026-W27": 878.33}, "weeks_ineff": {"2026-W24": 2134.52, "2026-W23": 105.65, "2026-W25": 1059.03, "2026-W26": 626.66, "2026-W27": 570.97}, "first_week": "2026-W23", "last_week": "2026-W27"}, {"project": "Martha Cockrell", "revenue": 8365.0, "cost": 2500.0, "produced": 5865.0, "produced_ineff": 4778.5, "margin_pct": 70.1, "weeks": {"2026-W27": 5865.0}, "weeks_ineff": {"2026-W27": 4778.5}, "first_week": "2026-W27", "last_week": "2026-W27"}], "by_pm": [{"pm": "Angel Pacheco", "produced": 96635.19, "produced_ineff": 64725.82, "revenue": 207864.45, "overhead": 52122.3, "net": 44512.89, "net_ineff": 12603.52, "overhead_share_pct": 55.8, "projects": ["Clifford Clack", "Katie Holmes", "Lingyan Qiu"], "margin_pct": 46.5, "weeks": {"2026-W20": 9520.9, "2026-W21": 36282.77, "2026-W26": 11087.32, "2026-W27": 7390.77, "2026-W23": 2371.87, "2026-W19": 7793.68, "2026-W25": 11314.52, "2026-W24": 6346.55, "2026-W22": 4526.8}}, {"pm": "Giselle Garcia", "produced": 43256.78, "produced_ineff": 30611.41, "revenue": 84855.21, "overhead": 21277.56, "net": 21979.22, "net_ineff": 9333.85, "overhead_share_pct": 22.8, "projects": ["Brandy Sexton", "Rohini Williams"], "margin_pct": 51.0, "weeks": {"2026-W19": 4591.11, "2026-W20": 9001.85, "2026-W21": 10442.26, "2026-W23": 4545.73, "2026-W22": 10436.85, "2026-W24": 484.25, "2026-W25": 484.25, "2026-W26": 1128.92, "2026-W27": 2141.56}}, {"pm": "Jeff", "produced": 24480.8, "produced_ineff": 13855.41, "revenue": 65367.4, "overhead": 16390.97, "net": 8089.83, "net_ineff": -2535.56, "overhead_share_pct": 17.5, "projects": ["Martha Cockrell", "Stephanie Felton"], "margin_pct": 37.5, "weeks": {"2026-W23": 3038.38, "2026-W24": 6383.88, "2026-W25": 6271.25, "2026-W21": -358.83, "2026-W22": -257.07, "2026-W26": 3100.5, "2026-W27": 6302.69}}, {"pm": "Milagros Porturas", "produced": 6749.67, "produced_ineff": 4496.83, "revenue": 14639.0, "overhead": 3670.75, "net": 3078.92, "net_ineff": 826.08, "overhead_share_pct": 3.9, "projects": ["Kyle Aubry"], "margin_pct": 46.1, "weeks": {"2026-W24": 3152.25, "2026-W23": 403.5, "2026-W25": 1442.14, "2026-W26": 873.44, "2026-W27": 878.33}}], "data_quality": {"orphan_trades": 6, "orphan_cost": 18185.79, "priced_trades": 57, "total_trades": 63, "by_project": [{"project": "Martha Cockrell", "orphan_trades": 1, "orphan_cost": 14500.0, "examples": [{"trade": "FRAMING", "cost": 14500.0}]}, {"project": "Stephanie Felton", "orphan_trades": 3, "orphan_cost": 2685.79, "examples": [{"trade": "PAINT", "cost": 960.92}, {"trade": "GLASS", "cost": 373.33}, {"trade": "CROWNMOLDING", "cost": 1351.54}]}, {"project": "Brandy Sexton", "orphan_trades": 2, "orphan_cost": 1000.0, "examples": [{"trade": "SHEETROCK", "cost": 850.0}, {"trade": "FINAL PUNCH LIST", "cost": 150.0}]}], "note": "Trades con costo pero SIN ingreso en su Action Task NO se cuentan como produccion (seria perdida falsa) — se listan aqui para cargar el valor en el Action Task. El producido es un PISO."}, "flags": [{"project": "Rohini Williams", "trade": "IN GROUND PLUMBING", "revenue": 8288.0, "cost": 0, "produced": 8288.0, "margin_pct": 100.0, "ratio": null, "start": "2026-05-08", "end": "2026-05-21", "severity": "alta"}, {"project": "Rohini Williams", "trade": "IN GROUND ELECTRICAL", "revenue": 2140.0, "cost": 0, "produced": 2140.0, "margin_pct": 100.0, "ratio": null, "start": "2026-06-02", "end": "2026-06-02", "severity": "alta"}, {"project": "Martha Cockrell", "trade": "ELECTRICAL ROUGH IN", "revenue": 12250.0, "cost": 2000.0, "produced": 10250.0, "margin_pct": 83.7, "ratio": 6.1, "start": "2026-06-29", "end": "2026-06-30", "severity": "alta"}, {"project": "Lingyan Qiu", "trade": "KITCHEN: DRYWALL", "revenue": 8770.0, "cost": 1754.56, "produced": 7015.44, "margin_pct": 80.0, "ratio": 5.0, "start": "2026-06-01", "end": "2026-07-01", "severity": "alta"}, {"project": "Stephanie Felton", "trade": "COUNTERTOPS", "revenue": 8640.0, "cost": 2850.0, "produced": 5790.0, "margin_pct": 67.0, "ratio": 3.0, "start": "2026-06-08", "end": "2026-06-17", "severity": "media"}, {"project": "Clifford Clack", "trade": "ELECTRICAL TRIM", "revenue": 2623.0, "cost": 871.98, "produced": 1751.02, "margin_pct": 66.8, "ratio": 3.0, "start": "2026-06-25", "end": "2026-06-26", "severity": "media"}, {"project": "Stephanie Felton", "trade": "ROOFING", "revenue": 15431.0, "cost": 5300.0, "produced": 10131.0, "margin_pct": 65.7, "ratio": 2.9, "start": "2026-05-28", "end": "2026-07-09", "severity": "media"}, {"project": "Brandy Sexton", "trade": "CABINETS", "revenue": 23900.0, "cost": 8280.0, "produced": 15620.0, "margin_pct": 65.4, "ratio": 2.9, "start": "2026-05-06", "end": "2026-05-30", "severity": "media"}, {"project": "Katie Holmes", "trade": "MECHANICAL ROUGH IN", "revenue": 12549.0, "cost": 4500.0, "produced": 8049.0, "margin_pct": 64.1, "ratio": 2.8, "start": "2026-05-19", "end": "2026-05-20", "severity": "media"}, {"project": "Clifford Clack", "trade": "EXTERIOR SHEATHING", "revenue": 8286.0, "cost": 3000.0, "produced": 5286.0, "margin_pct": 63.8, "ratio": 2.8, "start": "2026-05-04", "end": "2026-05-05", "severity": "media"}], "brandy": {"project": "Brandy Sexton", "contract": 59273.0, "revenue": 59273.0, "cost": 33896.91, "produced": 25376.09, "produced_ineff": 16059.1, "margin_pct": 42.8, "by_week": {"2026-W19": 3722.4, "2026-W20": 4125.68, "2026-W21": 6158.09, "2026-W22": 9704.69, "2026-W23": 1665.22}, "active_weeks": ["2026-W19", "2026-W20", "2026-W21", "2026-W22", "2026-W23"], "overhead_equal": 7726.65, "overhead_revwt": 5052.0, "net_equal": 17649.44, "net_revwt": 20324.09, "net_equal_ineff": 8332.45, "net_revwt_ineff": 11007.1, "allocation_detail": [{"week": "2026-W19", "week_label": "2–8 may", "active": 6, "equal": 1730.77, "revwt": 1080.42, "brandy_share_pct": 10.4}, {"week": "2026-W20", "week_label": "9–15 may", "active": 6, "equal": 1730.77, "revwt": 1080.42, "brandy_share_pct": 10.4}, {"week": "2026-W21", "week_label": "16–22 may", "active": 7, "equal": 1483.52, "revwt": 986.68, "brandy_share_pct": 9.5}, {"week": "2026-W22", "week_label": "23–29 may", "active": 7, "equal": 1483.52, "revwt": 986.68, "brandy_share_pct": 9.5}, {"week": "2026-W23", "week_label": "30 may–5 jun", "active": 8, "equal": 1298.08, "revwt": 917.8, "brandy_share_pct": 8.8}], "trades": [{"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "CABINETS", "revenue": 23900.0, "cost": 8280.0, "produced": 15620.0, "rev_source": "action", "date": "2026-05-30", "start": "2026-05-06", "end": "2026-05-30"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "COUNTERTOPS", "revenue": 16200.0, "cost": 11491.7, "produced": 4708.3, "rev_source": "action", "date": "2026-05-27", "start": "2026-05-22", "end": "2026-05-27"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "CABINET PAINTING", "revenue": 5980.0, "cost": 3393.0, "produced": 2587.0, "rev_source": "action", "date": "2026-06-03", "start": "2026-05-19", "end": "2026-06-03"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "PLUMBING ROUGH IN", "revenue": 1875.0, "cost": 900.0, "produced": 975.0, "rev_source": "action", "date": "2026-05-05", "start": "2026-05-05", "end": "2026-05-05"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "INTERIOR DOORS", "revenue": 2068.0, "cost": 1204.71, "produced": 863.29, "rev_source": "action", "date": "2026-05-19", "start": "2026-05-19", "end": "2026-05-19"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "ELECTRICAL TRIM", "revenue": 1549.0, "cost": 994.0, "produced": 555.0, "rev_source": "action", "date": "2026-06-01", "start": "2026-05-26", "end": "2026-06-01"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "ELECTRICAL ROUGH IN", "revenue": 1033.0, "cost": 600.0, "produced": 433.0, "rev_source": "action", "date": "2026-05-07", "start": "2026-05-06", "end": "2026-05-07"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "PLUMBING TRIM", "revenue": 1875.0, "cost": 1631.15, "produced": 243.85, "rev_source": "action", "date": "2026-06-02", "start": "2026-05-25", "end": "2026-06-02"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "FRAMING", "revenue": 1135.0, "cost": 900.0, "produced": 235.0, "rev_source": "action", "date": "2026-05-05", "start": "2026-05-04", "end": "2026-05-05"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "INTERIOR PAINT", "revenue": 1823.0, "cost": 1610.0, "produced": 213.0, "rev_source": "action", "date": "2026-06-02", "start": "2026-05-28", "end": "2026-06-02"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "DEMO INTERIOR", "revenue": 855.0, "cost": 650.0, "produced": 205.0, "rev_source": "action", "date": "2026-05-02", "start": "2026-05-02", "end": "2026-05-02"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "FINAL PUNCH LIST", "revenue": 0.0, "cost": 150.0, "produced": -150.0, "rev_source": "none", "date": "2026-06-03", "start": "2026-06-02", "end": "2026-06-03"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "WINDOWS", "revenue": 980.0, "cost": 1242.35, "produced": -262.35, "rev_source": "action", "date": "2026-05-16", "start": "2026-05-16", "end": "2026-05-16"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "SHEETROCK", "revenue": 0.0, "cost": 850.0, "produced": -850.0, "rev_source": "none", "date": "2026-06-01", "start": "2026-05-09", "end": "2026-06-01"}]}, "project_contracts": {"Kyle Aubry": 54123.8, "Stephanie Felton": 100485.0, "Katie Holmes": 133954.5, "Clifford Clack": 50920.0, "Martha Cockrell": 46816.15, "Lingyan Qiu": 139193.0, "Rohini Williams": 85887.0, "Brandy Sexton": 59273.0, "Karim Merchant": 0.0}};
+const EMBEDDED = {"generated_at": "2026-06-29T07:41:16", "today": "2026-06-29", "rule": "Ingreso = (Action Task + Critical Path) × (1 − %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) × (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido ÷ suma de duraciones × días en la semana). 3 escenarios de contingencia: 0% / 10% / 20%. Sumado por proyecto y por semana; menos el fijo prorrateado (overhead del cashflow) = Neta.", "params": {"weekly_fixed": 8984.31, "monthly_fixed": 38932.0, "overhead_source": "cashflow/finanzas v2", "window_start": "2026-05-02", "high_margin_flag": 0.6, "excluded": ["CANDACE - JUSTIN P REFERRAL", "Ginger Brown"], "project_discounts": {"Katie Holmes": 4.11, "Rohini Williams": 20.82, "Stephanie Felton": 10.0, "Lingyan Qiu": 12.08, "Martha Cockrell": 17.89, "Karim Merchant": 9.17}, "project_starts": {"Kyle Aubry": "2026-06-01"}}, "scenarios": [{"i": 0, "contingency": 0.0, "label": "Sin contingencia"}, {"i": 1, "contingency": 0.1, "label": "+10% costo"}, {"i": 2, "contingency": 0.2, "label": "+20% costo"}], "totals": {"prod": [137952.51, 118032.34, 98112.17], "fixed": 80858.79, "net": [57093.72, 37173.55, 17253.38], "weeks": 9, "weeks_positive": [8, 7, 4], "avg_weekly_net": [6343.75, 4130.39, 1917.04]}, "timeline": [{"week_iso": "2026-W19", "week_start": "2026-05-02", "week_end": "2026-05-08", "label": "2–8 may", "label_moy": "may S1", "label_short": "2 may", "prod": [10494.55, 8999.26, 7503.97], "fixed": 8984.31, "net": [1510.24, 14.95, -1480.34], "cum": [1510.24, 14.95, -1480.34], "active_count": 6, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Clifford Clack": [5943.5, 5563.5, 5183.5], "Lingyan Qiu": [712.9, -43.54, -799.99], "Rohini Williams": [1389.38, 1367.38, 1345.38], "Brandy Sexton": [2448.77, 2111.92, 1775.08]}}, {"week_iso": "2026-W20", "week_start": "2026-05-09", "week_end": "2026-05-15", "label": "9–15 may", "label_moy": "may S2", "label_short": "9 may", "prod": [15348.41, 13678.5, 12008.59], "fixed": 8984.31, "net": [6364.1, 4694.19, 3024.28], "cum": [7874.34, 4709.14, 1543.94], "active_count": 6, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Katie Holmes": [6753.06, 6212.63, 5672.2], "Clifford Clack": [657.5, 577.5, 497.5], "Lingyan Qiu": [540.78, -168.24, -877.26], "Rohini Williams": [1389.38, 1367.38, 1345.38], "Brandy Sexton": [6007.69, 5689.23, 5370.77]}}, {"week_iso": "2026-W21", "week_start": "2026-05-16", "week_end": "2026-05-22", "label": "16–22 may", "label_moy": "may S3", "label_short": "16 may", "prod": [41166.41, 36597.12, 32027.83], "fixed": 8984.31, "net": [32182.1, 27612.81, 23043.52], "cum": [40056.44, 32321.95, 24587.46], "active_count": 7, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Stephanie Felton": [-1073.8, -1299.87, -1525.94], "Katie Holmes": [16537.32, 15366.75, 14196.18], "Clifford Clack": [1070.0, 825.0, 580.0], "Lingyan Qiu": [13134.67, 11296.53, 9458.39], "Rohini Williams": [4475.72, 4321.72, 4167.72], "Brandy Sexton": [7022.51, 6087.0, 5151.49]}}, {"week_iso": "2026-W22", "week_start": "2026-05-23", "week_end": "2026-05-29", "label": "23–29 may", "label_moy": "may S4", "label_short": "23 may", "prod": [13394.19, 10042.79, 6691.39], "fixed": 8984.31, "net": [4409.88, 1058.48, -2292.92], "cum": [44466.32, 33380.43, 22294.54], "active_count": 7, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Rohini Williams", "Stephanie Felton"], "by_project": {"Stephanie Felton": [964.76, -250.0, -1464.76], "Lingyan Qiu": [3122.18, 2412.1, 1702.02], "Rohini Williams": [307.57, 219.57, 131.57], "Brandy Sexton": [8999.68, 7661.11, 6322.55]}}, {"week_iso": "2026-W23", "week_start": "2026-05-30", "week_end": "2026-06-05", "label": "30 may–5 jun", "label_moy": "may S5", "label_short": "30 may", "prod": [8187.05, 6919.67, 5652.29], "fixed": 8984.31, "net": [-797.26, -2064.64, -3332.02], "cum": [43669.06, 31315.79, 18962.52], "active_count": 8, "active_projects": ["Brandy Sexton", "Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Martha Cockrell", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": [403.5, 274.75, 146.0], "Stephanie Felton": [516.14, 61.44, -393.26], "Clifford Clack": [1589.34, 1425.84, 1262.35], "Lingyan Qiu": [1701.72, 1651.59, 1601.46], "Rohini Williams": [2078.92, 1968.92, 1858.92], "Brandy Sexton": [1897.44, 1537.14, 1176.83]}}, {"week_iso": "2026-W24", "week_start": "2026-06-06", "week_end": "2026-06-12", "label": "6–12 jun", "label_moy": "jun S1", "label_short": "6 jun", "prod": [11698.7, 9864.31, 8029.93], "fixed": 8984.31, "net": [2714.39, 880.0, -954.38], "cum": [46383.45, 32195.79, 18008.14], "active_count": 7, "active_projects": ["Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Martha Cockrell", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": [3152.25, 2801.0, 2449.75], "Stephanie Felton": [1862.85, 1279.16, 695.47], "Clifford Clack": [3415.5, 2952.75, 2490.0], "Lingyan Qiu": [2806.74, 2502.04, 2197.35], "Rohini Williams": [461.36, 329.36, 197.36]}}, {"week_iso": "2026-W25", "week_start": "2026-06-13", "week_end": "2026-06-19", "label": "13–19 jun", "label_moy": "jun S2", "label_short": "13 jun", "prod": [9707.8, 7637.27, 5566.74], "fixed": 8984.31, "net": [723.49, -1347.04, -3417.57], "cum": [47106.94, 30848.75, 14590.57], "active_count": 7, "active_projects": ["Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Martha Cockrell", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": [1117.72, 1027.88, 938.05], "Stephanie Felton": [3473.3, 2864.42, 2255.55], "Clifford Clack": [1220.0, 960.0, 700.0], "Lingyan Qiu": [3896.78, 2784.96, 1673.14]}}, {"week_iso": "2026-W26", "week_start": "2026-06-20", "week_end": "2026-06-26", "label": "20–26 jun", "label_moy": "jun S3", "label_short": "20 jun", "prod": [12799.73, 11031.02, 9262.3], "fixed": 8984.31, "net": [3815.42, 2046.71, 277.99], "cum": [50922.36, 32895.46, 14868.56], "active_count": 7, "active_projects": ["Clifford Clack", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Martha Cockrell", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": [1048.13, 952.47, 856.8], "Stephanie Felton": [4530.58, 4016.13, 3501.68], "Katie Holmes": [2338.9, 1910.9, 1482.9], "Clifford Clack": [2114.02, 1726.82, 1339.62], "Lingyan Qiu": [2042.27, 1867.84, 1693.4], "Rohini Williams": [725.83, 556.86, 387.89]}}, {"week_iso": "2026-W27", "week_start": "2026-06-27", "week_end": "2026-07-03", "label": "27 jun–3 jul", "label_moy": "jun S4", "label_short": "27 jun", "prod": [15155.67, 13262.4, 11369.13], "fixed": 8984.31, "net": [6171.36, 4278.09, 2384.82], "cum": [57093.72, 37173.55, 17253.38], "active_count": 8, "active_projects": ["Clifford Clack", "Karim Merchant", "Katie Holmes", "Kyle Aubry", "Lingyan Qiu", "Martha Cockrell", "Rohini Williams", "Stephanie Felton"], "by_project": {"Kyle Aubry": [953.2, 836.6, 720.0], "Stephanie Felton": [-268.45, -324.97, -381.48], "Katie Holmes": [3508.36, 2866.36, 2224.36], "Martha Cockrell": [4368.5, 4118.5, 3868.5], "Lingyan Qiu": [4339.69, 4040.45, 3741.2], "Rohini Williams": [2254.37, 1725.47, 1196.56]}}], "by_project": [{"project": "Lingyan Qiu", "revenue": 91837.83, "revenue_gross": 104456.14, "cost": 59540.1, "prod": [32297.73, 26343.72, 20389.71], "margin_pct": 35.2, "weeks": {"2026-W19": [712.9, -43.54, -799.99], "2026-W20": [540.78, -168.24, -877.26], "2026-W21": [13134.67, 11296.53, 9458.39], "2026-W24": [2806.74, 2502.04, 2197.35], "2026-W25": [3896.78, 2784.96, 1673.14], "2026-W23": [1701.72, 1651.59, 1601.46], "2026-W26": [2042.27, 1867.84, 1693.4], "2026-W27": [4339.69, 4040.45, 3741.2], "2026-W22": [3122.18, 2412.1, 1702.02]}, "first_week": "2026-W19", "last_week": "2026-W27"}, {"project": "Katie Holmes", "revenue": 56947.64, "revenue_gross": 59388.5, "cost": 27810.0, "prod": [29137.64, 26356.64, 23575.64], "margin_pct": 51.2, "weeks": {"2026-W20": [6753.06, 6212.63, 5672.2], "2026-W21": [16537.32, 15366.75, 14196.18], "2026-W26": [2338.9, 1910.9, 1482.9], "2026-W27": [3508.36, 2866.36, 2224.36]}, "first_week": "2026-W20", "last_week": "2026-W27"}, {"project": "Brandy Sexton", "revenue": 59273.0, "revenue_gross": 59273.0, "cost": 32896.91, "prod": [26376.09, 23086.4, 19796.71], "margin_pct": 44.5, "weeks": {"2026-W19": [2448.77, 2111.92, 1775.08], "2026-W20": [6007.69, 5689.23, 5370.77], "2026-W21": [7022.51, 6087.0, 5151.49], "2026-W22": [8999.68, 7661.11, 6322.55], "2026-W23": [1897.44, 1537.14, 1176.83]}, "first_week": "2026-W19", "last_week": "2026-W23"}, {"project": "Clifford Clack", "revenue": 35794.25, "revenue_gross": 35794.25, "cost": 19784.4, "prod": [16009.85, 14031.42, 12052.98], "margin_pct": 44.7, "weeks": {"2026-W26": [2114.02, 1726.82, 1339.62], "2026-W23": [1589.34, 1425.84, 1262.35], "2026-W19": [5943.5, 5563.5, 5183.5], "2026-W20": [657.5, 577.5, 497.5], "2026-W25": [1220.0, 960.0, 700.0], "2026-W24": [3415.5, 2952.75, 2490.0], "2026-W21": [1070.0, 825.0, 580.0]}, "first_week": "2026-W19", "last_week": "2026-W26"}, {"project": "Rohini Williams", "revenue": 25341.29, "revenue_gross": 32004.67, "cost": 12258.76, "prod": [13082.53, 11856.65, 10630.77], "margin_pct": 51.6, "weeks": {"2026-W19": [1389.38, 1367.38, 1345.38], "2026-W20": [1389.38, 1367.38, 1345.38], "2026-W21": [4475.72, 4321.72, 4167.72], "2026-W23": [2078.92, 1968.92, 1858.92], "2026-W22": [307.57, 219.57, 131.57], "2026-W24": [461.36, 329.36, 197.36], "2026-W27": [2254.37, 1725.47, 1196.56], "2026-W26": [725.83, 556.86, 387.89]}, "first_week": "2026-W19", "last_week": "2026-W27"}, {"project": "Stephanie Felton", "revenue": 46595.96, "revenue_gross": 51773.29, "cost": 36590.58, "prod": [10005.38, 6346.32, 2687.26], "margin_pct": 21.5, "weeks": {"2026-W23": [516.14, 61.44, -393.26], "2026-W24": [1862.85, 1279.16, 695.47], "2026-W25": [3473.3, 2864.42, 2255.55], "2026-W21": [-1073.8, -1299.87, -1525.94], "2026-W22": [964.76, -250.0, -1464.76], "2026-W27": [-268.45, -324.97, -381.48], "2026-W26": [4530.58, 4016.13, 3501.68]}, "first_week": "2026-W21", "last_week": "2026-W27"}, {"project": "Kyle Aubry", "revenue": 14495.8, "revenue_gross": 14495.8, "cost": 7821.0, "prod": [6674.8, 5892.7, 5110.6], "margin_pct": 46.0, "weeks": {"2026-W24": [3152.25, 2801.0, 2449.75], "2026-W23": [403.5, 274.75, 146.0], "2026-W25": [1117.72, 1027.88, 938.05], "2026-W26": [1048.13, 952.47, 856.8], "2026-W27": [953.2, 836.6, 720.0]}, "first_week": "2026-W23", "last_week": "2026-W27"}, {"project": "Martha Cockrell", "revenue": 6868.5, "revenue_gross": 8365.0, "cost": 2500.0, "prod": [4368.5, 4118.5, 3868.5], "margin_pct": 63.6, "weeks": {"2026-W27": [4368.5, 4118.5, 3868.5]}, "first_week": "2026-W27", "last_week": "2026-W27"}], "data_quality": {"orphan_trades": 6, "orphan_cost": 18185.79, "priced_trades": 57, "total_trades": 63, "by_project": [{"project": "Martha Cockrell", "orphan_trades": 1, "orphan_cost": 14500.0, "examples": [{"trade": "FRAMING", "cost": 14500.0}]}, {"project": "Stephanie Felton", "orphan_trades": 3, "orphan_cost": 2685.79, "examples": [{"trade": "PAINT", "cost": 960.92}, {"trade": "GLASS", "cost": 373.33}, {"trade": "CROWNMOLDING", "cost": 1351.54}]}, {"project": "Brandy Sexton", "orphan_trades": 2, "orphan_cost": 1000.0, "examples": [{"trade": "SHEETROCK", "cost": 850.0}, {"trade": "FINAL PUNCH LIST", "cost": 150.0}]}], "note": "Trades con costo pero SIN ingreso en su Action Task NO se cuentan como produccion (seria perdida falsa) — se listan aqui para cargar el valor en el Action Task. El producido es un PISO."}, "flags": [{"project": "Rohini Williams", "trade": "IN GROUND PLUMBING", "revenue": 8288.0, "cost": 0, "produced": 8288.0, "margin_pct": 100.0, "ratio": null, "start": "2026-05-08", "end": "2026-05-21", "severity": "alta"}, {"project": "Rohini Williams", "trade": "IN GROUND ELECTRICAL", "revenue": 2140.0, "cost": 0, "produced": 2140.0, "margin_pct": 100.0, "ratio": null, "start": "2026-06-02", "end": "2026-06-02", "severity": "alta"}, {"project": "Martha Cockrell", "trade": "ELECTRICAL ROUGH IN", "revenue": 12250.0, "cost": 2000.0, "produced": 10250.0, "margin_pct": 83.7, "ratio": 6.1, "start": "2026-06-29", "end": "2026-06-30", "severity": "alta"}, {"project": "Lingyan Qiu", "trade": "KITCHEN: DRYWALL", "revenue": 8770.0, "cost": 1754.56, "produced": 7015.44, "margin_pct": 80.0, "ratio": 5.0, "start": "2026-06-01", "end": "2026-07-01", "severity": "alta"}, {"project": "Stephanie Felton", "trade": "COUNTERTOPS", "revenue": 8640.0, "cost": 2850.0, "produced": 5790.0, "margin_pct": 67.0, "ratio": 3.0, "start": "2026-06-08", "end": "2026-06-17", "severity": "media"}, {"project": "Clifford Clack", "trade": "ELECTRICAL TRIM", "revenue": 2623.0, "cost": 871.98, "produced": 1751.02, "margin_pct": 66.8, "ratio": 3.0, "start": "2026-06-25", "end": "2026-06-26", "severity": "media"}, {"project": "Stephanie Felton", "trade": "ROOFING", "revenue": 15431.0, "cost": 5300.0, "produced": 10131.0, "margin_pct": 65.7, "ratio": 2.9, "start": "2026-05-28", "end": "2026-07-09", "severity": "media"}, {"project": "Brandy Sexton", "trade": "CABINETS", "revenue": 23900.0, "cost": 8280.0, "produced": 15620.0, "margin_pct": 65.4, "ratio": 2.9, "start": "2026-05-06", "end": "2026-05-30", "severity": "media"}, {"project": "Katie Holmes", "trade": "MECHANICAL ROUGH IN", "revenue": 12549.0, "cost": 4500.0, "produced": 8049.0, "margin_pct": 64.1, "ratio": 2.8, "start": "2026-05-19", "end": "2026-05-20", "severity": "media"}, {"project": "Clifford Clack", "trade": "EXTERIOR SHEATHING", "revenue": 8286.0, "cost": 3000.0, "produced": 5286.0, "margin_pct": 63.8, "ratio": 2.8, "start": "2026-05-04", "end": "2026-05-05", "severity": "media"}], "brandy": {"project": "Brandy Sexton", "revenue": 59273.0, "cost": 32896.91, "orphan_cost": 1000.0, "prod": [26376.09, 23086.4, 19796.71], "margin_pct": 44.5, "by_week": {"2026-W19": [2448.77, 2111.92, 1775.08], "2026-W20": [6007.69, 5689.23, 5370.77], "2026-W21": [7022.51, 6087.0, 5151.49], "2026-W22": [8999.68, 7661.11, 6322.55], "2026-W23": [1897.44, 1537.14, 1176.83]}, "trades": [{"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "CABINETS", "revenue": 23900.0, "revenue_gross": 23900.0, "discount_pct": 0.0, "cost": 8280.0, "rev_source": "action", "rev_ranges": [["2026-05-06", "2026-05-06"], ["2026-05-09", "2026-05-13"], ["2026-05-11", "2026-05-30"]], "start": "2026-05-06", "end": "2026-05-30"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "COUNTERTOPS", "revenue": 16200.0, "revenue_gross": 16200.0, "discount_pct": 0.0, "cost": 11491.7, "rev_source": "action", "rev_ranges": [["2026-05-22", "2026-05-22"], ["2026-05-26", "2026-05-27"]], "start": "2026-05-22", "end": "2026-05-27"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "CABINET PAINTING", "revenue": 5980.0, "revenue_gross": 5980.0, "discount_pct": 0.0, "cost": 3393.0, "rev_source": "action", "rev_ranges": [["2026-05-19", "2026-06-03"]], "start": "2026-05-19", "end": "2026-06-03"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "PLUMBING ROUGH IN", "revenue": 1875.0, "revenue_gross": 1875.0, "discount_pct": 0.0, "cost": 900.0, "rev_source": "action", "rev_ranges": [["2026-05-05", "2026-05-05"]], "start": "2026-05-05", "end": "2026-05-05"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "INTERIOR DOORS", "revenue": 2068.0, "revenue_gross": 2068.0, "discount_pct": 0.0, "cost": 1204.71, "rev_source": "action", "rev_ranges": [["2026-05-19", "2026-05-19"]], "start": "2026-05-19", "end": "2026-05-19"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "ELECTRICAL TRIM", "revenue": 1549.0, "revenue_gross": 1549.0, "discount_pct": 0.0, "cost": 994.0, "rev_source": "action", "rev_ranges": [["2026-05-26", "2026-06-01"]], "start": "2026-05-26", "end": "2026-06-01"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "ELECTRICAL ROUGH IN", "revenue": 1033.0, "revenue_gross": 1033.0, "discount_pct": 0.0, "cost": 600.0, "rev_source": "action", "rev_ranges": [["2026-05-06", "2026-05-07"]], "start": "2026-05-06", "end": "2026-05-07"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "PLUMBING TRIM", "revenue": 1875.0, "revenue_gross": 1875.0, "discount_pct": 0.0, "cost": 1631.15, "rev_source": "action", "rev_ranges": [["2026-05-25", "2026-06-02"]], "start": "2026-05-25", "end": "2026-06-02"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "FRAMING", "revenue": 1135.0, "revenue_gross": 1135.0, "discount_pct": 0.0, "cost": 900.0, "rev_source": "action", "rev_ranges": [["2026-05-04", "2026-05-05"]], "start": "2026-05-04", "end": "2026-05-05"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "INTERIOR PAINT", "revenue": 1823.0, "revenue_gross": 1823.0, "discount_pct": 0.0, "cost": 1610.0, "rev_source": "action", "rev_ranges": [["2026-05-28", "2026-06-02"]], "start": "2026-05-28", "end": "2026-06-02"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "DEMO INTERIOR", "revenue": 855.0, "revenue_gross": 855.0, "discount_pct": 0.0, "cost": 650.0, "rev_source": "action", "rev_ranges": [["2026-05-02", "2026-05-02"]], "start": "2026-05-02", "end": "2026-05-02"}, {"project_id": "22PLKSsB4aeV", "project": "Brandy Sexton", "trade": "WINDOWS", "revenue": 980.0, "revenue_gross": 980.0, "discount_pct": 0.0, "cost": 1242.35, "rev_source": "action", "rev_ranges": [["2026-05-16", "2026-05-16"]], "start": "2026-05-16", "end": "2026-05-16"}]}};
 const PW = 'Awesome';   // mismo gate de gerencia que el dashboard principal (sessionStorage compartido)
 let DATA = EMBEDDED;
-let MODE = 'real';      // escenario: 'real' | 'ineff' (+20% costo) | 'overhead' ($15,500/sem fijo)
+let SC = 0;             // escenario de contingencia de costo: 0 (0%) | 1 (+10%) | 2 (+20%)
 function tryPw(){
   if(document.getElementById('pw').value===PW){ sessionStorage.setItem('mgmt_auth','1'); load(); }
   else { document.getElementById('pwerr').style.visibility='visible'; }
@@ -149,58 +130,54 @@ function renderAll(){
 const fmt = n => (n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('en-US');
 const fmtk = n => (n<0?'-':'')+'$'+(Math.abs(n)/1000).toFixed(1)+'k';
 const T = DATA.totals, TL = DATA.timeline, BP = DATA.by_project, B = DATA.brandy;
+const SCN = DATA.scenarios||[{i:0,contingency:0,label:'Sin contingencia'}];
+if(SC>=SCN.length) SC=0;
+const ctg = SCN[SC].contingency||0;
+const at = a => Array.isArray(a) ? (a[SC]||0) : (a||0);   // toma el valor del escenario activo
 const cssv = k => getComputedStyle(document.documentElement).getPropertyValue(k).trim();
 const GRN=cssv('--grn'), RED=cssv('--red'), BLU=cssv('--blu'), MUT=cssv('--mut'), AMB=cssv('--amb');
 Chart.defaults.color = cssv('--mut'); Chart.defaults.borderColor = cssv('--line'); Chart.defaults.font.size=11;
-
-// ---- ESCENARIO: real | ineff (−10%/+10%) | overhead ($15,500/sem) | both ----
-const usePI = (MODE==='ineff' || MODE==='both');
-const useOVH = (MODE==='overhead' || MODE==='both');
-const inePct = Math.round((DATA.params.cost_inefficiency||0.10)*100);
-const revPct = Math.round((DATA.params.revenue_reduction||0.10)*100);
-const ineLbl = `−${revPct}% ing +${inePct}% costo`;
-const OVHW = DATA.params.overhead_sim_weekly||15500;
 Object.values(Chart.instances||{}).forEach(c=>{try{c.destroy()}catch(e){}});   // limpiar charts para re-render
-let _cum=0;
-const TLX = TL.map(t=>{const pr=usePI?t.produced_ineff:t.produced; const fx=useOVH?OVHW:t.fixed; const net=Math.round(pr-fx); _cum+=net; return Object.assign({},t,{pr:pr,xfix:fx,xnet:net,xcum:_cum});});
-const totProduced = usePI?T.produced_ineff:T.produced;
-const totFixed = useOVH ? OVHW*T.weeks : T.fixed;
-const totNet = Math.round(totProduced - totFixed);
-const weeksPos = TLX.filter(t=>t.xnet>0).length;
-const ohScale = T.fixed ? totFixed/T.fixed : 1;      // escala el overhead por-PM
-const PWK = usePI?'weeks_ineff':'weeks';
-const PPV = o => usePI?o.produced_ineff:o.produced;
-[['m-real','real'],['m-ineff','ineff'],['m-overhead','overhead'],['m-both','both']].forEach(([id,m])=>{
-  const el=document.getElementById(id); if(!el)return; el.className='tg'+(MODE===m?' on':''); el.onclick=()=>{MODE=m;renderAll();};
-});
-{const e=document.getElementById('m-both'); if(e) e.textContent=`Ineficiencia + Overhead ${fmt(OVHW)}/sem`;}
-{const e=document.getElementById('m-ineff'); if(e) e.textContent=`Ineficiencia (${ineLbl})`;}
-{const e=document.getElementById('m-overhead'); if(e) e.textContent=`Overhead ${fmt(OVHW)}/sem`;}
-{const _n=[]; if(usePI)_n.push(`ineficiencia ${ineLbl}`); if(useOVH)_n.push(`fijo ${fmt(OVHW)}/sem (vs real ${fmt(DATA.params.weekly_fixed)}/sem)`);
- document.getElementById('modeNote').textContent = _n.length ? ('Simulando: '+_n.join('  +  ')) : '';}
 
+// ---- ESCENARIO activo (índice SC en los arrays prod/net/cum) ----
+const TLX = TL.map(t=>Object.assign({},t,{pr:at(t.prod), fix:t.fixed, net:at(t.net), cum:at(t.cum)}));
+const totProduced = at(T.prod), totFixed = T.fixed, totNet = at(T.net);
+const weeksPos = Array.isArray(T.weeks_positive)?T.weeks_positive[SC]:TLX.filter(t=>t.net>0).length;
+const PPV = o => at(o.prod);
+const wkOf = (p,w)=>{const a=(p.weeks||{})[w]; return Array.isArray(a)?(a[SC]||0):(a||0);};
+
+// botones de escenario
+document.getElementById('scenBtns').innerHTML = SCN.map(s=>
+  `<button class="tg${s.i===SC?' on':''}" data-sc="${s.i}">${s.label}</button>`).join('');
+document.querySelectorAll('#scenBtns button').forEach(b=>b.onclick=()=>{SC=+b.dataset.sc;renderAll();});
+document.getElementById('modeNote').textContent = ctg===0
+  ? 'Sin contingencia: costos tal cual entrados. El descuento por proyecto siempre se aplica al ingreso.'
+  : `Contingencia: +${Math.round(ctg*100)}% sobre TODOS los costos (subs + materiales + adiciones). El descuento por proyecto siempre se aplica al ingreso.`;
+
+// header
 document.getElementById('sub').textContent =
-  `${DATA.params.window_start} → ${DATA.today}  ·  ${T.weeks} semanas  ·  fijo ${fmt(DATA.params.monthly_fixed)}/mes (${fmt(DATA.params.weekly_fixed)}/sem)  ·  generado ${DATA.generated_at.replace('T',' ')}`;
+  `${DATA.params.window_start} → ${DATA.today}  ·  ${T.weeks} semanas  ·  overhead ${fmt(DATA.params.monthly_fixed)}/mes (${fmt(DATA.params.weekly_fixed)}/sem · ${DATA.params.overhead_source})  ·  generado ${DATA.generated_at.replace('T',' ')}`;
+const disc = DATA.params.project_discounts||{};
+const discTxt = Object.keys(disc).length ? Object.entries(disc).map(([p,v])=>`${p.split(' (')[0]} ${v}%`).join(' · ') : 'ninguno';
 document.getElementById('rule').innerHTML = '<b>Regla:</b> ' + DATA.rule +
+  `<br><b>Descuentos por proyecto:</b> ${discTxt}.` +
   ` &nbsp;·&nbsp; <b>Excluidos:</b> ${DATA.params.excluded.join(', ')}.` +
   ((DATA.params.project_starts && Object.keys(DATA.params.project_starts).length)
     ? ` &nbsp;<b>Inicio especial:</b> ${Object.entries(DATA.params.project_starts).map(([p,dt])=>`${p.split(' (')[0]} desde ${dt}`).join(', ')}.` : '');
 const vb = document.getElementById('verdict');
-vb.innerHTML = (totNet>0 ? `<span class="badge grn">PRODUCES ${fmt(totNet)} netos</span>`
-                       : `<span class="badge red">POR DEBAJO DEL BREAKEVEN · ${fmt(totNet)}</span>`)
-                       + (usePI?` <span class="badge red">${ineLbl}</span>`:'')
-                       + (useOVH?` <span class="badge amb">fijo ${fmt(OVHW)}/sem</span>`:'');
+vb.innerHTML = (totNet>0 ? `<span class="badge grn">PRODUCE ${fmt(totNet)} netos</span>`
+                       : `<span class="badge red">BAJO BREAKEVEN · ${fmt(totNet)}</span>`)
+                       + ` <span class="badge amb">${SCN[SC].label}</span>`;
 
 // KPIs
 const blendMargin = (()=>{let r=BP.reduce((a,p)=>a+p.revenue,0),pr=BP.reduce((a,p)=>a+PPV(p),0);return r?Math.round(100*pr/r):0;})();
-const ohNote = useOVH ? `${fmt(OVHW)}/sem × ${T.weeks} (simulado)` : `${fmt(DATA.params.monthly_fixed)}/mes → ${fmt(DATA.params.weekly_fixed)}/sem × ${T.weeks}`;
 const kpiDefs = [
-  ['Producido (margen)', fmt(totProduced), `~${fmt(totProduced/(T.weeks||1))}/sem`, 'pos'],
-  ['Overhead prorrateado', fmt(totFixed), ohNote, ''],
+  ['Producido (bruto)', fmt(totProduced), `~${fmt(totProduced/(T.weeks||1))}/sem`, 'pos'],
+  ['Overhead prorrateado', fmt(totFixed), `${fmt(DATA.params.monthly_fixed)}/mes → ${fmt(DATA.params.weekly_fixed)}/sem × ${T.weeks}`, ''],
   ['Producción NETA', fmt(totNet), `~${fmt(totNet/(T.weeks||1))}/sem`, totNet>0?'pos':'neg'],
   ['Semanas sobre breakeven', `${weeksPos}/${T.weeks}`, `${T.weeks-weeksPos} por debajo`, weeksPos>(T.weeks-weeksPos)?'pos':'amb'],
-  ['Margen bruto', blendMargin+'%', usePI?`con ${ineLbl}`:'ingreso reconocido', 'pos'],
-  ['Cobertura overhead', Math.round(100*totProduced/totFixed)+'%', 'del fijo cubierto', totProduced>=totFixed?'pos':'amb'],
+  ['Margen bruto', blendMargin+'%', 'ingreso descontado vs costo', 'pos'],
+  ['Cobertura overhead', (totFixed?Math.round(100*totProduced/totFixed):0)+'%', 'del fijo cubierto', totProduced>=totFixed?'pos':'amb'],
 ];
 document.getElementById('kpis').innerHTML = kpiDefs.map(([l,v,n,c])=>
   `<div class="kpi"><div class="lab">${l}</div><div class="val ${c}">${v}</div><div class="note">${n}</div></div>`).join('');
@@ -215,13 +192,13 @@ function drawMain(mode){
   if(mode==='sem'){
     mainChart = new Chart(ctx,{type:'bar',data:{labels,datasets:[
       {label:'Producido', data:TLX.map(t=>t.pr),
-        backgroundColor:TLX.map(t=>t.xnet>0?GRN:RED), borderRadius:4, order:2},
-      {label:'Overhead', type:'line', data:TLX.map(t=>t.xfix), borderColor:AMB,
+        backgroundColor:TLX.map(t=>t.net>0?GRN:RED), borderRadius:4, order:2},
+      {label:'Overhead', type:'line', data:TLX.map(t=>t.fix), borderColor:AMB,
         borderDash:[6,4], pointRadius:0, borderWidth:2, order:1},
     ]},options:optBase()});
   } else {
     mainChart = new Chart(ctx,{type:'line',data:{labels,datasets:[
-      {label:'Neta acumulada', data:TLX.map(t=>t.xcum), borderColor:BLU,
+      {label:'Neta acumulada', data:TLX.map(t=>t.cum), borderColor:BLU,
         backgroundColor:'rgba(56,139,253,.12)', fill:true, tension:.25, pointRadius:3,
         segment:{borderColor:c=>c.p1.parsed.y<0?RED:GRN}},
     ]},options:optBase()});
@@ -231,7 +208,7 @@ function optBase(){return {responsive:true,plugins:{legend:{display:true,positio
   title:{display:false},tooltip:{callbacks:{
     title:(it)=>`${it[0].label}  (${ranges[it[0].dataIndex]})`,
     label:(c)=>`${c.dataset.label}: ${fmt(c.parsed.y)}`,
-    afterbody:(it)=>{const t=TLX[it[0].dataIndex];return `Neta: ${fmt(t.xnet)}\nAcum: ${fmt(t.xcum)}\nProyectos: ${t.active_count}`;}}}},
+    afterbody:(it)=>{const t=TLX[it[0].dataIndex];return `Neta: ${fmt(t.net)}\nAcum: ${fmt(t.cum)}\nProyectos: ${t.active_count}`;}}}},
   scales:{y:{ticks:{callback:v=>fmtk(v)}},x:{grid:{display:false}}}};}
 drawMain('sem');
 document.getElementById('b-sem').onclick=()=>{tog('b-sem','b-acum');drawMain('sem');};
@@ -242,13 +219,13 @@ function tog(on,off){document.getElementById(on).classList.add('on');document.ge
 document.getElementById('weekTable').innerHTML =
   '<thead><tr><th>Semana</th><th>Mes</th><th>Producido</th><th>Overhead</th><th>Neta</th><th>Acumulada</th><th>Proyectos</th></tr></thead><tbody>'
   + TLX.map(t=>`<tr><td><b>${t.label}</b></td><td><small class="t">${t.label_moy}</small></td>
-     <td>${fmt(t.pr)}</td><td><small class="t">${fmt(t.xfix)}</small></td>
-     <td class="${t.xnet>0?'pos':'neg'}">${fmt(t.xnet)}</td>
-     <td class="${t.xcum>0?'pos':'neg'}">${fmt(t.xcum)}</td><td>${t.active_count}</td></tr>`).join('')
+     <td>${fmt(t.pr)}</td><td><small class="t">${fmt(t.fix)}</small></td>
+     <td class="${t.net>0?'pos':'neg'}">${fmt(t.net)}</td>
+     <td class="${t.cum>0?'pos':'neg'}">${fmt(t.cum)}</td><td>${t.active_count}</td></tr>`).join('')
   + `</tbody><tfoot><tr class="hl"><td><b>TOTAL</b></td><td></td><td><b>${fmt(totProduced)}</b></td><td>${fmt(totFixed)}</td>
      <td class="${totNet>0?'pos':'neg'}"><b>${fmt(totNet)}</b></td><td></td><td></td></tr></tfoot>`;
 
-// ---- by project ----
+// ---- by project (BRUTO, sin overhead) ----
 const palette=['#58a6ff','#3fb950','#d29922','#db61a2','#a371f7','#f0883e','#56d4dd','#e34c26'];
 const projNames = BP.map(p=>p.project);
 const projColor = Object.fromEntries(projNames.map((n,i)=>[n,palette[i%palette.length]]));
@@ -257,7 +234,7 @@ let projChart;
 function drawProj(){
   if(projChart) projChart.destroy();
   const ds = BP.filter(p=>!hidden.has(p.project)).map(p=>({
-    label:p.project, data:TLX.map(t=>+(((p[PWK]||{})[t.week_iso])||0).toFixed(0)),
+    label:p.project, data:TLX.map(t=>+(wkOf(p,t.week_iso).toFixed(0))),
     backgroundColor:projColor[p.project], borderRadius:3, stack:'s'}));
   projChart = new Chart(document.getElementById('projChart'),{type:'bar',
     data:{labels,datasets:ds},options:{responsive:true,plugins:{legend:{display:false},
@@ -273,74 +250,47 @@ document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
 });
 drawProj();
 
-// project table (proj x week heatmap)
+// project table (proj x week) — BRUTO
 const wkIds = TLX.map(t=>t.week_iso);
-let ph='<thead><tr><th>Proyecto</th>'+TLX.map(t=>`<th title="${t.label_moy}">${t.label_short}</th>`).join('')+'<th>Total</th><th>Margen</th></tr></thead><tbody>';
+let ph='<thead><tr><th>Proyecto</th><th>Venta bruta</th><th>Desc.</th><th>Ingreso</th><th>Costo</th>'
+  +TLX.map(t=>`<th title="${t.label_moy}">${t.label_short}</th>`).join('')+'<th>Producido</th><th>Margen</th></tr></thead><tbody>';
 BP.forEach(p=>{
   const pm = p.revenue?Math.round(100*PPV(p)/p.revenue):null;
+  const dpct = p.revenue_gross?Math.round(1000*(1-p.revenue/p.revenue_gross))/10:0;
   ph+=`<tr><td><span style="color:${projColor[p.project]}">●</span> ${p.project}</td>`+
-    wkIds.map(w=>{let v=(p[PWK]||{})[w]||0;let c=v>0?'pos':(v<0?'neg':'');return `<td class="${c}">${v?fmt(v):'·'}</td>`;}).join('')+
+    `<td><small class="t">${fmt(p.revenue_gross)}</small></td><td><small class="t">${dpct?dpct+'%':'—'}</small></td>`+
+    `<td>${fmt(p.revenue)}</td><td>${fmt(p.cost)}</td>`+
+    wkIds.map(w=>{let v=wkOf(p,w);let c=v>0?'pos':(v<0?'neg':'');return `<td class="${c}">${v?fmt(v):'·'}</td>`;}).join('')+
     `<td><b>${fmt(PPV(p))}</b></td><td class="${pm>=30?'pos':(pm<15?'neg':'amb')}">${pm!=null?pm+'%':'—'}</td></tr>`;
 });
-ph+='</tbody>';
+ph+=`</tbody><tfoot><tr class="hl"><td><b>TOTAL</b></td><td></td><td></td>`+
+  `<td><b>${fmt(BP.reduce((a,p)=>a+p.revenue,0))}</b></td><td><b>${fmt(BP.reduce((a,p)=>a+p.cost,0))}</b></td>`+
+  wkIds.map(()=>'<td></td>').join('')+`<td><b>${fmt(totProduced)}</b></td><td></td></tr></tfoot>`;
 document.getElementById('projTable').innerHTML=ph;
 
-// ---- Brandy ----
-const compMargin = (()=>{let r=BP.reduce((a,p)=>a+p.revenue,0),pr=BP.reduce((a,p)=>a+PPV(p),0);return r?Math.round(100*pr/r):0;})();
+// ---- Brandy (BRUTO, 3 escenarios) ----
 const wkLabel = Object.fromEntries(TL.map(t=>[t.week_iso, t.label]));
-const bProduced = PPV(B), bMargin = B.revenue?Math.round(1000*bProduced/B.revenue)/10:0;
-const bOHeq = B.overhead_equal*(useOVH?ohScale:1), bOHrw = B.overhead_revwt*(useOVH?ohScale:1);
-const bNetEq = Math.round(bProduced - bOHeq), bNetRw = Math.round(bProduced - bOHrw);
-const bWon = (bNetEq>0 && bNetRw>0);
+const bProduced = at(B.prod), bMargin = B.revenue?Math.round(1000*bProduced/B.revenue)/10:0, bWon = bProduced>0;
 document.getElementById('brandyHead').innerHTML =
  `<div class="flex"><div>
-   <b>Brandy Sexton</b> — ingreso <b>${fmt(usePI?B.revenue*(1-revPct/100):B.revenue)}</b>, costo ${fmt(usePI?B.cost*(1+inePct/100):B.cost)}${usePI?` <small class="t">(${ineLbl})</small>`:''} → producido <b class="pos">${fmt(bProduced)}</b>
-   · margen bruto <b class="${bMargin>=30?'pos':'neg'}">${bMargin}%</b> <small class="t">(vs ${compMargin}% promedio empresa)</small></div>
+   <b>Brandy Sexton</b> — ingreso <b>${fmt(B.revenue)}</b>, costo ${fmt(B.cost)}${ctg>0?` <small class="t">(+${Math.round(ctg*100)}% → ${fmt(B.cost*(1+ctg))})</small>`:''} → producido <b class="${bWon?'pos':'neg'}">${fmt(bProduced)}</b>
+   · margen bruto <b class="${bMargin>=30?'pos':'neg'}">${bMargin}%</b></div>
    <span class="badge ${bWon?'grn':'red'}">${bWon?'✓ Produjo dinero':'Perdió dinero'}</span></div>
-   <div class="sub" style="margin-top:8px">Nuevo formato a prueba — data REAL de sus action tasks (re-bajada de JobTread).
-   Aun cargándole su parte del overhead${usePI?` y la ineficiencia (${ineLbl})`:''}, Brandy queda <b class="${bWon?'pos':'neg'}">${bWon?'POSITIVO':'negativo'}</b>.</div>`;
+   <div class="sub" style="margin-top:8px">Proyecto archivado — data REAL de sus action tasks (re-bajada de JobTread). Vista <b>bruta</b> (sin overhead).${B.orphan_cost?` <span class="amb">Tiene ${fmt(B.orphan_cost)} de costo sin ingreso cargado — no contado.</span>`:''}</div>`;
 
+const bWeeks = Object.keys(B.by_week);
 new Chart(document.getElementById('brandyChart'),{type:'bar',
-  data:{labels:Object.keys(B.by_week).map(w=>wkLabel[w]||w),
-    datasets:[{label:'Producido',data:Object.values(B.by_week),
-      backgroundColor:Object.values(B.by_week).map(v=>v>0?GRN:RED),borderRadius:3}]},
+  data:{labels:bWeeks.map(w=>wkLabel[w]||w),
+    datasets:[{label:'Producido',data:bWeeks.map(w=>at(B.by_week[w])),
+      backgroundColor:bWeeks.map(w=>at(B.by_week[w])>0?GRN:RED),borderRadius:3}]},
   options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.parsed.y)}}},
     scales:{y:{ticks:{callback:v=>fmtk(v)}},x:{grid:{display:false}}}}});
 
-const avgShare = B.allocation_detail.length?(B.allocation_detail.reduce((a,d)=>a+d.brandy_share_pct,0)/B.allocation_detail.length).toFixed(1):0;
-document.getElementById('brandyMatrix').innerHTML =
- `<thead><tr><th>Método de overhead</th><th>Producido</th><th>− Overhead</th><th>= Neta</th></tr></thead><tbody>
-  <tr><td>Equal-split (por # proyectos)</td><td>${fmt(bProduced)}</td><td>${fmt(bOHeq)}</td><td class="${bNetEq>0?'pos':'neg'}"><b>${fmt(bNetEq)}</b></td></tr>
-  <tr><td>Ponderado por venta (~${avgShare}%)</td><td>${fmt(bProduced)}</td><td>${fmt(bOHrw)}</td><td class="${bNetRw>0?'pos':'neg'}"><b>${fmt(bNetRw)}</b></td></tr></tbody>`;
-document.getElementById('brandyAlloc').innerHTML =
-  `Activo: <b>${B.active_weeks.map(w=>wkLabel[w]||w).join(', ')}</b>. Se le asigna overhead de dos formas para probar el formato; queda positivo en ambas.`;
-
 document.getElementById('brandyTrades').innerHTML =
- '<thead><tr><th>Trade</th><th>Ingreso</th><th>Costo</th><th>Producido</th><th>Fin</th></tr></thead><tbody>'
- + B.trades.map(t=>`<tr><td>${t.trade}${t.rev_source==='income'?' <small class="t">(income)</small>':''}</td><td>${fmt(t.revenue)}</td><td>${fmt(t.cost)}</td>
-    <td class="${t.produced>0?'pos':(t.produced<0?'neg':'')}">${fmt(t.produced)}</td><td><small class="t">${t.end||'—'}</small></td></tr>`).join('')
- + `</tbody><tfoot><tr class="hl"><td><b>TOTAL</b></td><td><b>${fmt(B.revenue)}</b></td><td><b>${fmt(B.cost)}</b></td><td class="pos"><b>${fmt(B.produced)}</b></td><td></td></tr></tfoot>`;
-
-// ---- Por PM ----
-const PM = DATA.by_pm||[];
-const pmPV = p => usePI?p.produced_ineff:p.produced;
-const pmOH = p => p.overhead*ohScale;
-const pmNet = p => pmPV(p) - pmOH(p);
-new Chart(document.getElementById('pmChart'),{type:'bar',
-  data:{labels:PM.map(p=>p.pm),datasets:[
-    {label:'Producido',data:PM.map(p=>pmPV(p)),backgroundColor:GRN,borderRadius:3},
-    {label:'Overhead asignado',data:PM.map(p=>pmOH(p)),backgroundColor:AMB,borderRadius:3},
-  ]},options:{responsive:true,plugins:{legend:{position:'bottom'},
-    tooltip:{callbacks:{afterbody:it=>{const p=PM[it[0].dataIndex];return `Neta: ${fmt(pmNet(p))}`;}}}},
-    scales:{y:{ticks:{callback:v=>fmtk(v)}},x:{grid:{display:false}}}}});
-document.getElementById('pmTable').innerHTML =
- '<thead><tr><th>PM</th><th>Producido</th><th>Overhead (share)</th><th>Neta</th><th>Margen</th><th>Proyectos</th></tr></thead><tbody>'
- + PM.map(p=>{const pr=pmPV(p),nt=pmNet(p),mg=p.revenue?Math.round(1000*pr/p.revenue)/10:null;
-   return `<tr><td><b>${p.pm}</b></td><td>${fmt(pr)}</td><td>${fmt(pmOH(p))} <small class="t">${p.overhead_share_pct}%</small></td>
-    <td class="${nt>0?'pos':'neg'}"><b>${fmt(nt)}</b></td>
-    <td class="${mg>=30?'pos':(mg<15?'neg':'amb')}">${mg!=null?mg+'%':'—'}</td>
-    <td><small class="t">${p.projects.map(x=>x.split(' (')[0]).join(', ')}</small></td></tr>`;}).join('')
- +'</tbody>';
+ '<thead><tr><th>Trade</th><th>Ingreso</th><th>Costo</th><th>Producido</th><th>Fechas</th></tr></thead><tbody>'
+ + B.trades.map(t=>{const pr=t.revenue - t.cost*(1+ctg);return `<tr><td>${t.trade}</td><td>${fmt(t.revenue)}</td><td>${fmt(t.cost)}</td>
+    <td class="${pr>0?'pos':(pr<0?'neg':'')}">${fmt(pr)}</td><td><small class="t">${t.start||'?'}→${t.end||'?'}</small></td></tr>`;}).join('')
+ + `</tbody><tfoot><tr class="hl"><td><b>TOTAL</b></td><td><b>${fmt(B.revenue)}</b></td><td><b>${fmt(B.cost)}</b></td><td class="${bProduced>0?'pos':'neg'}"><b>${fmt(bProduced)}</b></td><td></td></tr></tfoot>`;
 
 // ---- Calidad de datos ----
 const DQ = DATA.data_quality||{by_project:[]};
@@ -371,8 +321,9 @@ if(!FL.length){
 }
 
 document.getElementById('foot').innerHTML =
- `<b>Cómo se lee:</b> cada trade produce Ingreso − Costo. El ingreso sale <b>solo del Action Task / Critical Path</b> (NO de los pagos de cliente). Ese producido se reparte por <b>día de ejecución del action task</b> y cada día suma a su semana — la compra de material o el pago al sub en otra semana no mueven la fecha. Se le resta el <b>fijo prorrateado</b> (${fmt(DATA.params.monthly_fixed)}/mes ÷ 4.33 = ${fmt(DATA.params.weekly_fixed)}/sem) = <b>Producción Neta</b>.
-  <br><b>Datos REALES</b> re-bajados de JobTread. Trades con costo pero sin valor en su Action Task NO se cuentan como pérdida (se listan en Calidad de Datos). Overhead por PM por participación en el ingreso.
+ `<b>Cómo se lee:</b> cada trade produce (Ingreso × (1−descuento del proyecto)) − Costo×(1+contingencia). El ingreso sale <b>solo del Action Task / Critical Path</b> (NO de los pagos de cliente). Ese producido se reparte por <b>día de ejecución del action task</b> y cada día suma a su semana — la compra de material o el pago al sub en otra semana no mueven la fecha. Se le resta el <b>fijo prorrateado</b> (${fmt(DATA.params.monthly_fixed)}/mes = ${fmt(DATA.params.weekly_fixed)}/sem · ${DATA.params.overhead_source}) = <b>Producción Neta</b>. La vista por proyecto muestra el <b>bruto</b> (sin overhead).
+  <br><b>3 escenarios</b> de contingencia de costo: 0% / +10% / +20%. El descuento por proyecto SIEMPRE se aplica al ingreso.
+  <br><b>Datos REALES</b> re-bajados de JobTread. Trades con costo pero sin valor en su Action Task NO se cuentan como pérdida (ver Calidad de Datos).
   <br><b>Salvedades:</b> (1) la semana en curso es parcial; (2) el producido es un PISO mientras falte cargar ingresos; (3) trabajo futuro (días > hoy) aún no se reconoce; (4) depósitos a nivel proyecto no se cuentan como producción (son caja).
   Regenerar: <code>python3 generate_net_productivity.py --html</code>.`;
 }  // fin renderAll
