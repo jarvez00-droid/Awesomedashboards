@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T11:37:08",
+  "generated_at": "2026-06-30T11:59:24",
   "today": "2026-06-30",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -39,8 +39,8 @@
   ],
   "totals": {
     "prod": [
-      507813.42,
-      415292.21
+      514587.24,
+      422743.41
     ],
     "prod_todate": [
       55830.41,
@@ -49,8 +49,8 @@
     "weekly": {
       "fixed": 309267.28,
       "net": [
-        198546.14,
-        106024.93
+        205319.96,
+        113476.13
       ],
       "periods": 28,
       "positive": [
@@ -61,8 +61,8 @@
     "monthly": {
       "fixed": 335039.6,
       "net": [
-        172773.82,
-        80252.61
+        179547.64,
+        87703.81
       ],
       "periods": 7,
       "positive": [
@@ -375,17 +375,17 @@
       "label_moy": "jul S1",
       "label_short": "4 jul",
       "prod": [
-        43314.86,
-        31866.28
+        50088.68,
+        39317.48
       ],
       "fixed": 11045.26,
       "net": [
-        32269.6,
-        20821.02
+        39043.42,
+        28272.22
       ],
       "cum": [
-        53282.91,
-        27391.47
+        60056.73,
+        34842.67
       ],
       "active_count": 10,
       "active_projects": [
@@ -429,8 +429,8 @@
           404.42
         ],
         "Martha Cockrell": [
-          17118.17,
-          12864.83
+          23891.99,
+          20316.04
         ],
         "Lingyan Qiu": [
           -164.31,
@@ -463,8 +463,8 @@
         26936.46
       ],
       "cum": [
-        87917.13,
-        54327.93
+        94690.95,
+        61779.13
       ],
       "active_count": 9,
       "active_projects": [
@@ -537,8 +537,8 @@
         30422.83
       ],
       "cum": [
-        125503.34,
-        84750.76
+        132277.16,
+        92201.96
       ],
       "active_count": 7,
       "active_projects": [
@@ -601,8 +601,8 @@
         12776.03
       ],
       "cum": [
-        143972.46,
-        97526.79
+        150746.28,
+        104977.99
       ],
       "active_count": 6,
       "active_projects": [
@@ -660,8 +660,8 @@
         13226.99
       ],
       "cum": [
-        164558.36,
-        110753.78
+        171332.18,
+        118204.98
       ],
       "active_count": 6,
       "active_projects": [
@@ -715,8 +715,8 @@
         1474.44
       ],
       "cum": [
-        171567.03,
-        112228.22
+        178340.85,
+        119679.42
       ],
       "active_count": 6,
       "active_projects": [
@@ -774,8 +774,8 @@
         8100.98
       ],
       "cum": [
-        184548.55,
-        120329.2
+        191322.37,
+        127780.4
       ],
       "active_count": 5,
       "active_projects": [
@@ -828,8 +828,8 @@
         26718.15
       ],
       "cum": [
-        216863.01,
-        147047.35
+        223636.83,
+        154498.55
       ],
       "active_count": 5,
       "active_projects": [
@@ -882,8 +882,8 @@
         38899.15
       ],
       "cum": [
-        262642.9,
-        185946.5
+        269416.72,
+        193397.7
       ],
       "active_count": 5,
       "active_projects": [
@@ -936,8 +936,8 @@
         8779.77
       ],
       "cum": [
-        275612.19,
-        194726.27
+        282386.01,
+        202177.47
       ],
       "active_count": 5,
       "active_projects": [
@@ -986,8 +986,8 @@
         20549.2
       ],
       "cum": [
-        300567.17,
-        215275.47
+        307340.99,
+        222726.67
       ],
       "active_count": 3,
       "active_projects": [
@@ -1030,8 +1030,8 @@
         -7486.41
       ],
       "cum": [
-        296718.32,
-        207789.06
+        303492.14,
+        215240.26
       ],
       "active_count": 3,
       "active_projects": [
@@ -1074,8 +1074,8 @@
         -8855.88
       ],
       "cum": [
-        289066.46,
-        198933.18
+        295840.28,
+        206384.38
       ],
       "active_count": 3,
       "active_projects": [
@@ -1114,8 +1114,8 @@
         -8162.61
       ],
       "cum": [
-        281768.76,
-        190770.57
+        288542.58,
+        198221.77
       ],
       "active_count": 2,
       "active_projects": [
@@ -1149,8 +1149,8 @@
         -8129.99
       ],
       "cum": [
-        273823.94,
-        182640.58
+        280597.76,
+        190091.78
       ],
       "active_count": 2,
       "active_projects": [
@@ -1184,8 +1184,8 @@
         -10917.95
       ],
       "cum": [
-        262980.17,
-        171722.63
+        269753.99,
+        179173.83
       ],
       "active_count": 2,
       "active_projects": [
@@ -1219,8 +1219,8 @@
         -10779.88
       ],
       "cum": [
-        252275.48,
-        160942.75
+        259049.3,
+        168393.95
       ],
       "active_count": 2,
       "active_projects": [
@@ -1254,8 +1254,8 @@
         -9853.69
       ],
       "cum": [
-        242827.24,
-        151089.06
+        249601.06,
+        158540.26
       ],
       "active_count": 2,
       "active_projects": [
@@ -1289,8 +1289,8 @@
         -9931.74
       ],
       "cum": [
-        233313.85,
-        141157.32
+        240087.67,
+        148608.52
       ],
       "active_count": 2,
       "active_projects": [
@@ -1324,8 +1324,8 @@
         -10347.92
       ],
       "cum": [
-        223220.69,
-        130809.4
+        229994.51,
+        138260.6
       ],
       "active_count": 2,
       "active_projects": [
@@ -1359,8 +1359,8 @@
         -6920.1
       ],
       "cum": [
-        216410.52,
-        123889.3
+        223184.34,
+        131340.5
       ],
       "active_count": 2,
       "active_projects": [
@@ -1398,8 +1398,8 @@
         -7347.39
       ],
       "cum": [
-        209063.13,
-        116541.91
+        215836.95,
+        123993.11
       ],
       "active_count": 1,
       "active_projects": [
@@ -1432,8 +1432,8 @@
         -10516.99
       ],
       "cum": [
-        198546.14,
-        106024.92
+        205319.96,
+        113476.12
       ],
       "active_count": 1,
       "active_projects": [
@@ -1466,8 +1466,8 @@
         0.0
       ],
       "cum": [
-        198546.14,
-        106024.92
+        205319.96,
+        113476.12
       ],
       "active_count": 1,
       "active_projects": [
@@ -1495,8 +1495,8 @@
         0.0
       ],
       "cum": [
-        198546.14,
-        106024.92
+        205319.96,
+        113476.12
       ],
       "active_count": 0,
       "active_projects": [],
@@ -1522,8 +1522,8 @@
         0.0
       ],
       "cum": [
-        198546.14,
-        106024.92
+        205319.96,
+        113476.12
       ],
       "active_count": 0,
       "active_projects": [],
@@ -1592,17 +1592,17 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        187549.39,
-        150700.84
+        194323.21,
+        158152.04
       ],
       "fixed": 47862.8,
       "net": [
-        139686.59,
-        102838.04
+        146460.41,
+        110289.24
       ],
       "cum": [
-        147654.2,
-        101208.54
+        154428.02,
+        108659.74
       ],
       "is_future": true,
       "is_partial": false,
@@ -1633,8 +1633,8 @@
           13421.17
         ],
         "Martha Cockrell": [
-          50112.67,
-          40831.17
+          56886.49,
+          48282.37
         ],
         "Lingyan Qiu": [
           11868.74,
@@ -1663,8 +1663,8 @@
         65619.45
       ],
       "cum": [
-        239074.78,
-        166827.99
+        245848.6,
+        174279.19
       ],
       "is_future": true,
       "is_partial": false,
@@ -1709,8 +1709,8 @@
         38330.93
       ],
       "cum": [
-        294751.64,
-        205158.92
+        301525.46,
+        212610.12
       ],
       "is_future": true,
       "is_partial": false,
@@ -1747,8 +1747,8 @@
         -40473.39
       ],
       "cum": [
-        256033.96,
-        164685.53
+        262807.78,
+        172136.73
       ],
       "is_future": true,
       "is_partial": false,
@@ -1777,8 +1777,8 @@
         -39211.45
       ],
       "cum": [
-        217995.29,
-        125474.08
+        224769.11,
+        132925.28
       ],
       "is_future": true,
       "is_partial": false,
@@ -1807,8 +1807,8 @@
         -45221.47
       ],
       "cum": [
-        172773.82,
-        80252.61
+        179547.64,
+        87703.81
       ],
       "is_future": true,
       "is_partial": false,
@@ -1923,20 +1923,20 @@
       "project": "Martha Cockrell",
       "revenue": 365123.8,
       "revenue_gross": 444676.42,
-      "cost": 259367.44,
+      "cost": 252593.62,
       "prod": [
-        105756.36,
-        79819.62
+        112530.18,
+        87270.82
       ],
-      "margin_pct": 29.0,
+      "margin_pct": 30.8,
       "weeks": {
         "2026-W29": [
           12402.36,
           11482.71
         ],
         "2026-W28": [
-          17118.17,
-          12864.83
+          23891.99,
+          20316.04
         ],
         "2026-W27": [
           7501.6,
@@ -1993,8 +1993,8 @@
       },
       "months": {
         "2026-07": [
-          50112.67,
-          40831.17
+          56886.49,
+          48282.37
         ],
         "2026-06": [
           6368.43,
@@ -3152,6 +3152,18 @@
       "start": "2026-07-02",
       "end": "2026-07-20",
       "severity": "media"
+    },
+    {
+      "project": "Martha Cockrell",
+      "trade": "DOORS & WINDOWS",
+      "revenue": 16045.65,
+      "cost": 6246.18,
+      "produced": 9799.47,
+      "margin_pct": 61.1,
+      "ratio": 2.6,
+      "start": "2026-07-07",
+      "end": "2026-07-10",
+      "severity": "media"
     }
   ],
   "verify": [
@@ -3200,14 +3212,6 @@
           "n_exp": 4
         },
         {
-          "trade": "DOORS & WINDOWS",
-          "income": 23191.25,
-          "expense": 19124.0,
-          "grouped": true,
-          "n_inc": 2,
-          "n_exp": 4
-        },
-        {
           "trade": "ELECTRICAL TRIM",
           "income": 25644.0,
           "expense": 15130.0,
@@ -3219,6 +3223,14 @@
           "trade": "FLOORING",
           "income": 22826.7,
           "expense": 14524.72,
+          "grouped": true,
+          "n_inc": 2,
+          "n_exp": 4
+        },
+        {
+          "trade": "DOORS & WINDOWS",
+          "income": 23191.25,
+          "expense": 12350.18,
           "grouped": true,
           "n_inc": 2,
           "n_exp": 4
@@ -3377,7 +3389,7 @@
         }
       ],
       "total_income": 560057.6,
-      "total_expense": 322412.19,
+      "total_expense": 315638.37,
       "loose_amount": 0
     },
     {
