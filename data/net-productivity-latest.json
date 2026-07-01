@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-30T23:57:07",
-  "today": "2026-06-30",
+  "generated_at": "2026-07-01T00:12:57",
+  "today": "2026-07-01",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
   "params": {
@@ -43,8 +43,8 @@
       426139.28
     ],
     "prod_todate": [
-      50201.41,
-      41345.07
+      258228.94,
+      211836.73
     ],
     "weekly": {
       "fixed": 309267.28,
@@ -1552,7 +1552,7 @@
         -6517.73
       ],
       "is_future": false,
-      "is_partial": true,
+      "is_partial": false,
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
@@ -1605,8 +1605,8 @@
         162503.34,
         116111.13
       ],
-      "is_future": true,
-      "is_partial": false,
+      "is_future": false,
+      "is_partial": true,
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
