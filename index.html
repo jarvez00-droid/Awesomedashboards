@@ -367,6 +367,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
   <a data-p="finance">💵 Finance</a>
   <a data-p="productivity">📈 Productivity</a>
   <a href="net-productivity.html">💰 Productividad Neta</a>
+  <a data-p="purchases">🛒 Purchases</a>
   <a data-p="orgmgmt">🎯 Management</a>
   <a data-p="archive">▦ Archive</a>
 </div>
@@ -403,11 +404,16 @@ function render() {
   else if (curPage === 'productivity') productivityGate(c);
   else if (curPage === 'orgmgmt') orgMgmtGate(c);
   else if (curPage === 'archive') renderArchive(c);
+  else if (curPage === 'purchases') renderPurchases(c);
   else {
     const titles = {projects:'Project Dashboards'};
     const descs = {projects:'Live project status views. Coming soon.'};
     c.innerHTML = `<div class="empty"><div class="empty-i">📋</div><div class="empty-t">${titles[curPage]||'Coming Soon'}</div><div class="empty-d">${descs[curPage]||''}</div></div>`;
   }
+}
+
+function renderPurchases(c){
+  c.innerHTML = `<iframe src="purchases.html?embed=1" title="Purchases" style="width:100%;height:calc(100vh - 130px);min-height:600px;border:0;background:transparent"></iframe>`;
 }
 
 function weeklyGate(c) {

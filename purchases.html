@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Purchases — Compras por proyecto</title>
+<style>
+:root{--bg:#0f141b;--card:#171e27;--card2:#1d2630;--line:#2a3540;--tx:#e6edf3;--mut:#9aa7b4;
+--grn:#2ea043;--grnbg:#12351f;--red:#f85149;--redbg:#4a1d1d;--blu:#388bfd;--amb:#d29922;--ambbg:#3d3016;--accent:#58a6ff;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:20px}
+h1{font-size:22px;margin:0 0 4px}
+.sub{color:var(--mut);font-size:13px}
+.nav{margin-bottom:14px}
+.nav a{color:var(--accent);text-decoration:none;font-size:13px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:11px;margin:16px 0 6px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.kpi .lab{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.kpi .val{font-size:22px;font-weight:700;margin-top:4px}
+.kpi.warn{border-color:var(--red)} .kpi.warn .val{color:var(--red)}
+.alert{background:var(--redbg);border:1px solid var(--red);border-radius:10px;padding:13px 15px;margin:14px 0}
+.alert h2{margin:0 0 8px;font-size:15px;color:#ffb4ae}
+.alert .row{display:flex;gap:10px;font-size:13px;padding:4px 0;border-top:1px solid #6b2b2b}
+.alert .row:first-of-type{border-top:0}
+.alert .row .p{color:#ffd7d3;min-width:180px;font-weight:600}
+.alert .row .d{color:#f0a9a4;min-width:78px}
+.proj{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:12px 0;overflow:hidden}
+.proj.hasalert{border-color:var(--red)}
+.phead{display:flex;align-items:center;gap:10px;padding:11px 15px;background:var(--card2);border-bottom:1px solid var(--line)}
+.phead .nm{font-weight:700;font-size:15px}
+.phead .meta{color:var(--mut);font-size:12.5px;margin-left:auto}
+.phead .flag{background:var(--redbg);color:var(--red);border:1px solid var(--red);border-radius:20px;padding:1px 9px;font-size:11px;font-weight:600}
+table{width:100%;border-collapse:collapse}
+td,th{padding:8px 15px;text-align:left;font-size:13px;border-top:1px solid var(--line)}
+th{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.03em;background:#131a22}
+td.amt{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.day{color:var(--mut);white-space:nowrap;font-variant-numeric:tabular-nums}
+.day.today{color:var(--accent);font-weight:600}
+.ok{color:var(--grn);font-weight:600}
+.miss{background:var(--redbg);color:var(--red);border:1px solid var(--red);border-radius:20px;padding:1px 9px;font-size:11px;font-weight:600}
+.foot{color:var(--mut);font-size:11.5px;margin-top:22px}
+#gate{display:flex;align-items:center;justify-content:center;min-height:80vh}
+.gatebox{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px 32px;max-width:360px;text-align:center}
+.gatebox input{width:100%;padding:10px;margin:12px 0;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--tx);font-size:14px}
+.gatebox button{width:100%;padding:10px;border-radius:8px;border:0;background:var(--accent);color:#0b1117;font-weight:600;cursor:pointer}
+.empty{color:var(--mut);padding:26px;text-align:center}
+</style>
+</head>
+<body>
+<div id="gate"><div class="gatebox">
+  <div style="font-size:34px">🛒🔒</div>
+  <h1 style="font-size:18px">Purchases</h1>
+  <div class="sub">Vista restringida · compras</div>
+  <input type="password" id="pw" placeholder="Contraseña" onkeydown="if(event.key==='Enter')tryPw()">
+  <button onclick="tryPw()">Entrar</button>
+  <div class="sub" id="pwerr" style="color:var(--red);margin-top:8px;visibility:hidden">Contraseña incorrecta</div>
+</div></div>
+
+<div class="wrap" id="app" style="display:none">
+  <div class="nav"><a href="index.html">← Dashboard</a></div>
+  <h1>🛒 Purchases — Compras por proyecto</h1>
+  <div class="sub" id="sub">Tareas PURCHASE MATERIAL · próximas 2 semanas · por proyecto y día</div>
+  <div class="kpis" id="kpis"></div>
+  <div id="alerts"></div>
+  <div id="overdue"></div>
+  <div id="projects"></div>
+  <div class="foot" id="foot"></div>
+</div>
+
+<script>
+const PW='Awesome';   // mismo gate de gerencia (sessionStorage compartido)
+function tryPw(){
+  if(document.getElementById('pw').value===PW){ sessionStorage.setItem('mgmt_auth','1'); load(); }
+  else { document.getElementById('pwerr').style.visibility='visible'; }
+}
+const WINDOW_DAYS=14;
+const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
+function parseD(s){ if(!s)return null; const p=String(s).slice(0,10).split('-').map(Number); if(p.length<3)return null; return new Date(p[0],p[1]-1,p[2]); }
+function dayLabel(dt){ return dt.toLocaleDateString('es-MX',{weekday:'short',day:'2-digit',month:'short'}); }
+function iso(dt){ return dt.toISOString().slice(0,10); }
+
+function load(){
+  document.getElementById('gate').style.display='none';
+  document.getElementById('app').style.display='block';
+  fetch('data/cashflow-latest.json?_='+Date.now())
+    .then(r=>r.ok?r.json():null).then(j=>render(j))
+    .catch(()=>{document.getElementById('projects').innerHTML='<div class="empty">No se pudo cargar la data.</div>';});
+}
+
+function render(d){
+  if(!d||!d.all_tasks){document.getElementById('projects').innerHTML='<div class="empty">Sin data.</div>';return;}
+  const today=new Date(); today.setHours(0,0,0,0);
+  const end=new Date(today); end.setDate(end.getDate()+WINDOW_DAYS);
+  const noAmt=t=>!(Number(t.amount)>0);
+  const mats=d.all_tasks.filter(t=>t.type==='materials' && !t.paid);
+  const inWin=[], overdue=[];
+  mats.forEach(t=>{ const dt=parseD(t.due); if(!dt)return; if(dt<today)overdue.push(t); else if(dt<=end)inWin.push(t); });
+
+  // group window by project
+  const byP={};
+  inWin.forEach(t=>{ (byP[t.project]=byP[t.project]||[]).push(t); });
+  const projNames=Object.keys(byP).sort((a,b)=>{
+    const ea=Math.min(...byP[a].map(t=>parseD(t.due))), eb=Math.min(...byP[b].map(t=>parseD(t.due)));
+    return ea-eb;  // el que compra más pronto, primero
+  });
+  const totalAmt=inWin.reduce((s,t)=>s+(Number(t.amount)||0),0);
+  const missing=inWin.filter(noAmt);
+
+  // KPIs
+  document.getElementById('sub').textContent=
+    `Tareas PURCHASE MATERIAL · ${iso(today)} → ${iso(end)} (próx. ${WINDOW_DAYS} días) · por proyecto y día`;
+  document.getElementById('kpis').innerHTML=
+    kpi('Proyectos',projNames.length)+
+    kpi('Tareas de compra',inWin.length)+
+    kpi('Monto asignado',fmt(totalAmt))+
+    kpi('⚠️ Sin monto',missing.length,missing.length>0)+
+    (overdue.length?kpi('Atrasadas',overdue.length,true):'');
+
+  // ALERTA: sin monto asignado
+  const allMiss=missing.concat(overdue.filter(noAmt));
+  document.getElementById('alerts').innerHTML = allMiss.length? (
+    `<div class="alert"><h2>⚠️ ${allMiss.length} tarea(s) PURCHASE MATERIAL sin monto asignado</h2>`+
+    `<div class="sub" style="color:#f0a9a4;margin-bottom:6px">Purchases debe asignar el costo — sin monto no entran al cashflow ni se pueden pagar.</div>`+
+    allMiss.sort((a,b)=>parseD(a.due)-parseD(b.due)).map(t=>
+      `<div class="row"><span class="d">${dayLabel(parseD(t.due))}</span><span class="p">${esc(t.project.split(' (')[0])}</span><span>${esc(t.task)}</span></div>`
+    ).join('')+`</div>`
+  ) : '';
+
+  // ATRASADAS (compras vencidas no hechas)
+  document.getElementById('overdue').innerHTML = overdue.length? (
+    `<div class="alert" style="background:var(--ambbg);border-color:var(--amb)"><h2 style="color:#f0c674">⏰ ${overdue.length} compra(s) atrasada(s)</h2>`+
+    overdue.sort((a,b)=>parseD(a.due)-parseD(b.due)).map(t=>{
+      const amt=noAmt(t)?'<span class="miss">SIN MONTO</span>':fmt(t.amount);
+      return `<div class="row"><span class="d">${dayLabel(parseD(t.due))}</span><span class="p">${esc(t.project.split(' (')[0])}</span><span>${esc(t.task)}</span><span style="margin-left:auto">${amt}</span></div>`;
+    }).join('')+`</div>`
+  ) : '';
+
+  // POR PROYECTO / DÍA
+  if(!projNames.length){ document.getElementById('projects').innerHTML='<div class="empty">No hay compras programadas en la ventana. 🎉</div>'; }
+  else document.getElementById('projects').innerHTML = projNames.map(name=>{
+    const ts=byP[name].slice().sort((a,b)=>parseD(a.due)-parseD(b.due));
+    const sub=ts.reduce((s,t)=>s+(Number(t.amount)||0),0);
+    const miss=ts.filter(noAmt).length;
+    const rows=ts.map(t=>{
+      const dt=parseD(t.due); const isTdy=dt.getTime()===today.getTime();
+      const amt=noAmt(t)?'<span class="miss">⚠️ SIN MONTO</span>':`<span class="ok">${fmt(t.amount)}</span>`;
+      return `<tr><td class="day${isTdy?' today':''}">${dayLabel(dt)}</td><td>${esc(t.task)}</td><td class="amt">${amt}</td></tr>`;
+    }).join('');
+    return `<div class="proj${miss?' hasalert':''}"><div class="phead">`+
+      `<span class="nm">${esc(name.split(' (')[0])}</span>`+
+      (miss?`<span class="flag">⚠️ ${miss} sin monto</span>`:'')+
+      `<span class="meta">${ts.length} compra(s) · ${fmt(sub)}</span></div>`+
+      `<table><thead><tr><th style="width:110px">Día</th><th>Tarea (material)</th><th style="width:130px;text-align:right">Monto</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  }).join('');
+
+  document.getElementById('foot').textContent=
+    `Fuente: cashflow-latest.json (${d.date||'—'}) · solo tareas de tipo material no pagadas · se refresca solo a diario.`;
+}
+function kpi(lab,val,warn){ return `<div class="kpi${warn?' warn':''}"><div class="lab">${lab}</div><div class="val">${val}</div></div>`; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+const EMBED = new URLSearchParams(location.search).has('embed') || window.self!==window.top;
+if(EMBED){ document.getElementById('gate').style.display='none'; const nv=document.querySelector('.nav'); if(nv) nv.style.display='none'; }
+if(EMBED || sessionStorage.getItem('mgmt_auth')==='1'){ load(); }
+else { setTimeout(()=>{const e=document.getElementById('pw');if(e)e.focus();},60); }
+</script>
+</body></html>
