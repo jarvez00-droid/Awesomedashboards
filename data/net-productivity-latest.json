@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T23:32:26",
+  "generated_at": "2026-06-30T23:53:07",
   "today": "2026-06-30",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -2563,10 +2563,10 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 36,
-    "orphan_cost": 275374.54,
+    "orphan_trades": 38,
+    "orphan_cost": 277187.54,
     "priced_trades": 175,
-    "total_trades": 211,
+    "total_trades": 213,
     "by_project": [
       {
         "project": "Charles Harris",
@@ -2669,6 +2669,25 @@
         ]
       },
       {
+        "project": "Lingyan Qiu",
+        "orphan_trades": 3,
+        "orphan_cost": 3363.0,
+        "examples": [
+          {
+            "trade": "GLASS",
+            "cost": 1550.0
+          },
+          {
+            "trade": "INTERIOR DOORS",
+            "cost": 1288.0
+          },
+          {
+            "trade": "BASEBOARD & TRIM",
+            "cost": 525.0
+          }
+        ]
+      },
+      {
         "project": "Stephanie Felton",
         "orphan_trades": 2,
         "orphan_cost": 2851.54,
@@ -2680,17 +2699,6 @@
           {
             "trade": "CROWNMOLDING",
             "cost": 1351.54
-          }
-        ]
-      },
-      {
-        "project": "Lingyan Qiu",
-        "orphan_trades": 1,
-        "orphan_cost": 1550.0,
-        "examples": [
-          {
-            "trade": "GLASS",
-            "cost": 1550.0
           }
         ]
       },
@@ -3976,16 +3984,32 @@
           "n_exp": 1
         },
         {
+          "trade": "INTERIOR DOORS",
+          "income": 0.0,
+          "expense": 1288.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 2
+        },
+        {
           "trade": "KITCHEN: PLUMBING TRIM",
           "income": 128.0,
           "expense": 452.49,
           "grouped": true,
           "n_inc": 1,
           "n_exp": 2
+        },
+        {
+          "trade": "BASEBOARD & TRIM",
+          "income": 0.0,
+          "expense": 525.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 2
         }
       ],
       "total_income": 188050.0,
-      "total_expense": 117629.66,
+      "total_expense": 119442.66,
       "loose_amount": 0
     },
     {
