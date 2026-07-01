@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T22:25:55",
+  "generated_at": "2026-06-30T22:48:00",
   "today": "2026-06-30",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -39,8 +39,8 @@
   ],
   "totals": {
     "prod": [
-      514787.24,
-      422963.42
+      518174.4,
+      426689.29
     ],
     "prod_todate": [
       56284.47,
@@ -49,8 +49,8 @@
     "weekly": {
       "fixed": 309267.28,
       "net": [
-        205519.96,
-        113696.14
+        208907.12,
+        117422.01
       ],
       "periods": 28,
       "positive": [
@@ -61,8 +61,8 @@
     "monthly": {
       "fixed": 335039.6,
       "net": [
-        179747.64,
-        87923.82
+        183134.8,
+        91649.69
       ],
       "periods": 7,
       "positive": [
@@ -301,17 +301,17 @@
       "label_moy": "jun S4",
       "label_short": "27 jun",
       "prod": [
-        42023.93,
-        34068.62
+        42912.82,
+        35046.4
       ],
       "fixed": 11045.26,
       "net": [
-        30978.67,
-        23023.36
+        31867.56,
+        24001.14
       ],
       "cum": [
-        21078.37,
-        6797.12
+        21967.26,
+        7774.9
       ],
       "active_count": 9,
       "active_projects": [
@@ -350,8 +350,8 @@
           1117.74
         ],
         "Martha Cockrell": [
-          7501.6,
-          6222.82
+          8390.49,
+          7200.6
         ],
         "Lingyan Qiu": [
           13078.73,
@@ -375,17 +375,17 @@
       "label_moy": "jul S1",
       "label_short": "4 jul",
       "prod": [
-        50223.62,
-        39310.81
+        60079.24,
+        49888.25
       ],
       "fixed": 11045.26,
       "net": [
-        39178.36,
-        28265.55
+        49033.98,
+        38842.99
       ],
       "cum": [
-        60256.73,
-        35062.67
+        71001.24,
+        46617.89
       ],
       "active_count": 10,
       "active_projects": [
@@ -429,8 +429,8 @@
           404.42
         ],
         "Martha Cockrell": [
-          23891.99,
-          20316.04
+          33747.61,
+          30893.48
         ],
         "Lingyan Qiu": [
           -164.31,
@@ -454,17 +454,17 @@
       "label_moy": "jul S2",
       "label_short": "11 jul",
       "prod": [
-        45679.48,
-        37981.72
+        38322.13,
+        30152.37
       ],
       "fixed": 11045.26,
       "net": [
-        34634.22,
-        26936.46
+        27276.87,
+        19107.11
       ],
       "cum": [
-        94890.95,
-        61999.13
+        98278.11,
+        65725.0
       ],
       "active_count": 9,
       "active_projects": [
@@ -503,8 +503,8 @@
           776.18
         ],
         "Martha Cockrell": [
-          12402.36,
-          11482.71
+          5045.01,
+          3653.36
         ],
         "Lingyan Qiu": [
           4132.76,
@@ -537,8 +537,8 @@
         30422.83
       ],
       "cum": [
-        132477.16,
-        92421.96
+        135864.32,
+        96147.83
       ],
       "active_count": 8,
       "active_projects": [
@@ -602,8 +602,8 @@
         12776.03
       ],
       "cum": [
-        150946.28,
-        105197.99
+        154333.44,
+        108923.86
       ],
       "active_count": 6,
       "active_projects": [
@@ -661,8 +661,8 @@
         13226.99
       ],
       "cum": [
-        171532.18,
-        118424.98
+        174919.34,
+        122150.85
       ],
       "active_count": 6,
       "active_projects": [
@@ -716,8 +716,8 @@
         1474.44
       ],
       "cum": [
-        178540.85,
-        119899.42
+        181928.01,
+        123625.29
       ],
       "active_count": 6,
       "active_projects": [
@@ -775,8 +775,8 @@
         8100.98
       ],
       "cum": [
-        191522.37,
-        128000.4
+        194909.53,
+        131726.27
       ],
       "active_count": 5,
       "active_projects": [
@@ -829,8 +829,8 @@
         26718.15
       ],
       "cum": [
-        223836.83,
-        154718.55
+        227223.99,
+        158444.42
       ],
       "active_count": 5,
       "active_projects": [
@@ -883,8 +883,8 @@
         38899.15
       ],
       "cum": [
-        269616.72,
-        193617.7
+        273003.88,
+        197343.57
       ],
       "active_count": 5,
       "active_projects": [
@@ -937,8 +937,8 @@
         8779.77
       ],
       "cum": [
-        282586.01,
-        202397.47
+        285973.17,
+        206123.34
       ],
       "active_count": 5,
       "active_projects": [
@@ -987,8 +987,8 @@
         20549.2
       ],
       "cum": [
-        307540.99,
-        222946.67
+        310928.15,
+        226672.54
       ],
       "active_count": 3,
       "active_projects": [
@@ -1031,8 +1031,8 @@
         -7486.41
       ],
       "cum": [
-        303692.14,
-        215460.26
+        307079.3,
+        219186.13
       ],
       "active_count": 3,
       "active_projects": [
@@ -1075,8 +1075,8 @@
         -8855.88
       ],
       "cum": [
-        296040.28,
-        206604.38
+        299427.44,
+        210330.25
       ],
       "active_count": 3,
       "active_projects": [
@@ -1115,8 +1115,8 @@
         -8162.61
       ],
       "cum": [
-        288742.58,
-        198441.77
+        292129.74,
+        202167.64
       ],
       "active_count": 2,
       "active_projects": [
@@ -1150,8 +1150,8 @@
         -8129.99
       ],
       "cum": [
-        280797.76,
-        190311.78
+        284184.92,
+        194037.65
       ],
       "active_count": 2,
       "active_projects": [
@@ -1185,8 +1185,8 @@
         -10917.95
       ],
       "cum": [
-        269953.99,
-        179393.83
+        273341.15,
+        183119.7
       ],
       "active_count": 2,
       "active_projects": [
@@ -1220,8 +1220,8 @@
         -10779.88
       ],
       "cum": [
-        259249.3,
-        168613.95
+        262636.46,
+        172339.82
       ],
       "active_count": 2,
       "active_projects": [
@@ -1255,8 +1255,8 @@
         -9853.69
       ],
       "cum": [
-        249801.06,
-        158760.26
+        253188.22,
+        162486.13
       ],
       "active_count": 2,
       "active_projects": [
@@ -1290,8 +1290,8 @@
         -9931.74
       ],
       "cum": [
-        240287.67,
-        148828.52
+        243674.83,
+        152554.39
       ],
       "active_count": 2,
       "active_projects": [
@@ -1325,8 +1325,8 @@
         -10347.92
       ],
       "cum": [
-        230194.51,
-        138480.6
+        233581.67,
+        142206.47
       ],
       "active_count": 2,
       "active_projects": [
@@ -1360,8 +1360,8 @@
         -6920.1
       ],
       "cum": [
-        223384.34,
-        131560.5
+        226771.5,
+        135286.37
       ],
       "active_count": 2,
       "active_projects": [
@@ -1399,8 +1399,8 @@
         -7347.39
       ],
       "cum": [
-        216036.95,
-        124213.11
+        219424.11,
+        127938.98
       ],
       "active_count": 1,
       "active_projects": [
@@ -1433,8 +1433,8 @@
         -10516.99
       ],
       "cum": [
-        205519.96,
-        113696.12
+        208907.12,
+        117421.99
       ],
       "active_count": 1,
       "active_projects": [
@@ -1467,8 +1467,8 @@
         0.0
       ],
       "cum": [
-        205519.96,
-        113696.12
+        208907.12,
+        117421.99
       ],
       "active_count": 1,
       "active_projects": [
@@ -1496,8 +1496,8 @@
         0.0
       ],
       "cum": [
-        205519.96,
-        113696.12
+        208907.12,
+        117421.99
       ],
       "active_count": 0,
       "active_projects": [],
@@ -1523,8 +1523,8 @@
         0.0
       ],
       "cum": [
-        205519.96,
-        113696.12
+        208907.12,
+        117421.99
       ],
       "active_count": 0,
       "active_projects": [],
@@ -1593,17 +1593,17 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        194069.15,
-        157678.22
+        197456.31,
+        161404.09
       ],
       "fixed": 47862.8,
       "net": [
-        146206.35,
-        109815.42
+        149593.51,
+        113541.29
       ],
       "cum": [
-        154628.02,
-        108879.75
+        158015.18,
+        112605.62
       ],
       "is_future": true,
       "is_partial": false,
@@ -1634,8 +1634,8 @@
           13421.17
         ],
         "Martha Cockrell": [
-          56886.49,
-          48282.37
+          60273.65,
+          52008.25
         ],
         "Lingyan Qiu": [
           11868.74,
@@ -1664,8 +1664,8 @@
         65619.45
       ],
       "cum": [
-        246048.6,
-        174499.2
+        249435.76,
+        178225.07
       ],
       "is_future": true,
       "is_partial": false,
@@ -1710,8 +1710,8 @@
         38330.93
       ],
       "cum": [
-        301725.46,
-        212830.13
+        305112.62,
+        216556.0
       ],
       "is_future": true,
       "is_partial": false,
@@ -1748,8 +1748,8 @@
         -40473.39
       ],
       "cum": [
-        263007.78,
-        172356.74
+        266394.94,
+        176082.61
       ],
       "is_future": true,
       "is_partial": false,
@@ -1778,8 +1778,8 @@
         -39211.45
       ],
       "cum": [
-        224969.11,
-        133145.29
+        228356.27,
+        136871.16
       ],
       "is_future": true,
       "is_partial": false,
@@ -1808,8 +1808,8 @@
         -45221.47
       ],
       "cum": [
-        179747.64,
-        87923.82
+        183134.8,
+        91649.69
       ],
       "is_future": true,
       "is_partial": false,
@@ -1924,24 +1924,24 @@
       "project": "Martha Cockrell",
       "revenue": 365123.8,
       "revenue_gross": 444676.42,
-      "cost": 252593.62,
+      "cost": 249206.46,
       "prod": [
-        112530.18,
-        87270.82
+        115917.34,
+        90996.69
       ],
-      "margin_pct": 30.8,
+      "margin_pct": 31.7,
       "weeks": {
-        "2026-W29": [
-          12402.36,
-          11482.71
-        ],
         "2026-W28": [
-          23891.99,
-          20316.04
+          33747.61,
+          30893.48
+        ],
+        "2026-W29": [
+          5045.01,
+          3653.36
         ],
         "2026-W27": [
-          7501.6,
-          6222.82
+          8390.49,
+          7200.6
         ],
         "2026-W30": [
           7226.56,
@@ -1994,8 +1994,8 @@
       },
       "months": {
         "2026-07": [
-          56886.49,
-          48282.37
+          60273.65,
+          52008.25
         ],
         "2026-06": [
           6368.43,
@@ -2994,8 +2994,8 @@
       "produced": 10580.47,
       "margin_pct": 68.9,
       "ratio": 3.2,
-      "start": "2026-07-11",
-      "end": "2026-07-14",
+      "start": "2026-07-04",
+      "end": "2026-07-07",
       "severity": "media"
     },
     {
@@ -3245,17 +3245,17 @@
           "n_exp": 4
         },
         {
-          "trade": "INSULATION",
-          "income": 19773.88,
-          "expense": 10677.89,
+          "trade": "ROOFING",
+          "income": 17449.4,
+          "expense": 13316.49,
           "grouped": true,
           "n_inc": 2,
           "n_exp": 2
         },
         {
-          "trade": "ROOFING",
-          "income": 17449.4,
-          "expense": 12703.65,
+          "trade": "INSULATION",
+          "income": 19773.88,
+          "expense": 10677.89,
           "grouped": true,
           "n_inc": 2,
           "n_exp": 2
@@ -3285,20 +3285,20 @@
           "n_exp": 2
         },
         {
-          "trade": "MECHANICAL ROUGH IN",
-          "income": 9765.0,
-          "expense": 12500.0,
-          "grouped": true,
-          "n_inc": 2,
-          "n_exp": 2
-        },
-        {
           "trade": "PLUMBING TRIM",
           "income": 13950.0,
           "expense": 4960.0,
           "grouped": true,
           "n_inc": 2,
           "n_exp": 6
+        },
+        {
+          "trade": "MECHANICAL ROUGH IN",
+          "income": 9765.0,
+          "expense": 8500.0,
+          "grouped": true,
+          "n_inc": 2,
+          "n_exp": 2
         },
         {
           "trade": "EXTERIOR SHEATHING",
@@ -3390,7 +3390,7 @@
         }
       ],
       "total_income": 560057.6,
-      "total_expense": 315638.37,
+      "total_expense": 312251.21,
       "loose_amount": 0
     },
     {
