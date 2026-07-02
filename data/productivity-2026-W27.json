@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T08:02:06",
+  "generated_at": "2026-07-02T11:02:06",
   "week_iso": "2026-W27",
   "week_start": "2026-06-27",
   "week_end": "2026-07-03",
@@ -76,24 +76,29 @@
           "group_id": "22PZpzZGaYqg",
           "group_name": "PREFAB CABINETS",
           "parent_group_id": "22PZpzYHd8y5",
-          "action_count": 1,
+          "action_count": 2,
           "action_task_ids": [
-            "22PZqDfQZtGr"
+            "22PZqDfQZtGr",
+            "22PZpzZniKVa"
           ],
           "action_task_names": [
-            "CABINETS & CARPENTRY: TAKE MEASUREMENTS"
+            "CABINETS & CARPENTRY: TAKE MEASUREMENTS",
+            "INSTALL FIREPLACE MANTEL"
           ],
           "action_progresses": [
+            null,
             null
           ],
           "action_starts": [
-            "2026-07-01"
+            "2026-07-01",
+            "2026-07-13"
           ],
           "action_ends": [
-            "2026-07-01"
+            "2026-07-01",
+            "2026-07-13"
           ],
           "action_start_min": "2026-07-01",
-          "action_end_max": "2026-07-01",
+          "action_end_max": "2026-07-13",
           "action_lines": [
             {
               "task_id": "22PZqDfQZtGr",
@@ -102,23 +107,31 @@
               "amount": 0.0,
               "progress": null,
               "end_date": "2026-07-01"
+            },
+            {
+              "task_id": "22PZpzZniKVa",
+              "name": "INSTALL FIREPLACE MANTEL",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-07-13"
             }
           ],
           "subs_lines": [
-            {
-              "task_id": "22PZtykFXRv6",
-              "name": "FIREPLACE: BILL & PAYMENT",
-              "description": "-150",
-              "amount": 150.0,
-              "progress": null,
-              "end_date": "2026-07-08"
-            },
             {
               "task_id": "22PZwrv8gWbG",
               "name": "WINDOW SHUTTERS: INSTALLATION",
               "description": "564",
               "amount": 564.0,
-              "progress": null,
+              "progress": 0,
+              "end_date": "2026-07-07"
+            },
+            {
+              "task_id": "22PaBZEEUpKH",
+              "name": "WINDOW SHUTTERS: INSTALLATION DOWNPAYMENT",
+              "description": "564",
+              "amount": 564.0,
+              "progress": 0,
               "end_date": "2026-07-07"
             },
             {
@@ -128,6 +141,14 @@
               "amount": 1200.0,
               "progress": null,
               "end_date": "2026-07-17"
+            },
+            {
+              "task_id": "22PZtykFXRv6",
+              "name": "FIREPLACE: BILL & PAYMENT",
+              "description": "-150",
+              "amount": 150.0,
+              "progress": null,
+              "end_date": "2026-07-13"
             }
           ],
           "materials_lines": [
@@ -144,14 +165,6 @@
               "name": "PREFAB CABINETS: PURCHASE PULLS",
               "description": "-300",
               "amount": 300.0,
-              "progress": null,
-              "end_date": "2026-07-08"
-            },
-            {
-              "task_id": "22PZpzZniKVa",
-              "name": "INSTALL FIREPLACE MANTEL",
-              "description": "",
-              "amount": 0.0,
               "progress": null,
               "end_date": "2026-07-08"
             },
@@ -174,11 +187,11 @@
           ],
           "additional_lines": [],
           "sold": 0.0,
-          "expenses_subs": 1914.0,
+          "expenses_subs": 2478.0,
           "expenses_materials": 5530.0,
           "expenses_additional": 0,
-          "expenses_total": 7444.0,
-          "profit": -7444.0,
+          "expenses_total": 8008.0,
+          "profit": -8008.0,
           "status": "in_progress",
           "has_price": false,
           "this_pct": 0.0,
@@ -2176,7 +2189,7 @@
     "groups_in_progress": 18,
     "groups_finished_this_week": 1,
     "groups_missing_price": 3,
-    "expense_missing_price": 8244.0,
+    "expense_missing_price": 8808.0,
     "project_count": 6
   }
 }
