@@ -79,7 +79,11 @@ async function main(){
   }
   document.title = '📅 '+d.project.name+' — Schedule';
   document.getElementById('title').textContent = '📅 '+d.project.name+' — Schedule proyectado';
-  document.getElementById('sub').innerHTML = 'Solo <b>Action Tasks + Critical Path + City Inspections</b> · re-proyectado desde <b>'+fmt(d.today)+'</b> con tiempos <b>×'+d.factor+'</b> (+'+Math.round((d.factor-1)*100)+'% colchón) · generado '+d.generated_at.replace('T',' ');
+  document.getElementById('sub').innerHTML = 'Solo <b>Action Tasks + Critical Path + City Inspections</b> · ' +
+    (d.mode === 'real'
+      ? '<b>fechas REALES de JobTread</b> (sin colchón)'
+      : 're-proyectado desde <b>'+fmt(d.today)+'</b> con tiempos <b>×'+d.factor+'</b> (+'+Math.round((d.factor-1)*100)+'% colchón)') +
+    ' · generado '+d.generated_at.replace('T',' ');
 
   const span0 = d.span.start, span1 = d.span.end;
   const total = days(span0, span1) + 3; // + margen derecho
@@ -143,7 +147,9 @@ async function main(){
     document.getElementById('donelist').innerHTML = d.completed.map(t=>
       '<div class="donerow"><span class="dot" style="background:'+(CAT[t.cat]||{}).hex+';margin-top:5px"></span><span style="flex:1">'+t.name+'</span><span>'+t.orig_start+' → '+t.orig_end+'</span></div>').join('');
   }
-  document.getElementById('ft').textContent = 'Fuente: JobTread (dump '+slug+') · proyección ×'+d.factor+' anclada en hoy · las fechas ORIGINALES de JobTread no se modifican.';
+  document.getElementById('ft').textContent = d.mode === 'real'
+    ? 'Fuente: JobTread (dump '+slug+') · fechas reales del schedule, solo lectura.'
+    : 'Fuente: JobTread (dump '+slug+') · proyección ×'+d.factor+' anclada en hoy · las fechas ORIGINALES de JobTread no se modifican.';
 }
 main();
 </script>
