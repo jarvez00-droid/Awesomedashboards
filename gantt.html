@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>📅 Schedule — Gantt</title>
+<style>
+:root{--bg:#0f141b;--card:#171e27;--card2:#1d2630;--line:#2a3540;--tx:#e6edf3;--mut:#9aa7b4;
+--grn:#2ea043;--red:#f85149;--amb:#d29922;--blu:#388bfd;--pur:#a78bfa;--accent:#58a6ff;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1400px;margin:0 auto;padding:18px 20px 60px}
+.nav a{color:var(--accent);text-decoration:none;font-size:13px}
+h1{font-size:21px;margin:8px 0 3px}.sub{color:var(--mut);font-size:13px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:16px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px}
+.kpi .lab{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.kpi .val{font-size:20px;font-weight:700;margin-top:3px}
+.legend{display:flex;gap:16px;align-items:center;color:var(--mut);font-size:12px;margin:10px 0 14px;flex-wrap:wrap}
+.dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.gantt-box{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:auto;position:relative}
+.grow{display:flex;border-top:1px solid var(--line)}
+.grow:hover{background:var(--card2)}
+.glabel{flex:0 0 300px;position:sticky;left:0;background:var(--card);padding:7px 12px;font-size:12.5px;
+  border-right:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;z-index:2}
+.grow:hover .glabel{background:var(--card2)}
+.gtrack{position:relative;flex:0 0 auto;min-height:32px}
+.gbar{position:absolute;top:6px;height:20px;border-radius:5px;font-size:10px;line-height:20px;color:#fff;
+  padding:0 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:default;opacity:.95}
+.gbar:hover{opacity:1;box-shadow:0 0 0 1.5px #fff3;z-index:3}
+.gbar .pfill{position:absolute;left:0;top:0;bottom:0;background:rgba(255,255,255,.25);border-radius:5px 0 0 5px}
+.ghead{display:flex;position:sticky;top:0;background:var(--card2);z-index:4;border-bottom:1px solid var(--line)}
+.ghead .glabel{background:var(--card2);font-weight:700;color:var(--mut);font-size:11px}
+.gmonths,.gdays{position:relative;height:20px}
+.gm{position:absolute;top:0;font-size:11px;font-weight:700;color:var(--tx);border-left:1px solid var(--line);padding-left:6px;height:20px;line-height:20px}
+.gd{position:absolute;top:20px;font-size:9px;color:var(--mut);border-left:1px solid rgba(42,53,64,.6);height:16px;line-height:16px;padding-left:3px}
+.gheadcol{height:36px}
+.todayline{position:absolute;top:0;bottom:0;width:2px;background:var(--amb);z-index:1;opacity:.85}
+.todaytag{position:absolute;top:-1px;font-size:9px;background:var(--amb);color:#000;border-radius:0 4px 4px 0;padding:0 4px;font-weight:700}
+.weekend{position:absolute;top:0;bottom:0;background:rgba(255,255,255,.025)}
+.cathead{background:rgba(88,166,255,.06);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:5px 12px;border-top:1px solid var(--line);position:sticky;left:0}
+details{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 14px}
+summary{cursor:pointer;padding:8px 0;font-weight:600;font-size:13px}
+.donerow{display:flex;gap:10px;padding:5px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--mut)}
+.ft{color:var(--mut);font-size:11.5px;margin-top:22px;text-align:center}
+</style></head><body><div class="wrap">
+<div class="nav"><a href="index.html">← Operations Dashboard</a></div>
+<h1 id="title">📅 Schedule</h1>
+<div class="sub" id="sub">Cargando…</div>
+<div class="kpis" id="kpis"></div>
+<div class="legend">
+  <span><span class="dot" style="background:var(--blu)"></span>Action Task</span>
+  <span><span class="dot" style="background:var(--red)"></span>Critical Path</span>
+  <span><span class="dot" style="background:var(--pur)"></span>City Inspection</span>
+  <span style="margin-left:auto">línea <b style="color:var(--amb)">amarilla</b> = hoy · sombreado = fin de semana</span>
+</div>
+<div class="gantt-box" id="gantt"></div>
+<details id="donebox" style="display:none"><summary id="donesum"></summary><div id="donelist"></div></details>
+<div class="ft" id="ft"></div>
+<script>
+const CAT = {
+  action:     {label:'Action Tasks',     color:'var(--blu)', hex:'#388bfd'},
+  critical:   {label:'Critical Path',    color:'var(--red)', hex:'#f85149'},
+  inspection: {label:'City Inspections', color:'var(--pur)', hex:'#a78bfa'},
+};
+const PX = 18; // px por día
+const D = s => new Date(s + 'T12:00:00');
+const days = (a,b) => Math.round((D(b)-D(a))/86400000);
+const fmt = s => D(s).toLocaleDateString('es-MX',{day:'numeric',month:'short'});
+
+async function main(){
+  const slug = new URLSearchParams(location.search).get('p') || 'katie-holmes';
+  let d;
+  try {
+    const r = await fetch('data/gantt-'+slug+'-latest.json?_='+Date.now(),{cache:'no-store'});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    d = await r.json();
+  } catch(e) {
+    document.getElementById('sub').textContent = 'No hay data para "'+slug+'" — corre: python3 generate_gantt_json.py <projectId> '+slug;
+    return;
+  }
+  document.title = '📅 '+d.project.name+' — Schedule';
+  document.getElementById('title').textContent = '📅 '+d.project.name+' — Schedule proyectado';
+  document.getElementById('sub').innerHTML = 'Solo <b>Action Tasks + Critical Path + City Inspections</b> · re-proyectado desde <b>'+fmt(d.today)+'</b> con tiempos <b>×'+d.factor+'</b> (+'+Math.round((d.factor-1)*100)+'% colchón) · generado '+d.generated_at.replace('T',' ');
+
+  const span0 = d.span.start, span1 = d.span.end;
+  const total = days(span0, span1) + 3; // + margen derecho
+  const c = d.counts;
+  document.getElementById('kpis').innerHTML = [
+    ['Fin proyectado', fmt(span1), 'var(--amb)'],
+    ['Días restantes', days(d.today, span1), ''],
+    ['Action pendientes', c.by_cat.action, CAT.action.color],
+    ['Critical Path pendientes', c.by_cat.critical, CAT.critical.color],
+    ['Inspecciones pendientes', c.by_cat.inspection, CAT.inspection.color],
+    ['Completadas', c.done, 'var(--grn)'],
+  ].map(([l,v,col])=>'<div class="kpi"><div class="lab">'+l+'</div><div class="val" style="color:'+(col||'var(--tx)')+'">'+v+'</div></div>').join('');
+
+  const trackW = total * PX;
+  // fondos: weekends + hoy
+  let bg = '';
+  for (let i=0;i<total;i++){
+    const dt = new Date(D(span0).getTime()+i*86400000);
+    const dow = dt.getDay();
+    if (dow===0||dow===6) bg += '<div class="weekend" style="left:'+(i*PX)+'px;width:'+PX+'px"></div>';
+  }
+  const todayOff = days(span0, d.today);
+  const todayLine = '<div class="todayline" style="left:'+(todayOff*PX)+'px"></div>';
+  const todayLineTag = '<div class="todayline" style="left:'+(todayOff*PX)+'px"><span class="todaytag">HOY</span></div>';
+
+  // encabezado: meses + días (lunes)
+  let months='', dcols='';
+  let cur = D(span0);
+  for (let i=0;i<total;i++){
+    const dt = new Date(D(span0).getTime()+i*86400000);
+    if (i===0 || dt.getDate()===1){
+      months += '<div class="gm" style="left:'+(i*PX)+'px">'+dt.toLocaleDateString('es-MX',{month:'long',year:'numeric'})+'</div>';
+    }
+    if (dt.getDay()===1){
+      dcols += '<div class="gd" style="left:'+(i*PX)+'px">'+dt.getDate()+'</div>';
+    }
+  }
+  let h = '<div class="ghead"><div class="glabel gheadcol" style="line-height:36px">TAREA</div>'+
+          '<div class="gtrack gheadcol" style="width:'+trackW+'px">'+months+dcols+todayLineTag+'</div></div>';
+
+  for (const cat of ['critical','action','inspection']){
+    const rows = d.tasks.filter(t=>t.cat===cat);
+    if (!rows.length) continue;
+    h += '<div class="grow"><div class="cathead" style="flex:0 0 300px;color:'+CAT[cat].color+'">'+CAT[cat].label+' ('+rows.length+')</div><div class="gtrack" style="width:'+trackW+'px;background:rgba(88,166,255,.03)"></div></div>';
+    for (const t of rows){
+      const off = days(span0, t.start), len = days(t.start, t.end)+1;
+      const pct = Math.round((t.progress||0)*100);
+      const tip = t.name+'\n'+fmt(t.start)+' → '+fmt(t.end)+' ('+t.days+' días con colchón)\noriginal: '+t.orig_start+' → '+t.orig_end+(pct?'\navance actual: '+pct+'%':'');
+      h += '<div class="grow"><div class="glabel" title="'+t.name.replace(/"/g,'&quot;')+'">'+t.name+'</div>'+
+           '<div class="gtrack" style="width:'+trackW+'px">'+bg+todayLine+
+           '<div class="gbar" style="left:'+(off*PX)+'px;width:'+Math.max(len*PX-2,10)+'px;background:'+CAT[cat].hex+'" title="'+tip.replace(/"/g,'&quot;')+'">'+
+           (pct?'<span class="pfill" style="width:'+pct+'%"></span>':'')+
+           '<span style="position:relative">'+fmt(t.start)+' · '+t.days+'d</span></div></div></div>';
+    }
+  }
+  document.getElementById('gantt').innerHTML = h;
+
+  if ((d.completed||[]).length){
+    document.getElementById('donebox').style.display='';
+    document.getElementById('donesum').textContent = '✅ '+d.completed.length+' tareas ya completadas (no entran en la proyección)';
+    document.getElementById('donelist').innerHTML = d.completed.map(t=>
+      '<div class="donerow"><span class="dot" style="background:'+(CAT[t.cat]||{}).hex+';margin-top:5px"></span><span style="flex:1">'+t.name+'</span><span>'+t.orig_start+' → '+t.orig_end+'</span></div>').join('');
+  }
+  document.getElementById('ft').textContent = 'Fuente: JobTread (dump '+slug+') · proyección ×'+d.factor+' anclada en hoy · las fechas ORIGINALES de JobTread no se modifican.';
+}
+main();
+</script>
+</div></body></html>

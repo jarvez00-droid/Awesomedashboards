@@ -363,10 +363,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
 
 <div class="nav" id="main-nav">
   <a class="on" data-p="sod">📋 Projects Dashboard</a>
-  <a data-p="weekly">▤ Weekly Forecast</a>
   <a data-p="finance">💵 Finance</a>
-  <a data-p="pagos">✅ Pagos Realizados</a>
-  <a data-p="productivity">📈 Productivity</a>
   <a href="net-productivity.html">💰 Productividad Neta</a>
   <a data-p="purchases">🛒 Purchases</a>
   <a data-p="orgmgmt">🎯 Management</a>
@@ -400,10 +397,7 @@ const MGMT_PW = 'Awesome';
 function render() {
   const c = document.getElementById('content');
   if (curPage === 'sod') renderSOD(c);
-  else if (curPage === 'weekly') loadAndRenderWeekly(c);
   else if (curPage === 'finance') { window._financeV2 = false; financeGate(c); }
-  else if (curPage === 'pagos') pagosGate(c);
-  else if (curPage === 'productivity') productivityGate(c);
   else if (curPage === 'orgmgmt') orgMgmtGate(c);
   else if (curPage === 'archive') renderArchive(c);
   else if (curPage === 'purchases') renderPurchases(c);
@@ -1817,9 +1811,29 @@ function mgmtTypeInfo(type) {
 }
 
 // ── Finance tab — API helpers ────────────────────────────────────
+// El túnel trycloudflare cambia de URL en cada reinicio de la Mac. La Mac
+// publica la URL vigente en data/api-url.json (paso del auto_refresh); aquí la
+// auto-descubrimos para que el usuario solo tenga que pegar el TOKEN una vez.
+window._publishedApiUrl = null;
+(async function(){
+  try {
+    const r = await fetch('data/api-url.json?_='+Date.now(), {cache:'no-store'});
+    if (r.ok) {
+      const j = await r.json();
+      if (j && j.url) {
+        window._publishedApiUrl = String(j.url).replace(/\/+$/, '');
+        const stored = (localStorage.getItem('finance_api_url')||'').replace(/\/+$/, '');
+        if (stored && stored !== window._publishedApiUrl) {
+          localStorage.setItem('finance_api_url', window._publishedApiUrl);  // auto-heal URL vieja
+        }
+      }
+    }
+  } catch(e) {}
+})();
+
 function financeApiConfig() {
   return {
-    url: (localStorage.getItem('finance_api_url')||'').replace(/\/+$/, ''),
+    url: (localStorage.getItem('finance_api_url')||window._publishedApiUrl||'').replace(/\/+$/, ''),
     token: localStorage.getItem('finance_api_token')||'',
   };
 }
@@ -4506,58 +4520,14 @@ async function loadAndRenderFinance(c) {
   c.innerHTML='<div class="empty"><div class="empty-i">💵</div><div class="empty-t">No Finance Data</div><div class="empty-d">Run: python3 generate_finance_json.py</div></div>';
 }
 
-// ─── Pagos Realizados tab ───────────────────────────────────────────
+// ─── Pagos Realizados (sección dentro de Finance) ───────────────────
 // Todo lo pagado (PAID del dashboard o check directo en JobTread) DESDE el
-// último update del balance. Data: FINANCE_DATA.paid_since_balance, alimentado
-// por data/paid_ledger.json (ver workspace-jade/paid_ledger.py).
-function pagosGate(c) {
-  if (sessionStorage.getItem('mgmt_auth')==='1') { loadAndRenderPagos(c); return; }
-  c.innerHTML = `<div class="pw-gate">
-    <div class="pw-icon">✅</div>
-    <div class="pw-title">Pagos Realizados — Restricted</div>
-    <div class="pw-sub">Enter password to access.</div>
-    <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
-    <button class="pw-btn" id="pw-btn">Unlock</button>
-    <div class="pw-deny" id="pw-deny" style="display:none">Access denied</div>
-  </div>`;
-  const inp=document.getElementById('pw-input'),btn=document.getElementById('pw-btn'),deny=document.getElementById('pw-deny');
-  function tryPw(){
-    if(inp.value===MGMT_PW){sessionStorage.setItem('mgmt_auth','1');loadAndRenderPagos(c);}
-    else{inp.classList.add('pw-err');deny.style.display='';setTimeout(()=>inp.classList.remove('pw-err'),400);}
-  }
-  btn.addEventListener('click',tryPw);
-  inp.addEventListener('keydown',e=>{if(e.key==='Enter')tryPw();});
-  setTimeout(()=>inp.focus(),50);
-}
-
-async function loadAndRenderPagos(c) {
-  c.innerHTML = '<div class="empty"><div class="empty-i">⏳</div><div class="empty-t">Cargando pagos realizados…</div></div>';
-  // Misma fuente que Finance: API live primero, estático como fallback.
-  if (!FINANCE_DATA || !FINANCE_DATA.paid_since_balance) {
-    if (financeApiConfigured()) {
-      try { FINANCE_DATA = await financeApi('/state'); window._financeLive = true; }
-      catch (e) { window._financeLive = false; }
-    }
-    if (!FINANCE_DATA || !FINANCE_DATA.paid_since_balance) {
-      for (let i=0;i<7;i++){
-        const d=new Date(Date.now()-i*86400000).toISOString().slice(0,10);
-        try{const r=await fetch('data/finance-'+d+'.json?_='+Date.now(),{cache:'no-store'});if(!r.ok)continue;const j=await r.json();if(j.paid_since_balance){FINANCE_DATA=j;break;}}catch(e){}
-      }
-    }
-    if (!FINANCE_DATA || !FINANCE_DATA.paid_since_balance) {
-      try{const r=await fetch('data/finance-latest.json?_='+Date.now(),{cache:'no-store'});if(r.ok){const j=await r.json();if(j.paid_since_balance)FINANCE_DATA=j;}}catch(e){}
-    }
-  }
-  renderPagos(c);
-}
-
-function renderPagos(c) {
+// último update del balance, + el SALDO RESTANTE con que aún se cuenta.
+// Data: FINANCE_DATA.paid_since_balance ← data/paid_ledger.json (paid_ledger.py).
+function financePagosSectionHTML() {
   const psb = (FINANCE_DATA || {}).paid_since_balance;
   const bank = (FINANCE_DATA || {}).bank || {};
-  if (!psb) {
-    c.innerHTML = '<div class="empty"><div class="empty-i">✅</div><div class="empty-t">Sin data de pagos realizados</div><div class="empty-d">Corre el refresh de finance (el JSON aún no trae paid_since_balance).</div></div>';
-    return;
-  }
+  if (!psb) return '';
   const s = psb.summary || {};
   const fmt = n => '$' + Math.abs(n||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
   const TYPE_BADGE = {
@@ -4572,55 +4542,43 @@ function renderPagos(c) {
     backfill:  'histórico (fecha aprox.)',
   };
   const asOf = psb.since || bank.as_of || '—';
-  let h = `<div style="max-width:1100px;margin:0 auto">
-    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px">
-      <h2 style="margin:0;font-size:20px">✅ Pagos Realizados</h2>
-      <span style="color:var(--dim);font-size:12px">desde el último balance: <b style="color:var(--txt)">${asOf}</b> (${fmt(bank.current_balance)} registrado)</span>
-    </div>
-    <div style="color:var(--dim);font-size:11px;margin-bottom:14px">Todo lo marcado PAID en el dashboard (que marca el check en JobTread) + toda tarea de pago checkeada directo en JobTread, detectada en cada refresh.</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:18px">
-      <div style="background:var(--card,rgba(255,255,255,.03));border:1px solid var(--bdr);border-radius:8px;padding:12px">
-        <div style="font-size:11px;color:var(--dim)">PAGADO (salidas)</div>
-        <div style="font-size:20px;font-weight:700;color:var(--red)">−${fmt(s.paid_out)}</div>
-      </div>
-      <div style="background:var(--card,rgba(255,255,255,.03));border:1px solid var(--bdr);border-radius:8px;padding:12px">
-        <div style="font-size:11px;color:var(--dim)">COBRADO (ingresos)</div>
-        <div style="font-size:20px;font-weight:700;color:var(--grn)">+${fmt(s.income_received)}</div>
-      </div>
-      <div style="background:var(--card,rgba(255,255,255,.03));border:1px solid var(--bdr);border-radius:8px;padding:12px">
-        <div style="font-size:11px;color:var(--dim)">NETO desde el balance</div>
-        <div style="font-size:20px;font-weight:700;color:${(s.net||0)>=0?'var(--grn)':'var(--red)'}">${(s.net||0)>=0?'+':'−'}${fmt(s.net)}</div>
-      </div>
-      <div style="background:var(--card,rgba(255,255,255,.03));border:1px solid var(--bdr);border-radius:8px;padding:12px">
-        <div style="font-size:11px;color:var(--dim)">MOVIMIENTOS</div>
-        <div style="font-size:20px;font-weight:700">${s.count||0}</div>
-      </div>
-    </div>`;
+  const remaining = s.remaining_balance;
   const entries = psb.entries || [];
-  if (!entries.length) {
-    h += `<div class="empty"><div class="empty-i">🗒</div><div class="empty-t">Nada pagado todavía desde ${asOf}</div><div class="empty-d">Al marcar PAID (o checkear en JobTread) aparece aquí.</div></div></div>`;
-    c.innerHTML = h;
-    return;
-  }
-  // agrupar por fecha (ya vienen desc)
+  let rows = '';
   let curDate = null;
-  h += `<div style="border:1px solid var(--bdr);border-radius:8px;overflow:hidden">`;
   for (const e of entries) {
     if (e.paid_date !== curDate) {
       curDate = e.paid_date;
-      h += `<div style="background:rgba(129,140,248,.08);padding:6px 12px;font-size:12px;font-weight:600;border-top:1px solid var(--bdr)">${curDate}</div>`;
+      rows += `<div style="background:rgba(129,140,248,.08);padding:6px 12px;font-size:12px;font-weight:600;border-top:1px solid var(--bdr)">${curDate}</div>`;
     }
     const [bLabel, bColor] = TYPE_BADGE[e.type] || [String(e.type||'?').toUpperCase(), 'var(--dim)'];
     const isIncome = e.type === 'income';
-    h += `<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-top:1px solid var(--bdr);font-size:13px">
+    rows += `<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-top:1px solid var(--bdr);font-size:13px">
       <span style="flex:0 0 78px;font-size:10px;font-weight:700;color:${bColor};border:1px solid ${bColor};border-radius:4px;padding:1px 6px;text-align:center">${bLabel}</span>
       <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><b>${e.project||''}</b> — ${e.label||''}</span>
       <span style="flex:0 0 auto;font-size:10px;color:var(--dim)">${SRC_LABEL[e.source]||e.source||''}</span>
       <span style="flex:0 0 110px;text-align:right;font-family:var(--mono);font-weight:700;color:${isIncome?'var(--grn)':'var(--red)'}">${isIncome?'+':'−'}${fmt(e.amount)}</span>
     </div>`;
   }
-  h += `</div><div style="color:var(--dim);font-size:10px;margin-top:10px">Fuente: paid_ledger.json — el botón PAID registra la fecha exacta; los checks hechos directo en JobTread se detectan en el siguiente refresh (±20 min). Entradas "histórico" son de antes del ledger (fecha aproximada).</div></div>`;
-  c.innerHTML = h;
+  return `
+  <details style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);margin-bottom:16px" ${entries.length?'':'open'}>
+    <summary style="cursor:pointer;padding:12px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;list-style:none">
+      <b style="font-size:14px">✅ Pagos Realizados</b>
+      <span style="color:var(--dim);font-size:11px">desde el balance del <b style="color:var(--txt)">${asOf}</b> (${fmt(bank.current_balance)})</span>
+      <span style="margin-left:auto;display:flex;gap:14px;font-family:var(--mono);font-size:12px;font-weight:700">
+        <span style="color:var(--red)">−${fmt(s.paid_out)} pagado</span>
+        <span style="color:var(--grn)">+${fmt(s.income_received)} cobrado</span>
+        <span style="color:${(remaining??0)>=0?'var(--grn)':'var(--red)'};border:1px solid var(--bdr);border-radius:5px;padding:1px 8px">SALDO RESTANTE ${remaining==null?'—':fmt(remaining)}</span>
+      </span>
+    </summary>
+    <div style="padding:0 14px 12px">
+      <div style="color:var(--dim);font-size:11px;margin-bottom:10px">Lo marcado PAID en el dashboard (check automático en JobTread) + tareas de pago checkeadas directo en JobTread (detectadas en cada refresh). Saldo restante = balance registrado ${asOf} − pagado + cobrado.</div>
+      ${entries.length
+        ? `<div style="border:1px solid var(--bdr);border-radius:8px;overflow:hidden">${rows}</div>
+           <div style="color:var(--dim);font-size:10px;margin-top:8px">${s.count||0} movimientos. Entradas "histórico" son anteriores al ledger (fecha aproximada).</div>`
+        : `<div style="color:var(--dim);font-size:12px">Nada pagado todavía desde ${asOf} — al marcar PAID (o checkear en JobTread) aparece aquí.</div>`}
+    </div>
+  </details>`;
 }
 
 // ─── Scenario Cashflow tab ──────────────────────────────────────────
@@ -5666,6 +5624,7 @@ function renderFinance(c) {
 
     <div class="stats">
       <div class="st g"><div class="n">${fmtK(bal)}</div><div class="l">Current Balance</div></div>
+      ${(d.paid_since_balance && d.paid_since_balance.summary && d.paid_since_balance.summary.remaining_balance != null) ? `<div class="st ${d.paid_since_balance.summary.remaining_balance >= 0 ? 'g' : 'r'}"><div class="n">${fmtK(d.paid_since_balance.summary.remaining_balance)}</div><div class="l">Saldo Restante (hoy)</div></div>` : ''}
       <div class="st ${projected >= 0 ? 'g' : 'r'}"><div class="n">${fmtK(projected)}</div><div class="l">Projected ${rangeLbl} End</div></div>
       <div class="st ${runwayCls}"><div class="n">${runwayDisp}</div><div class="l">Runs Negative</div></div>
       <div class="st b"><div class="n">${fmtK(forward_net)}</div><div class="l">Net ${rangeLbl}</div></div>
@@ -5689,7 +5648,8 @@ function renderFinance(c) {
         <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Overdue To Pay</div>
         <div style="color:var(--red);font-family:var(--mono);font-weight:700;font-size:16px">-${fmtK(s.overdue_outgoing)}</div>
       </div>
-    </div>`;
+    </div>
+    ${financePagosSectionHTML()}`;
 
   if (breakdown) {
     const today = new Date(d.date + 'T12:00:00');
