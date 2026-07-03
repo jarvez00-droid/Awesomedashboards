@@ -1,0 +1,1361 @@
+{
+ "generated_at": "2026-07-03T15:26:03",
+ "params": {
+  "buffer": 2500.0,
+  "horizon_days": 90,
+  "planilla_max_delay": 7,
+  "big_payment_threshold": 8000.0,
+  "cp_window_days": 21
+ },
+ "start": {
+  "balance": 33860.51,
+  "source": "saldo restante (balance registrado 2026-07-01 \u2212 pagado + cobrado del ledger)",
+  "date": "2026-07-03"
+ },
+ "result": {
+  "min_before": -65130.15,
+  "min_before_day": "2026-07-10",
+  "min_after": -36749.76,
+  "min_after_day": "2026-10-01",
+  "moves_count": 80,
+  "moved_total": 165668.45,
+  "planilla_touched": true,
+  "hard_days": []
+ },
+ "rules": [
+  "materiales: NUNCA se mueven",
+  "subs DOWNPAYMENT: NUNCA se mueven",
+  "pagos que gatean RUTA CR\u00cdTICA (CP del mismo trade \u226421d): NUNCA se mueven",
+  "planilla: m\u00e1x 7 d\u00edas, solo \u00faltimo recurso",
+  "cobros: no se mueven, se usan cuando caen",
+  "todo lo dem\u00e1s: optimizable",
+  "colch\u00f3n m\u00ednimo: $2,500"
+ ],
+ "moves": [
+  {
+   "label": "Krishna",
+   "project": "Fixed Costs",
+   "amount": -1333.0,
+   "category": "Other",
+   "from": "2026-07-03",
+   "to": "2026-07-04",
+   "days": 1
+  },
+  {
+   "label": "ELECTRICAL ROUGH IN: after PM inspection",
+   "project": "Kyle Aubry - Project 01",
+   "amount": -1500.0,
+   "category": "subs",
+   "from": "2026-07-03",
+   "to": "2026-07-04",
+   "days": 1
+  },
+  {
+   "label": "DRYWALL: BILL & PAYMENT",
+   "project": "Lingyan Qiu (CNG2025-458)",
+   "amount": -1300.0,
+   "category": "subs",
+   "from": "2026-07-03",
+   "to": "2026-07-04",
+   "days": 1
+  },
+  {
+   "label": "Matt",
+   "project": "Fixed Costs",
+   "amount": -2000.0,
+   "category": "Legal",
+   "from": "2026-07-03",
+   "to": "2026-07-08",
+   "days": 5
+  },
+  {
+   "label": "Office",
+   "project": "Fixed Costs",
+   "amount": -2100.0,
+   "category": "Utility",
+   "from": "2026-07-03",
+   "to": "2026-07-08",
+   "days": 5
+  },
+  {
+   "label": "PAINTING - BILL & PAYMENT",
+   "project": "Ginger Brown",
+   "amount": -2000.0,
+   "category": "subs",
+   "from": "2026-07-03",
+   "to": "2026-07-08",
+   "days": 5
+  },
+  {
+   "label": "MECHANICAL: BILL & PAYMENT (MIDDLE PAYMENT)",
+   "project": "Katie Holmes & Sean Springs",
+   "amount": -2500.0,
+   "category": "subs",
+   "from": "2026-07-03",
+   "to": "2026-07-08",
+   "days": 5
+  },
+  {
+   "label": "GROUT: PURCHASE MATERIAL",
+   "project": "Lingyan Qiu (CNG2025-458)",
+   "amount": -70.0,
+   "category": "additional",
+   "from": "2026-07-06",
+   "to": "2026-07-08",
+   "days": 2
+  },
+  {
+   "label": "STARNES & BAILEY (LAWYERS)",
+   "project": "Fixed Costs",
+   "amount": -3000.0,
+   "category": "Legal",
+   "from": "2026-07-03",
+   "to": "2026-07-10",
+   "days": 7
+  },
+  {
+   "label": "PLUMBING: BILL & PAYMENT ( after final inspection )",
+   "project": "Ginger Brown",
+   "amount": -4000.0,
+   "category": "subs",
+   "from": "2026-07-03",
+   "to": "2026-07-10",
+   "days": 7
+  },
+  {
+   "label": "BRICKS: AFTER COMPLETION ORIGINAK 50%",
+   "project": "Stephanie and Marc Felton",
+   "amount": -2500.0,
+   "category": "subs",
+   "from": "2026-07-03",
+   "to": "2026-07-10",
+   "days": 7
+  },
+  {
+   "label": "Henry (5th)",
+   "project": "Fixed Costs",
+   "amount": -1000.0,
+   "category": "Other",
+   "from": "2026-07-05",
+   "to": "2026-07-10",
+   "days": 5
+  },
+  {
+   "label": "ELECTRICAL: BILL & PAYMENT",
+   "project": "Katie Holmes & Sean Springs",
+   "amount": -5805.0,
+   "category": "subs",
+   "from": "2026-07-03",
+   "to": "2026-07-11",
+   "days": 8
+  },
+  {
+   "label": "PLUMBING: BILL & PAYMENT PART 1",
+   "project": "Katie Holmes & Sean Springs",
+   "amount": -4873.0,
+   "category": "subs",
+   "from": "2026-07-03",
+   "to": "2026-07-11",
+   "days": 8
+  },
+  {
+   "label": "PLUMBING: BILL & PAYMENT PART 2",
+   "project": "Katie Holmes & Sean Springs",
+   "amount": -4873.0,
+   "category": "subs",
+   "from": "2026-07-03",
+   "to": "2026-07-11",
+   "days": 8
+  },
+  {
+   "label": "FOUNDATION: BILL & PAYMENT",
+   "project": "Rohini Williams (CNG2025-496)",
+   "amount": -5500.0,
+   "category": "subs",
+   "from": "2026-07-03",
+   "to": "2026-07-11",
+   "days": 8
+  },
+  {
+   "label": "GLASS: BILL & PAYMENT",
+   "project": "Stephanie and Marc Felton",
+   "amount": -840.0,
+   "category": "subs",
+   "from": "2026-07-08",
+   "to": "2026-07-11",
+   "days": 3
+  },
+  {
+   "label": "POOL: BILL & PAYMENT",
+   "project": "Stephanie and Marc Felton",
+   "amount": -6507.65,
+   "category": "subs",
+   "from": "2026-07-08",
+   "to": "2026-07-11",
+   "days": 3
+  },
+  {
+   "label": "GUTTERS: PAYMENT",
+   "project": "Clifford Clack \u2014 Gym Addition",
+   "amount": -689.0,
+   "category": "subs",
+   "from": "2026-07-09",
+   "to": "2026-07-11",
+   "days": 2
+  },
+  {
+   "label": "INSULATION: BILL & PAYMENT",
+   "project": "Katie Holmes & Sean Springs",
+   "amount": -9200.0,
+   "category": "subs",
+   "from": "2026-07-03",
+   "to": "2026-07-13",
+   "days": 10
+  },
+  {
+   "label": "FLOORING: BILL & PAYMENT",
+   "project": "Clifford Clack \u2014 Gym Addition",
+   "amount": -1200.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-13",
+   "days": 3
+  },
+  {
+   "label": "GLASS: PAYMENT",
+   "project": "Clifford Clack \u2014 Gym Addition",
+   "amount": -1033.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-13",
+   "days": 3
+  },
+  {
+   "label": "ELECTRIC: BILL PAYMENT 5",
+   "project": "Ginger Brown",
+   "amount": -1500.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-13",
+   "days": 3
+  },
+  {
+   "label": "INTERIOR FIXES - windows cleaning BILL & PAYMENT",
+   "project": "Ginger Brown",
+   "amount": -2000.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-13",
+   "days": 3
+  },
+  {
+   "label": "KITCHEN COUNTERTOPS: BILL & PAYMENT",
+   "project": "Lingyan Qiu (CNG2025-458)",
+   "amount": -1350.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-13",
+   "days": 3
+  },
+  {
+   "label": "Mechanical bill & payment FINAL",
+   "project": "Lingyan Qiu (CNG2025-458)",
+   "amount": -1400.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-13",
+   "days": 3
+  },
+  {
+   "label": "PLUMBING: GAS LINE BILL (Copy)",
+   "project": "Rohini Williams (CNG2025-496)",
+   "amount": -1000.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-13",
+   "days": 3
+  },
+  {
+   "label": "BILL & PAYMENTS: DIRT PREP + LOT PREP",
+   "project": "Charles Harris \u2014 Argyle TX",
+   "amount": -3500.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-14",
+   "days": 4
+  },
+  {
+   "label": "GUTTERS: BILL & PAYMENT",
+   "project": "Ginger Brown",
+   "amount": -2424.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-14",
+   "days": 4
+  },
+  {
+   "label": "MECHANICAL ROUGH IN: BILL & PAYMENT - AFTER INSPECTION (50%)",
+   "project": "Martha Cockrell (CNG-20251199)",
+   "amount": -4250.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-14",
+   "days": 4
+  },
+  {
+   "label": "FOUNDATION: BILL & PAYMENT",
+   "project": "Martha Cockrell (CNG-20251199)",
+   "amount": -4500.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-14",
+   "days": 4
+  },
+  {
+   "label": "EXTERIOR: BILL & PAYMENT",
+   "project": "Stephanie and Marc Felton",
+   "amount": -2750.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-14",
+   "days": 4
+  },
+  {
+   "label": "BRICKS: STANDARD PAYMENT EXTRA",
+   "project": "Stephanie and Marc Felton",
+   "amount": -2500.0,
+   "category": "subs",
+   "from": "2026-07-10",
+   "to": "2026-07-14",
+   "days": 4
+  },
+  {
+   "label": "BILL & PAYMENTS: CULVERTS",
+   "project": "Charles Harris \u2014 Argyle TX",
+   "amount": -4000.0,
+   "category": "subs",
+   "from": "2026-07-17",
+   "to": "2026-07-22",
+   "days": 5
+  },
+  {
+   "label": "CUSTOM CARPENTRY: BILLS & PAYMENT",
+   "project": "Clifford Clack \u2014 Gym Addition",
+   "amount": -1600.0,
+   "category": "subs",
+   "from": "2026-07-17",
+   "to": "2026-07-22",
+   "days": 5
+  },
+  {
+   "label": "CEILING MOULDING: BILL & PAYMENT",
+   "project": "Clifford Clack \u2014 Gym Addition",
+   "amount": -250.0,
+   "category": "subs",
+   "from": "2026-07-17",
+   "to": "2026-07-22",
+   "days": 5
+  },
+  {
+   "label": "CLEANING: BILL & PAYMENT",
+   "project": "Ginger Brown",
+   "amount": -600.0,
+   "category": "subs",
+   "from": "2026-07-17",
+   "to": "2026-07-22",
+   "days": 5
+  },
+  {
+   "label": "PAINTING - BILL & PAYMENT",
+   "project": "Ginger Brown",
+   "amount": -1200.0,
+   "category": "subs",
+   "from": "2026-07-17",
+   "to": "2026-07-22",
+   "days": 5
+  },
+  {
+   "label": "DRYWALL SHEETROCK: BILL & PAYMENT",
+   "project": "Katie Holmes & Sean Springs",
+   "amount": -3500.0,
+   "category": "subs",
+   "from": "2026-07-17",
+   "to": "2026-07-22",
+   "days": 5
+  },
+  {
+   "label": "PLUMBING ROUGH IN: BILL & PAYMENT - ROUGH FINISH",
+   "project": "Martha Cockrell (CNG-20251199)",
+   "amount": -500.0,
+   "category": "subs",
+   "from": "2026-07-17",
+   "to": "2026-07-22",
+   "days": 5
+  },
+  {
+   "label": "CABINETS (BATHROOM + KITCHEN): BILL & PAYMENT 1",
+   "project": "Stephanie and Marc Felton",
+   "amount": -2500.0,
+   "category": "subs",
+   "from": "2026-07-17",
+   "to": "2026-07-22",
+   "days": 5
+  },
+  {
+   "label": "CABINET PAINT PAYMENT",
+   "project": "Stephanie and Marc Felton",
+   "amount": -2500.0,
+   "category": "subs",
+   "from": "2026-07-17",
+   "to": "2026-07-22",
+   "days": 5
+  },
+  {
+   "label": "BRICKS: FINAL PAYMENT",
+   "project": "Stephanie and Marc Felton",
+   "amount": -125.0,
+   "category": "subs",
+   "from": "2026-07-17",
+   "to": "2026-07-22",
+   "days": 5
+  },
+  {
+   "label": "Henry (20th)",
+   "project": "Fixed Costs",
+   "amount": -500.0,
+   "category": "Other",
+   "from": "2026-07-20",
+   "to": "2026-07-22",
+   "days": 2
+  },
+  {
+   "label": "Accountant",
+   "project": "Fixed Costs",
+   "amount": -1000.0,
+   "category": "Other",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Claude",
+   "project": "Fixed Costs",
+   "amount": -200.0,
+   "category": "Systems",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Company cam awesome",
+   "project": "Fixed Costs",
+   "amount": -720.0,
+   "category": "Systems",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Gas",
+   "project": "Fixed Costs",
+   "amount": -1000.0,
+   "category": "Utility",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Gmail Awesome",
+   "project": "Fixed Costs",
+   "amount": -50.4,
+   "category": "Systems",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Gmail CNG",
+   "project": "Fixed Costs",
+   "amount": -224.0,
+   "category": "Systems",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Jobtread BWA",
+   "project": "Fixed Costs",
+   "amount": -360.0,
+   "category": "Systems",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Jobtread CNG",
+   "project": "Fixed Costs",
+   "amount": -240.0,
+   "category": "Systems",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Krishna",
+   "project": "Fixed Costs",
+   "amount": -1333.0,
+   "category": "Other",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Luz",
+   "project": "Fixed Costs",
+   "amount": -200.0,
+   "category": "Utility",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Marketing",
+   "project": "Fixed Costs",
+   "amount": -1000.0,
+   "category": "Systems",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Matt",
+   "project": "Fixed Costs",
+   "amount": -2000.0,
+   "category": "Legal",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Office",
+   "project": "Fixed Costs",
+   "amount": -2100.0,
+   "category": "Utility",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Openclaw",
+   "project": "Fixed Costs",
+   "amount": -250.0,
+   "category": "Systems",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Quickbooks",
+   "project": "Fixed Costs",
+   "amount": -250.0,
+   "category": "Systems",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "STARNES & BAILEY (LAWYERS)",
+   "project": "Fixed Costs",
+   "amount": -3000.0,
+   "category": "Legal",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Seguro empresa",
+   "project": "Fixed Costs",
+   "amount": -160.0,
+   "category": "Utility",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "Yaniv",
+   "project": "Fixed Costs",
+   "amount": -1000.0,
+   "category": "Legal",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "ELECTRICAL TRIM: BILL & PAYMENT",
+   "project": "Martha Cockrell (CNG-20251199)",
+   "amount": -1290.0,
+   "category": "subs",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "PLUMBING TRIM: BILL & PAYMENT - TRIM START",
+   "project": "Martha Cockrell (CNG-20251199)",
+   "amount": -250.0,
+   "category": "subs",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "CABINETS: BILL & PAYMENT",
+   "project": "Rohini Williams (CNG2025-496)",
+   "amount": -3843.0,
+   "category": "subs",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "CABINETS: BILL & PAYMENT (DOWNPAYMNT)",
+   "project": "Rohini Williams (CNG2025-496)",
+   "amount": -3843.0,
+   "category": "subs",
+   "from": "2026-09-01",
+   "to": "2026-09-07",
+   "days": 6
+  },
+  {
+   "label": "MECHANICAL TRIM: BILL & PAYMENT",
+   "project": "Martha Cockrell (CNG-20251199)",
+   "amount": -1100.0,
+   "category": "subs",
+   "from": "2026-09-02",
+   "to": "2026-09-07",
+   "days": 5
+  },
+  {
+   "label": "COUNTERTOPS: BILL & PAYMENT",
+   "project": "Rohini Williams (CNG2025-496)",
+   "amount": -1125.0,
+   "category": "subs",
+   "from": "2026-09-02",
+   "to": "2026-09-07",
+   "days": 5
+  },
+  {
+   "label": "COUNTERTOPS: BILL & PAYMENT (Copy)",
+   "project": "Rohini Williams (CNG2025-496)",
+   "amount": -1125.0,
+   "category": "subs",
+   "from": "2026-09-02",
+   "to": "2026-09-07",
+   "days": 5
+  },
+  {
+   "label": "PLUMBING TRIM: BILL & PAYMENT - FINAL INSPECTION",
+   "project": "Martha Cockrell (CNG-20251199)",
+   "amount": -250.0,
+   "category": "subs",
+   "from": "2026-09-03",
+   "to": "2026-09-07",
+   "days": 4
+  },
+  {
+   "label": "BASEBOARDS AND TRIM: BILL & PAYMENT",
+   "project": "Shaan Lagisetty (CNG-20251169)",
+   "amount": -230.4,
+   "category": "subs",
+   "from": "2026-09-03",
+   "to": "2026-09-07",
+   "days": 4
+  },
+  {
+   "label": "PROJECT CLEANING - FRAMING: BILL & PAYMENT",
+   "project": "Karim Merchant (JOSE-TEST10)",
+   "amount": -450.0,
+   "category": "subs",
+   "from": "2026-09-04",
+   "to": "2026-09-07",
+   "days": 3
+  },
+  {
+   "label": "ROOFING: BILL & PAYMENT",
+   "project": "Karim Merchant (JOSE-TEST10)",
+   "amount": -952.0,
+   "category": "subs",
+   "from": "2026-09-04",
+   "to": "2026-09-07",
+   "days": 3
+  },
+  {
+   "label": "EXTERIOR SHEATING:BILL & Payment",
+   "project": "Karim Merchant (JOSE-TEST10)",
+   "amount": -1588.0,
+   "category": "subs",
+   "from": "2026-09-04",
+   "to": "2026-09-07",
+   "days": 3
+  },
+  {
+   "label": "TILES: BILL & PAYMENT",
+   "project": "Martha Cockrell (CNG-20251199)",
+   "amount": -6571.5,
+   "category": "subs",
+   "from": "2026-09-04",
+   "to": "2026-09-07",
+   "days": 3
+  },
+  {
+   "label": "Henry (5th)",
+   "project": "Fixed Costs",
+   "amount": -1000.0,
+   "category": "Other",
+   "from": "2026-09-05",
+   "to": "2026-09-07",
+   "days": 2
+  },
+  {
+   "label": "PLUMBING ROUGH IN: BILL & PAYMENT",
+   "project": "Karim Merchant (JOSE-TEST10)",
+   "amount": -1562.5,
+   "category": "subs",
+   "from": "2026-09-05",
+   "to": "2026-09-07",
+   "days": 2
+  },
+  {
+   "label": "Karla",
+   "project": "Fixed Costs",
+   "amount": -580.0,
+   "category": "Other",
+   "from": "2026-09-28",
+   "to": "2026-09-29",
+   "days": 1
+  },
+  {
+   "label": "GLASS: BILL & PAYMENT",
+   "project": "Martha Cockrell (CNG-20251199)",
+   "amount": -1250.0,
+   "category": "subs",
+   "from": "2026-09-28",
+   "to": "2026-09-29",
+   "days": 1
+  },
+  {
+   "label": "ELECTRICAL ROUGH IN: BILL & PAYMENT",
+   "project": "Charles Harris \u2014 Argyle TX",
+   "amount": -15298.0,
+   "category": "subs",
+   "from": "2026-09-25",
+   "to": "2026-09-30",
+   "days": 5
+  }
+ ],
+ "planilla_alerts": [
+  {
+   "label": "JONAS DE CARDENAS",
+   "amount": -4000.0,
+   "from": "2026-09-28",
+   "to": "2026-09-29",
+   "days": 1
+  },
+  {
+   "label": "REYNALDO AQUIJE",
+   "amount": -4000.0,
+   "from": "2026-09-28",
+   "to": "2026-09-29",
+   "days": 1
+  },
+  {
+   "label": "JEFFERY CLARCK",
+   "amount": -2090.2,
+   "from": "2026-09-28",
+   "to": "2026-09-29",
+   "days": 1
+  },
+  {
+   "label": "MILAGROS PORTURAS",
+   "amount": -1260.0,
+   "from": "2026-09-28",
+   "to": "2026-09-29",
+   "days": 1
+  },
+  {
+   "label": "CLAUDIA DELGADO",
+   "amount": -1160.0,
+   "from": "2026-09-28",
+   "to": "2026-09-29",
+   "days": 1
+  },
+  {
+   "label": "Giselle",
+   "amount": -1015.0,
+   "from": "2026-09-28",
+   "to": "2026-09-29",
+   "days": 1
+  },
+  {
+   "label": "William",
+   "amount": -1015.0,
+   "from": "2026-09-28",
+   "to": "2026-09-29",
+   "days": 1
+  },
+  {
+   "label": "JOSE ANDRES ROBLES",
+   "amount": -875.0,
+   "from": "2026-09-28",
+   "to": "2026-09-29",
+   "days": 1
+  },
+  {
+   "label": "ANGEL PACHECO",
+   "amount": -700.0,
+   "from": "2026-09-28",
+   "to": "2026-09-29",
+   "days": 1
+  }
+ ],
+ "splits": [
+  {
+   "label": "INSULATION: BILL & PAYMENT",
+   "project": "Katie Holmes & Sean Springs",
+   "amount": -9200.0,
+   "due": "2026-07-03",
+   "movable": true,
+   "plan": [
+    {
+     "date": "2026-07-03",
+     "amount": 4600.0
+    },
+    {
+     "date": "2026-07-10",
+     "amount": 4600.0
+    }
+   ],
+   "nota": "Pago grande ($9,200). Negociar con el sub 2 pagos semanales de $4,600 \u2014 mantiene al sub trabajando y suaviza el golpe de caja."
+  },
+  {
+   "label": "FLOORING: PURCHASE MATERIALS",
+   "project": "Katie Holmes & Sean Springs",
+   "amount": -9668.0,
+   "due": "2026-07-13",
+   "movable": false,
+   "plan": [
+    {
+     "date": "2026-07-17",
+     "amount": 4834.0
+    },
+    {
+     "date": "2026-07-24",
+     "amount": 4834.0
+    }
+   ],
+   "nota": "Pago grande ($9,668). Negociar con el sub 2 pagos semanales de $4,834 \u2014 mantiene al sub trabajando y suaviza el golpe de caja (este pago es INAMOVIBLE completo, el split es la \u00fanica palanca)."
+  },
+  {
+   "label": "SIDING: PURCHASE MATERIALS",
+   "project": "Martha Cockrell (CNG-20251199)",
+   "amount": -10929.6,
+   "due": "2026-07-15",
+   "movable": false,
+   "plan": [
+    {
+     "date": "2026-07-17",
+     "amount": 5464.8
+    },
+    {
+     "date": "2026-07-24",
+     "amount": 5464.8
+    }
+   ],
+   "nota": "Pago grande ($10,930). Negociar con el sub 2 pagos semanales de $5,465 \u2014 mantiene al sub trabajando y suaviza el golpe de caja (este pago es INAMOVIBLE completo, el split es la \u00fanica palanca)."
+  },
+  {
+   "label": "ELECTRICAL TRIM: PURCHASE MATERIALS",
+   "project": "Katie Holmes & Sean Springs",
+   "amount": -10125.0,
+   "due": "2026-07-30",
+   "movable": false,
+   "plan": [
+    {
+     "date": "2026-07-31",
+     "amount": 5062.5
+    },
+    {
+     "date": "2026-08-07",
+     "amount": 5062.5
+    }
+   ],
+   "nota": "Pago grande ($10,125). Negociar con el sub 2 pagos semanales de $5,062 \u2014 mantiene al sub trabajando y suaviza el golpe de caja (este pago es INAMOVIBLE completo, el split es la \u00fanica palanca)."
+  },
+  {
+   "label": "ROOFING: BILL & PAYMENT",
+   "project": "Martha Cockrell (CNG-20251199)",
+   "amount": -9500.0,
+   "due": "2026-07-31",
+   "movable": false,
+   "plan": [
+    {
+     "date": "2026-07-31",
+     "amount": 4750.0
+    },
+    {
+     "date": "2026-08-07",
+     "amount": 4750.0
+    }
+   ],
+   "nota": "Pago grande ($9,500). Negociar con el sub 2 pagos semanales de $4,750 \u2014 mantiene al sub trabajando y suaviza el golpe de caja (este pago es INAMOVIBLE completo, el split es la \u00fanica palanca)."
+  },
+  {
+   "label": "PLUMBING TRIM: PURCHASE MATERIALS",
+   "project": "Katie Holmes & Sean Springs",
+   "amount": -9536.0,
+   "due": "2026-08-03",
+   "movable": false,
+   "plan": [
+    {
+     "date": "2026-08-07",
+     "amount": 4768.0
+    },
+    {
+     "date": "2026-08-14",
+     "amount": 4768.0
+    }
+   ],
+   "nota": "Pago grande ($9,536). Negociar con el sub 2 pagos semanales de $4,768 \u2014 mantiene al sub trabajando y suaviza el golpe de caja (este pago es INAMOVIBLE completo, el split es la \u00fanica palanca)."
+  },
+  {
+   "label": "SIDING: BILL & PAYMENT",
+   "project": "Martha Cockrell (CNG-20251199)",
+   "amount": -8942.4,
+   "due": "2026-08-03",
+   "movable": false,
+   "plan": [
+    {
+     "date": "2026-08-07",
+     "amount": 4471.2
+    },
+    {
+     "date": "2026-08-14",
+     "amount": 4471.2
+    }
+   ],
+   "nota": "Pago grande ($8,942). Negociar con el sub 2 pagos semanales de $4,471 \u2014 mantiene al sub trabajando y suaviza el golpe de caja (este pago es INAMOVIBLE completo, el split es la \u00fanica palanca)."
+  },
+  {
+   "label": "FOUNDATION: BILL & PAYMENT - STANDAR",
+   "project": "Karim Merchant (JOSE-TEST10)",
+   "amount": -8750.0,
+   "due": "2026-08-07",
+   "movable": false,
+   "plan": [
+    {
+     "date": "2026-08-07",
+     "amount": 4375.0
+    },
+    {
+     "date": "2026-08-14",
+     "amount": 4375.0
+    }
+   ],
+   "nota": "Pago grande ($8,750). Negociar con el sub 2 pagos semanales de $4,375 \u2014 mantiene al sub trabajando y suaviza el golpe de caja (este pago es INAMOVIBLE completo, el split es la \u00fanica palanca)."
+  },
+  {
+   "label": "FRAMING: PURCHASE MATERIALS",
+   "project": "Charles Harris \u2014 Argyle TX",
+   "amount": -43747.0,
+   "due": "2026-08-15",
+   "movable": false,
+   "plan": [
+    {
+     "date": "2026-08-21",
+     "amount": 10936.75
+    },
+    {
+     "date": "2026-08-28",
+     "amount": 10936.75
+    },
+    {
+     "date": "2026-09-04",
+     "amount": 10936.75
+    },
+    {
+     "date": "2026-09-11",
+     "amount": 10936.75
+    }
+   ],
+   "nota": "Pago grande ($43,747). Negociar con el sub 4 pagos semanales de $10,937 \u2014 mantiene al sub trabajando y suaviza el golpe de caja (este pago es INAMOVIBLE completo, el split es la \u00fanica palanca)."
+  },
+  {
+   "label": "FOUNDATION: BILL & PAYMENT",
+   "project": "Charles Harris \u2014 Argyle TX",
+   "amount": -59800.0,
+   "due": "2026-08-21",
+   "movable": false,
+   "plan": [
+    {
+     "date": "2026-08-21",
+     "amount": 14950.0
+    },
+    {
+     "date": "2026-08-28",
+     "amount": 14950.0
+    },
+    {
+     "date": "2026-09-04",
+     "amount": 14950.0
+    },
+    {
+     "date": "2026-09-11",
+     "amount": 14950.0
+    }
+   ],
+   "nota": "Pago grande ($59,800). Negociar con el sub 4 pagos semanales de $14,950 \u2014 mantiene al sub trabajando y suaviza el golpe de caja (este pago es INAMOVIBLE completo, el split es la \u00fanica palanca)."
+  },
+  {
+   "label": "DOORS AND WINDOWS: PURCHASE MATERIALS",
+   "project": "Charles Harris \u2014 Argyle TX",
+   "amount": -17315.0,
+   "due": "2026-08-30",
+   "movable": false,
+   "plan": [
+    {
+     "date": "2026-09-04",
+     "amount": 5771.67
+    },
+    {
+     "date": "2026-09-11",
+     "amount": 5771.67
+    },
+    {
+     "date": "2026-09-18",
+     "amount": 5771.67
+    }
+   ],
+   "nota": "Pago grande ($17,315). Negociar con el sub 3 pagos semanales de $5,772 \u2014 mantiene al sub trabajando y suaviza el golpe de caja (este pago es INAMOVIBLE completo, el split es la \u00fanica palanca)."
+  },
+  {
+   "label": "ROOFING: PURCHASE METAL ROOFS",
+   "project": "Charles Harris \u2014 Argyle TX",
+   "amount": -12000.0,
+   "due": "2026-09-21",
+   "movable": false,
+   "plan": [
+    {
+     "date": "2026-09-25",
+     "amount": 6000.0
+    },
+    {
+     "date": "2026-10-02",
+     "amount": 6000.0
+    }
+   ],
+   "nota": "Pago grande ($12,000). Negociar con el sub 2 pagos semanales de $6,000 \u2014 mantiene al sub trabajando y suaviza el golpe de caja (este pago es INAMOVIBLE completo, el split es la \u00fanica palanca)."
+  },
+  {
+   "label": "SIDING: PURCHASE MATERIALS",
+   "project": "Charles Harris \u2014 Argyle TX",
+   "amount": -35000.0,
+   "due": "2026-10-01",
+   "movable": false,
+   "plan": [
+    {
+     "date": "2026-10-02",
+     "amount": 8750.0
+    },
+    {
+     "date": "2026-10-09",
+     "amount": 8750.0
+    },
+    {
+     "date": "2026-10-16",
+     "amount": 8750.0
+    },
+    {
+     "date": "2026-10-23",
+     "amount": 8750.0
+    }
+   ],
+   "nota": "Pago grande ($35,000). Negociar con el sub 4 pagos semanales de $8,750 \u2014 mantiene al sub trabajando y suaviza el golpe de caja (este pago es INAMOVIBLE completo, el split es la \u00fanica palanca)."
+  }
+ ],
+ "income_reliance": {
+  "total": 173616.33,
+  "items": [
+   {
+    "label": "AFTER MEP PAYMENT",
+    "project": "Ginger Brown",
+    "amount": 10000.0,
+    "date": "2026-07-03"
+   },
+   {
+    "label": "PAYMENT: AFTER FLOOR PLAN APPROVAL",
+    "project": "Shaan Lagisetty (CNG-20251169)",
+    "amount": 8996.86,
+    "date": "2026-07-06"
+   },
+   {
+    "label": "GLASS: RECEIVE PAYMENT",
+    "project": "Stephanie and Marc Felton",
+    "amount": 1200.0,
+    "date": "2026-07-08"
+   },
+   {
+    "label": "DECKING: RECEIVE PAYMENT",
+    "project": "Stephanie and Marc Felton",
+    "amount": 6507.65,
+    "date": "2026-07-08"
+   },
+   {
+    "label": "MILESTONE: punchlist",
+    "project": "Clifford Clack \u2014 Gym Addition",
+    "amount": 7346.74,
+    "date": "2026-07-10"
+   },
+   {
+    "label": "BEFORE FINAL INSPECTION PAYMENT",
+    "project": "Ginger Brown",
+    "amount": 10000.0,
+    "date": "2026-07-10"
+   },
+   {
+    "label": "FINAL PAYMENT",
+    "project": "Ginger Brown",
+    "amount": 20000.0,
+    "date": "2026-07-11"
+   },
+   {
+    "label": "INTERIOR PAINT: RECEIVE PAYMENT",
+    "project": "Stephanie and Marc Felton",
+    "amount": 10505.8,
+    "date": "2026-07-11"
+   },
+   {
+    "label": "AFTER MEPS",
+    "project": "Martha Cockrell (CNG-20251199)",
+    "amount": 55187.28,
+    "date": "2026-07-13"
+   },
+   {
+    "label": "DIRT & LOT PREP & CULVERTS & OTHER GENERAL PAYMENT",
+    "project": "Charles Harris \u2014 Argyle TX",
+    "amount": 38022.0,
+    "date": "2026-07-14"
+   },
+   {
+    "label": "ELECTRICAL: RECEIVE PAYMENT",
+    "project": "Stephanie and Marc Felton",
+    "amount": 3275.0,
+    "date": "2026-07-14"
+   },
+   {
+    "label": "PLUMBING: RECEIVE PAYMENT",
+    "project": "Stephanie and Marc Felton",
+    "amount": 2575.0,
+    "date": "2026-07-14"
+   }
+  ]
+ },
+ "unpaid_at_end": [
+  {
+   "label": "Gmail Awesome",
+   "project": "Fixed Costs",
+   "amount": -50.4,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Seguro empresa",
+   "project": "Fixed Costs",
+   "amount": -160.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Claude",
+   "project": "Fixed Costs",
+   "amount": -200.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Luz",
+   "project": "Fixed Costs",
+   "amount": -200.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Gmail CNG",
+   "project": "Fixed Costs",
+   "amount": -224.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Jobtread CNG",
+   "project": "Fixed Costs",
+   "amount": -240.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Openclaw",
+   "project": "Fixed Costs",
+   "amount": -250.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Quickbooks",
+   "project": "Fixed Costs",
+   "amount": -250.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Jobtread BWA",
+   "project": "Fixed Costs",
+   "amount": -360.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Company cam awesome",
+   "project": "Fixed Costs",
+   "amount": -720.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Accountant",
+   "project": "Fixed Costs",
+   "amount": -1000.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Gas",
+   "project": "Fixed Costs",
+   "amount": -1000.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Marketing",
+   "project": "Fixed Costs",
+   "amount": -1000.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Yaniv",
+   "project": "Fixed Costs",
+   "amount": -1000.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Krishna",
+   "project": "Fixed Costs",
+   "amount": -1333.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Matt",
+   "project": "Fixed Costs",
+   "amount": -2000.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "Office",
+   "project": "Fixed Costs",
+   "amount": -2100.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "STARNES & BAILEY (LAWYERS)",
+   "project": "Fixed Costs",
+   "amount": -3000.0,
+   "due": "2026-10-01"
+  },
+  {
+   "label": "SHEETROCK: BILL & PAYMENT",
+   "project": "Karim Merchant (JOSE-TEST10)",
+   "amount": -3108.0,
+   "due": "2026-10-01"
+  }
+ ],
+ "immovable_summary": {
+  "materials": 315174.08,
+  "downpayments": 22475.0,
+  "cp_gating": 196426.65,
+  "planilla": 106641.4
+ },
+ "advice": [
+  "SIN plan, la caja toca $-65,130 el 2026-07-10 (bajo el colch\u00f3n de $2,500). CON la ruta propuesta el m\u00ednimo sube a $-36,750 (2026-10-01).",
+  "Se difieren 80 pagos optimizables por $165,668 en total \u2014 cero materiales, cero downpayments, cero pagos que gateen ruta cr\u00edtica: ninguna tarea cr\u00edtica se atrasa con este plan.",
+  "\ud83d\udd34 ATENCI\u00d3N: el plan solo cierra moviendo 9 pago(s) de PLANILLA (m\u00e1x 1 d\u00edas). Es \u00faltimo recurso \u2014 considera acelerar un cobro antes de aceptar esto.",
+  "El plan depende de $173,616 en cobros PROYECTADOS no confirmados (los primeros: AFTER MEP PAYMENT (Ginger Brown) $10,000 el 2026-07-03; PAYMENT: AFTER FLOOR PLAN APPROVAL (Shaan Lagisetty (CNG-20251169)) $8,997 el 2026-07-06; GLASS: RECEIVE PAYMENT (Stephanie and Marc Felton) $1,200 el 2026-07-08). Confirmar esos draws con el cliente vale m\u00e1s que cualquier diferimiento \u2014 cada d\u00eda de atraso en un cobro corre toda la ruta.",
+  "Hay 13 pagos grandes donde conviene NEGOCIAR partes semanales con el sub en lugar de (o adem\u00e1s de) moverlos \u2014 ver secci\u00f3n 'Negociar en partes'.",
+  "\u26a0\ufe0f $18,195 en pagos optimizables NO caben dentro del horizonte sin romper el colch\u00f3n \u2014 requieren negociaci\u00f3n o m\u00e1s ingresos: Gmail Awesome $50; Seguro empresa $160; Claude $200; Luz $200.",
+  "Regla de oro de la ruta: pagar-para-cobrar primero (subs que destraban un draw), diferir lo que no gatea trabajo, y nunca financiar la obra con la planilla.",
+  "Nota del horizonte: el modelo solo ve lo agendado en JobTread a 90 d\u00edas \u2014 ventas nuevas y draws de proyectos futuros no existen aqu\u00ed, as\u00ed que el final del horizonte siempre se ve peor de lo que ser\u00e1. Lo accionable es el PR\u00d3XIMO mes."
+ ],
+ "weekly": [
+  {
+   "week_end": "2026-07-09",
+   "before": -47267.76,
+   "after": 1519.89
+  },
+  {
+   "week_end": "2026-07-16",
+   "before": -8132.82,
+   "after": -8132.82
+  },
+  {
+   "week_end": "2026-07-23",
+   "before": 34914.36,
+   "after": 34914.36
+  },
+  {
+   "week_end": "2026-07-30",
+   "before": 103745.58,
+   "after": 103745.58
+  },
+  {
+   "week_end": "2026-08-06",
+   "before": 90415.54,
+   "after": 90415.54
+  },
+  {
+   "week_end": "2026-08-13",
+   "before": 110519.37,
+   "after": 110519.37
+  },
+  {
+   "week_end": "2026-08-20",
+   "before": 105356.12,
+   "after": 105356.12
+  },
+  {
+   "week_end": "2026-08-27",
+   "before": 12131.52,
+   "after": 12131.52
+  },
+  {
+   "week_end": "2026-09-03",
+   "before": -52528.86,
+   "after": -24385.06
+  },
+  {
+   "week_end": "2026-09-10",
+   "before": 113270.54,
+   "after": 113270.54
+  },
+  {
+   "week_end": "2026-09-17",
+   "before": 64441.24,
+   "after": 64441.24
+  },
+  {
+   "week_end": "2026-09-24",
+   "before": 41963.84,
+   "after": 41963.84
+  },
+  {
+   "week_end": "2026-10-01",
+   "before": -36749.76,
+   "after": -36749.76
+  }
+ ]
+}

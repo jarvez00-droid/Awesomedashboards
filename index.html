@@ -4581,6 +4581,92 @@ function financePagosSectionHTML() {
   </details>`;
 }
 
+// ─── Ruta de Pagos (escenario asesor financiero) ────────────────────
+// Botón 🧭 en Finance → genera (LIVE) o lee (static) payment-sequence y muestra
+// el reporte. Motor: workspace-jade/generate_payment_sequence.py (reglas de Jose
+// 2026-07-03). DECISION-SUPPORT: no ejecuta ni escribe nada.
+async function financePaymentRoute() {
+  const old = document.getElementById('payroute-overlay');
+  if (old) old.remove();
+  const ov = document.createElement('div');
+  ov.id = 'payroute-overlay';
+  ov.style.cssText = 'position:fixed;inset:0;background:rgba(10,14,20,.92);z-index:1000;overflow:auto;padding:24px';
+  ov.innerHTML = '<div style="max-width:1000px;margin:40px auto;text-align:center;color:var(--dim)">⏳ Generando la ruta de pagos (simulación día a día)…</div>';
+  document.body.appendChild(ov);
+  let data = null, generated = false;
+  if (window._financeLive && financeApiConfigured()) {
+    try { data = await financeApi('/payment-sequence', {method:'POST', body: JSON.stringify({})}); generated = true; }
+    catch (e) { console.warn('payment-sequence live failed:', e.message); }
+  }
+  if (!data) {
+    try { const r = await fetch('data/payment-sequence-latest.json?_='+Date.now(),{cache:'no-store'}); if (r.ok) data = await r.json(); } catch(e){}
+  }
+  if (!data) { ov.innerHTML = '<div style="max-width:600px;margin:80px auto;text-align:center;color:var(--txt)">No hay ruta generada aún y el API LIVE no está configurado.<br><br><button onclick="document.getElementById(\'payroute-overlay\').remove()" style="padding:8px 18px;border-radius:6px;border:1px solid var(--bdr);background:var(--card);color:var(--txt);cursor:pointer">Cerrar</button></div>'; return; }
+  renderPaymentRoute(ov, data, generated);
+}
+
+function renderPaymentRoute(ov, d, generated) {
+  const fmt = n => '$' + Math.abs(n||0).toLocaleString(undefined,{maximumFractionDigits:0});
+  const r = d.result, st = d.start;
+  const card = (lab,val,col) => `<div style="background:var(--card);border:1px solid var(--bdr);border-radius:8px;padding:10px 14px;min-width:150px"><div style="font-size:10px;color:var(--dim);text-transform:uppercase">${lab}</div><div style="font-size:19px;font-weight:800;color:${col||'var(--txt)'}">${val}</div></div>`;
+  // moves agrupados por semana destino
+  const byWeek = {};
+  for (const m of d.moves||[]) {
+    const wk = m.to.slice(0,10);
+    const w = new Date(wk+'T12:00:00'); const mon = new Date(w); mon.setDate(w.getDate()-((w.getDay()+6)%7));
+    const key = mon.toISOString().slice(0,10);
+    (byWeek[key] = byWeek[key]||[]).push(m);
+  }
+  const movesHtml = Object.keys(byWeek).sort().map(wk =>
+    `<div style="background:rgba(129,140,248,.08);padding:5px 12px;font-size:11px;font-weight:700;border-top:1px solid var(--bdr)">Semana del ${wk}</div>` +
+    byWeek[wk].map(m => `<div style="display:flex;gap:10px;padding:6px 12px;border-top:1px solid var(--bdr);font-size:12.5px;align-items:center">
+      <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><b>${m.project||''}</b> — ${m.label}</span>
+      <span style="color:var(--dim);font-size:11px">${m.from} → <b style="color:var(--txt)">${m.to}</b> (+${m.days}d)</span>
+      <span style="flex:0 0 90px;text-align:right;font-family:var(--mono);font-weight:700;color:var(--red)">−${fmt(m.amount)}</span>
+    </div>`).join('')
+  ).join('');
+  const splitsHtml = (d.splits||[]).map(s => `<div style="background:var(--card);border:1px solid var(--org,#f97316);border-radius:8px;padding:10px 12px;margin-bottom:8px">
+      <div style="display:flex;gap:10px;font-size:13px"><b style="flex:1">${s.project||''} — ${s.label}</b><span style="font-family:var(--mono);font-weight:700;color:var(--red)">−${fmt(s.amount)}</span></div>
+      <div style="font-size:11.5px;color:var(--txt2);margin:4px 0">${s.nota}</div>
+      <div style="font-size:11px;color:var(--dim)">Plan sugerido: ${s.plan.map(p=>p.date.slice(5)+' '+fmt(p.amount)).join(' · ')}</div>
+    </div>`).join('');
+  const relianceHtml = (d.income_reliance.items||[]).map(i => `<div style="display:flex;gap:10px;padding:4px 12px;border-top:1px solid var(--bdr);font-size:12px">
+      <span style="flex:1">${i.project||''} — ${i.label}</span><span style="color:var(--dim)">${i.date}</span>
+      <span style="flex:0 0 90px;text-align:right;font-family:var(--mono);font-weight:700;color:var(--grn)">+${fmt(i.amount)}</span></div>`).join('');
+  const weeklyHtml = (d.weekly||[]).map(w => `<tr><td style="padding:3px 10px;border-top:1px solid var(--bdr)">${w.week_end}</td>
+      <td style="padding:3px 10px;border-top:1px solid var(--bdr);text-align:right;font-family:var(--mono);color:${w.before<0?'var(--red)':'var(--grn)'}">${w.before<0?'−':''}${fmt(w.before)}</td>
+      <td style="padding:3px 10px;border-top:1px solid var(--bdr);text-align:right;font-family:var(--mono);font-weight:700;color:${w.after<0?'var(--red)':'var(--grn)'}">${w.after<0?'−':''}${fmt(w.after)}</td></tr>`).join('');
+  const planillaHtml = (d.planilla_alerts||[]).length
+    ? `<div style="background:rgba(248,81,73,.12);border:1px solid var(--red);border-radius:8px;padding:10px 12px;margin:12px 0">
+        <b style="color:var(--red)">🔴 Planilla tocada (último recurso):</b>
+        ${(d.planilla_alerts||[]).map(a=>`<div style="font-size:12px;margin-top:3px">${a.label}: ${a.from} → ${a.to} (+${a.days}d) −${fmt(a.amount)}</div>`).join('')}
+       </div>` : '';
+  ov.innerHTML = `<div style="max-width:1000px;margin:0 auto;background:var(--bg);border:1px solid var(--bdr);border-radius:12px;padding:20px 24px 30px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
+      <h2 style="margin:0;font-size:19px">🧭 Ruta de Pagos — escenario optimizado</h2>
+      <span style="font-size:11px;color:var(--dim)">${generated?'recién generado':'última generación'}: ${d.generated_at.replace('T',' ')}</span>
+      <button onclick="document.getElementById('payroute-overlay').remove()" style="margin-left:auto;padding:6px 14px;border-radius:6px;border:1px solid var(--bdr);background:var(--card);color:var(--txt);cursor:pointer">✕ Cerrar</button>
+    </div>
+    <div style="font-size:11px;color:var(--dim);margin-bottom:12px">Reglas: ${d.rules.join(' · ')} — <b>decision-support: nada se ejecuta solo, tú decides.</b></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+      ${card('Caja de partida (hoy)', fmt(st.balance), st.balance>=0?'var(--grn)':'var(--red)')}
+      ${card('Mínimo SIN plan', (r.min_before<0?'−':'')+fmt(r.min_before)+' · '+r.min_before_day.slice(5), r.min_before<0?'var(--red)':'var(--grn)')}
+      ${card('Mínimo CON plan', (r.min_after<0?'−':'')+fmt(r.min_after)+' · '+r.min_after_day.slice(5), r.min_after<0?'var(--red)':'var(--grn)')}
+      ${card('Pagos diferidos', r.moves_count+' · '+fmt(r.moved_total), 'var(--acc)')}
+      ${card('Depende de cobros NO confirmados', fmt(d.income_reliance.total), 'var(--org,#f97316)')}
+    </div>
+    <div style="background:var(--card);border:1px solid var(--acc);border-radius:8px;padding:12px 14px;margin-bottom:14px">
+      <b style="font-size:13px">📋 Lectura del asesor</b>
+      ${(d.advice||[]).map(a=>`<div style="font-size:12.5px;margin-top:6px;padding-left:10px;border-left:2px solid var(--acc)">${a}</div>`).join('')}
+    </div>
+    ${planillaHtml}
+    <details open style="margin-bottom:12px"><summary style="cursor:pointer;font-weight:700;font-size:13px;padding:6px 0">🤝 Negociar en partes (${(d.splits||[]).length})</summary>${splitsHtml||'<div style="color:var(--dim);font-size:12px">Ninguno.</div>'}</details>
+    <details style="margin-bottom:12px"><summary style="cursor:pointer;font-weight:700;font-size:13px;padding:6px 0">📅 Movimientos propuestos (${(d.moves||[]).length})</summary><div style="border:1px solid var(--bdr);border-radius:8px;overflow:hidden">${movesHtml||''}</div></details>
+    <details style="margin-bottom:12px"><summary style="cursor:pointer;font-weight:700;font-size:13px;padding:6px 0">💰 Cobros de los que depende el plan (${(d.income_reliance.items||[]).length}, +${fmt(d.income_reliance.total)})</summary><div style="border:1px solid var(--bdr);border-radius:8px;overflow:hidden">${relianceHtml}</div><div style="font-size:11px;color:var(--dim);margin-top:6px">Confirmar estos draws vale más que cualquier diferimiento.</div></details>
+    <details style="margin-bottom:12px"><summary style="cursor:pointer;font-weight:700;font-size:13px;padding:6px 0">📈 Cierre semanal: sin plan vs con plan</summary><table style="font-size:12px;border-collapse:collapse;width:100%"><tr style="color:var(--dim);font-size:10px;text-transform:uppercase"><td style="padding:3px 10px">Semana</td><td style="padding:3px 10px;text-align:right">Sin plan</td><td style="padding:3px 10px;text-align:right">Con plan</td></tr>${weeklyHtml}</table></details>
+  </div>`;
+}
+
 // ─── Scenario Cashflow tab ──────────────────────────────────────────
 // Reuses the Finance renderer by swapping FINANCE_DATA with the scenario state.
 // Adds a top banner summarizing the scenario projects.
@@ -5605,6 +5691,7 @@ function renderFinance(c) {
         </div>
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button onclick="financePaymentRoute()" style="padding:7px 12px;font-size:12px;font-weight:700;background:var(--acc);color:#fff;border:1px solid var(--acc);border-radius:6px;cursor:pointer" title="Escenario: ruta de pagos optimizada (reglas de Jose) — decision-support, no ejecuta nada">🧭 Ruta de Pagos</button>
         <button onclick="financePrintSummary()" style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:6px;cursor:pointer">📄 Print Summary</button>
         <button onclick="financeOpenAudit()" ${live?'':'disabled'} style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--ylw);border-radius:6px;cursor:${live?'pointer':'not-allowed'};opacity:${live?'1':'.4'}" title="See and clear every manually-entered row">🧹 Audit Manual Entries</button>
         <button onclick="financeResetScenarios()" style="padding:7px 12px;font-size:12px;font-weight:600;background:var(--card-h);color:var(--txt);border:1px solid var(--ylw);border-radius:6px;cursor:pointer">↺ Reset edits${hasOverrides ? ' ('+hasOverrides+')' : ''}</button>
