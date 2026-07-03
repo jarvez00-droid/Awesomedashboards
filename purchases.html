@@ -49,6 +49,37 @@ h1{font-size:21px;margin:0 0 3px}.sub{color:var(--mut);font-size:13px}
 #app{display:none}
 </style></head>
 <body>
+<script>
+/* Site-wide gate (Jose 2026-07-03): todo awesomedashboards tras clave global.
+   La página del cliente (holmes-schedule-*) NO lleva este gate. */
+(function(){
+  if (sessionStorage.getItem('ag_site') === '1') return;
+  document.documentElement.style.visibility = 'hidden';
+  function show(){
+    var ov = document.createElement('div');
+    ov.id = 'site-gate';
+    ov.style.cssText = 'position:fixed;inset:0;background:#0f141b;z-index:2147483647;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px';
+    ov.innerHTML = '<div style="font-size:36px">🔒</div>'+
+      '<div style="color:#e6edf3;font:700 17px -apple-system,BlinkMacSystemFont,sans-serif">Awesome Group</div>'+
+      '<div style="color:#9aa7b4;font:13px -apple-system,sans-serif">Restricted — enter password</div>'+
+      '<input id="sg-pw" type="password" placeholder="Password" autocomplete="off" style="background:#171e27;border:1px solid #2a3540;color:#e6edf3;padding:11px 14px;border-radius:8px;font-size:15px;width:230px;outline:none">'+
+      '<button id="sg-btn" style="background:#388bfd;color:#fff;border:none;padding:10px 26px;border-radius:8px;font:700 14px -apple-system,sans-serif;cursor:pointer">Enter</button>'+
+      '<div id="sg-err" style="color:#f85149;font:12px sans-serif;display:none">Wrong password</div>';
+    document.body.appendChild(ov);
+    document.documentElement.style.visibility = 'visible';
+    function go(){
+      if (document.getElementById('sg-pw').value === 'Awesomegroup') { sessionStorage.setItem('ag_site','1'); ov.remove(); }
+      else { document.getElementById('sg-err').style.display = 'block'; document.getElementById('sg-pw').value=''; }
+    }
+    document.getElementById('sg-btn').onclick = go;
+    document.getElementById('sg-pw').addEventListener('keydown', function(e){ if (e.key === 'Enter') go(); });
+    setTimeout(function(){ document.getElementById('sg-pw').focus(); }, 80);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show);
+  else show();
+})();
+</script>
+
 <div id="gate">
   <div style="font-size:34px">🛒</div>
   <div style="font-weight:600">Purchases — Coordinación de compras</div>
