@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-05T05:49:11",
+ "generated_at": "2026-07-05T06:11:26",
  "date": "2026-07-05",
  "window_start": "2026-07-05",
  "window_end": "2026-07-19",
@@ -7,7 +7,7 @@
   "tasks": 202,
   "projects": 9,
   "alerts": 6,
-  "overdue": 79,
+  "overdue": 69,
   "to_purchase_amount": 75628.66
  },
  "alerts": [
@@ -61,7 +61,7 @@
    "counts": {
     "tasks": 72,
     "alerts": 3,
-    "overdue": 23
+    "overdue": 21
    },
    "overdue": [
     {
@@ -315,30 +315,6 @@
      "overdue": true,
      "taskId": "22PZpKCHLNaC",
      "progress": 0
-    },
-    {
-     "name": "INTERIOR PAINT: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-04",
-     "amount": 800.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZtbpu2TgT",
-     "progress": 0
-    },
-    {
-     "name": "KITCHEN: EXTRA CABINET PURCHASE",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-07-04",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzxc4mNvk",
-     "progress": 0
     }
    ],
    "days": [
@@ -347,15 +323,27 @@
      "label": "Sun Jul 5",
      "tasks": [
       {
-       "name": "INTERIOR PAINT: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
+       "name": "INTERIOR PAINT: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-05",
+       "amount": 800.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZtbpu2TgT",
+       "progress": 0
+      },
+      {
+       "name": "KITCHEN: EXTRA CABINET PURCHASE",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
        "due": "2026-07-05",
        "amount": null,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZpKALYBzJ",
+       "taskId": "22PZzxc4mNvk",
        "progress": 0
       }
      ]
@@ -422,6 +410,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PaBj6Ysnu7",
+       "progress": 0
+      },
+      {
+       "name": "INTERIOR PAINT: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-07-06",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpKALYBzJ",
        "progress": 0
       },
       {
@@ -1010,7 +1010,7 @@
    "counts": {
     "tasks": 35,
     "alerts": 1,
-    "overdue": 16
+    "overdue": 13
    },
    "overdue": [
     {
@@ -1158,30 +1158,6 @@
      "progress": 0
     },
     {
-     "name": "KITCHEN FLOOR TILES: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-04",
-     "amount": 2005.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpzZ9CMFU",
-     "progress": 0
-    },
-    {
-     "name": "KITCHEN FLOOR TILES: PURCHASE GROUT",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-07-04",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpzZ9qVAe",
-     "progress": 0
-    },
-    {
      "name": "KITCHEN FLOOR TILES: DELIVERY ETA",
      "step": "eta",
      "icon": "🚚",
@@ -1192,21 +1168,51 @@
      "overdue": true,
      "taskId": "22PZpzZBCXMT",
      "progress": 0
-    },
-    {
-     "name": "PREFAB CABINETS: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-04",
-     "amount": 4300.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpzZKzKBw",
-     "progress": 0
     }
    ],
    "days": [
+    {
+     "date": "2026-07-05",
+     "label": "Sun Jul 5",
+     "tasks": [
+      {
+       "name": "KITCHEN FLOOR TILES: PURCHASE GROUT",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-07-05",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpzZ9qVAe",
+       "progress": 0
+      },
+      {
+       "name": "KITCHEN FLOOR TILES: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-05",
+       "amount": 2005.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpzZ9CMFU",
+       "progress": 0
+      },
+      {
+       "name": "PREFAB CABINETS: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-05",
+       "amount": 4300.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpzZKzKBw",
+       "progress": 0
+      }
+     ]
+    },
     {
      "date": "2026-07-06",
      "label": "Mon Jul 6",
@@ -1937,7 +1943,7 @@
    "counts": {
     "tasks": 33,
     "alerts": 0,
-    "overdue": 18
+    "overdue": 15
    },
    "overdue": [
     {
@@ -2073,30 +2079,6 @@
      "progress": 0
     },
     {
-     "name": "DOORS AND WINDOWS: STOCK WINDOWS",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-07-04",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpJek9FQS",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-04",
-     "amount": 1800.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpJevewcQ",
-     "progress": 0
-    },
-    {
      "name": "INSULATION- SPRAY FOAM: CONFIRM TAKEOFF DETAILS",
      "step": "takeoff",
      "icon": "📋",
@@ -2143,18 +2125,6 @@
      "overdue": true,
      "taskId": "22PZpJi2tjW4",
      "progress": 0
-    },
-    {
-     "name": "FRAMING: PURCHASE EXTERIOR SHEATING",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-07-04",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZxcpJWWQL",
-     "progress": 0
     }
    ],
    "days": [
@@ -2162,6 +2132,30 @@
      "date": "2026-07-05",
      "label": "Sun Jul 5",
      "tasks": [
+      {
+       "name": "DOORS AND WINDOWS: STOCK WINDOWS",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-07-05",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpJek9FQS",
+       "progress": 0
+      },
+      {
+       "name": "FRAMING: PURCHASE EXTERIOR SHEATING",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-07-05",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZxcpJWWQL",
+       "progress": 0
+      },
       {
        "name": "INTERIOR PAINT: CONFIRM TAKEOFF DETAILS",
        "step": "takeoff",
@@ -2172,6 +2166,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpJfu4ekJ",
+       "progress": 0
+      },
+      {
+       "name": "ROOFING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-05",
+       "amount": 1800.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpJevewcQ",
        "progress": 0
       }
      ]
@@ -2394,7 +2400,7 @@
    "counts": {
     "tasks": 23,
     "alerts": 0,
-    "overdue": 11
+    "overdue": 10
    },
    "overdue": [
     {
@@ -2516,21 +2522,27 @@
      "overdue": true,
      "taskId": "22PZzWUy85jT",
      "progress": 0
-    },
-    {
-     "name": "DOORS & WINDOWS: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-04",
-     "amount": 2623.09,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzWeqT44G",
-     "progress": 0
     }
    ],
    "days": [
+    {
+     "date": "2026-07-05",
+     "label": "Sun Jul 5",
+     "tasks": [
+      {
+       "name": "DOORS & WINDOWS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-05",
+       "amount": 2623.09,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzWeqT44G",
+       "progress": 0
+      }
+     ]
+    },
     {
      "date": "2026-07-06",
      "label": "Mon Jul 6",
@@ -2738,28 +2750,57 @@
    ]
   },
   {
-   "id": "22PCPuWPndkt",
-   "name": "Clifford Clack — Gym Addition",
+   "id": "22NxUEJKTj6C",
+   "name": "Ginger Brown",
    "counts": {
-    "tasks": 3,
+    "tasks": 1,
     "alerts": 0,
     "overdue": 1
    },
    "overdue": [
     {
-     "name": "ELECTRICAL TRIM: PURCHASE CEILING FAN (IN STOCK)",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-07-04",
+     "name": "EXTERIOR DOORS: CONFIRM DELIVERY",
+     "step": "confirm",
+     "icon": "📦",
+     "step_label": "Confirm delivery",
+     "due": "2026-07-03",
      "amount": null,
      "alert": false,
      "overdue": true,
-     "taskId": "22PaEwfdfLxU",
+     "taskId": "22Pa8TEgpXRW",
      "progress": 0
     }
    ],
+   "days": []
+  },
+  {
+   "id": "22PCPuWPndkt",
+   "name": "Clifford Clack — Gym Addition",
+   "counts": {
+    "tasks": 3,
+    "alerts": 0,
+    "overdue": 0
+   },
+   "overdue": [],
    "days": [
+    {
+     "date": "2026-07-05",
+     "label": "Sun Jul 5",
+     "tasks": [
+      {
+       "name": "ELECTRICAL TRIM: PURCHASE CEILING FAN (IN STOCK)",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-07-05",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PaEwfdfLxU",
+       "progress": 0
+      }
+     ]
+    },
     {
      "date": "2026-07-06",
      "label": "Mon Jul 6",
@@ -2797,30 +2838,6 @@
      ]
     }
    ]
-  },
-  {
-   "id": "22NxUEJKTj6C",
-   "name": "Ginger Brown",
-   "counts": {
-    "tasks": 1,
-    "alerts": 0,
-    "overdue": 1
-   },
-   "overdue": [
-    {
-     "name": "EXTERIOR DOORS: CONFIRM DELIVERY",
-     "step": "confirm",
-     "icon": "📦",
-     "step_label": "Confirm delivery",
-     "due": "2026-07-03",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22Pa8TEgpXRW",
-     "progress": 0
-    }
-   ],
-   "days": []
   },
   {
    "id": "22PMwhcSuqJD",
