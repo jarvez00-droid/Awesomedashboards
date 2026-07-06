@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T06:37:28",
+  "generated_at": "2026-07-06T06:42:49",
   "today": "2026-07-06",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -3613,6 +3613,14 @@
           "n_exp": 1
         },
         {
+          "trade": "\u21aa Permits charles harris (suelto)",
+          "income": 0.0,
+          "expense": 11000.0,
+          "grouped": false,
+          "n_inc": 0,
+          "n_exp": 1
+        },
+        {
           "trade": "COUNTERTOPS",
           "income": 0.0,
           "expense": 10735.0,
@@ -3678,8 +3686,8 @@
         }
       ],
       "total_income": 366715.7,
-      "total_expense": 433110.82,
-      "loose_amount": 0
+      "total_expense": 444110.82,
+      "loose_amount": 11000.0
     },
     {
       "project": "Katie Holmes",
