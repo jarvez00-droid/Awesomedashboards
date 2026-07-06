@@ -61,7 +61,7 @@ summary{cursor:pointer;padding:8px 0;font-weight:600;font-size:13px}
     document.body.appendChild(ov);
     document.documentElement.style.visibility = 'visible';
     function go(){
-      if (document.getElementById('sg-pw').value === 'Awesomegroup') { sessionStorage.setItem('ag_site','1'); ov.remove(); }
+      if (document.getElementById('sg-pw').value === 'Awesome') { sessionStorage.setItem('ag_site','1'); ov.remove(); }
       else { document.getElementById('sg-err').style.display = 'block'; document.getElementById('sg-pw').value=''; }
     }
     document.getElementById('sg-btn').onclick = go;

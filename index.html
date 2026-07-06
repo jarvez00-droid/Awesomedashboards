@@ -364,7 +364,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--txt);line-height:1
     document.body.appendChild(ov);
     document.documentElement.style.visibility = 'visible';
     function go(){
-      if (document.getElementById('sg-pw').value === 'Awesomegroup') { sessionStorage.setItem('ag_site','1'); ov.remove(); }
+      if (document.getElementById('sg-pw').value === 'Awesome') { sessionStorage.setItem('ag_site','1'); ov.remove(); }
       else { document.getElementById('sg-err').style.display = 'block'; document.getElementById('sg-pw').value=''; }
     }
     document.getElementById('sg-btn').onclick = go;

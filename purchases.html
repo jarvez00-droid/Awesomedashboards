@@ -68,7 +68,7 @@ h1{font-size:21px;margin:0 0 3px}.sub{color:var(--mut);font-size:13px}
     document.body.appendChild(ov);
     document.documentElement.style.visibility = 'visible';
     function go(){
-      if (document.getElementById('sg-pw').value === 'Awesomegroup') { sessionStorage.setItem('ag_site','1'); ov.remove(); }
+      if (document.getElementById('sg-pw').value === 'Awesome') { sessionStorage.setItem('ag_site','1'); ov.remove(); }
       else { document.getElementById('sg-err').style.display = 'block'; document.getElementById('sg-pw').value=''; }
     }
     document.getElementById('sg-btn').onclick = go;
