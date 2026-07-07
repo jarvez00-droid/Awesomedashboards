@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-07T15:26:33",
+ "generated_at": "2026-07-07T15:50:08",
  "date": "2026-07-07",
  "window_start": "2026-07-07",
  "window_end": "2026-07-21",
@@ -7,7 +7,7 @@
   "tasks": 191,
   "projects": 9,
   "alerts": 5,
-  "overdue": 51,
+  "overdue": 53,
   "to_purchase_amount": 71840.57
  },
  "alerts": [
@@ -29,7 +29,7 @@
    "project": "Kyle Aubry - Project 01",
    "projectId": "22Nx8Uut2Qxs",
    "task": "WINDOWS SHUTTER: PURCHASE MATERIAL",
-   "due": "2026-07-09",
+   "due": "2026-07-17",
    "taskId": "22PaBYVZSd2K"
   },
   {
@@ -54,7 +54,7 @@
    "counts": {
     "tasks": 33,
     "alerts": 2,
-    "overdue": 14
+    "overdue": 16
    },
    "overdue": [
     {
@@ -202,6 +202,18 @@
      "progress": 0
     },
     {
+     "name": "ELECTRICAL TRIM: PURCHASE MATERIAL",
+     "step": "purchase",
+     "icon": "🛒",
+     "step_label": "Purchase material",
+     "due": "2026-07-04",
+     "amount": 7335.0,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpzafaUAy",
+     "progress": 0
+    },
+    {
      "name": "KITCHEN FLOOR TILES: CONFIRM DELIVERY",
      "step": "confirm",
      "icon": "📦",
@@ -223,6 +235,18 @@
      "alert": false,
      "overdue": true,
      "taskId": "22PZpzZtjVJX",
+     "progress": 0
+    },
+    {
+     "name": "ELECTRICAL TRIM: CONFIRM DELIVERY",
+     "step": "confirm",
+     "icon": "📦",
+     "step_label": "Confirm delivery",
+     "due": "2026-07-06",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpzagPMsF",
      "progress": 0
     }
    ],
@@ -364,6 +388,18 @@
      "label": "Thu Jul 9",
      "tasks": [
       {
+       "name": "COUNTERTOPS: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-09",
+       "amount": 5314.4,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpzaC3mLr",
+       "progress": 0
+      },
+      {
        "name": "INTERIOR PAINT: PURCHASE MATERIAL",
        "step": "purchase",
        "icon": "🛒",
@@ -373,18 +409,6 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpzZsVEWM",
-       "progress": 0
-      },
-      {
-       "name": "WINDOWS SHUTTER: PURCHASE MATERIAL",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-07-09",
-       "amount": null,
-       "alert": true,
-       "overdue": false,
-       "taskId": "22PaBYVZSd2K",
        "progress": 0
       }
      ]
@@ -430,18 +454,6 @@
      "label": "Mon Jul 13",
      "tasks": [
       {
-       "name": "ELECTRICAL TRIM: PURCHASE MATERIAL",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-07-13",
-       "amount": 7335.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpzafaUAy",
-       "progress": 0
-      },
-      {
        "name": "PREFAB CABINETS: DELIVERY ETA",
        "step": "eta",
        "icon": "🚚",
@@ -451,42 +463,6 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpzZP7PG7",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-07-14",
-     "label": "Tue Jul 14",
-     "tasks": [
-      {
-       "name": "ELECTRICAL TRIM: CONFIRM DELIVERY",
-       "step": "confirm",
-       "icon": "📦",
-       "step_label": "Confirm delivery",
-       "due": "2026-07-14",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpzagPMsF",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-07-16",
-     "label": "Thu Jul 16",
-     "tasks": [
-      {
-       "name": "COUNTERTOPS: PURCHASE MATERIAL",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-07-16",
-       "amount": 5314.4,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpzaC3mLr",
        "progress": 0
       }
      ]
@@ -505,6 +481,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpzaDGT4Z",
+       "progress": 0
+      },
+      {
+       "name": "WINDOWS SHUTTER: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-17",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PaBYVZSd2K",
        "progress": 0
       }
      ]
