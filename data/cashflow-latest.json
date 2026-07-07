@@ -1,6 +1,6 @@
 {
   "date": "2026-07-07",
-  "generated_at": "2026-07-07T14:39:49.422961",
+  "generated_at": "2026-07-07T15:26:48.626359",
   "summary": {
     "total_payment_tasks": 782,
     "total_income": 563097.81,
@@ -25,14 +25,14 @@
       "income": 15615.0,
       "p_income": 0,
       "subs": 0,
-      "materials": 0,
+      "materials": 7335.0,
       "additional": 0,
-      "outgoing": 0,
-      "net": 15615.0,
+      "outgoing": 7335.0,
+      "net": 8280.0,
       "income_paid": 0,
       "p_income_paid": 0,
       "outgoing_paid": 0,
-      "task_count": 4,
+      "task_count": 5,
       "items": [
         {
           "project": "Ginger Brown",
@@ -63,6 +63,14 @@
           "task": "COUNTERTOPS: RECEIVE PAYMENT 2",
           "type": "income",
           "amount": 4140.0,
+          "due": "2026-07-04",
+          "paid": false
+        },
+        {
+          "project": "Kyle Aubry - Project 01",
+          "task": "ELECTRICAL TRIM: PURCHASE MATERIAL",
+          "type": "materials",
+          "amount": 7335.0,
           "due": "2026-07-04",
           "paid": false
         }
@@ -942,15 +950,15 @@
       "is_past": false,
       "income": 115673.51,
       "p_income": 0,
-      "subs": 67146.99,
-      "materials": 54908.02,
+      "subs": 61112.49,
+      "materials": 47573.02,
       "additional": 0,
-      "outgoing": 122055.01,
-      "net": -6381.5,
+      "outgoing": 108685.51,
+      "net": 6988.0,
       "income_paid": 0,
       "p_income_paid": 0,
       "outgoing_paid": 50.56,
-      "task_count": 58,
+      "task_count": 56,
       "items": [
         {
           "project": "Martha Cockrell (CNG-20251199)",
@@ -999,14 +1007,6 @@
           "amount": 50.56,
           "due": "2026-07-13",
           "paid": true
-        },
-        {
-          "project": "Kyle Aubry - Project 01",
-          "task": "ELECTRICAL TRIM: PURCHASE MATERIAL",
-          "type": "materials",
-          "amount": 7335.0,
-          "due": "2026-07-13",
-          "paid": false
         },
         {
           "project": "Lingyan Qiu (CNG2025-458)",
@@ -1141,14 +1141,6 @@
           "task": "INTERIOR PAINT: BILL & PAYMENT (Copy)",
           "type": "subs",
           "amount": 4232.0,
-          "due": "2026-07-16",
-          "paid": false
-        },
-        {
-          "project": "Kyle Aubry - Project 01",
-          "task": "INTERIOR PAINT: BILL & PAYMENT",
-          "type": "subs",
-          "amount": 6034.5,
           "due": "2026-07-16",
           "paid": false
         },
@@ -1425,15 +1417,15 @@
       "is_past": false,
       "income": 167465.32,
       "p_income": 0,
-      "subs": 55216.65,
+      "subs": 61251.15,
       "materials": 17152.32,
       "additional": 0,
-      "outgoing": 72368.97,
-      "net": 95096.35,
+      "outgoing": 78403.47,
+      "net": 89061.85,
       "income_paid": 0,
       "p_income_paid": 0,
       "outgoing_paid": 0,
-      "task_count": 44,
+      "task_count": 45,
       "items": [
         {
           "project": "Katie Holmes & Sean Springs",
@@ -1456,6 +1448,14 @@
           "task": "FOUNDATION: BILL & PAYMENT - STANDAR",
           "type": "subs",
           "amount": 8750.0,
+          "due": "2026-07-20",
+          "paid": false
+        },
+        {
+          "project": "Kyle Aubry - Project 01",
+          "task": "INTERIOR PAINT: BILL & PAYMENT",
+          "type": "subs",
+          "amount": 6034.5,
           "due": "2026-07-20",
           "paid": false
         },
@@ -5544,6 +5544,20 @@
       "external": false
     },
     {
+      "project": "Kyle Aubry - Project 01",
+      "task": "ELECTRICAL TRIM: PURCHASE MATERIAL",
+      "type": "materials",
+      "amount": 7335.0,
+      "due": "2026-07-04",
+      "paid": false,
+      "assignee": "ELECTRICAL TRIM",
+      "assignedTo": "Romina Rey",
+      "taskId": "22PZpzafaUAy",
+      "projectId": "22Nx8Uut2Qxs",
+      "planning": false,
+      "external": false
+    },
+    {
       "project": "Martha Cockrell (CNG-20251199)",
       "task": "FRAMING: EXTRA ROOF DECKING (CREDIT)",
       "type": "materials",
@@ -7308,20 +7322,6 @@
       "external": false
     },
     {
-      "project": "Kyle Aubry - Project 01",
-      "task": "ELECTRICAL TRIM: PURCHASE MATERIAL",
-      "type": "materials",
-      "amount": 7335.0,
-      "due": "2026-07-13",
-      "paid": false,
-      "assignee": "ELECTRICAL TRIM",
-      "assignedTo": "Romina Rey",
-      "taskId": "22PZpzafaUAy",
-      "projectId": "22Nx8Uut2Qxs",
-      "planning": false,
-      "external": false
-    },
-    {
       "project": "Lingyan Qiu (CNG2025-458)",
       "task": "GUTTERS: PURCHASE MATERIALS",
       "type": "materials",
@@ -7556,20 +7556,6 @@
       "assignedTo": "",
       "taskId": "22PZzzrfiH2T",
       "projectId": "22P2j3sQMKqz",
-      "planning": false,
-      "external": false
-    },
-    {
-      "project": "Kyle Aubry - Project 01",
-      "task": "INTERIOR PAINT: BILL & PAYMENT",
-      "type": "subs",
-      "amount": 6034.5,
-      "due": "2026-07-16",
-      "paid": false,
-      "assignee": "INTERIOR PAINT",
-      "assignedTo": "",
-      "taskId": "22PZpzZypbLG",
-      "projectId": "22Nx8Uut2Qxs",
       "planning": false,
       "external": false
     },
@@ -8074,6 +8060,20 @@
       "assignedTo": "",
       "taskId": "22PZqFvUzgfu",
       "projectId": "22PMwhcSuqJD",
+      "planning": false,
+      "external": false
+    },
+    {
+      "project": "Kyle Aubry - Project 01",
+      "task": "INTERIOR PAINT: BILL & PAYMENT",
+      "type": "subs",
+      "amount": 6034.5,
+      "due": "2026-07-20",
+      "paid": false,
+      "assignee": "INTERIOR PAINT",
+      "assignedTo": "",
+      "taskId": "22PZpzZypbLG",
+      "projectId": "22Nx8Uut2Qxs",
       "planning": false,
       "external": false
     },
