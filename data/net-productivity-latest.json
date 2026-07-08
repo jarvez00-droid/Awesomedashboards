@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T10:28:06",
+  "generated_at": "2026-07-08T10:51:49",
   "today": "2026-07-08",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -2637,7 +2637,7 @@
   ],
   "data_quality": {
     "orphan_trades": 40,
-    "orphan_cost": 277651.77,
+    "orphan_cost": 277805.76,
     "priced_trades": 175,
     "total_trades": 215,
     "by_project": [
@@ -2740,7 +2740,7 @@
       {
         "project": "Lingyan Qiu",
         "orphan_trades": 4,
-        "orphan_cost": 3099.93,
+        "orphan_cost": 3253.92,
         "examples": [
           {
             "trade": "GLASS",
@@ -2752,7 +2752,7 @@
           },
           {
             "trade": "BASEBOARD & TRIM",
-            "cost": 525.0
+            "cost": 678.99
           },
           {
             "trade": "KITCHEN: ELECTRICAL TRIM",
@@ -4108,19 +4108,19 @@
           "n_exp": 2
         },
         {
+          "trade": "BASEBOARD & TRIM",
+          "income": 0.0,
+          "expense": 678.99,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 2
+        },
+        {
           "trade": "KITCHEN: PLUMBING TRIM",
           "income": 128.0,
           "expense": 452.49,
           "grouped": true,
           "n_inc": 1,
-          "n_exp": 2
-        },
-        {
-          "trade": "BASEBOARD & TRIM",
-          "income": 0.0,
-          "expense": 525.0,
-          "grouped": true,
-          "n_inc": 0,
           "n_exp": 2
         },
         {
@@ -4133,7 +4133,7 @@
         }
       ],
       "total_income": 188050.0,
-      "total_expense": 116305.12,
+      "total_expense": 116459.11,
       "loose_amount": 0
     },
     {
