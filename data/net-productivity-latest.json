@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T16:20:00",
+  "generated_at": "2026-07-08T16:43:04",
   "today": "2026-07-08",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -241,17 +241,17 @@
       "label_moy": "jun S3",
       "label_short": "20 jun",
       "prod": [
-        8560.67,
-        7270.63
+        8469.92,
+        7254.88
       ],
       "fixed": 11045.26,
       "net": [
-        -2484.59,
-        -3774.63
+        -2575.34,
+        -3790.38
       ],
       "cum": [
-        -12841.15,
-        -18852.03
+        -12931.9,
+        -18867.78
       ],
       "active_count": 7,
       "active_projects": [
@@ -280,8 +280,8 @@
           1601.01
         ],
         "Clifford Clack": [
-          1902.96,
-          1494.66
+          1812.21,
+          1478.91
         ],
         "Lingyan Qiu": [
           2151.08,
@@ -310,8 +310,8 @@
         6463.66
       ],
       "cum": [
-        -3492.31,
-        -12388.37
+        -3583.06,
+        -12404.12
       ],
       "active_count": 8,
       "active_projects": [
@@ -370,13 +370,13 @@
       "label_moy": "jul S1",
       "label_short": "4 jul",
       "prod": [
-        47764.9,
-        40389.79
+        47855.65,
+        40405.54
       ],
       "fixed": 11045.26,
       "net": [
-        36719.64,
-        29344.53
+        36810.39,
+        29360.28
       ],
       "cum": [
         33227.33,
@@ -411,8 +411,8 @@
           627.87
         ],
         "Clifford Clack": [
-          3370.8,
-          2708.08
+          3461.55,
+          2723.83
         ],
         "Shaan Lagisetty": [
           0.0,
@@ -1568,17 +1568,17 @@
       "month": "2026-06",
       "label": "jun 2026",
       "prod": [
-        43068.08,
-        35381.97
+        42977.33,
+        35366.22
       ],
       "fixed": 47862.8,
       "net": [
-        -4794.72,
-        -12480.83
+        -4885.47,
+        -12496.58
       ],
       "cum": [
-        -4794.72,
-        -12480.83
+        -4885.47,
+        -12496.58
       ],
       "is_future": false,
       "is_partial": false,
@@ -1597,8 +1597,8 @@
           4002.53
         ],
         "Clifford Clack": [
-          7890.91,
-          6525.2
+          7800.16,
+          6509.45
         ],
         "Martha Cockrell": [
           285.37,
@@ -1622,13 +1622,13 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        190637.74,
-        155608.09
+        190728.49,
+        155623.84
       ],
       "fixed": 47862.8,
       "net": [
-        142774.94,
-        107745.29
+        142865.69,
+        107761.04
       ],
       "cum": [
         137980.22,
@@ -1651,8 +1651,8 @@
           16447.02
         ],
         "Clifford Clack": [
-          5688.84,
-          4792.63
+          5779.59,
+          4808.38
         ],
         "Charles Harris": [
           15849.05,
@@ -2544,8 +2544,8 @@
       "margin_pct": 37.5,
       "weeks": {
         "2026-W26": [
-          1902.96,
-          1494.66
+          1812.21,
+          1478.91
         ],
         "2026-W23": [
           1502.45,
@@ -2560,8 +2560,8 @@
           2787.75
         ],
         "2026-W28": [
-          3370.8,
-          2708.08
+          3461.55,
+          2723.83
         ],
         "2026-W27": [
           2318.04,
@@ -2570,12 +2570,12 @@
       },
       "months": {
         "2026-06": [
-          7890.91,
-          6525.2
+          7800.16,
+          6509.45
         ],
         "2026-07": [
-          5688.84,
-          4792.63
+          5779.59,
+          4808.38
         ]
       },
       "first_week": "2026-W23",
@@ -2637,7 +2637,7 @@
   ],
   "data_quality": {
     "orphan_trades": 40,
-    "orphan_cost": 277805.76,
+    "orphan_cost": 277522.76,
     "priced_trades": 175,
     "total_trades": 215,
     "by_project": [
@@ -2778,7 +2778,7 @@
       {
         "project": "Clifford Clack",
         "orphan_trades": 3,
-        "orphan_cost": 2422.0,
+        "orphan_cost": 2139.0,
         "examples": [
           {
             "trade": "CLEANING",
@@ -2786,7 +2786,7 @@
           },
           {
             "trade": "Glass",
-            "cost": 1033.0
+            "cost": 750.0
           },
           {
             "trade": "GUTTERS",
@@ -5313,7 +5313,7 @@
         {
           "trade": "Glass",
           "income": 0.0,
-          "expense": 1033.0,
+          "expense": 750.0,
           "grouped": true,
           "n_inc": 0,
           "n_exp": 1
@@ -5336,7 +5336,7 @@
         }
       ],
       "total_income": 50920.0,
-      "total_expense": 37949.86,
+      "total_expense": 37666.86,
       "loose_amount": 0
     }
   ],

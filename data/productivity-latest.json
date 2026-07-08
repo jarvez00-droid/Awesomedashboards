@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-08T16:19:50",
+  "generated_at": "2026-07-08T16:42:53",
   "week_iso": "2026-W28",
   "week_start": "2026-07-04",
   "week_end": "2026-07-10",
@@ -777,7 +777,7 @@
       "project_id": "22PCPuWPndkt",
       "project_name": "Clifford Clack \u2014 Gym Addition",
       "pm": "Angel Pacheco",
-      "group_count": 6,
+      "group_count": 7,
       "attribution": 0.0,
       "groups": [
         {
@@ -1171,22 +1171,110 @@
             {
               "task_id": "22PZtXNuVW3X",
               "name": "GLASS: PAYMENT",
-              "description": "1033",
-              "amount": 1033.0,
+              "description": "750",
+              "amount": 750.0,
               "progress": null,
-              "end_date": "2026-07-11"
+              "end_date": "2026-07-17"
             }
           ],
           "materials_lines": [],
           "additional_lines": [],
           "sold": 0.0,
-          "expenses_subs": 1033.0,
+          "expenses_subs": 750.0,
           "expenses_materials": 0,
           "expenses_additional": 0,
-          "expenses_total": 1033.0,
-          "profit": -1033.0,
+          "expenses_total": 750.0,
+          "profit": -750.0,
           "status": "in_progress",
           "has_price": false,
+          "this_pct": 0.0,
+          "attribution": 0.0,
+          "user_set": false
+        },
+        {
+          "project_id": "22PCPuWPndkt",
+          "project_name": "Clifford Clack \u2014 Gym Addition",
+          "group_id": "22PPsiDBL74Z",
+          "group_name": "INTERIOR PAINT",
+          "parent_group_id": null,
+          "action_count": 2,
+          "action_task_ids": [
+            "22PPsiDBMadj",
+            "22PaY7AATP7z"
+          ],
+          "action_task_names": [
+            "PAINT: PAINT WALLS AND CEILING",
+            "PAINT: PAINTING"
+          ],
+          "action_progresses": [
+            1,
+            null
+          ],
+          "action_starts": [
+            "2026-06-24",
+            "2026-07-09"
+          ],
+          "action_ends": [
+            "2026-06-26",
+            "2026-07-09"
+          ],
+          "action_start_min": "2026-06-24",
+          "action_end_max": "2026-07-09",
+          "action_lines": [
+            {
+              "task_id": "22PPsiDBMadj",
+              "name": "PAINT: PAINT WALLS AND CEILING",
+              "description": "3363",
+              "amount": 3363.0,
+              "progress": 1,
+              "end_date": "2026-06-26"
+            },
+            {
+              "task_id": "22PaY7AATP7z",
+              "name": "PAINT: PAINTING",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-07-09"
+            }
+          ],
+          "subs_lines": [
+            {
+              "task_id": "22PUnNg7AMCA",
+              "name": "PAINT: BILL & PAYMENT",
+              "description": "-2000",
+              "amount": 2000.0,
+              "progress": 1,
+              "end_date": "2026-07-03"
+            },
+            {
+              "task_id": "22PaCBciccMc",
+              "name": "PAINT: BILL & PAYMENT (Copy)",
+              "description": "-500",
+              "amount": 500.0,
+              "progress": null,
+              "end_date": "2026-07-10"
+            }
+          ],
+          "materials_lines": [
+            {
+              "task_id": "22PUnNktGUce",
+              "name": "INTERIOR PAINT: PURCHASE MATERIAL",
+              "description": "-500",
+              "amount": 500.0,
+              "progress": 1,
+              "end_date": "2026-06-15"
+            }
+          ],
+          "additional_lines": [],
+          "sold": 3363.0,
+          "expenses_subs": 2500.0,
+          "expenses_materials": 500.0,
+          "expenses_additional": 0,
+          "expenses_total": 3000.0,
+          "profit": 363.0,
+          "status": "in_progress",
+          "has_price": true,
           "this_pct": 0.0,
           "attribution": 0.0,
           "user_set": false
@@ -2303,10 +2391,10 @@
     {
       "pm": "Angel Pacheco",
       "project_count": 3,
-      "group_count": 8,
-      "sold": 28935.91,
-      "expenses": 18259.89,
-      "profit_potential": 10676.02,
+      "group_count": 9,
+      "sold": 32298.91,
+      "expenses": 21259.89,
+      "profit_potential": 11039.02,
       "attribution": 1778.12,
       "projects": [
         {
@@ -2319,7 +2407,7 @@
           "project_id": "22PCPuWPndkt",
           "project_name": "Clifford Clack \u2014 Gym Addition",
           "attribution": 0.0,
-          "group_count": 6
+          "group_count": 7
         },
         {
           "project_id": "22PK9BhEJtZn",
@@ -2371,14 +2459,14 @@
     }
   ],
   "totals": {
-    "sold": 159694.88,
-    "expenses": 126391.01,
-    "profit_potential": 33303.87,
+    "sold": 163057.88,
+    "expenses": 129391.01,
+    "profit_potential": 33666.87,
     "profit_attributed_this_week": -24860.08,
-    "groups_in_progress": 21,
+    "groups_in_progress": 22,
     "groups_finished_this_week": 4,
     "groups_missing_price": 8,
-    "expense_missing_price": 8611.66,
+    "expense_missing_price": 8328.66,
     "project_count": 8
   }
 }
