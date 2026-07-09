@@ -1,6 +1,6 @@
 {
   "date": "2026-07-09",
-  "generated_at": "2026-07-09T12:20:05.967978",
+  "generated_at": "2026-07-09T12:43:31.856324",
   "summary": {
     "total_payment_tasks": 789,
     "total_income": 507399.33,
@@ -9,11 +9,11 @@
     "total_net": 46849.72,
     "pending_income": 1516691.0,
     "pending_p_income": 0,
-    "pending_outgoing": 1214015.24,
+    "pending_outgoing": 1213035.24,
     "paid_income": 445389.75,
     "paid_p_income": 0,
-    "paid_outgoing": 351757.91,
-    "unpaid_net": 302675.76,
+    "paid_outgoing": 352737.91,
+    "unpaid_net": 303655.76,
     "weeks_covered": 6
   },
   "weeks": [
@@ -76,14 +76,14 @@
       "income": 108919.8,
       "p_income": 0,
       "subs": 98456.0,
-      "materials": 25947.89,
+      "materials": 20633.49,
       "additional": 11570.0,
-      "outgoing": 135973.89,
-      "net": -27054.09,
+      "outgoing": 130659.49,
+      "net": -21739.69,
       "income_paid": 0,
       "p_income_paid": 0,
-      "outgoing_paid": 60.0,
-      "task_count": 91,
+      "outgoing_paid": 1040.0,
+      "task_count": 90,
       "items": [
         {
           "project": "Charles Harris \u2014 Argyle TX",
@@ -139,7 +139,7 @@
           "type": "materials",
           "amount": 300.0,
           "due": "2026-07-09",
-          "paid": false
+          "paid": true
         },
         {
           "project": "Kyle Aubry - Project 01",
@@ -147,7 +147,7 @@
           "type": "materials",
           "amount": 680.0,
           "due": "2026-07-09",
-          "paid": false
+          "paid": true
         },
         {
           "project": "Kyle Aubry - Project 01",
@@ -162,14 +162,6 @@
           "task": "INTERIOR DOORS: PURCHASE MATERIAL",
           "type": "materials",
           "amount": 450.0,
-          "due": "2026-07-09",
-          "paid": false
-        },
-        {
-          "project": "Kyle Aubry - Project 01",
-          "task": "COUNTERTOPS: PURCHASE MATERIAL",
-          "type": "materials",
-          "amount": 5314.4,
           "due": "2026-07-09",
           "paid": false
         },
@@ -823,14 +815,14 @@
       "income": 123020.25,
       "p_income": 0,
       "subs": 104902.49,
-      "materials": 38847.16,
+      "materials": 44161.56,
       "additional": 0,
-      "outgoing": 143749.65,
-      "net": -20729.4,
+      "outgoing": 149064.05,
+      "net": -26043.8,
       "income_paid": 0,
       "p_income_paid": 0,
       "outgoing_paid": 50.56,
-      "task_count": 69,
+      "task_count": 70,
       "items": [
         {
           "project": "Clifford Clack \u2014 Gym Addition",
@@ -1085,6 +1077,14 @@
           "task": "GLASS: RECEIVE PAYMENT",
           "type": "income",
           "amount": 1200.0,
+          "due": "2026-07-16",
+          "paid": false
+        },
+        {
+          "project": "Kyle Aubry - Project 01",
+          "task": "COUNTERTOPS: PURCHASE MATERIAL",
+          "type": "materials",
+          "amount": 5314.4,
           "due": "2026-07-16",
           "paid": false
         },
@@ -5919,7 +5919,7 @@
       "type": "materials",
       "amount": 300.0,
       "due": "2026-07-09",
-      "paid": false,
+      "paid": true,
       "assignee": "PREFAB CABINETS",
       "assignedTo": "Romina Rey",
       "taskId": "22PZpzZLXMQE",
@@ -5933,7 +5933,7 @@
       "type": "materials",
       "amount": 680.0,
       "due": "2026-07-09",
-      "paid": false,
+      "paid": true,
       "assignee": "PREFAB CABINETS",
       "assignedTo": "Romina Rey",
       "taskId": "22PZpzZM4XeC",
@@ -5965,20 +5965,6 @@
       "assignee": "INTERIOR DOORS",
       "assignedTo": "Romina Rey",
       "taskId": "22PZpza3Tu5P",
-      "projectId": "22Nx8Uut2Qxs",
-      "planning": false,
-      "external": false
-    },
-    {
-      "project": "Kyle Aubry - Project 01",
-      "task": "COUNTERTOPS: PURCHASE MATERIAL",
-      "type": "materials",
-      "amount": 5314.4,
-      "due": "2026-07-09",
-      "paid": false,
-      "assignee": "COUNTERTOPS",
-      "assignedTo": "Romina Rey",
-      "taskId": "22PZpzaC3mLr",
       "projectId": "22Nx8Uut2Qxs",
       "planning": false,
       "external": false
@@ -7548,6 +7534,20 @@
       "assignedTo": "",
       "taskId": "22PVDYnm3avq",
       "projectId": "22P2cmNJZcwJ",
+      "planning": false,
+      "external": false
+    },
+    {
+      "project": "Kyle Aubry - Project 01",
+      "task": "COUNTERTOPS: PURCHASE MATERIAL",
+      "type": "materials",
+      "amount": 5314.4,
+      "due": "2026-07-16",
+      "paid": false,
+      "assignee": "COUNTERTOPS",
+      "assignedTo": "Romina Rey",
+      "taskId": "22PZpzaC3mLr",
+      "projectId": "22Nx8Uut2Qxs",
       "planning": false,
       "external": false
     },
