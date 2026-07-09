@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-09T15:50:27",
+  "generated_at": "2026-07-09T16:02:13",
   "today": "2026-07-09",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -370,17 +370,17 @@
       "label_moy": "jul S1",
       "label_short": "4 jul",
       "prod": [
-        44229.12,
-        37978.18
+        44138.37,
+        37962.43
       ],
       "fixed": 11045.26,
       "net": [
-        33183.86,
-        26932.92
+        33093.11,
+        26917.17
       ],
       "cum": [
-        30013.57,
-        14802.74
+        29922.82,
+        14786.99
       ],
       "active_count": 9,
       "active_projects": [
@@ -411,8 +411,8 @@
           627.87
         ],
         "Clifford Clack": [
-          1139.83,
-          651.56
+          1049.08,
+          635.81
         ],
         "Shaan Lagisetty": [
           0.0,
@@ -444,13 +444,13 @@
       "label_moy": "jul S2",
       "label_short": "11 jul",
       "prod": [
-        47048.99,
-        36937.76
+        47139.74,
+        36953.51
       ],
       "fixed": 11045.26,
       "net": [
-        36003.73,
-        25892.5
+        36094.48,
+        25908.25
       ],
       "cum": [
         66017.3,
@@ -486,8 +486,8 @@
           -499.0
         ],
         "Clifford Clack": [
-          2095.5,
-          1918.38
+          2186.25,
+          1934.13
         ],
         "Charles Harris": [
           2901.33,
@@ -2564,12 +2564,12 @@
           2787.75
         ],
         "2026-W28": [
-          1139.83,
-          651.56
+          1049.08,
+          635.81
         ],
         "2026-W29": [
-          2095.5,
-          1918.38
+          2186.25,
+          1934.13
         ],
         "2026-W27": [
           2318.04,
@@ -2645,7 +2645,7 @@
   ],
   "data_quality": {
     "orphan_trades": 40,
-    "orphan_cost": 277522.76,
+    "orphan_cost": 277750.76,
     "priced_trades": 175,
     "total_trades": 215,
     "by_project": [
@@ -2748,7 +2748,7 @@
       {
         "project": "Lingyan Qiu",
         "orphan_trades": 4,
-        "orphan_cost": 3253.92,
+        "orphan_cost": 3481.92,
         "examples": [
           {
             "trade": "GLASS",
@@ -2756,7 +2756,7 @@
           },
           {
             "trade": "INTERIOR DOORS",
-            "cost": 1288.0
+            "cost": 1516.0
           },
           {
             "trade": "BASEBOARD & TRIM",
@@ -4068,20 +4068,20 @@
           "n_exp": 2
         },
         {
+          "trade": "INTERIOR DOORS",
+          "income": 0.0,
+          "expense": 1516.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 2
+        },
+        {
           "trade": "CLEANING",
           "income": 900.0,
           "expense": 450.0,
           "grouped": true,
           "n_inc": 1,
           "n_exp": 1
-        },
-        {
-          "trade": "INTERIOR DOORS",
-          "income": 0.0,
-          "expense": 1288.0,
-          "grouped": true,
-          "n_inc": 0,
-          "n_exp": 2
         },
         {
           "trade": "GLASS",
@@ -4117,7 +4117,7 @@
         }
       ],
       "total_income": 188050.0,
-      "total_expense": 116859.11,
+      "total_expense": 117087.11,
       "loose_amount": 0
     },
     {
