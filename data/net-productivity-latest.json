@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-09T17:23:40",
+  "generated_at": "2026-07-09T17:46:52",
   "today": "2026-07-09",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -4553,7 +4553,7 @@
         {
           "trade": "BRICKS",
           "income": 25274.0,
-          "expense": 18271.0,
+          "expense": 18021.0,
           "grouped": true,
           "n_inc": 1,
           "n_exp": 8
@@ -4704,7 +4704,7 @@
         }
       ],
       "total_income": 121755.0,
-      "total_expense": 157092.28,
+      "total_expense": 156842.28,
       "loose_amount": 0
     },
     {
