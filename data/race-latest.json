@@ -1,11 +1,16 @@
 {
- "generated_at": "2026-07-10T12:09:47",
+ "generated_at": "2026-07-10T12:33:20",
  "today": "2026-07-10",
  "month": "July 2026",
  "month_prefix": "2026-07",
  "axis_start": "2026-07-01",
  "axis_end": "2026-08-02",
  "tolerance_today": 10.0,
+ "anchors": {
+  "monthly": "baseline-2026-07-06",
+  "weekly": "baseline-2026-07-06",
+  "note": "DOBLE ANCLA v8: meta mensual + dias-trabajados + cascada CP ancladas al baseline del MES; el plan/alertas (kicked/pulled/salvage) de la SEMANA EN CURSO usan el baseline SEMANAL mas reciente (snapshot domingo 21:00, plist ai.openclaw.sunday-baseline). Tras el reset dominical una pateada deja de ser alerta: su nueva fecha ES el plan de la semana."
+ },
  "week_sundays": [
   "2026-07-12",
   "2026-07-19",
@@ -25,7 +30,8 @@
   "color_formula": "adherencia-a-hoy: hechas_a_hoy / vencidas_segun_baseline_a_hoy (verde>=90, amarillo 70-89, rojo<70)",
   "week_pct_formula": "hechas_de_la_semana / planeadas_esa_semana (deadline domingo)",
   "week_target": "target_task = ULTIMA Action/CP que vence esa semana segun baseline (hasta donde hay que llegar; nombra el trade)",
-  "earned_schedule": "v7 POR DIAS (misma metrica que el status): runner_date = ultima fecha D con dias-plan-acumulados(D) <= dias-ganados. Garantia: on_pace <=> corredor EN o a la DERECHA de TODAY; atras <=> izquierda. Eje temporal COMPARTIDO por todos los carriles.",
+  "earned_schedule": "v8 POR DIAS sin artefacto de huecos: ganados==plan-a-hoy -> corredor EN TODAY; ganados>plan -> PRIMERA fecha cuyo plan>=ganados (adelanto real); ganados<plan -> ultima fecha con plan<=ganados (tope ayer). Garantia: on_pace <=> corredor EN o a la DERECHA de TODAY.",
+  "week_alerts": "v8: kicked_out = planeada esta semana (ancla semanal) con fecha actual fuera (> domingo) -> rojo titilante; pulled_in = planeada despues pero su fecha actual entro a esta semana -> verde titilante.",
   "progress_days": "v6: cada tarea pesa su duracion (dias baseline start->end incl). hecha=todos sus dias; en curso=dias desde su start ACTUAL (tope duracion-1); no iniciada=0. days_pct=ganados/planificados. Esperado a hoy = misma cuenta con fechas baseline.",
   "status_semaforo": "v6: gap = esperado_hoy - avance (puntos de DIAS). <=0 on_pace(verde); atras pero semana salvable=salvage(NARANJA titilante); <=tolerance_today warning(amarillo); resto behind(ROJO titilante). Tolerancia: lun-mie 20, jue 15, vie-dom 10.",
   "salvage": "semana salvable = TODAS las tareas no-hechas de la semana en curso tienen fecha ACTUAL <= domingo de la semana; save_tasks = que debe terminar y cuando.",
@@ -47,8 +53,8 @@
   "runner_pct": 14.6,
   "ghost_pct": 46.4,
   "july_money": [
-   160416.37,
-   130064.00999999998
+   158502.12,
+   127958.32999999999
   ],
   "projects": 9,
   "daily": [
@@ -135,10 +141,6 @@
     {
      "name": "GUTTERS: GUTTER INSTALLATION",
      "due": "2026-07-06"
-    },
-    {
-     "name": "INTERIOR FIXES - MULTIPLE TASKS",
-     "due": "2026-07-03"
     }
    ],
    "cp_chain": [],
@@ -151,73 +153,13 @@
      "label": "Week 1 · Jul 6-12",
      "deadline": "2026-07-12",
      "is_current": true,
-     "total": 12,
+     "total": 6,
      "done": 1,
-     "pct": 8.3,
+     "pct": 16.7,
      "target_task": "PAINTING",
      "target_type": "AT",
      "target_due": "2026-07-10",
      "tasks": [
-      {
-       "id": "22PZtuhRcsWu",
-       "name": "INTERIOR FIXES - INTERIOR PAINT",
-       "type": "AT",
-       "baseline_end": "2026-07-01",
-       "live_end": "2026-07-01",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending"
-      },
-      {
-       "id": "22PZttTMHeLL",
-       "name": "PLUMBING: READY FOR CITY INSPECTION",
-       "type": "AT",
-       "baseline_end": "2026-07-01",
-       "live_end": "2026-07-01",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending"
-      },
-      {
-       "id": "22PZtq84uPjP",
-       "name": "Vendor Meeting",
-       "type": "AT",
-       "baseline_end": "2026-07-01",
-       "live_end": "2026-07-01",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending"
-      },
-      {
-       "id": "22PYVbsasMS6",
-       "name": "CONCRETE FIX",
-       "type": "AT",
-       "baseline_end": "2026-07-02",
-       "live_end": "2026-07-02",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending"
-      },
-      {
-       "id": "22PZtqEzKuDi",
-       "name": "Siding fix",
-       "type": "AT",
-       "baseline_end": "2026-07-02",
-       "live_end": "2026-07-02",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending"
-      },
-      {
-       "id": "22PYVZNdU9xg",
-       "name": "INTERIOR FIXES - MULTIPLE TASKS",
-       "type": "AT",
-       "baseline_end": "2026-07-03",
-       "live_end": "2026-07-03",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending"
-      },
       {
        "id": "22PZwmeGFyp7",
        "name": "BRICKS: FIX FIREPLACE AND DOORS",
@@ -226,7 +168,11 @@
        "live_end": "2026-07-06",
        "moved_days": 0,
        "progress": 1,
-       "status": "done"
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PMhvM23Ls5",
@@ -236,7 +182,11 @@
        "live_end": "2026-07-06",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PMhvM23LsQ",
@@ -246,7 +196,11 @@
        "live_end": "2026-07-08",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PMhvM23LsV",
@@ -256,7 +210,11 @@
        "live_end": "2026-07-09",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PMhvM23LsL",
@@ -266,7 +224,11 @@
        "live_end": "2026-07-10",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZqqCN5tiK",
@@ -276,9 +238,14 @@
        "live_end": "2026-07-10",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "weekly"
     },
     {
      "label": "Week 2 · Jul 13-19",
@@ -290,7 +257,8 @@
      "target_task": null,
      "target_type": null,
      "target_due": null,
-     "tasks": []
+     "tasks": [],
+     "anchor": "monthly"
     },
     {
      "label": "Week 3 · Jul 20-26",
@@ -302,7 +270,8 @@
      "target_task": null,
      "target_type": null,
      "target_due": null,
-     "tasks": []
+     "tasks": [],
+     "anchor": "monthly"
     },
     {
      "label": "Week 4 · Jul 27-Aug 2",
@@ -314,7 +283,8 @@
      "target_task": null,
      "target_type": null,
      "target_due": null,
-     "tasks": []
+     "tasks": [],
+     "anchor": "monthly"
     }
    ],
    "daily": [
@@ -378,9 +348,34 @@
    "total_days": 14.0,
    "earned_days": 2.0,
    "gap": 78.6,
-   "status": "behind",
-   "salvable": false,
-   "save_tasks": [],
+   "status": "salvage",
+   "salvable": true,
+   "save_tasks": [
+    {
+     "name": "GUTTERS: INSTALL GUTTERS",
+     "due": "2026-07-12"
+    },
+    {
+     "name": "CLEANING: FINAL CLEANING",
+     "due": "2026-07-12"
+    },
+    {
+     "name": "BRICK: BRICK INSTALLATION",
+     "due": "2026-07-11"
+    },
+    {
+     "name": "CLEANING: TRASH HAUL",
+     "due": "2026-07-11"
+    },
+    {
+     "name": "CEILING MOULDING: INSTALLATION",
+     "due": "2026-07-11"
+    },
+    {
+     "name": "CUSTOM CARPENTRY: INSTALL SECRET DOOR",
+     "due": "2026-07-11"
+    }
+   ],
    "cp_chain": [
     {
      "id": "22PUWTffEG7R",
@@ -434,8 +429,8 @@
      "id": "22PPsiDCQYYw",
      "name": "CLEANING: FINAL CLEANING",
      "baseline_end": "2026-07-11",
-     "live_end": "2026-07-13",
-     "moved_days": 2,
+     "live_end": "2026-07-12",
+     "moved_days": 1,
      "status": "moved",
      "depends_on": []
     }
@@ -490,13 +485,6 @@
      "days": 3
     },
     {
-     "id": "22PPsiDCQYYw",
-     "name": "CLEANING: FINAL CLEANING",
-     "from": "2026-07-11",
-     "to": "2026-07-13",
-     "days": 2
-    },
-    {
      "id": "22PZkUehNPZy",
      "name": "GLASS: INSTALL GLASS",
      "from": "2026-07-08",
@@ -509,6 +497,13 @@
      "from": "2026-07-10",
      "to": "2026-07-12",
      "days": 2
+    },
+    {
+     "id": "22PPsiDCQYYw",
+     "name": "CLEANING: FINAL CLEANING",
+     "from": "2026-07-11",
+     "to": "2026-07-12",
+     "days": 1
     },
     {
      "id": "22PYmTjTWh4W",
@@ -530,23 +525,13 @@
      "label": "Week 1 · Jul 6-12",
      "deadline": "2026-07-12",
      "is_current": true,
-     "total": 12,
-     "done": 1,
-     "pct": 8.3,
+     "total": 11,
+     "done": 0,
+     "pct": 0.0,
      "target_task": "CLEANING: FINAL CLEANING",
      "target_type": "CP",
      "target_due": "2026-07-11",
      "tasks": [
-      {
-       "id": "22PPsiDBSSKa",
-       "name": "FLOORING: INSTALL FLOORING",
-       "type": "AT",
-       "baseline_end": "2026-07-01",
-       "live_end": "2026-07-01",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done"
-      },
       {
        "id": "22PUWTffEG7R",
        "name": "BRICK: BRICK INSTALLATION",
@@ -555,7 +540,11 @@
        "live_end": "2026-07-11",
        "moved_days": 4,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PaCCciwf4v",
@@ -565,7 +554,11 @@
        "live_end": "2026-07-11",
        "moved_days": 4,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PPsiDB5uvP",
@@ -575,7 +568,11 @@
        "live_end": "2026-07-10",
        "moved_days": 3,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PXCXCXSSVR",
@@ -585,7 +582,11 @@
        "live_end": "2026-07-11",
        "moved_days": 3,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PUnNKxDE7b",
@@ -595,7 +596,11 @@
        "live_end": "2026-07-11",
        "moved_days": 3,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PPsiDCTXjJ",
@@ -605,7 +610,11 @@
        "live_end": "2026-07-11",
        "moved_days": 3,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZkUehNPZy",
@@ -615,7 +624,11 @@
        "live_end": "2026-07-10",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PYmTjTWh4W",
@@ -625,7 +638,11 @@
        "live_end": "2026-07-11",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PaCEWgzt4Q",
@@ -635,7 +652,11 @@
        "live_end": "2026-07-11",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZkUsSKgvV",
@@ -645,19 +666,28 @@
        "live_end": "2026-07-12",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PPsiDCQYYw",
        "name": "CLEANING: FINAL CLEANING",
        "type": "CP",
        "baseline_end": "2026-07-11",
-       "live_end": "2026-07-13",
-       "moved_days": 2,
+       "live_end": "2026-07-12",
+       "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "weekly"
     },
     {
      "label": "Week 2 · Jul 13-19",
@@ -669,7 +699,8 @@
      "target_task": null,
      "target_type": null,
      "target_due": null,
-     "tasks": []
+     "tasks": [],
+     "anchor": "monthly"
     },
     {
      "label": "Week 3 · Jul 20-26",
@@ -681,7 +712,8 @@
      "target_task": null,
      "target_type": null,
      "target_due": null,
-     "tasks": []
+     "tasks": [],
+     "anchor": "monthly"
     },
     {
      "label": "Week 4 · Jul 27-Aug 2",
@@ -693,7 +725,8 @@
      "target_task": null,
      "target_type": null,
      "target_due": null,
-     "tasks": []
+     "tasks": [],
+     "anchor": "monthly"
     }
    ],
    "daily": [
@@ -1089,7 +1122,11 @@
        "live_end": "2026-07-07",
        "moved_days": 0,
        "progress": 1,
-       "status": "done"
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKADTfLD",
@@ -1099,7 +1136,11 @@
        "live_end": "2026-07-08",
        "moved_days": 0,
        "progress": 1,
-       "status": "done"
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpK8MBkUP",
@@ -1109,7 +1150,11 @@
        "live_end": "2026-07-11",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PaBiRU4Urw",
@@ -1119,7 +1164,11 @@
        "live_end": "2026-07-10",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpK7c8LMA",
@@ -1129,7 +1178,11 @@
        "live_end": "2026-07-10",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpK9qcNK7",
@@ -1139,7 +1192,11 @@
        "live_end": "2026-07-10",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKA3WxLB",
@@ -1149,7 +1206,11 @@
        "live_end": "2026-07-10",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpK8JeCxp",
@@ -1159,7 +1220,11 @@
        "live_end": "2026-07-10",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpK9rGkCL",
@@ -1169,7 +1234,11 @@
        "live_end": "2026-07-17",
        "moved_days": 7,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpK8ZfFq8",
@@ -1179,7 +1248,11 @@
        "live_end": "2026-07-11",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PaBiJWyriu",
@@ -1189,9 +1262,14 @@
        "live_end": "2026-07-11",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "weekly"
     },
     {
      "label": "Week 2 · Jul 13-19",
@@ -1212,7 +1290,11 @@
        "live_end": "2026-07-18",
        "moved_days": 5,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZtcszppfU",
@@ -1222,7 +1304,11 @@
        "live_end": "2026-07-18",
        "moved_days": 4,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKAP39Ee",
@@ -1232,9 +1318,14 @@
        "live_end": "2026-07-24",
        "moved_days": 7,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 3 · Jul 20-26",
@@ -1255,7 +1346,11 @@
        "live_end": "2026-07-20",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKBqLfMY",
@@ -1265,7 +1360,11 @@
        "live_end": "2026-07-25",
        "moved_days": 4,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKBJ8jsh",
@@ -1275,7 +1374,11 @@
        "live_end": "2026-07-21",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKAYpDhX",
@@ -1285,7 +1388,11 @@
        "live_end": "2026-07-22",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKAvBGym",
@@ -1295,7 +1402,11 @@
        "live_end": "2026-07-30",
        "moved_days": 7,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKCZ56D8",
@@ -1305,7 +1416,11 @@
        "live_end": "2026-07-23",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKC3L9j4",
@@ -1315,7 +1430,11 @@
        "live_end": "2026-07-28",
        "moved_days": 5,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKB7YbRu",
@@ -1325,7 +1444,11 @@
        "live_end": "2026-07-30",
        "moved_days": 7,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKAigegG",
@@ -1335,7 +1458,11 @@
        "live_end": "2026-07-30",
        "moved_days": 7,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKCFaaqg",
@@ -1345,9 +1472,14 @@
        "live_end": "2026-07-29",
        "moved_days": 5,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 4 · Jul 27-Aug 2",
@@ -1368,7 +1500,11 @@
        "live_end": "2026-08-03",
        "moved_days": 4,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpKCjBHpp",
@@ -1378,9 +1514,14 @@
        "live_end": "2026-08-04",
        "moved_days": 4,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     }
    ],
    "daily": [
@@ -1683,7 +1824,11 @@
        "live_end": "2026-07-07",
        "moved_days": 0,
        "progress": 1,
-       "status": "done"
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZqFvV2SUe",
@@ -1693,7 +1838,11 @@
        "live_end": "2026-07-09",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZqFvV3ZBb",
@@ -1703,7 +1852,11 @@
        "live_end": "2026-07-09",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PaRbiiPSPi",
@@ -1713,9 +1866,14 @@
        "live_end": "2026-07-13",
        "moved_days": 3,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "weekly"
     },
     {
      "label": "Week 2 · Jul 13-19",
@@ -1736,7 +1894,11 @@
        "live_end": "2026-07-15",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZqFvUyZz2",
@@ -1746,9 +1908,14 @@
        "live_end": "2026-07-23",
        "moved_days": 5,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 3 · Jul 20-26",
@@ -1769,7 +1936,11 @@
        "live_end": "2026-07-27",
        "moved_days": 5,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZqFvVCtd4",
@@ -1779,9 +1950,14 @@
        "live_end": "2026-07-30",
        "moved_days": 5,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 4 · Jul 27-Aug 2",
@@ -1802,7 +1978,11 @@
        "live_end": "2026-08-01",
        "moved_days": 4,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZqFvVMrC9",
@@ -1812,7 +1992,11 @@
        "live_end": "2026-08-03",
        "moved_days": 5,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZqFvVpEFz",
@@ -1822,7 +2006,11 @@
        "live_end": "2026-08-03",
        "moved_days": 5,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZqFvVVKA3",
@@ -1832,9 +2020,14 @@
        "live_end": "2026-08-04",
        "moved_days": 5,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     }
    ],
    "daily": [
@@ -2048,18 +2241,18 @@
     }
    ],
    "july_money": [
-    30270.49,
-    27180.21
+    29124.78,
+    25919.93
    ],
-   "margin_pct": 48.9,
+   "margin_pct": 47.4,
    "moved_count": 10,
    "moved": [
     {
      "id": "22PZqBFLKrWf",
      "name": "FLOORING: INSTALL NEW CARPET",
      "from": "2026-07-07",
-     "to": "2026-07-15",
-     "days": 8
+     "to": "2026-07-23",
+     "days": 16
     },
     {
      "id": "22PZqCDQs9sU",
@@ -2130,52 +2323,26 @@
      "label": "Week 1 · Jul 6-12",
      "deadline": "2026-07-12",
      "is_current": true,
-     "total": 9,
-     "done": 3,
-     "pct": 33.3,
+     "total": 6,
+     "done": 0,
+     "pct": 0.0,
      "target_task": "WINDOW SHUTTERS: INSTALLATION",
      "target_type": "AT",
      "target_due": "2026-07-11",
      "tasks": [
       {
-       "id": "22PZqDfQZtGr",
-       "name": "CABINETS & CARPENTRY: TAKE MEASUREMENTS",
-       "type": "AT",
-       "baseline_end": "2026-07-01",
-       "live_end": "2026-07-01",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done"
-      },
-      {
-       "id": "22PZpzYvdPxd",
-       "name": "SHEETROCK: TAPE, BED & TEXTURE",
-       "type": "CP",
-       "baseline_end": "2026-07-01",
-       "live_end": "2026-07-01",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done"
-      },
-      {
-       "id": "22PZq9icfFwT",
-       "name": "SHEETROCK: CLEAN PROJECT",
-       "type": "CP",
-       "baseline_end": "2026-07-02",
-       "live_end": "2026-07-02",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done"
-      },
-      {
        "id": "22PZqBFLKrWf",
        "name": "FLOORING: INSTALL NEW CARPET",
        "type": "AT",
        "baseline_end": "2026-07-07",
-       "live_end": "2026-07-15",
-       "moved_days": 8,
+       "live_end": "2026-07-23",
+       "moved_days": 16,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpzZEdsse",
@@ -2185,7 +2352,11 @@
        "live_end": "2026-07-09",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZqCDQs9sU",
@@ -2195,7 +2366,11 @@
        "live_end": "2026-07-16",
        "moved_days": 7,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpzZniKVa",
@@ -2205,7 +2380,11 @@
        "live_end": "2026-07-13",
        "moved_days": 3,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpzZx3NMe",
@@ -2215,7 +2394,11 @@
        "live_end": "2026-07-11",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZwrv8gWbG",
@@ -2225,9 +2408,14 @@
        "live_end": "2026-07-17",
        "moved_days": 6,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "weekly"
     },
     {
      "label": "Week 2 · Jul 13-19",
@@ -2248,7 +2436,11 @@
        "live_end": "2026-07-15",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZwqrWDcBA",
@@ -2258,7 +2450,11 @@
        "live_end": "2026-07-15",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpza7DCAJ",
@@ -2268,7 +2464,11 @@
        "live_end": "2026-07-14",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZqDyKRYiD",
@@ -2278,7 +2478,11 @@
        "live_end": "2026-07-15",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpzZTAKYA",
@@ -2288,7 +2492,11 @@
        "live_end": "2026-07-15",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpzakrkQ9",
@@ -2298,7 +2506,11 @@
        "live_end": "2026-07-14",
        "moved_days": -3,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpzZ5Vpj2",
@@ -2308,7 +2520,11 @@
        "live_end": "2026-07-17",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpzaFfVTZ",
@@ -2318,9 +2534,14 @@
        "live_end": "2026-07-18",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 3 · Jul 20-26",
@@ -2341,7 +2562,11 @@
        "live_end": "2026-07-21",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpzb6N4Gr",
@@ -2351,7 +2576,11 @@
        "live_end": "2026-07-21",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZwrcQBAuZ",
@@ -2361,7 +2590,11 @@
        "live_end": "2026-07-21",
        "moved_days": -2,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpzb9pfS3",
@@ -2371,7 +2604,11 @@
        "live_end": "2026-07-24",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZqEkJ8qkP",
@@ -2381,9 +2618,14 @@
        "live_end": "2026-07-25",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 4 · Jul 27-Aug 2",
@@ -2395,7 +2637,8 @@
      "target_task": null,
      "target_type": null,
      "target_due": null,
-     "tasks": []
+     "tasks": [],
+     "anchor": "monthly"
     }
    ],
    "daily": [
@@ -2715,33 +2958,13 @@
      "label": "Week 1 · Jul 6-12",
      "deadline": "2026-07-12",
      "is_current": true,
-     "total": 5,
-     "done": 2,
-     "pct": 40.0,
+     "total": 3,
+     "done": 0,
+     "pct": 0.0,
      "target_task": "FRAMING: ROOF DECKING",
      "target_type": "CP",
      "target_due": "2026-07-10",
      "tasks": [
-      {
-       "id": "22PZpJeRDvNx",
-       "name": "FRAMING: EXECUTE FRAMING",
-       "type": "CP",
-       "baseline_end": "2026-07-03",
-       "live_end": "2026-07-03",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done"
-      },
-      {
-       "id": "22PZqnVKgm5M",
-       "name": "FOUNDATION: FOUNDATION FIX",
-       "type": "AT",
-       "baseline_end": "2026-07-04",
-       "live_end": "2026-07-04",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done"
-      },
       {
        "id": "22PZpJeRityg",
        "name": "FRAMING: EXECUTE EXTERIOR SHEATING",
@@ -2750,7 +2973,11 @@
        "live_end": "2026-07-13",
        "moved_days": 4,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpJeehjUu",
@@ -2760,7 +2987,11 @@
        "live_end": "2026-07-13",
        "moved_days": 3,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpJeSfWb5",
@@ -2770,9 +3001,14 @@
        "live_end": "2026-07-13",
        "moved_days": 3,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "weekly"
     },
     {
      "label": "Week 2 · Jul 13-19",
@@ -2793,7 +3029,11 @@
        "live_end": "2026-07-14",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpJeqBFWH",
@@ -2803,7 +3043,11 @@
        "live_end": "2026-07-30",
        "moved_days": 13,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpJfFy7dB",
@@ -2813,7 +3057,11 @@
        "live_end": "2026-07-20",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpJf989Tu",
@@ -2823,7 +3071,11 @@
        "live_end": "2026-07-20",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpJf28aPS",
@@ -2833,7 +3085,11 @@
        "live_end": "2026-07-20",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpJezNKMt",
@@ -2843,9 +3099,14 @@
        "live_end": "2026-07-20",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 3 · Jul 20-26",
@@ -2866,7 +3127,11 @@
        "live_end": "2026-07-23",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpJeTpqtF",
@@ -2876,7 +3141,11 @@
        "live_end": "2026-07-22",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpJfP8HdN",
@@ -2886,7 +3155,11 @@
        "live_end": "2026-07-23",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpJhpt2eN",
@@ -2896,9 +3169,14 @@
        "live_end": "2026-07-24",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 4 · Jul 27-Aug 2",
@@ -2919,7 +3197,11 @@
        "live_end": "2026-07-28",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpJfahY9v",
@@ -2929,7 +3211,11 @@
        "live_end": "2026-08-01",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpJfj77u7",
@@ -2939,9 +3225,14 @@
        "live_end": "2026-08-03",
        "moved_days": 3,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     }
    ],
    "daily": [
@@ -3088,8 +3379,8 @@
      "id": "22PJWeDkyxJ9",
      "name": "PLUMBING: INSTALL PLUMBING TRIM",
      "baseline_end": "2026-07-14",
-     "live_end": "2026-07-15",
-     "moved_days": 1,
+     "live_end": "2026-07-17",
+     "moved_days": 3,
      "status": "moved",
      "depends_on": [
       "GLASS: INSTALL GLASS",
@@ -3102,8 +3393,8 @@
      "id": "22PJWewqDSU5",
      "name": "AUTOMATIC GATE INSTALLATION",
      "baseline_end": "2026-07-18",
-     "live_end": "2026-07-20",
-     "moved_days": 2,
+     "live_end": "2026-07-22",
+     "moved_days": 4,
      "status": "moved",
      "depends_on": [
       "MECHANICAL: CITY INSPECTION",
@@ -3115,8 +3406,8 @@
      "id": "22PJWeDm3Cfx",
      "name": "FINAL: TOUCH UP PAINT AND CLEAN",
      "baseline_end": "2026-07-21",
-     "live_end": "2026-07-22",
-     "moved_days": 1,
+     "live_end": "2026-07-24",
+     "moved_days": 3,
      "status": "moved",
      "depends_on": [
       "AUTOMATIC GATE INSTALLATION"
@@ -3126,8 +3417,8 @@
      "id": "22PJWeDm3ZaG",
      "name": "FINAL: PUNCH LIST COMPLETION",
      "baseline_end": "2026-07-23",
-     "live_end": "2026-07-24",
-     "moved_days": 1,
+     "live_end": "2026-07-27",
+     "moved_days": 4,
      "status": "moved",
      "depends_on": [
       "FINAL: TOUCH UP PAINT AND CLEAN"
@@ -3137,8 +3428,8 @@
      "id": "22PJWeDm3wUZ",
      "name": "FINAL INSPECTION",
      "baseline_end": "2026-07-24",
-     "live_end": "2026-07-25",
-     "moved_days": 1,
+     "live_end": "2026-07-28",
+     "moved_days": 4,
      "status": "moved",
      "depends_on": [
       "FINAL: PUNCH LIST COMPLETION"
@@ -3146,12 +3437,33 @@
     }
    ],
    "july_money": [
-    -3859.12,
-    -6253.72
+    -4627.66,
+    -7099.12
    ],
-   "margin_pct": 7.0,
+   "margin_pct": 5.0,
    "moved_count": 9,
    "moved": [
+    {
+     "id": "22PJWeDm3ZaG",
+     "name": "FINAL: PUNCH LIST COMPLETION",
+     "from": "2026-07-23",
+     "to": "2026-07-27",
+     "days": 4
+    },
+    {
+     "id": "22PJWewqDSU5",
+     "name": "AUTOMATIC GATE INSTALLATION",
+     "from": "2026-07-18",
+     "to": "2026-07-22",
+     "days": 4
+    },
+    {
+     "id": "22PJWeDm3wUZ",
+     "name": "FINAL INSPECTION",
+     "from": "2026-07-24",
+     "to": "2026-07-28",
+     "days": 4
+    },
     {
      "id": "22Pa5iUufEcM",
      "name": "CABINET: INSTALLATION OF DOORS",
@@ -3160,17 +3472,24 @@
      "days": 3
     },
     {
+     "id": "22PJWeDkyxJ9",
+     "name": "PLUMBING: INSTALL PLUMBING TRIM",
+     "from": "2026-07-14",
+     "to": "2026-07-17",
+     "days": 3
+    },
+    {
+     "id": "22PJWeDm3Cfx",
+     "name": "FINAL: TOUCH UP PAINT AND CLEAN",
+     "from": "2026-07-21",
+     "to": "2026-07-24",
+     "days": 3
+    },
+    {
      "id": "22PJWeDkzh6i",
      "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
      "from": "2026-07-11",
      "to": "2026-07-13",
-     "days": 2
-    },
-    {
-     "id": "22PJWewqDSU5",
-     "name": "AUTOMATIC GATE INSTALLATION",
-     "from": "2026-07-18",
-     "to": "2026-07-20",
      "days": 2
     },
     {
@@ -3186,34 +3505,6 @@
      "from": "2026-07-08",
      "to": "2026-07-09",
      "days": 1
-    },
-    {
-     "id": "22PJWeDkyxJ9",
-     "name": "PLUMBING: INSTALL PLUMBING TRIM",
-     "from": "2026-07-14",
-     "to": "2026-07-15",
-     "days": 1
-    },
-    {
-     "id": "22PJWeDm3Cfx",
-     "name": "FINAL: TOUCH UP PAINT AND CLEAN",
-     "from": "2026-07-21",
-     "to": "2026-07-22",
-     "days": 1
-    },
-    {
-     "id": "22PJWeDm3ZaG",
-     "name": "FINAL: PUNCH LIST COMPLETION",
-     "from": "2026-07-23",
-     "to": "2026-07-24",
-     "days": 1
-    },
-    {
-     "id": "22PJWeDm3wUZ",
-     "name": "FINAL INSPECTION",
-     "from": "2026-07-24",
-     "to": "2026-07-25",
-     "days": 1
     }
    ],
    "weeks": [
@@ -3221,23 +3512,13 @@
      "label": "Week 1 · Jul 6-12",
      "deadline": "2026-07-12",
      "is_current": true,
-     "total": 11,
-     "done": 4,
-     "pct": 36.4,
+     "total": 10,
+     "done": 3,
+     "pct": 30.0,
      "target_task": "MECHANICAL: INSTALL MECHANICAL TRIM",
      "target_type": "CP",
      "target_due": "2026-07-11",
      "tasks": [
-      {
-       "id": "22Pa5iTU9xu7",
-       "name": "CABINET: MOD OF BOXES",
-       "type": "AT",
-       "baseline_end": "2026-07-01",
-       "live_end": "2026-07-01",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done"
-      },
       {
        "id": "22Pa5iUufEcM",
        "name": "CABINET: INSTALLATION OF DOORS",
@@ -3246,7 +3527,11 @@
        "live_end": "2026-07-09",
        "moved_days": 3,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PVDYjWnvLr",
@@ -3256,7 +3541,11 @@
        "live_end": "2026-07-07",
        "moved_days": 0,
        "progress": 1,
-       "status": "done"
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PXMkAkqfAi",
@@ -3266,7 +3555,11 @@
        "live_end": "2026-07-07",
        "moved_days": 0,
        "progress": 1,
-       "status": "done"
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PJWeDkxqbD",
@@ -3276,7 +3569,11 @@
        "live_end": "2026-07-07",
        "moved_days": 0,
        "progress": 1,
-       "status": "done"
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZMvWk7aLu",
@@ -3286,7 +3583,11 @@
        "live_end": "2026-07-09",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PYA2rawv6G",
@@ -3296,7 +3597,11 @@
        "live_end": "2026-07-09",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZMuvtJSK9",
@@ -3306,7 +3611,11 @@
        "live_end": "2026-07-10",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PJWeDkzh6i",
@@ -3316,7 +3625,11 @@
        "live_end": "2026-07-13",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PVDYk5hi6N",
@@ -3326,7 +3639,11 @@
        "live_end": "2026-07-13",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PJWeDm25z3",
@@ -3336,9 +3653,14 @@
        "live_end": "2026-07-11",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "weekly"
     },
     {
      "label": "Week 2 · Jul 13-19",
@@ -3356,10 +3678,14 @@
        "name": "PLUMBING: INSTALL PLUMBING TRIM",
        "type": "CP",
        "baseline_end": "2026-07-14",
-       "live_end": "2026-07-15",
-       "moved_days": 1,
+       "live_end": "2026-07-17",
+       "moved_days": 3,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZpXyEynv6",
@@ -3369,19 +3695,28 @@
        "live_end": "2026-07-15",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PJWewqDSU5",
        "name": "AUTOMATIC GATE INSTALLATION",
        "type": "CP",
        "baseline_end": "2026-07-18",
-       "live_end": "2026-07-20",
-       "moved_days": 2,
+       "live_end": "2026-07-22",
+       "moved_days": 4,
        "progress": 0.85,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 3 · Jul 20-26",
@@ -3399,32 +3734,45 @@
        "name": "FINAL: TOUCH UP PAINT AND CLEAN",
        "type": "CP",
        "baseline_end": "2026-07-21",
-       "live_end": "2026-07-22",
-       "moved_days": 1,
+       "live_end": "2026-07-24",
+       "moved_days": 3,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PJWeDm3ZaG",
        "name": "FINAL: PUNCH LIST COMPLETION",
        "type": "CP",
        "baseline_end": "2026-07-23",
-       "live_end": "2026-07-24",
-       "moved_days": 1,
+       "live_end": "2026-07-27",
+       "moved_days": 4,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PJWeDm3wUZ",
        "name": "FINAL INSPECTION",
        "type": "CP",
        "baseline_end": "2026-07-24",
-       "live_end": "2026-07-25",
-       "moved_days": 1,
+       "live_end": "2026-07-28",
+       "moved_days": 4,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 4 · Jul 27-Aug 2",
@@ -3436,7 +3784,8 @@
      "target_task": null,
      "target_type": null,
      "target_due": null,
-     "tasks": []
+     "tasks": [],
+     "anchor": "monthly"
     }
    ],
    "daily": [
@@ -3723,63 +4072,13 @@
      "label": "Week 1 · Jul 6-12",
      "deadline": "2026-07-12",
      "is_current": true,
-     "total": 11,
-     "done": 5,
-     "pct": 45.5,
+     "total": 6,
+     "done": 2,
+     "pct": 33.3,
      "target_task": "MECHANICAL ROUGH IN: EXECUTE",
      "target_type": "AT",
      "target_due": "2026-07-10",
      "tasks": [
-      {
-       "id": "22PZzWVA3Jwm",
-       "name": "FOUNDATION REPAIR",
-       "type": "CP",
-       "baseline_end": "2026-07-01",
-       "live_end": "2026-07-01",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done"
-      },
-      {
-       "id": "22PaChNpSH3q",
-       "name": "DEMO: PACKING",
-       "type": "CP",
-       "baseline_end": "2026-07-03",
-       "live_end": "2026-07-03",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done"
-      },
-      {
-       "id": "22PZzWURUhyE",
-       "name": "FRAMING: EXECUTE EXTERIOR SHEATHING",
-       "type": "CP",
-       "baseline_end": "2026-07-03",
-       "live_end": "2026-07-03",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done"
-      },
-      {
-       "id": "22PaChWk49F7",
-       "name": "DEMO: DEMO WALLS & CEILING",
-       "type": "CP",
-       "baseline_end": "2026-07-04",
-       "live_end": "2026-07-08",
-       "moved_days": 4,
-       "progress": 0,
-       "status": "moved"
-      },
-      {
-       "id": "22PZzWm8eJ4B",
-       "name": "FRAMING: EXECUTE",
-       "type": "CP",
-       "baseline_end": "2026-07-04",
-       "live_end": "2026-08-04",
-       "moved_days": 31,
-       "progress": 0,
-       "status": "moved"
-      },
       {
        "id": "22PaChar7pX6",
        "name": "DEMO: FLOORING KITCHEN",
@@ -3788,7 +4087,11 @@
        "live_end": "2026-07-08",
        "moved_days": 2,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzWUUGmVq",
@@ -3798,7 +4101,11 @@
        "live_end": "2026-07-07",
        "moved_days": 0,
        "progress": 1,
-       "status": "done"
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzWfBSQDK",
@@ -3808,7 +4115,11 @@
        "live_end": "2026-07-09",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzWeD9gYx",
@@ -3818,7 +4129,11 @@
        "live_end": "2026-07-09",
        "moved_days": 0,
        "progress": 1,
-       "status": "done"
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzWUzYRut",
@@ -3828,7 +4143,11 @@
        "live_end": "2026-07-15",
        "moved_days": 5,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzWV7qXWg",
@@ -3838,9 +4157,42 @@
        "live_end": "2026-07-15",
        "moved_days": 5,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZzWe7eBKD",
+       "name": "ELECTRICAL ROUGH IN: EXECUTE",
+       "type": "CP",
+       "baseline_end": "2026-07-16",
+       "live_end": "2026-07-08",
+       "moved_days": -8,
+       "progress": 1,
+       "status": "done",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": true,
+       "was": "2026-07-16"
+      },
+      {
+       "id": "22PZzWUiKH6i",
+       "name": "PLUMBING ROUGH IN: EXECUTE",
+       "type": "AT",
+       "baseline_end": "2026-07-16",
+       "live_end": "2026-07-10",
+       "moved_days": -6,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": true,
+       "was": "2026-07-16"
       }
-     ]
+     ],
+     "anchor": "weekly"
     },
     {
      "label": "Week 2 · Jul 13-19",
@@ -3861,7 +4213,11 @@
        "live_end": "2026-07-13",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzWmEvmUK",
@@ -3871,7 +4227,11 @@
        "live_end": "2026-08-05",
        "moved_days": 22,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzWexBK6A",
@@ -3881,7 +4241,11 @@
        "live_end": "2026-07-16",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzWVERTRf",
@@ -3891,7 +4255,11 @@
        "live_end": "2026-07-14",
        "moved_days": -2,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzWe7eBKD",
@@ -3901,7 +4269,11 @@
        "live_end": "2026-07-08",
        "moved_days": -8,
        "progress": 1,
-       "status": "done"
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzWUiKH6i",
@@ -3911,9 +4283,14 @@
        "live_end": "2026-07-10",
        "moved_days": -6,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 3 · Jul 20-26",
@@ -3934,9 +4311,14 @@
        "live_end": "2026-07-23",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 4 · Jul 27-Aug 2",
@@ -3957,7 +4339,11 @@
        "live_end": "2026-07-24",
        "moved_days": -3,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzWfRibBW",
@@ -3967,9 +4353,14 @@
        "live_end": "2026-07-27",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     }
    ],
    "daily": [
@@ -4148,7 +4539,11 @@
        "live_end": "2026-07-07",
        "moved_days": 1,
        "progress": 1,
-       "status": "done"
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzzrXxmMg",
@@ -4158,9 +4553,14 @@
        "live_end": "2026-07-09",
        "moved_days": 1,
        "progress": 0,
-       "status": "moved"
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "weekly"
     },
     {
      "label": "Week 2 · Jul 13-19",
@@ -4181,9 +4581,14 @@
        "live_end": "2026-07-15",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 3 · Jul 20-26",
@@ -4204,7 +4609,11 @@
        "live_end": "2026-07-20",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzzs2BTjW",
@@ -4214,7 +4623,11 @@
        "live_end": "2026-07-21",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzzrhS6j8",
@@ -4224,7 +4637,11 @@
        "live_end": "2026-07-24",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzzrmMy4S",
@@ -4234,7 +4651,11 @@
        "live_end": "2026-07-24",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzzrrQAUm",
@@ -4244,9 +4665,14 @@
        "live_end": "2026-07-25",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     },
     {
      "label": "Week 4 · Jul 27-Aug 2",
@@ -4267,7 +4693,11 @@
        "live_end": "2026-07-27",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzzrxpbix",
@@ -4277,7 +4707,11 @@
        "live_end": "2026-07-30",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzzrrrvPh",
@@ -4287,7 +4721,11 @@
        "live_end": "2026-07-30",
        "moved_days": 0,
        "progress": 0,
-       "status": "pending"
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       },
       {
        "id": "22PZzzsREG4c",
@@ -4297,9 +4735,14 @@
        "live_end": "2026-07-31",
        "moved_days": 0,
        "progress": 1,
-       "status": "done"
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
-     ]
+     ],
+     "anchor": "monthly"
     }
    ],
    "daily": [
