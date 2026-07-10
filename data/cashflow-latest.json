@@ -1,19 +1,19 @@
 {
   "date": "2026-07-10",
-  "generated_at": "2026-07-10T10:16:17.835843",
+  "generated_at": "2026-07-10T10:39:33.359694",
   "summary": {
-    "total_payment_tasks": 797,
+    "total_payment_tasks": 796,
     "total_income": 554496.33,
     "total_p_income": 0,
-    "total_outgoing": 504374.29,
-    "total_net": 50122.04,
+    "total_outgoing": 504124.29,
+    "total_net": 50372.04,
     "pending_income": 1516691.0,
     "pending_p_income": 0,
-    "pending_outgoing": 1213152.12,
+    "pending_outgoing": 1211718.12,
     "paid_income": 445389.75,
     "paid_p_income": 0,
-    "paid_outgoing": 363737.91,
-    "unpaid_net": 303538.88,
+    "paid_outgoing": 364921.91,
+    "unpaid_net": 304972.88,
     "weeks_covered": 5
   },
   "weeks": [
@@ -25,14 +25,14 @@
       "income": 108934.5,
       "p_income": 0,
       "subs": 92706.0,
-      "materials": 16102.0,
+      "materials": 15852.0,
       "additional": 11770.0,
-      "outgoing": 120578.0,
-      "net": -11643.5,
+      "outgoing": 120328.0,
+      "net": -11393.5,
       "income_paid": 0,
       "p_income_paid": 0,
-      "outgoing_paid": 0,
-      "task_count": 82,
+      "outgoing_paid": 1184.0,
+      "task_count": 80,
       "items": [
         {
           "project": "Charles Harris \u2014 Argyle TX",
@@ -152,7 +152,7 @@
           "type": "materials",
           "amount": 1184.0,
           "due": "2026-07-10",
-          "paid": false
+          "paid": true
         },
         {
           "project": "Kyle Aubry - Project 01",
@@ -183,22 +183,6 @@
           "task": "ELECTRICAL TRIM: PURCHASE MATERIAL",
           "type": "materials",
           "amount": 7335.0,
-          "due": "2026-07-10",
-          "paid": false
-        },
-        {
-          "project": "Kyle Aubry - Project 01",
-          "task": "BUY FIREPLACE MANTEL",
-          "type": "materials",
-          "amount": 250.0,
-          "due": "2026-07-10",
-          "paid": false
-        },
-        {
-          "project": "Kyle Aubry - Project 01",
-          "task": "CARPET:PURCHASE MATERIAL",
-          "type": "materials",
-          "amount": 0.0,
           "due": "2026-07-10",
           "paid": false
         },
@@ -707,7 +691,7 @@
       "income_paid": 0,
       "p_income_paid": 0,
       "outgoing_paid": 3110.56,
-      "task_count": 81,
+      "task_count": 82,
       "items": [
         {
           "project": "Clifford Clack \u2014 Gym Addition",
@@ -866,6 +850,14 @@
           "task": "PLUMBING: RECEIVE PAYMENT",
           "type": "income",
           "amount": 2575.0,
+          "due": "2026-07-14",
+          "paid": false
+        },
+        {
+          "project": "Kyle Aubry - Project 01",
+          "task": "CARPET:PURCHASE MATERIAL",
+          "type": "materials",
+          "amount": 0.0,
           "due": "2026-07-14",
           "paid": false
         },
@@ -6148,7 +6140,7 @@
       "type": "materials",
       "amount": 1184.0,
       "due": "2026-07-10",
-      "paid": false,
+      "paid": true,
       "assignee": "INTERIOR PAINT",
       "assignedTo": "Giselle Garcia",
       "taskId": "22PZpzZsVEWM",
@@ -6208,34 +6200,6 @@
       "assignee": "ELECTRICAL TRIM",
       "assignedTo": "Romina Rey",
       "taskId": "22PZpzafaUAy",
-      "projectId": "22Nx8Uut2Qxs",
-      "planning": false,
-      "external": false
-    },
-    {
-      "project": "Kyle Aubry - Project 01",
-      "task": "BUY FIREPLACE MANTEL",
-      "type": "materials",
-      "amount": 250.0,
-      "due": "2026-07-10",
-      "paid": false,
-      "assignee": "INTERIOR DOORS",
-      "assignedTo": "Giselle Garcia, Romina Rey",
-      "taskId": "22PZtytu4CRA",
-      "projectId": "22Nx8Uut2Qxs",
-      "planning": false,
-      "external": false
-    },
-    {
-      "project": "Kyle Aubry - Project 01",
-      "task": "CARPET:PURCHASE MATERIAL",
-      "type": "materials",
-      "amount": 0.0,
-      "due": "2026-07-10",
-      "paid": false,
-      "assignee": "FLOORING",
-      "assignedTo": "Romina Rey",
-      "taskId": "22PadkjFSJip",
       "projectId": "22Nx8Uut2Qxs",
       "planning": false,
       "external": false
@@ -7371,6 +7335,20 @@
       "assignedTo": "",
       "taskId": "22PVycqBYe3q",
       "projectId": "22P2cmNJZcwJ",
+      "planning": false,
+      "external": false
+    },
+    {
+      "project": "Kyle Aubry - Project 01",
+      "task": "CARPET:PURCHASE MATERIAL",
+      "type": "materials",
+      "amount": 0.0,
+      "due": "2026-07-14",
+      "paid": false,
+      "assignee": "FLOORING",
+      "assignedTo": "Romina Rey",
+      "taskId": "22PadkjFSJip",
+      "projectId": "22Nx8Uut2Qxs",
       "planning": false,
       "external": false
     },
@@ -13849,7 +13827,7 @@
         "project": "Kyle Aubry - Project 01",
         "task": "CARPET:PURCHASE MATERIAL",
         "type": "materials",
-        "due": "2026-07-10",
+        "due": "2026-07-14",
         "taskId": "22PadkjFSJip"
       },
       {
