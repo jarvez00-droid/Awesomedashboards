@@ -27,6 +27,16 @@ h1{font-size:22px;margin:0 0 3px}
 .spark{width:100%;height:52px;display:block}
 .pill{font-size:11px;font-weight:700;padding:2px 10px;border-radius:999px;display:inline-block;background:var(--card2);border:1px solid var(--line);color:var(--mut)}
 .pill.pace{color:var(--accent);border-color:rgba(88,166,255,.5)}
+/* v5 traffic-light status (Jose): green on pace, amber warning, red blinking behind */
+.pill.st-on_pace{color:#3fb950;border-color:rgba(63,185,80,.55);background:rgba(63,185,80,.09)}
+.pill.st-warning{color:#e3b341;border-color:rgba(227,179,65,.55);background:rgba(227,179,65,.1)}
+.pill.st-behind{color:#ff7b72;border-color:rgba(248,81,73,.6);background:rgba(248,81,73,.12);animation:blinkst 1.1s ease-in-out infinite}
+@keyframes blinkst{0%,100%{opacity:1}50%{opacity:.3}}
+.stripe{position:absolute;top:0;right:0;bottom:0;width:5px;z-index:5}
+.stripe.st-on_pace{background:#3fb950}
+.stripe.st-warning{background:#e3b341}
+.stripe.st-behind{background:#f85149;animation:blinkst 1.1s ease-in-out infinite}
+.goalLab{color:var(--mut);font-size:9px;text-transform:uppercase;letter-spacing:.05em;line-height:1.25;margin-bottom:2px}
 
 .legend{color:var(--mut);font-size:12px;margin:10px 2px 4px;display:flex;gap:16px;flex-wrap:wrap}
 .legend b{color:var(--tx);font-weight:600}
@@ -41,7 +51,7 @@ h1{font-size:22px;margin:0 0 3px}
 .pmhead .pms{color:var(--mut);font-size:12px}
 
 /* ---- lanes ---- */
-.lane{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden}
+.lane{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;position:relative}
 .lhead{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer}
 .lhead:hover{background:var(--card2)}
 /* v4: FIXED column widths so every lane's track spans the SAME x-range (shared time axis) */
@@ -109,6 +119,18 @@ h1{font-size:22px;margin:0 0 3px}
 .wkh .wd{color:var(--mut);font-size:11px}
 .tgt{padding:7px 11px;background:rgba(88,166,255,.06);border-top:1px solid var(--line);font-size:12.5px;color:var(--tx)}
 .tgt b{font-weight:700}
+/* v5 Critical Path dependency cascade (stair-stepped waterfall) */
+.cascade{border:1px solid var(--line);border-radius:9px;margin:8px 0;padding:9px 11px;overflow-x:auto;background:var(--card)}
+.cstep{display:flex;align-items:baseline;gap:7px;font-size:12.5px;padding:2.5px 0;white-space:nowrap}
+.cstep .conn{color:var(--mut);font-family:ui-monospace,Menlo,monospace;font-size:11px}
+.cstep .cic{width:15px;text-align:center;flex-shrink:0}
+.cstep.done .cic{color:#3fb950}
+.cstep.moved .cic{color:#e3b341}
+.cstep.pending .cic{color:var(--mut)}
+.cstep.done .cn{color:var(--mut);text-decoration:line-through}
+.cstep .cd{color:var(--mut);font-size:11px}
+.cstep .cmv{color:#e3b341;font-size:11px;font-style:italic}
+.cstep .cdep{color:var(--mut);font-size:10.5px;font-style:italic}
 .task{display:flex;align-items:center;gap:9px;padding:6px 11px;border-top:1px solid var(--line);font-size:13px}
 .task .ic{width:18px;text-align:center;flex-shrink:0;color:var(--mut)}
 .task .tn{flex:1;color:#dbe4ee}
@@ -244,12 +266,15 @@ function runnerSVG(color){
   `</svg>`;
 }
 
-/* Neutral pace label — no traffic-light colors (Jose v3). */
-function paceLabel(done,due){
-  if(due<=0) return {t:'nothing due yet',cls:''};
-  const d=done-due;
-  if(d>=0) return {t:d>0?`ahead by ${d}`:'on pace',cls:'pace'};
-  return {t:`${-d} behind plan`,cls:''};
+/* v5 traffic-light status (Jose): from JSON status computed vs today's tolerance.
+   gap = expected-by-today% − month-progress%; tolerance shrinks through the week
+   (Mon-Wed 20 · Thu 15 · Fri-Sun 10). */
+function statusInfo(st,gap){
+  const map={on_pace:{label:'ON PACE'},warning:{label:'WARNING'},behind:{label:'BEHIND PLAN'}};
+  const m=map[st]||map.on_pace;
+  const tol=DATA.tolerance_today!=null?DATA.tolerance_today:'—';
+  return {cls:'st-'+(st||'on_pace'), label:m.label,
+          title:`gap ${gap!=null?gap:'—'} pts vs tolerance ${tol} pts today`};
 }
 
 /* ---- SHARED TIME AXIS (v4): identical date→x mapping for every lane ---- */
@@ -295,14 +320,14 @@ function axisHeader(){
 function renderHero(){
   const c=DATA.company;
   const mp=(c.monthly_pct!=null?c.monthly_pct:c.runner_pct);
-  const pace=paceLabel(c.done_total,c.due_to_today);
+  const pace={cls:statusInfo(c.status,c.gap).cls, t:statusInfo(c.status,c.gap).label};
   const money = c.july_money && c.july_money.length===2 ? `${fmtM(c.july_money[0])} <span style="color:var(--mut);font-size:12px">/ ${fmtM(c.july_money[1])} +10% cost</span>` : '—';
   $('#hero').innerHTML=`<div class="hero">
     <div class="hbig">
       <div class="num">${mp}%</div>
       <div class="lab">July goal · ${c.done_total}/${c.total_target} tasks</div>
       <div class="pill ${pace.cls}" style="margin-top:7px">${pace.t}</div>
-      <div style="color:var(--mut);font-size:11px;margin-top:6px">expected by today: <b style="color:var(--tx)">${c.ghost_pct}%</b></div>
+      <div style="color:var(--mut);font-size:11px;margin-top:6px">expected by today: <b style="color:var(--tx)">${c.ghost_pct}%</b> · tolerance today: ${DATA.tolerance_today!=null?DATA.tolerance_today+' pts':'—'}</div>
       ${c.runner_date?`<div style="color:var(--mut);font-size:11px;margin-top:2px">earned schedule: <b style="color:var(--tx)">${fmtD(c.runner_date)}</b> · ${schedLabel(c.runner_date)}</div>`:''}
     </div>
     <div class="hmid">
@@ -333,6 +358,19 @@ function detail(p,col){
   let html='';
   html+=`<div class="dmeta" style="border-left:3px solid ${col}">🎯 Month goal: <b>${p.total_target} tasks</b> · <b>${p.done_total}</b> done (${p.monthly_pct!=null?p.monthly_pct:p.runner_pct}%)</div>`;
   html+=`<div class="dtitle">Day-by-day progress</div>${spark(p.daily,640,60,col)}`;
+  if(p.cp_chain && p.cp_chain.length){
+    html+=`<div class="dtitle">⛓ Critical Path — dependency cascade (${p.cp_chain.length} steps, schedule order)</div><div class="cascade">`;
+    html+=p.cp_chain.map((s,i)=>{
+      const ic=s.status==='done'?'✓':(s.status==='moved'?'▸':'○');
+      const mv=s.moved_days ? `<span class="cmv">→ ${fmtD(s.live_end)} (${s.moved_days>0?'+':''}${s.moved_days}d)</span>` : '';
+      const dep=(s.depends_on&&s.depends_on.length)?`<span class="cdep">needs: ${s.depends_on.join(', ')}</span>`:'';
+      return `<div class="cstep ${s.status}" style="padding-left:${Math.min(i,12)*14}px">`+
+        (i?`<span class="conn">└─</span>`:'')+
+        `<span class="cic">${ic}</span><span class="cn">${s.name}</span>`+
+        `<span class="cd">${fmtD(s.baseline_end)}</span>${mv}${dep}</div>`;
+    }).join('');
+    html+=`</div>`;
+  }
   if(cur){
     html+=`<div class="dtitle">Current week — deadline Sunday ${fmtD(cur.deadline)}</div>`;
     html+=`<div class="wk" style="border-color:${hexA(col,.55)}"><div class="wkh" style="border-left:3px solid ${col}"><span class="wl">${cur.label}</span><span class="wd">${cur.done}/${cur.total} done${wpct(cur)}</span></div>`;
@@ -371,7 +409,7 @@ function weekChips(p,col){
 function renderLane(p){
   const col=COLOR[p.id]||'#58a6ff';
   const mp=(p.monthly_pct!=null?p.monthly_pct:p.runner_pct);
-  const pace=paceLabel(p.done_total,p.due_to_today);
+  const st=statusInfo(p.status,p.gap);
   /* v4 shared time axis: runner sits at its EARNED-SCHEDULE date, flag at the
      project's last planned task; Sunday grid + TODAY line identical on every lane. */
   const rx=datePct(p.runner_date||DATA.axis_start);
@@ -382,6 +420,7 @@ function renderLane(p){
   const money = p.july_money && p.july_money.length===2 ? ` · ${fmtM(p.july_money[0])} this month` : '';
   const esTitle=`Earned schedule: ${fmtD(p.runner_date)} — ${schedLabel(p.runner_date)} · goal ${fmtD(p.finish_date)}`;
   return `<div class="lane" id="lane-${p.id}" style="border-left:3px solid ${col}">
+    <div class="stripe ${st.cls}" title="${st.title}"></div>
     <div class="lhead" onclick="document.getElementById('lane-${p.id}').classList.toggle('open')">
       <div class="lname">
         <span class="avatar" style="background:${col}">${initials(p.client||p.name)}</span>
@@ -394,7 +433,7 @@ function renderLane(p){
         </div>
         ${weekChips(p,col)}
       </div>
-      <div class="ladh"><div class="p" style="color:${col}">${mp}%</div><div class="s"><span class="pill ${pace.cls}">${pace.t}</span></div></div>
+      <div class="ladh"><div class="goalLab">Progress goal of the month:</div><div class="p" style="color:${col}">${mp}%</div><div class="s"><span class="pill ${st.cls}" title="${st.title}">${st.label}</span></div></div>
       <span class="chev">▶</span>
     </div>
     <div class="detail">${detail(p,col)}</div>

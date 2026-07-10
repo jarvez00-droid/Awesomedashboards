@@ -1,10 +1,11 @@
 {
- "generated_at": "2026-07-10T10:18:50",
+ "generated_at": "2026-07-10T10:27:58",
  "today": "2026-07-10",
  "month": "July 2026",
  "month_prefix": "2026-07",
  "axis_start": "2026-07-01",
  "axis_end": "2026-08-02",
+ "tolerance_today": 10.0,
  "week_sundays": [
   "2026-07-12",
   "2026-07-19",
@@ -25,6 +26,8 @@
   "week_pct_formula": "hechas_de_la_semana / planeadas_esa_semana (deadline domingo)",
   "week_target": "target_task = ULTIMA Action/CP que vence esa semana segun baseline (hasta donde hay que llegar; nombra el trade)",
   "earned_schedule": "runner_date = endDate de la k-esima tarea del baseline (orden cronologico) con k=hechas; k=0 -> axis_start; resolucion=dia. El eje temporal (axis_start->axis_end) es COMPARTIDO por todos los carriles; corredor a la izquierda de TODAY = atras del plan.",
+  "status_semaforo": "gap = esperado_hoy% - avance_mensual%; <=0 on_pace; <=tolerance_today warning; > behind. Tolerancia por dia: lun-mie 20, jue 15, vie-dom 10.",
+  "cp_cascade": "cp_chain = CP del mes en orden CRONOLOGICO del baseline (solo ~14% traen dependsOnTasks explicitas, casi todas hacia tareas no-CP; van en depends_on como metadata).",
   "weighting": "conteo de tareas (el motor de productividad no expone $ por-tarea; el $ del mes es contexto por proyecto)"
  },
  "company": {
@@ -32,6 +35,8 @@
   "adherence": 31.4,
   "band": "red",
   "runner_date": "2026-07-06",
+  "gap": 31.8,
+  "status": "behind",
   "total_target": 151,
   "due_to_today": 70,
   "done_total": 22,
@@ -99,6 +104,9 @@
    "ghost_pct": 100.0,
    "runner_date": "2026-07-01",
    "finish_date": "2026-07-10",
+   "gap": 91.7,
+   "status": "behind",
+   "cp_chain": [],
    "july_money": null,
    "margin_pct": null,
    "moved_count": 0,
@@ -330,6 +338,67 @@
    "ghost_pct": 91.7,
    "runner_date": "2026-07-01",
    "finish_date": "2026-07-11",
+   "gap": 83.4,
+   "status": "behind",
+   "cp_chain": [
+    {
+     "id": "22PUWTffEG7R",
+     "name": "BRICK: BRICK INSTALLATION",
+     "baseline_end": "2026-07-07",
+     "live_end": "2026-07-11",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PPsiDB5uvP",
+     "name": "CUSTOM CARPENTRY: BUILD SECRET DOOR",
+     "baseline_end": "2026-07-07",
+     "live_end": "2026-07-10",
+     "moved_days": 3,
+     "status": "moved",
+     "depends_on": [
+      "CUSTOM CARPENTRY: CONFIRM SCHEDULE",
+      "CUSTOM CARPENTRY: DOWNPAYMENT"
+     ]
+    },
+    {
+     "id": "22PUnNKxDE7b",
+     "name": "CUSTOM CARPENTRY: INSTALL SECRET DOOR",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-11",
+     "moved_days": 3,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PPsiDCTXjJ",
+     "name": "DELIVERY: PRE DELIVERY WALK THROUGH",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-11",
+     "moved_days": 3,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PYmTjTWh4W",
+     "name": "CUSTOM CARPENTRY: PAINT SECRET DOOR (Copy)",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-11",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PPsiDCQYYw",
+     "name": "CLEANING: FINAL CLEANING",
+     "baseline_end": "2026-07-11",
+     "live_end": "2026-07-13",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": []
+    }
+   ],
    "july_money": [
     5603.37,
     4709.48
@@ -642,6 +711,190 @@
    "ghost_pct": 34.6,
    "runner_date": "2026-07-08",
    "finish_date": "2026-07-31",
+   "gap": 26.9,
+   "status": "behind",
+   "cp_chain": [
+    {
+     "id": "22PZpK7zzswK",
+     "name": "KITCHEN DRYWALL: PAINT",
+     "baseline_end": "2026-07-07",
+     "live_end": "2026-07-07",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKADTfLD",
+     "name": "INTERIOR PAINT: PAINT WALLS + CEILING",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-08",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpK8MBkUP",
+     "name": "KITCHEN TILES: BACKSPLASH INSTALLATION",
+     "baseline_end": "2026-07-09",
+     "live_end": "2026-07-11",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpK7c8LMA",
+     "name": "KITCHEN: INSTALL PULLS",
+     "baseline_end": "2026-07-09",
+     "live_end": "2026-07-10",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpK9qcNK7",
+     "name": "TILES: WET AREAS WATERPROOFING",
+     "baseline_end": "2026-07-09",
+     "live_end": "2026-07-10",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKA3WxLB",
+     "name": "FLOORING: INSTALL HARDWOOD",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-10",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpK8JeCxp",
+     "name": "KITCHEN FLOOR: FLOOR INSTALLATION",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-10",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpK9rGkCL",
+     "name": "TILES: INSTALL TILES",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-17",
+     "moved_days": 7,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpK8ZfFq8",
+     "name": "KITCHEN : PLUMBING TRIM",
+     "baseline_end": "2026-07-11",
+     "live_end": "2026-07-11",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PaBiJWyriu",
+     "name": "KITCHEN ELECTRICAL TRIM: INSTALL",
+     "baseline_end": "2026-07-11",
+     "live_end": "2026-07-11",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKBTvVsa",
+     "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
+     "baseline_end": "2026-07-13",
+     "live_end": "2026-07-20",
+     "moved_days": 7,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZtcszppfU",
+     "name": "BASEBOARD & TRIM: INSTALL",
+     "baseline_end": "2026-07-14",
+     "live_end": "2026-07-21",
+     "moved_days": 7,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKAP39Ee",
+     "name": "CARPENTRY: PREFAB CABINETS INSTALLATION",
+     "baseline_end": "2026-07-17",
+     "live_end": "2026-07-24",
+     "moved_days": 7,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKCP324d",
+     "name": "PRE DELIVERY WALK THROUGH: PRE DELIVERY WALK THROUGH",
+     "baseline_end": "2026-07-20",
+     "live_end": "2026-07-20",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKBqLfMY",
+     "name": "BRICKS: INSTALL BRICKS",
+     "baseline_end": "2026-07-21",
+     "live_end": "2026-07-25",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKBJ8jsh",
+     "name": "DECKING: INSTALL DECKING",
+     "baseline_end": "2026-07-21",
+     "live_end": "2026-07-21",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKAvBGym",
+     "name": "ELECTRICAL: ELECTRICAL TRIM",
+     "baseline_end": "2026-07-23",
+     "live_end": "2026-07-30",
+     "moved_days": 7,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKB7YbRu",
+     "name": "MECHANICAL: INSTALL MECHANICAL TRIM",
+     "baseline_end": "2026-07-23",
+     "live_end": "2026-07-30",
+     "moved_days": 7,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKAigegG",
+     "name": "PLUMBING: INSTALL PLUMBING TRIM",
+     "baseline_end": "2026-07-23",
+     "live_end": "2026-07-30",
+     "moved_days": 7,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZq7FAkZK7",
+     "name": "PAINT TOUCH UPS",
+     "baseline_end": "2026-07-30",
+     "live_end": "2026-08-03",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": []
+    }
+   ],
    "july_money": [
     20441.65,
     16784.33
@@ -1139,6 +1392,139 @@
    "ghost_pct": 33.3,
    "runner_date": "2026-07-07",
    "finish_date": "2026-07-30",
+   "gap": 25.0,
+   "status": "behind",
+   "cp_chain": [
+    {
+     "id": "22PZqFvUvxgu",
+     "name": "FOUNDATION: DIG FOUNDATION",
+     "baseline_end": "2026-07-07",
+     "live_end": "2026-07-07",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PZqFvV2SUe",
+     "name": "ELECTRICAL: EXECUTE IN GROUND ELECTRICAL",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-09",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": [
+      "FOUNDATION: CC CHECKLIST - PM INSPECTION (AFTER) - PLACE FORM BOARD",
+      "IN GROUND ELECTRICAL: CC CHECKLIST - PM INSPECTION (BEFORE)"
+     ]
+    },
+    {
+     "id": "22PZqFvV3ZBb",
+     "name": "PLUMBING: EXECUTE IN GROUND PLUMBING",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-09",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": [
+      "FOUNDATION: CC CHECKLIST - PM INSPECTION (AFTER) - PLACE FORM BOARD"
+     ]
+    },
+    {
+     "id": "22PaRbiiPSPi",
+     "name": "FOUNDATION: PLACE FORM BOARD",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-13",
+     "moved_days": 3,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZqFvUxqCQ",
+     "name": "FOUNDATION: EXECUTE CONCRETE POUR",
+     "baseline_end": "2026-07-13",
+     "live_end": "2026-07-15",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": [
+      "FOUNDATION: PRE-POUR CITY INSPECTION",
+      "FOUNDATION: PLACE FORM BOARD"
+     ]
+    },
+    {
+     "id": "22PZqFvUyZz2",
+     "name": "FOUNDATION: FOUNDATION CURE",
+     "baseline_end": "2026-07-18",
+     "live_end": "2026-07-23",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": [
+      "FOUNDATION: EXECUTE CONCRETE POUR"
+     ]
+    },
+    {
+     "id": "22PZqFvVAHM2",
+     "name": "FRAMING: EXECUTE FRAMING",
+     "baseline_end": "2026-07-22",
+     "live_end": "2026-07-27",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": [
+      "FOUNDATION: FOUNDATION CURE",
+      "FRAMING: PURCHASE MATERIALS",
+      "FRAMING: DELIVERY ETA",
+      "FRAMING: CC CHECKLIST - PM INSPECTION (BEFORE)",
+      "FRAMING: BILL & PAYMENT DOWNPAYMENT"
+     ]
+    },
+    {
+     "id": "22PZqFvVCtd4",
+     "name": "FRAMING: EXECUTE EXTERIOR SHEATHING",
+     "baseline_end": "2026-07-25",
+     "live_end": "2026-07-30",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": [
+      "FRAMING: EXECUTE FRAMING",
+      "EXTERIOR SHEATING: PURCHASE MATERIALS"
+     ]
+    },
+    {
+     "id": "22PZqFvVEPEE",
+     "name": "FRAMING: ROOF DECKING",
+     "baseline_end": "2026-07-28",
+     "live_end": "2026-08-01",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": [
+      "FRAMING: EXECUTE EXTERIOR SHEATHING"
+     ]
+    },
+    {
+     "id": "22PZqFvVMrC9",
+     "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
+     "baseline_end": "2026-07-29",
+     "live_end": "2026-08-03",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZqFvVpEFz",
+     "name": "ROOFING: INSTALL UNDERLAYMENT",
+     "baseline_end": "2026-07-29",
+     "live_end": "2026-08-03",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZqFvVVKA3",
+     "name": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
+     "baseline_end": "2026-07-30",
+     "live_end": "2026-08-04",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": []
+    }
+   ],
    "july_money": [
     10737.58,
     8699.59
@@ -1454,6 +1840,154 @@
    "ghost_pct": 36.4,
    "runner_date": "2026-07-02",
    "finish_date": "2026-07-25",
+   "gap": 22.8,
+   "status": "behind",
+   "cp_chain": [
+    {
+     "id": "22PZpzYvdPxd",
+     "name": "SHEETROCK: TAPE, BED & TEXTURE",
+     "baseline_end": "2026-07-01",
+     "live_end": "2026-07-01",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PZq9icfFwT",
+     "name": "SHEETROCK: CLEAN PROJECT",
+     "baseline_end": "2026-07-02",
+     "live_end": "2026-07-02",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzZEdsse",
+     "name": "TILES: INSTALL TILES (NO BACKSPLASH)",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-09",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzZx3NMe",
+     "name": "INTERIOR PAINT: PRIMER & FIRST COAT",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-11",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzaRWrFQ",
+     "name": "BASEBOARD AND TRIMS: INSTALLATION",
+     "baseline_end": "2026-07-14",
+     "live_end": "2026-07-14",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZwqrWDcBA",
+     "name": "EXTERIOR PAINT:",
+     "baseline_end": "2026-07-14",
+     "live_end": "2026-07-15",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpza7DCAJ",
+     "name": "INTERIOR DOORS: INSTALL",
+     "baseline_end": "2026-07-14",
+     "live_end": "2026-07-14",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZqDyKRYiD",
+     "name": "COUNTERTOPS: TAKE MEASUREMENTS",
+     "baseline_end": "2026-07-15",
+     "live_end": "2026-07-15",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzZTAKYA",
+     "name": "PREFAB CABINETS: INSTALLATION",
+     "baseline_end": "2026-07-15",
+     "live_end": "2026-07-15",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzakrkQ9",
+     "name": "ELECTRICAL TRIM: INSTALLATION",
+     "baseline_end": "2026-07-17",
+     "live_end": "2026-07-14",
+     "moved_days": -3,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzaFfVTZ",
+     "name": "COUNTERTOPS: INSTALLATION",
+     "baseline_end": "2026-07-18",
+     "live_end": "2026-07-18",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzaa3FGb",
+     "name": "PLUMBING TRIM: INSTALLATION",
+     "baseline_end": "2026-07-21",
+     "live_end": "2026-07-21",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzb6N4Gr",
+     "name": "PRE DELIVERY WALK THROUGH",
+     "baseline_end": "2026-07-21",
+     "live_end": "2026-07-21",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZwrcQBAuZ",
+     "name": "ELECTRICAL MAIN PANEL INSTALLATION",
+     "baseline_end": "2026-07-23",
+     "live_end": "2026-07-21",
+     "moved_days": -2,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzb9pfS3",
+     "name": "FINAL PUNCH LIST: WORK ON FINAL PUNCH LIST",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-07-24",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZqEkJ8qkP",
+     "name": "Project Cleaning",
+     "baseline_end": "2026-07-25",
+     "live_end": "2026-07-25",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    }
+   ],
    "july_money": [
     22685.49,
     18836.71
@@ -1854,6 +2388,136 @@
    "ghost_pct": 27.8,
    "runner_date": "2026-07-04",
    "finish_date": "2026-07-31",
+   "gap": 16.7,
+   "status": "behind",
+   "cp_chain": [
+    {
+     "id": "22PZpJeRDvNx",
+     "name": "FRAMING: EXECUTE FRAMING",
+     "baseline_end": "2026-07-03",
+     "live_end": "2026-07-03",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": [
+      "DEMO INTERIOR: DEMO INTERIOR",
+      "FRAMING: CC CHECKLIST - PM INSPECTION (BEFORE)",
+      "FRAMING: DELIVERY ETA"
+     ]
+    },
+    {
+     "id": "22PZpJeRityg",
+     "name": "FRAMING: EXECUTE EXTERIOR SHEATING",
+     "baseline_end": "2026-07-09",
+     "live_end": "2026-07-13",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": [
+      "FRAMING: EXECUTE FRAMING",
+      "FRAMING: PURCHASE EXTERIOR SHEATING"
+     ]
+    },
+    {
+     "id": "22PZpJeehjUu",
+     "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-13",
+     "moved_days": 3,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJeSfWb5",
+     "name": "FRAMING: ROOF DECKING",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-13",
+     "moved_days": 3,
+     "status": "moved",
+     "depends_on": [
+      "FRAMING: EXECUTE EXTERIOR SHEATING"
+     ]
+    },
+    {
+     "id": "22PZpJepgeCr",
+     "name": "ROOFING: INSTALL UNDERLAYMENT",
+     "baseline_end": "2026-07-13",
+     "live_end": "2026-07-14",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJfFy7dB",
+     "name": "ELECTRICAL ROUGH IN: ELECTRICAL ROUGH IN",
+     "baseline_end": "2026-07-18",
+     "live_end": "2026-07-20",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJf989Tu",
+     "name": "MECHANICAL ROUGH IN: MECHANICAL ROUGH IN",
+     "baseline_end": "2026-07-18",
+     "live_end": "2026-07-20",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJf28aPS",
+     "name": "PLUMBING ROUGH IN: GAS LINE",
+     "baseline_end": "2026-07-18",
+     "live_end": "2026-07-20",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJezNKMt",
+     "name": "PLUMBING ROUGH IN: WASTE / WATER",
+     "baseline_end": "2026-07-18",
+     "live_end": "2026-07-20",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJfP8HdN",
+     "name": "INSULATION: INSULATE WALLS AND CEILING",
+     "baseline_end": "2026-07-21",
+     "live_end": "2026-07-23",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJfZb7Ua",
+     "name": "SHEETROCK: INSTALL SHEETROCK",
+     "baseline_end": "2026-07-27",
+     "live_end": "2026-07-28",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJfahY9v",
+     "name": "SHEETROCK: TAPE, BED AND TEXTURE",
+     "baseline_end": "2026-07-30",
+     "live_end": "2026-08-01",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJfj77u7",
+     "name": "PROJECT CLEANING - SHEETROCK: PROJECT CLEANING / HAUL",
+     "baseline_end": "2026-07-31",
+     "live_end": "2026-08-03",
+     "moved_days": 3,
+     "status": "moved",
+     "depends_on": []
+    }
+   ],
    "july_money": [
     12174.13,
     7454.32
@@ -2264,6 +2928,145 @@
    "ghost_pct": 47.1,
    "runner_date": "2026-07-07",
    "finish_date": "2026-07-24",
+   "gap": 23.6,
+   "status": "behind",
+   "cp_chain": [
+    {
+     "id": "22PXMkAkqfAi",
+     "name": "INTERIOR DOORS AND TRIMS PAINTING",
+     "baseline_end": "2026-07-07",
+     "live_end": "2026-07-07",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PJWeDkxqbD",
+     "name": "INTERIOR PAINT: PAINT WALLS & CEILING",
+     "baseline_end": "2026-07-07",
+     "live_end": "2026-07-07",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": [
+      "INTERIOR DOORS AND TRIM: INSTALL INTERIOR DOORS",
+      "INTERIOR PAINT: CONFIRM SCHEDULE",
+      "INTERIOR PAINT: CONFIRM DELIVERY"
+     ]
+    },
+    {
+     "id": "22PZMvWk7aLu",
+     "name": "PAINT: WALL FIX PAINT",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-09",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PYA2rawv6G",
+     "name": "TILES: INSTALLATION OF NEW BACKSPLASH",
+     "baseline_end": "2026-07-09",
+     "live_end": "2026-07-09",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZMuvtJSK9",
+     "name": "PAINTING: CABINET PAINT",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-10",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PJWeDkzh6i",
+     "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
+     "baseline_end": "2026-07-11",
+     "live_end": "2026-07-13",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": [
+      "ELECTRICAL: DELIVERY ETA",
+      "ELECTRICAL: PM INSPECTION - Before",
+      "PAINT: WALL FIX PAINT"
+     ]
+    },
+    {
+     "id": "22PJWeDm25z3",
+     "name": "MECHANICAL: INSTALL MECHANICAL TRIM",
+     "baseline_end": "2026-07-11",
+     "live_end": "2026-07-11",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": [
+      "MECHANICAL: DELIVERY ETA",
+      "MECHANICAL: PM INSPECTION - Before",
+      "PAINT: WALL FIX PAINT"
+     ]
+    },
+    {
+     "id": "22PJWeDkyxJ9",
+     "name": "PLUMBING: INSTALL PLUMBING TRIM",
+     "baseline_end": "2026-07-14",
+     "live_end": "2026-07-15",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": [
+      "GLASS: INSTALL GLASS",
+      "PLUMBING: PM INSPECTION - Before",
+      "PLUMBING: DELIVERY ETA",
+      "PAINT: WALL FIX PAINT"
+     ]
+    },
+    {
+     "id": "22PJWewqDSU5",
+     "name": "AUTOMATIC GATE INSTALLATION",
+     "baseline_end": "2026-07-18",
+     "live_end": "2026-07-20",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": [
+      "MECHANICAL: CITY INSPECTION",
+      "ELECTRICAL: CITY INSPECTION",
+      "PLUMBING: CITY INSPECTION"
+     ]
+    },
+    {
+     "id": "22PJWeDm3Cfx",
+     "name": "FINAL: TOUCH UP PAINT AND CLEAN",
+     "baseline_end": "2026-07-21",
+     "live_end": "2026-07-22",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": [
+      "AUTOMATIC GATE INSTALLATION"
+     ]
+    },
+    {
+     "id": "22PJWeDm3ZaG",
+     "name": "FINAL: PUNCH LIST COMPLETION",
+     "baseline_end": "2026-07-23",
+     "live_end": "2026-07-24",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": [
+      "FINAL: TOUCH UP PAINT AND CLEAN"
+     ]
+    },
+    {
+     "id": "22PJWeDm3wUZ",
+     "name": "FINAL INSPECTION",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-07-25",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": [
+      "FINAL: PUNCH LIST COMPLETION"
+     ]
+    }
+   ],
    "july_money": [
     -3859.12,
     -6253.72
@@ -2614,6 +3417,138 @@
    "ghost_pct": 55.0,
    "runner_date": "2026-07-06",
    "finish_date": "2026-07-27",
+   "gap": 25.0,
+   "status": "behind",
+   "cp_chain": [
+    {
+     "id": "22PZzWVA3Jwm",
+     "name": "FOUNDATION REPAIR",
+     "baseline_end": "2026-07-01",
+     "live_end": "2026-07-01",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PaChNpSH3q",
+     "name": "DEMO: PACKING",
+     "baseline_end": "2026-07-03",
+     "live_end": "2026-07-03",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWURUhyE",
+     "name": "FRAMING: EXECUTE EXTERIOR SHEATHING",
+     "baseline_end": "2026-07-03",
+     "live_end": "2026-07-03",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": [
+      "FRAMING: BILL & PAYMENT 3"
+     ]
+    },
+    {
+     "id": "22PaChWk49F7",
+     "name": "DEMO: DEMO WALLS & CEILING",
+     "baseline_end": "2026-07-04",
+     "live_end": "2026-07-08",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWm8eJ4B",
+     "name": "FRAMING: EXECUTE",
+     "baseline_end": "2026-07-04",
+     "live_end": "2026-08-04",
+     "moved_days": 31,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PaChar7pX6",
+     "name": "DEMO: FLOORING KITCHEN",
+     "baseline_end": "2026-07-06",
+     "live_end": "2026-07-08",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWUzYRut",
+     "name": "DOORS & WINDOWS: EXECUTE",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-15",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWesQkCw",
+     "name": "DOORS & WINDOWS: EXECUTE",
+     "baseline_end": "2026-07-13",
+     "live_end": "2026-07-13",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWexBK6A",
+     "name": "ROOFING: EXECUTE",
+     "baseline_end": "2026-07-15",
+     "live_end": "2026-07-16",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWVERTRf",
+     "name": "ELECTRICAL ROUGH IN: EXECUTE",
+     "baseline_end": "2026-07-16",
+     "live_end": "2026-07-14",
+     "moved_days": -2,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWe7eBKD",
+     "name": "ELECTRICAL ROUGH IN: EXECUTE",
+     "baseline_end": "2026-07-16",
+     "live_end": "2026-07-08",
+     "moved_days": -8,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWUsGsvd",
+     "name": "ROOFING: EXECUTE",
+     "baseline_end": "2026-07-23",
+     "live_end": "2026-07-23",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWVeTaGW",
+     "name": "INSULATION: EXECUTE",
+     "baseline_end": "2026-07-27",
+     "live_end": "2026-07-24",
+     "moved_days": -3,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWfRibBW",
+     "name": "INSULATION: EXECUTE",
+     "baseline_end": "2026-07-27",
+     "live_end": "2026-07-27",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    }
+   ],
    "july_money": [
     65650.54,
     56759.68
@@ -3009,6 +3944,73 @@
    "ghost_pct": 16.7,
    "runner_date": "2026-07-08",
    "finish_date": "2026-07-31",
+   "gap": 0.0,
+   "status": "on_pace",
+   "cp_chain": [
+    {
+     "id": "22PZzzrXxmMg",
+     "name": "DRYWALL: HANG SHEETROCK",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-09",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzzrZfHwU",
+     "name": "DRYWALL: TAPE, BED AND TEXTURE",
+     "baseline_end": "2026-07-15",
+     "live_end": "2026-07-15",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzzrbzJtH",
+     "name": "INTERIOR PAINT: WALL & CEILING PRIMER AND FIRST COAT",
+     "baseline_end": "2026-07-20",
+     "live_end": "2026-07-20",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzzrhS6j8",
+     "name": "FLOORING: INSTALL LVP, CARPET OR TILE",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-07-24",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzzrmMy4S",
+     "name": "TILES: INSTALL TILES (NO BACKSPLASH)",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-07-24",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzzrvq7n2",
+     "name": "INTERIOR DOORS: INSTALL TRIM AND DOORS",
+     "baseline_end": "2026-07-27",
+     "live_end": "2026-07-27",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzzrxpbix",
+     "name": "BASEBOARDS AND TRIM: INSTALL BASEBOARDS AND TRIM",
+     "baseline_end": "2026-07-30",
+     "live_end": "2026-07-30",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    }
+   ],
    "july_money": [
     17870.18,
     13137.25
