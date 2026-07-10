@@ -1,8 +1,10 @@
 {
- "generated_at": "2026-07-10T10:16:03",
+ "generated_at": "2026-07-10T10:18:50",
  "today": "2026-07-10",
  "month": "July 2026",
  "month_prefix": "2026-07",
+ "axis_start": "2026-07-01",
+ "axis_end": "2026-08-02",
  "week_sundays": [
   "2026-07-12",
   "2026-07-19",
@@ -22,12 +24,14 @@
   "color_formula": "adherencia-a-hoy: hechas_a_hoy / vencidas_segun_baseline_a_hoy (verde>=90, amarillo 70-89, rojo<70)",
   "week_pct_formula": "hechas_de_la_semana / planeadas_esa_semana (deadline domingo)",
   "week_target": "target_task = ULTIMA Action/CP que vence esa semana segun baseline (hasta donde hay que llegar; nombra el trade)",
+  "earned_schedule": "runner_date = endDate de la k-esima tarea del baseline (orden cronologico) con k=hechas; k=0 -> axis_start; resolucion=dia. El eje temporal (axis_start->axis_end) es COMPARTIDO por todos los carriles; corredor a la izquierda de TODAY = atras del plan.",
   "weighting": "conteo de tareas (el motor de productividad no expone $ por-tarea; el $ del mes es contexto por proyecto)"
  },
  "company": {
   "monthly_pct": 14.6,
   "adherence": 31.4,
   "band": "red",
+  "runner_date": "2026-07-06",
   "total_target": 151,
   "due_to_today": 70,
   "done_total": 22,
@@ -93,6 +97,8 @@
    "band": "red",
    "runner_pct": 8.3,
    "ghost_pct": 100.0,
+   "runner_date": "2026-07-01",
+   "finish_date": "2026-07-10",
    "july_money": null,
    "margin_pct": null,
    "moved_count": 0,
@@ -322,6 +328,8 @@
    "band": "red",
    "runner_pct": 8.3,
    "ghost_pct": 91.7,
+   "runner_date": "2026-07-01",
+   "finish_date": "2026-07-11",
    "july_money": [
     5603.37,
     4709.48
@@ -632,6 +640,8 @@
    "band": "red",
    "runner_pct": 7.7,
    "ghost_pct": 34.6,
+   "runner_date": "2026-07-08",
+   "finish_date": "2026-07-31",
    "july_money": [
     20441.65,
     16784.33
@@ -1127,6 +1137,8 @@
    "band": "red",
    "runner_pct": 8.3,
    "ghost_pct": 33.3,
+   "runner_date": "2026-07-07",
+   "finish_date": "2026-07-30",
    "july_money": [
     10737.58,
     8699.59
@@ -1440,6 +1452,8 @@
    "band": "red",
    "runner_pct": 13.6,
    "ghost_pct": 36.4,
+   "runner_date": "2026-07-02",
+   "finish_date": "2026-07-25",
    "july_money": [
     22685.49,
     18836.71
@@ -1838,6 +1852,8 @@
    "band": "red",
    "runner_pct": 11.1,
    "ghost_pct": 27.8,
+   "runner_date": "2026-07-04",
+   "finish_date": "2026-07-31",
    "july_money": [
     12174.13,
     7454.32
@@ -2246,6 +2262,8 @@
    "band": "red",
    "runner_pct": 23.5,
    "ghost_pct": 47.1,
+   "runner_date": "2026-07-07",
+   "finish_date": "2026-07-24",
    "july_money": [
     -3859.12,
     -6253.72
@@ -2594,6 +2612,8 @@
    "band": "red",
    "runner_pct": 30.0,
    "ghost_pct": 55.0,
+   "runner_date": "2026-07-06",
+   "finish_date": "2026-07-27",
    "july_money": [
     65650.54,
     56759.68
@@ -2987,6 +3007,8 @@
    "band": "green",
    "runner_pct": 16.7,
    "ghost_pct": 16.7,
+   "runner_date": "2026-07-08",
+   "finish_date": "2026-07-31",
    "july_money": [
     17870.18,
     13137.25

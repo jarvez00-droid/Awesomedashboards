@@ -44,23 +44,35 @@ h1{font-size:22px;margin:0 0 3px}
 .lane{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden}
 .lhead{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer}
 .lhead:hover{background:var(--card2)}
-.lname{min-width:150px;max-width:215px;flex-shrink:0;display:flex;gap:9px;align-items:center}
+/* v4: FIXED column widths so every lane's track spans the SAME x-range (shared time axis) */
+.lname{width:216px;flex-shrink:0;display:flex;gap:9px;align-items:center}
 .avatar{width:30px;height:30px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#0b1017}
 .lname .n{font-size:14px;font-weight:650;line-height:1.25}
 .lname .pm{color:var(--mut);font-size:11px;margin-top:1px}
 .trackwrap{flex:1;min-width:150px}
 .trackrow{position:relative;height:30px;background:var(--track);border-radius:8px;overflow:visible;border:1px solid var(--line)}
 .fill{position:absolute;top:0;left:0;bottom:0;border-radius:7px 0 0 7px;transition:width .5s ease}
-.ghostline{position:absolute;top:-4px;bottom:-4px;width:0;border-left:2px dashed var(--ghost);z-index:3}
-.ghostline .gl{position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--ghost);white-space:nowrap}
-.sun{position:absolute;top:0;bottom:0;width:1px;background:rgba(154,167,180,.28);z-index:2}
-.sun .st{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--mut)}
-.flag{position:absolute;right:-2px;top:50%;transform:translateY(-50%);font-size:15px;z-index:2}
-.ladh{min-width:96px;max-width:150px;text-align:right;flex-shrink:0}
+.sun{position:absolute;top:0;bottom:0;width:1px;background:rgba(154,167,180,.3);z-index:2}
+.todayline{position:absolute;top:-5px;bottom:-5px;width:0;border-left:2px solid #e6edf3;opacity:.9;z-index:3;box-shadow:0 0 7px rgba(230,237,243,.45)}
+.postfin{position:absolute;top:0;bottom:0;right:0;background:rgba(11,16,23,.5);border-radius:0 7px 7px 0;z-index:1}
+.flag{position:absolute;top:50%;transform:translate(-50%,-50%);font-size:15px;z-index:2}
+.ladh{width:132px;text-align:right;flex-shrink:0}
 .ladh .p{font-size:26px;font-weight:800;line-height:1}
 .ladh .s{color:var(--mut);font-size:10.5px;line-height:1.3;margin-top:4px}
-.chev{color:var(--mut);flex-shrink:0;transition:transform .2s;font-size:13px}
+.chev{color:var(--mut);flex-shrink:0;transition:transform .2s;font-size:13px;width:14px}
 .lane.open .chev{transform:rotate(90deg)}
+
+/* ---- shared date axis header (sticky, one set of labels for ALL lanes) ---- */
+.axiswrap{position:sticky;top:0;z-index:30;background:var(--bg);padding:10px 0 4px;margin-top:6px}
+.axisrow{display:flex;align-items:center;gap:12px;padding:0 14px;border:1px solid transparent;border-left:3px solid transparent}
+.axname{width:216px;flex-shrink:0;color:var(--mut);font-size:10px;text-transform:uppercase;letter-spacing:.05em;text-align:right;padding-right:4px}
+.axtrack{flex:1;min-width:150px;position:relative;height:20px;border-bottom:1px solid var(--line)}
+.axlab{position:absolute;top:2px;transform:translateX(-50%);font-size:10px;color:var(--mut);white-space:nowrap}
+.axlab.edge{transform:none}
+.axlab.edge.right{transform:translateX(-100%)}
+.axlab.tdy{top:0;transform:translateX(-50%);font-size:9.5px;font-weight:800;color:#0b1017;background:#e6edf3;padding:0 6px;border-radius:5px}
+.axpad{width:132px;flex-shrink:0}
+.axchev{width:14px;flex-shrink:0}
 
 /* ---- weekly chips ---- */
 .wkchips{display:flex;gap:6px;flex-wrap:wrap;margin-top:18px}
@@ -108,10 +120,12 @@ h1{font-size:22px;margin:0 0 3px}
 .ft{color:var(--mut);font-size:11.5px;margin-top:28px;text-align:center}
 @media(max-width:640px){
   .lhead{flex-wrap:wrap}
-  .lname{max-width:none;min-width:120px}
+  .lname{width:auto;flex:1;min-width:120px}
   .trackwrap{order:3;flex-basis:100%;margin-top:8px}
-  .ladh{min-width:60px}
+  .ladh{width:auto;min-width:60px}
   .hbig .num{font-size:42px}
+  /* axis header collapses to the bare track so its x-range matches the wrapped lane tracks */
+  .axname,.axpad,.axchev{display:none}
 }
 </style></head>
 <body>
@@ -152,10 +166,10 @@ h1{font-size:22px;margin:0 0 3px}
   <div id="hero"></div>
 
   <div class="legend">
-    <span class="lgd">🏃 <b>Runner</b> = actual progress</span>
-    <span class="lgd"><span class="sw ghost"></span> <b>Ghost line</b> = where the plan says you should be today</span>
-    <span class="lgd">🏁 <b>Goal</b> = month target</span>
-    <span class="lgd">│ <b>Sundays</b> = weekly checkpoints</span>
+    <span class="lgd">🏃 <b>Runner</b> = how far into the plan you've gotten (earned schedule)</span>
+    <span class="lgd"><b>TODAY line</b> = shared date line — runner LEFT of it = behind plan</span>
+    <span class="lgd">🏁 <b>Goal</b> = last planned task of the month</span>
+    <span class="lgd">│ <b>Sundays</b> = weekly checkpoints, same date grid on every lane</span>
     <span class="lgd"><b>Big %</b> = progress toward the month goal (X/N)</span>
   </div>
 
@@ -238,11 +252,44 @@ function paceLabel(done,due){
   return {t:`${-d} behind plan`,cls:''};
 }
 
-/* Cumulative plan fraction at each Sunday (checkpoint positions on the track) */
-function sundayPositions(weeks, total){
-  let cum=0, out=[];
-  weeks.forEach(w=>{ cum+=w.total; out.push(total? (100*cum/total):0); });
-  return out;
+/* ---- SHARED TIME AXIS (v4): identical date→x mapping for every lane ---- */
+function dayMs(iso){ const p=(''+iso).slice(0,10).split('-'); return Date.UTC(+p[0],+p[1]-1,+p[2]); }
+function datePct(iso){
+  const a=dayMs(DATA.axis_start), b=dayMs(DATA.axis_end), d=dayMs(iso);
+  if(b<=a) return 0;
+  return Math.max(0, Math.min(100, 100*(d-a)/(b-a)));
+}
+function daysBetween(a,b){ return Math.round((dayMs(b)-dayMs(a))/864e5); }
+function schedLabel(runnerDate){
+  const d=daysBetween(runnerDate, DATA.today);
+  if(d>0) return `${d} day${d>1?'s':''} behind schedule`;
+  if(d<0) return `${-d} day${d<-1?'s':''} ahead of schedule`;
+  return 'on schedule';
+}
+/* Common tick set rendered inside each lane track (same x everywhere) */
+function laneTicks(){
+  const suns=DATA.week_sundays.map(s=>`<div class="sun" style="left:${datePct(s)}%"></div>`).join('');
+  return suns+`<div class="todayline" style="left:${datePct(DATA.today)}%"></div>`;
+}
+/* One sticky axis header with the date labels for ALL lanes */
+function axisHeader(){
+  const tx=datePct(DATA.today);
+  // hide Sunday labels that would collide with the TODAY badge (ticks still drawn in lanes)
+  const labs=DATA.week_sundays.map(s=>{
+    const x=datePct(s);
+    if(Math.abs(x-tx)<9) return '';
+    return `<span class="axlab" style="left:${x}%">${fmtD(s)}</span>`;
+  }).join('');
+  const startLab = tx<6 ? '' : `<span class="axlab edge" style="left:0">${fmtD(DATA.axis_start)}</span>`;
+  // right edge label only if the axis ends after the last Sunday (avoid double "Aug 2")
+  const endLab = (DATA.axis_end!==DATA.week_sundays[DATA.week_sundays.length-1])
+    ? `<span class="axlab edge right" style="left:100%">${fmtD(DATA.axis_end)}</span>` : '';
+  const tdy=`<span class="axlab tdy" style="left:${tx}%">TODAY</span>`;
+  return `<div class="axiswrap"><div class="axisrow">
+    <div class="axname">timeline</div>
+    <div class="axtrack">${startLab}${endLab}${labs}${tdy}</div>
+    <div class="axpad"></div><span class="axchev"></span>
+  </div></div>`;
 }
 
 function renderHero(){
@@ -256,6 +303,7 @@ function renderHero(){
       <div class="lab">July goal · ${c.done_total}/${c.total_target} tasks</div>
       <div class="pill ${pace.cls}" style="margin-top:7px">${pace.t}</div>
       <div style="color:var(--mut);font-size:11px;margin-top:6px">expected by today: <b style="color:var(--tx)">${c.ghost_pct}%</b></div>
+      ${c.runner_date?`<div style="color:var(--mut);font-size:11px;margin-top:2px">earned schedule: <b style="color:var(--tx)">${fmtD(c.runner_date)}</b> · ${schedLabel(c.runner_date)}</div>`:''}
     </div>
     <div class="hmid">
       <div class="hstats">
@@ -324,11 +372,15 @@ function renderLane(p){
   const col=COLOR[p.id]||'#58a6ff';
   const mp=(p.monthly_pct!=null?p.monthly_pct:p.runner_pct);
   const pace=paceLabel(p.done_total,p.due_to_today);
-  const suns=sundayPositions(p.weeks, p.total_target);
-  let sunHtml=suns.map((pos,i)=>`<div class="sun" style="left:${Math.min(100,pos)}%"><span class="st">${fmtD(DATA.week_sundays[i])}</span></div>`).join('');
-  const ghost=`<div class="ghostline" style="left:${Math.min(100,p.ghost_pct)}%"><span class="gl">plan today ${p.ghost_pct}%</span></div>`;
-  const runner=`<span class="runner" style="left:${Math.min(100,Math.max(2,p.runner_pct))}%">${runnerSVG(col)}</span>`;
+  /* v4 shared time axis: runner sits at its EARNED-SCHEDULE date, flag at the
+     project's last planned task; Sunday grid + TODAY line identical on every lane. */
+  const rx=datePct(p.runner_date||DATA.axis_start);
+  const fx=datePct(p.finish_date||DATA.axis_end);
+  const runner=`<span class="runner" style="left:${Math.max(1.2,rx)}%">${runnerSVG(col)}</span>`;
+  const flag=`<span class="flag" style="left:${fx}%">🏁</span>`;
+  const post= fx<99 ? `<div class="postfin" style="left:${fx}%"></div>` : '';
   const money = p.july_money && p.july_money.length===2 ? ` · ${fmtM(p.july_money[0])} this month` : '';
+  const esTitle=`Earned schedule: ${fmtD(p.runner_date)} — ${schedLabel(p.runner_date)} · goal ${fmtD(p.finish_date)}`;
   return `<div class="lane" id="lane-${p.id}" style="border-left:3px solid ${col}">
     <div class="lhead" onclick="document.getElementById('lane-${p.id}').classList.toggle('open')">
       <div class="lname">
@@ -336,10 +388,9 @@ function renderLane(p){
         <div><div class="n">${p.name}</div><div class="pm">${p.done_total}/${p.total_target} tasks${money}</div></div>
       </div>
       <div class="trackwrap">
-        <div class="trackrow">
-          <div class="fill" style="width:${Math.min(100,p.runner_pct)}%;background:linear-gradient(90deg,${hexA(col,.45)},${col})"></div>
-          ${sunHtml}${ghost}${runner}
-          <span class="flag">🏁</span>
+        <div class="trackrow" title="${esTitle.replace(/"/g,'&quot;')}">
+          <div class="fill" style="width:${rx}%;background:linear-gradient(90deg,${hexA(col,.45)},${col})"></div>
+          ${post}${laneTicks()}${runner}${flag}
         </div>
         ${weekChips(p,col)}
       </div>
@@ -358,7 +409,7 @@ function renderLanes(){
     (groups[pm]=groups[pm]||[]).push(p);
   });
   const names=Object.keys(groups).sort((a,b)=>a.localeCompare(b));
-  $('#lanes').innerHTML=names.map(pm=>{
+  $('#lanes').innerHTML=axisHeader()+names.map(pm=>{
     const ps=groups[pm];
     const done=ps.reduce((s,p)=>s+p.done_total,0), tot=ps.reduce((s,p)=>s+p.total_target,0);
     return `<div class="pmsec">
