@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🏁 Carrera del Mes — CNG</title>
+<style>
+:root{--bg:#0f141b;--card:#171e27;--card2:#1d2630;--line:#2a3540;--tx:#e6edf3;--mut:#9aa7b4;
+--grn:#2ea043;--grnbg:#12351f;--red:#f85149;--redbg:#3a1615;--amb:#d29922;--ambbg:#3a2c10;
+--blu:#388bfd;--accent:#58a6ff;--ghost:#6e7d8c;--track:#222c37;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1220px;margin:0 auto;padding:18px 20px 70px}
+.nav{margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.nav a{color:var(--accent);text-decoration:none;font-size:13px}
+.rbtn{background:var(--card2);border:1px solid var(--line);color:var(--accent);font-size:12px;padding:6px 12px;border-radius:8px;cursor:pointer}
+.rbtn:active{background:var(--line)}
+h1{font-size:22px;margin:0 0 3px}
+.sub{color:var(--mut);font-size:13px}
+
+/* ---- company hero ---- */
+.hero{display:flex;flex-wrap:wrap;gap:18px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:16px 0 8px}
+.hbig{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:150px}
+.hbig .num{font-size:52px;font-weight:800;line-height:1}
+.hbig .lab{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+.hmid{flex:1;min-width:240px}
+.hstats{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px}
+.hstat .v{font-size:19px;font-weight:700}
+.hstat .l{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.03em}
+.spark{width:100%;height:52px;display:block}
+
+/* color bands */
+.green{color:var(--grn)} .amber{color:var(--amb)} .red{color:var(--red)} .na{color:var(--mut)}
+.pill{font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;display:inline-block}
+.pill.green{background:var(--grnbg);color:#57d977}.pill.amber{background:var(--ambbg);color:#f0c674}
+.pill.red{background:var(--redbg);color:#ffb4ab}.pill.na{background:var(--card2);color:var(--mut)}
+
+.legend{color:var(--mut);font-size:12px;margin:10px 2px 4px;display:flex;gap:16px;flex-wrap:wrap}
+.legend b{color:var(--tx);font-weight:600}
+.lgd{display:inline-flex;align-items:center;gap:5px}
+.sw{width:22px;height:8px;border-radius:3px;display:inline-block}
+.sw.run{background:var(--blu)} .sw.ghost{border-top:2px dashed var(--ghost);height:0;width:22px}
+
+/* ---- lanes ---- */
+.lane{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden}
+.lhead{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer}
+.lhead:hover{background:var(--card2)}
+.lname{min-width:150px;max-width:210px;flex-shrink:0}
+.lname .n{font-size:14.5px;font-weight:650;line-height:1.25}
+.lname .pm{color:var(--mut);font-size:11.5px;margin-top:2px}
+.trackwrap{flex:1;min-width:150px}
+.trackrow{position:relative;height:30px;background:var(--track);border-radius:8px;overflow:visible;border:1px solid var(--line)}
+.fill{position:absolute;top:0;left:0;bottom:0;border-radius:7px 0 0 7px;background:linear-gradient(90deg,#2b6fd6,#58a6ff);transition:width .5s ease}
+.fill.green{background:linear-gradient(90deg,#1f7a34,#3fb950)}
+.fill.amber{background:linear-gradient(90deg,#a9781a,#e3b341)}
+.fill.red{background:linear-gradient(90deg,#b4362f,#f85149)}
+.ghostline{position:absolute;top:-4px;bottom:-4px;width:0;border-left:2px dashed var(--ghost);z-index:3}
+.ghostline .gl{position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--ghost);white-space:nowrap}
+.sun{position:absolute;top:0;bottom:0;width:1px;background:rgba(154,167,180,.28);z-index:2}
+.sun .st{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--mut)}
+.runner{position:absolute;top:50%;transform:translate(-50%,-50%);z-index:4;font-size:16px;transition:left .5s ease;filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+.flag{position:absolute;right:-2px;top:50%;transform:translateY(-50%);font-size:15px;z-index:2}
+.ladh{min-width:74px;text-align:right;flex-shrink:0}
+.ladh .p{font-size:26px;font-weight:800;line-height:1}
+.ladh .s{color:var(--mut);font-size:10.5px}
+.chev{color:var(--mut);flex-shrink:0;transition:transform .2s;font-size:13px}
+.lane.open .chev{transform:rotate(90deg)}
+
+/* ---- detail ---- */
+.detail{display:none;padding:4px 15px 16px;border-top:1px solid var(--line);background:var(--card2)}
+.lane.open .detail{display:block}
+.dtitle{font-size:12px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin:14px 0 7px}
+.dspark{width:100%;height:60px;display:block;margin:4px 0 6px}
+.wk{border:1px solid var(--line);border-radius:9px;margin:8px 0;overflow:hidden}
+.wkh{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 11px;background:var(--card);font-size:12.5px}
+.wkh.cur{background:#14202e;border-left:3px solid var(--accent)}
+.wkh .wl{font-weight:650}
+.wkh .wd{color:var(--mut);font-size:11px}
+.task{display:flex;align-items:center;gap:9px;padding:6px 11px;border-top:1px solid var(--line);font-size:13px}
+.task .ic{width:18px;text-align:center;flex-shrink:0}
+.task .tn{flex:1;color:#dbe4ee}
+.task .tg{font-size:10px;color:var(--mut);border:1px solid var(--line);border-radius:4px;padding:0 5px;flex-shrink:0}
+.task.done .tn{color:var(--mut);text-decoration:line-through}
+.task .mv{color:var(--amb);font-size:11.5px;flex-shrink:0}
+.mvlist .task{border-top:1px solid var(--line)}
+.empty{color:var(--mut);font-size:12.5px;padding:8px 2px}
+.ft{color:var(--mut);font-size:11.5px;margin-top:28px;text-align:center}
+@media(max-width:640px){
+  .lhead{flex-wrap:wrap}
+  .lname{max-width:none;min-width:120px}
+  .trackwrap{order:3;flex-basis:100%;margin-top:8px}
+  .ladh{min-width:60px}
+  .hbig .num{font-size:42px}
+}
+</style></head>
+<body>
+<script>
+/* Gate global del sitio (Jose 2026-07-03): todo awesomedashboards tras clave. */
+(function(){
+  if (sessionStorage.getItem('ag_site') === '1') return;
+  document.documentElement.style.visibility='hidden';
+  function show(){
+    var ov=document.createElement('div'); ov.id='site-gate';
+    ov.style.cssText='position:fixed;inset:0;background:#0f141b;z-index:2147483647;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px';
+    ov.innerHTML='<div style="font-size:36px">🔒</div>'+
+      '<div style="color:#e6edf3;font:700 17px -apple-system,BlinkMacSystemFont,sans-serif">Awesome Group</div>'+
+      '<div style="color:#9aa7b4;font:13px -apple-system,sans-serif">Restricted — enter password</div>'+
+      '<input id="sg-pw" type="password" placeholder="Password" autocomplete="off" style="background:#171e27;border:1px solid #2a3540;color:#e6edf3;padding:11px 14px;border-radius:8px;font-size:15px;width:230px;outline:none">'+
+      '<button id="sg-btn" style="background:#388bfd;color:#fff;border:none;padding:10px 26px;border-radius:8px;font:700 14px -apple-system,sans-serif;cursor:pointer">Enter</button>'+
+      '<div id="sg-err" style="color:#f85149;font:12px sans-serif;display:none">Wrong password</div>';
+    document.body.appendChild(ov);
+    document.documentElement.style.visibility='visible';
+    function go(){ if(document.getElementById('sg-pw').value==='Awesome'){sessionStorage.setItem('ag_site','1');ov.remove();}
+      else{document.getElementById('sg-err').style.display='block';document.getElementById('sg-pw').value='';} }
+    document.getElementById('sg-btn').onclick=go;
+    document.getElementById('sg-pw').addEventListener('keydown',function(e){if(e.key==='Enter')go();});
+    setTimeout(function(){document.getElementById('sg-pw').focus();},80);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',show); else show();
+})();
+</script>
+
+<div class="wrap">
+  <div class="nav">
+    <a href="index.html">← Dashboard</a>
+    <button class="rbtn" id="refresh" onclick="load(true)">↻ Actualizar</button>
+  </div>
+  <h1>🏁 Carrera del Mes</h1>
+  <div class="sub" id="sub">Cargando…</div>
+
+  <div id="hero"></div>
+
+  <div class="legend">
+    <span class="lgd"><span class="sw run"></span> <b>Corredor</b> = avance real</span>
+    <span class="lgd"><span class="sw ghost"></span> <b>Fantasma</b> = dónde debería ir hoy (baseline)</span>
+    <span class="lgd">🏁 <b>Meta</b> = target del mes</span>
+    <span class="lgd">│ <b>Domingos</b> = checkpoints</span>
+    <span class="lgd"><b>% Adherencia</b> = real hoy ÷ plan hoy</span>
+  </div>
+
+  <div id="lanes"></div>
+  <div class="ft" id="ft"></div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+let DATA=null;
+const fmtM = n => (n==null?'—':'$'+Math.round(n).toLocaleString('en-US'));
+const bandOf = a => a==null?'na':(a>=90?'green':(a>=70?'amber':'red'));
+
+function load(manual){
+  if(manual){ const b=$('#refresh'); if(b){b.textContent='↻ …';} }
+  fetch('data/race-latest.json?_='+Date.now())
+    .then(r=>r.ok?r.json():null)
+    .then(j=>{ DATA=j; render(); const b=$('#refresh'); if(b)b.textContent='↻ Actualizar'; })
+    .catch(()=>{ render(); const b=$('#refresh'); if(b)b.textContent='↻ Actualizar'; });
+}
+
+/* SVG sparkline: real (sólido) vs plan (punteado) sobre % del mes */
+function spark(daily, w, h){
+  const pad=4, W=w, H=h;
+  const days=daily.filter(d=>d.plan_pct!=null);
+  if(days.length<2) return '';
+  const n=days.length;
+  const x=i=> pad + (W-2*pad)*(i/(n-1));
+  const y=v=> H-pad - (H-2*pad)*(Math.max(0,Math.min(100,v))/100);
+  let planPts=[], realPts=[];
+  days.forEach((d,i)=>{
+    planPts.push(x(i)+','+y(d.plan_pct));
+    if(d.real_pct!=null) realPts.push(x(i)+','+y(d.real_pct));
+  });
+  const grid=[0,50,100].map(v=>`<line x1="${pad}" y1="${y(v)}" x2="${W-pad}" y2="${y(v)}" stroke="#2a3540" stroke-width="1"/>`).join('');
+  const planPoly=`<polyline points="${planPts.join(' ')}" fill="none" stroke="#6e7d8c" stroke-width="1.6" stroke-dasharray="4 3"/>`;
+  const realPoly=realPts.length?`<polyline points="${realPts.join(' ')}" fill="none" stroke="#58a6ff" stroke-width="2.4"/>`:'';
+  const lastReal=days.filter(d=>d.real_pct!=null).slice(-1)[0];
+  const dot=lastReal?`<circle cx="${x(days.indexOf(lastReal))}" cy="${y(lastReal.real_pct)}" r="3" fill="#58a6ff"/>`:'';
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${grid}${planPoly}${realPoly}${dot}</svg>`;
+}
+
+/* Cumulative plan fraction at each Sunday from weeks (checkpoint positions) */
+function sundayPositions(weeks, total){
+  let cum=0, out=[];
+  weeks.forEach(w=>{ cum+=w.total; out.push(total? (100*cum/total):0); });
+  return out;
+}
+
+function renderHero(){
+  const c=DATA.company, b=c.band;
+  const money = c.july_money && c.july_money.length===2 ? `${fmtM(c.july_money[0])} <span class="mut" style="color:var(--mut);font-size:12px">/ ${fmtM(c.july_money[1])} +10%</span>` : '—';
+  $('#hero').innerHTML=`<div class="hero">
+    <div class="hbig">
+      <div class="num ${b}">${c.adherence==null?'—':c.adherence+'%'}</div>
+      <div class="lab">Adherencia global</div>
+      <div class="pill ${b}" style="margin-top:7px">${b==='green'?'EN RITMO':b==='amber'?'ATENCIÓN':b==='red'?'ATRASADOS':'—'}</div>
+    </div>
+    <div class="hmid">
+      <div class="hstats">
+        <div class="hstat"><div class="v">${c.done_total}/${c.due_to_today}</div><div class="l">Vencidas hechas</div></div>
+        <div class="hstat"><div class="v">${c.done_total}/${c.total_target}</div><div class="l">Del mes hechas</div></div>
+        <div class="hstat"><div class="v">${c.projects}</div><div class="l">Proyectos</div></div>
+        <div class="hstat"><div class="v" style="font-size:16px">${money}</div><div class="l">Producción mes ($)</div></div>
+      </div>
+      ${spark(c.daily,560,52)}
+      <div style="color:var(--mut);font-size:11px">Real (línea sólida) vs Plan (punteada) · % de tareas del mes completadas día a día</div>
+    </div>
+  </div>`;
+}
+
+function taskRow(t){
+  const ic = t.status==='done'?'✓':(t.status==='moved'?'▸':'○');
+  const mv = t.moved_days>0?`<span class="mv">corrida +${t.moved_days}d</span>`:'';
+  return `<div class="task ${t.status==='done'?'done':''}"><span class="ic ${t.status==='done'?'green':(t.status==='moved'?'amber':'')}">${ic}</span>`+
+    `<span class="tn">${t.name}</span><span class="tg">${t.type}</span>${mv}</div>`;
+}
+
+function detail(p){
+  const curIdx=p.weeks.findIndex(w=>w.is_current);
+  const cur = curIdx>=0?p.weeks[curIdx]:null;
+  let html='';
+  html+=`<div class="dtitle">Avance día a día</div>${spark(p.daily,640,60)}`;
+  if(cur){
+    html+=`<div class="dtitle">Semana en curso — deadline domingo ${cur.deadline}</div>`;
+    html+=`<div class="wk"><div class="wkh cur"><span class="wl">${cur.label}</span><span class="wd">${cur.done}/${cur.total} listas</span></div>`;
+    html+= cur.tasks.length? cur.tasks.map(taskRow).join('') : '<div class="empty" style="padding:8px 11px">Sin hitos esta semana.</div>';
+    html+=`</div>`;
+  }
+  html+=`<div class="dtitle">Todas las semanas del mes</div>`;
+  p.weeks.forEach((w,i)=>{
+    if(i===curIdx) return;
+    html+=`<div class="wk"><div class="wkh"><span class="wl">${w.label}</span><span class="wd">${w.done}/${w.total} listas · dom ${w.deadline.slice(5)}</span></div>`;
+    html+= w.tasks.length? w.tasks.map(taskRow).join('') : '<div class="empty" style="padding:8px 11px">Sin hitos.</div>';
+    html+=`</div>`;
+  });
+  if(p.moved && p.moved.length){
+    html+=`<div class="dtitle">⏱ Tareas corridas del plan (${p.moved_count})</div><div class="mvlist wk">`;
+    html+= p.moved.map(m=>`<div class="task"><span class="ic amber">▸</span><span class="tn">${m.name}</span><span class="mv">${m.from.slice(5)} → ${m.to.slice(5)} (+${m.days}d)</span></div>`).join('');
+    html+=`</div>`;
+  }
+  return html;
+}
+
+function renderLane(p){
+  const b=p.band;
+  const suns=sundayPositions(p.weeks, p.total_target);
+  const sunLabels=['D1','D2','D3','D4'];
+  let sunHtml=suns.map((pos,i)=>`<div class="sun" style="left:${Math.min(100,pos)}%"><span class="st">${DATA.week_sundays[i].slice(5)}</span></div>`).join('');
+  const ghost=`<div class="ghostline" style="left:${Math.min(100,p.ghost_pct)}%"><span class="gl">plan hoy ${p.ghost_pct}%</span></div>`;
+  const runner=`<span class="runner" style="left:${Math.min(100,Math.max(2,p.runner_pct))}%">🏃</span>`;
+  const money = p.july_money && p.july_money.length===2 ? `· ${fmtM(p.july_money[0])} mes` : '';
+  const pm = (p.pms&&p.pms.length)? p.pms.join(', '):'—';
+  return `<div class="lane" id="lane-${p.id}">
+    <div class="lhead" onclick="document.getElementById('lane-${p.id}').classList.toggle('open')">
+      <div class="lname"><div class="n">${p.name}</div><div class="pm">PM ${pm} ${money}</div></div>
+      <div class="trackwrap">
+        <div class="trackrow">
+          <div class="fill ${b}" style="width:${Math.min(100,p.runner_pct)}%"></div>
+          ${sunHtml}${ghost}${runner}
+          <span class="flag">🏁</span>
+        </div>
+      </div>
+      <div class="ladh"><div class="p ${b}">${p.adherence==null?'—':p.adherence+'%'}</div><div class="s">${p.done_total}/${p.total_target} · ${p.moved_count}▸</div></div>
+      <span class="chev">▶</span>
+    </div>
+    <div class="detail">${detail(p)}</div>
+  </div>`;
+}
+
+function render(){
+  if(!DATA){ $('#sub').textContent='No se pudo cargar la data de carrera.'; return; }
+  const gen=(''+DATA.generated_at).slice(0,16).replace('T',' ');
+  $('#sub').innerHTML=`${DATA.month} · corte ${DATA.today} · actualizado ${gen} · deadline cada <b>domingo</b>`;
+  renderHero();
+  $('#lanes').innerHTML = DATA.projects.map(renderLane).join('');
+  $('#ft').textContent=`Generado por Jade · Awesome Group · baseline ${'2026-07-06'} vs estado vivo (JobTread) · adherencia por conteo de tareas Action/Critical-Path`;
+}
+
+load();
+// Tiempo real: re-fetch silencioso cada 5 min (el JSON se regenera cada 20 min).
+setInterval(()=>load(false), 300000);
+</script>
+</body></html>
