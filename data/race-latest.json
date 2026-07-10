@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-10T09:27:48",
+ "generated_at": "2026-07-10T09:53:01",
  "today": "2026-07-10",
  "month": "Julio 2026",
  "month_prefix": "2026-07",
@@ -18,10 +18,13 @@
  "method": {
   "universe": "Action Task + Critical Path (hojas)",
   "done_threshold": 0.999,
-  "adherence_formula": "hechas_a_hoy / vencidas_segun_baseline_a_hoy",
+  "main_pct_formula": "hechas_del_mes / meta_mensual (a donde el baseline dijo que llegariamos a fin de mes)",
+  "color_formula": "adherencia-a-hoy: hechas_a_hoy / vencidas_segun_baseline_a_hoy (verde>=90, amarillo 70-89, rojo<70)",
+  "week_pct_formula": "hechas_de_la_semana / planeadas_esa_semana (deadline domingo)",
   "weighting": "conteo de tareas (el motor de productividad no expone $ por-tarea; el $ del mes es contexto por proyecto)"
  },
  "company": {
+  "monthly_pct": 14.6,
   "adherence": 31.4,
   "band": "red",
   "total_target": 151,
@@ -84,6 +87,7 @@
    "due_to_today": 12,
    "done_total": 1,
    "done_due": 1,
+   "monthly_pct": 8.3,
    "adherence": 8.3,
    "band": "red",
    "runner_pct": 8.3,
@@ -99,6 +103,7 @@
      "is_current": true,
      "total": 12,
      "done": 1,
+     "pct": 8.3,
      "tasks": [
       {
        "id": "22PMhvM23Ls5",
@@ -228,6 +233,7 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "pct": null,
      "tasks": []
     },
     {
@@ -236,6 +242,7 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "pct": null,
      "tasks": []
     },
     {
@@ -244,6 +251,7 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "pct": null,
      "tasks": []
     }
    ],
@@ -296,6 +304,7 @@
    "due_to_today": 11,
    "done_total": 1,
    "done_due": 1,
+   "monthly_pct": 8.3,
    "adherence": 9.1,
    "band": "red",
    "runner_pct": 8.3,
@@ -378,6 +387,7 @@
      "is_current": true,
      "total": 12,
      "done": 1,
+     "pct": 8.3,
      "tasks": [
       {
        "id": "22PPsiDB5uvP",
@@ -507,6 +517,7 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "pct": null,
      "tasks": []
     },
     {
@@ -515,6 +526,7 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "pct": null,
      "tasks": []
     },
     {
@@ -523,6 +535,7 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "pct": null,
      "tasks": []
     }
    ],
@@ -575,6 +588,7 @@
    "due_to_today": 9,
    "done_total": 2,
    "done_due": 2,
+   "monthly_pct": 7.7,
    "adherence": 22.2,
    "band": "red",
    "runner_pct": 7.7,
@@ -713,6 +727,7 @@
      "is_current": true,
      "total": 11,
      "done": 2,
+     "pct": 18.2,
      "tasks": [
       {
        "id": "22PZpK7zzswK",
@@ -832,6 +847,7 @@
      "is_current": false,
      "total": 3,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZpKAP39Ee",
@@ -871,6 +887,7 @@
      "is_current": false,
      "total": 10,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZpKAYpDhX",
@@ -980,6 +997,7 @@
      "is_current": false,
      "total": 2,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZpKCjBHpp",
@@ -1053,6 +1071,7 @@
    "due_to_today": 4,
    "done_total": 1,
    "done_due": 1,
+   "monthly_pct": 8.3,
    "adherence": 25.0,
    "band": "red",
    "runner_pct": 8.3,
@@ -1149,6 +1168,7 @@
      "is_current": true,
      "total": 4,
      "done": 1,
+     "pct": 25.0,
      "tasks": [
       {
        "id": "22PZqFvUvxgu",
@@ -1198,6 +1218,7 @@
      "is_current": false,
      "total": 2,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZqFvUxqCQ",
@@ -1227,6 +1248,7 @@
      "is_current": false,
      "total": 2,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZqFvVAHM2",
@@ -1256,6 +1278,7 @@
      "is_current": false,
      "total": 4,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZqFvVEPEE",
@@ -1349,6 +1372,7 @@
    "due_to_today": 8,
    "done_total": 3,
    "done_due": 3,
+   "monthly_pct": 13.6,
    "adherence": 37.5,
    "band": "red",
    "runner_pct": 13.6,
@@ -1431,6 +1455,7 @@
      "is_current": true,
      "total": 9,
      "done": 3,
+     "pct": 33.3,
      "tasks": [
       {
        "id": "22PZpzYvdPxd",
@@ -1530,6 +1555,7 @@
      "is_current": false,
      "total": 8,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZpzZ5Vpj2",
@@ -1619,6 +1645,7 @@
      "is_current": false,
      "total": 5,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZpzaa3FGb",
@@ -1678,6 +1705,7 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "pct": null,
      "tasks": []
     }
    ],
@@ -1730,6 +1758,7 @@
    "due_to_today": 5,
    "done_total": 2,
    "done_due": 2,
+   "monthly_pct": 11.1,
    "adherence": 40.0,
    "band": "red",
    "runner_pct": 11.1,
@@ -1861,6 +1890,7 @@
      "is_current": true,
      "total": 5,
      "done": 2,
+     "pct": 40.0,
      "tasks": [
       {
        "id": "22PZpJeRDvNx",
@@ -1920,6 +1950,7 @@
      "is_current": false,
      "total": 6,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZpJepgeCr",
@@ -1989,6 +2020,7 @@
      "is_current": false,
      "total": 4,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZpJeTpqtF",
@@ -2038,6 +2070,7 @@
      "is_current": false,
      "total": 3,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZpJfZb7Ua",
@@ -2121,6 +2154,7 @@
    "due_to_today": 8,
    "done_total": 4,
    "done_due": 4,
+   "monthly_pct": 23.5,
    "adherence": 50.0,
    "band": "red",
    "runner_pct": 23.5,
@@ -2203,6 +2237,7 @@
      "is_current": true,
      "total": 11,
      "done": 4,
+     "pct": 36.4,
      "tasks": [
       {
        "id": "22PJWeDkxqbD",
@@ -2322,6 +2357,7 @@
      "is_current": false,
      "total": 3,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PJWeDkyxJ9",
@@ -2361,6 +2397,7 @@
      "is_current": false,
      "total": 3,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PJWeDm3Cfx",
@@ -2400,6 +2437,7 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "pct": null,
      "tasks": []
     }
    ],
@@ -2452,6 +2490,7 @@
    "due_to_today": 11,
    "done_total": 6,
    "done_due": 5,
+   "monthly_pct": 30.0,
    "adherence": 54.5,
    "band": "red",
    "runner_pct": 30.0,
@@ -2548,6 +2587,7 @@
      "is_current": true,
      "total": 11,
      "done": 5,
+     "pct": 45.5,
      "tasks": [
       {
        "id": "22PZzWURUhyE",
@@ -2667,6 +2707,7 @@
      "is_current": false,
      "total": 6,
      "done": 1,
+     "pct": 16.7,
      "tasks": [
       {
        "id": "22PZzWUiKH6i",
@@ -2736,6 +2777,7 @@
      "is_current": false,
      "total": 1,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZzWUsGsvd",
@@ -2755,6 +2797,7 @@
      "is_current": false,
      "total": 2,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZzWVeTaGW",
@@ -2828,6 +2871,7 @@
    "due_to_today": 2,
    "done_total": 2,
    "done_due": 1,
+   "monthly_pct": 16.7,
    "adherence": 100.0,
    "band": "green",
    "runner_pct": 16.7,
@@ -2861,6 +2905,7 @@
      "is_current": true,
      "total": 2,
      "done": 1,
+     "pct": 50.0,
      "tasks": [
       {
        "id": "22PZzzrXxmMg",
@@ -2890,6 +2935,7 @@
      "is_current": false,
      "total": 1,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZzzrZfHwU",
@@ -2909,6 +2955,7 @@
      "is_current": false,
      "total": 5,
      "done": 0,
+     "pct": 0.0,
      "tasks": [
       {
        "id": "22PZzzrbzJtH",
@@ -2968,6 +3015,7 @@
      "is_current": false,
      "total": 4,
      "done": 1,
+     "pct": 25.0,
      "tasks": [
       {
        "id": "22PZzzrrrvPh",
