@@ -1,12 +1,12 @@
 {
- "generated_at": "2026-07-10T17:41:12",
+ "generated_at": "2026-07-10T18:04:44",
  "date": "2026-07-10",
  "window_start": "2026-07-10",
  "window_end": "2026-07-24",
  "summary": {
-  "tasks": 170,
+  "tasks": 171,
   "projects": 9,
-  "alerts": 8,
+  "alerts": 9,
   "overdue": 13,
   "to_purchase_amount": 67460.06
  },
@@ -24,6 +24,13 @@
    "task": "MSI TILES: PURCHASE MATERIAL",
    "due": "2026-07-13",
    "taskId": "22Pae4Tc4xJi"
+  },
+  {
+   "project": "Clifford Clack — Gym Addition",
+   "projectId": "22PCPuWPndkt",
+   "task": "GLASS: PURCHASE MATERIALS",
+   "due": "2026-07-13",
+   "taskId": "22PaepcZNKRC"
   },
   {
    "project": "Kyle Aubry - Project 01",
@@ -1394,6 +1401,67 @@
    ]
   },
   {
+   "id": "22PCPuWPndkt",
+   "name": "Clifford Clack — Gym Addition",
+   "counts": {
+    "tasks": 3,
+    "alerts": 1,
+    "overdue": 1
+   },
+   "overdue": [
+    {
+     "name": "ELECTRICAL TRIM: DELIVERY ETA",
+     "step": "eta",
+     "icon": "🚚",
+     "step_label": "Delivery ETA",
+     "due": "2026-07-09",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PaXYTVPVEB",
+     "progress": 0
+    }
+   ],
+   "days": [
+    {
+     "date": "2026-07-11",
+     "label": "Sat Jul 11",
+     "tasks": [
+      {
+       "name": "PAINT: PURCHASE PAINT",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-07-11",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PadmWLx8fy",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-07-13",
+     "label": "Mon Jul 13",
+     "tasks": [
+      {
+       "name": "GLASS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-13",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PaepcZNKRC",
+       "progress": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "22PK9BhEJtZn",
    "name": "Lingyan Qiu (CNG2025-458)",
    "counts": {
@@ -1499,18 +1567,6 @@
        "progress": 0
       },
       {
-       "name": "GUTTERS: CREATE TAKEOFF REPORT",
-       "step": "takeoff",
-       "icon": "📋",
-       "step_label": "Takeoff",
-       "due": "2026-07-13",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpKC8BrAx",
-       "progress": 0
-      },
-      {
        "name": "PLUMBING TRIM: CREATE TAKEOFF REPORT",
        "step": "takeoff",
        "icon": "📋",
@@ -1574,18 +1630,6 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpKAaSnPB",
-       "progress": 0
-      },
-      {
-       "name": "GUTTERS: SECURE PRICING & ETA",
-       "step": "pricing",
-       "icon": "💲",
-       "step_label": "Secure pricing",
-       "due": "2026-07-14",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpKC8pjqe",
        "progress": 0
       },
       {
@@ -1653,30 +1697,6 @@
        "overdue": false,
        "taskId": "22PZpKBQR5FW",
        "progress": 0
-      },
-      {
-       "name": "GUTTERS: CONFIRM TAKEOFF DETAILS",
-       "step": "takeoff",
-       "icon": "📋",
-       "step_label": "Takeoff",
-       "due": "2026-07-15",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpKC4ayAY",
-       "progress": 0
-      },
-      {
-       "name": "GUTTERS: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-07-15",
-       "amount": 838.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpKC9mQfc",
-       "progress": 0
       }
      ]
     },
@@ -1694,18 +1714,6 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpKBQzsak",
-       "progress": 0
-      },
-      {
-       "name": "GUTTERS: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-07-16",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpKCAMyVq",
        "progress": 0
       },
       {
@@ -1805,6 +1813,30 @@
        "progress": 0
       },
       {
+       "name": "GUTTERS: CONFIRM TAKEOFF DETAILS",
+       "step": "takeoff",
+       "icon": "📋",
+       "step_label": "Takeoff",
+       "due": "2026-07-20",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpKC4ayAY",
+       "progress": 0
+      },
+      {
+       "name": "GUTTERS: CREATE TAKEOFF REPORT",
+       "step": "takeoff",
+       "icon": "📋",
+       "step_label": "Takeoff",
+       "due": "2026-07-20",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpKC8BrAx",
+       "progress": 0
+      },
+      {
        "name": "INTERIOR DOORS: DELIVERY ETA",
        "step": "eta",
        "icon": "🚚",
@@ -1832,6 +1864,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpKAfka8d",
+       "progress": 0
+      },
+      {
+       "name": "GUTTERS: SECURE PRICING & ETA",
+       "step": "pricing",
+       "icon": "💲",
+       "step_label": "Secure pricing",
+       "due": "2026-07-21",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpKC8pjqe",
        "progress": 0
       }
      ]
@@ -1863,6 +1907,18 @@
        "overdue": false,
        "taskId": "22PZpKBxtc7S",
        "progress": 0
+      },
+      {
+       "name": "GUTTERS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-22",
+       "amount": 838.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpKC9mQfc",
+       "progress": 0
       }
      ]
     },
@@ -1881,48 +1937,17 @@
        "overdue": false,
        "taskId": "22PZpKB4n8We",
        "progress": 0
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "id": "22PCPuWPndkt",
-   "name": "Clifford Clack — Gym Addition",
-   "counts": {
-    "tasks": 2,
-    "alerts": 0,
-    "overdue": 1
-   },
-   "overdue": [
-    {
-     "name": "ELECTRICAL TRIM: DELIVERY ETA",
-     "step": "eta",
-     "icon": "🚚",
-     "step_label": "Delivery ETA",
-     "due": "2026-07-09",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PaXYTVPVEB",
-     "progress": 0
-    }
-   ],
-   "days": [
-    {
-     "date": "2026-07-10",
-     "label": "Fri Jul 10",
-     "tasks": [
+      },
       {
-       "name": "PAINT: PURCHASE PAINT",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-07-10",
+       "name": "GUTTERS: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-07-23",
        "amount": null,
        "alert": false,
        "overdue": false,
-       "taskId": "22PadmWLx8fy",
+       "taskId": "22PZpKCAMyVq",
        "progress": 0
       }
      ]
