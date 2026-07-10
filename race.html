@@ -204,7 +204,7 @@ h1{font-size:22px;margin:0 0 3px}
 
   <div class="howto">
     <div class="ht">How to read this</div>
-    <div>🏃 Every project races its plan on the same calendar: a runner LEFT of the white <b>TODAY</b> line is behind schedule; at or past it is on track. 🏁 marks the last planned task of the month, │ lines are the Sunday weekly deadlines.</div>
+    <div>🏃 Every project races its plan on the same calendar: a runner LEFT of the white <b>TODAY</b> line is behind schedule; at or past it is on track — the runner and the pill always agree. 🏁 marks the last planned task of the month, │ lines are the Sunday weekly deadlines.</div>
     <div><b>The big %</b> counts <b>worked days, not just finished tasks</b>: a finished task earns all of its planned days, a task in progress earns the days worked so far, a task not started earns 0.</div>
     <div>Pill colors: <span class="g">green = on pace</span> · <span class="o">blinking orange = behind, but the week can still be saved if the rescheduled tasks finish by Sunday</span> · <span class="y">yellow = slightly behind</span> · <span class="r">blinking red = behind plan</span>.</div>
   </div>
@@ -454,7 +454,7 @@ function renderLane(p){
           ${post}${laneTicks()}${runner}${flag}
         </div>
         ${weekChips(p,col)}
-        ${p.status==='salvage' && p.save_tasks && p.save_tasks.length ? `<div class="salvline">⚠ The week is saved ONLY if <b>${p.save_tasks[0].name}</b> finishes by <b>${fmtD(p.save_tasks[0].due)}</b>${p.save_tasks.length>1?` (plus ${p.save_tasks.length-1} more: ${p.save_tasks.slice(1,3).map(t=>t.name).join('; ')}${p.save_tasks.length>3?'…':''})`:''} — if the sub slips, we DON'T make it.</div>`:''}
+        ${p.status==='salvage' && p.save_tasks && p.save_tasks.length ? `<div class="salvline" title="${p.save_tasks.map(t=>t.name+' by '+fmtD(t.due)).join(' · ').replace(/"/g,'&quot;')}">⚠ Week saved ONLY if <b>${p.save_tasks[0].name}</b> finishes by <b>${fmtD(p.save_tasks[0].due)}</b>${p.save_tasks.length>1?` (+${p.save_tasks.length-1} more)`:''} — if it slips, we don't make it.</div>`:''}
       </div>
       <div class="ladh"><div class="goalLab">Progress goal of the month:</div><div class="p" style="color:${col}" title="${p.earned_days!=null?p.earned_days+' of '+p.total_days+' planned work-days earned (done task = all its days, started task = days worked, not started = 0)':''}">${mp}%</div><div class="s"><span class="pill ${st.cls}" title="${st.title}">${st.label}</span></div></div>
       <span class="chev">▶</span>
