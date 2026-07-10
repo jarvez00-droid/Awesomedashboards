@@ -1,19 +1,19 @@
 {
   "date": "2026-07-10",
-  "generated_at": "2026-07-10T13:45:07.964071",
+  "generated_at": "2026-07-10T14:02:30.159154",
   "summary": {
-    "total_payment_tasks": 798,
+    "total_payment_tasks": 799,
     "total_income": 554496.33,
     "total_p_income": 0,
     "total_outgoing": 497435.76,
     "total_net": 57060.57,
     "pending_income": 1516691.0,
     "pending_p_income": 0,
-    "pending_outgoing": 1203981.05,
+    "pending_outgoing": 1202681.05,
     "paid_income": 445389.75,
     "paid_p_income": 0,
-    "paid_outgoing": 365970.45,
-    "unpaid_net": 312709.95,
+    "paid_outgoing": 367270.45,
+    "unpaid_net": 314009.95,
     "weeks_covered": 5
   },
   "weeks": [
@@ -31,8 +31,8 @@
       "net": -4047.04,
       "income_paid": 0,
       "p_income_paid": 0,
-      "outgoing_paid": 2232.54,
-      "task_count": 79,
+      "outgoing_paid": 3532.54,
+      "task_count": 80,
       "items": [
         {
           "project": "Charles Harris \u2014 Argyle TX",
@@ -176,13 +176,21 @@
           "type": "materials",
           "amount": 1300.0,
           "due": "2026-07-10",
-          "paid": false
+          "paid": true
         },
         {
           "project": "Lingyan Qiu (CNG2025-458)",
           "task": "BRICKS & EXTERIOR SHEATING: PURCHASE MATERIALS",
           "type": "materials",
           "amount": 3550.0,
+          "due": "2026-07-10",
+          "paid": false
+        },
+        {
+          "project": "Lingyan Qiu (CNG2025-458)",
+          "task": "INTERIOR DOORS: SECOND & SURPLUS",
+          "type": "materials",
+          "amount": 0.0,
           "due": "2026-07-10",
           "paid": false
         },
@@ -863,6 +871,14 @@
         },
         {
           "project": "Kyle Aubry - Project 01",
+          "task": "COUNTERTOPS: PURCHASE MATERIAL",
+          "type": "materials",
+          "amount": 5314.4,
+          "due": "2026-07-14",
+          "paid": false
+        },
+        {
+          "project": "Kyle Aubry - Project 01",
           "task": "CARPET:PURCHASE MATERIAL",
           "type": "materials",
           "amount": 0.0,
@@ -986,14 +1002,6 @@
           "task": "GLASS: RECEIVE PAYMENT",
           "type": "income",
           "amount": 1200.0,
-          "due": "2026-07-16",
-          "paid": false
-        },
-        {
-          "project": "Kyle Aubry - Project 01",
-          "task": "COUNTERTOPS: PURCHASE MATERIAL",
-          "type": "materials",
-          "amount": 5314.4,
           "due": "2026-07-16",
           "paid": false
         },
@@ -6198,7 +6206,7 @@
       "type": "materials",
       "amount": 1300.0,
       "due": "2026-07-10",
-      "paid": false,
+      "paid": true,
       "assignee": "INTERIOR DOORS",
       "assignedTo": "",
       "taskId": "22PZpKBaM5Dk",
@@ -6216,6 +6224,20 @@
       "assignee": "BRICKS & EXTERIOR SHEATING",
       "assignedTo": "Romina Rey",
       "taskId": "22PZpKBxJJ65",
+      "projectId": "22PK9BhEJtZn",
+      "planning": false,
+      "external": false
+    },
+    {
+      "project": "Lingyan Qiu (CNG2025-458)",
+      "task": "INTERIOR DOORS: SECOND & SURPLUS",
+      "type": "materials",
+      "amount": 0.0,
+      "due": "2026-07-10",
+      "paid": false,
+      "assignee": "INTERIOR DOORS",
+      "assignedTo": "",
+      "taskId": "22PaeJfzkwVb",
       "projectId": "22PK9BhEJtZn",
       "planning": false,
       "external": false
@@ -7370,6 +7392,20 @@
     },
     {
       "project": "Kyle Aubry - Project 01",
+      "task": "COUNTERTOPS: PURCHASE MATERIAL",
+      "type": "materials",
+      "amount": 5314.4,
+      "due": "2026-07-14",
+      "paid": false,
+      "assignee": "COUNTERTOPS",
+      "assignedTo": "Romina Rey",
+      "taskId": "22PZpzaC3mLr",
+      "projectId": "22Nx8Uut2Qxs",
+      "planning": false,
+      "external": false
+    },
+    {
+      "project": "Kyle Aubry - Project 01",
       "task": "CARPET:PURCHASE MATERIAL",
       "type": "materials",
       "amount": 0.0,
@@ -7589,20 +7625,6 @@
       "assignedTo": "",
       "taskId": "22PVDYnm3avq",
       "projectId": "22P2cmNJZcwJ",
-      "planning": false,
-      "external": false
-    },
-    {
-      "project": "Kyle Aubry - Project 01",
-      "task": "COUNTERTOPS: PURCHASE MATERIAL",
-      "type": "materials",
-      "amount": 5314.4,
-      "due": "2026-07-16",
-      "paid": false,
-      "assignee": "COUNTERTOPS",
-      "assignedTo": "Romina Rey",
-      "taskId": "22PZpzaC3mLr",
-      "projectId": "22Nx8Uut2Qxs",
       "planning": false,
       "external": false
     },
@@ -13901,6 +13923,13 @@
         "type": "subs",
         "due": "2026-07-24",
         "taskId": "22PZpzaSxZTh"
+      },
+      {
+        "project": "Lingyan Qiu (CNG2025-458)",
+        "task": "INTERIOR DOORS: SECOND & SURPLUS",
+        "type": "materials",
+        "due": "2026-07-10",
+        "taskId": "22PaeJfzkwVb"
       },
       {
         "project": "Lingyan Qiu (CNG2025-458)",
