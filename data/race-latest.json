@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-10T12:33:20",
+ "generated_at": "2026-07-10T12:48:04",
  "today": "2026-07-10",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -24,11 +24,19 @@
   "Week 4 · Jul 27-Aug 2"
  ],
  "method": {
-  "universe": "Action Task + Critical Path (hojas)",
+  "universe": "Action Task + Critical Path (hojas) — SOLO OBRA (v9): tareas admin excluidas por patron de nombre",
+  "admin_exclusions": [
+   "ASM MEETING",
+   "MEETING WITH CLIENT",
+   "MEETING (any)",
+   "CC CHECKLIST",
+   "CHECKLIST (any)",
+   "WALK THROUGH"
+  ],
   "done_threshold": 0.999,
   "main_pct_formula": "hechas_del_mes / meta_mensual (a donde el baseline dijo que llegariamos a fin de mes)",
   "color_formula": "adherencia-a-hoy: hechas_a_hoy / vencidas_segun_baseline_a_hoy (verde>=90, amarillo 70-89, rojo<70)",
-  "week_pct_formula": "hechas_de_la_semana / planeadas_esa_semana (deadline domingo)",
+  "week_pct_formula": "v9 POR DIAS: dias ganados de las tareas de la semana / dias planeados (ej: 5 dias de drywall planeados, 3 trabajados = 60%). Conteos de tareas = contexto.",
   "week_target": "target_task = ULTIMA Action/CP que vence esa semana segun baseline (hasta donde hay que llegar; nombra el trade)",
   "earned_schedule": "v8 POR DIAS sin artefacto de huecos: ganados==plan-a-hoy -> corredor EN TODAY; ganados>plan -> PRIMERA fecha cuyo plan>=ganados (adelanto real); ganados<plan -> ultima fecha con plan<=ganados (tope ayer). Garantia: on_pace <=> corredor EN o a la DERECHA de TODAY.",
   "week_alerts": "v8: kicked_out = planeada esta semana (ancla semanal) con fecha actual fuera (> domingo) -> rojo titilante; pulled_in = planeada despues pero su fecha actual entro a esta semana -> verde titilante.",
@@ -39,19 +47,19 @@
   "weighting": "conteo de tareas (el motor de productividad no expone $ por-tarea; el $ del mes es contexto por proyecto)"
  },
  "company": {
-  "monthly_pct": 14.6,
-  "days_pct": 33.2,
-  "ghost_days_pct": 49.0,
-  "adherence": 31.4,
+  "monthly_pct": 14.5,
+  "days_pct": 32.9,
+  "ghost_days_pct": 49.4,
+  "adherence": 31.3,
   "band": "red",
   "runner_date": "2026-07-07",
-  "gap": 15.9,
+  "gap": 16.5,
   "status": "behind",
-  "total_target": 151,
-  "due_to_today": 70,
-  "done_total": 22,
-  "runner_pct": 14.6,
-  "ghost_pct": 46.4,
+  "total_target": 145,
+  "due_to_today": 67,
+  "done_total": 21,
+  "runner_pct": 14.5,
+  "ghost_pct": 46.2,
   "july_money": [
    158502.12,
    127958.32999999999
@@ -60,38 +68,38 @@
   "daily": [
    {
     "date": "2026-07-06",
-    "real": 12,
-    "real_pct": 7.9,
-    "plan": 23,
+    "real": 11,
+    "real_pct": 7.6,
+    "plan": 22,
     "plan_pct": 15.2
    },
    {
     "date": "2026-07-07",
-    "real": 16,
-    "real_pct": 10.6,
-    "plan": 33,
-    "plan_pct": 21.9
+    "real": 15,
+    "real_pct": 10.3,
+    "plan": 32,
+    "plan_pct": 22.1
    },
    {
     "date": "2026-07-08",
-    "real": 19,
-    "real_pct": 12.6,
-    "plan": 44,
-    "plan_pct": 29.1
+    "real": 18,
+    "real_pct": 12.4,
+    "plan": 42,
+    "plan_pct": 29.0
    },
    {
     "date": "2026-07-09",
-    "real": 22,
-    "real_pct": 14.6,
-    "plan": 54,
-    "plan_pct": 35.8
+    "real": 21,
+    "real_pct": 14.5,
+    "plan": 51,
+    "plan_pct": 35.2
    },
    {
     "date": "2026-07-10",
-    "real": 22,
-    "real_pct": 14.6,
-    "plan": 70,
-    "plan_pct": 46.4
+    "real": 21,
+    "real_pct": 14.5,
+    "plan": 67,
+    "plan_pct": 46.2
    }
   ]
  },
@@ -103,22 +111,22 @@
    "pms": [
     "Milagros Porturas"
    ],
-   "total_target": 12,
-   "due_to_today": 12,
+   "total_target": 10,
+   "due_to_today": 10,
    "done_total": 1,
    "done_due": 1,
-   "monthly_pct": 8.3,
-   "adherence": 8.3,
+   "monthly_pct": 10.0,
+   "adherence": 10.0,
    "band": "red",
-   "runner_pct": 8.3,
+   "runner_pct": 10.0,
    "ghost_pct": 100.0,
-   "runner_date": "2026-07-04",
+   "runner_date": "2026-07-05",
    "finish_date": "2026-07-10",
-   "days_pct": 45.0,
+   "days_pct": 50.0,
    "ghost_days_pct": 100.0,
-   "total_days": 20.0,
+   "total_days": 18.0,
    "earned_days": 9.0,
-   "gap": 55.0,
+   "gap": 50.0,
    "status": "salvage",
    "salvable": true,
    "save_tasks": [
@@ -131,16 +139,24 @@
      "due": "2026-07-10"
     },
     {
-     "name": "DELIVERY: PRE WALK THROUGH",
-     "due": "2026-07-09"
-    },
-    {
      "name": "CLEANING: FINAL CLEANING",
      "due": "2026-07-08"
     },
     {
      "name": "GUTTERS: GUTTER INSTALLATION",
      "due": "2026-07-06"
+    }
+   ],
+   "excluded_admin": [
+    {
+     "name": "DELIVERY: PRE WALK THROUGH",
+     "pattern": "WALK THROUGH",
+     "baseline_end": "2026-07-09"
+    },
+    {
+     "name": "Vendor Meeting",
+     "pattern": "MEETING (any)",
+     "baseline_end": "2026-07-01"
     }
    ],
    "cp_chain": [],
@@ -153,9 +169,11 @@
      "label": "Week 1 · Jul 6-12",
      "deadline": "2026-07-12",
      "is_current": true,
-     "total": 6,
+     "total": 5,
      "done": 1,
-     "pct": 16.7,
+     "days_planned": 11.0,
+     "days_earned": 7.0,
+     "pct": 63.6,
      "target_task": "PAINTING",
      "target_type": "AT",
      "target_due": "2026-07-10",
@@ -203,20 +221,6 @@
        "was": null
       },
       {
-       "id": "22PMhvM23LsV",
-       "name": "DELIVERY: PRE WALK THROUGH",
-       "type": "AT",
-       "baseline_end": "2026-07-09",
-       "live_end": "2026-07-09",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
        "id": "22PMhvM23LsL",
        "name": "FINAL BUILDING INSPECTION",
        "type": "AT",
@@ -253,6 +257,8 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "days_planned": 0.0,
+     "days_earned": 0.0,
      "pct": null,
      "target_task": null,
      "target_type": null,
@@ -266,6 +272,8 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "days_planned": 0.0,
+     "days_earned": 0.0,
      "pct": null,
      "target_task": null,
      "target_type": null,
@@ -279,6 +287,8 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "days_planned": 0.0,
+     "days_earned": 0.0,
      "pct": null,
      "target_task": null,
      "target_type": null,
@@ -291,36 +301,36 @@
     {
      "date": "2026-07-06",
      "real": 1,
-     "real_pct": 8.3,
-     "plan": 8,
-     "plan_pct": 66.7
+     "real_pct": 10.0,
+     "plan": 7,
+     "plan_pct": 70.0
     },
     {
      "date": "2026-07-07",
      "real": 1,
-     "real_pct": 8.3,
-     "plan": 8,
-     "plan_pct": 66.7
+     "real_pct": 10.0,
+     "plan": 7,
+     "plan_pct": 70.0
     },
     {
      "date": "2026-07-08",
      "real": 1,
-     "real_pct": 8.3,
-     "plan": 9,
-     "plan_pct": 75.0
+     "real_pct": 10.0,
+     "plan": 8,
+     "plan_pct": 80.0
     },
     {
      "date": "2026-07-09",
      "real": 1,
-     "real_pct": 8.3,
-     "plan": 10,
-     "plan_pct": 83.3
+     "real_pct": 10.0,
+     "plan": 8,
+     "plan_pct": 80.0
     },
     {
      "date": "2026-07-10",
      "real": 1,
-     "real_pct": 8.3,
-     "plan": 12,
+     "real_pct": 10.0,
+     "plan": 10,
      "plan_pct": 100.0
     }
    ]
@@ -332,22 +342,22 @@
    "pms": [
     "Angel Pacheco"
    ],
-   "total_target": 12,
-   "due_to_today": 11,
+   "total_target": 11,
+   "due_to_today": 10,
    "done_total": 1,
    "done_due": 1,
-   "monthly_pct": 8.3,
-   "adherence": 9.1,
+   "monthly_pct": 9.1,
+   "adherence": 10.0,
    "band": "red",
-   "runner_pct": 8.3,
-   "ghost_pct": 91.7,
+   "runner_pct": 9.1,
+   "ghost_pct": 90.9,
    "runner_date": "2026-07-06",
    "finish_date": "2026-07-11",
-   "days_pct": 14.3,
-   "ghost_days_pct": 92.9,
-   "total_days": 14.0,
+   "days_pct": 15.4,
+   "ghost_days_pct": 92.3,
+   "total_days": 13.0,
    "earned_days": 2.0,
-   "gap": 78.6,
+   "gap": 76.9,
    "status": "salvage",
    "salvable": true,
    "save_tasks": [
@@ -374,6 +384,13 @@
     {
      "name": "CUSTOM CARPENTRY: INSTALL SECRET DOOR",
      "due": "2026-07-11"
+    }
+   ],
+   "excluded_admin": [
+    {
+     "name": "DELIVERY: PRE DELIVERY WALK THROUGH",
+     "pattern": "WALK THROUGH",
+     "baseline_end": "2026-07-08"
     }
    ],
    "cp_chain": [
@@ -408,15 +425,6 @@
      "depends_on": []
     },
     {
-     "id": "22PPsiDCTXjJ",
-     "name": "DELIVERY: PRE DELIVERY WALK THROUGH",
-     "baseline_end": "2026-07-08",
-     "live_end": "2026-07-11",
-     "moved_days": 3,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PYmTjTWh4W",
      "name": "CUSTOM CARPENTRY: PAINT SECRET DOOR (Copy)",
      "baseline_end": "2026-07-10",
@@ -440,7 +448,7 @@
     5186.7
    ],
    "margin_pct": 37.5,
-   "moved_count": 11,
+   "moved_count": 10,
    "moved": [
     {
      "id": "22PUWTffEG7R",
@@ -461,13 +469,6 @@
      "name": "CUSTOM CARPENTRY: BUILD SECRET DOOR",
      "from": "2026-07-07",
      "to": "2026-07-10",
-     "days": 3
-    },
-    {
-     "id": "22PPsiDCTXjJ",
-     "name": "DELIVERY: PRE DELIVERY WALK THROUGH",
-     "from": "2026-07-08",
-     "to": "2026-07-11",
      "days": 3
     },
     {
@@ -525,9 +526,11 @@
      "label": "Week 1 · Jul 6-12",
      "deadline": "2026-07-12",
      "is_current": true,
-     "total": 11,
+     "total": 10,
      "done": 0,
-     "pct": 0.0,
+     "days_planned": 12.0,
+     "days_earned": 1.0,
+     "pct": 8.3,
      "target_task": "CLEANING: FINAL CLEANING",
      "target_type": "CP",
      "target_due": "2026-07-11",
@@ -591,20 +594,6 @@
       {
        "id": "22PUnNKxDE7b",
        "name": "CUSTOM CARPENTRY: INSTALL SECRET DOOR",
-       "type": "CP",
-       "baseline_end": "2026-07-08",
-       "live_end": "2026-07-11",
-       "moved_days": 3,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PPsiDCTXjJ",
-       "name": "DELIVERY: PRE DELIVERY WALK THROUGH",
        "type": "CP",
        "baseline_end": "2026-07-08",
        "live_end": "2026-07-11",
@@ -695,6 +684,8 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "days_planned": 0.0,
+     "days_earned": 0.0,
      "pct": null,
      "target_task": null,
      "target_type": null,
@@ -708,6 +699,8 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "days_planned": 0.0,
+     "days_earned": 0.0,
      "pct": null,
      "target_task": null,
      "target_type": null,
@@ -721,6 +714,8 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "days_planned": 0.0,
+     "days_earned": 0.0,
      "pct": null,
      "target_task": null,
      "target_type": null,
@@ -733,37 +728,37 @@
     {
      "date": "2026-07-06",
      "real": 1,
-     "real_pct": 8.3,
+     "real_pct": 9.1,
      "plan": 1,
-     "plan_pct": 8.3
+     "plan_pct": 9.1
     },
     {
      "date": "2026-07-07",
      "real": 1,
-     "real_pct": 8.3,
+     "real_pct": 9.1,
      "plan": 4,
-     "plan_pct": 33.3
+     "plan_pct": 36.4
     },
     {
      "date": "2026-07-08",
      "real": 1,
-     "real_pct": 8.3,
-     "plan": 8,
-     "plan_pct": 66.7
+     "real_pct": 9.1,
+     "plan": 7,
+     "plan_pct": 63.6
     },
     {
      "date": "2026-07-09",
      "real": 1,
-     "real_pct": 8.3,
-     "plan": 8,
-     "plan_pct": 66.7
+     "real_pct": 9.1,
+     "plan": 7,
+     "plan_pct": 63.6
     },
     {
      "date": "2026-07-10",
      "real": 1,
-     "real_pct": 8.3,
-     "plan": 11,
-     "plan_pct": 91.7
+     "real_pct": 9.1,
+     "plan": 10,
+     "plan_pct": 90.9
     }
    ]
   },
@@ -774,25 +769,32 @@
    "pms": [
     "Angel Pacheco"
    ],
-   "total_target": 26,
+   "total_target": 25,
    "due_to_today": 9,
    "done_total": 2,
    "done_due": 2,
-   "monthly_pct": 7.7,
+   "monthly_pct": 8.0,
    "adherence": 22.2,
    "band": "red",
-   "runner_pct": 7.7,
-   "ghost_pct": 34.6,
+   "runner_pct": 8.0,
+   "ghost_pct": 36.0,
    "runner_date": "2026-07-08",
    "finish_date": "2026-07-31",
-   "days_pct": 20.6,
-   "ghost_days_pct": 33.3,
-   "total_days": 63.0,
+   "days_pct": 21.0,
+   "ghost_days_pct": 33.9,
+   "total_days": 62.0,
    "earned_days": 13.0,
-   "gap": 12.7,
+   "gap": 12.9,
    "status": "behind",
    "salvable": false,
    "save_tasks": [],
+   "excluded_admin": [
+    {
+     "name": "PRE DELIVERY WALK THROUGH: PRE DELIVERY WALK THROUGH",
+     "pattern": "WALK THROUGH",
+     "baseline_end": "2026-07-20"
+    }
+   ],
    "cp_chain": [
     {
      "id": "22PZpK7zzswK",
@@ -909,15 +911,6 @@
      "live_end": "2026-07-24",
      "moved_days": 7,
      "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PZpKCP324d",
-     "name": "PRE DELIVERY WALK THROUGH: PRE DELIVERY WALK THROUGH",
-     "baseline_end": "2026-07-20",
-     "live_end": "2026-07-20",
-     "moved_days": 0,
-     "status": "pending",
      "depends_on": []
     },
     {
@@ -1109,7 +1102,9 @@
      "is_current": true,
      "total": 11,
      "done": 2,
-     "pct": 18.2,
+     "days_planned": 23.0,
+     "days_earned": 13.0,
+     "pct": 56.5,
      "target_task": "KITCHEN ELECTRICAL TRIM: INSTALL",
      "target_type": "CP",
      "target_due": "2026-07-11",
@@ -1277,6 +1272,8 @@
      "is_current": false,
      "total": 3,
      "done": 0,
+     "days_planned": 4.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "CARPENTRY: PREFAB CABINETS INSTALLATION",
      "target_type": "CP",
@@ -1331,27 +1328,15 @@
      "label": "Week 3 · Jul 20-26",
      "deadline": "2026-07-26",
      "is_current": false,
-     "total": 10,
+     "total": 9,
      "done": 0,
+     "days_planned": 33.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "CLEANING: CLEANING",
      "target_type": "AT",
      "target_due": "2026-07-24",
      "tasks": [
-      {
-       "id": "22PZpKCP324d",
-       "name": "PRE DELIVERY WALK THROUGH: PRE DELIVERY WALK THROUGH",
-       "type": "CP",
-       "baseline_end": "2026-07-20",
-       "live_end": "2026-07-20",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
       {
        "id": "22PZpKBqLfMY",
        "name": "BRICKS: INSTALL BRICKS",
@@ -1487,6 +1472,8 @@
      "is_current": false,
      "total": 2,
      "done": 0,
+     "days_planned": 2.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "PROJECT DELIVERY: DELIVERY",
      "target_type": "AT",
@@ -1535,30 +1522,30 @@
     {
      "date": "2026-07-07",
      "real": 2,
-     "real_pct": 7.7,
+     "real_pct": 8.0,
      "plan": 1,
-     "plan_pct": 3.8
+     "plan_pct": 4.0
     },
     {
      "date": "2026-07-08",
      "real": 2,
-     "real_pct": 7.7,
+     "real_pct": 8.0,
      "plan": 2,
-     "plan_pct": 7.7
+     "plan_pct": 8.0
     },
     {
      "date": "2026-07-09",
      "real": 2,
-     "real_pct": 7.7,
+     "real_pct": 8.0,
      "plan": 6,
-     "plan_pct": 23.1
+     "plan_pct": 24.0
     },
     {
      "date": "2026-07-10",
      "real": 2,
-     "real_pct": 7.7,
+     "real_pct": 8.0,
      "plan": 9,
-     "plan_pct": 34.6
+     "plan_pct": 36.0
     }
    ]
   },
@@ -1588,6 +1575,7 @@
    "status": "warning",
    "salvable": false,
    "save_tasks": [],
+   "excluded_admin": [],
    "cp_chain": [
     {
      "id": "22PZqFvUvxgu",
@@ -1811,7 +1799,9 @@
      "is_current": true,
      "total": 4,
      "done": 1,
-     "pct": 25.0,
+     "days_planned": 13.0,
+     "days_earned": 10.0,
+     "pct": 76.9,
      "target_task": "FOUNDATION: PLACE FORM BOARD",
      "target_type": "CP",
      "target_due": "2026-07-10",
@@ -1881,6 +1871,8 @@
      "is_current": false,
      "total": 2,
      "done": 0,
+     "days_planned": 6.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "FOUNDATION: FOUNDATION CURE",
      "target_type": "CP",
@@ -1923,6 +1915,8 @@
      "is_current": false,
      "total": 2,
      "done": 0,
+     "days_planned": 6.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "FRAMING: EXECUTE EXTERIOR SHEATHING",
      "target_type": "CP",
@@ -1965,6 +1959,8 @@
      "is_current": false,
      "total": 4,
      "done": 0,
+     "days_planned": 5.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
      "target_type": "CP",
@@ -2075,25 +2071,32 @@
    "pms": [
     "Giselle Garcia"
    ],
-   "total_target": 22,
+   "total_target": 21,
    "due_to_today": 8,
    "done_total": 3,
    "done_due": 3,
-   "monthly_pct": 13.6,
+   "monthly_pct": 14.3,
    "adherence": 37.5,
    "band": "red",
-   "runner_pct": 13.6,
-   "ghost_pct": 36.4,
+   "runner_pct": 14.3,
+   "ghost_pct": 38.1,
    "runner_date": "2026-07-07",
    "finish_date": "2026-07-25",
-   "days_pct": 20.0,
-   "ghost_days_pct": 40.0,
-   "total_days": 45.0,
+   "days_pct": 20.5,
+   "ghost_days_pct": 40.9,
+   "total_days": 44.0,
    "earned_days": 9.0,
-   "gap": 20.0,
+   "gap": 20.5,
    "status": "behind",
    "salvable": false,
    "save_tasks": [],
+   "excluded_admin": [
+    {
+     "name": "PRE DELIVERY WALK THROUGH",
+     "pattern": "WALK THROUGH",
+     "baseline_end": "2026-07-21"
+    }
+   ],
    "cp_chain": [
     {
      "id": "22PZpzYvdPxd",
@@ -2197,15 +2200,6 @@
     {
      "id": "22PZpzaa3FGb",
      "name": "PLUMBING TRIM: INSTALLATION",
-     "baseline_end": "2026-07-21",
-     "live_end": "2026-07-21",
-     "moved_days": 0,
-     "status": "pending",
-     "depends_on": []
-    },
-    {
-     "id": "22PZpzb6N4Gr",
-     "name": "PRE DELIVERY WALK THROUGH",
      "baseline_end": "2026-07-21",
      "live_end": "2026-07-21",
      "moved_days": 0,
@@ -2325,7 +2319,9 @@
      "is_current": true,
      "total": 6,
      "done": 0,
-     "pct": 0.0,
+     "days_planned": 10.0,
+     "days_earned": 2.0,
+     "pct": 20.0,
      "target_task": "WINDOW SHUTTERS: INSTALLATION",
      "target_type": "AT",
      "target_due": "2026-07-11",
@@ -2423,6 +2419,8 @@
      "is_current": false,
      "total": 8,
      "done": 0,
+     "days_planned": 19.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "COUNTERTOPS: INSTALLATION",
      "target_type": "CP",
@@ -2547,8 +2545,10 @@
      "label": "Week 3 · Jul 20-26",
      "deadline": "2026-07-26",
      "is_current": false,
-     "total": 5,
+     "total": 4,
      "done": 0,
+     "days_planned": 8.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "Project Cleaning",
      "target_type": "CP",
@@ -2557,20 +2557,6 @@
       {
        "id": "22PZpzaa3FGb",
        "name": "PLUMBING TRIM: INSTALLATION",
-       "type": "CP",
-       "baseline_end": "2026-07-21",
-       "live_end": "2026-07-21",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZpzb6N4Gr",
-       "name": "PRE DELIVERY WALK THROUGH",
        "type": "CP",
        "baseline_end": "2026-07-21",
        "live_end": "2026-07-21",
@@ -2633,6 +2619,8 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "days_planned": 0.0,
+     "days_earned": 0.0,
      "pct": null,
      "target_task": null,
      "target_type": null,
@@ -2645,37 +2633,37 @@
     {
      "date": "2026-07-06",
      "real": 2,
-     "real_pct": 9.1,
+     "real_pct": 9.5,
      "plan": 3,
-     "plan_pct": 13.6
+     "plan_pct": 14.3
     },
     {
      "date": "2026-07-07",
      "real": 3,
-     "real_pct": 13.6,
+     "real_pct": 14.3,
      "plan": 4,
-     "plan_pct": 18.2
+     "plan_pct": 19.0
     },
     {
      "date": "2026-07-08",
      "real": 3,
-     "real_pct": 13.6,
+     "real_pct": 14.3,
      "plan": 5,
-     "plan_pct": 22.7
+     "plan_pct": 23.8
     },
     {
      "date": "2026-07-09",
      "real": 3,
-     "real_pct": 13.6,
+     "real_pct": 14.3,
      "plan": 6,
-     "plan_pct": 27.3
+     "plan_pct": 28.6
     },
     {
      "date": "2026-07-10",
      "real": 3,
-     "real_pct": 13.6,
+     "real_pct": 14.3,
      "plan": 8,
-     "plan_pct": 36.4
+     "plan_pct": 38.1
     }
    ]
   },
@@ -2705,6 +2693,7 @@
    "status": "behind",
    "salvable": false,
    "save_tasks": [],
+   "excluded_admin": [],
    "cp_chain": [
     {
      "id": "22PZpJeRDvNx",
@@ -2960,6 +2949,8 @@
      "is_current": true,
      "total": 3,
      "done": 0,
+     "days_planned": 6.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "FRAMING: ROOF DECKING",
      "target_type": "CP",
@@ -3016,6 +3007,8 @@
      "is_current": false,
      "total": 6,
      "done": 0,
+     "days_planned": 29.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "PLUMBING ROUGH IN: WASTE / WATER",
      "target_type": "CP",
@@ -3114,6 +3107,8 @@
      "is_current": false,
      "total": 4,
      "done": 0,
+     "days_planned": 4.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "BRICKS: CITY INSPECTION - BRICK TIES",
      "target_type": "AT",
@@ -3184,6 +3179,8 @@
      "is_current": false,
      "total": 3,
      "done": 0,
+     "days_planned": 7.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "PROJECT CLEANING - SHEETROCK: PROJECT CLEANING / HAUL",
      "target_type": "CP",
@@ -3299,6 +3296,7 @@
    "status": "behind",
    "salvable": false,
    "save_tasks": [],
+   "excluded_admin": [],
    "cp_chain": [
     {
      "id": "22PXMkAkqfAi",
@@ -3514,7 +3512,9 @@
      "is_current": true,
      "total": 10,
      "done": 3,
-     "pct": 30.0,
+     "days_planned": 33.0,
+     "days_earned": 22.0,
+     "pct": 66.7,
      "target_task": "MECHANICAL: INSTALL MECHANICAL TRIM",
      "target_type": "CP",
      "target_due": "2026-07-11",
@@ -3668,7 +3668,9 @@
      "is_current": false,
      "total": 3,
      "done": 0,
-     "pct": 0.0,
+     "days_planned": 10.0,
+     "days_earned": 2.0,
+     "pct": 20.0,
      "target_task": "AUTOMATIC GATE INSTALLATION",
      "target_type": "CP",
      "target_due": "2026-07-18",
@@ -3724,6 +3726,8 @@
      "is_current": false,
      "total": 3,
      "done": 0,
+     "days_planned": 5.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "FINAL INSPECTION",
      "target_type": "CP",
@@ -3780,6 +3784,8 @@
      "is_current": false,
      "total": 0,
      "done": 0,
+     "days_planned": 0.0,
+     "days_earned": 0.0,
      "pct": null,
      "target_task": null,
      "target_type": null,
@@ -3827,6 +3833,389 @@
    ]
   },
   {
+   "id": "22P2j3sQMKqz",
+   "name": "Katie Holmes & Sean Springs",
+   "client": "Katie Holmes",
+   "pms": [
+    "Angel Pacheco"
+   ],
+   "total_target": 11,
+   "due_to_today": 2,
+   "done_total": 1,
+   "done_due": 1,
+   "monthly_pct": 9.1,
+   "adherence": 50.0,
+   "band": "red",
+   "runner_pct": 9.1,
+   "ghost_pct": 18.2,
+   "runner_date": "2026-07-08",
+   "finish_date": "2026-07-30",
+   "days_pct": 19.4,
+   "ghost_days_pct": 25.0,
+   "total_days": 36.0,
+   "earned_days": 7.0,
+   "gap": 5.6,
+   "status": "salvage",
+   "salvable": true,
+   "save_tasks": [
+    {
+     "name": "DRYWALL: HANG SHEETROCK",
+     "due": "2026-07-09"
+    }
+   ],
+   "excluded_admin": [
+    {
+     "name": "GARAGE DOOR: ASM MEETING WITH CLIENT",
+     "pattern": "ASM MEETING",
+     "baseline_end": "2026-07-31"
+    }
+   ],
+   "cp_chain": [
+    {
+     "id": "22PZzzrXxmMg",
+     "name": "DRYWALL: HANG SHEETROCK",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-09",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzzrZfHwU",
+     "name": "DRYWALL: TAPE, BED AND TEXTURE",
+     "baseline_end": "2026-07-15",
+     "live_end": "2026-07-15",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzzrbzJtH",
+     "name": "INTERIOR PAINT: WALL & CEILING PRIMER AND FIRST COAT",
+     "baseline_end": "2026-07-20",
+     "live_end": "2026-07-20",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzzrhS6j8",
+     "name": "FLOORING: INSTALL LVP, CARPET OR TILE",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-07-24",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzzrmMy4S",
+     "name": "TILES: INSTALL TILES (NO BACKSPLASH)",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-07-24",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzzrvq7n2",
+     "name": "INTERIOR DOORS: INSTALL TRIM AND DOORS",
+     "baseline_end": "2026-07-27",
+     "live_end": "2026-07-27",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzzrxpbix",
+     "name": "BASEBOARDS AND TRIM: INSTALL BASEBOARDS AND TRIM",
+     "baseline_end": "2026-07-30",
+     "live_end": "2026-07-30",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    }
+   ],
+   "july_money": [
+    18884.41,
+    14252.9
+   ],
+   "margin_pct": 32.0,
+   "moved_count": 2,
+   "moved": [
+    {
+     "id": "22PZzzrXxmMg",
+     "name": "DRYWALL: HANG SHEETROCK",
+     "from": "2026-07-08",
+     "to": "2026-07-09",
+     "days": 1
+    },
+    {
+     "id": "22PaFkTHKsia",
+     "name": "PLUMNING FIX",
+     "from": "2026-07-06",
+     "to": "2026-07-07",
+     "days": 1
+    }
+   ],
+   "weeks": [
+    {
+     "label": "Week 1 · Jul 6-12",
+     "deadline": "2026-07-12",
+     "is_current": true,
+     "total": 2,
+     "done": 1,
+     "days_planned": 7.0,
+     "days_earned": 6.0,
+     "pct": 85.7,
+     "target_task": "DRYWALL: HANG SHEETROCK",
+     "target_type": "CP",
+     "target_due": "2026-07-08",
+     "tasks": [
+      {
+       "id": "22PaFkTHKsia",
+       "name": "PLUMNING FIX",
+       "type": "AT",
+       "baseline_end": "2026-07-06",
+       "live_end": "2026-07-07",
+       "moved_days": 1,
+       "progress": 1,
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZzzrXxmMg",
+       "name": "DRYWALL: HANG SHEETROCK",
+       "type": "CP",
+       "baseline_end": "2026-07-08",
+       "live_end": "2026-07-09",
+       "moved_days": 1,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      }
+     ],
+     "anchor": "weekly"
+    },
+    {
+     "label": "Week 2 · Jul 13-19",
+     "deadline": "2026-07-19",
+     "is_current": false,
+     "total": 1,
+     "done": 0,
+     "days_planned": 7.0,
+     "days_earned": 1.0,
+     "pct": 14.3,
+     "target_task": "DRYWALL: TAPE, BED AND TEXTURE",
+     "target_type": "CP",
+     "target_due": "2026-07-15",
+     "tasks": [
+      {
+       "id": "22PZzzrZfHwU",
+       "name": "DRYWALL: TAPE, BED AND TEXTURE",
+       "type": "CP",
+       "baseline_end": "2026-07-15",
+       "live_end": "2026-07-15",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      }
+     ],
+     "anchor": "monthly"
+    },
+    {
+     "label": "Week 3 · Jul 20-26",
+     "deadline": "2026-07-26",
+     "is_current": false,
+     "total": 5,
+     "done": 0,
+     "days_planned": 15.0,
+     "days_earned": 0.0,
+     "pct": 0.0,
+     "target_task": "GLASS: TAKE MEASUREMENTS",
+     "target_type": "AT",
+     "target_due": "2026-07-25",
+     "tasks": [
+      {
+       "id": "22PZzzrbzJtH",
+       "name": "INTERIOR PAINT: WALL & CEILING PRIMER AND FIRST COAT",
+       "type": "CP",
+       "baseline_end": "2026-07-20",
+       "live_end": "2026-07-20",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZzzs2BTjW",
+       "name": "CABINETS: TAKE MEASUREMENTS",
+       "type": "AT",
+       "baseline_end": "2026-07-21",
+       "live_end": "2026-07-21",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZzzrhS6j8",
+       "name": "FLOORING: INSTALL LVP, CARPET OR TILE",
+       "type": "CP",
+       "baseline_end": "2026-07-24",
+       "live_end": "2026-07-24",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZzzrmMy4S",
+       "name": "TILES: INSTALL TILES (NO BACKSPLASH)",
+       "type": "CP",
+       "baseline_end": "2026-07-24",
+       "live_end": "2026-07-24",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZzzrrQAUm",
+       "name": "GLASS: TAKE MEASUREMENTS",
+       "type": "AT",
+       "baseline_end": "2026-07-25",
+       "live_end": "2026-07-25",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      }
+     ],
+     "anchor": "monthly"
+    },
+    {
+     "label": "Week 4 · Jul 27-Aug 2",
+     "deadline": "2026-08-02",
+     "is_current": false,
+     "total": 3,
+     "done": 0,
+     "days_planned": 7.0,
+     "days_earned": 0.0,
+     "pct": 0.0,
+     "target_task": "GLASS: INSTALL GLASS",
+     "target_type": "AT",
+     "target_due": "2026-07-30",
+     "tasks": [
+      {
+       "id": "22PZzzrvq7n2",
+       "name": "INTERIOR DOORS: INSTALL TRIM AND DOORS",
+       "type": "CP",
+       "baseline_end": "2026-07-27",
+       "live_end": "2026-07-27",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZzzrxpbix",
+       "name": "BASEBOARDS AND TRIM: INSTALL BASEBOARDS AND TRIM",
+       "type": "CP",
+       "baseline_end": "2026-07-30",
+       "live_end": "2026-07-30",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZzzrrrvPh",
+       "name": "GLASS: INSTALL GLASS",
+       "type": "AT",
+       "baseline_end": "2026-07-30",
+       "live_end": "2026-07-30",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      }
+     ],
+     "anchor": "monthly"
+    }
+   ],
+   "daily": [
+    {
+     "date": "2026-07-06",
+     "real": 0,
+     "real_pct": 0.0,
+     "plan": 1,
+     "plan_pct": 9.1
+    },
+    {
+     "date": "2026-07-07",
+     "real": 1,
+     "real_pct": 9.1,
+     "plan": 1,
+     "plan_pct": 9.1
+    },
+    {
+     "date": "2026-07-08",
+     "real": 1,
+     "real_pct": 9.1,
+     "plan": 2,
+     "plan_pct": 18.2
+    },
+    {
+     "date": "2026-07-09",
+     "real": 1,
+     "real_pct": 9.1,
+     "plan": 2,
+     "plan_pct": 18.2
+    },
+    {
+     "date": "2026-07-10",
+     "real": 1,
+     "real_pct": 9.1,
+     "plan": 2,
+     "plan_pct": 18.2
+    }
+   ]
+  },
+  {
    "id": "22PGVNmUgLww",
    "name": "Martha Cockrell (CNG-20251199)",
    "client": "Martha Cockrell",
@@ -3852,6 +4241,7 @@
    "status": "behind",
    "salvable": false,
    "save_tasks": [],
+   "excluded_admin": [],
    "cp_chain": [
     {
      "id": "22PZzWVA3Jwm",
@@ -4074,7 +4464,9 @@
      "is_current": true,
      "total": 6,
      "done": 2,
-     "pct": 33.3,
+     "days_planned": 27.0,
+     "days_earned": 20.0,
+     "pct": 74.1,
      "target_task": "MECHANICAL ROUGH IN: EXECUTE",
      "target_type": "AT",
      "target_due": "2026-07-10",
@@ -4200,7 +4592,9 @@
      "is_current": false,
      "total": 6,
      "done": 1,
-     "pct": 16.7,
+     "days_planned": 43.0,
+     "days_earned": 16.0,
+     "pct": 37.2,
      "target_task": "PLUMBING ROUGH IN: EXECUTE",
      "target_type": "AT",
      "target_due": "2026-07-16",
@@ -4298,6 +4692,8 @@
      "is_current": false,
      "total": 1,
      "done": 0,
+     "days_planned": 1.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "ROOFING: EXECUTE",
      "target_type": "CP",
@@ -4326,6 +4722,8 @@
      "is_current": false,
      "total": 2,
      "done": 0,
+     "days_planned": 9.0,
+     "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "INSULATION: EXECUTE",
      "target_type": "CP",
@@ -4398,388 +4796,6 @@
      "real_pct": 30.0,
      "plan": 11,
      "plan_pct": 55.0
-    }
-   ]
-  },
-  {
-   "id": "22P2j3sQMKqz",
-   "name": "Katie Holmes & Sean Springs",
-   "client": "Katie Holmes",
-   "pms": [
-    "Angel Pacheco"
-   ],
-   "total_target": 12,
-   "due_to_today": 2,
-   "done_total": 2,
-   "done_due": 1,
-   "monthly_pct": 16.7,
-   "adherence": 100.0,
-   "band": "green",
-   "runner_pct": 16.7,
-   "ghost_pct": 16.7,
-   "runner_date": "2026-07-12",
-   "finish_date": "2026-07-31",
-   "days_pct": 27.5,
-   "ghost_days_pct": 22.5,
-   "total_days": 40.0,
-   "earned_days": 11.0,
-   "gap": -5.0,
-   "status": "on_pace",
-   "salvable": true,
-   "save_tasks": [
-    {
-     "name": "DRYWALL: HANG SHEETROCK",
-     "due": "2026-07-09"
-    }
-   ],
-   "cp_chain": [
-    {
-     "id": "22PZzzrXxmMg",
-     "name": "DRYWALL: HANG SHEETROCK",
-     "baseline_end": "2026-07-08",
-     "live_end": "2026-07-09",
-     "moved_days": 1,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PZzzrZfHwU",
-     "name": "DRYWALL: TAPE, BED AND TEXTURE",
-     "baseline_end": "2026-07-15",
-     "live_end": "2026-07-15",
-     "moved_days": 0,
-     "status": "pending",
-     "depends_on": []
-    },
-    {
-     "id": "22PZzzrbzJtH",
-     "name": "INTERIOR PAINT: WALL & CEILING PRIMER AND FIRST COAT",
-     "baseline_end": "2026-07-20",
-     "live_end": "2026-07-20",
-     "moved_days": 0,
-     "status": "pending",
-     "depends_on": []
-    },
-    {
-     "id": "22PZzzrhS6j8",
-     "name": "FLOORING: INSTALL LVP, CARPET OR TILE",
-     "baseline_end": "2026-07-24",
-     "live_end": "2026-07-24",
-     "moved_days": 0,
-     "status": "pending",
-     "depends_on": []
-    },
-    {
-     "id": "22PZzzrmMy4S",
-     "name": "TILES: INSTALL TILES (NO BACKSPLASH)",
-     "baseline_end": "2026-07-24",
-     "live_end": "2026-07-24",
-     "moved_days": 0,
-     "status": "pending",
-     "depends_on": []
-    },
-    {
-     "id": "22PZzzrvq7n2",
-     "name": "INTERIOR DOORS: INSTALL TRIM AND DOORS",
-     "baseline_end": "2026-07-27",
-     "live_end": "2026-07-27",
-     "moved_days": 0,
-     "status": "pending",
-     "depends_on": []
-    },
-    {
-     "id": "22PZzzrxpbix",
-     "name": "BASEBOARDS AND TRIM: INSTALL BASEBOARDS AND TRIM",
-     "baseline_end": "2026-07-30",
-     "live_end": "2026-07-30",
-     "moved_days": 0,
-     "status": "pending",
-     "depends_on": []
-    }
-   ],
-   "july_money": [
-    18884.41,
-    14252.9
-   ],
-   "margin_pct": 32.0,
-   "moved_count": 2,
-   "moved": [
-    {
-     "id": "22PZzzrXxmMg",
-     "name": "DRYWALL: HANG SHEETROCK",
-     "from": "2026-07-08",
-     "to": "2026-07-09",
-     "days": 1
-    },
-    {
-     "id": "22PaFkTHKsia",
-     "name": "PLUMNING FIX",
-     "from": "2026-07-06",
-     "to": "2026-07-07",
-     "days": 1
-    }
-   ],
-   "weeks": [
-    {
-     "label": "Week 1 · Jul 6-12",
-     "deadline": "2026-07-12",
-     "is_current": true,
-     "total": 2,
-     "done": 1,
-     "pct": 50.0,
-     "target_task": "DRYWALL: HANG SHEETROCK",
-     "target_type": "CP",
-     "target_due": "2026-07-08",
-     "tasks": [
-      {
-       "id": "22PaFkTHKsia",
-       "name": "PLUMNING FIX",
-       "type": "AT",
-       "baseline_end": "2026-07-06",
-       "live_end": "2026-07-07",
-       "moved_days": 1,
-       "progress": 1,
-       "status": "done",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZzzrXxmMg",
-       "name": "DRYWALL: HANG SHEETROCK",
-       "type": "CP",
-       "baseline_end": "2026-07-08",
-       "live_end": "2026-07-09",
-       "moved_days": 1,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      }
-     ],
-     "anchor": "weekly"
-    },
-    {
-     "label": "Week 2 · Jul 13-19",
-     "deadline": "2026-07-19",
-     "is_current": false,
-     "total": 1,
-     "done": 0,
-     "pct": 0.0,
-     "target_task": "DRYWALL: TAPE, BED AND TEXTURE",
-     "target_type": "CP",
-     "target_due": "2026-07-15",
-     "tasks": [
-      {
-       "id": "22PZzzrZfHwU",
-       "name": "DRYWALL: TAPE, BED AND TEXTURE",
-       "type": "CP",
-       "baseline_end": "2026-07-15",
-       "live_end": "2026-07-15",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      }
-     ],
-     "anchor": "monthly"
-    },
-    {
-     "label": "Week 3 · Jul 20-26",
-     "deadline": "2026-07-26",
-     "is_current": false,
-     "total": 5,
-     "done": 0,
-     "pct": 0.0,
-     "target_task": "GLASS: TAKE MEASUREMENTS",
-     "target_type": "AT",
-     "target_due": "2026-07-25",
-     "tasks": [
-      {
-       "id": "22PZzzrbzJtH",
-       "name": "INTERIOR PAINT: WALL & CEILING PRIMER AND FIRST COAT",
-       "type": "CP",
-       "baseline_end": "2026-07-20",
-       "live_end": "2026-07-20",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZzzs2BTjW",
-       "name": "CABINETS: TAKE MEASUREMENTS",
-       "type": "AT",
-       "baseline_end": "2026-07-21",
-       "live_end": "2026-07-21",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZzzrhS6j8",
-       "name": "FLOORING: INSTALL LVP, CARPET OR TILE",
-       "type": "CP",
-       "baseline_end": "2026-07-24",
-       "live_end": "2026-07-24",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZzzrmMy4S",
-       "name": "TILES: INSTALL TILES (NO BACKSPLASH)",
-       "type": "CP",
-       "baseline_end": "2026-07-24",
-       "live_end": "2026-07-24",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZzzrrQAUm",
-       "name": "GLASS: TAKE MEASUREMENTS",
-       "type": "AT",
-       "baseline_end": "2026-07-25",
-       "live_end": "2026-07-25",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      }
-     ],
-     "anchor": "monthly"
-    },
-    {
-     "label": "Week 4 · Jul 27-Aug 2",
-     "deadline": "2026-08-02",
-     "is_current": false,
-     "total": 4,
-     "done": 1,
-     "pct": 25.0,
-     "target_task": "GARAGE DOOR: ASM MEETING WITH CLIENT",
-     "target_type": "AT",
-     "target_due": "2026-07-31",
-     "tasks": [
-      {
-       "id": "22PZzzrvq7n2",
-       "name": "INTERIOR DOORS: INSTALL TRIM AND DOORS",
-       "type": "CP",
-       "baseline_end": "2026-07-27",
-       "live_end": "2026-07-27",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZzzrxpbix",
-       "name": "BASEBOARDS AND TRIM: INSTALL BASEBOARDS AND TRIM",
-       "type": "CP",
-       "baseline_end": "2026-07-30",
-       "live_end": "2026-07-30",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZzzrrrvPh",
-       "name": "GLASS: INSTALL GLASS",
-       "type": "AT",
-       "baseline_end": "2026-07-30",
-       "live_end": "2026-07-30",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZzzsREG4c",
-       "name": "GARAGE DOOR: ASM MEETING WITH CLIENT",
-       "type": "AT",
-       "baseline_end": "2026-07-31",
-       "live_end": "2026-07-31",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      }
-     ],
-     "anchor": "monthly"
-    }
-   ],
-   "daily": [
-    {
-     "date": "2026-07-06",
-     "real": 1,
-     "real_pct": 8.3,
-     "plan": 1,
-     "plan_pct": 8.3
-    },
-    {
-     "date": "2026-07-07",
-     "real": 2,
-     "real_pct": 16.7,
-     "plan": 1,
-     "plan_pct": 8.3
-    },
-    {
-     "date": "2026-07-08",
-     "real": 2,
-     "real_pct": 16.7,
-     "plan": 2,
-     "plan_pct": 16.7
-    },
-    {
-     "date": "2026-07-09",
-     "real": 2,
-     "real_pct": 16.7,
-     "plan": 2,
-     "plan_pct": 16.7
-    },
-    {
-     "date": "2026-07-10",
-     "real": 2,
-     "real_pct": 16.7,
-     "plan": 2,
-     "plan_pct": 16.7
     }
    ]
   }

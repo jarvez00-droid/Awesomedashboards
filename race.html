@@ -214,7 +214,7 @@ h1{font-size:22px;margin:0 0 3px}
   <div class="howto">
     <div class="ht">How to read this</div>
     <div>🏃 Every project races its plan on the same calendar: a runner LEFT of the white <b>TODAY</b> line is behind schedule; at or past it is on track — the runner and the pill always agree. 🏁 marks the last planned task of the month, │ lines are the Sunday weekly deadlines.</div>
-    <div><b>The big %</b> counts <b>worked days, not just finished tasks</b>: a finished task earns all of its planned days, a task in progress earns the days worked so far, a task not started earns 0.</div>
+    <div><b>Every %</b> counts <b>worked days, not tasks</b>: a finished task earns all of its planned days, one in progress earns the days worked so far, one not started earns 0. Example: 5 drywall days planned, 3 worked = <b>60%</b>. Task counts ("8 tasks · 3 done") are context only. Admin tasks (meetings, checklists, walkthroughs) don't count — construction work only.</div>
     <div>Pill colors: <span class="g">green = on pace</span> · <span class="o">blinking orange = behind, but the week can still be saved if the rescheduled tasks finish by Sunday</span> · <span class="y">yellow = slightly behind</span> · <span class="r">blinking red = behind plan</span>.</div>
   </div>
 
@@ -425,7 +425,7 @@ function detail(p,col){
   }
   if(cur){
     html+=`<div class="dtitle">Current week — deadline ${fmtD(cur.deadline)}</div>`;
-    html+=`<div class="wk" style="border-color:${hexA(col,.55)}"><div class="wkh" style="border-left:3px solid ${col}"><span class="wl">${cur.label}</span><span class="wd">This week: ${cur.total} tasks planned · ${cur.done} done${cur.pct!=null?` (${Math.round(cur.pct)}%)`:''}</span></div>`;
+    html+=`<div class="wk" style="border-color:${hexA(col,.55)}"><div class="wkh" style="border-left:3px solid ${col}"><span class="wl">${cur.label}</span><span class="wd">This week: ${cur.pct!=null?`<b>${Math.round(cur.pct)}%</b> of planned work-days (${cur.days_earned}/${cur.days_planned})`:'no work-days planned'} · ${cur.total} tasks · ${cur.done} done</span></div>`;
     html+=tgtRow(cur);
     html+= cur.tasks.length? cur.tasks.map(taskRow).join('') : '<div class="empty" style="padding:8px 11px">No milestones this week.</div>';
     html+=`</div>`;
@@ -433,7 +433,7 @@ function detail(p,col){
   html+=`<div class="dtitle">All weeks of the month</div>`;
   p.weeks.forEach((w,i)=>{
     if(i===curIdx) return;
-    html+=`<div class="wk"><div class="wkh"><span class="wl">${w.label}</span><span class="wd">${w.total} tasks planned · ${w.done} done${wpct(w)} · ${fmtD(w.deadline)}</span></div>`;
+    html+=`<div class="wk"><div class="wkh"><span class="wl">${w.label}</span><span class="wd">${w.pct!=null?`<b>${Math.round(w.pct)}%</b> of work-days (${w.days_earned}/${w.days_planned})`:'no work-days'} · ${w.total} tasks · ${w.done} done · ${fmtD(w.deadline)}</span></div>`;
     html+=tgtRow(w);
     html+= w.tasks.length? w.tasks.map(taskRow).join('') : '<div class="empty" style="padding:8px 11px">No milestones.</div>';
     html+=`</div>`;
@@ -444,12 +444,15 @@ function detail(p,col){
 function shortName(n){ n=n||''; return n.length>30 ? n.slice(0,28)+'…' : n; }
 
 function weekChips(p,col){
+  /* v9: chip % = worked days earned / planned that week; task counts = context */
   return `<div class="wkchips">`+p.weeks.map((w,i)=>{
-    const pct = w.pct==null ? '' : ` · ${Math.round(w.pct)}%`;
+    const pct = w.pct==null ? '—' : Math.round(w.pct)+'%';
     const tgt = w.target_task ? shortName(w.target_task) : 'no tasks';
     const cur = w.is_current ? `style="border-color:${col};color:${col};background:${hexA(col,.09)}"` : '';
-    const title = (w.target_task? 'Target: '+w.target_task+' · ':'')+'deadline Sun '+fmtD(w.deadline);
-    return `<span class="chip" ${cur} title="${title.replace(/"/g,'&quot;')}">W${i+1} → <b>${tgt}</b> (${w.done}/${w.total}${pct})</span>`;
+    const title = (w.target_task? 'Target: '+w.target_task+' · ':'')+
+      (w.days_planned!=null? `${w.days_earned}/${w.days_planned} work-days earned · `:'')+
+      'deadline '+fmtD(w.deadline);
+    return `<span class="chip" ${cur} title="${title.replace(/"/g,'&quot;')}">W${i+1} → <b>${tgt}</b> — ${pct} (${w.total} tasks · ${w.done} done)</span>`;
   }).join('')+`</div>`;
 }
 
