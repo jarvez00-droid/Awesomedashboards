@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-10T14:32:23",
+ "generated_at": "2026-07-10T14:56:07",
  "today": "2026-07-10",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -47,18 +47,18 @@
   "weighting": "conteo de tareas (el motor de productividad no expone $ por-tarea; el $ del mes es contexto por proyecto)"
  },
  "company": {
-  "monthly_pct": 14.5,
-  "days_pct": 32.9,
+  "monthly_pct": 15.2,
+  "days_pct": 33.2,
   "ghost_days_pct": 49.4,
-  "adherence": 31.3,
+  "adherence": 32.8,
   "band": "red",
   "runner_date": "2026-07-07",
-  "gap": 16.5,
+  "gap": 16.2,
   "status": "behind",
   "total_target": 145,
   "due_to_today": 67,
-  "done_total": 21,
-  "runner_pct": 14.5,
+  "done_total": 22,
+  "runner_pct": 15.2,
   "ghost_pct": 46.2,
   "july_money": [
    158502.12,
@@ -96,8 +96,8 @@
    },
    {
     "date": "2026-07-10",
-    "real": 21,
-    "real_pct": 14.5,
+    "real": 22,
+    "real_pct": 15.2,
     "plan": 67,
     "plan_pct": 46.2
    }
@@ -3285,568 +3285,6 @@
    ]
   },
   {
-   "id": "22P2cmNJZcwJ",
-   "name": "Stephanie and Marc Felton",
-   "client": "Stephanie Felton",
-   "pms": [
-    "Jeff"
-   ],
-   "total_target": 17,
-   "due_to_today": 8,
-   "done_total": 4,
-   "done_due": 4,
-   "monthly_pct": 23.5,
-   "adherence": 50.0,
-   "band": "red",
-   "runner_pct": 23.5,
-   "ghost_pct": 47.1,
-   "runner_date": "2026-07-08",
-   "finish_date": "2026-07-24",
-   "days_pct": 51.0,
-   "ghost_days_pct": 67.3,
-   "total_days": 49.0,
-   "earned_days": 25.0,
-   "gap": 16.3,
-   "status": "behind",
-   "salvable": false,
-   "save_tasks": [],
-   "excluded_admin": [],
-   "cp_chain": [
-    {
-     "id": "22PXMkAkqfAi",
-     "name": "INTERIOR DOORS AND TRIMS PAINTING",
-     "baseline_end": "2026-07-07",
-     "live_end": "2026-07-07",
-     "moved_days": 0,
-     "status": "done",
-     "depends_on": []
-    },
-    {
-     "id": "22PJWeDkxqbD",
-     "name": "INTERIOR PAINT: PAINT WALLS & CEILING",
-     "baseline_end": "2026-07-07",
-     "live_end": "2026-07-07",
-     "moved_days": 0,
-     "status": "done",
-     "depends_on": [
-      "INTERIOR DOORS AND TRIM: INSTALL INTERIOR DOORS",
-      "INTERIOR PAINT: CONFIRM SCHEDULE",
-      "INTERIOR PAINT: CONFIRM DELIVERY"
-     ]
-    },
-    {
-     "id": "22PZMvWk7aLu",
-     "name": "PAINT: WALL FIX PAINT",
-     "baseline_end": "2026-07-08",
-     "live_end": "2026-07-09",
-     "moved_days": 1,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PYA2rawv6G",
-     "name": "TILES: INSTALLATION OF NEW BACKSPLASH",
-     "baseline_end": "2026-07-09",
-     "live_end": "2026-07-09",
-     "moved_days": 0,
-     "status": "pending",
-     "depends_on": []
-    },
-    {
-     "id": "22PZMuvtJSK9",
-     "name": "PAINTING: CABINET PAINT",
-     "baseline_end": "2026-07-10",
-     "live_end": "2026-07-10",
-     "moved_days": 0,
-     "status": "pending",
-     "depends_on": []
-    },
-    {
-     "id": "22PJWeDkzh6i",
-     "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
-     "baseline_end": "2026-07-11",
-     "live_end": "2026-07-13",
-     "moved_days": 2,
-     "status": "moved",
-     "depends_on": [
-      "ELECTRICAL: DELIVERY ETA",
-      "ELECTRICAL: PM INSPECTION - Before",
-      "PAINT: WALL FIX PAINT"
-     ]
-    },
-    {
-     "id": "22PJWeDm25z3",
-     "name": "MECHANICAL: INSTALL MECHANICAL TRIM",
-     "baseline_end": "2026-07-11",
-     "live_end": "2026-07-11",
-     "moved_days": 0,
-     "status": "pending",
-     "depends_on": [
-      "MECHANICAL: DELIVERY ETA",
-      "MECHANICAL: PM INSPECTION - Before",
-      "PAINT: WALL FIX PAINT"
-     ]
-    },
-    {
-     "id": "22PJWeDkyxJ9",
-     "name": "PLUMBING: INSTALL PLUMBING TRIM",
-     "baseline_end": "2026-07-14",
-     "live_end": "2026-07-17",
-     "moved_days": 3,
-     "status": "moved",
-     "depends_on": [
-      "GLASS: INSTALL GLASS",
-      "PLUMBING: PM INSPECTION - Before",
-      "PLUMBING: DELIVERY ETA",
-      "PAINT: WALL FIX PAINT"
-     ]
-    },
-    {
-     "id": "22PJWewqDSU5",
-     "name": "AUTOMATIC GATE INSTALLATION",
-     "baseline_end": "2026-07-18",
-     "live_end": "2026-07-22",
-     "moved_days": 4,
-     "status": "moved",
-     "depends_on": [
-      "MECHANICAL: CITY INSPECTION",
-      "ELECTRICAL: CITY INSPECTION",
-      "PLUMBING: CITY INSPECTION"
-     ]
-    },
-    {
-     "id": "22PJWeDm3Cfx",
-     "name": "FINAL: TOUCH UP PAINT AND CLEAN",
-     "baseline_end": "2026-07-21",
-     "live_end": "2026-07-24",
-     "moved_days": 3,
-     "status": "moved",
-     "depends_on": [
-      "AUTOMATIC GATE INSTALLATION"
-     ]
-    },
-    {
-     "id": "22PJWeDm3ZaG",
-     "name": "FINAL: PUNCH LIST COMPLETION",
-     "baseline_end": "2026-07-23",
-     "live_end": "2026-07-27",
-     "moved_days": 4,
-     "status": "moved",
-     "depends_on": [
-      "FINAL: TOUCH UP PAINT AND CLEAN"
-     ]
-    },
-    {
-     "id": "22PJWeDm3wUZ",
-     "name": "FINAL INSPECTION",
-     "baseline_end": "2026-07-24",
-     "live_end": "2026-07-28",
-     "moved_days": 4,
-     "status": "moved",
-     "depends_on": [
-      "FINAL: PUNCH LIST COMPLETION"
-     ]
-    }
-   ],
-   "july_money": [
-    -4627.66,
-    -7099.12
-   ],
-   "margin_pct": 5.0,
-   "moved_count": 9,
-   "moved": [
-    {
-     "id": "22PJWeDm3ZaG",
-     "name": "FINAL: PUNCH LIST COMPLETION",
-     "from": "2026-07-23",
-     "to": "2026-07-27",
-     "days": 4
-    },
-    {
-     "id": "22PJWewqDSU5",
-     "name": "AUTOMATIC GATE INSTALLATION",
-     "from": "2026-07-18",
-     "to": "2026-07-22",
-     "days": 4
-    },
-    {
-     "id": "22PJWeDm3wUZ",
-     "name": "FINAL INSPECTION",
-     "from": "2026-07-24",
-     "to": "2026-07-28",
-     "days": 4
-    },
-    {
-     "id": "22Pa5iUufEcM",
-     "name": "CABINET: INSTALLATION OF DOORS",
-     "from": "2026-07-06",
-     "to": "2026-07-09",
-     "days": 3
-    },
-    {
-     "id": "22PJWeDkyxJ9",
-     "name": "PLUMBING: INSTALL PLUMBING TRIM",
-     "from": "2026-07-14",
-     "to": "2026-07-17",
-     "days": 3
-    },
-    {
-     "id": "22PJWeDm3Cfx",
-     "name": "FINAL: TOUCH UP PAINT AND CLEAN",
-     "from": "2026-07-21",
-     "to": "2026-07-24",
-     "days": 3
-    },
-    {
-     "id": "22PJWeDkzh6i",
-     "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
-     "from": "2026-07-11",
-     "to": "2026-07-13",
-     "days": 2
-    },
-    {
-     "id": "22PVDYk5hi6N",
-     "name": "GLASS: INSTALL GLASS",
-     "from": "2026-07-11",
-     "to": "2026-07-13",
-     "days": 2
-    },
-    {
-     "id": "22PZMvWk7aLu",
-     "name": "PAINT: WALL FIX PAINT",
-     "from": "2026-07-08",
-     "to": "2026-07-09",
-     "days": 1
-    }
-   ],
-   "weeks": [
-    {
-     "label": "Week 1 · Jul 6-12",
-     "deadline": "2026-07-12",
-     "is_current": true,
-     "total": 10,
-     "done": 3,
-     "days_planned": 33.0,
-     "days_earned": 22.0,
-     "pct": 66.7,
-     "target_task": "MECHANICAL: INSTALL MECHANICAL TRIM",
-     "target_type": "CP",
-     "target_due": "2026-07-11",
-     "tasks": [
-      {
-       "id": "22Pa5iUufEcM",
-       "name": "CABINET: INSTALLATION OF DOORS",
-       "type": "AT",
-       "baseline_end": "2026-07-06",
-       "live_end": "2026-07-09",
-       "moved_days": 3,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PVDYjWnvLr",
-       "name": "GLASS: TAKE MEASUREMENTS",
-       "type": "AT",
-       "baseline_end": "2026-07-07",
-       "live_end": "2026-07-07",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PXMkAkqfAi",
-       "name": "INTERIOR DOORS AND TRIMS PAINTING",
-       "type": "CP",
-       "baseline_end": "2026-07-07",
-       "live_end": "2026-07-07",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PJWeDkxqbD",
-       "name": "INTERIOR PAINT: PAINT WALLS & CEILING",
-       "type": "CP",
-       "baseline_end": "2026-07-07",
-       "live_end": "2026-07-07",
-       "moved_days": 0,
-       "progress": 1,
-       "status": "done",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZMvWk7aLu",
-       "name": "PAINT: WALL FIX PAINT",
-       "type": "CP",
-       "baseline_end": "2026-07-08",
-       "live_end": "2026-07-09",
-       "moved_days": 1,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PYA2rawv6G",
-       "name": "TILES: INSTALLATION OF NEW BACKSPLASH",
-       "type": "CP",
-       "baseline_end": "2026-07-09",
-       "live_end": "2026-07-09",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZMuvtJSK9",
-       "name": "PAINTING: CABINET PAINT",
-       "type": "CP",
-       "baseline_end": "2026-07-10",
-       "live_end": "2026-07-10",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PJWeDkzh6i",
-       "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
-       "type": "CP",
-       "baseline_end": "2026-07-11",
-       "live_end": "2026-07-13",
-       "moved_days": 2,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": true,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PVDYk5hi6N",
-       "name": "GLASS: INSTALL GLASS",
-       "type": "AT",
-       "baseline_end": "2026-07-11",
-       "live_end": "2026-07-13",
-       "moved_days": 2,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": true,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PJWeDm25z3",
-       "name": "MECHANICAL: INSTALL MECHANICAL TRIM",
-       "type": "CP",
-       "baseline_end": "2026-07-11",
-       "live_end": "2026-07-11",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      }
-     ],
-     "anchor": "weekly"
-    },
-    {
-     "label": "Week 2 · Jul 13-19",
-     "deadline": "2026-07-19",
-     "is_current": false,
-     "total": 3,
-     "done": 0,
-     "days_planned": 10.0,
-     "days_earned": 2.0,
-     "pct": 20.0,
-     "target_task": "AUTOMATIC GATE INSTALLATION",
-     "target_type": "CP",
-     "target_due": "2026-07-18",
-     "tasks": [
-      {
-       "id": "22PJWeDkyxJ9",
-       "name": "PLUMBING: INSTALL PLUMBING TRIM",
-       "type": "CP",
-       "baseline_end": "2026-07-14",
-       "live_end": "2026-07-17",
-       "moved_days": 3,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZpXyEynv6",
-       "name": "EXTERIOR: PAINT",
-       "type": "AT",
-       "baseline_end": "2026-07-15",
-       "live_end": "2026-07-15",
-       "moved_days": 0,
-       "progress": 0,
-       "status": "pending",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PJWewqDSU5",
-       "name": "AUTOMATIC GATE INSTALLATION",
-       "type": "CP",
-       "baseline_end": "2026-07-18",
-       "live_end": "2026-07-22",
-       "moved_days": 4,
-       "progress": 0.85,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      }
-     ],
-     "anchor": "monthly"
-    },
-    {
-     "label": "Week 3 · Jul 20-26",
-     "deadline": "2026-07-26",
-     "is_current": false,
-     "total": 3,
-     "done": 0,
-     "days_planned": 5.0,
-     "days_earned": 0.0,
-     "pct": 0.0,
-     "target_task": "FINAL INSPECTION",
-     "target_type": "CP",
-     "target_due": "2026-07-24",
-     "tasks": [
-      {
-       "id": "22PJWeDm3Cfx",
-       "name": "FINAL: TOUCH UP PAINT AND CLEAN",
-       "type": "CP",
-       "baseline_end": "2026-07-21",
-       "live_end": "2026-07-24",
-       "moved_days": 3,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PJWeDm3ZaG",
-       "name": "FINAL: PUNCH LIST COMPLETION",
-       "type": "CP",
-       "baseline_end": "2026-07-23",
-       "live_end": "2026-07-27",
-       "moved_days": 4,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PJWeDm3wUZ",
-       "name": "FINAL INSPECTION",
-       "type": "CP",
-       "baseline_end": "2026-07-24",
-       "live_end": "2026-07-28",
-       "moved_days": 4,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      }
-     ],
-     "anchor": "monthly"
-    },
-    {
-     "label": "Week 4 · Jul 27-Aug 2",
-     "deadline": "2026-08-02",
-     "is_current": false,
-     "total": 0,
-     "done": 0,
-     "days_planned": 0.0,
-     "days_earned": 0.0,
-     "pct": null,
-     "target_task": null,
-     "target_type": null,
-     "target_due": null,
-     "tasks": [],
-     "anchor": "monthly"
-    }
-   ],
-   "daily": [
-    {
-     "date": "2026-07-06",
-     "real": 1,
-     "real_pct": 5.9,
-     "plan": 2,
-     "plan_pct": 11.8
-    },
-    {
-     "date": "2026-07-07",
-     "real": 1,
-     "real_pct": 5.9,
-     "plan": 5,
-     "plan_pct": 29.4
-    },
-    {
-     "date": "2026-07-08",
-     "real": 4,
-     "real_pct": 23.5,
-     "plan": 6,
-     "plan_pct": 35.3
-    },
-    {
-     "date": "2026-07-09",
-     "real": 4,
-     "real_pct": 23.5,
-     "plan": 7,
-     "plan_pct": 41.2
-    },
-    {
-     "date": "2026-07-10",
-     "real": 4,
-     "real_pct": 23.5,
-     "plan": 8,
-     "plan_pct": 47.1
-    }
-   ]
-  },
-  {
    "id": "22P2j3sQMKqz",
    "name": "Katie Holmes & Sean Springs",
    "client": "Katie Holmes",
@@ -4810,6 +4248,568 @@
      "real_pct": 30.0,
      "plan": 11,
      "plan_pct": 55.0
+    }
+   ]
+  },
+  {
+   "id": "22P2cmNJZcwJ",
+   "name": "Stephanie and Marc Felton",
+   "client": "Stephanie Felton",
+   "pms": [
+    "Jeff"
+   ],
+   "total_target": 17,
+   "due_to_today": 8,
+   "done_total": 5,
+   "done_due": 5,
+   "monthly_pct": 29.4,
+   "adherence": 62.5,
+   "band": "red",
+   "runner_pct": 29.4,
+   "ghost_pct": 47.1,
+   "runner_date": "2026-07-08",
+   "finish_date": "2026-07-24",
+   "days_pct": 53.1,
+   "ghost_days_pct": 67.3,
+   "total_days": 49.0,
+   "earned_days": 26.0,
+   "gap": 14.3,
+   "status": "behind",
+   "salvable": false,
+   "save_tasks": [],
+   "excluded_admin": [],
+   "cp_chain": [
+    {
+     "id": "22PXMkAkqfAi",
+     "name": "INTERIOR DOORS AND TRIMS PAINTING",
+     "baseline_end": "2026-07-07",
+     "live_end": "2026-07-07",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PJWeDkxqbD",
+     "name": "INTERIOR PAINT: PAINT WALLS & CEILING",
+     "baseline_end": "2026-07-07",
+     "live_end": "2026-07-07",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": [
+      "INTERIOR DOORS AND TRIM: INSTALL INTERIOR DOORS",
+      "INTERIOR PAINT: CONFIRM SCHEDULE",
+      "INTERIOR PAINT: CONFIRM DELIVERY"
+     ]
+    },
+    {
+     "id": "22PZMvWk7aLu",
+     "name": "PAINT: WALL FIX PAINT",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-09",
+     "moved_days": 1,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PYA2rawv6G",
+     "name": "TILES: INSTALLATION OF NEW BACKSPLASH",
+     "baseline_end": "2026-07-09",
+     "live_end": "2026-07-09",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZMuvtJSK9",
+     "name": "PAINTING: CABINET PAINT",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-10",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PJWeDkzh6i",
+     "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
+     "baseline_end": "2026-07-11",
+     "live_end": "2026-07-14",
+     "moved_days": 3,
+     "status": "moved",
+     "depends_on": [
+      "ELECTRICAL: DELIVERY ETA",
+      "ELECTRICAL: PM INSPECTION - Before",
+      "PAINT: WALL FIX PAINT"
+     ]
+    },
+    {
+     "id": "22PJWeDm25z3",
+     "name": "MECHANICAL: INSTALL MECHANICAL TRIM",
+     "baseline_end": "2026-07-11",
+     "live_end": "2026-07-11",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": [
+      "MECHANICAL: DELIVERY ETA",
+      "MECHANICAL: PM INSPECTION - Before",
+      "PAINT: WALL FIX PAINT"
+     ]
+    },
+    {
+     "id": "22PJWeDkyxJ9",
+     "name": "PLUMBING: INSTALL PLUMBING TRIM",
+     "baseline_end": "2026-07-14",
+     "live_end": "2026-07-17",
+     "moved_days": 3,
+     "status": "moved",
+     "depends_on": [
+      "GLASS: INSTALL GLASS",
+      "PLUMBING: PM INSPECTION - Before",
+      "PLUMBING: DELIVERY ETA",
+      "PAINT: WALL FIX PAINT"
+     ]
+    },
+    {
+     "id": "22PJWewqDSU5",
+     "name": "AUTOMATIC GATE INSTALLATION",
+     "baseline_end": "2026-07-18",
+     "live_end": "2026-07-22",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": [
+      "MECHANICAL: CITY INSPECTION",
+      "ELECTRICAL: CITY INSPECTION",
+      "PLUMBING: CITY INSPECTION"
+     ]
+    },
+    {
+     "id": "22PJWeDm3Cfx",
+     "name": "FINAL: TOUCH UP PAINT AND CLEAN",
+     "baseline_end": "2026-07-21",
+     "live_end": "2026-07-24",
+     "moved_days": 3,
+     "status": "moved",
+     "depends_on": [
+      "AUTOMATIC GATE INSTALLATION"
+     ]
+    },
+    {
+     "id": "22PJWeDm3ZaG",
+     "name": "FINAL: PUNCH LIST COMPLETION",
+     "baseline_end": "2026-07-23",
+     "live_end": "2026-07-27",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": [
+      "FINAL: TOUCH UP PAINT AND CLEAN"
+     ]
+    },
+    {
+     "id": "22PJWeDm3wUZ",
+     "name": "FINAL INSPECTION",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-07-28",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": [
+      "FINAL: PUNCH LIST COMPLETION"
+     ]
+    }
+   ],
+   "july_money": [
+    -4627.66,
+    -7099.12
+   ],
+   "margin_pct": 5.0,
+   "moved_count": 9,
+   "moved": [
+    {
+     "id": "22PJWeDm3ZaG",
+     "name": "FINAL: PUNCH LIST COMPLETION",
+     "from": "2026-07-23",
+     "to": "2026-07-27",
+     "days": 4
+    },
+    {
+     "id": "22PJWewqDSU5",
+     "name": "AUTOMATIC GATE INSTALLATION",
+     "from": "2026-07-18",
+     "to": "2026-07-22",
+     "days": 4
+    },
+    {
+     "id": "22PJWeDm3wUZ",
+     "name": "FINAL INSPECTION",
+     "from": "2026-07-24",
+     "to": "2026-07-28",
+     "days": 4
+    },
+    {
+     "id": "22Pa5iUufEcM",
+     "name": "CABINET: INSTALLATION OF DOORS",
+     "from": "2026-07-06",
+     "to": "2026-07-09",
+     "days": 3
+    },
+    {
+     "id": "22PJWeDkyxJ9",
+     "name": "PLUMBING: INSTALL PLUMBING TRIM",
+     "from": "2026-07-14",
+     "to": "2026-07-17",
+     "days": 3
+    },
+    {
+     "id": "22PJWeDkzh6i",
+     "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
+     "from": "2026-07-11",
+     "to": "2026-07-14",
+     "days": 3
+    },
+    {
+     "id": "22PJWeDm3Cfx",
+     "name": "FINAL: TOUCH UP PAINT AND CLEAN",
+     "from": "2026-07-21",
+     "to": "2026-07-24",
+     "days": 3
+    },
+    {
+     "id": "22PVDYk5hi6N",
+     "name": "GLASS: INSTALL GLASS",
+     "from": "2026-07-11",
+     "to": "2026-07-13",
+     "days": 2
+    },
+    {
+     "id": "22PZMvWk7aLu",
+     "name": "PAINT: WALL FIX PAINT",
+     "from": "2026-07-08",
+     "to": "2026-07-09",
+     "days": 1
+    }
+   ],
+   "weeks": [
+    {
+     "label": "Week 1 · Jul 6-12",
+     "deadline": "2026-07-12",
+     "is_current": true,
+     "total": 10,
+     "done": 4,
+     "days_planned": 33.0,
+     "days_earned": 23.0,
+     "pct": 69.7,
+     "target_task": "MECHANICAL: INSTALL MECHANICAL TRIM",
+     "target_type": "CP",
+     "target_due": "2026-07-11",
+     "tasks": [
+      {
+       "id": "22Pa5iUufEcM",
+       "name": "CABINET: INSTALLATION OF DOORS",
+       "type": "AT",
+       "baseline_end": "2026-07-06",
+       "live_end": "2026-07-09",
+       "moved_days": 3,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PVDYjWnvLr",
+       "name": "GLASS: TAKE MEASUREMENTS",
+       "type": "AT",
+       "baseline_end": "2026-07-07",
+       "live_end": "2026-07-07",
+       "moved_days": 0,
+       "progress": 1,
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PXMkAkqfAi",
+       "name": "INTERIOR DOORS AND TRIMS PAINTING",
+       "type": "CP",
+       "baseline_end": "2026-07-07",
+       "live_end": "2026-07-07",
+       "moved_days": 0,
+       "progress": 1,
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PJWeDkxqbD",
+       "name": "INTERIOR PAINT: PAINT WALLS & CEILING",
+       "type": "CP",
+       "baseline_end": "2026-07-07",
+       "live_end": "2026-07-07",
+       "moved_days": 0,
+       "progress": 1,
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZMvWk7aLu",
+       "name": "PAINT: WALL FIX PAINT",
+       "type": "CP",
+       "baseline_end": "2026-07-08",
+       "live_end": "2026-07-09",
+       "moved_days": 1,
+       "progress": 1,
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PYA2rawv6G",
+       "name": "TILES: INSTALLATION OF NEW BACKSPLASH",
+       "type": "CP",
+       "baseline_end": "2026-07-09",
+       "live_end": "2026-07-09",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZMuvtJSK9",
+       "name": "PAINTING: CABINET PAINT",
+       "type": "CP",
+       "baseline_end": "2026-07-10",
+       "live_end": "2026-07-10",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PJWeDkzh6i",
+       "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
+       "type": "CP",
+       "baseline_end": "2026-07-11",
+       "live_end": "2026-07-14",
+       "moved_days": 3,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PVDYk5hi6N",
+       "name": "GLASS: INSTALL GLASS",
+       "type": "AT",
+       "baseline_end": "2026-07-11",
+       "live_end": "2026-07-13",
+       "moved_days": 2,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PJWeDm25z3",
+       "name": "MECHANICAL: INSTALL MECHANICAL TRIM",
+       "type": "CP",
+       "baseline_end": "2026-07-11",
+       "live_end": "2026-07-11",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      }
+     ],
+     "anchor": "weekly"
+    },
+    {
+     "label": "Week 2 · Jul 13-19",
+     "deadline": "2026-07-19",
+     "is_current": false,
+     "total": 3,
+     "done": 0,
+     "days_planned": 10.0,
+     "days_earned": 2.0,
+     "pct": 20.0,
+     "target_task": "AUTOMATIC GATE INSTALLATION",
+     "target_type": "CP",
+     "target_due": "2026-07-18",
+     "tasks": [
+      {
+       "id": "22PJWeDkyxJ9",
+       "name": "PLUMBING: INSTALL PLUMBING TRIM",
+       "type": "CP",
+       "baseline_end": "2026-07-14",
+       "live_end": "2026-07-17",
+       "moved_days": 3,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpXyEynv6",
+       "name": "EXTERIOR: PAINT",
+       "type": "AT",
+       "baseline_end": "2026-07-15",
+       "live_end": "2026-07-15",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PJWewqDSU5",
+       "name": "AUTOMATIC GATE INSTALLATION",
+       "type": "CP",
+       "baseline_end": "2026-07-18",
+       "live_end": "2026-07-22",
+       "moved_days": 4,
+       "progress": 0.85,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      }
+     ],
+     "anchor": "monthly"
+    },
+    {
+     "label": "Week 3 · Jul 20-26",
+     "deadline": "2026-07-26",
+     "is_current": false,
+     "total": 3,
+     "done": 0,
+     "days_planned": 5.0,
+     "days_earned": 0.0,
+     "pct": 0.0,
+     "target_task": "FINAL INSPECTION",
+     "target_type": "CP",
+     "target_due": "2026-07-24",
+     "tasks": [
+      {
+       "id": "22PJWeDm3Cfx",
+       "name": "FINAL: TOUCH UP PAINT AND CLEAN",
+       "type": "CP",
+       "baseline_end": "2026-07-21",
+       "live_end": "2026-07-24",
+       "moved_days": 3,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PJWeDm3ZaG",
+       "name": "FINAL: PUNCH LIST COMPLETION",
+       "type": "CP",
+       "baseline_end": "2026-07-23",
+       "live_end": "2026-07-27",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PJWeDm3wUZ",
+       "name": "FINAL INSPECTION",
+       "type": "CP",
+       "baseline_end": "2026-07-24",
+       "live_end": "2026-07-28",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      }
+     ],
+     "anchor": "monthly"
+    },
+    {
+     "label": "Week 4 · Jul 27-Aug 2",
+     "deadline": "2026-08-02",
+     "is_current": false,
+     "total": 0,
+     "done": 0,
+     "days_planned": 0.0,
+     "days_earned": 0.0,
+     "pct": null,
+     "target_task": null,
+     "target_type": null,
+     "target_due": null,
+     "tasks": [],
+     "anchor": "monthly"
+    }
+   ],
+   "daily": [
+    {
+     "date": "2026-07-06",
+     "real": 1,
+     "real_pct": 5.9,
+     "plan": 2,
+     "plan_pct": 11.8
+    },
+    {
+     "date": "2026-07-07",
+     "real": 1,
+     "real_pct": 5.9,
+     "plan": 5,
+     "plan_pct": 29.4
+    },
+    {
+     "date": "2026-07-08",
+     "real": 4,
+     "real_pct": 23.5,
+     "plan": 6,
+     "plan_pct": 35.3
+    },
+    {
+     "date": "2026-07-09",
+     "real": 4,
+     "real_pct": 23.5,
+     "plan": 7,
+     "plan_pct": 41.2
+    },
+    {
+     "date": "2026-07-10",
+     "real": 5,
+     "real_pct": 29.4,
+     "plan": 8,
+     "plan_pct": 47.1
     }
    ]
   }
