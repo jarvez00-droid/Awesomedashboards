@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-10T16:30:39",
+ "generated_at": "2026-07-10T16:54:06",
  "today": "2026-07-10",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -1360,9 +1360,9 @@
      "id": "22PZpKA3WxLB",
      "name": "FLOORING: INSTALL HARDWOOD",
      "baseline_end": "2026-07-10",
-     "live_end": "2026-07-10",
-     "moved_days": 0,
-     "status": "pending",
+     "live_end": "2026-07-13",
+     "moved_days": 3,
+     "status": "moved",
      "depends_on": []
     },
     {
@@ -1405,8 +1405,8 @@
      "id": "22PZpKBTvVsa",
      "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
      "baseline_end": "2026-07-13",
-     "live_end": "2026-07-18",
-     "moved_days": 5,
+     "live_end": "2026-07-21",
+     "moved_days": 8,
      "status": "moved",
      "depends_on": []
     },
@@ -1414,8 +1414,8 @@
      "id": "22PZtcszppfU",
      "name": "BASEBOARD & TRIM: INSTALL",
      "baseline_end": "2026-07-14",
-     "live_end": "2026-07-18",
-     "moved_days": 4,
+     "live_end": "2026-07-21",
+     "moved_days": 7,
      "status": "moved",
      "depends_on": []
     },
@@ -1488,13 +1488,20 @@
     16784.33
    ],
    "margin_pct": 38.4,
-   "moved_count": 17,
+   "moved_count": 18,
    "moved": [
     {
      "id": "22PZpK9rGkCL",
      "name": "TILES: INSTALL TILES",
      "from": "2026-07-10",
      "to": "2026-07-18",
+     "days": 8
+    },
+    {
+     "id": "22PZpKBTvVsa",
+     "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
+     "from": "2026-07-13",
+     "to": "2026-07-21",
      "days": 8
     },
     {
@@ -1526,11 +1533,11 @@
      "days": 7
     },
     {
-     "id": "22PZpKBTvVsa",
-     "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
-     "from": "2026-07-13",
-     "to": "2026-07-18",
-     "days": 5
+     "id": "22PZtcszppfU",
+     "name": "BASEBOARD & TRIM: INSTALL",
+     "from": "2026-07-14",
+     "to": "2026-07-21",
+     "days": 7
     },
     {
      "id": "22PZpKC3L9j4",
@@ -1568,13 +1575,6 @@
      "days": 4
     },
     {
-     "id": "22PZtcszppfU",
-     "name": "BASEBOARD & TRIM: INSTALL",
-     "from": "2026-07-14",
-     "to": "2026-07-18",
-     "days": 4
-    },
-    {
      "id": "22PZpKCjBHpp",
      "name": "PROJECT DELIVERY: DELIVERY",
      "from": "2026-07-31",
@@ -1587,6 +1587,13 @@
      "from": "2026-07-30",
      "to": "2026-08-03",
      "days": 4
+    },
+    {
+     "id": "22PZpKA3WxLB",
+     "name": "FLOORING: INSTALL HARDWOOD",
+     "from": "2026-07-10",
+     "to": "2026-07-13",
+     "days": 3
     },
     {
      "id": "22PZpK7c8LMA",
@@ -1713,12 +1720,12 @@
        "name": "FLOORING: INSTALL HARDWOOD",
        "type": "CP",
        "baseline_end": "2026-07-10",
-       "live_end": "2026-07-10",
-       "moved_days": 0,
+       "live_end": "2026-07-13",
+       "moved_days": 3,
        "progress": 0,
-       "status": "pending",
+       "status": "moved",
        "in_week_plan": true,
-       "kicked_out": false,
+       "kicked_out": true,
        "pulled_in": false,
        "was": null
       },
@@ -1799,8 +1806,8 @@
        "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
        "type": "CP",
        "baseline_end": "2026-07-13",
-       "live_end": "2026-07-18",
-       "moved_days": 5,
+       "live_end": "2026-07-21",
+       "moved_days": 8,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -1813,8 +1820,8 @@
        "name": "BASEBOARD & TRIM: INSTALL",
        "type": "CP",
        "baseline_end": "2026-07-14",
-       "live_end": "2026-07-18",
-       "moved_days": 4,
+       "live_end": "2026-07-21",
+       "moved_days": 7,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
