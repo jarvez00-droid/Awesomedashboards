@@ -171,6 +171,12 @@ h1{font-size:22px;margin:0 0 3px}
 .fcline b{color:var(--tx)}
 .fcline.at_risk b.lk{color:#e3b341}
 .fcline.behind b.lk{color:#ff7b72}
+/* v11: explicit work-day numbers under the track; lands-here ghost rows */
+.monthline{font-size:11.5px;color:var(--mut);margin-top:16px;line-height:1.4}
+.monthline b{color:var(--tx)}
+.monthline+.wkchips{margin-top:6px}
+.task.lands .tn{color:var(--mut);font-style:italic}
+.task.lands .lmark{color:var(--ghost);font-size:11px;font-style:italic;flex-shrink:0}
 .mvlist .task{border-top:1px solid var(--line)}
 .empty{color:var(--mut);font-size:12.5px;padding:8px 2px}
 .ft{color:var(--mut);font-size:11.5px;margin-top:28px;text-align:center}
@@ -224,7 +230,7 @@ h1{font-size:22px;margin:0 0 3px}
   <div class="howto">
     <div class="ht">How to read this</div>
     <div>🏃 Every project races its plan on the same calendar: a runner LEFT of the white <b>TODAY</b> line is behind schedule; at or past it is on track — the runner and the pill always agree. 🏁 marks the last planned task of the month, │ lines are the Sunday weekly deadlines.</div>
-    <div><b>Every %</b> counts <b>worked days, not tasks</b>: a finished task earns all of its planned days, one in progress earns the days worked so far, one not started earns 0. Example: 5 drywall days planned, 3 worked = <b>60%</b>. Task counts ("8 tasks · 3 done") are context only. Admin tasks (meetings, checklists, walkthroughs) don't count — construction work only.</div>
+    <div><b>Every %</b> counts <b>worked days, not tasks</b>: a finished task earns all of its planned days, one in progress earns the days worked so far, one not started earns 0. Example: 5 drywall days planned, 3 worked = <b>60%</b>. Finish a task early and it still earns its full planned days — complete the whole month plan and the month reads <b>100%</b>, even in fewer days. Task counts ("8 tasks · 3 done") are context only. Work = Action + Critical Path + City Inspections; admin tasks (meetings, checklists, walkthroughs) don't count.</div>
     <div>Pill colors: <span class="g">green = on pace</span> · <span class="o">blinking orange = behind, but the week can still be saved if the rescheduled tasks finish by Sunday</span> · <span class="y">yellow = slightly behind</span> · <span class="r">blinking red = behind plan</span>.</div>
   </div>
 
@@ -390,7 +396,7 @@ function renderHero(){
       <div class="num" title="Share of July's planned work-days already earned across all projects">${mp}%</div>
       <div class="lab">of July's planned work-days earned<br>${c.done_total}/${c.total_target} tasks fully done</div>
       <div class="pill ${pace.cls}" style="margin-top:7px">${pace.t}</div>
-      <div style="color:var(--mut);font-size:11px;margin-top:6px">the plan expected <b style="color:var(--tx)">${c.ghost_days_pct!=null?c.ghost_days_pct:c.ghost_pct}%</b> by today · tolerance today: ${DATA.tolerance_today!=null?DATA.tolerance_today+'%':'—'}</div>
+      <div style="color:var(--mut);font-size:11px;margin-top:6px">Month: <b style="color:var(--tx)">${c.earned_days!=null?c.earned_days:'—'}</b> of <b style="color:var(--tx)">${c.total_days!=null?c.total_days:'—'}</b> work-days done · plan says <b style="color:var(--tx)">${c.plan_days!=null?c.plan_days:'—'}</b> by today (${c.ghost_days_pct}%) · tolerance today: ${DATA.tolerance_today!=null?DATA.tolerance_today+'%':'—'}</div>
       ${c.runner_date?`<div style="color:var(--mut);font-size:11px;margin-top:2px">earned schedule: <b style="color:var(--tx)">${fmtD(c.runner_date)}</b> · ${schedLabel(c.runner_date)}</div>`:''}
       ${monthFc(c.month_forecast).badge}
     </div>
@@ -409,6 +415,12 @@ function renderHero(){
 }
 
 function taskRow(t){
+  /* v11: task LANDING in this week per its CURRENT date (the plan had it elsewhere) */
+  if(t.lands_here){
+    const ic=t.status==='done'?'✓':'▸';
+    return `<div class="task lands ${t.status==='done'?'done':''}"><span class="ic">${ic}</span><span class="tn">${t.name}</span>`+
+      `<span class="tg">${t.type}</span><span class="lmark">lands here — was ${fmtD(t.was)}, now ${fmtD(t.live_end)}</span></div>`;
+  }
   /* v8: kicked out of the current week -> blinking red; pulled into it -> blinking green */
   if(t.kicked_out){
     return `<div class="task kicked"><span class="ic">✗</span><span class="tn">${t.name}</span>`+
@@ -519,6 +531,7 @@ function renderLane(p){
           <div class="fill" style="width:${rx}%;background:linear-gradient(90deg,${hexA(col,.45)},${col})"></div>
           ${post}${laneTicks()}${runner}${flag}
         </div>
+        <div class="monthline">Month: <b>${p.earned_days!=null?p.earned_days:'—'}</b> of <b>${p.total_days!=null?p.total_days:'—'}</b> work-days done (<b>${p.days_pct}%</b>) · plan says <b>${p.plan_days!=null?p.plan_days:'—'}</b> by today (${p.ghost_days_pct}%)</div>
         ${weekChips(p,col)}
         ${p.status==='salvage' && p.save_tasks && p.save_tasks.length ? `<div class="salvline" title="${p.save_tasks.map(t=>t.name+' by '+fmtD(t.due)).join(' · ').replace(/"/g,'&quot;')}">⚠ Week saved ONLY if <b>${p.save_tasks[0].name}</b> finishes by <b>${fmtD(p.save_tasks[0].due)}</b>${p.save_tasks.length>1?` (+${p.save_tasks.length-1} more)`:''} — if it slips, we don't make it.</div>`:''}
         ${fc.line}

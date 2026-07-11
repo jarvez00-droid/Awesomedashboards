@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-10T18:51:44",
+ "generated_at": "2026-07-10T19:03:50",
  "today": "2026-07-10",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -24,7 +24,8 @@
   "Week 4 · Jul 27-Aug 2"
  ],
  "method": {
-  "universe": "Action Task + Critical Path (hojas) — SOLO OBRA (v9): tareas admin excluidas por patron de nombre",
+  "universe": "v11: Action Task + CRITICAL PATH + City Inspection (hojas) — SOLO OBRA: tareas admin excluidas por patron de nombre",
+  "days_capping": "v11: tarea DONE gana TODOS sus dias del plan aunque haya usado menos dias reales — si todo el plan mensual esta done, el mes marca 100% aunque se haya cumplido en menos dias.",
   "admin_exclusions": [
    "ASM MEETING",
    "MEETING WITH CLIENT",
@@ -48,28 +49,31 @@
   "weighting": "conteo de tareas (el motor de productividad no expone $ por-tarea; el $ del mes es contexto por proyecto)"
  },
  "company": {
-  "monthly_pct": 18.6,
-  "days_pct": 34.4,
-  "ghost_days_pct": 49.4,
+  "monthly_pct": 16.7,
+  "days_pct": 32.6,
+  "ghost_days_pct": 47.9,
+  "earned_days": 142.0,
+  "total_days": 436.0,
+  "plan_days": 209.0,
   "month_forecast": {
    "status": "at_risk",
-   "projected_pct": 95.3,
+   "projected_pct": 95.6,
    "plan_pct": 100.0,
    "leaked_count": 8,
    "leaked_days": 19.0,
-   "leaked_pct": 4.7,
-   "reshuffled_in_month": 83
+   "leaked_pct": 4.4,
+   "reshuffled_in_month": 101
   },
-  "adherence": 40.3,
+  "adherence": 38.7,
   "band": "red",
   "runner_date": "2026-07-07",
-  "gap": 15.0,
+  "gap": 15.4,
   "status": "behind",
-  "total_target": 145,
-  "due_to_today": 67,
-  "done_total": 27,
-  "runner_pct": 18.6,
-  "ghost_pct": 46.2,
+  "total_target": 174,
+  "due_to_today": 75,
+  "done_total": 29,
+  "runner_pct": 16.7,
+  "ghost_pct": 43.1,
   "july_money": [
    160555.21999999997,
    129827.90000000001
@@ -78,38 +82,38 @@
   "daily": [
    {
     "date": "2026-07-06",
-    "real": 11,
-    "real_pct": 7.6,
-    "plan": 22,
-    "plan_pct": 15.2
+    "real": 12,
+    "real_pct": 6.9,
+    "plan": 26,
+    "plan_pct": 14.9
    },
    {
     "date": "2026-07-07",
-    "real": 15,
-    "real_pct": 10.3,
-    "plan": 32,
-    "plan_pct": 22.1
+    "real": 16,
+    "real_pct": 9.2,
+    "plan": 37,
+    "plan_pct": 21.3
    },
    {
     "date": "2026-07-08",
-    "real": 18,
-    "real_pct": 12.4,
-    "plan": 42,
-    "plan_pct": 29.0
+    "real": 20,
+    "real_pct": 11.5,
+    "plan": 47,
+    "plan_pct": 27.0
    },
    {
     "date": "2026-07-09",
-    "real": 21,
-    "real_pct": 14.5,
-    "plan": 51,
-    "plan_pct": 35.2
+    "real": 23,
+    "real_pct": 13.2,
+    "plan": 59,
+    "plan_pct": 33.9
    },
    {
     "date": "2026-07-10",
-    "real": 27,
-    "real_pct": 18.6,
-    "plan": 67,
-    "plan_pct": 46.2
+    "real": 29,
+    "real_pct": 16.7,
+    "plan": 75,
+    "plan_pct": 43.1
    }
   ]
  },
@@ -121,22 +125,24 @@
    "pms": [
     "Milagros Porturas"
    ],
-   "total_target": 10,
-   "due_to_today": 10,
+   "total_target": 13,
+   "due_to_today": 13,
    "done_total": 1,
    "done_due": 1,
-   "monthly_pct": 10.0,
-   "adherence": 10.0,
+   "monthly_pct": 7.7,
+   "adherence": 7.7,
    "band": "red",
-   "runner_pct": 10.0,
+   "runner_pct": 7.7,
    "ghost_pct": 100.0,
-   "runner_date": "2026-07-05",
+   "runner_date": "2026-07-02",
    "finish_date": "2026-07-10",
-   "days_pct": 50.0,
+   "days_pct": 42.9,
    "ghost_days_pct": 100.0,
-   "total_days": 18.0,
+   "total_days": 21.0,
    "earned_days": 9.0,
-   "gap": 50.0,
+   "plan_days": 21.0,
+   "city_inspections": 3,
+   "gap": 57.1,
    "status": "salvage",
    "salvable": true,
    "save_tasks": [
@@ -179,7 +185,38 @@
     "reshuffled_in_month": 0,
     "leaked": []
    },
-   "cp_chain": [],
+   "cp_chain": [
+    {
+     "id": "22PYxwN8yU2w",
+     "name": "CITY INSPECTION (final electrical)",
+     "baseline_end": "2026-07-01",
+     "live_end": "2026-07-01",
+     "current_end": "2026-07-01",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PUmwvFbKrG",
+     "name": "MECHANICAL: CITY INSPECTION",
+     "baseline_end": "2026-07-01",
+     "live_end": "2026-07-01",
+     "current_end": "2026-07-01",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PYbgdPDmuP",
+     "name": "PLUMBING: CITY INSPECTION (Copy)",
+     "baseline_end": "2026-07-01",
+     "live_end": "2026-07-01",
+     "current_end": "2026-07-01",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    }
+   ],
    "july_money": null,
    "margin_pct": null,
    "moved_count": 0,
@@ -321,36 +358,36 @@
     {
      "date": "2026-07-06",
      "real": 1,
-     "real_pct": 10.0,
-     "plan": 7,
-     "plan_pct": 70.0
+     "real_pct": 7.7,
+     "plan": 10,
+     "plan_pct": 76.9
     },
     {
      "date": "2026-07-07",
      "real": 1,
-     "real_pct": 10.0,
-     "plan": 7,
-     "plan_pct": 70.0
+     "real_pct": 7.7,
+     "plan": 10,
+     "plan_pct": 76.9
     },
     {
      "date": "2026-07-08",
      "real": 1,
-     "real_pct": 10.0,
-     "plan": 8,
-     "plan_pct": 80.0
+     "real_pct": 7.7,
+     "plan": 11,
+     "plan_pct": 84.6
     },
     {
      "date": "2026-07-09",
      "real": 1,
-     "real_pct": 10.0,
-     "plan": 8,
-     "plan_pct": 80.0
+     "real_pct": 7.7,
+     "plan": 11,
+     "plan_pct": 84.6
     },
     {
      "date": "2026-07-10",
      "real": 1,
-     "real_pct": 10.0,
-     "plan": 10,
+     "real_pct": 7.7,
+     "plan": 13,
      "plan_pct": 100.0
     }
    ]
@@ -362,22 +399,24 @@
    "pms": [
     "Angel Pacheco"
    ],
-   "total_target": 11,
+   "total_target": 12,
    "due_to_today": 10,
    "done_total": 2,
    "done_due": 2,
-   "monthly_pct": 18.2,
+   "monthly_pct": 16.7,
    "adherence": 20.0,
    "band": "red",
-   "runner_pct": 18.2,
-   "ghost_pct": 90.9,
+   "runner_pct": 16.7,
+   "ghost_pct": 83.3,
    "runner_date": "2026-07-06",
-   "finish_date": "2026-07-11",
-   "days_pct": 23.1,
-   "ghost_days_pct": 92.3,
-   "total_days": 13.0,
+   "finish_date": "2026-07-13",
+   "days_pct": 21.4,
+   "ghost_days_pct": 85.7,
+   "total_days": 14.0,
    "earned_days": 3.0,
-   "gap": 69.2,
+   "plan_days": 12.0,
+   "city_inspections": 1,
+   "gap": 64.3,
    "status": "behind",
    "salvable": false,
    "save_tasks": [],
@@ -450,6 +489,16 @@
      "current_end": "2026-07-12",
      "moved_days": 1,
      "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PPsiDCMZNa",
+     "name": "FINAL: BUILDING INSPECTION",
+     "baseline_end": "2026-07-13",
+     "live_end": "2026-07-13",
+     "current_end": "2026-07-13",
+     "moved_days": 0,
+     "status": "pending",
      "depends_on": []
     }
    ],
@@ -692,15 +741,60 @@
      "label": "Week 2 · Jul 13-19",
      "deadline": "2026-07-19",
      "is_current": false,
-     "total": 0,
+     "total": 1,
      "done": 0,
-     "days_planned": 0.0,
+     "days_planned": 1.0,
      "days_earned": 0.0,
-     "pct": null,
-     "target_task": null,
-     "target_type": null,
-     "target_due": null,
-     "tasks": [],
+     "pct": 0.0,
+     "target_task": "FINAL: BUILDING INSPECTION",
+     "target_type": "CI",
+     "target_due": "2026-07-13",
+     "tasks": [
+      {
+       "id": "22PPsiDCMZNa",
+       "name": "FINAL: BUILDING INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-13",
+       "live_end": "2026-07-13",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZkUsSKgvV",
+       "name": "GUTTERS: INSTALL GUTTERS",
+       "type": "AT",
+       "baseline_end": "2026-07-10",
+       "live_end": "2026-07-13",
+       "moved_days": 3,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-10"
+      },
+      {
+       "id": "22PZkUehNPZy",
+       "name": "GLASS: INSTALL GLASS",
+       "type": "AT",
+       "baseline_end": "2026-07-08",
+       "live_end": "2026-07-14",
+       "moved_days": 6,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-08"
+      }
+     ],
      "anchor": "monthly"
     },
     {
@@ -738,37 +832,805 @@
     {
      "date": "2026-07-06",
      "real": 1,
-     "real_pct": 9.1,
+     "real_pct": 8.3,
      "plan": 1,
-     "plan_pct": 9.1
+     "plan_pct": 8.3
     },
     {
      "date": "2026-07-07",
      "real": 1,
-     "real_pct": 9.1,
+     "real_pct": 8.3,
      "plan": 4,
-     "plan_pct": 36.4
+     "plan_pct": 33.3
     },
     {
      "date": "2026-07-08",
      "real": 1,
-     "real_pct": 9.1,
+     "real_pct": 8.3,
      "plan": 7,
-     "plan_pct": 63.6
+     "plan_pct": 58.3
     },
     {
      "date": "2026-07-09",
      "real": 1,
-     "real_pct": 9.1,
+     "real_pct": 8.3,
      "plan": 7,
-     "plan_pct": 63.6
+     "plan_pct": 58.3
     },
     {
      "date": "2026-07-10",
      "real": 2,
-     "real_pct": 18.2,
+     "real_pct": 16.7,
      "plan": 10,
-     "plan_pct": 90.9
+     "plan_pct": 83.3
+    }
+   ]
+  },
+  {
+   "id": "22PMwhcSuqJD",
+   "name": "Karim-Merchant",
+   "client": "Karim Merchant",
+   "pms": [
+    "Giselle Garcia"
+   ],
+   "total_target": 15,
+   "due_to_today": 7,
+   "done_total": 2,
+   "done_due": 2,
+   "monthly_pct": 13.3,
+   "adherence": 28.6,
+   "band": "red",
+   "runner_pct": 13.3,
+   "ghost_pct": 46.7,
+   "runner_date": "2026-07-07",
+   "finish_date": "2026-07-30",
+   "days_pct": 33.3,
+   "ghost_days_pct": 48.5,
+   "total_days": 33.0,
+   "earned_days": 11.0,
+   "plan_days": 16.0,
+   "city_inspections": 3,
+   "gap": 15.2,
+   "status": "behind",
+   "salvable": false,
+   "save_tasks": [],
+   "excluded_admin": [],
+   "month_forecast": {
+    "status": "behind",
+    "projected_pct": 84.8,
+    "plan_pct": 100.0,
+    "leaked_count": 4,
+    "leaked_days": 5.0,
+    "leaked_pct": 15.2,
+    "reshuffled_in_month": 9,
+    "leaked": [
+     {
+      "name": "FRAMING: ROOF DECKING",
+      "from": "2026-07-28",
+      "to": "2026-08-01",
+      "days": 2
+     },
+     {
+      "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
+      "from": "2026-07-29",
+      "to": "2026-08-03",
+      "days": 1
+     },
+     {
+      "name": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
+      "from": "2026-07-30",
+      "to": "2026-08-04",
+      "days": 1
+     },
+     {
+      "name": "ROOFING: INSTALL UNDERLAYMENT",
+      "from": "2026-07-29",
+      "to": "2026-08-03",
+      "days": 1
+     }
+    ]
+   },
+   "cp_chain": [
+    {
+     "id": "22PZqFvUvxgu",
+     "name": "FOUNDATION: DIG FOUNDATION",
+     "baseline_end": "2026-07-07",
+     "live_end": "2026-07-07",
+     "current_end": "2026-07-07",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PZqFvV3ZBb",
+     "name": "PLUMBING: EXECUTE IN GROUND PLUMBING",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-09",
+     "current_end": "2026-07-09",
+     "moved_days": 1,
+     "status": "done",
+     "depends_on": [
+      "FOUNDATION: CC CHECKLIST - PM INSPECTION (AFTER) - PLACE FORM BOARD"
+     ]
+    },
+    {
+     "id": "22PZqFvV2SUe",
+     "name": "ELECTRICAL: EXECUTE IN GROUND ELECTRICAL",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-10",
+     "current_end": "2026-07-10",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": [
+      "FOUNDATION: CC CHECKLIST - PM INSPECTION (AFTER) - PLACE FORM BOARD",
+      "IN GROUND ELECTRICAL: CC CHECKLIST - PM INSPECTION (BEFORE)"
+     ]
+    },
+    {
+     "id": "22PZqFvV2pNx",
+     "name": "ELECTRICAL: CITY INSPECTION",
+     "baseline_end": "2026-07-09",
+     "live_end": "2026-07-13",
+     "current_end": "2026-07-13",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": [
+      "ELECTRICAL: EXECUTE IN GROUND ELECTRICAL"
+     ]
+    },
+    {
+     "id": "22PaRbiiPSPi",
+     "name": "FOUNDATION: PLACE FORM BOARD",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-13",
+     "current_end": "2026-07-13",
+     "moved_days": 3,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZqFvV4JyD",
+     "name": "PLUMBING: CITY INSPECTION",
+     "baseline_end": "2026-07-09",
+     "live_end": "2026-07-13",
+     "current_end": "2026-07-13",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": [
+      "PLUMBING: EXECUTE IN GROUND PLUMBING"
+     ]
+    },
+    {
+     "id": "22PZqFvUx6Pp",
+     "name": "FOUNDATION: PRE-POUR CITY INSPECTION",
+     "baseline_end": "2026-07-09",
+     "live_end": "2026-07-14",
+     "current_end": "2026-07-14",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": [
+      "FOUNDATION: DIG FOUNDATION"
+     ]
+    },
+    {
+     "id": "22PZqFvUxqCQ",
+     "name": "FOUNDATION: EXECUTE CONCRETE POUR",
+     "baseline_end": "2026-07-13",
+     "live_end": "2026-07-15",
+     "current_end": "2026-07-15",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": [
+      "FOUNDATION: PRE-POUR CITY INSPECTION",
+      "FOUNDATION: PLACE FORM BOARD"
+     ]
+    },
+    {
+     "id": "22PZqFvUyZz2",
+     "name": "FOUNDATION: FOUNDATION CURE",
+     "baseline_end": "2026-07-18",
+     "live_end": "2026-07-23",
+     "current_end": "2026-07-23",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": [
+      "FOUNDATION: EXECUTE CONCRETE POUR"
+     ]
+    },
+    {
+     "id": "22PZqFvVAHM2",
+     "name": "FRAMING: EXECUTE FRAMING",
+     "baseline_end": "2026-07-22",
+     "live_end": "2026-07-27",
+     "current_end": "2026-07-27",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": [
+      "FOUNDATION: FOUNDATION CURE",
+      "FRAMING: PURCHASE MATERIALS",
+      "FRAMING: DELIVERY ETA",
+      "FRAMING: CC CHECKLIST - PM INSPECTION (BEFORE)",
+      "FRAMING: BILL & PAYMENT DOWNPAYMENT"
+     ]
+    },
+    {
+     "id": "22PZqFvVCtd4",
+     "name": "FRAMING: EXECUTE EXTERIOR SHEATHING",
+     "baseline_end": "2026-07-25",
+     "live_end": "2026-07-30",
+     "current_end": "2026-07-30",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": [
+      "FRAMING: EXECUTE FRAMING",
+      "EXTERIOR SHEATING: PURCHASE MATERIALS"
+     ]
+    },
+    {
+     "id": "22PZqFvVEPEE",
+     "name": "FRAMING: ROOF DECKING",
+     "baseline_end": "2026-07-28",
+     "live_end": "2026-08-01",
+     "current_end": "2026-08-01",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": [
+      "FRAMING: EXECUTE EXTERIOR SHEATHING"
+     ]
+    },
+    {
+     "id": "22PZqFvVMrC9",
+     "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
+     "baseline_end": "2026-07-29",
+     "live_end": "2026-08-03",
+     "current_end": "2026-08-03",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZqFvVpEFz",
+     "name": "ROOFING: INSTALL UNDERLAYMENT",
+     "baseline_end": "2026-07-29",
+     "live_end": "2026-08-03",
+     "current_end": "2026-08-03",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZqFvVVKA3",
+     "name": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
+     "baseline_end": "2026-07-30",
+     "live_end": "2026-08-04",
+     "current_end": "2026-08-04",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": []
+    }
+   ],
+   "july_money": [
+    10737.58,
+    8699.59
+   ],
+   "margin_pct": 37.3,
+   "moved_count": 14,
+   "moved": [
+    {
+     "id": "22PZqFvUx6Pp",
+     "name": "FOUNDATION: PRE-POUR CITY INSPECTION",
+     "from": "2026-07-09",
+     "to": "2026-07-14",
+     "days": 5
+    },
+    {
+     "id": "22PZqFvUyZz2",
+     "name": "FOUNDATION: FOUNDATION CURE",
+     "from": "2026-07-18",
+     "to": "2026-07-23",
+     "days": 5
+    },
+    {
+     "id": "22PZqFvVAHM2",
+     "name": "FRAMING: EXECUTE FRAMING",
+     "from": "2026-07-22",
+     "to": "2026-07-27",
+     "days": 5
+    },
+    {
+     "id": "22PZqFvVCtd4",
+     "name": "FRAMING: EXECUTE EXTERIOR SHEATHING",
+     "from": "2026-07-25",
+     "to": "2026-07-30",
+     "days": 5
+    },
+    {
+     "id": "22PZqFvVMrC9",
+     "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
+     "from": "2026-07-29",
+     "to": "2026-08-03",
+     "days": 5
+    },
+    {
+     "id": "22PZqFvVVKA3",
+     "name": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
+     "from": "2026-07-30",
+     "to": "2026-08-04",
+     "days": 5
+    },
+    {
+     "id": "22PZqFvVpEFz",
+     "name": "ROOFING: INSTALL UNDERLAYMENT",
+     "from": "2026-07-29",
+     "to": "2026-08-03",
+     "days": 5
+    },
+    {
+     "id": "22PZqFvV2pNx",
+     "name": "ELECTRICAL: CITY INSPECTION",
+     "from": "2026-07-09",
+     "to": "2026-07-13",
+     "days": 4
+    },
+    {
+     "id": "22PZqFvV4JyD",
+     "name": "PLUMBING: CITY INSPECTION",
+     "from": "2026-07-09",
+     "to": "2026-07-13",
+     "days": 4
+    },
+    {
+     "id": "22PZqFvVEPEE",
+     "name": "FRAMING: ROOF DECKING",
+     "from": "2026-07-28",
+     "to": "2026-08-01",
+     "days": 4
+    },
+    {
+     "id": "22PaRbiiPSPi",
+     "name": "FOUNDATION: PLACE FORM BOARD",
+     "from": "2026-07-10",
+     "to": "2026-07-13",
+     "days": 3
+    },
+    {
+     "id": "22PZqFvUxqCQ",
+     "name": "FOUNDATION: EXECUTE CONCRETE POUR",
+     "from": "2026-07-13",
+     "to": "2026-07-15",
+     "days": 2
+    },
+    {
+     "id": "22PZqFvV2SUe",
+     "name": "ELECTRICAL: EXECUTE IN GROUND ELECTRICAL",
+     "from": "2026-07-08",
+     "to": "2026-07-10",
+     "days": 2
+    },
+    {
+     "id": "22PZqFvV3ZBb",
+     "name": "PLUMBING: EXECUTE IN GROUND PLUMBING",
+     "from": "2026-07-08",
+     "to": "2026-07-09",
+     "days": 1
+    }
+   ],
+   "weeks": [
+    {
+     "label": "Week 1 · Jul 6-12",
+     "deadline": "2026-07-12",
+     "is_current": true,
+     "total": 7,
+     "done": 2,
+     "days_planned": 16.0,
+     "days_earned": 11.0,
+     "pct": 68.8,
+     "target_task": "FOUNDATION: PLACE FORM BOARD",
+     "target_type": "CP",
+     "target_due": "2026-07-10",
+     "tasks": [
+      {
+       "id": "22PZqFvUvxgu",
+       "name": "FOUNDATION: DIG FOUNDATION",
+       "type": "CP",
+       "baseline_end": "2026-07-07",
+       "live_end": "2026-07-07",
+       "moved_days": 0,
+       "progress": 1,
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZqFvV2SUe",
+       "name": "ELECTRICAL: EXECUTE IN GROUND ELECTRICAL",
+       "type": "CP",
+       "baseline_end": "2026-07-08",
+       "live_end": "2026-07-10",
+       "moved_days": 2,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZqFvV3ZBb",
+       "name": "PLUMBING: EXECUTE IN GROUND PLUMBING",
+       "type": "CP",
+       "baseline_end": "2026-07-08",
+       "live_end": "2026-07-09",
+       "moved_days": 1,
+       "progress": 1,
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZqFvV2pNx",
+       "name": "ELECTRICAL: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-09",
+       "live_end": "2026-07-13",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZqFvUx6Pp",
+       "name": "FOUNDATION: PRE-POUR CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-09",
+       "live_end": "2026-07-14",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZqFvV4JyD",
+       "name": "PLUMBING: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-09",
+       "live_end": "2026-07-13",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PaRbiiPSPi",
+       "name": "FOUNDATION: PLACE FORM BOARD",
+       "type": "CP",
+       "baseline_end": "2026-07-10",
+       "live_end": "2026-07-13",
+       "moved_days": 3,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": true,
+       "pulled_in": false,
+       "was": null
+      }
+     ],
+     "anchor": "weekly"
+    },
+    {
+     "label": "Week 2 · Jul 13-19",
+     "deadline": "2026-07-19",
+     "is_current": false,
+     "total": 2,
+     "done": 0,
+     "days_planned": 6.0,
+     "days_earned": 0.0,
+     "pct": 0.0,
+     "target_task": "FOUNDATION: FOUNDATION CURE",
+     "target_type": "CP",
+     "target_due": "2026-07-18",
+     "tasks": [
+      {
+       "id": "22PZqFvV2pNx",
+       "name": "ELECTRICAL: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-09",
+       "live_end": "2026-07-13",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-09"
+      },
+      {
+       "id": "22PZqFvUxqCQ",
+       "name": "FOUNDATION: EXECUTE CONCRETE POUR",
+       "type": "CP",
+       "baseline_end": "2026-07-13",
+       "live_end": "2026-07-15",
+       "moved_days": 2,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PaRbiiPSPi",
+       "name": "FOUNDATION: PLACE FORM BOARD",
+       "type": "CP",
+       "baseline_end": "2026-07-10",
+       "live_end": "2026-07-13",
+       "moved_days": 3,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-10"
+      },
+      {
+       "id": "22PZqFvV4JyD",
+       "name": "PLUMBING: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-09",
+       "live_end": "2026-07-13",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-09"
+      },
+      {
+       "id": "22PZqFvUx6Pp",
+       "name": "FOUNDATION: PRE-POUR CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-09",
+       "live_end": "2026-07-14",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-09"
+      },
+      {
+       "id": "22PZqFvUyZz2",
+       "name": "FOUNDATION: FOUNDATION CURE",
+       "type": "CP",
+       "baseline_end": "2026-07-18",
+       "live_end": "2026-07-23",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      }
+     ],
+     "anchor": "monthly"
+    },
+    {
+     "label": "Week 3 · Jul 20-26",
+     "deadline": "2026-07-26",
+     "is_current": false,
+     "total": 2,
+     "done": 0,
+     "days_planned": 6.0,
+     "days_earned": 0.0,
+     "pct": 0.0,
+     "target_task": "FRAMING: EXECUTE EXTERIOR SHEATHING",
+     "target_type": "CP",
+     "target_due": "2026-07-25",
+     "tasks": [
+      {
+       "id": "22PZqFvVAHM2",
+       "name": "FRAMING: EXECUTE FRAMING",
+       "type": "CP",
+       "baseline_end": "2026-07-22",
+       "live_end": "2026-07-27",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZqFvUyZz2",
+       "name": "FOUNDATION: FOUNDATION CURE",
+       "type": "CP",
+       "baseline_end": "2026-07-18",
+       "live_end": "2026-07-23",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-18"
+      },
+      {
+       "id": "22PZqFvVCtd4",
+       "name": "FRAMING: EXECUTE EXTERIOR SHEATHING",
+       "type": "CP",
+       "baseline_end": "2026-07-25",
+       "live_end": "2026-07-30",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      }
+     ],
+     "anchor": "monthly"
+    },
+    {
+     "label": "Week 4 · Jul 27-Aug 2",
+     "deadline": "2026-08-02",
+     "is_current": false,
+     "total": 4,
+     "done": 0,
+     "days_planned": 5.0,
+     "days_earned": 0.0,
+     "pct": 0.0,
+     "target_task": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
+     "target_type": "CP",
+     "target_due": "2026-07-30",
+     "tasks": [
+      {
+       "id": "22PZqFvVAHM2",
+       "name": "FRAMING: EXECUTE FRAMING",
+       "type": "CP",
+       "baseline_end": "2026-07-22",
+       "live_end": "2026-07-27",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-22"
+      },
+      {
+       "id": "22PZqFvVEPEE",
+       "name": "FRAMING: ROOF DECKING",
+       "type": "CP",
+       "baseline_end": "2026-07-28",
+       "live_end": "2026-08-01",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZqFvVMrC9",
+       "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
+       "type": "CP",
+       "baseline_end": "2026-07-29",
+       "live_end": "2026-08-03",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZqFvVpEFz",
+       "name": "ROOFING: INSTALL UNDERLAYMENT",
+       "type": "CP",
+       "baseline_end": "2026-07-29",
+       "live_end": "2026-08-03",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZqFvVCtd4",
+       "name": "FRAMING: EXECUTE EXTERIOR SHEATHING",
+       "type": "CP",
+       "baseline_end": "2026-07-25",
+       "live_end": "2026-07-30",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-25"
+      },
+      {
+       "id": "22PZqFvVVKA3",
+       "name": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
+       "type": "CP",
+       "baseline_end": "2026-07-30",
+       "live_end": "2026-08-04",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      }
+     ],
+     "anchor": "monthly"
+    }
+   ],
+   "daily": [
+    {
+     "date": "2026-07-06",
+     "real": 0,
+     "real_pct": 0.0,
+     "plan": 0,
+     "plan_pct": 0.0
+    },
+    {
+     "date": "2026-07-07",
+     "real": 0,
+     "real_pct": 0.0,
+     "plan": 1,
+     "plan_pct": 6.7
+    },
+    {
+     "date": "2026-07-08",
+     "real": 0,
+     "real_pct": 0.0,
+     "plan": 3,
+     "plan_pct": 20.0
+    },
+    {
+     "date": "2026-07-09",
+     "real": 1,
+     "real_pct": 6.7,
+     "plan": 6,
+     "plan_pct": 40.0
+    },
+    {
+     "date": "2026-07-10",
+     "real": 2,
+     "real_pct": 13.3,
+     "plan": 7,
+     "plan_pct": 46.7
     }
    ]
   },
@@ -779,22 +1641,24 @@
    "pms": [
     "Angel Pacheco"
    ],
-   "total_target": 25,
+   "total_target": 29,
    "due_to_today": 9,
    "done_total": 3,
    "done_due": 3,
-   "monthly_pct": 12.0,
+   "monthly_pct": 10.3,
    "adherence": 33.3,
    "band": "red",
-   "runner_pct": 12.0,
-   "ghost_pct": 36.0,
+   "runner_pct": 10.3,
+   "ghost_pct": 31.0,
    "runner_date": "2026-07-08",
    "finish_date": "2026-07-31",
-   "days_pct": 22.6,
-   "ghost_days_pct": 33.9,
-   "total_days": 62.0,
+   "days_pct": 21.2,
+   "ghost_days_pct": 31.8,
+   "total_days": 66.0,
    "earned_days": 14.0,
-   "gap": 11.3,
+   "plan_days": 21.0,
+   "city_inspections": 4,
+   "gap": 10.6,
    "status": "behind",
    "salvable": false,
    "save_tasks": [],
@@ -807,12 +1671,12 @@
    ],
    "month_forecast": {
     "status": "at_risk",
-    "projected_pct": 98.4,
+    "projected_pct": 98.5,
     "plan_pct": 100.0,
     "leaked_count": 1,
     "leaked_days": 1.0,
-    "leaked_pct": 1.6,
-    "reshuffled_in_month": 18,
+    "leaked_pct": 1.5,
+    "reshuffled_in_month": 22,
     "leaked": [
      {
       "name": "PROJECT DELIVERY: DELIVERY",
@@ -1004,6 +1868,46 @@
      "depends_on": []
     },
     {
+     "id": "22PZpKAvmiDj",
+     "name": "ELECTRICAL: CITY INSPECTION",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-07-29",
+     "current_end": "2026-07-29",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKB8D6zM",
+     "name": "MECHANICAL: CITY INSPECTION",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-07-29",
+     "current_end": "2026-07-29",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKAjKvg8",
+     "name": "PLUMBING: CITY INSPECTION",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-07-29",
+     "current_end": "2026-07-29",
+     "moved_days": 5,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKCERzKp",
+     "name": "FINAL INSPECTIONS: CITY INSPECTION",
+     "baseline_end": "2026-07-25",
+     "live_end": "2026-07-31",
+     "current_end": "2026-07-31",
+     "moved_days": 6,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
      "id": "22PZq7FAkZK7",
      "name": "PAINT TOUCH UPS",
      "baseline_end": "2026-07-30",
@@ -1019,7 +1923,7 @@
     17160.58
    ],
    "margin_pct": 38.4,
-   "moved_count": 19,
+   "moved_count": 23,
    "moved": [
     {
      "id": "22PZpK9rGkCL",
@@ -1050,10 +1954,38 @@
      "days": 7
     },
     {
+     "id": "22PZpKCERzKp",
+     "name": "FINAL INSPECTIONS: CITY INSPECTION",
+     "from": "2026-07-25",
+     "to": "2026-07-31",
+     "days": 6
+    },
+    {
      "id": "22PZpKAigegG",
      "name": "PLUMBING: INSTALL PLUMBING TRIM",
      "from": "2026-07-23",
      "to": "2026-07-28",
+     "days": 5
+    },
+    {
+     "id": "22PZpKAjKvg8",
+     "name": "PLUMBING: CITY INSPECTION",
+     "from": "2026-07-24",
+     "to": "2026-07-29",
+     "days": 5
+    },
+    {
+     "id": "22PZpKAvmiDj",
+     "name": "ELECTRICAL: CITY INSPECTION",
+     "from": "2026-07-24",
+     "to": "2026-07-29",
+     "days": 5
+    },
+    {
+     "id": "22PZpKB8D6zM",
+     "name": "MECHANICAL: CITY INSPECTION",
+     "from": "2026-07-24",
+     "to": "2026-07-29",
      "days": 5
     },
     {
@@ -1340,6 +2272,21 @@
      "target_due": "2026-07-17",
      "tasks": [
       {
+       "id": "22PZpKA3WxLB",
+       "name": "FLOORING: INSTALL HARDWOOD",
+       "type": "CP",
+       "baseline_end": "2026-07-10",
+       "live_end": "2026-07-13",
+       "moved_days": 3,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-10"
+      },
+      {
        "id": "22PZpKBTvVsa",
        "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
        "type": "CP",
@@ -1352,6 +2299,36 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZpK8MBkUP",
+       "name": "KITCHEN TILES: BACKSPLASH INSTALLATION",
+       "type": "CP",
+       "baseline_end": "2026-07-09",
+       "live_end": "2026-07-13",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-09"
+      },
+      {
+       "id": "22PZpK9qcNK7",
+       "name": "TILES: WET AREAS WATERPROOFING",
+       "type": "CP",
+       "baseline_end": "2026-07-09",
+       "live_end": "2026-07-13",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-09"
       },
       {
        "id": "22PZtcszppfU",
@@ -1380,6 +2357,36 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZpKBJ8jsh",
+       "name": "DECKING: INSTALL DECKING",
+       "type": "CP",
+       "baseline_end": "2026-07-21",
+       "live_end": "2026-07-18",
+       "moved_days": -3,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-21"
+      },
+      {
+       "id": "22PZpK9rGkCL",
+       "name": "TILES: INSTALL TILES",
+       "type": "CP",
+       "baseline_end": "2026-07-10",
+       "live_end": "2026-07-18",
+       "moved_days": 8,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-10"
       }
      ],
      "anchor": "monthly"
@@ -1388,15 +2395,30 @@
      "label": "Week 3 · Jul 20-26",
      "deadline": "2026-07-26",
      "is_current": false,
-     "total": 9,
+     "total": 13,
      "done": 0,
-     "days_planned": 33.0,
+     "days_planned": 37.0,
      "days_earned": 0.0,
      "pct": 0.0,
-     "target_task": "CLEANING: CLEANING",
-     "target_type": "AT",
-     "target_due": "2026-07-24",
+     "target_task": "FINAL INSPECTIONS: CITY INSPECTION",
+     "target_type": "CI",
+     "target_due": "2026-07-25",
      "tasks": [
+      {
+       "id": "22PZtcszppfU",
+       "name": "BASEBOARD & TRIM: INSTALL",
+       "type": "CP",
+       "baseline_end": "2026-07-14",
+       "live_end": "2026-07-21",
+       "moved_days": 7,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-14"
+      },
       {
        "id": "22PZpKBqLfMY",
        "name": "BRICKS: INSTALL BRICKS",
@@ -1438,6 +2460,21 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZpKBTvVsa",
+       "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
+       "type": "CP",
+       "baseline_end": "2026-07-13",
+       "live_end": "2026-07-21",
+       "moved_days": 8,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-13"
       },
       {
        "id": "22PZpKAvBGym",
@@ -1510,12 +2547,83 @@
        "was": null
       },
       {
+       "id": "22PZpKAP39Ee",
+       "name": "CARPENTRY: PREFAB CABINETS INSTALLATION",
+       "type": "CP",
+       "baseline_end": "2026-07-17",
+       "live_end": "2026-07-24",
+       "moved_days": 7,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-17"
+      },
+      {
        "id": "22PZpKCFaaqg",
        "name": "CLEANING: CLEANING",
        "type": "AT",
        "baseline_end": "2026-07-24",
        "live_end": "2026-07-29",
        "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpKAvmiDj",
+       "name": "ELECTRICAL: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-24",
+       "live_end": "2026-07-29",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpKB8D6zM",
+       "name": "MECHANICAL: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-24",
+       "live_end": "2026-07-29",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpKAjKvg8",
+       "name": "PLUMBING: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-24",
+       "live_end": "2026-07-29",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpKCERzKp",
+       "name": "FINAL INSPECTIONS: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-25",
+       "live_end": "2026-07-31",
+       "moved_days": 6,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -1540,6 +2648,111 @@
      "target_due": "2026-07-31",
      "tasks": [
       {
+       "id": "22PZpKAvBGym",
+       "name": "ELECTRICAL: ELECTRICAL TRIM",
+       "type": "CP",
+       "baseline_end": "2026-07-23",
+       "live_end": "2026-07-27",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-23"
+      },
+      {
+       "id": "22PZpKC3L9j4",
+       "name": "GUTTERS: INSTALL GUTTERS",
+       "type": "AT",
+       "baseline_end": "2026-07-23",
+       "live_end": "2026-07-27",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-23"
+      },
+      {
+       "id": "22PZpKAigegG",
+       "name": "PLUMBING: INSTALL PLUMBING TRIM",
+       "type": "CP",
+       "baseline_end": "2026-07-23",
+       "live_end": "2026-07-28",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-23"
+      },
+      {
+       "id": "22PZpKCFaaqg",
+       "name": "CLEANING: CLEANING",
+       "type": "AT",
+       "baseline_end": "2026-07-24",
+       "live_end": "2026-07-29",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-24"
+      },
+      {
+       "id": "22PZpKAvmiDj",
+       "name": "ELECTRICAL: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-24",
+       "live_end": "2026-07-29",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-24"
+      },
+      {
+       "id": "22PZpKB8D6zM",
+       "name": "MECHANICAL: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-24",
+       "live_end": "2026-07-29",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-24"
+      },
+      {
+       "id": "22PZpKAjKvg8",
+       "name": "PLUMBING: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-24",
+       "live_end": "2026-07-29",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-24"
+      },
+      {
        "id": "22PZq7FAkZK7",
        "name": "PAINT TOUCH UPS",
        "type": "CP",
@@ -1552,6 +2765,21 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZpKCERzKp",
+       "name": "FINAL INSPECTIONS: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-25",
+       "live_end": "2026-07-31",
+       "moved_days": 6,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-25"
       },
       {
        "id": "22PZpKCjBHpp",
@@ -1582,30 +2810,30 @@
     {
      "date": "2026-07-07",
      "real": 2,
-     "real_pct": 8.0,
+     "real_pct": 6.9,
      "plan": 1,
-     "plan_pct": 4.0
+     "plan_pct": 3.4
     },
     {
      "date": "2026-07-08",
      "real": 2,
-     "real_pct": 8.0,
+     "real_pct": 6.9,
      "plan": 2,
-     "plan_pct": 8.0
+     "plan_pct": 6.9
     },
     {
      "date": "2026-07-09",
      "real": 2,
-     "real_pct": 8.0,
+     "real_pct": 6.9,
      "plan": 6,
-     "plan_pct": 24.0
+     "plan_pct": 20.7
     },
     {
      "date": "2026-07-10",
      "real": 3,
-     "real_pct": 12.0,
+     "real_pct": 10.3,
      "plan": 9,
-     "plan_pct": 36.0
+     "plan_pct": 31.0
     }
    ]
   },
@@ -1616,22 +2844,24 @@
    "pms": [
     "Giselle Garcia"
    ],
-   "total_target": 21,
-   "due_to_today": 8,
-   "done_total": 3,
-   "done_due": 3,
-   "monthly_pct": 14.3,
-   "adherence": 37.5,
+   "total_target": 25,
+   "due_to_today": 9,
+   "done_total": 4,
+   "done_due": 4,
+   "monthly_pct": 16.0,
+   "adherence": 44.4,
    "band": "red",
-   "runner_pct": 14.3,
-   "ghost_pct": 38.1,
+   "runner_pct": 16.0,
+   "ghost_pct": 36.0,
    "runner_date": "2026-07-07",
-   "finish_date": "2026-07-25",
-   "days_pct": 20.5,
-   "ghost_days_pct": 40.9,
-   "total_days": 44.0,
-   "earned_days": 9.0,
-   "gap": 20.5,
+   "finish_date": "2026-07-29",
+   "days_pct": 20.8,
+   "ghost_days_pct": 39.6,
+   "total_days": 48.0,
+   "earned_days": 10.0,
+   "plan_days": 19.0,
+   "city_inspections": 4,
+   "gap": 18.8,
    "status": "behind",
    "salvable": false,
    "save_tasks": [],
@@ -1649,7 +2879,7 @@
     "leaked_count": 0,
     "leaked_days": 0.0,
     "leaked_pct": 0.0,
-    "reshuffled_in_month": 14,
+    "reshuffled_in_month": 16,
     "leaked": []
    },
    "cp_chain": [
@@ -1659,6 +2889,16 @@
      "baseline_end": "2026-07-01",
      "live_end": "2026-07-01",
      "current_end": "2026-07-01",
+     "moved_days": 0,
+     "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzYx9EYq",
+     "name": "CITY INSPECTION - SHEETROCK",
+     "baseline_end": "2026-07-02",
+     "live_end": "2026-07-02",
+     "current_end": "2026-07-02",
      "moved_days": 0,
      "status": "done",
      "depends_on": []
@@ -1784,6 +3024,16 @@
      "depends_on": []
     },
     {
+     "id": "22PaCcN67shT",
+     "name": "ELECTRICAL: CITY INSPECTION",
+     "baseline_end": "2026-07-27",
+     "live_end": "2026-07-22",
+     "current_end": "2026-07-22",
+     "moved_days": -5,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
      "id": "22PZpzb9pfS3",
      "name": "FINAL PUNCH LIST: WORK ON FINAL PUNCH LIST",
      "baseline_end": "2026-07-24",
@@ -1791,6 +3041,16 @@
      "current_end": "2026-07-24",
      "moved_days": 0,
      "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzZ6deGC",
+     "name": "INSULTATION: CITY INSPECTION",
+     "baseline_end": "2026-07-18",
+     "live_end": "2026-07-24",
+     "current_end": "2026-07-24",
+     "moved_days": 6,
+     "status": "moved",
      "depends_on": []
     },
     {
@@ -1802,6 +3062,16 @@
      "moved_days": 0,
      "status": "pending",
      "depends_on": []
+    },
+    {
+     "id": "22PZpzbCr8TZ",
+     "name": "DELIVERY",
+     "baseline_end": "2026-07-29",
+     "live_end": "2026-07-29",
+     "current_end": "2026-07-29",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
     }
    ],
    "july_money": [
@@ -1809,7 +3079,7 @@
     29486.08
    ],
    "margin_pct": 50.5,
-   "moved_count": 14,
+   "moved_count": 16,
    "moved": [
     {
      "id": "22PZqBFLKrWf",
@@ -1833,6 +3103,13 @@
      "days": 6
     },
     {
+     "id": "22PZpzZ6deGC",
+     "name": "INSULTATION: CITY INSPECTION",
+     "from": "2026-07-18",
+     "to": "2026-07-24",
+     "days": 6
+    },
+    {
      "id": "22PZpzZniKVa",
      "name": "INSTALL FIREPLACE MANTEL",
      "from": "2026-07-10",
@@ -1845,6 +3122,13 @@
      "from": "2026-07-11",
      "to": "2026-07-17",
      "days": 6
+    },
+    {
+     "id": "22PaCcN67shT",
+     "name": "ELECTRICAL: CITY INSPECTION",
+     "from": "2026-07-27",
+     "to": "2026-07-22",
+     "days": -5
     },
     {
      "id": "22PZpzZEdsse",
@@ -2015,13 +3299,13 @@
      "label": "Week 2 · Jul 13-19",
      "deadline": "2026-07-19",
      "is_current": false,
-     "total": 8,
+     "total": 9,
      "done": 0,
-     "days_planned": 19.0,
+     "days_planned": 20.0,
      "days_earned": 0.0,
      "pct": 0.0,
-     "target_task": "COUNTERTOPS: INSTALLATION",
-     "target_type": "CP",
+     "target_task": "INSULTATION: CITY INSPECTION",
+     "target_type": "CI",
      "target_due": "2026-07-18",
      "tasks": [
       {
@@ -2095,6 +3379,36 @@
        "was": null
       },
       {
+       "id": "22PZpzZniKVa",
+       "name": "INSTALL FIREPLACE MANTEL",
+       "type": "AT",
+       "baseline_end": "2026-07-10",
+       "live_end": "2026-07-16",
+       "moved_days": 6,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-10"
+      },
+      {
+       "id": "22PZqCDQs9sU",
+       "name": "TILES: INSTALL TILES (BACKSPLASH)",
+       "type": "AT",
+       "baseline_end": "2026-07-09",
+       "live_end": "2026-07-16",
+       "moved_days": 7,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-09"
+      },
+      {
        "id": "22PZpzakrkQ9",
        "name": "ELECTRICAL TRIM: INSTALLATION",
        "type": "CP",
@@ -2123,6 +3437,21 @@
        "was": null
       },
       {
+       "id": "22PZwrv8gWbG",
+       "name": "WINDOW SHUTTERS: INSTALLATION",
+       "type": "AT",
+       "baseline_end": "2026-07-11",
+       "live_end": "2026-07-17",
+       "moved_days": 6,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-11"
+      },
+      {
        "id": "22PZpzaFfVTZ",
        "name": "COUNTERTOPS: INSTALLATION",
        "type": "CP",
@@ -2135,6 +3464,35 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZpzZ6deGC",
+       "name": "INSULTATION: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-18",
+       "live_end": "2026-07-24",
+       "moved_days": 6,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpzaa3FGb",
+       "name": "PLUMBING TRIM: INSTALLATION",
+       "type": "CP",
+       "baseline_end": "2026-07-21",
+       "live_end": "2026-07-18",
+       "moved_days": -3,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-21"
       }
      ],
      "anchor": "monthly"
@@ -2167,6 +3525,21 @@
        "was": null
       },
       {
+       "id": "22PaCcN67shT",
+       "name": "ELECTRICAL: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-27",
+       "live_end": "2026-07-22",
+       "moved_days": -5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-27"
+      },
+      {
        "id": "22PZwrcQBAuZ",
        "name": "ELECTRICAL MAIN PANEL INSTALLATION",
        "type": "CP",
@@ -2181,6 +3554,36 @@
        "was": null
       },
       {
+       "id": "22PZqBFLKrWf",
+       "name": "FLOORING: INSTALL NEW CARPET",
+       "type": "AT",
+       "baseline_end": "2026-07-07",
+       "live_end": "2026-07-23",
+       "moved_days": 16,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-07"
+      },
+      {
+       "id": "22PZpzZ5Vpj2",
+       "name": "INSULATION: INSULATE WALLS AND CEILING",
+       "type": "AT",
+       "baseline_end": "2026-07-17",
+       "live_end": "2026-07-23",
+       "moved_days": 6,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-17"
+      },
+      {
        "id": "22PZpzb9pfS3",
        "name": "FINAL PUNCH LIST: WORK ON FINAL PUNCH LIST",
        "type": "CP",
@@ -2193,6 +3596,21 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZpzZ6deGC",
+       "name": "INSULTATION: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-18",
+       "live_end": "2026-07-24",
+       "moved_days": 6,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-18"
       },
       {
        "id": "22PZqEkJ8qkP",
@@ -2215,571 +3633,38 @@
      "label": "Week 4 · Jul 27-Aug 2",
      "deadline": "2026-08-02",
      "is_current": false,
-     "total": 0,
+     "total": 2,
      "done": 0,
-     "days_planned": 0.0,
+     "days_planned": 2.0,
      "days_earned": 0.0,
-     "pct": null,
-     "target_task": null,
-     "target_type": null,
-     "target_due": null,
-     "tasks": [],
-     "anchor": "monthly"
-    }
-   ],
-   "daily": [
-    {
-     "date": "2026-07-06",
-     "real": 2,
-     "real_pct": 9.5,
-     "plan": 3,
-     "plan_pct": 14.3
-    },
-    {
-     "date": "2026-07-07",
-     "real": 3,
-     "real_pct": 14.3,
-     "plan": 4,
-     "plan_pct": 19.0
-    },
-    {
-     "date": "2026-07-08",
-     "real": 3,
-     "real_pct": 14.3,
-     "plan": 5,
-     "plan_pct": 23.8
-    },
-    {
-     "date": "2026-07-09",
-     "real": 3,
-     "real_pct": 14.3,
-     "plan": 6,
-     "plan_pct": 28.6
-    },
-    {
-     "date": "2026-07-10",
-     "real": 3,
-     "real_pct": 14.3,
-     "plan": 8,
-     "plan_pct": 38.1
-    }
-   ]
-  },
-  {
-   "id": "22PMwhcSuqJD",
-   "name": "Karim-Merchant",
-   "client": "Karim Merchant",
-   "pms": [
-    "Giselle Garcia"
-   ],
-   "total_target": 12,
-   "due_to_today": 4,
-   "done_total": 2,
-   "done_due": 2,
-   "monthly_pct": 16.7,
-   "adherence": 50.0,
-   "band": "red",
-   "runner_pct": 16.7,
-   "ghost_pct": 33.3,
-   "runner_date": "2026-07-07",
-   "finish_date": "2026-07-30",
-   "days_pct": 36.7,
-   "ghost_days_pct": 43.3,
-   "total_days": 30.0,
-   "earned_days": 11.0,
-   "gap": 6.7,
-   "status": "warning",
-   "salvable": false,
-   "save_tasks": [],
-   "excluded_admin": [],
-   "month_forecast": {
-    "status": "behind",
-    "projected_pct": 83.3,
-    "plan_pct": 100.0,
-    "leaked_count": 4,
-    "leaked_days": 5.0,
-    "leaked_pct": 16.7,
-    "reshuffled_in_month": 6,
-    "leaked": [
-     {
-      "name": "FRAMING: ROOF DECKING",
-      "from": "2026-07-28",
-      "to": "2026-08-01",
-      "days": 2
-     },
-     {
-      "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
-      "from": "2026-07-29",
-      "to": "2026-08-03",
-      "days": 1
-     },
-     {
-      "name": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
-      "from": "2026-07-30",
-      "to": "2026-08-04",
-      "days": 1
-     },
-     {
-      "name": "ROOFING: INSTALL UNDERLAYMENT",
-      "from": "2026-07-29",
-      "to": "2026-08-03",
-      "days": 1
-     }
-    ]
-   },
-   "cp_chain": [
-    {
-     "id": "22PZqFvUvxgu",
-     "name": "FOUNDATION: DIG FOUNDATION",
-     "baseline_end": "2026-07-07",
-     "live_end": "2026-07-07",
-     "current_end": "2026-07-07",
-     "moved_days": 0,
-     "status": "done",
-     "depends_on": []
-    },
-    {
-     "id": "22PZqFvV3ZBb",
-     "name": "PLUMBING: EXECUTE IN GROUND PLUMBING",
-     "baseline_end": "2026-07-08",
-     "live_end": "2026-07-09",
-     "current_end": "2026-07-09",
-     "moved_days": 1,
-     "status": "done",
-     "depends_on": [
-      "FOUNDATION: CC CHECKLIST - PM INSPECTION (AFTER) - PLACE FORM BOARD"
-     ]
-    },
-    {
-     "id": "22PZqFvV2SUe",
-     "name": "ELECTRICAL: EXECUTE IN GROUND ELECTRICAL",
-     "baseline_end": "2026-07-08",
-     "live_end": "2026-07-10",
-     "current_end": "2026-07-10",
-     "moved_days": 2,
-     "status": "moved",
-     "depends_on": [
-      "FOUNDATION: CC CHECKLIST - PM INSPECTION (AFTER) - PLACE FORM BOARD",
-      "IN GROUND ELECTRICAL: CC CHECKLIST - PM INSPECTION (BEFORE)"
-     ]
-    },
-    {
-     "id": "22PaRbiiPSPi",
-     "name": "FOUNDATION: PLACE FORM BOARD",
-     "baseline_end": "2026-07-10",
-     "live_end": "2026-07-13",
-     "current_end": "2026-07-13",
-     "moved_days": 3,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PZqFvUxqCQ",
-     "name": "FOUNDATION: EXECUTE CONCRETE POUR",
-     "baseline_end": "2026-07-13",
-     "live_end": "2026-07-15",
-     "current_end": "2026-07-15",
-     "moved_days": 2,
-     "status": "moved",
-     "depends_on": [
-      "FOUNDATION: PRE-POUR CITY INSPECTION",
-      "FOUNDATION: PLACE FORM BOARD"
-     ]
-    },
-    {
-     "id": "22PZqFvUyZz2",
-     "name": "FOUNDATION: FOUNDATION CURE",
-     "baseline_end": "2026-07-18",
-     "live_end": "2026-07-23",
-     "current_end": "2026-07-23",
-     "moved_days": 5,
-     "status": "moved",
-     "depends_on": [
-      "FOUNDATION: EXECUTE CONCRETE POUR"
-     ]
-    },
-    {
-     "id": "22PZqFvVAHM2",
-     "name": "FRAMING: EXECUTE FRAMING",
-     "baseline_end": "2026-07-22",
-     "live_end": "2026-07-27",
-     "current_end": "2026-07-27",
-     "moved_days": 5,
-     "status": "moved",
-     "depends_on": [
-      "FOUNDATION: FOUNDATION CURE",
-      "FRAMING: PURCHASE MATERIALS",
-      "FRAMING: DELIVERY ETA",
-      "FRAMING: CC CHECKLIST - PM INSPECTION (BEFORE)",
-      "FRAMING: BILL & PAYMENT DOWNPAYMENT"
-     ]
-    },
-    {
-     "id": "22PZqFvVCtd4",
-     "name": "FRAMING: EXECUTE EXTERIOR SHEATHING",
-     "baseline_end": "2026-07-25",
-     "live_end": "2026-07-30",
-     "current_end": "2026-07-30",
-     "moved_days": 5,
-     "status": "moved",
-     "depends_on": [
-      "FRAMING: EXECUTE FRAMING",
-      "EXTERIOR SHEATING: PURCHASE MATERIALS"
-     ]
-    },
-    {
-     "id": "22PZqFvVEPEE",
-     "name": "FRAMING: ROOF DECKING",
-     "baseline_end": "2026-07-28",
-     "live_end": "2026-08-01",
-     "current_end": "2026-08-01",
-     "moved_days": 4,
-     "status": "moved",
-     "depends_on": [
-      "FRAMING: EXECUTE EXTERIOR SHEATHING"
-     ]
-    },
-    {
-     "id": "22PZqFvVMrC9",
-     "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
-     "baseline_end": "2026-07-29",
-     "live_end": "2026-08-03",
-     "current_end": "2026-08-03",
-     "moved_days": 5,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PZqFvVpEFz",
-     "name": "ROOFING: INSTALL UNDERLAYMENT",
-     "baseline_end": "2026-07-29",
-     "live_end": "2026-08-03",
-     "current_end": "2026-08-03",
-     "moved_days": 5,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PZqFvVVKA3",
-     "name": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
-     "baseline_end": "2026-07-30",
-     "live_end": "2026-08-04",
-     "current_end": "2026-08-04",
-     "moved_days": 5,
-     "status": "moved",
-     "depends_on": []
-    }
-   ],
-   "july_money": [
-    10737.58,
-    8699.59
-   ],
-   "margin_pct": 37.3,
-   "moved_count": 11,
-   "moved": [
-    {
-     "id": "22PZqFvUyZz2",
-     "name": "FOUNDATION: FOUNDATION CURE",
-     "from": "2026-07-18",
-     "to": "2026-07-23",
-     "days": 5
-    },
-    {
-     "id": "22PZqFvVAHM2",
-     "name": "FRAMING: EXECUTE FRAMING",
-     "from": "2026-07-22",
-     "to": "2026-07-27",
-     "days": 5
-    },
-    {
-     "id": "22PZqFvVCtd4",
-     "name": "FRAMING: EXECUTE EXTERIOR SHEATHING",
-     "from": "2026-07-25",
-     "to": "2026-07-30",
-     "days": 5
-    },
-    {
-     "id": "22PZqFvVMrC9",
-     "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
-     "from": "2026-07-29",
-     "to": "2026-08-03",
-     "days": 5
-    },
-    {
-     "id": "22PZqFvVVKA3",
-     "name": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
-     "from": "2026-07-30",
-     "to": "2026-08-04",
-     "days": 5
-    },
-    {
-     "id": "22PZqFvVpEFz",
-     "name": "ROOFING: INSTALL UNDERLAYMENT",
-     "from": "2026-07-29",
-     "to": "2026-08-03",
-     "days": 5
-    },
-    {
-     "id": "22PZqFvVEPEE",
-     "name": "FRAMING: ROOF DECKING",
-     "from": "2026-07-28",
-     "to": "2026-08-01",
-     "days": 4
-    },
-    {
-     "id": "22PaRbiiPSPi",
-     "name": "FOUNDATION: PLACE FORM BOARD",
-     "from": "2026-07-10",
-     "to": "2026-07-13",
-     "days": 3
-    },
-    {
-     "id": "22PZqFvUxqCQ",
-     "name": "FOUNDATION: EXECUTE CONCRETE POUR",
-     "from": "2026-07-13",
-     "to": "2026-07-15",
-     "days": 2
-    },
-    {
-     "id": "22PZqFvV2SUe",
-     "name": "ELECTRICAL: EXECUTE IN GROUND ELECTRICAL",
-     "from": "2026-07-08",
-     "to": "2026-07-10",
-     "days": 2
-    },
-    {
-     "id": "22PZqFvV3ZBb",
-     "name": "PLUMBING: EXECUTE IN GROUND PLUMBING",
-     "from": "2026-07-08",
-     "to": "2026-07-09",
-     "days": 1
-    }
-   ],
-   "weeks": [
-    {
-     "label": "Week 1 · Jul 6-12",
-     "deadline": "2026-07-12",
-     "is_current": true,
-     "total": 4,
-     "done": 2,
-     "days_planned": 13.0,
-     "days_earned": 11.0,
-     "pct": 84.6,
-     "target_task": "FOUNDATION: PLACE FORM BOARD",
-     "target_type": "CP",
-     "target_due": "2026-07-10",
+     "pct": 0.0,
+     "target_task": "DELIVERY",
+     "target_type": "CI",
+     "target_due": "2026-07-29",
      "tasks": [
       {
-       "id": "22PZqFvUvxgu",
-       "name": "FOUNDATION: DIG FOUNDATION",
-       "type": "CP",
-       "baseline_end": "2026-07-07",
-       "live_end": "2026-07-07",
+       "id": "22PaCcN67shT",
+       "name": "ELECTRICAL: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-27",
+       "live_end": "2026-07-22",
+       "moved_days": -5,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpzbCr8TZ",
+       "name": "DELIVERY",
+       "type": "CI",
+       "baseline_end": "2026-07-29",
+       "live_end": "2026-07-29",
        "moved_days": 0,
-       "progress": 1,
-       "status": "done",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZqFvV2SUe",
-       "name": "ELECTRICAL: EXECUTE IN GROUND ELECTRICAL",
-       "type": "CP",
-       "baseline_end": "2026-07-08",
-       "live_end": "2026-07-10",
-       "moved_days": 2,
        "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZqFvV3ZBb",
-       "name": "PLUMBING: EXECUTE IN GROUND PLUMBING",
-       "type": "CP",
-       "baseline_end": "2026-07-08",
-       "live_end": "2026-07-09",
-       "moved_days": 1,
-       "progress": 1,
-       "status": "done",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PaRbiiPSPi",
-       "name": "FOUNDATION: PLACE FORM BOARD",
-       "type": "CP",
-       "baseline_end": "2026-07-10",
-       "live_end": "2026-07-13",
-       "moved_days": 3,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": true,
-       "pulled_in": false,
-       "was": null
-      }
-     ],
-     "anchor": "weekly"
-    },
-    {
-     "label": "Week 2 · Jul 13-19",
-     "deadline": "2026-07-19",
-     "is_current": false,
-     "total": 2,
-     "done": 0,
-     "days_planned": 6.0,
-     "days_earned": 0.0,
-     "pct": 0.0,
-     "target_task": "FOUNDATION: FOUNDATION CURE",
-     "target_type": "CP",
-     "target_due": "2026-07-18",
-     "tasks": [
-      {
-       "id": "22PZqFvUxqCQ",
-       "name": "FOUNDATION: EXECUTE CONCRETE POUR",
-       "type": "CP",
-       "baseline_end": "2026-07-13",
-       "live_end": "2026-07-15",
-       "moved_days": 2,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZqFvUyZz2",
-       "name": "FOUNDATION: FOUNDATION CURE",
-       "type": "CP",
-       "baseline_end": "2026-07-18",
-       "live_end": "2026-07-23",
-       "moved_days": 5,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      }
-     ],
-     "anchor": "monthly"
-    },
-    {
-     "label": "Week 3 · Jul 20-26",
-     "deadline": "2026-07-26",
-     "is_current": false,
-     "total": 2,
-     "done": 0,
-     "days_planned": 6.0,
-     "days_earned": 0.0,
-     "pct": 0.0,
-     "target_task": "FRAMING: EXECUTE EXTERIOR SHEATHING",
-     "target_type": "CP",
-     "target_due": "2026-07-25",
-     "tasks": [
-      {
-       "id": "22PZqFvVAHM2",
-       "name": "FRAMING: EXECUTE FRAMING",
-       "type": "CP",
-       "baseline_end": "2026-07-22",
-       "live_end": "2026-07-27",
-       "moved_days": 5,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZqFvVCtd4",
-       "name": "FRAMING: EXECUTE EXTERIOR SHEATHING",
-       "type": "CP",
-       "baseline_end": "2026-07-25",
-       "live_end": "2026-07-30",
-       "moved_days": 5,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      }
-     ],
-     "anchor": "monthly"
-    },
-    {
-     "label": "Week 4 · Jul 27-Aug 2",
-     "deadline": "2026-08-02",
-     "is_current": false,
-     "total": 4,
-     "done": 0,
-     "days_planned": 5.0,
-     "days_earned": 0.0,
-     "pct": 0.0,
-     "target_task": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
-     "target_type": "CP",
-     "target_due": "2026-07-30",
-     "tasks": [
-      {
-       "id": "22PZqFvVEPEE",
-       "name": "FRAMING: ROOF DECKING",
-       "type": "CP",
-       "baseline_end": "2026-07-28",
-       "live_end": "2026-08-01",
-       "moved_days": 4,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZqFvVMrC9",
-       "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
-       "type": "CP",
-       "baseline_end": "2026-07-29",
-       "live_end": "2026-08-03",
-       "moved_days": 5,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZqFvVpEFz",
-       "name": "ROOFING: INSTALL UNDERLAYMENT",
-       "type": "CP",
-       "baseline_end": "2026-07-29",
-       "live_end": "2026-08-03",
-       "moved_days": 5,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZqFvVVKA3",
-       "name": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
-       "type": "CP",
-       "baseline_end": "2026-07-30",
-       "live_end": "2026-08-04",
-       "moved_days": 5,
-       "progress": 0,
-       "status": "moved",
+       "status": "pending",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -2792,38 +3677,38 @@
    "daily": [
     {
      "date": "2026-07-06",
-     "real": 0,
-     "real_pct": 0.0,
-     "plan": 0,
-     "plan_pct": 0.0
+     "real": 3,
+     "real_pct": 12.0,
+     "plan": 4,
+     "plan_pct": 16.0
     },
     {
      "date": "2026-07-07",
-     "real": 0,
-     "real_pct": 0.0,
-     "plan": 1,
-     "plan_pct": 8.3
+     "real": 4,
+     "real_pct": 16.0,
+     "plan": 5,
+     "plan_pct": 20.0
     },
     {
      "date": "2026-07-08",
-     "real": 0,
-     "real_pct": 0.0,
-     "plan": 3,
-     "plan_pct": 25.0
+     "real": 4,
+     "real_pct": 16.0,
+     "plan": 6,
+     "plan_pct": 24.0
     },
     {
      "date": "2026-07-09",
-     "real": 1,
-     "real_pct": 8.3,
-     "plan": 3,
-     "plan_pct": 25.0
+     "real": 4,
+     "real_pct": 16.0,
+     "plan": 7,
+     "plan_pct": 28.0
     },
     {
      "date": "2026-07-10",
-     "real": 2,
-     "real_pct": 16.7,
-     "plan": 4,
-     "plan_pct": 33.3
+     "real": 4,
+     "real_pct": 16.0,
+     "plan": 9,
+     "plan_pct": 36.0
     }
    ]
   },
@@ -2834,34 +3719,36 @@
    "pms": [
     "Jeff"
    ],
-   "total_target": 20,
+   "total_target": 23,
    "due_to_today": 11,
    "done_total": 6,
    "done_due": 5,
-   "monthly_pct": 30.0,
+   "monthly_pct": 26.1,
    "adherence": 54.5,
    "band": "red",
-   "runner_pct": 30.0,
-   "ghost_pct": 55.0,
+   "runner_pct": 26.1,
+   "ghost_pct": 47.8,
    "runner_date": "2026-07-08",
-   "finish_date": "2026-07-27",
-   "days_pct": 49.5,
-   "ghost_days_pct": 61.6,
-   "total_days": 99.0,
+   "finish_date": "2026-07-29",
+   "days_pct": 48.0,
+   "ghost_days_pct": 59.8,
+   "total_days": 102.0,
    "earned_days": 49.0,
-   "gap": 12.1,
+   "plan_days": 61.0,
+   "city_inspections": 3,
+   "gap": 11.8,
    "status": "behind",
    "salvable": false,
    "save_tasks": [],
    "excluded_admin": [],
    "month_forecast": {
     "status": "behind",
-    "projected_pct": 87.9,
+    "projected_pct": 88.2,
     "plan_pct": 100.0,
     "leaked_count": 2,
     "leaked_days": 12.0,
-    "leaked_pct": 12.1,
-    "reshuffled_in_month": 8,
+    "leaked_pct": 11.8,
+    "reshuffled_in_month": 9,
     "leaked": [
      {
       "name": "ELECTRICAL ROUGH IN: EXECUTE",
@@ -2971,6 +3858,16 @@
      "depends_on": []
     },
     {
+     "id": "22PaCjS2mANX",
+     "name": "FRAMING & MEPS ROUGH IN INSPECTION",
+     "baseline_end": "2026-07-17",
+     "live_end": "2026-07-15",
+     "current_end": "2026-07-15",
+     "moved_days": -2,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
      "id": "22PZzWexBK6A",
      "name": "ROOFING: EXECUTE",
      "baseline_end": "2026-07-15",
@@ -3011,6 +3908,26 @@
      "depends_on": []
     },
     {
+     "id": "22PZzWVfUWhN",
+     "name": "INSULATION: CITY INSPECTION",
+     "baseline_end": "2026-07-29",
+     "live_end": "2026-07-29",
+     "current_end": "2026-07-29",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWfSdfDV",
+     "name": "INSULATION: CITY INSPECTION",
+     "baseline_end": "2026-07-29",
+     "live_end": "2026-07-29",
+     "current_end": "2026-07-29",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
      "id": "22PZzWm8eJ4B",
      "name": "FRAMING: EXECUTE",
      "baseline_end": "2026-07-04",
@@ -3026,7 +3943,7 @@
     56759.68
    ],
    "margin_pct": 31.8,
-   "moved_count": 11,
+   "moved_count": 12,
    "moved": [
     {
      "id": "22PZzWm8eJ4B",
@@ -3096,6 +4013,13 @@
      "name": "ELECTRICAL ROUGH IN: EXECUTE",
      "from": "2026-07-16",
      "to": "2026-07-14",
+     "days": -2
+    },
+    {
+     "id": "22PaCjS2mANX",
+     "name": "FRAMING & MEPS ROUGH IN INSPECTION",
+     "from": "2026-07-17",
+     "to": "2026-07-15",
      "days": -2
     },
     {
@@ -3239,14 +4163,14 @@
      "label": "Week 2 · Jul 13-19",
      "deadline": "2026-07-19",
      "is_current": false,
-     "total": 6,
+     "total": 7,
      "done": 1,
-     "days_planned": 43.0,
+     "days_planned": 44.0,
      "days_earned": 16.0,
-     "pct": 37.2,
-     "target_task": "PLUMBING ROUGH IN: EXECUTE",
-     "target_type": "AT",
-     "target_due": "2026-07-16",
+     "pct": 36.4,
+     "target_task": "FRAMING & MEPS ROUGH IN INSPECTION",
+     "target_type": "CI",
+     "target_due": "2026-07-17",
      "tasks": [
       {
        "id": "22PZzWesQkCw",
@@ -3275,6 +4199,36 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZzWUzYRut",
+       "name": "DOORS & WINDOWS: EXECUTE",
+       "type": "CP",
+       "baseline_end": "2026-07-10",
+       "live_end": "2026-07-15",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-10"
+      },
+      {
+       "id": "22PZzWV7qXWg",
+       "name": "MECHANICAL ROUGH IN: EXECUTE",
+       "type": "AT",
+       "baseline_end": "2026-07-10",
+       "live_end": "2026-07-15",
+       "moved_days": 5,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-10"
       },
       {
        "id": "22PZzWexBK6A",
@@ -3331,6 +4285,20 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PaCjS2mANX",
+       "name": "FRAMING & MEPS ROUGH IN INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-17",
+       "live_end": "2026-07-15",
+       "moved_days": -2,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
      ],
      "anchor": "monthly"
@@ -3361,6 +4329,21 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZzWVeTaGW",
+       "name": "INSULATION: EXECUTE",
+       "type": "CP",
+       "baseline_end": "2026-07-27",
+       "live_end": "2026-07-24",
+       "moved_days": -3,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-27"
       }
      ],
      "anchor": "monthly"
@@ -3369,14 +4352,14 @@
      "label": "Week 4 · Jul 27-Aug 2",
      "deadline": "2026-08-02",
      "is_current": false,
-     "total": 2,
+     "total": 4,
      "done": 0,
-     "days_planned": 9.0,
+     "days_planned": 11.0,
      "days_earned": 0.0,
      "pct": 0.0,
-     "target_task": "INSULATION: EXECUTE",
-     "target_type": "CP",
-     "target_due": "2026-07-27",
+     "target_task": "INSULATION: CITY INSPECTION",
+     "target_type": "CI",
+     "target_due": "2026-07-29",
      "tasks": [
       {
        "id": "22PZzWVeTaGW",
@@ -3405,6 +4388,34 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZzWVfUWhN",
+       "name": "INSULATION: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-29",
+       "live_end": "2026-07-29",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZzWfSdfDV",
+       "name": "INSULATION: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-29",
+       "live_end": "2026-07-29",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
      ],
      "anchor": "monthly"
@@ -3414,37 +4425,37 @@
     {
      "date": "2026-07-06",
      "real": 4,
-     "real_pct": 20.0,
+     "real_pct": 17.4,
      "plan": 6,
-     "plan_pct": 30.0
+     "plan_pct": 26.1
     },
     {
      "date": "2026-07-07",
      "real": 4,
-     "real_pct": 20.0,
+     "real_pct": 17.4,
      "plan": 7,
-     "plan_pct": 35.0
+     "plan_pct": 30.4
     },
     {
      "date": "2026-07-08",
      "real": 4,
-     "real_pct": 20.0,
+     "real_pct": 17.4,
      "plan": 7,
-     "plan_pct": 35.0
+     "plan_pct": 30.4
     },
     {
      "date": "2026-07-09",
      "real": 6,
-     "real_pct": 30.0,
+     "real_pct": 26.1,
      "plan": 9,
-     "plan_pct": 45.0
+     "plan_pct": 39.1
     },
     {
      "date": "2026-07-10",
      "real": 6,
-     "real_pct": 30.0,
+     "real_pct": 26.1,
      "plan": 11,
-     "plan_pct": 55.0
+     "plan_pct": 47.8
     }
    ]
   },
@@ -3455,34 +4466,36 @@
    "pms": [
     "Giselle Garcia"
    ],
-   "total_target": 18,
+   "total_target": 25,
    "due_to_today": 5,
    "done_total": 3,
    "done_due": 3,
-   "monthly_pct": 16.7,
+   "monthly_pct": 12.0,
    "adherence": 60.0,
    "band": "red",
-   "runner_pct": 16.7,
-   "ghost_pct": 27.8,
+   "runner_pct": 12.0,
+   "ghost_pct": 20.0,
    "runner_date": "2026-07-08",
    "finish_date": "2026-07-31",
-   "days_pct": 23.2,
-   "ghost_days_pct": 28.6,
-   "total_days": 56.0,
+   "days_pct": 20.6,
+   "ghost_days_pct": 25.4,
+   "total_days": 63.0,
    "earned_days": 13.0,
-   "gap": 5.4,
+   "plan_days": 16.0,
+   "city_inspections": 7,
+   "gap": 4.8,
    "status": "warning",
    "salvable": false,
    "save_tasks": [],
    "excluded_admin": [],
    "month_forecast": {
     "status": "at_risk",
-    "projected_pct": 98.2,
+    "projected_pct": 98.4,
     "plan_pct": 100.0,
     "leaked_count": 1,
     "leaked_days": 1.0,
-    "leaked_pct": 1.8,
-    "reshuffled_in_month": 11,
+    "leaked_pct": 1.6,
+    "reshuffled_in_month": 17,
     "leaked": [
      {
       "name": "PROJECT CLEANING - SHEETROCK: PROJECT CLEANING / HAUL",
@@ -3593,11 +4606,75 @@
      "depends_on": []
     },
     {
+     "id": "22PZpJfGTrqV",
+     "name": "ELECTRICAL ROUGH IN: CITY INSPECTION",
+     "baseline_end": "2026-07-19",
+     "live_end": "2026-07-20",
+     "current_end": "2026-07-20",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJeTBBJ6",
+     "name": "FRAMING: REQUEST CITY INSPECTION",
+     "baseline_end": "2026-07-20",
+     "live_end": "2026-07-20",
+     "current_end": "2026-07-20",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": [
+      "PLUMBING ROUGH IN: CITY INSPECTION",
+      "MECHANICAL ROUGH IN: CITY INSPECTION",
+      "ELECTRICAL ROUGH IN: CITY INSPECTION"
+     ]
+    },
+    {
+     "id": "22PZpJf9c9mT",
+     "name": "MECHANICAL ROUGH IN: CITY INSPECTION",
+     "baseline_end": "2026-07-19",
+     "live_end": "2026-07-20",
+     "current_end": "2026-07-20",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJf2dNpM",
+     "name": "PLUMBING ROUGH IN: CITY INSPECTION",
+     "baseline_end": "2026-07-19",
+     "live_end": "2026-07-21",
+     "current_end": "2026-07-21",
+     "moved_days": 2,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
      "id": "22PZpJfP8HdN",
      "name": "INSULATION: INSULATE WALLS AND CEILING",
      "baseline_end": "2026-07-21",
      "live_end": "2026-07-22",
      "current_end": "2026-07-22",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJfPsGRu",
+     "name": "INSULATION: ENERGY EFFICIENCY REPORT",
+     "baseline_end": "2026-07-22",
+     "live_end": "2026-07-23",
+     "current_end": "2026-07-23",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJfQQ9CU",
+     "name": "INSULATION: CITY INSPECTION",
+     "baseline_end": "2026-07-23",
+     "live_end": "2026-07-24",
+     "current_end": "2026-07-24",
      "moved_days": 1,
      "status": "moved",
      "depends_on": []
@@ -3610,6 +4687,16 @@
      "current_end": "2026-07-27",
      "moved_days": 0,
      "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJfaDEPW",
+     "name": "SHEETROCK: SCREW CITY INSPECTION",
+     "baseline_end": "2026-07-28",
+     "live_end": "2026-07-29",
+     "current_end": "2026-07-29",
+     "moved_days": 1,
+     "status": "moved",
      "depends_on": []
     },
     {
@@ -3638,7 +4725,7 @@
     7161.55
    ],
    "margin_pct": 27.4,
-   "moved_count": 13,
+   "moved_count": 19,
    "moved": [
     {
      "id": "22PZpJeqBFWH",
@@ -3659,6 +4746,13 @@
      "name": "FRAMING: EXECUTE EXTERIOR SHEATING",
      "from": "2026-07-09",
      "to": "2026-07-11",
+     "days": 2
+    },
+    {
+     "id": "22PZpJf2dNpM",
+     "name": "PLUMBING ROUGH IN: CITY INSPECTION",
+     "from": "2026-07-19",
+     "to": "2026-07-21",
      "days": 2
     },
     {
@@ -3697,6 +4791,13 @@
      "days": 1
     },
     {
+     "id": "22PZpJf9c9mT",
+     "name": "MECHANICAL ROUGH IN: CITY INSPECTION",
+     "from": "2026-07-19",
+     "to": "2026-07-20",
+     "days": 1
+    },
+    {
      "id": "22PZpJfFy7dB",
      "name": "ELECTRICAL ROUGH IN: ELECTRICAL ROUGH IN",
      "from": "2026-07-18",
@@ -3704,10 +4805,31 @@
      "days": 1
     },
     {
+     "id": "22PZpJfGTrqV",
+     "name": "ELECTRICAL ROUGH IN: CITY INSPECTION",
+     "from": "2026-07-19",
+     "to": "2026-07-20",
+     "days": 1
+    },
+    {
      "id": "22PZpJfP8HdN",
      "name": "INSULATION: INSULATE WALLS AND CEILING",
      "from": "2026-07-21",
      "to": "2026-07-22",
+     "days": 1
+    },
+    {
+     "id": "22PZpJfPsGRu",
+     "name": "INSULATION: ENERGY EFFICIENCY REPORT",
+     "from": "2026-07-22",
+     "to": "2026-07-23",
+     "days": 1
+    },
+    {
+     "id": "22PZpJfQQ9CU",
+     "name": "INSULATION: CITY INSPECTION",
+     "from": "2026-07-23",
+     "to": "2026-07-24",
      "days": 1
     },
     {
@@ -3722,6 +4844,13 @@
      "name": "BRICKS: CITY INSPECTION - BRICK TIES",
      "from": "2026-07-22",
      "to": "2026-07-23",
+     "days": 1
+    },
+    {
+     "id": "22PZpJfaDEPW",
+     "name": "SHEETROCK: SCREW CITY INSPECTION",
+     "from": "2026-07-28",
+     "to": "2026-07-29",
      "days": 1
     },
     {
@@ -3795,14 +4924,14 @@
      "label": "Week 2 · Jul 13-19",
      "deadline": "2026-07-19",
      "is_current": false,
-     "total": 6,
+     "total": 9,
      "done": 0,
-     "days_planned": 29.0,
+     "days_planned": 32.0,
      "days_earned": 0.0,
      "pct": 0.0,
-     "target_task": "PLUMBING ROUGH IN: WASTE / WATER",
-     "target_type": "CP",
-     "target_due": "2026-07-18",
+     "target_task": "PLUMBING ROUGH IN: CITY INSPECTION",
+     "target_type": "CI",
+     "target_due": "2026-07-19",
      "tasks": [
       {
        "id": "22PZpJepgeCr",
@@ -3817,6 +4946,21 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZpJeehjUu",
+       "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
+       "type": "CP",
+       "baseline_end": "2026-07-10",
+       "live_end": "2026-07-14",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-10"
       },
       {
        "id": "22PZpJeqBFWH",
@@ -3887,6 +5031,48 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZpJfGTrqV",
+       "name": "ELECTRICAL ROUGH IN: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-19",
+       "live_end": "2026-07-20",
+       "moved_days": 1,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpJf9c9mT",
+       "name": "MECHANICAL ROUGH IN: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-19",
+       "live_end": "2026-07-20",
+       "moved_days": 1,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpJf2dNpM",
+       "name": "PLUMBING ROUGH IN: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-19",
+       "live_end": "2026-07-21",
+       "moved_days": 2,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
       }
      ],
      "anchor": "monthly"
@@ -3895,15 +5081,59 @@
      "label": "Week 3 · Jul 20-26",
      "deadline": "2026-07-26",
      "is_current": false,
-     "total": 4,
+     "total": 7,
      "done": 0,
-     "days_planned": 4.0,
+     "days_planned": 7.0,
      "days_earned": 0.0,
      "pct": 0.0,
-     "target_task": "BRICKS: CITY INSPECTION - BRICK TIES",
-     "target_type": "AT",
-     "target_due": "2026-07-22",
+     "target_task": "INSULATION: CITY INSPECTION",
+     "target_type": "CI",
+     "target_due": "2026-07-23",
      "tasks": [
+      {
+       "id": "22PZpJfGTrqV",
+       "name": "ELECTRICAL ROUGH IN: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-19",
+       "live_end": "2026-07-20",
+       "moved_days": 1,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-19"
+      },
+      {
+       "id": "22PZpJeTBBJ6",
+       "name": "FRAMING: REQUEST CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-20",
+       "live_end": "2026-07-20",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpJf9c9mT",
+       "name": "MECHANICAL ROUGH IN: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-19",
+       "live_end": "2026-07-20",
+       "moved_days": 1,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-19"
+      },
       {
        "id": "22PZpJhpLmm5",
        "name": "BRICKS: INSTALL BRICK TIES",
@@ -3947,11 +5177,54 @@
        "was": null
       },
       {
+       "id": "22PZpJf2dNpM",
+       "name": "PLUMBING ROUGH IN: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-19",
+       "live_end": "2026-07-21",
+       "moved_days": 2,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-19"
+      },
+      {
        "id": "22PZpJhpt2eN",
        "name": "BRICKS: CITY INSPECTION - BRICK TIES",
        "type": "AT",
        "baseline_end": "2026-07-22",
        "live_end": "2026-07-23",
+       "moved_days": 1,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpJfPsGRu",
+       "name": "INSULATION: ENERGY EFFICIENCY REPORT",
+       "type": "CI",
+       "baseline_end": "2026-07-22",
+       "live_end": "2026-07-23",
+       "moved_days": 1,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpJfQQ9CU",
+       "name": "INSULATION: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-23",
+       "live_end": "2026-07-24",
        "moved_days": 1,
        "progress": 0,
        "status": "moved",
@@ -3967,9 +5240,9 @@
      "label": "Week 4 · Jul 27-Aug 2",
      "deadline": "2026-08-02",
      "is_current": false,
-     "total": 3,
+     "total": 4,
      "done": 0,
-     "days_planned": 7.0,
+     "days_planned": 8.0,
      "days_earned": 0.0,
      "pct": 0.0,
      "target_task": "PROJECT CLEANING - SHEETROCK: PROJECT CLEANING / HAUL",
@@ -3989,6 +5262,35 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZpJfaDEPW",
+       "name": "SHEETROCK: SCREW CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-28",
+       "live_end": "2026-07-29",
+       "moved_days": 1,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PZpJeqBFWH",
+       "name": "ROOFING: INSTALL SHINGLES",
+       "type": "AT",
+       "baseline_end": "2026-07-17",
+       "live_end": "2026-07-30",
+       "moved_days": 13,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-17"
       },
       {
        "id": "22PZpJfahY9v",
@@ -4026,37 +5328,37 @@
     {
      "date": "2026-07-06",
      "real": 2,
-     "real_pct": 11.1,
+     "real_pct": 8.0,
      "plan": 2,
-     "plan_pct": 11.1
+     "plan_pct": 8.0
     },
     {
      "date": "2026-07-07",
      "real": 2,
-     "real_pct": 11.1,
+     "real_pct": 8.0,
      "plan": 2,
-     "plan_pct": 11.1
+     "plan_pct": 8.0
     },
     {
      "date": "2026-07-08",
      "real": 2,
-     "real_pct": 11.1,
+     "real_pct": 8.0,
      "plan": 2,
-     "plan_pct": 11.1
+     "plan_pct": 8.0
     },
     {
      "date": "2026-07-09",
      "real": 2,
-     "real_pct": 11.1,
+     "real_pct": 8.0,
      "plan": 3,
-     "plan_pct": 16.7
+     "plan_pct": 12.0
     },
     {
      "date": "2026-07-10",
      "real": 3,
-     "real_pct": 16.7,
+     "real_pct": 12.0,
      "plan": 5,
-     "plan_pct": 27.8
+     "plan_pct": 20.0
     }
    ]
   },
@@ -4067,22 +5369,24 @@
    "pms": [
     "Jeff"
    ],
-   "total_target": 17,
+   "total_target": 20,
    "due_to_today": 8,
    "done_total": 5,
    "done_due": 5,
-   "monthly_pct": 29.4,
+   "monthly_pct": 25.0,
    "adherence": 62.5,
    "band": "red",
-   "runner_pct": 29.4,
-   "ghost_pct": 47.1,
+   "runner_pct": 25.0,
+   "ghost_pct": 40.0,
    "runner_date": "2026-07-08",
    "finish_date": "2026-07-24",
-   "days_pct": 51.0,
-   "ghost_days_pct": 67.3,
-   "total_days": 49.0,
+   "days_pct": 48.1,
+   "ghost_days_pct": 63.5,
+   "total_days": 52.0,
    "earned_days": 25.0,
-   "gap": 16.3,
+   "plan_days": 33.0,
+   "city_inspections": 3,
+   "gap": 15.4,
    "status": "behind",
    "salvable": false,
    "save_tasks": [],
@@ -4094,7 +5398,7 @@
     "leaked_count": 0,
     "leaked_days": 0.0,
     "leaked_pct": 0.0,
-    "reshuffled_in_month": 9,
+    "reshuffled_in_month": 11,
     "leaked": []
    },
    "cp_chain": [
@@ -4181,6 +5485,26 @@
      ]
     },
     {
+     "id": "22PUT7AFdshz",
+     "name": "MECHANICAL: CITY INSPECTION",
+     "baseline_end": "2026-07-14",
+     "live_end": "2026-07-14",
+     "current_end": "2026-07-14",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PUT7JGaFjS",
+     "name": "ELECTRICAL: CITY INSPECTION",
+     "baseline_end": "2026-07-16",
+     "live_end": "2026-07-17",
+     "current_end": "2026-07-17",
+     "moved_days": 1,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
      "id": "22PJWeDkyxJ9",
      "name": "PLUMBING: INSTALL PLUMBING TRIM",
      "baseline_end": "2026-07-14",
@@ -4194,6 +5518,16 @@
       "PLUMBING: DELIVERY ETA",
       "PAINT: WALL FIX PAINT"
      ]
+    },
+    {
+     "id": "22PUT7PFFUJe",
+     "name": "PLUMBING: CITY INSPECTION",
+     "baseline_end": "2026-07-17",
+     "live_end": "2026-07-21",
+     "current_end": "2026-07-21",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": []
     },
     {
      "id": "22PJWewqDSU5",
@@ -4251,7 +5585,7 @@
     -7566.22
    ],
    "margin_pct": 3.5,
-   "moved_count": 10,
+   "moved_count": 12,
    "moved": [
     {
      "id": "22Pa5iUufEcM",
@@ -4272,6 +5606,13 @@
      "name": "AUTOMATIC GATE INSTALLATION",
      "from": "2026-07-18",
      "to": "2026-07-22",
+     "days": 4
+    },
+    {
+     "id": "22PUT7PFFUJe",
+     "name": "PLUMBING: CITY INSPECTION",
+     "from": "2026-07-17",
+     "to": "2026-07-21",
      "days": 4
     },
     {
@@ -4321,6 +5662,13 @@
      "name": "PAINT: WALL FIX PAINT",
      "from": "2026-07-08",
      "to": "2026-07-09",
+     "days": 1
+    },
+    {
+     "id": "22PUT7JGaFjS",
+     "name": "ELECTRICAL: CITY INSPECTION",
+     "from": "2026-07-16",
+     "to": "2026-07-17",
      "days": 1
     }
    ],
@@ -4485,15 +5833,89 @@
      "label": "Week 2 · Jul 13-19",
      "deadline": "2026-07-19",
      "is_current": false,
-     "total": 3,
+     "total": 6,
      "done": 0,
-     "days_planned": 10.0,
+     "days_planned": 13.0,
      "days_earned": 2.0,
-     "pct": 20.0,
+     "pct": 15.4,
      "target_task": "AUTOMATIC GATE INSTALLATION",
      "target_type": "CP",
      "target_due": "2026-07-18",
      "tasks": [
+      {
+       "id": "22Pa5iUufEcM",
+       "name": "CABINET: INSTALLATION OF DOORS",
+       "type": "AT",
+       "baseline_end": "2026-07-06",
+       "live_end": "2026-07-13",
+       "moved_days": 7,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-06"
+      },
+      {
+       "id": "22PVDYk5hi6N",
+       "name": "GLASS: INSTALL GLASS",
+       "type": "AT",
+       "baseline_end": "2026-07-11",
+       "live_end": "2026-07-13",
+       "moved_days": 2,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-11"
+      },
+      {
+       "id": "22PYA2rawv6G",
+       "name": "TILES: INSTALLATION OF NEW BACKSPLASH",
+       "type": "CP",
+       "baseline_end": "2026-07-09",
+       "live_end": "2026-07-13",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-09"
+      },
+      {
+       "id": "22PJWeDkzh6i",
+       "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
+       "type": "CP",
+       "baseline_end": "2026-07-11",
+       "live_end": "2026-07-14",
+       "moved_days": 3,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-11"
+      },
+      {
+       "id": "22PUT7AFdshz",
+       "name": "MECHANICAL: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-14",
+       "live_end": "2026-07-14",
+       "moved_days": 0,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
       {
        "id": "22PJWeDkyxJ9",
        "name": "PLUMBING: INSTALL PLUMBING TRIM",
@@ -4517,6 +5939,34 @@
        "moved_days": 0,
        "progress": 0,
        "status": "pending",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PUT7JGaFjS",
+       "name": "ELECTRICAL: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-16",
+       "live_end": "2026-07-17",
+       "moved_days": 1,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PUT7PFFUJe",
+       "name": "PLUMBING: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-17",
+       "live_end": "2026-07-21",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -4567,6 +6017,36 @@
        "was": null
       },
       {
+       "id": "22PUT7PFFUJe",
+       "name": "PLUMBING: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-17",
+       "live_end": "2026-07-21",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-17"
+      },
+      {
+       "id": "22PJWewqDSU5",
+       "name": "AUTOMATIC GATE INSTALLATION",
+       "type": "CP",
+       "baseline_end": "2026-07-18",
+       "live_end": "2026-07-22",
+       "moved_days": 4,
+       "progress": 0.85,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-18"
+      },
+      {
        "id": "22PJWeDm3ZaG",
        "name": "FINAL: PUNCH LIST COMPLETION",
        "type": "CP",
@@ -4609,7 +6089,38 @@
      "target_task": null,
      "target_type": null,
      "target_due": null,
-     "tasks": [],
+     "tasks": [
+      {
+       "id": "22PJWeDm3ZaG",
+       "name": "FINAL: PUNCH LIST COMPLETION",
+       "type": "CP",
+       "baseline_end": "2026-07-23",
+       "live_end": "2026-07-27",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-23"
+      },
+      {
+       "id": "22PJWeDm3wUZ",
+       "name": "FINAL INSPECTION",
+       "type": "CP",
+       "baseline_end": "2026-07-24",
+       "live_end": "2026-07-28",
+       "moved_days": 4,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-24"
+      }
+     ],
      "anchor": "monthly"
     }
    ],
@@ -4617,37 +6128,37 @@
     {
      "date": "2026-07-06",
      "real": 1,
-     "real_pct": 5.9,
+     "real_pct": 5.0,
      "plan": 2,
-     "plan_pct": 11.8
+     "plan_pct": 10.0
     },
     {
      "date": "2026-07-07",
      "real": 1,
-     "real_pct": 5.9,
+     "real_pct": 5.0,
      "plan": 5,
-     "plan_pct": 29.4
+     "plan_pct": 25.0
     },
     {
      "date": "2026-07-08",
      "real": 4,
-     "real_pct": 23.5,
+     "real_pct": 20.0,
      "plan": 6,
-     "plan_pct": 35.3
+     "plan_pct": 30.0
     },
     {
      "date": "2026-07-09",
      "real": 4,
-     "real_pct": 23.5,
+     "real_pct": 20.0,
      "plan": 7,
-     "plan_pct": 41.2
+     "plan_pct": 35.0
     },
     {
      "date": "2026-07-10",
      "real": 5,
-     "real_pct": 29.4,
+     "real_pct": 25.0,
      "plan": 8,
-     "plan_pct": 47.1
+     "plan_pct": 40.0
     }
    ]
   },
@@ -4658,22 +6169,24 @@
    "pms": [
     "Angel Pacheco"
    ],
-   "total_target": 11,
-   "due_to_today": 2,
-   "done_total": 2,
-   "done_due": 2,
-   "monthly_pct": 18.2,
+   "total_target": 12,
+   "due_to_today": 3,
+   "done_total": 3,
+   "done_due": 3,
+   "monthly_pct": 25.0,
    "adherence": 100.0,
    "band": "green",
-   "runner_pct": 18.2,
-   "ghost_pct": 18.2,
+   "runner_pct": 25.0,
+   "ghost_pct": 25.0,
    "runner_date": "2026-07-08",
    "finish_date": "2026-07-30",
-   "days_pct": 19.4,
-   "ghost_days_pct": 25.0,
-   "total_days": 36.0,
-   "earned_days": 7.0,
-   "gap": 5.6,
+   "days_pct": 21.6,
+   "ghost_days_pct": 27.0,
+   "total_days": 37.0,
+   "earned_days": 8.0,
+   "plan_days": 10.0,
+   "city_inspections": 1,
+   "gap": 5.4,
    "status": "warning",
    "salvable": false,
    "save_tasks": [],
@@ -4695,6 +6208,16 @@
     "leaked": []
    },
    "cp_chain": [
+    {
+     "id": "22PaFkcs3SA4",
+     "name": "PLUMBING CITY INSPECTION",
+     "baseline_end": "2026-07-07",
+     "live_end": "2026-07-08",
+     "current_end": "2026-07-08",
+     "moved_days": 1,
+     "status": "done",
+     "depends_on": []
+    },
     {
      "id": "22PZzzrXxmMg",
      "name": "DRYWALL: HANG SHEETROCK",
@@ -4771,7 +6294,7 @@
     13150.77
    ],
    "margin_pct": 32.0,
-   "moved_count": 10,
+   "moved_count": 11,
    "moved": [
     {
      "id": "22PZzzrrQAUm",
@@ -4806,6 +6329,13 @@
      "name": "PLUMNING FIX",
      "from": "2026-07-06",
      "to": "2026-07-07",
+     "days": 1
+    },
+    {
+     "id": "22PaFkcs3SA4",
+     "name": "PLUMBING CITY INSPECTION",
+     "from": "2026-07-07",
+     "to": "2026-07-08",
      "days": 1
     },
     {
@@ -4849,10 +6379,10 @@
      "label": "Week 1 · Jul 6-12",
      "deadline": "2026-07-12",
      "is_current": true,
-     "total": 2,
-     "done": 2,
-     "days_planned": 7.0,
-     "days_earned": 7.0,
+     "total": 3,
+     "done": 3,
+     "days_planned": 8.0,
+     "days_earned": 8.0,
      "pct": 100.0,
      "target_task": "DRYWALL: HANG SHEETROCK",
      "target_type": "CP",
@@ -4864,6 +6394,20 @@
        "type": "AT",
        "baseline_end": "2026-07-06",
        "live_end": "2026-07-07",
+       "moved_days": 1,
+       "progress": 1,
+       "status": "done",
+       "in_week_plan": true,
+       "kicked_out": false,
+       "pulled_in": false,
+       "was": null
+      },
+      {
+       "id": "22PaFkcs3SA4",
+       "name": "PLUMBING CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-07",
+       "live_end": "2026-07-08",
        "moved_days": 1,
        "progress": 1,
        "status": "done",
@@ -5019,6 +6563,21 @@
      "target_due": "2026-07-30",
      "tasks": [
       {
+       "id": "22PZzzrrQAUm",
+       "name": "GLASS: TAKE MEASUREMENTS",
+       "type": "AT",
+       "baseline_end": "2026-07-25",
+       "live_end": "2026-07-27",
+       "moved_days": 2,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-25"
+      },
+      {
        "id": "22PZzzrvq7n2",
        "name": "INTERIOR DOORS: INSTALL TRIM AND DOORS",
        "type": "CP",
@@ -5070,35 +6629,35 @@
      "real": 0,
      "real_pct": 0.0,
      "plan": 1,
-     "plan_pct": 9.1
+     "plan_pct": 8.3
     },
     {
      "date": "2026-07-07",
      "real": 1,
-     "real_pct": 9.1,
-     "plan": 1,
-     "plan_pct": 9.1
+     "real_pct": 8.3,
+     "plan": 2,
+     "plan_pct": 16.7
     },
     {
      "date": "2026-07-08",
-     "real": 1,
-     "real_pct": 9.1,
-     "plan": 2,
-     "plan_pct": 18.2
+     "real": 2,
+     "real_pct": 16.7,
+     "plan": 3,
+     "plan_pct": 25.0
     },
     {
      "date": "2026-07-09",
-     "real": 1,
-     "real_pct": 9.1,
-     "plan": 2,
-     "plan_pct": 18.2
+     "real": 2,
+     "real_pct": 16.7,
+     "plan": 3,
+     "plan_pct": 25.0
     },
     {
      "date": "2026-07-10",
-     "real": 2,
-     "real_pct": 18.2,
-     "plan": 2,
-     "plan_pct": 18.2
+     "real": 3,
+     "real_pct": 25.0,
+     "plan": 3,
+     "plan_pct": 25.0
     }
    ]
   }
