@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T19:31:11",
+  "generated_at": "2026-07-10T19:35:06",
   "week_iso": "2026-W28",
   "week_start": "2026-07-04",
   "week_end": "2026-07-10",
@@ -685,75 +685,9 @@
       "project_id": "22NxUEJKTj6C",
       "project_name": "Ginger Brown",
       "pm": "Milagros Porturas",
-      "group_count": 6,
+      "group_count": 3,
       "attribution": -1323.95,
       "groups": [
-        {
-          "project_id": "22NxUEJKTj6C",
-          "project_name": "Ginger Brown",
-          "group_id": "22PMhvM23LsP",
-          "group_name": "CLEANING",
-          "parent_group_id": "22PMhvM22xub",
-          "action_count": 1,
-          "action_task_ids": [
-            "22PMhvM23LsQ"
-          ],
-          "action_task_names": [
-            "CLEANING: FINAL CLEANING"
-          ],
-          "action_progresses": [
-            null
-          ],
-          "action_starts": [
-            "2026-07-08"
-          ],
-          "action_ends": [
-            "2026-07-08"
-          ],
-          "action_start_min": "2026-07-08",
-          "action_end_max": "2026-07-08",
-          "action_lines": [
-            {
-              "task_id": "22PMhvM23LsQ",
-              "name": "CLEANING: FINAL CLEANING",
-              "description": "",
-              "amount": 0.0,
-              "progress": null,
-              "end_date": "2026-07-08"
-            }
-          ],
-          "subs_lines": [
-            {
-              "task_id": "22PXPNeEUnPy",
-              "name": "Trash Pickup",
-              "description": "",
-              "amount": 0.0,
-              "progress": 1,
-              "end_date": "2026-05-22"
-            },
-            {
-              "task_id": "22PUmxbw4zdS",
-              "name": "CLEANING: BILL & PAYMENT",
-              "description": "-600",
-              "amount": 600.0,
-              "progress": null,
-              "end_date": "2026-07-17"
-            }
-          ],
-          "materials_lines": [],
-          "additional_lines": [],
-          "sold": 0.0,
-          "expenses_subs": 600.0,
-          "expenses_materials": 0,
-          "expenses_additional": 0,
-          "expenses_total": 600.0,
-          "profit": -600.0,
-          "status": "in_progress",
-          "has_price": false,
-          "this_pct": 0.0,
-          "attribution": 0.0,
-          "user_set": false
-        },
         {
           "project_id": "22NxUEJKTj6C",
           "project_name": "Ginger Brown",
@@ -762,33 +696,41 @@
           "parent_group_id": "22PMhvM22xuX",
           "action_count": 3,
           "action_task_ids": [
+            "22PMhvM22xup",
             "22PWP7BQj9Di",
-            "22PYbd5UdLFf",
-            "22PMhvM22xup"
+            "22PYbd5UdLFf"
           ],
           "action_task_names": [
+            "ELECTRICAL: ELECTRICAL TRIM",
             "MAIN PANEL INSTALLATION",
-            "ELECTRIC: ELECTRICAL fixes",
-            "ELECTRICAL: ELECTRICAL TRIM"
+            "ELECTRIC: ELECTRICAL fixes"
           ],
           "action_progresses": [
+            0.8,
             1,
-            1,
-            0.8
+            1
           ],
           "action_starts": [
+            "2026-06-30",
             "2026-05-05",
-            "2026-06-12",
-            "2026-06-30"
+            "2026-06-12"
           ],
           "action_ends": [
+            "2026-07-14",
             "2026-06-04",
-            "2026-06-13",
-            "2026-07-14"
+            "2026-06-13"
           ],
           "action_start_min": "2026-05-05",
           "action_end_max": "2026-07-14",
           "action_lines": [
+            {
+              "task_id": "22PMhvM22xup",
+              "name": "ELECTRICAL: ELECTRICAL TRIM",
+              "description": "7200",
+              "amount": 7200.0,
+              "progress": 0.8,
+              "end_date": "2026-07-14"
+            },
             {
               "task_id": "22PWP7BQj9Di",
               "name": "MAIN PANEL INSTALLATION",
@@ -804,14 +746,6 @@
               "amount": 0.0,
               "progress": 1,
               "end_date": "2026-06-13"
-            },
-            {
-              "task_id": "22PMhvM22xup",
-              "name": "ELECTRICAL: ELECTRICAL TRIM",
-              "description": "7200",
-              "amount": 7200.0,
-              "progress": 0.8,
-              "end_date": "2026-07-14"
             }
           ],
           "subs_lines": [
@@ -840,14 +774,6 @@
               "end_date": "2026-06-19"
             },
             {
-              "task_id": "22PY2y7HkpeM",
-              "name": "ELECTRIC: BILL DOWNPAYMENT - maybe (Copy)",
-              "description": "-750",
-              "amount": 750.0,
-              "progress": 1,
-              "end_date": "2026-06-11"
-            },
-            {
               "task_id": "22PWPCemfvKX",
               "name": "ELECTRIC TRIM: BILL PAYMENT",
               "description": "-750",
@@ -861,7 +787,15 @@
               "description": "-1500",
               "amount": 1500.0,
               "progress": null,
-              "end_date": "2026-07-31"
+              "end_date": "2026-07-17"
+            },
+            {
+              "task_id": "22PY2y7HkpeM",
+              "name": "ELECTRIC: BILL DOWNPAYMENT - maybe (Copy)",
+              "description": "-750",
+              "amount": 750.0,
+              "progress": 1,
+              "end_date": "2026-06-11"
             }
           ],
           "materials_lines": [
@@ -922,153 +856,76 @@
         {
           "project_id": "22NxUEJKTj6C",
           "project_name": "Ginger Brown",
-          "group_id": "22PMhvM23LsK",
-          "group_name": "FINAL BUILDING INSPECTION",
+          "group_id": "22PMhvM23Ls8",
+          "group_name": "INSTALL APPLIANCES",
           "parent_group_id": "22PMhvM22xuX",
-          "action_count": 1,
+          "action_count": 2,
           "action_task_ids": [
-            "22PMhvM23LsL"
+            "22PMhvM23LsA",
+            "22PWUue3mbGk"
           ],
           "action_task_names": [
-            "FINAL BUILDING INSPECTION"
+            "APPLIANCES: INSTALL APPLIANCES",
+            "ELECTRICAL TRIM (FIREPLACE): INSTALLATION"
           ],
           "action_progresses": [
-            null
+            null,
+            1
           ],
           "action_starts": [
-            "2026-07-10"
+            "2026-07-07",
+            "2026-06-17"
           ],
           "action_ends": [
-            "2026-07-10"
+            "2026-07-08",
+            "2026-06-17"
           ],
-          "action_start_min": "2026-07-10",
-          "action_end_max": "2026-07-10",
+          "action_start_min": "2026-06-17",
+          "action_end_max": "2026-07-08",
           "action_lines": [
             {
-              "task_id": "22PMhvM23LsL",
-              "name": "FINAL BUILDING INSPECTION",
-              "description": "8000",
-              "amount": 8000.0,
+              "task_id": "22PMhvM23LsA",
+              "name": "APPLIANCES: INSTALL APPLIANCES",
+              "description": "",
+              "amount": 0.0,
               "progress": null,
-              "end_date": "2026-07-10"
-            }
-          ],
-          "subs_lines": [],
-          "materials_lines": [],
-          "additional_lines": [],
-          "sold": 8000.0,
-          "expenses_subs": 0,
-          "expenses_materials": 0,
-          "expenses_additional": 0,
-          "expenses_total": 0,
-          "profit": 8000.0,
-          "status": "in_progress",
-          "has_price": true,
-          "this_pct": 0.0,
-          "attribution": 0.0,
-          "user_set": false
-        },
-        {
-          "project_id": "22NxUEJKTj6C",
-          "project_name": "Ginger Brown",
-          "group_id": "22PMhvM23Ls4",
-          "group_name": "GUTTERS",
-          "parent_group_id": "22PMhvM22xuX",
-          "action_count": 1,
-          "action_task_ids": [
-            "22PMhvM23Ls5"
-          ],
-          "action_task_names": [
-            "GUTTERS: GUTTER INSTALLATION"
-          ],
-          "action_progresses": [
-            null
-          ],
-          "action_starts": [
-            "2026-07-06"
-          ],
-          "action_ends": [
-            "2026-07-06"
-          ],
-          "action_start_min": "2026-07-06",
-          "action_end_max": "2026-07-06",
-          "action_lines": [
+              "end_date": "2026-07-08"
+            },
             {
-              "task_id": "22PMhvM23Ls5",
-              "name": "GUTTERS: GUTTER INSTALLATION",
-              "description": "2200",
-              "amount": 2200.0,
-              "progress": null,
-              "end_date": "2026-07-06"
+              "task_id": "22PWUue3mbGk",
+              "name": "ELECTRICAL TRIM (FIREPLACE): INSTALLATION",
+              "description": "",
+              "amount": 0.0,
+              "progress": 1,
+              "end_date": "2026-06-17"
             }
           ],
           "subs_lines": [
             {
-              "task_id": "22PUmvXS8E8y",
-              "name": "GUTTERS: BILL & PAYMENT",
-              "description": "-2424",
-              "amount": 2424.0,
+              "task_id": "22PUmwidtThu",
+              "name": "APPLIANCES: BILL & PAYMENT",
+              "description": "-300",
+              "amount": 300.0,
               "progress": null,
-              "end_date": "2026-07-10"
-            }
-          ],
-          "materials_lines": [],
-          "additional_lines": [],
-          "sold": 2200.0,
-          "expenses_subs": 2424.0,
-          "expenses_materials": 0,
-          "expenses_additional": 0,
-          "expenses_total": 2424.0,
-          "profit": -224.0,
-          "status": "in_progress",
-          "has_price": true,
-          "this_pct": 0.0,
-          "attribution": -0.0,
-          "user_set": false
-        },
-        {
-          "project_id": "22NxUEJKTj6C",
-          "project_name": "Ginger Brown",
-          "group_id": "22PMhvM23LsT",
-          "group_name": "PRE DELIVERY WALK THROUGH",
-          "parent_group_id": "22PMhvM22xub",
-          "action_count": 1,
-          "action_task_ids": [
-            "22PMhvM23LsV"
-          ],
-          "action_task_names": [
-            "DELIVERY: PRE WALK THROUGH"
-          ],
-          "action_progresses": [
-            null
-          ],
-          "action_starts": [
-            "2026-07-09"
-          ],
-          "action_ends": [
-            "2026-07-09"
-          ],
-          "action_start_min": "2026-07-09",
-          "action_end_max": "2026-07-09",
-          "action_lines": [
+              "end_date": "2026-07-18"
+            },
             {
-              "task_id": "22PMhvM23LsV",
-              "name": "DELIVERY: PRE WALK THROUGH",
-              "description": "",
+              "task_id": "22PWPHNVAMdN",
+              "name": "ELECTRICAL TRIM (FIREPLACE): BILL & PAYMENT",
+              "description": "0",
               "amount": 0.0,
-              "progress": null,
-              "end_date": "2026-07-09"
+              "progress": 1,
+              "end_date": "2026-06-27"
             }
           ],
-          "subs_lines": [],
           "materials_lines": [],
           "additional_lines": [],
           "sold": 0.0,
-          "expenses_subs": 0,
+          "expenses_subs": 300.0,
           "expenses_materials": 0,
           "expenses_additional": 0,
-          "expenses_total": 0,
-          "profit": 0.0,
+          "expenses_total": 300.0,
+          "profit": -300.0,
           "status": "in_progress",
           "has_price": false,
           "this_pct": 0.0,
@@ -1711,17 +1568,17 @@
     {
       "pm": "Milagros Porturas",
       "project_count": 1,
-      "group_count": 6,
-      "sold": 25705.0,
-      "expenses": 16164.44,
-      "profit_potential": 9540.56,
+      "group_count": 3,
+      "sold": 15505.0,
+      "expenses": 13740.44,
+      "profit_potential": 1764.56,
       "attribution": -1323.95,
       "projects": [
         {
           "project_id": "22NxUEJKTj6C",
           "project_name": "Ginger Brown",
           "attribution": -1323.95,
-          "group_count": 6
+          "group_count": 3
         }
       ]
     },
@@ -1750,14 +1607,14 @@
     }
   ],
   "totals": {
-    "sold": 138933.88,
-    "expenses": 135715.4,
-    "profit_potential": 3218.48,
+    "sold": 128733.88,
+    "expenses": 133291.4,
+    "profit_potential": -4557.52,
     "profit_attributed_this_week": -18127.08,
-    "groups_in_progress": 11,
+    "groups_in_progress": 8,
     "groups_finished_this_week": 6,
-    "groups_missing_price": 2,
-    "expense_missing_price": 600.0,
+    "groups_missing_price": 1,
+    "expense_missing_price": 300.0,
     "project_count": 5
   }
 }
