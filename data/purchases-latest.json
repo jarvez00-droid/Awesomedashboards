@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-11T05:43:12",
+ "generated_at": "2026-07-11T06:06:04",
  "date": "2026-07-11",
  "window_start": "2026-07-11",
  "window_end": "2026-07-25",
@@ -7,7 +7,7 @@
   "tasks": 174,
   "projects": 8,
   "alerts": 8,
-  "overdue": 18,
+  "overdue": 16,
   "to_purchase_amount": 68528.06
  },
  "alerts": [
@@ -75,7 +75,7 @@
    "counts": {
     "tasks": 19,
     "alerts": 2,
-    "overdue": 5
+    "overdue": 4
    },
    "overdue": [
     {
@@ -88,18 +88,6 @@
      "alert": false,
      "overdue": true,
      "taskId": "22PZpzaJzWx3",
-     "progress": 0
-    },
-    {
-     "name": "INTERIOR DOORS: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-10",
-     "amount": 450.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpza3Tu5P",
      "progress": 0
     },
     {
@@ -157,15 +145,15 @@
        "progress": 0
       },
       {
-       "name": "INTERIOR DOORS: CONFIRM DELIVERY",
-       "step": "confirm",
-       "icon": "📦",
-       "step_label": "Confirm delivery",
+       "name": "INTERIOR DOORS: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
        "due": "2026-07-11",
-       "amount": null,
+       "amount": 450.0,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZpza3vieD",
+       "taskId": "22PZpza3Tu5P",
        "progress": 0
       }
      ]
@@ -208,6 +196,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpzaBXHES",
+       "progress": 0
+      },
+      {
+       "name": "INTERIOR DOORS: CONFIRM DELIVERY",
+       "step": "confirm",
+       "icon": "📦",
+       "step_label": "Confirm delivery",
+       "due": "2026-07-13",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpza3vieD",
        "progress": 0
       },
       {
@@ -1430,12 +1430,73 @@
    ]
   },
   {
+   "id": "22PCPuWPndkt",
+   "name": "Clifford Clack — Gym Addition",
+   "counts": {
+    "tasks": 3,
+    "alerts": 1,
+    "overdue": 1
+   },
+   "overdue": [
+    {
+     "name": "ELECTRICAL TRIM: DELIVERY ETA",
+     "step": "eta",
+     "icon": "🚚",
+     "step_label": "Delivery ETA",
+     "due": "2026-07-09",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PaXYTVPVEB",
+     "progress": 0
+    }
+   ],
+   "days": [
+    {
+     "date": "2026-07-11",
+     "label": "Sat Jul 11",
+     "tasks": [
+      {
+       "name": "PAINT: PURCHASE PAINT",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-07-11",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PadmWLx8fy",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-07-13",
+     "label": "Mon Jul 13",
+     "tasks": [
+      {
+       "name": "GLASS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-13",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PaepcZNKRC",
+       "progress": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "22PK9BhEJtZn",
    "name": "Lingyan Qiu (CNG2025-458)",
    "counts": {
     "tasks": 35,
     "alerts": 1,
-    "overdue": 2
+    "overdue": 1
    },
    "overdue": [
     {
@@ -1449,21 +1510,27 @@
      "overdue": true,
      "taskId": "22PZpKBKR7f3",
      "progress": 0
-    },
-    {
-     "name": "BRICKS & EXTERIOR SHEATING: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-10",
-     "amount": 3550.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpKBxJJ65",
-     "progress": 0
     }
    ],
    "days": [
+    {
+     "date": "2026-07-11",
+     "label": "Sat Jul 11",
+     "tasks": [
+      {
+       "name": "BRICKS & EXTERIOR SHEATING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-11",
+       "amount": 3550.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpKBxJJ65",
+       "progress": 0
+      }
+     ]
+    },
     {
      "date": "2026-07-13",
      "label": "Mon Jul 13",
@@ -1859,18 +1926,6 @@
        "progress": 0
       },
       {
-       "name": "BRICKS & EXTERIOR SHEATING: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-07-22",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpKBxtc7S",
-       "progress": 0
-      },
-      {
        "name": "GUTTERS: PURCHASE MATERIALS",
        "step": "purchase",
        "icon": "🛒",
@@ -1888,6 +1943,18 @@
      "date": "2026-07-23",
      "label": "Thu Jul 23",
      "tasks": [
+      {
+       "name": "BRICKS & EXTERIOR SHEATING: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-07-23",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpKBxtc7S",
+       "progress": 0
+      },
       {
        "name": "ELECTRICAL TRIM: DELIVERY ETA",
        "step": "eta",
@@ -1910,67 +1977,6 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpKCAMyVq",
-       "progress": 0
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "id": "22PCPuWPndkt",
-   "name": "Clifford Clack — Gym Addition",
-   "counts": {
-    "tasks": 3,
-    "alerts": 1,
-    "overdue": 1
-   },
-   "overdue": [
-    {
-     "name": "ELECTRICAL TRIM: DELIVERY ETA",
-     "step": "eta",
-     "icon": "🚚",
-     "step_label": "Delivery ETA",
-     "due": "2026-07-09",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PaXYTVPVEB",
-     "progress": 0
-    }
-   ],
-   "days": [
-    {
-     "date": "2026-07-11",
-     "label": "Sat Jul 11",
-     "tasks": [
-      {
-       "name": "PAINT: PURCHASE PAINT",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-07-11",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PadmWLx8fy",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-07-13",
-     "label": "Mon Jul 13",
-     "tasks": [
-      {
-       "name": "GLASS: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-07-13",
-       "amount": null,
-       "alert": true,
-       "overdue": false,
-       "taskId": "22PaepcZNKRC",
        "progress": 0
       }
      ]
