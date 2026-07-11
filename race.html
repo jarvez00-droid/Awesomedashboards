@@ -354,19 +354,15 @@ function datePct(iso){
   return Math.max(0, Math.min(100, 100*(d-a)/(b-a)));
 }
 function daysBetween(a,b){ return Math.round((dayMs(b)-dayMs(a))/864e5); }
-/* v12 (Jose): NO abstract "N days behind schedule" — always concrete work-days vs plan. */
-function shortfall(earned, plan){
-  if(earned==null||plan==null) return {diff:0, txt:'', short:''};
-  const d=Math.round((plan-earned)*10)/10;
-  if(d>0) return {diff:d,
-    txt:`${d} work-days short of plan (${earned} done · ${plan} expected by today)`,
-    short:`<b>${d} work-days short of plan</b>`};
-  if(d<0) return {diff:d,
-    txt:`${-d} work-days ahead of plan (${earned} done · ${plan} expected by today)`,
-    short:`<b>${-d} work-days ahead of plan</b>`};
-  return {diff:0, txt:`right on plan (${earned} of ${plan} expected work-days done)`, short:'right on plan'};
+/* v13 (Jose): deviation reads as a clean SLIP % of the month plan — never "short/lost days". */
+function slipTxt(gap){
+  if(gap==null) return {short:'—', txt:'—'};
+  const g=Math.round(gap);
+  if(g>0) return {short:`<b>Slip: ${g}%</b>`, txt:`Slip: ${g}% of the month plan`};
+  if(g<0) return {short:`<b>Ahead: ${-g}%</b>`, txt:`Ahead of plan: ${-g}%`};
+  return {short:'right on plan', txt:'right on plan'};
 }
-/* "needs ~N work-days/day through Sunday" — only when the number is reasonable */
+/* constructive catch-up line — only when the number is reasonable */
 function needsPace(p){
   if(p.earned_days==null||p.plan_days==null) return '';
   const d=p.plan_days-p.earned_days;
@@ -377,7 +373,7 @@ function needsPace(p){
   if(left<=0) return '';
   const n=Math.round(10*d/left)/10;
   if(n<=0||n>6) return '';
-  return ` · needs ~${n} work-day${n!==1?'s':''}/day through ${fmtD(cur.deadline)} to catch up`;
+  return ` · to catch up: ~${n} work-day${n!==1?'s':''}/day through ${fmtD(cur.deadline)}`;
 }
 /* Common tick set rendered inside each lane track (same x everywhere) */
 function laneTicks(){
@@ -408,7 +404,7 @@ function axisHeader(){
 function renderHero(){
   const c=DATA.company;
   const mp=(c.days_pct!=null?c.days_pct:c.monthly_pct);
-  const si=statusInfo(c.status,c.gap,shortfall(c.earned_days,c.plan_days).txt);
+  const si=statusInfo(c.status,c.gap,slipTxt(c.gap).txt);
   const pace={cls:si.cls, t:si.label};
   const money = c.july_money && c.july_money.length===2 ? `${fmtM(c.july_money[0])} <span style="color:var(--mut);font-size:12px">/ ${fmtM(c.july_money[1])} +10% cost</span>` : '—';
   $('#hero').innerHTML=`<div class="hero">
@@ -417,7 +413,7 @@ function renderHero(){
       <div class="lab">of July's planned work-days earned<br>${c.done_total}/${c.total_target} tasks fully done</div>
       <div class="pill ${pace.cls}" style="margin-top:7px">${pace.t}</div>
       <div style="color:var(--mut);font-size:11px;margin-top:6px">Month: <b style="color:var(--tx)">${c.earned_days!=null?c.earned_days:'—'}</b> of <b style="color:var(--tx)">${c.total_days!=null?c.total_days:'—'}</b> work-days done · plan says <b style="color:var(--tx)">${c.plan_days!=null?c.plan_days:'—'}</b> by today (${c.ghost_days_pct}%) · tolerance today: ${DATA.tolerance_today!=null?DATA.tolerance_today+'%':'—'}</div>
-      <div style="color:var(--mut);font-size:11px;margin-top:2px">${shortfall(c.earned_days,c.plan_days).short}</div>
+      <div style="color:var(--mut);font-size:11px;margin-top:2px">${slipTxt(c.gap).short}</div>
       ${monthFc(c.month_forecast).badge}
     </div>
     <div class="hmid">
@@ -528,7 +524,7 @@ function weekChips(p,col){
 function renderLane(p){
   const col=COLOR[p.id]||'#58a6ff';
   const mp=(p.days_pct!=null?p.days_pct:(p.monthly_pct!=null?p.monthly_pct:p.runner_pct));
-  const st=statusInfo(p.status,p.gap,shortfall(p.earned_days,p.plan_days).txt);
+  const st=statusInfo(p.status,p.gap,slipTxt(p.gap).txt);
   /* v4 shared time axis: runner sits at its EARNED-SCHEDULE date, flag at the
      project's last planned task; Sunday grid + TODAY line identical on every lane. */
   const rx=datePct(p.runner_date||DATA.axis_start);
@@ -537,7 +533,7 @@ function renderLane(p){
   const flag=`<span class="flag" style="left:${fx}%">🏁</span>`;
   const post= fx<99 ? `<div class="postfin" style="left:${fx}%"></div>` : '';
   const money = p.july_money && p.july_money.length===2 ? ` · ${fmtM(p.july_money[0])} this month` : '';
-  const esTitle=`Runner reached ${fmtD(p.runner_date)} of the plan · ${shortfall(p.earned_days,p.plan_days).txt} · goal ${fmtD(p.finish_date)}`;
+  const esTitle=`Runner reached ${fmtD(p.runner_date)} of the plan · ${slipTxt(p.gap).txt} · goal ${fmtD(p.finish_date)}`;
   const fc=monthFc(p.month_forecast);
   return `<div class="lane" id="lane-${p.id}" style="border-left:3px solid ${col}">
     <div class="stripe ${st.cls}" title="${st.title}"></div>
@@ -551,7 +547,7 @@ function renderLane(p){
           <div class="fill" style="width:${rx}%;background:linear-gradient(90deg,${hexA(col,.45)},${col})"></div>
           ${post}${laneTicks()}${runner}${flag}
         </div>
-        <div class="monthline">Month: <b>${p.earned_days!=null?p.earned_days:'—'}</b> of <b>${p.total_days!=null?p.total_days:'—'}</b> work-days done (<b>${p.days_pct}%</b>) · plan says <b>${p.plan_days!=null?p.plan_days:'—'}</b> by today (${p.ghost_days_pct}%) — ${shortfall(p.earned_days,p.plan_days).short}${needsPace(p)}</div>
+        <div class="monthline">Month: <b>${p.earned_days!=null?p.earned_days:'—'}</b> of <b>${p.total_days!=null?p.total_days:'—'}</b> work-days done (<b>${p.days_pct}%</b>) · plan says <b>${p.plan_days!=null?p.plan_days:'—'}</b> by today (${p.ghost_days_pct}%) · ${slipTxt(p.gap).short}${needsPace(p)}</div>
         ${weekChips(p,col)}
         ${p.status==='salvage' && p.save_tasks && p.save_tasks.length ? `<div class="salvline" title="${p.save_tasks.map(t=>t.name+' by '+fmtD(t.due)).join(' · ').replace(/"/g,'&quot;')}">⚠ Week saved ONLY if <b>${p.save_tasks[0].name}</b> finishes by <b>${fmtD(p.save_tasks[0].due)}</b>${p.save_tasks.length>1?` (+${p.save_tasks.length-1} more)`:''} — if it slips, we don't make it.</div>`:''}
         ${fc.line}
