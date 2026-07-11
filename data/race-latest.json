@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-10T19:13:21",
+ "generated_at": "2026-07-10T19:31:20",
  "today": "2026-07-10",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -62,7 +62,7 @@
    "leaked_count": 8,
    "leaked_days": 19.0,
    "leaked_pct": 4.4,
-   "reshuffled_in_month": 104
+   "reshuffled_in_month": 109
   },
   "adherence": 38.7,
   "band": "red",
@@ -165,45 +165,80 @@
     "leaked_count": 0,
     "leaked_days": 0.0,
     "leaked_pct": 0.0,
-    "reshuffled_in_month": 1,
+    "reshuffled_in_month": 6,
     "leaked": []
    },
    "cp_chain": [
     {
-     "id": "22PYxwN8yU2w",
-     "name": "CITY INSPECTION (final electrical)",
-     "baseline_end": "2026-07-01",
-     "live_end": "2026-07-01",
-     "current_end": "2026-07-01",
-     "moved_days": 0,
-     "status": "pending",
-     "depends_on": []
-    },
-    {
      "id": "22PUmwvFbKrG",
      "name": "MECHANICAL: CITY INSPECTION",
      "baseline_end": "2026-07-01",
-     "live_end": "2026-07-01",
-     "current_end": "2026-07-01",
-     "moved_days": 0,
-     "status": "pending",
+     "live_end": "2026-07-14",
+     "current_end": "2026-07-14",
+     "moved_days": 13,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PYxwN8yU2w",
+     "name": "CITY INSPECTION (final electrical)",
+     "baseline_end": "2026-07-01",
+     "live_end": "2026-07-15",
+     "current_end": "2026-07-15",
+     "moved_days": 14,
+     "status": "moved",
      "depends_on": []
     },
     {
      "id": "22PYbgdPDmuP",
      "name": "PLUMBING: CITY INSPECTION (Copy)",
      "baseline_end": "2026-07-01",
-     "live_end": "2026-07-01",
-     "current_end": "2026-07-01",
-     "moved_days": 0,
-     "status": "pending",
+     "live_end": "2026-07-15",
+     "current_end": "2026-07-15",
+     "moved_days": 14,
+     "status": "moved",
      "depends_on": []
     }
    ],
    "july_money": null,
    "margin_pct": null,
-   "moved_count": 1,
+   "moved_count": 6,
    "moved": [
+    {
+     "id": "22PYbgdPDmuP",
+     "name": "PLUMBING: CITY INSPECTION (Copy)",
+     "from": "2026-07-01",
+     "to": "2026-07-15",
+     "days": 14
+    },
+    {
+     "id": "22PYxwN8yU2w",
+     "name": "CITY INSPECTION (final electrical)",
+     "from": "2026-07-01",
+     "to": "2026-07-15",
+     "days": 14
+    },
+    {
+     "id": "22PUmwvFbKrG",
+     "name": "MECHANICAL: CITY INSPECTION",
+     "from": "2026-07-01",
+     "to": "2026-07-14",
+     "days": 13
+    },
+    {
+     "id": "22PZtqEzKuDi",
+     "name": "Siding fix",
+     "from": "2026-07-02",
+     "to": "2026-07-15",
+     "days": 13
+    },
+    {
+     "id": "22PZttTMHeLL",
+     "name": "PLUMBING: READY FOR CITY INSPECTION",
+     "from": "2026-07-01",
+     "to": "2026-07-14",
+     "days": 13
+    },
     {
      "id": "22PZqqCN5tiK",
      "name": "PAINTING",
@@ -312,6 +347,81 @@
      "target_type": null,
      "target_due": null,
      "tasks": [
+      {
+       "id": "22PUmwvFbKrG",
+       "name": "MECHANICAL: CITY INSPECTION",
+       "type": "CI",
+       "baseline_end": "2026-07-01",
+       "live_end": "2026-07-14",
+       "moved_days": 13,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-01"
+      },
+      {
+       "id": "22PZttTMHeLL",
+       "name": "PLUMBING: READY FOR CITY INSPECTION",
+       "type": "AT",
+       "baseline_end": "2026-07-01",
+       "live_end": "2026-07-14",
+       "moved_days": 13,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-01"
+      },
+      {
+       "id": "22PYxwN8yU2w",
+       "name": "CITY INSPECTION (final electrical)",
+       "type": "CI",
+       "baseline_end": "2026-07-01",
+       "live_end": "2026-07-15",
+       "moved_days": 14,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-01"
+      },
+      {
+       "id": "22PYbgdPDmuP",
+       "name": "PLUMBING: CITY INSPECTION (Copy)",
+       "type": "CI",
+       "baseline_end": "2026-07-01",
+       "live_end": "2026-07-15",
+       "moved_days": 14,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-01"
+      },
+      {
+       "id": "22PZtqEzKuDi",
+       "name": "Siding fix",
+       "type": "AT",
+       "baseline_end": "2026-07-02",
+       "live_end": "2026-07-15",
+       "moved_days": 13,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-02"
+      },
       {
        "id": "22PZqqCN5tiK",
        "name": "PAINTING",
