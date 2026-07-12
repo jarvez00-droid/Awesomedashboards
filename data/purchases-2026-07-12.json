@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-12T06:01:07",
+ "generated_at": "2026-07-12T06:24:01",
  "date": "2026-07-12",
  "window_start": "2026-07-12",
  "window_end": "2026-07-26",
@@ -7,7 +7,7 @@
   "tasks": 174,
   "projects": 8,
   "alerts": 8,
-  "overdue": 21,
+  "overdue": 18,
   "to_purchase_amount": 68528.06
  },
  "alerts": [
@@ -15,7 +15,7 @@
    "project": "Kyle Aubry - Project 01",
    "projectId": "22Nx8Uut2Qxs",
    "task": "BASEBOARD AND TRIMS: PURCHASE MATERIAL",
-   "due": "2026-07-11",
+   "due": "2026-07-12",
    "taskId": "22PZpzaM6GXi"
   },
   {
@@ -75,7 +75,7 @@
    "counts": {
     "tasks": 19,
     "alerts": 2,
-    "overdue": 6
+    "overdue": 4
    },
    "overdue": [
     {
@@ -125,33 +125,39 @@
      "overdue": true,
      "taskId": "22PaapkLYNYb",
      "progress": 0
-    },
-    {
-     "name": "INTERIOR DOORS: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-11",
-     "amount": 450.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpza3Tu5P",
-     "progress": 0
-    },
-    {
-     "name": "BASEBOARD AND TRIMS: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-11",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PZpzaM6GXi",
-     "progress": 0
     }
    ],
    "days": [
+    {
+     "date": "2026-07-12",
+     "label": "Sun Jul 12",
+     "tasks": [
+      {
+       "name": "BASEBOARD AND TRIMS: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-12",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PZpzaM6GXi",
+       "progress": 0
+      },
+      {
+       "name": "INTERIOR DOORS: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-12",
+       "amount": 450.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpza3Tu5P",
+       "progress": 0
+      }
+     ]
+    },
     {
      "date": "2026-07-13",
      "label": "Mon Jul 13",
@@ -1423,7 +1429,7 @@
    "counts": {
     "tasks": 3,
     "alerts": 1,
-    "overdue": 2
+    "overdue": 1
    },
    "overdue": [
     {
@@ -1437,21 +1443,27 @@
      "overdue": true,
      "taskId": "22PaXYTVPVEB",
      "progress": 0
-    },
-    {
-     "name": "PAINT: PURCHASE PAINT",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-07-11",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PadmWLx8fy",
-     "progress": 0
     }
    ],
    "days": [
+    {
+     "date": "2026-07-12",
+     "label": "Sun Jul 12",
+     "tasks": [
+      {
+       "name": "PAINT: PURCHASE PAINT",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-07-12",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PadmWLx8fy",
+       "progress": 0
+      }
+     ]
+    },
     {
      "date": "2026-07-13",
      "label": "Mon Jul 13",
