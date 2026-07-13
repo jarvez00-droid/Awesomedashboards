@@ -2441,10 +2441,16 @@ function financeFilterByRange(data) {
     projMap[pn].outflow = Math.round(projMap[pn].outflow * 100) / 100;
     projMap[pn].event_count = projMap[pn].events.length;
   });
-  // Sort by full-window net (NOT range-scoped) so all projects ranked by total scale
-  const projectsFiltered = Object.values(projMap).sort((a, b) => {
-    return Math.abs(b.total_net) - Math.abs(a.total_net);
-  });
+  // Ranked by full-window net on FIRST render, then PINNED for the whole page
+  // session (Jose 2026-07-13): amount edits / saves / refetches must not
+  // reshuffle the project cards. New projects append. Shares the same pin map
+  // as the drill-down boxes (financePinnedProjOrder) so both stay coherent.
+  const _ord = window._financeProjOrder || (window._financeProjOrder = { map: {}, next: 0, seeded: false });
+  Object.values(projMap)
+    .sort((a, b) => Math.abs(b.total_net) - Math.abs(a.total_net))
+    .forEach(p => { if (!(p.project in _ord.map)) _ord.map[p.project] = _ord.next++; });
+  const projectsFiltered = Object.values(projMap).sort((a, b) =>
+    (_ord.map[a.project] ?? 1e9) - (_ord.map[b.project] ?? 1e9));
 
   return {
     ...data,
@@ -2891,7 +2897,7 @@ function financeToggleCatSeg(segKey) {
 // append at the end. Fixed Costs / Debts always render after real projects.
 function financePinnedProjOrder(keys, byProj, specialGroups) {
   const ord = window._financeProjOrder || (window._financeProjOrder = { map: {}, next: 0, seeded: false });
-  if (!ord.seeded && window.FINANCE_DATA && Array.isArray(FINANCE_DATA.by_project)) {
+  if (!ord.seeded && FINANCE_DATA && Array.isArray(FINANCE_DATA.by_project)) {
     ord.seeded = true;
     FINANCE_DATA.by_project.slice()
       .sort((a, b) => (Math.abs(b.inflow||0)+Math.abs(b.outflow||0)) - (Math.abs(a.inflow||0)+Math.abs(a.outflow||0)))
