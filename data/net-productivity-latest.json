@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T07:37:13",
+  "generated_at": "2026-07-13T07:45:28",
   "today": "2026-07-13",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -39,18 +39,18 @@
   ],
   "totals": {
     "prod": [
-      513146.92,
-      422128.69
+      516646.92,
+      425978.69
     ],
     "prod_todate": [
-      224352.1,
-      181187.28
+      227852.1,
+      185037.28
     ],
     "weekly": {
       "fixed": 298222.02,
       "net": [
-        214924.9,
-        123906.67
+        218424.9,
+        127756.67
       ],
       "periods": 27,
       "positive": [
@@ -61,8 +61,8 @@
     "monthly": {
       "fixed": 335039.6,
       "net": [
-        178107.32,
-        87089.09
+        181607.32,
+        90939.09
       ],
       "periods": 7,
       "positive": [
@@ -444,17 +444,17 @@
       "label_moy": "jul S2",
       "label_short": "11 jul",
       "prod": [
-        58431.08,
-        47029.83
+        61931.08,
+        50879.83
       ],
       "fixed": 11045.26,
       "net": [
-        47385.82,
-        35984.57
+        50885.82,
+        39834.57
       ],
       "cum": [
-        65084.54,
-        39827.99
+        68584.54,
+        43677.99
       ],
       "active_count": 10,
       "active_projects": [
@@ -478,8 +478,8 @@
           16388.98
         ],
         "Stephanie Felton": [
-          -6419.58,
-          -8405.24
+          -2919.58,
+          -4555.24
         ],
         "Katie Holmes": [
           33.71,
@@ -532,8 +532,8 @@
         15080.01
       ],
       "cum": [
-        90363.17,
-        54908.0
+        93863.17,
+        58758.0
       ],
       "active_count": 9,
       "active_projects": [
@@ -602,8 +602,8 @@
         26871.93
       ],
       "cum": [
-        124944.77,
-        81779.93
+        128444.77,
+        85629.93
       ],
       "active_count": 9,
       "active_projects": [
@@ -668,8 +668,8 @@
         39727.17
       ],
       "cum": [
-        171756.84,
-        121507.1
+        175256.84,
+        125357.1
       ],
       "active_count": 7,
       "active_projects": [
@@ -728,8 +728,8 @@
         6618.11
       ],
       "cum": [
-        184654.33,
-        128125.21
+        188154.33,
+        131975.21
       ],
       "active_count": 6,
       "active_projects": [
@@ -787,8 +787,8 @@
         -2667.34
       ],
       "cum": [
-        186402.78,
-        125457.87
+        189902.78,
+        129307.87
       ],
       "active_count": 5,
       "active_projects": [
@@ -841,8 +841,8 @@
         -2517.89
       ],
       "cum": [
-        188393.0,
-        122939.98
+        191893.0,
+        126789.98
       ],
       "active_count": 5,
       "active_projects": [
@@ -895,8 +895,8 @@
         29029.03
       ],
       "cum": [
-        222613.53,
-        151969.01
+        226113.53,
+        155819.01
       ],
       "active_count": 5,
       "active_projects": [
@@ -949,8 +949,8 @@
         20290.13
       ],
       "cum": [
-        247742.61,
-        172259.14
+        251242.61,
+        176109.14
       ],
       "active_count": 5,
       "active_projects": [
@@ -1003,8 +1003,8 @@
         20510.34
       ],
       "cum": [
-        276712.08,
-        192769.48
+        280212.08,
+        196619.48
       ],
       "active_count": 4,
       "active_projects": [
@@ -1052,8 +1052,8 @@
         24608.28
       ],
       "cum": [
-        304566.87,
-        217377.76
+        308066.87,
+        221227.76
       ],
       "active_count": 3,
       "active_projects": [
@@ -1096,8 +1096,8 @@
         -2329.18
       ],
       "cum": [
-        303603.17,
-        215048.58
+        307103.17,
+        218898.58
       ],
       "active_count": 3,
       "active_projects": [
@@ -1140,8 +1140,8 @@
         -14703.71
       ],
       "cum": [
-        290033.63,
-        200344.87
+        293533.63,
+        204194.87
       ],
       "active_count": 2,
       "active_projects": [
@@ -1179,8 +1179,8 @@
         -10717.5
       ],
       "cum": [
-        279395.33,
-        189627.37
+        282895.33,
+        193477.37
       ],
       "active_count": 2,
       "active_projects": [
@@ -1214,8 +1214,8 @@
         0.0
       ],
       "cum": [
-        279395.33,
-        189627.37
+        282895.33,
+        193477.37
       ],
       "active_count": 2,
       "active_projects": [
@@ -1244,8 +1244,8 @@
         -10801.09
       ],
       "cum": [
-        268657.06,
-        178826.28
+        272157.06,
+        182676.28
       ],
       "active_count": 2,
       "active_projects": [
@@ -1279,8 +1279,8 @@
         -9855.46
       ],
       "cum": [
-        259206.02,
-        168970.82
+        262706.02,
+        172820.82
       ],
       "active_count": 2,
       "active_projects": [
@@ -1314,8 +1314,8 @@
         -9931.74
       ],
       "cum": [
-        249692.63,
-        159039.08
+        253192.63,
+        162889.08
       ],
       "active_count": 2,
       "active_projects": [
@@ -1349,8 +1349,8 @@
         -10347.92
       ],
       "cum": [
-        239599.47,
-        148691.16
+        243099.47,
+        152541.16
       ],
       "active_count": 2,
       "active_projects": [
@@ -1384,8 +1384,8 @@
         -8504.9
       ],
       "cum": [
-        231204.5,
-        140186.26
+        234704.5,
+        144036.26
       ],
       "active_count": 2,
       "active_projects": [
@@ -1423,8 +1423,8 @@
         -7347.39
       ],
       "cum": [
-        223857.11,
-        132838.87
+        227357.11,
+        136688.87
       ],
       "active_count": 1,
       "active_projects": [
@@ -1457,8 +1457,8 @@
         -8932.19
       ],
       "cum": [
-        214924.92,
-        123906.68
+        218424.92,
+        127756.68
       ],
       "active_count": 1,
       "active_projects": [
@@ -1491,8 +1491,8 @@
         0.0
       ],
       "cum": [
-        214924.92,
-        123906.68
+        218424.92,
+        127756.68
       ],
       "active_count": 1,
       "active_projects": [
@@ -1520,8 +1520,8 @@
         0.0
       ],
       "cum": [
-        214924.92,
-        123906.68
+        218424.92,
+        127756.68
       ],
       "active_count": 1,
       "active_projects": [
@@ -1549,8 +1549,8 @@
         0.0
       ],
       "cum": [
-        214924.92,
-        123906.68
+        218424.92,
+        127756.68
       ],
       "active_count": 1,
       "active_projects": [
@@ -1621,17 +1621,17 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        182332.59,
-        146749.25
+        185832.59,
+        150599.25
       ],
       "fixed": 47862.8,
       "net": [
-        134469.79,
-        98886.45
+        137969.79,
+        102736.45
       ],
       "cum": [
-        128626.5,
-        85461.68
+        132126.5,
+        89311.68
       ],
       "is_future": false,
       "is_partial": true,
@@ -1642,8 +1642,8 @@
           29486.08
         ],
         "Stephanie Felton": [
-          -4892.05,
-          -7566.22
+          -1392.05,
+          -3716.22
         ],
         "Katie Holmes": [
           17606.6,
@@ -1692,8 +1692,8 @@
         56564.13
       ],
       "cum": [
-        209900.51,
-        142025.81
+        213400.51,
+        145875.81
       ],
       "is_future": true,
       "is_partial": false,
@@ -1738,8 +1738,8 @@
         80261.53
       ],
       "cum": [
-        310583.09,
-        222287.34
+        314083.09,
+        226137.34
       ],
       "is_future": true,
       "is_partial": false,
@@ -1780,8 +1780,8 @@
         -50763.56
       ],
       "cum": [
-        261370.26,
-        171523.78
+        264870.26,
+        175373.78
       ],
       "is_future": true,
       "is_partial": false,
@@ -1814,8 +1814,8 @@
         -40798.02
       ],
       "cum": [
-        221743.99,
-        130725.76
+        225243.99,
+        134575.76
       ],
       "is_future": true,
       "is_partial": false,
@@ -1844,8 +1844,8 @@
         -43636.67
       ],
       "cum": [
-        178107.32,
-        87089.09
+        181607.32,
+        90939.09
       ],
       "is_future": true,
       "is_partial": false,
@@ -2576,16 +2576,16 @@
       "project": "Stephanie Felton",
       "revenue": 39673.8,
       "revenue_gross": 44082.0,
-      "cost": 38277.58,
+      "cost": 34777.58,
       "prod": [
-        1396.22,
-        -2431.54
+        4896.22,
+        1418.46
       ],
-      "margin_pct": 3.5,
+      "margin_pct": 12.3,
       "weeks": {
         "2026-W29": [
-          -6419.58,
-          -8405.24
+          -2919.58,
+          -4555.24
         ],
         "2026-W28": [
           968.02,
@@ -2614,8 +2614,8 @@
       },
       "months": {
         "2026-07": [
-          -4892.05,
-          -7566.22
+          -1392.05,
+          -3716.22
         ],
         "2026-06": [
           6288.27,
@@ -4622,14 +4622,6 @@
           "n_exp": 4
         },
         {
-          "trade": "ELECTRICAL TRIM",
-          "income": 3275.0,
-          "expense": 5248.26,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 4
-        },
-        {
           "trade": "STAIRS",
           "income": 3430.0,
           "expense": 4250.0,
@@ -4643,6 +4635,14 @@
           "expense": 5300.0,
           "grouped": true,
           "n_inc": 0,
+          "n_exp": 4
+        },
+        {
+          "trade": "ELECTRICAL TRIM",
+          "income": 3275.0,
+          "expense": 1748.26,
+          "grouped": true,
+          "n_inc": 1,
           "n_exp": 4
         },
         {
@@ -4687,7 +4687,7 @@
         }
       ],
       "total_income": 121755.0,
-      "total_expense": 158210.82,
+      "total_expense": 154710.82,
       "loose_amount": 0
     },
     {
