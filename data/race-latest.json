@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-12T07:55:25",
+ "generated_at": "2026-07-12T21:19:43",
  "today": "2026-07-12",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -8,7 +8,7 @@
  "tolerance_today": 10.0,
  "anchors": {
   "monthly": "baseline-2026-07-06",
-  "weekly": "baseline-2026-07-10",
+  "weekly": "baseline-2026-07-13",
   "note": "DOBLE ANCLA v8: meta mensual + dias-trabajados + cascada CP ancladas al baseline del MES; el plan/alertas (kicked/pulled/salvage) de la SEMANA EN CURSO usan el baseline SEMANAL mas reciente (snapshot domingo 21:00, plist ai.openclaw.sunday-baseline). Tras el reset dominical una pateada deja de ser alerta: su nueva fecha ES el plan de la semana."
  },
  "week_sundays": [
@@ -658,9 +658,34 @@
    "plan_days": 13.0,
    "city_inspections": 1,
    "gap": 64.3,
-   "status": "behind",
-   "salvable": false,
-   "save_tasks": [],
+   "status": "salvage",
+   "salvable": true,
+   "save_tasks": [
+    {
+     "name": "CLEANING: FINAL CLEANING",
+     "due": "2026-07-12"
+    },
+    {
+     "name": "CLEANING: TRASH HAUL",
+     "due": "2026-07-12"
+    },
+    {
+     "name": "BRICK: BRICK INSTALLATION",
+     "due": "2026-07-11"
+    },
+    {
+     "name": "CEILING MOULDING: INSTALLATION",
+     "due": "2026-07-11"
+    },
+    {
+     "name": "CUSTOM CARPENTRY: INSTALL SECRET DOOR",
+     "due": "2026-07-11"
+    },
+    {
+     "name": "CUSTOM CARPENTRY: PAINT SECRET DOOR (Copy)",
+     "due": "2026-07-11"
+    }
+   ],
    "excluded_admin": [
     {
      "name": "DELIVERY: PRE DELIVERY WALK THROUGH",
@@ -826,13 +851,13 @@
      "label": "Week 1 · Jul 6-12",
      "deadline": "2026-07-12",
      "is_current": true,
-     "total": 10,
+     "total": 9,
      "done": 1,
-     "days_planned": 11.0,
+     "days_planned": 10.0,
      "days_earned": 2.0,
-     "pct": 18.2,
-     "target_task": "PAINT: PAINTING ADDITIONAL",
-     "target_type": "CP",
+     "pct": 20.0,
+     "target_task": "CLEANING: TRASH HAUL",
+     "target_type": "AT",
      "target_due": "2026-07-12",
      "tasks": [
       {
@@ -958,20 +983,6 @@
        "status": "pending",
        "in_week_plan": true,
        "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PaY7AATP7z",
-       "name": "PAINT: PAINTING ADDITIONAL",
-       "type": "CP",
-       "baseline_end": "2026-07-12",
-       "live_end": "2026-07-13",
-       "moved_days": 1,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": true,
        "pulled_in": false,
        "was": null
       }
