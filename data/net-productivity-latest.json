@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T14:06:04",
+  "generated_at": "2026-07-13T14:29:40",
   "today": "2026-07-13",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -5150,6 +5150,14 @@
           "n_exp": 3
         },
         {
+          "trade": "DEMO INTERIOR",
+          "income": 855.0,
+          "expense": 1650.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 4
+        },
+        {
           "trade": "WINDOWS",
           "income": 980.0,
           "expense": 1242.35,
@@ -5174,14 +5182,6 @@
           "n_exp": 1
         },
         {
-          "trade": "DEMO INTERIOR",
-          "income": 855.0,
-          "expense": 650.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 2
-        },
-        {
           "trade": "SHEETROCK",
           "income": 0.0,
           "expense": 850.0,
@@ -5199,7 +5199,7 @@
         }
       ],
       "total_income": 59273.0,
-      "total_expense": 33896.91,
+      "total_expense": 34896.91,
       "loose_amount": 0
     },
     {
@@ -5359,17 +5359,17 @@
   "brandy": {
     "project": "Brandy Sexton",
     "revenue": 59273.0,
-    "cost": 32896.91,
+    "cost": 33896.91,
     "orphan_cost": 1000.0,
     "prod": [
-      26376.09,
-      23086.4
+      25376.09,
+      21986.4
     ],
-    "margin_pct": 44.5,
+    "margin_pct": 42.8,
     "by_month": {
       "2026-05": [
-        25686.55,
-        22564.6
+        24686.55,
+        21464.6
       ],
       "2026-06": [
         689.54,
@@ -5572,24 +5572,6 @@
       {
         "project_id": "22PLKSsB4aeV",
         "project": "Brandy Sexton",
-        "trade": "DEMO INTERIOR",
-        "revenue": 855.0,
-        "revenue_gross": 855.0,
-        "discount_pct": 0.0,
-        "cost": 650.0,
-        "rev_source": "action",
-        "rev_ranges": [
-          [
-            "2026-05-02",
-            "2026-05-02"
-          ]
-        ],
-        "start": "2026-05-02",
-        "end": "2026-05-02"
-      },
-      {
-        "project_id": "22PLKSsB4aeV",
-        "project": "Brandy Sexton",
         "trade": "WINDOWS",
         "revenue": 980.0,
         "revenue_gross": 980.0,
@@ -5604,6 +5586,24 @@
         ],
         "start": "2026-05-16",
         "end": "2026-05-16"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "DEMO INTERIOR",
+        "revenue": 855.0,
+        "revenue_gross": 855.0,
+        "discount_pct": 0.0,
+        "cost": 1650.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-02",
+            "2026-05-02"
+          ]
+        ],
+        "start": "2026-05-02",
+        "end": "2026-05-02"
       }
     ]
   }
