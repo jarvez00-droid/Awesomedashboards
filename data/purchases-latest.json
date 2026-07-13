@@ -1,23 +1,16 @@
 {
- "generated_at": "2026-07-13T11:43:04",
+ "generated_at": "2026-07-13T12:02:14",
  "date": "2026-07-13",
  "window_start": "2026-07-13",
  "window_end": "2026-07-27",
  "summary": {
-  "tasks": 171,
+  "tasks": 170,
   "projects": 8,
   "alerts": 8,
-  "overdue": 16,
+  "overdue": 14,
   "to_purchase_amount": 67748.06
  },
  "alerts": [
-  {
-   "project": "Kyle Aubry - Project 01",
-   "projectId": "22Nx8Uut2Qxs",
-   "task": "BASEBOARD AND TRIMS: PURCHASE MATERIAL",
-   "due": "2026-07-13",
-   "taskId": "22PZpzaM6GXi"
-  },
   {
    "project": "Katie Holmes & Sean Springs",
    "projectId": "22P2j3sQMKqz",
@@ -31,6 +24,13 @@
    "task": "GLASS: PURCHASE MATERIALS",
    "due": "2026-07-13",
    "taskId": "22PaepcZNKRC"
+  },
+  {
+   "project": "Kyle Aubry - Project 01",
+   "projectId": "22Nx8Uut2Qxs",
+   "task": "BASEBOARD AND TRIMS: PURCHASE MATERIAL",
+   "due": "2026-07-15",
+   "taskId": "22PZpzaM6GXi"
   },
   {
    "project": "Kyle Aubry - Project 01",
@@ -500,51 +500,26 @@
    "id": "22Nx8Uut2Qxs",
    "name": "Kyle Aubry - Project 01",
    "counts": {
-    "tasks": 15,
+    "tasks": 14,
     "alerts": 2,
-    "overdue": 2
+    "overdue": 0
    },
-   "overdue": [
-    {
-     "name": "BASEBOARDS AND TRIM: COMPLETE TAKEOFF",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-07-09",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpzaJzWx3",
-     "progress": 0
-    },
-    {
-     "name": "BASEBOARD AND TRIMS: SECURE PRICING",
-     "step": "pricing",
-     "icon": "💲",
-     "step_label": "Secure pricing",
-     "due": "2026-07-10",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpzaLRn7B",
-     "progress": 0
-    }
-   ],
+   "overdue": [],
    "days": [
     {
      "date": "2026-07-13",
      "label": "Mon Jul 13",
      "tasks": [
       {
-       "name": "BASEBOARD AND TRIMS: PURCHASE MATERIAL",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
+       "name": "BASEBOARD AND TRIMS: SECURE PRICING",
+       "step": "pricing",
+       "icon": "💲",
+       "step_label": "Secure pricing",
        "due": "2026-07-13",
        "amount": null,
-       "alert": true,
+       "alert": false,
        "overdue": false,
-       "taskId": "22PZpzaM6GXi",
+       "taskId": "22PZpzaLRn7B",
        "progress": 0
       },
       {
@@ -572,18 +547,6 @@
        "progress": 0
       },
       {
-       "name": "INTERIOR DOORS: PURCHASE MATERIAL",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-07-13",
-       "amount": 450.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpza3Tu5P",
-       "progress": 0
-      },
-      {
        "name": "PREFAB CABINETS: DELIVERY ETA",
        "step": "eta",
        "icon": "🚚",
@@ -601,18 +564,6 @@
      "date": "2026-07-14",
      "label": "Tue Jul 14",
      "tasks": [
-      {
-       "name": "BASEBOARD AND TRIMS: CONFIRM DELIVERY",
-       "step": "confirm",
-       "icon": "📦",
-       "step_label": "Confirm delivery",
-       "due": "2026-07-14",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpzaMdNbc",
-       "progress": 0
-      },
       {
        "name": "CARPET:PURCHASE MATERIAL",
        "step": "purchase",
@@ -638,15 +589,15 @@
        "progress": 0
       },
       {
-       "name": "INTERIOR DOORS: CONFIRM DELIVERY",
-       "step": "confirm",
-       "icon": "📦",
-       "step_label": "Confirm delivery",
+       "name": "INTERIOR DOORS: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
        "due": "2026-07-14",
-       "amount": null,
+       "amount": 450.0,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZpza3vieD",
+       "taskId": "22PZpza3Tu5P",
        "progress": 0
       }
      ]
@@ -655,6 +606,18 @@
      "date": "2026-07-15",
      "label": "Wed Jul 15",
      "tasks": [
+      {
+       "name": "BASEBOARD AND TRIMS: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-15",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PZpzaM6GXi",
+       "progress": 0
+      },
       {
        "name": "COUNTERTOPS: CONFIRM DELIVERY",
        "step": "confirm",
@@ -666,6 +629,18 @@
        "overdue": false,
        "taskId": "22PZpzaDGT4Z",
        "progress": 0
+      },
+      {
+       "name": "INTERIOR DOORS: CONFIRM DELIVERY",
+       "step": "confirm",
+       "icon": "📦",
+       "step_label": "Confirm delivery",
+       "due": "2026-07-15",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpza3vieD",
+       "progress": 0
       }
      ]
     },
@@ -673,6 +648,18 @@
      "date": "2026-07-16",
      "label": "Thu Jul 16",
      "tasks": [
+      {
+       "name": "BASEBOARD AND TRIMS: CONFIRM DELIVERY",
+       "step": "confirm",
+       "icon": "📦",
+       "step_label": "Confirm delivery",
+       "due": "2026-07-16",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpzaMdNbc",
+       "progress": 0
+      },
       {
        "name": "PULLS: DELIVERY ETA",
        "step": "eta",
