@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-13T09:44:42",
+ "generated_at": "2026-07-13T10:02:14",
  "today": "2026-07-13",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -59,12 +59,12 @@
   "plan_days": 252.0,
   "month_forecast": {
    "status": "at_risk",
-   "projected_pct": 95.6,
+   "projected_pct": 94.3,
    "plan_pct": 100.0,
-   "leaked_count": 8,
-   "leaked_days": 19.0,
-   "leaked_pct": 4.4,
-   "reshuffled_in_month": 115
+   "leaked_count": 12,
+   "leaked_days": 25.0,
+   "leaked_pct": 5.7,
+   "reshuffled_in_month": 111
   },
   "adherence": 33.3,
   "band": "red",
@@ -86,8 +86,8 @@
   "runner_pct": 16.7,
   "ghost_pct": 50.0,
   "july_money": [
-   164520.96,
-   134190.21000000002
+   163287.16,
+   133141.42
   ],
   "projects": 9,
   "daily": [
@@ -1667,17 +1667,35 @@
    ],
    "month_forecast": {
     "status": "at_risk",
-    "projected_pct": 98.5,
+    "projected_pct": 93.9,
     "plan_pct": 100.0,
-    "leaked_count": 1,
-    "leaked_days": 1.0,
-    "leaked_pct": 1.5,
-    "reshuffled_in_month": 22,
+    "leaked_count": 4,
+    "leaked_days": 4.0,
+    "leaked_pct": 6.1,
+    "reshuffled_in_month": 19,
     "leaked": [
+     {
+      "name": "FINAL INSPECTIONS: CITY INSPECTION",
+      "from": "2026-07-25",
+      "to": "2026-08-03",
+      "days": 1
+     },
+     {
+      "name": "CLEANING: CLEANING",
+      "from": "2026-07-24",
+      "to": "2026-08-01",
+      "days": 1
+     },
      {
       "name": "PROJECT DELIVERY: DELIVERY",
       "from": "2026-07-31",
       "to": "2026-08-04",
+      "days": 1
+     },
+     {
+      "name": "PAINT TOUCH UPS",
+      "from": "2026-07-30",
+      "to": "2026-08-03",
       "days": 1
      }
     ]
@@ -1860,17 +1878,6 @@
      "depends_on": []
     },
     {
-     "id": "22PZpKBqLfMY",
-     "name": "BRICKS: INSTALL BRICKS",
-     "baseline_end": "2026-07-21",
-     "live_end": "2026-07-28",
-     "current_end": "2026-07-28",
-     "current_start": "2026-07-25",
-     "moved_days": 7,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PZpKAigegG",
      "name": "PLUMBING: INSTALL PLUMBING TRIM",
      "baseline_end": "2026-07-23",
@@ -1915,13 +1922,24 @@
      "depends_on": []
     },
     {
+     "id": "22PZpKBqLfMY",
+     "name": "BRICKS: INSTALL BRICKS",
+     "baseline_end": "2026-07-21",
+     "live_end": "2026-07-30",
+     "current_end": "2026-07-30",
+     "current_start": "2026-07-28",
+     "moved_days": 9,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
      "id": "22PZpKCERzKp",
      "name": "FINAL INSPECTIONS: CITY INSPECTION",
      "baseline_end": "2026-07-25",
-     "live_end": "2026-07-31",
-     "current_end": "2026-07-31",
-     "current_start": "2026-07-31",
-     "moved_days": 6,
+     "live_end": "2026-08-03",
+     "current_end": "2026-08-03",
+     "current_start": "2026-08-03",
+     "moved_days": 9,
      "status": "moved",
      "depends_on": []
     },
@@ -1929,21 +1947,35 @@
      "id": "22PZq7FAkZK7",
      "name": "PAINT TOUCH UPS",
      "baseline_end": "2026-07-30",
-     "live_end": "2026-07-31",
-     "current_end": "2026-07-31",
-     "current_start": "2026-07-30",
-     "moved_days": 1,
+     "live_end": "2026-08-03",
+     "current_end": "2026-08-03",
+     "current_start": "2026-08-01",
+     "moved_days": 4,
      "status": "moved",
      "depends_on": []
     }
    ],
    "july_money": [
-    20887.91,
-    17160.58
+    19654.11,
+    16111.79
    ],
    "margin_pct": 38.4,
    "moved_count": 23,
    "moved": [
+    {
+     "id": "22PZpKBqLfMY",
+     "name": "BRICKS: INSTALL BRICKS",
+     "from": "2026-07-21",
+     "to": "2026-07-30",
+     "days": 9
+    },
+    {
+     "id": "22PZpKCERzKp",
+     "name": "FINAL INSPECTIONS: CITY INSPECTION",
+     "from": "2026-07-25",
+     "to": "2026-08-03",
+     "days": 9
+    },
     {
      "id": "22PZpK9rGkCL",
      "name": "TILES: INSTALL TILES",
@@ -1959,17 +1991,24 @@
      "days": 8
     },
     {
+     "id": "22PZpKC3L9j4",
+     "name": "GUTTERS: INSTALL GUTTERS",
+     "from": "2026-07-23",
+     "to": "2026-07-31",
+     "days": 8
+    },
+    {
+     "id": "22PZpKCFaaqg",
+     "name": "CLEANING: CLEANING",
+     "from": "2026-07-24",
+     "to": "2026-08-01",
+     "days": 8
+    },
+    {
      "id": "22PZpKAP39Ee",
      "name": "CARPENTRY: PREFAB CABINETS INSTALLATION",
      "from": "2026-07-17",
      "to": "2026-07-24",
-     "days": 7
-    },
-    {
-     "id": "22PZpKBqLfMY",
-     "name": "BRICKS: INSTALL BRICKS",
-     "from": "2026-07-21",
-     "to": "2026-07-28",
      "days": 7
     },
     {
@@ -1978,27 +2017,6 @@
      "from": "2026-07-14",
      "to": "2026-07-21",
      "days": 7
-    },
-    {
-     "id": "22PZpKC3L9j4",
-     "name": "GUTTERS: INSTALL GUTTERS",
-     "from": "2026-07-23",
-     "to": "2026-07-29",
-     "days": 6
-    },
-    {
-     "id": "22PZpKCERzKp",
-     "name": "FINAL INSPECTIONS: CITY INSPECTION",
-     "from": "2026-07-25",
-     "to": "2026-07-31",
-     "days": 6
-    },
-    {
-     "id": "22PZpKCFaaqg",
-     "name": "CLEANING: CLEANING",
-     "from": "2026-07-24",
-     "to": "2026-07-30",
-     "days": 6
     },
     {
      "id": "22PZpKAigegG",
@@ -2057,6 +2075,13 @@
      "days": 4
     },
     {
+     "id": "22PZq7FAkZK7",
+     "name": "PAINT TOUCH UPS",
+     "from": "2026-07-30",
+     "to": "2026-08-03",
+     "days": 4
+    },
+    {
      "id": "22PZpKA3WxLB",
      "name": "FLOORING: INSTALL HARDWOOD",
      "from": "2026-07-10",
@@ -2096,13 +2121,6 @@
      "name": "MECHANICAL: INSTALL MECHANICAL TRIM",
      "from": "2026-07-23",
      "to": "2026-07-24",
-     "days": 1
-    },
-    {
-     "id": "22PZq7FAkZK7",
-     "name": "PAINT TOUCH UPS",
-     "from": "2026-07-30",
-     "to": "2026-07-31",
      "days": 1
     }
    ],
@@ -2512,9 +2530,9 @@
        "marker": "finish",
        "baseline_start": "2026-07-18",
        "baseline_end": "2026-07-21",
-       "live_start": "2026-07-25",
-       "live_end": "2026-07-28",
-       "moved_days": 7,
+       "live_start": "2026-07-28",
+       "live_end": "2026-07-30",
+       "moved_days": 9,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "started": false,
@@ -2633,9 +2651,9 @@
        "marker": null,
        "baseline_start": "2026-07-22",
        "baseline_end": "2026-07-23",
-       "live_start": "2026-07-29",
-       "live_end": "2026-07-29",
-       "moved_days": 6,
+       "live_start": "2026-07-31",
+       "live_end": "2026-07-31",
+       "moved_days": 8,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "started": false,
@@ -2714,9 +2732,9 @@
        "marker": null,
        "baseline_start": "2026-07-24",
        "baseline_end": "2026-07-24",
-       "live_start": "2026-07-30",
-       "live_end": "2026-07-30",
-       "moved_days": 6,
+       "live_start": "2026-08-01",
+       "live_end": "2026-08-01",
+       "moved_days": 8,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2794,9 +2812,9 @@
        "marker": null,
        "baseline_start": "2026-07-25",
        "baseline_end": "2026-07-25",
-       "live_start": "2026-07-31",
-       "live_end": "2026-07-31",
-       "moved_days": 6,
+       "live_start": "2026-08-03",
+       "live_end": "2026-08-03",
+       "moved_days": 9,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2847,27 +2865,6 @@
        "was": "2026-07-23"
       },
       {
-       "id": "22PZpKBqLfMY",
-       "name": "BRICKS: INSTALL BRICKS",
-       "type": "CP",
-       "marker": null,
-       "baseline_start": "2026-07-18",
-       "baseline_end": "2026-07-21",
-       "live_start": "2026-07-25",
-       "live_end": "2026-07-28",
-       "moved_days": 7,
-       "days_in_week": 0,
-       "earned_in_week": 0,
-       "started": false,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": false,
-       "kicked_out": false,
-       "pulled_in": false,
-       "lands_here": true,
-       "was": "2026-07-21"
-      },
-      {
        "id": "22PZpKAigegG",
        "name": "PLUMBING: INSTALL PLUMBING TRIM",
        "type": "CP",
@@ -2908,27 +2905,6 @@
        "pulled_in": false,
        "lands_here": true,
        "was": "2026-07-24"
-      },
-      {
-       "id": "22PZpKC3L9j4",
-       "name": "GUTTERS: INSTALL GUTTERS",
-       "type": "AT",
-       "marker": null,
-       "baseline_start": "2026-07-22",
-       "baseline_end": "2026-07-23",
-       "live_start": "2026-07-29",
-       "live_end": "2026-07-29",
-       "moved_days": 6,
-       "days_in_week": 0,
-       "earned_in_week": 0,
-       "started": false,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": false,
-       "kicked_out": false,
-       "pulled_in": false,
-       "lands_here": true,
-       "was": "2026-07-23"
       },
       {
        "id": "22PZpKB8D6zM",
@@ -2973,15 +2949,15 @@
        "was": "2026-07-24"
       },
       {
-       "id": "22PZpKCFaaqg",
-       "name": "CLEANING: CLEANING",
-       "type": "AT",
+       "id": "22PZpKBqLfMY",
+       "name": "BRICKS: INSTALL BRICKS",
+       "type": "CP",
        "marker": null,
-       "baseline_start": "2026-07-24",
-       "baseline_end": "2026-07-24",
-       "live_start": "2026-07-30",
+       "baseline_start": "2026-07-18",
+       "baseline_end": "2026-07-21",
+       "live_start": "2026-07-28",
        "live_end": "2026-07-30",
-       "moved_days": 6,
+       "moved_days": 9,
        "days_in_week": 0,
        "earned_in_week": 0,
        "started": false,
@@ -2991,7 +2967,7 @@
        "kicked_out": false,
        "pulled_in": false,
        "lands_here": true,
-       "was": "2026-07-24"
+       "was": "2026-07-21"
       },
       {
        "id": "22PZq7FAkZK7",
@@ -3000,9 +2976,9 @@
        "marker": null,
        "baseline_start": "2026-07-30",
        "baseline_end": "2026-07-30",
-       "live_start": "2026-07-30",
-       "live_end": "2026-07-31",
-       "moved_days": 1,
+       "live_start": "2026-08-01",
+       "live_end": "2026-08-03",
+       "moved_days": 4,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -3014,15 +2990,15 @@
        "was": null
       },
       {
-       "id": "22PZpKCERzKp",
-       "name": "FINAL INSPECTIONS: CITY INSPECTION",
-       "type": "CI",
+       "id": "22PZpKC3L9j4",
+       "name": "GUTTERS: INSTALL GUTTERS",
+       "type": "AT",
        "marker": null,
-       "baseline_start": "2026-07-25",
-       "baseline_end": "2026-07-25",
+       "baseline_start": "2026-07-22",
+       "baseline_end": "2026-07-23",
        "live_start": "2026-07-31",
        "live_end": "2026-07-31",
-       "moved_days": 6,
+       "moved_days": 8,
        "days_in_week": 0,
        "earned_in_week": 0,
        "started": false,
@@ -3032,7 +3008,7 @@
        "kicked_out": false,
        "pulled_in": false,
        "lands_here": true,
-       "was": "2026-07-25"
+       "was": "2026-07-23"
       },
       {
        "id": "22PZpKCjBHpp",
@@ -3053,6 +3029,27 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZpKCFaaqg",
+       "name": "CLEANING: CLEANING",
+       "type": "AT",
+       "marker": null,
+       "baseline_start": "2026-07-24",
+       "baseline_end": "2026-07-24",
+       "live_start": "2026-08-01",
+       "live_end": "2026-08-01",
+       "moved_days": 8,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-24"
       }
      ],
      "anchor": "monthly"
@@ -8819,14 +8816,21 @@
     }
    ],
    "month_forecast": {
-    "status": "intact",
-    "projected_pct": 100.0,
+    "status": "at_risk",
+    "projected_pct": 91.9,
     "plan_pct": 100.0,
-    "leaked_count": 0,
-    "leaked_days": 0.0,
-    "leaked_pct": 0.0,
-    "reshuffled_in_month": 8,
-    "leaked": []
+    "leaked_count": 1,
+    "leaked_days": 3.0,
+    "leaked_pct": 8.1,
+    "reshuffled_in_month": 7,
+    "leaked": [
+     {
+      "name": "BASEBOARDS AND TRIM: INSTALL BASEBOARDS AND TRIM",
+      "from": "2026-07-30",
+      "to": "2026-08-03",
+      "days": 3
+     }
+    ]
    },
    "cp_chain": [
     {
@@ -8874,17 +8878,6 @@
      "depends_on": []
     },
     {
-     "id": "22PZzzrhS6j8",
-     "name": "FLOORING: INSTALL LVP, CARPET OR TILE",
-     "baseline_end": "2026-07-24",
-     "live_end": "2026-07-25",
-     "current_end": "2026-07-25",
-     "current_start": "2026-07-22",
-     "moved_days": 1,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PZzzrmMy4S",
      "name": "TILES: INSTALL TILES (NO BACKSPLASH)",
      "baseline_end": "2026-07-24",
@@ -8896,13 +8889,24 @@
      "depends_on": []
     },
     {
+     "id": "22PZzzrhS6j8",
+     "name": "FLOORING: INSTALL LVP, CARPET OR TILE",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-07-28",
+     "current_end": "2026-07-28",
+     "current_start": "2026-07-24",
+     "moved_days": 4,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
      "id": "22PZzzrvq7n2",
      "name": "INTERIOR DOORS: INSTALL TRIM AND DOORS",
      "baseline_end": "2026-07-27",
-     "live_end": "2026-07-28",
-     "current_end": "2026-07-28",
-     "current_start": "2026-07-27",
-     "moved_days": 1,
+     "live_end": "2026-07-30",
+     "current_end": "2026-07-30",
+     "current_start": "2026-07-29",
+     "moved_days": 3,
      "status": "moved",
      "depends_on": []
     },
@@ -8910,10 +8914,10 @@
      "id": "22PZzzrxpbix",
      "name": "BASEBOARDS AND TRIM: INSTALL BASEBOARDS AND TRIM",
      "baseline_end": "2026-07-30",
-     "live_end": "2026-07-31",
-     "current_end": "2026-07-31",
-     "current_start": "2026-07-29",
-     "moved_days": 1,
+     "live_end": "2026-08-03",
+     "current_end": "2026-08-03",
+     "current_start": "2026-07-31",
+     "moved_days": 4,
      "status": "moved",
      "depends_on": []
     }
@@ -8925,6 +8929,27 @@
    "margin_pct": 32.0,
    "moved_count": 11,
    "moved": [
+    {
+     "id": "22PZzzrhS6j8",
+     "name": "FLOORING: INSTALL LVP, CARPET OR TILE",
+     "from": "2026-07-24",
+     "to": "2026-07-28",
+     "days": 4
+    },
+    {
+     "id": "22PZzzrxpbix",
+     "name": "BASEBOARDS AND TRIM: INSTALL BASEBOARDS AND TRIM",
+     "from": "2026-07-30",
+     "to": "2026-08-03",
+     "days": 4
+    },
+    {
+     "id": "22PZzzrvq7n2",
+     "name": "INTERIOR DOORS: INSTALL TRIM AND DOORS",
+     "from": "2026-07-27",
+     "to": "2026-07-30",
+     "days": 3
+    },
     {
      "id": "22PZzzrrQAUm",
      "name": "GLASS: TAKE MEASUREMENTS",
@@ -8968,13 +8993,6 @@
      "days": 1
     },
     {
-     "id": "22PZzzrhS6j8",
-     "name": "FLOORING: INSTALL LVP, CARPET OR TILE",
-     "from": "2026-07-24",
-     "to": "2026-07-25",
-     "days": 1
-    },
-    {
      "id": "22PZzzrmMy4S",
      "name": "TILES: INSTALL TILES (NO BACKSPLASH)",
      "from": "2026-07-24",
@@ -8984,20 +9002,6 @@
     {
      "id": "22PZzzrrrvPh",
      "name": "GLASS: INSTALL GLASS",
-     "from": "2026-07-30",
-     "to": "2026-07-31",
-     "days": 1
-    },
-    {
-     "id": "22PZzzrvq7n2",
-     "name": "INTERIOR DOORS: INSTALL TRIM AND DOORS",
-     "from": "2026-07-27",
-     "to": "2026-07-28",
-     "days": 1
-    },
-    {
-     "id": "22PZzzrxpbix",
-     "name": "BASEBOARDS AND TRIM: INSTALL BASEBOARDS AND TRIM",
      "from": "2026-07-30",
      "to": "2026-07-31",
      "days": 1
@@ -9225,9 +9229,9 @@
        "marker": null,
        "baseline_start": "2026-07-21",
        "baseline_end": "2026-07-24",
-       "live_start": "2026-07-22",
-       "live_end": "2026-07-25",
-       "moved_days": 1,
+       "live_start": "2026-07-24",
+       "live_end": "2026-07-28",
+       "moved_days": 4,
        "days_in_week": 4,
        "earned_in_week": 0.0,
        "started": false,
@@ -9285,9 +9289,9 @@
        "marker": "start",
        "baseline_start": "2026-07-25",
        "baseline_end": "2026-07-27",
-       "live_start": "2026-07-27",
-       "live_end": "2026-07-28",
-       "moved_days": 1,
+       "live_start": "2026-07-29",
+       "live_end": "2026-07-30",
+       "moved_days": 3,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "started": false,
@@ -9344,9 +9348,9 @@
        "marker": "finish",
        "baseline_start": "2026-07-25",
        "baseline_end": "2026-07-27",
-       "live_start": "2026-07-27",
-       "live_end": "2026-07-28",
-       "moved_days": 1,
+       "live_start": "2026-07-29",
+       "live_end": "2026-07-30",
+       "moved_days": 3,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -9358,15 +9362,36 @@
        "was": null
       },
       {
+       "id": "22PZzzrhS6j8",
+       "name": "FLOORING: INSTALL LVP, CARPET OR TILE",
+       "type": "CP",
+       "marker": null,
+       "baseline_start": "2026-07-21",
+       "baseline_end": "2026-07-24",
+       "live_start": "2026-07-24",
+       "live_end": "2026-07-28",
+       "moved_days": 4,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-24"
+      },
+      {
        "id": "22PZzzrxpbix",
        "name": "BASEBOARDS AND TRIM: INSTALL BASEBOARDS AND TRIM",
        "type": "CP",
        "marker": null,
        "baseline_start": "2026-07-28",
        "baseline_end": "2026-07-30",
-       "live_start": "2026-07-29",
-       "live_end": "2026-07-31",
-       "moved_days": 1,
+       "live_start": "2026-07-31",
+       "live_end": "2026-08-03",
+       "moved_days": 4,
        "days_in_week": 3,
        "earned_in_week": 0.0,
        "started": false,
@@ -9404,9 +9429,9 @@
        "marker": null,
        "baseline_start": "2026-07-31",
        "baseline_end": "2026-08-01",
-       "live_start": "2026-08-01",
-       "live_end": "2026-08-03",
-       "moved_days": 2,
+       "live_start": "2026-08-04",
+       "live_end": "2026-08-05",
+       "moved_days": 4,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "started": false,
