@@ -2314,19 +2314,33 @@ function financeMoveDate(sourceId, currentDate, originalDate, label, taskId, pro
   }
 }
 
+// Mini calendar for date edits: the native date input's month-grid picker,
+// opened immediately (Chrome/Safari render a month grid; no CDN dependency).
+// Falls back silently to the plain input where showPicker isn't supported.
+function financeWireDatePicker(modal) {
+  setTimeout(() => {
+    const inp = modal && modal.querySelector('input[type=date]');
+    if (!inp) return;
+    const open = () => { try { if (inp.showPicker) inp.showPicker(); } catch (e) { /* needs user gesture in some browsers */ } };
+    inp.addEventListener('click', open);
+    open();  // open the month grid right away (we're inside the click activation window)
+  }, 80);
+}
+
 function financeJtMoveModal(taskId, projectId, currentDate, label) {
   const body = `
     <div style="font-size:13px;color:var(--txt2);margin-bottom:2px"><b style="color:var(--txt)">${label}</b></div>
     <div style="font-size:11px;color:var(--dim);margin-bottom:8px">Changes this task's date <b>directly in JobTread</b> (updates the live schedule).</div>
     <label style="font-size:12px;color:var(--txt2)">New date</label>
-    <input name="date" type="date" value="${currentDate}" required style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:10px 12px;font-size:14px;border-radius:6px;font-family:var(--mono)">
+    <input name="date" type="date" value="${currentDate}" required style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:12px 14px;font-size:15px;border-radius:6px;font-family:var(--mono);cursor:pointer;color-scheme:dark">
   `;
-  financeModal('Move date in JobTread', body, async (data) => {
+  const modal = financeModal('Move date in JobTread', body, async (data) => {
     if (!data.date || !/^\d{4}-\d{2}-\d{2}$/.test(data.date)) throw new Error('Please pick a valid date.');
     const result = await financeApi('/jobtread/set-date', { method: 'POST', body: JSON.stringify({ task_id: taskId, project_id: projectId, date: data.date }) });
     if (result && result.state) { FINANCE_DATA = result.state; financeSafeRender(); }
     financeFlash(`✓ "${label}" moved to ${data.date} in JobTread. (Full Cash Flow tab updates in ~30s.)`);
   });
+  financeWireDatePicker(modal);
 }
 
 function financeSetUnit(u) {
@@ -2562,11 +2576,11 @@ function financeRenderProjBucket(project, start, end, live) {
   const fmt = n => (n<0?'-':'') + '$' + Math.abs(n||0).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
   const fmtDate = iso => { if (!iso) return '—'; const dt = new Date(iso+'T12:00:00'); const MS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return `${MS[dt.getMonth()]} ${dt.getDate()}`; };
   // Project events within date range (exclude overhead source_types — they're their own category)
-  const events = (d.timeline || []).filter(e =>
+  const events = financeClusterCopies((d.timeline || []).filter(e =>
     e.date >= start && e.date <= end &&
     e.source_type !== 'fixed_cost' && e.source_type !== 'debt' &&
     ((e.project || 'Other') === project)
-  ).sort((a, b) => a.date.localeCompare(b.date));
+  ).sort((a, b) => a.date.localeCompare(b.date)));
   if (!events.length) return '<div style="padding:10px 16px;color:var(--dim);font-size:12px">No events for this project in this period.</div>';
   let html = '<div style="padding:8px 16px 12px;background:var(--bg)">';
   events.forEach(e => {
@@ -2765,13 +2779,7 @@ function financeRenderBucketContent(start, end, rowId, live) {
     (byProj[p] = byProj[p] || []).push(e);
   });
   const specialGroups = {'Fixed Costs': 1, 'Debts': 2};
-  const projKeys = Object.keys(byProj).sort((a, bb) => {
-    const sa = specialGroups[a] || 0, sb = specialGroups[bb] || 0;
-    if (sa !== sb) return sa - sb;  // real projects first, then Fixed Costs, then Debts
-    const na = byProj[a].reduce((s, e) => s + e.amount, 0);
-    const nb = byProj[bb].reduce((s, e) => s + e.amount, 0);
-    return Math.abs(nb) - Math.abs(na);
-  });
+  const projKeys = financePinnedProjOrder(Object.keys(byProj), byProj, specialGroups);
 
   const PAGE = 15;
   // Single event row — shared by the flat (Fixed Costs / Debts) and the
@@ -2816,7 +2824,7 @@ function financeRenderBucketContent(start, end, rowId, live) {
 
   let html = '<div style="padding:10px 20px 14px">';
   projKeys.forEach(p => {
-    const events = byProj[p].sort((a, bb) => a.date.localeCompare(bb.date));
+    const events = financeClusterCopies(byProj[p].sort((a, bb) => a.date.localeCompare(bb.date)));
     const net = events.reduce((s, e) => s + e.amount, 0);
     const inflow = events.filter(e => e.amount > 0).reduce((s, e) => s + e.amount, 0);
     const outflow = events.filter(e => e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
@@ -2874,6 +2882,59 @@ function financeToggleCatSeg(segKey) {
   const open = body.style.display !== 'none';
   body.style.display = open ? 'none' : '';
   if (chv) chv.textContent = open ? '▸' : '▾';
+}
+
+// ── Stable project ordering (Jose 2026-07-13) ──────────────────────
+// The project boxes inside a bucket drill-down keep ONE pinned order for the
+// whole page session: seeded once (amount-desc) on first render, so amount
+// edits / saves / refetches never reshuffle them. Genuinely new projects
+// append at the end. Fixed Costs / Debts always render after real projects.
+function financePinnedProjOrder(keys, byProj, specialGroups) {
+  const ord = window._financeProjOrder || (window._financeProjOrder = { map: {}, next: 0, seeded: false });
+  if (!ord.seeded && window.FINANCE_DATA && Array.isArray(FINANCE_DATA.by_project)) {
+    ord.seeded = true;
+    FINANCE_DATA.by_project.slice()
+      .sort((a, b) => (Math.abs(b.inflow||0)+Math.abs(b.outflow||0)) - (Math.abs(a.inflow||0)+Math.abs(a.outflow||0)))
+      .forEach(bp => { const p = bp.project; if (p && !(p in ord.map)) ord.map[p] = ord.next++; });
+  }
+  const vol = p => Math.abs((byProj[p]||[]).reduce((s, e) => s + e.amount, 0));
+  keys.filter(p => !specialGroups[p] && !(p in ord.map))
+      .sort((a, b) => vol(b) - vol(a))
+      .forEach(p => { ord.map[p] = ord.next++; });
+  return keys.slice().sort((a, b) => {
+    const sa = specialGroups[a] || 0, sb = specialGroups[b] || 0;
+    if (sa !== sb) return sa - sb;  // real projects first, then Fixed Costs, then Debts
+    if (sa) return 0;
+    return (ord.map[a] ?? 1e9) - (ord.map[b] ?? 1e9);
+  });
+}
+
+// ── Split-copy clustering (Jose 2026-07-13) ────────────────────────
+// A task named "X - copy" (or "X - copy 2"…) always renders IMMEDIATELY BELOW
+// its source task "X" in the same list — right after a split (optimistic
+// state) AND after any later refetch. Copies without a visible source keep
+// their normal date position.
+function financeCopyBaseName(label) {
+  const m = /^(.*) - copy(?: \d+)?$/.exec(label || '');
+  return m ? m[1] : null;
+}
+function financeClusterCopies(events) {
+  const out = [], copies = [];
+  events.forEach(e => {
+    const b = financeCopyBaseName(e.label);
+    if (b && events.some(o => o !== e && ((o.label || '') === b))) copies.push(e);
+    else out.push(e);
+  });
+  copies.forEach(c => {
+    const b = financeCopyBaseName(c.label);
+    let at = -1;
+    for (let i = out.length - 1; i >= 0; i--) {
+      const l = out[i].label || '';
+      if (l === b || financeCopyBaseName(l) === b) { at = i; break; }
+    }
+    if (at >= 0) out.splice(at + 1, 0, c); else out.push(c);
+  });
+  return out;
 }
 
 function financeShowAll(id) {
@@ -3021,35 +3082,137 @@ function financeEditAmount(sourceId, currentAmount, label, sourceType, taskId, p
   const isSQLite = /^(pc-|misc-|npi-|bs-)/.test(sourceId || '');
   const isJT = !!taskId && /^jt-/.test(sourceId || '');
   const kindNote = isJT
-    ? "This is a JobTread payment task. The new amount is written <b>directly into JobTread</b> (the task's description) — the real schedule/CRM is the source of truth."
+    ? "This is a JobTread payment task. Name and amount changes are written <b>directly into JobTread</b> (the amount lives in the task's description) — the real schedule/CRM is the source of truth."
     : isSQLite
     ? "This is a SQLite-logged entry. We'll void the existing row and insert a corrected one — original stays in the audit trail."
     : "This is an external event (fixed cost / debt). We'll apply a scenario amount override — the source data stays unchanged.";
-  financeModal('Modify amount', `
+  const inputStyle = 'background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:10px 12px;font-size:14px;border-radius:6px;font-family:var(--mono)';
+  // Task name field + Split payment section: JobTread payment tasks only.
+  const nameField = isJT ? `
+    <label style="font-size:12px;color:var(--txt2)">Task name (renames the task in JobTread)</label>
+    <input name="task_name" value="${financeAttr(label || '')}" required style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:10px 12px;font-size:13px;border-radius:6px">` : '';
+  const splitSection = isJT ? `
+    <input type="hidden" name="do_split" value="">
+    <div style="margin-top:8px;border-top:1px solid var(--bdr);padding-top:8px">
+      <a href="#" id="fin-split-toggle" style="color:var(--blu);text-decoration:none;font-size:12px;font-weight:600">⑂ Split payment into several instances…</a>
+      <div id="fin-split-box" style="display:none;margin-top:8px">
+        <label style="font-size:12px;color:var(--txt2)">Number of instances</label>
+        <select name="split_n" id="fin-split-n" style="${inputStyle};margin-top:4px;width:100%">
+          <option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option>
+        </select>
+        <div id="fin-split-amts" style="display:flex;flex-direction:column;gap:6px;margin-top:8px"></div>
+        <div id="fin-split-hint" style="font-size:11px;margin-top:6px;color:var(--dim)"></div>
+        <div style="font-size:11px;color:var(--dim);margin-top:6px">Instance 1 stays on this task (its amount is rewritten). Each extra instance is created in JobTread as "<i>${financeAttr(label || '')} - copy</i>" with the same date — move each one afterwards with 📅.</div>
+      </div>
+    </div>` : '';
+  const modal = financeModal(isJT ? 'Edit task (JobTread)' : 'Modify amount', `
     <div style="font-size:13px;color:var(--txt2);margin-bottom:2px"><b style="color:var(--txt)">${label || '(no label)'}</b></div>
     <div style="font-size:11px;color:var(--dim);margin-bottom:10px">Current: <b style="color:${direction==='income'?'var(--grn)':'var(--red)'}">${direction==='income'?'+':'-'}$${abs.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</b> (${direction})</div>
-    <label style="font-size:12px;color:var(--txt2)">New amount ($)</label>
-    <input name="amount" type="number" step="0.01" min="0.01" value="${abs}" required style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:10px 12px;font-size:14px;border-radius:6px;font-family:var(--mono)">
+    ${nameField}
+    <label style="font-size:12px;color:var(--txt2)${isJT?';margin-top:6px':''}">New amount ($)</label>
+    <input name="amount" type="number" step="0.01" min="0.01" value="${abs}" required style="${inputStyle}">
     <label style="font-size:12px;color:var(--txt2);margin-top:6px">Reason (optional)</label>
     <input name="reason" placeholder="e.g. typo correction" style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:8px 10px;font-size:13px;border-radius:6px">
     <div style="font-size:11px;color:var(--dim);margin-top:6px">Enter the amount as a positive number. The direction (${direction}) will be preserved automatically.</div>
     <div style="font-size:11px;color:var(--dim);margin-top:6px;padding:8px;background:rgba(129,140,248,.06);border-left:2px solid var(--acc);border-radius:4px">${kindNote}</div>
+    ${splitSection}
   `, async (data) => {
-    const newAmt = parseFloat(data.amount);
-    if (isNaN(newAmt) || newAmt <= 0) throw new Error('Amount must be a positive number');
-    const result = await financeApi('/edit-amount', {
-      method: 'POST',
-      body: JSON.stringify({
-        source_id: sourceId,
-        new_amount: newAmt,
-        reason: (data.reason || '').trim() || 'amount edited via dashboard',
-        task_id: taskId || null,
-        project_id: projectId || null,
-      }),
-    });
+    let result = null;
+    // 1) Rename (JobTread tasks only) — before the split so copies inherit the new name.
+    const newName = (data.task_name || '').trim();
+    const nameChanged = isJT && newName && newName !== (label || '');
+    if (nameChanged) {
+      result = await financeApi('/jobtread/rename-task', {
+        method: 'POST',
+        body: JSON.stringify({ task_id: taskId, name: newName, project_id: projectId || null }),
+      });
+    }
+    if (isJT && data.do_split === '1') {
+      // 2a) Split: instance 1 keeps this task; 2..N become " - copy" clones in JobTread.
+      const n = parseInt(data.split_n || '2', 10);
+      const amounts = [];
+      for (let i = 1; i <= n; i++) {
+        const v = parseFloat(data['split_amt_' + i]);
+        if (isNaN(v) || v <= 0) throw new Error('Instance ' + i + ' amount must be a positive number');
+        amounts.push(v);
+      }
+      result = await financeApi('/jobtread/split-task', {
+        method: 'POST',
+        body: JSON.stringify({ task_id: taskId, amounts, project_id: projectId || null }),
+      });
+    } else {
+      // 2b) Plain amount edit (unchanged behavior).
+      const newAmt = parseFloat(data.amount);
+      if (isNaN(newAmt) || newAmt <= 0) throw new Error('Amount must be a positive number');
+      if (!isJT || Math.abs(newAmt - abs) > 0.004) {
+        result = await financeApi('/edit-amount', {
+          method: 'POST',
+          body: JSON.stringify({
+            source_id: sourceId,
+            new_amount: newAmt,
+            reason: (data.reason || '').trim() || 'amount edited via dashboard',
+            task_id: taskId || null,
+            project_id: projectId || null,
+          }),
+        });
+      }
+    }
     if (result && result.state) FINANCE_DATA = result.state;
     financeSafeRender();
   });
+  // Wire the split UI (toggle + per-instance amount inputs + running-sum hint).
+  if (isJT) setTimeout(() => financeWireSplitUI(modal, abs), 60);
+}
+
+// Split-payment sub-form inside the edit modal: builds N amount inputs
+// (prefilled with an even split that sums exactly to the current amount) and
+// keeps a non-blocking running-sum hint vs the original amount.
+function financeWireSplitUI(modal, originalAbs) {
+  const toggle = modal.querySelector('#fin-split-toggle');
+  const box = modal.querySelector('#fin-split-box');
+  const flag = modal.querySelector('input[name=do_split]');
+  const nSel = modal.querySelector('#fin-split-n');
+  const amts = modal.querySelector('#fin-split-amts');
+  const hint = modal.querySelector('#fin-split-hint');
+  if (!toggle || !box || !flag || !nSel || !amts || !hint) return;
+  const fmt = n => '$' + Math.abs(n).toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  const updateHint = () => {
+    let sum = 0;
+    amts.querySelectorAll('input').forEach(i => { const v = parseFloat(i.value); if (!isNaN(v)) sum += v; });
+    const diff = sum - originalAbs;
+    if (Math.abs(diff) < 0.005) {
+      hint.style.color = 'var(--grn)';
+      hint.textContent = `Sum ${fmt(sum)} = current amount ${fmt(originalAbs)} ✓`;
+    } else {
+      hint.style.color = 'var(--ylw)';
+      hint.textContent = `Sum ${fmt(sum)} vs current ${fmt(originalAbs)} (${diff > 0 ? '+' : '−'}${fmt(diff)}) — allowed, just so you know.`;
+    }
+  };
+  const build = () => {
+    const n = parseInt(nSel.value || '2', 10);
+    const even = Math.floor((originalAbs / n) * 100) / 100;
+    const last = Math.round((originalAbs - even * (n - 1)) * 100) / 100;
+    let html = '';
+    for (let i = 1; i <= n; i++) {
+      const v = (i === n ? last : even).toFixed(2);
+      html += `<div style="display:flex;align-items:center;gap:8px">
+        <span style="font-size:11px;color:var(--txt2);width:110px;white-space:nowrap">Instance ${i}${i===1?' (this task)':''}</span>
+        <input name="split_amt_${i}" type="number" step="0.01" min="0.01" value="${v}" style="flex:1;background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:8px 10px;font-size:13px;border-radius:6px;font-family:var(--mono)">
+      </div>`;
+    }
+    amts.innerHTML = html;
+    amts.querySelectorAll('input').forEach(i => i.addEventListener('input', updateHint));
+    updateHint();
+  };
+  toggle.addEventListener('click', ev => {
+    ev.preventDefault();
+    const on = box.style.display === 'none';
+    box.style.display = on ? '' : 'none';
+    flag.value = on ? '1' : '';
+    toggle.textContent = on ? '⑂ Splitting — click to cancel the split' : '⑂ Split payment into several instances…';
+    if (on && !amts.children.length) build();
+  });
+  nSel.addEventListener('change', build);
 }
 
 function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
@@ -3057,7 +3220,7 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
     <div style="font-size:13px;color:var(--txt2);margin-bottom:2px"><b style="color:var(--txt)">${label}</b></div>
     <div style="font-size:11px;color:var(--dim);margin-bottom:8px">Original date: ${originalDate || currentDate}${currentDate !== originalDate ? ' · Currently moved to: ' + currentDate : ''}</div>
     <label style="font-size:12px;color:var(--txt2)">New date</label>
-    <input name="date" type="date" value="${currentDate}" required style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:10px 12px;font-size:14px;border-radius:6px;font-family:var(--mono)">
+    <input name="date" type="date" value="${currentDate}" required style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:12px 14px;font-size:15px;border-radius:6px;font-family:var(--mono);cursor:pointer;color-scheme:dark">
     <div style="font-size:11px;color:var(--dim);margin-top:6px">This creates a scenario override. Click "Reset" below to revert to the original date.</div>
     <div style="margin-top:4px"><button type="button" id="scenario-reset-btn" style="padding:6px 10px;font-size:11px;background:var(--card-h);color:var(--txt);border:1px solid var(--bdr);border-radius:5px;cursor:pointer">Reset to original</button></div>
   `;
@@ -3082,6 +3245,7 @@ function financeMoveDateModal(sourceId, currentDate, originalDate, label) {
     if (result && result.state) FINANCE_DATA = result.state;
     financeSafeRender();
   });
+  financeWireDatePicker(modal);
   // Wire reset button
   setTimeout(() => {
     const btn = modal.querySelector('#scenario-reset-btn');
