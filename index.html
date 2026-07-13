@@ -2341,35 +2341,40 @@ function financeSetRange(r) {
   financeSafeRender();
 }
 
-function financeRangeEndDate(data) {
-  const range = window._financeRange || 'eoy';
+// Local YYYY-MM-DD (avoids toISOString timezone day-shift)
+function finYmd(dt) {
+  return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
+}
+
+// Window presets (Jose 2026-07-13): exactly This month / Q3 / Q4.
+// Q3 = Jul 1 → Sep 30, Q4 = Oct 1 → Dec 31 (year taken from data.date — never hardcoded).
+function financeRangeBounds(data) {
+  const range = window._financeRange || 'month';
   const today = new Date(data.date + 'T12:00:00');
-  if (range === 'custom' && window._financeCustomEnd) {
-    return new Date(window._financeCustomEnd + 'T12:00:00');
-  }
-  if (range === 'eoy') {
-    return new Date(today.getFullYear(), 11, 31);
-  }
-  if (range === 'full') {
-    return new Date(data.window_end + 'T12:00:00');
-  }
-  const days = { '30d': 30, '90d': 90, '6mo': 180, '12mo': 365 }[range];
-  const end = new Date(today);
-  end.setDate(end.getDate() + (days || 365));
-  return end;
+  const yr = today.getFullYear();
+  if (range === 'q3') return { start: new Date(yr, 6, 1), end: new Date(yr, 8, 30) };
+  if (range === 'q4') return { start: new Date(yr, 9, 1), end: new Date(yr, 11, 31) };
+  // default 'month' → the current calendar month
+  return { start: new Date(yr, today.getMonth(), 1), end: new Date(yr, today.getMonth() + 1, 0) };
+}
+
+function financeRangeEndDate(data) {
+  return financeRangeBounds(data).end;
 }
 
 function financeFilterByRange(data) {
-  const rangeEnd = financeRangeEndDate(data);
-  const rangeEndStr = rangeEnd.toISOString().slice(0, 10);
+  const bounds = financeRangeBounds(data);
+  const rangeEndStr = finYmd(bounds.end);
+  const rangeStartStr = finYmd(bounds.start);
 
-  const tl = (data.timeline || []).filter(e => e.date <= rangeEndStr);
-  const fcFwd = ((data.fixed_cost_events || {}).forward || []).filter(e => e.date <= rangeEndStr);
+  const inRange = e => e.date >= rangeStartStr && e.date <= rangeEndStr;
+  const tl = (data.timeline || []).filter(inRange);
+  const fcFwd = ((data.fixed_cost_events || {}).forward || []).filter(inRange);
 
   const agg = {}, aggFixed = {};
   ['day', 'week', 'month'].forEach(u => {
-    agg[u] = ((data.aggregated && data.aggregated[u]) || []).filter(b => b.start <= rangeEndStr);
-    aggFixed[u] = ((data.aggregated_fixed && data.aggregated_fixed[u]) || []).filter(b => b.start <= rangeEndStr);
+    agg[u] = ((data.aggregated && data.aggregated[u]) || []).filter(b => b.start <= rangeEndStr && b.end >= rangeStartStr);
+    aggFixed[u] = ((data.aggregated_fixed && data.aggregated_fixed[u]) || []).filter(b => b.start <= rangeEndStr && b.end >= rangeStartStr);
   });
 
   // Recompute summary for the range
@@ -2429,6 +2434,7 @@ function financeFilterByRange(data) {
 
   return {
     ...data,
+    _rangeStart: rangeStartStr,
     _rangeEnd: rangeEndStr,
     window_end: rangeEndStr,
     timeline: tl,
@@ -2768,6 +2774,46 @@ function financeRenderBucketContent(start, end, rowId, live) {
   });
 
   const PAGE = 15;
+  // Single event row — shared by the flat (Fixed Costs / Debts) and the
+  // category-segmented (per-project) rendering paths.
+  const evRow = (e, hidden, hideKey) => {
+    let html = '';
+    const canVoid = live && ['petty_cash','misc_expense','non_project_income','bank_snapshot'].includes(e.source_type);
+    const dbId = (e.source_id||'').replace(/^(pc|misc|npi|bs)-/, '');
+    const isConf = !!e.confirmed;
+    const jtRow = (e.source_type==='jobtread' && e.meta && e.meta.taskId) ? ` data-jt-row="${financeAttr(e.meta.taskId)}"` : '';
+    html += `<div ${hidden?`data-hidden-in="${financeAttr(hideKey)}"`:''}${jtRow} style="display:${hidden?'none':'flex'};align-items:center;padding:3px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3)">`;
+    // Confirmation toggle (live mode only — needs API)
+    if (live) {
+      const tip = isConf ? 'Confirmed — click to mark Potential' : 'Potential — click to mark Confirmed';
+      html += `<a href="#" class="fin-confirm" data-src="${financeAttr(e.confirm_key || e.source_id)}" data-confirmed="${isConf?1:0}" title="${tip}" style="color:${isConf?'var(--grn)':'var(--dim)'};text-decoration:none;font-size:14px;width:18px;text-align:center">${isConf?'☑':'☐'}</a>`;
+    } else {
+      html += `<span title="${isConf?'Confirmed':'Potential'}" style="color:${isConf?'var(--grn)':'var(--dim)'};font-size:14px;width:18px;text-align:center">${isConf?'☑':'☐'}</span>`;
+    }
+    html += `<span style="font-family:var(--mono);color:${e.moved?'var(--ylw)':'var(--txt2)'};white-space:nowrap;width:62px">${fmtDate(e.date)}</span>`;
+    html += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}${finAssigneeTag(e)}</span>`;
+    html += `<span style="font-family:var(--mono);color:${e.amount>=0?'var(--grn)':'var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
+    html += finPaidBtn(e, live);
+    if (live) html += `<a href="#" class="fin-edit-amount" data-src="${financeAttr(e.source_id)}" data-amount="${e.amount}" data-label="${financeAttr(e.label||'')}" data-type="${financeAttr(e.source_type)}" data-task="${financeAttr((e.meta&&e.meta.taskId)||'')}" data-project="${financeAttr((e.meta&&e.meta.projectId)||'')}" title="Edit amount" style="color:var(--dim);text-decoration:none;margin-right:4px">✎</a>`;
+    if (live) html += `<a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" data-task="${financeAttr((e.meta&&e.meta.taskId)||'')}" data-project="${financeAttr((e.meta&&e.meta.projectId)||'')}" data-type="${financeAttr(e.source_type)}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
+    if (canVoid) html += `<a href="#" class="fin-void" data-kind="${financeAttr(e.source_type)}" data-id="${dbId}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
+    else html += `<span style="width:12px"></span>`;
+    html += `</div>`;
+    return html;
+  };
+  const showMoreLink = (n, hideKey) => `<div style="padding:6px 0;font-size:11px">
+        <a href="#" class="fin-showmore" data-target="${financeAttr(hideKey)}" style="color:var(--blu);text-decoration:none">Show all ${n} events →</a>
+      </div>`;
+
+  // Second-level sub-segments inside each project (Jose 2026-07-13): items are
+  // assigned by JobTread task type — category 'materials' / 'subs'; everything
+  // else (income, additional, manual entries…) lands in Additional expenses.
+  const CAT_SEGS = [
+    { id: 'materials', label: '🧱 Materials', test: e => e.category === 'materials' },
+    { id: 'subs',      label: '👷 Sub payments', test: e => e.category === 'subs' },
+    { id: 'other',     label: '📋 Additional expenses', test: null },
+  ];
+
   let html = '<div style="padding:10px 20px 14px">';
   projKeys.forEach(p => {
     const events = byProj[p].sort((a, bb) => a.date.localeCompare(bb.date));
@@ -2786,39 +2832,48 @@ function financeRenderBucketContent(start, end, rowId, live) {
     html += `<div style="font-size:12px">`;
     const pKey = p.replace(/[^a-z0-9]/gi,'_');
     const hideKey = `${rowId}-${pKey}`;
-    events.forEach((e, idx) => {
-      const hidden = idx >= PAGE;
-      const canVoid = live && ['petty_cash','misc_expense','non_project_income','bank_snapshot'].includes(e.source_type);
-      const dbId = (e.source_id||'').replace(/^(pc|misc|npi|bs)-/, '');
-      const isConf = !!e.confirmed;
-      const jtRow = (e.source_type==='jobtread' && e.meta && e.meta.taskId) ? ` data-jt-row="${financeAttr(e.meta.taskId)}"` : '';
-      html += `<div ${hidden?`data-hidden-in="${financeAttr(hideKey)}"`:''}${jtRow} style="display:${hidden?'none':'flex'};align-items:center;padding:3px 0;gap:10px;border-top:1px solid rgba(33,39,47,.3)">`;
-      // Confirmation toggle (live mode only — needs API)
-      if (live) {
-        const tip = isConf ? 'Confirmed — click to mark Potential' : 'Potential — click to mark Confirmed';
-        html += `<a href="#" class="fin-confirm" data-src="${financeAttr(e.confirm_key || e.source_id)}" data-confirmed="${isConf?1:0}" title="${tip}" style="color:${isConf?'var(--grn)':'var(--dim)'};text-decoration:none;font-size:14px;width:18px;text-align:center">${isConf?'☑':'☐'}</a>`;
-      } else {
-        html += `<span title="${isConf?'Confirmed':'Potential'}" style="color:${isConf?'var(--grn)':'var(--dim)'};font-size:14px;width:18px;text-align:center">${isConf?'☑':'☐'}</span>`;
-      }
-      html += `<span style="font-family:var(--mono);color:${e.moved?'var(--ylw)':'var(--txt2)'};white-space:nowrap;width:62px">${fmtDate(e.date)}</span>`;
-      html += `<span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label||''}${finAssigneeTag(e)}</span>`;
-      html += `<span style="font-family:var(--mono);color:${e.amount>=0?'var(--grn)':'var(--red)'};font-weight:600;white-space:nowrap">${e.amount>=0?'+':''}${fmt(e.amount)}</span>`;
-      html += finPaidBtn(e, live);
-      if (live) html += `<a href="#" class="fin-edit-amount" data-src="${financeAttr(e.source_id)}" data-amount="${e.amount}" data-label="${financeAttr(e.label||'')}" data-type="${financeAttr(e.source_type)}" data-task="${financeAttr((e.meta&&e.meta.taskId)||'')}" data-project="${financeAttr((e.meta&&e.meta.projectId)||'')}" title="Edit amount" style="color:var(--dim);text-decoration:none;margin-right:4px">✎</a>`;
-      if (live) html += `<a href="#" class="fin-move" data-src="${financeAttr(e.source_id)}" data-date="${financeAttr(e.date)}" data-orig="${financeAttr(e.original_date)}" data-label="${financeAttr(e.label||'')}" data-task="${financeAttr((e.meta&&e.meta.taskId)||'')}" data-project="${financeAttr((e.meta&&e.meta.projectId)||'')}" data-type="${financeAttr(e.source_type)}" title="Move date" style="color:var(--dim);text-decoration:none">📅</a>`;
-      if (canVoid) html += `<a href="#" class="fin-void" data-kind="${financeAttr(e.source_type)}" data-id="${dbId}" title="Void" style="color:var(--red);text-decoration:none">×</a>`;
-      else html += `<span style="width:12px"></span>`;
-      html += `</div>`;
-    });
-    if (events.length > PAGE) {
-      html += `<div style="padding:6px 0;font-size:11px">
-        <a href="#" class="fin-showmore" data-target="${financeAttr(hideKey)}" style="color:var(--blu);text-decoration:none">Show all ${events.length} events →</a>
-      </div>`;
+    if (specialGroups[p]) {
+      // Fixed Costs / Debts pseudo-groups — flat list (no task types here)
+      events.forEach((e, idx) => { html += evRow(e, idx >= PAGE, hideKey); });
+      if (events.length > PAGE) html += showMoreLink(events.length, hideKey);
+    } else {
+      // Real project — Materials / Sub payments / Additional expenses sub-segments
+      let remaining = events.slice();
+      CAT_SEGS.forEach(seg => {
+        const segEvents = seg.test ? remaining.filter(seg.test) : remaining;
+        if (seg.test) remaining = remaining.filter(e => !seg.test(e));
+        if (!segEvents.length) return;
+        const segKey = `${hideKey}-${seg.id}`;
+        const segIn = segEvents.filter(e => e.amount > 0).reduce((s, e) => s + e.amount, 0);
+        const segOut = segEvents.filter(e => e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
+        const segNet = segIn - segOut;
+        html += `<div onclick="financeToggleCatSeg('${segKey}')" style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding:4px 8px;background:var(--raised);border-radius:5px;cursor:pointer;font-size:11px" title="Click to collapse/expand">`;
+        html += `<span style="font-weight:700;color:var(--txt2)"><span id="${segKey}-chv" style="color:var(--dim);margin-right:6px;display:inline-block;width:10px">▾</span>${seg.label} <span style="color:var(--dim);font-weight:400">· ${segEvents.length} item${segEvents.length!==1?'s':''}</span></span>`;
+        html += `<span style="font-family:var(--mono)">`;
+        if (segIn) html += `<span style="color:var(--grn);margin-right:8px">+${fmtK(segIn)}</span>`;
+        if (segOut) html += `<span style="color:var(--red);margin-right:8px">-${fmtK(segOut)}</span>`;
+        html += `<span style="font-weight:700;color:${segNet>=0?'var(--grn)':'var(--red)'}">${segNet>=0?'+':''}${fmtK(segNet)}</span>`;
+        html += `</span></div>`;
+        html += `<div id="${segKey}-body" style="padding-left:6px">`;
+        segEvents.forEach((e, idx) => { html += evRow(e, idx >= PAGE, segKey); });
+        if (segEvents.length > PAGE) html += showMoreLink(segEvents.length, segKey);
+        html += `</div>`;
+      });
     }
     html += `</div></div>`;
   });
   html += '</div>';
   return html;
+}
+
+// Collapse/expand a category sub-segment inside a bucket drill-down.
+function financeToggleCatSeg(segKey) {
+  const body = document.getElementById(segKey + '-body');
+  const chv = document.getElementById(segKey + '-chv');
+  if (!body) return;
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : '';
+  if (chv) chv.textContent = open ? '▸' : '▾';
 }
 
 function financeShowAll(id) {
@@ -2931,7 +2986,7 @@ function financeInstallClickHandler() {
       const cur = window._financeCustomEnd || '';
       const val = prompt('End date for the range (YYYY-MM-DD). Leave blank to clear and use preset.', cur);
       if (val === null) return;
-      if (val.trim() === '') { window._financeCustomEnd = null; window._financeRange = 'eoy'; }
+      if (val.trim() === '') { window._financeCustomEnd = null; window._financeRange = 'month'; }
       else if (!/^\d{4}-\d{2}-\d{2}$/.test(val.trim())) { alert('Use YYYY-MM-DD format'); return; }
       else { window._financeCustomEnd = val.trim(); window._financeRange = 'custom'; }
       window._financeExpandedBuckets = new Set();
@@ -5682,20 +5737,42 @@ function renderFinance(c) {
   const amountSign = n => (n > 0 ? '+' : '') + fmt(n);
 
   const bal = s.current_balance || 0;
-  const projected = s.projected_end_balance || 0;
-  const forward_net = s.net_window || 0;
-  const overdue_net = s.overdue_net || 0;
-  const breakdown = s.runway_breakdown_date;
 
-  // Runway stat — date when balance first goes negative
-  let runwayCls = 'g', runwayDisp = '∞';
-  if (breakdown) {
-    const today = new Date(d.date + 'T12:00:00');
-    const brk = new Date(breakdown + 'T12:00:00');
-    const daysOut = Math.max(0, Math.ceil((brk - today) / 86400000));
-    runwayCls = daysOut <= 14 ? 'r' : daysOut <= 45 ? 'y' : 'b';
-    runwayDisp = daysOut === 0 ? 'today' : `${daysOut}d`;
-  }
+  // ── Summary boxes (Jose 2026-07-13 redesign) — always computed over the FULL
+  //    projection horizon from the unfiltered global data, so they don't move
+  //    when the Cashflow Breakdown window changes. ──
+  const G = FINANCE_DATA;
+  const gtl = G.timeline || [];
+  const horizonEnd = G.window_end;
+  // First date each running balance dips below 0 (computed from the timeline so
+  // it stays correct after client-side confirm toggles, not from stale summary).
+  const negPot = gtl.find(e => e.running_balance != null && e.running_balance < 0) || null;
+  const negConf = gtl.find(e => e.running_balance_confirmed != null && e.running_balance_confirmed < 0) || null;
+  const breakdown = negPot ? negPot.date : null;
+  // Quarter windows from item dates (year taken from the data date — no hardcoding)
+  const finYr = parseInt((G.date || '').slice(0, 4), 10) || new Date().getFullYear();
+  const qSum = (from, to, projOnly) => {
+    let inn = 0, out = 0;
+    gtl.forEach(e => {
+      if (e.date < from || e.date > to) return;
+      if (projOnly && (e.source_type === 'fixed_cost' || e.source_type === 'debt')) return;
+      if (e.amount > 0) inn += e.amount; else out += Math.abs(e.amount);
+    });
+    return { inn: Math.round(inn * 100) / 100, out: Math.round(out * 100) / 100, net: Math.round((inn - out) * 100) / 100 };
+  };
+  const q3Tot = qSum(finYr + '-07-01', finYr + '-09-30', false);   // incl. fixed costs
+  const q4Tot = qSum(finYr + '-10-01', finYr + '-12-31', false);   // incl. fixed costs
+  const projTot = qSum('0000-00-00', '9999-99-99', true);          // full horizon, projects only
+  const fcMonthly = (G.fixed_costs && G.fixed_costs.total_monthly_equivalent) || (G.summary && G.summary.fixed_costs_monthly) || 0;
+  const fmtDateFull = iso => { if (!iso) return '—'; const dt = new Date(iso + 'T12:00:00'); const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return `${MS[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`; };
+  // "Next runs negative" tile state
+  const negInfo = ev => {
+    if (!ev) return { val: 'Never', sub: `stays positive through ${fmtDateFull(horizonEnd)}`, col: 'var(--grn)', bg: 'rgba(18,183,106,.08)', bdr: 'rgba(18,183,106,.45)' };
+    const daysOut = Math.max(0, Math.ceil((new Date(ev.date + 'T12:00:00') - new Date(G.date + 'T12:00:00')) / 86400000));
+    const col = daysOut <= 14 ? 'var(--red)' : daysOut <= 45 ? 'var(--ylw)' : 'var(--org)';
+    return { val: fmtDateFull(ev.date), sub: (daysOut === 0 ? 'today' : `in ${daysOut} days`) + ` · on "${(ev.label || '').slice(0, 38)}"`, col, bg: 'rgba(240,68,56,.07)', bdr: col };
+  };
+  const negC = negInfo(negConf), negP = negInfo(negPot);
 
   const live = window._financeLive === true;
   // Count ALL scenario data (overrides + additions + deletions) for the active scenario.
@@ -5707,18 +5784,20 @@ function renderFinance(c) {
     + (scenInfo.deletions_count || 0)
     || (d.sources && d.sources.scenario_overrides_count) || 0;
 
-  // Range info
+  // Range info — effective start is whichever is later: today or the window start (Q4 starts Oct 1)
   const rangeEnd = new Date(d._rangeEnd + 'T12:00:00');
-  const todayDt = new Date(d.date + 'T12:00:00');
-  const rangeDays = Math.max(1, Math.round((rangeEnd - todayDt) / 86400000));
+  const effStartStr = (d._rangeStart && d._rangeStart > d.date) ? d._rangeStart : d.date;
+  const effStart = new Date(effStartStr + 'T12:00:00');
+  const rangeDays = Math.max(1, Math.round((rangeEnd - effStart) / 86400000));
   const rangeEndFmt = rangeEnd.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
-  const rangeLbl = { '30d':'30d','90d':'90d','6mo':'6mo','12mo':'12mo','eoy':'EOY','full':'365d','custom':'custom' }[window._financeRange || 'eoy'] || 'range';
+  const rangeStartFmt = effStartStr === d.date ? 'Today' : effStart.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  const rangeLbl = { 'month': 'This month', 'q3': 'Q3', 'q4': 'Q4' }[window._financeRange || 'month'] || 'This month';
 
   let h = `
     <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:12px">
       <div>
         <div class="page-title">${window._financeV2 ? 'Finance V2 <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px;background:rgba(75,134,253,.15);color:var(--blu);margin-left:8px;vertical-align:middle">overhead-trim simulation</span>' : 'Finance'}</div>
-        <div class="page-sub">Balance · Projects · Fixed costs · <b style="color:var(--txt)">Today → ${rangeEndFmt}</b> (${rangeDays} days) · As of ${d.date}
+        <div class="page-sub">Balance · Projects · Fixed costs · <b style="color:var(--txt)">${rangeStartFmt} → ${rangeEndFmt}</b> (${rangeDays} days) · As of ${d.date}
           ${live ? '<span style="color:var(--grn);font-weight:600;margin-left:8px">● LIVE</span>' : '<span style="color:var(--ylw);margin-left:8px">● read-only (static JSON)</span>'}
         </div>
       </div>
@@ -5741,31 +5820,62 @@ function renderFinance(c) {
     </div>
     ${!live ? `<div class="alert" style="background:var(--ylw-s);border-color:var(--ylw-b);color:var(--ylw)"><div><b>Read-only mode.</b> You're seeing the static JSON snapshot from the last dashboard refresh. To enable Add/Edit/Scenario buttons, click ⚙ Settings and enter the tunnel URL + bearer token from the Mac. ${window._financeApiError ? '<span style="opacity:.7"> (last error: '+window._financeApiError+')</span>' : ''}</div></div>` : ''}
 
-    <div class="stats">
-      <div class="st g"><div class="n">${fmtK(bal)}</div><div class="l">Current Balance</div></div>
-      ${(d.paid_since_balance && d.paid_since_balance.summary && d.paid_since_balance.summary.remaining_balance != null) ? `<div class="st ${d.paid_since_balance.summary.remaining_balance >= 0 ? 'g' : 'r'}"><div class="n">${fmtK(d.paid_since_balance.summary.remaining_balance)}</div><div class="l">Saldo Restante (hoy)</div></div>` : ''}
-      <div class="st ${projected >= 0 ? 'g' : 'r'}"><div class="n">${fmtK(projected)}</div><div class="l">Projected ${rangeLbl} End</div></div>
-      <div class="st ${runwayCls}"><div class="n">${runwayDisp}</div><div class="l">Runs Negative</div></div>
-      <div class="st b"><div class="n">${fmtK(forward_net)}</div><div class="l">Net ${rangeLbl}</div></div>
-      <div class="st ${overdue_net >= 0 ? 'g' : 'r'}"><div class="n">${fmtK(overdue_net)}</div><div class="l">Overdue Backlog Net</div></div>
+    <!-- Row 1: balance + early-warning "next runs negative" boxes + quarter nets -->
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;align-items:stretch">
+      <div style="flex:1.1;min-width:160px;background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:10px 12px">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700">Current Balance</div>
+        <div style="font-family:var(--mono);font-weight:700;font-size:20px;color:var(--txt);margin-top:4px">${fmtK(bal)}</div>
+        ${(d.paid_since_balance && d.paid_since_balance.summary && d.paid_since_balance.summary.remaining_balance != null) ? `<div style="font-size:10px;color:var(--dim);margin-top:3px">Saldo restante (hoy): <b style="color:${d.paid_since_balance.summary.remaining_balance >= 0 ? 'var(--grn)' : 'var(--red)'}">${fmtK(d.paid_since_balance.summary.remaining_balance)}</b></div>` : `<div style="font-size:10px;color:var(--dim);margin-top:3px">as of ${G.bank && G.bank.as_of || d.date}</div>`}
+      </div>
+      <div style="flex:1.4;min-width:200px;background:${negC.bg};border:1.5px solid ${negC.bdr};border-radius:var(--r);padding:10px 12px" title="First date the CONFIRMED-only running balance goes below $0 (only movements marked ☑ confirmed count)">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700">⚠ Next Runs Negative <span style="color:var(--grn)">(Confirmed)</span></div>
+        <div style="font-family:var(--mono);font-weight:700;font-size:20px;color:${negC.col};margin-top:4px">${negC.val}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px">${negC.sub}</div>
+      </div>
+      <div style="flex:1.4;min-width:200px;background:${negP.bg};border:1.5px solid ${negP.bdr};border-radius:var(--r);padding:10px 12px" title="First date the COMBINED running balance (confirmed + potential movements) goes below $0">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700">⚠ Next Runs Negative <span style="color:var(--blu)">(Potential)</span></div>
+        <div style="font-family:var(--mono);font-weight:700;font-size:20px;color:${negP.col};margin-top:4px">${negP.val}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px">${negP.sub}</div>
+      </div>
+      <div style="width:1px;background:var(--bdr);margin:2px 4px"></div>
+      <div style="flex:1;min-width:140px;background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:10px 12px" title="Net cashflow ${finYr}-07-01 → ${finYr}-09-30 (incl. fixed costs; projection starts ${d.date})">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700">Net Q3</div>
+        <div style="font-family:var(--mono);font-weight:700;font-size:20px;color:${q3Tot.net >= 0 ? 'var(--grn)' : 'var(--red)'};margin-top:4px">${q3Tot.net >= 0 ? '+' : ''}${fmtK(q3Tot.net)}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px">Jul 1 → Sep 30</div>
+      </div>
+      <div style="flex:1;min-width:140px;background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:10px 12px" title="Net cashflow ${finYr}-10-01 → ${finYr}-12-31 (incl. fixed costs)">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700">Net Q4</div>
+        <div style="font-family:var(--mono);font-weight:700;font-size:20px;color:${q4Tot.net >= 0 ? 'var(--grn)' : 'var(--red)'};margin-top:4px">${q4Tot.net >= 0 ? '+' : ''}${fmtK(q4Tot.net)}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px">Oct 1 → Dec 31</div>
+      </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px;font-size:12px">
-      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px">
-        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Incoming (${rangeLbl})</div>
-        <div style="color:var(--grn);font-family:var(--mono);font-weight:700;font-size:16px">+${fmtK(s.incoming_window)}</div>
+    <!-- Row 2: project-only horizon totals + quarter in/out (incl. fixed) + fixed-cost baseline -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px;margin-bottom:16px;font-size:12px">
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px" title="All project inflows from today through ${fmtDateFull(horizonEnd)} — fixed costs excluded">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Incoming Total</div>
+        <div style="color:var(--grn);font-family:var(--mono);font-weight:700;font-size:16px">+${fmtK(projTot.inn)}</div>
+        <div style="color:var(--dim);font-size:10px;margin-top:2px">projects · today → ${fmtDateFull(horizonEnd)}</div>
       </div>
-      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px">
-        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Outgoing (${rangeLbl})</div>
-        <div style="color:var(--red);font-family:var(--mono);font-weight:700;font-size:16px">-${fmtK(s.outgoing_window)}</div>
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px" title="All project outflows from today through ${fmtDateFull(horizonEnd)} — fixed costs excluded">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Outgoing Total (Projects)</div>
+        <div style="color:var(--red);font-family:var(--mono);font-weight:700;font-size:16px">-${fmtK(projTot.out)}</div>
+        <div style="color:var(--dim);font-size:10px;margin-top:2px">fixed costs excluded</div>
       </div>
-      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px">
-        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Overdue To Collect</div>
-        <div style="color:var(--grn);font-family:var(--mono);font-weight:700;font-size:16px">+${fmtK(s.overdue_incoming)}</div>
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px" title="Q3 = Jul 1 → Sep 30 · includes fixed costs (projection starts ${d.date})">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Q3 · In / Out</div>
+        <div style="font-family:var(--mono);font-weight:700;font-size:16px"><span style="color:var(--grn)">+${fmtK(q3Tot.inn)}</span> <span style="color:var(--dim);font-weight:400">/</span> <span style="color:var(--red)">-${fmtK(q3Tot.out)}</span></div>
+        <div style="color:var(--dim);font-size:10px;margin-top:2px">incl. fixed costs</div>
       </div>
-      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px">
-        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Overdue To Pay</div>
-        <div style="color:var(--red);font-family:var(--mono);font-weight:700;font-size:16px">-${fmtK(s.overdue_outgoing)}</div>
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px" title="Q4 = Oct 1 → Dec 31 · includes fixed costs">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Q4 · In / Out</div>
+        <div style="font-family:var(--mono);font-weight:700;font-size:16px"><span style="color:var(--grn)">+${fmtK(q4Tot.inn)}</span> <span style="color:var(--dim);font-weight:400">/</span> <span style="color:var(--red)">-${fmtK(q4Tot.out)}</span></div>
+        <div style="color:var(--dim);font-size:10px;margin-top:2px">incl. fixed costs</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:8px 12px" title="Monthly fixed-cost baseline (salaries, systems, utilities, legal, other)">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">Current Fixed Costs</div>
+        <div style="color:var(--org);font-family:var(--mono);font-weight:700;font-size:16px">${fmtK(fcMonthly)}<span style="font-size:11px;color:var(--dim);font-weight:400">/mo</span></div>
+        <div style="color:var(--dim);font-size:10px;margin-top:2px">monthly baseline</div>
       </div>
     </div>
     ${financePagosSectionHTML()}`;
@@ -5782,13 +5892,13 @@ function renderFinance(c) {
   // ── Range selector + time-unit slider + aggregated summary ──
   const unit = window._financeUnit || 'week';
   const view = window._financeView || 'table';
-  const range = window._financeRange || 'eoy';
+  const range = window._financeRange || 'month';
   const pill = (val, label) => `<button onclick="financeSetUnit('${val}')" style="padding:7px 18px;font-size:13px;font-weight:600;background:${unit===val?'var(--blu)':'transparent'};color:${unit===val?'#fff':'var(--txt2)'};border:none;border-radius:4px;cursor:pointer;transition:all .12s">${label}</button>`;
   const viewPill = (val, label) => `<button onclick="financeSetView('${val}')" style="padding:7px 14px;font-size:12px;font-weight:600;background:${view===val?'var(--pur)':'transparent'};color:${view===val?'#fff':'var(--txt2)'};border:none;border-radius:4px;cursor:pointer;transition:all .12s">${label}</button>`;
   const rangePill = (val, label) => `<button onclick="financeSetRange('${val}')" style="padding:6px 12px;font-size:12px;font-weight:600;background:${range===val?'var(--acc)':'transparent'};color:${range===val?'#fff':'var(--txt2)'};border:none;border-radius:4px;cursor:pointer;transition:all .12s">${label}</button>`;
   const endDisp = (() => { const dt = new Date(d._rangeEnd + 'T12:00:00'); return dt.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'}); })();
   h += `<div class="sh" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-    <span>Cashflow Summary <span style="font-size:11px;color:var(--dim);font-weight:400;margin-left:6px">through ${endDisp}</span></span>
+    <span>Cashflow Breakdown <span style="font-size:11px;color:var(--dim);font-weight:400;margin-left:6px">through ${endDisp}</span></span>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
       ${unit === 'day' ? `<div style="display:inline-flex;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px">${viewPill('table','Table')}${viewPill('calendar','Calendar')}</div>` : ''}
       <div style="display:inline-flex;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px">
@@ -5797,13 +5907,12 @@ function renderFinance(c) {
     </div>
   </div>
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
-    <span style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;font-weight:600">From today through:</span>
+    <span style="font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;font-weight:600">Window:</span>
     <div style="display:inline-flex;background:var(--card);border:1px solid var(--bdr);border-radius:6px;padding:2px">
-      ${rangePill('30d','+30d')}${rangePill('90d','+90d')}${rangePill('6mo','+6mo')}${rangePill('eoy','EOY')}${rangePill('12mo','+12mo')}${rangePill('full','Full')}${rangePill('custom','Custom…')}
+      ${rangePill('month','This month')}${rangePill('q3','Q3')}${rangePill('q4','Q4')}
     </div>
-    <span style="font-size:11px;color:var(--txt);font-weight:600">${rangeEndFmt}</span>
-    <span style="font-size:11px;color:var(--dim)">(${rangeDays} days) — stats + runway update live</span>
-    ${window._financeRange === 'custom' ? `<a href="#" class="fin-pick-end" style="font-size:11px;color:var(--blu);text-decoration:underline">pick date</a>` : ''}
+    <span style="font-size:11px;color:var(--txt);font-weight:600">${rangeStartFmt} → ${rangeEndFmt}</span>
+    <span style="font-size:11px;color:var(--dim)">(${rangeDays} days)</span>
   </div>`;
 
   const buckets = (d.aggregated && d.aggregated[unit]) || [];
@@ -5825,21 +5934,27 @@ function renderFinance(c) {
   } else if (!buckets.length) {
     h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:14px;color:var(--dim);margin-bottom:20px">No forward events.</div>';
   } else {
+    // Two grouped column sections: POTENTIAL (all events) vs CONFIRMED (☑ only),
+    // each with its own background tint spanning its columns.
+    const POT_BG = 'rgba(75,134,253,.06)';
+    const CONF_BG = 'rgba(18,183,106,.06)';
+    const GRP_BDR = 'border-left:1px solid var(--bdr)';
     h += '<div style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);padding:0;overflow:hidden;margin-bottom:20px">';
     h += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">';
-    h += '<thead style="background:var(--raised)"><tr style="text-align:left;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
-    h += '<th style="padding:10px 12px;width:20px"></th>';
-    h += '<th style="padding:10px 12px">Period</th>';
-    h += '<th style="padding:10px 12px;text-align:right" title="All events (confirmed + potential)">Inflow (Pot.)</th>';
-    h += '<th style="padding:10px 12px;text-align:right" title="Only events explicitly confirmed">Inflow (Conf.)</th>';
-    h += '<th style="padding:10px 12px;text-align:right">Outflow (Pot.)</th>';
-    h += '<th style="padding:10px 12px;text-align:right">Outflow (Conf.)</th>';
-    h += '<th style="padding:10px 12px;text-align:right">Fixed costs</th>';
-    h += '<th style="padding:10px 12px;text-align:right">Net (Pot.)</th>';
-    h += '<th style="padding:10px 12px;text-align:right">Net (Conf.)</th>';
-    h += '<th style="padding:10px 12px;text-align:right">Close (Pot.)</th>';
-    h += '<th style="padding:10px 12px;text-align:right">Close (Conf.)</th>';
-    h += '<th style="padding:10px 12px;text-align:right">Events</th>';
+    h += '<thead style="background:var(--raised)">';
+    h += '<tr style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.8px">';
+    h += '<th rowspan="2" style="padding:8px 12px;width:20px"></th>';
+    h += '<th rowspan="2" style="padding:8px 12px;text-align:left;vertical-align:bottom">Period</th>';
+    h += `<th colspan="3" style="padding:7px 12px;text-align:center;background:${POT_BG};${GRP_BDR};color:var(--blu);font-weight:800" title="All scheduled movements (confirmed + potential)">Potential</th>`;
+    h += `<th colspan="3" style="padding:7px 12px;text-align:center;background:${CONF_BG};${GRP_BDR};color:var(--grn);font-weight:800" title="Only movements marked ☑ confirmed">Confirmed</th>`;
+    h += '</tr>';
+    h += '<tr style="text-align:right;color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px">';
+    h += `<th style="padding:6px 12px;background:${POT_BG};${GRP_BDR}">Inflow</th>`;
+    h += `<th style="padding:6px 12px;background:${POT_BG}">Outflow</th>`;
+    h += `<th style="padding:6px 12px;background:${POT_BG}">Close</th>`;
+    h += `<th style="padding:6px 12px;background:${CONF_BG};${GRP_BDR}">Inflow</th>`;
+    h += `<th style="padding:6px 12px;background:${CONF_BG}">Outflow</th>`;
+    h += `<th style="padding:6px 12px;background:${CONF_BG}">Close</th>`;
     h += '</tr></thead><tbody>';
     // Lazy-render bucket drill-downs — only render content when user expands a bucket.
     // The full event list can be 600+ events; rendering all at once is slow.
@@ -5849,35 +5964,32 @@ function renderFinance(c) {
       const cbC = b.closing_balance_confirmed;
       const cbStyle = cb == null ? 'color:var(--dim)' : (cb < 0 ? 'color:var(--red);font-weight:700' : 'color:var(--txt);font-weight:600');
       const cbCStyle = cbC == null ? 'color:var(--dim)' : (cbC < 0 ? 'color:var(--red);font-weight:700' : 'color:var(--txt);font-weight:600');
-      const netStyle = b.net >= 0 ? 'color:var(--grn);font-weight:600' : 'color:var(--red);font-weight:600';
-      const netCStyle = (b.net_confirmed||0) >= 0 ? 'color:var(--grn);font-weight:600' : 'color:var(--red);font-weight:600';
-      const fc = fcByKey[b.key];
-      const fcAmt = fc ? fc.outflow : 0;
       const rowId = 'bkt-' + unit + '-' + idx;
       const isOpen = expanded.has(rowId);
       const inC = b.inflow_confirmed||0;
       const outC = b.outflow_confirmed||0;
-      const netC = b.net_confirmed||0;
       h += `<tr id="${rowId}-row" style="border-top:1px solid rgba(33,39,47,.3);cursor:pointer" onclick="financeToggleBucket('${rowId}')">`;
       h += `<td style="padding:8px 12px;text-align:center;color:var(--dim)"><span id="${rowId}-chv">${isOpen?'▾':'▸'}</span></td>`;
       h += `<td style="padding:8px 12px;font-weight:500">${b.label}</td>`;
-      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--grn)">+${fmtK(b.inflow)}</td>`;
-      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:${inC>0?'var(--grn)':'var(--dim)'}">${inC>0?'+'+fmtK(inC):'—'}</td>`;
-      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--red)">-${fmtK(b.outflow)}</td>`;
-      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:${outC>0?'var(--red)':'var(--dim)'}">${outC>0?'-'+fmtK(outC):'—'}</td>`;
-      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--org)">-${fmtK(fcAmt)}</td>`;
-      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${netStyle}">${b.net>=0?'+':''}${fmtK(b.net)}</td>`;
-      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${netCStyle}">${netC>=0?'+':''}${fmtK(netC)}</td>`;
-      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${cbStyle}">${cb==null?'—':fmt(cb)}</td>`;
-      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${cbCStyle}">${cbC==null?'—':fmt(cbC)}</td>`;
-      h += `<td style="padding:8px 12px;text-align:right;color:var(--txt2);font-size:11px">${b.count_confirmed||0}/${b.count}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--grn);background:${POT_BG};${GRP_BDR}">+${fmtK(b.inflow)}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:var(--red);background:${POT_BG}">-${fmtK(b.outflow)}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${cbStyle};background:${POT_BG}">${cb==null?'—':fmt(cb)}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:${inC>0?'var(--grn)':'var(--dim)'};background:${CONF_BG};${GRP_BDR}">${inC>0?'+'+fmtK(inC):'—'}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);color:${outC>0?'var(--red)':'var(--dim)'};background:${CONF_BG}">${outC>0?'-'+fmtK(outC):'—'}</td>`;
+      h += `<td style="padding:8px 12px;text-align:right;font-family:var(--mono);${cbCStyle};background:${CONF_BG}">${cbC==null?'—':fmt(cbC)}</td>`;
       h += '</tr>';
       // Detail row — empty placeholder, filled lazily on expand
-      h += `<tr id="${rowId}-detail" data-bucket-start="${b.start}" data-bucket-end="${b.end}" style="display:${isOpen?'':'none'};background:var(--bg)"><td colspan="12" style="padding:0">`;
+      h += `<tr id="${rowId}-detail" data-bucket-start="${b.start}" data-bucket-end="${b.end}" style="display:${isOpen?'':'none'};background:var(--bg)"><td colspan="8" style="padding:0">`;
       h += isOpen ? financeRenderBucketContent(b.start, b.end, rowId, live) : '';
       h += '</td></tr>';
     });
-    h += '</tbody></table></div></div>';  // close scroll wrapper + outer card
+    h += '</tbody></table></div>';
+    // Legend — what Close means in each group
+    h += `<div style="padding:8px 14px;font-size:11px;color:var(--dim);border-top:1px solid var(--bdr);line-height:1.5">
+      <b style="color:var(--blu)">Potential</b> = all scheduled movements (confirmed + potential) · <b style="color:var(--grn)">Confirmed</b> = only movements marked ☑ confirmed.
+      <b style="color:var(--txt2)">Close</b> = projected running balance at the end of the period — Potential Close counts <i>all</i> movements (confirmed + potential); Confirmed Close counts confirmed movements only.
+    </div>`;
+    h += '</div>';  // close outer card
   }
 
   // ── Overdue backlog (grouped by project) ──
