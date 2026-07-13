@@ -33,12 +33,51 @@ h1{font-size:22px;margin:0 0 3px}
 .pill.st-warning{color:#e3b341;border-color:rgba(227,179,65,.55);background:rgba(227,179,65,.1)}
 .pill.st-behind{color:#ff7b72;border-color:rgba(248,81,73,.6);background:rgba(248,81,73,.12);animation:blinkst 1.1s ease-in-out infinite}
 .pill.st-salvage{color:#ffa657;border-color:rgba(255,140,0,.7);background:rgba(255,140,0,.15);animation:blinkst 1.1s ease-in-out infinite}
+/* v14: neutral gray = no universe work scheduled this week (NOT green) */
+.pill.st-no_work{color:#9aa7b4;border-color:rgba(154,167,180,.4);background:rgba(154,167,180,.07)}
 @keyframes blinkst{0%,100%{opacity:1}50%{opacity:.3}}
 .stripe{position:absolute;top:0;right:0;bottom:0;width:5px;z-index:5}
 .stripe.st-on_pace{background:#3fb950}
 .stripe.st-warning{background:#e3b341}
 .stripe.st-behind{background:#f85149;animation:blinkst 1.1s ease-in-out infinite}
 .stripe.st-salvage{background:#ff8c00;animation:blinkst 1.1s ease-in-out infinite}
+.stripe.st-no_work{background:#5a6b7b}
+/* v14: (start)/(finish) markers on weekly task rows + chips */
+.mkr{font-size:9px;font-weight:800;letter-spacing:.04em;border-radius:4px;padding:0 5px;flex-shrink:0;border:1px solid;white-space:nowrap}
+.mkr.start{color:#bc8cff;border-color:rgba(188,140,255,.55);background:rgba(188,140,255,.09)}
+.mkr.start.ok{color:#3fb950;border-color:rgba(63,185,80,.55);background:rgba(63,185,80,.08)}
+.mkr.finish{color:#2dd4bf;border-color:rgba(45,212,191,.5);background:rgba(45,212,191,.08)}
+.mkr.cont{color:var(--mut);border-color:var(--line)}
+/* v14: last-week verdict chip (from the frozen race-week-report.json) */
+.lastwk{font-size:10px;font-weight:800;padding:1px 8px;border-radius:999px;border:1px solid var(--line);display:inline-block;white-space:nowrap;cursor:default}
+.lastwk.saved{color:#3fb950;border-color:rgba(63,185,80,.5);background:rgba(63,185,80,.08)}
+.lastwk.missed{color:#ff7b72;border-color:rgba(248,81,73,.55);background:rgba(248,81,73,.1)}
+.lastwk.nowork{color:var(--mut)}
+/* v14: top-level view toggle LIVE / REPORT */
+.views{display:flex;gap:8px;margin:14px 0 2px;flex-wrap:wrap}
+.vbtn{background:var(--card2);border:1px solid var(--line);color:var(--mut);font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:9px;cursor:pointer}
+.vbtn.act{color:#0b1017;background:var(--accent);border-color:var(--accent)}
+.vbtn:not(.act):hover{color:var(--tx)}
+/* v14: frozen LAST WEEK report view */
+.rep-note{color:var(--mut);font-size:12px;margin:8px 0 12px}
+.rep-hero{display:flex;gap:16px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:10px 0 14px}
+.rep-hero .hstat .v{font-size:22px;font-weight:800}
+.rep-card{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:12px 0;overflow:hidden}
+.rep-head{display:flex;align-items:center;gap:12px;padding:12px 14px;flex-wrap:wrap}
+.rep-head .rp{font-size:22px;font-weight:800;margin-left:auto}
+.verdict{font-size:11px;font-weight:800;padding:2px 10px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.verdict.saved{color:#3fb950;border-color:rgba(63,185,80,.55);background:rgba(63,185,80,.09)}
+.verdict.missed{color:#ff7b72;border-color:rgba(248,81,73,.6);background:rgba(248,81,73,.12)}
+.verdict.nowork{color:var(--mut)}
+.rep-an{padding:10px 14px;border-top:1px solid var(--line);background:var(--card2);font-size:13.5px;line-height:1.65;color:#cdd9e5}
+.rep-task{display:flex;align-items:center;gap:9px;padding:6px 14px;border-top:1px solid var(--line);font-size:13px}
+.rep-task .ic{width:18px;text-align:center;flex-shrink:0}
+.rep-task.ok .ic{color:#3fb950}
+.rep-task.miss .ic{color:#ff7b72}
+.rep-task .tn{flex:1;color:#dbe4ee}
+.rep-task.ok .tn{color:var(--mut);text-decoration:line-through}
+.rep-task .slip{color:#e3b341;font-size:11.5px;font-style:italic;flex-shrink:0}
+.rep-task .pdate{color:var(--mut);font-size:11px;flex-shrink:0}
 .goalLab{color:var(--mut);font-size:9px;text-transform:uppercase;letter-spacing:.05em;line-height:1.25;margin-bottom:2px}
 .salvline{color:#ffa657;font-size:12px;font-weight:600;margin-top:7px;line-height:1.45}
 .salvline b{color:#ffc088}
@@ -225,17 +264,24 @@ h1{font-size:22px;margin:0 0 3px}
   <h1>🏁 Month Race</h1>
   <div class="sub" id="sub">Loading…</div>
 
+  <div class="views" id="views"></div>
+
+  <div id="liveview">
   <div id="hero"></div>
 
   <div class="howto">
     <div class="ht">How to read this</div>
-    <div>🏃 Every project races its plan on the same calendar: a runner LEFT of the white <b>TODAY</b> line has fewer work-days done than the plan expected; at or past it is on track — the runner and the pill always agree. 🏁 marks the last planned task of the month, │ lines are the Sunday weekly deadlines.</div>
+    <div>🏃 Every project races its plan on the same calendar: a runner LEFT of the white <b>TODAY</b> line has fewer work-days done than the plan expected. 🏁 marks the last planned task of the month, │ lines are the Sunday weekly deadlines.</div>
     <div><b>Every %</b> counts <b>worked days, not tasks</b>: a finished task earns all of its planned days, one in progress earns the days worked so far, one not started earns 0. Example: 5 drywall days planned, 3 worked = <b>60%</b>. Finish a task early and it still earns its full planned days — complete the whole month plan and the month reads <b>100%</b>, even in fewer days. Task counts ("8 tasks · 3 done") are context only. Work = Action + Critical Path + City Inspections; admin tasks (meetings, checklists, walkthroughs) don't count.</div>
-    <div>Pill colors: <span class="g">green = on pace</span> · <span class="o">blinking orange = behind, but the week can still be saved if the rescheduled tasks finish by Sunday</span> · <span class="y">yellow = slightly behind</span> · <span class="r">blinking red = behind plan</span>.</div>
+    <div><b>The status pill judges THE CURRENT WEEK (Mon–Sun)</b>: what this week's plan demands by today — including trades that must <b>start</b> this week — and whether the project is on that pace. The month %, Slip % and month-end forecast are separate month-level metrics. A trade that starts this week and ends later shows as <span class="mkr start">START</span> (it passes the week once it actually starts); one finishing this week that started earlier shows as <span class="mkr finish">FINISH</span>.</div>
+    <div>Pill colors: <span class="g">green = on pace for this week</span> · <span class="o">blinking orange = behind, but the week can still be saved if the rescheduled tasks land by Sunday</span> · <span class="y">yellow = slightly behind this week</span> · <span class="r">blinking red = this week's plan won't hold</span> · gray = no work scheduled this week. The "Last week" chip is the frozen Sunday-night verdict — see the LAST WEEK · REPORT view.</div>
   </div>
 
   <div id="lanes"></div>
   <div id="analysis"></div>
+  </div>
+
+  <div id="reportview" style="display:none"></div>
   <div class="ft" id="ft"></div>
 </div>
 
@@ -267,19 +313,22 @@ function initials(name){
   return ((w[0]||'')[0]||'?')+(((w[1]||'')[0])||'');
 }
 
-let ADATA=null;
+let ADATA=null, WDATA=null, VIEW='live'; /* v14: WDATA = frozen last-week report; VIEW = live|report */
 function load(manual){
   if(manual){ const b=$('#refresh'); if(b){b.textContent='↻ …';} }
   Promise.all([
     fetch('data/race-latest.json?_='+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
-    fetch('data/race-analysis.json?_='+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null)
-  ]).then(([j,a])=>{
+    fetch('data/race-analysis.json?_='+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null),
+    fetch('data/race-week-report.json?_='+Date.now()).then(r=>r.ok?r.json():null).catch(()=>null)
+  ]).then(([j,a,w])=>{
     if(j) DATA=j;
     ADATA=a;
+    if(w) WDATA=w;
     render();
     const b=$('#refresh'); if(b)b.textContent='↻ Refresh';
   });
 }
+function setView(v){ VIEW=v; render(); window.scrollTo({top:0}); }
 
 /* SVG sparkline: actual (solid) vs plan (dashed), % of the month goal */
 function spark(daily, w, h, color){
@@ -334,16 +383,42 @@ function monthFc(mf){
   return {badge,line};
 }
 
-/* v5 traffic-light status (Jose): from JSON status computed vs today's tolerance.
-   gap = expected-by-today% − month-progress%; tolerance shrinks through the week
-   (Mon-Wed 20 · Thu 15 · Fri-Sun 10). */
-function statusInfo(st,gap,shortTxt){
+/* v14 traffic-light status (Jose: "el analisis es semanal"): the pill judges THE
+   CURRENT WEEK ONLY — what the week's plan demands by today (work-days due within
+   the week + starts due) vs what's earned. Tolerance shrinks through the week
+   (Mon-Wed 20 · Thu 15 · Fri-Sun 10). Gray = no universe work scheduled this week. */
+function statusInfo(st,gap,shortTxt,wk){
   const map={on_pace:{label:'ON PACE'},salvage:{label:'ON TRACK — SERIOUS WARNING'},
-             warning:{label:'WARNING'},behind:{label:'BEHIND PLAN'}};
+             warning:{label:'WARNING'},behind:{label:'BEHIND PLAN'},
+             no_work:{label:'NO WORK THIS WEEK'}};
   const m=map[st]||map.on_pace;
   const tol=DATA.tolerance_today!=null?DATA.tolerance_today:'—';
+  const wtx = wk && wk.days_planned ?
+    `This week's plan: ${wk.days_planned} work-days (${wk.days_due} due by today · ${wk.days_earned} earned` +
+    (wk.starts_due?` · ${wk.starts_started}/${wk.starts_due} starts due happened`:'') + ') · ' : '';
   return {cls:'st-'+(st||'on_pace'), label:m.label,
-          title:`${shortTxt||''}${shortTxt?' · ':''}tolerance today ${tol}% of the month's work-days`};
+          title:`Status = THIS WEEK (Mon-Sun). ${wtx}${shortTxt||''}${shortTxt?' · ':''}tolerance today ${tol}% of the week's work-days`};
+}
+/* v14: (start)/(finish)/(cont) marker chip for weekly task rows */
+function mkrChip(t){
+  if(!t.marker) return '';
+  if(t.marker==='start'){
+    const ok=t.started;
+    const lbl= ok ? 'STARTED ✓' : 'STARTS '+fmtDs(t.baseline_start).toUpperCase();
+    return `<span class="mkr start ${ok?'ok':''}" title="Starts this week (${fmtD(t.baseline_start)}), ends ${fmtD(t.baseline_end)} — passes the week once it actually starts">${lbl}</span>`;
+  }
+  if(t.marker==='finish') return `<span class="mkr finish" title="Started earlier (${fmtD(t.baseline_start)}) — must finish this week (${fmtD(t.baseline_end)})">FINISH</span>`;
+  return `<span class="mkr cont" title="Runs through this whole week (${fmtD(t.baseline_start)} → ${fmtD(t.baseline_end)})">CONT.</span>`;
+}
+/* v14: frozen last-week verdict chip (race-week-report.json) */
+function lastWeekChip(pid){
+  if(!WDATA||!WDATA.projects) return '';
+  const r=WDATA.projects.find(x=>x.id===pid);
+  if(!r) return '';
+  const tip=((r.analysis||'')+' — see LAST WEEK · REPORT').replace(/"/g,'&quot;');
+  if(r.verdict==='NO_WORK') return `<span class="lastwk nowork" title="No work was scheduled last week">Last week (${WDATA.week_label}): no work scheduled</span>`;
+  const s=r.verdict==='SAVED';
+  return `<span class="lastwk ${s?'saved':'missed'}" title="${tip}">Last week (${WDATA.week_label}): ${s?'✅ SAVED':'❌ MISSED'} (${r.achieved_pct}%)</span>`;
 }
 
 /* ---- SHARED TIME AXIS (v4): identical date→x mapping for every lane ---- */
@@ -404,16 +479,19 @@ function axisHeader(){
 function renderHero(){
   const c=DATA.company;
   const mp=(c.days_pct!=null?c.days_pct:c.monthly_pct);
-  const si=statusInfo(c.status,c.gap,slipTxt(c.gap).txt);
-  const pace={cls:si.cls, t:si.label};
+  /* v14: the hero pill judges THE CURRENT WEEK (company.week); month goal stays as its own metric */
+  const wk=c.week||{};
+  const si=statusInfo(wk.status||c.status,wk.gap,'',wk);
+  const pace={cls:si.cls, t:'THIS WEEK: '+si.label};
   const money = c.july_money && c.july_money.length===2 ? `${fmtM(c.july_money[0])} <span style="color:var(--mut);font-size:12px">/ ${fmtM(c.july_money[1])} +10% cost</span>` : '—';
   $('#hero').innerHTML=`<div class="hero">
     <div class="hbig">
       <div class="num" title="Share of July's planned work-days already earned across all projects">${mp}%</div>
       <div class="lab">of July's planned work-days earned<br>${c.done_total}/${c.total_target} tasks fully done</div>
-      <div class="pill ${pace.cls}" style="margin-top:7px">${pace.t}</div>
-      <div style="color:var(--mut);font-size:11px;margin-top:6px">Month: <b style="color:var(--tx)">${c.earned_days!=null?c.earned_days:'—'}</b> of <b style="color:var(--tx)">${c.total_days!=null?c.total_days:'—'}</b> work-days done · plan says <b style="color:var(--tx)">${c.plan_days!=null?c.plan_days:'—'}</b> by today (${c.ghost_days_pct}%) · tolerance today: ${DATA.tolerance_today!=null?DATA.tolerance_today+'%':'—'}</div>
-      <div style="color:var(--mut);font-size:11px;margin-top:2px">${slipTxt(c.gap).short}</div>
+      <div class="pill ${pace.cls}" style="margin-top:7px" title="${si.title.replace(/"/g,'&quot;')}">${pace.t}</div>
+      <div style="color:var(--mut);font-size:11px;margin-top:6px">This week: <b style="color:var(--tx)">${wk.days_earned!=null?wk.days_earned:'—'}</b> of <b style="color:var(--tx)">${wk.days_planned!=null?wk.days_planned:'—'}</b> work-days earned · <b style="color:var(--tx)">${wk.days_due!=null?wk.days_due:'—'}</b> due by today · tolerance today: ${DATA.tolerance_today!=null?DATA.tolerance_today+'%':'—'}</div>
+      <div style="color:var(--mut);font-size:11px;margin-top:4px">Month: <b style="color:var(--tx)">${c.earned_days!=null?c.earned_days:'—'}</b> of <b style="color:var(--tx)">${c.total_days!=null?c.total_days:'—'}</b> work-days done · plan says <b style="color:var(--tx)">${c.plan_days!=null?c.plan_days:'—'}</b> by today (${c.ghost_days_pct}%)</div>
+      <div style="color:var(--mut);font-size:11px;margin-top:2px">Month: ${slipTxt(c.gap).short}</div>
       ${monthFc(c.month_forecast).badge}
     </div>
     <div class="hmid">
@@ -437,10 +515,13 @@ function taskRow(t){
     return `<div class="task lands ${t.status==='done'?'done':''}"><span class="ic">${ic}</span><span class="tn">${t.name}</span>`+
       `<span class="tg">${t.type}</span><span class="lmark">lands here — was ${fmtD(t.was)}, now ${fmtD(t.live_end)}</span></div>`;
   }
-  /* v8: kicked out of the current week -> blinking red; pulled into it -> blinking green */
+  /* v8: kicked out of the current week -> blinking red; pulled into it -> blinking green.
+     v14: a kicked (start) means the START no longer happens this week. */
   if(t.kicked_out){
-    return `<div class="task kicked"><span class="ic">✗</span><span class="tn">${t.name}</span>`+
-      `<span class="tg">${t.type}</span><span class="kmark">KICKED OUT → ${t.live_end?fmtD(t.live_end):'no date'}</span></div>`;
+    const what = t.marker==='start' ? `START KICKED OUT → now starts ${t.live_start?fmtD(t.live_start):'no date'}`
+                                    : `KICKED OUT → ${t.live_end?fmtD(t.live_end):'no date'}`;
+    return `<div class="task kicked"><span class="ic">✗</span><span class="tn">${t.name}</span>${mkrChip(t)}`+
+      `<span class="tg">${t.type}</span><span class="kmark">${what}</span></div>`;
   }
   if(t.pulled_in){
     const ic=t.status==='done'?'✓':'⇠';
@@ -450,7 +531,7 @@ function taskRow(t){
   const ic = t.status==='done'?'✓':(t.status==='moved'?'▸':'○');
   const mv = t.moved_days>0?`<span class="mv">+${t.moved_days}d moved</span>`:'';
   return `<div class="task ${t.status==='done'?'done':''}"><span class="ic">${ic}</span>`+
-    `<span class="tn">${t.name}</span><span class="tg">${t.type}</span>${mv}</div>`;
+    `<span class="tn">${t.name}</span>${mkrChip(t)}<span class="tg">${t.type}</span>${mv}</div>`;
 }
 
 function detail(p,col){
@@ -463,34 +544,56 @@ function detail(p,col){
   html+=`<div class="dtitle">Day-by-day progress</div>${spark(p.daily,640,60,col)}`;
   if(p.cp_chain && p.cp_chain.length){
     /* v10: cascade = CURRENT REALITY — ordered & dated by JobTread's live dates
-       (same source as the week views); baseline shows only as a was→now mark. */
-    const bucketOf = s => {
-      const d=(''+(s.current_end||s.live_end||s.baseline_end)).slice(0,10);
+       (same source as the week views); baseline shows only as a was→now mark.
+       v14: a step whose current span crosses a week boundary also drops a ghost
+       "▶ starts" row in the week where it STARTS — same (start)/(finish) idea. */
+    const bucketOfDate = d0 => {
+      const d=(''+d0).slice(0,10);
       if(d>'2026-07-31') return 'aug';
       let i=0; while(i<DATA.week_sundays.length-1 && d>DATA.week_sundays[i]) i++;
       return i;
     };
     const bucketLabel = b => b==='aug' ? '⚠ Pushed to August (out of the month)' : DATA.week_labels[b];
+    const items=[];
+    p.cp_chain.forEach((s,i)=>{
+      const endD=s.current_end||s.live_end||s.baseline_end;
+      items.push({s,i,date:(''+endD).slice(0,10),bucket:bucketOfDate(endD),ghost:false});
+      if(s.current_start && s.status!=='done'){
+        const bs=bucketOfDate(s.current_start), be=bucketOfDate(endD);
+        if(bs!==be && bs!=='aug' && (be==='aug'||bs<be)){
+          items.push({s,i,date:(''+s.current_start).slice(0,10),bucket:bs,ghost:true});
+        }
+      }
+    });
+    items.sort((a,b)=> a.date<b.date?-1:(a.date>b.date?1:(a.ghost===b.ghost?0:(a.ghost?-1:1))));
     html+=`<div class="dtitle">⛓ Critical Path — where the project stands NOW (${p.cp_chain.length} steps, current dates)</div><div class="cascade">`;
     let lastB=null;
-    html+=p.cp_chain.map((s,i)=>{
-      const ic=s.status==='done'?'✓':(s.status==='moved'?'▸':'○');
-      const cur=s.current_end||s.live_end||s.baseline_end;
-      const mv=s.moved_days ? `<span class="cmv">was ${fmtD(s.baseline_end)} → now ${fmtD(s.live_end)} (${s.moved_days>0?'+':''}${s.moved_days}d)</span>` : '';
-      const dep=(s.depends_on&&s.depends_on.length)?`<span class="cdep">needs: ${s.depends_on.join(', ')}</span>`:'';
-      const b=bucketOf(s);
+    html+=items.map(it=>{
+      const s=it.s;
+      const b=it.bucket;
       const div = b!==lastB ? `<div class="cwk ${b==='aug'?'aug':''}">${bucketLabel(b)}</div>` : '';
       lastB=b;
-      return div+`<div class="cstep ${s.status}" style="padding-left:${Math.min(i,12)*14}px">`+
-        (i?`<span class="conn">└─</span>`:'')+
+      if(it.ghost){
+        return div+`<div class="cstep pending" style="padding-left:${Math.min(it.i,12)*14}px">`+
+          `<span class="cic">▶</span><span class="cn" style="color:var(--mut);font-style:italic">${s.name}</span>`+
+          `<span class="cd">(start) ${fmtD(s.current_start)} — finishes ${fmtD(s.current_end||s.live_end||s.baseline_end)}</span></div>`;
+      }
+      const ic=s.status==='done'?'✓':(s.status==='moved'?'▸':'○');
+      const cur=s.current_end||s.live_end||s.baseline_end;
+      const crossing = s.current_start && bucketOfDate(s.current_start)!==b;
+      const fin = crossing ? `<span class="cd" style="font-style:italic">(finish — started ${fmtD(s.current_start)})</span>` : '';
+      const mv=s.moved_days ? `<span class="cmv">was ${fmtD(s.baseline_end)} → now ${fmtD(s.live_end)} (${s.moved_days>0?'+':''}${s.moved_days}d)</span>` : '';
+      const dep=(s.depends_on&&s.depends_on.length)?`<span class="cdep">needs: ${s.depends_on.join(', ')}</span>`:'';
+      return div+`<div class="cstep ${s.status}" style="padding-left:${Math.min(it.i,12)*14}px">`+
+        (it.i?`<span class="conn">└─</span>`:'')+
         `<span class="cic">${ic}</span><span class="cn">${s.name}</span>`+
-        `<span class="cd">${fmtD(cur)}</span>${mv}${dep}</div>`;
+        `<span class="cd">${fmtD(cur)}</span>${fin}${mv}${dep}</div>`;
     }).join('');
     html+=`</div>`;
   }
   if(cur){
     html+=`<div class="dtitle">Current week — deadline ${fmtD(cur.deadline)}</div>`;
-    html+=`<div class="wk" style="border-color:${hexA(col,.55)}"><div class="wkh" style="border-left:3px solid ${col}"><span class="wl">${cur.label}</span><span class="wd">This week: ${cur.pct!=null?`<b>${Math.round(cur.pct)}%</b> of planned work-days (${cur.days_earned}/${cur.days_planned})`:'no work-days planned'} · ${cur.total} tasks · ${cur.done} done</span></div>`;
+    html+=`<div class="wk" style="border-color:${hexA(col,.55)}"><div class="wkh" style="border-left:3px solid ${col}"><span class="wl">${cur.label}</span><span class="wd">This week: ${cur.pct!=null?`<b>${Math.round(cur.pct)}%</b> of planned work-days (${cur.days_earned}/${cur.days_planned}${cur.days_due!=null?` · ${cur.days_due} due by today`:''})`:'no work-days planned'} · ${cur.total} tasks · ${cur.done} done</span></div>`;
     html+=tgtRow(cur);
     html+= cur.tasks.length? cur.tasks.map(taskRow).join('') : '<div class="empty" style="padding:8px 11px">No milestones this week.</div>';
     html+=`</div>`;
@@ -509,14 +612,17 @@ function detail(p,col){
 function shortName(n){ n=n||''; return n.length>30 ? n.slice(0,28)+'…' : n; }
 
 function weekChips(p,col){
-  /* v9: chip % = worked days earned / planned that week; task counts = context */
+  /* v9: chip % = worked days earned / planned that week; task counts = context.
+     v14: the target carries its (start)/(finish) marker — a week whose last trade
+     only STARTS that week reads "PAINT (start)". */
   return `<div class="wkchips">`+p.weeks.map((w,i)=>{
     const pct = w.pct==null ? '—' : Math.round(w.pct)+'%';
-    const tgt = w.target_task ? shortName(w.target_task) : 'no tasks';
+    const mk = w.target_marker ? ` (${w.target_marker==='cont'?'cont.':w.target_marker})` : '';
+    const tgt = w.target_task ? shortName(w.target_task)+mk : 'no work';
     const cur = w.is_current ? `style="border-color:${col};color:${col};background:${hexA(col,.09)}"` : '';
-    const title = (w.target_task? 'Target: '+w.target_task+' · ':'')+
+    const title = (w.target_task? 'Target: '+w.target_task+mk+' · ':'')+
       (w.days_planned!=null? `${w.days_earned}/${w.days_planned} work-days earned · `:'')+
-      'deadline '+fmtD(w.deadline);
+      (w.target_marker==='start' ? 'passes once it actually starts by ' : 'deadline ')+fmtD(w.deadline);
     return `<span class="chip" ${cur} title="${title.replace(/"/g,'&quot;')}">W${i+1} → <b>${tgt}</b> — ${pct} (${w.total} tasks · ${w.done} done)</span>`;
   }).join('')+`</div>`;
 }
@@ -524,7 +630,7 @@ function weekChips(p,col){
 function renderLane(p){
   const col=COLOR[p.id]||'#58a6ff';
   const mp=(p.days_pct!=null?p.days_pct:(p.monthly_pct!=null?p.monthly_pct:p.runner_pct));
-  const st=statusInfo(p.status,p.gap,slipTxt(p.gap).txt);
+  const st=statusInfo(p.status,p.gap,'Month: '+slipTxt(p.gap).txt,p.week);
   /* v4 shared time axis: runner sits at its EARNED-SCHEDULE date, flag at the
      project's last planned task; Sunday grid + TODAY line identical on every lane. */
   const rx=datePct(p.runner_date||DATA.axis_start);
@@ -547,7 +653,8 @@ function renderLane(p){
           <div class="fill" style="width:${rx}%;background:linear-gradient(90deg,${hexA(col,.45)},${col})"></div>
           ${post}${laneTicks()}${runner}${flag}
         </div>
-        <div class="monthline">Month: <b>${p.earned_days!=null?p.earned_days:'—'}</b> of <b>${p.total_days!=null?p.total_days:'—'}</b> work-days done (<b>${p.days_pct}%</b>) · plan says <b>${p.plan_days!=null?p.plan_days:'—'}</b> by today (${p.ghost_days_pct}%) · ${slipTxt(p.gap).short}${needsPace(p)}</div>
+        <div class="monthline">${p.week&&p.week.days_planned?`This week: <b>${p.week.days_earned}</b> of <b>${p.week.days_planned}</b> work-days earned · <b>${p.week.days_due}</b> due by today${p.week.starts_required?` · ${p.week.starts_started}/${p.week.starts_required} starts${p.week.starts_due?` (${p.week.starts_due} due)`:''}`:''}`:'This week: no work scheduled'} <span style="margin-left:6px">${lastWeekChip(p.id)}</span></div>
+        <div class="monthline" style="margin-top:4px">Month: <b>${p.earned_days!=null?p.earned_days:'—'}</b> of <b>${p.total_days!=null?p.total_days:'—'}</b> work-days done (<b>${p.days_pct}%</b>) · plan says <b>${p.plan_days!=null?p.plan_days:'—'}</b> by today (${p.ghost_days_pct}%) · ${slipTxt(p.gap).short}${needsPace(p)}</div>
         ${weekChips(p,col)}
         ${p.status==='salvage' && p.save_tasks && p.save_tasks.length ? `<div class="salvline" title="${p.save_tasks.map(t=>t.name+' by '+fmtD(t.due)).join(' · ').replace(/"/g,'&quot;')}">⚠ Week saved ONLY if <b>${p.save_tasks[0].name}</b> finishes by <b>${fmtD(p.save_tasks[0].due)}</b>${p.save_tasks.length>1?` (+${p.save_tasks.length-1} more)`:''} — if it slips, we don't make it.</div>`:''}
         ${fc.line}
@@ -593,15 +700,78 @@ function renderAnalysis(){
   </div>`;
 }
 
+/* v14: [LAST WEEK · REPORT] — FROZEN as of the Sunday-night snapshot, never live data */
+function repTaskRow(t){
+  const ok=t.achieved;
+  const ic= ok ? '✓' : '✗';
+  const mk = t.marker ? mkrChip({marker:t.marker,started:t.started,baseline_start:t.plan_start,baseline_end:t.plan_end}) : '';
+  let slip='';
+  if(!ok){
+    if(t.marker==='start') slip=`<span class="slip">did not start${t.slipped_to?` — now set for ${fmtD(t.slipped_to)}`:''}</span>`;
+    else slip=`<span class="slip">not finished${t.slipped_to?` — slipped to ${fmtD(t.slipped_to)}`:''}</span>`;
+  } else if(t.marker==='start' && !t.done){
+    slip=`<span class="pdate" style="color:#3fb950">started ✓</span>`;
+  }
+  const pd=`<span class="pdate">${fmtDs(t.plan_start)}→${fmtDs(t.plan_end)}</span>`;
+  return `<div class="rep-task ${ok?'ok':'miss'}"><span class="ic">${ic}</span><span class="tn">${t.name}</span>${mk}<span class="tg" style="font-size:10px;color:var(--mut);border:1px solid var(--line);border-radius:4px;padding:0 5px">${t.type}</span>${pd}${slip}</div>`;
+}
+function renderReport(){
+  const el=$('#reportview');
+  if(!WDATA){ el.innerHTML='<div class="empty" style="padding:24px 4px">No frozen week report yet — it generates every Sunday at 21:00 after the weekly snapshot.</div>'; return; }
+  const c=WDATA.company||{};
+  const vcls=v=>v==='SAVED'?'saved':(v==='MISSED'?'missed':'nowork');
+  const cards=(WDATA.projects||[]).map(r=>{
+    const col=COLOR[r.id]||'#58a6ff';
+    const v=r.verdict;
+    const chip=`<span class="verdict ${vcls(v)}">${v==='SAVED'?'✅ SAVED':(v==='MISSED'?'❌ MISSED':'— NO WORK SCHEDULED')}</span>`;
+    const pct=r.achieved_pct!=null?`<span class="rp" style="color:${col}" title="${r.days_earned} of ${r.days_planned} planned work-days achieved by Sunday night">${r.achieved_pct}%</span>`:'<span class="rp"></span>';
+    const starts=r.starts_required?`<span class="pdate" style="font-size:11px;color:var(--mut)">starts: ${r.starts_happened}/${r.starts_required} happened</span>`:'';
+    const rows=(r.planned||[]).map(repTaskRow).join('') || '<div class="empty" style="padding:8px 14px">No work was scheduled for this week.</div>';
+    const extra=(r.extra_done&&r.extra_done.length)?`<div class="rep-task ok"><span class="ic">＋</span><span class="tn" style="text-decoration:none;color:var(--mut);font-style:italic">Also completed outside this week's plan: ${r.extra_done.slice(0,4).join(', ')}${r.extra_done.length>4?'…':''}</span></div>`:'';
+    return `<div class="rep-card" style="border-left:3px solid ${col}">
+      <div class="rep-head">
+        <span class="avatar" style="background:${col}">${initials(r.client||r.name)}</span>
+        <div><div style="font-size:14.5px;font-weight:700">${r.name}</div>
+        <div style="color:var(--mut);font-size:11.5px">${(r.pms||[]).join(', ')||''} · ${r.days_earned!=null?r.days_earned:'—'} of ${r.days_planned!=null?r.days_planned:'—'} planned work-days achieved ${starts?'· ':''}</div></div>
+        ${chip}${pct}
+      </div>
+      ${r.analysis?`<div class="rep-an" style="border-left:3px solid ${hexA(col,.5)}">${r.analysis}</div>`:''}
+      ${rows}${extra}
+    </div>`;
+  }).join('');
+  el.innerHTML=`
+    <div class="rep-hero">
+      <div class="hstat"><div class="v">${c.saved||0} / ${(c.saved||0)+(c.missed||0)}</div><div class="l">Projects that saved the week</div></div>
+      <div class="hstat"><div class="v">${c.achieved_pct!=null?c.achieved_pct+'%':'—'}</div><div class="l">Planned work-days achieved</div></div>
+      <div class="hstat"><div class="v">${c.days_earned!=null?c.days_earned:'—'}/${c.days_planned!=null?c.days_planned:'—'}</div><div class="l">Work-days earned / planned</div></div>
+    </div>
+    <div class="rep-note">🧊 ${WDATA.frozen_note||''} Plan = ${WDATA.plan_anchor} · actuals = ${WDATA.actuals_anchor}. ${WDATA.verdict_rule||''}</div>
+    ${cards}`;
+}
+function renderViews(){
+  const wl=WDATA?` — ${WDATA.week_label}`:'';
+  $('#views').innerHTML=
+    `<button class="vbtn ${VIEW==='live'?'act':''}" onclick="setView('live')">📡 THIS WEEK · LIVE</button>`+
+    `<button class="vbtn ${VIEW==='report'?'act':''}" onclick="setView('report')">🧊 LAST WEEK · REPORT${wl}</button>`;
+}
 function render(){
   if(!DATA){ $('#sub').textContent='Could not load race data.'; return; }
   assignColors();
-  const gen=(''+DATA.generated_at);
-  $('#sub').innerHTML=`${DATA.month} · as of ${fmtD(DATA.today)} · updated ${fmtD(gen)} ${gen.slice(11,16)} · deadlines every <b>Sunday</b>`;
-  renderHero();
-  renderLanes();
-  renderAnalysis();
-  $('#ft').textContent=`Generated by Jade · Awesome Group · baseline 2026-07-06 vs live JobTread · big % = planned work-days earned · analysis refreshed daily at 7:35 AM`;
+  renderViews();
+  const live=VIEW==='live';
+  $('#liveview').style.display=live?'':'none';
+  $('#reportview').style.display=live?'none':'';
+  if(live){
+    const gen=(''+DATA.generated_at);
+    $('#sub').innerHTML=`${DATA.month} · as of ${fmtD(DATA.today)} · updated ${fmtD(gen)} ${gen.slice(11,16)} · deadlines every <b>Sunday</b> · status = current week`;
+    renderHero();
+    renderLanes();
+    renderAnalysis();
+  } else {
+    $('#sub').innerHTML=WDATA?`Week ${WDATA.week_label} · frozen from the Sunday-night snapshot (${fmtD(WDATA.week_ending)} 21:00) — not live data`:'No frozen report available yet.';
+    renderReport();
+  }
+  $('#ft').textContent=`Generated by Jade · Awesome Group · month anchor baseline-2026-07-06 · weekly status vs the Sunday-night plan · big % = planned work-days earned · analysis refreshed daily at 7:35 AM`;
 }
 
 load();
