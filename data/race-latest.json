@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-14T12:18:28",
+ "generated_at": "2026-07-14T12:42:15",
  "today": "2026-07-14",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -52,9 +52,9 @@
  },
  "company": {
   "monthly_pct": 16.7,
-  "days_pct": 38.5,
+  "days_pct": 38.3,
   "ghost_days_pct": 62.4,
-  "earned_days": 168.0,
+  "earned_days": 167.0,
   "total_days": 436.0,
   "plan_days": 272.0,
   "month_forecast": {
@@ -69,7 +69,7 @@
   "adherence": 30.9,
   "band": "red",
   "runner_date": "2026-07-08",
-  "gap": 23.9,
+  "gap": 24.1,
   "status": "behind",
   "week": {
    "days_planned": 138.0,
@@ -86,8 +86,8 @@
   "runner_pct": 16.7,
   "ghost_pct": 54.0,
   "july_money": [
-   160900.15000000002,
-   131111.09
+   162410.97,
+   132663.69
   ],
   "projects": 9,
   "daily": [
@@ -986,13 +986,13 @@
    "ghost_pct": 100.0,
    "runner_date": "2026-07-06",
    "finish_date": "2026-07-13",
-   "days_pct": 28.6,
+   "days_pct": 21.4,
    "ghost_days_pct": 100.0,
    "total_days": 14.0,
-   "earned_days": 4.0,
+   "earned_days": 3.0,
    "plan_days": 14.0,
    "city_inspections": 1,
-   "gap": 71.4,
+   "gap": 78.6,
    "status": "salvage",
    "status_scope": "current_week",
    "week": {
@@ -1071,28 +1071,6 @@
      "depends_on": []
     },
     {
-     "id": "22PUnNKxDE7b",
-     "name": "CUSTOM CARPENTRY: INSTALL SECRET DOOR",
-     "baseline_end": "2026-07-08",
-     "live_end": "2026-07-11",
-     "current_end": "2026-07-11",
-     "current_start": "2026-07-11",
-     "moved_days": 3,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PYmTjTWh4W",
-     "name": "CUSTOM CARPENTRY: PAINT SECRET DOOR (Copy)",
-     "baseline_end": "2026-07-10",
-     "live_end": "2026-07-11",
-     "current_end": "2026-07-11",
-     "current_start": "2026-07-11",
-     "moved_days": 1,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PPsiDCQYYw",
      "name": "CLEANING: FINAL CLEANING",
      "baseline_end": "2026-07-11",
@@ -1113,15 +1091,58 @@
      "moved_days": 0,
      "status": "pending",
      "depends_on": []
+    },
+    {
+     "id": "22PUnNKxDE7b",
+     "name": "CUSTOM CARPENTRY: INSTALL SECRET DOOR",
+     "baseline_end": "2026-07-08",
+     "live_end": "2026-07-21",
+     "current_end": "2026-07-21",
+     "current_start": "2026-07-21",
+     "moved_days": 13,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PYmTjTWh4W",
+     "name": "CUSTOM CARPENTRY: PAINT SECRET DOOR (Copy)",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-21",
+     "current_end": "2026-07-21",
+     "current_start": "2026-07-21",
+     "moved_days": 11,
+     "status": "moved",
+     "depends_on": []
     }
    ],
    "july_money": [
-    5925.02,
-    4975.87
+    6035.84,
+    4988.47
    ],
-   "margin_pct": 35.7,
+   "margin_pct": 33.6,
    "moved_count": 10,
    "moved": [
+    {
+     "id": "22PUnNKxDE7b",
+     "name": "CUSTOM CARPENTRY: INSTALL SECRET DOOR",
+     "from": "2026-07-08",
+     "to": "2026-07-21",
+     "days": 13
+    },
+    {
+     "id": "22PXCXCXSSVR",
+     "name": "CEILING MOULDING: INSTALLATION",
+     "from": "2026-07-08",
+     "to": "2026-07-21",
+     "days": 13
+    },
+    {
+     "id": "22PYmTjTWh4W",
+     "name": "CUSTOM CARPENTRY: PAINT SECRET DOOR (Copy)",
+     "from": "2026-07-10",
+     "to": "2026-07-21",
+     "days": 11
+    },
     {
      "id": "22PZkUehNPZy",
      "name": "GLASS: INSTALL GLASS",
@@ -1151,20 +1172,6 @@
      "days": 3
     },
     {
-     "id": "22PUnNKxDE7b",
-     "name": "CUSTOM CARPENTRY: INSTALL SECRET DOOR",
-     "from": "2026-07-08",
-     "to": "2026-07-11",
-     "days": 3
-    },
-    {
-     "id": "22PXCXCXSSVR",
-     "name": "CEILING MOULDING: INSTALLATION",
-     "from": "2026-07-08",
-     "to": "2026-07-11",
-     "days": 3
-    },
-    {
      "id": "22PZkUsSKgvV",
      "name": "GUTTERS: INSTALL GUTTERS",
      "from": "2026-07-10",
@@ -1176,13 +1183,6 @@
      "name": "CLEANING: FINAL CLEANING",
      "from": "2026-07-11",
      "to": "2026-07-12",
-     "days": 1
-    },
-    {
-     "id": "22PYmTjTWh4W",
-     "name": "CUSTOM CARPENTRY: PAINT SECRET DOOR (Copy)",
-     "from": "2026-07-10",
-     "to": "2026-07-11",
      "days": 1
     },
     {
@@ -1202,8 +1202,8 @@
      "total": 10,
      "done": 1,
      "days_planned": 12.0,
-     "days_earned": 3.0,
-     "pct": 25.0,
+     "days_earned": 2.0,
+     "pct": 16.7,
      "target_task": "CLEANING: FINAL CLEANING",
      "target_type": "CP",
      "target_marker": null,
@@ -1276,12 +1276,12 @@
        "marker": null,
        "baseline_start": "2026-07-08",
        "baseline_end": "2026-07-08",
-       "live_start": "2026-07-11",
-       "live_end": "2026-07-11",
-       "moved_days": 3,
+       "live_start": "2026-07-21",
+       "live_end": "2026-07-21",
+       "moved_days": 13,
        "days_in_week": 1,
        "earned_in_week": 0.0,
-       "started": true,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -1296,12 +1296,12 @@
        "marker": null,
        "baseline_start": "2026-07-08",
        "baseline_end": "2026-07-08",
-       "live_start": "2026-07-11",
-       "live_end": "2026-07-11",
-       "moved_days": 3,
+       "live_start": "2026-07-21",
+       "live_end": "2026-07-21",
+       "moved_days": 13,
        "days_in_week": 1,
        "earned_in_week": 0.0,
-       "started": true,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -1336,12 +1336,12 @@
        "marker": null,
        "baseline_start": "2026-07-09",
        "baseline_end": "2026-07-10",
-       "live_start": "2026-07-11",
-       "live_end": "2026-07-11",
-       "moved_days": 1,
+       "live_start": "2026-07-21",
+       "live_end": "2026-07-21",
+       "moved_days": 11,
        "days_in_week": 2,
-       "earned_in_week": 1.0,
-       "started": true,
+       "earned_in_week": 0.0,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -1428,6 +1428,27 @@
      "target_marker": null,
      "target_due": "2026-07-14",
      "tasks": [
+      {
+       "id": "22PadrSqhV4T",
+       "name": "ELECTRICAL TRIM: INSTALL NEW CEILING FAN",
+       "type": "AT",
+       "marker": null,
+       "baseline_start": "2026-07-11",
+       "baseline_end": "2026-07-11",
+       "live_start": "2026-07-11",
+       "live_end": "2026-07-16",
+       "moved_days": 5,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "days_due_in_week": 0,
+       "started": true,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": true,
+       "was": "2026-07-11"
+      },
       {
        "id": "22PPsiDCMZNa",
        "name": "FINAL: BUILDING INSPECTION",
@@ -1529,7 +1550,71 @@
      "target_type": null,
      "target_marker": null,
      "target_due": null,
-     "tasks": [],
+     "tasks": [
+      {
+       "id": "22PXCXCXSSVR",
+       "name": "CEILING MOULDING: INSTALLATION",
+       "type": "AT",
+       "marker": null,
+       "baseline_start": "2026-07-08",
+       "baseline_end": "2026-07-08",
+       "live_start": "2026-07-21",
+       "live_end": "2026-07-21",
+       "moved_days": 13,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-08"
+      },
+      {
+       "id": "22PUnNKxDE7b",
+       "name": "CUSTOM CARPENTRY: INSTALL SECRET DOOR",
+       "type": "CP",
+       "marker": null,
+       "baseline_start": "2026-07-08",
+       "baseline_end": "2026-07-08",
+       "live_start": "2026-07-21",
+       "live_end": "2026-07-21",
+       "moved_days": 13,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-08"
+      },
+      {
+       "id": "22PYmTjTWh4W",
+       "name": "CUSTOM CARPENTRY: PAINT SECRET DOOR (Copy)",
+       "type": "CP",
+       "marker": null,
+       "baseline_start": "2026-07-09",
+       "baseline_end": "2026-07-10",
+       "live_start": "2026-07-21",
+       "live_end": "2026-07-21",
+       "moved_days": 11,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-10"
+      }
+     ],
      "anchor": "monthly"
     },
     {
@@ -9108,10 +9193,10 @@
     }
    ],
    "july_money": [
-    17606.6,
-    13150.77
+    19006.6,
+    14690.77
    ],
-   "margin_pct": 32.0,
+   "margin_pct": 33.0,
    "moved_count": 11,
    "moved": [
     {
