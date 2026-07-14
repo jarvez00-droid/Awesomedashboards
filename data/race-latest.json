@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-14T07:35:37",
+ "generated_at": "2026-07-14T09:32:27",
  "today": "2026-07-14",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -1757,17 +1757,6 @@
      "depends_on": []
     },
     {
-     "id": "22PZpK7c8LMA",
-     "name": "KITCHEN: INSTALL PULLS",
-     "baseline_end": "2026-07-09",
-     "live_end": "2026-07-11",
-     "current_end": "2026-07-11",
-     "current_start": "2026-07-11",
-     "moved_days": 2,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PZpKA3WxLB",
      "name": "FLOORING: INSTALL HARDWOOD",
      "baseline_end": "2026-07-10",
@@ -1797,6 +1786,17 @@
      "current_end": "2026-07-13",
      "current_start": "2026-07-13",
      "moved_days": 4,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpK7c8LMA",
+     "name": "KITCHEN: INSTALL PULLS",
+     "baseline_end": "2026-07-09",
+     "live_end": "2026-07-16",
+     "current_end": "2026-07-16",
+     "current_start": "2026-07-16",
+     "moved_days": 7,
      "status": "moved",
      "depends_on": []
     },
@@ -2005,6 +2005,13 @@
      "days": 8
     },
     {
+     "id": "22PZpK7c8LMA",
+     "name": "KITCHEN: INSTALL PULLS",
+     "from": "2026-07-09",
+     "to": "2026-07-16",
+     "days": 7
+    },
+    {
      "id": "22PZpKAP39Ee",
      "name": "CARPENTRY: PREFAB CABINETS INSTALLATION",
      "from": "2026-07-17",
@@ -2016,6 +2023,13 @@
      "name": "BASEBOARD & TRIM: INSTALL",
      "from": "2026-07-14",
      "to": "2026-07-21",
+     "days": 7
+    },
+    {
+     "id": "22PaBiRU4Urw",
+     "name": "KITCHEN: INSTALL EXTRA CABINETS",
+     "from": "2026-07-09",
+     "to": "2026-07-16",
      "days": 7
     },
     {
@@ -2094,20 +2108,6 @@
      "from": "2026-07-21",
      "to": "2026-07-18",
      "days": -3
-    },
-    {
-     "id": "22PZpK7c8LMA",
-     "name": "KITCHEN: INSTALL PULLS",
-     "from": "2026-07-09",
-     "to": "2026-07-11",
-     "days": 2
-    },
-    {
-     "id": "22PaBiRU4Urw",
-     "name": "KITCHEN: INSTALL EXTRA CABINETS",
-     "from": "2026-07-09",
-     "to": "2026-07-11",
-     "days": 2
     },
     {
      "id": "22PZpKAYpDhX",
@@ -2207,12 +2207,12 @@
        "marker": null,
        "baseline_start": "2026-07-09",
        "baseline_end": "2026-07-09",
-       "live_start": "2026-07-11",
-       "live_end": "2026-07-11",
-       "moved_days": 2,
+       "live_start": "2026-07-16",
+       "live_end": "2026-07-16",
+       "moved_days": 7,
        "days_in_week": 1,
        "earned_in_week": 0.0,
-       "started": true,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -2227,12 +2227,12 @@
        "marker": null,
        "baseline_start": "2026-07-09",
        "baseline_end": "2026-07-09",
-       "live_start": "2026-07-11",
-       "live_end": "2026-07-11",
-       "moved_days": 2,
+       "live_start": "2026-07-16",
+       "live_end": "2026-07-16",
+       "moved_days": 7,
        "days_in_week": 1,
        "earned_in_week": 0.0,
-       "started": true,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -2379,6 +2379,48 @@
      "target_marker": null,
      "target_due": "2026-07-18",
      "tasks": [
+      {
+       "id": "22PaBiRU4Urw",
+       "name": "KITCHEN: INSTALL EXTRA CABINETS",
+       "type": "AT",
+       "marker": null,
+       "baseline_start": "2026-07-11",
+       "baseline_end": "2026-07-11",
+       "live_start": "2026-07-16",
+       "live_end": "2026-07-16",
+       "moved_days": 5,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "days_due_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": true,
+       "was": "2026-07-11"
+      },
+      {
+       "id": "22PZpK7c8LMA",
+       "name": "KITCHEN: INSTALL PULLS",
+       "type": "CP",
+       "marker": null,
+       "baseline_start": "2026-07-11",
+       "baseline_end": "2026-07-11",
+       "live_start": "2026-07-16",
+       "live_end": "2026-07-16",
+       "moved_days": 5,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "days_due_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": true,
+       "was": "2026-07-11"
+      },
       {
        "id": "22PZpKA3WxLB",
        "name": "FLOORING: INSTALL HARDWOOD",
