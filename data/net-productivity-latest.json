@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T09:32:26",
+  "generated_at": "2026-07-14T09:56:05",
   "today": "2026-07-14",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -2652,10 +2652,10 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 40,
-    "orphan_cost": 278127.38,
+    "orphan_trades": 41,
+    "orphan_cost": 279442.6,
     "priced_trades": 176,
-    "total_trades": 216,
+    "total_trades": 217,
     "by_project": [
       {
         "project": "Charles Harris",
@@ -2792,6 +2792,21 @@
         ]
       },
       {
+        "project": "Martha Cockrell",
+        "orphan_trades": 2,
+        "orphan_cost": 2295.52,
+        "examples": [
+          {
+            "trade": "FRAMING",
+            "cost": 1315.22
+          },
+          {
+            "trade": "DEMO",
+            "cost": 980.3
+          }
+        ]
+      },
+      {
         "project": "Clifford Clack",
         "orphan_trades": 3,
         "orphan_cost": 2139.0,
@@ -2807,17 +2822,6 @@
           {
             "trade": "GUTTERS",
             "cost": 689.0
-          }
-        ]
-      },
-      {
-        "project": "Martha Cockrell",
-        "orphan_trades": 1,
-        "orphan_cost": 980.3,
-        "examples": [
-          {
-            "trade": "DEMO",
-            "cost": 980.3
           }
         ]
       },
@@ -3287,10 +3291,10 @@
         {
           "trade": "FRAMING",
           "income": 111141.18,
-          "expense": 66048.75,
+          "expense": 67363.97,
           "grouped": true,
           "n_inc": 7,
-          "n_exp": 22
+          "n_exp": 23
         },
         {
           "trade": "DRYWALL",
@@ -3510,7 +3514,7 @@
         }
       ],
       "total_income": 560057.6,
-      "total_expense": 318934.41,
+      "total_expense": 320249.63,
       "loose_amount": 0
     },
     {

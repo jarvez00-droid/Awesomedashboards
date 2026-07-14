@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-14T09:32:27",
+ "generated_at": "2026-07-14T09:56:06",
  "today": "2026-07-14",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -52,24 +52,24 @@
  },
  "company": {
   "monthly_pct": 16.7,
-  "days_pct": 38.1,
+  "days_pct": 38.5,
   "ghost_days_pct": 62.4,
-  "earned_days": 166.0,
+  "earned_days": 168.0,
   "total_days": 436.0,
   "plan_days": 272.0,
   "month_forecast": {
    "status": "at_risk",
-   "projected_pct": 93.8,
+   "projected_pct": 95.0,
    "plan_pct": 100.0,
-   "leaked_count": 13,
-   "leaked_days": 27.0,
-   "leaked_pct": 6.2,
-   "reshuffled_in_month": 113
+   "leaked_count": 12,
+   "leaked_days": 22.0,
+   "leaked_pct": 5.0,
+   "reshuffled_in_month": 114
   },
   "adherence": 30.9,
   "band": "red",
   "runner_date": "2026-07-08",
-  "gap": 24.3,
+  "gap": 23.9,
   "status": "behind",
   "week": {
    "days_planned": 138.0,
@@ -6622,15 +6622,15 @@
    "band": "red",
    "runner_pct": 26.1,
    "ghost_pct": 56.5,
-   "runner_date": "2026-07-09",
+   "runner_date": "2026-07-10",
    "finish_date": "2026-07-29",
-   "days_pct": 58.8,
+   "days_pct": 60.8,
    "ghost_days_pct": 80.4,
    "total_days": 102.0,
-   "earned_days": 60.0,
+   "earned_days": 62.0,
    "plan_days": 82.0,
    "city_inspections": 3,
-   "gap": 21.6,
+   "gap": 19.6,
    "status": "salvage",
    "status_scope": "current_week",
    "week": {
@@ -6675,25 +6675,19 @@
    ],
    "excluded_admin": [],
    "month_forecast": {
-    "status": "behind",
-    "projected_pct": 88.2,
+    "status": "at_risk",
+    "projected_pct": 93.1,
     "plan_pct": 100.0,
-    "leaked_count": 2,
-    "leaked_days": 12.0,
-    "leaked_pct": 11.8,
-    "reshuffled_in_month": 9,
+    "leaked_count": 1,
+    "leaked_days": 7.0,
+    "leaked_pct": 6.9,
+    "reshuffled_in_month": 10,
     "leaked": [
      {
       "name": "ELECTRICAL ROUGH IN: EXECUTE",
       "from": "2026-07-14",
       "to": "2026-08-05",
       "days": 7
-     },
-     {
-      "name": "FRAMING: EXECUTE",
-      "from": "2026-07-04",
-      "to": "2026-08-04",
-      "days": 5
      }
     ]
    },
@@ -6822,6 +6816,17 @@
      "depends_on": []
     },
     {
+     "id": "22PZzWm8eJ4B",
+     "name": "FRAMING: EXECUTE",
+     "baseline_end": "2026-07-04",
+     "live_end": "2026-07-17",
+     "current_end": "2026-07-17",
+     "current_start": "2026-07-13",
+     "moved_days": 13,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
      "id": "22PZzWUsGsvd",
      "name": "ROOFING: EXECUTE",
      "baseline_end": "2026-07-23",
@@ -6875,17 +6880,6 @@
      "moved_days": 0,
      "status": "pending",
      "depends_on": []
-    },
-    {
-     "id": "22PZzWm8eJ4B",
-     "name": "FRAMING: EXECUTE",
-     "baseline_end": "2026-07-04",
-     "live_end": "2026-08-04",
-     "current_end": "2026-08-04",
-     "current_start": "2026-07-30",
-     "moved_days": 31,
-     "status": "moved",
-     "depends_on": []
     }
    ],
    "july_money": [
@@ -6896,18 +6890,18 @@
    "moved_count": 12,
    "moved": [
     {
-     "id": "22PZzWm8eJ4B",
-     "name": "FRAMING: EXECUTE",
-     "from": "2026-07-04",
-     "to": "2026-08-04",
-     "days": 31
-    },
-    {
      "id": "22PZzWmEvmUK",
      "name": "ELECTRICAL ROUGH IN: EXECUTE",
      "from": "2026-07-14",
      "to": "2026-08-05",
      "days": 22
+    },
+    {
+     "id": "22PZzWm8eJ4B",
+     "name": "FRAMING: EXECUTE",
+     "from": "2026-07-04",
+     "to": "2026-07-17",
+     "days": 13
     },
     {
      "id": "22PZzWe7eBKD",
@@ -7382,6 +7376,27 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZzWm8eJ4B",
+       "name": "FRAMING: EXECUTE",
+       "type": "AT",
+       "marker": null,
+       "baseline_start": "2026-07-30",
+       "baseline_end": "2026-08-04",
+       "live_start": "2026-07-13",
+       "live_end": "2026-07-17",
+       "moved_days": -18,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "days_due_in_week": 0,
+       "started": true,
+       "progress": 0,
+       "status": "pending",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": true,
+       "was": "2026-08-04"
       },
       {
        "id": "22PZzWVZeLkQ",
