@@ -2249,21 +2249,23 @@ async function financeToggleConfirm(sourceId, currentlyConfirmed) {
       (FINANCE_DATA.overdue || []).forEach(updateEvent);
       // Per-project events arrays are duplicates of the same dicts above — same in-place update
       (FINANCE_DATA.by_project || []).forEach(p => (p.events || []).forEach(updateEvent));
-      // Recompute running_balance_confirmed walking the timeline (only confirmed events count)
+      // Recompute running_balance_confirmed walking the timeline (only confirmed events count;
+      // petty spends never touch the bank — two-account model, Jose 2026-07-14)
       const startBal = (FINANCE_DATA.bank && FINANCE_DATA.bank.current_balance) || 0;
       let runConf = startBal;
       (FINANCE_DATA.timeline || []).forEach(e => {
-        if (e.confirmed) runConf += (e.amount || 0);
+        if (e.confirmed && !e.petty) runConf += (e.amount || 0);
         e.running_balance_confirmed = Math.round(runConf * 100) / 100;
       });
-      // Update aggregates' confirmed totals + counts
+      // Update aggregates' confirmed totals + counts (bank flows = non-petty only)
       ['day','week','month'].forEach(unit => {
         const bs = (FINANCE_DATA.aggregated && FINANCE_DATA.aggregated[unit]) || [];
         bs.forEach(b => {
           const inWin = (FINANCE_DATA.timeline || []).filter(e => e.date >= b.start && e.date <= b.end);
           const conf = inWin.filter(e => e.confirmed);
-          b.inflow_confirmed = Math.round(conf.filter(e=>e.amount>0).reduce((s,e)=>s+e.amount,0)*100)/100;
-          b.outflow_confirmed = Math.round(conf.filter(e=>e.amount<0).reduce((s,e)=>s+Math.abs(e.amount),0)*100)/100;
+          const confBank = conf.filter(e => !e.petty);
+          b.inflow_confirmed = Math.round(confBank.filter(e=>e.amount>0).reduce((s,e)=>s+e.amount,0)*100)/100;
+          b.outflow_confirmed = Math.round(confBank.filter(e=>e.amount<0).reduce((s,e)=>s+Math.abs(e.amount),0)*100)/100;
           b.net_confirmed = Math.round((b.inflow_confirmed - b.outflow_confirmed)*100)/100;
           b.count_confirmed = conf.length;
           // closing_balance_confirmed = running_balance_confirmed of last event in bucket
@@ -2391,9 +2393,9 @@ function financeFilterByRange(data) {
     aggFixed[u] = ((data.aggregated_fixed && data.aggregated_fixed[u]) || []).filter(b => b.start <= rangeEndStr && b.end >= rangeStartStr);
   });
 
-  // Recompute summary for the range
-  const totalIn = tl.filter(e => e.amount > 0).reduce((s, e) => s + e.amount, 0);
-  const totalOut = tl.filter(e => e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
+  // Recompute summary for the range (bank view — petty spends excluded, two-account model)
+  const totalIn = tl.filter(e => e.amount > 0 && !e.petty).reduce((s, e) => s + e.amount, 0);
+  const totalOut = tl.filter(e => e.amount < 0 && !e.petty).reduce((s, e) => s + Math.abs(e.amount), 0);
   const startBal = data.summary.current_balance;
   const projected = startBal + totalIn - totalOut;
   const breakdown = tl.find(e => e.running_balance !== null && e.running_balance < 0);
@@ -2820,20 +2822,30 @@ function financeRenderBucketContent(start, end, rowId, live) {
       </div>`;
 
   // Second-level sub-segments inside each project (Jose 2026-07-13): items are
-  // assigned by JobTread task type — category 'materials' / 'subs'; everything
-  // else (income, additional, manual entries…) lands in Additional expenses.
+  // assigned by JobTread task type — category 'materials' / 'subs'. Petty-
+  // flagged events ('additional' tasks) get their own 🪙 segment (two-account
+  // model, Jose 2026-07-14): shown here per project but paid from the petty
+  // account, so they're excluded from every bank column. Everything else
+  // (income, manual entries…) lands in Other movements.
   const CAT_SEGS = [
     { id: 'materials', label: '🧱 Materials', test: e => e.category === 'materials' },
     { id: 'subs',      label: '👷 Sub payments', test: e => e.category === 'subs' },
-    { id: 'other',     label: '📋 Additional expenses', test: null },
+    { id: 'petty',     label: '🪙 Additional (petty)', test: e => !!e.petty,
+      note: 'paid from petty cash — not counted in bank columns' },
+    { id: 'other',     label: '📋 Other movements', test: null },
   ];
 
   let html = '<div style="padding:10px 20px 14px">';
   projKeys.forEach(p => {
     const events = financeClusterCopies(byProj[p].sort((a, bb) => a.date.localeCompare(bb.date)));
-    const net = events.reduce((s, e) => s + e.amount, 0);
-    const inflow = events.filter(e => e.amount > 0).reduce((s, e) => s + e.amount, 0);
-    const outflow = events.filter(e => e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
+    // Header sums = BANK movements only (two-account model): petty spends are
+    // listed below in their 🪙 segment but never counted here, so these numbers
+    // reconcile with the bucket-row Inflow/Outflow/Close columns.
+    const bankEvents = events.filter(e => !e.petty);
+    const net = bankEvents.reduce((s, e) => s + e.amount, 0);
+    const inflow = bankEvents.filter(e => e.amount > 0).reduce((s, e) => s + e.amount, 0);
+    const outflow = bankEvents.filter(e => e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
+    const pettyOut = events.filter(e => e.petty && e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
     const projColor = financeProjIdentColor(p);
     html += `<div style="margin-top:14px;background:var(--card);border:1px solid color-mix(in srgb, ${projColor} 28%, transparent);border-left:4px solid ${projColor};border-radius:0 8px 8px 0;overflow:hidden">`;
     html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:color-mix(in srgb, ${projColor} 10%, transparent);font-size:13px">`;
@@ -2842,6 +2854,7 @@ function financeRenderBucketContent(start, end, rowId, live) {
     if (inflow) html += `<span style="color:var(--grn);margin-right:10px">+${fmtK(inflow)}</span>`;
     if (outflow) html += `<span style="color:var(--red);margin-right:10px">-${fmtK(outflow)}</span>`;
     html += `<span style="font-weight:700;color:${net>=0?'var(--grn)':'var(--red)'}">${net>=0?'+':''}${fmtK(net)}</span>`;
+    if (pettyOut) html += `<span style="color:var(--org);font-size:10px;margin-left:10px" title="Petty-cash spends in this period — paid from the petty account, not counted in the bank sums">🪙 -${fmtK(pettyOut)} petty</span>`;
     html += `</span></div>`;
     html += `<div style="font-size:12px;padding:4px 10px 8px">`;
     const pKey = p.replace(/[^a-z0-9]/gi,'_');
@@ -2868,6 +2881,7 @@ function financeRenderBucketContent(start, end, rowId, live) {
         if (segOut) html += `<span style="color:var(--red);margin-right:8px">-${fmtK(segOut)}</span>`;
         html += `<span style="font-weight:700;color:${segNet>=0?'var(--grn)':'var(--red)'}">${segNet>=0?'+':''}${fmtK(segNet)}</span>`;
         html += `</span></div>`;
+        if (seg.note) html += `<div style="font-size:10px;color:var(--org);font-style:italic;padding:2px 8px 0">${seg.note}</div>`;
         html += `<div id="${segKey}-body" style="padding-left:6px">`;
         segEvents.forEach((e, idx) => { html += evRow(e, idx >= PAGE, segKey); });
         if (segEvents.length > PAGE) html += showMoreLink(segEvents.length, segKey);
@@ -4945,13 +4959,14 @@ function financePettySectionHTML() {
   <details ${window._financePettyOpen === false ? '' : 'open'} ontoggle="window._financePettyOpen = this.open" style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);margin-bottom:16px">
     <summary style="cursor:pointer;padding:12px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;list-style:none">
       <b style="font-size:14px">🪙 Petty Cash</b>
-      <span style="color:var(--dim);font-size:11px">weekly fund · spends = JobTread additional-expense tasks</span>
+      <span style="color:var(--dim);font-size:11px">separate account · spends = JobTread additional-expense tasks</span>
       <span style="margin-left:auto;display:flex;gap:14px;font-family:var(--mono);font-size:12px;font-weight:700">
         <span style="color:var(--red)">−${fmt(spentWk)} spent this wk</span>
         <span style="color:${fund >= 0 ? 'var(--grn)' : 'var(--red)'};border:1px solid var(--bdr);border-radius:5px;padding:1px 8px">FUND ${fmt(fund)}</span>
       </span>
     </summary>
     <div style="padding:0 14px 14px">
+      <div style="font-size:11px;color:var(--dim);margin-bottom:10px;line-height:1.5">Two separate accounts (Jose 2026-07-14): <b style="color:var(--grn)">assignments</b> fund the box FROM the bank (the only petty movement that touches the bank balance) · <b style="color:var(--red)">additional-expense tasks</b> spend FROM the box — they never count in the bank columns above.</div>
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
         <div style="display:inline-flex;align-items:center;background:var(--raised);border:1px solid var(--bdr);border-radius:6px;padding:2px">
           <button onclick="financePettyNav(-1)" ${sel <= minFri ? 'disabled' : ''} style="padding:5px 12px;font-size:14px;font-weight:700;background:transparent;color:${sel <= minFri ? 'var(--dim)' : 'var(--txt)'};border:none;border-radius:4px;cursor:${sel <= minFri ? 'not-allowed' : 'pointer'}">‹</button>
@@ -4965,7 +4980,7 @@ function financePettySectionHTML() {
         ${tile('Assigned this week', fmt(assignedWk), 'var(--grn)', 'Weekly amount allocated to the petty-cash box for this plan week', assignedWk ? '' : 'no assignment registered')}
         ${tile('Spent this week', '−' + fmt(spentWk), 'var(--red)', 'Additional-expense tasks dated within this week, up to today', plannedWk ? `+ ${fmt(plannedWk)} planned later this week` : '')}
         ${tile('Remaining this week', fmt(remainingWk), remainingWk < 0 ? 'var(--red)' : 'var(--txt)', 'Assigned this week − spent this week', remainingWk < 0 ? 'over the weekly assignment' : '')}
-        ${tile('Fund balance', fmt(fund), fund >= 0 ? 'var(--grn)' : 'var(--red)', `Cumulative since ${P.start}: all assignments − all spends dated ≤ today. Unspent money carries over from week to week.`, 'carryover incl.')}
+        ${tile('Petty account balance', fmt(fund), fund >= 0 ? 'var(--grn)' : 'var(--red)', `The petty ACCOUNT (separate from the bank). Cumulative since ${P.start}: all assignments − all spends dated ≤ today. Unspent money carries over from week to week.`, 'carryover incl.')}
       </div>
       ${wk.length
         ? `<div style="border:1px solid var(--bdr);border-radius:8px;overflow:hidden">${rows}</div>`
@@ -6083,6 +6098,7 @@ function renderFinance(c) {
     let inn = 0, out = 0;
     gtl.forEach(e => {
       if (e.date < from || e.date > to) return;
+      if (e.petty) return;  // two-account model: petty spends don't touch the bank
       if (projOnly && (e.source_type === 'fixed_cost' || e.source_type === 'debt')) return;
       if (e.amount > 0) inn += e.amount; else out += Math.abs(e.amount);
     });
@@ -6101,6 +6117,20 @@ function renderFinance(c) {
     return { val: fmtDateFull(ev.date), sub: (daysOut === 0 ? 'today' : `in ${daysOut} days`) + ` · on "${(ev.label || '').slice(0, 38)}"`, col, bg: 'rgba(240,68,56,.07)', bdr: col };
   };
   const negC = negInfo(negConf), negP = negInfo(negPot);
+
+  // 🪙 Petty ACCOUNT (two-account model, Jose 2026-07-14): a separate box
+  // funded from the bank via weekly assignments; additional-expense tasks
+  // spend from HERE — they never touch the bank numbers on this page.
+  const PB = G.petty || {};
+  const pEntries = PB.entries || [];
+  const pToday = G.date || finYmd(new Date());
+  const pettyBal = (PB.balance_today != null) ? PB.balance_today
+    : pEntries.reduce((s, e) => s + (e.date <= pToday ? e.amount : 0), 0);
+  const pWkFri = financePettyWeekFri(pToday), pWkEnd = financePettyAddDays(pWkFri, 6);
+  const pAssignedWk = pEntries.filter(e => e.kind === 'assignment' && e.date >= pWkFri && e.date <= pWkEnd)
+    .reduce((s, e) => s + e.amount, 0);
+  const pSpentWk = pEntries.filter(e => e.kind === 'spend' && e.date >= pWkFri && e.date <= pWkEnd && e.date <= pToday)
+    .reduce((s, e) => s + Math.abs(e.amount), 0);
 
   const live = window._financeLive === true;
   // Count ALL scenario data (overrides + additions + deletions) for the active scenario.
@@ -6150,10 +6180,15 @@ function renderFinance(c) {
 
     <!-- Row 1: balance + early-warning "next runs negative" boxes + quarter nets -->
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;align-items:stretch">
-      <div style="flex:1.1;min-width:160px;background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:10px 12px">
-        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700">Current Balance</div>
+      <div style="flex:1.1;min-width:160px;background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:10px 12px" title="BANK account — petty-cash spends never touch these numbers (two-account model)">
+        <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700">🏦 Current Balance <span style="color:var(--blu)">(Bank)</span></div>
         <div style="font-family:var(--mono);font-weight:700;font-size:20px;color:var(--txt);margin-top:4px">${fmtK(bal)}</div>
         ${(d.paid_since_balance && d.paid_since_balance.summary && d.paid_since_balance.summary.remaining_balance != null) ? `<div style="font-size:10px;color:var(--dim);margin-top:3px">Saldo restante (hoy): <b style="color:${d.paid_since_balance.summary.remaining_balance >= 0 ? 'var(--grn)' : 'var(--red)'}">${fmtK(d.paid_since_balance.summary.remaining_balance)}</b></div>` : `<div style="font-size:10px;color:var(--dim);margin-top:3px">as of ${G.bank && G.bank.as_of || d.date}</div>`}
+      </div>
+      <div style="flex:1.1;min-width:170px;background:rgba(247,144,9,.07);border:1.5px solid rgba(247,144,9,.55);border-radius:var(--r);padding:10px 12px" title="PETTY-CASH account — a separate box funded from the bank via weekly assignments; additional-expense tasks spend from here, not from the bank balance">
+        <div style="color:var(--org);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700">🪙 Petty Cash <span style="color:var(--dim)">(own account)</span></div>
+        <div style="font-family:var(--mono);font-weight:700;font-size:20px;color:${pettyBal >= 0 ? 'var(--txt)' : 'var(--red)'};margin-top:4px">${fmtK(pettyBal)}</div>
+        <div style="font-size:10px;color:var(--dim);margin-top:3px">assigned this week <b style="color:var(--grn)">+${fmtK(pAssignedWk)}</b> · spent <b style="color:var(--red)">−${fmtK(pSpentWk)}</b></div>
       </div>
       <div style="flex:1.4;min-width:200px;background:${negC.bg};border:1.5px solid ${negC.bdr};border-radius:var(--r);padding:10px 12px" title="First date the CONFIRMED-only running balance goes below $0 (only movements marked ☑ confirmed count)">
         <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700">⚠ Next Runs Negative <span style="color:var(--grn)">(Confirmed)</span></div>
@@ -6322,6 +6357,7 @@ function renderFinance(c) {
       <b style="color:var(--blu)">Potential</b> = all scheduled movements (confirmed + potential) · <b style="color:var(--grn)">Confirmed</b> = only movements marked ☑ confirmed.
       <b style="color:var(--txt2)">Close</b> = projected running balance at the end of the period — Potential Close counts <i>all</i> movements (confirmed + potential); Confirmed Close counts confirmed movements only.
       <b style="color:var(--org)">Fixed costs</b> = fixed costs scheduled in the period (payroll, rent…), shown apart from the project Inflow/Outflow columns but already inside Potential Close.
+      <b style="color:var(--org)">🪙 Additional (petty)</b> items appear inside the drill-downs but are <b>excluded from every bank column</b> (Inflow / Outflow / Close) — they're paid from the separate petty-cash account, which the bank only funds via the weekly assignments.
     </div>`;
     h += '</div>';  // close outer card
   }
