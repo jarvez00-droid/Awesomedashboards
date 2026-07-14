@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T10:43:20",
+  "generated_at": "2026-07-14T11:54:55",
   "today": "2026-07-14",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -39,18 +39,18 @@
   ],
   "totals": {
     "prod": [
-      516629.03,
-      425958.99
+      515210.03,
+      424398.09
     ],
     "prod_todate": [
-      226149.31,
-      184067.94
+      224730.31,
+      182507.04
     ],
     "weekly": {
       "fixed": 298222.02,
       "net": [
-        218407.01,
-        127736.97
+        216988.01,
+        126176.07
       ],
       "periods": 27,
       "positive": [
@@ -61,8 +61,8 @@
     "monthly": {
       "fixed": 335039.6,
       "net": [
-        181589.43,
-        90919.39
+        180170.43,
+        89358.49
       ],
       "periods": 7,
       "positive": [
@@ -444,17 +444,17 @@
       "label_moy": "jul S2",
       "label_short": "11 jul",
       "prod": [
-        61043.78,
-        50600.95
+        59624.78,
+        49040.05
       ],
       "fixed": 11045.26,
       "net": [
-        49998.52,
-        39555.69
+        48579.52,
+        37994.79
       ],
       "cum": [
-        67685.07,
-        43431.57
+        66266.07,
+        41870.67
       ],
       "active_count": 10,
       "active_projects": [
@@ -506,8 +506,8 @@
           6108.46
         ],
         "Rohini Williams": [
-          4375.94,
-          2577.1
+          2956.94,
+          1016.2
         ],
         "Karim Merchant": [
           1186.06,
@@ -532,8 +532,8 @@
         11113.89
       ],
       "cum": [
-        88828.98,
-        54545.46
+        87409.98,
+        52984.56
       ],
       "active_count": 9,
       "active_projects": [
@@ -606,8 +606,8 @@
         30115.14
       ],
       "cum": [
-        126741.99,
-        84660.6
+        125322.99,
+        83099.7
       ],
       "active_count": 9,
       "active_projects": [
@@ -672,8 +672,8 @@
         36003.68
       ],
       "cum": [
-        169471.67,
-        120664.28
+        168052.67,
+        119103.38
       ],
       "active_count": 8,
       "active_projects": [
@@ -737,8 +737,8 @@
         10757.63
       ],
       "cum": [
-        187419.04,
-        131421.91
+        186000.04,
+        129861.01
       ],
       "active_count": 6,
       "active_projects": [
@@ -796,8 +796,8 @@
         -1932.5
       ],
       "cum": [
-        190029.42,
-        129489.41
+        188610.42,
+        127928.51
       ],
       "active_count": 5,
       "active_projects": [
@@ -850,8 +850,8 @@
         -3297.44
       ],
       "cum": [
-        191032.74,
-        126191.97
+        189613.74,
+        124631.07
       ],
       "active_count": 5,
       "active_projects": [
@@ -904,8 +904,8 @@
         28150.51
       ],
       "cum": [
-        224571.01,
-        154342.48
+        223152.01,
+        152781.58
       ],
       "active_count": 5,
       "active_projects": [
@@ -958,8 +958,8 @@
         21746.96
       ],
       "cum": [
-        251224.72,
-        176089.44
+        249805.72,
+        174528.54
       ],
       "active_count": 5,
       "active_projects": [
@@ -1012,8 +1012,8 @@
         20510.34
       ],
       "cum": [
-        280194.19,
-        196599.78
+        278775.19,
+        195038.88
       ],
       "active_count": 4,
       "active_projects": [
@@ -1061,8 +1061,8 @@
         24608.28
       ],
       "cum": [
-        308048.98,
-        221208.06
+        306629.98,
+        219647.16
       ],
       "active_count": 3,
       "active_projects": [
@@ -1105,8 +1105,8 @@
         -2329.18
       ],
       "cum": [
-        307085.28,
-        218878.88
+        305666.28,
+        217317.98
       ],
       "active_count": 3,
       "active_projects": [
@@ -1149,8 +1149,8 @@
         -14703.71
       ],
       "cum": [
-        293515.74,
-        204175.17
+        292096.74,
+        202614.27
       ],
       "active_count": 2,
       "active_projects": [
@@ -1188,8 +1188,8 @@
         -10717.5
       ],
       "cum": [
-        282877.44,
-        193457.67
+        281458.44,
+        191896.77
       ],
       "active_count": 2,
       "active_projects": [
@@ -1223,8 +1223,8 @@
         0.0
       ],
       "cum": [
-        282877.44,
-        193457.67
+        281458.44,
+        191896.77
       ],
       "active_count": 2,
       "active_projects": [
@@ -1253,8 +1253,8 @@
         -10801.09
       ],
       "cum": [
-        272139.17,
-        182656.58
+        270720.17,
+        181095.68
       ],
       "active_count": 2,
       "active_projects": [
@@ -1288,8 +1288,8 @@
         -9855.46
       ],
       "cum": [
-        262688.13,
-        172801.12
+        261269.13,
+        171240.22
       ],
       "active_count": 2,
       "active_projects": [
@@ -1323,8 +1323,8 @@
         -9931.74
       ],
       "cum": [
-        253174.74,
-        162869.38
+        251755.74,
+        161308.48
       ],
       "active_count": 2,
       "active_projects": [
@@ -1358,8 +1358,8 @@
         -10347.92
       ],
       "cum": [
-        243081.58,
-        152521.46
+        241662.58,
+        150960.56
       ],
       "active_count": 2,
       "active_projects": [
@@ -1393,8 +1393,8 @@
         -8504.9
       ],
       "cum": [
-        234686.61,
-        144016.56
+        233267.61,
+        142455.66
       ],
       "active_count": 2,
       "active_projects": [
@@ -1432,8 +1432,8 @@
         -7347.39
       ],
       "cum": [
-        227339.22,
-        136669.17
+        225920.22,
+        135108.27
       ],
       "active_count": 1,
       "active_projects": [
@@ -1466,8 +1466,8 @@
         -8932.19
       ],
       "cum": [
-        218407.03,
-        127736.98
+        216988.03,
+        126176.08
       ],
       "active_count": 1,
       "active_projects": [
@@ -1500,8 +1500,8 @@
         0.0
       ],
       "cum": [
-        218407.03,
-        127736.98
+        216988.03,
+        126176.08
       ],
       "active_count": 1,
       "active_projects": [
@@ -1529,8 +1529,8 @@
         0.0
       ],
       "cum": [
-        218407.03,
-        127736.98
+        216988.03,
+        126176.08
       ],
       "active_count": 1,
       "active_projects": [
@@ -1558,8 +1558,8 @@
         0.0
       ],
       "cum": [
-        218407.03,
-        127736.98
+        216988.03,
+        126176.08
       ],
       "active_count": 1,
       "active_projects": [
@@ -1630,17 +1630,17 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        184096.53,
-        149593.32
+        182677.53,
+        148032.42
       ],
       "fixed": 47862.8,
       "net": [
-        136233.73,
-        101730.52
+        134814.73,
+        100169.62
       ],
       "cum": [
-        130423.71,
-        88342.34
+        129004.71,
+        86781.44
       ],
       "is_future": false,
       "is_partial": true,
@@ -1679,8 +1679,8 @@
           16111.79
         ],
         "Rohini Williams": [
-          11617.23,
-          7260.71
+          10198.23,
+          5699.81
         ],
         "Karim Merchant": [
           11203.32,
@@ -1701,8 +1701,8 @@
         55629.7
       ],
       "cum": [
-        211256.6,
-        143972.04
+        209837.6,
+        142411.14
       ],
       "is_future": true,
       "is_partial": false,
@@ -1751,8 +1751,8 @@
         82145.6
       ],
       "cum": [
-        314065.2,
-        226117.64
+        312646.2,
+        224556.74
       ],
       "is_future": true,
       "is_partial": false,
@@ -1793,8 +1793,8 @@
         -50763.56
       ],
       "cum": [
-        264852.37,
-        175354.08
+        263433.37,
+        173793.18
       ],
       "is_future": true,
       "is_partial": false,
@@ -1827,8 +1827,8 @@
         -40798.02
       ],
       "cum": [
-        225226.1,
-        134556.06
+        223807.1,
+        132995.16
       ],
       "is_future": true,
       "is_partial": false,
@@ -1857,8 +1857,8 @@
         -43636.67
       ],
       "cum": [
-        181589.43,
-        90919.39
+        180170.43,
+        89358.49
       ],
       "is_future": true,
       "is_partial": false,
@@ -2321,12 +2321,12 @@
       "project": "Rohini Williams",
       "revenue": 131891.08,
       "revenue_gross": 166571.2,
-      "cost": 95774.71,
+      "cost": 97193.71,
       "prod": [
-        36116.37,
-        26538.9
+        34697.37,
+        24978.0
       ],
-      "margin_pct": 27.4,
+      "margin_pct": 26.3,
       "weeks": {
         "2026-W26": [
           1370.84,
@@ -2341,8 +2341,8 @@
           586.73
         ],
         "2026-W29": [
-          4375.94,
-          2577.1
+          2956.94,
+          1016.2
         ],
         "2026-W30": [
           3911.55,
@@ -2383,8 +2383,8 @@
           3520.39
         ],
         "2026-07": [
-          11617.23,
-          7260.71
+          10198.23,
+          5699.81
         ],
         "2026-08": [
           6556.19,
@@ -4253,17 +4253,17 @@
           "n_exp": 3
         },
         {
-          "trade": "COUNTERTOPS",
-          "income": 5650.0,
-          "expense": 3250.0,
+          "trade": "DOORS AND WINDOWS",
+          "income": 4452.0,
+          "expense": 4593.49,
           "grouped": true,
           "n_inc": 1,
           "n_exp": 3
         },
         {
-          "trade": "DOORS AND WINDOWS",
-          "income": 4452.0,
-          "expense": 3174.49,
+          "trade": "COUNTERTOPS",
+          "income": 5650.0,
+          "expense": 3250.0,
           "grouped": true,
           "n_inc": 1,
           "n_exp": 3
@@ -4358,7 +4358,7 @@
         }
       ],
       "total_income": 175398.2,
-      "total_expense": 106124.71,
+      "total_expense": 107543.71,
       "loose_amount": 0
     },
     {
