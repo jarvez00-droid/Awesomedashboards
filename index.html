@@ -4853,6 +4853,149 @@ function financePagosSectionHTML() {
   </details>`;
 }
 
+// ─── 🪙 Petty Cash (weekly fund registry — Jose spec 2026-07-13) ─────
+// SPENDS = JobTread "additional expenses" tasks (FINANCE_DATA.petty.entries,
+// kind:'spend', built by generate_finance_json.py — the team keeps registering
+// them in JobTread as always; nothing new to enter here).
+// ASSIGNMENTS = the weekly amount consolidated in the plan (Fridays, Milagros).
+// Posted via the standard /petty endpoint with category='assignment': the row
+// hits the main cashflow as a bank OUTFLOW (cash leaving the bank into the
+// box) and shows HERE with the sign flipped (+ = money into the fund).
+// Weeks run Friday→Thursday to match the plan cycle. All week bucketing is
+// client-side from the flat ledger.
+function financePettyWeekFri(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  d.setDate(d.getDate() - ((d.getDay() - 5 + 7) % 7));  // back to the week's Friday
+  return finYmd(d);
+}
+function financePettyAddDays(dateStr, n) {
+  const d = new Date(dateStr + 'T12:00:00');
+  d.setDate(d.getDate() + n);
+  return finYmd(d);
+}
+function financePettyNav(dir) {
+  const base = window._financePettyWeek || financePettyWeekFri((FINANCE_DATA || {}).date || finYmd(new Date()));
+  window._financePettyWeek = financePettyAddDays(base, dir * 7);  // clamped on render
+  financeSafeRender();
+}
+function financePettySectionHTML() {
+  const P = (FINANCE_DATA || {}).petty;
+  if (!P || !Array.isArray(P.entries)) return '';
+  const entries = P.entries;
+  const live = window._financeLive === true;
+  const fmt = n => (n < 0 ? '-' : '') + '$' + Math.abs(n || 0).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  const MS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const fmtD = iso => { const dt = new Date(iso + 'T12:00:00'); return `${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dt.getDay()]} ${MS[dt.getMonth()]} ${dt.getDate()}`; };
+  const todayISO = FINANCE_DATA.date || finYmd(new Date());
+  const curFri = financePettyWeekFri(todayISO);
+
+  // Navigation bounds: oldest week with entries ↔ newest of (current week, newest week with entries)
+  let minFri = curFri, maxFri = curFri;
+  entries.forEach(e => {
+    const f = financePettyWeekFri(e.date);
+    if (f < minFri) minFri = f;
+    if (f > maxFri) maxFri = f;
+  });
+  let sel = window._financePettyWeek || curFri;
+  if (sel < minFri) sel = minFri;
+  if (sel > maxFri) sel = maxFri;
+  window._financePettyWeek = sel;
+  const selEnd = financePettyAddDays(sel, 6);  // Thursday
+
+  const wk = entries.filter(e => e.date >= sel && e.date <= selEnd);
+  const assignedWk = wk.filter(e => e.kind === 'assignment').reduce((s, e) => s + e.amount, 0);
+  // Spent = spends dated ≤ today only; future-dated spends are "planned" and excluded
+  const spentWk = wk.filter(e => e.kind === 'spend' && e.date <= todayISO).reduce((s, e) => s + Math.abs(e.amount), 0);
+  const plannedWk = wk.filter(e => e.kind === 'spend' && e.date > todayISO).reduce((s, e) => s + Math.abs(e.amount), 0);
+  const remainingWk = assignedWk - spentWk;
+  // Fund balance = cumulative since ledger start: all assignments − all spends dated ≤ today
+  // (spend amounts are already negative, so a straight sum works)
+  const fund = entries.reduce((s, e) => s + (e.date <= todayISO ? e.amount : 0), 0);
+
+  const tile = (lab, val, col, tip, sub) => `
+    <div style="flex:1;min-width:150px;background:var(--card);border:1px solid var(--bdr);border-radius:var(--r);padding:10px 12px" ${tip ? `title="${tip}"` : ''}>
+      <div style="color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700">${lab}</div>
+      <div style="font-family:var(--mono);font-weight:700;font-size:18px;color:${col};margin-top:4px">${val}</div>
+      ${sub ? `<div style="font-size:10px;color:var(--dim);margin-top:3px">${sub}</div>` : ''}
+    </div>`;
+
+  let rows = '';
+  wk.forEach(e => {
+    if (e.kind === 'assignment') {
+      rows += `<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-top:1px solid var(--bdr);font-size:13px;background:rgba(18,183,106,.06)">
+        <span style="flex:0 0 84px;font-family:var(--mono);font-size:11px;color:var(--txt2);white-space:nowrap">${fmtD(e.date)}</span>
+        <span style="flex:0 0 auto;font-size:10px;font-weight:700;color:var(--grn);border:1px solid var(--grn);border-radius:4px;padding:1px 6px">🏦→🪙 ASSIGNED</span>
+        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--txt)">${e.label || 'Weekly assignment'}</span>
+        <span style="flex:0 0 100px;text-align:right;font-family:var(--mono);font-weight:700;color:var(--grn)">+${fmt(e.amount)}</span>
+      </div>`;
+    } else {
+      const future = e.date > todayISO;
+      const pc = financeProjIdentColor(e.project || 'Other');
+      rows += `<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-top:1px solid var(--bdr);font-size:13px${future ? ';opacity:.5' : ''}">
+        <span style="flex:0 0 84px;font-family:var(--mono);font-size:11px;color:var(--txt2);white-space:nowrap">${fmtD(e.date)}</span>
+        <span style="flex:0 0 auto;display:inline-flex;align-items:center;gap:5px;max-width:180px;overflow:hidden"><span style="flex:none;width:8px;height:8px;border-radius:50%;background:${pc}"></span><span style="font-size:11px;color:${pc};font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.project || '—'}</span></span>
+        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${e.label || ''}</span>
+        ${future ? '<span style="flex:0 0 auto;font-size:9px;font-weight:700;color:var(--blu);border:1px solid var(--blu);border-radius:3px;padding:1px 5px">PLANNED</span>' : (e.paid ? '<span style="flex:0 0 auto;font-size:9px;font-weight:700;color:var(--grn);border:1px solid var(--grn);border-radius:3px;padding:1px 5px">PAID</span>' : '')}
+        <span style="flex:0 0 100px;text-align:right;font-family:var(--mono);font-weight:700;color:var(--red)">−${fmt(Math.abs(e.amount))}</span>
+      </div>`;
+    }
+  });
+
+  return `
+  <details ${window._financePettyOpen === false ? '' : 'open'} ontoggle="window._financePettyOpen = this.open" style="background:var(--card);border:1px solid var(--bdr);border-radius:var(--rl);margin-bottom:16px">
+    <summary style="cursor:pointer;padding:12px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;list-style:none">
+      <b style="font-size:14px">🪙 Petty Cash</b>
+      <span style="color:var(--dim);font-size:11px">weekly fund · spends = JobTread additional-expense tasks</span>
+      <span style="margin-left:auto;display:flex;gap:14px;font-family:var(--mono);font-size:12px;font-weight:700">
+        <span style="color:var(--red)">−${fmt(spentWk)} spent this wk</span>
+        <span style="color:${fund >= 0 ? 'var(--grn)' : 'var(--red)'};border:1px solid var(--bdr);border-radius:5px;padding:1px 8px">FUND ${fmt(fund)}</span>
+      </span>
+    </summary>
+    <div style="padding:0 14px 14px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
+        <div style="display:inline-flex;align-items:center;background:var(--raised);border:1px solid var(--bdr);border-radius:6px;padding:2px">
+          <button onclick="financePettyNav(-1)" ${sel <= minFri ? 'disabled' : ''} style="padding:5px 12px;font-size:14px;font-weight:700;background:transparent;color:${sel <= minFri ? 'var(--dim)' : 'var(--txt)'};border:none;border-radius:4px;cursor:${sel <= minFri ? 'not-allowed' : 'pointer'}">‹</button>
+          <span style="padding:0 10px;font-size:12px;font-weight:700;color:var(--txt);white-space:nowrap">Week ${fmtD(sel)} → ${fmtD(selEnd)}${sel === curFri ? ' <span style="color:var(--grn);font-size:10px">(current)</span>' : ''}</span>
+          <button onclick="financePettyNav(1)" ${sel >= maxFri ? 'disabled' : ''} style="padding:5px 12px;font-size:14px;font-weight:700;background:transparent;color:${sel >= maxFri ? 'var(--dim)' : 'var(--txt)'};border:none;border-radius:4px;cursor:${sel >= maxFri ? 'not-allowed' : 'pointer'}">›</button>
+        </div>
+        ${live ? `<button onclick="financePettyAssign()" style="padding:6px 14px;font-size:12px;font-weight:700;background:var(--grn);color:#fff;border:none;border-radius:6px;cursor:pointer" title="Set the weekly amount assigned to the petty-cash box (plan consolidation)">＋ Assign week</button>` : ''}
+        <span style="font-size:10px;color:var(--dim)">Plan weeks run Friday → Thursday</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+        ${tile('Assigned this week', fmt(assignedWk), 'var(--grn)', 'Weekly amount allocated to the petty-cash box for this plan week', assignedWk ? '' : 'no assignment registered')}
+        ${tile('Spent this week', '−' + fmt(spentWk), 'var(--red)', 'Additional-expense tasks dated within this week, up to today', plannedWk ? `+ ${fmt(plannedWk)} planned later this week` : '')}
+        ${tile('Remaining this week', fmt(remainingWk), remainingWk < 0 ? 'var(--red)' : 'var(--txt)', 'Assigned this week − spent this week', remainingWk < 0 ? 'over the weekly assignment' : '')}
+        ${tile('Fund balance', fmt(fund), fund >= 0 ? 'var(--grn)' : 'var(--red)', `Cumulative since ${P.start}: all assignments − all spends dated ≤ today. Unspent money carries over from week to week.`, 'carryover incl.')}
+      </div>
+      ${wk.length
+        ? `<div style="border:1px solid var(--bdr);border-radius:8px;overflow:hidden">${rows}</div>`
+        : '<div style="color:var(--dim);font-size:12px;padding:6px 2px">No petty-cash movements this week.</div>'}
+      <div style="color:var(--dim);font-size:10px;margin-top:8px">Spends are the JobTread tasks typed "additional expenses" — keep registering them there as usual. Assignments are entered here when the weekly plan is consolidated (LIVE mode).</div>
+    </div>
+  </details>`;
+}
+
+function financePettyAssign() {
+  const sel = window._financePettyWeek || financePettyWeekFri((FINANCE_DATA || {}).date || finYmd(new Date()));
+  const selEnd = financePettyAddDays(sel, 6);
+  financeModal('Assign Petty Cash Week', `
+    <div style="font-size:12px;color:var(--dim)">Weekly fund allocation for the plan week <b style="color:var(--txt)">${sel} → ${selEnd}</b>. Saved as a petty-cash row with category "assignment": it shows in the main cashflow as money leaving the bank into the box, and in the Petty Cash section as money INTO the fund.</div>
+    <label style="font-size:12px;color:var(--txt2)">Amount ($)</label>
+    <input name="amount" type="number" step="0.01" min="0" required style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:8px 10px;font-size:14px;border-radius:6px;font-family:var(--mono)">
+    <label style="font-size:12px;color:var(--txt2)">Date (plan Friday)</label>
+    <input name="date" type="date" value="${sel}" required style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:8px 10px;font-size:13px;border-radius:6px">
+    <label style="font-size:12px;color:var(--txt2)">Note (optional)</label>
+    <input name="description" placeholder="Weekly petty assignment" style="background:var(--bg);border:1px solid var(--bdr);color:var(--txt);padding:8px 10px;font-size:13px;border-radius:6px">
+  `, async (data) => {
+    data.amount = Math.abs(parseFloat(data.amount));
+    if (!data.amount) throw new Error('Amount required');
+    data.category = 'assignment';
+    if (!data.description) data.description = 'Weekly petty assignment (week of ' + (data.date || sel) + ')';
+    await financeApi('/petty', { method: 'POST', body: JSON.stringify(data) });
+    loadAndRenderFinance(document.getElementById('content'));
+  });
+}
+
 // ─── Ruta de Pagos (escenario asesor financiero) ────────────────────
 // Botón 🧭 en Finance → genera (LIVE) o lee (static) payment-sequence y muestra
 // el reporte. Motor: workspace-jade/generate_payment_sequence.py (reglas de Jose
@@ -6063,7 +6206,8 @@ function renderFinance(c) {
         <div style="color:var(--dim);font-size:10px;margin-top:2px">monthly baseline</div>
       </div>
     </div>
-    ${financePagosSectionHTML()}`;
+    ${financePagosSectionHTML()}
+    ${financePettySectionHTML()}`;
 
   if (breakdown) {
     const today = new Date(d.date + 'T12:00:00');
