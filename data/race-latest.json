@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-15T12:24:42",
+ "generated_at": "2026-07-15T13:02:17",
  "today": "2026-07-15",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -64,7 +64,7 @@
    "leaked_count": 13,
    "leaked_days": 23.0,
    "leaked_pct": 5.3,
-   "reshuffled_in_month": 116
+   "reshuffled_in_month": 117
   },
   "adherence": 28.3,
   "band": "red",
@@ -86,8 +86,8 @@
   "runner_pct": 16.1,
   "ghost_pct": 56.9,
   "july_money": [
-   164043.37000000002,
-   134162.41999999998
+   164459.57000000004,
+   134449.34
   ],
   "projects": 9,
   "daily": [
@@ -2659,7 +2659,7 @@
    "plan_days": 14.0,
    "city_inspections": 1,
    "gap": 78.6,
-   "status": "salvage",
+   "status": "behind",
    "status_scope": "current_week",
    "week": {
     "label": "Week 2 · Jul 13-19",
@@ -2672,27 +2672,10 @@
     "starts_due": 0,
     "starts_started": 0,
     "gap": 100.0,
-    "status": "salvage"
+    "status": "behind"
    },
-   "salvable": true,
-   "save_tasks": [
-    {
-     "name": "PAINT: PAINTING ADDITIONAL",
-     "due": "2026-07-15"
-    },
-    {
-     "name": "GLASS: INSTALL GLASS",
-     "due": "2026-07-15"
-    },
-    {
-     "name": "FINAL: BUILDING INSPECTION",
-     "due": "2026-07-13"
-    },
-    {
-     "name": "GUTTERS: INSTALL GUTTERS",
-     "due": "2026-07-13"
-    }
-   ],
+   "salvable": false,
+   "save_tasks": [],
    "excluded_admin": [
     {
      "name": "DELIVERY: PRE DELIVERY WALK THROUGH",
@@ -2707,7 +2690,7 @@
     "leaked_count": 0,
     "leaked_days": 0.0,
     "leaked_pct": 0.0,
-    "reshuffled_in_month": 9,
+    "reshuffled_in_month": 10,
     "leaked": []
    },
    "cp_chain": [
@@ -2729,10 +2712,10 @@
      "id": "22PUWTffEG7R",
      "name": "BRICK: BRICK INSTALLATION",
      "baseline_end": "2026-07-07",
-     "live_end": "2026-07-11",
-     "current_end": "2026-07-11",
-     "current_start": "2026-07-11",
-     "moved_days": 4,
+     "live_end": "2026-07-17",
+     "current_end": "2026-07-17",
+     "current_start": "2026-07-14",
+     "moved_days": 10,
      "status": "moved",
      "depends_on": []
     },
@@ -2740,10 +2723,10 @@
      "id": "22PPsiDCQYYw",
      "name": "CLEANING: FINAL CLEANING",
      "baseline_end": "2026-07-11",
-     "live_end": "2026-07-12",
-     "current_end": "2026-07-12",
-     "current_start": "2026-07-12",
-     "moved_days": 1,
+     "live_end": "2026-07-18",
+     "current_end": "2026-07-18",
+     "current_start": "2026-07-18",
+     "moved_days": 7,
      "status": "moved",
      "depends_on": []
     },
@@ -2751,11 +2734,11 @@
      "id": "22PPsiDCMZNa",
      "name": "FINAL: BUILDING INSPECTION",
      "baseline_end": "2026-07-13",
-     "live_end": "2026-07-13",
-     "current_end": "2026-07-13",
-     "current_start": "2026-07-13",
-     "moved_days": 0,
-     "status": "pending",
+     "live_end": "2026-07-20",
+     "current_end": "2026-07-20",
+     "current_start": "2026-07-20",
+     "moved_days": 7,
+     "status": "moved",
      "depends_on": []
     },
     {
@@ -2782,11 +2765,11 @@
     }
    ],
    "july_money": [
-    6035.84,
-    4988.47
+    6452.04,
+    5275.39
    ],
    "margin_pct": 33.6,
-   "moved_count": 10,
+   "moved_count": 11,
    "moved": [
     {
      "id": "22PUnNKxDE7b",
@@ -2810,6 +2793,34 @@
      "days": 11
     },
     {
+     "id": "22PUWTffEG7R",
+     "name": "BRICK: BRICK INSTALLATION",
+     "from": "2026-07-07",
+     "to": "2026-07-17",
+     "days": 10
+    },
+    {
+     "id": "22PZkUsSKgvV",
+     "name": "GUTTERS: INSTALL GUTTERS",
+     "from": "2026-07-10",
+     "to": "2026-07-18",
+     "days": 8
+    },
+    {
+     "id": "22PPsiDCMZNa",
+     "name": "FINAL: BUILDING INSPECTION",
+     "from": "2026-07-13",
+     "to": "2026-07-20",
+     "days": 7
+    },
+    {
+     "id": "22PPsiDCQYYw",
+     "name": "CLEANING: FINAL CLEANING",
+     "from": "2026-07-11",
+     "to": "2026-07-18",
+     "days": 7
+    },
+    {
      "id": "22PZkUehNPZy",
      "name": "GLASS: INSTALL GLASS",
      "from": "2026-07-08",
@@ -2824,32 +2835,11 @@
      "days": 5
     },
     {
-     "id": "22PUWTffEG7R",
-     "name": "BRICK: BRICK INSTALLATION",
-     "from": "2026-07-07",
-     "to": "2026-07-11",
-     "days": 4
-    },
-    {
      "id": "22PPsiDB5uvP",
      "name": "CUSTOM CARPENTRY: BUILD SECRET DOOR",
      "from": "2026-07-07",
      "to": "2026-07-10",
      "days": 3
-    },
-    {
-     "id": "22PZkUsSKgvV",
-     "name": "GUTTERS: INSTALL GUTTERS",
-     "from": "2026-07-10",
-     "to": "2026-07-13",
-     "days": 3
-    },
-    {
-     "id": "22PPsiDCQYYw",
-     "name": "CLEANING: FINAL CLEANING",
-     "from": "2026-07-11",
-     "to": "2026-07-12",
-     "days": 1
     },
     {
      "id": "22PaCEWgzt4Q",
@@ -2882,9 +2872,9 @@
        "marker": null,
        "baseline_start": "2026-07-07",
        "baseline_end": "2026-07-07",
-       "live_start": "2026-07-11",
-       "live_end": "2026-07-11",
-       "moved_days": 4,
+       "live_start": "2026-07-14",
+       "live_end": "2026-07-17",
+       "moved_days": 10,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": true,
@@ -3042,12 +3032,12 @@
        "marker": null,
        "baseline_start": "2026-07-10",
        "baseline_end": "2026-07-10",
-       "live_start": "2026-07-13",
-       "live_end": "2026-07-13",
-       "moved_days": 3,
+       "live_start": "2026-07-18",
+       "live_end": "2026-07-18",
+       "moved_days": 8,
        "days_in_week": 1,
        "earned_in_week": 0.0,
-       "started": true,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -3062,12 +3052,12 @@
        "marker": null,
        "baseline_start": "2026-07-11",
        "baseline_end": "2026-07-11",
-       "live_start": "2026-07-12",
-       "live_end": "2026-07-12",
-       "moved_days": 1,
+       "live_start": "2026-07-18",
+       "live_end": "2026-07-18",
+       "moved_days": 7,
        "days_in_week": 1,
        "earned_in_week": 0.0,
-       "started": true,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -3095,6 +3085,27 @@
      "target_due": "2026-07-14",
      "tasks": [
       {
+       "id": "22PUWTffEG7R",
+       "name": "BRICK: BRICK INSTALLATION",
+       "type": "CP",
+       "marker": null,
+       "baseline_start": "2026-07-11",
+       "baseline_end": "2026-07-11",
+       "live_start": "2026-07-14",
+       "live_end": "2026-07-17",
+       "moved_days": 6,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "days_due_in_week": 0,
+       "started": true,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": true,
+       "was": "2026-07-11"
+      },
+      {
        "id": "22PadrSqhV4T",
        "name": "ELECTRICAL TRIM: INSTALL NEW CEILING FAN",
        "type": "AT",
@@ -3116,23 +3127,44 @@
        "was": "2026-07-11"
       },
       {
+       "id": "22PPsiDCQYYw",
+       "name": "CLEANING: FINAL CLEANING",
+       "type": "CP",
+       "marker": null,
+       "baseline_start": "2026-07-12",
+       "baseline_end": "2026-07-12",
+       "live_start": "2026-07-18",
+       "live_end": "2026-07-18",
+       "moved_days": 6,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "days_due_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": true,
+       "was": "2026-07-12"
+      },
+      {
        "id": "22PPsiDCMZNa",
        "name": "FINAL: BUILDING INSPECTION",
        "type": "CI",
        "marker": null,
        "baseline_start": "2026-07-13",
        "baseline_end": "2026-07-13",
-       "live_start": "2026-07-13",
-       "live_end": "2026-07-13",
-       "moved_days": 0,
+       "live_start": "2026-07-20",
+       "live_end": "2026-07-20",
+       "moved_days": 7,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "days_due_in_week": 1,
-       "started": true,
+       "started": false,
        "progress": 0,
-       "status": "pending",
+       "status": "moved",
        "in_week_plan": true,
-       "kicked_out": false,
+       "kicked_out": true,
        "pulled_in": false,
        "was": null
       },
@@ -3143,15 +3175,15 @@
        "marker": null,
        "baseline_start": "2026-07-13",
        "baseline_end": "2026-07-13",
-       "live_start": "2026-07-13",
-       "live_end": "2026-07-13",
-       "moved_days": 0,
+       "live_start": "2026-07-18",
+       "live_end": "2026-07-18",
+       "moved_days": 5,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "days_due_in_week": 1,
-       "started": true,
+       "started": false,
        "progress": 0,
-       "status": "pending",
+       "status": "moved",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -3217,6 +3249,27 @@
      "target_marker": null,
      "target_due": null,
      "tasks": [
+      {
+       "id": "22PPsiDCMZNa",
+       "name": "FINAL: BUILDING INSPECTION",
+       "type": "CI",
+       "marker": null,
+       "baseline_start": "2026-07-13",
+       "baseline_end": "2026-07-13",
+       "live_start": "2026-07-20",
+       "live_end": "2026-07-20",
+       "moved_days": 7,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-13"
+      },
       {
        "id": "22PXCXCXSSVR",
        "name": "CEILING MOULDING: INSTALLATION",
