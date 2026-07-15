@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-15T15:11:03",
+ "generated_at": "2026-07-15T15:34:38",
  "today": "2026-07-15",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -52,9 +52,9 @@
  },
  "company": {
   "monthly_pct": 16.7,
-  "days_pct": 39.0,
+  "days_pct": 38.8,
   "ghost_days_pct": 65.8,
-  "earned_days": 170.0,
+  "earned_days": 169.0,
   "total_days": 436.0,
   "plan_days": 287.0,
   "month_forecast": {
@@ -69,7 +69,7 @@
   "adherence": 29.3,
   "band": "red",
   "runner_date": "2026-07-08",
-  "gap": 26.8,
+  "gap": 27.1,
   "status": "behind",
   "week": {
    "days_planned": 138.0,
@@ -86,8 +86,8 @@
   "runner_pct": 16.7,
   "ghost_pct": 56.9,
   "july_money": [
-   164425.22000000003,
-   134557.14
+   156425.22000000003,
+   125757.14
   ],
   "projects": 9,
   "daily": [
@@ -5764,13 +5764,13 @@
    "ghost_pct": 60.9,
    "runner_date": "2026-07-11",
    "finish_date": "2026-07-29",
-   "days_pct": 65.7,
+   "days_pct": 64.7,
    "ghost_days_pct": 84.3,
    "total_days": 102.0,
-   "earned_days": 67.0,
+   "earned_days": 66.0,
    "plan_days": 86.0,
    "city_inspections": 3,
-   "gap": 18.6,
+   "gap": 19.6,
    "status": "salvage",
    "status_scope": "current_week",
    "week": {
@@ -5793,12 +5793,12 @@
      "due": "2026-07-17"
     },
     {
-     "name": "ROOFING: EXECUTE",
+     "name": "DOORS & WINDOWS: EXECUTE",
      "due": "2026-07-16"
     },
     {
-     "name": "DOORS & WINDOWS: EXECUTE",
-     "due": "2026-07-15"
+     "name": "ROOFING: EXECUTE",
+     "due": "2026-07-16"
     },
     {
      "name": "FRAMING & MEPS ROUGH IN INSPECTION",
@@ -5923,17 +5923,6 @@
      "depends_on": []
     },
     {
-     "id": "22PZzWUzYRut",
-     "name": "DOORS & WINDOWS: EXECUTE",
-     "baseline_end": "2026-07-10",
-     "live_end": "2026-07-15",
-     "current_end": "2026-07-15",
-     "current_start": "2026-07-15",
-     "moved_days": 5,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PaCjS2mANX",
      "name": "FRAMING & MEPS ROUGH IN INSPECTION",
      "baseline_end": "2026-07-17",
@@ -5942,6 +5931,17 @@
      "current_start": "2026-07-15",
      "moved_days": -2,
      "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWUzYRut",
+     "name": "DOORS & WINDOWS: EXECUTE",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-16",
+     "current_end": "2026-07-16",
+     "current_start": "2026-07-16",
+     "moved_days": 6,
+     "status": "moved",
      "depends_on": []
     },
     {
@@ -6023,10 +6023,10 @@
     }
    ],
    "july_money": [
-    65163.64,
-    56224.09
+    57163.64,
+    47424.09
    ],
-   "margin_pct": 31.7,
+   "margin_pct": 29.5,
    "moved_count": 12,
    "moved": [
     {
@@ -6061,8 +6061,8 @@
      "id": "22PZzWUzYRut",
      "name": "DOORS & WINDOWS: EXECUTE",
      "from": "2026-07-10",
-     "to": "2026-07-15",
-     "days": 5
+     "to": "2026-07-16",
+     "days": 6
     },
     {
      "id": "22PZzWV7qXWg",
@@ -6123,8 +6123,8 @@
      "total": 10,
      "done": 2,
      "days_planned": 43.0,
-     "days_earned": 32.0,
-     "pct": 74.4,
+     "days_earned": 31.0,
+     "pct": 72.1,
      "target_task": "DOORS & WINDOWS: EXECUTE",
      "target_type": "CP",
      "target_marker": "start",
@@ -6239,12 +6239,12 @@
        "marker": null,
        "baseline_start": "2026-07-07",
        "baseline_end": "2026-07-10",
-       "live_start": "2026-07-15",
-       "live_end": "2026-07-15",
-       "moved_days": 5,
+       "live_start": "2026-07-16",
+       "live_end": "2026-07-16",
+       "moved_days": 6,
        "days_in_week": 4,
-       "earned_in_week": 1.0,
-       "started": true,
+       "earned_in_week": 0.0,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -6440,15 +6440,15 @@
        "marker": null,
        "baseline_start": "2026-07-15",
        "baseline_end": "2026-07-15",
-       "live_start": "2026-07-15",
-       "live_end": "2026-07-15",
-       "moved_days": 0,
+       "live_start": "2026-07-16",
+       "live_end": "2026-07-16",
+       "moved_days": 1,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "days_due_in_week": 1,
-       "started": true,
+       "started": false,
        "progress": 0,
-       "status": "pending",
+       "status": "moved",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
