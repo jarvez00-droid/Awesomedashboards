@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T10:40:37",
+  "generated_at": "2026-07-16T11:02:32",
   "date": "2026-07-16",
   "window_start": "2026-07-16",
   "window_end": "2027-07-16",
@@ -341,7 +341,7 @@
     "net_window_confirmed": 20224.03,
     "projected_end_balance_confirmed": 70224.03,
     "runway_breakdown_date_confirmed": null,
-    "event_count": 910,
+    "event_count": 911,
     "event_count_confirmed": 54,
     "overdue_count": 0,
     "overdue_incoming": 0,
@@ -1009,6 +1009,32 @@
         "taskId": "22PatDEsGXdg",
         "projectId": "22PCPuWPndkt",
         "assignedTo": ""
+      },
+      "running_balance": 44471.66,
+      "running_balance_confirmed": 60796.86
+    },
+    {
+      "source_id": "jt-Martha_Cockrell_(CNG-20251199)-EXTRA_WINDOW_ORDER-2026-07-16",
+      "source_type": "jobtread",
+      "confirm_key": "jt-task-22PazZ3XZmNa",
+      "original_date": "2026-07-16",
+      "date": "2026-07-16",
+      "moved": false,
+      "original_amount": null,
+      "amount_overridden": false,
+      "label": "EXTRA WINDOW ORDER",
+      "project": "Martha Cockrell (CNG-20251199)",
+      "kind": "project_out",
+      "amount": -127.71,
+      "category": "additional",
+      "paid": false,
+      "petty": true,
+      "confirmed": false,
+      "meta": {
+        "planning": false,
+        "taskId": "22PazZ3XZmNa",
+        "projectId": "22PGVNmUgLww",
+        "assignedTo": "Romina Rey, Milagros Porturas"
       },
       "running_balance": 44471.66,
       "running_balance_confirmed": 60796.86
@@ -38318,9 +38344,9 @@
         "outflow_confirmed": 58120.59,
         "net_confirmed": -47323.73,
         "closing_balance_confirmed": 2676.27,
-        "count": 66,
+        "count": 67,
         "count_confirmed": 25,
-        "petty_outflow": 1370.0
+        "petty_outflow": 1497.71
       },
       {
         "key": "2026-07-17",
@@ -40717,9 +40743,9 @@
         "outflow_confirmed": 78725.99,
         "net_confirmed": -32046.11,
         "closing_balance_confirmed": 17953.89,
-        "count": 104,
+        "count": 105,
         "count_confirmed": 38,
-        "petty_outflow": 1440.0
+        "petty_outflow": 1567.71
       },
       {
         "key": "2026-07-20",
@@ -41586,9 +41612,9 @@
         "outflow_confirmed": 93517.92,
         "net_confirmed": 20224.03,
         "closing_balance_confirmed": 70224.03,
-        "count": 217,
+        "count": 218,
         "count_confirmed": 54,
-        "petty_outflow": 1440.0
+        "petty_outflow": 1567.71
       },
       {
         "key": "2026-08",
@@ -44603,16 +44629,16 @@
           "start": "2026-07-16",
           "end": "2026-07-16",
           "inflow": 0,
-          "outflow": 17119.6,
-          "net": -17119.6,
+          "outflow": 17247.31,
+          "net": -17247.31,
           "closing_balance": -39165.53,
           "inflow_confirmed": 0,
           "outflow_confirmed": 2500.0,
           "net_confirmed": -2500.0,
           "closing_balance_confirmed": 18476.27,
-          "count": 5,
+          "count": 6,
           "count_confirmed": 1,
-          "petty_outflow": 0
+          "petty_outflow": 127.71
         },
         {
           "key": "2026-07-17",
@@ -48129,16 +48155,16 @@
           "start": "2026-07-13",
           "end": "2026-07-19",
           "inflow": 55187.28,
-          "outflow": 36619.6,
-          "net": 18567.68,
+          "outflow": 36747.31,
+          "net": 18439.97,
           "closing_balance": -20726.63,
           "inflow_confirmed": 0,
           "outflow_confirmed": 2500.0,
           "net_confirmed": -2500.0,
           "closing_balance_confirmed": 17953.89,
-          "count": 11,
+          "count": 12,
           "count_confirmed": 1,
-          "petty_outflow": 0
+          "petty_outflow": 127.71
         },
         {
           "key": "2026-07-20",
@@ -49513,16 +49539,16 @@
           "start": "2026-07-01",
           "end": "2026-07-31",
           "inflow": 55187.28,
-          "outflow": 64129.4,
-          "net": -8942.12,
+          "outflow": 64257.11,
+          "net": -9069.83,
           "closing_balance": -57139.96,
           "inflow_confirmed": 0,
           "outflow_confirmed": 2500.0,
           "net_confirmed": -2500.0,
           "closing_balance_confirmed": 70224.03,
-          "count": 19,
+          "count": 20,
           "count_confirmed": 1,
-          "petty_outflow": 0
+          "petty_outflow": 127.71
         },
         {
           "key": "2026-08",
@@ -50066,6 +50092,15 @@
       {
         "kind": "spend",
         "date": "2026-07-16",
+        "amount": -127.71,
+        "project": "Martha Cockrell (CNG-20251199)",
+        "label": "EXTRA WINDOW ORDER",
+        "task_id": "22PazZ3XZmNa",
+        "paid": false
+      },
+      {
+        "kind": "spend",
+        "date": "2026-07-16",
         "amount": -600.0,
         "project": "Stephanie and Marc Felton",
         "label": "INTERIOR PAINT: PURCHASE NEW PAINT",
@@ -50082,12 +50117,12 @@
         "paid": false
       }
     ],
-    "spend_count": 10,
+    "spend_count": 11,
     "assignment_count": 0,
     "skipped_zero_amount": 1,
-    "balance_today": -7379.17,
+    "balance_today": -7506.88,
     "assigned_todate": 0,
-    "spent_todate": 7379.17
+    "spent_todate": 7506.88
   },
   "misc_expense_log": [
     {
@@ -52109,12 +52144,38 @@
     },
     {
       "project": "Martha Cockrell (CNG-20251199)",
-      "net": -97759.48,
+      "net": -97887.19,
       "inflow": 132968.16,
-      "outflow": 230727.64,
+      "outflow": 230855.35,
       "overdue_in": 0.0,
       "overdue_out": 0.0,
       "events": [
+        {
+          "source_id": "jt-Martha_Cockrell_(CNG-20251199)-EXTRA_WINDOW_ORDER-2026-07-16",
+          "source_type": "jobtread",
+          "confirm_key": "jt-task-22PazZ3XZmNa",
+          "original_date": "2026-07-16",
+          "date": "2026-07-16",
+          "moved": false,
+          "original_amount": null,
+          "amount_overridden": false,
+          "label": "EXTRA WINDOW ORDER",
+          "project": "Martha Cockrell (CNG-20251199)",
+          "kind": "project_out",
+          "amount": -127.71,
+          "category": "additional",
+          "paid": false,
+          "petty": true,
+          "confirmed": false,
+          "meta": {
+            "planning": false,
+            "taskId": "22PazZ3XZmNa",
+            "projectId": "22PGVNmUgLww",
+            "assignedTo": "Romina Rey, Milagros Porturas"
+          },
+          "running_balance": 44471.66,
+          "running_balance_confirmed": 60796.86
+        },
         {
           "source_id": "jt-Martha_Cockrell_(CNG-20251199)-SIDING:_PURCHASE_MATERIALS-2026-07-16",
           "source_type": "jobtread",
@@ -53938,15 +53999,15 @@
       ],
       "is_planning": false,
       "planning_event_count": 0,
-      "event_count": 70,
+      "event_count": 71,
       "milestones": [
         {
           "date": "2026-07-17",
           "label": "AFTER MEPS",
           "payment": 55187.28,
-          "invest_before": 35619.6,
-          "cumulative_invest": 35619.6,
-          "net_after": 19567.68,
+          "invest_before": 35747.31,
+          "cumulative_invest": 35747.31,
+          "net_after": 19439.97,
           "trailing": false
         },
         {
@@ -53954,7 +54015,7 @@
           "label": "AFTER DRYWALL /SIDING",
           "payment": 44149.82,
           "invest_before": 87739.72,
-          "cumulative_invest": 123359.32,
+          "cumulative_invest": 123487.03,
           "net_after": -43589.9,
           "trailing": false
         },
@@ -53963,7 +54024,7 @@
           "label": "FINAL",
           "payment": 33631.06,
           "invest_before": 101464.32,
-          "cumulative_invest": 224823.64,
+          "cumulative_invest": 224951.35,
           "net_after": -67833.26,
           "trailing": false
         },
@@ -53972,7 +54033,7 @@
           "label": "Outflows after final payment (punch list / cleanup)",
           "payment": 0.0,
           "invest_before": 5904.0,
-          "cumulative_invest": 230727.64,
+          "cumulative_invest": 230855.35,
           "net_after": -5904.0,
           "trailing": true
         }
