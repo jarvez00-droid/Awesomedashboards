@@ -1,13 +1,13 @@
 {
- "generated_at": "2026-07-17T11:24:49",
+ "generated_at": "2026-07-17T11:48:19",
  "date": "2026-07-17",
  "window_start": "2026-07-17",
  "window_end": "2026-07-31",
  "summary": {
-  "tasks": 196,
+  "tasks": 197,
   "projects": 10,
-  "alerts": 9,
-  "overdue": 33,
+  "alerts": 10,
+  "overdue": 30,
   "to_purchase_amount": 98608.37
  },
  "alerts": [
@@ -38,6 +38,13 @@
    "task": "TRIM: PURCHASE MATERIAL",
    "due": "2026-07-18",
    "taskId": "22PaXKPT6tYG"
+  },
+  {
+   "project": "Kyle Aubry - Project 01",
+   "projectId": "22Nx8Uut2Qxs",
+   "task": "BACKSPLASH TILES: PURCHASE MATERIAL",
+   "due": "2026-07-20",
+   "taskId": "22Pb4wxe9m2x"
   },
   {
    "project": "Karim-Merchant",
@@ -513,53 +520,40 @@
    "id": "22Nx8Uut2Qxs",
    "name": "Kyle Aubry - Project 01",
    "counts": {
-    "tasks": 12,
-    "alerts": 2,
-    "overdue": 3
+    "tasks": 13,
+    "alerts": 3,
+    "overdue": 0
    },
-   "overdue": [
-    {
-     "name": "BASEBOARD AND TRIMS: SECURE PRICING",
-     "step": "pricing",
-     "icon": "💲",
-     "step_label": "Secure pricing",
-     "due": "2026-07-13",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpzaLRn7B",
-     "progress": 0
-    },
-    {
-     "name": "COUNTERTOPS: COMPLETE TAKEOFF",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-07-15",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpzaARCvn",
-     "progress": 0
-    },
-    {
-     "name": "COUNTERTOPS: SECURE PRICING",
-     "step": "pricing",
-     "icon": "💲",
-     "step_label": "Secure pricing",
-     "due": "2026-07-16",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpzaBXHES",
-     "progress": 0
-    }
-   ],
+   "overdue": [],
    "days": [
     {
      "date": "2026-07-17",
      "label": "Fri Jul 17",
      "tasks": [
+      {
+       "name": "BACKSPLASH TILES: SECURE PRICING",
+       "step": "pricing",
+       "icon": "💲",
+       "step_label": "Secure pricing",
+       "due": "2026-07-17",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22Pb4wvjqyd4",
+       "progress": 0
+      },
+      {
+       "name": "BACKSPLASH TILES: SECURE PRICING (Copy)",
+       "step": "pricing",
+       "icon": "💲",
+       "step_label": "Secure pricing",
+       "due": "2026-07-17",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22Pb4wxTQzyN",
+       "progress": 0
+      },
       {
        "name": "BASEBOARD AND TRIMS: PURCHASE MATERIAL",
        "step": "purchase",
@@ -573,27 +567,15 @@
        "progress": 0
       },
       {
-       "name": "CARPET:PURCHASE MATERIAL",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
+       "name": "COUNTERTOPS: SECURE PRICING",
+       "step": "pricing",
+       "icon": "💲",
+       "step_label": "Secure pricing",
        "due": "2026-07-17",
-       "amount": 1068.0,
+       "amount": null,
        "alert": false,
        "overdue": false,
-       "taskId": "22PadkjFSJip",
-       "progress": 0
-      },
-      {
-       "name": "COUNTERTOPS: PURCHASE MATERIAL",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-07-17",
-       "amount": 5314.4,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpzaC3mLr",
+       "taskId": "22PZpzaBXHES",
        "progress": 0
       },
       {
@@ -639,18 +621,6 @@
        "progress": 0
       },
       {
-       "name": "COUNTERTOPS: CONFIRM DELIVERY",
-       "step": "confirm",
-       "icon": "📦",
-       "step_label": "Confirm delivery",
-       "due": "2026-07-18",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpzaDGT4Z",
-       "progress": 0
-      },
-      {
        "name": "INTERIOR DOORS: CONFIRM DELIVERY",
        "step": "confirm",
        "icon": "📦",
@@ -665,15 +635,75 @@
      ]
     },
     {
-     "date": "2026-07-25",
-     "label": "Sat Jul 25",
+     "date": "2026-07-20",
+     "label": "Mon Jul 20",
+     "tasks": [
+      {
+       "name": "BACKSPLASH TILES: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-20",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22Pb4wxe9m2x",
+       "progress": 0
+      },
+      {
+       "name": "CARPET:PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-20",
+       "amount": 1068.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PadkjFSJip",
+       "progress": 0
+      },
+      {
+       "name": "COUNTERTOPS: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-20",
+       "amount": 5314.4,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpzaC3mLr",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-07-21",
+     "label": "Tue Jul 21",
+     "tasks": [
+      {
+       "name": "COUNTERTOPS: CONFIRM DELIVERY",
+       "step": "confirm",
+       "icon": "📦",
+       "step_label": "Confirm delivery",
+       "due": "2026-07-21",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpzaDGT4Z",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-07-28",
+     "label": "Tue Jul 28",
      "tasks": [
       {
        "name": "CARPET: ETA DELIVERY",
        "step": "other",
        "icon": "•",
        "step_label": "Purchases",
-       "due": "2026-07-25",
+       "due": "2026-07-28",
        "amount": null,
        "alert": false,
        "overdue": false,
