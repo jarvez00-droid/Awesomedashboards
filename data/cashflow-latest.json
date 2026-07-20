@@ -1,19 +1,19 @@
 {
   "date": "2026-07-20",
-  "generated_at": "2026-07-20T07:32:14.632773",
+  "generated_at": "2026-07-20T07:38:36.529701",
   "summary": {
     "total_payment_tasks": 805,
     "total_income": 599276.29,
     "total_p_income": 0,
     "total_outgoing": 572760.82,
     "total_net": 26515.47,
-    "pending_income": 1440600.24,
+    "pending_income": 1435600.24,
     "pending_p_income": 0,
-    "pending_outgoing": 1173558.59,
-    "paid_income": 509404.71,
+    "pending_outgoing": 1163908.59,
+    "paid_income": 514404.71,
     "paid_p_income": 0,
-    "paid_outgoing": 396847.3,
-    "unpaid_net": 267041.65,
+    "paid_outgoing": 406497.3,
+    "unpaid_net": 271691.65,
     "weeks_covered": 5
   },
   "weeks": [
@@ -29,9 +29,9 @@
       "additional": 890.46,
       "outgoing": 256580.48,
       "net": -4701.14,
-      "income_paid": 6507.65,
+      "income_paid": 11507.65,
       "p_income_paid": 0,
-      "outgoing_paid": 8377.71,
+      "outgoing_paid": 18027.71,
       "task_count": 143,
       "items": [
         {
@@ -120,7 +120,7 @@
           "type": "income",
           "amount": 5000.0,
           "due": "2026-07-20",
-          "paid": false
+          "paid": true
         },
         {
           "project": "Stephanie and Marc Felton",
@@ -168,15 +168,7 @@
           "type": "materials",
           "amount": 450.0,
           "due": "2026-07-20",
-          "paid": false
-        },
-        {
-          "project": "Kyle Aubry - Project 01",
-          "task": "COUNTERTOPS: PURCHASE MATERIAL",
-          "type": "materials",
-          "amount": 5314.4,
-          "due": "2026-07-20",
-          "paid": false
+          "paid": true
         },
         {
           "project": "Kyle Aubry - Project 01",
@@ -456,7 +448,7 @@
           "type": "subs",
           "amount": 9200.0,
           "due": "2026-07-20",
-          "paid": false
+          "paid": true
         },
         {
           "project": "Kyle Aubry - Project 01",
@@ -751,6 +743,14 @@
           "task": "DOORS AND WINDOWS: PURCHASE MATERIALS",
           "type": "materials",
           "amount": 0.0,
+          "due": "2026-07-22",
+          "paid": false
+        },
+        {
+          "project": "Kyle Aubry - Project 01",
+          "task": "COUNTERTOPS: PURCHASE MATERIAL",
+          "type": "materials",
+          "amount": 5314.4,
           "due": "2026-07-22",
           "paid": false
         },
@@ -1222,14 +1222,6 @@
           "paid": false
         },
         {
-          "project": "Kyle Aubry - Project 01",
-          "task": "COUNTERTOPS: BILL & PAYMENT",
-          "type": "subs",
-          "amount": 1820.0,
-          "due": "2026-07-27",
-          "paid": false
-        },
-        {
           "project": "Stephanie and Marc Felton",
           "task": "GLASS: BILL & PAYMENT",
           "type": "subs",
@@ -1258,6 +1250,14 @@
           "task": "BILL & PAYMENTS: CULVERTS",
           "type": "subs",
           "amount": 4000.0,
+          "due": "2026-07-28",
+          "paid": false
+        },
+        {
+          "project": "Kyle Aubry - Project 01",
+          "task": "COUNTERTOPS: BILL & PAYMENT",
+          "type": "subs",
+          "amount": 1820.0,
           "due": "2026-07-28",
           "paid": false
         },
@@ -6818,20 +6818,6 @@
     },
     {
       "project": "Kyle Aubry - Project 01",
-      "task": "COUNTERTOPS: PURCHASE MATERIAL",
-      "type": "materials",
-      "amount": 5314.4,
-      "due": "2026-07-20",
-      "paid": false,
-      "assignee": "COUNTERTOPS",
-      "assignedTo": "Romina Rey",
-      "taskId": "22PZpzaC3mLr",
-      "projectId": "22Nx8Uut2Qxs",
-      "planning": false,
-      "external": false
-    },
-    {
-      "project": "Kyle Aubry - Project 01",
       "task": "BASEBOARD AND TRIMS: PURCHASE MATERIAL",
       "type": "materials",
       "amount": 0.0,
@@ -7839,6 +7825,20 @@
       "external": false
     },
     {
+      "project": "Kyle Aubry - Project 01",
+      "task": "COUNTERTOPS: PURCHASE MATERIAL",
+      "type": "materials",
+      "amount": 5314.4,
+      "due": "2026-07-22",
+      "paid": false,
+      "assignee": "COUNTERTOPS",
+      "assignedTo": "Romina Rey",
+      "taskId": "22PZpzaC3mLr",
+      "projectId": "22Nx8Uut2Qxs",
+      "planning": false,
+      "external": false
+    },
+    {
       "project": "Lingyan Qiu (CNG2025-458)",
       "task": "DECKING: PURCHASE MATERIALS",
       "type": "materials",
@@ -8623,20 +8623,6 @@
       "external": false
     },
     {
-      "project": "Kyle Aubry - Project 01",
-      "task": "COUNTERTOPS: BILL & PAYMENT",
-      "type": "subs",
-      "amount": 1820.0,
-      "due": "2026-07-27",
-      "paid": false,
-      "assignee": "COUNTERTOPS",
-      "assignedTo": "",
-      "taskId": "22PZpzaHWkVR",
-      "projectId": "22Nx8Uut2Qxs",
-      "planning": false,
-      "external": false
-    },
-    {
       "project": "Stephanie and Marc Felton",
       "task": "GLASS: BILL & PAYMENT",
       "type": "subs",
@@ -8689,6 +8675,20 @@
       "assignedTo": "",
       "taskId": "22PZwjyYujCu",
       "projectId": "22PDc9569pUD",
+      "planning": false,
+      "external": false
+    },
+    {
+      "project": "Kyle Aubry - Project 01",
+      "task": "COUNTERTOPS: BILL & PAYMENT",
+      "type": "subs",
+      "amount": 1820.0,
+      "due": "2026-07-28",
+      "paid": false,
+      "assignee": "COUNTERTOPS",
+      "assignedTo": "",
+      "taskId": "22PZpzaHWkVR",
+      "projectId": "22Nx8Uut2Qxs",
       "planning": false,
       "external": false
     },
