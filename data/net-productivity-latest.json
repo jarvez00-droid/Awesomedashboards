@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T11:01:40",
+  "generated_at": "2026-07-20T13:00:44",
   "today": "2026-07-20",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -3343,10 +3343,10 @@
         {
           "trade": "FRAMING",
           "income": 111141.18,
-          "expense": 66863.97,
+          "expense": 67113.97,
           "grouped": true,
           "n_inc": 7,
-          "n_exp": 22
+          "n_exp": 23
         },
         {
           "trade": "DRYWALL",
@@ -3566,7 +3566,7 @@
         }
       ],
       "total_income": 560057.6,
-      "total_expense": 330351.95,
+      "total_expense": 330601.95,
       "loose_amount": 0
     },
     {
