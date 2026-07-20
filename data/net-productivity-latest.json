@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T07:53:09",
+  "generated_at": "2026-07-20T08:16:28",
   "today": "2026-07-20",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -676,17 +676,17 @@
       "label_moy": "ago S1",
       "label_short": "1 ago",
       "prod": [
-        53456.31,
-        45900.51
+        53315.91,
+        46009.24
       ],
       "fixed": 11045.26,
       "net": [
-        42411.05,
-        34855.25
+        42270.65,
+        34963.98
       ],
       "cum": [
-        156506.22,
-        109471.11
+        156365.82,
+        109579.84
       ],
       "active_count": 8,
       "active_projects": [
@@ -723,10 +723,6 @@
           16015.29,
           13105.4
         ],
-        "Lingyan Qiu": [
-          140.4,
-          -108.73
-        ],
         "Rohini Williams": [
           727.96,
           -333.57
@@ -745,23 +741,24 @@
       "label_moy": "ago S2",
       "label_short": "8 ago",
       "prod": [
-        34647.12,
-        27721.91
+        34787.52,
+        27613.18
       ],
       "fixed": 11045.26,
       "net": [
-        23601.86,
-        16676.65
+        23742.26,
+        16567.92
       ],
       "cum": [
         180108.08,
         126147.76
       ],
-      "active_count": 6,
+      "active_count": 7,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
         "Katie Holmes",
+        "Lingyan Qiu",
         "Martha Cockrell",
         "Rohini Williams",
         "Shaan Lagisetty"
@@ -785,6 +782,10 @@
         "Martha Cockrell": [
           7808.31,
           6055.47
+        ],
+        "Lingyan Qiu": [
+          140.4,
+          -108.73
         ],
         "Rohini Williams": [
           2391.93,
@@ -2488,7 +2489,7 @@
           6877.16,
           5764.36
         ],
-        "2026-W32": [
+        "2026-W33": [
           140.4,
           -108.73
         ]
@@ -2508,7 +2509,7 @@
         ]
       },
       "first_week": "2026-W23",
-      "last_week": "2026-W32"
+      "last_week": "2026-W33"
     },
     {
       "project": "Shaan Lagisetty",
