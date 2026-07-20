@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T07:06:42",
+  "generated_at": "2026-07-20T07:29:53",
   "today": "2026-07-20",
   "horizon": "2026-12-31",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -2712,7 +2712,7 @@
   ],
   "data_quality": {
     "orphan_trades": 42,
-    "orphan_cost": 280412.6,
+    "orphan_cost": 279734.6,
     "priced_trades": 174,
     "total_trades": 216,
     "by_project": [
@@ -2876,7 +2876,7 @@
       {
         "project": "Martha Cockrell",
         "orphan_trades": 2,
-        "orphan_cost": 2295.52,
+        "orphan_cost": 1617.52,
         "examples": [
           {
             "trade": "FRAMING",
@@ -2884,7 +2884,7 @@
           },
           {
             "trade": "DEMO",
-            "cost": 980.3
+            "cost": 302.3
           }
         ]
       },
@@ -3548,24 +3548,24 @@
           "n_exp": 2
         },
         {
-          "trade": "DEMO",
-          "income": 0.0,
-          "expense": 980.3,
-          "grouped": true,
-          "n_inc": 0,
-          "n_exp": 3
-        },
-        {
           "trade": "TRIMWORK",
           "income": 311.4,
           "expense": 168.16,
           "grouped": true,
           "n_inc": 1,
           "n_exp": 1
+        },
+        {
+          "trade": "DEMO",
+          "income": 0.0,
+          "expense": 302.3,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 3
         }
       ],
       "total_income": 560057.6,
-      "total_expense": 331029.95,
+      "total_expense": 330351.95,
       "loose_amount": 0
     },
     {
