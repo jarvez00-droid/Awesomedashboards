@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-20T16:02:16",
+ "generated_at": "2026-07-20T16:10:29",
  "today": "2026-07-20",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -86,8 +86,8 @@
   "runner_pct": 23.6,
   "ghost_pct": 70.1,
   "july_money": [
-   151384.53000000003,
-   124388.29000000001
+   151399.40000000002,
+   124400.83000000002
   ],
   "projects": 9,
   "daily": [
@@ -3241,7 +3241,7 @@
    "plan_days": 42.0,
    "city_inspections": 4,
    "gap": 40.9,
-   "status": "salvage",
+   "status": "behind",
    "status_scope": "current_week",
    "week": {
     "label": "Week 3 · Jul 20-26",
@@ -3254,35 +3254,10 @@
     "starts_due": 0,
     "starts_started": 0,
     "gap": 29.6,
-    "status": "salvage"
+    "status": "behind"
    },
-   "salvable": true,
-   "save_tasks": [
-    {
-     "name": "TILES: INSTALL TILES",
-     "due": "2026-07-25"
-    },
-    {
-     "name": "DECKING: INSTALL DECKING",
-     "due": "2026-07-24"
-    },
-    {
-     "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
-     "due": "2026-07-24"
-    },
-    {
-     "name": "KITCHEN : PLUMBING TRIM",
-     "due": "2026-07-23"
-    },
-    {
-     "name": "BASEBOARD & TRIM: INSTALL",
-     "due": "2026-07-23"
-    },
-    {
-     "name": "CARPENTRY: PREFAB CABINETS INSTALLATION",
-     "due": "2026-07-23"
-    }
-   ],
+   "salvable": false,
+   "save_tasks": [],
    "excluded_admin": [
     {
      "name": "PRE DELIVERY WALK THROUGH: PRE DELIVERY WALK THROUGH",
@@ -3427,28 +3402,6 @@
      "depends_on": []
     },
     {
-     "id": "22PZtcszppfU",
-     "name": "BASEBOARD & TRIM: INSTALL",
-     "baseline_end": "2026-07-14",
-     "live_end": "2026-07-23",
-     "current_end": "2026-07-23",
-     "current_start": "2026-07-22",
-     "moved_days": 9,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PZpKAP39Ee",
-     "name": "CARPENTRY: PREFAB CABINETS INSTALLATION",
-     "baseline_end": "2026-07-17",
-     "live_end": "2026-07-23",
-     "current_end": "2026-07-23",
-     "current_start": "2026-07-22",
-     "moved_days": 6,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PZpK8ZfFq8",
      "name": "KITCHEN : PLUMBING TRIM",
      "baseline_end": "2026-07-11",
@@ -3460,13 +3413,24 @@
      "depends_on": []
     },
     {
-     "id": "22PZpKBJ8jsh",
-     "name": "DECKING: INSTALL DECKING",
-     "baseline_end": "2026-07-21",
+     "id": "22PZtcszppfU",
+     "name": "BASEBOARD & TRIM: INSTALL",
+     "baseline_end": "2026-07-14",
      "live_end": "2026-07-24",
      "current_end": "2026-07-24",
      "current_start": "2026-07-23",
-     "moved_days": 3,
+     "moved_days": 10,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKAP39Ee",
+     "name": "CARPENTRY: PREFAB CABINETS INSTALLATION",
+     "baseline_end": "2026-07-17",
+     "live_end": "2026-07-24",
+     "current_end": "2026-07-24",
+     "current_start": "2026-07-23",
+     "moved_days": 7,
      "status": "moved",
      "depends_on": []
     },
@@ -3474,10 +3438,10 @@
      "id": "22PZpKBTvVsa",
      "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
      "baseline_end": "2026-07-13",
-     "live_end": "2026-07-24",
-     "current_end": "2026-07-24",
-     "current_start": "2026-07-22",
-     "moved_days": 11,
+     "live_end": "2026-07-25",
+     "current_end": "2026-07-25",
+     "current_start": "2026-07-23",
+     "moved_days": 12,
      "status": "moved",
      "depends_on": []
     },
@@ -3522,6 +3486,17 @@
      "current_end": "2026-07-29",
      "current_start": "2026-07-27",
      "moved_days": 6,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKBJ8jsh",
+     "name": "DECKING: INSTALL DECKING",
+     "baseline_end": "2026-07-21",
+     "live_end": "2026-07-30",
+     "current_end": "2026-07-30",
+     "current_start": "2026-07-29",
+     "moved_days": 9,
      "status": "moved",
      "depends_on": []
     },
@@ -3593,8 +3568,8 @@
     }
    ],
    "july_money": [
-    25206.07,
-    21973.26
+    25220.94,
+    21985.8
    ],
    "margin_pct": 41.8,
    "moved_count": 27,
@@ -3663,17 +3638,17 @@
      "days": 12
     },
     {
+     "id": "22PZpKBTvVsa",
+     "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
+     "from": "2026-07-13",
+     "to": "2026-07-25",
+     "days": 12
+    },
+    {
      "id": "22PZpK7c8LMA",
      "name": "KITCHEN: INSTALL PULLS",
      "from": "2026-07-09",
      "to": "2026-07-20",
-     "days": 11
-    },
-    {
-     "id": "22PZpKBTvVsa",
-     "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
-     "from": "2026-07-13",
-     "to": "2026-07-24",
      "days": 11
     },
     {
@@ -3684,6 +3659,13 @@
      "days": 11
     },
     {
+     "id": "22PZtcszppfU",
+     "name": "BASEBOARD & TRIM: INSTALL",
+     "from": "2026-07-14",
+     "to": "2026-07-24",
+     "days": 10
+    },
+    {
      "id": "22PaBiJWyriu",
      "name": "KITCHEN ELECTRICAL TRIM: INSTALL",
      "from": "2026-07-11",
@@ -3691,10 +3673,10 @@
      "days": 10
     },
     {
-     "id": "22PZtcszppfU",
-     "name": "BASEBOARD & TRIM: INSTALL",
-     "from": "2026-07-14",
-     "to": "2026-07-23",
+     "id": "22PZpKBJ8jsh",
+     "name": "DECKING: INSTALL DECKING",
+     "from": "2026-07-21",
+     "to": "2026-07-30",
      "days": 9
     },
     {
@@ -3719,6 +3701,13 @@
      "days": 8
     },
     {
+     "id": "22PZpKAP39Ee",
+     "name": "CARPENTRY: PREFAB CABINETS INSTALLATION",
+     "from": "2026-07-17",
+     "to": "2026-07-24",
+     "days": 7
+    },
+    {
      "id": "22PZpKCZ56D8",
      "name": "FINAL PUNCH LIST: FINISHES AND TOUCH UPS",
      "from": "2026-07-23",
@@ -3730,13 +3719,6 @@
      "name": "KITCHEN FLOOR: FLOOR INSTALLATION",
      "from": "2026-07-10",
      "to": "2026-07-16",
-     "days": 6
-    },
-    {
-     "id": "22PZpKAP39Ee",
-     "name": "CARPENTRY: PREFAB CABINETS INSTALLATION",
-     "from": "2026-07-17",
-     "to": "2026-07-23",
      "days": 6
     },
     {
@@ -3763,13 +3745,6 @@
     {
      "id": "22PZpKAjKvg8",
      "name": "PLUMBING: CITY INSPECTION",
-     "from": "2026-07-24",
-     "to": "2026-07-30",
-     "days": 6
-    },
-    {
-     "id": "22PZpKAvmiDj",
-     "name": "ELECTRICAL: CITY INSPECTION",
      "from": "2026-07-24",
      "to": "2026-07-30",
      "days": 6
@@ -4036,9 +4011,9 @@
        "marker": null,
        "baseline_start": "2026-07-13",
        "baseline_end": "2026-07-13",
-       "live_start": "2026-07-22",
-       "live_end": "2026-07-24",
-       "moved_days": 11,
+       "live_start": "2026-07-23",
+       "live_end": "2026-07-25",
+       "moved_days": 12,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -4056,9 +4031,9 @@
        "marker": null,
        "baseline_start": "2026-07-14",
        "baseline_end": "2026-07-14",
-       "live_start": "2026-07-22",
-       "live_end": "2026-07-23",
-       "moved_days": 9,
+       "live_start": "2026-07-23",
+       "live_end": "2026-07-24",
+       "moved_days": 10,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -4118,9 +4093,9 @@
        "marker": null,
        "baseline_start": "2026-07-16",
        "baseline_end": "2026-07-17",
-       "live_start": "2026-07-22",
-       "live_end": "2026-07-23",
-       "moved_days": 6,
+       "live_start": "2026-07-23",
+       "live_end": "2026-07-24",
+       "moved_days": 7,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "started": false,
@@ -4179,9 +4154,9 @@
        "marker": "start",
        "baseline_start": "2026-07-18",
        "baseline_end": "2026-07-21",
-       "live_start": "2026-07-23",
-       "live_end": "2026-07-24",
-       "moved_days": 3,
+       "live_start": "2026-07-29",
+       "live_end": "2026-07-30",
+       "moved_days": 9,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "started": false,
@@ -4405,14 +4380,14 @@
        "baseline_start": "2026-07-21",
        "baseline_end": "2026-07-21",
        "live_start": "2026-07-21",
-       "live_end": "2026-07-21",
-       "moved_days": 0,
+       "live_end": "2026-07-22",
+       "moved_days": 1,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "days_due_in_week": 0,
        "started": false,
        "progress": 0,
-       "status": "pending",
+       "status": "moved",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -4530,15 +4505,15 @@
        "marker": null,
        "baseline_start": "2026-07-22",
        "baseline_end": "2026-07-23",
-       "live_start": "2026-07-22",
-       "live_end": "2026-07-23",
-       "moved_days": 0,
+       "live_start": "2026-07-23",
+       "live_end": "2026-07-24",
+       "moved_days": 1,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "days_due_in_week": 0,
        "started": false,
        "progress": 0,
-       "status": "pending",
+       "status": "moved",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -4551,15 +4526,15 @@
        "marker": null,
        "baseline_start": "2026-07-22",
        "baseline_end": "2026-07-23",
-       "live_start": "2026-07-22",
-       "live_end": "2026-07-23",
-       "moved_days": 0,
+       "live_start": "2026-07-23",
+       "live_end": "2026-07-24",
+       "moved_days": 1,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "days_due_in_week": 0,
        "started": false,
        "progress": 0,
-       "status": "pending",
+       "status": "moved",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -4572,17 +4547,17 @@
        "marker": null,
        "baseline_start": "2026-07-23",
        "baseline_end": "2026-07-24",
-       "live_start": "2026-07-23",
-       "live_end": "2026-07-24",
-       "moved_days": 0,
+       "live_start": "2026-07-29",
+       "live_end": "2026-07-30",
+       "moved_days": 6,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "days_due_in_week": 0,
        "started": false,
        "progress": 0,
-       "status": "pending",
+       "status": "moved",
        "in_week_plan": true,
-       "kicked_out": false,
+       "kicked_out": true,
        "pulled_in": false,
        "was": null
       },
@@ -4593,15 +4568,15 @@
        "marker": null,
        "baseline_start": "2026-07-22",
        "baseline_end": "2026-07-24",
-       "live_start": "2026-07-22",
-       "live_end": "2026-07-24",
-       "moved_days": 0,
+       "live_start": "2026-07-23",
+       "live_end": "2026-07-25",
+       "moved_days": 1,
        "days_in_week": 3,
        "earned_in_week": 0.0,
        "days_due_in_week": 0,
        "started": false,
        "progress": 0,
-       "status": "pending",
+       "status": "moved",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -4729,6 +4704,27 @@
        "pulled_in": false,
        "lands_here": true,
        "was": "2026-07-23"
+      },
+      {
+       "id": "22PZpKBJ8jsh",
+       "name": "DECKING: INSTALL DECKING",
+       "type": "CP",
+       "marker": null,
+       "baseline_start": "2026-07-18",
+       "baseline_end": "2026-07-21",
+       "live_start": "2026-07-29",
+       "live_end": "2026-07-30",
+       "moved_days": 9,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-21"
       },
       {
        "id": "22PZpKAvmiDj",
