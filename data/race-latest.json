@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-19T07:52:50",
+ "generated_at": "2026-07-19T21:00:42",
  "today": "2026-07-19",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -8,7 +8,7 @@
  "tolerance_today": 10.0,
  "anchors": {
   "monthly": "baseline-2026-07-06",
-  "weekly": "baseline-2026-07-17",
+  "weekly": "baseline-2026-07-20",
   "note": "DOBLE ANCLA v8: meta mensual + dias-trabajados + cascada CP ancladas al baseline del MES; el plan/alertas (kicked/pulled/salvage) de la SEMANA EN CURSO usan el baseline SEMANAL mas reciente (snapshot domingo 21:00, plist ai.openclaw.sunday-baseline). Tras el reset dominical una pateada deja de ser alerta: su nueva fecha ES el plan de la semana."
  },
  "week_sundays": [
@@ -72,12 +72,12 @@
   "gap": 33.0,
   "status": "behind",
   "week": {
-   "days_planned": 96.0,
+   "days_planned": 94.0,
    "days_earned": 49.0,
-   "days_due": 96.0,
+   "days_due": 94.0,
    "starts_due": 0,
    "starts_started": 0,
-   "gap": 49.0,
+   "gap": 47.9,
    "status": "behind"
   },
   "total_target": 174,
@@ -5735,23 +5735,48 @@
    "plan_days": 47.0,
    "city_inspections": 3,
    "gap": 34.6,
-   "status": "behind",
+   "status": "salvage",
    "status_scope": "current_week",
    "week": {
     "label": "Week 2 · Jul 13-19",
     "week_start": "2026-07-13",
     "deadline": "2026-07-19",
-    "days_planned": 16.0,
+    "days_planned": 15.0,
     "days_earned": 7.0,
-    "days_due": 16.0,
+    "days_due": 15.0,
     "starts_required": 0,
     "starts_due": 0,
     "starts_started": 0,
-    "gap": 56.2,
-    "status": "behind"
+    "gap": 53.3,
+    "status": "salvage"
    },
-   "salvable": false,
-   "save_tasks": [],
+   "salvable": true,
+   "save_tasks": [
+    {
+     "name": "INTERIOR PAINT: FIRST FLOOR CORRECTIONS",
+     "due": "2026-07-17"
+    },
+    {
+     "name": "MECHANICAL: CITY INSPECTION",
+     "due": "2026-07-17"
+    },
+    {
+     "name": "PAINTING: CABINET PAINT",
+     "due": "2026-07-17"
+    },
+    {
+     "name": "PLUMBING: CITY INSPECTION",
+     "due": "2026-07-17"
+    },
+    {
+     "name": "FIX WATER LINES",
+     "due": "2026-07-16"
+    },
+    {
+     "name": "MECHANICAL: INSTALL MECHANICAL TRIM",
+     "due": "2026-07-16"
+    }
+   ],
    "excluded_admin": [],
    "month_forecast": {
     "status": "behind",
@@ -6332,16 +6357,16 @@
      "week_start": "2026-07-13",
      "deadline": "2026-07-19",
      "is_current": true,
-     "total": 9,
+     "total": 8,
      "done": 0,
-     "days_planned": 16.0,
+     "days_planned": 15.0,
      "days_earned": 7.0,
-     "days_due": 16.0,
-     "pct": 43.8,
-     "target_task": "ELECTRICAL: INSTALL ELECTRICAL TRIM (INCLUDING GATE & TRENCH)",
-     "target_type": "CP",
+     "days_due": 15.0,
+     "pct": 46.7,
+     "target_task": "PLUMBING: CITY INSPECTION",
+     "target_type": "CI",
      "target_marker": null,
-     "target_due": "2026-07-18",
+     "target_due": "2026-07-17",
      "tasks": [
       {
        "id": "22PaV8PbfeQF",
@@ -6508,27 +6533,6 @@
        "status": "pending",
        "in_week_plan": true,
        "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PJWeDkzh6i",
-       "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM (INCLUDING GATE & TRENCH)",
-       "type": "CP",
-       "marker": null,
-       "baseline_start": "2026-07-18",
-       "baseline_end": "2026-07-18",
-       "live_start": "2026-07-20",
-       "live_end": "2026-07-20",
-       "moved_days": 2,
-       "days_in_week": 1,
-       "earned_in_week": 0.0,
-       "days_due_in_week": 1,
-       "started": false,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": true,
        "pulled_in": false,
        "was": null
       }
@@ -8064,23 +8068,28 @@
    "plan_days": 48.0,
    "city_inspections": 7,
    "gap": 30.2,
-   "status": "behind",
+   "status": "salvage",
    "status_scope": "current_week",
    "week": {
     "label": "Week 2 · Jul 13-19",
     "week_start": "2026-07-13",
     "deadline": "2026-07-19",
-    "days_planned": 2.0,
+    "days_planned": 1.0,
     "days_earned": 0.0,
-    "days_due": 2.0,
+    "days_due": 1.0,
     "starts_required": 0,
     "starts_due": 0,
     "starts_started": 0,
     "gap": 100.0,
-    "status": "behind"
+    "status": "salvage"
    },
-   "salvable": false,
-   "save_tasks": [],
+   "salvable": true,
+   "save_tasks": [
+    {
+     "name": "FRAMING: REFRAME STAIRS",
+     "due": "2026-07-16"
+    }
+   ],
    "excluded_admin": [],
    "month_forecast": {
     "status": "at_risk",
@@ -8590,16 +8599,16 @@
      "week_start": "2026-07-13",
      "deadline": "2026-07-19",
      "is_current": true,
-     "total": 2,
+     "total": 1,
      "done": 0,
-     "days_planned": 2.0,
+     "days_planned": 1.0,
      "days_earned": 0.0,
-     "days_due": 2.0,
+     "days_due": 1.0,
      "pct": 0.0,
-     "target_task": "MECHANICAL ROUGH IN: MECHANICAL ROUGH IN",
+     "target_task": "FRAMING: REFRAME STAIRS",
      "target_type": "CP",
      "target_marker": null,
-     "target_due": "2026-07-18",
+     "target_due": "2026-07-16",
      "tasks": [
       {
        "id": "22PaxEuFngcf",
@@ -8619,27 +8628,6 @@
        "status": "pending",
        "in_week_plan": true,
        "kicked_out": false,
-       "pulled_in": false,
-       "was": null
-      },
-      {
-       "id": "22PZpJf989Tu",
-       "name": "MECHANICAL ROUGH IN: MECHANICAL ROUGH IN",
-       "type": "CP",
-       "marker": null,
-       "baseline_start": "2026-07-18",
-       "baseline_end": "2026-07-18",
-       "live_start": "2026-07-20",
-       "live_end": "2026-07-20",
-       "moved_days": 2,
-       "days_in_week": 1,
-       "earned_in_week": 0.0,
-       "days_due_in_week": 1,
-       "started": false,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": true,
-       "kicked_out": true,
        "pulled_in": false,
        "was": null
       }
