@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-20T05:57:15",
+ "generated_at": "2026-07-20T06:20:23",
  "date": "2026-07-20",
  "window_start": "2026-07-20",
  "window_end": "2026-08-03",
@@ -7,7 +7,7 @@
   "tasks": 202,
   "projects": 10,
   "alerts": 9,
-  "overdue": 54,
+  "overdue": 41,
   "to_purchase_amount": 113554.37
  },
  "alerts": [
@@ -15,15 +15,8 @@
    "project": "Kyle Aubry - Project 01",
    "projectId": "22Nx8Uut2Qxs",
    "task": "BASEBOARD AND TRIMS: PURCHASE MATERIAL",
-   "due": "2026-07-19",
+   "due": "2026-07-20",
    "taskId": "22PZpzaM6GXi"
-  },
-  {
-   "project": "Katie Holmes & Sean Springs",
-   "projectId": "22P2j3sQMKqz",
-   "task": "MSI TILES: PURCHASE MATERIAL",
-   "due": "2026-07-19",
-   "taskId": "22Pae4Tc4xJi"
   },
   {
    "project": "Kyle Aubry - Project 01",
@@ -33,10 +26,17 @@
    "taskId": "22Pb4wxe9m2x"
   },
   {
+   "project": "Katie Holmes & Sean Springs",
+   "projectId": "22P2j3sQMKqz",
+   "task": "MSI TILES: PURCHASE MATERIAL",
+   "due": "2026-07-20",
+   "taskId": "22Pae4Tc4xJi"
+  },
+  {
    "project": "Lingyan Qiu (CNG2025-458)",
    "projectId": "22PK9BhEJtZn",
    "task": "TRIM: PURCHASE MATERIAL",
-   "due": "2026-07-20",
+   "due": "2026-07-21",
    "taskId": "22PaXKPT6tYG"
   },
   {
@@ -82,7 +82,7 @@
    "counts": {
     "tasks": 33,
     "alerts": 4,
-    "overdue": 11
+    "overdue": 8
    },
    "overdue": [
     {
@@ -180,42 +180,6 @@
      "overdue": true,
      "taskId": "22Pa9K39yBKW",
      "progress": 0
-    },
-    {
-     "name": "FLOORING: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-19",
-     "amount": 9539.88,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzzrigRw7",
-     "progress": 0
-    },
-    {
-     "name": "TILES: PURCHASE MATERIALS - ARIZONA TILES",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-19",
-     "amount": 1213.22,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzzrpPVSH",
-     "progress": 0
-    },
-    {
-     "name": "MSI TILES: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-19",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22Pae4Tc4xJi",
-     "progress": 0
     }
    ],
    "days": [
@@ -223,6 +187,18 @@
      "date": "2026-07-20",
      "label": "Mon Jul 20",
      "tasks": [
+      {
+       "name": "FLOORING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-20",
+       "amount": 9539.88,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzzrigRw7",
+       "progress": 0
+      },
       {
        "name": "INTERIOR PAINT: PURCHASE MATERIALS",
        "step": "purchase",
@@ -233,6 +209,30 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZzzrdXxp9",
+       "progress": 0
+      },
+      {
+       "name": "MSI TILES: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-20",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22Pae4Tc4xJi",
+       "progress": 0
+      },
+      {
+       "name": "TILES: PURCHASE MATERIALS - ARIZONA TILES",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-20",
+       "amount": 1213.22,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzzrpPVSH",
        "progress": 0
       }
      ]
@@ -260,18 +260,6 @@
      "label": "Wed Jul 22",
      "tasks": [
       {
-       "name": "ARIZONA TILES: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-07-22",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PatA5BCQkr",
-       "progress": 0
-      },
-      {
        "name": "COUNTERTOPS: TAKEOFF",
        "step": "takeoff",
        "icon": "📋",
@@ -289,6 +277,18 @@
      "date": "2026-07-23",
      "label": "Thu Jul 23",
      "tasks": [
+      {
+       "name": "ARIZONA TILES: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-07-23",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PatA5BCQkr",
+       "progress": 0
+      },
       {
        "name": "BASEBOARDS AND TRIMS: DELIVERY ETA",
        "step": "eta",
@@ -366,18 +366,6 @@
        "overdue": false,
        "taskId": "22Pa9NBZEcQi",
        "progress": 0
-      },
-      {
-       "name": "MSI TILES: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-07-24",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22Pat9isGVci",
-       "progress": 0
       }
      ]
     },
@@ -386,7 +374,7 @@
      "label": "Sat Jul 25",
      "tasks": [
       {
-       "name": "FLOORING: DELIVERY ETA",
+       "name": "MSI TILES: DELIVERY ETA",
        "step": "eta",
        "icon": "🚚",
        "step_label": "Delivery ETA",
@@ -394,7 +382,7 @@
        "amount": null,
        "alert": false,
        "overdue": false,
-       "taskId": "22Pa9KWxUXy3",
+       "taskId": "22Pat9isGVci",
        "progress": 0
       }
      ]
@@ -413,6 +401,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZzzs4smWN",
+       "progress": 0
+      },
+      {
+       "name": "FLOORING: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-07-27",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22Pa9KWxUXy3",
        "progress": 0
       },
       {
@@ -551,7 +551,7 @@
    "counts": {
     "tasks": 12,
     "alerts": 2,
-    "overdue": 4
+    "overdue": 2
    },
    "overdue": [
     {
@@ -576,30 +576,6 @@
      "alert": false,
      "overdue": true,
      "taskId": "22Pb4wvjqyd4",
-     "progress": 0
-    },
-    {
-     "name": "INTERIOR DOORS: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-19",
-     "amount": 450.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpza3Tu5P",
-     "progress": 0
-    },
-    {
-     "name": "BASEBOARD AND TRIMS: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-19",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PZpzaM6GXi",
      "progress": 0
     }
    ],
@@ -633,15 +609,15 @@
        "progress": 0
       },
       {
-       "name": "BASEBOARD AND TRIMS: CONFIRM DELIVERY",
-       "step": "confirm",
-       "icon": "📦",
-       "step_label": "Confirm delivery",
+       "name": "BASEBOARD AND TRIMS: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
        "due": "2026-07-20",
        "amount": null,
-       "alert": false,
+       "alert": true,
        "overdue": false,
-       "taskId": "22PZpzaMdNbc",
+       "taskId": "22PZpzaM6GXi",
        "progress": 0
       },
       {
@@ -669,15 +645,15 @@
        "progress": 0
       },
       {
-       "name": "INTERIOR DOORS: CONFIRM DELIVERY",
-       "step": "confirm",
-       "icon": "📦",
-       "step_label": "Confirm delivery",
+       "name": "INTERIOR DOORS: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
        "due": "2026-07-20",
-       "amount": null,
+       "amount": 450.0,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZpza3vieD",
+       "taskId": "22PZpza3Tu5P",
        "progress": 0
       }
      ]
@@ -686,6 +662,18 @@
      "date": "2026-07-21",
      "label": "Tue Jul 21",
      "tasks": [
+      {
+       "name": "BASEBOARD AND TRIMS: CONFIRM DELIVERY",
+       "step": "confirm",
+       "icon": "📦",
+       "step_label": "Confirm delivery",
+       "due": "2026-07-21",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpzaMdNbc",
+       "progress": 0
+      },
       {
        "name": "COUNTERTOPS: CONFIRM DELIVERY",
        "step": "confirm",
@@ -696,6 +684,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpzaDGT4Z",
+       "progress": 0
+      },
+      {
+       "name": "INTERIOR DOORS: CONFIRM DELIVERY",
+       "step": "confirm",
+       "icon": "📦",
+       "step_label": "Confirm delivery",
+       "due": "2026-07-21",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpza3vieD",
        "progress": 0
       }
      ]
@@ -726,7 +726,7 @@
    "counts": {
     "tasks": 28,
     "alerts": 1,
-    "overdue": 14
+    "overdue": 8
    },
    "overdue": [
     {
@@ -824,78 +824,6 @@
      "overdue": true,
      "taskId": "22PZpKBPnCFm",
      "progress": 0
-    },
-    {
-     "name": "BRICKS & EXTERIOR SHEATING: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-19",
-     "amount": 3550.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpKBxJJ65",
-     "progress": 0
-    },
-    {
-     "name": "BASEBOARD: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-19",
-     "amount": 453.99,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZtcgUhjnK",
-     "progress": 0
-    },
-    {
-     "name": "PLUMBING TRIM: MATERIALS (bathroom 2)",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-07-19",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PaBhjRZ2fx",
-     "progress": 0
-    },
-    {
-     "name": "GROUT: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-19",
-     "amount": 70.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PaBj6Ysnu7",
-     "progress": 0
-    },
-    {
-     "name": "PLUMBING TRIM: MATERIALS (guest bathroom)",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-07-19",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PaBjzW9Znu",
-     "progress": 0
-    },
-    {
-     "name": "PLUMBING TRIM: MATERIALS (addition master bathroom)",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-07-19",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PaBk49U88s",
-     "progress": 0
     }
    ],
    "days": [
@@ -904,15 +832,27 @@
      "label": "Mon Jul 20",
      "tasks": [
       {
-       "name": "BASEBOARD & TRIM: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
+       "name": "BASEBOARD: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
        "due": "2026-07-20",
-       "amount": null,
+       "amount": 453.99,
        "alert": false,
        "overdue": false,
-       "taskId": "22Pa9TMj9dia",
+       "taskId": "22PZtcgUhjnK",
+       "progress": 0
+      },
+      {
+       "name": "BRICKS & EXTERIOR SHEATING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-20",
+       "amount": 3550.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpKBxJJ65",
        "progress": 0
       },
       {
@@ -925,6 +865,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpKAfBj7Q",
+       "progress": 0
+      },
+      {
+       "name": "GROUT: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-20",
+       "amount": 70.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PaBj6Ysnu7",
        "progress": 0
       },
       {
@@ -964,27 +916,39 @@
        "progress": 0
       },
       {
-       "name": "PLUMBING TRIM: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
+       "name": "PLUMBING TRIM: MATERIALS (addition master bathroom)",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
        "due": "2026-07-20",
        "amount": null,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZpKAsHpms",
+       "taskId": "22PaBk49U88s",
        "progress": 0
       },
       {
-       "name": "TRIM: PURCHASE MATERIAL",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
+       "name": "PLUMBING TRIM: MATERIALS (bathroom 2)",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
        "due": "2026-07-20",
        "amount": null,
-       "alert": true,
+       "alert": false,
        "overdue": false,
-       "taskId": "22PaXKPT6tYG",
+       "taskId": "22PaBhjRZ2fx",
+       "progress": 0
+      },
+      {
+       "name": "PLUMBING TRIM: MATERIALS (guest bathroom)",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-07-20",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PaBjzW9Znu",
        "progress": 0
       }
      ]
@@ -993,6 +957,18 @@
      "date": "2026-07-21",
      "label": "Tue Jul 21",
      "tasks": [
+      {
+       "name": "BASEBOARD & TRIM: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-07-21",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22Pa9TMj9dia",
+       "progress": 0
+      },
       {
        "name": "GLASS: DELIVERY ETA",
        "step": "eta",
@@ -1027,6 +1003,30 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpKBayYax",
+       "progress": 0
+      },
+      {
+       "name": "PLUMBING TRIM: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-07-21",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpKAsHpms",
+       "progress": 0
+      },
+      {
+       "name": "TRIM: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-21",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PaXKPT6tYG",
        "progress": 0
       }
      ]
@@ -1080,15 +1080,15 @@
      ]
     },
     {
-     "date": "2026-07-30",
-     "label": "Thu Jul 30",
+     "date": "2026-07-31",
+     "label": "Fri Jul 31",
      "tasks": [
       {
        "name": "BRICKS & EXTERIOR SHEATING: DELIVERY ETA",
        "step": "eta",
        "icon": "🚚",
        "step_label": "Delivery ETA",
-       "due": "2026-07-30",
+       "due": "2026-07-31",
        "amount": null,
        "alert": false,
        "overdue": false,
@@ -1448,15 +1448,15 @@
    ],
    "days": [
     {
-     "date": "2026-07-24",
-     "label": "Fri Jul 24",
+     "date": "2026-07-25",
+     "label": "Sat Jul 25",
      "tasks": [
       {
        "name": "INTERIOR PAINT: CONCRETE LOOK PAINT DELIVERY ETA",
        "step": "eta",
        "icon": "🚚",
        "step_label": "Delivery ETA",
-       "due": "2026-07-24",
+       "due": "2026-07-25",
        "amount": null,
        "alert": false,
        "overdue": false,
@@ -1563,7 +1563,7 @@
    "counts": {
     "tasks": 34,
     "alerts": 0,
-    "overdue": 13
+    "overdue": 11
    },
    "overdue": [
     {
@@ -1697,30 +1697,6 @@
      "overdue": true,
      "taskId": "22PaUXLepDEs",
      "progress": 0
-    },
-    {
-     "name": "SIDING: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-19",
-     "amount": 10929.6,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzWVL3SUx",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-19",
-     "amount": 8000.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PaUXFPyP5w",
-     "progress": 0
     }
    ],
    "days": [
@@ -1777,15 +1753,27 @@
        "progress": 0
       },
       {
-       "name": "SIDING: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
+       "name": "ROOFING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
        "due": "2026-07-20",
-       "amount": null,
+       "amount": 8000.0,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZzWVLYgVg",
+       "taskId": "22PaUXFPyP5w",
+       "progress": 0
+      },
+      {
+       "name": "SIDING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-07-20",
+       "amount": 10929.6,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzWVL3SUx",
        "progress": 0
       }
      ]
@@ -1816,6 +1804,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZzWfFVK87",
+       "progress": 0
+      },
+      {
+       "name": "SIDING: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-07-21",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzWVLYgVg",
        "progress": 0
       }
      ]
