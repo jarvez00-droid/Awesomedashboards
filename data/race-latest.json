@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-20T20:31:23",
+ "generated_at": "2026-07-20T20:55:32",
  "today": "2026-07-20",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -2124,17 +2124,6 @@
      "depends_on": []
     },
     {
-     "id": "22PZpKBTvVsa",
-     "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
-     "baseline_end": "2026-07-13",
-     "live_end": "2026-07-25",
-     "current_end": "2026-07-25",
-     "current_start": "2026-07-23",
-     "moved_days": 12,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PZpK9rGkCL",
      "name": "TILES: INSTALL TILES",
      "baseline_end": "2026-07-10",
@@ -2142,6 +2131,17 @@
      "current_end": "2026-07-25",
      "current_start": "2026-07-21",
      "moved_days": 15,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKBTvVsa",
+     "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
+     "baseline_end": "2026-07-13",
+     "live_end": "2026-07-27",
+     "current_end": "2026-07-27",
+     "current_start": "2026-07-24",
+     "moved_days": 14,
      "status": "moved",
      "depends_on": []
     },
@@ -2313,6 +2313,13 @@
      "days": 15
     },
     {
+     "id": "22PZpKBTvVsa",
+     "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
+     "from": "2026-07-13",
+     "to": "2026-07-27",
+     "days": 14
+    },
+    {
      "id": "22PZpK8MBkUP",
      "name": "KITCHEN TILES: BACKSPLASH INSTALLATION",
      "from": "2026-07-09",
@@ -2324,13 +2331,6 @@
      "name": "KITCHEN : PLUMBING TRIM",
      "from": "2026-07-11",
      "to": "2026-07-23",
-     "days": 12
-    },
-    {
-     "id": "22PZpKBTvVsa",
-     "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
-     "from": "2026-07-13",
-     "to": "2026-07-25",
      "days": 12
     },
     {
@@ -2700,9 +2700,9 @@
        "marker": null,
        "baseline_start": "2026-07-13",
        "baseline_end": "2026-07-13",
-       "live_start": "2026-07-23",
-       "live_end": "2026-07-25",
-       "moved_days": 12,
+       "live_start": "2026-07-24",
+       "live_end": "2026-07-27",
+       "moved_days": 14,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -3068,9 +3068,9 @@
        "marker": null,
        "baseline_start": "2026-07-21",
        "baseline_end": "2026-07-21",
-       "live_start": "2026-07-21",
-       "live_end": "2026-07-22",
-       "moved_days": 1,
+       "live_start": "2026-07-22",
+       "live_end": "2026-07-23",
+       "moved_days": 2,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "days_due_in_week": 0,
@@ -3257,9 +3257,9 @@
        "marker": null,
        "baseline_start": "2026-07-22",
        "baseline_end": "2026-07-24",
-       "live_start": "2026-07-23",
-       "live_end": "2026-07-25",
-       "moved_days": 1,
+       "live_start": "2026-07-24",
+       "live_end": "2026-07-27",
+       "moved_days": 3,
        "days_in_week": 3,
        "earned_in_week": 0.0,
        "days_due_in_week": 0,
@@ -3267,7 +3267,7 @@
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
-       "kicked_out": false,
+       "kicked_out": true,
        "pulled_in": false,
        "was": null
       },
@@ -3310,6 +3310,27 @@
      "target_marker": null,
      "target_due": "2026-07-31",
      "tasks": [
+      {
+       "id": "22PZpKBTvVsa",
+       "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
+       "type": "CP",
+       "marker": null,
+       "baseline_start": "2026-07-13",
+       "baseline_end": "2026-07-13",
+       "live_start": "2026-07-24",
+       "live_end": "2026-07-27",
+       "moved_days": 14,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-13"
+      },
       {
        "id": "22PZpKAvBGym",
        "name": "ELECTRICAL: ELECTRICAL TRIM",
