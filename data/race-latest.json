@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-22T07:47:17",
+ "generated_at": "2026-07-22T11:42:56",
  "today": "2026-07-22",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -6437,7 +6437,7 @@
    "plan_days": 42.0,
    "city_inspections": 4,
    "gap": 39.6,
-   "status": "salvage",
+   "status": "behind",
    "status_scope": "current_week",
    "week": {
     "label": "Week 3 · Jul 20-26",
@@ -6450,35 +6450,10 @@
     "starts_due": 0,
     "starts_started": 0,
     "gap": 23.5,
-    "status": "salvage"
+    "status": "behind"
    },
-   "salvable": true,
-   "save_tasks": [
-    {
-     "name": "BASEBOARD AND TRIMS: INSTALLATION",
-     "due": "2026-07-24"
-    },
-    {
-     "name": "COUNTERTOPS: INSTALLATION",
-     "due": "2026-07-24"
-    },
-    {
-     "name": "ELECTRICAL TRIM: INSTALLATION",
-     "due": "2026-07-24"
-    },
-    {
-     "name": "Project Cleaning",
-     "due": "2026-07-24"
-    },
-    {
-     "name": "PLUMBING TRIM: INSTALLATION",
-     "due": "2026-07-24"
-    },
-    {
-     "name": "INTERIOR DOORS: INSTALL",
-     "due": "2026-07-23"
-    }
-   ],
+   "salvable": false,
+   "save_tasks": [],
    "excluded_admin": [
     {
      "name": "PRE DELIVERY WALK THROUGH",
@@ -6630,17 +6605,6 @@
      "depends_on": []
     },
     {
-     "id": "22PZpzaFfVTZ",
-     "name": "COUNTERTOPS: INSTALLATION",
-     "baseline_end": "2026-07-18",
-     "live_end": "2026-07-24",
-     "current_end": "2026-07-24",
-     "current_start": "2026-07-23",
-     "moved_days": 6,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PZpzakrkQ9",
      "name": "ELECTRICAL TRIM: INSTALLATION",
      "baseline_end": "2026-07-17",
@@ -6648,17 +6612,6 @@
      "current_end": "2026-07-24",
      "current_start": "2026-07-23",
      "moved_days": 7,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PZpzaa3FGb",
-     "name": "PLUMBING TRIM: INSTALLATION",
-     "baseline_end": "2026-07-21",
-     "live_end": "2026-07-24",
-     "current_end": "2026-07-24",
-     "current_start": "2026-07-24",
-     "moved_days": 3,
      "status": "moved",
      "depends_on": []
     },
@@ -6671,6 +6624,28 @@
      "current_start": "2026-07-24",
      "moved_days": -1,
      "status": "pending",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzaFfVTZ",
+     "name": "COUNTERTOPS: INSTALLATION",
+     "baseline_end": "2026-07-18",
+     "live_end": "2026-07-27",
+     "current_end": "2026-07-27",
+     "current_start": "2026-07-25",
+     "moved_days": 9,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpzaa3FGb",
+     "name": "PLUMBING TRIM: INSTALLATION",
+     "baseline_end": "2026-07-21",
+     "live_end": "2026-07-27",
+     "current_end": "2026-07-27",
+     "current_start": "2026-07-27",
+     "moved_days": 6,
+     "status": "moved",
      "depends_on": []
     },
     {
@@ -6757,6 +6732,13 @@
      "days": 9
     },
     {
+     "id": "22PZpzaFfVTZ",
+     "name": "COUNTERTOPS: INSTALLATION",
+     "from": "2026-07-18",
+     "to": "2026-07-27",
+     "days": 9
+    },
+    {
      "id": "22PZwqrWDcBA",
      "name": "EXTERIOR PAINT:",
      "from": "2026-07-14",
@@ -6799,10 +6781,10 @@
      "days": 6
     },
     {
-     "id": "22PZpzaFfVTZ",
-     "name": "COUNTERTOPS: INSTALLATION",
-     "from": "2026-07-18",
-     "to": "2026-07-24",
+     "id": "22PZpzaa3FGb",
+     "name": "PLUMBING TRIM: INSTALLATION",
+     "from": "2026-07-21",
+     "to": "2026-07-27",
      "days": 6
     },
     {
@@ -6811,13 +6793,6 @@
      "from": "2026-07-23",
      "to": "2026-07-28",
      "days": 5
-    },
-    {
-     "id": "22PZpzaa3FGb",
-     "name": "PLUMBING TRIM: INSTALLATION",
-     "from": "2026-07-21",
-     "to": "2026-07-24",
-     "days": 3
     },
     {
      "id": "22PZpzbCr8TZ",
@@ -7211,9 +7186,9 @@
        "marker": null,
        "baseline_start": "2026-07-18",
        "baseline_end": "2026-07-18",
-       "live_start": "2026-07-23",
-       "live_end": "2026-07-24",
-       "moved_days": 6,
+       "live_start": "2026-07-25",
+       "live_end": "2026-07-27",
+       "moved_days": 9,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -7417,9 +7392,9 @@
        "marker": null,
        "baseline_start": "2026-07-22",
        "baseline_end": "2026-07-23",
-       "live_start": "2026-07-23",
-       "live_end": "2026-07-24",
-       "moved_days": 1,
+       "live_start": "2026-07-25",
+       "live_end": "2026-07-27",
+       "moved_days": 4,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "days_due_in_week": 1,
@@ -7427,7 +7402,7 @@
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
-       "kicked_out": false,
+       "kicked_out": true,
        "pulled_in": false,
        "was": null
       },
@@ -7543,17 +7518,17 @@
        "marker": null,
        "baseline_start": "2026-07-24",
        "baseline_end": "2026-07-25",
-       "live_start": "2026-07-24",
-       "live_end": "2026-07-24",
-       "moved_days": -1,
+       "live_start": "2026-07-27",
+       "live_end": "2026-07-27",
+       "moved_days": 2,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "days_due_in_week": 0,
        "started": false,
        "progress": 0,
-       "status": "pending",
+       "status": "moved",
        "in_week_plan": true,
-       "kicked_out": false,
+       "kicked_out": true,
        "pulled_in": false,
        "was": null
       },
@@ -7597,6 +7572,27 @@
      "target_due": "2026-07-29",
      "tasks": [
       {
+       "id": "22PZpzaFfVTZ",
+       "name": "COUNTERTOPS: INSTALLATION",
+       "type": "CP",
+       "marker": null,
+       "baseline_start": "2026-07-18",
+       "baseline_end": "2026-07-18",
+       "live_start": "2026-07-25",
+       "live_end": "2026-07-27",
+       "moved_days": 9,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-18"
+      },
+      {
        "id": "22PaCcN67shT",
        "name": "ELECTRICAL: CITY INSPECTION",
        "type": "CI",
@@ -7615,6 +7611,27 @@
        "kicked_out": false,
        "pulled_in": false,
        "was": null
+      },
+      {
+       "id": "22PZpzaa3FGb",
+       "name": "PLUMBING TRIM: INSTALLATION",
+       "type": "CP",
+       "marker": null,
+       "baseline_start": "2026-07-20",
+       "baseline_end": "2026-07-21",
+       "live_start": "2026-07-27",
+       "live_end": "2026-07-27",
+       "moved_days": 6,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-21"
       },
       {
        "id": "22PZwrcQBAuZ",
