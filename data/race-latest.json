@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-24T18:30:13",
+ "generated_at": "2026-07-24T18:53:10",
  "today": "2026-07-24",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -59,12 +59,12 @@
   "plan_days": 401.0,
   "month_forecast": {
    "status": "behind",
-   "projected_pct": 82.3,
+   "projected_pct": 81.9,
    "plan_pct": 100.0,
-   "leaked_count": 40,
-   "leaked_days": 77.0,
-   "leaked_pct": 17.7,
-   "reshuffled_in_month": 66
+   "leaked_count": 41,
+   "leaked_days": 79.0,
+   "leaked_pct": 18.1,
+   "reshuffled_in_month": 65
   },
   "adherence": 39.7,
   "band": "red",
@@ -86,8 +86,8 @@
   "runner_pct": 34.5,
   "ghost_pct": 86.8,
   "july_money": [
-   143158.39000000004,
-   119916.68000000001
+   150974.58000000002,
+   128550.49
   ],
   "projects": 9,
   "daily": [
@@ -3912,18 +3912,24 @@
    "save_tasks": [],
    "excluded_admin": [],
    "month_forecast": {
-    "status": "at_risk",
-    "projected_pct": 92.3,
+    "status": "behind",
+    "projected_pct": 88.5,
     "plan_pct": 100.0,
-    "leaked_count": 3,
-    "leaked_days": 4.0,
-    "leaked_pct": 7.7,
-    "reshuffled_in_month": 9,
+    "leaked_count": 4,
+    "leaked_days": 6.0,
+    "leaked_pct": 11.5,
+    "reshuffled_in_month": 8,
     "leaked": [
      {
       "name": "FINAL: PUNCH LIST COMPLETION",
       "from": "2026-07-23",
       "to": "2026-08-06",
+      "days": 2
+     },
+     {
+      "name": "GLASS: INSTALL GLASS",
+      "from": "2026-07-11",
+      "to": "2026-08-01",
       "days": 2
      },
      {
@@ -4135,12 +4141,19 @@
     }
    ],
    "july_money": [
-    -2200.24,
-    -4783.64
+    3615.95,
+    1650.17
    ],
-   "margin_pct": 12.4,
+   "margin_pct": 26.6,
    "moved_count": 15,
    "moved": [
+    {
+     "id": "22PVDYk5hi6N",
+     "name": "GLASS: INSTALL GLASS",
+     "from": "2026-07-11",
+     "to": "2026-08-01",
+     "days": 21
+    },
     {
      "id": "22PJWeDm25z3",
      "name": "MECHANICAL: INSTALL MECHANICAL TRIM",
@@ -4154,13 +4167,6 @@
      "from": "2026-07-10",
      "to": "2026-07-29",
      "days": 19
-    },
-    {
-     "id": "22PVDYk5hi6N",
-     "name": "GLASS: INSTALL GLASS",
-     "from": "2026-07-11",
-     "to": "2026-07-29",
-     "days": 18
     },
     {
      "id": "22PJWeDkzh6i",
@@ -4430,9 +4436,9 @@
        "marker": null,
        "baseline_start": "2026-07-10",
        "baseline_end": "2026-07-11",
-       "live_start": "2026-07-28",
-       "live_end": "2026-07-29",
-       "moved_days": 18,
+       "live_start": "2026-07-31",
+       "live_end": "2026-08-01",
+       "moved_days": 21,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "started": false,
@@ -5016,27 +5022,6 @@
        "was": "2026-07-16"
       },
       {
-       "id": "22PVDYk5hi6N",
-       "name": "GLASS: INSTALL GLASS",
-       "type": "AT",
-       "marker": null,
-       "baseline_start": "2026-07-10",
-       "baseline_end": "2026-07-11",
-       "live_start": "2026-07-28",
-       "live_end": "2026-07-29",
-       "moved_days": 18,
-       "days_in_week": 0,
-       "earned_in_week": 0,
-       "started": false,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": false,
-       "kicked_out": false,
-       "pulled_in": false,
-       "lands_here": true,
-       "was": "2026-07-11"
-      },
-      {
        "id": "22PZMuvtJSK9",
        "name": "PAINTING: CABINET PAINT",
        "type": "CP",
@@ -5098,6 +5083,27 @@
        "pulled_in": false,
        "lands_here": true,
        "was": "2026-07-14"
+      },
+      {
+       "id": "22PVDYk5hi6N",
+       "name": "GLASS: INSTALL GLASS",
+       "type": "AT",
+       "marker": null,
+       "baseline_start": "2026-07-10",
+       "baseline_end": "2026-07-11",
+       "live_start": "2026-07-31",
+       "live_end": "2026-08-01",
+       "moved_days": 21,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "started": false,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": false,
+       "lands_here": true,
+       "was": "2026-07-11"
       },
       {
        "id": "22PV9dSZ3ZUK",
@@ -8063,10 +8069,10 @@
     }
    ],
    "july_money": [
-    48975.91,
-    43065.53
+    50975.91,
+    45265.53
    ],
-   "margin_pct": 28.6,
+   "margin_pct": 29.2,
    "moved_count": 18,
    "moved": [
     {
