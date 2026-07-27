@@ -2846,6 +2846,9 @@ function financeRenderBucketContent(start, end, rowId, live) {
     const inflow = bankEvents.filter(e => e.amount > 0).reduce((s, e) => s + e.amount, 0);
     const outflow = bankEvents.filter(e => e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
     const pettyOut = events.filter(e => e.petty && e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
+    // Doble total (Jose 27-jul): cada resumen muestra TOTAL y ☑ CONFIRMADO
+    const inflowC = bankEvents.filter(e => e.amount > 0 && e.confirmed).reduce((s, e) => s + e.amount, 0);
+    const outflowC = bankEvents.filter(e => e.amount < 0 && e.confirmed).reduce((s, e) => s + Math.abs(e.amount), 0);
     const projColor = financeProjIdentColor(p);
     html += `<div style="margin-top:14px;background:var(--card);border:1px solid color-mix(in srgb, ${projColor} 28%, transparent);border-left:4px solid ${projColor};border-radius:0 8px 8px 0;overflow:hidden">`;
     html += `<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:color-mix(in srgb, ${projColor} 10%, transparent);font-size:13px">`;
@@ -2854,6 +2857,7 @@ function financeRenderBucketContent(start, end, rowId, live) {
     if (inflow) html += `<span style="color:var(--grn);margin-right:10px">+${fmtK(inflow)}</span>`;
     if (outflow) html += `<span style="color:var(--red);margin-right:10px">-${fmtK(outflow)}</span>`;
     html += `<span style="font-weight:700;color:${net>=0?'var(--grn)':'var(--red)'}">${net>=0?'+':''}${fmtK(net)}</span>`;
+    html += `<span style="margin-left:12px;padding-left:10px;border-left:1px solid var(--bdr);font-size:11px" title="Solo los movimientos marcados ☑ confirmados de este bloque">☑ <span style="color:${inflowC>0?'var(--grn)':'var(--dim)'}">${inflowC>0?'+'+fmtK(inflowC):'—'}</span> <span style="color:${outflowC>0?'var(--red)':'var(--dim)'};margin-left:6px">${outflowC>0?'-'+fmtK(outflowC):'—'}</span></span>`;
     if (pettyOut) html += `<span style="color:var(--org);font-size:10px;margin-left:10px" title="Petty-cash spends in this period — paid from the petty account, not counted in the bank sums">🪙 -${fmtK(pettyOut)} petty</span>`;
     html += `</span></div>`;
     html += `<div style="font-size:12px;padding:4px 10px 8px">`;
@@ -2874,12 +2878,15 @@ function financeRenderBucketContent(start, end, rowId, live) {
         const segIn = segEvents.filter(e => e.amount > 0).reduce((s, e) => s + e.amount, 0);
         const segOut = segEvents.filter(e => e.amount < 0).reduce((s, e) => s + Math.abs(e.amount), 0);
         const segNet = segIn - segOut;
+        const segInC = segEvents.filter(e => e.amount > 0 && e.confirmed).reduce((s, e) => s + e.amount, 0);
+        const segOutC = segEvents.filter(e => e.amount < 0 && e.confirmed).reduce((s, e) => s + Math.abs(e.amount), 0);
         html += `<div onclick="financeToggleCatSeg('${segKey}')" style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;padding:4px 8px;background:var(--raised);border-radius:5px;cursor:pointer;font-size:11px" title="Click to collapse/expand">`;
         html += `<span style="font-weight:700;color:var(--txt2)"><span id="${segKey}-chv" style="color:var(--dim);margin-right:6px;display:inline-block;width:10px">▾</span>${seg.label} <span style="color:var(--dim);font-weight:400">· ${segEvents.length} item${segEvents.length!==1?'s':''}</span></span>`;
         html += `<span style="font-family:var(--mono)">`;
         if (segIn) html += `<span style="color:var(--grn);margin-right:8px">+${fmtK(segIn)}</span>`;
         if (segOut) html += `<span style="color:var(--red);margin-right:8px">-${fmtK(segOut)}</span>`;
         html += `<span style="font-weight:700;color:${segNet>=0?'var(--grn)':'var(--red)'}">${segNet>=0?'+':''}${fmtK(segNet)}</span>`;
+        html += `<span style="margin-left:10px;padding-left:8px;border-left:1px solid var(--bdr);font-size:10px" title="Solo lo marcado ☑ confirmado de esta categoría">☑ <span style="color:${segInC>0?'var(--grn)':'var(--dim)'}">${segInC>0?'+'+fmtK(segInC):'—'}</span> <span style="color:${segOutC>0?'var(--red)':'var(--dim)'};margin-left:5px">${segOutC>0?'-'+fmtK(segOutC):'—'}</span></span>`;
         html += `</span></div>`;
         if (seg.note) html += `<div style="font-size:10px;color:var(--org);font-style:italic;padding:2px 8px 0">${seg.note}</div>`;
         html += `<div id="${segKey}-body" style="padding-left:6px">`;
