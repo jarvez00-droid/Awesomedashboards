@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-07-27T09:05:37",
+ "generated_at": "2026-07-27T12:12:13",
  "date": "2026-07-27",
  "window_start": "2026-07-27",
  "window_end": "2026-08-10",
  "summary": {
-  "tasks": 207,
+  "tasks": 208,
   "projects": 10,
   "alerts": 9,
   "overdue": 42,
@@ -54,6 +54,13 @@
    "taskId": "22PZzzsPjpMa"
   },
   {
+   "project": "Karim-Merchant",
+   "projectId": "22PMwhcSuqJD",
+   "task": "DOORS AND WINDOWS: PURCHASE MATERIALS",
+   "due": "2026-08-03",
+   "taskId": "22PZqFvVLiVF"
+  },
+  {
    "project": "Katie Holmes & Sean Springs",
    "projectId": "22P2j3sQMKqz",
    "task": "PRE DELIVERY WALK THROUGH: PURCHASE MATERIALS",
@@ -66,13 +73,6 @@
    "task": "FINAL PUNCH LIST: PURCHASE MATERIALS",
    "due": "2026-08-08",
    "taskId": "22PZzzsdaX58"
-  },
-  {
-   "project": "Karim-Merchant",
-   "projectId": "22PMwhcSuqJD",
-   "task": "DOORS AND WINDOWS: PURCHASE MATERIALS",
-   "due": "2026-08-10",
-   "taskId": "22PZqFvVLiVF"
   }
  ],
  "projects": [
@@ -1001,7 +1001,7 @@
    "id": "22PMwhcSuqJD",
    "name": "Karim-Merchant",
    "counts": {
-    "tasks": 20,
+    "tasks": 21,
     "alerts": 1,
     "overdue": 0
    },
@@ -1021,18 +1021,6 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZqFvVKbnM",
-       "progress": 0
-      },
-      {
-       "name": "FRAMING: SECURE PRICING & ETA",
-       "step": "pricing",
-       "icon": "💲",
-       "step_label": "Secure pricing",
-       "due": "2026-07-27",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZqFvV6BTj",
        "progress": 0
       }
      ]
@@ -1068,33 +1056,45 @@
      ]
     },
     {
-     "date": "2026-07-30",
-     "label": "Thu Jul 30",
+     "date": "2026-07-29",
+     "label": "Wed Jul 29",
      "tasks": [
       {
-       "name": "EXTERIOR SHEATING: CREATE TAKEOFF REPORT (Copy)",
+       "name": "EXTERIOR SHEATING: CREATE TAKEOFF REPORT",
        "step": "takeoff",
        "icon": "📋",
        "step_label": "Takeoff",
-       "due": "2026-07-30",
+       "due": "2026-07-29",
        "amount": null,
        "alert": false,
        "overdue": false,
        "taskId": "22Pa9BrA9HHR",
        "progress": 0
+      },
+      {
+       "name": "FRAMING: SECURE PRICING & ETA",
+       "step": "pricing",
+       "icon": "💲",
+       "step_label": "Secure pricing",
+       "due": "2026-07-29",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZqFvV6BTj",
+       "progress": 0
       }
      ]
     },
     {
-     "date": "2026-07-31",
-     "label": "Fri Jul 31",
+     "date": "2026-07-30",
+     "label": "Thu Jul 30",
      "tasks": [
       {
        "name": "EXTERIOR SHEATING: SECURE PRICING",
        "step": "pricing",
        "icon": "💲",
        "step_label": "Secure pricing",
-       "due": "2026-07-31",
+       "due": "2026-07-30",
        "amount": null,
        "alert": false,
        "overdue": false,
@@ -1104,37 +1104,19 @@
      ]
     },
     {
-     "date": "2026-08-01",
-     "label": "Sat Aug 1",
-     "tasks": [
-      {
-       "name": "EXTERIOR SHEATING: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-08-01",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22Pa9UAaHPSc",
-       "progress": 0
-      }
-     ]
-    },
-    {
      "date": "2026-08-03",
      "label": "Mon Aug 3",
      "tasks": [
       {
-       "name": "EXTERIOR SHEATING: PURCHASE MATERIALS",
+       "name": "DOORS AND WINDOWS: PURCHASE MATERIALS",
        "step": "purchase",
        "icon": "🛒",
        "step_label": "Purchase material",
        "due": "2026-08-03",
-       "amount": 1916.0,
-       "alert": false,
+       "amount": null,
+       "alert": true,
        "overdue": false,
-       "taskId": "22PZwraw6BHq",
+       "taskId": "22PZqFvVLiVF",
        "progress": 0
       },
       {
@@ -1167,6 +1149,18 @@
      "date": "2026-08-04",
      "label": "Tue Aug 4",
      "tasks": [
+      {
+       "name": "DOORS AND WINDOWS: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-08-04",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZqFvVM7PY",
+       "progress": 0
+      },
       {
        "name": "ELECTRICAL ROUGH IN: CONFIRM TAKEOFF DETAILS",
        "step": "takeoff",
@@ -1234,6 +1228,18 @@
      "label": "Fri Aug 7",
      "tasks": [
       {
+       "name": "EXTERIOR SHEATING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-07",
+       "amount": 1916.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZwraw6BHq",
+       "progress": 0
+      },
+      {
        "name": "PLUMBING ROUGH IN: CONFIRM TAKEOFF DETAILS",
        "step": "takeoff",
        "icon": "📋",
@@ -1248,21 +1254,27 @@
      ]
     },
     {
+     "date": "2026-08-08",
+     "label": "Sat Aug 8",
+     "tasks": [
+      {
+       "name": "EXTERIOR SHEATING: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-08-08",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22Pa9UAaHPSc",
+       "progress": 0
+      }
+     ]
+    },
+    {
      "date": "2026-08-10",
      "label": "Mon Aug 10",
      "tasks": [
-      {
-       "name": "DOORS AND WINDOWS: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-08-10",
-       "amount": null,
-       "alert": true,
-       "overdue": false,
-       "taskId": "22PZqFvVLiVF",
-       "progress": 0
-      },
       {
        "name": "INSULATION: CREATE TAKEOFF REPORT",
        "step": "takeoff",
