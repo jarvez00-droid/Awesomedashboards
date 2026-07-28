@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T12:28:22",
+  "generated_at": "2026-07-28T12:51:39",
   "week_iso": "2026-W31",
   "week_start": "2026-07-25",
   "week_end": "2026-07-31",
@@ -857,25 +857,30 @@
           "group_id": "22PZpJeQ9BGw",
           "group_name": "FRAMING",
           "parent_group_id": null,
-          "action_count": 2,
+          "action_count": 3,
           "action_task_ids": [
             "22PZpJeTpqtF",
-            "22PbJuLnR5bk"
+            "22PbJuLnR5bk",
+            "22Pbh8wydiRG"
           ],
           "action_task_names": [
             "FRAMING: INSTALL ZIP TAPE",
-            "FRAMING: FIX STEPS"
+            "FRAMING: FIX STEPS",
+            "FRAMING: CHANGE ORDER ADDITIONAL TASKS"
           ],
           "action_progresses": [
+            null,
             null,
             null
           ],
           "action_starts": [
             "2026-08-04",
+            "2026-07-30",
             "2026-07-30"
           ],
           "action_ends": [
             "2026-08-04",
+            "2026-08-01",
             "2026-08-01"
           ],
           "action_start_min": "2026-07-30",
@@ -892,6 +897,14 @@
             {
               "task_id": "22PbJuLnR5bk",
               "name": "FRAMING: FIX STEPS",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-08-01"
+            },
+            {
+              "task_id": "22Pbh8wydiRG",
+              "name": "FRAMING: CHANGE ORDER ADDITIONAL TASKS",
               "description": "",
               "amount": 0.0,
               "progress": null,
@@ -1015,10 +1028,26 @@
               "end_date": "2026-07-24"
             },
             {
+              "task_id": "22Pbh8EvZ5Sg",
+              "name": "PLUMBING: DOWNPAYMENT TO FIX GAS LINE",
+              "description": "400",
+              "amount": 400.0,
+              "progress": null,
+              "end_date": "2026-07-27"
+            },
+            {
               "task_id": "22PZpJf7pe5u",
               "name": "PLUMBING ROUGH IN: BILL & PAYMENT",
               "description": "3000",
               "amount": 3000.0,
+              "progress": null,
+              "end_date": "2026-08-07"
+            },
+            {
+              "task_id": "22Pbh8Rzd6Ax",
+              "name": "PLUMBING; FINAL PAYMENT TO FIX GAS LINE",
+              "description": "400",
+              "amount": 400.0,
               "progress": null,
               "end_date": "2026-08-07"
             }
@@ -1026,11 +1055,11 @@
           "materials_lines": [],
           "additional_lines": [],
           "sold": 0.0,
-          "expenses_subs": 9800.0,
+          "expenses_subs": 10600.0,
           "expenses_materials": 0,
           "expenses_additional": 0,
-          "expenses_total": 9800.0,
-          "profit": -9800.0,
+          "expenses_total": 10600.0,
+          "profit": -10600.0,
           "status": "in_progress",
           "has_price": false,
           "this_pct": 0.0,
@@ -1125,7 +1154,7 @@
     "groups_in_progress": 11,
     "groups_finished_this_week": 2,
     "groups_missing_price": 8,
-    "expense_missing_price": 677760.97,
+    "expense_missing_price": 678560.97,
     "project_count": 7
   }
 }
