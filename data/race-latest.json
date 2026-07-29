@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-29T17:55:33",
+ "generated_at": "2026-07-29T18:18:54",
  "today": "2026-07-29",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -51,25 +51,25 @@
   "weighting": "conteo de tareas (el motor de productividad no expone $ por-tarea; el $ del mes es contexto por proyecto)"
  },
  "company": {
-  "monthly_pct": 40.2,
-  "days_pct": 59.4,
+  "monthly_pct": 41.4,
+  "days_pct": 59.9,
   "ghost_days_pct": 98.4,
-  "earned_days": 259.0,
+  "earned_days": 261.0,
   "total_days": 436.0,
   "plan_days": 429.0,
   "month_forecast": {
    "status": "behind",
-   "projected_pct": 73.6,
+   "projected_pct": 73.4,
    "plan_pct": 100.0,
-   "leaked_count": 54,
-   "leaked_days": 115.0,
-   "leaked_pct": 26.4,
-   "reshuffled_in_month": 44
+   "leaked_count": 55,
+   "leaked_days": 116.0,
+   "leaked_pct": 26.6,
+   "reshuffled_in_month": 41
   },
-  "adherence": 41.9,
+  "adherence": 43.1,
   "band": "red",
   "runner_date": "2026-07-13",
-  "gap": 39.0,
+  "gap": 38.5,
   "status": "behind",
   "week": {
    "days_planned": 111.0,
@@ -82,12 +82,12 @@
   },
   "total_target": 174,
   "due_to_today": 167,
-  "done_total": 70,
-  "runner_pct": 40.2,
+  "done_total": 72,
+  "runner_pct": 41.4,
   "ghost_pct": 96.0,
   "july_money": [
-   121894.18000000001,
-   103683.91
+   123272.68000000001,
+   105193.12999999999
   ],
   "projects": 9,
   "daily": [
@@ -254,8 +254,8 @@
    },
    {
     "date": "2026-07-29",
-    "real": 70,
-    "real_pct": 40.2,
+    "real": 72,
+    "real_pct": 41.4,
     "plan": 167,
     "plan_pct": 96.0
    }
@@ -5005,12 +5005,12 @@
    ],
    "month_forecast": {
     "status": "behind",
-    "projected_pct": 51.5,
+    "projected_pct": 53.0,
     "plan_pct": 100.0,
-    "leaked_count": 14,
-    "leaked_days": 32.0,
-    "leaked_pct": 48.5,
-    "reshuffled_in_month": 3,
+    "leaked_count": 13,
+    "leaked_days": 31.0,
+    "leaked_pct": 47.0,
+    "reshuffled_in_month": 4,
     "leaked": [
      {
       "name": "PLUMBING: INSTALL PLUMBING TRIM",
@@ -5049,12 +5049,6 @@
       "days": 2
      },
      {
-      "name": "BASEBOARD & TRIM: INSTALL",
-      "from": "2026-07-14",
-      "to": "2026-08-01",
-      "days": 1
-     },
-     {
       "name": "PLUMBING: CITY INSPECTION",
       "from": "2026-07-24",
       "to": "2026-08-04",
@@ -5082,6 +5076,12 @@
       "name": "CLEANING: CLEANING",
       "from": "2026-07-24",
       "to": "2026-08-15",
+      "days": 1
+     },
+     {
+      "name": "PROJECT DELIVERY: DELIVERY",
+      "from": "2026-07-31",
+      "to": "2026-08-18",
       "days": 1
      }
     ]
@@ -5209,6 +5209,17 @@
      "depends_on": []
     },
     {
+     "id": "22PZtcszppfU",
+     "name": "BASEBOARD & TRIM: INSTALL",
+     "baseline_end": "2026-07-14",
+     "live_end": "2026-07-31",
+     "current_end": "2026-07-31",
+     "current_start": "2026-07-30",
+     "moved_days": 17,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
      "id": "22PZpKBTvVsa",
      "name": "INTERIOR DOORS: INSTALL INTERIOR DOORS",
      "baseline_end": "2026-07-13",
@@ -5228,17 +5239,6 @@
      "current_start": "2026-07-31",
      "moved_days": 8,
      "status": "done",
-     "depends_on": []
-    },
-    {
-     "id": "22PZtcszppfU",
-     "name": "BASEBOARD & TRIM: INSTALL",
-     "baseline_end": "2026-07-14",
-     "live_end": "2026-08-01",
-     "current_end": "2026-08-01",
-     "current_start": "2026-07-31",
-     "moved_days": 18,
-     "status": "moved",
      "depends_on": []
     },
     {
@@ -5342,8 +5342,8 @@
     }
    ],
    "july_money": [
-    15175.54,
-    12123.67
+    15239.75,
+    12187.18
    ],
    "margin_pct": 38.1,
    "moved_count": 27,
@@ -5405,18 +5405,18 @@
      "days": 18
     },
     {
-     "id": "22PZtcszppfU",
-     "name": "BASEBOARD & TRIM: INSTALL",
-     "from": "2026-07-14",
-     "to": "2026-08-01",
-     "days": 18
-    },
-    {
      "id": "22PZpKCjBHpp",
      "name": "PROJECT DELIVERY: DELIVERY",
      "from": "2026-07-31",
      "to": "2026-08-18",
      "days": 18
+    },
+    {
+     "id": "22PZtcszppfU",
+     "name": "BASEBOARD & TRIM: INSTALL",
+     "from": "2026-07-14",
+     "to": "2026-07-31",
+     "days": 17
     },
     {
      "id": "22PaBiJWyriu",
@@ -5805,9 +5805,9 @@
        "marker": null,
        "baseline_start": "2026-07-14",
        "baseline_end": "2026-07-14",
-       "live_start": "2026-07-31",
-       "live_end": "2026-08-01",
-       "moved_days": 18,
+       "live_start": "2026-07-30",
+       "live_end": "2026-07-31",
+       "moved_days": 17,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -6390,8 +6390,8 @@
        "baseline_start": "2026-07-25",
        "baseline_end": "2026-07-25",
        "live_start": "2026-07-29",
-       "live_end": "2026-07-29",
-       "moved_days": 4,
+       "live_end": "2026-07-30",
+       "moved_days": 5,
        "days_in_week": 0,
        "earned_in_week": 0,
        "days_due_in_week": 0,
@@ -6557,9 +6557,9 @@
        "marker": null,
        "baseline_start": "2026-07-29",
        "baseline_end": "2026-07-30",
-       "live_start": "2026-07-31",
-       "live_end": "2026-08-01",
-       "moved_days": 2,
+       "live_start": "2026-07-30",
+       "live_end": "2026-07-31",
+       "moved_days": 1,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "days_due_in_week": 1,
@@ -6942,7 +6942,7 @@
      {
       "name": "INSULATION: CITY INSPECTION",
       "from": "2026-07-29",
-      "to": "2026-08-14",
+      "to": "2026-08-11",
       "days": 1
      },
      {
@@ -7045,17 +7045,6 @@
      "depends_on": []
     },
     {
-     "id": "22PZzWVERTRf",
-     "name": "ELECTRICAL ROUGH IN: EXECUTE",
-     "baseline_end": "2026-07-16",
-     "live_end": "2026-07-25",
-     "current_end": "2026-07-25",
-     "current_start": "2026-07-09",
-     "moved_days": 9,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PZzWUzYRut",
      "name": "DOORS & WINDOWS: EXECUTE",
      "baseline_end": "2026-07-10",
@@ -7063,6 +7052,17 @@
      "current_end": "2026-07-31",
      "current_start": "2026-07-16",
      "moved_days": 21,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWVERTRf",
+     "name": "ELECTRICAL ROUGH IN: EXECUTE",
+     "baseline_end": "2026-07-16",
+     "live_end": "2026-07-31",
+     "current_end": "2026-07-31",
+     "current_start": "2026-07-09",
+     "moved_days": 15,
      "status": "moved",
      "depends_on": []
     },
@@ -7100,6 +7100,17 @@
      "depends_on": []
     },
     {
+     "id": "22PZzWVfUWhN",
+     "name": "INSULATION: CITY INSPECTION",
+     "baseline_end": "2026-07-29",
+     "live_end": "2026-08-11",
+     "current_end": "2026-08-11",
+     "current_start": "2026-08-11",
+     "moved_days": 13,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
      "id": "22PZzWexBK6A",
      "name": "ROOFING: EXECUTE",
      "baseline_end": "2026-07-15",
@@ -7129,17 +7140,6 @@
      "current_end": "2026-08-13",
      "current_start": "2026-08-13",
      "moved_days": 15,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PZzWVfUWhN",
-     "name": "INSULATION: CITY INSPECTION",
-     "baseline_end": "2026-07-29",
-     "live_end": "2026-08-14",
-     "current_end": "2026-08-14",
-     "current_start": "2026-08-14",
-     "moved_days": 16,
      "status": "moved",
      "depends_on": []
     }
@@ -7187,11 +7187,11 @@
      "days": 17
     },
     {
-     "id": "22PZzWVfUWhN",
-     "name": "INSULATION: CITY INSPECTION",
-     "from": "2026-07-29",
-     "to": "2026-08-14",
-     "days": 16
+     "id": "22PZzWVERTRf",
+     "name": "ELECTRICAL ROUGH IN: EXECUTE",
+     "from": "2026-07-16",
+     "to": "2026-07-31",
+     "days": 15
     },
     {
      "id": "22PZzWfBSQDK",
@@ -7212,6 +7212,13 @@
      "name": "FRAMING: EXECUTE",
      "from": "2026-07-04",
      "to": "2026-07-17",
+     "days": 13
+    },
+    {
+     "id": "22PZzWVfUWhN",
+     "name": "INSULATION: CITY INSPECTION",
+     "from": "2026-07-29",
+     "to": "2026-08-11",
      "days": 13
     },
     {
@@ -7261,13 +7268,6 @@
      "name": "DEMO: FLOORING KITCHEN",
      "from": "2026-07-06",
      "to": "2026-07-15",
-     "days": 9
-    },
-    {
-     "id": "22PZzWVERTRf",
-     "name": "ELECTRICAL ROUGH IN: EXECUTE",
-     "from": "2026-07-16",
-     "to": "2026-07-25",
      "days": 9
     },
     {
@@ -7437,8 +7437,8 @@
        "baseline_start": "2026-07-07",
        "baseline_end": "2026-07-16",
        "live_start": "2026-07-09",
-       "live_end": "2026-07-25",
-       "moved_days": 9,
+       "live_end": "2026-07-31",
+       "moved_days": 15,
        "days_in_week": 6,
        "earned_in_week": 6.0,
        "started": true,
@@ -7657,8 +7657,8 @@
        "baseline_start": "2026-07-07",
        "baseline_end": "2026-07-16",
        "live_start": "2026-07-09",
-       "live_end": "2026-07-25",
-       "moved_days": 9,
+       "live_end": "2026-07-31",
+       "moved_days": 15,
        "days_in_week": 4,
        "earned_in_week": 3.0,
        "started": true,
@@ -7873,36 +7873,15 @@
        "was": "2026-07-13"
       },
       {
-       "id": "22PZzWVERTRf",
-       "name": "ELECTRICAL ROUGH IN: EXECUTE",
-       "type": "CP",
-       "marker": null,
-       "baseline_start": "2026-07-07",
-       "baseline_end": "2026-07-16",
-       "live_start": "2026-07-09",
-       "live_end": "2026-07-25",
-       "moved_days": 9,
-       "days_in_week": 0,
-       "earned_in_week": 0,
-       "started": true,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": false,
-       "kicked_out": false,
-       "pulled_in": false,
-       "lands_here": true,
-       "was": "2026-07-16"
-      },
-      {
        "id": "22PZzWVZeLkQ",
        "name": "SIDING: EXECUTE",
        "type": "CP",
        "marker": "start",
        "baseline_start": "2026-07-20",
        "baseline_end": "2026-08-01",
-       "live_start": "2026-08-10",
-       "live_end": "2026-08-22",
-       "moved_days": 21,
+       "live_start": "2026-08-07",
+       "live_end": "2026-08-13",
+       "moved_days": 12,
        "days_in_week": 7,
        "earned_in_week": 0.0,
        "started": false,
@@ -8022,14 +8001,14 @@
        "baseline_start": "2026-07-09",
        "baseline_end": "2026-07-27",
        "live_start": "2026-07-09",
-       "live_end": "2026-07-25",
-       "moved_days": -2,
+       "live_end": "2026-07-31",
+       "moved_days": 4,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "days_due_in_week": 1,
        "started": true,
        "progress": 0,
-       "status": "pending",
+       "status": "moved",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -8147,15 +8126,15 @@
        "marker": "start",
        "baseline_start": "2026-08-01",
        "baseline_end": "2026-08-14",
-       "live_start": "2026-08-10",
-       "live_end": "2026-08-22",
-       "moved_days": 8,
+       "live_start": "2026-08-07",
+       "live_end": "2026-08-13",
+       "moved_days": -1,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "days_due_in_week": 0,
        "started": false,
        "progress": 0,
-       "status": "moved",
+       "status": "pending",
        "in_week_plan": true,
        "kicked_out": true,
        "pulled_in": false,
@@ -10752,23 +10731,23 @@
    ],
    "total_target": 12,
    "due_to_today": 12,
-   "done_total": 7,
-   "done_due": 7,
-   "monthly_pct": 58.3,
-   "adherence": 58.3,
-   "band": "red",
-   "runner_pct": 58.3,
+   "done_total": 9,
+   "done_due": 9,
+   "monthly_pct": 75.0,
+   "adherence": 75.0,
+   "band": "amber",
+   "runner_pct": 75.0,
    "ghost_pct": 100.0,
    "runner_date": "2026-07-09",
    "finish_date": "2026-07-13",
-   "days_pct": 64.3,
+   "days_pct": 78.6,
    "ghost_days_pct": 100.0,
    "total_days": 14.0,
-   "earned_days": 9.0,
+   "earned_days": 11.0,
    "plan_days": 14.0,
    "city_inspections": 1,
-   "gap": 35.7,
-   "status": "salvage",
+   "gap": 21.4,
+   "status": "behind",
    "status_scope": "current_week",
    "week": {
     "label": "Week 4 · Jul 27-Aug 2",
@@ -10781,19 +10760,10 @@
     "starts_due": 0,
     "starts_started": 0,
     "gap": 50.0,
-    "status": "salvage"
+    "status": "behind"
    },
-   "salvable": true,
-   "save_tasks": [
-    {
-     "name": "FINAL: BUILDING INSPECTION",
-     "due": "2026-07-30"
-    },
-    {
-     "name": "CLEANING: FINAL CLEANING",
-     "due": "2026-07-29"
-    }
-   ],
+   "salvable": false,
+   "save_tasks": [],
    "excluded_admin": [
     {
      "name": "DELIVERY: PRE DELIVERY WALK THROUGH",
@@ -10802,14 +10772,27 @@
     }
    ],
    "month_forecast": {
-    "status": "intact",
-    "projected_pct": 100.0,
+    "status": "behind",
+    "projected_pct": 85.7,
     "plan_pct": 100.0,
-    "leaked_count": 0,
-    "leaked_days": 0.0,
-    "leaked_pct": 0.0,
-    "reshuffled_in_month": 5,
-    "leaked": []
+    "leaked_count": 2,
+    "leaked_days": 2.0,
+    "leaked_pct": 14.3,
+    "reshuffled_in_month": 1,
+    "leaked": [
+     {
+      "name": "FINAL: BUILDING INSPECTION",
+      "from": "2026-07-13",
+      "to": "2026-08-04",
+      "days": 1
+     },
+     {
+      "name": "CLEANING: FINAL CLEANING",
+      "from": "2026-07-11",
+      "to": "2026-08-03",
+      "days": 1
+     }
+    ]
    },
    "cp_chain": [
     {
@@ -10856,17 +10839,17 @@
      "current_end": "2026-07-28",
      "current_start": "2026-07-28",
      "moved_days": 18,
-     "status": "moved",
+     "status": "done",
      "depends_on": []
     },
     {
      "id": "22PPsiDCQYYw",
      "name": "CLEANING: FINAL CLEANING",
      "baseline_end": "2026-07-11",
-     "live_end": "2026-07-29",
-     "current_end": "2026-07-29",
-     "current_start": "2026-07-29",
-     "moved_days": 18,
+     "live_end": "2026-08-03",
+     "current_end": "2026-08-03",
+     "current_start": "2026-08-03",
+     "moved_days": 23,
      "status": "moved",
      "depends_on": []
     },
@@ -10874,21 +10857,35 @@
      "id": "22PPsiDCMZNa",
      "name": "FINAL: BUILDING INSPECTION",
      "baseline_end": "2026-07-13",
-     "live_end": "2026-07-30",
-     "current_end": "2026-07-30",
-     "current_start": "2026-07-30",
-     "moved_days": 17,
+     "live_end": "2026-08-04",
+     "current_end": "2026-08-04",
+     "current_start": "2026-08-04",
+     "moved_days": 22,
      "status": "moved",
      "depends_on": []
     }
    ],
    "july_money": [
-    5753.87,
-    4679.51
+    7068.16,
+    6125.22
    ],
-   "margin_pct": 35.5,
+   "margin_pct": 38.5,
    "moved_count": 11,
    "moved": [
+    {
+     "id": "22PPsiDCQYYw",
+     "name": "CLEANING: FINAL CLEANING",
+     "from": "2026-07-11",
+     "to": "2026-08-03",
+     "days": 23
+    },
+    {
+     "id": "22PPsiDCMZNa",
+     "name": "FINAL: BUILDING INSPECTION",
+     "from": "2026-07-13",
+     "to": "2026-08-04",
+     "days": 22
+    },
     {
      "id": "22PaCCciwf4v",
      "name": "CLEANING: TRASH HAUL",
@@ -10904,25 +10901,11 @@
      "days": 20
     },
     {
-     "id": "22PPsiDCQYYw",
-     "name": "CLEANING: FINAL CLEANING",
-     "from": "2026-07-11",
-     "to": "2026-07-29",
-     "days": 18
-    },
-    {
      "id": "22PYmTjTWh4W",
      "name": "CUSTOM CARPENTRY: PAINT SECRET DOOR (Copy)",
      "from": "2026-07-10",
      "to": "2026-07-28",
      "days": 18
-    },
-    {
-     "id": "22PPsiDCMZNa",
-     "name": "FINAL: BUILDING INSPECTION",
-     "from": "2026-07-13",
-     "to": "2026-07-30",
-     "days": 17
     },
     {
      "id": "22PZkUsSKgvV",
@@ -10974,10 +10957,10 @@
      "deadline": "2026-07-12",
      "is_current": false,
      "total": 10,
-     "done": 6,
+     "done": 8,
      "days_planned": 12.0,
-     "days_earned": 8.0,
-     "pct": 66.7,
+     "days_earned": 10.0,
+     "pct": 83.3,
      "target_task": "CLEANING: FINAL CLEANING",
      "target_type": "CP",
      "target_marker": null,
@@ -11054,10 +11037,10 @@
        "live_end": "2026-07-28",
        "moved_days": 20,
        "days_in_week": 1,
-       "earned_in_week": 0.0,
+       "earned_in_week": 1.0,
        "started": true,
-       "progress": 0,
-       "status": "moved",
+       "progress": 1,
+       "status": "done",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -11114,10 +11097,10 @@
        "live_end": "2026-07-28",
        "moved_days": 18,
        "days_in_week": 2,
-       "earned_in_week": 1.0,
+       "earned_in_week": 2.0,
        "started": true,
-       "progress": 0,
-       "status": "moved",
+       "progress": 1,
+       "status": "done",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -11170,12 +11153,12 @@
        "marker": null,
        "baseline_start": "2026-07-11",
        "baseline_end": "2026-07-11",
-       "live_start": "2026-07-29",
-       "live_end": "2026-07-29",
-       "moved_days": 18,
+       "live_start": "2026-08-03",
+       "live_end": "2026-08-03",
+       "moved_days": 23,
        "days_in_week": 1,
        "earned_in_week": 0.0,
-       "started": true,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -11208,9 +11191,9 @@
        "marker": null,
        "baseline_start": "2026-07-13",
        "baseline_end": "2026-07-13",
-       "live_start": "2026-07-30",
-       "live_end": "2026-07-30",
-       "moved_days": 17,
+       "live_start": "2026-08-04",
+       "live_end": "2026-08-04",
+       "moved_days": 22,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -11356,8 +11339,8 @@
        "earned_in_week": 0,
        "days_due_in_week": 0,
        "started": true,
-       "progress": 0,
-       "status": "moved",
+       "progress": 1,
+       "status": "done",
        "in_week_plan": false,
        "kicked_out": false,
        "pulled_in": true,
@@ -11398,8 +11381,8 @@
        "earned_in_week": 0,
        "days_due_in_week": 0,
        "started": true,
-       "progress": 0,
-       "status": "moved",
+       "progress": 1,
+       "status": "done",
        "in_week_plan": false,
        "kicked_out": false,
        "pulled_in": true,
@@ -11433,17 +11416,17 @@
        "marker": null,
        "baseline_start": "2026-07-27",
        "baseline_end": "2026-07-27",
-       "live_start": "2026-07-29",
-       "live_end": "2026-07-29",
-       "moved_days": 2,
+       "live_start": "2026-08-03",
+       "live_end": "2026-08-03",
+       "moved_days": 7,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "days_due_in_week": 1,
-       "started": true,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
-       "kicked_out": false,
+       "kicked_out": true,
        "pulled_in": false,
        "was": null
       },
@@ -11496,9 +11479,9 @@
        "marker": null,
        "baseline_start": "2026-07-28",
        "baseline_end": "2026-07-28",
-       "live_start": "2026-07-30",
-       "live_end": "2026-07-30",
-       "moved_days": 2,
+       "live_start": "2026-08-04",
+       "live_end": "2026-08-04",
+       "moved_days": 7,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "days_due_in_week": 1,
@@ -11506,7 +11489,7 @@
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
-       "kicked_out": false,
+       "kicked_out": true,
        "pulled_in": false,
        "was": null
       }
@@ -11678,8 +11661,8 @@
     },
     {
      "date": "2026-07-29",
-     "real": 7,
-     "real_pct": 58.3,
+     "real": 9,
+     "real_pct": 75.0,
      "plan": 12,
      "plan_pct": 100.0
     }
