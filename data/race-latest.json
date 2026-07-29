@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-29T14:00:49",
+ "generated_at": "2026-07-29T17:55:33",
  "today": "2026-07-29",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -59,12 +59,12 @@
   "plan_days": 429.0,
   "month_forecast": {
    "status": "behind",
-   "projected_pct": 73.9,
+   "projected_pct": 73.6,
    "plan_pct": 100.0,
-   "leaked_count": 53,
-   "leaked_days": 114.0,
-   "leaked_pct": 26.1,
-   "reshuffled_in_month": 45
+   "leaked_count": 54,
+   "leaked_days": 115.0,
+   "leaked_pct": 26.4,
+   "reshuffled_in_month": 44
   },
   "adherence": 41.9,
   "band": "red",
@@ -6896,12 +6896,12 @@
    "excluded_admin": [],
    "month_forecast": {
     "status": "behind",
-    "projected_pct": 78.4,
+    "projected_pct": 77.5,
     "plan_pct": 100.0,
-    "leaked_count": 7,
-    "leaked_days": 22.0,
-    "leaked_pct": 21.6,
-    "reshuffled_in_month": 5,
+    "leaked_count": 8,
+    "leaked_days": 23.0,
+    "leaked_pct": 22.5,
+    "reshuffled_in_month": 4,
     "leaked": [
      {
       "name": "ELECTRICAL ROUGH IN: EXECUTE",
@@ -6912,7 +6912,7 @@
      {
       "name": "INSULATION: EXECUTE",
       "from": "2026-07-27",
-      "to": "2026-08-05",
+      "to": "2026-08-07",
       "days": 5
      },
      {
@@ -6930,7 +6930,13 @@
      {
       "name": "ROOFING: EXECUTE",
       "from": "2026-07-23",
-      "to": "2026-08-07",
+      "to": "2026-08-12",
+      "days": 1
+     },
+     {
+      "name": "FRAMING & MEPS ROUGH IN INSPECTION",
+      "from": "2026-07-17",
+      "to": "2026-08-03",
       "days": 1
      },
      {
@@ -7028,17 +7034,6 @@
      "depends_on": []
     },
     {
-     "id": "22PZzWUzYRut",
-     "name": "DOORS & WINDOWS: EXECUTE",
-     "baseline_end": "2026-07-10",
-     "live_end": "2026-07-23",
-     "current_end": "2026-07-23",
-     "current_start": "2026-07-16",
-     "moved_days": 13,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PZzWesQkCw",
      "name": "DOORS & WINDOWS: EXECUTE",
      "baseline_end": "2026-07-13",
@@ -7061,13 +7056,24 @@
      "depends_on": []
     },
     {
+     "id": "22PZzWUzYRut",
+     "name": "DOORS & WINDOWS: EXECUTE",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-07-31",
+     "current_end": "2026-07-31",
+     "current_start": "2026-07-16",
+     "moved_days": 21,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
      "id": "22PaCjS2mANX",
      "name": "FRAMING & MEPS ROUGH IN INSPECTION",
      "baseline_end": "2026-07-17",
-     "live_end": "2026-07-30",
-     "current_end": "2026-07-30",
-     "current_start": "2026-07-30",
-     "moved_days": 13,
+     "live_end": "2026-08-03",
+     "current_end": "2026-08-03",
+     "current_start": "2026-08-03",
+     "moved_days": 17,
      "status": "moved",
      "depends_on": []
     },
@@ -7075,21 +7081,10 @@
      "id": "22PZzWVeTaGW",
      "name": "INSULATION: EXECUTE",
      "baseline_end": "2026-07-27",
-     "live_end": "2026-08-05",
-     "current_end": "2026-08-05",
-     "current_start": "2026-08-03",
-     "moved_days": 9,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PZzWUsGsvd",
-     "name": "ROOFING: EXECUTE",
-     "baseline_end": "2026-07-23",
      "live_end": "2026-08-07",
      "current_end": "2026-08-07",
-     "current_start": "2026-08-05",
-     "moved_days": 15,
+     "current_start": "2026-08-06",
+     "moved_days": 11,
      "status": "moved",
      "depends_on": []
     },
@@ -7112,6 +7107,17 @@
      "current_end": "2026-08-11",
      "current_start": "2026-08-08",
      "moved_days": 27,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWUsGsvd",
+     "name": "ROOFING: EXECUTE",
+     "baseline_end": "2026-07-23",
+     "live_end": "2026-08-12",
+     "current_end": "2026-08-12",
+     "current_start": "2026-08-10",
+     "moved_days": 20,
      "status": "moved",
      "depends_on": []
     },
@@ -7160,18 +7166,32 @@
      "days": 22
     },
     {
-     "id": "22PZzWVfUWhN",
-     "name": "INSULATION: CITY INSPECTION",
-     "from": "2026-07-29",
-     "to": "2026-08-14",
-     "days": 16
+     "id": "22PZzWUzYRut",
+     "name": "DOORS & WINDOWS: EXECUTE",
+     "from": "2026-07-10",
+     "to": "2026-07-31",
+     "days": 21
     },
     {
      "id": "22PZzWUsGsvd",
      "name": "ROOFING: EXECUTE",
      "from": "2026-07-23",
-     "to": "2026-08-07",
-     "days": 15
+     "to": "2026-08-12",
+     "days": 20
+    },
+    {
+     "id": "22PaCjS2mANX",
+     "name": "FRAMING & MEPS ROUGH IN INSPECTION",
+     "from": "2026-07-17",
+     "to": "2026-08-03",
+     "days": 17
+    },
+    {
+     "id": "22PZzWVfUWhN",
+     "name": "INSULATION: CITY INSPECTION",
+     "from": "2026-07-29",
+     "to": "2026-08-14",
+     "days": 16
     },
     {
      "id": "22PZzWfBSQDK",
@@ -7192,20 +7212,6 @@
      "name": "FRAMING: EXECUTE",
      "from": "2026-07-04",
      "to": "2026-07-17",
-     "days": 13
-    },
-    {
-     "id": "22PZzWUzYRut",
-     "name": "DOORS & WINDOWS: EXECUTE",
-     "from": "2026-07-10",
-     "to": "2026-07-23",
-     "days": 13
-    },
-    {
-     "id": "22PaCjS2mANX",
-     "name": "FRAMING & MEPS ROUGH IN INSPECTION",
-     "from": "2026-07-17",
-     "to": "2026-07-30",
      "days": 13
     },
     {
@@ -7237,6 +7243,13 @@
      "days": 11
     },
     {
+     "id": "22PZzWVeTaGW",
+     "name": "INSULATION: EXECUTE",
+     "from": "2026-07-27",
+     "to": "2026-08-07",
+     "days": 11
+    },
+    {
      "id": "22PZzWUUGmVq",
      "name": "FRAMING: STAIRS",
      "from": "2026-07-07",
@@ -7255,13 +7268,6 @@
      "name": "ELECTRICAL ROUGH IN: EXECUTE",
      "from": "2026-07-16",
      "to": "2026-07-25",
-     "days": 9
-    },
-    {
-     "id": "22PZzWVeTaGW",
-     "name": "INSULATION: EXECUTE",
-     "from": "2026-07-27",
-     "to": "2026-08-05",
      "days": 9
     },
     {
@@ -7370,8 +7376,8 @@
        "baseline_start": "2026-07-07",
        "baseline_end": "2026-07-10",
        "live_start": "2026-07-16",
-       "live_end": "2026-07-23",
-       "moved_days": 13,
+       "live_end": "2026-07-31",
+       "moved_days": 21,
        "days_in_week": 4,
        "earned_in_week": 3.0,
        "started": true,
@@ -7731,9 +7737,9 @@
        "marker": null,
        "baseline_start": "2026-07-17",
        "baseline_end": "2026-07-17",
-       "live_start": "2026-07-30",
-       "live_end": "2026-07-30",
-       "moved_days": 13,
+       "live_start": "2026-08-03",
+       "live_end": "2026-08-03",
+       "moved_days": 17,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -7805,36 +7811,15 @@
      "target_due": "2026-07-24",
      "tasks": [
       {
-       "id": "22PZzWUzYRut",
-       "name": "DOORS & WINDOWS: EXECUTE",
-       "type": "CP",
-       "marker": null,
-       "baseline_start": "2026-07-07",
-       "baseline_end": "2026-07-10",
-       "live_start": "2026-07-16",
-       "live_end": "2026-07-23",
-       "moved_days": 13,
-       "days_in_week": 0,
-       "earned_in_week": 0,
-       "started": true,
-       "progress": 0,
-       "status": "moved",
-       "in_week_plan": false,
-       "kicked_out": false,
-       "pulled_in": false,
-       "lands_here": true,
-       "was": "2026-07-10"
-      },
-      {
        "id": "22PZzWUsGsvd",
        "name": "ROOFING: EXECUTE",
        "type": "CP",
        "marker": null,
        "baseline_start": "2026-07-23",
        "baseline_end": "2026-07-23",
-       "live_start": "2026-08-05",
-       "live_end": "2026-08-07",
-       "moved_days": 15,
+       "live_start": "2026-08-10",
+       "live_end": "2026-08-12",
+       "moved_days": 20,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -7915,9 +7900,9 @@
        "marker": "start",
        "baseline_start": "2026-07-20",
        "baseline_end": "2026-08-01",
-       "live_start": "2026-08-06",
-       "live_end": "2026-08-19",
-       "moved_days": 18,
+       "live_start": "2026-08-10",
+       "live_end": "2026-08-22",
+       "moved_days": 21,
        "days_in_week": 7,
        "earned_in_week": 0.0,
        "started": false,
@@ -7935,9 +7920,9 @@
        "marker": "start",
        "baseline_start": "2026-07-23",
        "baseline_end": "2026-07-27",
-       "live_start": "2026-08-03",
-       "live_end": "2026-08-05",
-       "moved_days": 9,
+       "live_start": "2026-08-06",
+       "live_end": "2026-08-07",
+       "moved_days": 11,
        "days_in_week": 4,
        "earned_in_week": 0.0,
        "started": false,
@@ -7988,6 +7973,27 @@
      "target_due": "2026-08-01",
      "tasks": [
       {
+       "id": "22PZzWUzYRut",
+       "name": "DOORS & WINDOWS: EXECUTE",
+       "type": "CP",
+       "marker": null,
+       "baseline_start": "2026-07-16",
+       "baseline_end": "2026-07-23",
+       "live_start": "2026-07-16",
+       "live_end": "2026-07-31",
+       "moved_days": 8,
+       "days_in_week": 0,
+       "earned_in_week": 0,
+       "days_due_in_week": 0,
+       "started": true,
+       "progress": 0,
+       "status": "moved",
+       "in_week_plan": false,
+       "kicked_out": false,
+       "pulled_in": true,
+       "was": "2026-07-23"
+      },
+      {
        "id": "22PZzWUiKH6i",
        "name": "PLUMBING ROUGH IN: EXECUTE",
        "type": "AT",
@@ -8036,9 +8042,9 @@
        "marker": null,
        "baseline_start": "2026-07-28",
        "baseline_end": "2026-07-28",
-       "live_start": "2026-07-30",
-       "live_end": "2026-07-30",
-       "moved_days": 2,
+       "live_start": "2026-08-03",
+       "live_end": "2026-08-03",
+       "moved_days": 6,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "days_due_in_week": 1,
@@ -8046,7 +8052,7 @@
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
-       "kicked_out": false,
+       "kicked_out": true,
        "pulled_in": false,
        "was": null
       },
@@ -8078,9 +8084,9 @@
        "marker": "start",
        "baseline_start": "2026-07-30",
        "baseline_end": "2026-08-13",
-       "live_start": "2026-08-06",
-       "live_end": "2026-08-20",
-       "moved_days": 7,
+       "live_start": "2026-08-10",
+       "live_end": "2026-08-14",
+       "moved_days": 1,
        "days_in_week": 4,
        "earned_in_week": 0.0,
        "days_due_in_week": 0,
@@ -8141,9 +8147,9 @@
        "marker": "start",
        "baseline_start": "2026-08-01",
        "baseline_end": "2026-08-14",
-       "live_start": "2026-08-06",
-       "live_end": "2026-08-19",
-       "moved_days": 5,
+       "live_start": "2026-08-10",
+       "live_end": "2026-08-22",
+       "moved_days": 8,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "days_due_in_week": 0,
@@ -10887,8 +10893,8 @@
      "id": "22PaCCciwf4v",
      "name": "CLEANING: TRASH HAUL",
      "from": "2026-07-07",
-     "to": "2026-07-28",
-     "days": 21
+     "to": "2026-07-29",
+     "days": 22
     },
     {
      "id": "22PXCXCXSSVR",
@@ -11005,8 +11011,8 @@
        "baseline_start": "2026-07-07",
        "baseline_end": "2026-07-07",
        "live_start": "2026-07-28",
-       "live_end": "2026-07-28",
-       "moved_days": 21,
+       "live_end": "2026-07-29",
+       "moved_days": 22,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": true,
@@ -11365,8 +11371,8 @@
        "baseline_start": "2026-07-25",
        "baseline_end": "2026-07-25",
        "live_start": "2026-07-28",
-       "live_end": "2026-07-28",
-       "moved_days": 3,
+       "live_end": "2026-07-29",
+       "moved_days": 4,
        "days_in_week": 0,
        "earned_in_week": 0,
        "days_due_in_week": 0,
