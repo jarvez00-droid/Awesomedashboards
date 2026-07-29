@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T05:41:35",
+  "generated_at": "2026-07-29T06:05:10",
   "today": "2026-07-29",
   "horizon": "2027-02-03",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -39,17 +39,17 @@
   ],
   "totals": {
     "prod": [
-      523397.01,
+      523397.0,
       433937.92
     ],
     "prod_todate": [
-      178793.12,
-      148952.24
+      177046.26,
+      147466.18
     ],
     "weekly": {
       "fixed": 320312.54,
       "net": [
-        203084.47,
+        203084.46,
         113625.38
       ],
       "periods": 29,
@@ -61,7 +61,7 @@
     "monthly": {
       "fixed": 382902.4,
       "net": [
-        140494.61,
+        140494.6,
         51035.52
       ],
       "periods": 8,
@@ -602,17 +602,17 @@
       "label_moy": "jul S4",
       "label_short": "25 jul",
       "prod": [
-        55667.19,
-        47299.2
+        53920.33,
+        45813.14
       ],
       "fixed": 11045.26,
       "net": [
-        44621.93,
-        36253.94
+        42875.07,
+        34767.88
       ],
       "cum": [
-        79385.79,
-        49544.9
+        77638.93,
+        48058.84
       ],
       "active_count": 10,
       "active_projects": [
@@ -640,8 +640,8 @@
           867.67
         ],
         "Katie Holmes": [
-          9061.09,
-          8445.76
+          7314.24,
+          6959.7
         ],
         "Clifford Clack": [
           2696.07,
@@ -681,17 +681,17 @@
       "label_moy": "ago S1",
       "label_short": "1 ago",
       "prod": [
-        49755.31,
-        41479.49
+        51408.22,
+        42886.34
       ],
       "fixed": 11045.26,
       "net": [
-        38710.05,
-        30434.23
+        40362.96,
+        31841.08
       ],
       "cum": [
-        118095.84,
-        79979.13
+        118001.89,
+        79899.92
       ],
       "active_count": 8,
       "active_projects": [
@@ -713,8 +713,8 @@
           -10.53
         ],
         "Katie Holmes": [
-          20732.25,
-          18821.58
+          22479.11,
+          20307.64
         ],
         "Charles Harris": [
           7355.95,
@@ -729,8 +729,8 @@
           1757.03
         ],
         "Lingyan Qiu": [
-          7354.03,
-          6844.31
+          7260.08,
+          6765.1
         ],
         "Rohini Williams": [
           4045.4,
@@ -750,17 +750,17 @@
       "label_moy": "ago S2",
       "label_short": "8 ago",
       "prod": [
-        43636.2,
-        35105.01
+        42343.39,
+        33986.2
       ],
       "fixed": 11045.26,
       "net": [
-        32590.94,
-        24059.75
+        31298.13,
+        22940.94
       ],
       "cum": [
-        150686.78,
-        104038.88
+        149300.02,
+        102840.86
       ],
       "active_count": 7,
       "active_projects": [
@@ -777,8 +777,8 @@
       "pending": false,
       "by_project": {
         "Katie Holmes": [
-          6948.11,
-          5789.35
+          5902.63,
+          4887.61
         ],
         "Charles Harris": [
           2901.33,
@@ -793,8 +793,8 @@
           12838.66
         ],
         "Lingyan Qiu": [
-          -97.6,
-          -309.4
+          -344.93,
+          -526.47
         ],
         "Rohini Williams": [
           3946.07,
@@ -814,23 +814,24 @@
       "label_moy": "ago S3",
       "label_short": "15 ago",
       "prod": [
-        37390.83,
-        28477.25
+        39536.7,
+        30747.78
       ],
       "fixed": 11045.26,
       "net": [
-        26345.57,
-        17431.99
+        28491.44,
+        19702.52
       ],
       "cum": [
-        177032.35,
-        121470.87
+        177791.46,
+        122543.38
       ],
-      "active_count": 6,
+      "active_count": 7,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
         "Katie Holmes",
+        "Lingyan Qiu",
         "Martha Cockrell",
         "Rohini Williams",
         "Shaan Lagisetty"
@@ -840,8 +841,8 @@
       "pending": false,
       "by_project": {
         "Katie Holmes": [
-          4245.74,
-          1804.69
+          6050.33,
+          3778.94
         ],
         "Charles Harris": [
           2176.0,
@@ -854,6 +855,10 @@
         "Martha Cockrell": [
           12499.73,
           8919.04
+        ],
+        "Lingyan Qiu": [
+          341.28,
+          296.28
         ],
         "Rohini Williams": [
           4787.14,
@@ -873,22 +878,23 @@
       "label_moy": "ago S4",
       "label_short": "22 ago",
       "prod": [
-        23629.91,
-        18668.4
+        22870.8,
+        17595.89
       ],
       "fixed": 11045.26,
       "net": [
-        12584.65,
-        7623.14
+        11825.54,
+        6550.63
       ],
       "cum": [
         189617.0,
         129094.01
       ],
-      "active_count": 5,
+      "active_count": 6,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
+        "Katie Holmes",
         "Martha Cockrell",
         "Rohini Williams",
         "Shaan Lagisetty"
@@ -897,6 +903,10 @@
       "is_partial": false,
       "pending": false,
       "by_project": {
+        "Katie Holmes": [
+          -759.11,
+          -1072.51
+        ],
         "Charles Harris": [
           7729.94,
           6073.33
@@ -1836,17 +1846,17 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        138305.75,
-        115195.36
+        136558.89,
+        113709.3
       ],
       "fixed": 47862.8,
       "net": [
-        90442.95,
-        67332.56
+        88696.09,
+        65846.5
       ],
       "cum": [
-        83067.52,
-        53226.64
+        81320.66,
+        51740.58
       ],
       "is_future": false,
       "is_partial": true,
@@ -1861,8 +1871,8 @@
           2156.97
         ],
         "Katie Holmes": [
-          11939.14,
-          9732.41
+          10192.29,
+          8246.35
         ],
         "Clifford Clack": [
           5753.87,
@@ -1898,16 +1908,16 @@
       "month": "2026-08",
       "label": "ago 2026",
       "prod": [
-        174438.43,
-        141191.49
+        176185.28,
+        142677.55
       ],
       "fixed": 47862.8,
       "net": [
-        126575.63,
-        93328.69
+        128322.48,
+        94814.75
       ],
       "cum": [
-        209643.15,
+        209643.14,
         146555.33
       ],
       "is_future": true,
@@ -1919,8 +1929,8 @@
           -10.53
         ],
         "Katie Holmes": [
-          31926.11,
-          26415.63
+          33672.96,
+          27901.69
         ],
         "Charles Harris": [
           32473.06,
@@ -1961,7 +1971,7 @@
         75172.6
       ],
       "cum": [
-        306731.38,
+        306731.37,
         221727.93
       ],
       "is_future": true,
@@ -2003,7 +2013,7 @@
         -47542.74
       ],
       "cum": [
-        261933.17,
+        261933.16,
         174185.19
       ],
       "is_future": true,
@@ -2041,7 +2051,7 @@
         -44657.71
       ],
       "cum": [
-        218038.25,
+        218038.24,
         129527.48
       ],
       "is_future": true,
@@ -2071,7 +2081,7 @@
         -30780.23
       ],
       "cum": [
-        188116.42,
+        188116.41,
         98747.25
       ],
       "is_future": true,
@@ -2101,7 +2111,7 @@
         0.0
       ],
       "cum": [
-        188116.42,
+        188116.41,
         98747.25
       ],
       "is_future": true,
@@ -2122,7 +2132,7 @@
         -47711.73
       ],
       "cum": [
-        140494.61,
+        140494.6,
         51035.52
       ],
       "is_future": true,
@@ -2370,21 +2380,25 @@
           -277.74,
           -1331.39
         ],
-        "2026-W31": [
-          9061.09,
-          8445.76
-        ],
         "2026-W32": [
-          20732.25,
-          18821.58
+          22479.11,
+          20307.64
+        ],
+        "2026-W31": [
+          7314.24,
+          6959.7
         ],
         "2026-W33": [
-          6948.11,
-          5789.35
+          5902.63,
+          4887.61
         ],
         "2026-W34": [
-          4245.74,
-          1804.69
+          6050.33,
+          3778.94
+        ],
+        "2026-W35": [
+          -759.11,
+          -1072.51
         ]
       },
       "months": {
@@ -2393,16 +2407,16 @@
           4002.53
         ],
         "2026-07": [
-          11939.14,
-          9732.41
+          10192.29,
+          8246.35
         ],
         "2026-08": [
-          31926.11,
-          26415.63
+          33672.96,
+          27901.69
         ]
       },
       "first_week": "2026-W26",
-      "last_week": "2026-W34"
+      "last_week": "2026-W35"
     },
     {
       "project": "Rohini Williams",
@@ -2747,12 +2761,16 @@
           526.49
         ],
         "2026-W32": [
-          7354.03,
-          6844.31
+          7260.08,
+          6765.1
         ],
         "2026-W33": [
-          -97.6,
-          -309.4
+          -344.93,
+          -526.47
+        ],
+        "2026-W34": [
+          341.28,
+          296.28
         ]
       },
       "months": {
@@ -2770,7 +2788,7 @@
         ]
       },
       "first_week": "2026-W23",
-      "last_week": "2026-W33"
+      "last_week": "2026-W34"
     },
     {
       "project": "Shaan Lagisetty",
