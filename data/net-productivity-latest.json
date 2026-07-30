@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T15:12:56",
+  "generated_at": "2026-07-30T15:36:47",
   "today": "2026-07-30",
   "horizon": "2027-02-03",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -2999,10 +2999,10 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 41,
-    "orphan_cost": 277973.6,
+    "orphan_trades": 42,
+    "orphan_cost": 282473.6,
     "priced_trades": 173,
-    "total_trades": 214,
+    "total_trades": 215,
     "by_project": [
       {
         "project": "Charles Harris",
@@ -3051,6 +3051,25 @@
           {
             "trade": "MECHANICAL TRIM",
             "cost": 4302.0
+          }
+        ]
+      },
+      {
+        "project": "Stephanie Felton",
+        "orphan_trades": 3,
+        "orphan_cost": 7351.54,
+        "examples": [
+          {
+            "trade": "MECHANICAL TRIM",
+            "cost": 1500.0
+          },
+          {
+            "trade": "CROWNMOLDING",
+            "cost": 1351.54
+          },
+          {
+            "trade": "EXTERIOR DRIVEWAY",
+            "cost": 4500.0
           }
         ]
       },
@@ -3139,21 +3158,6 @@
           {
             "trade": "GUTTERS",
             "cost": 689.0
-          }
-        ]
-      },
-      {
-        "project": "Stephanie Felton",
-        "orphan_trades": 2,
-        "orphan_cost": 2851.54,
-        "examples": [
-          {
-            "trade": "MECHANICAL TRIM",
-            "cost": 1500.0
-          },
-          {
-            "trade": "CROWNMOLDING",
-            "cost": 1351.54
           }
         ]
       },
@@ -5142,6 +5146,14 @@
           "n_exp": 4
         },
         {
+          "trade": "EXTERIOR DRIVEWAY",
+          "income": 0.0,
+          "expense": 4500.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 1
+        },
+        {
           "trade": "GLASS",
           "income": 1200.0,
           "expense": 1800.0,
@@ -5183,7 +5195,7 @@
         }
       ],
       "total_income": 121755.0,
-      "total_expense": 149183.57,
+      "total_expense": 153683.57,
       "loose_amount": 0
     },
     {
