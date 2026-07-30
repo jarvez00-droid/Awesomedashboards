@@ -3,10 +3,10 @@
   "summary": {
     "overdue": 181,
     "active": 42,
-    "active_blocked": 3,
+    "active_blocked": 4,
     "coming": 301,
     "coming_unassigned": 292,
-    "role_gaps": 633,
+    "role_gaps": 634,
     "concern": "Charles Harris \u2014 Argyle TX \u2014 43 overdue tasks",
     "payment_overdue": 15,
     "hidden_no_pm": [
@@ -15,7 +15,7 @@
   },
   "analysis": {
     "paragraphs": [
-      "Overdue climbed to 181 \u2014 we need to reverse this today. Well below the 7-day average of 188 \u2014 the team is making real progress. 42 tasks are actively in progress \u2014 that's solid execution across the board. 3 tasks should be active but are stuck waiting on blockers \u2014 these need immediate attention.",
+      "Overdue climbed to 181 \u2014 we need to reverse this today. Well below the 7-day average of 188 \u2014 the team is making real progress. 42 tasks are actively in progress \u2014 that's solid execution across the board. 4 tasks should be active but are stuck waiting on blockers \u2014 these need immediate attention.",
       "**Charles Harris \u2014 Argyle TX:** The oldest overdue task is 49 days past due with 43 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. **3 upcoming tasks unassigned** \u2014 assign people now or they'll start late.",
       "**Ginger Brown:** The oldest overdue task is 61 days past due with 35 total \u2014 this has been stuck for days. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. $30,000 in payments coming due this week \u2014 prepare funds.",
       "**Shaan Lagisetty (CNG-20251169):** The oldest overdue task is 22 days past due with 19 total \u2014 this schedule needs a reset. PM should update dates on tasks that have truly slipped rather than letting false overdues pile up. **32 upcoming tasks unassigned** \u2014 assign people now or they'll start late. 4 payment tasks due this week.",
@@ -53,7 +53,7 @@
       "Jeff": [
         "Jeff's overdue has been growing over the past few days \u2014 now at 32. This needs to turn around today.",
         "**Stephanie and Marc Felton:** 18 overdue (oldest: 59d) \u2014 review and reschedule tasks that have truly slipped. **16 upcoming unassigned** \u2014 assign before they start. 18 tasks starting this week \u2014 make sure subs and materials are confirmed.",
-        "**Martha Cockrell (CNG-20251199):** 14 overdue (oldest: 10d) \u2014 review and reschedule tasks that have truly slipped. **69 upcoming unassigned** \u2014 assign before they start. 69 tasks starting this week \u2014 make sure subs and materials are confirmed.",
+        "**Martha Cockrell (CNG-20251199):** 14 overdue (oldest: 10d) \u2014 review and reschedule tasks that have truly slipped. 1 active-blocked \u2014 clear the blockers to keep moving. **69 upcoming unassigned** \u2014 assign before they start. 69 tasks starting this week \u2014 make sure subs and materials are confirmed.",
         "**Recommendation:** Block 2 hours today to clear the oldest overdue tasks first. If a task is genuinely behind and can't be completed soon, update the schedule dates so we have accurate data."
       ],
       "Jonas De Cardenas": [
@@ -4417,7 +4417,7 @@
       "c": {
         "ov": 14,
         "ac": 8,
-        "ab": 0,
+        "ab": 1,
         "up": 85,
         "bo_ov": 4,
         "bo_today": 3,
@@ -4427,7 +4427,7 @@
         "pay": 4
       },
       "g": {
-        "p": 124,
+        "p": 125,
         "v": 87,
         "pc": 11
       },
@@ -4454,11 +4454,6 @@
             "w": "\u26a0\ufe0f Nobody"
           },
           {
-            "n": "PLUMBING ROUGH IN: EXECUTE",
-            "d": 3,
-            "w": "\u26a0\ufe0f Nobody"
-          },
-          {
             "n": "DOORS & WINDOWS: CC CHECKLIST - PM INSPECTION (AFTER)",
             "d": 3,
             "w": "\u26a0\ufe0f Nobody"
@@ -4469,7 +4464,7 @@
             "w": "\u26a0\ufe0f Nobody"
           },
           {
-            "n": "PLUMBING ROUGH IN: CC CHECKLIST - PM INSPECTION (AFTER)",
+            "n": "PLUMBING ROUGH IN: EXECUTE",
             "d": 1,
             "w": "\u26a0\ufe0f Nobody"
           },
@@ -4502,9 +4497,19 @@
             "n": "GARAGE DOOR: CONFIRM TAKEOFF DETAILS",
             "d": 1,
             "w": "\u26a0\ufe0f Nobody"
+          },
+          {
+            "n": "SIDING: CONFIRM TAKEOFF DETAILS",
+            "d": 1,
+            "w": "\u26a0\ufe0f Nobody"
           }
         ],
         "active": [
+          {
+            "n": "ELECTRICAL ROUGH IN: EXECUTE",
+            "dt": "Jul 9-30",
+            "w": "Brayan Ramos"
+          },
           {
             "n": "INSULATION: SELECT VENDOR & SEND WO",
             "dt": "Jul 30-30",
@@ -4532,11 +4537,6 @@
           },
           {
             "n": "ELECTRICAL ROUGH IN: EXECUTE",
-            "dt": "Jul 9-31",
-            "w": "Brayan Ramos"
-          },
-          {
-            "n": "ELECTRICAL ROUGH IN: EXECUTE",
             "dt": "Jul 30-5",
             "w": "\u26a0\ufe0f Nobody"
           },
@@ -4546,7 +4546,15 @@
             "w": "\u26a0\ufe0f Nobody"
           }
         ],
-        "active_blocked": [],
+        "active_blocked": [
+          {
+            "n": "PLUMBING ROUGH IN: CC CHECKLIST - PM INSPECTION (AFTER)",
+            "d": 0,
+            "w": "\u26a0\ufe0f Nobody",
+            "bl": "PLUMBING ROUGH IN: EXECUTE",
+            "bl_kind": "overdue"
+          }
+        ],
         "upcoming": [
           {
             "n": "ROOFING: CREATE SOW REPORT & SOURCE VENDORS",
@@ -4580,6 +4588,18 @@
           },
           {
             "n": "STAIRS: CREATE SOW REPORT & SOURCE VENDORS",
+            "w": "\u26a0\ufe0f Nobody",
+            "unassigned": true,
+            "when": "tomorrow"
+          },
+          {
+            "n": "PLUMBING: CITY INSPECTION",
+            "w": "\u26a0\ufe0f Nobody",
+            "unassigned": true,
+            "when": "tomorrow"
+          },
+          {
+            "n": "MECHANICAL CITY INSPECTION",
             "w": "\u26a0\ufe0f Nobody",
             "unassigned": true,
             "when": "tomorrow"
@@ -4621,6 +4641,12 @@
             "when": "Mon"
           },
           {
+            "n": "INSULATION: CONFIRM SCHEDULE WITH SUB",
+            "w": "\u26a0\ufe0f Nobody",
+            "unassigned": true,
+            "when": "Mon"
+          },
+          {
             "n": "DRYWALL: CONFIRM TAKEOFF DETAILS",
             "w": "\u26a0\ufe0f Nobody",
             "unassigned": true,
@@ -4651,18 +4677,6 @@
             "when": "Mon"
           },
           {
-            "n": "PLUMBING: CITY INSPECTION",
-            "w": "\u26a0\ufe0f Nobody",
-            "unassigned": true,
-            "when": "Mon"
-          },
-          {
-            "n": "MECHANICAL CITY INSPECTION",
-            "w": "\u26a0\ufe0f Nobody",
-            "unassigned": true,
-            "when": "Mon"
-          },
-          {
             "n": "ROOFING: CONFIRM TAKEOFF DETAILS",
             "w": "\u26a0\ufe0f Nobody",
             "unassigned": true,
@@ -4675,7 +4689,7 @@
             "when": "Tue"
           },
           {
-            "n": "INSULATION: CONFIRM SCHEDULE WITH SUB",
+            "n": "INSULATION: CC CHECKLIST - PM INSPECTION (BEFORE)",
             "w": "\u26a0\ufe0f Nobody",
             "unassigned": true,
             "when": "Tue"
@@ -4729,7 +4743,7 @@
             "when": "Wed"
           },
           {
-            "n": "INSULATION: CC CHECKLIST - PM INSPECTION (BEFORE)",
+            "n": "INSULATION: EXECUTE",
             "w": "\u26a0\ufe0f Nobody",
             "unassigned": true,
             "when": "Wed"
@@ -4808,12 +4822,6 @@
           },
           {
             "n": "ELECTRICAL ROUGH IN: CC CHECKLIST - PM INSPECTION (AFTER)",
-            "w": "\u26a0\ufe0f Nobody",
-            "unassigned": true,
-            "when": "Aug 6"
-          },
-          {
-            "n": "INSULATION: EXECUTE",
             "w": "\u26a0\ufe0f Nobody",
             "unassigned": true,
             "when": "Aug 6"
@@ -5396,11 +5404,6 @@
             "w": "\u26a0\ufe0f Nobody"
           },
           {
-            "n": "PLUMBING ROUGH IN: EXECUTE",
-            "d": 3,
-            "w": "\u26a0\ufe0f Nobody"
-          },
-          {
             "n": "DOORS & WINDOWS: CC CHECKLIST - PM INSPECTION (AFTER)",
             "d": 3,
             "w": "\u26a0\ufe0f Nobody"
@@ -5411,7 +5414,7 @@
             "w": "\u26a0\ufe0f Nobody"
           },
           {
-            "n": "PLUMBING ROUGH IN: CC CHECKLIST - PM INSPECTION (AFTER)",
+            "n": "PLUMBING ROUGH IN: EXECUTE",
             "d": 1,
             "w": "\u26a0\ufe0f Nobody"
           },
@@ -5444,9 +5447,19 @@
             "n": "GARAGE DOOR: CONFIRM TAKEOFF DETAILS",
             "d": 1,
             "w": "\u26a0\ufe0f Nobody"
+          },
+          {
+            "n": "SIDING: CONFIRM TAKEOFF DETAILS",
+            "d": 1,
+            "w": "\u26a0\ufe0f Nobody"
           }
         ],
         "active": [
+          {
+            "n": "ELECTRICAL ROUGH IN: EXECUTE",
+            "dt": "Jul 9-30",
+            "w": "Brayan Ramos"
+          },
           {
             "n": "INSULATION: SELECT VENDOR & SEND WO",
             "dt": "Jul 30-30",
@@ -5474,11 +5487,6 @@
           },
           {
             "n": "ELECTRICAL ROUGH IN: EXECUTE",
-            "dt": "Jul 9-31",
-            "w": "Brayan Ramos"
-          },
-          {
-            "n": "ELECTRICAL ROUGH IN: EXECUTE",
             "dt": "Jul 30-5",
             "w": "\u26a0\ufe0f Nobody"
           },
@@ -5488,7 +5496,15 @@
             "w": "\u26a0\ufe0f Nobody"
           }
         ],
-        "active_blocked": [],
+        "active_blocked": [
+          {
+            "n": "PLUMBING ROUGH IN: CC CHECKLIST - PM INSPECTION (AFTER)",
+            "d": 0,
+            "w": "\u26a0\ufe0f Nobody",
+            "bl": "PLUMBING ROUGH IN: EXECUTE",
+            "bl_kind": "overdue"
+          }
+        ],
         "coming": [
           {
             "n": "ROOFING: CREATE SOW REPORT & SOURCE VENDORS",
@@ -5540,6 +5556,18 @@
             "is_payment": true,
             "amount": 1000.0,
             "pay_type": "subs"
+          },
+          {
+            "n": "PLUMBING: CITY INSPECTION",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts tomorrow",
+            "unassigned": true
+          },
+          {
+            "n": "MECHANICAL CITY INSPECTION",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts tomorrow",
+            "unassigned": true
           },
           {
             "n": "GARAGE DOOR: PURCHASE MATERIAL",
@@ -5617,6 +5645,12 @@
             "unassigned": true
           },
           {
+            "n": "INSULATION: CONFIRM SCHEDULE WITH SUB",
+            "w": "\u26a0\ufe0f Nobody",
+            "when": "starts Mon",
+            "unassigned": true
+          },
+          {
             "n": "DRYWALL: CONFIRM TAKEOFF DETAILS",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts Mon",
@@ -5682,18 +5716,6 @@
             "unassigned": true
           },
           {
-            "n": "PLUMBING: CITY INSPECTION",
-            "w": "\u26a0\ufe0f Nobody",
-            "when": "starts Mon",
-            "unassigned": true
-          },
-          {
-            "n": "MECHANICAL CITY INSPECTION",
-            "w": "\u26a0\ufe0f Nobody",
-            "when": "starts Mon",
-            "unassigned": true
-          },
-          {
             "n": "ROOFING: CONFIRM TAKEOFF DETAILS",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts Tue",
@@ -5708,7 +5730,7 @@
             "unassigned": true
           },
           {
-            "n": "INSULATION: CONFIRM SCHEDULE WITH SUB",
+            "n": "INSULATION: CC CHECKLIST - PM INSPECTION (BEFORE)",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts Tue",
             "unassigned": true
@@ -5789,7 +5811,7 @@
             "unassigned": true
           },
           {
-            "n": "INSULATION: CC CHECKLIST - PM INSPECTION (BEFORE)",
+            "n": "INSULATION: EXECUTE",
             "w": "\u26a0\ufe0f Nobody",
             "when": "starts Wed",
             "unassigned": true
@@ -5910,12 +5932,6 @@
             "is_payment": true,
             "amount": 8000.0,
             "pay_type": "materials"
-          },
-          {
-            "n": "INSULATION: EXECUTE",
-            "w": "\u26a0\ufe0f Nobody",
-            "when": "starts Aug 6",
-            "unassigned": true
           },
           {
             "n": "INSULATION: EXECUTE",
