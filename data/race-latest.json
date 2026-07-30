@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-30T12:24:24",
+ "generated_at": "2026-07-30T12:48:52",
  "today": "2026-07-30",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -59,11 +59,11 @@
   "plan_days": 434.0,
   "month_forecast": {
    "status": "behind",
-   "projected_pct": 73.2,
+   "projected_pct": 73.4,
    "plan_pct": 100.0,
-   "leaked_count": 56,
-   "leaked_days": 117.0,
-   "leaked_pct": 26.8,
+   "leaked_count": 55,
+   "leaked_days": 116.0,
+   "leaked_pct": 26.6,
    "reshuffled_in_month": 37
   },
   "adherence": 43.0,
@@ -9346,11 +9346,11 @@
    "excluded_admin": [],
    "month_forecast": {
     "status": "behind",
-    "projected_pct": 77.5,
+    "projected_pct": 78.4,
     "plan_pct": 100.0,
-    "leaked_count": 8,
-    "leaked_days": 23.0,
-    "leaked_pct": 22.5,
+    "leaked_count": 7,
+    "leaked_days": 22.0,
+    "leaked_pct": 21.6,
     "reshuffled_in_month": 2,
     "leaked": [
      {
@@ -9368,7 +9368,7 @@
      {
       "name": "INSULATION: EXECUTE",
       "from": "2026-07-27",
-      "to": "2026-08-08",
+      "to": "2026-08-07",
       "days": 4
      },
      {
@@ -9392,13 +9392,7 @@
      {
       "name": "INSULATION: CITY INSPECTION",
       "from": "2026-07-29",
-      "to": "2026-08-07",
-      "days": 1
-     },
-     {
-      "name": "INSULATION: CITY INSPECTION",
-      "from": "2026-07-29",
-      "to": "2026-08-13",
+      "to": "2026-08-08",
       "days": 1
      }
     ]
@@ -9495,6 +9489,17 @@
      "depends_on": []
     },
     {
+     "id": "22PZzWfSdfDV",
+     "name": "INSULATION: CITY INSPECTION",
+     "baseline_end": "2026-07-29",
+     "live_end": null,
+     "current_end": "2026-07-29",
+     "current_start": "2026-07-29",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
      "id": "22PZzWVERTRf",
      "name": "ELECTRICAL ROUGH IN: EXECUTE",
      "baseline_end": "2026-07-16",
@@ -9539,24 +9544,24 @@
      "depends_on": []
     },
     {
-     "id": "22PZzWVfUWhN",
-     "name": "INSULATION: CITY INSPECTION",
-     "baseline_end": "2026-07-29",
+     "id": "22PZzWfRibBW",
+     "name": "INSULATION: EXECUTE",
+     "baseline_end": "2026-07-27",
      "live_end": "2026-08-07",
      "current_end": "2026-08-07",
      "current_start": "2026-08-07",
-     "moved_days": 9,
+     "moved_days": 11,
      "status": "moved",
      "depends_on": []
     },
     {
-     "id": "22PZzWfRibBW",
-     "name": "INSULATION: EXECUTE",
-     "baseline_end": "2026-07-27",
+     "id": "22PZzWVfUWhN",
+     "name": "INSULATION: CITY INSPECTION",
+     "baseline_end": "2026-07-29",
      "live_end": "2026-08-08",
      "current_end": "2026-08-08",
-     "current_start": "2026-08-06",
-     "moved_days": 12,
+     "current_start": "2026-08-08",
+     "moved_days": 10,
      "status": "moved",
      "depends_on": []
     },
@@ -9568,17 +9573,6 @@
      "current_end": "2026-08-11",
      "current_start": "2026-08-10",
      "moved_days": 19,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PZzWfSdfDV",
-     "name": "INSULATION: CITY INSPECTION",
-     "baseline_end": "2026-07-29",
-     "live_end": "2026-08-13",
-     "current_end": "2026-08-13",
-     "current_start": "2026-08-13",
-     "moved_days": 15,
      "status": "moved",
      "depends_on": []
     },
@@ -9598,8 +9592,8 @@
     43577.49,
     39631.15
    ],
-   "margin_pct": 32.7,
-   "moved_count": 20,
+   "margin_pct": 37.8,
+   "moved_count": 19,
    "moved": [
     {
      "id": "22PZzWexBK6A",
@@ -9644,13 +9638,6 @@
      "days": 15
     },
     {
-     "id": "22PZzWfSdfDV",
-     "name": "INSULATION: CITY INSPECTION",
-     "from": "2026-07-29",
-     "to": "2026-08-13",
-     "days": 15
-    },
-    {
      "id": "22PZzWVERTRf",
      "name": "ELECTRICAL ROUGH IN: EXECUTE",
      "from": "2026-07-16",
@@ -9679,13 +9666,6 @@
      "days": 12
     },
     {
-     "id": "22PZzWfRibBW",
-     "name": "INSULATION: EXECUTE",
-     "from": "2026-07-27",
-     "to": "2026-08-08",
-     "days": 12
-    },
-    {
      "id": "22PaChWk49F7",
      "name": "DEMO: DEMO WALLS & CEILING",
      "from": "2026-07-04",
@@ -9693,10 +9673,24 @@
      "days": 11
     },
     {
+     "id": "22PZzWfRibBW",
+     "name": "INSULATION: EXECUTE",
+     "from": "2026-07-27",
+     "to": "2026-08-07",
+     "days": 11
+    },
+    {
      "id": "22PZzWVeTaGW",
      "name": "INSULATION: EXECUTE",
      "from": "2026-07-27",
      "to": "2026-08-06",
+     "days": 10
+    },
+    {
+     "id": "22PZzWVfUWhN",
+     "name": "INSULATION: CITY INSPECTION",
+     "from": "2026-07-29",
+     "to": "2026-08-08",
      "days": 10
     },
     {
@@ -9711,13 +9705,6 @@
      "name": "DEMO: FLOORING KITCHEN",
      "from": "2026-07-06",
      "to": "2026-07-15",
-     "days": 9
-    },
-    {
-     "id": "22PZzWVfUWhN",
-     "name": "INSULATION: CITY INSPECTION",
-     "from": "2026-07-29",
-     "to": "2026-08-07",
      "days": 9
     },
     {
@@ -10369,9 +10356,9 @@
        "marker": "start",
        "baseline_start": "2026-07-24",
        "baseline_end": "2026-07-27",
-       "live_start": "2026-08-06",
-       "live_end": "2026-08-08",
-       "moved_days": 12,
+       "live_start": "2026-08-07",
+       "live_end": "2026-08-07",
+       "moved_days": 11,
        "days_in_week": 3,
        "earned_in_week": 0.0,
        "started": false,
@@ -10513,15 +10500,15 @@
        "marker": "start",
        "baseline_start": "2026-07-30",
        "baseline_end": "2026-08-13",
-       "live_start": "2026-08-07",
-       "live_end": "2026-08-12",
-       "moved_days": -1,
+       "live_start": "2026-08-10",
+       "live_end": "2026-08-14",
+       "moved_days": 1,
        "days_in_week": 4,
        "earned_in_week": 0.0,
        "days_due_in_week": 1,
        "started": false,
        "progress": 0,
-       "status": "pending",
+       "status": "moved",
        "in_week_plan": true,
        "kicked_out": true,
        "pulled_in": false,
@@ -10534,9 +10521,9 @@
        "marker": "start",
        "baseline_start": "2026-07-30",
        "baseline_end": "2026-08-07",
-       "live_start": "2026-08-12",
-       "live_end": "2026-08-20",
-       "moved_days": 13,
+       "live_start": "2026-08-15",
+       "live_end": "2026-08-17",
+       "moved_days": 10,
        "days_in_week": 4,
        "earned_in_week": 0.0,
        "days_due_in_week": 1,
