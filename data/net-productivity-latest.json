@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T13:44:26",
+  "generated_at": "2026-07-31T14:08:03",
   "today": "2026-07-31",
   "horizon": "2027-02-03",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -3025,7 +3025,7 @@
   ],
   "data_quality": {
     "orphan_trades": 42,
-    "orphan_cost": 282473.6,
+    "orphan_cost": 282211.0,
     "priced_trades": 173,
     "total_trades": 215,
     "by_project": [
@@ -3143,11 +3143,11 @@
       {
         "project": "Lingyan Qiu",
         "orphan_trades": 5,
-        "orphan_cost": 3217.54,
+        "orphan_cost": 2954.94,
         "examples": [
           {
             "trade": "GLASS",
-            "cost": 1256.93
+            "cost": 994.33
           },
           {
             "trade": "INTERIOR DOORS",
@@ -4584,17 +4584,17 @@
           "n_exp": 1
         },
         {
-          "trade": "GLASS",
+          "trade": "INTERIOR DOORS",
           "income": 0.0,
-          "expense": 1256.93,
+          "expense": 1076.62,
           "grouped": true,
           "n_inc": 0,
           "n_exp": 2
         },
         {
-          "trade": "INTERIOR DOORS",
+          "trade": "GLASS",
           "income": 0.0,
-          "expense": 1076.62,
+          "expense": 994.33,
           "grouped": true,
           "n_inc": 0,
           "n_exp": 2
@@ -4633,7 +4633,7 @@
         }
       ],
       "total_income": 188050.0,
-      "total_expense": 115432.22,
+      "total_expense": 115169.62,
       "loose_amount": 0
     },
     {
