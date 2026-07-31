@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T14:55:33",
+  "generated_at": "2026-07-31T15:19:15",
   "today": "2026-07-31",
   "horizon": "2027-02-03",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -43,8 +43,8 @@
       490467.96
     ],
     "prod_todate": [
-      167227.38,
-      139377.12
+      167649.85,
+      139769.26
     ],
     "weekly": {
       "fixed": 320312.54,
@@ -602,17 +602,17 @@
       "label_moy": "jul S4",
       "label_short": "25 jul",
       "prod": [
-        60783.08,
-        52654.11
+        61205.55,
+        53046.25
       ],
       "fixed": 11045.26,
       "net": [
-        49737.82,
-        41608.85
+        50160.29,
+        42000.99
       ],
       "cum": [
-        67820.03,
-        39969.77
+        68242.5,
+        40361.91
       ],
       "active_count": 10,
       "active_projects": [
@@ -640,8 +640,8 @@
           2563.11
         ],
         "Katie Holmes": [
-          9248.2,
-          9096.53
+          9670.67,
+          9488.67
         ],
         "Clifford Clack": [
           2876.21,
@@ -677,17 +677,17 @@
       "label_moy": "ago S1",
       "label_short": "1 ago",
       "prod": [
-        61869.98,
-        56868.25
+        67371.89,
+        61585.97
       ],
       "fixed": 11045.26,
       "net": [
-        50824.72,
-        45822.99
+        56326.63,
+        50540.71
       ],
       "cum": [
-        118644.75,
-        85792.76
+        124569.13,
+        90902.62
       ],
       "active_count": 10,
       "active_projects": [
@@ -715,8 +715,8 @@
           -684.89
         ],
         "Katie Holmes": [
-          26304.76,
-          25072.75
+          31806.67,
+          29790.47
         ],
         "Clifford Clack": [
           -119.18,
@@ -756,17 +756,17 @@
       "label_moy": "ago S2",
       "label_short": "8 ago",
       "prod": [
-        57025.33,
-        47078.64
+        57373.82,
+        47379.22
       ],
       "fixed": 11045.26,
       "net": [
-        45980.07,
-        36033.38
+        46328.56,
+        36333.96
       ],
       "cum": [
-        164624.82,
-        121826.14
+        170897.69,
+        127236.58
       ],
       "active_count": 8,
       "active_projects": [
@@ -784,8 +784,8 @@
       "pending": false,
       "by_project": {
         "Katie Holmes": [
-          10976.9,
-          9902.94
+          11325.39,
+          10203.52
         ],
         "Charles Harris": [
           2901.33,
@@ -821,17 +821,17 @@
       "label_moy": "ago S3",
       "label_short": "15 ago",
       "prod": [
-        40686.86,
-        34838.41
+        33654.88,
+        28355.46
       ],
       "fixed": 11045.26,
       "net": [
-        29641.6,
-        23793.15
+        22609.62,
+        17310.2
       ],
       "cum": [
-        194266.42,
-        145619.29
+        193507.31,
+        144546.78
       ],
       "active_count": 7,
       "active_projects": [
@@ -848,8 +848,8 @@
       "pending": false,
       "by_project": {
         "Katie Holmes": [
-          6050.33,
-          3778.94
+          -981.65,
+          -2704.01
         ],
         "Charles Harris": [
           2176.0,
@@ -881,23 +881,22 @@
       "label_moy": "ago S4",
       "label_short": "22 ago",
       "prod": [
-        44795.81,
-        38789.27
+        45554.92,
+        39861.77
       ],
       "fixed": 11045.26,
       "net": [
-        33750.55,
-        27744.01
+        34509.66,
+        28816.51
       ],
       "cum": [
         228016.97,
-        173363.3
+        173363.29
       ],
-      "active_count": 6,
+      "active_count": 5,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Katie Holmes",
         "Martha Cockrell",
         "Rohini Williams",
         "Shaan Lagisetty"
@@ -906,10 +905,6 @@
       "is_partial": false,
       "pending": false,
       "by_project": {
-        "Katie Holmes": [
-          -759.11,
-          -1072.51
-        ],
         "Charles Harris": [
           7729.94,
           6073.33
@@ -950,7 +945,7 @@
       ],
       "cum": [
         260049.23,
-        200237.15
+        200237.14
       ],
       "active_count": 5,
       "active_projects": [
@@ -1004,7 +999,7 @@
       ],
       "cum": [
         276698.4,
-        213610.47
+        213610.46
       ],
       "active_count": 5,
       "active_projects": [
@@ -1058,7 +1053,7 @@
       ],
       "cum": [
         299160.47,
-        228867.38
+        228867.37
       ],
       "active_count": 5,
       "active_projects": [
@@ -1112,7 +1107,7 @@
       ],
       "cum": [
         330103.16,
-        255841.77
+        255841.76
       ],
       "active_count": 4,
       "active_projects": [
@@ -1157,7 +1152,7 @@
       ],
       "cum": [
         343492.24,
-        264455.06
+        264455.05
       ],
       "active_count": 4,
       "active_projects": [
@@ -1206,7 +1201,7 @@
       ],
       "cum": [
         338177.9,
-        257216.31
+        257216.3
       ],
       "active_count": 4,
       "active_projects": [
@@ -1251,7 +1246,7 @@
       ],
       "cum": [
         329205.96,
-        247469.85
+        247469.84
       ],
       "active_count": 3,
       "active_projects": [
@@ -1287,7 +1282,7 @@
       ],
       "cum": [
         320452.21,
-        238227.66
+        238227.65
       ],
       "active_count": 3,
       "active_projects": [
@@ -1323,7 +1318,7 @@
       ],
       "cum": [
         320452.21,
-        238227.66
+        238227.65
       ],
       "active_count": 2,
       "active_projects": [
@@ -1353,7 +1348,7 @@
       ],
       "cum": [
         308908.91,
-        226338.04
+        226338.03
       ],
       "active_count": 2,
       "active_projects": [
@@ -1388,7 +1383,7 @@
       ],
       "cum": [
         297916.55,
-        215046.14
+        215046.13
       ],
       "active_count": 2,
       "active_projects": [
@@ -1423,7 +1418,7 @@
       ],
       "cum": [
         297916.55,
-        215046.14
+        215046.13
       ],
       "active_count": 2,
       "active_projects": [
@@ -1453,7 +1448,7 @@
       ],
       "cum": [
         288984.36,
-        206113.95
+        206113.94
       ],
       "active_count": 2,
       "active_projects": [
@@ -1488,7 +1483,7 @@
       ],
       "cum": [
         282860.64,
-        199665.23
+        199665.22
       ],
       "active_count": 2,
       "active_projects": [
@@ -1527,7 +1522,7 @@
       ],
       "cum": [
         273928.45,
-        190733.04
+        190733.03
       ],
       "active_count": 2,
       "active_projects": [
@@ -1562,7 +1557,7 @@
       ],
       "cum": [
         269887.67,
-        186267.56
+        186267.55
       ],
       "active_count": 2,
       "active_projects": [
@@ -1597,7 +1592,7 @@
       ],
       "cum": [
         264940.93,
-        181049.62
+        181049.61
       ],
       "active_count": 2,
       "active_projects": [
@@ -1632,7 +1627,7 @@
       ],
       "cum": [
         264940.93,
-        181049.62
+        181049.61
       ],
       "active_count": 2,
       "active_projects": [
@@ -1662,7 +1657,7 @@
       ],
       "cum": [
         264940.93,
-        181049.62
+        181049.61
       ],
       "active_count": 1,
       "active_projects": [
@@ -1691,7 +1686,7 @@
       ],
       "cum": [
         264940.93,
-        181049.62
+        181049.61
       ],
       "active_count": 1,
       "active_projects": [
@@ -1720,7 +1715,7 @@
       ],
       "cum": [
         264940.93,
-        181049.62
+        181049.61
       ],
       "active_count": 1,
       "active_projects": [
@@ -1749,7 +1744,7 @@
       ],
       "cum": [
         264940.93,
-        181049.62
+        181049.61
       ],
       "active_count": 1,
       "active_projects": [
@@ -1778,7 +1773,7 @@
       ],
       "cum": [
         254136.66,
-        170155.43
+        170155.42
       ],
       "active_count": 1,
       "active_projects": [
@@ -1854,17 +1849,17 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        127436.74,
-        106191.18
+        127859.21,
+        106583.32
       ],
       "fixed": 47862.8,
       "net": [
-        79573.94,
-        58328.38
+        79996.41,
+        58720.52
       ],
       "cum": [
-        71501.78,
-        43651.52
+        71924.25,
+        44043.66
       ],
       "is_future": false,
       "is_partial": true,
@@ -1879,8 +1874,8 @@
           2951.26
         ],
         "Katie Holmes": [
-          12126.25,
-          10383.18
+          12548.72,
+          10775.32
         ],
         "Clifford Clack": [
           7436.56,
@@ -1916,13 +1911,13 @@
       "month": "2026-08",
       "label": "ago 2026",
       "prod": [
-        222603.46,
-        193624.67
+        222180.99,
+        193232.53
       ],
       "fixed": 47862.8,
       "net": [
-        174740.66,
-        145761.87
+        174318.19,
+        145369.73
       ],
       "cum": [
         246242.44,
@@ -1941,8 +1936,8 @@
           -684.89
         ],
         "Katie Holmes": [
-          42572.88,
-          37682.13
+          42150.41,
+          37289.99
         ],
         "Clifford Clack": [
           -119.18,
@@ -2401,24 +2396,20 @@
           -1331.39
         ],
         "2026-W31": [
-          9248.2,
-          9096.53
+          9670.67,
+          9488.67
         ],
         "2026-W32": [
-          26304.76,
-          25072.75
+          31806.67,
+          29790.47
         ],
         "2026-W33": [
-          10976.9,
-          9902.94
+          11325.39,
+          10203.52
         ],
         "2026-W34": [
-          6050.33,
-          3778.94
-        ],
-        "2026-W35": [
-          -759.11,
-          -1072.51
+          -981.65,
+          -2704.01
         ]
       },
       "months": {
@@ -2427,16 +2418,16 @@
           4002.53
         ],
         "2026-07": [
-          12126.25,
-          10383.18
+          12548.72,
+          10775.32
         ],
         "2026-08": [
-          42572.88,
-          37682.13
+          42150.41,
+          37289.99
         ]
       },
       "first_week": "2026-W26",
-      "last_week": "2026-W35"
+      "last_week": "2026-W34"
     },
     {
       "project": "Rohini Williams",
