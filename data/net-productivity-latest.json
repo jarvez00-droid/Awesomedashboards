@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T18:42:12",
+  "generated_at": "2026-08-01T19:05:36",
   "today": "2026-08-01",
   "horizon": "2027-02-03",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -39,18 +39,18 @@
   ],
   "totals": {
     "prod": [
-      576996.78,
-      493270.32
+      588314.78,
+      505720.12
     ],
     "prod_todate": [
-      390263.89,
-      333689.61
+      401581.89,
+      346139.41
     ],
     "weekly": {
       "fixed": 320312.54,
       "net": [
-        256684.24,
-        172957.78
+        268002.24,
+        185407.58
       ],
       "periods": 29,
       "positive": [
@@ -61,8 +61,8 @@
     "monthly": {
       "fixed": 382902.4,
       "net": [
-        194094.38,
-        110367.92
+        205412.38,
+        122817.72
       ],
       "periods": 8,
       "positive": [
@@ -241,17 +241,17 @@
       "label_moy": "jun S3",
       "label_short": "20 jun",
       "prod": [
-        6911.36,
-        5974.68
+        7183.82,
+        6274.38
       ],
       "fixed": 11045.26,
       "net": [
-        -4133.9,
-        -5070.58
+        -3861.44,
+        -4770.88
       ],
       "cum": [
-        -14660.06,
-        -19860.72
+        -14387.6,
+        -19561.02
       ],
       "active_count": 7,
       "active_projects": [
@@ -280,8 +280,8 @@
           1601.01
         ],
         "Clifford Clack": [
-          356.8,
-          195.84
+          629.26,
+          495.54
         ],
         "Lingyan Qiu": [
           1838.95,
@@ -310,8 +310,8 @@
         3661.13
       ],
       "cum": [
-        -9059.61,
-        -16199.59
+        -8787.15,
+        -15899.89
       ],
       "active_count": 8,
       "active_projects": [
@@ -379,8 +379,8 @@
         1972.97
       ],
       "cum": [
-        -5158.11,
-        -14226.62
+        -4885.65,
+        -13926.92
       ],
       "active_count": 9,
       "active_projects": [
@@ -444,17 +444,17 @@
       "label_moy": "jul S2",
       "label_short": "11 jul",
       "prod": [
-        23010.39,
-        18550.78
+        23192.03,
+        18750.58
       ],
       "fixed": 11045.26,
       "net": [
-        11965.13,
-        7505.52
+        12146.77,
+        7705.32
       ],
       "cum": [
-        6807.02,
-        -6721.1
+        7261.12,
+        -6221.6
       ],
       "active_count": 10,
       "active_projects": [
@@ -486,8 +486,8 @@
           7329.88
         ],
         "Clifford Clack": [
-          1679.57,
-          1553.73
+          1861.2,
+          1753.53
         ],
         "Charles Harris": [
           2901.33,
@@ -532,8 +532,8 @@
         18230.49
       ],
       "cum": [
-        31284.14,
-        11509.39
+        31738.24,
+        12008.89
       ],
       "active_count": 10,
       "active_projects": [
@@ -602,17 +602,17 @@
       "label_moy": "jul S4",
       "label_short": "25 jul",
       "prod": [
-        52156.22,
-        43885.21
+        52428.68,
+        44184.91
       ],
       "fixed": 11045.26,
       "net": [
-        41110.96,
-        32839.95
+        41383.42,
+        33139.65
       ],
       "cum": [
-        72395.1,
-        44349.34
+        73121.66,
+        45148.54
       ],
       "active_count": 10,
       "active_projects": [
@@ -644,8 +644,8 @@
           2352.83
         ],
         "Clifford Clack": [
-          2876.21,
-          2574.73
+          3148.66,
+          2874.43
         ],
         "Charles Harris": [
           8595.71,
@@ -677,17 +677,17 @@
       "label_moy": "ago S1",
       "label_short": "1 ago",
       "prod": [
-        58782.72,
-        53352.43
+        74886.81,
+        70086.39
       ],
       "fixed": 11045.26,
       "net": [
-        47737.46,
-        42307.17
+        63841.55,
+        59041.13
       ],
       "cum": [
-        120132.56,
-        86656.51
+        136963.21,
+        104189.67
       ],
       "active_count": 10,
       "active_projects": [
@@ -715,12 +715,12 @@
           160.0
         ],
         "Katie Holmes": [
-          26933.84,
-          25219.18
+          42765.48,
+          41653.44
         ],
         "Clifford Clack": [
-          -119.18,
-          -222.82
+          153.27,
+          76.88
         ],
         "Charles Harris": [
           7355.95,
@@ -756,17 +756,17 @@
       "label_moy": "ago S2",
       "label_short": "8 ago",
       "prod": [
-        60143.94,
-        50674.99
+        54631.3,
+        45591.62
       ],
       "fixed": 11045.26,
       "net": [
-        49098.68,
-        39629.73
+        43586.04,
+        34546.36
       ],
       "cum": [
-        169231.24,
-        126286.24
+        180549.25,
+        138736.03
       ],
       "active_count": 8,
       "active_projects": [
@@ -788,8 +788,8 @@
           86.18
         ],
         "Katie Holmes": [
-          13339.38,
-          12321.37
+          7826.75,
+          7238.01
         ],
         "Charles Harris": [
           2901.33,
@@ -834,8 +834,8 @@
         21325.69
       ],
       "cum": [
-        196171.85,
-        147611.93
+        207489.86,
+        160061.72
       ],
       "active_count": 7,
       "active_projects": [
@@ -894,8 +894,8 @@
         27827.1
       ],
       "cum": [
-        229508.17,
-        175439.03
+        240826.18,
+        187888.82
       ],
       "active_count": 5,
       "active_projects": [
@@ -948,8 +948,8 @@
         27600.48
       ],
       "cum": [
-        262596.84,
-        203039.51
+        273914.85,
+        215489.3
       ],
       "active_count": 5,
       "active_projects": [
@@ -1002,8 +1002,8 @@
         13373.32
       ],
       "cum": [
-        279246.01,
-        216412.83
+        290564.02,
+        228862.62
       ],
       "active_count": 5,
       "active_projects": [
@@ -1056,8 +1056,8 @@
         15256.91
       ],
       "cum": [
-        301708.08,
-        231669.74
+        313026.09,
+        244119.53
       ],
       "active_count": 5,
       "active_projects": [
@@ -1110,8 +1110,8 @@
         26974.39
       ],
       "cum": [
-        332650.77,
-        258644.13
+        343968.78,
+        271093.92
       ],
       "active_count": 4,
       "active_projects": [
@@ -1155,8 +1155,8 @@
         8613.29
       ],
       "cum": [
-        346039.85,
-        267257.42
+        357357.86,
+        279707.21
       ],
       "active_count": 4,
       "active_projects": [
@@ -1204,8 +1204,8 @@
         -7238.75
       ],
       "cum": [
-        340725.51,
-        260018.67
+        352043.52,
+        272468.46
       ],
       "active_count": 4,
       "active_projects": [
@@ -1249,8 +1249,8 @@
         -9746.46
       ],
       "cum": [
-        331753.57,
-        250272.21
+        343071.58,
+        262722.0
       ],
       "active_count": 3,
       "active_projects": [
@@ -1285,8 +1285,8 @@
         -9242.19
       ],
       "cum": [
-        322999.82,
-        241030.02
+        334317.83,
+        253479.81
       ],
       "active_count": 3,
       "active_projects": [
@@ -1321,8 +1321,8 @@
         0.0
       ],
       "cum": [
-        322999.82,
-        241030.02
+        334317.83,
+        253479.81
       ],
       "active_count": 2,
       "active_projects": [
@@ -1351,8 +1351,8 @@
         -11889.62
       ],
       "cum": [
-        311456.52,
-        229140.4
+        322774.53,
+        241590.19
       ],
       "active_count": 2,
       "active_projects": [
@@ -1386,8 +1386,8 @@
         -11291.9
       ],
       "cum": [
-        300464.16,
-        217848.5
+        311782.17,
+        230298.29
       ],
       "active_count": 2,
       "active_projects": [
@@ -1421,8 +1421,8 @@
         0.0
       ],
       "cum": [
-        300464.16,
-        217848.5
+        311782.17,
+        230298.29
       ],
       "active_count": 2,
       "active_projects": [
@@ -1451,8 +1451,8 @@
         -8932.19
       ],
       "cum": [
-        291531.97,
-        208916.31
+        302849.98,
+        221366.1
       ],
       "active_count": 2,
       "active_projects": [
@@ -1486,8 +1486,8 @@
         -6448.72
       ],
       "cum": [
-        285408.25,
-        202467.59
+        296726.26,
+        214917.38
       ],
       "active_count": 2,
       "active_projects": [
@@ -1525,8 +1525,8 @@
         -8932.19
       ],
       "cum": [
-        276476.06,
-        193535.4
+        287794.07,
+        205985.19
       ],
       "active_count": 2,
       "active_projects": [
@@ -1560,8 +1560,8 @@
         -4465.48
       ],
       "cum": [
-        272435.28,
-        189069.92
+        283753.29,
+        201519.71
       ],
       "active_count": 2,
       "active_projects": [
@@ -1595,8 +1595,8 @@
         -5217.94
       ],
       "cum": [
-        267488.54,
-        183851.98
+        278806.55,
+        196301.77
       ],
       "active_count": 2,
       "active_projects": [
@@ -1630,8 +1630,8 @@
         0.0
       ],
       "cum": [
-        267488.54,
-        183851.98
+        278806.55,
+        196301.77
       ],
       "active_count": 2,
       "active_projects": [
@@ -1660,8 +1660,8 @@
         0.0
       ],
       "cum": [
-        267488.54,
-        183851.98
+        278806.55,
+        196301.77
       ],
       "active_count": 1,
       "active_projects": [
@@ -1689,8 +1689,8 @@
         0.0
       ],
       "cum": [
-        267488.54,
-        183851.98
+        278806.55,
+        196301.77
       ],
       "active_count": 1,
       "active_projects": [
@@ -1718,8 +1718,8 @@
         0.0
       ],
       "cum": [
-        267488.54,
-        183851.98
+        278806.55,
+        196301.77
       ],
       "active_count": 1,
       "active_projects": [
@@ -1747,8 +1747,8 @@
         0.0
       ],
       "cum": [
-        267488.54,
-        183851.98
+        278806.55,
+        196301.77
       ],
       "active_count": 1,
       "active_projects": [
@@ -1776,8 +1776,8 @@
         -10894.19
       ],
       "cum": [
-        256684.27,
-        172957.79
+        268002.28,
+        185407.58
       ],
       "active_count": 1,
       "active_projects": [
@@ -1799,17 +1799,17 @@
       "month": "2026-06",
       "label": "jun 2026",
       "prod": [
-        40372.59,
-        33802.21
+        40645.05,
+        34101.91
       ],
       "fixed": 47862.8,
       "net": [
-        -7490.21,
-        -14060.59
+        -7217.75,
+        -13760.89
       ],
       "cum": [
-        -7490.21,
-        -14060.59
+        -7217.75,
+        -13760.89
       ],
       "is_future": false,
       "is_partial": false,
@@ -1828,8 +1828,8 @@
           4002.53
         ],
         "Clifford Clack": [
-          6636.29,
-          5452.13
+          6908.75,
+          5751.83
         ],
         "Martha Cockrell": [
           285.37,
@@ -1853,17 +1853,17 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        131429.84,
-        109954.47
+        131883.93,
+        110453.97
       ],
       "fixed": 47862.8,
       "net": [
-        83567.04,
-        62091.67
+        84021.13,
+        62591.17
       ],
       "cum": [
-        76076.83,
-        48031.08
+        76803.38,
+        48830.28
       ],
       "is_future": false,
       "is_partial": false,
@@ -1882,8 +1882,8 @@
           17688.16
         ],
         "Clifford Clack": [
-          7436.56,
-          6499.82
+          7890.65,
+          6999.32
         ],
         "Charles Harris": [
           15849.05,
@@ -1915,17 +1915,17 @@
       "month": "2026-08",
       "label": "ago 2026",
       "prod": [
-        218461.46,
-        189932.93
+        229052.91,
+        201583.53
       ],
       "fixed": 47862.8,
       "net": [
-        170598.66,
-        142070.13
+        181190.11,
+        153720.73
       ],
       "cum": [
-        246675.49,
-        190101.21
+        257993.49,
+        202551.01
       ],
       "is_future": false,
       "is_partial": true,
@@ -1940,12 +1940,12 @@
           246.17
         ],
         "Katie Holmes": [
-          39291.57,
-          34836.55
+          49610.57,
+          46187.45
         ],
         "Clifford Clack": [
-          -119.18,
-          -222.82
+          153.27,
+          76.88
         ],
         "Charles Harris": [
           32473.06,
@@ -1986,8 +1986,8 @@
         83408.49
       ],
       "cum": [
-        351696.36,
-        273509.7
+        363014.36,
+        285959.5
       ],
       "is_future": true,
       "is_partial": false,
@@ -2028,8 +2028,8 @@
         -39992.11
       ],
       "cum": [
-        315532.94,
-        233517.59
+        326850.94,
+        245967.39
       ],
       "is_future": true,
       "is_partial": false,
@@ -2066,8 +2066,8 @@
         -44657.71
       ],
       "cum": [
-        271638.02,
-        188859.88
+        282956.02,
+        201309.68
       ],
       "is_future": true,
       "is_partial": false,
@@ -2096,8 +2096,8 @@
         -30780.23
       ],
       "cum": [
-        241716.19,
-        158079.65
+        253034.19,
+        170529.45
       ],
       "is_future": true,
       "is_partial": false,
@@ -2126,8 +2126,8 @@
         0.0
       ],
       "cum": [
-        241716.19,
-        158079.65
+        253034.19,
+        170529.45
       ],
       "is_future": true,
       "is_partial": false,
@@ -2147,8 +2147,8 @@
         -47711.73
       ],
       "cum": [
-        194094.38,
-        110367.92
+        205412.38,
+        122817.72
       ],
       "is_future": true,
       "is_partial": false,
@@ -2372,12 +2372,12 @@
       "project": "Katie Holmes",
       "revenue": 135929.88,
       "revenue_gross": 141756.05,
-      "cost": 72184.22,
+      "cost": 61865.22,
       "prod": [
-        63745.66,
-        56527.24
+        74064.66,
+        67878.14
       ],
-      "margin_pct": 46.9,
+      "margin_pct": 54.5,
       "weeks": {
         "2026-W26": [
           1997.01,
@@ -2404,12 +2404,12 @@
           2352.83
         ],
         "2026-W32": [
-          26933.84,
-          25219.18
+          42765.48,
+          41653.44
         ],
         "2026-W33": [
-          13339.38,
-          12321.37
+          7826.75,
+          7238.01
         ],
         "2026-W34": [
           -981.65,
@@ -2426,8 +2426,8 @@
           17688.16
         ],
         "2026-08": [
-          39291.57,
-          34836.55
+          49610.57,
+          46187.45
         ]
       },
       "first_week": "2026-W26",
@@ -2882,20 +2882,20 @@
       "project": "Clifford Clack",
       "revenue": 36199.0,
       "revenue_gross": 36199.0,
-      "cost": 22245.33,
+      "cost": 21246.33,
       "prod": [
-        13953.67,
-        11729.14
+        14952.67,
+        12828.04
       ],
-      "margin_pct": 38.5,
+      "margin_pct": 41.3,
       "weeks": {
         "2026-W26": [
-          356.8,
-          195.84
+          629.26,
+          495.54
         ],
         "2026-W31": [
-          2876.21,
-          2574.73
+          3148.66,
+          2874.43
         ],
         "2026-W23": [
           1687.27,
@@ -2918,12 +2918,12 @@
           542.62
         ],
         "2026-W29": [
-          1679.57,
-          1553.73
+          1861.2,
+          1753.53
         ],
         "2026-W32": [
-          -119.18,
-          -222.82
+          153.27,
+          76.88
         ],
         "2026-W27": [
           1759.02,
@@ -2932,16 +2932,16 @@
       },
       "months": {
         "2026-06": [
-          6636.29,
-          5452.13
+          6908.75,
+          5751.83
         ],
         "2026-07": [
-          7436.56,
-          6499.82
+          7890.65,
+          6999.32
         ],
         "2026-08": [
-          -119.18,
-          -222.82
+          153.27,
+          76.88
         ]
       },
       "first_week": "2026-W23",
@@ -3022,10 +3022,10 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 43,
-    "orphan_cost": 292805.0,
+    "orphan_trades": 45,
+    "orphan_cost": 292807.0,
     "priced_trades": 173,
-    "total_trades": 216,
+    "total_trades": 218,
     "by_project": [
       {
         "project": "Charles Harris",
@@ -3060,12 +3060,16 @@
       },
       {
         "project": "Katie Holmes",
-        "orphan_trades": 3,
-        "orphan_cost": 31767.0,
+        "orphan_trades": 4,
+        "orphan_cost": 31768.0,
         "examples": [
           {
             "trade": "DOORS AND WINDOWS - INTERIOR",
             "cost": 9600.0
+          },
+          {
+            "trade": "BASEBOARD & TRIM",
+            "cost": 1.0
           },
           {
             "trade": "ELECTRICAL TRIM",
@@ -3167,8 +3171,8 @@
       },
       {
         "project": "Clifford Clack",
-        "orphan_trades": 3,
-        "orphan_cost": 2859.0,
+        "orphan_trades": 4,
+        "orphan_cost": 2860.0,
         "examples": [
           {
             "trade": "CLEANING",
@@ -3181,6 +3185,10 @@
           {
             "trade": "GUTTERS",
             "cost": 689.0
+          },
+          {
+            "trade": "CONCRETE",
+            "cost": 1.0
           }
         ]
       },
@@ -3274,6 +3282,18 @@
       "ratio": null,
       "start": "2026-08-01",
       "end": "2026-08-01",
+      "severity": "alta"
+    },
+    {
+      "project": "Katie Holmes",
+      "trade": "CABINETS",
+      "revenue": 25893.0,
+      "cost": 1.0,
+      "produced": 25892.0,
+      "margin_pct": 100.0,
+      "ratio": 25893.0,
+      "start": "2026-08-01",
+      "end": "2026-08-07",
       "severity": "alta"
     },
     {
@@ -3803,18 +3823,6 @@
       "start": "2026-09-10",
       "end": "2026-09-25",
       "severity": "media"
-    },
-    {
-      "project": "Katie Holmes",
-      "trade": "CABINETS",
-      "revenue": 25893.0,
-      "cost": 10320.0,
-      "produced": 15573.0,
-      "margin_pct": 60.1,
-      "ratio": 2.5,
-      "start": "2026-08-01",
-      "end": "2026-08-11",
-      "severity": "media"
     }
   ],
   "verify": [
@@ -4249,14 +4257,6 @@
           "n_exp": 6
         },
         {
-          "trade": "CABINETS",
-          "income": 25893.0,
-          "expense": 10320.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 1
-        },
-        {
           "trade": "ELECTRICAL ROUGH IN",
           "income": 22112.3,
           "expense": 12610.0,
@@ -4271,6 +4271,14 @@
           "grouped": true,
           "n_inc": 1,
           "n_exp": 2
+        },
+        {
+          "trade": "CABINETS",
+          "income": 25893.0,
+          "expense": 1.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
         },
         {
           "trade": "INSULATION",
@@ -4391,10 +4399,18 @@
           "grouped": true,
           "n_inc": 1,
           "n_exp": 0
+        },
+        {
+          "trade": "BASEBOARD & TRIM",
+          "income": 0.0,
+          "expense": 1.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 1
         }
       ],
       "total_income": 213418.59,
-      "total_expense": 156506.89,
+      "total_expense": 146188.89,
       "loose_amount": 4200.0
     },
     {
@@ -5761,14 +5777,6 @@
           "n_exp": 5
         },
         {
-          "trade": "PAINT",
-          "income": 3363.0,
-          "expense": 3800.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 4
-        },
-        {
           "trade": "SHEETROCK",
           "income": 3820.0,
           "expense": 2600.0,
@@ -5780,6 +5788,14 @@
           "trade": "CUSTOM CARPENTRY",
           "income": 3500.0,
           "expense": 2894.38,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 4
+        },
+        {
+          "trade": "PAINT",
+          "income": 3363.0,
+          "expense": 2801.0,
           "grouped": true,
           "n_inc": 1,
           "n_exp": 4
@@ -5879,10 +5895,18 @@
           "grouped": true,
           "n_inc": 0,
           "n_exp": 1
+        },
+        {
+          "trade": "CONCRETE",
+          "income": 0.0,
+          "expense": 1.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 1
         }
       ],
       "total_income": 50920.0,
-      "total_expense": 38012.94,
+      "total_expense": 37014.94,
       "loose_amount": 0
     }
   ],
