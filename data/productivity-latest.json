@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T17:51:05",
+  "generated_at": "2026-08-04T18:13:50",
   "week_iso": "2026-W32",
   "week_start": "2026-08-01",
   "week_end": "2026-08-07",
@@ -126,6 +126,82 @@
           "has_price": true,
           "this_pct": 0.0,
           "attribution": 0.0,
+          "user_set": false
+        }
+      ]
+    },
+    {
+      "project_id": "22PL9RSbYNs9",
+      "project_name": "Rohini Williams (CNG2025-496)",
+      "pm": "Giselle Garcia",
+      "group_count": 1,
+      "attribution": 911.0,
+      "groups": [
+        {
+          "project_id": "22PL9RSbYNs9",
+          "project_name": "Rohini Williams (CNG2025-496)",
+          "group_id": "22PZpJenmdCj",
+          "group_name": "ROOFING",
+          "parent_group_id": null,
+          "action_count": 1,
+          "action_task_ids": [
+            "22PZpJeqBFWH"
+          ],
+          "action_task_names": [
+            "ROOFING: INSTALL SHINGLES"
+          ],
+          "action_progresses": [
+            1
+          ],
+          "action_starts": [
+            "2026-08-04"
+          ],
+          "action_ends": [
+            "2026-08-06"
+          ],
+          "action_start_min": "2026-08-04",
+          "action_end_max": "2026-08-06",
+          "action_lines": [
+            {
+              "task_id": "22PZpJeqBFWH",
+              "name": "ROOFING: INSTALL SHINGLES",
+              "description": "3405",
+              "amount": 3405.0,
+              "progress": 1,
+              "end_date": "2026-08-06"
+            }
+          ],
+          "subs_lines": [
+            {
+              "task_id": "22PZpJeyJsTp",
+              "name": "ROOFING: BILL & PAYMENT",
+              "description": "694",
+              "amount": 694.0,
+              "progress": null,
+              "end_date": "2026-08-21"
+            }
+          ],
+          "materials_lines": [
+            {
+              "task_id": "22PZpJevewcQ",
+              "name": "ROOFING: PURCHASE MATERIALS",
+              "description": "1800",
+              "amount": 1800.0,
+              "progress": 1,
+              "end_date": "2026-08-04"
+            }
+          ],
+          "additional_lines": [],
+          "sold": 3405.0,
+          "expenses_subs": 694.0,
+          "expenses_materials": 1800.0,
+          "expenses_additional": 0,
+          "expenses_total": 2494.0,
+          "profit": 911.0,
+          "status": "finished",
+          "has_price": true,
+          "this_pct": 100.0,
+          "attribution": 911.0,
           "user_set": false
         }
       ]
@@ -354,7 +430,7 @@
               "description": "-200",
               "amount": 200.0,
               "progress": null,
-              "end_date": "2026-08-08"
+              "end_date": "2026-08-06"
             },
             {
               "task_id": "22PaCCdCwhYG",
@@ -370,7 +446,7 @@
               "description": "$300",
               "amount": 300.0,
               "progress": null,
-              "end_date": "2026-08-05"
+              "end_date": "2026-08-04"
             }
           ],
           "materials_lines": [],
@@ -496,13 +572,19 @@
     },
     {
       "pm": "Giselle Garcia",
-      "project_count": 1,
-      "group_count": 1,
-      "sold": 0.0,
-      "expenses": 0.0,
-      "profit_potential": 0.0,
-      "attribution": 0.0,
+      "project_count": 2,
+      "group_count": 2,
+      "sold": 3405.0,
+      "expenses": 2494.0,
+      "profit_potential": 911.0,
+      "attribution": 911.0,
       "projects": [
+        {
+          "project_id": "22PL9RSbYNs9",
+          "project_name": "Rohini Williams (CNG2025-496)",
+          "attribution": 911.0,
+          "group_count": 1
+        },
         {
           "project_id": "22Nx8Uut2Qxs",
           "project_name": "Kyle Aubry - Project 01",
@@ -547,14 +629,14 @@
     }
   ],
   "totals": {
-    "sold": 49045.0,
-    "expenses": 22170.4,
-    "profit_potential": 26874.6,
-    "profit_attributed_this_week": 2445.0,
+    "sold": 52450.0,
+    "expenses": 24664.4,
+    "profit_potential": 27785.6,
+    "profit_attributed_this_week": 3356.0,
     "groups_in_progress": 4,
-    "groups_finished_this_week": 2,
+    "groups_finished_this_week": 3,
     "groups_missing_price": 2,
     "expense_missing_price": 7980.0,
-    "project_count": 5
+    "project_count": 6
   }
 }
