@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T16:08:13",
+  "generated_at": "2026-08-07T16:31:47",
   "today": "2026-08-07",
   "horizon": "2027-06-07",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -39,30 +39,30 @@
   ],
   "totals": {
     "prod": [
-      581883.15,
-      498736.37
+      588063.15,
+      505534.37
     ],
     "prod_todate": [
-      330859.54,
-      283375.73
+      337039.54,
+      290173.73
     ],
     "weekly": {
       "fixed": 386584.1,
       "net": [
-        195299.05,
-        112152.27
+        201479.05,
+        118950.27
       ],
       "periods": 35,
       "positive": [
-        16,
+        17,
         16
       ]
     },
     "monthly": {
       "fixed": 526490.8,
       "net": [
-        55392.35,
-        -27754.43
+        61572.35,
+        -20956.43
       ],
       "periods": 11,
       "positive": [
@@ -133,17 +133,17 @@
       "label_moy": "jun S1",
       "label_short": "6 jun",
       "prod": [
-        10172.88,
-        8849.07
+        11297.88,
+        10086.57
       ],
       "fixed": 11045.26,
       "net": [
-        -872.38,
-        -2196.19
+        252.62,
+        -958.69
       ],
       "cum": [
-        -9010.05,
-        -10831.02
+        -7885.05,
+        -9593.52
       ],
       "active_count": 7,
       "active_projects": [
@@ -160,8 +160,8 @@
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
-          3108.25,
-          2752.6
+          4233.25,
+          3990.1
         ],
         "Stephanie Felton": [
           2299.39,
@@ -185,17 +185,17 @@
       "label_moy": "jun S2",
       "label_short": "13 jun",
       "prod": [
-        9738.82,
-        7246.33
+        10113.82,
+        7658.83
       ],
       "fixed": 11045.26,
       "net": [
-        -1306.44,
-        -3798.93
+        -931.44,
+        -3386.43
       ],
       "cum": [
-        -10316.49,
-        -14629.95
+        -8816.49,
+        -12979.95
       ],
       "active_count": 7,
       "active_projects": [
@@ -212,8 +212,8 @@
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
-          1117.72,
-          1027.88
+          1492.72,
+          1440.38
         ],
         "Stephanie Felton": [
           3847.48,
@@ -250,8 +250,8 @@
         -5341.64
       ],
       "cum": [
-        -14788.69,
-        -19971.59
+        -13288.69,
+        -18321.59
       ],
       "active_count": 7,
       "active_projects": [
@@ -310,8 +310,8 @@
         2277.35
       ],
       "cum": [
-        -10665.1,
-        -17694.24
+        -9165.1,
+        -16044.24
       ],
       "active_count": 8,
       "active_projects": [
@@ -379,8 +379,8 @@
         1333.71
       ],
       "cum": [
-        -7546.52,
-        -16360.53
+        -6046.52,
+        -14710.53
       ],
       "active_count": 9,
       "active_projects": [
@@ -444,17 +444,17 @@
       "label_moy": "jul S2",
       "label_short": "11 jul",
       "prod": [
-        22098.48,
-        17794.69
+        22329.25,
+        18048.53
       ],
       "fixed": 11045.26,
       "net": [
-        11053.22,
-        6749.43
+        11283.99,
+        7003.27
       ],
       "cum": [
-        3506.7,
-        -9611.1
+        5237.47,
+        -7707.26
       ],
       "active_count": 10,
       "active_projects": [
@@ -474,8 +474,8 @@
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
-          2462.84,
-          2040.88
+          2693.6,
+          2294.73
         ],
         "Stephanie Felton": [
           537.36,
@@ -523,17 +523,17 @@
       "label_moy": "jul S3",
       "label_short": "18 jul",
       "prod": [
-        32897.16,
-        27492.9
+        33051.01,
+        27662.13
       ],
       "fixed": 11045.26,
       "net": [
-        21851.9,
-        16447.64
+        22005.75,
+        16616.87
       ],
       "cum": [
-        25358.6,
-        6836.54
+        27243.22,
+        8909.61
       ],
       "active_count": 10,
       "active_projects": [
@@ -553,8 +553,8 @@
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
-          5760.31,
-          4943.28
+          5914.16,
+          5112.52
         ],
         "Stephanie Felton": [
           558.36,
@@ -602,17 +602,17 @@
       "label_moy": "jul S4",
       "label_short": "25 jul",
       "prod": [
-        41234.35,
-        35351.1
+        41491.28,
+        35633.71
       ],
       "fixed": 11045.26,
       "net": [
-        30189.09,
-        24305.84
+        30446.02,
+        24588.45
       ],
       "cum": [
-        55547.69,
-        31142.38
+        57689.24,
+        33498.06
       ],
       "active_count": 10,
       "active_projects": [
@@ -632,8 +632,8 @@
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
-          7157.41,
-          6182.45
+          7414.33,
+          6465.07
         ],
         "Stephanie Felton": [
           1667.92,
@@ -673,17 +673,17 @@
       "label_moy": "ago S1",
       "label_short": "1 ago",
       "prod": [
-        41270.87,
-        37776.04
+        43309.33,
+        40018.35
       ],
       "fixed": 11045.26,
       "net": [
-        30225.61,
-        26730.78
+        32264.07,
+        28973.09
       ],
       "cum": [
-        85773.3,
-        57873.16
+        89953.31,
+        62471.15
       ],
       "active_count": 10,
       "active_projects": [
@@ -703,8 +703,8 @@
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
-          8302.24,
-          7742.81
+          10340.7,
+          9985.12
         ],
         "Stephanie Felton": [
           1298.69,
@@ -748,17 +748,17 @@
       "label_moy": "ago S2",
       "label_short": "8 ago",
       "prod": [
-        50176.82,
-        41352.65
+        52176.82,
+        43552.65
       ],
       "fixed": 11045.26,
       "net": [
-        39131.56,
-        30307.39
+        41131.56,
+        32507.39
       ],
       "cum": [
-        124904.86,
-        88180.55
+        131084.87,
+        94978.54
       ],
       "active_count": 10,
       "active_projects": [
@@ -778,8 +778,8 @@
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
-          3799.72,
-          3597.19
+          5799.72,
+          5797.19
         ],
         "Stephanie Felton": [
           689.07,
@@ -832,8 +832,8 @@
         26093.18
       ],
       "cum": [
-        157091.79,
-        114273.73
+        163271.8,
+        121071.72
       ],
       "active_count": 7,
       "active_projects": [
@@ -896,8 +896,8 @@
         18682.21
       ],
       "cum": [
-        179265.32,
-        132955.94
+        185445.33,
+        139753.93
       ],
       "active_count": 6,
       "active_projects": [
@@ -951,8 +951,8 @@
         25461.1
       ],
       "cum": [
-        209498.76,
-        158417.04
+        215678.77,
+        165215.03
       ],
       "active_count": 5,
       "active_projects": [
@@ -1005,8 +1005,8 @@
         10887.07
       ],
       "cum": [
-        224376.35,
-        169304.11
+        230556.36,
+        176102.1
       ],
       "active_count": 5,
       "active_projects": [
@@ -1059,8 +1059,8 @@
         22348.52
       ],
       "cum": [
-        252712.68,
-        191652.63
+        258892.69,
+        198450.62
       ],
       "active_count": 5,
       "active_projects": [
@@ -1109,8 +1109,8 @@
         13463.8
       ],
       "cum": [
-        270576.65,
-        205116.43
+        276756.66,
+        211914.42
       ],
       "active_count": 5,
       "active_projects": [
@@ -1159,8 +1159,8 @@
         18865.96
       ],
       "cum": [
-        297255.05,
-        223982.39
+        303435.06,
+        230780.38
       ],
       "active_count": 5,
       "active_projects": [
@@ -1209,8 +1209,8 @@
         26091.48
       ],
       "cum": [
-        327638.82,
-        250073.87
+        333818.83,
+        256871.86
       ],
       "active_count": 5,
       "active_projects": [
@@ -1259,8 +1259,8 @@
         753.41
       ],
       "cum": [
-        329484.41,
-        250827.28
+        335664.42,
+        257625.27
       ],
       "active_count": 4,
       "active_projects": [
@@ -1304,8 +1304,8 @@
         -9412.71
       ],
       "cum": [
-        320848.24,
-        241414.57
+        327028.25,
+        248212.56
       ],
       "active_count": 4,
       "active_projects": [
@@ -1345,8 +1345,8 @@
         -7759.69
       ],
       "cum": [
-        314030.26,
-        233654.88
+        320210.27,
+        240452.87
       ],
       "active_count": 4,
       "active_projects": [
@@ -1386,8 +1386,8 @@
         -9059.15
       ],
       "cum": [
-        305733.34,
-        224595.73
+        311913.35,
+        231393.72
       ],
       "active_count": 4,
       "active_projects": [
@@ -1431,8 +1431,8 @@
         0.0
       ],
       "cum": [
-        305733.34,
-        224595.73
+        311913.35,
+        231393.72
       ],
       "active_count": 3,
       "active_projects": [
@@ -1462,8 +1462,8 @@
         -11052.86
       ],
       "cum": [
-        294813.06,
-        213542.87
+        300993.07,
+        220340.86
       ],
       "active_count": 3,
       "active_projects": [
@@ -1498,8 +1498,8 @@
         -10038.73
       ],
       "cum": [
-        284824.33,
-        203504.14
+        291004.34,
+        210302.13
       ],
       "active_count": 3,
       "active_projects": [
@@ -1538,8 +1538,8 @@
         -7347.39
       ],
       "cum": [
-        277476.94,
-        196156.75
+        283656.95,
+        202954.74
       ],
       "active_count": 2,
       "active_projects": [
@@ -1573,8 +1573,8 @@
         -7875.66
       ],
       "cum": [
-        269601.28,
-        188281.09
+        275781.29,
+        195079.08
       ],
       "active_count": 2,
       "active_projects": [
@@ -1608,8 +1608,8 @@
         0.0
       ],
       "cum": [
-        269601.28,
-        188281.09
+        275781.29,
+        195079.08
       ],
       "active_count": 2,
       "active_projects": [
@@ -1638,8 +1638,8 @@
         0.0
       ],
       "cum": [
-        269601.28,
-        188281.09
+        275781.29,
+        195079.08
       ],
       "active_count": 2,
       "active_projects": [
@@ -1668,8 +1668,8 @@
         -11757.05
       ],
       "cum": [
-        258120.68,
-        176524.04
+        264300.69,
+        183322.03
       ],
       "active_count": 2,
       "active_projects": [
@@ -1703,8 +1703,8 @@
         -11557.03
       ],
       "cum": [
-        247002.93,
-        164967.01
+        253182.94,
+        171765.0
       ],
       "active_count": 1,
       "active_projects": [
@@ -1737,8 +1737,8 @@
         0.0
       ],
       "cum": [
-        247002.93,
-        164967.01
+        253182.94,
+        171765.0
       ],
       "active_count": 1,
       "active_projects": [
@@ -1766,8 +1766,8 @@
         0.0
       ],
       "cum": [
-        247002.93,
-        164967.01
+        253182.94,
+        171765.0
       ],
       "active_count": 1,
       "active_projects": [
@@ -1795,8 +1795,8 @@
         0.0
       ],
       "cum": [
-        247002.93,
-        164967.01
+        253182.94,
+        171765.0
       ],
       "active_count": 1,
       "active_projects": [
@@ -1824,8 +1824,8 @@
         0.0
       ],
       "cum": [
-        247002.93,
-        164967.01
+        253182.94,
+        171765.0
       ],
       "active_count": 1,
       "active_projects": [
@@ -1853,8 +1853,8 @@
         -10595.93
       ],
       "cum": [
-        236569.51,
-        154371.08
+        242749.52,
+        161169.07
       ],
       "active_count": 1,
       "active_projects": [
@@ -1887,8 +1887,8 @@
         -10595.93
       ],
       "cum": [
-        226136.09,
-        143775.15
+        232316.1,
+        150573.14
       ],
       "active_count": 1,
       "active_projects": [
@@ -1921,8 +1921,8 @@
         0.0
       ],
       "cum": [
-        226136.09,
-        143775.15
+        232316.1,
+        150573.14
       ],
       "active_count": 1,
       "active_projects": [
@@ -1950,8 +1950,8 @@
         -6621.15
       ],
       "cum": [
-        219791.46,
-        137154.0
+        225971.47,
+        143951.99
       ],
       "active_count": 1,
       "active_projects": [
@@ -1984,8 +1984,8 @@
         -8889.59
       ],
       "cum": [
-        211050.05,
-        128264.41
+        217230.06,
+        135062.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2018,8 +2018,8 @@
         0.0
       ],
       "cum": [
-        211050.05,
-        128264.41
+        217230.06,
+        135062.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2047,8 +2047,8 @@
         -5217.94
       ],
       "cum": [
-        206103.31,
-        123046.47
+        212283.32,
+        129844.46
       ],
       "active_count": 1,
       "active_projects": [
@@ -2081,8 +2081,8 @@
         0.0
       ],
       "cum": [
-        206103.31,
-        123046.47
+        212283.32,
+        129844.46
       ],
       "active_count": 1,
       "active_projects": [
@@ -2110,8 +2110,8 @@
         0.0
       ],
       "cum": [
-        206103.31,
-        123046.47
+        212283.32,
+        129844.46
       ],
       "active_count": 1,
       "active_projects": [
@@ -2139,8 +2139,8 @@
         0.0
       ],
       "cum": [
-        206103.31,
-        123046.47
+        212283.32,
+        129844.46
       ],
       "active_count": 1,
       "active_projects": [
@@ -2168,8 +2168,8 @@
         0.0
       ],
       "cum": [
-        206103.31,
-        123046.47
+        212283.32,
+        129844.46
       ],
       "active_count": 1,
       "active_projects": [
@@ -2197,8 +2197,8 @@
         0.0
       ],
       "cum": [
-        206103.31,
-        123046.47
+        212283.32,
+        129844.46
       ],
       "active_count": 1,
       "active_projects": [
@@ -2226,8 +2226,8 @@
         0.0
       ],
       "cum": [
-        206103.31,
-        123046.47
+        212283.32,
+        129844.46
       ],
       "active_count": 1,
       "active_projects": [
@@ -2255,8 +2255,8 @@
         0.0
       ],
       "cum": [
-        206103.31,
-        123046.47
+        212283.32,
+        129844.46
       ],
       "active_count": 1,
       "active_projects": [
@@ -2284,8 +2284,8 @@
         0.0
       ],
       "cum": [
-        206103.31,
-        123046.47
+        212283.32,
+        129844.46
       ],
       "active_count": 1,
       "active_projects": [
@@ -2313,8 +2313,8 @@
         0.0
       ],
       "cum": [
-        206103.31,
-        123046.47
+        212283.32,
+        129844.46
       ],
       "active_count": 1,
       "active_projects": [
@@ -2342,8 +2342,8 @@
         0.0
       ],
       "cum": [
-        206103.31,
-        123046.47
+        212283.32,
+        129844.46
       ],
       "active_count": 1,
       "active_projects": [
@@ -2371,8 +2371,8 @@
         -10894.19
       ],
       "cum": [
-        195299.04,
-        112152.28
+        201479.05,
+        118950.27
       ],
       "active_count": 1,
       "active_projects": [
@@ -2394,25 +2394,25 @@
       "month": "2026-06",
       "label": "jun 2026",
       "prod": [
-        39471.16,
-        32968.91
+        40971.16,
+        34618.91
       ],
       "fixed": 47862.8,
       "net": [
-        -8391.64,
-        -14893.89
+        -6891.64,
+        -13243.89
       ],
       "cum": [
-        -8391.64,
-        -14893.89
+        -6891.64,
+        -13243.89
       ],
       "is_future": false,
       "is_partial": false,
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
-          6276.53,
-          5551.97
+          7776.53,
+          7201.97
         ],
         "Stephanie Felton": [
           7018.78,
@@ -2448,25 +2448,25 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        115483.87,
-        97580.8
+        116125.41,
+        98286.49
       ],
       "fixed": 47862.8,
       "net": [
-        67621.07,
-        49718.0
+        68262.61,
+        50423.69
       ],
       "cum": [
-        59229.43,
-        34824.11
+        61370.97,
+        37179.8
       ],
       "is_future": false,
       "is_partial": false,
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
-          16665.32,
-          14339.68
+          17306.86,
+          15045.37
         ],
         "Stephanie Felton": [
           3677.89,
@@ -2510,25 +2510,25 @@
       "month": "2026-08",
       "label": "ago 2026",
       "prod": [
-        175904.51,
-        152826.02
+        179942.97,
+        157268.33
       ],
       "fixed": 47862.8,
       "net": [
-        128041.71,
-        104963.22
+        132080.17,
+        109405.53
       ],
       "cum": [
-        187271.14,
-        139787.33
+        193451.14,
+        146585.33
       ],
       "is_future": false,
       "is_partial": true,
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
-          12101.96,
-          11340.0
+          16140.42,
+          15782.31
         ],
         "Stephanie Felton": [
           2049.8,
@@ -2581,8 +2581,8 @@
         94047.78
       ],
       "cum": [
-        305178.11,
-        233835.11
+        311358.11,
+        240633.11
       ],
       "is_future": true,
       "is_partial": false,
@@ -2623,8 +2623,8 @@
         3642.43
       ],
       "cum": [
-        317891.6,
-        237477.54
+        324071.6,
+        244275.54
       ],
       "is_future": true,
       "is_partial": false,
@@ -2661,8 +2661,8 @@
         -43433.92
       ],
       "cum": [
-        275363.86,
-        194043.62
+        281543.86,
+        200841.62
       ],
       "is_future": true,
       "is_partial": false,
@@ -2699,8 +2699,8 @@
         -43159.35
       ],
       "cum": [
-        232411.08,
-        150884.27
+        238591.08,
+        157682.27
       ],
       "is_future": true,
       "is_partial": false,
@@ -2729,8 +2729,8 @@
         -48507.14
       ],
       "cum": [
-        184413.09,
-        102377.13
+        190593.09,
+        109175.13
       ],
       "is_future": true,
       "is_partial": false,
@@ -2755,8 +2755,8 @@
         -46964.13
       ],
       "cum": [
-        137773.96,
-        55413.0
+        143953.96,
+        62211.0
       ],
       "is_future": true,
       "is_partial": false,
@@ -2781,8 +2781,8 @@
         -35455.7
       ],
       "cum": [
-        103014.16,
-        19957.3
+        109194.16,
+        26755.3
       ],
       "is_future": true,
       "is_partial": false,
@@ -2807,8 +2807,8 @@
         0.0
       ],
       "cum": [
-        103014.16,
-        19957.3
+        109194.16,
+        26755.3
       ],
       "is_future": true,
       "is_partial": false,
@@ -2828,8 +2828,8 @@
         0.0
       ],
       "cum": [
-        103014.16,
-        19957.3
+        109194.16,
+        26755.3
       ],
       "is_future": true,
       "is_partial": false,
@@ -2849,8 +2849,8 @@
         -47711.73
       ],
       "cum": [
-        55392.35,
-        -27754.43
+        61572.35,
+        -20956.43
       ],
       "is_future": true,
       "is_partial": false,
@@ -3398,6 +3398,79 @@
       "last_week": "2026-W45"
     },
     {
+      "project": "Kyle Aubry",
+      "revenue": 73165.45,
+      "revenue_gross": 73165.45,
+      "cost": 31941.64,
+      "prod": [
+        41223.81,
+        38029.65
+      ],
+      "margin_pct": 56.3,
+      "weeks": {
+        "2026-W24": [
+          4233.25,
+          3990.1
+        ],
+        "2026-W30": [
+          5914.16,
+          5112.52
+        ],
+        "2026-W23": [
+          403.5,
+          274.75
+        ],
+        "2026-W25": [
+          1492.72,
+          1440.38
+        ],
+        "2026-W26": [
+          1048.13,
+          952.47
+        ],
+        "2026-W27": [
+          1139.91,
+          1029.59
+        ],
+        "2026-W29": [
+          2693.6,
+          2294.73
+        ],
+        "2026-W31": [
+          7414.33,
+          6465.07
+        ],
+        "2026-W32": [
+          10340.7,
+          9985.12
+        ],
+        "2026-W28": [
+          743.78,
+          687.74
+        ],
+        "2026-W33": [
+          5799.72,
+          5797.19
+        ]
+      },
+      "months": {
+        "2026-06": [
+          7776.53,
+          7201.97
+        ],
+        "2026-07": [
+          17306.86,
+          15045.37
+        ],
+        "2026-08": [
+          16140.42,
+          15782.31
+        ]
+      },
+      "first_week": "2026-W23",
+      "last_week": "2026-W33"
+    },
+    {
       "project": "Lingyan Qiu",
       "revenue": 87646.57,
       "revenue_gross": 99689.0,
@@ -3465,79 +3538,6 @@
         "2026-08": [
           9159.46,
           8424.5
-        ]
-      },
-      "first_week": "2026-W23",
-      "last_week": "2026-W33"
-    },
-    {
-      "project": "Kyle Aubry",
-      "revenue": 73165.45,
-      "revenue_gross": 73165.45,
-      "cost": 38121.64,
-      "prod": [
-        35043.81,
-        31231.65
-      ],
-      "margin_pct": 47.9,
-      "weeks": {
-        "2026-W24": [
-          3108.25,
-          2752.6
-        ],
-        "2026-W30": [
-          5760.31,
-          4943.28
-        ],
-        "2026-W23": [
-          403.5,
-          274.75
-        ],
-        "2026-W25": [
-          1117.72,
-          1027.88
-        ],
-        "2026-W26": [
-          1048.13,
-          952.47
-        ],
-        "2026-W27": [
-          1139.91,
-          1029.59
-        ],
-        "2026-W29": [
-          2462.84,
-          2040.88
-        ],
-        "2026-W31": [
-          7157.41,
-          6182.45
-        ],
-        "2026-W32": [
-          8302.24,
-          7742.81
-        ],
-        "2026-W28": [
-          743.78,
-          687.74
-        ],
-        "2026-W33": [
-          3799.72,
-          3597.19
-        ]
-      },
-      "months": {
-        "2026-06": [
-          6276.53,
-          5551.97
-        ],
-        "2026-07": [
-          16665.32,
-          14339.68
-        ],
-        "2026-08": [
-          12101.96,
-          11340.0
         ]
       },
       "first_week": "2026-W23",
@@ -3797,7 +3797,7 @@
   ],
   "data_quality": {
     "orphan_trades": 45,
-    "orphan_cost": 294426.0,
+    "orphan_cost": 294386.0,
     "priced_trades": 173,
     "total_trades": 218,
     "by_project": [
@@ -3969,7 +3969,7 @@
       {
         "project": "Kyle Aubry",
         "orphan_trades": 2,
-        "orphan_cost": 2231.0,
+        "orphan_cost": 2191.0,
         "examples": [
           {
             "trade": "PRE DELIVERY WALK THROUGH",
@@ -3977,7 +3977,7 @@
           },
           {
             "trade": "Additionals",
-            "cost": 1601.0
+            "cost": 1561.0
           }
         ]
       },
@@ -4032,6 +4032,18 @@
       "ratio": null,
       "start": "2026-07-23",
       "end": "2026-07-24",
+      "severity": "alta"
+    },
+    {
+      "project": "Kyle Aubry",
+      "trade": "PLUMBING TRIM",
+      "revenue": 1500.0,
+      "cost": 0,
+      "produced": 1500.0,
+      "margin_pct": 100.0,
+      "ratio": null,
+      "start": "2026-07-28",
+      "end": "2026-07-28",
       "severity": "alta"
     },
     {
@@ -4215,6 +4227,18 @@
       "severity": "alta"
     },
     {
+      "project": "Kyle Aubry",
+      "trade": "ELECTRICAL TRIM",
+      "revenue": 9250.0,
+      "cost": 50.56,
+      "produced": 9199.44,
+      "margin_pct": 99.5,
+      "ratio": 183.0,
+      "start": "2026-08-03",
+      "end": "2026-08-08",
+      "severity": "alta"
+    },
+    {
       "project": "Martha Cockrell",
       "trade": "MECHANICAL TRIM",
       "revenue": 3510.0,
@@ -4239,18 +4263,6 @@
       "severity": "alta"
     },
     {
-      "project": "Kyle Aubry",
-      "trade": "PLUMBING TRIM",
-      "revenue": 1500.0,
-      "cost": 180.0,
-      "produced": 1320.0,
-      "margin_pct": 88.0,
-      "ratio": 8.3,
-      "start": "2026-07-28",
-      "end": "2026-07-28",
-      "severity": "alta"
-    },
-    {
       "project": "Martha Cockrell",
       "trade": "ELECTRICAL ROUGH IN",
       "revenue": 13510.0,
@@ -4260,6 +4272,18 @@
       "ratio": 6.8,
       "start": "2026-07-07",
       "end": "2026-07-31",
+      "severity": "alta"
+    },
+    {
+      "project": "Kyle Aubry",
+      "trade": "ELECTRICAL ROUGH IN",
+      "revenue": 5773.0,
+      "cost": 1000.0,
+      "produced": 4773.0,
+      "margin_pct": 82.7,
+      "ratio": 5.8,
+      "start": "2026-06-10",
+      "end": "2026-06-13",
       "severity": "alta"
     },
     {
@@ -6090,26 +6114,26 @@
         {
           "trade": "TILES",
           "income": 7966.0,
-          "expense": 6093.68,
-          "grouped": true,
-          "n_inc": 2,
-          "n_exp": 6
-        },
-        {
-          "trade": "ELECTRICAL TRIM",
-          "income": 9250.0,
-          "expense": 4050.56,
+          "expense": 5593.68,
           "grouped": true,
           "n_inc": 2,
           "n_exp": 5
         },
         {
+          "trade": "ELECTRICAL TRIM",
+          "income": 9250.0,
+          "expense": 50.56,
+          "grouped": true,
+          "n_inc": 2,
+          "n_exp": 1
+        },
+        {
           "trade": "ELECTRICAL ROUGH IN",
           "income": 5773.0,
-          "expense": 2500.0,
+          "expense": 1000.0,
           "grouped": true,
           "n_inc": 1,
-          "n_exp": 2
+          "n_exp": 1
         },
         {
           "trade": "SHEETROCK",
@@ -6176,14 +6200,6 @@
           "n_exp": 1
         },
         {
-          "trade": "PLUMBING TRIM",
-          "income": 1500.0,
-          "expense": 180.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 1
-        },
-        {
           "trade": "PLUMBING ROUGH IN",
           "income": 920.0,
           "expense": 725.0,
@@ -6194,7 +6210,7 @@
         {
           "trade": "Additionals",
           "income": 0.0,
-          "expense": 1601.0,
+          "expense": 1561.0,
           "grouped": true,
           "n_inc": 0,
           "n_exp": 2
@@ -6206,6 +6222,14 @@
           "grouped": true,
           "n_inc": 1,
           "n_exp": 1
+        },
+        {
+          "trade": "PLUMBING TRIM",
+          "income": 1500.0,
+          "expense": 0.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 0
         },
         {
           "trade": "FINAL PUNCH LIST",
@@ -6241,7 +6265,7 @@
         }
       ],
       "total_income": 99487.45,
-      "total_expense": 45693.36,
+      "total_expense": 39473.36,
       "loose_amount": 0
     },
     {
