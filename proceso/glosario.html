@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CNG · Glosario EN↔ES de obra</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+#glo-buscar{width:100%;max-width:420px;padding:10px 14px;border:1.5px solid var(--line2);border-radius:10px;font-size:15px;background:var(--card);color:var(--body)}
+#glo-buscar:focus{outline:none;border-color:var(--azul-2)}
+#glo-count{font-size:12.5px;color:var(--mut);margin:6px 2px 0}
+#glo-tabla td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+#glo-tabla tr.hide{display:none}
+mark{background:#fef08a;color:inherit;padding:0}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="bar">
+    <span class="logo">CNG · <b>PROCESO</b></span>
+    <nav>
+      <a href="index.html"><span data-i18n="es">Inicio</span><span data-i18n="en">Home</span></a>
+      <a href="proceso-constructivo.html"><span data-i18n="es">Proceso constructivo</span><span data-i18n="en">Build sequence</span></a>
+      <a href="proceso-empresa.html"><span data-i18n="es">Proceso de empresa</span><span data-i18n="en">Company process</span></a>
+      <a href="bucle-diario.html"><span data-i18n="es">Bucle diario</span><span data-i18n="en">Daily loop</span></a>
+      <a href="jobtread.html">JobTread</a>
+      <a href="dinero.html"><span data-i18n="es">Dinero</span><span data-i18n="en">Money</span></a>
+      <a href="reloj-reportes.html"><span data-i18n="es">Reloj &amp; reportes</span><span data-i18n="en">Clock &amp; reports</span></a>
+      <a href="posiciones/index.html"><span data-i18n="es">Posiciones</span><span data-i18n="en">Positions</span></a>
+      <a href="casos-reales.html"><span data-i18n="es">Casos reales</span><span data-i18n="en">Real cases</span></a>
+      <a href="glosario.html"><span data-i18n="es">Glosario</span><span data-i18n="en">Glossary</span></a>
+    </nav>
+    <button id="cng-lang-btn" class="lang-toggle" type="button">EN</button>
+  </div>
+</header>
+
+<main>
+  <h1><span data-i18n="es">Glosario EN↔ES de obra</span><span data-i18n="en">EN↔ES construction glossary</span></h1>
+  <p class="lead">
+    <span data-i18n="es">El vocabulario del proceso como llega del campo (los PMs reportan en inglés; Jeff escribe 100% en inglés) y qué es en español operativo. Es la tabla del Track A (Sesión 2), navegable.</span>
+    <span data-i18n="en">The process vocabulary as it arrives from the field (PMs report in English) and what it is in operational Spanish. It is Track A's table (Session 2), made browsable.</span>
+  </p>
+  <div class="regla">
+    <span data-i18n="es"><b>La regla al recibir un reporte en inglés:</b> extraer SIEMPRE proyecto → trade → qué pasó → fechas → montos → qué pide el PM. Lo que no se entiende <b>se pregunta, no se adivina</b> — un "finished" sin evidencia en CompanyCam no es un completado.</span>
+    <span data-i18n="en"><b>The rule when receiving an English report:</b> ALWAYS extract project → trade → what happened → dates → amounts → what the PM asks. What you don't understand <b>you ask, never guess</b> — a "finished" without CompanyCam evidence is not a completion.</span>
+  </div>
+
+  <p style="margin:18px 0 4px">
+    <input id="glo-buscar" type="search" autocomplete="off" placeholder="Buscar… / Search… (ej. drywall, zócalo, WO, red tag)">
+  </p>
+  <div id="glo-count"></div>
+
+  <div class="tbl-wrap">
+    <table id="glo-tabla">
+      <thead>
+        <tr><th data-i18n="es">Inglés (como llega)</th><th data-i18n="en">English (as it arrives)</th><th data-i18n="es">Qué es (español operativo)</th><th data-i18n="en">What it is (operational Spanish)</th><th data-i18n="es">Grupo</th><th data-i18n="en">Group</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>foundation</td><td>losa de concreto</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>formboard</td><td>delimitar el plano en terreno con madera</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>survey</td><td>inspección de tercero</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>concrete pour / curing</td><td>tirado / curado del concreto (~10 días)</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>framing</td><td>esqueleto de madera</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>exterior sheathing</td><td>envolvente impermeable</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>roof decking</td><td>la envolvente, para el techo</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>MEP (mechanical / electrical / plumbing)</td><td>las 3 fases de las instalaciones</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>in-ground</td><td>instalaciones bajo tierra (fase 1 de MEP)</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>rough-in</td><td>instalaciones dentro de la casa (fase 2 de MEP)</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>trim (MEP)</td><td>acabados finales de las instalaciones (fase 3 de MEP)</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>zip tape</td><td>sellado de uniones / ventanas</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>insulation (fiberglass / foam)</td><td>aislamiento (fibra de vidrio / espuma)</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>drywall / sheetrock</td><td>tablaroca</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>hang (drywall)</td><td>colgado de la tablaroca</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>tape, bed &amp; texture</td><td>cinta + masilla + textura</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>primer</td><td>primera capa (la pintura final va AL FINAL — P1)</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>flooring</td><td>pisos (laminados / madera)</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>tiles</td><td>cerámica</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>grout</td><td>fragua / pegamento</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>interior doors</td><td>puertas interiores</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>baseboards</td><td>zócalos</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>trims (carpentry)</td><td>contornos / molduras</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>cabinets</td><td>gabinetes de cocina</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>vanities</td><td>gabinetes de baño</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>island</td><td>isla (de cocina)</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>countertops</td><td>cubiertas de piedra</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>bricks</td><td>fachada de ladrillo</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>siding</td><td>paneles decorativos (fachada)</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>gutters</td><td>canaletas</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>gutter guard</td><td>protector de canaletas</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>punch list</td><td>lista de correcciones</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>pre-delivery walk</td><td>recorrido con el cliente</td><td><span class="chip t-pm">Obra</span></td></tr>
+        <tr><td>final inspection</td><td>inspección final (la hace LA CIUDAD)</td><td><span class="chip t-insp">Ciudad</span></td></tr>
+        <tr><td>red tag</td><td>rechazo de inspección</td><td><span class="chip t-insp">Ciudad</span></td></tr>
+        <tr><td>pass / fail (inspection)</td><td>pasó / falló la inspección</td><td><span class="chip t-insp">Ciudad</span></td></tr>
+        <tr><td>permit</td><td>permiso de la ciudad</td><td><span class="chip t-insp">Ciudad</span></td></tr>
+        <tr><td>SOW (scope of work)</td><td>el alcance de trabajo detallado (reporte en CompanyCam, sin lugar a interpretación)</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>take-off</td><td>cuantificar el material</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>bid request / quote</td><td>pedido de cotización a los subs (≥3) / la cotización</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>vendor</td><td>sub o proveedor</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>WO (work order)</td><td>la orden de trabajo = el contrato ("no es como acuerdo de palabra")</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>ETA (estimated time of arrival)</td><td>fecha estimada de llegada del material</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>bill</td><td>pago a sub</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>expense</td><td>compra de material</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>invoice / receipt</td><td>factura / boleta</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>lien waiver</td><td>renuncia de gravamen — parte del expediente de pago</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>lien release</td><td>cierre de obra</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>downpayment</td><td>pago inicial — especial, solo ciertos subs/trades como FRAMING o MEP ROUGH-INS</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>draw</td><td>desembolso del banco</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>due</td><td>vencido</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>crew</td><td>cuadrilla</td><td><span class="chip t-psub">Admin</span></td></tr>
+        <tr><td>completion form</td><td>conformidad del cliente al cierre</td><td><span class="chip t-psub">Admin</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:12.5px;color:var(--mut)">
+    <span data-i18n="es"><b>Grupos:</b> <span class="chip t-pm">Obra</span> = vocabulario del proceso constructivo (canon §2, §4, §5) · <span class="chip t-insp">Ciudad</span> = permisos e inspecciones · <span class="chip t-psub">Admin</span> = el vocabulario del registro (schedule + libros).</span>
+    <span data-i18n="en"><b>Groups:</b> <span class="chip t-pm">Obra</span> = build-sequence vocabulary (canon §2, §4, §5) · <span class="chip t-insp">Ciudad</span> = permits and inspections · <span class="chip t-psub">Admin</span> = the record's vocabulary (schedule + books).</span>
+  </p>
+
+  <div class="footer-note">
+    <span data-i18n="es">WEB DEL PROCESO CNG · Glosario · 2026-08-07 · Fuente: TRACK_A_BACKOFFICE_DATA_ENTRY_v2026-08-06.md, Sesión 2 (vocabulario del canon §2/§4/§5 + vocabulario administrativo). Material interno — no distribuir.</span>
+    <span data-i18n="en">CNG PROCESS SITE · Glossary · 2026-08-07 · Source: TRACK_A_BACKOFFICE_DATA_ENTRY_v2026-08-06.md, Session 2. Internal material — do not distribute.</span>
+  </div>
+</main>
+
+<script src="assets/app.js"></script>
+<script>
+(function () {
+  'use strict';
+  var input = document.getElementById('glo-buscar');
+  var count = document.getElementById('glo-count');
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#glo-tabla tbody tr'));
+
+  function norm(s) {
+    s = s.toLowerCase();
+    try { s = s.normalize('NFD').replace(/[\u0300-\u036f]/g, ''); } catch (e) { /* viejo browser */ }
+    return s;
+  }
+  var data = rows.map(function (tr) { return norm(tr.textContent); });
+
+  function actualizar() {
+    var q = norm(input.value.trim());
+    var visibles = 0;
+    rows.forEach(function (tr, i) {
+      var ok = !q || data[i].indexOf(q) !== -1;
+      tr.classList.toggle('hide', !ok);
+      if (ok) visibles++;
+    });
+    var es = visibles + ' de ' + rows.length + ' términos';
+    var en = visibles + ' of ' + rows.length + ' terms';
+    count.textContent = (window.cngLang && window.cngLang() === 'en') ? en : es;
+  }
+  input.addEventListener('input', actualizar);
+  document.addEventListener('cng:lang', actualizar);
+  actualizar();
+})();
+</script>
+</body>
+</html>

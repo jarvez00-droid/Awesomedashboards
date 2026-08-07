@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía de lectura — Your Next Week (PM)</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+ul, ol { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.sub { color: #475569; font-size: 11px; margin: 0 0 10px; }
+.sw { display:inline-block; width:26px; height:9px; border-radius:3px; vertical-align:middle; margin-right:4px; }
+</style>
+</head>
+<body>
+
+<h1>Cómo leer tu <b>Your Next Week</b></h1>
+<p class="sub">Guía de lectura de reportes · Programa de entrenamiento CNG · v2026-08-06 · (Jeff lo recibe 100% en inglés)</p>
+
+<h2>1 · Qué es y para quién</h2>
+<div class="clave">
+Es <b>TU plan de la semana entrante</b> (sáb → vie). Sale junto con el Project Department Next Week Report, cuando gerencia
+consolida el cashflow. Es <b>VISTA DE PLAN PURA</b>: la semana aún no ocurre — nada que comparar, cero estados.
+<b>Cumplir este plan ES tu objetivo semanal:</b> el PM Weekly Evaluation del sábado siguiente te evalúa exactamente contra esta foto
+(el baseline se congela el viernes 11 PM).
+</div>
+
+<h2>2 · Anatomía — qué significa cada cosa</h2>
+<table>
+<tr><th>Sección</th><th>Qué significa</th></tr>
+<tr><td><b>Tarjetas de conteo</b></td><td>Tu semana en números: ★ ruta crítica · ▸ action tasks · ◆ city inspections · 🛒 purchases · 💵 pagos confirmados · 💰 cobros confirmados de tus obras.</td></tr>
+<tr><td><b>PAGOS Y COMPRAS CONFIRMADAS — primeras páginas</b></td><td>SOLO movimientos con check ☑ de confirmado en el Finances tab, por proyecto y sin fijos: bandas <b>SUBS</b> (naranja) y <b>MATERIALES</b> (azul), cada pago con día y monto, y el TOTAL CONFIRMADO de tu semana. Esto es lo que gerencia aprobó gastar en TUS obras.</td></tr>
+<tr><td><b>COBROS DE SUS OBRAS — informativo</b></td><td>Los cobros de la semana de tus obras. Chip <span class="chip">POTENCIAL</span> = agendado sin confirmar. <b>Los cobros se gestionan en gerencia</b> — para ti son contexto: saber qué cobro depende de tu obra.</td></tr>
+<tr><td><b>📌 PENDIENTES DE LA SEMANA</b></td><td>Lo que te pidieron (reuniones y directivas) y lo que esperas de otros — <b>los MISMOS ítems que tu Task List diaria</b>, agrupados por obra, con 🔴 en los urgentes y "pendiente desde hace X días".</td></tr>
+<tr><td><b>Página por obra</b></td><td><b>🎯 OBJETIVO DE LA SEMANA</b> en lenguaje llano (qué debe quedar y qué libera) + gantt de plan puro: <span class="sw" style="background:#16a34a"></span>una barra <b>VERDE</b> por tarea en su fecha (verde aquí = PLAN, por orden de Jose — no confundir con "hecho") · ◆ inspecciones · 🛒 compras agendadas · columna FECHA AGENDADA · ◂/▸ = la tarea viene de antes / sigue después.</td></tr>
+<tr><td><b>MATERIALES EN CAMINO — informativo</b></td><td>"Material llega a más tardar el X" o "ETA sin verificar: perseguir la confirmación con Purchases". Informativo, nunca métrica.</td></tr>
+</table>
+
+<h2>3 · De dónde salen los números</h2>
+<ul>
+<li>Tareas: <b>lo agendado en JobTread</b> para tus obras en la semana entrante.</li>
+<li>Pagos/compras: el <b>cashflow consolidado</b> (Finances tab, solo ☑ confirmados) — el plan aprobado por el CEO en la reunión de presupuestos del viernes.</li>
+<li>Pendientes: el registro de reuniones y directivas (el mismo motor de tu Task List).</li>
+</ul>
+
+<h2>4 · Qué hago cuando lo recibo</h2>
+<div class="mat"><b>1.</b> Lee el <b>OBJETIVO</b> de cada obra y quédatelo en la cabeza: la semana se juega ahí (qué cierra y qué cobro/inspección libera).</div>
+<div class="mat"><b>2.</b> Verifica la <b>cadena de cada EXECUTE</b> antes de que llegue su día: WO firmada, sub con schedule confirmado, material con ETA, inspección Before. Un EXECUTE sin cadena cerrada se mueve — no se espera al fallo.</div>
+<div class="mat"><b>3.</b> El día que toca cada <b>pago confirmado</b> de tus obras, dale seguimiento: que el trabajo esté aprobado en sitio y la documentación lista (el After desbloquea el pago).</div>
+<div class="mat"><b>4.</b> Ataca los <b>pendientes 🔴 más viejos</b> — se arrastran con contador de días y son los mismos que verás cada noche en tu Task List.</div>
+<div class="mat"><b>5.</b> Todo <b>"ETA sin verificar"</b> = persíguelo con Romina HOY, no el día que necesitas el material.</div>
+
+<h2>5 · Errores de lectura comunes</h2>
+<div class="gap"><b>"Verde = ya está hecho."</b> No: en ESTE reporte el verde es el PLAN (la semana no ha ocurrido). El verde de "culminada" es del Weekly Evaluation.</div>
+<div class="gap"><b>"Los cobros son mi tarea."</b> Son informativos — los gestiona gerencia. Tu parte es cerrar la obra y la documentación que los libera.</div>
+<div class="gap"><b>"Si no está en pagos confirmados, lo pago igual."</b> No: lo confirmado ☑ ES el plan aprobado. Cualquier pago fuera de plan aparecerá en rojo en el reporte gerencial del sábado.</div>
+<div class="gap"><b>"Los pendientes son opcionales."</b> Son los mismos de tu Task List: no desaparecen, envejecen ("pendiente desde hace X días") a la vista de todos.</div>
+
+<p class="footer-note">Guía de lectura · Your Next Week (v3 FINAL — Jose 2026-08-06: "está perfecto") · fuentes: canon §9.4 · REPORTERIA_MASTER §A/C5 · sample YOUR_NEXT_WEEK_ANGEL_V3.pdf (semana 1–7 ago) · _BRIEF_CONSTRUCTORES v1 · Programa de entrenamiento CNG 2026-08-06.</p>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CNG · El bucle diario por trade — ramas PM y Compras</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="bar">
+    <span class="logo">CNG · <b>PROCESO</b></span>
+    <nav>
+      <a href="index.html"><span data-i18n="es">Inicio</span><span data-i18n="en">Home</span></a>
+      <a href="proceso-constructivo.html"><span data-i18n="es">Proceso constructivo</span><span data-i18n="en">Build sequence</span></a>
+      <a href="proceso-empresa.html"><span data-i18n="es">Proceso de empresa</span><span data-i18n="en">Company process</span></a>
+      <a href="bucle-diario.html"><span data-i18n="es">Bucle diario</span><span data-i18n="en">Daily loop</span></a>
+      <a href="jobtread.html">JobTread</a>
+      <a href="dinero.html"><span data-i18n="es">Dinero</span><span data-i18n="en">Money</span></a>
+      <a href="reloj-reportes.html"><span data-i18n="es">Reloj &amp; reportes</span><span data-i18n="en">Clock &amp; reports</span></a>
+      <a href="posiciones/index.html"><span data-i18n="es">Posiciones</span><span data-i18n="en">Positions</span></a>
+      <a href="casos-reales.html"><span data-i18n="es">Casos reales</span><span data-i18n="en">Real cases</span></a>
+      <a href="glosario.html"><span data-i18n="es">Glosario</span><span data-i18n="en">Glossary</span></a>
+    </nav>
+    <button id="cng-lang-btn" class="lang-toggle" type="button">EN</button>
+  </div>
+</header>
+
+<main>
+  <h1><span data-i18n="es">El bucle diario por trade</span><span data-i18n="en">The daily loop per trade</span></h1>
+  <p class="lead">
+    <span data-i18n="es">Para INICIAR cada trade corren <b>dos ramas en paralelo</b>: la del PM (contratar y supervisar al sub) y la de Compras (que el material llegue ANTES que la cuadrilla). Es la parte más operativa del proceso — y la que el Backoffice/Data-Entry registra día a día.</span>
+    <span data-i18n="en">To START each trade, <b>two branches run in parallel</b>: the PM's (hire and supervise the sub) and Purchasing's (material arrives BEFORE the crew). It is the most operational part of the process — and the one Backoffice/Data-Entry records every day.</span>
+  </p>
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta página existe para</b> que ejecutes el arranque de un trade sin saltarte pasos: cada paso dice qué haces, qué entrega y qué desbloquea. Falla un paso = falla el EXECUTE.</span>
+    <span data-i18n="en"><b>This page exists so</b> you can run a trade's start without skipping steps: each step says what you do, what it delivers and what it unlocks. One step fails = the EXECUTE fails.</span>
+  </p>
+
+  <!-- REGLA DE ORO -->
+  <div class="clave">
+    <div style="font-size:12px;letter-spacing:1.5px;color:#94a3b8;font-weight:700;margin-bottom:6px">
+      <span data-i18n="es">LA REGLA DE ORO (EL FLOW)</span><span data-i18n="en">THE GOLDEN RULE (THE FLOW)</span>
+    </div>
+    <span data-i18n="es">Un <b>Action/EXECUTE solo puede tener fecha si su cadena previa está 100% CERRADA</b>: SOW + WO firmada + schedule confirmado con el sub + material comprado con ETA + inspección Before. Si no, <b>el EXECUTE se mueve</b> — no se deja “por si acaso”.</span>
+    <span data-i18n="en">An <b>Action/EXECUTE task may only carry a date if its upstream chain is 100% CLOSED</b>: SOW + signed WO + schedule confirmed with the sub + material purchased with ETA + Before inspection. Otherwise <b>the EXECUTE moves</b> — it is never left “just in case”.</span>
+    <div class="sub">
+      <span data-i18n="es">Caso real: la semana del 29-jun se produjo LA MITAD de lo proyectado por violar esto — EXECUTEs fechados con la cadena en 0% (en Martha: ELECTRICAL ROUGH IN fechado 7–8 jul con SELECT VENDOR &amp; SEND WO y CONFIRM SCHEDULE WITH SUB en 0%). Llegó el día y no había electricista.</span>
+      <span data-i18n="en">Real case: the week of Jun 29 we produced HALF of what was projected by violating this — EXECUTEs dated with the chain at 0% (on Martha: ELECTRICAL ROUGH IN dated Jul 7–8 with SELECT VENDOR &amp; SEND WO and CONFIRM SCHEDULE WITH SUB at 0%). The day came and there was no electrician.</span>
+    </div>
+  </div>
+
+  <!-- LAS DOS RAMAS -->
+  <h2><span class="seccion-num">1 · </span><span data-i18n="es">Las dos ramas en paralelo</span><span data-i18n="en">The two parallel branches</span></h2>
+  <div class="grid c2">
+
+    <!-- RAMA PM -->
+    <div>
+      <h3 style="color:var(--rol-pm)"><span class="chip pm">PM</span> <span data-i18n="es">Rama PM — planificación y ejecución</span><span data-i18n="en">PM branch — planning &amp; execution</span></h3>
+      <ol class="pasos rama-pm">
+        <li><span class="tarea">REVIEW PORTFOLIO &amp; CC CHECKLIST: BEFORE SOW</span>
+          <div class="det"><span data-i18n="es">Revisar el Portafolio + checklist “Before” en CompanyCam: detectar qué verificar para evitar retrabajos. El Before se revisa <b>DOS veces</b>: (1) al inicio del trade para “mapear” el trade al proyecto; (2) ~3 días antes de iniciar el trabajo (paso 6). Ej. drywall: verificar que MEPs e insulación PASARON inspecciones y fotografiar paredes abiertas y techos.</span>
+          <span data-i18n="en">Review the Portfolio + the “Before” checklist in CompanyCam: spot what to verify to avoid rework. The Before is reviewed <b>TWICE</b>: (1) at trade start to “map” the trade onto the project; (2) ~3 days before work starts (step 6). E.g. drywall: verify MEPs and insulation PASSED inspections and photograph open walls and ceilings.</span></div></li>
+        <li><span class="tarea">CREATE SOW REPORT</span>
+          <div class="det"><span data-i18n="es">El Scope of Work como reporte de CompanyCam: el alcance exacto para el sub (dibujos, medidas, fotos de dónde va cada cosa). Su consigna: <i>“darle TODA la información de forma estructurada al sub para que entienda el trabajo y cotice un precio justo.”</i> ⚠ PROVISIONAL: el CEO aprueba el SOW antes de enviarse. El Backoffice audita que el documento EXISTA en CompanyCam.</span>
+          <span data-i18n="en">The Scope of Work as a CompanyCam report: the exact scope for the sub (drawings, measurements, photos of where everything goes). Its mandate: give the sub ALL the information, structured, so he understands the job and quotes a fair price. ⚠ PROVISIONAL: the CEO approves the SOW before it goes out. Backoffice audits that the document EXISTS in CompanyCam.</span></div></li>
+        <li><span class="tarea">SOURCE VENDORS (Bid Request ≥3)</span>
+          <div class="det"><span data-i18n="es">Enviar el SOW a <b>≥3 subcontratistas</b> pidiendo: precio, cuándo puede venir, y agendar visita al sitio para medir y confirmar. Se registra extendiendo la tarea día a día hasta tener las 3 cotizaciones.</span>
+          <span data-i18n="en">Send the SOW to <b>≥3 subcontractors</b> asking: price, when they can come, and to schedule a site visit to measure and confirm. Recorded by extending the task day by day until the 3 quotes are in.</span></div></li>
+        <li><span class="tarea">SELECT VENDOR &amp; SEND WO</span>
+          <div class="det"><span data-i18n="es">La <b>Work Order = el contrato</b>: sub registrado como proveedor → receptor de la WO → el sistema envía SMS + email → <b>firma electrónica</b> → RECIÉN entonces se marca “Aprobado”. La WO lleva el scope ADENTRO (o el PDF del SOW adjunto) + SIEMPRE el Payment Breakdown. <b>Regla dura: NINGÚN trabajo inicia sin WO FIRMADA</b> — <i>“no es como acuerdo de palabra.”</i></span>
+          <span data-i18n="en">The <b>Work Order = the contract</b>: sub registered as a vendor → set as WO recipient → the system sends SMS + email → <b>electronic signature</b> → ONLY then is it marked “Approved”. The WO carries the scope INSIDE (or the SOW PDF attached) + ALWAYS the Payment Breakdown. <b>Hard rule: NO work starts without a SIGNED WO</b> — it is not a handshake deal.</span></div></li>
+        <li><span class="tarea">CONFIRM SCHEDULE WITH SUB</span>
+          <div class="det"><span data-i18n="es">Llamar <b>3–5 días antes</b>, confirmar día de inicio, marcar completado. Existe <i>“porque los PMs se olvidan.”</i></span>
+          <span data-i18n="en">Call <b>3–5 days ahead</b>, confirm the start day, mark it complete. It exists “because PMs forget.”</span></div></li>
+        <li><span class="tarea">CC CHECKLIST — PM INSPECTION (BEFORE)</span>
+          <div class="det"><span data-i18n="es">Re-revisar el “Before” en obra: sitio preparado (muebles cubiertos, área limpia, predecesor listo con sign-off). <b>Si no se cumple, no arranca.</b></span>
+          <span data-i18n="en">Re-check the “Before” on site: site prepared (furniture covered, area clean, predecessor done with sign-off). <b>If it's not met, work does not start.</b></span></div></li>
+        <li><span class="tarea">WORK STARTS → CHECKLIST “DURING” → “AFTER”</span>
+          <div class="det"><span data-i18n="es">El sub ejecuta; el PM inspecciona con el checklist en mano y fotos diarias CON descripción. Al terminar, checklist “After”. ⚠ Resistencia típica: llenar todo al final del trade — eso invalida las 3 secciones. <b>El After desbloquea el pago</b>: <i>“si el PM no ha llenado su reporte, no hay registro de su inspección → no damos por terminado el trabajo → no se le paga al sub.”</i></span>
+          <span data-i18n="en">The sub executes; the PM inspects with the checklist in hand plus daily photos WITH descriptions. When done, the “After” checklist. ⚠ Typical resistance: filling everything at the end of the trade — that voids the 3 sections. <b>The After unlocks payment</b>: no filled report → no inspection record → work not accepted → the sub doesn't get paid.</span></div></li>
+        <li><span class="tarea">BILL &amp; PAYMENT</span>
+          <div class="det"><span data-i18n="es">Según términos de la WO — <b>pago estándar = el viernes siguiente</b> a terminar el trabajo (o excepción “día después”). A veces partido: “ROUGH FINISH” / “PASS INSPECTION”.</span>
+          <span data-i18n="en">Per WO terms — <b>standard payment = the Friday after</b> the work is finished (or the “day after” exception). Sometimes split: “ROUGH FINISH” / “PASS INSPECTION”.</span></div></li>
+      </ol>
+    </div>
+
+    <!-- RAMA COMPRAS -->
+    <div>
+      <h3 style="color:var(--rol-compras)"><span class="chip compras">Purchases</span> <span data-i18n="es">Rama Compras (Romina) — en paralelo</span><span data-i18n="en">Purchasing branch (Romina) — in parallel</span></h3>
+      <ol class="pasos rama-compras">
+        <li><span class="tarea">CREATE TAKEOFF REPORT</span>
+          <div class="det"><span data-i18n="es">Revisar Portafolio + checklist → cuantificar el material que se necesita (ej. pies lineales de siding por locación). Lo prepara Compras para requerir información específica del trade al PM.</span>
+          <span data-i18n="en">Review Portfolio + checklist → quantify the material needed (e.g. linear feet of siding per location). Purchasing builds it to request trade-specific information from the PM.</span></div></li>
+        <li><span class="tarea">CONFIRM TAKEOFF DETAILS <span class="chip pm">PM</span></span>
+          <div class="det"><span data-i18n="es">Como Compras está en Perú, <b>el PM verifica dimensiones y lugares EN OBRA</b> y las llena en el reporte. Este cotejo plano-vs-campo existe para atrapar errores de spec (caso puertas 96").</span>
+          <span data-i18n="en">Since Purchasing is in Peru, <b>the PM verifies dimensions and locations ON SITE</b> and fills them into the report. This plan-vs-field check exists to catch spec errors (the 96" doors case).</span></div></li>
+        <li><span class="tarea">SECURE PRICING &amp; ETA</span>
+          <div class="det"><span data-i18n="es">Cotizar con <b>TRES proveedores distintos</b> (precios + tiempos de llegada); elegir por precio + ETA + budget — <b>el primer filtro SIEMPRE es si entra en el presupuesto del trade</b>.</span>
+          <span data-i18n="en">Quote with <b>THREE different suppliers</b> (prices + lead times); choose by price + ETA + budget — <b>the first filter is ALWAYS whether it fits the trade's budget</b>.</span></div></li>
+        <li><span class="tarea">PURCHASE MATERIALS</span>
+          <div class="det"><span data-i18n="es">Registrar en el schedule (Payment - Materials, con $) + generar el documento contable (Expense). <a href="jobtread.html">Los DOS registros →</a></span>
+          <span data-i18n="en">Record in the schedule (Payment - Materials, with $) + create the accounting document (Expense). <a href="jobtread.html">The TWO records →</a></span></div></li>
+        <li><span class="tarea">DELIVERY ETA</span>
+          <div class="det"><span data-i18n="es">1 día después de la compra, poner el plazo del proveedor (ej. 5 días) → el PM sabe para qué día llega el material. <b>Regla:</b> duración &gt;1 día = fecha fin es el plazo máximo de llegada; =1 día = en stock o ETA sin verificar. Un ETA desactualizado <i>“le miente al cronograma.”</i></span>
+          <span data-i18n="en">1 day after the purchase, enter the supplier's lead time (e.g. 5 days) → the PM knows what day the material lands. <b>Rule:</b> duration &gt;1 day = end date is the max arrival date; =1 day = in stock or ETA unverified. An outdated ETA “lies to the schedule.”</span></div></li>
+      </ol>
+
+      <div class="mat">
+        <span data-i18n="es"><b>Las 3 EVIDENCIAS OBLIGATORIAS del reporte de takeoff en CompanyCam (Jose 2026-08-06):</b> (1) foto del precio CONFIRMADO/FIJADO · (2) el ETA POR ESCRITO de parte del proveedor · (3) la confirmación de la compra = el RECIBO. El reporte de takeoff es el expediente completo del ciclo de compra del trade.</span>
+        <span data-i18n="en"><b>The 3 MANDATORY pieces of EVIDENCE in the CompanyCam takeoff report (Jose 2026-08-06):</b> (1) photo of the CONFIRMED/LOCKED price · (2) the supplier's ETA IN WRITING · (3) the purchase confirmation = the RECEIPT. The takeoff report is the complete file of the trade's purchasing cycle.</span>
+      </div>
+      <div class="gap">
+        <span data-i18n="es">⚠ REALIDAD (P3): hoy el circuito take-off <i>“no se está cumpliendo casi para nada.”</i> Ideal futuro (backlog, NO vigente): los take-offs preliminares saldrían de Planning al inicio de la obra.</span>
+        <span data-i18n="en">⚠ REALITY (P3): today the takeoff circuit “is barely being followed at all.” Future ideal (backlog, NOT in force): preliminary takeoffs would come from Planning at job start.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="regla">
+    <span data-i18n="es"><b>Dependencias del bucle:</b> no se puede “confirmar takeoff” sin takeoff · no arranca work sin WO firmada · el EXECUTE no se cita sin material en sitio (DELIVERY ETA) · BILL &amp; PAYMENT depende de la inspección After. Así se arma la ruta crítica.</span>
+    <span data-i18n="en"><b>Loop dependencies:</b> you can't “confirm takeoff” without a takeoff · no work starts without a signed WO · the EXECUTE isn't scheduled without material on site (DELIVERY ETA) · BILL &amp; PAYMENT depends on the After inspection. That is how the critical path is built.</span>
+  </div>
+
+  <!-- CIERRE DEL CICLO -->
+  <h2><span class="seccion-num">2 · </span><span data-i18n="es">El cierre del ciclo — lo que desbloquea el pago</span><span data-i18n="en">Closing the cycle — what unlocks payment</span></h2>
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta sección existe para</b> que quede claro que el pago NO lo dispara “terminó el trabajo”: lo dispara la cadena de verificación completa (doble candado).</span>
+    <span data-i18n="en"><b>This section exists to</b> make clear that payment is NOT triggered by “the work is done”: it is triggered by the full verification chain (double lock).</span>
+  </p>
+  <ol class="pasos">
+    <li><span class="tarea"><span class="chip pm">PM</span> <span data-i18n="es">aprueba el trabajo EN SITIO</span><span data-i18n="en">approves the work ON SITE</span></span>
+      <div class="det"><span data-i18n="es">Checklist After completo → notifica al Backoffice (“trabajo aprobado en sitio”) — la notificación que arranca el pago. Primer candado.</span>
+      <span data-i18n="en">After checklist complete → notifies Backoffice (“work approved on site”) — the notification that starts payment. First lock.</span></div></li>
+    <li><span class="tarea"><span class="chip backoffice">Backoffice</span> <span data-i18n="es">revisa el checklist</span><span data-i18n="en">reviews the checklist</span></span>
+      <div class="det"><span data-i18n="es">Segundo candado (en oficina): si pasa calidad → <b>Proceed with Payment</b>. También audita: SOW existe en CC · Durante activo con fotos · After antes de pagar · dicho-vs-marcado.</span>
+      <span data-i18n="en">Second lock (in office): if quality passes → <b>Proceed with Payment</b>. Also audits: SOW exists in CC · During active with photos · After before paying · said-vs-checked.</span></div></li>
+    <li><span class="tarea"><span class="chip admin">Admin</span> <span data-i18n="es">paga con los 4 filtros</span><span data-i18n="en">pays through the 4 filters</span></span>
+      <div class="det"><span data-i18n="es">Milagros es el gatekeeper: nada se paga sin pasar por ella. <a href="dinero.html">Los 4 filtros →</a> Luego el Backoffice sube el Bill a JT + actualiza el schedule.</span>
+      <span data-i18n="en">Milagros is the gatekeeper: nothing gets paid without going through her. <a href="dinero.html">The 4 filters →</a> Then Backoffice uploads the Bill to JT + updates the schedule.</span></div></li>
+    <li><span class="tarea"><span class="chip ceo">CEO</span> <span data-i18n="es">convierte el trade cerrado en COBRO</span><span data-i18n="en">turns the closed trade into a COLLECTION</span></span>
+      <div class="det"><span data-i18n="es">Cada trade terminado y documentado se convierte en cobro — el draw bancario lo gestiona Jonas.</span>
+      <span data-i18n="en">Every finished, documented trade becomes a collection — Jonas manages the bank draw.</span></div></li>
+  </ol>
+
+  <!-- CASOS -->
+  <h2><span class="seccion-num">3 · </span><span data-i18n="es">Los casos que enseñan este bucle</span><span data-i18n="en">The cases that teach this loop</span></h2>
+  <div class="grid c2">
+    <div class="gap"><span data-i18n="es"><b>La fuga de Ginger.</b> Una línea de gas perforada instalando mayólica se ubicó gracias a fotos de 2 AÑOS atrás que la PM tomó por iniciativa propia. Moraleja: fotos CON descripción = el seguro de la obra; el checklist Before institucionaliza ese reflejo para que no dependa de la iniciativa individual.</span>
+    <span data-i18n="en"><b>Ginger's leak.</b> A gas line punctured while installing tile was located thanks to photos from 2 YEARS earlier that the PM took on her own initiative. Lesson: photos WITH descriptions = the job's insurance; the Before checklist institutionalizes that reflex so it doesn't depend on individual initiative.</span></div>
+    <div class="gap"><span data-i18n="es"><b>WO sin firma / WO a posteriori.</b> Un sub reclamó su pago 1 día después de terminar — su WO firmada decía “1 semana después” y por contrato esperó. Y en Martha (24-jul): “crear urgente work order para César” — la WO DESPUÉS del trabajo. Moraleja: la WO firmada protege a CNG; una WO a posteriori deja trabajo no autorizado y no facturable.</span>
+    <span data-i18n="en"><b>Unsigned WO / after-the-fact WO.</b> A sub claimed payment 1 day after finishing — his signed WO said “1 week after” and by contract he waited. And on Martha (Jul 24): “urgently create a work order for César” — the WO AFTER the work. Lesson: the signed WO protects CNG; an after-the-fact WO leaves work unauthorized and unbillable.</span></div>
+    <div class="gap"><span data-i18n="es"><b>Puertas 96" (Katie Holmes).</b> Se framearon a 8 ft cuando el diseño decía 82"; el 23-jul se pidieron puertas de 96" = <b>SE COMPRÓ EL ERROR</b>. Moraleja: nunca comprar sobre un spec NO confirmado; CONFIRM TAKEOFF DETAILS y el cotejo plano-vs-campo existen para atrapar esto.</span>
+    <span data-i18n="en"><b>96" doors (Katie Holmes).</b> Framed at 8 ft when the design said 82"; on Jul 23, 96" doors were ordered = <b>THE ERROR WAS PURCHASED</b>. Lesson: never buy on an UNCONFIRMED spec; CONFIRM TAKEOFF DETAILS and the plan-vs-field check exist to catch this.</span></div>
+    <div class="gap"><span data-i18n="es"><b>Checklists en 0%.</b> En Martha: 30 checklists instanciados, 29 en 0/x — los PMs querían llenar todo al final del trade. Moraleja: el checklist se llena EN VIVO por sección o no sirve; el Backoffice audita el Durante (trade activo sin fotos = flag).</span>
+    <span data-i18n="en"><b>Checklists at 0%.</b> On Martha: 30 checklists instantiated, 29 at 0/x — PMs wanted to fill everything at trade end. Lesson: the checklist is filled LIVE per section or it's useless; Backoffice audits the During (active trade without photos = flag).</span></div>
+  </div>
+
+  <div class="footer-note">
+    <span data-i18n="es">Fuente: PROCESO CANÓNICO CNG v4 §5 (bucle diario, P2+P3) + EL_FLOW (regla de oro, fases A–E) + BRIEF §5 (casos reales). Citas de Jose verbatim entre comillas.</span>
+    <span data-i18n="en">Source: CNG CANONICAL PROCESS v4 §5 (daily loop, P2+P3) + EL_FLOW (golden rule, phases A–E) + BRIEF §5 (real cases). Jose's quotes verbatim in quotation marks (translated where shown in English).</span>
+  </div>
+</main>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

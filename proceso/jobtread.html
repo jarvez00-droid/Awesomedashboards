@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CNG · JobTread — el alfabeto de la operación</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="bar">
+    <span class="logo">CNG · <b>PROCESO</b></span>
+    <nav>
+      <a href="index.html"><span data-i18n="es">Inicio</span><span data-i18n="en">Home</span></a>
+      <a href="proceso-constructivo.html"><span data-i18n="es">Proceso constructivo</span><span data-i18n="en">Build sequence</span></a>
+      <a href="proceso-empresa.html"><span data-i18n="es">Proceso de empresa</span><span data-i18n="en">Company process</span></a>
+      <a href="bucle-diario.html"><span data-i18n="es">Bucle diario</span><span data-i18n="en">Daily loop</span></a>
+      <a href="jobtread.html">JobTread</a>
+      <a href="dinero.html"><span data-i18n="es">Dinero</span><span data-i18n="en">Money</span></a>
+      <a href="reloj-reportes.html"><span data-i18n="es">Reloj &amp; reportes</span><span data-i18n="en">Clock &amp; reports</span></a>
+      <a href="posiciones/index.html"><span data-i18n="es">Posiciones</span><span data-i18n="en">Positions</span></a>
+      <a href="casos-reales.html"><span data-i18n="es">Casos reales</span><span data-i18n="en">Real cases</span></a>
+      <a href="glosario.html"><span data-i18n="es">Glosario</span><span data-i18n="en">Glossary</span></a>
+    </nav>
+    <button id="cng-lang-btn" class="lang-toggle" type="button">EN</button>
+  </div>
+</header>
+
+<main>
+  <h1>JobTread — <span data-i18n="es">el alfabeto de la operación</span><span data-i18n="en">the alphabet of the operation</span></h1>
+  <p class="lead">
+    <span data-i18n="es">Todo el registro vive en <b>JobTread (JT)</b> = <i>“la columna vertebral de la operación a nivel administrativo.”</i> Cada trade es un grupo de tareas con dos lanes paralelos (PM y Compras). <i>“JobTread es un espejo de lo que está pasando en la realidad.”</i></span>
+    <span data-i18n="en">The entire record lives in <b>JobTread (JT)</b> = <i>“the administrative backbone of the operation.”</i> Each trade is a task group with two parallel lanes (PM and Purchasing). <i>“JobTread is a mirror of what is happening in reality.”</i></span>
+  </p>
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta página existe para</b> que hables el idioma del schedule: los 9 tipos de tarea, los DOS registros por movimiento de dinero, y las reglas que hacen que el registro sea verdad (regla de oro, cerrar = check + fechas, nomenclatura, DELIVERY ETA).</span>
+    <span data-i18n="en"><b>This page exists so</b> you speak the schedule's language: the 9 task types, the TWO records per money movement, and the rules that keep the record truthful (golden rule, closing = check + dates, naming, DELIVERY ETA).</span>
+  </p>
+
+  <!-- 9 TIPOS -->
+  <h2><span class="seccion-num">1 · </span><span data-i18n="es">Los 9 tipos de tarea</span><span data-i18n="en">The 9 task types</span></h2>
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta sección existe para</b> que cada tarea del schedule se cree con el tipo correcto — el tipo es lo que alimenta cashflow, productividad y reportes.</span>
+    <span data-i18n="en"><b>This section exists so</b> every schedule task is created with the correct type — the type is what feeds cashflow, productivity and reports.</span>
+  </p>
+  <div class="tbl-wrap"><table>
+    <tr><th><span data-i18n="es">Tipo</span><span data-i18n="en">Type</span></th><th><span data-i18n="es">Qué es</span><span data-i18n="en">What it is</span></th><th><span data-i18n="es">Dueño</span><span data-i18n="en">Owner</span></th></tr>
+    <tr><td><span class="chip t-pm">1 · PM Task</span></td><td><span data-i18n="es">Tareas de gestión del PM (SOW, source vendors, WO, confirmar schedule, inspecciones del checklist)</span><span data-i18n="en">PM management tasks (SOW, source vendors, WO, confirm schedule, checklist inspections)</span></td><td><span class="chip pm">PM</span></td></tr>
+    <tr><td><span class="chip t-pur">2 · Purchases</span></td><td><span data-i18n="es">Workflow de compras: takeoff, pricing/ETA, confirmar entrega</span><span data-i18n="en">Purchasing workflow: takeoff, pricing/ETA, confirm delivery</span></td><td><span class="chip compras">Purchases</span></td></tr>
+    <tr><td><span class="chip t-act">3 · Action Task</span></td><td><span data-i18n="es">El trabajo real que ejecuta el sub (ej. instalar sheetrock)</span><span data-i18n="en">The real work the sub executes (e.g. install sheetrock)</span></td><td><span data-i18n="es">(registro)</span><span data-i18n="en">(record)</span></td></tr>
+    <tr><td><span class="chip t-psub">4 · Payment – Subs</span></td><td><span data-i18n="es">Pago a subcontratista. Genera un <b>Bill</b></span><span data-i18n="en">Payment to a subcontractor. Generates a <b>Bill</b></span></td><td><span class="chip admin">Admin</span></td></tr>
+    <tr><td><span class="chip t-pmat">5 · Payment – Materials</span></td><td><span data-i18n="es">Compra de material. Genera un <b>Expense</b></span><span data-i18n="en">Material purchase. Generates an <b>Expense</b></span></td><td><span class="chip compras">Purchases</span></td></tr>
+    <tr><td><span class="chip t-insp">6 · City Inspection</span></td><td><span data-i18n="es">Día real de una inspección de ciudad (“los ítems rojitos”)</span><span data-i18n="en">The real day of a city inspection (“the little red items”)</span></td><td><span class="chip pm">PM</span></td></tr>
+    <tr><td><span class="chip">7 · Additional Expenses</span></td><td><span data-i18n="es">Compras del día a día / caja chica (ej. bolsas de basura)</span><span data-i18n="en">Day-to-day purchases / petty cash (e.g. trash bags)</span></td><td><span class="chip compras">Purchases</span> <span class="chip pm">PM</span></td></tr>
+    <tr><td><span class="chip t-cp">8 · Critical Path</span></td><td><span data-i18n="es">Action Task que está en la ruta crítica</span><span data-i18n="en">An Action Task that sits on the critical path</span></td><td><span data-i18n="es">(registro)</span><span data-i18n="en">(record)</span></td></tr>
+    <tr><td><span class="chip">9 · Refunds</span></td><td><span data-i18n="es">Reembolsos (ej. gasolina de los PMs)</span><span data-i18n="en">Reimbursements (e.g. PMs' gas)</span></td><td><span data-i18n="es">(registro)</span><span data-i18n="en">(record)</span></td></tr>
+  </table></div>
+
+  <div class="regla">
+    <span data-i18n="es"><b>Nomenclatura:</b> <code>&lt;TRADE&gt; + &lt;ACCIÓN&gt;</code> (ej. <code>PLUMBING – CREATE SOW</code>, <code>SIDING – BILL AND PAYMENT</code>). · <b>El monto del pago vive en la DESCRIPCIÓN de la tarea</b> (el sistema lo parsea; sin monto = “amount TBD”, no cuenta en cashflow). · <b>DELIVERY ETA:</b> duración &gt;1 día → la fecha fin es el plazo máximo de llegada; =1 día → en stock o ETA sin verificar. · El template usa días numerados; el schedule en producción usa fechas de calendario.</span>
+    <span data-i18n="en"><b>Naming:</b> <code>&lt;TRADE&gt; + &lt;ACTION&gt;</code> (e.g. <code>PLUMBING – CREATE SOW</code>, <code>SIDING – BILL AND PAYMENT</code>). · <b>The payment amount lives in the task's DESCRIPTION</b> (the system parses it; no amount = “amount TBD”, doesn't count in cashflow). · <b>DELIVERY ETA:</b> duration &gt;1 day → end date is the max arrival date; =1 day → in stock or ETA unverified. · The template uses numbered days; a production schedule uses calendar dates.</span>
+  </div>
+
+  <!-- REGLA DE ORO + MOVER EL SCHEDULE -->
+  <h2><span class="seccion-num">2 · </span><span data-i18n="es">Las reglas que hacen el registro VERDAD</span><span data-i18n="en">The rules that keep the record TRUE</span></h2>
+  <div class="clave">
+    <div style="font-size:12px;letter-spacing:1.5px;color:#94a3b8;font-weight:700;margin-bottom:6px">
+      <span data-i18n="es">LA REGLA DE ORO</span><span data-i18n="en">THE GOLDEN RULE</span>
+    </div>
+    <span data-i18n="es">Un <b>Action/EXECUTE solo puede tener fecha si su cadena previa está 100% cerrada</b> (SOW + WO firmada + schedule confirmado + material con ETA + inspección Before). Violarla = obra que “produce la mitad” (caso real: semana del 29-jun).</span>
+    <span data-i18n="en">An <b>Action/EXECUTE task may only carry a date if its upstream chain is 100% closed</b> (SOW + signed WO + confirmed schedule + material with ETA + Before inspection). Violating it = a job that “produces half” (real case: week of Jun 29).</span>
+  </div>
+  <div class="grid c2">
+    <div class="card">
+      <h3><span data-i18n="es">Reglas para MOVER el schedule (Jose 2026-08-06)</span><span data-i18n="en">Rules for MOVING the schedule (Jose 2026-08-06)</span></h3>
+      <p style="font-size:13.5px"><span data-i18n="es">El schedule es <b>el reflejo de lo que pasa o pasó en la realidad, y la proyección OPTIMISTA de lo que pasará</b>. Al cerrar una tarea hay que <b>CUADRAR la información con las FECHAS — no basta marcar el check</b>: un check sobre una fecha que no corresponde a cuándo ocurrió de verdad es un <b>registro sucio</b> (rompe el viernes-vs-viernes, el cashflow y la productividad). <b>Cerrar = check + fechas reales cuadradas.</b></span>
+      <span data-i18n="en">The schedule is <b>the reflection of what happens or happened in reality, and the OPTIMISTIC projection of what will happen</b>. When closing a task you must <b>SQUARE the information with the DATES — the check alone is not enough</b>: a check on a date that doesn't match when it really happened is a <b>dirty record</b> (it breaks Friday-vs-Friday, cashflow and productivity). <b>Closing = check + real dates squared.</b></span></p>
+    </div>
+    <div class="card">
+      <h3><span data-i18n="es">El matiz de los PAGOS (no se pierde)</span><span data-i18n="en">The PAYMENT nuance (never lose it)</span></h3>
+      <p style="font-size:13.5px"><span data-i18n="es">En las tareas de <b>pago</b>, la fecha original = <b>gatillo contractual</b> (culminación + término) y <b>NO se reescribe</b>; el pago se <b>MUEVE</b> y se registra en la fecha en que REALMENTE se pagó. Cuadrar fechas aplica a la realidad de la obra; el gatillo contractual del pago se preserva.</span>
+      <span data-i18n="en">On <b>payment</b> tasks, the original date = the <b>contractual trigger</b> (completion + terms) and is <b>NOT rewritten</b>; the payment is <b>MOVED</b> and recorded on the date it was REALLY paid. Squaring dates applies to job reality; the payment's contractual trigger is preserved.</span></p>
+    </div>
+  </div>
+
+  <!-- LOS DOS REGISTROS -->
+  <h2><span class="seccion-num">3 · </span><span data-i18n="es">Los DOS registros por movimiento de dinero</span><span data-i18n="en">The TWO records per money movement</span></h2>
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta sección existe para</b> que ningún movimiento de dinero quede a medias: <i>“siempre son dos, acuérdense: el schedule = nuestro registro de obra, y los libros contables.”</i> (Jose, P2)</span>
+    <span data-i18n="en"><b>This section exists so</b> no money movement is left half-recorded: “it's always two, remember: the schedule = our job record, and the accounting books.” (Jose, P2, translated)</span>
+  </p>
+
+  <div class="grid c2">
+    <div>
+      <h3>A) <span data-i18n="es">Registro en el SCHEDULE (registro de obra)</span><span data-i18n="en">Record in the SCHEDULE (job record)</span></h3>
+      <div class="mock">
+        <div class="mock-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span data-i18n="es">CAPTURA DESCRITA — JobTread · Schedule → nueva tarea</span><span data-i18n="en">DESCRIBED SCREENSHOT — JobTread · Schedule → new task</span></div>
+        <div class="mock-body">
+          <div class="campo"><span class="lbl">Task name</span><span class="val">SHEETROCK – BILL AND PAYMENT</span></div>
+          <div class="campo"><span class="lbl"><span data-i18n="es">Día</span><span data-i18n="en">Day</span></span><span class="val"><span data-i18n="es">HOY (el día correspondiente)</span><span data-i18n="en">TODAY (the corresponding day)</span></span></div>
+          <div class="campo"><span class="lbl">Task type</span><span class="val">4. Payment - Subs <span style="color:#64748b;font-weight:400">(Materials <span data-i18n="es">si es compra de material</span><span data-i18n="en">if it's a material purchase</span>)</span></span></div>
+          <div class="campo"><span class="lbl"><span data-i18n="es">Descripción</span><span data-i18n="en">Description</span></span><span class="val">4500 <span style="color:#64748b;font-weight:400">(<span data-i18n="es">solo el número, sin signo menos</span><span data-i18n="en">just the number, no minus sign</span>)</span></span></div>
+          <div class="campo"><span class="lbl">Progress</span><span class="val">✓ <span data-i18n="es">Completado</span><span data-i18n="en">Complete</span></span></div>
+        </div>
+      </div>
+      <p style="font-size:12.5px;color:var(--mut)"><span data-i18n="es">Resultado: queda el registro en calendario de que ESE día se hizo esa compra/pago.</span><span data-i18n="en">Result: the calendar record that THAT day this purchase/payment happened.</span></p>
+    </div>
+    <div>
+      <h3>B) <span data-i18n="es">Registro en los LIBROS (documento contable)</span><span data-i18n="en">Record in the BOOKS (accounting document)</span></h3>
+      <div class="mock">
+        <div class="mock-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span data-i18n="es">CAPTURA DESCRITA — JobTread · Proyecto → Documentos → Crear documento</span><span data-i18n="en">DESCRIBED SCREENSHOT — JobTread · Project → Documents → Create document</span></div>
+        <div class="mock-body">
+          <div class="campo"><span class="lbl"><span data-i18n="es">Tipo</span><span data-i18n="en">Type</span></span><span class="val"><b>Bill</b> (<span data-i18n="es">pago a sub</span><span data-i18n="en">sub payment</span>) · <b>Expense</b> (<span data-i18n="es">compra de material</span><span data-i18n="en">material purchase</span>)</span></div>
+          <div class="campo"><span class="lbl">Vendor</span><span class="val"><span data-i18n="es">a quién se le compró/pagó</span><span data-i18n="en">who was paid / bought from</span></span></div>
+          <div class="campo"><span class="lbl">Trade</span><span class="val"><span data-i18n="es">ej. Plumbing</span><span data-i18n="en">e.g. Plumbing</span></span></div>
+          <div class="campo"><span class="lbl">Line item</span><span class="val"><span data-i18n="es">a qué ítem del budget corresponde (ej. tankless water heater)</span><span data-i18n="en">which budget item it maps to (e.g. tankless water heater)</span></span></div>
+          <div class="campo"><span class="lbl"><span data-i18n="es">Costo</span><span data-i18n="en">Cost</span></span><span class="val">$ → <b>Approve for Payment</b> → <b>Pay</b> (<span data-i18n="es">si ya se pagó</span><span data-i18n="en">if already paid</span>)</span></div>
+        </div>
+      </div>
+      <p style="font-size:12.5px;color:var(--mut)"><span data-i18n="es">Resultado: el movimiento queda en los libros, contra el line item correcto del budget.</span><span data-i18n="en">Result: the movement lands in the books, against the correct budget line item.</span></p>
+    </div>
+  </div>
+  <p class="mock-note"><span data-i18n="es">Las “capturas” son descripciones fieles de la mecánica (canon §6). Las capturas de pantalla reales de proyectos se añaden en la fase de material visual, con aprobación de Jose.</span><span data-i18n="en">These “screenshots” are faithful descriptions of the mechanics (canon §6). Real project screenshots get added in the visual-material phase, with Jose's approval.</span></p>
+
+  <div class="alerta">
+    <span data-i18n="es"><b>REGLA SIN EXCEPCIONES (Jose 2026-08-06): TODO dinero pasa por el schedule.</b> TODA compra se registra aunque sea de último minuto (Payment - Materials / Payment - Subs). TODO gasto — aunque sea de Home Depot o caja chica — se anota al proyecto como Additional Expense. Si se movió dinero y no hay tarea en el schedule, el registro está incompleto: cashflow, productividad y reportes quedan ciegos a ese gasto.</span>
+    <span data-i18n="en"><b>RULE WITHOUT EXCEPTIONS (Jose 2026-08-06): ALL money goes through the schedule.</b> EVERY purchase is recorded even last-minute (Payment - Materials / Payment - Subs). EVERY expense — even Home Depot or petty cash — is logged to the project as an Additional Expense. If money moved and there's no task in the schedule, the record is incomplete: cashflow, productivity and reports are blind to that spend.</span>
+  </div>
+
+  <div class="gap">
+    <span data-i18n="es">⚠ REALIDAD: hoy Compras y Backoffice están fusionados en una posición híbrida (Jose); el nuevo Data-Entry (Joaquín) absorbe el registro de schedule + pagos y audita que Compras cumpla ETAs (<i>“a veces se le pasa al área de compras”</i>).</span>
+    <span data-i18n="en">⚠ REALITY: today Purchasing and Backoffice are fused into a hybrid position (Jose); the new Data-Entry (Joaquín) absorbs schedule + payment recording and audits that Purchasing meets ETAs (“sometimes the purchasing area misses it”).</span>
+  </div>
+
+  <!-- CASOS -->
+  <h2><span class="seccion-num">4 · </span><span data-i18n="es">Los casos que enseñan estas reglas</span><span data-i18n="en">The cases that teach these rules</span></h2>
+  <div class="grid c2">
+    <div class="gap"><span data-i18n="es"><b>La semana del 29-jun.</b> Se produjo LA MITAD de lo proyectado por violar la regla de oro: EXECUTEs fechados con la cadena en 0%. Llegó el día y no había electricista.</span>
+    <span data-i18n="en"><b>The week of Jun 29.</b> HALF of what was projected got produced by violating the golden rule: EXECUTEs dated with the chain at 0%. The day came and there was no electrician.</span></div>
+    <div class="gap"><span data-i18n="es"><b>ETAs añejos.</b> “Está ordenado” ≠ “ETA confirmado”: un ETA desactualizado <i>“le miente al cronograma”</i> — el PM planifica su semana sobre una fecha falsa. Toda compra con ETA POR ESCRITO del proveedor; ETA sin confirmar &gt;24h = discrepancia abierta.</span>
+    <span data-i18n="en"><b>Stale ETAs.</b> “It's ordered” ≠ “ETA confirmed”: an outdated ETA “lies to the schedule” — the PM plans his week on a false date. Every purchase carries the supplier's ETA IN WRITING; an ETA unconfirmed &gt;24h = an open discrepancy.</span></div>
+  </div>
+
+  <div class="footer-note">
+    <span data-i18n="es">Fuente: PROCESO CANÓNICO CNG v4 §4 (tipos de tarea) + §6 (los dos registros, mecánica exacta P2) + EL_FLOW §0 (regla de oro) + SCHEDULE_STRUCTURE (regla DELIVERY ETA). Citas de Jose verbatim.</span>
+    <span data-i18n="en">Source: CNG CANONICAL PROCESS v4 §4 (task types) + §6 (the two records, exact P2 mechanics) + EL_FLOW §0 (golden rule) + SCHEDULE_STRUCTURE (DELIVERY ETA rule). Jose's quotes verbatim (translated where shown in English).</span>
+  </div>
+</main>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

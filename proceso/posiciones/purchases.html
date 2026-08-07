@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CNG · Posición — Purchases (Compras)</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+.btn{display:inline-block;background:var(--ink);color:#fbbf24;font-weight:700;border-radius:9px;padding:8px 14px;font-size:13px;margin:2px 6px 2px 0}
+.btn:hover{text-decoration:none;opacity:.92}
+ul.checks{list-style:none;margin:8px 0;padding:0}
+ul.checks li{padding:7px 10px 7px 34px;position:relative;border-bottom:1px dashed var(--line);font-size:13.5px}
+ul.checks li:last-child{border-bottom:0}
+ul.checks li::before{content:"✓";position:absolute;left:8px;color:var(--verde);font-weight:800}
+.shv-s{border-top:4px solid var(--rol-compras)} .shv-h{border-top:4px solid var(--verde)} .shv-v{border-top:4px solid var(--ambar)}
+.shv-s ul,.shv-h ul,.shv-v ul{margin:6px 0 0;padding-left:18px;font-size:13px}
+.shv-s li,.shv-h li,.shv-v li{margin:4px 0}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="bar">
+    <span class="logo">CNG · <b>PROCESO</b></span>
+    <nav>
+      <a href="../index.html"><span data-i18n="es">Inicio</span><span data-i18n="en">Home</span></a>
+      <a href="../proceso-constructivo.html"><span data-i18n="es">Proceso constructivo</span><span data-i18n="en">Build sequence</span></a>
+      <a href="../proceso-empresa.html"><span data-i18n="es">Proceso de empresa</span><span data-i18n="en">Company process</span></a>
+      <a href="../bucle-diario.html"><span data-i18n="es">Bucle diario</span><span data-i18n="en">Daily loop</span></a>
+      <a href="../jobtread.html">JobTread</a>
+      <a href="../dinero.html"><span data-i18n="es">Dinero</span><span data-i18n="en">Money</span></a>
+      <a href="../reloj-reportes.html"><span data-i18n="es">Reloj &amp; reportes</span><span data-i18n="en">Clock &amp; reports</span></a>
+      <a href="index.html" class="active"><span data-i18n="es">Posiciones</span><span data-i18n="en">Positions</span></a>
+      <a href="../casos-reales.html"><span data-i18n="es">Casos reales</span><span data-i18n="en">Real cases</span></a>
+      <a href="../glosario.html"><span data-i18n="es">Glosario</span><span data-i18n="en">Glossary</span></a>
+    </nav>
+    <button id="cng-lang-btn" class="lang-toggle" type="button">EN</button>
+  </div>
+</header>
+
+<main>
+  <p style="margin:0 0 4px"><span class="chip compras"><span data-i18n="es">COMPRAS</span><span data-i18n="en">PURCHASES</span></span> <span style="font-size:12.5px;color:var(--mut)">Romina (Perú)</span></p>
+  <h1><span data-i18n="es">Coordinadora de Compras</span><span data-i18n="en">Purchases Coordinator</span></h1>
+  <p class="lead">
+    <span data-i18n="es">El puesto no se mide por cuánto se compra, sino por <b>si algún trade quedó alguna vez esperando material</b>. Coordinadora y gestora de entregas — NO decide las prioridades de la obra. Su oficio es la <b>anticipación</b>.</span>
+    <span data-i18n="en">The role is measured not by how much is purchased, but by <b>whether any trade was ever left waiting for material</b>. Coordinator and expediter — NOT a decision-maker about jobsite priorities. Her craft is <b>anticipation</b>.</span>
+  </p>
+
+  <div class="clave">
+    <div style="font-size:12px;letter-spacing:1.5px;color:#94a3b8;font-weight:700;margin-bottom:6px"><span data-i18n="es">MISIÓN</span><span data-i18n="en">MISSION</span></div>
+    <span data-i18n="es"><b>Garantizar que ningún trade en ninguna obra de CNG quede parado por falta de material</b> — cotizando a tiempo, ordenando antes que la cuadrilla, confirmando cada ETA y manteniendo abastecida cada cadena crítica para que la obra avance sin fricción.</span>
+    <span data-i18n="en"><b>To guarantee that no trade on any CNG jobsite is ever idle for lack of material</b> — by pricing on time, ordering ahead of the crew, confirming every ETA, and keeping every critical chain supplied so the build moves without friction.</span>
+    <div class="sub"><span data-i18n="es">Las 3 verdades: 1) ningún trade se detiene por material · 2) cada cadena crítica con ETA confirmado — "está ordenado" NO basta · 3) la cotización ES la descripción en JobTread.</span><span data-i18n="en">The 3 truths: 1) no trade ever stops for material · 2) every critical chain has its confirmed ETA — "it's ordered" is not enough · 3) the quote IS the description in JobTread.</span></div>
+  </div>
+
+  <h2><span class="seccion-num">1 · </span><span data-i18n="es">Su día (jornada hasta la 1:00 PM)</span><span data-i18n="en">Her day (workday until 1:00 PM)</span></h2>
+  <ul class="reloj">
+    <li class="sys"><span class="hora">6:00 AM</span><div class="que"><span data-i18n="es"><b>Roll de vencidos</b> (sistema): pagos y cobros ruedan a hoy en JobTread.</span><span data-i18n="en"><b>Overdue roll</b> (system): payments and collections roll to today in JobTread.</span></div></li>
+    <li><span class="hora" data-i18n="es">Mañana</span><span class="hora" data-i18n="en">Morning</span><div class="que"><span data-i18n="es">Priorizar el día con el <b>kanban de confirmadas</b>: takeoffs (al INICIO del trade — "para el día 60, 64, 65 ya empiezas los preparativos" para el trabajo del día 85) · cotizaciones a 3 proveedores · compras del día con registro doble · ETAs corregidos.</span><span data-i18n="en">Prioritize the day with the <b>confirmed-purchases kanban</b>: takeoffs (at the START of the trade — "by day 60, 64, 65 you start preparing" for day-85 work) · quotes from 3 suppliers · today's purchases with the double record · ETAs corrected.</span></div></li>
+    <li><span class="hora">12:00 PM</span><div class="que"><span data-i18n="es">Corre <b>ELLA MISMA los 4 checks</b> del Día Cumplido (la alerta pre-cierre del bot está en pausa desde el 31-jul).</span><span data-i18n="en">She runs <b>the 4 Day-Done checks HERSELF</b> (the bot's pre-close alert is paused since Jul-31).</span></div></li>
+    <li class="hito"><span class="hora">1:00 PM</span><div class="que"><span data-i18n="es"><b>CIERRE con handoff al Backoffice</b>: pendientes declarados — nada queda en silencio. (Formato propuesto: pendiente · estado · próximo paso · quién lo tiene <span class="verificar">[PROPUESTA]</span>.)</span><span data-i18n="en"><b>CLOSE with the Backoffice handoff</b>: declared open items — nothing stays silent. (Proposed format: item · status · next step · owner <span class="verificar">[PROPUESTA]</span>.)</span></div></li>
+    <li><span class="hora">2:30 PM</span><div class="que"><span data-i18n="es"><b>Reunión diaria</b> (3:30 PM Perú): sus registros de la mañana son el insumo. Después de las 3 PM, JobTread es la verdad del día.</span><span data-i18n="en"><b>Daily meeting</b> (3:30 PM Peru): her morning records are the input. After 3 PM, JobTread is the truth of the day.</span></div></li>
+    <li class="sys"><span class="hora" data-i18n="es">Vie 11 PM</span><span class="hora" data-i18n="en">Fri 11 PM</span><div class="que"><span data-i18n="es"><b>Baseline oficial</b> — la foto que ancla su viernes-vs-viernes.</span><span data-i18n="en"><b>Official baseline</b> — the photo that anchors her Friday-vs-Friday.</span></div></li>
+  </ul>
+
+  <h2><span class="seccion-num">2 · </span><span data-i18n="es">Qué SABE · qué HACE · qué VERIFICA</span><span data-i18n="en">What she KNOWS · DOES · VERIFIES</span></h2>
+  <div class="grid c3">
+    <div class="card shv-s"><h3 style="color:var(--rol-compras)"><span data-i18n="es">SABE</span><span data-i18n="en">KNOWS</span></h3>
+      <ul>
+        <li data-i18n="es">Su <b>lane oficial de 5 tareas</b> por trade: CREATE TAKEOFF REPORT → (PM: CONFIRM TAKEOFF DETAILS) → SECURE PRICING &amp; ETA → PURCHASE MATERIALS → DELIVERY ETA.</li><li data-i18n="en">Her <b>official 5-task lane</b> per trade: CREATE TAKEOFF REPORT → (PM: CONFIRM TAKEOFF DETAILS) → SECURE PRICING &amp; ETA → PURCHASE MATERIALS → DELIVERY ETA.</li>
+        <li data-i18n="es"><b>El primer filtro SIEMPRE es el presupuesto</b>; después, el trade-off precio vs ETA contra la fecha de la cuadrilla.</li><li data-i18n="en"><b>The first filter is ALWAYS the budget</b>; then the price-vs-ETA trade-off against the crew's date.</li>
+        <li data-i18n="es"><b>Regla DELIVERY ETA:</b> &gt;1 día = plazo máximo de llegada · =1 día = stock o SIN VERIFICAR (deuda, no cierre).</li><li data-i18n="en"><b>DELIVERY ETA rule:</b> &gt;1 day = max arrival window · =1 day = in stock or UNVERIFIED (a debt, not a close).</li>
+        <li data-i18n="es"><b>FRAMING es especial:</b> el takeoff/sizing está tercerizado al lumber supplier — ella manda los planos y consigue los quotes.</li><li data-i18n="en"><b>FRAMING is special:</b> takeoff/sizing is outsourced to the lumber supplier — she sends the plans and gets the quotes.</li>
+        <li data-i18n="es">Checks del cronograma = pagos CONFIRMADOS (fuente de la verdad: el Finance tab, no el schedule).</li><li data-i18n="en">Schedule checks = CONFIRMED payments (source of truth: the Finance tab, not the schedule).</li>
+      </ul>
+    </div>
+    <div class="card shv-h"><h3 style="color:var(--verde)"><span data-i18n="es">HACE</span><span data-i18n="en">DOES</span></h3>
+      <ul>
+        <li data-i18n="es">Crea el <b>Take-Off Report en CompanyCam</b> (campos por locación) desde el PORTAFOLIO de Planning — y espera el <b>CONFIRM TAKEOFF DETAILS del PM antes de cotizar o comprar</b>.</li><li data-i18n="en">Creates the <b>Take-Off Report in CompanyCam</b> (fields per location) from Planning's PORTFOLIO — and waits for the PM's <b>CONFIRM TAKEOFF DETAILS before pricing or buying</b>.</li>
+        <li data-i18n="es">Cotiza con <b>TRES proveedores</b>; todo pricing a ≤5 días con la <b>cotización escrita en la descripción</b> + quote adjunto.</li><li data-i18n="en">Quotes with <b>THREE suppliers</b>; every pricing due ≤5 days has the <b>quote written in the description</b> + attached.</li>
+        <li data-i18n="es">Compra con <b>registro doble</b> (tarea Payment–Materials con monto limpio + Expense contra el line item) y deja las <b>3 evidencias</b> en el reporte de takeoff: foto del precio confirmado · ETA por escrito · recibo.</li><li data-i18n="en">Purchases with the <b>double record</b> (Payment–Materials task with a clean amount + Expense against the line item) and leaves the <b>3 pieces of evidence</b> in the takeoff report: photo of the confirmed price · written ETA · receipt.</li>
+        <li data-i18n="es">Pone la tarea <b>DELIVERY ETA al día siguiente de la compra</b> — "así el PM sabe para qué día llega lo solicitado".</li><li data-i18n="en">Sets the <b>DELIVERY ETA task the day after the purchase</b> — "so the PM knows what day it arrives."</li>
+        <li data-i18n="es">Verificada la entrega → <b>notifica a la Administradora</b> (Compras coordina; ella ejecuta el pago).</li><li data-i18n="en">Once delivery is verified → <b>notifies the Administrator</b> (Purchases coordinates; she executes the payment).</li>
+      </ul>
+    </div>
+    <div class="card shv-v"><h3 style="color:var(--ambar)"><span data-i18n="es">VERIFICA</span><span data-i18n="en">VERIFIES</span></h3>
+      <ul>
+        <li data-i18n="es"><b>Cada entrega con conteo propio</b> contra la orden: cantidad · spec · condición; evidencia = foto + comentario. Incompleta o errada → se levanta con el proveedor y se corrige el ETA.</li><li data-i18n="en"><b>Every delivery with her own count</b> against the order: quantity · spec · condition; evidence = photo + comment. Short or wrong → raised with the supplier and the ETA corrected.</li>
+        <li data-i18n="es"><b>Nunca compra sobre un spec no confirmado</b> (caso puertas 96": se compró el error).</li><li data-i18n="en"><b>Never buys on an unconfirmed spec</b> (96" doors case: the error got purchased).</li>
+        <li data-i18n="es">Cada <b>ETA que cambia se corrige DE INMEDIATO</b> — un ETA desactualizado "le miente al cronograma".</li><li data-i18n="en">Every <b>changed ETA gets corrected IMMEDIATELY</b> — a stale ETA "lies to the schedule."</li>
+        <li data-i18n="es">El material pertenece a <b>SU proyecto</b> — contra el budget de UNA obra (caso material cruzado Martha/César).</li><li data-i18n="en">Material belongs to <b>ITS project</b> — against ONE job's budget (Martha/César crossed-material case).</li>
+        <li data-i18n="es">Toda <b>espera a un PM registrada en el bot</b> — si no está en el bot, no existe.</li><li data-i18n="en">Every <b>wait on a PM logged in the bot</b> — if it is not in the bot, it does not exist.</li>
+      </ul>
+    </div>
+  </div>
+
+  <details class="exp"><summary><span data-i18n="es">Lo que NO hace</span><span data-i18n="en">What she does NOT do</span></summary>
+    <div class="exp-body"><ul>
+      <li data-i18n="es">NO decide prioridades de obra (las sigue; conflictos se escalan) · NO ejecuta pagos (la Administradora, con sus 4 filtros) · NO confirma takeoffs en obra (eso es del PM — ella está en Perú) · NO fija el presupuesto semanal (viernes de cashflow; el CEO aprueba) · NO maneja la obra.</li>
+      <li data-i18n="en">Does NOT decide jobsite priorities (follows them; conflicts get escalated) · does NOT execute payments (the Administrator, with her 4 filters) · does NOT confirm takeoffs on site (the PM's — she is in Peru) · does NOT set the weekly budget (Friday cashflow; the CEO approves) · does NOT run the jobsite.</li>
+    </ul></div>
+  </details>
+
+  <h2><span class="seccion-num">3 · </span><span data-i18n="es">Su "Día Cumplido" (los 4 checks)</span><span data-i18n="en">Her "Day Done" (the 4 checks)</span></h2>
+  <div class="card">
+    <ul class="checks">
+      <li data-i18n="es"><b>Cero compras con vencimiento HOY</b> sin ejecutar o sin ETA confirmada.</li><li data-i18n="en"><b>Zero purchases due TODAY</b> unexecuted or without a confirmed ETA.</li>
+      <li data-i18n="es"><b>Todo pricing a ≤5 días</b> tiene cotización en la descripción.</li><li data-i18n="en"><b>Every pricing due ≤5 days</b> has its quote in the description.</li>
+      <li data-i18n="es"><b>ETAs de la semana</b> confirmados o corregidos.</li><li data-i18n="en"><b>The week's ETAs</b> confirmed or corrected.</li>
+      <li data-i18n="es"><b>Toda espera suya a un PM registrada en el bot</b> ("espero confirmación de X").</li><li data-i18n="en"><b>Every wait on a PM logged in the bot</b> ("waiting on X's confirmation").</li>
+    </ul>
+    <p style="font-size:12.5px;color:var(--mut);margin:8px 0 0"><span data-i18n="es">✅ = puede cerrar e irse tranquila · ⚠️ = parcial · ❌ = sin señal. Hoy los corre ella misma a las 12:00 (alertas en pausa).</span><span data-i18n="en">✅ = can close and leave in peace · ⚠️ = partial · ❌ = no signal. Today she runs them herself at 12:00 (alerts paused).</span></p>
+  </div>
+
+  <h2><span class="seccion-num">4 · </span><span data-i18n="es">Sus reportes (con su guía de lectura)</span><span data-i18n="en">Her reports (with the reading guide)</span></h2>
+  <div class="tbl-wrap">
+    <table>
+      <tr><th data-i18n="es">Reporte</th><th data-i18n="en">Report</th><th data-i18n="es">Cuándo</th><th data-i18n="en">When</th><th data-i18n="es">Guía</th><th data-i18n="en">Guide</th></tr>
+      <tr><td><b>Upcoming Week Purchases</b> — <span data-i18n="es">el kanban sáb→vie de compras CONFIRMADAS con monto y SU día + indicadores TAKEOFF/PM-confirmó. Su papel: que cada compra se realice SU día</span><span data-i18n="en">the Sat→Fri kanban of CONFIRMED purchases with amount and THEIR day + TAKEOFF/PM-confirmed indicators. Her role: each purchase happens on ITS day</span></td><td data-i18n="es">Con los presupuestos consolidados</td><td data-i18n="en">With the consolidated budgets</td><td><a href="../materiales/guias/GUIA_05_UPCOMING_WEEK_PURCHASES_ROMINA.html">ES</a></td></tr>
+    </table>
+  </div>
+  <p style="font-size:12.5px"><span data-i18n="es">Su reporte dedicado "Purchases Review of the Week" está en <b>backlog</b> por decisión de Jose (2026-08-06); mientras tanto la evaluación corre por las leyes viernes-vs-viernes (DELIVERY ETA = solo informativa, nunca cuenta como vencida — regla C3).</span><span data-i18n="en">Her dedicated "Purchases Review of the Week" report is in the <b>backlog</b> per Jose's decision (2026-08-06); meanwhile evaluation runs under the Friday-vs-Friday laws (DELIVERY ETA = informational only, never counts as overdue — rule C3).</span></p>
+
+  <h2><span class="seccion-num">5 · </span><span data-i18n="es">Materiales del puesto</span><span data-i18n="en">Position materials</span></h2>
+  <p><a class="btn" href="../materiales/one-pagers/purchases_romina.html">⬇ One-pager Purchases (Romina)</a></p>
+  <p style="font-size:12.5px;color:var(--mut)"><span data-i18n="es">Su track de entrenamiento: <code>03_PAQUETES_ENTRENAMIENTO/TRACK_B_PURCHASES_ROMINA_v2026-08-06.md</code>.</span><span data-i18n="en">Training track: <code>03_PAQUETES_ENTRENAMIENTO/TRACK_B_PURCHASES_ROMINA_v2026-08-06.md</code>.</span></p>
+
+  <div class="footer-note">
+    <span data-i18n="es">Posición · Purchases Coordinator · 2026-08-07 · Fuentes: JD_purchases.md v3.0 (2026-08-06) · Track B v2026-08-06 (one-pager "TU DÍA") · canon v4 · DIA_CUMPLIDO_POR_PUESTO v3 · _BRIEF_CONSTRUCTORES. Material interno.</span>
+    <span data-i18n="en">Position · Purchases Coordinator · 2026-08-07 · Sources: JD_purchases.md v3.0 · Track B v2026-08-06 · canon v4 · DIA_CUMPLIDO_POR_PUESTO v3 · Builders' BRIEF. Internal material.</span>
+  </div>
+</main>
+
+<script src="../assets/app.js"></script>
+</body>
+</html>

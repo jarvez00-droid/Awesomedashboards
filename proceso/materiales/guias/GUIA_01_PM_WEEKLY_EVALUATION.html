@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía de lectura — PM Weekly Evaluation</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+h3 { font-size: 12px; margin: 14px 0 6px; color: #1d4ed8; }
+h4 { font-size: 10.5px; margin: 10px 0 4px; color: #0f172a; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+ul, ol { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.sub { color: #475569; font-size: 11px; margin: 0 0 10px; }
+.sw { display:inline-block; width:26px; height:9px; border-radius:3px; vertical-align:middle; margin-right:4px; }
+</style>
+</head>
+<body>
+
+<h1>Cómo leer tu <b>PM Weekly Evaluation</b></h1>
+<p class="sub">Guía de lectura de reportes · Programa de entrenamiento CNG · v2026-08-06</p>
+
+<h2>1 · Qué es y para quién</h2>
+<div class="clave">
+Es tu <b>evaluación de la semana cerrada</b>: llega cada <b>sábado 8:00 AM</b> (automático) a cada PM (su propio PDF) y a Jose.
+La semana se cierra el <b>viernes a las 11:00 PM</b> — lo que se ve es la foto congelada de ese momento.
+<b>Se evalúa viernes vs viernes:</b> lo que cuenta es qué CERRASTE entre el cierre del viernes anterior y este.
+</div>
+<p><b>Propósito de este reporte:</b> mostrarte, obra por obra, tu schedule real contra el plan que quedó fijado el viernes anterior, tu documentación, y tus métricas de la semana con el <b>algoritmo honesto (v20)</b>. Solo aparece la OBRA (Action ▸ + Ruta Crítica ★ + inspecciones de ciudad ◆) — <b>los pagos no van en los gantts</b>.</p>
+
+<h2>2 · Anatomía — qué significa cada cosa</h2>
+<table>
+<tr><th>Sección / elemento</th><th>Qué significa</th></tr>
+<tr><td><b>Portada</b> (fondo oscuro)</td><td>Tu nombre, la semana evaluada (sáb → vie) y el chip naranja: "semana cerrada el vie 11:00 PM · estado congelado al cierre". Abajo, tus obras con su color y su % de avance acumulado.</td></tr>
+<tr><td><b>Banner por obra</b> (color)</td><td>Cada obra abre con su banda de color: "AVANCE DEL PROYECTO (obra, acumulado)" = X/Y tareas de obra y % — el universo es Action + Ruta Crítica del proyecto COMPLETO, sin pagos. Chips: Obra cerradas · PM tasks · Compras · vencidas al cierre.</td></tr>
+<tr><td><span class="sw" style="background:#94a3b8"></span><b>Barra GRIS</b></td><td>El PLAN: la foto del schedule del viernes anterior a las 11 PM (la línea base). Es el "ideal" contra el que se compara la semana.</td></tr>
+<tr><td><span class="sw" style="background:#16a34a"></span><b>Barra VERDE</b></td><td>Tarea <b>CULMINADA DENTRO de la semana</b> — lo que realmente sucedió, cerrado en plazo. Lleva la nota "cumplida (prog. X)".</td></tr>
+<tr><td><span class="sw" style="background:#f59e0b"></span><b>NARANJA + flechas ›››</b></td><td>La tarea <b>se corre a la semana siguiente</b> (iniciada pero extendida, o cumplida fuera de fecha). No es acusación: es el schedule reflejando la realidad — pero RESTA del cumplimiento pleno.</td></tr>
+<tr><td><span class="sw" style="background:#2563eb"></span><b>Barra AZUL</b></td><td>Tarea <b>añadida después del baseline</b> ("añadida — sin baseline"): entró a la semana ya en curso, no estaba en la foto del viernes.</td></tr>
+<tr><td><b>DOCUMENTACIÓN ✓/✗</b></td><td>Bajo cada trade: SOW · WO · TAKEOFF · CHECKLIST BEFORE/AFTER con ✓ o ✗ según el registro en JobTread. Solo se listan los ítems que ese trade tiene en su schedule.</td></tr>
+<tr><td><b>Símbolos</b> ★ ▸ ◆</td><td>★ = Ruta Crítica · ▸ = Action task · ◆ = City Inspection (las inspecciones van en su propia sección naranja, con rombo gris = plan y rombo color = real).</td></tr>
+<tr><td><b>Página final — MÉTRICAS</b></td><td>Tabla por proyecto: OBRA DE LA SEMANA (x/y · % en plazo) · TAREAS DE PM · COMPRAS · VENCIDAS · DOCUMENTACIÓN % · AVANCE ACUMULADO · ADOPCIÓN IA (días con interacción con el asistente + nº de mensajes).</td></tr>
+</table>
+
+<h4>El algoritmo honesto (v20) — cómo se calcula tu %</h4>
+<ul>
+<li><b>EN PLAZO</b> = culminada DENTRO de la semana. <b>El % principal cuenta SOLO estas.</b></li>
+<li><b>FUERA DE PLAZO ›››</b> = iniciada pero extendida a la semana siguiente. Resta del cumplimiento pleno: <b>nunca se muestra 100% si algo se extendió</b>.</li>
+<li><b>SIN CULMINAR</b> = tenía fecha en la semana y quedó sin culminar al cierre.</li>
+<li><b>VENCIDAS</b> = tareas con fecha ya pasada y sin culminar al cierre del viernes. Es un dato NEUTRO: trabajo por cerrar o schedule por reprogramar — no un veredicto.</li>
+</ul>
+
+<h2>3 · De dónde salen los números</h2>
+<ul>
+<li>Todo sale de <b>JobTread congelado al viernes 11 PM</b> (el cierre) comparado contra el <b>baseline del viernes anterior 11 PM</b> (el plan).</li>
+<li>La documentación ✓/✗ sale del <b>registro en JobTread</b> del schedule de cada trade.</li>
+<li>La adopción IA sale de tus mensajes con el asistente (DM + grupo) en los días hábiles.</li>
+<li><b>Los números del reporte oficial mandan</b> — no se recalculan por fuera.</li>
+</ul>
+
+<h2>4 · Qué hago cuando lo recibo</h2>
+<div class="mat"><b>1.</b> Mira primero las <b>naranjas ›››</b> y las <b>sin culminar</b>: eso es lo que arrastras a la semana nueva. Llévalo cuadrado a la reunión de las 2:30 (cerrar = check + fechas reales cuadradas).</div>
+<div class="mat"><b>2.</b> Revisa las <b>VENCIDAS</b>: son tu lista de limpieza — o se cierran o se reprograman en JobTread. No las dejes acumular.</div>
+<div class="mat"><b>3.</b> Cada <b>✗ de documentación</b> es un pendiente concreto: sube el SOW/WO/takeoff o completa el checklist en CompanyCam. Recuerda: el After desbloquea el pago del sub.</div>
+<div class="mat"><b>4.</b> Compara contra tu <b>Your Next Week</b> de la semana pasada: ese plan es exactamente contra lo que te evaluaron. El de esta semana será tu próxima evaluación.</div>
+<div class="mat"><b>5.</b> Si un número no te cuadra, pregúntale al bot ANTES del lunes — no re-calcules por tu cuenta.</div>
+
+<h2>5 · Errores de lectura comunes</h2>
+<div class="gap"><b>"Mi % es el avance de la obra."</b> No: el % de la semana solo cuenta lo culminado EN PLAZO. El avance de obra es la otra columna (AVANCE ACUMULADO).</div>
+<div class="gap"><b>"Naranja = me están acusando."</b> No: las reprogramaciones se presentan en neutro — son el schedule reflejando la realidad. Pero sí restan del cumplimiento pleno de la semana.</div>
+<div class="gap"><b>"Las vencidas son un castigo."</b> Son neutras: parte de lo abierto es limpieza de plan pendiente, no trabajo no hecho. Pero hay que limpiarlas.</div>
+<div class="gap"><b>"¿Dónde están los pagos?"</b> No van aquí: el dinero vive en el resumen pagado/cobrado del Project Department Weekly Evaluation y en la página de COBROS.</div>
+<div class="gap"><b>"Me evaluaron por no mover el schedule el martes."</b> Nunca: la evaluación es viernes vs viernes, jamás por puntualidad por día.</div>
+
+<p class="footer-note">Guía de lectura · PM Weekly Evaluation (v20 FINAL, aprobado por Jose 2026-08-06) · fuentes: canon §9.4/§9.5 · REPORTERIA_MASTER §A · sample PM_WEEKLY_EVALUATION_ANGEL.pdf (semana 25–31 jul) · _BRIEF_CONSTRUCTORES v1 · Programa de entrenamiento CNG 2026-08-06. Versión EN disponible (GUIA_01_..._EN.html).</p>
+
+</body>
+</html>

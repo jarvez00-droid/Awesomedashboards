@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CNG · Posición — Backoffice / Data-Entry</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+.btn{display:inline-block;background:var(--ink);color:#fbbf24;font-weight:700;border-radius:9px;padding:8px 14px;font-size:13px;margin:2px 6px 2px 0}
+.btn:hover{text-decoration:none;opacity:.92}
+ul.checks{list-style:none;margin:8px 0;padding:0}
+ul.checks li{padding:7px 10px 7px 34px;position:relative;border-bottom:1px dashed var(--line);font-size:13.5px}
+ul.checks li:last-child{border-bottom:0}
+ul.checks li::before{content:"✓";position:absolute;left:8px;color:var(--verde);font-weight:800}
+.shv-s{border-top:4px solid var(--violeta)} .shv-h{border-top:4px solid var(--verde)} .shv-v{border-top:4px solid var(--ambar)}
+.shv-s ul,.shv-h ul,.shv-v ul{margin:6px 0 0;padding-left:18px;font-size:13px}
+.shv-s li,.shv-h li,.shv-v li{margin:4px 0}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="bar">
+    <span class="logo">CNG · <b>PROCESO</b></span>
+    <nav>
+      <a href="../index.html"><span data-i18n="es">Inicio</span><span data-i18n="en">Home</span></a>
+      <a href="../proceso-constructivo.html"><span data-i18n="es">Proceso constructivo</span><span data-i18n="en">Build sequence</span></a>
+      <a href="../proceso-empresa.html"><span data-i18n="es">Proceso de empresa</span><span data-i18n="en">Company process</span></a>
+      <a href="../bucle-diario.html"><span data-i18n="es">Bucle diario</span><span data-i18n="en">Daily loop</span></a>
+      <a href="../jobtread.html">JobTread</a>
+      <a href="../dinero.html"><span data-i18n="es">Dinero</span><span data-i18n="en">Money</span></a>
+      <a href="../reloj-reportes.html"><span data-i18n="es">Reloj &amp; reportes</span><span data-i18n="en">Clock &amp; reports</span></a>
+      <a href="index.html" class="active"><span data-i18n="es">Posiciones</span><span data-i18n="en">Positions</span></a>
+      <a href="../casos-reales.html"><span data-i18n="es">Casos reales</span><span data-i18n="en">Real cases</span></a>
+      <a href="../glosario.html"><span data-i18n="es">Glosario</span><span data-i18n="en">Glossary</span></a>
+    </nav>
+    <button id="cng-lang-btn" class="lang-toggle" type="button">EN</button>
+  </div>
+</header>
+
+<main>
+  <p style="margin:0 0 4px"><span class="chip backoffice">BACKOFFICE</span> <span style="font-size:12.5px;color:var(--mut)"><span data-i18n="es">Hoy: Jose (la función) → Joaquín (Data-Entry, Perú — las manos)</span><span data-i18n="en">Today: Jose (the function) → Joaquín (Data-Entry, Peru — the hands)</span></span></p>
+  <h1>Backoffice / Data-Entry</h1>
+  <p class="lead">
+    <span data-i18n="es">El dueño del schedule y del proceso desde la oficina. Los PMs reportan; el Backoffice es <b>el autor del sistema</b>. <i>"Somos una empresa que realmente depende de la información"</i> (Jose, P2).</span>
+    <span data-i18n="en">Owner of the schedule and the process from the office. PMs report; the Backoffice is <b>the system's author</b>. <i>"We are a company that truly depends on information"</i> (Jose, P2).</span>
+  </p>
+
+  <div class="clave">
+    <div style="font-size:12px;letter-spacing:1.5px;color:#94a3b8;font-weight:700;margin-bottom:6px"><span data-i18n="es">MISIÓN</span><span data-i18n="en">MISSION</span></div>
+    <span data-i18n="es"><b>Hacer que el schedule y la realidad sean la misma cosa desde la oficina</b> — de modo que después de la reunión diaria, el schedule en JobTread sea la única verdad del día, cada cambio que el campo reporta quede reflejado, cada inconsistencia se resuelva, y todo el equipo trabaje sobre el mismo plan limpio.</span>
+    <span data-i18n="en"><b>To make the schedule and reality the same thing from the office</b> — so that after the daily meeting, the schedule in JobTread is the single truth of the day, every change the field reports is reflected, every inconsistency resolved, and the whole team works over the same clean plan.</span>
+    <div class="sub"><span data-i18n="es">JD v3.0 — 2026-08-06. Registro sucio = plan de pagos de toda la empresa hecho sobre mentiras.</span><span data-i18n="en">JD v3.0 — 2026-08-06. A dirty record = the whole company's payment plan built on lies.</span></div>
+  </div>
+
+  <h2><span class="seccion-num">1 · </span><span data-i18n="es">Su día</span><span data-i18n="en">Its day</span></h2>
+  <p class="proposito"><span data-i18n="es"><b>Esta sección existe para</b> que el Data-Entry viva el mismo día que practicó en el simulacro final del Track A (Sesión 7).</span><span data-i18n="en"><b>This section exists so</b> the Data-Entry lives the same day rehearsed in Track A's final simulation (Session 7).</span></p>
+  <ul class="reloj">
+    <li><span class="hora" data-i18n="es">Mañana</span><span class="hora" data-i18n="en">Morning</span><div class="que"><span data-i18n="es"><b>Revisar schedules + flags</b>: aplicar cambios que reporta el bot, resolver pendientes/alertas derivados al Backoffice.</span><span data-i18n="en"><b>Review schedules + flags</b>: apply the changes the bot reports, resolve pending items/alerts routed to the Backoffice.</span></div></li>
+    <li><span class="hora">~1:00 PM</span><div class="que"><span data-i18n="es"><b>Handoff de Compras:</b> Romina declara sus pendientes; la tarde los persigue el Backoffice.</span><span data-i18n="en"><b>Purchases handoff:</b> Romina declares her open items; the Backoffice chases them in the afternoon.</span></div></li>
+    <li><span class="hora">2:30 PM</span><div class="que"><span data-i18n="es">Leer la <b>prep del bot</b> ANTES de la reunión.</span><span data-i18n="en">Read the <b>bot's prep</b> BEFORE the meeting.</span></div></li>
+    <li class="hito"><span class="hora">2:30 PM</span><div class="que"><span data-i18n="es"><b>LA REUNIÓN DIARIA</b> (~2 h — el Data-Entry DEBE estar): registrar EN VIVO todos los proyectos — check / extender / re-fechar con razón / pagos con doble registro / discrepancias → ops.db.</span><span data-i18n="en"><b>THE DAILY MEETING</b> (~2 h — the Data-Entry MUST be there): register ALL projects LIVE — check / extend / re-date with reason / payments with double record / discrepancies → ops.db.</span></div></li>
+    <li><span class="hora" data-i18n="es">Después</span><span class="hora" data-i18n="en">After</span><div class="que"><span data-i18n="es"><b>Alimentar el transcript de la reunión TODOS los días</b> (Jose 2026-08-06): soltar la grabación en <code>~/.openclaw/REUNIONES/</code> — el watcher hace el resto. Día sin transcript = registro incompleto.</span><span data-i18n="en"><b>Feed the meeting transcript EVERY day</b> (Jose 2026-08-06): drop the recording in <code>~/.openclaw/REUNIONES/</code> — the watcher does the rest. A day without the transcript = an incomplete record.</span></div></li>
+    <li><span class="hora">EOD</span><div class="que"><span data-i18n="es"><b>Daily Schedule Update by EOD:</b> schedules cuadrados al cierre (limpios antes de las 8 PM) — el insumo del CASHFLOW DATA de la Administradora y de la Task List 8 PM de cada PM.</span><span data-i18n="en"><b>Daily Schedule Update by EOD:</b> schedules squared at close (clean before 8 PM) — the input to the Administrator's CASHFLOW DATA and each PM's 8 PM Task List.</span></div></li>
+  </ul>
+
+  <h2><span class="seccion-num">2 · </span><span data-i18n="es">Qué SABE · qué HACE · qué VERIFICA</span><span data-i18n="en">What it KNOWS · DOES · VERIFIES</span></h2>
+  <div class="grid c3">
+    <div class="card shv-s"><h3 style="color:var(--violeta)"><span data-i18n="es">SABE</span><span data-i18n="en">KNOWS</span></h3>
+      <ul>
+        <li data-i18n="es">El canon completo y los <b>9 tipos de tarea</b> + nomenclatura <code>TRADE: ACCIÓN</code>.</li><li data-i18n="en">The full canon and the <b>9 task types</b> + <code>TRADE: ACTION</code> naming.</li>
+        <li data-i18n="es"><b>Los DOS registros</b> por movimiento de dinero: schedule (registro de obra) + libros (Bill/Expense).</li><li data-i18n="en"><b>The TWO records</b> per money movement: schedule (job record) + books (Bill/Expense).</li>
+        <li data-i18n="es">Cerrar = check + fechas cuadradas · TODO dinero por el schedule · la fecha original de un pago = gatillo contractual.</li><li data-i18n="en">Closing = check + squared dates · ALL money through the schedule · a payment's original date = contractual trigger.</li>
+        <li data-i18n="es"><b>Inglés de obra</b>: Jeff escribe 100% en inglés — lo ambiguo se pregunta, no se adivina (ver el <a href="../glosario.html">glosario</a>).</li><li data-i18n="en"><b>Jobsite English</b>: Jeff writes 100% in English — ambiguity gets asked, never guessed (see the <a href="../glosario.html">glossary</a>).</li>
+        <li data-i18n="es">El template maestro oficial: de ahí consolida el schedule ideal F1 de cada obra nueva ("hasta el colgado del drywall"), eliminando trades no vendidos.</li><li data-i18n="en">The official master template: from it, the ideal Phase-1 schedule of every new job ("up to hanging the drywall"), removing unsold trades.</li>
+      </ul>
+    </div>
+    <div class="card shv-h"><h3 style="color:var(--verde)"><span data-i18n="es">HACE</span><span data-i18n="en">DOES</span></h3>
+      <ul>
+        <li data-i18n="es">Actualiza los cronogramas a diario: re-fechar CON razón, extender tareas vivas, cerrar cuadrando fechas.</li><li data-i18n="en">Updates schedules daily: re-date WITH reason, extend live tasks, close squaring the dates.</li>
+        <li data-i18n="es"><b>Registro DOBLE</b> de cada movimiento: tarea (tipo + monto limpio en descripción + check) y documento (vendor → trade → line item → Approve → Pay solo si ya se pagó).</li><li data-i18n="en"><b>DOUBLE record</b> of every movement: task (type + clean amount in description + check) and document (vendor → trade → line item → Approve → Pay only if actually paid).</li>
+        <li data-i18n="es"><b>Elabora las WOs</b>: sub → trade → monto negociado → SOW adentro → Payment Breakdown SIEMPRE → flujo de <b>firma electrónica</b> (SMS + email → firma → recién ahí "Aprobado").</li><li data-i18n="en"><b>Builds the WOs</b>: sub → trade → negotiated amount → SOW inside → Payment Breakdown ALWAYS → <b>e-signature</b> flow (SMS + email → signature → only then "Approved").</li>
+        <li data-i18n="es">Registra en vivo la 2:30 · alimenta el transcript diario · Daily Schedule Update by EOD.</li><li data-i18n="en">Registers the 2:30 live · feeds the daily transcript · Daily Schedule Update by EOD.</li>
+        <li data-i18n="es"><b>Destraba, no bloquea:</b> lo que pida cualquier miembro del equipo en horario laboral se atiende.</li><li data-i18n="en"><b>Unblocks, never blocks:</b> whatever any team member asks during work hours gets handled.</li>
+      </ul>
+    </div>
+    <div class="card shv-v"><h3 style="color:var(--ambar)"><span data-i18n="es">VERIFICA (las 6 auditorías)</span><span data-i18n="en">VERIFIES (the 6 audits)</span></h3>
+      <ul>
+        <li data-i18n="es"><b>1 Dicho vs marcado:</b> cada reporte de PM contra JobTread y CompanyCam.</li><li data-i18n="en"><b>1 Said vs marked:</b> every PM report against JobTread and CompanyCam.</li>
+        <li data-i18n="es"><b>2 ETAs de Compras:</b> cada compra con su tarea ETA al día siguiente; ETA =1 día = stock o SIN VERIFICAR (perseguir).</li><li data-i18n="en"><b>2 Purchases' ETAs:</b> every purchase with its ETA task the next day; ETA =1 day = stock or UNVERIFIED (chase it).</li>
+        <li data-i18n="es"><b>3 Expediente antes de pago:</b> factura + WO firmada + lien waiver + After respaldada, ANTES de que el Bill llegue a la Administradora.</li><li data-i18n="en"><b>3 File before payment:</b> invoice + signed WO + lien waiver + backed After, BEFORE the Bill reaches the Administrator.</li>
+        <li data-i18n="es"><b>4 Fotos con descripción</b> en toda obra trabajada hoy.</li><li data-i18n="en"><b>4 Photos with descriptions</b> on every job worked today.</li>
+        <li data-i18n="es"><b>5 Takeoffs con las 3 evidencias:</b> foto del precio confirmado + ETA por escrito + recibo.</li><li data-i18n="en"><b>5 Takeoffs with the 3 pieces of evidence:</b> photo of the confirmed price + written ETA + receipt.</li>
+        <li data-i18n="es"><b>6 SOW existe + Durante activo:</b> trade próximo con SOW en CC; trade en ejecución con fotos en el During (si no → el PM no está inspeccionando → flag).</li><li data-i18n="en"><b>6 SOW exists + During active:</b> upcoming trade has its SOW in CC; running trade has photos in the During (if not → the PM is not inspecting → flag).</li>
+      </ul>
+    </div>
+  </div>
+
+  <details class="exp"><summary><span data-i18n="es">Lo que NO hace</span><span data-i18n="en">What it does NOT do</span></summary>
+    <div class="exp-body"><ul>
+      <li data-i18n="es">No ejecuta obra física · no mueve ni aprueba dinero (la Administradora paga; él prepara y verifica el expediente) · no decide re-fechados de fondo solo (la reunión decide, él registra) · no empuja a los subs (tarea EXCLUSIVA del PM) · no se involucra en el cashflow (gerencia) · no recalcula los números de los reportes oficiales.</li>
+      <li data-i18n="en">Does not execute field work · does not move or approve money (the Administrator pays; it prepares and verifies the file) · does not re-date on its own (the meeting decides, it registers) · does not push subs (the PM's EXCLUSIVE task) · does not get into cashflow (management's) · does not recalculate official report numbers.</li>
+    </ul></div>
+  </details>
+
+  <h2><span class="seccion-num">3 · </span><span data-i18n="es">Su "Día Cumplido"</span><span data-i18n="en">Its "Day Done"</span></h2>
+  <div class="card">
+    <ul class="checks">
+      <li data-i18n="es"><b>Reunión de cierre/verificación con los PMs hecha</b> y lo dicho vs lo marcado en JobTread verificado (discrepancias → ops.db).</li><li data-i18n="en"><b>Close/verification meeting with the PMs done</b> and said-vs-marked verified in JobTread (discrepancies → ops.db).</li>
+      <li data-i18n="es"><b>Schedules al día:</b> cambios reportados por el bot realizados, y pendientes/alertas derivados resueltos.</li><li data-i18n="en"><b>Schedules current:</b> bot-reported changes applied, and routed pending items/alerts resolved.</li>
+      <li data-i18n="es"><i>Deber del cierre añadido 2026-08-06:</i> <b>transcript de la reunión alimentado al sistema</b> — día sin transcript = registro incompleto.</li><li data-i18n="en"><i>Closing duty added 2026-08-06:</i> <b>meeting transcript fed to the system</b> — a day without it = an incomplete record.</li>
+    </ul>
+    <p style="font-size:12.5px;color:var(--mut);margin:8px 0 0"><span data-i18n="es">✅ = puede irse tranquilo · ⚠️ = parcial · ❌ = sin señal (merece UNA pregunta antes de concluir).</span><span data-i18n="en">✅ = can leave in peace · ⚠️ = partial · ❌ = no signal (deserves ONE question before any conclusion).</span></p>
+  </div>
+
+  <h2><span class="seccion-num">4 · </span><span data-i18n="es">Sus reportes (con su guía de lectura)</span><span data-i18n="en">Its reports (with the reading guide)</span></h2>
+  <p class="proposito"><span data-i18n="es"><b>Esta sección existe para</b> entender que los reportes oficiales #1 y #2 <b>se construyen SOBRE sus registros</b>: registro sucio = evaluación de todo el equipo sucia. Su calidad es visible cada sábado.</span><span data-i18n="en"><b>This section exists so</b> you understand that official reports #1 and #2 <b>are built ON its records</b>: a dirty record = a dirty evaluation for the whole team. Its quality shows every Saturday.</span></p>
+  <div class="tbl-wrap">
+    <table>
+      <tr><th data-i18n="es">Reporte</th><th data-i18n="en">Report</th><th data-i18n="es">Cuándo</th><th data-i18n="en">When</th><th data-i18n="es">Guía</th><th data-i18n="en">Guide</th></tr>
+      <tr><td><b>PM Weekly Evaluation</b> — <span data-i18n="es">documentación ✓/✗ y cierres: salen de SUS registros</span><span data-i18n="en">documentation ✓/✗ and closures: they come from ITS records</span></td><td data-i18n="es">Sáb 8:00 AM</td><td data-i18n="en">Sat 8:00 AM</td><td><a href="../materiales/guias/GUIA_01_PM_WEEKLY_EVALUATION.html">ES</a> · <a href="../materiales/guias/GUIA_01_PM_WEEKLY_EVALUATION_EN.html">EN</a></td></tr>
+      <tr><td><b>Project Department Weekly Evaluation</b> — <span data-i18n="es">pagado/cobrado + métricas por PM sobre sus registros</span><span data-i18n="en">paid/collected + per-PM metrics over its records</span></td><td data-i18n="es">Sáb 8:30 AM</td><td data-i18n="en">Sat 8:30 AM</td><td><a href="../materiales/guias/GUIA_02_PROJECT_DEPT_WEEKLY_EVALUATION.html">ES</a></td></tr>
+    </table>
+  </div>
+  <p style="font-size:12.5px"><span class="verificar">[VERIFICAR CON JOSE]</span> <span data-i18n="es">El formato del semanal individual del Backoffice/Data-Entry (la ley C2 aplica también al backoffice; el builder específico aún no existe en la reportería oficial).</span><span data-i18n="en">The Backoffice/Data-Entry's own weekly format (law C2 also applies to the backoffice; the specific builder does not yet exist in the official reporting).</span></p>
+
+  <h2><span class="seccion-num">5 · </span><span data-i18n="es">Materiales del puesto</span><span data-i18n="en">Position materials</span></h2>
+  <p><a class="btn" href="../materiales/one-pagers/one_pager_backoffice.html">⬇ One-pager Backoffice</a></p>
+  <p style="font-size:12.5px;color:var(--mut)"><span data-i18n="es">Su track de entrenamiento: <code>03_PAQUETES_ENTRENAMIENTO/TRACK_A_BACKOFFICE_DATA_ENTRY_v2026-08-06.md</code> (7 sesiones + simulacro de día completo).</span><span data-i18n="en">Training track: <code>03_PAQUETES_ENTRENAMIENTO/TRACK_A_BACKOFFICE_DATA_ENTRY_v2026-08-06.md</code> (7 sessions + full-day simulation).</span></p>
+
+  <div class="footer-note">
+    <span data-i18n="es">Posición · Backoffice / Data-Entry · 2026-08-07 · Fuentes: JD_backoffice.md v3.0 (2026-08-06) · Track A v2026-08-06 (Sesión 7, simulacro) · canon v4 · DIA_CUMPLIDO_POR_PUESTO v3 · _BRIEF_CONSTRUCTORES. Material interno.</span>
+    <span data-i18n="en">Position · Backoffice / Data-Entry · 2026-08-07 · Sources: JD_backoffice.md v3.0 · Track A v2026-08-06 · canon v4 · DIA_CUMPLIDO_POR_PUESTO v3 · Builders' BRIEF. Internal material.</span>
+  </div>
+</main>
+
+<script src="../assets/app.js"></script>
+</body>
+</html>

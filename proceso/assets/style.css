@@ -1,0 +1,271 @@
+/* ============================================================
+   WEB DEL PROCESO CNG — Design system v1 (2026-08-06)
+   Basado en el CSS oficial del mega plan (BRIEF §7): misma paleta
+   slate/azul, limpio, corporativo, responsive, print-friendly.
+   Colores por rol = variables --rol-*.
+   ============================================================ */
+
+:root{
+  /* base */
+  --ink:#0f172a; --body:#1e293b; --mut:#64748b; --mut2:#94a3b8;
+  --line:#e2e8f0; --line2:#cbd5e1; --bg:#f1f5f9; --card:#ffffff; --soft:#f8fafc;
+  /* semantica del proceso */
+  --azul:#1d4ed8; --azul-2:#2563eb; --azul-bg:#eff6ff; --azul-line:#bfdbfe;  /* ruta critica / PM */
+  --gris:#94a3b8; --gris-bg:#f1f5f9;                                          /* no critico */
+  --rojo:#dc2626; --rojo-bg:#fef2f2;                                          /* inspecciones ciudad / alerta */
+  --verde:#16a34a; --verde-bg:#f0fdf4;                                        /* compras / material / dinero ok */
+  --ambar:#d97706; --ambar-bg:#fffbeb;                                        /* pagos / advertencia / admin */
+  --violeta:#7c3aed; --violeta-bg:#f5f3ff;                                    /* backoffice / registro */
+  /* colores por rol */
+  --rol-pm:#1d4ed8;        --rol-pm-bg:#eff6ff;
+  --rol-compras:#16a34a;   --rol-compras-bg:#f0fdf4;
+  --rol-backoffice:#7c3aed;--rol-backoffice-bg:#f5f3ff;
+  --rol-admin:#d97706;     --rol-admin-bg:#fffbeb;
+  --rol-ceo:#ea580c;       --rol-ceo-bg:#fff7ed;
+  --rol-coo:#0d9488;       --rol-coo-bg:#f0fdfa;
+  --rol-planning:#db2777;  --rol-planning-bg:#fdf2f8;
+  --rol-ventas:#9333ea;    --rol-ventas-bg:#faf5ff;
+  --rol-sistema:#475569;   --rol-sistema-bg:#f1f5f9;
+  --rol-sub:#78716c;       --rol-sub-bg:#fafaf9;
+  --maxw:1080px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--body);
+  font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  font-size:15px; line-height:1.55;
+}
+img,svg{max-width:100%}
+a{color:var(--azul); text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ---------- idioma (toggle ES/EN por data-attributes) ---------- */
+html[data-lang="es"] [data-i18n="en"]{display:none !important}
+html[data-lang="en"] [data-i18n="es"]{display:none !important}
+
+/* ---------- gate de password (inyectado por app.js) ---------- */
+#cng-gate{position:fixed; inset:0; background:var(--ink); z-index:999;
+  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px; padding:20px}
+#cng-gate .g-box{background:#1e293b; border:1px solid #334155; border-radius:14px; padding:28px 30px; width:min(360px,92vw); text-align:center}
+#cng-gate h1{color:#fff; font-size:19px; margin:0 0 2px}
+#cng-gate p{color:#94a3b8; font-size:12.5px; margin:4px 0 14px}
+#cng-gate input{width:100%; padding:10px 12px; border-radius:8px; border:1px solid #475569;
+  background:#0f172a; color:#fff; font-size:15px; text-align:center; letter-spacing:2px}
+#cng-gate button{margin-top:10px; width:100%; padding:10px; border:0; border-radius:8px;
+  background:var(--azul-2); color:#fff; font-size:14px; font-weight:600; cursor:pointer}
+#cng-gate .g-err{color:#f87171; font-size:12px; visibility:hidden; margin-top:8px}
+body.cng-locked > *:not(#cng-gate){display:none !important}
+
+/* ---------- header / nav ---------- */
+header.site{background:var(--ink); color:#fff; position:sticky; top:0; z-index:50;
+  box-shadow:0 1px 6px rgba(15,23,42,.25)}
+header.site .bar{max-width:var(--maxw); margin:0 auto; padding:10px 16px;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+header.site .logo{font-weight:800; font-size:15px; letter-spacing:.4px; color:#fff; white-space:nowrap}
+header.site .logo b{color:#fbbf24}
+header.site nav{display:flex; gap:2px; flex-wrap:wrap; flex:1; min-width:0}
+header.site nav a{color:#cbd5e1; font-size:12.5px; padding:5px 9px; border-radius:7px; white-space:nowrap}
+header.site nav a:hover{background:#1e293b; text-decoration:none; color:#fff}
+header.site nav a.active{background:var(--azul-2); color:#fff; font-weight:600}
+.lang-toggle{border:1px solid #475569; border-radius:8px; background:#1e293b; color:#e2e8f0;
+  font-size:12px; font-weight:700; padding:5px 10px; cursor:pointer}
+.lang-toggle:hover{background:#334155}
+
+/* ---------- layout ---------- */
+main{max-width:var(--maxw); margin:0 auto; padding:26px 16px 60px}
+h1{font-size:27px; color:var(--ink); margin:0 0 6px; line-height:1.2}
+h2{font-size:19px; color:var(--ink); border-bottom:2.5px solid var(--ink); padding-bottom:5px; margin:34px 0 12px}
+h3{font-size:15px; color:var(--azul); margin:20px 0 8px}
+h4{font-size:13.5px; color:var(--ink); margin:14px 0 6px}
+.lead{color:var(--mut); font-size:15px; margin:0 0 8px}
+.seccion-num{color:var(--mut2); font-weight:400}
+
+/* proposito de seccion (estilo obligatorio: "esta seccion existe para...") */
+.proposito{background:var(--soft); border-left:3px solid var(--mut2); color:var(--mut);
+  font-size:13px; padding:8px 12px; margin:0 0 14px; border-radius:0 8px 8px 0}
+.proposito b{color:var(--body)}
+
+/* LA CLAVE y reglas madre */
+.clave{background:var(--ink); color:#fff; border-radius:12px; padding:18px 22px; margin:16px 0; font-size:16px; line-height:1.5}
+.clave b{color:#fbbf24}
+.clave .sub{font-size:13px; color:#94a3b8; margin-top:8px}
+.regla{background:var(--azul-bg); border:1.5px solid var(--azul-line); border-radius:10px;
+  padding:12px 16px; margin:12px 0; font-size:14px}
+.regla b{color:var(--azul)}
+
+/* tarjetas */
+.card{background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:16px 18px; margin:12px 0}
+.card h3{margin-top:0}
+.grid{display:grid; gap:12px}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+
+/* mapa del sitio (index) */
+a.mapa-card{display:block; background:var(--card); border:1.5px solid var(--line); border-radius:12px;
+  padding:16px 18px; color:var(--body); transition:border-color .15s, transform .15s}
+a.mapa-card:hover{border-color:var(--azul-2); text-decoration:none; transform:translateY(-2px)}
+a.mapa-card .num{display:inline-block; background:var(--ink); color:#fbbf24; font-weight:800;
+  border-radius:8px; padding:2px 9px; font-size:12px; margin-bottom:8px}
+a.mapa-card h3{margin:0 0 4px; color:var(--ink)}
+a.mapa-card p{margin:0; font-size:13px; color:var(--mut)}
+a.mapa-card.off{opacity:.55; pointer-events:none; border-style:dashed}
+a.mapa-card.off .num{background:var(--mut2); color:#fff}
+
+/* chips */
+.chip{display:inline-block; border-radius:20px; padding:1.5px 10px; font-size:11.5px; font-weight:700;
+  border:1px solid var(--line2); background:var(--soft); color:var(--mut); margin:1px 2px; vertical-align:middle}
+.chip.pm{background:var(--rol-pm-bg); border-color:#bfdbfe; color:var(--rol-pm)}
+.chip.compras{background:var(--rol-compras-bg); border-color:#bbf7d0; color:var(--rol-compras)}
+.chip.backoffice{background:var(--rol-backoffice-bg); border-color:#ddd6fe; color:var(--rol-backoffice)}
+.chip.admin{background:var(--rol-admin-bg); border-color:#fde68a; color:var(--rol-admin)}
+.chip.ceo{background:var(--rol-ceo-bg); border-color:#fed7aa; color:var(--rol-ceo)}
+.chip.coo{background:var(--rol-coo-bg); border-color:#99f6e4; color:var(--rol-coo)}
+.chip.planning{background:var(--rol-planning-bg); border-color:#fbcfe8; color:var(--rol-planning)}
+.chip.ventas{background:var(--rol-ventas-bg); border-color:#e9d5ff; color:var(--rol-ventas)}
+.chip.sistema{background:var(--rol-sistema-bg); border-color:var(--line2); color:var(--rol-sistema)}
+.chip.sub{background:var(--rol-sub-bg); border-color:#e7e5e4; color:var(--rol-sub)}
+.chip.cliente{background:#fefce8; border-color:#fef08a; color:#a16207}
+/* chips de tipo de tarea (mismos colores del diagrama) */
+.chip.t-pm{background:var(--azul-bg); border-color:var(--azul-line); color:var(--azul)}
+.chip.t-pur{background:var(--verde-bg); border-color:#bbf7d0; color:var(--verde)}
+.chip.t-act{background:var(--gris-bg); border-color:var(--line2); color:#475569}
+.chip.t-cp{background:var(--ink); border-color:var(--ink); color:#fbbf24}
+.chip.t-psub{background:var(--ambar-bg); border-color:#fde68a; color:var(--ambar)}
+.chip.t-pmat{background:var(--ambar-bg); border-color:#fde68a; color:#b45309}
+.chip.t-insp{background:var(--rojo-bg); border-color:#fecaca; color:var(--rojo)}
+
+/* tablas */
+.tbl-wrap{overflow-x:auto; margin:8px 0 14px}
+table{border-collapse:collapse; width:100%; font-size:13px; background:var(--card)}
+th{background:var(--ink); color:#fff; padding:7px 10px; text-align:left; font-size:12px; white-space:nowrap}
+td{border:1px solid var(--line2); padding:7px 10px; vertical-align:top}
+tr:nth-child(even) td{background:var(--soft)}
+
+/* avisos */
+.mat{background:var(--verde-bg); border-left:3px solid var(--verde); padding:9px 13px; margin:10px 0; font-size:13.5px; border-radius:0 8px 8px 0}
+.mat b{color:#15803d}
+.gap{background:var(--ambar-bg); border-left:3px solid var(--ambar); padding:9px 13px; margin:10px 0; font-size:13.5px; border-radius:0 8px 8px 0}
+.gap b{color:var(--ambar)}
+.alerta{background:var(--rojo-bg); border-left:3px solid var(--rojo); padding:9px 13px; margin:10px 0; font-size:13.5px; border-radius:0 8px 8px 0}
+.alerta b{color:var(--rojo)}
+.verificar{background:#fdf4ff; border:1px dashed #d8b4fe; color:#7e22ce; font-size:12px;
+  padding:2px 8px; border-radius:6px; display:inline-block; font-weight:600}
+
+/* citas de Jose */
+blockquote.jose{border-left:4px solid #fbbf24; background:var(--soft); margin:12px 0; padding:10px 16px;
+  font-style:italic; color:var(--body); border-radius:0 8px 8px 0}
+blockquote.jose footer{font-style:normal; font-size:12px; color:var(--mut); margin-top:4px}
+
+/* pasos numerados (bucle diario, registros) */
+ol.pasos{list-style:none; margin:10px 0; padding:0; counter-reset:paso}
+ol.pasos>li{counter-increment:paso; position:relative; padding:10px 12px 10px 46px; margin:8px 0;
+  background:var(--card); border:1.5px solid var(--line); border-radius:10px}
+ol.pasos>li::before{content:counter(paso); position:absolute; left:12px; top:12px;
+  width:24px; height:24px; border-radius:50%; background:var(--ink); color:#fbbf24;
+  font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center}
+ol.pasos>li .tarea{font-weight:700; color:var(--ink); font-size:13.5px}
+ol.pasos>li .det{font-size:13px; color:var(--body); margin-top:3px}
+ol.pasos.rama-pm>li{border-left:4px solid var(--rol-pm)}
+ol.pasos.rama-compras>li{border-left:4px solid var(--rol-compras)}
+ol.pasos.rama-compras>li::before{background:var(--rol-compras); color:#fff}
+
+/* expandibles */
+details.exp{background:var(--card); border:1.5px solid var(--line); border-radius:10px; margin:8px 0; overflow:hidden}
+details.exp>summary{cursor:pointer; padding:11px 14px; font-weight:700; color:var(--ink); font-size:14px;
+  list-style:none; display:flex; align-items:center; gap:8px}
+details.exp>summary::-webkit-details-marker{display:none}
+details.exp>summary::after{content:"+"; margin-left:auto; color:var(--mut2); font-weight:800; font-size:16px}
+details.exp[open]>summary::after{content:"−"}
+details.exp .exp-body{padding:2px 16px 14px; border-top:1px solid var(--line); font-size:13.5px}
+
+/* "captura descrita" (mock de pantalla JobTread) */
+.mock{border:1.5px solid var(--line2); border-radius:10px; overflow:hidden; margin:10px 0; background:var(--card)}
+.mock .mock-top{background:var(--soft); border-bottom:1px solid var(--line); padding:6px 12px; font-size:11.5px;
+  color:var(--mut); display:flex; align-items:center; gap:8px}
+.mock .mock-top .dot{width:8px; height:8px; border-radius:50%; background:var(--line2)}
+.mock .mock-body{padding:12px 14px; font-size:13px}
+.mock .campo{display:flex; gap:8px; align-items:baseline; padding:5px 8px; border:1px dashed var(--line2);
+  border-radius:7px; margin:5px 0; background:var(--soft)}
+.mock .campo .lbl{font-size:11px; color:var(--mut); min-width:120px; font-weight:700; text-transform:uppercase; letter-spacing:.3px}
+.mock .campo .val{font-weight:600; color:var(--ink)}
+.mock-note{font-size:11.5px; color:var(--mut2); margin-top:4px}
+
+/* diagrama SVG (proceso constructivo) */
+.diagrama-wrap{background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:10px 6px; overflow-x:auto}
+.diagrama-wrap svg{display:block}
+.leyenda{display:flex; gap:14px; flex-wrap:wrap; font-size:12.5px; color:var(--mut); margin:10px 4px}
+.leyenda .it{display:flex; align-items:center; gap:6px}
+.leyenda .sw{width:22px; height:12px; border-radius:3px; display:inline-block}
+#detalle-trade{margin-top:14px}
+.trade-panel{border:1.5px solid var(--azul-line); border-radius:12px; background:var(--card); padding:16px 18px}
+.trade-panel h3{margin:0 0 2px; color:var(--ink); font-size:17px}
+.trade-panel .dias{color:var(--mut); font-size:12.5px; margin-bottom:10px}
+.dep-list a{cursor:pointer}
+ul.tareas-chain{list-style:none; margin:8px 0 0; padding:0; font-size:12.5px}
+ul.tareas-chain li{padding:4px 8px; border-bottom:1px dashed var(--line); display:flex; gap:8px; align-items:baseline; flex-wrap:wrap}
+ul.tareas-chain li:last-child{border-bottom:0}
+ul.tareas-chain .dias-t{color:var(--mut2); font-size:11px; margin-left:auto; white-space:nowrap}
+
+/* linea de vida (proceso empresa) */
+.fases-flow{display:flex; gap:0; align-items:stretch; overflow-x:auto; padding:6px 2px 12px}
+.fase-nodo{min-width:118px; flex:1; text-align:center; position:relative; cursor:pointer; padding:10px 6px;
+  border:1.5px solid var(--line); background:var(--card); margin-right:26px; border-radius:10px}
+.fase-nodo::after{content:"→"; position:absolute; right:-22px; top:50%; transform:translateY(-50%);
+  color:var(--mut2); font-size:16px; font-weight:700}
+.fase-nodo:last-child{margin-right:0}
+.fase-nodo:last-child::after{content:""}
+.fase-nodo .f-num{font-size:10px; color:var(--mut2); font-weight:700; letter-spacing:.5px}
+.fase-nodo .f-nom{font-size:12px; font-weight:800; color:var(--ink); line-height:1.25; margin-top:2px}
+.fase-nodo.activa{border-color:var(--azul-2); background:var(--azul-bg); box-shadow:0 0 0 2px var(--azul-line)}
+.fase-detalle{border:1.5px solid var(--azul-line); border-radius:12px; background:var(--card); padding:16px 18px; margin-top:10px}
+
+/* reloj diario */
+.reloj{list-style:none; margin:14px 0; padding:0; position:relative}
+.reloj::before{content:""; position:absolute; left:74px; top:6px; bottom:6px; width:2.5px; background:var(--line2)}
+.reloj li{position:relative; padding:8px 12px 8px 100px; margin:6px 0}
+.reloj li .hora{position:absolute; left:0; top:8px; width:64px; text-align:right; font-weight:800;
+  color:var(--ink); font-size:12.5px}
+.reloj li::before{content:""; position:absolute; left:69px; top:13px; width:12px; height:12px;
+  border-radius:50%; background:var(--card); border:3px solid var(--azul-2)}
+.reloj li.sys::before{border-color:var(--mut2)}
+.reloj li.hito::before{border-color:var(--rojo)}
+.reloj li .que{font-size:13.5px}
+.reloj li .que b{color:var(--ink)}
+
+/* miniaturas descritas (reportes) */
+.mini{width:100%; height:88px; border:1px solid var(--line2); border-radius:8px; background:var(--soft);
+  margin-bottom:10px; overflow:hidden}
+.rep-card{background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:14px 16px}
+.rep-card h4{margin:0 0 2px; font-size:14px}
+.rep-card .meta{font-size:11.5px; color:var(--mut); margin-bottom:6px}
+.rep-card p{font-size:12.5px; margin:6px 0 0}
+
+/* footer */
+.footer-note{color:var(--mut2); font-size:11.5px; margin-top:44px; border-top:1px solid var(--line); padding-top:10px}
+.footer-note a{color:var(--mut)}
+
+/* ---------- responsive ---------- */
+@media (max-width:640px){
+  body{font-size:14px}
+  h1{font-size:22px}
+  header.site nav{order:3; width:100%}
+  .reloj::before{left:58px}
+  .reloj li{padding-left:82px}
+  .reloj li .hora{width:50px; font-size:11.5px}
+  .reloj li::before{left:53px}
+}
+
+/* ---------- print ---------- */
+@media print{
+  body{background:#fff; font-size:11px}
+  header.site, .lang-toggle, #cng-gate, .no-print{display:none !important}
+  main{max-width:none; padding:0}
+  .card,.trade-panel,.fase-detalle,details.exp{break-inside:avoid; box-shadow:none}
+  details.exp>summary::after{display:none}
+  details.exp:not([open]) .exp-body{display:block}  /* imprime todo el contenido */
+  a{color:inherit}
+  .diagrama-wrap{overflow:visible; border:0}
+  h2{break-after:avoid}
+}

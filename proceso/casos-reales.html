@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CNG · Biblioteca de casos reales</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.caso{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column}
+.caso .c-num{display:inline-block;background:var(--ink);color:#fbbf24;font-weight:800;border-radius:8px;padding:2px 10px;font-size:12px;margin-bottom:8px;align-self:flex-start}
+.caso h3{margin:0 0 6px;color:var(--ink)}
+.caso .hechos{font-size:13.5px;margin:0 0 10px}
+.caso .moraleja{background:var(--verde-bg);border-left:3px solid var(--verde);padding:8px 12px;border-radius:0 8px 8px 0;font-size:13px;margin-top:auto}
+.caso .moraleja b{color:#15803d}
+.caso .pregunta{font-size:12.5px;color:var(--mut);font-style:italic;margin:8px 0 0}
+.caso .roles{margin:0 0 8px}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="bar">
+    <span class="logo">CNG · <b>PROCESO</b></span>
+    <nav>
+      <a href="index.html"><span data-i18n="es">Inicio</span><span data-i18n="en">Home</span></a>
+      <a href="proceso-constructivo.html"><span data-i18n="es">Proceso constructivo</span><span data-i18n="en">Build sequence</span></a>
+      <a href="proceso-empresa.html"><span data-i18n="es">Proceso de empresa</span><span data-i18n="en">Company process</span></a>
+      <a href="bucle-diario.html"><span data-i18n="es">Bucle diario</span><span data-i18n="en">Daily loop</span></a>
+      <a href="jobtread.html">JobTread</a>
+      <a href="dinero.html"><span data-i18n="es">Dinero</span><span data-i18n="en">Money</span></a>
+      <a href="reloj-reportes.html"><span data-i18n="es">Reloj &amp; reportes</span><span data-i18n="en">Clock &amp; reports</span></a>
+      <a href="posiciones/index.html"><span data-i18n="es">Posiciones</span><span data-i18n="en">Positions</span></a>
+      <a href="casos-reales.html"><span data-i18n="es">Casos reales</span><span data-i18n="en">Real cases</span></a>
+      <a href="glosario.html"><span data-i18n="es">Glosario</span><span data-i18n="en">Glossary</span></a>
+    </nav>
+    <button id="cng-lang-btn" class="lang-toggle" type="button">EN</button>
+  </div>
+</header>
+
+<main>
+  <h1><span data-i18n="es">Biblioteca de casos reales</span><span data-i18n="en">Real-case library</span></h1>
+  <p class="lead">
+    <span data-i18n="es">Los 10 errores que ya nos costaron dinero, con su moraleja — el material anti-"aceptar y reaccionar". Hechos EXACTOS del brief de constructores (2026-08-06 §5); nada adornado ni inventado.</span>
+    <span data-i18n="en">The 10 mistakes that already cost us money, each with its lesson — the anti-"accept and react" material. EXACT facts from the builders' brief (2026-08-06 §5); nothing embellished or invented.</span>
+  </p>
+
+  <blockquote class="jose">
+    <span data-i18n="es">"aceptamos los problemas y reaccionamos, en vez de prevenirlos o buscar soluciones insaciablemente para cumplir a como dé lugar el cronograma planteado."</span>
+    <span data-i18n="en">"aceptamos los problemas y reaccionamos…" <i>(we accept problems and react, instead of preventing them or hunting for solutions relentlessly to meet the planned schedule no matter what.)</i></span>
+    <footer><span data-i18n="es">Jose, 2026-08-04 — la causa raíz. Cada caso de esta página es esa frase en acción.</span><span data-i18n="en">Jose, 2026-08-04 — the root cause. Every case on this page is that sentence in action.</span></footer>
+  </blockquote>
+
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta página existe para</b> que cada sesión de entrenamiento cierre con al menos un caso real, y para que ningún error se repita por olvido. <b>Loop de mejora:</b> cada fallo real nuevo (inspección rechazada, error de compra, discrepancia) se convierte en un caso nuevo de esta biblioteca. Al final de cada caso: <i>¿qué habrías hecho tú?</i></span>
+    <span data-i18n="en"><b>This page exists so</b> every training session closes with at least one real case, and no mistake repeats out of forgetfulness. <b>Improvement loop:</b> every new real failure (rejected inspection, purchasing error, discrepancy) becomes a new case in this library. At the end of each case: <i>what would YOU have done?</i></span>
+  </p>
+
+  <div class="grid c2">
+
+    <div class="caso"><span class="c-num">CASO 1</span>
+      <h3><span data-i18n="es">Puertas 96" (Katie Holmes)</span><span data-i18n="en">The 96" doors (Katie Holmes)</span></h3>
+      <p class="roles"><span class="chip pm">PM</span><span class="chip compras">Compras</span></p>
+      <p class="hechos"><span data-i18n="es">Se framearon a 8 ft cuando el diseño decía <b>82"</b>; el 23-jul se pidieron puertas de <b>96" = SE COMPRÓ EL ERROR</b>. El cambio de spec nunca llegó al framer y la compra se hizo sobre el dato errado.</span><span data-i18n="en">Framed at 8 ft when the design said <b>82"</b>; on Jul-23, <b>96" doors were ordered = THE ERROR GOT PURCHASED</b>. The spec change never reached the framer and the purchase ran on the wrong data.</span></p>
+      <div class="moraleja"><span data-i18n="es"><b>Moraleja:</b> nunca comprar/registrar sobre un spec NO confirmado; los cambios se propagan a TODOS los documentos por el canal; <code>CONFIRM TAKEOFF DETAILS</code> y el cotejo plano-vs-campo existen para atrapar esto (atención al detalle + prever).</span><span data-i18n="en"><b>Lesson:</b> never buy/register on an UNconfirmed spec; changes propagate to ALL documents through the channel; <code>CONFIRM TAKEOFF DETAILS</code> and the plan-vs-field check exist to catch this (attention to detail + anticipate).</span></div>
+      <p class="pregunta"><span data-i18n="es">¿Qué habrías hecho tú?</span><span data-i18n="en">What would you have done?</span></p>
+    </div>
+
+    <div class="caso"><span class="c-num">CASO 2</span>
+      <h3><span data-i18n="es">La semana del 29-jun</span><span data-i18n="en">The week of Jun-29</span></h3>
+      <p class="roles"><span class="chip pm">PM</span><span class="chip backoffice">Backoffice</span></p>
+      <p class="hechos"><span data-i18n="es">Se produjo <b>LA MITAD de lo proyectado</b> por violar la regla de oro: EXECUTEs fechados con la cadena en 0% (en Martha: ELECTRICAL ROUGH IN fechado 7–8 jul con <code>SELECT VENDOR &amp; SEND WO</code> y <code>CONFIRM SCHEDULE WITH SUB</code> en 0%). Llegó el día y no había electricista.</span><span data-i18n="en"><b>HALF of the projected production</b> — the golden rule was violated: EXECUTEs dated with their chain at 0% (on Martha: ELECTRICAL ROUGH IN dated Jul 7–8 with <code>SELECT VENDOR &amp; SEND WO</code> and <code>CONFIRM SCHEDULE WITH SUB</code> at 0%). The day came and there was no electrician.</span></p>
+      <div class="moraleja"><span data-i18n="es"><b>Moraleja — la regla de oro (EL_FLOW):</b> un Action/EXECUTE solo puede tener fecha si su cadena previa está 100% cerrada (SOW + WO firmada + schedule confirmado + material con ETA + inspección Before). Sin cadena cerrada, el EXECUTE se mueve.</span><span data-i18n="en"><b>Lesson — the golden rule (EL_FLOW):</b> an Action/EXECUTE may only carry a date if its prior chain is 100% closed (SOW + signed WO + confirmed schedule + material with ETA + Before inspection). No closed chain → the EXECUTE moves.</span></div>
+      <p class="pregunta"><span data-i18n="es">¿Qué habrías hecho tú?</span><span data-i18n="en">What would you have done?</span></p>
+    </div>
+
+    <div class="caso"><span class="c-num">CASO 3</span>
+      <h3><span data-i18n="es">Red tags de Martha (24-jul)</span><span data-i18n="en">Martha's red tags (Jul-24)</span></h3>
+      <p class="roles"><span class="chip pm">PM</span><span class="chip coo">COO</span></p>
+      <p class="hechos"><span data-i18n="es">Inspecciones rechazadas por <b>secuencia mal pedida y planos no presentes en obra</b> — el fallo que ya se había predicho.</span><span data-i18n="en">Inspections rejected for <b>a wrongly-ordered sequence and plans not present on site</b> — the failure that had already been predicted.</span></p>
+      <div class="moraleja"><span data-i18n="es"><b>Moraleja:</b> la secuencia de inspecciones y los <b>planos aprobados físicamente en obra</b> no son burocracia: son lo que evita el red tag. El PM verifica ANTES de llamar a la ciudad (rigurosidad + prever).</span><span data-i18n="en"><b>Lesson:</b> the inspection sequence and the <b>approved plans physically on site</b> are not bureaucracy: they are what prevents the red tag. The PM verifies BEFORE calling the city (rigor + anticipate).</span></div>
+      <p class="pregunta"><span data-i18n="es">¿Qué habrías hecho tú?</span><span data-i18n="en">What would you have done?</span></p>
+    </div>
+
+    <div class="caso"><span class="c-num">CASO 4</span>
+      <h3><span data-i18n="es">El tile de Katie Holmes</span><span data-i18n="en">Katie Holmes's tile</span></h3>
+      <p class="roles"><span class="chip pm">PM</span><span class="chip compras">Compras</span></p>
+      <p class="hechos"><span data-i18n="es"><b>4 días de ping-pong (21–24 jul)</b> para confirmar si el tile pagado era el elegido.</span><span data-i18n="en"><b>4 days of ping-pong (Jul 21–24)</b> to confirm whether the paid tile was the chosen one.</span></p>
+      <div class="moraleja"><span data-i18n="es"><b>Moraleja:</b> una selección sin punto único de verdad FRENA la ejecución. La ambigüedad se escala el <b>DÍA 1</b>, no se deja rebotar (proactividad).</span><span data-i18n="en"><b>Lesson:</b> a selection without a single point of truth STOPS execution. Ambiguity gets escalated on <b>DAY 1</b>, not left bouncing (proactivity).</span></div>
+      <p class="pregunta"><span data-i18n="es">¿Qué habrías hecho tú?</span><span data-i18n="en">What would you have done?</span></p>
+    </div>
+
+    <div class="caso"><span class="c-num">CASO 5</span>
+      <h3><span data-i18n="es">La fuga de Ginger</span><span data-i18n="en">Ginger's leak</span></h3>
+      <p class="roles"><span class="chip pm">PM</span></p>
+      <p class="hechos"><span data-i18n="es">Una línea de gas perforada instalando mayólica se ubicó gracias a <b>fotos de 2 años atrás</b> que la PM tomó por iniciativa propia.</span><span data-i18n="en">A gas line punctured while installing tile was located thanks to <b>photos from 2 years earlier</b> the PM had taken on her own initiative.</span></p>
+      <div class="moraleja"><span data-i18n="es"><b>Moraleja:</b> fotos CON descripción = el seguro de la obra (<i>"para poder buscar dónde estuvo el error… que no se vuelva a repetir"</i>). El checklist Before institucionaliza ese reflejo para que no dependa de la iniciativa individual.</span><span data-i18n="en"><b>Lesson:</b> photos WITH descriptions = the job's insurance. The Before checklist institutionalizes that reflex so it doesn't depend on individual initiative.</span></div>
+      <p class="pregunta"><span data-i18n="es">¿Qué habrías hecho tú?</span><span data-i18n="en">What would you have done?</span></p>
+    </div>
+
+    <div class="caso"><span class="c-num">CASO 6</span>
+      <h3><span data-i18n="es">WO sin firma / WO a posteriori</span><span data-i18n="en">Unsigned WO / after-the-fact WO</span></h3>
+      <p class="roles"><span class="chip pm">PM</span><span class="chip backoffice">Backoffice</span></p>
+      <p class="hechos"><span data-i18n="es">(P3) Un sub reclamó su pago 1 día después de terminar — su WO firmada decía "1 semana después" y <b>por contrato esperó</b>. Y en Martha (24-jul, 17:25): "Crear urgente work order para Cesar" — la WO DESPUÉS del trabajo.</span><span data-i18n="en">(P3) A sub demanded payment 1 day after finishing — his signed WO said "1 week after" and <b>by contract he waited</b>. And on Martha (Jul-24, 17:25): "Create urgent work order for Cesar" — the WO AFTER the work.</span></p>
+      <div class="moraleja"><span data-i18n="es"><b>Moraleja:</b> la WO firmada = sello legal que protege a CNG (<i>"no es como acuerdo de palabra"</i>). <b>NINGÚN trabajo inicia sin WO FIRMADA</b>; una WO a posteriori invierte la regla y deja trabajo no autorizado y no facturable.</span><span data-i18n="en"><b>Lesson:</b> the signed WO = the legal seal protecting CNG (<i>"not like a verbal agreement"</i>). <b>NO work starts without a SIGNED WO</b>; an after-the-fact WO inverts the rule and leaves unauthorized, unbillable work.</span></div>
+      <p class="pregunta"><span data-i18n="es">¿Qué habrías hecho tú?</span><span data-i18n="en">What would you have done?</span></p>
+    </div>
+
+    <div class="caso"><span class="c-num">CASO 7</span>
+      <h3><span data-i18n="es">Cheques rebotados (Felton, 17-jul)</span><span data-i18n="en">Bounced checks (Felton, Jul-17)</span></h3>
+      <p class="roles"><span class="chip pm">PM</span><span class="chip admin">Admin</span></p>
+      <p class="hechos"><span data-i18n="es">Un cheque rebotado del cliente condicionando si el sub trabaja el sábado.</span><span data-i18n="en">A bounced client check conditioning whether the sub works Saturday.</span></p>
+      <div class="moraleja"><span data-i18n="es"><b>Moraleja:</b> cuando el dinero toca la ejecución, el PM <b>escala a Milagros/Jose ESE día</b> — no lo descubre el sábado (proactividad + flujo de información).</span><span data-i18n="en"><b>Lesson:</b> when money touches execution, the PM <b>escalates to Milagros/Jose THAT day</b> — it is not discovered on Saturday (proactivity + information flow).</span></div>
+      <p class="pregunta"><span data-i18n="es">¿Qué habrías hecho tú?</span><span data-i18n="en">What would you have done?</span></p>
+    </div>
+
+    <div class="caso"><span class="c-num">CASO 8</span>
+      <h3><span data-i18n="es">Material cruzado entre obras</span><span data-i18n="en">Material crossed between jobs</span></h3>
+      <p class="roles"><span class="chip pm">PM</span><span class="chip compras">Compras</span><span class="chip backoffice">Backoffice</span></p>
+      <p class="hechos"><span data-i18n="es">César usando material de Martha en otra cosa — detectado <b>por chat, no por sistema</b>.</span><span data-i18n="en">César using Martha's material on something else — detected <b>via chat, not via the system</b>.</span></p>
+      <div class="moraleja"><span data-i18n="es"><b>Moraleja:</b> material que entra a una obra es DE ESA obra; todo registro va contra el proyecto/trade/line item correcto. El PM es el par de ojos en sitio (rigurosidad).</span><span data-i18n="en"><b>Lesson:</b> material entering a job belongs to THAT job; every record goes against the correct project/trade/line item. The PM is the pair of eyes on site (rigor).</span></div>
+      <p class="pregunta"><span data-i18n="es">¿Qué habrías hecho tú?</span><span data-i18n="en">What would you have done?</span></p>
+    </div>
+
+    <div class="caso"><span class="c-num">CASO 9</span>
+      <h3><span data-i18n="es">Checklists en 0%</span><span data-i18n="en">Checklists at 0%</span></h3>
+      <p class="roles"><span class="chip pm">PM</span><span class="chip backoffice">Backoffice</span></p>
+      <p class="hechos"><span data-i18n="es">En Martha: <b>30 checklists instanciados, 29 en 0/x</b> — los PMs querían llenar todo al final del trade.</span><span data-i18n="en">On Martha: <b>30 checklists instantiated, 29 at 0/x</b> — the PMs wanted to fill everything at the end of the trade.</span></p>
+      <div class="moraleja"><span data-i18n="es"><b>Moraleja:</b> el checklist se llena <b>EN VIVO por sección</b> (Before×2 / During / After) o no sirve. El <b>After desbloquea el pago</b>: sin reporte no hay registro de inspección → no se da por terminado → no se paga al sub. El Backoffice audita el Durante (trade activo sin fotos = flag).</span><span data-i18n="en"><b>Lesson:</b> the checklist is filled <b>LIVE by section</b> (Before×2 / During / After) or it is useless. The <b>After unlocks the payment</b>: no report → no inspection record → not finished → the sub is not paid. The Backoffice audits the During (active trade without photos = flag).</span></div>
+      <p class="pregunta"><span data-i18n="es">¿Qué habrías hecho tú?</span><span data-i18n="en">What would you have done?</span></p>
+    </div>
+
+    <div class="caso"><span class="c-num">CASO 10</span>
+      <h3><span data-i18n="es">ETAs añejos</span><span data-i18n="en">Stale ETAs</span></h3>
+      <p class="roles"><span class="chip compras">Compras</span><span class="chip pm">PM</span></p>
+      <p class="hechos"><span data-i18n="es">"Está ordenado" ≠ "ETA confirmado": un ETA desactualizado <i>"le miente al cronograma"</i> — el PM planifica su semana sobre una fecha falsa.</span><span data-i18n="en">"It's ordered" ≠ "ETA confirmed": a stale ETA <i>"lies to the schedule"</i> — the PM plans his week on a false date.</span></p>
+      <div class="moraleja"><span data-i18n="es"><b>Moraleja:</b> toda compra con <b>ETA POR ESCRITO del proveedor</b> (una de las 3 evidencias del takeoff); ETA sin confirmar &gt;24h = discrepancia abierta. DELIVERY ETA &gt;1 día = plazo máximo de llegada; =1 día = en stock o sin verificar.</span><span data-i18n="en"><b>Lesson:</b> every purchase with a <b>WRITTEN supplier ETA</b> (one of the takeoff's 3 pieces of evidence); an unconfirmed ETA &gt;24h = an open discrepancy. DELIVERY ETA &gt;1 day = max arrival window; =1 day = in stock or unverified.</span></div>
+      <p class="pregunta"><span data-i18n="es">¿Qué habrías hecho tú?</span><span data-i18n="en">What would you have done?</span></p>
+    </div>
+
+  </div>
+
+  <div class="gap" style="margin-top:22px">
+    <span data-i18n="es"><b>Cómo crece esta biblioteca:</b> cada fallo real nuevo se convierte en caso (con foto cuando exista y Jose apruebe la selección — privacidad de clientes) + ajuste del track correspondiente. La cola de entrada es <code>INSPECTION_FAILURES.md</code>.</span>
+    <span data-i18n="en"><b>How this library grows:</b> every new real failure becomes a case (with a photo when one exists and Jose approves the selection — client privacy) + an adjustment to the corresponding track. The intake queue is <code>INSPECTION_FAILURES.md</code>.</span>
+  </div>
+
+  <div class="footer-note">
+    <span data-i18n="es">WEB DEL PROCESO CNG · Casos reales · 2026-08-07 · Fuente: _BRIEF_CONSTRUCTORES 2026-08-06 §5 (mega-análisis 2026-07 + canon §5/§11 + tracks) — hechos exactos, sin adornar. Material interno — no distribuir.</span>
+    <span data-i18n="en">CNG PROCESS SITE · Real cases · 2026-08-07 · Source: 2026-08-06 Builders' BRIEF §5 — exact facts, unembellished. Internal material — do not distribute.</span>
+  </div>
+</main>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

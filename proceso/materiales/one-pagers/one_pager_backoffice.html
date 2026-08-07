@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>ONE-PAGER · Backoffice / Data-Entry — CNG</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+h3 { font-size: 12px; margin: 14px 0 6px; color: #1d4ed8; }
+h4 { font-size: 10.5px; margin: 10px 0 4px; color: #0f172a; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.pos { page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+.pos h3 { margin-top: 0; }
+ul { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+.dos-col { display: flex; gap: 14px; } .dos-col > div { flex: 1; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.seccion-num { color: #94a3b8; font-weight: 400; }
+ol { margin: 4px 0 8px; padding-left: 20px; } ol li { margin: 2px 0; }
+.mini { font-size: 9px; color: #475569; }
+</style>
+</head>
+<body>
+
+<h1>BACKOFFICE / DATA-ENTRY — la mecánica exacta</h1>
+<div class="mini">CNG · one-pager v2.0 · 2026-08-06 · imprimir y tener al lado · fuente: Proceso Canónico + manual v2.0 + reglas de Jose 06-ago</div>
+
+<div class="clave">
+<b>LA CLAVE:</b> GESTIONAR LA OBRA DE LA FORMA EN LA QUE SE PLANIFICÓ EN EL CRONOGRAMA.
+Yo soy <b>el autor del registro</b>: si mi registro es limpio, la operación corre; si no, todos trabajan sobre versiones distintas de la verdad.
+<b>"Si no está en JobTread después de las 3 PM, no pasó."</b>
+</div>
+
+<h2><span class="seccion-num">1 ·</span> REGLAS DE ORO (no se negocian)</h2>
+<ol>
+<li><b>Después de las 3 PM, JobTread es la verdad del día.</b> No un recuerdo, no un chat, no un acuerdo verbal.</li>
+<li><b>SIEMPRE SON DOS registros</b> por movimiento de dinero: schedule (obra) + libros (documento). <b>TODO dinero pasa por el schedule — SIN EXCEPCIONES</b> (hasta Home Depot / caja chica → Additional Expense al proyecto).</li>
+<li><b>CERRAR = CHECK + FECHAS REALES CUADRADAS.</b> Un check sobre una fecha falsa = registro sucio (rompe viernes-vs-viernes, cashflow y productividad). <span class="mini">Excepción pagos: la fecha original = gatillo contractual, NO se reescribe — el pago se MUEVE a la fecha en que realmente se pagó.</span></li>
+<li><b>Regla de oro de la cadena:</b> un EXECUTE solo tiene fecha si su cadena previa está 100%: SOW ✓ · WO FIRMADA ✓ · schedule confirmado con sub ✓ · material con entrega confirmada ✓ · Before ✓. Si no → <b>el EXECUTE SE MUEVE</b>, no se deja "por si acaso".</li>
+<li><b>Verificar, no asumir.</b> Sin documento, no hay aprobación.</li>
+<li><b>Nomenclatura:</b> <span class="chip">&lt;TRADE&gt; + &lt;ACCIÓN&gt;</span> ej. PLUMBING: PURCHASE MATERIAL · SIDING: BILL &amp; PAYMENT. Estándar = <b>template oficial</b> (34 trades · 411 tareas) — el archivo MANDA.</li>
+<li><b>Yo NO apruebo pagos ni muevo dinero</b> (Milagros) y <b>NO ejecuto obra</b> (PMs).</li>
+</ol>
+
+<div class="dos-col">
+<div class="pos">
+<h3>REGISTRO A · SCHEDULE</h3>
+<p class="mini">Cada compra o pago, el día que ocurre:</p>
+<ol>
+<li>Crear tarea en el <b>DÍA REAL</b> del movimiento</li>
+<li>Tipo: material → <span class="chip">Payment - Materials</span> · sub → <span class="chip">Payment - Subs</span></li>
+<li><b>Monto en la descripción: SOLO el número, SIN signo menos</b> (sin monto = "amount TBD" → NO cuenta en cashflow)</li>
+<li>Marcar completado ✓ (con la fecha cuadrada)</li>
+</ol>
+</div>
+<div class="pos">
+<h3>REGISTRO B · LIBROS</h3>
+<p class="mini">Inmediatamente después:</p>
+<ol>
+<li>Proyecto → Documentos → Crear documento</li>
+<li><b>Expense</b> (material/tienda) o <b>Bill</b> (pago a sub)</li>
+<li>vendor → trade → <b>LINE ITEM correcto del budget</b></li>
+<li>Crear → costo → Approve for Payment → <b>Pay solo si YA se pagó</b></li>
+</ol>
+</div>
+</div>
+
+<div class="pos">
+<h3>WORK ORDER — antes de que el trabajo inicie, SIEMPRE</h3>
+<ul>
+<li>Añadir documento → Work Order → <b>subcontratista → trade → presupuesto del trade → monto = LO NEGOCIADO por el PM</b> (≤ costo del budget)</li>
+<li><b>Scope of Work:</b> copiar y pegar el SOW report del PM (o PDF adjunto en files) — <b>NUNCA sin scope</b></li>
+<li><b>Payment Breakdown SIEMPRE:</b> estándar = viernes siguiente a terminar · excepción "día después" · partido: ROUGH FINISH / PASS INSPECTION · downpayment solo trades especiales (framing, MEP rough-ins)</li>
+<li><b>FIRMA:</b> sub registrado como proveedor → el sistema envía SMS+email → firma electrónica → <b>RECIÉN AHÍ "Aprobado" en JT</b>. <i>"No es como acuerdo de palabra."</i></li>
+<li>Prueba de calidad: <b>¿un extraño podría ejecutarla?</b> Si no, falta.</li>
+</ul>
+</div>
+
+<h2><span class="seccion-num">2 ·</span> MIS 6 AUDITORÍAS</h2>
+<table>
+<tr><th>#</th><th>Auditoría</th><th>Qué verifico</th></tr>
+<tr><td>1</td><td><b>Dicho vs marcado</b></td><td>Reporte del PM vs JobTread/CompanyCam → toda discrepancia a ops.db y se resuelve HOY</td></tr>
+<tr><td>2</td><td><b>ETAs de Compras</b></td><td>Cada compra con tarea ETA al día siguiente con el plazo del proveedor · &gt;1 día → fecha FIN = llega a más tardar · =1 día → stock o SIN VERIFICAR (perseguir)</td></tr>
+<tr><td>3</td><td><b>Expediente antes de pago</b></td><td>Factura + WO FIRMADA + lien waiver + After → recién ahí a Milagros (sus 4 filtros) · tras pago: actualizar schedule + subir factura</td></tr>
+<tr><td>4</td><td><b>Fotos con descripción</b></td><td>Toda obra trabajada hoy con fotos en CompanyCam CON descripción</td></tr>
+<tr><td>5</td><td><b>Takeoff: 3 EVIDENCIAS</b></td><td>Dentro del reporte de takeoff en CC: ① foto del precio CONFIRMADO · ② ETA POR ESCRITO del proveedor · ③ RECIBO — falta una = flag</td></tr>
+<tr><td>6</td><td><b>SOW existe + Durante activo</b></td><td>Trade próximo → el SOW EXISTE en CC · trade en ejecución → sección Durante con fotos/registros — si no → flag</td></tr>
+</table>
+
+<h2><span class="seccion-num">3 ·</span> MI DÍA (L–V)</h2>
+<table>
+<tr><th>Momento</th><th>Qué hago</th></tr>
+<tr><td>mañana</td><td>Revisar schedules + flags</td></tr>
+<tr><td>~1:00 PM</td><td>Handoff de Romina — la tarde persigo yo sus pendientes</td></tr>
+<tr><td>2:30 PM</td><td>Leer la prep de KITBOT ANTES de la reunión</td></tr>
+<tr><td><b>2:30 PM Jose<br>= 3:30 Perú</b></td><td><b>LA REUNIÓN (~2 h, hora oficial)</b> — registro EN VIVO: check+fechas · extender · re-fechar CON RAZÓN · pagos (doble registro) · discrepancias → ops.db. Lo que quede a medias al colgar es deuda</td></tr>
+<tr><td>después</td><td>Cierre: cambios del bot + pendientes + expedientes + <b>SOLTAR LA GRABACIÓN en ~/.openclaw/REUNIONES/</b> (transcript diario = deber del cierre; sin él, registro incompleto)</td></tr>
+<tr><td>&lt; 8:00 PM</td><td>Schedule LIMPIO — de ahí salen el Daily Report (gerencia) y las Task Lists automáticas de las 8 PM</td></tr>
+<tr><td>VIERNES</td><td>Pagos estándar del viernes: doble registro + expediente listo ANTES · reunión de cashflow → PLAN DE LA SEMANA (aprueba el CEO)</td></tr>
+<tr><td>VIE 11 PM</td><td>Baseline oficial (la foto GRIS = el ideal de la próxima semana)</td></tr>
+</table>
+
+<div class="mat"><b>MI DÍA CUMPLIDO (el sistema lo verifica):</b> ✓ Reunión hecha + dicho-vs-marcado verificado (discrepancias → ops.db) · ✓ Schedules al día (cambios del bot hechos + pendientes resueltos) · ✓ Transcript de la reunión alimentado al sistema.</div>
+
+<div class="dos-col">
+<div class="gap"><b>ANTES DE GUARDAR — 5 PREGUNTAS:</b> ¿Proyecto correcto? ¿Trade correcto? ¿Line item correcto? ¿Monto limpio (solo número)? ¿Evidencia existe (foto/doc)?<br><br><b>SI UN REPORTE EN INGLÉS ES AMBIGUO → PREGUNTO, NO ADIVINO.</b> (Las puertas de 96" se compraron mal por no confirmar la medida.)</div>
+<div class="gap"><b>LOS 5 COMPORTAMIENTOS:</b> rigurosidad · atención al detalle · prever · solucionar · proactividad insaciable.<br><br><i>"No aceptar el problema y reaccionar: prevenirlo, o buscar soluciones insaciablemente para cumplir el cronograma a como dé lugar."</i> — Jose</div>
+</div>
+
+<div class="footer-note">ONE-PAGER Backoffice/Data-Entry v2.0 · 2026-08-06 · Fuentes: 00_PROCESO_CANONICO_CNG.md · JD_backoffice.md v3.0 · TRACK_A_BACKOFFICE_DATA_ENTRY_v2026-08-06.md · DIA_CUMPLIDO_POR_PUESTO.md v3 · TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv · reglas de Jose 2026-08-06. PDF vía Chrome headless, tamaño letter.</div>
+
+</body>
+</html>

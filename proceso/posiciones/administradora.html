@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CNG · Posición — Administradora</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+.btn{display:inline-block;background:var(--ink);color:#fbbf24;font-weight:700;border-radius:9px;padding:8px 14px;font-size:13px;margin:2px 6px 2px 0}
+.btn:hover{text-decoration:none;opacity:.92}
+ul.checks{list-style:none;margin:8px 0;padding:0}
+ul.checks li{padding:7px 10px 7px 34px;position:relative;border-bottom:1px dashed var(--line);font-size:13.5px}
+ul.checks li:last-child{border-bottom:0}
+ul.checks li::before{content:"✓";position:absolute;left:8px;color:var(--verde);font-weight:800}
+.shv-s{border-top:4px solid var(--rol-admin)} .shv-h{border-top:4px solid var(--verde)} .shv-v{border-top:4px solid var(--rojo)}
+.shv-s ul,.shv-h ul,.shv-v ul{margin:6px 0 0;padding-left:18px;font-size:13px}
+.shv-s li,.shv-h li,.shv-v li{margin:4px 0}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="bar">
+    <span class="logo">CNG · <b>PROCESO</b></span>
+    <nav>
+      <a href="../index.html"><span data-i18n="es">Inicio</span><span data-i18n="en">Home</span></a>
+      <a href="../proceso-constructivo.html"><span data-i18n="es">Proceso constructivo</span><span data-i18n="en">Build sequence</span></a>
+      <a href="../proceso-empresa.html"><span data-i18n="es">Proceso de empresa</span><span data-i18n="en">Company process</span></a>
+      <a href="../bucle-diario.html"><span data-i18n="es">Bucle diario</span><span data-i18n="en">Daily loop</span></a>
+      <a href="../jobtread.html">JobTread</a>
+      <a href="../dinero.html"><span data-i18n="es">Dinero</span><span data-i18n="en">Money</span></a>
+      <a href="../reloj-reportes.html"><span data-i18n="es">Reloj &amp; reportes</span><span data-i18n="en">Clock &amp; reports</span></a>
+      <a href="index.html" class="active"><span data-i18n="es">Posiciones</span><span data-i18n="en">Positions</span></a>
+      <a href="../casos-reales.html"><span data-i18n="es">Casos reales</span><span data-i18n="en">Real cases</span></a>
+      <a href="../glosario.html"><span data-i18n="es">Glosario</span><span data-i18n="en">Glossary</span></a>
+    </nav>
+    <button id="cng-lang-btn" class="lang-toggle" type="button">EN</button>
+  </div>
+</header>
+
+<main>
+  <p style="margin:0 0 4px"><span class="chip admin">ADMIN</span> <span style="font-size:12.5px;color:var(--mut)">Milagros (Perú) · <span data-i18n="es">rol VIVO en el sistema desde 2026-07-03</span><span data-i18n="en">role LIVE in the system since 2026-07-03</span></span></p>
+  <h1><span data-i18n="es">Administradora</span><span data-i18n="en">Administrator</span></h1>
+  <p class="lead">
+    <span data-i18n="es">La <b>guardiana del dinero de la empresa</b>: <i>"nada se paga sin pasar por ella."</i> Fusiona lo que en el org diseñado eran dos roles (CFO + Accountant). No hace estrategia financiera (eso es del CEO): <b>ejecuta, controla y hace cumplir</b> el dinero del día a día.</span>
+    <span data-i18n="en">The <b>guardian of the company's money</b>: <i>"nothing is paid without passing through her."</i> She merges what the designed org split into two roles (CFO + Accountant). No financial strategy (the CEO's): she <b>executes, controls and enforces</b> the day-to-day money.</span>
+  </p>
+
+  <div class="clave">
+    <div style="font-size:12px;letter-spacing:1.5px;color:#94a3b8;font-weight:700;margin-bottom:6px"><span data-i18n="es">MISIÓN</span><span data-i18n="en">MISSION</span></div>
+    <span data-i18n="es"><b>Asegurar que la empresa SIEMPRE tenga con qué operar</b> — que los pagos que sostienen la obra se hagan a tiempo, que ninguno se cuele fuera del plan, y que cuando el dinero se vaya a poner corto, el CEO y el COO se enteren <b>ANTES</b> de que pase, con una propuesta ya sobre la mesa.</span>
+    <span data-i18n="en"><b>To make sure the company ALWAYS has what it needs to operate</b> — the payments that sustain the work happen on time, none slips outside the plan, and when money is about to run short, the CEO and COO find out <b>BEFORE</b> it happens, with a proposal already on the table.</span>
+    <div class="sub"><span data-i18n="es">Dos principios: 1) el plan es la ley de la semana (ella controla y hace cumplir, NO inventa prioridades) · 2) sin documentación no hay pago — y autorizar no es pagar.</span><span data-i18n="en">Two principles: 1) the plan is the week's law (she controls and enforces, does NOT invent priorities) · 2) no documentation, no payment — and authorizing is not paying.</span></div>
+  </div>
+
+  <h2><span class="seccion-num">1 · </span><span data-i18n="es">Su día — hora a hora</span><span data-i18n="en">Her day — hour by hour</span></h2>
+  <p class="proposito"><span data-i18n="es"><b>Esta sección existe para</b> ver la cadencia diseñada del puesto (ficha 2026-08-06). ⚠️ La cadencia automática de KITBOT está <b>en pausa desde el 31-jul</b>: mientras Jose fija la cadencia oficial (gate t23), los checks se corren manualmente.</span><span data-i18n="en"><b>This section exists to</b> show the role's designed cadence (2026-08-06 file). ⚠️ KITBOT's automatic cadence has been <b>paused since Jul-31</b>: until Jose sets the official cadence (gate t23), the checks run manually.</span></p>
+  <ul class="reloj">
+    <li><span class="hora">9:30 AM</span><div class="que"><span data-i18n="es"><b>Apertura:</b> abre el día sobre el plan vigente — cashflow fresco, pagos que vencen hoy, pendientes.</span><span data-i18n="en"><b>Opening:</b> opens the day on the current plan — fresh cashflow, payments due today, pending items.</span></div></li>
+    <li><span class="hora">12:00 PM</span><div class="que"><span data-i18n="es"><b>Control de pagos:</b> qué salió, cuáles necesitan documentación, con qué solicitantes confirmar.</span><span data-i18n="en"><b>Payment control:</b> what went out, which need documentation, which requesters to confirm with.</span></div></li>
+    <li><span class="hora">2:00 PM</span><div class="que"><span data-i18n="es"><b>Pre-3PM:</b> cuadra el lado del dinero ANTES de la reunión — qué destraba un pago, qué desviación debe conocer la mesa.</span><span data-i18n="en"><b>Pre-3PM:</b> squares the money side BEFORE the meeting — what a payment unblocks, what deviation the table must know.</span></div></li>
+    <li class="hito"><span class="hora">2:30 PM</span><div class="que"><span data-i18n="es"><b>Reunión diaria</b> (3:30 Perú): aporta el estado del dinero mientras se re-fechan los schedules de todos los proyectos.</span><span data-i18n="en"><b>Daily meeting</b> (3:30 Peru): brings the money's state while all projects' schedules are re-dated.</span></div></li>
+    <li><span class="hora">4:00 PM</span><div class="que"><span data-i18n="es"><b>Alerta pre-cierre</b> (diseñada; hoy manual): qué le falta exactamente para cerrar sus 5 checks.</span><span data-i18n="en"><b>Pre-close alert</b> (designed; manual today): exactly what is missing to close her 5 checks.</span></div></li>
+    <li><span class="hora" data-i18n="es">Cierre</span><span class="hora" data-i18n="en">Close</span><div class="que"><span data-i18n="es"><b>Reconciliación:</b> aprobado-vs-real · comprobantes subidos · desviaciones registradas. Noche: <b>Cierre Administrativo</b> (PDF) — la foto reconciliada del día.</span><span data-i18n="en"><b>Reconciliation:</b> approved-vs-real · receipts uploaded · deviations recorded. Night: <b>Administrative Close</b> (PDF) — the day's reconciled photo.</span></div></li>
+    <li class="sys"><span class="hora" data-i18n="es">VIERNES</span><span class="hora" data-i18n="en">FRIDAY</span><div class="que"><span data-i18n="es"><b>Ancla semanal:</b> consolida los saldos bancarios (única fuente de verdad — la suma de saldos NO es diaria, es semanal), alimenta el CASHFLOW PLAN, lo presenta al CEO → sale el PLAN DE LA SEMANA; pago estándar a subs; baseline 11 PM.</span><span data-i18n="en"><b>Weekly anchor:</b> consolidates bank balances (single source of truth — the balance sum is NOT daily, it's weekly), feeds the CASHFLOW PLAN, presents it to the CEO → the WEEK'S PLAN comes out; standard sub payment; 11 PM baseline.</span></div></li>
+  </ul>
+
+  <h2><span class="seccion-num">2 · </span><span data-i18n="es">Qué SABE · qué HACE · qué VERIFICA</span><span data-i18n="en">What she KNOWS · DOES · VERIFIES</span></h2>
+  <div class="grid c3">
+    <div class="card shv-s"><h3 style="color:var(--rol-admin)"><span data-i18n="es">SABE</span><span data-i18n="en">KNOWS</span></h3>
+      <ul>
+        <li data-i18n="es">El canon completo y por qué el registro limpio del schedule ES la materia prima del cashflow.</li><li data-i18n="en">The full canon and why the clean schedule record IS the cashflow's raw material.</li>
+        <li data-i18n="es">El <b>ciclo del cashflow</b> y su carril ADMINISTRATOR en 8 pasos: saldos + negociaciones del COO + schedule updates → CASHFLOW DATA → PLAN → aprueba CEO → verifica reglas → confirma → paga/mueve → update schedule.</li><li data-i18n="en">The <b>cashflow cycle</b> and her 8-step ADMINISTRATOR lane: balances + COO negotiations + schedule updates → CASHFLOW DATA → PLAN → CEO approves → verify rules → confirm → pay/move → update schedule.</li>
+        <li data-i18n="es">Los <b>4 filtros de pago</b> y los 10 Mandamientos del puesto.</li><li data-i18n="en">The <b>4 payment filters</b> and the role's 10 Commandments.</li>
+        <li data-i18n="es">Reglas del dinero: checks = pagos confirmados/reservados · <b>fecha original = gatillo contractual</b> (no se reescribe) · pago estándar = viernes siguiente · downpayment = excepción solo FRAMING / MEP ROUGH-INS · nada queda overdue.</li><li data-i18n="en">Money rules: checks = confirmed/reserved payments · <b>original date = contractual trigger</b> (never rewritten) · standard payment = the following Friday · downpayment = exception only FRAMING / MEP ROUGH-INS · nothing stays overdue.</li>
+        <li data-i18n="es">Que es <b>gatekeeper de toda negociación</b>: todo cambio de términos con cliente o sub le llega a ella.</li><li data-i18n="en">That she is the <b>gatekeeper of every negotiation</b>: every change of terms with a client or sub reaches her.</li>
+      </ul>
+    </div>
+    <div class="card shv-h"><h3 style="color:var(--verde)"><span data-i18n="es">HACE</span><span data-i18n="en">DOES</span></h3>
+      <ul>
+        <li data-i18n="es"><b>Arma y lee el cashflow diario</b> en el Finance dashboard (Saldo Restante · Pagos Realizados · running_balance · closing semanal).</li><li data-i18n="en"><b>Builds and reads the daily cashflow</b> in the Finance dashboard (Remaining Balance · Payments Made · running_balance · weekly closing).</li>
+        <li data-i18n="es"><b>Ejecuta pagos:</b> 4 filtros → confirma con el solicitante → paga o mueve con razón → <b>sube el comprobante</b> → <b>avisa al grupo de PMs de CADA pago</b>.</li><li data-i18n="en"><b>Executes payments:</b> 4 filters → confirms with the requester → pays or moves with a reason → <b>uploads the receipt</b> → <b>notifies the PM group of EVERY payment</b>.</li>
+        <li data-i18n="es">Corre la <b>🧭 Ruta de Pagos</b> cuando el proyectado aprieta (pagar → cobrar → avanzar).</li><li data-i18n="en">Runs the <b>🧭 Payment Route</b> when the projection tightens (pay → collect → advance).</li>
+        <li data-i18n="es"><b>Consolida los saldos bancarios los viernes</b> → plan viernes-a-viernes; lidia con el banco directamente.</li><li data-i18n="en"><b>Consolidates bank balances on Fridays</b> → Friday-to-Friday plan; deals with the bank directly.</li>
+        <li data-i18n="es"><b>Custodia la documentación:</b> facturas · WOs firmadas · lien waivers · comprobantes en JT/CompanyCam.</li><li data-i18n="en"><b>Custodian of documentation:</b> invoices · signed WOs · lien waivers · receipts in JT/CompanyCam.</li>
+      </ul>
+    </div>
+    <div class="card shv-v"><h3 style="color:var(--rojo)"><span data-i18n="es">VERIFICA</span><span data-i18n="en">VERIFIES</span></h3>
+      <ul>
+        <li data-i18n="es">Que <b>ningún pago salga sin sus 4 filtros</b>: ¿está en el plan de la semana? ¿es la misma cantidad? ¿nos deja en buena posición? ¿documentación adecuada (WO firmada + inspecciones)?</li><li data-i18n="en">That <b>no payment leaves without her 4 filters</b>: is it in the week's plan? same amount? does it leave us in a good position? proper documentation (signed WO + inspections)?</li>
+        <li data-i18n="es">Montos <b>aprobado-vs-pagado</b> con el POR QUÉ de toda diferencia; <b>&gt;$1,000 → flag al CEO Y al COO</b>.</li><li data-i18n="en"><b>Approved-vs-paid</b> amounts with the WHY of every difference; <b>&gt;$1,000 → flag to the CEO AND the COO</b>.</li>
+        <li data-i18n="es">Que el proyectado <b>NO llegue a negativo</b> — flag emitido ANTES, con propuesta.</li><li data-i18n="en">That the projection <b>never goes negative</b> — flag raised BEFORE, with a proposal.</li>
+        <li data-i18n="es">Que <b>nada quede overdue</b> (pagos y cobros rodados hasta resolverse) y que el expediente esté completo antes de mover dinero.</li><li data-i18n="en">That <b>nothing stays overdue</b> (payments and collections rolled until resolved) and the file is complete before money moves.</li>
+        <li data-i18n="es">El cumplimiento del equipo por la reportería — su <b>lente de cumplimiento</b>, complemento del COO (obra) y el CEO (dirección).</li><li data-i18n="en">Team compliance through the reporting — her <b>compliance lens</b>, complementing the COO (field) and CEO (direction).</li>
+      </ul>
+    </div>
+  </div>
+
+  <details class="exp"><summary><span data-i18n="es">Lo que NO hace</span><span data-i18n="en">What she does NOT do</span></summary>
+    <div class="exp-body"><ul>
+      <li data-i18n="es">No dirige la estrategia financiera (el CEO aprueba el plan) · no decide qué proyectos priorizar · no maneja obra ni schedule (COO / PMs) · no emite directivas de pago propias — <b>categoriza y controla; Jose / Jonas deciden</b> cuándo sostener o soltar.</li>
+      <li data-i18n="en">Does not set financial strategy (the CEO approves the plan) · does not decide project priorities · does not run jobs or schedules (COO / PMs) · does not issue her own payment directives — <b>she categorizes and controls; Jose / Jonas decide</b> what to hold or release.</li>
+    </ul></div>
+  </details>
+
+  <h2><span class="seccion-num">3 · </span><span data-i18n="es">Su "Día Cumplido" (los 5 checks)</span><span data-i18n="en">Her "Day Done" (the 5 checks)</span></h2>
+  <div class="card">
+    <ul class="checks">
+      <li data-i18n="es"><b>Aprobado hoy vs realidad verificado</b> — el POR QUÉ de cada diferencia registrado; &gt;$1,000 → flag al CEO Y al COO.</li><li data-i18n="en"><b>Approved-today vs reality verified</b> — the WHY of each difference recorded; &gt;$1,000 → flag to the CEO AND COO.</li>
+      <li data-i18n="es"><b>Pagos que vencían hoy:</b> ejecutados con comprobante subido, o movidos con razón registrada.</li><li data-i18n="en"><b>Payments due today:</b> executed with the receipt uploaded, or moved with a recorded reason.</li>
+      <li data-i18n="es"><b>Avisó al grupo de PMs</b> cada pago realizado.</li><li data-i18n="en"><b>Notified the PM group</b> of every payment made.</li>
+      <li data-i18n="es"><b>Proyectado pre-negativo → flag ANTES</b> + propuesta (split / 🧭 Ruta de Pagos).</li><li data-i18n="en"><b>Pre-negative projection → flag BEFORE</b> + proposal (split / 🧭 Payment Route).</li>
+      <li data-i18n="es"><b>Documentación del día perseguida</b> (facturas / lien waivers / comprobantes).</li><li data-i18n="en"><b>The day's documentation chased</b> (invoices / lien waivers / receipts).</li>
+    </ul>
+  </div>
+
+  <h2><span class="seccion-num">4 · </span><span data-i18n="es">Sus reportes (con su guía de lectura)</span><span data-i18n="en">Her reports (with the reading guide)</span></h2>
+  <div class="tbl-wrap">
+    <table>
+      <tr><th data-i18n="es">Reporte</th><th data-i18n="en">Report</th><th data-i18n="es">Cuándo</th><th data-i18n="en">When</th><th data-i18n="es">Guía</th><th data-i18n="en">Guide</th></tr>
+      <tr><td><b>Daily Report (gerencia)</b> — <span data-i18n="es">ella es audiencia: el día de las obras con fotos + veredicto</span><span data-i18n="en">she is in the audience: the jobs' day with photos + verdict</span></td><td>8:00 PM L-V</td><td><a href="../materiales/guias/GUIA_06_DAILY_REPORT_GERENCIA.html">ES</a></td></tr>
+      <tr><td><b>Project Department Weekly Evaluation</b> — <span data-i18n="es">resumen pagado/cobrado (confirmados vs no-confirmados-ejecutados)</span><span data-i18n="en">paid/collected summary (confirmed vs non-confirmed-executed)</span></td><td data-i18n="es">Sáb 8:30 AM</td><td data-i18n="en">Sat 8:30 AM</td><td><a href="../materiales/guias/GUIA_02_PROJECT_DEPT_WEEKLY_EVALUATION.html">ES</a></td></tr>
+      <tr><td><b>Project Department Next Week Report</b> — <span data-i18n="es">dinero SOLO confirmados + pagos aprobados POR PROYECTO</span><span data-i18n="en">confirmed-only money + approved payments PER PROJECT</span></td><td data-i18n="es">On-demand ("presupuestos consolidados")</td><td data-i18n="en">On-demand ("consolidated budgets")</td><td><a href="../materiales/guias/GUIA_03_PROJECT_DEPT_NEXT_WEEK.html">ES</a></td></tr>
+    </table>
+  </div>
+  <p style="font-size:12.5px"><span data-i18n="es"><b>Fuente de la verdad de pagos CONFIRMADOS</b> (Jose 2026-08-03): el <b>Finance tab</b> del dashboard — no los checks del schedule.</span><span data-i18n="en"><b>Source of truth for CONFIRMED payments</b> (Jose 2026-08-03): the dashboard's <b>Finance tab</b> — not the schedule checks.</span></p>
+
+  <h2><span class="seccion-num">5 · </span><span data-i18n="es">Materiales del puesto</span><span data-i18n="en">Position materials</span></h2>
+  <p><a class="btn" href="../materiales/one-pagers/administradora_4_filtros.html">⬇ One-pager — <span data-i18n="es">los 4 filtros</span><span data-i18n="en">the 4 filters</span></a></p>
+  <p style="font-size:12.5px;color:var(--mut)"><span data-i18n="es">Su track de entrenamiento: <code>03_PAQUETES_ENTRENAMIENTO/TRACK_D_ADMINISTRADORA_MILAGROS.md</code>.</span><span data-i18n="en">Training track: <code>03_PAQUETES_ENTRENAMIENTO/TRACK_D_ADMINISTRADORA_MILAGROS.md</code>.</span></p>
+
+  <div class="footer-note">
+    <span data-i18n="es">Posición · Administradora · 2026-08-07 · Fuentes: ficha 02_POSICIONES/administradora.md v1.0 (2026-08-06) · JD_administradora.md · Track D · canon v4 §8 · _BRIEF_CONSTRUCTORES. Material interno.</span>
+    <span data-i18n="en">Position · Administrator · 2026-08-07 · Sources: 02_POSICIONES/administradora.md v1.0 · JD_administradora.md · Track D · canon v4 §8 · Builders' BRIEF. Internal material.</span>
+  </div>
+</main>
+
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía de lectura — Project Department Next Week Report</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+ul, ol { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.sub { color: #475569; font-size: 11px; margin: 0 0 10px; }
+</style>
+</head>
+<body>
+
+<h1>Cómo leer el <b>Project Department Next Week Report</b></h1>
+<p class="sub">Guía de lectura de reportes · Programa de entrenamiento CNG · v2026-08-06</p>
+
+<h2>1 · Qué es y para quién</h2>
+<div class="clave">
+Es el <b>PLAN de la semana entrante</b> para gerencia. Se genera <b>a pedido de Jose</b>, cuando el cashflow de la semana quedó
+<b>consolidado</b> ("presupuestos consolidados") — no tiene hora fija. Es una <b>VISTA DE PLAN PURA</b>: la semana AÚN NO OCURRE,
+así que no hay baseline, no hay estados, no hay verde/naranja — solo lo agendado en JobTread y el dinero <b>SOLO confirmado</b>.
+</div>
+<p><b>Propósito:</b> que gerencia vea de un vistazo qué se va a ejecutar en cada obra la semana que entra, qué pagos quedaron aprobados (confirmados ✓) por proyecto, y qué cobros se esperan — para aprobar y repartir el plan.</p>
+
+<h2>2 · Anatomía — qué significa cada cosa</h2>
+<table>
+<tr><th>Sección</th><th>Qué significa</th></tr>
+<tr><td><b>Tarjetas de conteo</b> (arriba)</td><td>Cantidad total de tareas de la semana por tipo en las obras: ★ ruta crítica · ▸ action tasks · ◆ city inspections · 🛒 purchases · 💵 pagos confirmados · 💰 cobros confirmados.</td></tr>
+<tr><td><b>COBROS DE LA SEMANA — por proyecto</b></td><td>Cada cobro con su fecha y monto. Chip <span class="chip">POTENCIAL</span> = agendado SIN confirmar (permitido aquí solo si está claramente marcado); ✓ CONFIRMADO = con check en Finances. El total separa confirmados de potenciales.</td></tr>
+<tr><td><b>PAGOS APROBADOS DE LA SEMANA — por proyecto · SOLO CONFIRMADOS ✓</b></td><td>Únicamente movimientos con check ☑ de confirmado en el Finances tab. Por obra, en dos bandas: <b>SUBS</b> (naranja) y <b>MATERIALES</b> (azul), cada pago con su día y monto. La lista plana se eliminó — todo va POR PROYECTO. Al final: TOTAL CONFIRMADO DE LA SEMANA, que debe <b>cuadrar al centavo</b> contra el CONFIRMED OUTFLOW del dashboard.</td></tr>
+<tr><td><b>Página por obra</b></td><td><b>🎯 OBJETIVO DE LA SEMANA</b> en lenguaje llano (qué debe pasar y qué LIBERA: cobro, inspección, entrega) + gantt de plan puro: una barra oscura por tarea en su fecha (color por TIPO: ★ ruta crítica · ▸ action · ◆ city inspection · 🛒 purchases) + columna FECHA AGENDADA. ◂/▸ en los bordes = la tarea viene de antes / sigue después de la semana.</td></tr>
+<tr><td><b>MATERIALES EN CAMINO — informativo</b></td><td>ETAs en lenguaje llano: "material llega a más tardar el X" (DELIVERY ETA &gt;1 día) o "ETA sin verificar: perseguir la confirmación con Purchases". Nunca es métrica — solo información.</td></tr>
+</table>
+
+<h2>3 · De dónde salen los números</h2>
+<ul>
+<li>Las tareas: <b>lo agendado en JobTread</b> para la semana entrante (sáb → vie), tal cual está.</li>
+<li>El dinero: el <b>cashflow consolidado</b> — Finances tab del dashboard (finance-latest.json), SOLO eventos con check ☑ de confirmado. Los potenciales solo aparecen en cobros y claramente marcados.</li>
+<li>Verificación obligatoria: el total confirmado cuadra al centavo con la celda CONFIRMED OUTFLOW del dashboard.</li>
+</ul>
+
+<h2>4 · Qué hago cuando lo recibo (gerencia)</h2>
+<div class="mat"><b>1.</b> Lee los <b>OBJETIVOS DE LA SEMANA</b> de cada obra: son el contrato de la semana. Si un objetivo no refleja lo acordado, se corrige ANTES de repartir.</div>
+<div class="mat"><b>2.</b> Verifica la lógica <b>pago → cobro</b>: cada pago confirmado debería acercar un cobro (trade que termina = draw que entra). Los objetivos dicen qué libera cada cosa.</div>
+<div class="mat"><b>3.</b> Revisa las <b>◆ inspecciones agendadas</b>: son los cuellos de botella de la semana — si una se cae, cae la cadena aguas abajo.</div>
+<div class="mat"><b>4.</b> Con el OK, se generan y reparten los hermanos de este reporte: <b>Your Next Week</b> (cada PM) y el <b>tablero de compras de Romina</b>.</div>
+<div class="mat"><b>5.</b> Los <b>POTENCIALES</b> de cobro se tratan como trabajo por confirmar, no como dinero contado.</div>
+
+<h2>5 · Errores de lectura comunes</h2>
+<div class="gap"><b>Leer las barras como avance.</b> Aquí NADA ocurrió todavía: es plan puro. No hay verde ni naranja porque no hay nada que evaluar.</div>
+<div class="gap"><b>Contar los potenciales como ingreso.</b> Un cobro POTENCIAL es agendado sin confirmar; solo los ✓ confirmados son plan de verdad.</div>
+<div class="gap"><b>Buscar % de cumplimiento o comparaciones.</b> Eso vive en los Weekly Evaluation del sábado — este reporte es la otra mitad del ciclo: primero el plan, después la evaluación contra ese plan.</div>
+<div class="gap"><b>Tratar un ETA como compromiso del schedule.</b> Los ETA son informativos (regla C3); si está "sin verificar", la acción es perseguir la confirmación con Purchases, no mover la obra.</div>
+
+<p class="footer-note">Guía de lectura · Project Department Next Week Report (aprobado por Jose 2026-08-06; ex Upcoming Week Operations v7, reformulado) · fuentes: canon §9.4 · REPORTERIA_MASTER §A/C5 + "FUENTE DE LA VERDAD — PAGOS CONFIRMADOS" · sample PROJECT_DEPT_NEXT_WEEK.pdf (semana 1–7 ago) · _BRIEF_CONSTRUCTORES v1 · Programa de entrenamiento CNG 2026-08-06.</p>
+
+</body>
+</html>

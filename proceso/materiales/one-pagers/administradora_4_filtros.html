@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>ONE-PAGER — Los 4 filtros de pago (Administradora)</title>
+<style>
+@page { size: letter; margin: 12mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.45; margin: 0; }
+h1 { font-size: 21px; margin: 0 0 2px; color: #0f172a; }
+.sub { font-size: 11px; color: #475569; margin-bottom: 10px; }
+h2 { font-size: 13px; margin: 12px 0 6px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 3px; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 8px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 10px 14px; margin: 8px 0; font-size: 11px; }
+.clave b { color: #fbbf24; }
+.filtro { border: 2px solid #0f172a; border-radius: 10px; padding: 8px 12px; margin: 6px 0; }
+.filtro .num { font-size: 16px; font-weight: 800; color: #1d4ed8; margin-right: 8px; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 5px 10px; margin: 5px 0; font-size: 9.3px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 5px 10px; margin: 5px 0; font-size: 9.3px; }
+.mat b { color: #15803d; }
+ul { margin: 3px 0 6px; padding-left: 17px; }
+li { margin: 1px 0; }
+.dos-col { display: flex; gap: 12px; } .dos-col > div { flex: 1; }
+.footer-note { color: #94a3b8; font-size: 8.3px; margin-top: 12px; border-top: 1px solid #e2e8f0; padding-top: 5px; }
+</style>
+</head>
+<body>
+
+<h1>LOS 4 FILTROS DE PAGO — ADMINISTRADORA</h1>
+<div class="sub">CNG · Milagros · imprimir y tener al lado · v1 — 2026-08-06</div>
+
+<div class="clave"><b>NADA SE PAGA SIN PASAR POR MÍ.</b> Toda solicitud de pago (COO · PMs · Compras) corre los 4 filtros, <b>en este orden, sin excepción</b>. Jose (P3): <i>"El primer filtro es si está uno en el plan. Si es la misma cantidad. Si nos deja en una buena posición financiera — de acuerdo al plan. Y si tiene la documentación adecuada… el work order y sus inspecciones."</i></div>
+
+<div class="filtro"><span class="num">1</span><b>¿ESTÁ EN EL PLAN DE LA SEMANA?</b> — El plan aprobado el viernes por el CEO es LA LEY. No está en el plan → no sale (o se mueve con razón; Jose/Jonas deciden).</div>
+<div class="filtro"><span class="num">2</span><b>¿ES LA MISMA CANTIDAD?</b> — Aprobado = solicitado, contra la WO ACTUALIZADA. Difiere → se para. Difiere &gt;$1,000 → flag al CEO <b>Y</b> al COO con el POR QUÉ. <i>(Detector de renegociaciones no notificadas.)</i></div>
+<div class="filtro"><span class="num">3</span><b>¿NOS DEJA EN BUENA POSICIÓN FINANCIERA SEGÚN EL PLAN?</b> — No rompe el running_balance. Si aprieta → 🧭 Ruta de Pagos (pagar → cobrar → avanzar; splits / secuencia). Pre-negativo → flag ANTES, con propuesta.</div>
+<div class="filtro"><span class="num">4</span><b>¿TIENE LA DOCUMENTACIÓN ADECUADA?</b> — <b>Work Order FIRMADA + inspecciones</b> (expediente: factura · WO · lien waiver · comprobante, en JT/CompanyCam — no en un chat). Sin expediente → NO se aprueba.</div>
+
+<table>
+<tr><th>Resultado</th><th>Qué hago</th></tr>
+<tr><td><b>Pasa los 4</b></td><td>Confirmo con el solicitante → pago → <b>subo el comprobante</b> (autorizar NO es pagar) → <b>aviso al grupo de PMs</b> (proyecto · trade · sub · monto · concepto) → el Backoffice actualiza schedule + sube factura</td></tr>
+<tr><td><b>No pasa</b></td><td><b>Devuelvo</b> (expediente incompleto) o <b>muevo con razón registrada</b>. NUNCA "regularizar" ni pagar por urgencia</td></tr>
+</table>
+
+<div class="dos-col">
+<div>
+<h2>REGLAS DE ORO ALREDEDOR DEL FILTRO</h2>
+<ul>
+<li><b>A los subs NUNCA se les paga al inicio</b> ("se van y te dejan varado"). Pago al culminar, ~1 semana después por contrato, ideal VIERNES.</li>
+<li><b>Única excepción = DOWNPAYMENT</b>, solo con CIERTOS subs/trades: <b>FRAMING o MEP ROUGH-INS</b> (con gate). Otro "adelanto" = regla violada.</li>
+<li><b>Fecha original = gatillo contractual. NO se reescribe.</b> El pago se MUEVE ("patear") y se registra la fecha REAL de pago.</li>
+<li><b>Nada queda overdue:</b> pagos Y cobros ruedan día a día hasta resolverse — patear ≠ olvidar.</li>
+<li><b>Toda renegociación me llega a MÍ</b> → WO actualizada → no pagar de más.</li>
+</ul>
+</div>
+<div>
+<h2>EL DOBLE CANDADO (yo soy la 3ª verificación)</h2>
+<ul>
+<li><b>1º PM en obra:</b> inspección After + lien waiver.</li>
+<li><b>2º Backoffice en oficina:</b> expediente completo armado.</li>
+<li><b>3º YO:</b> los 4 filtros. Falta un candado → el pago NO pasa; lo devuelvo.</li>
+</ul>
+<div class="gap"><b>El error que este filtro atrapa (real):</b> WO creada DESPUÉS del trabajo (Martha 24-jul: "crear urgente work order para Cesar") y pagos por urgencia de cashflow sin expediente (canon §11.2). Cada pago sin filtro #4 es un fuego futuro.</div>
+<div class="mat"><b>Confirmados:</b> la fuente de la verdad de pagos CONFIRMADOS es el <b>FINANCE TAB</b> (☑ timeline confirmed:true) — NO los checks del schedule (Jose 2026-08-03). Reportes de confirmados cuadran AL CENTAVO con CONFIRMED OUTFLOW.</div>
+</div>
+</div>
+
+<div class="footer-note">Fuentes: canon v4 §8 (4 filtros P3, gatillo contractual, downpayment 2026-08-06) + §11.2 · manual v2.0 Administradora §1.3–1.4, §7 · REPORTERIA_MASTER (fuente de la verdad 2026-08-03) · Track D sesión D3. El formato del aviso al grupo = [PROPUESTA] pendiente de Jose. TRACK D · ADMINISTRADORA · CNG.</div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Guía de lectura — Task List (PM) · Tu Día Mañana</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+ul, ol { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.sub { color: #475569; font-size: 11px; margin: 0 0 10px; }
+</style>
+</head>
+<body>
+
+<h1>Cómo leer tu <b>Task List</b> — "Tu Día Mañana"</h1>
+<p class="sub">Guía de lectura de reportes · Programa de entrenamiento CNG · v2026-08-06 · (Jeff la recibe 100% en inglés)</p>
+
+<h2>1 · Qué es y para quién</h2>
+<div class="clave">
+Es tu <b>lista de lo que toca MAÑANA</b>, engranada al proceso: llega cada noche a las <b>8:00 PM, lunes a viernes</b> (cron activo
+desde el 6-ago), una por PM, con tus proyectos. Cada frase habla SOLO de <b>tareas REALES que existen en tu schedule</b> — nada
+inventado. En el encabezado va la <b>regla de oro</b>: un trabajo solo arranca si lo previo está listo.
+</div>
+<p><b>Propósito:</b> que planifiques mañana ANTES de mañana: qué toca según el schedule, qué te pidieron y sigue abierto, y qué estás esperando de otros — más el radar de inspecciones para nunca llegar a una cita de ciudad sin revisar.</p>
+
+<h2>2 · Anatomía — qué significa cada cosa</h2>
+<table>
+<tr><th>Sección / etiqueta</th><th>Qué significa</th></tr>
+<tr><td><b>PENDIENTES TUYOS EN GENERAL</b></td><td>Arriba de todo: lo que te pidieron que no es de una obra específica, con "pendiente desde hace X días".</td></tr>
+<tr><td><b>§1 · TU DÍA MAÑANA</b> (por obra)</td><td>Lo que toca según tu schedule, cada tarea con su etiqueta y una línea de qué hacer en lenguaje llano.</td></tr>
+<tr><td><span class="chip">OBRA · EN CURSO</span></td><td>Trade ejecutándose: tu trabajo es documentar — fotos del avance en CompanyCam CON descripción; no dejes que tapen nada sin revisarlo y fotografiarlo antes.</td></tr>
+<tr><td><span class="chip">TAREA TUYA</span></td><td>Algo que haces TÚ (PM inspection, CC report, WO, SOW…): "hazla en la obra con fotos, no desde el teléfono".</td></tr>
+<tr><td><span class="chip">PROCESO PASIVO</span></td><td>Curado, secado…: corre solo, no pide sub — solo cuida las condiciones (ej. que nadie pise el concreto). Pasivas con discernimiento: no te piden acción de cuadrilla.</td></tr>
+<tr><td><span class="chip">INSPECCIÓN CIUDAD</span></td><td>Inspección de la ciudad: TODO lo que revisa la ciudad, revisado por ti y con foto ANTES de llamar — si algo falla se pierde la cita y días de obra.</td></tr>
+<tr><td><span class="chip">MATERIAL EN CAMINO</span></td><td>ETA informativo: confirma con Romina que la entrega llega; <b>no cites al sub sin el material en sitio</b>.</td></tr>
+<tr><td><b>🏛 INSPECCIONES EN EL RADAR (5/3/1)</b></td><td>El bot te avisa cuando faltan <b>5, 3 y 1 días</b> para cada inspección (chip "FALTAN X DÍAS") y te ofrece repasar los códigos de construcción juntos antes de llamar. Si ya la revisaron juntos, se calla.</td></tr>
+<tr><td><b>§2 · LO QUE TE PIDIERON Y SIGUE ABIERTO</b></td><td>Encargos de las reuniones y de Jose: 🔴 = urgente; cada uno con "pendiente desde hace X días". No desaparecen solos — envejecen a la vista.</td></tr>
+<tr><td><b>§3 · LO QUE ESTÁS ESPERANDO DE OTROS</b></td><td>Tus esperas (Romina, subs, gerencia) para que las reclames y no te frenen.</td></tr>
+</table>
+
+<h2>3 · De dónde salen los números</h2>
+<ul>
+<li>El §1 sale del <b>schedule de JobTread</b> (se refresca cada 20 min): solo tareas que EXISTEN en el schedule del trade.</li>
+<li>Los §2/§3 salen del <b>registro de las reuniones</b> y de las directivas de Jose (por eso importa que todo se diga en la reunión de las 2:30).</li>
+<li>Los recordatorios de inspección siguen la cadencia <b>5/3/1</b> y se apagan si ya la revisaste con el bot.</li>
+<li><b>Los pagos no van aquí</b> — ese carril es de Milagros/Jonas.</li>
+</ul>
+
+<h2>4 · Qué hago cuando lo recibo</h2>
+<div class="mat"><b>1.</b> Esa misma noche, arma tu mañana con el <b>§1</b>: ruta, a qué obra vas primero, qué fotos y checklists tocan.</div>
+<div class="mat"><b>2.</b> Si mañana hay <b>INSPECCIÓN CIUDAD</b> o el radar marca "FALTA 1 DÍA": respóndele al bot HOY y repasen los códigos — todavía alcanzas; si algo falla en la cita se pierden días de obra.</div>
+<div class="mat"><b>3.</b> Del <b>§2</b>, cierra primero los 🔴 y los más viejos ("pendiente desde hace 20 días" es una deuda visible para todos).</div>
+<div class="mat"><b>4.</b> Del <b>§3</b>, reclama lo que esperas de otros a primera hora — que tu día no muera esperando.</div>
+<div class="mat"><b>5.</b> Si algo del §1 NO cuadra con la realidad de la obra, dilo en la reunión de las 2:30 para re-fechar: el schedule es el espejo de la realidad.</div>
+
+<h2>5 · Errores de lectura comunes</h2>
+<div class="gap"><b>"PROCESO PASIVO = tengo que llamar al sub."</b> No: corre solo (cura, seca). Tu única acción es cuidar las condiciones.</div>
+<div class="gap"><b>"El ETA es una fecha firme."</b> Es informativo (fecha estimada): confirma con Romina — y nunca cites al sub sin material en sitio.</div>
+<div class="gap"><b>"Los pendientes viejos ya prescribieron."</b> No: se arrastran cada noche con su contador de días, y son los mismos que ve gerencia en tu Your Next Week.</div>
+<div class="gap"><b>"La inspección la reviso el mismo día."</b> Tarde: por eso el radar arranca 5 días antes. La cita perdida cuesta días de obra (caso real: red tags por secuencia mal pedida y planos ausentes).</div>
+<div class="gap"><b>"¿Y mis pagos?"</b> No van aquí: pagos a subs e ingresos corren por el carril de Milagros/Jonas.</div>
+
+<p class="footer-note">Guía de lectura · Task List PM (v4 FINAL — Jose: "perfecto"; pasivas con discernimiento + inspecciones 5/3/1 con memoria) · fuentes: canon §9.4 · REPORTERIA_MASTER §A · sample TASK_LIST_ANGEL_V4.pdf (para viernes 7-ago) · _BRIEF_CONSTRUCTORES v1 · Programa de entrenamiento CNG 2026-08-06. Versión EN disponible (GUIA_07_..._EN.html).</p>
+
+</body>
+</html>

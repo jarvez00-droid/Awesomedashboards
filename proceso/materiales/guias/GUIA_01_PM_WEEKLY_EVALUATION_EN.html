@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reading Guide — PM Weekly Evaluation (EN)</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+h3 { font-size: 12px; margin: 14px 0 6px; color: #1d4ed8; }
+h4 { font-size: 10.5px; margin: 10px 0 4px; color: #0f172a; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+ul, ol { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.sub { color: #475569; font-size: 11px; margin: 0 0 10px; }
+.sw { display:inline-block; width:26px; height:9px; border-radius:3px; vertical-align:middle; margin-right:4px; }
+</style>
+</head>
+<body>
+
+<h1>How to read your <b>PM Weekly Evaluation</b></h1>
+<p class="sub">Report reading guide · CNG training program · v2026-08-06 · English edition</p>
+
+<h2>1 · What it is and who it is for</h2>
+<div class="clave">
+This is your <b>evaluation of the week that just closed</b>. It arrives every <b>Saturday 8:00 AM</b> (automatic) — one PDF for you, one copy for Jose.
+The week closes <b>Friday at 11:00 PM</b>: everything you see is a frozen snapshot of that moment.
+<b>You are evaluated Friday vs Friday:</b> what counts is what you CLOSED between last Friday's close and this one.
+</div>
+<p><b>Purpose of this report:</b> to show you, project by project, your real schedule against the plan that was locked last Friday, your documentation, and your weekly numbers using the <b>honest algorithm (v20)</b>. Only WORK appears (Action ▸ + Critical Path ★ + city inspections ◆) — <b>payments never show in the gantts</b>.</p>
+
+<h2>2 · Anatomy — what every element means</h2>
+<table>
+<tr><th>Section / element</th><th>What it means</th></tr>
+<tr><td><b>Cover</b> (dark page)</td><td>Your name, the evaluated week (Sat → Fri) and the orange chip: "week closed Fri 11:00 PM · state frozen at close". Below: your projects, each with its color and its accumulated progress %.</td></tr>
+<tr><td><b>Project banner</b> (color)</td><td>Each project opens with its color band: "PROJECT PROGRESS (work, accumulated)" = X/Y work tasks and % — the universe is Action + Critical Path of the WHOLE project, no payments. Chips: work closed · PM tasks · Purchases · overdue at close.</td></tr>
+<tr><td><span class="sw" style="background:#94a3b8"></span><b>GRAY bar</b></td><td>The PLAN: the snapshot of the schedule taken the PREVIOUS Friday at 11 PM (the baseline). It is the "ideal" the week is compared against.</td></tr>
+<tr><td><span class="sw" style="background:#16a34a"></span><b>GREEN bar</b></td><td>Task <b>FINISHED WITHIN the week</b> — what really happened, closed on time. Carries the note "done (plan: X)".</td></tr>
+<tr><td><span class="sw" style="background:#f59e0b"></span><b>ORANGE + ››› arrows</b></td><td>The task <b>rolls into next week</b> (started but extended, or finished late). It is not an accusation — it is the schedule reflecting reality — but it DOES subtract from full compliance.</td></tr>
+<tr><td><span class="sw" style="background:#2563eb"></span><b>BLUE bar</b></td><td>Task <b>added after the baseline</b> ("added — no baseline"): it entered the week already in motion; it was not in Friday's snapshot.</td></tr>
+<tr><td><b>DOCUMENTATION ✓/✗</b></td><td>Under each trade: SOW · WO · TAKEOFF · CHECKLIST BEFORE/AFTER with ✓ or ✗, according to what is registered in JobTread. Only the items that trade actually has in its schedule are listed.</td></tr>
+<tr><td><b>Symbols</b> ★ ▸ ◆</td><td>★ = Critical Path · ▸ = Action task · ◆ = City Inspection (inspections get their own orange section: gray diamond = plan, colored diamond = real).</td></tr>
+<tr><td><b>Final page — METRICS</b></td><td>Table per project: WORK OF THE WEEK (x/y · % on time) · PM TASKS · PURCHASES · OVERDUE · DOCUMENTATION % · ACCUMULATED PROGRESS · AI ADOPTION (days you interacted with the assistant + message count).</td></tr>
+</table>
+
+<h4>The honest algorithm (v20) — how your % is computed</h4>
+<ul>
+<li><b>ON TIME</b> = finished WITHIN the week. <b>The main % counts ONLY these.</b></li>
+<li><b>PAST DUE ›››</b> = started but extended into next week. It subtracts: <b>you never see 100% if anything was extended</b>.</li>
+<li><b>NOT FINISHED</b> = had a date inside the week and was still open at close.</li>
+<li><b>OVERDUE</b> = tasks whose date already passed, still open at Friday's close. This is NEUTRAL data: work to close or schedule to reprogram — not a verdict.</li>
+</ul>
+
+<h2>3 · Where the numbers come from</h2>
+<ul>
+<li>Everything comes from <b>JobTread frozen at Friday 11 PM</b> (the close), compared against the <b>previous Friday's 11 PM baseline</b> (the plan).</li>
+<li>Documentation ✓/✗ comes from what is <b>registered in JobTread</b> for each trade's schedule.</li>
+<li>AI adoption comes from your messages with the assistant (DM + group) on working days.</li>
+<li><b>The official report's numbers rule</b> — nobody recalculates them on the side.</li>
+</ul>
+
+<h2>4 · What to do when you receive it</h2>
+<div class="mat"><b>1.</b> Look first at the <b>orange ›››</b> and the <b>not-finished</b> tasks: that is what you carry into the new week. Bring it squared to the 2:30 meeting (closing = check + real dates squared).</div>
+<div class="mat"><b>2.</b> Go through the <b>OVERDUE</b> list: it is your cleanup list — each item either gets closed or gets reprogrammed in JobTread. Do not let it pile up.</div>
+<div class="mat"><b>3.</b> Every <b>✗ in documentation</b> is a concrete to-do: upload the SOW/WO/takeoff or complete the checklist in CompanyCam. Remember: the After checklist unlocks the sub's payment.</div>
+<div class="mat"><b>4.</b> Compare against last week's <b>Your Next Week</b>: that plan is exactly what you were evaluated against. This week's one will be your next evaluation.</div>
+<div class="mat"><b>5.</b> If a number looks wrong, ask the bot BEFORE Monday — do not recalculate on your own.</div>
+
+<h2>5 · Common reading mistakes</h2>
+<div class="gap"><b>"My % is the project's progress."</b> No: the weekly % only counts what you finished ON TIME. Project progress is the other column (ACCUMULATED PROGRESS).</div>
+<div class="gap"><b>"Orange means I'm being blamed."</b> No: reschedules are presented neutrally — they are the schedule reflecting reality. But they do subtract from the week's full compliance.</div>
+<div class="gap"><b>"Overdue is a punishment."</b> It is neutral: part of what is open is pending plan cleanup, not work left undone. But it must be cleaned up.</div>
+<div class="gap"><b>"Where are the payments?"</b> Not here: money lives in the paid/collected summary of the Project Department Weekly Evaluation and in its COLLECTIONS page.</div>
+<div class="gap"><b>"I was graded for not moving the schedule on Tuesday."</b> Never: evaluation is Friday vs Friday, never day-by-day punctuality.</div>
+
+<p class="footer-note">Reading guide · PM Weekly Evaluation (v20 FINAL, approved by Jose 2026-08-06) · sources: canon §9.4/§9.5 · REPORTERIA_MASTER §A · sample PM_WEEKLY_EVALUATION_ANGEL.pdf (week Jul 25–31) · _BRIEF_CONSTRUCTORES v1 · CNG training program 2026-08-06. Spanish version: GUIA_01_PM_WEEKLY_EVALUATION.html.</p>
+
+</body>
+</html>
