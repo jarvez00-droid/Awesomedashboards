@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T16:31:47",
+  "generated_at": "2026-08-07T16:55:06",
   "today": "2026-08-07",
   "horizon": "2027-06-07",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -3797,7 +3797,7 @@
   ],
   "data_quality": {
     "orphan_trades": 45,
-    "orphan_cost": 294386.0,
+    "orphan_cost": 294106.0,
     "priced_trades": 173,
     "total_trades": 218,
     "by_project": [
@@ -3969,11 +3969,11 @@
       {
         "project": "Kyle Aubry",
         "orphan_trades": 2,
-        "orphan_cost": 2191.0,
+        "orphan_cost": 1911.0,
         "examples": [
           {
             "trade": "PRE DELIVERY WALK THROUGH",
-            "cost": 630.0
+            "cost": 350.0
           },
           {
             "trade": "Additionals",
@@ -6248,24 +6248,24 @@
           "n_exp": 0
         },
         {
-          "trade": "PRE DELIVERY WALK THROUGH",
-          "income": 0.0,
-          "expense": 630.0,
-          "grouped": true,
-          "n_inc": 0,
-          "n_exp": 1
-        },
-        {
           "trade": "INTERIOR DOORS",
           "income": 0.0,
           "expense": 450.0,
           "grouped": true,
           "n_inc": 0,
           "n_exp": 1
+        },
+        {
+          "trade": "PRE DELIVERY WALK THROUGH",
+          "income": 0.0,
+          "expense": 350.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 2
         }
       ],
       "total_income": 99487.45,
-      "total_expense": 39473.36,
+      "total_expense": 39193.36,
       "loose_amount": 0
     },
     {
