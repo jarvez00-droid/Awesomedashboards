@@ -92,6 +92,87 @@
     <span data-i18n="en"><b>The rule in one line:</b> the schedule says <b>WHICH trade, WHEN and HOW MUCH</b> · the checklist says <b>HOW to verify it's done right</b>. If you're typing "cover the furniture" into JobTread, you're in the wrong tool.</span>
   </div>
 
+  <!-- ---- el diagrama de decisión ---- -->
+  <h3><span data-i18n="es">El diagrama: ¿dónde va este dato?</span><span data-i18n="en">The diagram: where does this piece of information go?</span></h3>
+  <p style="font-size:14px;color:var(--mut);margin:0 0 6px">
+    <span data-i18n="es">Cuando dudes, hazte UNA sola pregunta. La respuesta siempre cae de un lado.</span>
+    <span data-i18n="en">When in doubt, ask yourself ONE question. The answer always falls on one side.</span>
+  </p>
+  <div class="decision">
+    <div class="d-q">
+      <span data-i18n="es">Tengo algo que anotar. ¿Es un dato del <b>PLAN</b> (cuándo · cuánto · quién) o una <b>VERIFICACIÓN</b> de cómo se ejecuta el trabajo?</span>
+      <span data-i18n="en">I have something to record. Is it a <b>PLAN</b> fact (when · how much · who) or a <b>VERIFICATION</b> of how the work is executed?</span>
+    </div>
+    <div class="d-flecha">↓</div>
+    <div class="d-ramas">
+      <div class="d-rama izq">
+        <div class="d-head">🗓️ <span data-i18n="es">Dato del PLAN → va al SCHEDULE (JobTread)</span><span data-i18n="en">PLAN fact → goes to the SCHEDULE (JobTread)</span></div>
+        <div class="d-cond"><span data-i18n="es">Se puede poner en un calendario o en una casilla de dinero. Cambia la FECHA de algo o el DINERO de algo.</span><span data-i18n="en">It fits on a calendar or in a money field. It changes the DATE of something or the MONEY of something.</span></div>
+        <ul>
+          <li data-i18n="es">La fecha de inicio y de fin de un trade</li><li data-i18n="en">A trade's start and end date</li>
+          <li data-i18n="es">Cuántos días dura una tarea</li><li data-i18n="en">How many days a task lasts</li>
+          <li data-i18n="es">El monto de un pago o de una compra</li><li data-i18n="en">The amount of a payment or a purchase</li>
+          <li data-i18n="es">El tipo de tarea (Action, Payment - Subs, City Inspection…)</li><li data-i18n="en">The task type (Action, Payment - Subs, City Inspection…)</li>
+          <li data-i18n="es">El check de "esto ya se cerró" (con su fecha real)</li><li data-i18n="en">The "this is closed" check (with its real date)</li>
+        </ul>
+        <div class="d-pie"><span data-i18n="es">Lo lee: gerencia, el cashflow y los 11 reportes.</span><span data-i18n="en">Read by: management, the cashflow and the 11 reports.</span></div>
+      </div>
+      <div class="d-rama der">
+        <div class="d-head">📸 <span data-i18n="es">VERIFICACIÓN → va al CHECKLIST (CompanyCam)</span><span data-i18n="en">VERIFICATION → goes to the CHECKLIST (CompanyCam)</span></div>
+        <div class="d-cond"><span data-i18n="es">Empieza con un verbo que haces con los ojos o las manos: <b>mira · cuenta · mide · cubre · fotografía · confirma</b>. No tiene fecha propia: pasa cuando pasa el trabajo.</span><span data-i18n="en">It starts with a verb you do with your eyes or hands: <b>look · count · measure · cover · photograph · confirm</b>. It has no date of its own: it happens when the work happens.</span></div>
+        <ul>
+          <li data-i18n="es">"Cubre los muebles antes de abrir un tarro"</li><li data-i18n="en">"Cover the furniture before opening a can"</li>
+          <li data-i18n="es">"Verifica el color contra el portafolio aprobado"</li><li data-i18n="en">"Verify the color against the approved portfolio"</li>
+          <li data-i18n="es">"Foto de cada ambiente CON descripción"</li><li data-i18n="en">"Photo of each room WITH a description"</li>
+          <li data-i18n="es">"El trade anterior dejó su <i class="glo" data-g="signoff">sign-off</i> y el sitio limpio"</li><li data-i18n="en">"The previous trade left its <i class="glo" data-g="signoff">sign-off</i> and a clean site"</li>
+        </ul>
+        <div class="d-pie"><span data-i18n="es">Lo lee: el PM en obra y el Backoffice antes de autorizar el pago.</span><span data-i18n="en">Read by: the PM on site and the Backoffice before authorizing payment.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="regla">
+    <span data-i18n="es"><b>¿Y por qué no meterlo todo en el schedule y listo?</b> Porque el schedule lo leen máquinas y gerencia para calcular dinero y avance: 411 tareas ya son muchas — si además metieras las verificaciones de los 34 trades, serían miles de líneas, nadie las cerraría y el cronograma dejaría de ser legible. Y al revés: una verificación con fecha fija no sirve, porque se hace <b>cuando el trabajo llega a ese punto</b>, no el martes a las 10.</span>
+    <span data-i18n="en"><b>So why not dump everything into the schedule?</b> Because the schedule is read by machines and management to compute money and progress: 411 tasks is already a lot — add the verifications of all 34 trades and it becomes thousands of lines nobody closes, and the schedule stops being readable. And the other way around: a verification with a fixed date is useless, because it happens <b>when the work reaches that point</b>, not on Tuesday at 10.</span>
+  </div>
+
+  <!-- ---- clasificador interactivo ---- -->
+  <div class="clasifica" id="clasifica">
+    <h4 style="margin-top:0"><span data-i18n="es">Practícalo: ¿schedule o checklist?</span><span data-i18n="en">Practice it: schedule or checklist?</span></h4>
+    <p style="font-size:13.5px;color:var(--mut);margin:0 0 8px"><span data-i18n="es">Elige dónde va cada uno. Te dice al instante si acertaste y por qué.</span><span data-i18n="en">Pick where each one goes. It tells you instantly whether you got it and why.</span></p>
+
+    <div class="c-item" data-ok="sch">
+      <span class="c-txt"><span data-i18n="es">"PLUMBING TRIM empieza el 12 de marzo y dura 3 días"</span><span data-i18n="en">"PLUMBING TRIM starts March 12 and lasts 3 days"</span></span>
+      <span class="c-btns"><button type="button" data-r="sch">SCHEDULE</button><button type="button" data-r="chk">CHECKLIST</button></span>
+      <span class="c-fb"><span data-i18n="es"><b>Schedule.</b> Son fechas y duración: dato del plan.</span><span data-i18n="en"><b>Schedule.</b> Dates and duration: a plan fact.</span></span>
+    </div>
+    <div class="c-item" data-ok="chk">
+      <span class="c-txt"><span data-i18n="es">"Antes de cerrar la pared, fotografía todas las líneas de agua"</span><span data-i18n="en">"Before closing the wall, photograph every water line"</span></span>
+      <span class="c-btns"><button type="button" data-r="sch">SCHEDULE</button><button type="button" data-r="chk">CHECKLIST</button></span>
+      <span class="c-fb"><span data-i18n="es"><b>Checklist (Before).</b> Es una verificación con evidencia — y un <i class="glo" data-g="holdpoint">hold point</i>: después de tapar ya no hay forma de probarlo (caso 5: la fuga de gas de Ginger).</span><span data-i18n="en"><b>Checklist (Before).</b> A verification with evidence — and a <i class="glo" data-g="holdpoint">hold point</i>: once it's covered there's no way to prove it (case 5: Ginger's gas leak).</span></span>
+    </div>
+    <div class="c-item" data-ok="sch">
+      <span class="c-txt"><span data-i18n="es">"Se le pagaron $4,500 al sub de pintura"</span><span data-i18n="en">"$4,500 was paid to the paint sub"</span></span>
+      <span class="c-btns"><button type="button" data-r="sch">SCHEDULE</button><button type="button" data-r="chk">CHECKLIST</button></span>
+      <span class="c-fb"><span data-i18n="es"><b>Schedule</b> (tarea Payment - Subs con el monto en la descripción) <b>+ los libros</b> (el Bill). Recuerda: todo movimiento de dinero son DOS registros — sección 4.</span><span data-i18n="en"><b>Schedule</b> (a Payment - Subs task with the amount in the description) <b>+ the books</b> (the Bill). Remember: every money movement is TWO records — section 4.</span></span>
+    </div>
+    <div class="c-item" data-ok="chk">
+      <span class="c-txt"><span data-i18n="es">"Revisa que no queden bordes sin rematar ni salpicaduras en las tomas"</span><span data-i18n="en">"Check there are no unfinished edges or paint splatter on the outlets"</span></span>
+      <span class="c-btns"><button type="button" data-r="sch">SCHEDULE</button><button type="button" data-r="chk">CHECKLIST</button></span>
+      <span class="c-fb"><span data-i18n="es"><b>Checklist (After).</b> Es la verificación de calidad que hace el PM — y es la que desbloquea el pago del sub.</span><span data-i18n="en"><b>Checklist (After).</b> The PM's quality verification — and the one that unlocks the sub's payment.</span></span>
+    </div>
+    <div class="c-item" data-ok="sch">
+      <span class="c-txt"><span data-i18n="es">"La inspección eléctrica de la ciudad es el jueves 20"</span><span data-i18n="en">"The city electrical inspection is Thursday the 20th"</span></span>
+      <span class="c-btns"><button type="button" data-r="sch">SCHEDULE</button><button type="button" data-r="chk">CHECKLIST</button></span>
+      <span class="c-fb"><span data-i18n="es"><b>Schedule</b>, con tipo <b>City Inspection</b> (los "ítems rojitos"). Es un día real del calendario que bloquea al trade siguiente.</span><span data-i18n="en"><b>Schedule</b>, with type <b>City Inspection</b> (the "little red items"). It's a real calendar day that blocks the next trade.</span></span>
+    </div>
+    <div class="c-item" data-ok="chk">
+      <span class="c-txt"><span data-i18n="es">"Confirma que el piso ya está instalado antes de colgar las puertas"</span><span data-i18n="en">"Confirm the floor is installed before hanging the doors"</span></span>
+      <span class="c-btns"><button type="button" data-r="sch">SCHEDULE</button><button type="button" data-r="chk">CHECKLIST</button></span>
+      <span class="c-fb"><span data-i18n="es"><b>Checklist (Before).</b> Ojo con la trampa: la <b>dependencia</b> entre FLOORING e INTERIOR DOORS sí vive en el schedule (una tarea después de la otra), pero <b>comprobar con tus ojos</b> que se cumplió es del checklist.</span><span data-i18n="en"><b>Checklist (Before).</b> Careful with the trap: the <b>dependency</b> between FLOORING and INTERIOR DOORS does live in the schedule (one task after the other), but <b>checking with your own eyes</b> that it holds belongs to the checklist.</span></span>
+    </div>
+    <div class="c-marcador" id="c-marcador"></div>
+  </div>
+
   <!-- ============ LOS 9 TIPOS ============ -->
   <h2><span class="seccion-num">2 · </span><span data-i18n="es">Los 9 tipos de tarea (con ejemplo real)</span><span data-i18n="en">The 9 task types (with real examples)</span></h2>
   <p class="proposito">
@@ -250,5 +331,42 @@
 </main>
 
 <script src="/proceso/assets/app.js"></script>
+<script>
+/* clasificador schedule-vs-checklist: autocontenido, sin dependencias */
+(function () {
+  'use strict';
+  var box = document.getElementById('clasifica');
+  if (!box) return;
+  var marcador = document.getElementById('c-marcador');
+  var items = box.querySelectorAll('.c-item');
+
+  function pintarMarcador() {
+    var hechos = 0, buenos = 0;
+    items.forEach(function (it) {
+      if (it.classList.contains('resuelto')) { hechos++; if (it.classList.contains('ok')) buenos++; }
+    });
+    if (!hechos) { marcador.textContent = ''; return; }
+    var t = window.cngT || function (es) { return es; };
+    marcador.textContent = t(
+      buenos + ' de ' + hechos + ' correctas' + (hechos === items.length && buenos === items.length ? ' — perfecto: ya sabes en qué herramienta estás.' : ''),
+      buenos + ' of ' + hechos + ' correct' + (hechos === items.length && buenos === items.length ? ' — perfect: you know which tool you are in.' : '')
+    );
+  }
+
+  items.forEach(function (it) {
+    it.querySelectorAll('.c-btns button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (it.classList.contains('resuelto')) return;
+        var acierto = b.getAttribute('data-r') === it.getAttribute('data-ok');
+        it.classList.add('resuelto', acierto ? 'ok' : 'mal');
+        b.classList.add('elegida');
+        pintarMarcador();
+      });
+    });
+  });
+
+  document.addEventListener('cng:lang', pintarMarcador);
+})();
+</script>
 </body>
 </html>

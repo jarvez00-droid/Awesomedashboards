@@ -52,6 +52,24 @@
     <span data-i18n="en"><b>This page exists so</b> you start a trade without skipping steps. Each step says what you do, what it delivers and what it unlocks. Tap each step to open the detail. One step fails = the EXECUTE fails.</span>
   </p>
 
+  <!-- ---- paso 0: de dónde sale este bucle ---- -->
+  <div class="card" style="border-left:5px solid var(--oro)">
+    <h3 style="margin-top:0"><span data-i18n="es">Paso 0 — ¿de dónde sale este bucle? (nadie te lo dice y todos lo asumen)</span><span data-i18n="en">Step 0 — where does this loop come from? (nobody says it and everybody assumes it)</span></h3>
+    <p style="font-size:14.5px;margin:0 0 8px">
+      <span data-i18n="es">Antes de que exista "tu día", pasó esto, en este orden:</span>
+      <span data-i18n="en">Before "your day" exists, this happened, in this order:</span>
+    </p>
+    <ol style="font-size:14px;margin:0 0 8px;padding-left:22px">
+      <li><span data-i18n="es">El cliente firmó → el estimado se volvió <i class="glo" data-g="budget">budget</i>, y Planning entregó el <i class="glo" data-g="portafolio">Portafolio</i> (<a href="proceso-empresa.html">página 2</a>).</span><span data-i18n="en">The client signed → the estimate became the <i class="glo" data-g="budget">budget</i>, and Planning delivered the <i class="glo" data-g="portafolio">Portfolio</i> (<a href="proceso-empresa.html">page 2</a>).</span></li>
+      <li><span data-i18n="es">El Backoffice copió el <i class="glo" data-g="template">template maestro</i> (34 trades · 411 tareas) al proyecto y <b>borró los trades que este cliente no compró</b>. Eso te deja un schedule con la cadena de cada trade ya escrita.</span><span data-i18n="en">The Backoffice copied the <i class="glo" data-g="template">master template</i> (34 trades · 411 tasks) into the project and <b>deleted the trades this client did not buy</b>. That leaves you a schedule with each trade's chain already written.</span></li>
+      <li><span data-i18n="es">Cada noche a las 8 PM, el sistema te manda tu <b>Task List</b> con lo de MAÑANA sacado de ese schedule (<a href="reloj-reportes.html">página 6</a>).</span><span data-i18n="en">Every night at 8 PM the system sends you your <b>Task List</b> with TOMORROW's work pulled from that schedule (<a href="reloj-reportes.html">page 6</a>).</span></li>
+    </ol>
+    <p style="font-size:14.5px;margin:0">
+      <span data-i18n="es">Por eso <b>tú no inventas las tareas de esta página: ya están en tu schedule</b>, con esos nombres exactos (<code>TRADE: ACCIÓN</code>). Lo que hace esta página es explicarte <b>qué significa cada una y por qué está en ese orden</b>. Un trade "arranca" ~2 semanas antes de que la cuadrilla pise la obra: cuando abres su primera tarea.</span>
+      <span data-i18n="en">That's why <b>you don't invent this page's tasks: they're already in your schedule</b>, with those exact names (<code>TRADE: ACTION</code>). What this page does is explain <b>what each one means and why it sits in that order</b>. A trade "starts" ~2 weeks before the crew sets foot on site: when you open its first task.</span>
+    </p>
+  </div>
+
   <div class="gate-banner">
     <div class="g-title"><span data-i18n="es">LA REGLA DE ORO (EL FLOW)</span><span data-i18n="en">THE GOLDEN RULE (EL FLOW)</span></div>
     <span data-i18n="es">Un Action/EXECUTE <b>solo puede tener fecha si su cadena previa está 100% CERRADA</b>: SOW + WO firmada + schedule confirmado con el sub + material comprado con ETA + inspección Before. Si no, el EXECUTE <b>se mueve</b> — no se deja "por si acaso".</span>
@@ -94,16 +112,16 @@
         <details class="exp">
           <summary><span style="color:var(--rol-pm)">3</span> · SOURCE VENDORS (<span data-i18n="es">cotizar con ≥3</span><span data-i18n="en">quote with ≥3</span>)</summary>
           <div class="exp-body">
-            <span data-i18n="es">Enviar el SOW a <b>≥3 subcontratistas</b> (biblioteca de contactos / Marketplace / Fiverr) pidiendo: precio, cuándo puede venir, y <b>agendar visita al sitio</b> para medir y confirmar. Se registra extendiendo la tarea día a día hasta tener las 3 cotizaciones (<i class="glo" data-g="bid">bid requests</i>). <b>¿Por qué 3?</b> Sin comparación no sabes si el precio es justo.</span>
-            <span data-i18n="en">Send the SOW to <b>≥3 subcontractors</b> (contact library / Marketplace / Fiverr) asking: price, when they can come, and <b>schedule a site visit</b> to measure and confirm. Recorded by extending the task day by day until all 3 quotes (<i class="glo" data-g="bid">bid requests</i>) are in. <b>Why 3?</b> Without comparison you don't know if the price is fair.</span>
+            <span data-i18n="es">Enviar el SOW a <b>≥3 subcontratistas</b> pidiendo: precio, cuándo puede venir, y <b>agendar visita al sitio</b> para medir y confirmar. <b>¿De dónde salen esos 3?</b> De la biblioteca de contactos de CNG (los subs con los que ya trabajamos) y, si falta alguno, de bolsas de proveedores en internet (Facebook Marketplace, Fiverr). Se registra extendiendo la tarea día a día hasta tener las 3 cotizaciones (<i class="glo" data-g="bid">bid requests</i>). <b>¿Por qué 3?</b> Sin comparación no sabes si el precio es justo.</span>
+            <span data-i18n="en">Send the SOW to <b>≥3 subcontractors</b> asking: price, when they can come, and <b>schedule a site visit</b> to measure and confirm. <b>Where do those 3 come from?</b> From CNG's contact library (subs we already work with) and, if one is missing, from online supplier pools (Facebook Marketplace, Fiverr). Recorded by extending the task day by day until all 3 quotes (<i class="glo" data-g="bid">bid requests</i>) are in. <b>Why 3?</b> Without comparison you don't know if the price is fair.</span>
           </div>
         </details>
 
         <details class="exp">
           <summary><span style="color:var(--rol-pm)">4</span> · SELECT VENDOR &amp; SEND WO</summary>
           <div class="exp-body">
-            <span data-i18n="es">Se elige la mejor opción y se crea la <i class="glo" data-g="wo">Work Order</i> = <b>el contrato</b>. La WO lleva el scope ADENTRO (o el PDF del SOW adjunto) + SIEMPRE el Payment Breakdown (los términos de pago). <b>Flujo de firma:</b> el sub debe estar registrado como proveedor (nombre, email, teléfono + documentación) → se le pone como receptor → el sistema envía SMS + email → <b>firma electrónica</b> → RECIÉN entonces se marca "Aprobado" en JT.<br><br><b>Regla dura: NINGÚN trabajo inicia sin WO FIRMADA</b> — <i>"no es como acuerdo de palabra."</i> La firma protege a CNG (caso 6: un sub reclamó cobrar al día siguiente; su WO firmada decía "1 semana después" — y por contrato esperó).</span>
-            <span data-i18n="en">The best option is chosen and the <i class="glo" data-g="wo">Work Order</i> = <b>the contract</b> gets created. The WO carries the scope INSIDE (or the SOW PDF attached) + ALWAYS the Payment Breakdown (payment terms). <b>Signature flow:</b> the sub must be registered as a vendor (name, email, phone + docs) → set as WO recipient → the system sends SMS + email → <b>e-signature</b> → ONLY then is it marked "Approved" in JT.<br><br><b>Hard rule: NO work starts without a SIGNED WO</b> — <i>"it's not a handshake deal."</i> The signature protects CNG (case 6: a sub demanded payment the next day; his signed WO said "1 week after" — and by contract he waited).</span>
+            <span data-i18n="es">Se elige la mejor opción y se crea la <i class="glo" data-g="wo">Work Order</i> = <b>el contrato</b>. La WO lleva el scope ADENTRO (o el PDF del SOW adjunto) + SIEMPRE el <i class="glo" data-g="paybreak">Payment Breakdown</i> (cuándo y contra qué se le paga). <b>Flujo de firma:</b> el sub debe estar registrado como proveedor (nombre, email, teléfono + documentación) → se le pone como receptor → el sistema envía SMS + email → <b>firma electrónica</b> → RECIÉN entonces se marca "Aprobado" en JT.<br><br><b>Regla dura: NINGÚN trabajo inicia sin WO FIRMADA</b> — <i>"no es como acuerdo de palabra."</i> La firma protege a CNG (caso 6: un sub reclamó cobrar al día siguiente; su WO firmada decía "1 semana después" — y por contrato esperó).</span>
+            <span data-i18n="en">The best option is chosen and the <i class="glo" data-g="wo">Work Order</i> = <b>the contract</b> gets created. The WO carries the scope INSIDE (or the SOW PDF attached) + ALWAYS the <i class="glo" data-g="paybreak">Payment Breakdown</i> (when and against what he gets paid). <b>Signature flow:</b> the sub must be registered as a vendor (name, email, phone + docs) → set as WO recipient → the system sends SMS + email → <b>e-signature</b> → ONLY then is it marked "Approved" in JT.<br><br><b>Hard rule: NO work starts without a SIGNED WO</b> — <i>"it's not a handshake deal."</i> The signature protects CNG (case 6: a sub demanded payment the next day; his signed WO said "1 week after" — and by contract he waited).</span>
           </div>
         </details>
 
@@ -118,8 +136,8 @@
         <details class="exp">
           <summary><span style="color:var(--rol-pm)">6</span> · CC CHECKLIST — PM INSPECTION (BEFORE)</summary>
           <div class="exp-body">
-            <span data-i18n="es">Re-revisar el "Before" EN OBRA: sitio preparado (muebles cubiertos, área limpia, el trade predecesor listo con su sign-off). <b>Si no se cumple, el trabajo no arranca.</b> Es la segunda pasada del Before (la primera fue el paso 1).</span>
-            <span data-i18n="en">Re-check the "Before" ON SITE: site prepared (furniture covered, area clean, predecessor trade finished with its sign-off). <b>If it's not met, the work doesn't start.</b> This is the Before's second pass (the first was step 1).</span>
+            <span data-i18n="es">Re-revisar el "Before" EN OBRA: sitio preparado (muebles cubiertos, área limpia, el trade predecesor listo con su <i class="glo" data-g="signoff">sign-off</i>). <b>Si no se cumple, el trabajo no arranca.</b> Es la segunda pasada del Before (la primera fue el paso 1).</span>
+            <span data-i18n="en">Re-check the "Before" ON SITE: site prepared (furniture covered, area clean, predecessor trade finished with its <i class="glo" data-g="signoff">sign-off</i>). <b>If it's not met, the work doesn't start.</b> This is the Before's second pass (the first was step 1).</span>
           </div>
         </details>
 

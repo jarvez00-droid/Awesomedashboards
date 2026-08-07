@@ -292,6 +292,12 @@ details.q .q-a b{color:var(--oro)}
 /* ---------- diagramas SVG genéricos ---------- */
 .diagrama-wrap{background:var(--card); border:1.5px solid var(--line); border-radius:var(--radius); padding:12px 8px; overflow-x:auto; box-shadow:var(--sombra)}
 .diagrama-wrap svg{display:block}
+/* movil: el diagrama NO se encoge hasta ser ilegible — se desliza dentro de su caja */
+.diagrama-wrap .desliza{display:none; font-size:11.5px; color:var(--mut2); font-weight:700; padding:6px 4px 0}
+@media (max-width:780px){
+  .diagrama-wrap svg{min-width:660px}
+  .diagrama-wrap .desliza{display:block}
+}
 .leyenda{display:flex; gap:16px; flex-wrap:wrap; font-size:13.5px; color:var(--mut); margin:12px 4px}
 .leyenda .it{display:flex; align-items:center; gap:7px}
 .leyenda .sw{width:24px; height:13px; border-radius:4px; display:inline-block; flex:0 0 auto}
@@ -407,6 +413,40 @@ ul.tareas-chain .dias-t{color:var(--mut2); font-size:11.5px; margin-left:auto; w
   padding:7px 2px; font-size:13.5px}
 .svsc .chk-item:last-child{border-bottom:0}
 .svsc .chk-item .cb{flex:0 0 auto; width:16px; height:16px; border:2px solid var(--verde); border-radius:4px; position:relative; top:2px}
+
+/* ---------- DIAGRAMA DE DECISIÓN (¿dónde va este dato?) ---------- */
+.decision{margin:16px 0}
+.decision .d-q{background:var(--ink); color:#fff; border-radius:14px; padding:14px 18px; text-align:center;
+  font-size:15.5px; font-weight:700; max-width:560px; margin:0 auto}
+.decision .d-q b{color:var(--oro)}
+.decision .d-flecha{text-align:center; color:var(--mut2); font-size:24px; line-height:1; margin:6px 0 2px}
+.decision .d-ramas{display:grid; grid-template-columns:1fr; gap:14px; margin-top:8px}
+@media (min-width:780px){.decision .d-ramas{grid-template-columns:1fr 1fr}}
+.decision .d-rama{border:2px solid var(--line2); border-radius:16px; overflow:hidden; background:var(--card); box-shadow:var(--sombra)}
+.decision .d-rama .d-head{padding:11px 15px; color:#fff; font-weight:800; font-size:14.5px}
+.decision .d-rama.izq{border-color:var(--azul-line)} .decision .d-rama.izq .d-head{background:var(--azul)}
+.decision .d-rama.der{border-color:#bbf7d0} .decision .d-rama.der .d-head{background:var(--rol-compras)}
+.decision .d-rama .d-cond{font-size:13.5px; padding:10px 15px; background:var(--soft); border-bottom:1px dashed var(--line); color:var(--body)}
+.decision .d-rama ul{margin:9px 0; padding-left:32px; font-size:13.5px}
+.decision .d-rama li{margin:3px 0}
+.decision .d-rama .d-pie{font-size:12.5px; color:var(--mut); padding:0 15px 12px}
+
+/* ---------- CLASIFICADOR interactivo (schedule vs checklist) ---------- */
+.clasifica{background:var(--card); border:1.5px solid var(--line); border-radius:var(--radius); padding:16px 18px; margin:14px 0; box-shadow:var(--sombra)}
+.clasifica .c-item{border:1.5px solid var(--line); border-radius:12px; padding:10px 13px; margin:9px 0;
+  display:flex; gap:10px; align-items:center; flex-wrap:wrap; background:var(--soft); transition:border-color .15s, background .15s}
+.clasifica .c-txt{flex:1 1 230px; font-size:14.5px; color:var(--ink)}
+.clasifica .c-btns{display:flex; gap:6px; flex:0 0 auto}
+.clasifica .c-btns button{border:1.5px solid var(--line2); background:var(--card); color:var(--mut);
+  font-size:12.5px; font-weight:800; padding:7px 13px; border-radius:20px; cursor:pointer; white-space:nowrap}
+.clasifica .c-btns button:hover{border-color:var(--azul-2); color:var(--ink)}
+.clasifica .c-item.resuelto .c-btns button{cursor:default; opacity:.55}
+.clasifica .c-item.resuelto .c-btns button.elegida{opacity:1; background:var(--ink); color:#fff; border-color:var(--ink)}
+.clasifica .c-fb{flex:1 1 100%; font-size:13.5px; margin-top:4px; display:none; border-top:1px dashed var(--line2); padding-top:8px}
+.clasifica .c-item.resuelto .c-fb{display:block}
+.clasifica .c-item.ok{border-color:var(--verde); background:var(--verde-bg)}
+.clasifica .c-item.mal{border-color:var(--rojo); background:var(--rojo-bg)}
+.clasifica .c-marcador{font-size:13px; font-weight:800; color:var(--mut); margin-top:10px}
 
 /* ---------- RELOJ / timeline ---------- */
 .reloj{list-style:none; margin:16px 0; padding:0; position:relative}

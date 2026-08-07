@@ -43,8 +43,8 @@
     <span class="paso-n">9 / 9 · <span data-i18n="es">CONSULTA PERMANENTE</span><span data-i18n="en">PERMANENT REFERENCE</span></span>
     <h1><span data-i18n="es">Glosario EN↔ES del proceso</span><span data-i18n="en">EN↔ES glossary of the process</span></h1>
     <p class="sub">
-      <span data-i18n="es">Todos los términos de esta web en un solo lugar: el vocabulario del campo (los PMs reportan en inglés; Jeff escribe 100% en inglés), el de la ciudad, el del registro y los roles/herramientas. Es la misma fuente de los tooltips de puntitos azules.</span>
-      <span data-i18n="en">Every term on this site in one place: field vocabulary (PMs report in English), city vocabulary, record vocabulary and roles/tools. Same source as the blue-dotted tooltips.</span>
+      <span data-i18n="es">Todos los términos de esta web en un solo lugar: el vocabulario del campo, el de la ciudad, el del registro y los roles/herramientas. Es la misma fuente de los tooltips de puntitos azules. <b>¿Por qué bilingüe?</b> Porque la obra ocurre en Dallas y se habla en inglés: los subs, los inspectores y los proveedores escriben en inglés, y <b>Jeff —uno de los tres PMs— trabaja 100% en inglés</b>. Media empresa (Compras, Backoffice, Planning, Administración) está en Perú y trabaja en español. Este glosario es el puente entre las dos mitades.</span>
+      <span data-i18n="en">Every term on this site in one place: field vocabulary, city vocabulary, record vocabulary and roles/tools. Same source as the blue-dotted tooltips. <b>Why bilingual?</b> Because the jobs happen in Dallas and run in English: subs, inspectors and suppliers write in English, and <b>Jeff — one of the three PMs — works 100% in English</b>. Half the company (Purchases, Backoffice, Planning, Admin) sits in Peru and works in Spanish. This glossary is the bridge between the two halves.</span>
     </p>
     <div class="aprende">
       <div class="ttl"><span data-i18n="es">EN ESTA PÁGINA PUEDES:</span><span data-i18n="en">ON THIS PAGE YOU CAN:</span></div>
@@ -61,7 +61,7 @@
   </div>
 
   <p style="margin:18px 0 4px">
-    <input id="glo-buscar" type="search" autocomplete="off" placeholder="Buscar… / Search… (ej. drywall, zócalo, WO, red tag)">
+    <input id="glo-buscar" type="search" autocomplete="off" placeholder="Buscar… (ej. drywall, gantt, WO, red tag)">
   </p>
   <div class="glo-filtros" id="glo-filtros">
     <button type="button" data-f="*" class="on"><span data-i18n="es">Todos</span><span data-i18n="en">All</span></button>
@@ -87,7 +87,7 @@
 
   <p style="font-size:13px;color:var(--mut)">
     <span data-i18n="es"><b>Grupos:</b> <span class="chip t-pm">Obra</span> = vocabulario del proceso constructivo (canon §2/§4/§5) · <span class="chip t-insp">Ciudad</span> = permisos e inspecciones · <span class="chip t-psub">Registro</span> = el vocabulario de schedule + libros + documentos · <span class="chip sistema">Roles</span> = quién es quién y las herramientas. ¿Falta un término? Se agrega a la fuente única (app.js) y aparece aquí y en todos los tooltips.</span>
-    <span data-i18n="en"><b>Groups:</b> <span class="chip t-pm">Obra</span> = build-sequence vocabulary (canon §2/§4/§5) · <span class="chip t-insp">Ciudad</span> = permits and inspections · <span class="chip t-psub">Registro</span> = schedule + books + documents vocabulary · <span class="chip sistema">Roles</span> = who's who and the tools. Missing a term? Add it to the single source (app.js) and it appears here and in every tooltip.</span>
+    <span data-i18n="en"><b>Groups:</b> <span class="chip t-pm">Field</span> = build-sequence vocabulary (canon §2/§4/§5) · <span class="chip t-insp">City</span> = permits and inspections · <span class="chip t-psub">Record</span> = schedule + books + documents vocabulary · <span class="chip sistema">Roles</span> = who's who and the tools. Missing a term? Add it to the single source (app.js) and it appears here and in every tooltip.</span>
   </p>
 
   <section class="quiz">
@@ -175,6 +175,14 @@
       : (visibles + ' de ' + total + ' términos');
   }
 
+  /* el placeholder también cambia de idioma */
+  function placeholder() {
+    input.setAttribute('placeholder', t(
+      'Buscar… (ej. drywall, gantt, WO, red tag)',
+      'Search… (e.g. drywall, gantt, WO, red tag)'
+    ));
+  }
+
   input.addEventListener('input', pintar);
   filtros.addEventListener('click', function (e) {
     var b = e.target.closest ? e.target.closest('button[data-f]') : null;
@@ -183,7 +191,8 @@
     filtros.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
     pintar();
   });
-  document.addEventListener('cng:lang', pintar);
+  document.addEventListener('cng:lang', function () { pintar(); placeholder(); });
+  placeholder();
   pintar();
 })();
 </script>

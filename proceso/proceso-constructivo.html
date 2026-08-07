@@ -60,6 +60,15 @@
     <span class="it"><span style="color:var(--ambar);font-weight:800">$</span><span data-i18n="es">Tiene downpayment (excepción: solo ciertos trades)</span><span data-i18n="en">Has a downpayment (exception: only certain trades)</span></span>
   </div>
 
+  <div class="card" style="border-left:5px solid var(--oro)">
+    <h3 style="margin-top:0"><span data-i18n="es">Cómo se lee esta ruta (3 cosas que nadie te dice)</span><span data-i18n="en">How to read this route (3 things nobody tells you)</span></h3>
+    <ol style="font-size:14.5px;margin:6px 0;padding-left:22px">
+      <li><span data-i18n="es"><b>"Día 15", "día 171" NO son fechas.</b> Son días <i>contados desde el inicio del proyecto</i> en el <i class="glo" data-g="template">template maestro</i> — el schedule modelo del que nace toda obra. Cuando tu obra arranca de verdad, esos días se convierten en fechas de calendario reales. El template llega al día 171: ese es el largo de una obra completa "de manual".</span><span data-i18n="en"><b>"Day 15", "day 171" are NOT dates.</b> They are days <i>counted from the project's start</i> in the <i class="glo" data-g="template">master template</i> — the model schedule every job is born from. When your job actually starts, those days become real calendar dates. The template runs to day 171: that's the length of a full "by-the-book" job.</span></li>
+      <li><span data-i18n="es"><b>Ninguna obra tiene los 34 trades.</b> 34 es el catálogo completo. Al abrir un proyecto, el Backoffice copia el template y <b>borra los trades que ese cliente no compró</b> (sin garaje → fuera GARAGE DOOR). Una remodelación de cocina puede tener 12.</span><span data-i18n="en"><b>No job has all 34 trades.</b> 34 is the full catalog. When a project opens, the Backoffice copies the template and <b>deletes the trades that client didn't buy</b> (no garage → GARAGE DOOR is out). A kitchen remodel might have 12.</span></li>
+      <li><span data-i18n="es"><b>Cada trade es un GRUPO, no una tarea.</b> Dentro de "PAINT" viven ~12 tareas en cadena (revisar portafolio → SOW → cotizar → WO → confirmar → ejecutar → pagar). Tócalo y las verás. Lo que <b>no</b> vas a encontrar ahí es "cubre los muebles": eso vive en los checklists de CompanyCam (<a href="jobtread.html">página 4</a>).</span><span data-i18n="en"><b>Each trade is a GROUP, not a task.</b> Inside "PAINT" live ~12 chained tasks (review portfolio → SOW → quote → WO → confirm → execute → pay). Tap it and you'll see them. What you will <b>not</b> find there is "cover the furniture": that lives in the CompanyCam checklists (<a href="jobtread.html">page 4</a>).</span></li>
+    </ol>
+  </div>
+
   <!-- Las etapas se generan por JS desde el template oficial -->
   <div id="etapas"></div>
 

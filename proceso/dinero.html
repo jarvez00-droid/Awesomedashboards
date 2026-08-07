@@ -93,6 +93,11 @@
     <div class="f-paso" style="border-top:4px solid var(--rol-ceo)"><span class="f-ico">🏦</span><div class="f-t">6 · <span data-i18n="es">COBRO</span><span data-i18n="en">COLLECTION</span></div><p><span data-i18n="es">Cada trade terminado se convierte en cobro: el <i class="glo" data-g="draw">draw</i> bancario lo gestiona el CEO.</span><span data-i18n="en">Every finished trade becomes a collection: the bank <i class="glo" data-g="draw">draw</i>, managed by the CEO.</span></p></div>
   </div>
 
+  <div class="regla">
+    <span data-i18n="es"><b>La parada 6 explicada desde cero (aquí se pierde todo el mundo):</b> el cliente <b>no paga la obra completa por adelantado</b> — casi siempre la financia con un préstamo de construcción del banco. El banco <b>libera el dinero por pedazos</b>, a medida que la obra avanza: eso es un <i class="glo" data-g="draw">draw</i>. Cada trade terminado y documentado es un pedazo que CNG puede cobrar. Por eso todo se encadena: <b>sin checklist After no se cierra el trade → sin trade cerrado no hay draw → sin draw no entra plata → sin plata no se paga al siguiente sub.</b> Tu documentación no es papeleo: es literalmente lo que hace entrar el dinero.</span>
+    <span data-i18n="en"><b>Stop 6 explained from zero (this is where everybody gets lost):</b> the client <b>does not pay for the whole job upfront</b> — they almost always finance it with a bank construction loan. The bank <b>releases the money in pieces</b> as the job advances: that's a <i class="glo" data-g="draw">draw</i>. Every finished, documented trade is a piece CNG can collect. That's why it all chains together: <b>no After checklist → the trade doesn't close → no closed trade → no draw → no money in → no payment for the next sub.</b> Your documentation isn't paperwork: it's literally what brings the money in.</span>
+  </div>
+
   <!-- ============ LOS 4 PEAJES ============ -->
   <h2><span class="seccion-num">3 · </span><span data-i18n="es">Los 4 peajes de la Administradora</span><span data-i18n="en">The Administrator's 4 tollgates</span></h2>
   <p class="proposito">
@@ -124,9 +129,20 @@
   </div>
 
   <p style="font-size:14px;color:var(--mut)">
-    <span data-i18n="es">Si pasa los 4 → se paga → el Backoffice <b>actualiza el schedule + sube la factura</b> → la Administradora <b>avisa al grupo de PMs de CADA pago realizado</b>.</span>
-    <span data-i18n="en">If it passes all 4 → it gets paid → Backoffice <b>updates the schedule + uploads the invoice</b> → the Administrator <b>notifies the PM group of EVERY payment made</b>.</span>
+    <span data-i18n="es">Si pasa los 4 → se paga → el Backoffice <b>actualiza el schedule + sube la factura</b> → la Administradora <b>avisa al grupo de PMs de CADA pago realizado</b>. ("Flag" = el aviso que la Administradora levanta a gerencia cuando algo no cuadra.)</span>
+    <span data-i18n="en">If it passes all 4 → it gets paid → Backoffice <b>updates the schedule + uploads the invoice</b> → the Administrator <b>notifies the PM group of EVERY payment made</b>. ("Flag" = the alert the Administrator raises to management when something doesn't add up.)</span>
   </p>
+
+  <div class="card" style="border-left:5px solid var(--rojo)">
+    <h4 style="margin-top:0"><span data-i18n="es">¿Y si un peaje NO pasa? Qué haces tú (no lo dejes ahí)</span><span data-i18n="en">And if a tollgate does NOT pass? What YOU do (don't leave it hanging)</span></h4>
+    <ul style="font-size:14px;margin:6px 0;padding-left:20px">
+      <li><span data-i18n="es"><b>Falló el peaje 1</b> (no está en el plan de la semana): el pago no es urgente por definición — entra al plan del <b>viernes siguiente</b>. Si de verdad no puede esperar (el sub para la obra si no cobra), lo <i class="glo" data-g="escalar">escalas</i> el MISMO día explicando qué se atrasa si no sale.</span><span data-i18n="en"><b>Toll 1 failed</b> (not in the week's plan): by definition it isn't urgent — it enters <b>next Friday's</b> plan. If it truly can't wait (the sub stops the job without payment), you <i class="glo" data-g="escalar">escalate</i> the SAME day, explaining what slips if it doesn't go out.</span></li>
+      <li><span data-i18n="es"><b>Falló el peaje 2</b> (el monto no calza): casi siempre es una <b>renegociación que nadie notificó</b> o un monto mal tipeado. Se corrige la WO — no se paga "el número que dijo alguien".</span><span data-i18n="en"><b>Toll 2 failed</b> (amount mismatch): it's almost always a <b>renegotiation nobody notified</b> or a mistyped amount. Fix the WO — you don't pay "the number somebody said".</span></li>
+      <li><span data-i18n="es"><b>Falló el peaje 3</b> (no hay caja): no es un "no", es un <b>"todavía no"</b>. La Administradora reordena la fila según entren los cobros; tu trabajo es avisar al sub con la fecha real, no dejarlo esperando en silencio.</span><span data-i18n="en"><b>Toll 3 failed</b> (no cash): it's not a "no", it's a <b>"not yet"</b>. The Administrator re-orders the queue as collections land; your job is to give the sub the real date, not to leave him waiting in silence.</span></li>
+      <li><span data-i18n="es"><b>Falló el peaje 4</b> (falta documentación): <b>este sí es tuyo y se arregla hoy</b> — WO sin firmar, checklist After vacío, factura o lien waiver que falta. Es el único de los cuatro que depende 100% de ti.</span><span data-i18n="en"><b>Toll 4 failed</b> (missing documentation): <b>this one is yours and gets fixed today</b> — unsigned WO, empty After checklist, missing invoice or lien waiver. It's the only one of the four that depends 100% on you.</span></li>
+    </ul>
+    <p style="font-size:13.5px;color:var(--mut);margin:0"><span data-i18n="es">Regla general: un pago frenado <b>siempre tiene dueño y fecha</b>. "Está en revisión" no es un estado.</span><span data-i18n="en">General rule: a held payment <b>always has an owner and a date</b>. "It's under review" is not a status.</span></p>
+  </div>
 
   <!-- ============ EL CICLO SEMANAL ============ -->
   <h2><span class="seccion-num">4 · </span><span data-i18n="es">El VIERNES: donde el dinero se cierra y se planifica</span><span data-i18n="en">FRIDAY: where money closes and gets planned</span></h2>
@@ -144,7 +160,7 @@
       <div class="det"><span data-i18n="es">Dinero reservado: suceden sí o sí en la semana; si no alcanza, pasan a la siguiente CON PRIORIDAD. El cuadre se maneja "pateando" pagos a proveedores según lleguen los ingresos. Meta: un colchón en cuenta para que una movida de ~$200k no afecte. <b>Fuente de la verdad de pagos confirmados: el Finance tab del dashboard</b> — no los checks del schedule.</span><span data-i18n="en">Reserved money: they happen in the week no matter what; if funds fall short, they roll to the next week WITH PRIORITY. Squaring is managed by "kicking" supplier payments as income lands. Goal: a cushion so a ~$200k move doesn't hurt. <b>Source of truth for confirmed payments: the dashboard's Finance tab</b> — not the schedule checks.</span></div></li>
     <li><span class="tarea"><span data-i18n="es">Pago estándar a subs</span><span data-i18n="en">Standard sub payment</span></span>
       <div class="det"><span data-i18n="es">= el viernes siguiente a terminar el trabajo (o la excepción "día después" si la WO lo dice).</span><span data-i18n="en">= the Friday after the work finishes (or the "day after" exception if the WO says so).</span></div></li>
-    <li><span class="tarea"><span data-i18n="es">VIERNES 11:00 PM — BASELINE OFICIAL</span><span data-i18n="en">FRIDAY 11:00 PM — OFFICIAL BASELINE</span> <span class="chip sistema">sistema</span></span>
+    <li><span class="tarea"><span data-i18n="es">VIERNES 11:00 PM — BASELINE OFICIAL</span><span data-i18n="en">FRIDAY 11:00 PM — OFFICIAL BASELINE</span> <span class="chip sistema"><span data-i18n="es">sistema</span><span data-i18n="en">system</span></span></span>
       <div class="det"><span data-i18n="es">La foto del schedule que ancla el <i class="glo" data-g="viernes">viernes-vs-viernes</i>. <a href="reloj-reportes.html">Ver el reloj de la semana →</a></span><span data-i18n="en">The schedule snapshot that anchors <i class="glo" data-g="viernes">Friday-vs-Friday</i>. <a href="reloj-reportes.html">See the week's clock →</a></span></div></li>
   </ol>
 
