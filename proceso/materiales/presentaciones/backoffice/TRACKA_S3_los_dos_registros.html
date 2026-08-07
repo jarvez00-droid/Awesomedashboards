@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TRACK A · S3 — Los DOS registros + "todo dinero pasa por el schedule"</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+h3 { font-size: 12px; margin: 14px 0 6px; color: #1d4ed8; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.portada { text-align: center; padding-top: 90px; page-break-after: always; }
+.portada .sub { font-size: 13px; color: #475569; margin-top: 8px; }
+.portada .fecha { margin-top: 30px; color: #64748b; font-size: 11px; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.pos { page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+.pos h3 { margin-top: 0; }
+ul { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+ol { margin: 4px 0 8px; padding-left: 20px; }
+.dos-col { display: flex; gap: 14px; } .dos-col > div { flex: 1; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.seccion-num { color: #94a3b8; font-weight: 400; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+<h1>TRACK A · BACKOFFICE / DATA-ENTRY</h1>
+<div class="sub">SESIÓN 3 — Los DOS registros: la mecánica exacta + "TODO dinero pasa por el schedule"</div>
+<div class="sub">Duración: 75–90 min · Aprendiz: Joaquín · Entrenador: Jose</div>
+<div class="fecha">v2026-08-06 · Biblioteca de Entrenamientos CNG</div>
+</div>
+
+<h2><span class="seccion-num">1 ·</span> OBJETIVO</h2>
+<p><b>Esta sesión existe para</b> que el Data-Entry ejecute sin ayuda el registro doble de cualquier movimiento de dinero, exactamente como Jose lo enseñó en la Parte 2 — y aplique la regla sin excepciones del 2026-08-06.</p>
+
+<div class="clave">
+<i>"Siempre son dos, acuérdense: el schedule, que es nuestro registro de obra, y los libros contables."</i> — Jose (P2)
+<br><br>
+<b>⭐ REGLA SIN EXCEPCIONES (Jose, 06-ago):</b> TODA compra se registra en el schedule <b>aunque sea de último minuto</b>. TODO gasto — <b>aunque sea de Home Depot o caja chica</b> — se anota al proyecto como Additional Expense. Dinero movido sin tarea en el schedule = cashflow, productividad y reportes <b>CIEGOS</b> a ese gasto.
+</div>
+
+<h2><span class="seccion-num">2 ·</span> CONTENIDO</h2>
+
+<div class="dos-col">
+<div class="pos">
+<h3>A) REGISTRO EN EL SCHEDULE — 4 pasos (P2)</h3>
+<ol>
+<li><b>Crear la tarea en el día correspondiente</b> — el día que REALMENTE ocurrió. (El template usa días numerados; producción usa calendario real.)</li>
+<li><b>Tipo de tarea:</b> <span class="chip">Payment - Materials</span> compra de material · <span class="chip">Payment - Subs</span> pago a sub.</li>
+<li><b>Monto en la descripción — solo el número, SIN signo menos</b> (<i>"no necesito que pongas menos, simplemente el número escrito"</i>). El sistema lo parsea para el cashflow; <b>sin monto = "amount TBD" y NO cuenta</b>.</li>
+<li><b>Marcar completado (check)</b> — con la fecha CUADRADA a la realidad (cerrar = check + fechas).</li>
+</ol>
+</div>
+<div class="pos">
+<h3>B) REGISTRO EN LOS LIBROS (P2)</h3>
+<ol>
+<li>Proyecto → <b>Documentos → Crear documento</b>.</li>
+<li><b>Expense</b> = compra de material a una tienda (factura/boleta) · <b>Bill</b> = pago a subcontratista (<i>"como un recibo por honorarios"</i>).</li>
+<li><b>Vendor</b> (a quién) → <b>trade</b> (ej. Plumbing) → <b>line item del budget</b> (ej. tankless water heater).</li>
+<li><b>Crear</b> → costo → <b>Approve for Payment</b> → <b>Pay</b> (SOLO si ya se pagó de verdad).</li>
+</ol>
+</div>
+</div>
+
+<h3>2.1 Casos especiales y reglas de apoyo</h3>
+<ul>
+<li><b>Additional Expenses:</b> caja chica / día a día (ej. bolsas de basura) — SIEMPRE al proyecto, el día que se pagaron.</li>
+<li><b>Refunds:</b> reembolsos (ej. gasolina de los PMs).</li>
+<li><b>Nomenclatura:</b> <span class="chip">&lt;TRADE&gt; + &lt;ACCIÓN&gt;</span> — ej. PLUMBING: PURCHASE MATERIAL · &lt;TRADE&gt;: BILL &amp; PAYMENT.</li>
+<li><b>Por qué importa el line item correcto:</b> <i>"nos da la posibilidad de ver claramente si se está cumpliendo o no nuestros márgenes"</i> (P2). Budget = cantidad · unidad · costo unitario · costo extendido; margen ~40% (caso Kyle Aubrey: techo 1,456 sqft × $1.32 = $1,921 de costo; paredes $3,035 costo vs $4,722 precio).</li>
+<li><b>Fecha de pagos — el matiz:</b> la fecha original de una tarea de pago = <b>gatillo contractual</b> (culminación + término): NO se reescribe. El pago se <b>MUEVE</b> ("patear") y se registra en la fecha en que REALMENTE se pagó. Checks = pagos CONFIRMADOS/reservados de la semana.</li>
+<li><b>Fuente de la verdad de pagos CONFIRMADOS</b> (Jose 03-ago): el <b>Finance tab</b> del dashboard — NO los checks del schedule.</li>
+</ul>
+
+<h2><span class="seccion-num">3 ·</span> EL CASO REAL</h2>
+<div class="gap"><b>Montos ambiguos que ciegan el cashflow.</b> Casos reales flaggeados en productividad: Rohini <b>"43k"</b> y Martha <b>"551872"</b> — descripciones que el sistema no puede parsear con certeza. Un monto sucio o ausente = "amount TBD" = Milagros planifica pagos sin ver ese egreso. Pariente directo: <b>material cruzado entre obras</b> (César usando material de Martha en otra cosa — detectado por chat, no por sistema). <b>Moraleja:</b> monto limpio (solo número) + proyecto/trade/line item correctos, SIEMPRE. El registro dice la verdad o no dice nada.</div>
+
+<h2><span class="seccion-num">4 ·</span> EL EJERCICIO</h2>
+<div class="mat">
+<ol>
+<li><b>Sandbox (método de Jose en P2):</b> crear un Expense de prueba con costo $0, recorrer vendor→trade→line item→approve→pay, y borrarlo. Repetir con un Bill.</li>
+<li><b>En vivo, supervisado:</b> registrar los pagos/compras REALES que salgan de la reunión de hoy (ej. una compra de Romina en Lingyan o Katie Holmes): 4 pasos del schedule + documento completo. Jose revisa antes de guardar.</li>
+<li><b>Rastreo:</b> buscar en Rohini o Martha un pago ya registrado y verificar su doble registro: ¿schedule con monto y check en la fecha real? ¿bill contra el line item correcto?</li>
+</ol>
+</div>
+
+<h2><span class="seccion-num">5 ·</span> LO QUE SE EVALÚA</h2>
+<ul>
+<li>Ejecuta los 4 pasos del registro A y el documento B sin ayuda y sin omitir ninguno.</li>
+<li>Recita la regla sin excepciones y la aplica: ningún gasto "demasiado chico" queda fuera del schedule.</li>
+<li>Responde las 5 preguntas antes de guardar: ¿proyecto? ¿trade? ¿line item? ¿monto limpio? ¿evidencia?</li>
+<li>Nunca pone "Pay" sin que el pago haya ocurrido; nunca reescribe la fecha contractual de un pago — lo MUEVE.</li>
+<li>Nivel 2 de certificación: <b>5 movimientos de dinero reales con doble registro perfecto</b>.</li>
+</ul>
+
+<div class="footer-note">TRACK A · Sesión 3 · v2026-08-06 · Fuentes: transcripción Parte 2 (verbatim) · 00_PROCESO_CANONICO_CNG.md §4/§6/§7/§8 · regla nueva de Jose 06-ago (canon §6) · REPORTERIA_MASTER.md (fuente de la verdad de pagos) · TRACK_A_v2026-08-06 §S3.</div>
+
+</body>
+</html>

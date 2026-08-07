@@ -1,0 +1,352 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TRACK C PROJECT MANAGERS · CNG</title>
+<link rel="stylesheet" href="/proceso/assets/style.css">
+<style>
+.doc{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.doc h1{font-size:28px;border-bottom:3px solid var(--ink,#0f172a);padding-bottom:10px;margin-top:0}
+.doc h2{font-size:20px;margin-top:34px;border-bottom:2px solid #cbd5e1;padding-bottom:6px}
+.doc h3{font-size:16px;color:#1d4ed8;margin-top:24px}
+.doc table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.doc th{background:#0f172a;color:#fff;padding:8px 10px;text-align:left}
+.doc td{border:1px solid #cbd5e1;padding:8px 10px;vertical-align:top}
+.doc tr:nth-child(even) td{background:#f8fafc}
+.doc pre{background:#f1f5f9;padding:14px;border-radius:8px;overflow-x:auto;font-size:13px;border:1px solid #e2e8f0}
+.doc code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:13px}
+.doc blockquote{border-left:4px solid #2563eb;background:#eff6ff;margin:14px 0;padding:10px 16px;border-radius:0 8px 8px 0}
+.doc li{margin:5px 0}
+.volver{display:inline-block;margin:16px 0;padding:8px 16px;background:#0f172a;color:#fff;border-radius:20px;text-decoration:none;font-size:14px;font-weight:600}
+</style></head><body>
+<div class="doc"><a class="volver" href="/proceso/materiales/">← Centro de materiales</a>
+<h1>TRACK C · PROJECT MANAGER — Currículo de Capacitación</h1>
+<p><strong>Para:</strong> Angel · Giselle · Jeff (y todo PM futuro)<br />
+<strong>Prerequisito:</strong> Módulo 0 completo (ver <code>00_PLAN_MAESTRO_CAPACITACION.md</code> §3 — NO se repite aquí; este track asume que el PM ya explica el proceso canónico de punta a punta).<br />
+<strong>Por qué este track existe (Jose, Parte 1):</strong> <em>"el único problema real es que los project managers son lentos y ejecutan lentamente la obra… son gente que encontramos por ahí y la pusimos en el puesto."</em> El objetivo de este track es convertir a un no-experto en un PM que ejecuta el proceso completo con disciplina, sobre el sistema que ya existe para apoyarlo.</p>
+<blockquote>
+<p><strong>⚠️ IDIOMA — aviso obligatorio:</strong> Jeff opera en un grupo 100% inglés. Este track DEBE existir también en versión en inglés antes de entrenar a Jeff (traducción 1:1 de este documento). El one-pager final (§5) ya es bilingüe ES/EN. [El resto de la traducción es tarea pendiente del dueño del programa.]</p>
+</blockquote>
+<p>Fuentes: manual <code>JD_PM_manual-operaciones.md</code> v2.0 (jul-2026) · <code>EL_FLOW_ACTION_TASK.md</code> · <code>SCHEDULE_STRUCTURE.md</code> · <code>00_PROCESO_CANONICO_CNG.md</code> · transcripciones Parte 1+2 (Jose, ago-2026) · mega-análisis <code>interno_ejecucion-obra.md</code> (2026-07-26) · <code>DIA_CUMPLIDO_POR_PUESTO.md</code> v3.</p>
+<hr />
+<h2>1. Perfil y misión</h2>
+<p><strong>Del manual v2.0 (resumen):</strong> el PM es el <strong>dueño de la ejecución en obra</strong>. No swinguea el martillo — <strong>maneja a los subcontratistas</strong> que lo hacen. Su valor: coordinar cada trade, verificar que el trabajo se haga bien, documentarlo en campo, y mantener el schedule pegado a la realidad para que la obra avance por su ruta crítica y <strong>pase la inspección de la ciudad a la primera</strong>.</p>
+<p><strong>Misión (manual §1.2):</strong> <em>"Hacer que el proyecto avance de verdad."</em> El schedule dice una teoría; el PM la vuelve realidad — consiguiendo al sub correcto, asegurando que el material llegue antes que la cuadrilla, verificando el estándar, documentando, y destrabando o escalando lo trabado antes de que reviente la ruta crítica.</p>
+<p><strong>Los 2 principios fundamentales (manual §1.3–1.4):</strong><br />
+1. <strong>Ownership:</strong> cada tarea del schedule es responsabilidad del PM aunque el PM no sea el actor. Un <em>"no se hizo y nadie dijo por qué"</em> <strong>nunca existe</strong> en la obra de un PM. El PM es dueño del resultado, no de la excusa.<br />
+2. <strong>El cliente SIEMPRE se entera primero por el PM.</strong> Buenas o malas noticias, retraso, cambio, hallazgo detrás de una pared — el cliente lo sabe por su PM antes que por cualquier otra fuente. Un cliente sorprendido por su propia obra es un cliente al que el PM le falló.</p>
+<p><strong>La mentalidad (la causa raíz — Jose, 2026-08-04, canónico §1):</strong> los fallos de obra NO vienen del trade ni de la teoría — vienen de falta de <strong>RIGUROSIDAD</strong>, de <strong>ATENCIÓN AL DETALLE</strong>, de no <strong>PREVER</strong>, no <strong>SOLUCIONAR</strong> y no ser <strong>PROACTIVO</strong>. La regla mental de este track: <em>"no aceptar el problema y reaccionar: prevenirlo, o buscar soluciones insaciablemente para cumplir el cronograma a como dé lugar."</em> En concreto para el PM: el material, el sub y la inspección se prevén ANTES de que truenen — no se descubren el día del EXECUTE. Este comportamiento es la columna vertebral del track y <strong>se evalúa</strong> (ver §4).</p>
+<p><strong>Mapa de conexiones (de quién recibe / a quién entrega):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Con quién</th>
+<th>Qué recibe el PM</th>
+<th>Qué entrega el PM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Planning (Perú)</strong></td>
+<td>El <strong>Portafolio</strong> ("la biblia del PM", P2): layout antes/después, medidas, planos, lista de compras</td>
+<td>Dudas/discrepancias plano-vs-campo detectadas ANTES de construir</td>
+</tr>
+<tr>
+<td><strong>Backoffice (Jose)</strong></td>
+<td>Tareas creadas en JobTread (el PM <strong>NO crea tareas</strong>, manual §2.1), agenda matinal, WOs formalizadas</td>
+<td>La realidad honesta de cada obra en la reunión de las 3PM; re-fechas CON razón</td>
+</tr>
+<tr>
+<td><strong>Purchases (Romina)</strong></td>
+<td>Take-off Report para confirmar, pricing, ETAs de material</td>
+<td><code>CONFIRM TAKEOFF DETAILS</code>: dimensiones y lugares verificados EN OBRA (Romina está en Perú, P2)</td>
+</tr>
+<tr>
+<td><strong>Administradora (Milagros)</strong></td>
+<td>Ejecución de downpayments y pagos</td>
+<td>Solicitudes de pago con documentación completa (factura, WO, lien waiver) — el PM <strong>no lleva el dinero</strong></td>
+</tr>
+<tr>
+<td><strong>Subcontratistas</strong></td>
+<td>Cotizaciones (bids), el trabajo ejecutado</td>
+<td>SOW detallado, WO aprobada, schedule confirmado 2 veces, inspección y pago liberado por checklist</td>
+</tr>
+<tr>
+<td><strong>Cliente</strong></td>
+<td>Selecciones, aprobaciones, accesos</td>
+<td>Estatus proactivo SIEMPRE primero; problema + camino propuesto, nunca solo el problema</td>
+</tr>
+<tr>
+<td><strong>KITBOT</strong></td>
+<td>PDF "Tu día mañana", respuestas técnicas expertas, persecución de esperas</td>
+<td>Reportes en check-ins, razones de re-fecha, respuesta a la alerta pre-cierre de las 4PM</td>
+</tr>
+<tr>
+<td><strong>Ciudad (inspector)</strong></td>
+<td>El pase de inspección</td>
+<td>La llamada SOLO cuando la inspección propia pasó Y el checklist está 100% (Mandamiento VIII)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Mapa de competencias</h2>
+<table>
+<thead>
+<tr>
+<th>Debe SABER</th>
+<th>Debe SABER HACER</th>
+<th>Debe VERIFICAR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El proceso constructivo a nivel experto: la secuencia escalonada y POR QUÉ una cosa bloquea la otra (P1: <em>"una cosa te va bloqueando la otra"</em>)</td>
+<td>Leer el Portafolio y cotejarlo contra la obra real (medidas, W3, qué se demuele/añade)</td>
+<td>Que la secuencia pedida a la ciudad sea la correcta (MEP rough-ins ANTES de pedir framing — red tag de Martha 24-jul)</td>
+</tr>
+<tr>
+<td>Los 10 Mandamientos del manual v2.0 (de memoria)</td>
+<td>Escribir un <strong>SOW detallado</strong> en CompanyCam (fotos + medidas + alcance sin lugar a interpretación, Mandamiento III)</td>
+<td>Que los <strong>planos aprobados estén físicamente en obra</strong> (el fallo predicho que causó el red tag de framing de Martha)</td>
+</tr>
+<tr>
+<td>La cadena EL_FLOW completa y la <strong>regla de oro</strong>: un EXECUTE solo tiene fecha si su cadena previa está 100% cerrada</td>
+<td>Conseguir <strong>≥3 bids</strong>, evaluar, <code>SELECT VENDOR &amp; SEND WO</code> — <strong>WO aprobada ANTES de que nadie toque la obra</strong></td>
+<td>Material en sitio ANTES que la cuadrilla (Mandamiento VII); DELIVERY ETA: &gt;1 día = llega a más tardar el fin; =1 día = stock o SIN verificar</td>
+</tr>
+<tr>
+<td>El budget como límite: <strong>costo máx = precio × (1 − margen 40%)</strong> (P2)</td>
+<td>Negociar con el sub por ≤ el costo del line item (ej. real de WO en P2: budget $20,000 → cerrado en $18,000 = $2,000 ahorrados)</td>
+<td>Predecesor firmado (sign-off del trade anterior) antes de arrancar el siguiente</td>
+</tr>
+<tr>
+<td>Los checklists Before/During/After y el gate: <strong>checklist 100% required = la señal de pago</strong></td>
+<td>Correr la inspección Before, los hold points During (nada se tapa sin foto) y el After con lien waiver</td>
+<td>Que NUNCA se llame a la ciudad sin inspección propia pasada + checklist 100% (Mandamiento VIII)</td>
+</tr>
+<tr>
+<td>El Día Cumplido del PM (los 6 checks exactos) y la cadencia KITBOT (7:50 / 10 / 12 / 2 / 4 / 5)</td>
+<td>Documentar en CompanyCam <strong>fotos CON descripción</strong> en toda obra trabajada — es lo que libera el pago (manual §2.2)</td>
+<td>Tarea completa solo con <strong>bill + pago + lien waiver + Gantt 100%</strong> (Mandamiento IX)</td>
+</tr>
+<tr>
+<td>"Después de las 3PM, JobTread es la verdad del día"</td>
+<td><strong>Re-fechar CON razón</strong> al bot o en la 3PM — nunca dejar un "no pasó" sin explicar</td>
+<td>Cero waits &gt;24h sin respuesta; directivas de Jose due=hoy cerradas o con estado</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Módulos (sesiones)</h2>
+<p>Formato: sesión grabada (para repaso) + práctica en vivo sobre proyectos reales + tareas para la reunión de las 2:45. Igual que Jose entrenó a Joaquín (Plan Maestro §2).</p>
+<hr />
+<h3>SESIÓN C1 — El puesto: ownership, el cliente primero y los 10 Mandamientos (~60 min)</h3>
+<p><strong>Objetivo:</strong> que el PM explique sin leer qué se espera de él, por qué existe el puesto así, y recite los 10 Mandamientos aplicándolos a un caso.</p>
+<p><strong>Contenido:</strong><br />
+- El problema #1 declarado (P1): PMs lentos, ejecución lenta — y la respuesta de la empresa: <em>"darles todas las herramientas posibles para que su gestión, su contratación y su proactividad sea mucho mayor"</em>. El sistema no es burocracia: es el andamio del PM.<br />
+- El core del negocio — <strong>LA CLAVE</strong> (P1 + Jose 2026-08-04): CNG no pone ladrillos — subcontrata todo. La clave es <strong>GESTIONAR LA OBRA DE LA FORMA EN LA QUE SE PLANIFICÓ EN EL CRONOGRAMA</strong>: flujo de información impecable + solucionar los imprevistos para no salirse del cronograma = lo que garantiza el éxito de la operación. El margen se gana gestionando el cronograma, no ejecutando obra.<br />
+- Ownership (manual §1.3): si un sub no llega, el PM no reporta "no vino" y cierra el día — averigua por qué, re-fecha con razón, arma la recuperación y avisa al sistema.<br />
+- Cliente primero (manual §1.4): proactivo, nunca perseguido; problema + camino propuesto; jamás un sub/inspector/factura/vecino informa al cliente antes que el PM.<br />
+- Los 10 Mandamientos, uno por uno (manual §3). Memorizar los números: II (sin WO no arranca nadie), IV (confirmar 2 veces), VII (material antes que cuadrilla), VIII (ciudad de último), IX (bill+pago+lien waiver+Gantt 100%).<br />
+- Estructura de reporte (manual §1.5): reporta a Backoffice; el PM no crea tareas, no lleva dinero, no define estrategia. Coordina, verifica, documenta, destraba.<br />
+- Valores (manual §6): respeto en TODO canal; NO gritar, NO insultar — nunca; un PM que mueve la obra pero rompe los valores no está haciendo el trabajo.</p>
+<p><strong>Práctica sobre caso real:</strong> abrir en JobTread el proyecto propio del PM (Angel: Katie Holmes o Lingyan · Giselle: Kyle Aubrey, Rohini o Karim · Jeff: Martha Cockrell o Felton). Recorrer el schedule y señalar en vivo: ¿dónde estoy violando hoy algún Mandamiento? (una tarea vencida sin razón, un trade activo sin WO visible, una obra trabajada ayer sin fotos). Lista escrita de 3 violaciones propias y su corrección.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Charles Harris:</strong> proyecto 24 días seguidos sin una foto (3-jul→26-jul), con draw bancario en juego (mega-análisis §6). Sin ownership, la obra se vuelve invisible.<br />
+- <strong>"No se hizo y nadie dijo por qué"</strong> = la definición exacta de día NO cumplido (Día Cumplido check 3).</p>
+<hr />
+<h3>SESIÓN C2 — Las herramientas y el día del PM (~60 min)</h3>
+<p><strong>Objetivo:</strong> dominar la mecánica diaria: JobTread (visibilidad, no autoría), CompanyCam, KITBOT, la reunión de las 3PM y los 6 checks del Día Cumplido.</p>
+<p><strong>Contenido:</strong><br />
+- JobTread (manual §2.1): la columna vertebral. Deberes del PM: <strong>clock in al llegar / clock out al salir</strong>, estatus honesto de cada tarea (hecho / no hecho / movido), re-fechar CON razón. <strong>El PM NO crea tareas</strong> — eso es de Backoffice, decidido en la 3PM.<br />
+- <strong>"Después de las 3PM, JobTread es la verdad del día"</strong> (canónico §9). Si no está en JT después de la reunión, no pasó. El PM llega a la 3PM con la realidad de CADA obra, no con impresiones.<br />
+- CompanyCam (manual §2.2): fotos <strong>obligatorias CON descripción</strong> de toda obra trabajada hoy — antes, durante y después. <em>"Una foto sin contexto no es documentación."</em> <strong>La documentación es la señal que libera el pago</strong>: la tarea de un sub no es pagable hasta que fotos + checklist lo prueben.<br />
+- KITBOT (manual §2.3 + canónico §9.3): PDF "Tu día mañana" cada noche; respuestas técnicas expertas (códigos, requisitos de inspección, secuencia — preguntar al bot, no adivinar); persigue esperas; audita las fotos del día; <strong><code>/inspeccion</code></strong> = investiga los requisitos de inspección de la ciudad del proyecto para pasar a la primera.<br />
+- La cadencia fija (manual §4.3 + canónico §9.3): 7:50 saludo + plan → clock in + caminar el sitio antes de la cuadrilla (Mandamiento V) → check-ins 10/12/2 → 3PM reunión con Jose → <strong>4PM ALERTA PRE-CIERRE</strong> (lo que falta para cerrar el día, con tiempo para arreglarlo) → 5PM cierre. <em>(Cada puesto tiene su pre-cierre una hora antes de su fin de jornada: PM 4PM · Romina 12PM · Backoffice 5PM — nadie cierra el día "por sensación".)</em><br />
+- Los 6 checks del Día Cumplido (ver §4 de este track — son la certificación).<br />
+- Nomenclatura del schedule: <code>&lt;TRADE&gt; + &lt;ACCIÓN&gt;</code> (P2: <em>"la nomenclatura es básicamente el nombre del trade y luego la acción"</em>). Ojo: proyectos viejos (Kyle) usan nombres viejos (<code>CREATE SOW</code> / <code>SOURCE VENDOR</code> / <code>APPROVE WO</code>); el estándar vigente es el de Martha (<code>CREATE SOW REPORT &amp; SOURCE VENDORS</code> / <code>SELECT VENDOR &amp; SEND WO</code>) (EL_FLOW, notas).</p>
+<p><strong>Práctica sobre caso real:</strong> día simulado completo sobre la obra real del PM: (1) revisar el "Tu día mañana" de hoy; (2) clock in; (3) subir 3 fotos reales a CompanyCam con descripción útil (qué es, dónde, estado); (4) en la 3PM real, reportar cada tarea de hoy con estatus + razón; (5) a las 4PM, leer la alerta pre-cierre y cerrar lo que falte; (6) verificar a las 5PM que el gate marque ✅.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Fotos sin descripción, crónico:</strong> Martha 17-jul: <strong>2 de 49</strong> fotos con descripción; Felton 24-jul: <strong>1 de 35</strong> (mega-análisis §6). Eso es documentación que NO libera pago.<br />
+- Reportar por sensación ("ahí va avanzando") en vez de por tarea. La 3PM re-fecha TODOS los schedules; datos vagos = schedule ficticio.</p>
+<hr />
+<h3>SESIÓN C3 — El proceso constructivo a nivel PM: secuencia, dependencias e inspecciones (~90 min)</h3>
+<p><strong>Objetivo:</strong> que el PM domine la ruta crítica física y sepa exactamente qué inspección se pide cuándo — y qué NO se agenda hasta qué pase.</p>
+<p><strong>Contenido:</strong><br />
+- La secuencia completa (canónico §2, del entrenamiento P1): MEP In-Ground (+inspecciones) → Foundation (Formboard → Survey de tercero → Report de ciudad → concreto → ~10 días de curado) → Framing → Exterior Sheathing + Roof Decking → puertas/ventanas exteriores (la mayoría de ciudades las exige antes de la inspección de framing, P1) → MEP Rough-Ins (+inspección de CADA uno) → <strong>Framing Inspection</strong> → el proyecto se parte en interior (prioridad, ruta crítica) y exterior.<br />
+- Interior: Zip Tape → Insulation → Drywall (colgar sheetrock → tape, bed &amp; texture) → <strong>Primer</strong> (la pintura final va AL FINAL — P1: <em>"pintamos todo, lo dejamos bonito y en los siguientes trabajos terminan arruinando la pintura"</em>) → Flooring &amp; Tiles → vidrios → carpintería (puertas, baseboards, trims) → Cabinets/Vanities → Countertops (dependen de cabinets) → MEP Trims (+inspección; electrical trim devuelve la electricidad de ciudad) → pintura final → Pre-Delivery Walk → punch list → limpieza → Final Inspection (LA CIUDAD, no un tercero) → entrega.<br />
+- La lógica de dependencias (P1): <em>"No puedes colgar el sheetrock si no has hecho la insulación… esa línea de dependencias se convierte en la ruta crítica porque es lo que no se puede achicar más."</em><br />
+- 📌 Este proceso escalonado <strong>ES el TEMPLATE maestro que vive en JobTread</strong> (Jose lo exportará; pendiente de ingerir a la biblioteca — canónico §2). Cuando llegue, el template oficial manda sobre cualquier reconstrucción.<br />
+- <strong>La regla de secuencia de inspecciones que hoy vive en la cabeza de Jeff y debe vivir en la de TODOS:</strong> "no se agenda insulation ni drywall hasta pasar MEP" (mega-análisis §7). Los rough-ins pasan su inspección ANTES de que nada los tape.<br />
+- Dónde más falla CNG (P1): MEP rough-ins (inspecciones rechazadas por observaciones) y framing (planos estructurales desactualizados / no aprobados por el ingeniero llegan al sub → retrabajo). Pintura/textura: <em>"siempre se nos malogra"</em>.<br />
+- Caso de retrabajo enseñado por Jose (P1): espuma de insulation instalada junto a una línea de agua caliente → riesgo de incendio → cambiar la terma y rehacer. El checklist Before existe para atrapar exactamente esto.<br />
+- Preguntas técnicas: KITBOT responde a nivel experto (códigos, requisitos por ciudad) — investigar primero, no adivinar ni esperar (manual §2.3).</p>
+<p><strong>Práctica sobre caso real:</strong> sobre el schedule de <strong>Martha Cockrell</strong> (el estándar de nomenclatura vigente), el PM reconstruye en papel la cadena de dependencias de 3 trades (p. ej. INSULATION → DRYWALL → PRIMER) y marca: ¿qué inspección de ciudad libera cada paso? Después responde: "si hoy el drywall está fechado el lunes, ¿qué 3 cosas verifico ANTES del viernes?" Verificación cruzada con KITBOT (<code>/inspeccion</code> cuando esté cableado; mientras, pregunta directa al bot).</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Red tags de Martha, 24-jul (mega-análisis §5):</strong> la inspección MEP red-taggeada <strong>por pedirse antes del framing</strong> (secuencia mal pedida) Y el framing red-taggeado <strong>por no tener los planos en obra</strong> — el fallo que el audit ya había predicho. Dos días quemados por dos verificaciones de 5 minutos.<br />
+- Agendar insulation/drywall sin el pase de MEP: tapar tubería sin inspección = destapar después.</p>
+<hr />
+<h3>SESIÓN C4 — La cadena pre-EXECUTE completa: la regla de oro (~90 min) ⭐ LA SESIÓN MÁS IMPORTANTE</h3>
+<p><strong>Objetivo:</strong> que el PM ejecute la cadena completa de preparación de un trade y jure la regla de oro: <strong>un EXECUTE solo tiene fecha si su cadena previa está 100% cerrada.</strong></p>
+<p><strong>Contenido (la cadena, en orden — EL_FLOW Fases A–C):</strong><br />
+1. <strong>Revisar el Portafolio</strong> — "la biblia del PM" (P2): layout antes/después, qué se demuele/añade/remueve, medidas (ventana "W3" → tabla de medidas), plano eléctrico, medidas de carpintería. Cotejar plano vs campo ANTES de todo.<br />
+2. <strong><code>CC CHECKLIST: BEFORE SOW</code></strong> — estudiar planos/renders, caminar el sitio, verificar que el diseño se puede construir, fotos. <em>(⚠️ Nota temporal de Jose 2026-07-06: estas tareas se OBVIAN mientras la sección de checklists no esté construida — pero la DISCIPLINA de revisar portafolio + sitio antes del SOW sigue vigente y se entrena igual.)</em><br />
+3. <strong><code>CONFIRM TAKEOFF DETAILS</code></strong> — Romina está en Perú: el PM verifica EN OBRA dimensiones y lugares y los llena en el reporte (P2, ej. real: take-off de siding con starter strip / esquinas / J-channel — "estos son 328 pies lineales, estos 288, 145…").<br />
+4. <strong><code>CREATE SOW REPORT &amp; SOURCE VENDORS</code></strong> — SOW como reporte de CompanyCam: fotos de dónde va cada cosa, medidas, redacción exacta del alcance (ej. real P2: "instalación y relocación de nueve ventanas y dos puertas"). Un SOW vago produce una obra equivocada (Mandamiento III). Enviarlo a <strong>≥3 subs</strong> (biblioteca de contactos / Marketplace / Fiverr) como Bid Request; la tarea se extiende día a día hasta tener las 3 cotizaciones (P2).<br />
+5. <strong><code>SELECT VENDOR &amp; SEND WO</code></strong> — evaluar las 3, elegir y <strong>DEFINIR los datos de la WO</strong> (sub → trade → presupuesto → <strong>monto negociado</strong> → SOW copiado → Payment Breakdown con términos), que <strong>Backoffice formaliza en JT</strong> (P2: <em>"lo que vas a ingresar te lo va a estar dando el Project Manager"</em>). <strong>Sin WO aprobada no se inicia trabajo — nunca</strong> (Mandamiento II; EL_FLOW A.4).<br />
+6. <strong><code>CONFIRM SCHEDULE WITH SUB</code></strong> — llamar 3–5 días antes y confirmar día/hora. Existe <em>"porque se olvida"</em> (P2: <em>"los propios managers se olvidan de hacer las cosas"</em>). Y por Mandamiento IV: <strong>confirmar DOS veces — teléfono Y escrito.</strong> Un canal es una esperanza; dos es un compromiso.<br />
+7. <strong>Lane de Romina cerrado:</strong> material comprado y <code>DELIVERY ETA</code> confirmado — <strong>el material llega ANTES que la cuadrilla</strong> (Mandamiento VII). Regla de lectura: ETA con duración &gt;1 día = llega a más tardar en la fecha fin; =1 día = en stock o <strong>sin verificar</strong> (SCHEDULE_STRUCTURE).<br />
+8. <strong><code>PM INSPECTION (BEFORE)</code></strong> — caminar el sitio ANTES del sub: sitio preparado (muebles cubiertos, área limpia — P2), condiciones previas listas, <strong>sign-off del trade anterior</strong> (el drywall no arranca si la insulation no está firmada — EL_FLOW C.1). Si no se cumple, NO arranca.<br />
+- <strong>La regla de oro (EL_FLOW §0):</strong> si en la 3PM un EXECUTE tiene fecha esta semana, las 6 tareas anteriores de su grupo están al 100%. Si no, el EXECUTE <strong>se mueve</strong> — no se deja "por si acaso".</p>
+<p><strong>Práctica sobre caso real:</strong> tomar un trade próximo REAL del proyecto del PM (p. ej. un trim pendiente en <strong>Kyle Aubrey</strong> o un trade de acabados en <strong>Lingyan</strong>) y correr la cadena completa en vivo: cotejar portafolio, confirmar take-off en obra, redactar el SOW en CompanyCam (revisado por Jose contra el estándar "sin lugar a interpretación"), lanzar los 3 bid requests, y en la 3PM declarar la fecha del EXECUTE SOLO cuando la cadena esté 100%. Segundo ejercicio (auditoría): en su propio schedule, encontrar todo EXECUTE fechado con cadena &lt;100% y proponer la re-fecha.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>La semana del 29-jun produjo LA MITAD de lo proyectado</strong> por violar la regla de oro (EL_FLOW §0). En Martha: ELECTRICAL ROUGH IN con EXECUTE fechado 7–8 jul y <code>SELECT VENDOR &amp; SEND WO</code> + <code>CONFIRM SCHEDULE WITH SUB</code> <strong>en 0%</strong> — "ejecutando" con el sub aún en sourcing. Llegó el día y no había electricista.<br />
+- <strong>Framing fechado antes de contratar al framer</strong> (otro proyecto, misma semana — EL_FLOW §3).<br />
+- <strong>WO a posteriori:</strong> Martha 24-jul, 17:25, Jose: "Crear urgente work order para Cesar" — la WO DESPUÉS del trabajo invierte la regla (mega-análisis §4). Trabajo sin WO = no facturable y no autorizado.<br />
+- <strong>~$12k de compras frenadas</strong> por takeoffs y confirmaciones vencidos aguas arriba (EL_FLOW §3): las tareas de Fase A/B vencidas son el freno invisible.<br />
+- <strong>Puertas de Katie Holmes:</strong> se framearon a 8 ft cuando debían ser de 82" — y el 23-jul Romina pidió puertas de 96": <strong>se compró el error</strong> (mega-análisis §7). El cotejo plano-vs-campo del paso 1 y el <code>CONFIRM TAKEOFF DETAILS</code> existen para atrapar esto.</p>
+<hr />
+<h3>SESIÓN C5 — Negociar con el budget: el costo máximo y la WO (~60 min)</h3>
+<p><strong>Objetivo:</strong> que el PM use el budget como su límite de negociación y cierre subs por ≤ el costo del line item.</p>
+<p><strong>Contenido:</strong><br />
+- Estructura del budget (P2 + canónico §7): el estimado firmado se convierte en el budget; cada line item = cantidad · unidad (típico: square feet) · costo unitario · costo extendido.<br />
+- <strong>Costo vs. precio:</strong> el precio es lo que paga el cliente; el costo es lo que CNG puede pagar al sub. <strong>Costo = precio × (1 − margen). Margen normal = 40%</strong> (P2: <em>"ganamos 40% de cada line item"</em>). Se fija UNA vez al convertir estimado→budget (baja si hubo descuento).<br />
+- <strong>El ejemplo que Jose enseñó (P2, proyecto Kyle Aubrey, trade de pintura):</strong> paredes 3,373 sqft → costo <strong>$3,035.7</strong> (precio al cliente: $4,722) · techo 1,456 sqft × $1.32 → <strong>$1,921</strong> · siding 616 sqft → <strong>$628</strong>. La llamada del PM al sub es literal: <em>"tengo que pintar 3,373 sqft de pared, 1,456 de techo y 616 de siding, y por todo eso te puedo pagar la suma de estos tres."</em> — <em>"Esa es la forma en la que un Project Manager consigue los trabajos."</em><br />
+- Negociar por MENOS ahorra para CNG (P2, ejemplo en la WO): presupuesto $20,000, el PM negocia $18,000 → la WO se registra por $18,000 y <strong>se ahorran $2,000</strong>.<br />
+- La WO completa (P2): documento → work order → sub → trade → presupuesto → monto negociado → <strong>Scope of Work copiado del SOW</strong> → <strong>Payment Breakdown</strong> (términos: pago estándar = <strong>el viernes siguiente a terminar el trabajo</strong>; excepción "día después" — se pacta explícito).<br />
+- Quién registra: Backoffice hace la documentación en JT, pero <strong>los datos los da el PM</strong> (P2) — monto acordado, términos, alcance. Sin datos del PM, no hay WO limpia.<br />
+- El primer filtro de toda decisión (compras y contratación) es <strong>si entra en el presupuesto</strong> (P2).</p>
+<p><strong>Práctica sobre caso real:</strong> abrir el budget real de <strong>Kyle Aubrey</strong> en JobTread, ubicar el trade de pintura y reproducir el cálculo de Jose (línea por línea: cantidad × costo unitario = costo extendido; costo vs precio). Luego, con un trade pendiente del proyecto propio: extraer el costo máximo de cada line item, preparar el guion de negociación, y simular la llamada con Jose de contraparte. Cierre: llenar los datos de la WO (monto negociado + payment breakdown) para que Backoffice la formalice.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- Negociar sin abrir el budget = regalar margen o reventar el line item. El costo disponible ya está calculado — usarlo.<br />
+- <strong>Montos ambiguos en descripciones</strong> ("43k", "551872" — casos reales de Rohini y Martha, mega-análisis §7): el monto vive en la descripción de la tarea y el sistema lo parsea; un formato ambiguo rompe cashflow y productividad. Números claros, sin signo menos (P2).<br />
+- <strong>Karim:</strong> tasks de Critical Path vacíos = $0 de income en productividad (mega-análisis §7). Lo que no está bien registrado no existe para el negocio.</p>
+<hr />
+<h3>SESIÓN C6 — Ejecución, checklists During/After, la ciudad y el pago (~90 min)</h3>
+<p><strong>Objetivo:</strong> que el PM supervise la ejecución con checklist en mano, nunca llame a la ciudad antes de tiempo, y cierre el trade hasta el pago con documentación completa.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>During (EL_FLOW D.2):</strong> fotos diarias en CompanyCam CON descripción (el bot las audita y arma la bitácora) + la sección During del checklist con sus <strong>HOLD POINTS: nunca se tapa nada (drywall, tierra, concreto) sin verificarlo y fotografiarlo antes</strong>. P2: <em>"cada vez que vaya a inspeccionar, tiene que ir con el checklist en la mano."</em><br />
+- Inspección de cada visita (Mandamiento VI): cada visita de sitio termina con inspección contra el checklist + fotos con descripción. Ninguna visita sin evidencia.<br />
+- <strong>After (EL_FLOW E.2):</strong> al terminar el sub, inspección del después — verificar que TODO cumple, fotos finales, lien waiver, factura reconciliada. <strong>Esto es lo que justifica el pago al sub.</strong><br />
+- <strong>Mandamiento VIII — la ciudad de último:</strong> NUNCA llamar a la inspección municipal hasta que (1) la inspección propia del PM pase Y (2) el checklist de CompanyCam esté al <strong>100%</strong>. Llamar sobre trabajo sin verificar reprueba la inspección y quema días. KITBOT investiga qué revisa esa ciudad para pasar <strong>a la primera</strong> (EL_FLOW E.1).<br />
+- <strong>El gate de pago (EL_FLOW E.4):</strong> checklist 100% de los required = la señal de pago. Doble candado: PM verifica en obra + Backoffice revisa en oficina. Sin 100%, no hay pago — punto.<br />
+- Pago (EL_FLOW E.5): <code>BILL &amp; PAYMENT</code> lo ejecuta Milagros; a veces va <strong>partido</strong>: "ROUGH FINISH" / "PASS INSPECTION" (la última parte solo cuando la ciudad pasó). Pago estándar = viernes siguiente (P2). <strong>Los viernes hay reunión para FIJAR PRESUPUESTOS</strong> — el día donde el dinero de la semana se cierra: consolidación de saldos, pagos estándar del viernes, baseline semanal (canónico §9.2; agenda exacta por confirmar).<br />
+- <strong>Mandamiento IX:</strong> la tarea se cierra solo con <strong>bill + pago + lien waiver + Gantt al 100%</strong>. "Terminado en el terreno" no es "terminado".<br />
+- El cobro (EL_FLOW E.6): con el trade cerrado y documentado, Jonas pide el draw (<code>REQUEST/RECEIVE BANK PAYMENT</code>) — <strong>así cada trade terminado se convierte en cobro</strong>. La documentación del PM es el primer eslabón del dinero que entra.<br />
+- ⚠️ Estado real: los checklists v2 aún no están desplegados en la app (mega-análisis §3) — mientras tanto, la disciplina se ejecuta con fotos CON descripción + el checklist del trade que exista + el dossier del trade vía KITBOT. La regla del gate no se suspende: se documenta el equivalente.</p>
+<p><strong>Práctica sobre caso real:</strong> sobre un trade activo del PM (p. ej. tiles en <strong>Felton</strong> o el trade vivo de <strong>Rohini</strong>): (1) visita con checklist/dossier en mano, marcar item por item; (2) identificar los hold points del trade y fotografiar ANTES de que algo se tape; (3) simular el cierre: ¿qué me falta HOY para poder llamar a la ciudad? (lista exacta); (4) armar el paquete de pago: fotos After + lien waiver + factura → pedir la revisión de Backoffice. Auditoría inversa: abrir los checklists instanciados de <strong>Martha</strong> y explicar qué costó tenerlos en 0%.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Martha: 30 checklists instanciados, 29 en 0/x</strong> (mega-análisis §3). Instanciar no es llenar. Un checklist en 0% no libera pago ni atrapa errores.<br />
+- Llamar a la ciudad "para ganar tiempo" con trabajo a medias: red tag, días quemados, y el pago del sub (parte PASS INSPECTION) congelado.<br />
+- <strong>Tile de Katie Holmes:</strong> 4 días de ping-pong (21–24 jul) para confirmar si el tile pagado era el elegido (mega-análisis §7) — una selección sin punto único de verdad frena la ejecución. Si el PM detecta la ambigüedad, la escala el DÍA 1.<br />
+- <strong>Material cruzado entre obras:</strong> César usando material de Martha en otra cosa, detectado por chat y no por sistema (mega-análisis §7). El PM es el par de ojos en sitio: material que entra a su obra es de su obra.</p>
+<hr />
+<h3>SESIÓN C7 — Comunicación: el cliente, las re-fechas y el cierre del día (~60 min)</h3>
+<p><strong>Objetivo:</strong> que el PM domine las tres comunicaciones que definen el puesto: al cliente (primero), al sistema (re-fechas con razón) y al equipo (día contado).</p>
+<p><strong>Contenido:</strong><br />
+- <strong>El cliente SIEMPRE se entera primero por el PM</strong> (manual §1.4): proactivo, nunca perseguido; con problema + camino propuesto. Practicar el guion: qué pasó → qué implica (tiempo/costo) → qué propongo → qué necesito del cliente.<br />
+- <strong>Re-fechar CON razón</strong> (manual §2.1 + Día Cumplido check 3): toda tarea de HOY termina el día ejecutada o re-fechada con razón dicha al bot o en la 3PM. La razón es un dato del sistema (alimenta cashflow y la 3PM), no una excusa.<br />
+- Daily Update (Mandamiento I): un día sin update es un día en que la empresa está ciega a la obra.<br />
+- Esperas (waits): lo que el PM debe a otros — cero waits &gt;24h sin respuesta (Día Cumplido check 5); lo que otros le deben al PM — registrarlo con el bot para que lo persiga (manual §2.3).<br />
+- Directivas de Jose del grupo con due=hoy: cerradas o respondidas con estado (check 4).<br />
+- La 3PM como ritual (canónico §9): el PM entrega la realidad honesta de cada obra; Jose la cuadra en JT; después de las 3PM, JobTread es la verdad del día. El Backoffice es socio, no obstáculo (Mandamiento X).<br />
+- Dónde cae lo que el PM reporta (canónico §9.4–9.5): sus updates alimentan el <strong>SOD</strong> de la mañana, la <strong>prep de reunión 2:30</strong>, el <strong>"Tu Día Mañana" 6PM</strong> del grupo, el <strong>EOD</strong>, el <strong>SEMANAL</strong> de los viernes, el <strong>MENSUAL</strong> de gerencia (baseline inicial vs último viernes, solo obra), <strong>PRODUCTIVIDAD</strong> y <strong>CARRERA</strong>. Las leyes: <strong>los números del reporte oficial MANDAN</strong> (no se recalculan por fuera), <strong>"lo dicho manda sobre lo agendado"</strong> (si el campo reportó distinto al schedule, se registra y se cuadra), y <strong>la evaluación = cierres viernes vs viernes</strong>.<br />
+- Valores en la comunicación (manual §6): amabilidad y respeto en CUALQUIER canal, también cuando el sub falló o el cliente presiona.</p>
+<p><strong>Práctica sobre caso real:</strong> (1) roleplay de la llamada difícil con datos reales: "señora Cockrell, hoy la inspección se red-taggeó; esto significa X días; el plan de recuperación es Y" — evaluado contra el guion; (2) en la 3PM real, reportar TODAS las tareas de hoy de su proyecto con estatus + razón, sin que Jose tenga que preguntar dos veces; (3) revisar sus waits abiertos en el bot y cerrar los &gt;24h.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- Que el cliente se entere por el inspector, por un sub o por la factura (manual §1.4: "un cliente sorprendido por su propia obra es un cliente al que el PM le falló").<br />
+- Re-fechar sin razón o dejar la tarea vencida "en silencio" — la definición literal de día NO cumplido.<br />
+- <strong>Felton 17-jul:</strong> un cheque rebotado del cliente condicionando si el sub trabaja el sábado (mega-análisis §7) — cuando el dinero toca la ejecución, el PM escala a Milagros/Jose ESE día, no lo descubre el sábado.</p>
+<hr />
+<h2>4. Evaluación y certificación</h2>
+<p>Tres niveles observables por el sistema — no exámenes de papel (Plan Maestro §5). <strong>La evaluación oficial es por cierres viernes-vs-viernes</strong> (canónico §9.5): lo que cuenta es qué se CERRÓ entre viernes y viernes, nunca "schedules sin mover" que están en corrección. Y en los tres niveles se observa el <strong>comportamiento raíz</strong> (Jose, 2026-08-04): rigurosidad · atención al detalle · prever · solucionar · proactividad — ¿el PM previó (material, sub, inspección ANTES de que tronara) o aceptó el problema y reaccionó?</p>
+<h3>Nivel 1 — Comprensión (al terminar C1–C3)</h3>
+<ul>
+<li>Recita los 10 Mandamientos y explica cada uno con un caso propio.</li>
+<li>Dibuja la cadena pre-EXECUTE completa de memoria (portafolio → checklist Before → take-off confirmado → SOW → ≥3 bids → SELECT VENDOR &amp; SEND WO → CONFIRM SCHEDULE ×2 → material/ETA → PM INSPECTION BEFORE) y enuncia la regla de oro.</li>
+<li>Explica la secuencia de inspecciones de ciudad de su proyecto actual y qué NO se agenda hasta qué pase (la regla MEP→insulation→drywall).</li>
+<li>Calcula el costo máximo de un line item dado precio y margen (fórmula: costo = precio × (1 − margen)).</li>
+<li>Formato: conversación con Jose + diagrama en papel (≤30 min).</li>
+</ul>
+<h3>Nivel 2 — Ejecución guiada (durante C4–C7)</h3>
+<p>Sobre SU proyecto real, con Jose supervisando cada entrega:<br />
+- 1 cadena de trade completa ejecutada: SOW en CompanyCam + 3 bids + datos de WO entregados a Backoffice ANTES de cualquier inicio + schedule confirmado por teléfono Y escrito + material verificado en sitio + inspección Before hecha.<br />
+- 1 negociación real cerrada por ≤ el costo del line item del budget.<br />
+- 1 trade supervisado con checklist/dossier en mano: hold points fotografiados, After completo, paquete de pago (fotos + lien waiver + factura) aceptado por Backoffice.<br />
+- 1 semana entera con todas las fotos de obras trabajadas CON descripción (verificado por el bot).<br />
+- 1 llamada de cliente con problema real + camino propuesto (o roleplay si no hay evento).</p>
+<h3>Nivel 3 — Ejecución autónoma = CERTIFICADO</h3>
+<p><strong>Cumplir el "Día Cumplido" del PM 10 días hábiles seguidos sin ayuda</strong> <em>(N=10 es [PROPUESTA]; el Plan Maestro define "X días seguidos" y el semáforo semanal verde = ≥4/5 días — Jose fija el N final)</em>. Los checks EXACTOS (DIA_CUMPLIDO_POR_PUESTO.md v3, evaluados por la alerta pre-cierre de las 4:00 PM y el gate EOD):</p>
+<ol>
+<li><strong>Clock in y clock out en JobTread</strong> hechos.</li>
+<li><strong>Toda obra donde trabajó hoy tiene fotos en CompanyCam CON descripción.</strong></li>
+<li><strong>Las tareas del schedule de HOY: ejecutadas, o re-fechadas CON razón dicha al bot o en la 3PM</strong> (un "no se hizo y nadie dijo por qué" = día NO cumplido).</li>
+<li><strong>Las directivas de Jose del grupo (due=hoy): cerradas o respondidas con estado.</strong></li>
+<li><strong>Respondió lo que le pidieron (waits owes=él): cero waits &gt;24h sin respuesta.</strong></li>
+<li><strong>Contó su día — respondió ≥1 check-in o reportó por el grupo/bot.</strong></li>
+</ol>
+<p>Gate: ✅ = todos los checks core ("puedes irte tranquilo") · ⚠️ = parcial, dice qué falta · ❌ = sin señal. Un ❌ nuevo merece UNA pregunta antes de cualquier conclusión (¿dato real o sistema desactualizado?). Registro de avance: tabla por persona en la biblioteca, conectada al semáforo semanal de los viernes (Plan Maestro §5).</p>
+<hr />
+<h2>5. Material de apoyo — ONE-PAGER BILINGÜE / BILINGUAL ONE-PAGER</h2>
+<blockquote>
+<p>Imprimir y tener al lado. / Print it and keep it next to you.</p>
+</blockquote>
+<hr />
+<h3>🇪🇸 EL PM DE CNG — MECÁNICA EXACTA</h3>
+<p><strong>La misión:</strong> hacer que el proyecto avance DE VERDAD — <strong>como se planificó en el cronograma</strong>. Eres dueño del resultado, no de la excusa.</p>
+<p><strong>LA MENTALIDAD:</strong> rigurosidad · atención al detalle · prever · solucionar · proactividad. <strong>NO aceptes el problema y reacciones:</strong> prevélo (el material, el sub, la inspección — ANTES de que truene) o busca soluciones insaciablemente hasta cumplir el cronograma a como dé lugar.</p>
+<p><strong>LA CADENA (por cada trade, en orden — nada se salta):</strong><br />
+1. <strong>PORTAFOLIO</strong> — tu biblia. Coteja plano vs campo ANTES de todo.<br />
+2. <strong>CHECKLIST BEFORE + sitio caminado</strong> — ¿se puede construir esto tal cual?<br />
+3. <strong>CONFIRM TAKEOFF DETAILS</strong> — mide EN OBRA y llena el reporte de Romina.<br />
+4. <strong>SOW DETALLADO</strong> (reporte CompanyCam: fotos + medidas + alcance exacto) → <strong>≥3 BIDS</strong>.<br />
+5. <strong>SELECT VENDOR &amp; SEND WO</strong> — negocia ≤ costo del budget. <strong>SIN WO APROBADA NADIE TOCA LA OBRA.</strong><br />
+6. <strong>CONFIRM SCHEDULE ×2</strong> — teléfono Y escrito, 3–5 días antes. Uno es esperanza; dos es compromiso.<br />
+7. <strong>MATERIAL ANTES QUE LA CUADRILLA</strong> — ETA confirmado (ETA de 1 día = stock o SIN verificar: pregunta).<br />
+8. <strong>PM INSPECTION BEFORE</strong> — sitio listo + sign-off del trade anterior. Si no cumple, NO arranca.<br />
+9. <strong>EXECUTE</strong> — fotos diarias CON descripción. <strong>HOLD POINTS: nada se tapa sin foto.</strong><br />
+10. <strong>AFTER</strong>: checklist 100% + lien waiver + factura → <strong>ciudad SOLO cuando tu inspección pasó Y el checklist está 100%</strong> → pago (a veces partido: ROUGH / PASS INSPECTION).</p>
+<p><strong>REGLA DE ORO:</strong> un EXECUTE solo tiene fecha si su cadena previa está 100% cerrada. Si no, se mueve — no se deja "por si acaso".</p>
+<p><strong>EL BUDGET ES TU LÍMITE:</strong> costo máx = precio × (1 − margen 40%). Ej. real (pintura Kyle Aubrey): paredes $3,035 · techo $1,921 · siding $628 — "te puedo pagar la suma de estos tres". <em>(En Kyle hubo descuento — por eso no sale 40% exacto.)</em></p>
+<p><strong>NOMENCLATURA:</strong> <code>&lt;TRADE&gt; + &lt;ACCIÓN&gt;</code> (ej. <code>DRYWALL: EXECUTE</code>, <code>PAINT: BILL &amp; PAYMENT</code>).</p>
+<p><strong>REGLAS DE ORO DEL DÍA:</strong><br />
+- Clock in al llegar, clock out al salir.<br />
+- Foto sin descripción = NO es documentación = NO libera pago.<br />
+- Tarea de hoy: ejecutada o re-fechada CON razón. Nunca "no se hizo y nadie dijo por qué".<br />
+- <strong>Después de las 3PM, JobTread es la verdad del día.</strong><br />
+- El cliente SIEMPRE se entera primero por ti — con problema + camino propuesto.<br />
+- Tarea completa = bill + pago + lien waiver + Gantt 100%.<br />
+- Tú NO creas tareas en JT (Backoffice) ni llevas dinero (Milagros). Coordinas, verificas, documentas, destrabas.<br />
+- Duda técnica → pregúntale a KITBOT. No adivines.<br />
+- Respeto en TODO canal. No gritar. No insultar. Nunca.</p>
+<p><strong>TU RELOJ:</strong> 7:50 saludo/plan → clock in + caminar sitio → check-ins 10/12/2 → <strong>3PM reunión</strong> → <strong>4PM alerta pre-cierre</strong> → 5PM cierre ✅.</p>
+<hr />
+<h3>🇺🇸 THE CNG PM — EXACT MECHANICS</h3>
+<p><strong>The mission:</strong> make the project ACTUALLY move — <strong>the way it was planned in the schedule</strong>. You own the outcome, not the excuse.</p>
+<p><strong>THE MINDSET:</strong> rigor · attention to detail · foresee · solve · be proactive. <strong>Do NOT accept the problem and react:</strong> prevent it (the material, the sub, the inspection — BEFORE it blows up) or hunt for solutions relentlessly until the schedule is met, whatever it takes.</p>
+<p><strong>THE CHAIN (per trade, in order — no skipping):</strong><br />
+1. <strong>PORTFOLIO</strong> — your bible. Check plans vs. field BEFORE anything.<br />
+2. <strong>BEFORE CHECKLIST + walk the site</strong> — can this be built as drawn?<br />
+3. <strong>CONFIRM TAKEOFF DETAILS</strong> — measure ON SITE and fill Romina's report.<br />
+4. <strong>DETAILED SOW</strong> (CompanyCam report: photos + measurements + exact scope) → <strong>≥3 BIDS</strong>.<br />
+5. <strong>SELECT VENDOR &amp; SEND WO</strong> — negotiate ≤ budget cost. <strong>NO APPROVED WO = NOBODY TOUCHES THE JOB.</strong><br />
+6. <strong>CONFIRM SCHEDULE ×2</strong> — phone AND writing, 3–5 days ahead. One channel is a hope; two is a commitment.<br />
+7. <strong>MATERIAL BEFORE THE CREW</strong> — ETA confirmed (1-day ETA = in stock or UNVERIFIED: ask).<br />
+8. <strong>PM INSPECTION BEFORE</strong> — site ready + predecessor signed off. Not ready = no start.<br />
+9. <strong>EXECUTE</strong> — daily photos WITH descriptions. <strong>HOLD POINTS: nothing gets covered without a photo.</strong><br />
+10. <strong>AFTER</strong>: checklist 100% + lien waiver + invoice → <strong>call the city ONLY when your own inspection passed AND the checklist is 100%</strong> → payment (sometimes split: ROUGH / PASS INSPECTION).</p>
+<p><strong>GOLDEN RULE:</strong> an EXECUTE only gets a date if its whole prior chain is 100% closed. Otherwise it moves — never left "just in case".</p>
+<p><strong>THE BUDGET IS YOUR CEILING:</strong> max cost = price × (1 − 40% margin). Real example (Kyle Aubrey paint): walls $3,035 · ceiling $1,921 · siding $628 — "I can pay you the sum of these three." <em>(Kyle had a discount — that's why it isn't exactly 40%.)</em></p>
+<p><strong>NAMING:</strong> <code>&lt;TRADE&gt; + &lt;ACTION&gt;</code> (e.g. <code>DRYWALL: EXECUTE</code>, <code>PAINT: BILL &amp; PAYMENT</code>).</p>
+<p><strong>DAILY GOLDEN RULES:</strong><br />
+- Clock in on arrival, clock out on departure.<br />
+- A photo without a description is NOT documentation and does NOT release payment.<br />
+- Today's task: executed, or re-dated WITH a reason. Never "didn't get done and nobody said why".<br />
+- <strong>After 3 PM, JobTread is the truth of the day.</strong><br />
+- The client ALWAYS hears it first from you — problem + proposed path, never just the problem.<br />
+- A task is complete = bill + payment + lien waiver + Gantt 100%.<br />
+- You do NOT create JT tasks (Backoffice does) and do NOT carry money (Administradora does). You coordinate, verify, document, un-stick.<br />
+- Technical question → ask KITBOT. Don't guess.<br />
+- Respect on EVERY channel. No yelling. No insults. Ever.</p>
+<p><strong>YOUR CLOCK:</strong> 7:50 greeting/plan → clock in + walk the site → check-ins 10/12/2 → <strong>3 PM meeting</strong> → <strong>4 PM pre-close alert</strong> → 5 PM close ✅.</p>
+<hr />
+<p><em>Track C v1.1 — 2026-08-04. Construido desde el manual PM v2.0, EL_FLOW, SCHEDULE_STRUCTURE, el proceso canónico, las transcripciones Parte 1+2 de Jose y los huecos reales del mega-análisis 2026-07-26. v1.1 integra las correcciones de Jose 2026-08-04 (LA CLAVE, mentalidad/causa raíz, reunión de viernes, reportería §9.4–9.5, template maestro JT) + hallazgos del verificador. Se revisa con Jose antes de entrenar (regla: un entregable a la vez).</em></p>
+<a class="volver" href="/proceso/materiales/">← Centro de materiales</a></div></body></html>

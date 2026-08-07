@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<title>M5 — Negociar con el budget</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+h3 { font-size: 12px; margin: 14px 0 6px; color: #1d4ed8; }
+h4 { font-size: 10.5px; margin: 10px 0 4px; color: #0f172a; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.portada { text-align: center; padding-top: 90px; page-break-after: always; }
+.portada .sub { font-size: 13px; color: #475569; margin-top: 8px; }
+.portada .fecha { margin-top: 30px; color: #64748b; font-size: 11px; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.pos { page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+.pos h3 { margin-top: 0; }
+ul { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+.dos-col { display: flex; gap: 14px; } .dos-col > div { flex: 1; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.seccion-num { color: #94a3b8; font-weight: 400; }
+</style></head><body>
+<div class="portada">
+  <h1>M5 — Negociar con el budget</h1>
+  <div class="sub">Costo máximo = precio × (1 − margen) · la WO completa · renegociaciones notificadas</div>
+  <div class="sub">TRACK C · PROJECT MANAGERS — Angel · Giselle · Jeff</div>
+  <div class="fecha">v2026-08-06 · Programa de Capacitación CNG · <b>Jeff: English version = TRACK_C_v2026-08-06_EN + guion EN</b></div>
+</div>
+
+<h2><span class="seccion-num">1 ·</span> OBJETIVO</h2>
+<p><b>Esta sección existe para</b> que el PM use el budget como su límite de negociación y cierre subs por ≤ el costo del line item, con la WO completa y firmada.</p>
+
+<h2><span class="seccion-num">2 ·</span> CONTENIDO</h2>
+<div class="clave"><b>Costo vs precio:</b> el PRECIO es lo que paga el cliente; el COSTO es lo que CNG puede pagar al sub. <b>Costo = precio × (1 − margen). Margen normal = 40%.</b> Se fija UNA vez al convertir estimado→budget (baja si hubo descuento). El primer filtro de toda decisión: ¿entra en el presupuesto?</div>
+<div class="pos"><h3>El ejemplo que Jose enseñó (P2 — Kyle Aubrey, pintura)</h3>
+<table>
+<tr><th>Line item</th><th>Cantidad</th><th>Costo disponible</th></tr>
+<tr><td>Paredes</td><td>3,373 sqft</td><td><b>$3,035.7</b> (precio cliente: $4,722)</td></tr>
+<tr><td>Techo</td><td>1,456 sqft × $1.32</td><td><b>$1,921</b></td></tr>
+<tr><td>Siding</td><td>616 sqft</td><td><b>$628</b></td></tr>
+</table>
+<p>La llamada literal: <i>"tengo que pintar 3,373 sqft de pared, 1,456 de techo y 616 de siding, y por todo eso te puedo pagar la suma de estos tres." — "Esa es la forma en la que un Project Manager consigue los trabajos."</i> (En Kyle hubo descuento — por eso no sale 40% exacto.)</p></div>
+<ul>
+<li><b>Negociar por MENOS ahorra:</b> WO real de $20,000 cerrada en $18,000 = $2,000 ahorrados, registrados.</li>
+<li><b>La WO completa:</b> sub → trade → presupuesto → monto negociado → <b>scope adentro</b> → <b>Payment Breakdown SIEMPRE</b> (estándar = el viernes siguiente a terminar; excepciones explícitas; a veces partido ROUGH / PASS INSPECTION) → <b>firma electrónica</b> → "Aprobado".</li>
+<li><b>Quién registra:</b> Backoffice formaliza en JT; <b>los datos los da el PM</b> (monto, términos, alcance).</li>
+<li><b>Renegociaciones (P3):</b> si CEO/COO renegocia un precio ya cerrado, <b>DEBE notificarse</b> para actualizar la WO y no pagar de más. El PM verifica que su WO refleje el último precio.</li>
+<li><b>El monto vive en la DESCRIPCIÓN</b> de la tarea y el sistema lo parsea: números claros, sin signo menos.</li>
+</ul>
+
+<h2><span class="seccion-num">3 ·</span> EL CASO REAL</h2>
+<div class="gap"><b>Montos ambiguos:</b> "43k" (Rohini) y "551872" (Martha) — formatos que rompen cashflow y productividad. Y <b>Karim:</b> tasks de Critical Path vacíos = <b>$0 de income</b> en productividad. Lo que no está bien registrado <b>no existe para el negocio</b>.</div>
+
+<h2><span class="seccion-num">4 ·</span> EL EJERCICIO</h2>
+<p>(1) Abrir el budget real de Kyle Aubrey y reproducir el cálculo de Jose línea por línea (cantidad × costo unitario = extendido; costo vs precio). (2) Con un trade pendiente propio: extraer el costo máximo por line item, preparar el guion de negociación y <b>simular la llamada con Jose de contraparte</b>. (3) Llenar los datos de la WO (monto + payment breakdown) para que Backoffice la formalice y el sub la firme.</p>
+
+<h2><span class="seccion-num">5 ·</span> LO QUE SE EVALÚA</h2>
+<ul>
+<li>Calcula el costo máximo dado precio y margen.</li>
+<li>1 negociación real cerrada por ≤ el costo del line item.</li>
+<li>Su última WO: scope adentro + payment breakdown + firma electrónica antes del inicio.</li>
+</ul>
+
+<div class="footer-note">TRACK C · PM · v2026-08-06 — Fuentes: PROCESO CANÓNICO CNG v4 · JD_pm v3.0 · TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv · EL_FLOW · REPORTERIA_MASTER §A · DIA_CUMPLIDO v3 · transcripciones Parte 1–3. El canon manda; nada inventado.</div>
+</body></html>

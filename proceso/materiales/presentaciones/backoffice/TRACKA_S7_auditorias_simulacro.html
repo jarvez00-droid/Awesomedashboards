@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TRACK A · S7 — Las 6 auditorías del Backoffice + simulacro de día completo</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+h3 { font-size: 12px; margin: 14px 0 6px; color: #1d4ed8; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.portada { text-align: center; padding-top: 90px; page-break-after: always; }
+.portada .sub { font-size: 13px; color: #475569; margin-top: 8px; }
+.portada .fecha { margin-top: 30px; color: #64748b; font-size: 11px; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.pos { page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+.pos h3 { margin-top: 0; }
+ul { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+ol { margin: 4px 0 8px; padding-left: 20px; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.seccion-num { color: #94a3b8; font-weight: 400; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+<h1>TRACK A · BACKOFFICE / DATA-ENTRY</h1>
+<div class="sub">SESIÓN 7 — Las 6 AUDITORÍAS del Backoffice + simulacro de día completo</div>
+<div class="sub">Duración: 90 min · Aprendiz: Joaquín · Entrenador: Jose</div>
+<div class="fecha">v2026-08-06 · Biblioteca de Entrenamientos CNG</div>
+</div>
+
+<h2><span class="seccion-num">1 ·</span> OBJETIVO</h2>
+<p><b>Esta sesión existe para</b> ejercer los "VERIFICAR" del puesto — con las evidencias exactas que Jose fijó — y correr un día entero de punta a punta. La auditoría real <b>verifica el documento, no la palabra</b>: hasta la Parte 3, la "auditoría" era preguntarle al PM sí/no sin verificar (<i>"nos han dicho sí y no"</i>). Ese hábito se entierra aquí.</p>
+
+<div class="clave"><b>Verificar, no asumir. Sin documento, no hay aprobación.</b> El Data-Entry es la mitad del doble candado de pago que hoy NO opera en la práctica — la mitad de oficina. El PM en obra + el Backoffice en oficina = el gate.</div>
+
+<h2><span class="seccion-num">2 ·</span> CONTENIDO — LAS 6 AUDITORÍAS</h2>
+<table>
+<tr><th>#</th><th>Auditoría</th><th>Qué verifico exactamente</th><th>Si falla</th></tr>
+<tr><td>1</td><td><b>Dicho vs. marcado</b> (Mand. II)</td><td>El reporte de cada PM contra JobTread y CompanyCam; el Daily Update se verifica ANTES de actuar sobre él (Mand. V)</td><td>Discrepancia → ops.db, se resuelve HOY — nunca se asume resuelta</td></tr>
+<tr><td>2</td><td><b>ETAs de Compras</b> (P2)</td><td>Cada PURCHASE MATERIAL con su tarea ETA al día siguiente · plazo = el del proveedor · ETA de 1 día = stock o SIN VERIFICAR · ninguna cadena crítica sin ETA</td><td>Lista para Romina/Jose; se persigue — <i>"a veces se le pasa al área de compras"</i></td></tr>
+<tr><td>3</td><td><b>Expediente antes de pago</b> (Mand. VI)</td><td>Factura + WO FIRMADA + lien waiver + After respaldada, ANTES de que el BILL &amp; PAYMENT llegue a Milagros. Estándar = sus 4 FILTROS: ¿en el plan de la semana? ¿misma cantidad? ¿nos deja bien? ¿documentación (WO + inspecciones)?</td><td>El pago no se mueve — y se dice A TIEMPO, no el viernes a las 5. Tras pago: actualizar schedule + subir factura</td></tr>
+<tr><td>4</td><td><b>Fotos con descripción</b></td><td>Toda obra trabajada hoy con fotos en CompanyCam CON descripción (nunca se tapa nada sin foto — Fase D)</td><td>PM en cero → se levanta en la reunión</td></tr>
+<tr><td>5</td><td><b>⭐ Takeoffs con las 3 EVIDENCIAS</b> (Jose 06-ago)</td><td>Compras crea sus take-offs + cada compra deja DENTRO del reporte de takeoff en CC: ① foto del precio CONFIRMADO/FIJADO · ② ETA POR ESCRITO del proveedor · ③ el RECIBO. El takeoff = expediente completo del ciclo de compra del trade</td><td>Takeoff sin las 3 = expediente incompleto → flag. PM con takeoff sin confirmar → avisarle <i>"si no le hacen caso a Romina"</i></td></tr>
+<tr><td>6</td><td><b>⭐ SOW existe + Durante activo</b> (P3)</td><td>Trade próximo → el SOW EXISTE en CompanyCam (el envío no es trackeable; la existencia sí) · trade EN EJECUCIÓN → sección Durante con fotos/registros</td><td>Durante vacío = el PM no está inspeccionando con checklist → flag</td></tr>
+</table>
+
+<h3>2.1 El contexto del dinero (por qué estas auditorías importan)</h3>
+<ul>
+<li><b>El insumo del cashflow:</b> el "Daily Schedule Update by EOD" alimenta el CASHFLOW DATA de Milagros — si el schedule está sucio, el plan de pagos de toda la empresa se hace sobre mentiras.</li>
+<li><b>La reunión de los VIERNES (canon §9.2):</b> reunión de cash flow → <b>PLAN DE LA SEMANA</b> (presupuesto por proyecto) → el CEO aprueba (o plan alternativo). Checks del cronograma = <b>pagos CONFIRMADOS/reservados</b>. El Backoffice registra los pagos estándar que caen viernes — doble registro + expediente listo ANTES.</li>
+<li><b>El After desbloquea el pago:</b> <i>"si el PM no ha llenado su reporte, no hay registro de su inspección → no damos por terminado el trabajo → no se le paga al sub."</i></li>
+</ul>
+
+<h2><span class="seccion-num">3 ·</span> EL CASO REAL</h2>
+<div class="gap"><b>Checklists en 0% + ETAs añejos.</b> En Martha: <b>30 checklists instanciados, 29 en 0/x</b> — los PMs querían llenar todo al final del trade, lo que invalida las 3 secciones (Before/Durante/Después tienen momentos distintos; se detecta por el patrón: todo llenado el mismo día del cierre). Y el hueco gemelo de compras: <b>"está ordenado" ≠ "ETA confirmado"</b> — un ETA desactualizado <i>"le miente al cronograma"</i>: el PM planifica su semana sobre una fecha falsa (ETA sin confirmar &gt;24h = discrepancia abierta). <b>Moraleja:</b> no dar por "verificado" lo que solo está instanciado; la evidencia es la sección llenada EN VIVO y el ETA por escrito. Referencia del hueco de fotos: Martha 2/49, Felton 1/35 con descripción.</div>
+
+<h2><span class="seccion-num">4 ·</span> EL EJERCICIO</h2>
+<div class="mat">
+<ol>
+<li><b>ETAs + 3 evidencias:</b> barrido completo de compras de la semana en Lingyan y Rohini: compras sin ETA, ETAs de 1 día sin verificar, ETAs vencidos, takeoffs sin las 3 evidencias. Producir la lista para Romina/Jose.</li>
+<li><b>Fotos:</b> revisar en CompanyCam los proyectos trabajados ayer y contar fotos con/sin descripción. Llevar el dato a la reunión.</li>
+<li><b>Expediente:</b> tomar el próximo BILL &amp; PAYMENT que venza y auditar su expediente completo ANTES de que Milagros pague — contra los 4 filtros.</li>
+<li><b>SOW/Durante:</b> para 2 trades próximos y 2 en ejecución, verificar SOW existe + Durante con fotos. Flags → ops.db.</li>
+<li><b>🏁 SIMULACRO FINAL — un día completo, Joaquín conduce, Jose observa:</b> mañana (schedules + flags) → 1 PM handoff de Romina → 2:30 leer la prep → reunión registrando en vivo TODOS los proyectos → cierre: cambios del bot + pendientes + transcript al sistema + schedule limpio antes de las 8 PM. <b>Este simulacro es la puerta al Nivel 3 (certificación).</b></li>
+</ol>
+</div>
+
+<h2><span class="seccion-num">5 ·</span> LO QUE SE EVALÚA</h2>
+<ul>
+<li>Corre las 6 auditorías sobre proyectos reales y produce flags CON evidencia (captura/documento), no con "me dijeron".</li>
+<li>Prepara un expediente de pago completo contra los 4 filtros de la Administradora, a tiempo.</li>
+<li>Conduce el simulacro de día completo sin ayuda — la puerta al Nivel 3.</li>
+<li><b>Nivel 3 = CERTIFICADO:</b> Día Cumplido del Backoffice sin ayuda, N días seguidos <i>[PROPUESTA: N = 10 días hábiles — gate de Jose]</i>: ✓ reunión hecha + dicho-vs-marcado verificado (discrepancias → ops.db) · ✓ schedules al día (cambios del bot + pendientes resueltos) · ✓ transcript alimentado. Durante esos días: cero WO a posteriori sin flag, cero compras sin ETA auditado, comportamiento observado (discrepancias el mismo día, esperas perseguidas antes de vencer — nunca "aceptar y reaccionar").</li>
+</ul>
+
+<div class="footer-note">TRACK A · Sesión 7 · v2026-08-06 · Fuentes: 00_PROCESO_CANONICO_CNG.md §5/§8/§9.2/§11 · manual v2.0 (Mandamientos II/V/VI/VII) · EL_FLOW Fase E · evidencias del takeoff (Jose 06-ago, canon §5) · DIA_CUMPLIDO_POR_PUESTO.md v3 · TRACK_A_v2026-08-06 §S7 · casos reales brief §5 (casos 9-10).</div>
+
+</body>
+</html>

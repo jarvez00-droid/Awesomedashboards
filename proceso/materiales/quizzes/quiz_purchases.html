@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>quiz purchases · CNG</title>
+<link rel="stylesheet" href="/proceso/assets/style.css">
+<style>
+.doc{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.doc h1{font-size:28px;border-bottom:3px solid var(--ink,#0f172a);padding-bottom:10px;margin-top:0}
+.doc h2{font-size:20px;margin-top:34px;border-bottom:2px solid #cbd5e1;padding-bottom:6px}
+.doc h3{font-size:16px;color:#1d4ed8;margin-top:24px}
+.doc table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.doc th{background:#0f172a;color:#fff;padding:8px 10px;text-align:left}
+.doc td{border:1px solid #cbd5e1;padding:8px 10px;vertical-align:top}
+.doc tr:nth-child(even) td{background:#f8fafc}
+.doc pre{background:#f1f5f9;padding:14px;border-radius:8px;overflow-x:auto;font-size:13px;border:1px solid #e2e8f0}
+.doc code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:13px}
+.doc blockquote{border-left:4px solid #2563eb;background:#eff6ff;margin:14px 0;padding:10px 16px;border-radius:0 8px 8px 0}
+.doc li{margin:5px 0}
+.volver{display:inline-block;margin:16px 0;padding:8px 16px;background:#0f172a;color:#fff;border-radius:20px;text-decoration:none;font-size:14px;font-weight:600}
+</style></head><body>
+<div class="doc"><a class="volver" href="/proceso/materiales/">← Centro de materiales</a>
+<h1>QUIZ · PURCHASES COORDINATOR (Romina) — 3 niveles</h1>
+<p><strong>Track B v2026-08-06 · Instrumento de apoyo a la certificación (Plan Maestro §5).</strong> La certificación real es el Día Cumplido sostenido — este quiz verifica comprensión antes de la práctica supervisada. Se corre en conversación (no examen de papel). Respuestas al final de cada nivel.</p>
+<hr />
+<h2>NIVEL 1 — EXPLICA (comprensión)</h2>
+<p><strong>P1.</strong> ¿Cuál es la medida ÚNICA del puesto? ¿Por qué NO es "cuánto se compró"?</p>
+<p><strong>P2.</strong> Recita las 3 verdades no negociables y da un ejemplo real de cada una.</p>
+<p><strong>P3.</strong> Nombra las 5 tareas del lane oficial (template maestro 2026-08-06) en orden, con su task type y su dueño.</p>
+<p><strong>P4.</strong> La regla DELIVERY ETA: ¿qué significa una tarea de 3 días de duración? ¿Y una de 1 día? ¿Por qué en tu evaluación semanal una ETA "vencida" no significa nada?</p>
+<p><strong>P5.</strong> ¿Cuáles son las 3 EVIDENCIAS obligatorias en el reporte de takeoff (Jose 06-ago) y en qué momento del ciclo se sube cada una?</p>
+<p><strong>P6.</strong> ¿Cuáles son los DOS registros de toda compra, y qué documento contable crea Compras (Bill o Expense)? ¿Por qué?</p>
+<p><strong>P7.</strong> La regla "TODO dinero pasa por el schedule" (Jose 06-ago): ¿qué se hace con una compra de caja chica en Home Depot, y qué se rompe si no se registra?</p>
+<p><strong>P8.</strong> ¿Quién ejecuta los pagos que tú coordinas, y cuáles son sus 4 filtros?</p>
+<p><strong>P9.</strong> ¿Cuál es tu plan semanal, de dónde sale, y cuál es tu papel frente a él?</p>
+<p><strong>P10.</strong> Los 4 checks de tu Día Cumplido — recítalos.</p>
+<h3>Respuestas Nivel 1</h3>
+<ol>
+<li><strong>¿Algún trade quedó esperando material?</strong> Si el material frena a una cuadrilla, la cadena de compras falló sin importar cuántas órdenes salieron — el volumen no protege el cronograma, la anticipación sí.</li>
+<li>① Ningún trade se detiene por material (ej.: semana del 29-jun — se produjo la mitad por cadenas abiertas). ② Cada cadena crítica con ETA confirmado — "está ordenado" no basta (ej.: ETAs añejos que "le mienten al cronograma"). ③ La cotización ES la descripción (ej.: montos ilegibles "43k"/"551872" que el parser no lee).</li>
+<li><code>TRADE: CREATE TAKEOFF REPORT</code> (2. Purchases, Romina) → <code>TRADE: CONFIRM TAKEOFF DETAILS</code> (1. PM Tasks, el PM) → <code>TRADE: SECURE PRICING &amp; ETA</code> (2. Purchases, Romina) → <code>TRADE: PURCHASE MATERIALS</code> (5. Payment–Materials, Romina) → <code>TRADE: DELIVERY ETA</code> (2. Purchases, Romina). <em>(La tarea CONFIRM DELIVERY no existe en el template oficial.)</em></li>
+<li>
+<blockquote>
+<p>1 día → la fecha fin es el plazo MÁXIMO de llegada ("llega a más tardar el fin"). =1 día → en stock, o ETA SIN VERIFICAR (deuda, no cierre). En la evaluación la ETA es SOLO INFORMATIVA (ley C3): se ajusta a propósito para reflejar la llegada real — corregirla es mantener el cronograma honesto, no admitir un fallo.</p>
+</blockquote>
+</li>
+<li>① Foto del precio CONFIRMADO/FIJADO (al cerrar el pricing) · ② ETA POR ESCRITO del proveedor (al cerrar el pricing) · ③ el RECIBO (al ejecutar la compra). Todas en el MISMO reporte de takeoff de CompanyCam = el expediente auditable.</li>
+<li>A) el SCHEDULE (tarea en el día real, tipo, monto, check) y B) los LIBROS (documento contable). Compras crea <strong>EXPENSE</strong> — <em>"lo que crea el área de compras cuando realiza una compra de material es expense"</em> (Jose); el Bill es para pagos a subs.</li>
+<li>Se anota al proyecto como <strong>Additional Expense</strong> — aunque sean bolsas de basura. Sin tarea en el schedule, el cashflow, la productividad y los reportes quedan CIEGOS a ese gasto.</li>
+<li>La <strong>Administradora (Milagros)</strong> — gatekeeper. Filtros: ¿está en el plan de la semana? ¿es la misma cantidad? ¿nos deja en buena posición financiera? ¿documentación adecuada (WO + inspecciones)?</li>
+<li>El <strong>KANBAN "Upcoming Week Purchases"</strong> (reporte oficial #5): sáb→vie, tarjeta = compra CONFIRMADA en el cashflow con monto en SU día. Sale de la reunión de cashflow del viernes (aprueba el CEO). Mi papel: <strong>empujar que cada compra se realice SU día</strong>.</li>
+<li>① Cero compras de HOY sin ejecutar o sin ETA confirmada · ② todo pricing ≤5 días cotizado en la descripción · ③ ETAs de la semana confirmados o corregidos · ④ toda espera a un PM registrada en el bot.</li>
+</ol>
+<hr />
+<h2>NIVEL 2 — APLICA A CASO REAL (decisión)</h2>
+<p><strong>C1 — El spec que no cuadra.</strong> Estás por cotizar puertas interiores. El portafolio dice marcos de <strong>82"</strong>. El PM aún no cierra su <code>CONFIRM TAKEOFF DETAILS</code>, pero te escriben por Telegram: "ya compra nomás, el framer dice que están a 8 pies". ¿Qué haces, en orden?</p>
+<p><strong>C2 — Budget vs cuadrilla.</strong> Trade: insulation. Budget del line item: $2,400. Quotes: A) $2,100, llega en 10 días · B) $2,350, llega en 4 días · C) $2,600, llega mañana. La cuadrilla está confirmada para dentro de 5 días. ¿Cuál eliges y por qué? ¿Y si la cuadrilla fuera MAÑANA?</p>
+<p><strong>C3 — El ETA que se movió.</strong> El lunes registraste DELIVERY ETA con fin el jueves (plazo del proveedor por escrito). El miércoles el proveedor avisa: llega el lunes siguiente. El EXECUTE del trade está fechado el viernes. ¿Qué haces, en orden, y a quién le llega cada cosa?</p>
+<p><strong>C4 — La entrega incompleta.</strong> Llega la entrega de tile: la foto del packing slip muestra 42 cajas; tu orden dice 50. Además 6 cajas son de un tono distinto. El sub empieza en 3 días. ¿Qué marcas, qué NO marcas, y qué disparas?</p>
+<p><strong>C5 — El viernes y el kanban.</strong> Es lunes; tu kanban trae para HOY una compra confirmada de $3,800 de sheetrock en Martha. El takeoff tiene indicador "PM-confirmó: NO". ¿Puedes ejecutar la compra? ¿Qué haces antes de la 1:00 PM?</p>
+<h3>Respuestas Nivel 2</h3>
+<ol>
+<li><strong>No compro.</strong> (1) La espera "espero confirmación del takeoff de puertas" va al bot. (2) Levanto la discrepancia HOY: el plano dice 82", el campo dice 8 ft — la pregunta exacta al PM: "mide el alto framed del marco EN OBRA y confírmalo en el reporte". (3) Solo cotizo/compro sobre el dato confirmado. <em>Es el caso real de Katie Holmes: se compró el error (96") por saltarse esto.</em></li>
+<li><strong>B</strong> — primer filtro: budget ($2,350 ≤ $2,400 ✓; C queda fuera de una); segundo: ETA vs cuadrilla (4 días &lt; 5 — llega ANTES que la cuadrilla; A con 10 días llega tarde = trade parado). Si la cuadrilla fuera mañana: NINGUNA opción dentro de budget llega a tiempo → <strong>no decido sola</strong>: flag al PM y al Backoffice con las opciones sobre la mesa (mover cuadrilla vs excepción de budget — decisión de ellos).</li>
+<li>(1) <strong>Corrijo el DELIVERY ETA de inmediato</strong> al lunes (un ETA viejo "le miente al cronograma"; corregirlo no me penaliza — es informativo). (2) Aviso al PM: su EXECUTE del viernes queda sin material — la regla de oro dice que ese EXECUTE ya no puede sostener su fecha. (3) Comentario de estado en el proyecto (el sistema lo lee) y el cambio queda para la reunión de las 2:30. Lo que NO se hace: callar y "esperar que llegue antes".</li>
+<li><strong>No marco la entrega como verificada.</strong> Registro el conteo contra la orden (42/50, 6 con spec errado) con foto + comentario. Disparo: reclamo al proveedor HOY + corrección del DELIVERY ETA por el faltante + aviso al PM (su sub empieza en 3 días) + NO notifico a Milagros para pago hasta verificar completo. <em>La entrega no está "hecha" hasta que se verifica.</em></li>
+<li>La compra está CONFIRMADA en cashflow (el CEO la aprobó), pero <strong>comprar sobre un takeoff sin confirmar es comprar el error</strong>. Antes de la 1 PM: (1) espera al bot "espero confirmación del takeoff de sheetrock en Martha"; (2) empujo al PM directamente (mi papel es que la compra se realice SU día); (3) si no confirma a mi cierre → handoff al Backoffice con el pendiente declarado y el riesgo dicho: "tarjeta de hoy sin PM-confirmó — quién la destraba esta tarde". El desvío queda registrado con razón, no en silencio.</li>
+</ol>
+<hr />
+<h2>NIVEL 3 — DETECTA EL ERROR PLANTADO (auditoría)</h2>
+<p><strong>E1 — La tarea registrada.</strong> En el schedule de un proyecto ves, cerrada hoy:</p>
+<pre><code>Tarea: SHEETROCK: PURCHASE MATERIALS   · type: 2. Purchases
+Descripción: &quot;aprox 2.4k, guardé la boleta en mi correo&quot;
+Fecha: viernes pasado (la compra se hizo hoy) · check ✓
+</code></pre>
+<p>Encuentra los 5 errores.</p>
+<p><strong>E2 — El expediente.</strong> El reporte de takeoff de INSULATION en CompanyCam tiene: la foto del quote inicial del proveedor (de hace 3 semanas), un chat de WhatsApp donde el proveedor dice "sale en unos días", y nada más. La compra ya se pagó. ¿Qué falta y qué está mal?</p>
+<p><strong>E3 — El cierre del día.</strong> Son las 12:55 PM. Tu registro del día: 2 compras de hoy ejecutadas ✓ · 1 pricing con fecha pasado mañana sin cotización "porque mañana me responden" · el ETA de plumbing corregido ✓ · esperas: "le escribí a Giselle por el takeoff, me responde en la tarde" (solo en Telegram) · cierras y te vas sin mensaje al Backoffice. ¿Cuántos checks del Día Cumplido fallan y por qué?</p>
+<p><strong>E4 — El kanban.</strong> Miras tu semana: la tarjeta del martes (compra de windows, $5,200, Lingyan) la moviste al jueves porque "el proveedor atiende mejor los jueves". No avisaste a nadie; el schedule sigue igual. ¿Qué está mal y qué era lo correcto?</p>
+<h3>Respuestas Nivel 3</h3>
+<ol>
+<li>① Type errado: PURCHASE MATERIALS es <strong>5. Payment – Materials</strong> (no 2. Purchases) — sin eso el $ no alimenta el cashflow. ② Monto ilegible: "aprox 2.4k" no es parseable — número limpio (2400). ③ Boleta "en mi correo": va <strong>ATTACHED</strong> en la tarea (y el recibo al reporte de takeoff — evidencia ③). ④ Fecha sin cuadrar: la tarea vive el <strong>día REAL</strong> de la compra (hoy), no el viernes pasado — check sobre fecha falsa = registro sucio. ⑤ Falta la otra mitad: no se menciona el <strong>Expense</strong> en libros (vendor → trade → line item) ni el <strong>DELIVERY ETA</strong> de mañana. <em>(Bonus: tampoco hay comentario de estado en el proyecto.)</em></li>
+<li>Faltan las 3 evidencias reales: ① la foto del precio <strong>CONFIRMADO/FIJADO</strong> (el quote inicial de hace 3 semanas no es el precio fijado), ② el <strong>ETA POR ESCRITO</strong> — "sale en unos días" en WhatsApp no es un plazo por escrito accionable (¿cuántos días? ¿desde cuándo?), y ③ el <strong>RECIBO</strong> de la compra ya pagada. Además la evidencia vive en WhatsApp, no en el reporte: para el auditor y el semanal esto es un <strong>cierre sin documento</strong>.</li>
+<li><strong>Fallan 3 de 4.</strong> Check #2: el pricing está a ≤5 días (pasado mañana) y no tiene cotización en la descripción — "mañana me responden" se registra como estado, pero el check exige cotización o el pendiente declarado. Check #4: la espera a Giselle está solo en Telegram — <strong>si no está en el bot, no existe</strong>. Y el cierre sin handoff viola el mandamiento 8 (no es un check numerado, pero el día NO está bien cerrado: los pendientes quedan silenciosos toda la tarde). El check #1 (compras de hoy ✓) y el #3 (ETA corregido ✓) sí pasan.</li>
+<li>La tarjeta del kanban es un pago <strong>CONFIRMADO que el CEO aprobó para el martes</strong> — moverla por comodidad del proveedor sin razón registrada rompe el plan de la semana y deja el schedule mintiendo. Lo correcto: intentar que se ejecute SU día (ese es tu papel); si de verdad no se puede, el movimiento se registra con razón (comentario + reunión de las 2:30 / handoff), el schedule se cuadra, y el desvío aparece en las métricas con su porqué — reprogramación en neutro, no en silencio.</li>
+</ol>
+<hr />
+<p><em>Quiz Purchases v2026-08-06 — construido del Track B v2026-08-06, canon v4, template maestro oficial, DIA_CUMPLIDO v3, REPORTERIA_MASTER C2/C3 y los casos reales del brief (#1, #2, #4, #8, #10). Los errores plantados replican los fallos documentados (montos ilegibles, fechas sin cuadrar, evidencia en chat, esperas fuera del bot).</em></p>
+<a class="volver" href="/proceso/materiales/">← Centro de materiales</a></div></body></html>

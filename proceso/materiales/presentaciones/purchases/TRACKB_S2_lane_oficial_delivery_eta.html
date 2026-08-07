@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TRACK B · S2 — El lane oficial y la regla DELIVERY ETA · Purchases (Romina)</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+h3 { font-size: 12px; margin: 14px 0 6px; color: #1d4ed8; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+ul { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.seccion-num { color: #94a3b8; font-weight: 400; }
+</style>
+</head>
+<body>
+
+<h1>SESIÓN B2 · El lane oficial en JobTread y la regla DELIVERY ETA</h1>
+<div style="color:#475569; font-size:11px;">Track B · Purchases Coordinator (Romina) · 60–90 min · v2026-08-06
+<span class="chip">template maestro</span><span class="chip">5 tareas</span><span class="chip">DELIVERY ETA</span><span class="chip">monto limpio</span></div>
+
+<h2><span class="seccion-num">1 ·</span> OBJETIVO</h2>
+<p><b>Esta sesión existe para</b> dominar la mecánica exacta del lane oficial del template maestro (las 5 tareas, sus task types y dependencias) y leer/escribir la regla DELIVERY ETA sin error.</p>
+
+<h2><span class="seccion-num">2 ·</span> CONTENIDO</h2>
+<h3>El lane oficial — TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv (el archivo MANDA)</h3>
+<table>
+<tr><th>#</th><th>Tarea</th><th>Task type</th><th>Dueño</th><th>Qué es</th></tr>
+<tr><td>1</td><td><code>TRADE: CREATE TAKEOFF REPORT</code></td><td>2. Purchases</td><td>Romina</td><td>Reporte CompanyCam, campos por locación</td></tr>
+<tr><td>2</td><td><code>TRADE: CONFIRM TAKEOFF DETAILS</code></td><td>1. PM Tasks</td><td>PM</td><td>Verificación en obra: dimensiones y lugares</td></tr>
+<tr><td>3</td><td><code>TRADE: SECURE PRICING &amp; ETA</code></td><td>2. Purchases</td><td>Romina</td><td>3 proveedores · ≤5 días · cotización en descripción + quote attached</td></tr>
+<tr><td>4</td><td><code>TRADE: PURCHASE MATERIALS</code></td><td>5. Payment – Materials</td><td>Romina</td><td>Lleva el <b>$</b> (alimenta cashflow) + boleta</td></tr>
+<tr><td>5</td><td><code>TRADE: DELIVERY ETA</code></td><td>2. Purchases</td><td>Romina</td><td>Al día siguiente de la compra; la guía de los PMs</td></tr>
+</table>
+<div class="gap"><b>⚠️ Cambio vs documentos previos:</b> la tarea <code>CONFIRM DELIVERY</code> NO existe en el template oficial. La confirmación de entrega vive en las <b>3 evidencias</b> del reporte de takeoff (S4/S5) y la verificación física con foto + comentario (S6). <b>[VERIFICAR CON JOSE: si al llegar el material se marca alguna tarea en el schedule.]</b></div>
+<h3>Nomenclatura y dependencias</h3>
+<ul>
+<li>Nomenclatura oficial: <b><code>TRADE: ACCIÓN</code></b> (ej. <code>FRAMING: CREATE TAKEOFF REPORT</code>). Proyectos viejos usan nombres previos — misma cadena.</li>
+<li>Dependencias reales en JT: TAKEOFF → CONFIRM → PRICING → PURCHASE → DELIVERY ETA, y el <b>ACTION dependsOn DELIVERY ETA</b> (en el template: <code>ROOFING: INSTALL SHINGLES</code> depende de <code>ROOFING: DELIVERY ETA</code>).</li>
+</ul>
+<div class="clave"><b>REGLA DELIVERY ETA:</b> duración <b>&gt;1 día</b> → la FECHA FIN = plazo máximo en que llegan los items ("llega a más tardar el &lt;fin&gt;") · duración <b>=1 día</b> → o está <b>EN STOCK</b>, o el ETA <b>AÚN NO SE VERIFICÓ</b> — y eso es una deuda, no un cierre. En tu evaluación semanal la ETA es <b>SOLO INFORMATIVA</b> (ley C3): se ajusta a propósito para reflejar la llegada real y <b>nunca cuenta como vencida</b> — corregirla no es admitir un fallo, es mantener el cronograma honesto.</div>
+<h3>El monto y el cierre limpio</h3>
+<ul>
+<li><b>El monto vive en la DESCRIPCIÓN</b>, solo el número, sin signo. Sin monto = "amount TBD" → <b>no cuenta en el cashflow</b>. Los vencidos ruedan a hoy a las 6:00 AM.</li>
+<li><b>Cerrar = check + fechas reales cuadradas</b> (Jose 06-ago): un check sobre una fecha que no corresponde es un registro sucio — rompe el viernes-vs-viernes, el cashflow y la productividad.</li>
+<li>"Después de las 3 PM, JobTread es la verdad del día": tus registros de la mañana son el insumo de la reunión de las 2:30.</li>
+</ul>
+
+<h2><span class="seccion-num">3 ·</span> EL CASO REAL</h2>
+<div class="gap"><b>Los montos ilegibles:</b> "43k" (Rohini) y "551872" (Martha) — el parser financiero no los lee bien y el dato financiero del schedule se vuelve frágil. Y <b>Karim</b>: tasks Critical Path vacíos = <b>$0 income</b> registrado para su proyecto. <b>Moraleja:</b> la descripción es dato del sistema, no nota personal — número limpio, siempre. El registro incompleto ciega los reportes que gerencia usa para decidir.</div>
+
+<h2><span class="seccion-num">4 ·</span> EL EJERCICIO</h2>
+<ul>
+<li>En <b>Martha Cockrell</b> y <b>Lingyan</b>: listar TODAS las DELIVERY ETA de la semana y clasificar cada una: confirmada (&gt;1 día, fecha fin real) / en stock / <b>sin verificar</b>. Corregir en vivo una "sin verificar" con el plazo real del proveedor.</li>
+<li>En el template oficial: seguir la cadena FRAMING completa (5 tareas + dependencias) y explicar qué pasa si cada una se atrasa un día.</li>
+<li>Revisar 3 descripciones de PURCHASE MATERIALS reales: ¿el monto es parseable?</li>
+</ul>
+
+<h2><span class="seccion-num">5 ·</span> LO QUE SE EVALÚA</h2>
+<div class="mat"><b>Nivel 1:</b> recita el lane oficial (5 tareas + task types + dueños) y clasifica 5 DELIVERY ETA reales sin error. <b>Nivel 2:</b> deja 3 descripciones con monto limpio y corrige 1 ETA desactualizada el mismo día que cambió. Check del Día Cumplido conectado: #3 (ETAs de la semana confirmados o corregidos).</div>
+
+<div class="footer-note">CNG · Track B v2026-08-06 · S2/7 · Fuentes: TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv · canon v4 §4 · SCHEDULE_STRUCTURE · REPORTERIA_MASTER C3 · P2.</div>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TRACK B PURCHASES ROMINA v2026-08-06 · CNG</title>
+<link rel="stylesheet" href="/proceso/assets/style.css">
+<style>
+.doc{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.doc h1{font-size:28px;border-bottom:3px solid var(--ink,#0f172a);padding-bottom:10px;margin-top:0}
+.doc h2{font-size:20px;margin-top:34px;border-bottom:2px solid #cbd5e1;padding-bottom:6px}
+.doc h3{font-size:16px;color:#1d4ed8;margin-top:24px}
+.doc table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.doc th{background:#0f172a;color:#fff;padding:8px 10px;text-align:left}
+.doc td{border:1px solid #cbd5e1;padding:8px 10px;vertical-align:top}
+.doc tr:nth-child(even) td{background:#f8fafc}
+.doc pre{background:#f1f5f9;padding:14px;border-radius:8px;overflow-x:auto;font-size:13px;border:1px solid #e2e8f0}
+.doc code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:13px}
+.doc blockquote{border-left:4px solid #2563eb;background:#eff6ff;margin:14px 0;padding:10px 16px;border-radius:0 8px 8px 0}
+.doc li{margin:5px 0}
+.volver{display:inline-block;margin:16px 0;padding:8px 16px;background:#0f172a;color:#fff;border-radius:20px;text-decoration:none;font-size:14px;font-weight:600}
+</style></head><body>
+<div class="doc"><a class="volver" href="/proceso/materiales/">← Centro de materiales</a>
+<h1>TRACK B · PURCHASES COORDINATOR (Romina) — Currículo de Capacitación · <strong>v2026-08-06</strong></h1>
+<p><strong>Qué cambió vs v1.1 (2026-08-04):</strong> (1) el lane se actualizó al <strong>template maestro oficial</strong> ingerido el 06-ago (la tarea <code>CONFIRM DELIVERY</code> NO existe en el template — se retira de la cadena); (2) se integran <strong>las 3 evidencias obligatorias en el reporte de takeoff</strong> (Jose 06-ago); (3) el <strong>kanban de compras confirmadas = su plan semanal</strong> (reporte oficial #5, aprobado); (4) la <strong>reportería final</strong> (los 11 oficiales + leyes C2/C3 + fuente de la verdad de pagos); (5) las <strong>2 reglas nuevas</strong> del 06-ago (todo dinero pasa por el schedule; cerrar = check + fechas cuadradas); (6) el reloj oficial (reunión 2:30 PM · baseline viernes 11:00 PM) y el <strong>estado real de la cadencia</strong> (envíos automáticos en pausa desde el 31-jul). La v1.1 se conserva intacta como historial.</p>
+<p><strong>Lugar en el programa:</strong> Track B del <a href="00_PLAN_MAESTRO_CAPACITACION.md">Plan Maestro de Capacitación</a>. <strong>Prerrequisito: Módulo 0 completo.</strong> Este track NO repite el Módulo 0: lo asume y lo referencia.</p>
+<p><strong>Situación de partida:</strong> Romina YA ejerce el puesto (Perú, part-time hasta la 1:00 PM, dueña del lane completo takeoff → pricing → purchase → delivery). Este track no es para "aprender desde cero": es para llevarla del <strong>"ya lo hace"</strong> al <strong>"lo hace al 100% según el proceso"</strong> — cerrando los huecos reales documentados (ETAs añejos, compras sobre specs no confirmados, esperas sin registrar). Cada sesión arranca por la mecánica exacta y la práctica, no por teoría.</p>
+<p><strong>Fuentes:</strong> <code>_BRIEF_CONSTRUCTORES.md</code> (2026-08-06) · canon v4 (<code>00_PROCESO_CANONICO_CNG.md</code>) · <strong><code>TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv</code> (oficial — MANDA)</strong> · manual v2.0 + <strong>JD v3.0</strong> (<code>04_JOB_DESCRIPTIONS/JD_purchases.md</code>) · <code>EL_FLOW_ACTION_TASK.md</code> · <code>SCHEDULE_STRUCTURE.md</code> · <code>DIA_CUMPLIDO_POR_PUESTO.md</code> (v3) · <code>REPORTERIA_MASTER.md</code> §A/C2/C3 · transcripciones Parte 1–3.</p>
+<p><strong>Paquete de materiales de este track (05_MATERIALES/):</strong><br />
+- Presentaciones por sesión: <code>presentaciones/purchases/TRACKB_S1…S7_*.html</code> (7)<br />
+- One-pager imprimible: <code>one_pagers/purchases_romina.html</code><br />
+- Quiz 3 niveles: <code>quizzes/quiz_purchases.md</code><br />
+- Guiones de video palabra por palabra: <code>guiones_video/purchases.md</code></p>
+<hr />
+<h2>1. Perfil y misión</h2>
+<h3>1.1 La misión (JD v3.0 / manual v2.0)</h3>
+<blockquote>
+<p><strong>"Garantizar que ningún trade en ninguna obra de CNG quede parado por falta de material — cotizando a tiempo, ordenando antes que la cuadrilla, confirmando cada ETA y manteniendo abastecida cada cadena crítica para que la obra avance sin fricción."</strong></p>
+</blockquote>
+<p>El puesto <strong>no se mide por cuánto se compra, sino por si algún trade quedó alguna vez esperando material</strong>. Romina es <strong>coordinadora y gestora de entregas — NO decide las prioridades de la obra</strong>: sigue las prioridades que fijan el schedule y los PMs. Su oficio es la <strong>anticipación</strong>: ver a la cuadrilla que llega el jueves y asegurarse de que el material esté confirmado y en camino <strong>antes de que el jueves exista</strong>.</p>
+<h3>1.2 Las 3 verdades no negociables</h3>
+<ol>
+<li><strong>Ningún trade se detiene jamás por falta de material.</strong> Si el material frena a una cuadrilla, la cadena de compras falló — sin importar cuántas otras órdenes salieron.</li>
+<li><strong>Cada cadena crítica tiene su ETA confirmado.</strong> "Está ordenado" NO basta; el ETA confirmado es lo que protege el cronograma.</li>
+<li><strong>La cotización ES la descripción en JobTread.</strong> El pricing no es una nota aparte: vive en la descripción de la tarea. <strong>El registro es el trabajo.</strong></li>
+</ol>
+<h3>1.3 Mapa de conexiones — de quién recibe, a quién entrega</h3>
+<table>
+<thead>
+<tr>
+<th>Con quién</th>
+<th>Qué recibe Romina</th>
+<th>Qué entrega Romina</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Planning (Claudia · Karla)</strong></td>
+<td>El <strong>PORTAFOLIO</strong> con la lista detallada para compras (medidas, ventanas "W3", specs) — su fuente para el take-off</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>PMs (Angel · Giselle · Jeff)</strong></td>
+<td>La confirmación del take-off (<code>CONFIRM TAKEOFF DETAILS</code>): dimensiones y lugares verificados EN OBRA + prioridades</td>
+<td>Material en sitio ANTES que la cuadrilla + el <strong>DELIVERY ETA</strong> visible en el schedule ("para qué día llega lo que pediste")</td>
+</tr>
+<tr>
+<td><strong>Proveedores (3 cotizaciones)</strong></td>
+<td>Precio + <strong>ETA POR ESCRITO</strong></td>
+<td>Órdenes; reclamos por entregas incompletas</td>
+</tr>
+<tr>
+<td><strong>Backoffice/Data-Entry (Jose → Joaquín)</strong> — jefe directo</td>
+<td>Prioridades; auditoría de sus ETAs y evidencias (<em>"a veces se le pasa al área de compras"</em> — P2)</td>
+<td>El <strong>handoff de la 1:00 PM</strong> con pendientes declarados; registros limpios que alimentan la reunión de las 2:30 PM</td>
+</tr>
+<tr>
+<td><strong>Administradora (Milagros)</strong></td>
+<td>—</td>
+<td>La <strong>notificación de entrega verificada</strong> para que ella coordine y ejecute el pago (Compras coordina; Milagros es la gatekeeper)</td>
+</tr>
+<tr>
+<td><strong>KITBOT / sistema</strong></td>
+<td>Su <strong>kanban semanal de confirmadas</strong>; persecución de esperas</td>
+<td>Cada espera registrada en el bot; montos limpios (cashflow); comentarios de proyecto en JT; <strong>las 3 evidencias</strong> en CompanyCam</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Regla estructural (EL_FLOW):</strong> su lane B corre EN PARALELO al lane del PM y debe cerrar <strong>ANTES</strong> del EXECUTE — "no se cita al sub sin material en sitio". El <code>ACTION dependsOn DELIVERY ETA</code> está cableado como dependencia real en JobTread (verificable en el template oficial: <code>ROOFING: INSTALL SHINGLES</code> depende de <code>ROOFING: DELIVERY ETA</code>).</p>
+<h3>1.4 La mentalidad — la causa raíz es el comportamiento (Jose, 2026-08-04)</h3>
+<p>Los fallos no vienen de falta de conocimiento técnico: vienen de falta de <strong>RIGUROSIDAD</strong>, de <strong>ATENCIÓN AL DETALLE</strong>, de no <strong>PREVER</strong>, no <strong>SOLUCIONAR</strong> y no ser <strong>PROACTIVO</strong>. Verbatim: <em>"aceptamos los problemas y reaccionamos, en vez de prevenirlos o buscar soluciones insaciablemente para cumplir a como dé lugar el cronograma planteado."</em> En compras esto se traduce literal: un ETA que cambió y no se corrigió, una espera que no se registró, un spec que no se confirmó — todos son fallos de comportamiento antes que de proceso. Se evalúa junto con la mecánica (§4).</p>
+<h3>1.5 ⭐ Las 2 reglas nuevas (Jose, 2026-08-06) — este track las enseña en cada sesión</h3>
+<p><strong>(a) TODO dinero pasa por el schedule (canon §6 — SIN EXCEPCIONES):</strong> toda compra se registra en el schedule <strong>aunque sea de último minuto</strong>, con su task type (Payment–Materials); todo gasto — <strong>aunque sea de Home Depot o caja chica</strong> — se anota al proyecto como <strong>Additional Expense</strong>. Si se movió dinero y no hay tarea, el cashflow, la productividad y los reportes quedan ciegos.</p>
+<p><strong>(b) Cerrar = check + fechas reales cuadradas (canon §4):</strong> el schedule es el reflejo de lo que pasa o pasó en la realidad y la proyección OPTIMISTA de lo que pasará. Al cerrar una tarea hay que <strong>CUADRAR las fechas</strong> — un check sobre una fecha que no corresponde es un registro sucio (rompe el viernes-vs-viernes, el cashflow y la productividad). <em>Matiz de pagos (canon §8): la fecha original de una tarea de pago = gatillo contractual y NO se reescribe; el pago se MUEVE y se registra en la fecha en que realmente se pagó.</em></p>
+<hr />
+<h2>2. Mapa de competencias</h2>
+<table>
+<thead>
+<tr>
+<th>Debe SABER</th>
+<th>Debe SABER HACER</th>
+<th>Debe VERIFICAR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El proceso canónico completo (Módulo 0) y por qué "una cosa te va bloqueando la otra" (P1)</td>
+<td><strong>Take-Off Report</strong> en CompanyCam: cuantificar material por trade desde el portafolio, campos por locación</td>
+<td>Que el material llegue <strong>ANTES</strong> que la cuadrilla — siempre</td>
+</tr>
+<tr>
+<td><strong>El lane oficial de 5 tareas</strong> del template maestro y sus task types</td>
+<td>Cerrar el <code>CONFIRM TAKEOFF DETAILS</code> con el PM (y registrar la espera en el bot si demora)</td>
+<td>Que <strong>ninguna cadena crítica</strong> quede sin ETA confirmado</td>
+</tr>
+<tr>
+<td>La <strong>regla DELIVERY ETA</strong> (&gt;1 día = plazo máximo; =1 día = en stock o SIN verificar) y que la ETA es <strong>informativa</strong> en su evaluación (C3)</td>
+<td><strong>Secure Pricing ≤5 días</strong> con 3 proveedores: cotización en la descripción + quote attached</td>
+<td>Que todo pricing con fecha ≤5 días esté cotizado</td>
+</tr>
+<tr>
+<td>El <strong>budget</strong> por line items y que es el PRIMER filtro</td>
+<td>Elegir proveedor por <strong>budget → precio → ETA</strong></td>
+<td>Cada entrega <strong>con conteo propio</strong>: cantidad, spec, condición</td>
+</tr>
+<tr>
+<td>Nomenclatura <code>TRADE: ACCIÓN</code>; monto solo-número en la descripción (sin monto = "amount TBD")</td>
+<td><strong>Registro doble</strong> de cada compra (schedule + Expense) + <strong>las 3 evidencias en el reporte de takeoff</strong></td>
+<td>Que el spec comprado = spec confirmado por el PM en obra</td>
+</tr>
+<tr>
+<td>Las 2 reglas nuevas del 06-ago (§1.5)</td>
+<td>Poner el <strong>DELIVERY ETA</strong> al día siguiente de cada compra con el plazo POR ESCRITO del proveedor</td>
+<td>Que cada material se use en SU proyecto</td>
+</tr>
+<tr>
+<td>Los 8 mandamientos y los 4 checks de su Día Cumplido</td>
+<td>Escribir el estado de cada compra en los <strong>comentarios de proyecto de JT</strong></td>
+<td>Sus esperas: toda espera a un PM está en el bot</td>
+</tr>
+<tr>
+<td><strong>Su kanban semanal de confirmadas</strong> y las leyes de reportería (C2/C3, viernes-vs-viernes, fuente de pagos = Finance tab)</td>
+<td>Ejecutar su semana empujando que <strong>cada compra confirmada se realice SU día</strong></td>
+<td>Su propio cierre: los 4 checks en ✅ antes de la 1:00 PM</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Módulos (7 sesiones)</h2>
+<blockquote>
+<p>Formato estándar: sesión grabada (para repaso) + práctica guiada sobre proyectos reales en JobTread/CompanyCam. Como Romina ya opera, cada sesión abre con 5 min de "muéstrame cómo lo haces hoy" y se corrige sobre su práctica real. Material por sesión: presentación HTML (<code>presentaciones/purchases/</code>) + guion de video (<code>guiones_video/purchases.md</code>).</p>
+</blockquote>
+<hr />
+<h3>SESIÓN B1 · El puesto en el mapa — misión, mandamientos y conexiones (45–60 min)</h3>
+<p><strong>Objetivo:</strong> que Romina explique en 2 minutos su misión, las 3 verdades, y por qué su lane cerrado a tiempo es lo que permite fechar un EXECUTE.</p>
+<p><strong>Contenido:</strong><br />
+- Repaso exprés del Módulo 0: <strong>LA CLAVE</strong> — GESTIONAR LA OBRA DE LA FORMA EN LA QUE SE PLANIFICÓ EN EL CRONOGRAMA (canon §1).<br />
+- La misión y la medida única del puesto: ¿algún trade quedó esperando material?<br />
+- Coordinadora, NO decisora de prioridades: si algo no entra en budget o hay conflicto, <strong>escala</strong> — no decide sola.<br />
+- Las 3 verdades no negociables — leerlas en voz alta y dar un ejemplo real de cada una.<br />
+- Los <strong>8 mandamientos</strong> (manual §3): pricing ≤5d en descripción · confirmar y CORREGIR ETAs · material ANTES que la cuadrilla · conteo propio · esperas en el bot · cadena crítica nunca sin ETA · estado en comentarios JT · cierre 1PM con handoff.<br />
+- Por qué existe el lane B: regla de oro de EL_FLOW — <strong>un EXECUTE solo tiene fecha si su cadena previa está 100% cerrada</strong>; su lane es la mitad de esa cadena.<br />
+- <strong>Los 5 comportamientos</strong> (§1.4) aterrizados a compras + valores de trato (respeto, cero gritos, facilitar información — condición del puesto).</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Abrir el schedule de <strong>Martha Cockrell</strong> y ubicar el lane B completo de 2 trades: decir en voz alta de quién recibe y a quién entrega cada tarea.<br />
+2. Elegir un EXECUTE fechado esta semana y responder: ¿su DELIVERY ETA está confirmado? Si no — explicar qué pasaría el día que llegue la cuadrilla.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Semana del 29-jun: se produjo LA MITAD de lo proyectado</strong> por EXECUTEs fechados con cadenas abiertas (en Martha: ELECTRICAL ROUGH IN fechado 7–8 jul con la cadena en 0% — llegó el día y no había electricista). Su lane abierto es la mitad de ese fallo.<br />
+- <strong>~$12k de compras frenadas por takeoffs vencidos</strong> (EL_FLOW error #5): las tareas de fase A/B vencidas son "el freno invisible".</p>
+<hr />
+<h3>SESIÓN B2 · Su lane en JobTread: las 5 tareas OFICIALES, nomenclatura y la regla DELIVERY ETA (60–90 min)</h3>
+<p><strong>Objetivo:</strong> dominar la mecánica exacta del lane oficial del template maestro y leer/escribir la regla DELIVERY ETA sin error.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>El lane oficial (TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv — el archivo MANDA):</strong><br />
+  1. <code>TRADE: CREATE TAKEOFF REPORT</code> — type <strong>2. Purchases</strong> — reporte CompanyCam; Romina lo arma.<br />
+  2. <code>TRADE: CONFIRM TAKEOFF DETAILS</code> — type <strong>1. PM Tasks</strong> — el PM verifica en obra.<br />
+  3. <code>TRADE: SECURE PRICING &amp; ETA</code> — type <strong>2. Purchases</strong> — 3 proveedores; quotes ATTACHED; cotización en descripción.<br />
+  4. <code>TRADE: PURCHASE MATERIALS</code> — type <strong>5. Payment – Materials</strong> — lleva el <strong>$</strong> (alimenta cashflow) y la boleta.<br />
+  5. <code>TRADE: DELIVERY ETA</code> — type <strong>2. Purchases</strong> — al día siguiente de la compra; guía para los PMs.<br />
+- <strong>⚠️ Cambio vs docs previos:</strong> la tarea <code>CONFIRM DELIVERY</code> NO existe en el template oficial — la confirmación de entrega vive en las <strong>3 evidencias</strong> del reporte de takeoff (B4/B6) y la verificación física con foto+comentario. <strong>[VERIFICAR CON JOSE: si al llegar el material se marca alguna tarea en el schedule además de la evidencia en CC.]</strong><br />
+- Nomenclatura oficial: <strong><code>TRADE: ACCIÓN</code></strong> (ej. <code>FRAMING: CREATE TAKEOFF REPORT</code>). Proyectos viejos (Kyle) usan nombres previos — misma cadena.<br />
+- <strong>REGLA DELIVERY ETA:</strong> &gt;1 día → fecha fin = plazo máximo de llegada · =1 día → en stock o <strong>sin verificar</strong> (el sistema lo persigue). Para su evaluación semanal la ETA es <strong>SOLO INFORMATIVA</strong> (C3): se ajusta a propósito para reflejar la llegada real y nunca cuenta como "vencida" — corregirla no es admitir un fallo, es mantener el cronograma honesto.<br />
+- <strong>El monto vive en la DESCRIPCIÓN</strong>, solo el número, sin signo (P2). Sin monto = "amount TBD" → no cuenta en cashflow. Vencidos ruedan a hoy a las 6:00 AM.<br />
+- Dependencias reales en JT: TAKEOFF → CONFIRM → PRICING → PURCHASE → DELIVERY ETA, y el <strong>ACTION dependsOn DELIVERY ETA</strong> (ej. template: INSTALL SHINGLES depende de ROOFING: DELIVERY ETA).<br />
+- <strong>Cerrar = check + fechas cuadradas</strong> (§1.5b): al marcar su PURCHASE MATERIALS, la tarea vive en el día REAL de la compra.<br />
+- "Después de las 3 PM, JobTread es la verdad del día": sus registros de la mañana son insumo de la reunión de las 2:30; los cambios le llegan al día siguiente.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. En <strong>Martha Cockrell</strong> y <strong>Lingyan</strong>: listar TODAS las DELIVERY ETA de la semana y clasificar: confirmada (&gt;1 día, fecha fin real) / en stock / <strong>sin verificar</strong>. Corregir en vivo una "sin verificar" con el plazo real del proveedor.<br />
+2. En el template oficial: seguir la cadena FRAMING completa (5 tareas + dependencias) y explicar qué pasa si cada una se atrasa un día.<br />
+3. Revisar 3 descripciones de PURCHASE MATERIALS reales: ¿el monto es parseable (número limpio)?</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>ETAs añejos:</strong> un ETA desactualizado <em>"le miente al cronograma"</em> — el PM planifica su semana sobre una fecha falsa.<br />
+- <strong>Montos ilegibles</strong> ("43k" de Rohini, "551872" de Martha) → el parser financiero no los lee; el dato financiero del schedule se vuelve frágil. Número limpio, siempre. (Y Karim: tasks Critical Path vacíos = $0 income para su proyecto — el registro incompleto ciega los reportes.)<br />
+- "Está ordenado" ≠ ETA confirmado (verdad #2): la tarea de 1 día sin verificar es una deuda, no un cierre.</p>
+<hr />
+<h3>SESIÓN B3 · Take-off y Confirm Details: el puente con el PM (60–90 min)</h3>
+<p><strong>Objetivo:</strong> producir un take-off report completo desde el portafolio y cerrar la confirmación del PM ANTES de cotizar — sin que la espera se pudra en silencio.</p>
+<p><strong>Contenido:</strong><br />
+- Qué es el take-off: <em>"cuantificar la cantidad de material que se necesita"</em> (Jose, P2). Se hace al INICIO del trade (día 60–65 para un trabajo del día 85): <em>"para el día 60, 64, 65, ya tienes que empezar a hacer los preparativos."</em><br />
+- La fuente: el <strong>PORTAFOLIO</strong> — la lista detallada para compras (medidas de ventanas W3, plano eléctrico, medidas de carpintería).<br />
+- El reporte en CompanyCam con campos <strong>POR LOCACIÓN</strong>. Ejemplo real de Jose (P2, siding): <em>"necesito que vayas a cada una de estas locaciones — starter strip, esquina exterior, esquina interior, J-channel…"</em> → el PM va y llena: 328 pies lineales, 288, 145…<br />
+- <strong><code>CONFIRM TAKEOFF DETAILS</code> es tarea del PM</strong> — existe porque ella está en Perú: <em>"para poder hacer la compra correcta necesita corroborar dimensiones, más que nada dimensiones, dimensiones y lugares"</em> (Jose, P2). Romina NO cotiza ni compra sobre un take-off sin confirmar.<br />
+- Mientras el PM no confirma: <strong>la espera va al bot</strong> — mandamiento 5. KITBOT persigue por ella.<br />
+- <strong>El reporte de takeoff = el EXPEDIENTE del ciclo completo:</strong> aquí es donde después se suben las <strong>3 evidencias</strong> (precio confirmado · ETA por escrito · recibo — Jose 06-ago). Armarlo bien desde el día 1 es lo que hace auditable toda la compra.<br />
+- <strong>Caso especial FRAMING:</strong> takeoff/sizing <strong>tercerizado al lumber supplier</strong> — Romina manda los planos al proveedor y consigue los quotes; el PM supervisa y coteja planos vs realidad de campo.<br />
+- ⚠️ REALIDAD (P3): hoy el circuito take-off <em>"no se está cumpliendo casi para nada"</em> — este módulo existe para revertir exactamente eso. Los REPORTS de CompanyCam (take-off, SOW) están 100% vigentes.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. <strong>Caso Katie Holmes (puertas):</strong> reconstruir el take-off de puertas interiores COMO DEBIÓ hacerse: campo "alto de marco framed — VERIFICAR EN OBRA" vs el spec de diseño (82"). Redactar la pregunta exacta al PM que habría detectado la discrepancia ANTES de comprar.<br />
+2. Crear (guiado) el take-off report de un trade próximo real: campos por locación + qué debe confirmar el PM + registrar la espera en el bot.<br />
+3. Simular el flujo framing: qué se le manda al lumber supplier de <strong>Charles Harris</strong> y qué queda esperando de quién.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Katie Holmes:</strong> las puertas se framearon a <strong>8 ft</strong> cuando el diseño decía <strong>82"</strong>; el 23-jul se pidieron puertas de <strong>96" = SE COMPRÓ EL ERROR</strong>. El cambio de spec nunca llegó al framer y la compra se hizo sobre el dato errado. Lección: <strong>nunca comprar sobre un spec que el PM no confirmó en obra</strong>.<br />
+- <strong>~$12k de compras frenadas por takeoffs vencidos</strong>: un take-off abierto frena TODO su lane aguas abajo.<br />
+- Espera sin registrar: el PM no confirma, nadie lo persigue, y el take-off "se pudre" — si no está en el bot, no existe.</p>
+<hr />
+<h3>SESIÓN B4 · Secure Pricing &amp; ETA ≤5 días: la cotización ES la descripción · el budget es el PRIMER filtro (60–90 min)</h3>
+<p><strong>Objetivo:</strong> cotizar con 3 proveedores dentro de 5 días, dejar la cotización legible en la descripción, elegir por budget → precio → ETA, y dejar las primeras 2 evidencias en el reporte de takeoff.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>Mandamiento 1:</strong> cualquier tarea de pricing con fecha a ≤5 días tiene su cotización <strong>escrita en la descripción</strong> de JobTread. La cotización ES la descripción (verdad #3) — es el check #2 de su Día Cumplido.<br />
+- <strong>Cotizar con TRES proveedores distintos</strong> (canon §5, P3) — precio + tiempo de llegada de cada uno.<br />
+- Qué es una cotización completa en la descripción — <strong>[PROPUESTA, pendiente de aprobar con Jose]</strong> formato de 4 campos: proveedor · monto · ETA ofrecido · dentro/fuera de budget — con el <strong>quote attached</strong> en la tarea.<br />
+- <strong>⭐ LAS 3 EVIDENCIAS (Jose 2026-08-06) en el REPORTE DE TAKEOFF de CompanyCam</strong> — el mismo reporte acumula el expediente completo: (1) <strong>foto del precio CONFIRMADO/FIJADO</strong>, (2) <strong>el ETA POR ESCRITO del proveedor</strong>, (3) <strong>el RECIBO</strong> de la compra. En esta sesión se dejan la 1 y la 2; la 3 llega con la compra (B5). El Backoffice audita este expediente (Track A, Auditoría 5) y el semanal audita "cierres sin documento" (C3).<br />
+- <strong>El PRIMER filtro es SIEMPRE el presupuesto:</strong> <em>"el primer filtro siempre va a ser si está o no dentro de tu presupuesto"</em> (Jose, P2). Budget del trade → <strong>line item</strong> → cantidad · unidad · costo unitario · <strong>costo extendido</strong> (Jose lo enseña con el budget de pintura de Kyle Aubrey en P2).<br />
+- Después del filtro budget: el trade-off <strong>precio vs ETA</strong> (Jose, P2): <em>"yo te cobro 10 dólares pero llega en dos semanas; yo te cobro 100 pero llega en una semana; yo te cobro 1,000 pero llega mañana."</em> La elección depende de cuándo llega la cuadrilla — y el default es temprano.<br />
+- Si NINGUNA opción entra en budget o el ETA no alcanza: <strong>no es su decisión</strong> — flag al PM y al Backoffice con las opciones sobre la mesa.<br />
+- Por qué el line item correcto importa: es lo que permite ver si se cumplen los <strong>márgenes (~40%)</strong> y alimentar el cashflow (canon §7).</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Tomar un <code>SECURE PRICING &amp; ETA</code> real de la semana: ubicar el line item en el budget, conseguir/simular 3 quotes, escribir la cotización modelo en la descripción + attach + subir al reporte de takeoff la foto del precio y el ETA por escrito.<br />
+2. Ejercicio de decisión sobre el budget real de <strong>Kyle Aubrey</strong>: 3 quotes ficticios (barato-lento / medio / caro-rápido) contra una fecha de cuadrilla dada — elegir y justificar en 3 frases.<br />
+3. Revisar sus pricings abiertos HOY a ≤5 días: ¿todos tienen cotización en la descripción? Cerrar en vivo los que falten.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- Pricing a ≤5 días sin cotizar: exactamente el check que el sistema le audita.<br />
+- <strong>Montos ilegibles</strong> ("43k", "551872"): la descripción es dato del sistema, no nota personal.<br />
+- Cotizar/comprar fuera del line item = margen invisible.<br />
+- Evidencia solo en el chat: si el precio confirmado y el ETA por escrito no están EN EL REPORTE, el expediente está incompleto y el semanal lo marcará como cierre sin documento.</p>
+<hr />
+<h3>SESIÓN B5 · Purchase: el registro doble, las 3 evidencias completas y el DELIVERY ETA (75–90 min)</h3>
+<p><strong>Objetivo:</strong> ejecutar una compra dejando los DOS registros perfectos, el expediente de 3 evidencias completo, el DELIVERY ETA al día siguiente, y el estado en los comentarios del proyecto.</p>
+<p><strong>Contenido:</strong><br />
+- <code>TRADE: PURCHASE MATERIALS</code>: type <strong>Payment – Materials</strong>, monto en la descripción (solo el número), boleta attached, <strong>en el día REAL de la compra</strong> (cerrar = check + fechas cuadradas, §1.5b).<br />
+- <strong>El registro doble</strong> — <em>"siempre son dos, acuérdense: el schedule, que es nuestro registro de obra, y los libros contables"</em> (Jose, P2):<br />
+  - <strong>A) Schedule:</strong> crear/cuadrar la tarea en el día real → tipo (Materials) → monto → check.<br />
+  - <strong>B) Libros:</strong> Proyecto → Documentos → Crear documento → <strong>EXPENSE</strong> (<em>"lo que crea el área de compras cuando realiza una compra de material es expense"</em>; Bill = pago a sub) → <strong>vendor</strong> → <strong>trade</strong> → <strong>line item del budget</strong> (ej. de Jose: tankless water heater) → Crear → costo → <strong>Approve for Payment</strong> → <strong>Pay</strong>.<br />
+- <strong>⭐ REGLA SIN EXCEPCIONES (06-ago): TODO dinero pasa por el schedule</strong> — compra de último minuto incluida; caja chica/Home Depot = <strong>Additional Expense</strong> al proyecto (ej. de Jose en P2: bolsas de basura). Si se movió dinero y no hay tarea, el registro está incompleto: cashflow, productividad y reportes quedan ciegos.<br />
+- <strong>El DELIVERY ETA:</strong> <em>"un día después de la compra inicia lo que es el ETA y se pone el plazo que ha dado el proveedor"</em> (Jose, P2). Proveedor dice 5 días → tarea de 5 días → <em>"de esta forma, el Project Manager puede saber para qué día llega lo que has solicitado que se compre."</em> El plazo sale del <strong>ETA POR ESCRITO</strong> (evidencia 2) — nunca de memoria.<br />
+- <strong>Completar el expediente:</strong> subir el <strong>RECIBO</strong> (evidencia 3) al reporte de takeoff. Con las 3 evidencias, la compra es auditable de punta a punta.<br />
+- <strong>Comentarios de proyecto en JT</strong> (mandamiento 7): el estado de cada compra se escribe ahí — el sistema los lee como parte de la secuencia. <em>(Para su evaluación son fuente, no métrica — C3.)</em><br />
+- Quién la audita: el Data-Entry/Backoffice verifica ETAs, registros y evidencias — <em>"a veces se le pasa al área de compras"</em> (P2). La meta: que el auditor no encuentre nada.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Replicar el ejercicio exacto de Jose (P2): crear un <strong>Expense de prueba</strong> (tankless water heater → Plumbing → line item) en el proyecto/sandbox que indique el Backoffice, con costo $0, y recorrer Approve for Payment → Pay.<br />
+2. Con supervisión del Backoffice, ejecutar UNA compra REAL de punta a punta: tarea con monto limpio + boleta → Expense contra line item → <strong>DELIVERY ETA al día siguiente</strong> con el plazo por escrito → recibo al reporte de takeoff → comentario de estado.<br />
+3. Verificar al día siguiente que la compra aparece en el dashboard (el registro fue leído por el sistema).</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- Compra sin registro doble = cashflow ciego: el sistema planifica egresos con lo que está en el schedule.<br />
+- <strong>DELIVERY ETA olvidado</strong> = la compra queda en "está ordenado" sin fecha — lo que la verdad #2 prohíbe.<br />
+- Recibo perdido en el chat: la evidencia 3 vive en el reporte de takeoff, no en Telegram.<br />
+- Estado solo en la cabeza: si no está en los comentarios de JT, el sistema no lo ve y el ping-pong de Telegram lo reemplaza (caso tile de Katie — B6).</p>
+<hr />
+<h3>SESIÓN B6 · La entrega: conteo propio, cierre físico y notificación a la Administradora (60 min)</h3>
+<p><strong>Objetivo:</strong> cerrar el ciclo físico de cada compra: verificar la entrega contra la orden y disparar el pago por el canal correcto.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>Mandamiento 4:</strong> "verifica cada entrega con tu propio conteo — cantidad, especificación, condición. La entrega no está 'hecha' hasta que se verifica."<br />
+- La mecánica remota (ella está en Perú): la verificación es SUYA aunque los ojos estén en obra — coteja la orden contra la evidencia del sitio. [PROPUESTA] Estandarizar: quien recibe sube a CompanyCam foto del packing slip + material apilado CON descripción; Romina cuenta contra su orden línea por línea.<br />
+- La evidencia de llegada = <strong>foto + comentario</strong> (el template oficial no tiene tarea de "confirm delivery" — <strong>[VERIFICAR CON JOSE: qué se marca en el schedule al llegar el material]</strong>). Entrega incompleta o errada → NO se da por verificada; se levanta con el proveedor y <strong>se corrige el DELIVERY ETA</strong> (la ETA es informativa y se ajusta a la realidad — C3).<br />
+- <strong>Notificar a la Administradora (etapa 6 del ciclo):</strong> verificada la entrega, Romina notifica a <strong>Milagros</strong> para que el pago se coordine y ejecute. <strong>Compras coordina; la Administradora es la gatekeeper con sus 4 filtros.</strong> Nunca "resolver" un pago por fuera.<br />
+- El material pertenece a SU proyecto: cada compra registrada contra el budget de UNA obra; material que "migra" rompe los márgenes de ambas.<br />
+- Si el proyecto no tiene PM a quién pedirle ojos (caso Charles Harris, 24 días sin fotos): <strong>flag inmediato al Backoffice</strong> — la cadena huérfana no se deja en silencio.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Próxima entrega real: correr la verificación completa — orden vs recibido (cantidad/spec/condición), foto + comentario, recibo al expediente, y <strong>notificación a Milagros</strong>.<br />
+2. <strong>Caso Katie Holmes (tile):</strong> role-play de cómo cerrar en UN día la pregunta "¿el tile pagado es el tile elegido?" — identificar el punto único de verdad (la orden/el take-off + la selección del cliente) y quién debía confirmar qué.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Katie Holmes: 4 días de ping-pong (21–24 jul)</strong> para confirmar si el tile pagado era el elegido. La ambigüedad se escala el DÍA 1, con dueño y fecha — no se deja rebotar.<br />
+- <strong>Martha/César:</strong> material de Martha usado en otra cosa — detectado por chat, no por sistema. El conteo propio y el registro por proyecto existen para atrapar esto.<br />
+- Marcar entrega sin verificar: si después falta material, el trade se para el día de la cuadrilla — y la medida del puesto es esa.</p>
+<hr />
+<h3>SESIÓN B7 · Su semana: el KANBAN de confirmadas, el reloj oficial y cómo la evalúa la reportería (60–90 min)</h3>
+<p><strong>Objetivo:</strong> planificar y ejecutar una semana completa con el kanban de confirmadas como plan, cerrar cada día con los 4 checks, y saber leer los reportes oficiales donde ella aparece.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>⭐ SU PLAN SEMANAL = el KANBAN "Upcoming Week Purchases"</strong> (reporte oficial #5, aprobado por Jose 06-ago: "está perfecto"): columnas = días <strong>sábado→viernes</strong>, una banda por proyecto, cada tarjeta = <strong>compra CONFIRMADA en el cashflow</strong> con su monto en el día en que debe realizarse, con indicadores <strong>TAKEOFF/PM-confirmó</strong>. Sale con el paquete de "próxima semana" cuando Jose consolida el cashflow. <strong>Su papel: empujar que cada compra se realice SU día</strong> — cualquier desvío se refleja en las métricas de la semana. ETAs excluidas del kanban (informativas).<br />
+- <strong>De dónde sale el kanban — el ciclo del dinero semanal:</strong> reunión de cashflow los <strong>VIERNES</strong> → PLAN DE LA SEMANA (presupuesto por proyecto) → <strong>el CEO aprueba</strong> → checks del cronograma = <strong>pagos CONFIRMADOS/reservados</strong>. La <strong>fuente de la verdad de pagos confirmados = el Finance tab del dashboard</strong>, NO los checks del schedule.<br />
+- <strong>El reloj oficial que la toca:</strong> roll de vencidos 6:00 AM · su jornada hasta la <strong>1:00 PM</strong> con <strong>handoff</strong> al Backoffice (formato [PROPUESTA]: pendiente · estado · próximo paso · quién lo tiene) · <strong>reunión diaria 2:30 PM</strong> (3:30 Perú — sus registros de la mañana son el insumo; "después de las 3 PM, JobTread es la verdad del día") · <strong>baseline VIERNES 11:00 PM</strong> (la foto que ancla su viernes-vs-viernes) · sáb 8:00/8:30 AM los weekly de PMs y gerencia.<br />
+- <strong>⚠️ Estado real de la cadencia automática:</strong> los envíos de formatos están <strong>EN PAUSA desde la reestructura del 31-jul</strong> (radar 7:40 silenciado; check-ins/alertas pre-cierre/nudger dados de baja por Jose el 06-ago). <strong>Los 4 checks del Día Cumplido siguen vigentes: hoy los corre ELLA misma antes de la 1:00 PM.</strong> La cadencia que se reactive la definirá Jose (gate t23) — este módulo se actualiza entonces.<br />
+- <strong>Cómo la evalúa la reportería (leyes C2/C3):</strong><br />
+  - <strong>Evaluación = cierres de SU carril viernes vs viernes</strong> (takeoffs, cotizaciones, compras) — el mismo criterio que los PMs, con el <strong>algoritmo honesto</strong>: solo lo culminado EN plazo cuenta; extendido = naranja ›››; GRIS = ideal del viernes, VERDE = lo real.<br />
+  - <strong>Reprogramaciones en neutro</strong> — mover una compra para reflejar la realidad no es una falla; se presenta sin culpa.<br />
+  - <strong>DELIVERY ETA nunca cuenta como vencida</strong> (informativa).<br />
+  - <strong>Auditoría "cierres sin documento en CompanyCam":</strong> cada cierre de su carril debe tener su documento (takeoff/cotización/recibo — las 3 evidencias). Métrica: cierres con documento / cierres auditables.<br />
+  - <strong>Los números del reporte oficial MANDAN</strong> — no se recalculan por fuera.<br />
+  - Dónde aparece ella en los 11 oficiales: <strong>#5 Upcoming Week Purchases</strong> (suyo) · #2 Project Dept Weekly (el dinero pagado/cobrado que sus registros alimentan) · #3/#4 (los ETAs en lenguaje llano que los PMs leen) · #10 Productividad (sus montos limpios). Su <strong>Purchases Review of the Week está en BACKLOG</strong> (Jose 06-ago) — no se enseña como vivo.<br />
+- Los <strong>4 checks del Día Cumplido</strong> (§4) y la semántica ✅/⚠️/❌.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Con el kanban real de la semana: recorrer las tarjetas de lunes y martes — por cada una: ¿takeoff hecho? ¿PM confirmó? ¿qué falta para que la compra se ejecute SU día? Registrar las esperas que salgan.<br />
+2. Un día completo con el Backoffice observando: priorizar en la mañana → registrar 2 esperas reales en el bot → correr los 4 checks a las 12:00 → cerrar 1:00 PM con handoff escrito.<br />
+3. Leer juntos su sección del último weekly: por cada cierre sin documento o fuera de plazo, decir qué faltó y cómo se cierra esta semana.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- Esperas en notas sueltas o en la memoria: nadie las persigue y pasan cosas como el tile de Katie (4 días).<br />
+- Cerrar la 1 PM sin handoff: los pendientes quedan silenciosos toda la tarde y revientan en la reunión de las 2:30 — o al día siguiente en obra.<br />
+- Tratar el kanban como sugerencia: las tarjetas son pagos CONFIRMADOS que el CEO aprobó — moverlas sin razón registrada rompe el plan de la semana.</p>
+<hr />
+<h2>4. Evaluación y certificación</h2>
+<p>Tres niveles, todos observables por el sistema (no exámenes de papel — Plan Maestro §5). Instrumento de apoyo: <code>quizzes/quiz_purchases.md</code> (explica / aplica / detecta el error plantado).</p>
+<p><strong>Criterio transversal (los 3 niveles) — el comportamiento (§1.4):</strong> rigurosidad · atención al detalle · prever · solucionar · proactividad insaciable. No aceptar el problema y reaccionar: prevenirlo, o buscar soluciones insaciablemente para cumplir el cronograma a como dé lugar.</p>
+<h3>Nivel 1 — Comprensión</h3>
+<ul>
+<li>Explica en conversación: la misión y su medida única, las 3 verdades, los 8 mandamientos, el <strong>lane oficial de 5 tareas</strong> con sus task types, las 2 reglas nuevas del 06-ago y las 3 evidencias.</li>
+<li>Sobre un schedule real: lee la regla DELIVERY ETA (clasifica 5 tareas: confirmada / en stock / sin verificar) y ubica un line item en el budget.</li>
+</ul>
+<h3>Nivel 2 — Ejecución guiada (sobre casos reales, con supervisión del Backoffice)</h3>
+<ul>
+<li>1 <strong>take-off report</strong> creado + confirmación del PM cerrada (o espera registrada en el bot).</li>
+<li>3 <strong>pricings ≤5 días</strong> con 3 proveedores, cotización en la descripción + quote attached + evidencias 1–2 en el reporte de takeoff.</li>
+<li>2 <strong>compras</strong> con registro doble perfecto + <strong>DELIVERY ETA</strong> al día siguiente con plazo por escrito + <strong>recibo</strong> en el reporte + comentario de estado.</li>
+<li>1 <strong>entrega verificada</strong> con conteo propio + notificación a Milagros.</li>
+<li>1 <strong>semana ejecutada sobre el kanban</strong> de confirmadas (o simulada si no hay kanban esa semana) + 3 <strong>handoffs de la 1 PM</strong> declarados.</li>
+</ul>
+<h3>Nivel 3 — Ejecución autónoma = CERTIFICADA</h3>
+<p>Cumplir su <strong>"Día Cumplido" N días seguidos sin ayuda</strong> (checks EXACTOS de DIA_CUMPLIDO_POR_PUESTO v3):</p>
+<ol>
+<li><strong>Cero compras con vencimiento HOY sin ejecutar o sin ETA confirmada.</strong></li>
+<li><strong>Todo pricing a ≤5 días tiene cotización en la descripción.</strong></li>
+<li><strong>ETAs de la semana confirmados o corregidos.</strong></li>
+<li><strong>Toda espera suya a un PM registrada en el bot.</strong></li>
+</ol>
+<p>✅ = los 4 cumplidos · ⚠️ = parcial · ❌ = sin señal (merece UNA pregunta antes de concluir). <em>Mientras la alerta pre-cierre de las 12:00 esté en pausa, los corre ella misma antes de la 1:00 PM.</em></p>
+<p>[PROPUESTA] <strong>N = 10 días hábiles</strong> (≈ 2 semanas en verde del semáforo semanal). El avance del track se lleva en la tabla por persona de la biblioteca.</p>
+<hr />
+<h2>5. Material de apoyo — ONE-PAGER (imprimir y tener al lado)</h2>
+<blockquote>
+<p>Versión imprimible con formato oficial: <code>05_MATERIALES/one_pagers/purchases_romina.html</code></p>
+</blockquote>
+<pre><code>═══════════════════════════════════════════════════════════════════
+  PURCHASES COORDINATOR — LA MECÁNICA EXACTA          CNG · Romina
+  Misión: NINGÚN trade parado por material.
+  La medida del puesto: ¿alguna cuadrilla esperó material?
+═══════════════════════════════════════════════════════════════════
+
+EL LANE OFICIAL (template maestro 2026-08-06 — el archivo MANDA)
+ 1. Leer el PORTAFOLIO (lista de compras, medidas, specs).
+ 2. TRADE: CREATE TAKEOFF REPORT (type Purchases) → reporte en
+    CompanyCam, campos POR LOCACIÓN.
+    Framing: mandar planos al LUMBER SUPPLIER (él hace el takeoff);
+    conseguir sus quotes.
+ 3. TRADE: CONFIRM TAKEOFF DETAILS (type PM Tasks) — la hace el PM
+    en obra: &quot;dimensiones, dimensiones y lugares&quot;.
+    → Si demora: registrar la espera EN EL BOT.
+    → NUNCA cotizar/comprar sobre spec no confirmado (puertas 96&quot;).
+ 4. TRADE: SECURE PRICING &amp; ETA (type Purchases) → TRES proveedores,
+    en ≤5 DÍAS. LA COTIZACIÓN ES LA DESCRIPCIÓN en JT
+    (+ quote ATTACHED). PRIMER FILTRO SIEMPRE: ¿entra en el LINE
+    ITEM del budget? Luego: precio vs ETA contra la cuadrilla.
+    Nada entra en budget → FLAG al PM/Backoffice (tú no decides).
+ 5. TRADE: PURCHASE MATERIALS (type Payment–Materials) → comprar.
+    REGISTRO DOBLE:
+    A) Schedule: tarea en el día REAL · monto en descripción
+       (SOLO número limpio, nada de &quot;43k&quot;) · boleta · check.
+       Cerrar = check + FECHAS CUADRADAS.
+    B) Libros: Documentos → EXPENSE → vendor → trade → LINE ITEM
+       → costo → Approve for Payment → Pay.
+    ★ TODO dinero pasa por el schedule — hasta caja chica/Home
+      Depot = Additional Expense (Jose 06-ago). SIN EXCEPCIONES.
+ 6. TRADE: DELIVERY ETA al día SIGUIENTE de la compra, con el
+    plazo POR ESCRITO del proveedor. REGLA:
+       &gt; 1 día  = fecha fin es el plazo máximo de llegada
+       = 1 día  = en stock… o SIN VERIFICAR (el sistema lo caza)
+    El material llega ANTES que la cuadrilla. Siempre temprano.
+    ETA que cambia → corregir DE INMEDIATO (un ETA viejo le
+    MIENTE al cronograma). Cadena crítica NUNCA sin ETA.
+    (En tu evaluación la ETA es INFORMATIVA — nunca &quot;vencida&quot;.)
+ 7. ★ LAS 3 EVIDENCIAS EN EL REPORTE DE TAKEOFF (Jose 06-ago):
+    ① foto del precio CONFIRMADO  ② ETA POR ESCRITO del proveedor
+    ③ el RECIBO de la compra.  El reporte = el expediente completo;
+    el Backoffice lo audita; el semanal marca cierres sin documento.
+ 8. Llega el material → VERIFICACIÓN con CONTEO PROPIO contra la
+    orden: cantidad · spec · condición. Evidencia = foto +
+    comentario. [VERIFICAR CON JOSE: qué se marca en el schedule
+    al llegar.] Incompleto/errado → no se verifica; se levanta con
+    el proveedor y se corrige el ETA.
+    El material es de SU proyecto (nada de cruzar entre obras).
+ 9. Verificada → NOTIFICAR A MILAGROS (Administradora) para el
+    pago. Tú coordinas; ella es la gatekeeper que ejecuta.
+10. En TODO el ciclo: estado en los COMENTARIOS DE PROYECTO de JT
+    (el sistema los LEE) + toda espera a un PM EN EL BOT.
+
+NOMENCLATURA:  TRADE: ACCIÓN   (ej. FRAMING: PURCHASE MATERIALS)
+
+TU SEMANA — EL KANBAN DE CONFIRMADAS (reporte oficial #5):
+  columnas sáb→vie · tarjeta = compra CONFIRMADA en cashflow con
+  monto y SU día · indicadores TAKEOFF/PM-confirmó.
+  El viernes se fija el plan (CEO aprueba); checks = pagos
+  CONFIRMADOS (fuente de la verdad: Finance tab, no el schedule).
+  TU PAPEL: que cada compra se realice SU día.
+
+TU DÍA (hora Perú): jornada hasta la 1:00 PM →
+  CIERRE con handoff al Backoffice (pendiente · estado · próximo
+  paso · quién lo tiene [PROPUESTA]).
+  Corre TÚ MISMA los 4 checks a las 12:00 (alertas del bot en
+  pausa desde el 31-jul). Reunión diaria 2:30 PM (3:30 Perú);
+  después de las 3 PM, JobTread es la verdad del día.
+  Baseline: VIERNES 11:00 PM (tu viernes-vs-viernes).
+
+DÍA CUMPLIDO ✅ (los 4 checks):
+  1. Cero compras de HOY sin ejecutar o sin ETA confirmada.
+  2. Todo pricing ≤5 días con cotización en la descripción.
+  3. ETAs de la semana confirmados o corregidos.
+  4. Toda espera a un PM registrada en el bot.
+
+REGLAS DE ORO:
+  · &quot;Está ordenado&quot; NO basta — solo el ETA confirmado protege
+    el schedule.
+  · Un EXECUTE solo tiene fecha si la cadena está 100% — tu lane
+    es la mitad de esa cadena (&quot;no se cita al sub sin material&quot;).
+  · Si no está en el bot / en JT / en el reporte, NO EXISTE.
+  · Takeoff vencido = freno invisible (los $12k frenados).
+  · Los 5: rigurosidad · detalle · prever · solucionar ·
+    proactividad insaciable. No aceptar y reaccionar: prevenir.
+  · Respeto y amabilidad en TODO canal, con TODOS. Sin excepción.
+═══════════════════════════════════════════════════════════════════
+</code></pre>
+<hr />
+<p><em>Track B </em><em>v2026-08-06</em><em> — construido sobre la v1.1 (que se conserva) + el brief de constructores 2026-08-06 + el canon v4 + el template maestro oficial + REPORTERIA_MASTER §A/C2/C3 + JD v3.0. Pendientes con Jose: [VERIFICAR] qué se marca al llegar el material (el template no tiene CONFIRM DELIVERY) · [PROPUESTA] formato cotización 4 campos · [PROPUESTA] formato handoff 1 PM · [PROPUESTA] N=10 días para certificar · gate t23 (cadencia que revive: radar/alerta 12:00). Se revisa con Jose un entregable a la vez.</em></p>
+<a class="volver" href="/proceso/materiales/">← Centro de materiales</a></div></body></html>

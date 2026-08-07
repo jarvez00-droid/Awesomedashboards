@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TRACK D · M6 — Sus reportes: el Finance tab y el check de confirmado</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+h3 { font-size: 12px; margin: 14px 0 6px; color: #1d4ed8; }
+h4 { font-size: 10.5px; margin: 10px 0 4px; color: #0f172a; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.portada { text-align: center; padding-top: 90px; page-break-after: always; }
+.portada .sub { font-size: 13px; color: #475569; margin-top: 8px; }
+.portada .fecha { margin-top: 30px; color: #64748b; font-size: 11px; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.pos { page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+.pos h3 { margin-top: 0; }
+ul { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+.dos-col { display: flex; gap: 14px; } .dos-col > div { flex: 1; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.seccion-num { color: #94a3b8; font-weight: 400; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <h1>TRACK D · ADMINISTRADORA</h1>
+  <div class="sub">MÓDULO 6 — Sus reportes: el Finance tab y el check de confirmado</div>
+  <div class="sub">Milagros · cubre las sesiones D5 + D7 del track</div>
+  <div class="fecha">CNG · Programa de Capacitación · v1 — 2026-08-06</div>
+</div>
+
+<h2><span class="seccion-num">1.</span> OBJETIVO <span class="chip">esta sección existe para saber qué te llevas del módulo</span></h2>
+<p>Leer los <b>reportes oficiales donde vive su data</b>, aplicar las leyes de la reportería, y dominar la regla más nueva y más importante de su tablero: <b>la fuente de la verdad de los pagos CONFIRMADOS es el FINANCE TAB del dashboard — no los checks del schedule</b> (Jose, 2026-08-03, DEFINITIVO).</p>
+
+<div class="clave">
+<b>FUENTE DE LA VERDAD — PAGOS CONFIRMADOS (Jose 2026-08-03, DEFINITIVO):</b><br>
+Los confirmados son los <b>☑ del FINANCE TAB</b> (timeline con <b>confirmed: true</b>; columna CONFIRMED del Cashflow Breakdown).<br>
+<b>NO son los checks del schedule de JobTread. NO es el botón PAID</b> (ese es pago ya ejecutado/histórico).<br>
+Antes de enviar cualquier reporte de confirmados: el total debe cuadrar <b>AL CENTAVO</b> con la celda CONFIRMED OUTFLOW
+del dashboard para la misma ventana (ventana semanal del dashboard = <b>lun→dom</b>).
+</div>
+
+<h2><span class="seccion-num">2.</span> CONTENIDO <span class="chip">esta sección existe para entender la mecánica exacta</span></h2>
+
+<h3>2.1 Los tres estados de un pago — no confundirlos nunca</h3>
+<table>
+<tr><th>Estado</th><th>Dónde vive</th><th>Qué significa</th></tr>
+<tr><td><b>CONFIRMADO</b> ☑</td><td><b>Finance tab</b> — timeline <code>confirmed: true</code></td><td>Dinero <b>reservado</b>: sucede sí o sí en la semana (Jose P3: <i>"Estos cheques significan confirmados… lo que confirmamos sí o sí tiene que suceder durante la semana"</i>). Es lo que alimenta el plan y los reportes de dinero.</td></tr>
+<tr><td><b>PAGADO</b> (histórico)</td><td>Botón PAID / Pagos Realizados</td><td>Pago <b>ya ejecutado</b> — es historia, no plan.</td></tr>
+<tr><td><b>Check del schedule</b></td><td>Tarea de JobTread</td><td>Registro de obra/calendario. <b>NO es confirmación de pago</b> por sí solo — la verdad de confirmados vive en el Finance tab.</td></tr>
+</table>
+
+<h3>2.2 Los reportes oficiales donde vive TU data (canon §9.4)</h3>
+<table>
+<tr><th>#</th><th>Reporte</th><th>Cuándo</th><th>Qué es para ti</th></tr>
+<tr><td>2</td><td><b>Project Department Weekly Evaluation</b></td><td>Sáb 8:30 AM (auto) — Jose·Jonas·Rey·<b>Milagros</b></td><td>El resumen <b>pagado/cobrado</b>: pagos <b>confirmados vs no-confirmados-ejecutados</b> · cobros <b>confirmados vs potenciales recibidos</b> · additionals por proyecto. Tu reconciliación semanal en versión oficial.</td></tr>
+<tr><td>3</td><td><b>Project Department Next Week Report</b></td><td>On-demand ("presupuestos consolidados")</td><td>La semana entrante con dinero <b>SOLO CONFIRMADOS</b> + pagos aprobados POR PROYECTO — la foto del plan que tú haces cumplir.</td></tr>
+<tr><td>6</td><td><b>Daily Report (gerencia)</b></td><td>8:00 PM L-V — Jonas·Rey·Jose·<b>Milagros</b></td><td>Qué pasó HOY en las obras, con veredicto ✅/🔴 — tu lente de cumplimiento diario sobre PMs y documentación.</td></tr>
+<tr><td>10</td><td><b>Productividad</b></td><td>Dashboard c/20 min</td><td>Producción neta vs overhead — el contexto del dinero que administras.</td></tr>
+</table>
+
+<h3>2.3 Las leyes de la reportería que te aplican (canon §9.5)</h3>
+<ul>
+<li><b>Ley 0:</b> el baseline se fija cada <b>VIERNES 11:00 PM</b> — la foto que ancla el viernes-vs-viernes.</li>
+<li><b>Ley 1:</b> evaluación = <b>cierres viernes vs viernes</b>; reprogramaciones se presentan <b>en neutro y sin culpa</b>.</li>
+<li><b>Ley 2:</b> <b>los números del reporte oficial MANDAN</b> — no se recalculan por fuera. Si algo no cuadra, se levanta la discrepancia; no se sobreescribe.</li>
+<li><b>Ley 3:</b> "lo dicho manda sobre lo agendado" — se registra y se cuadra.</li>
+<li><b>Ley 4:</b> después de las 3 PM, <b>JobTread es la verdad del día</b> — y ese schedule limpio es lo que alimenta tu cashflow.</li>
+</ul>
+
+<h3>2.4 El reloj en el que vives (diseño de la cadencia del puesto)</h3>
+<ul>
+<li><b>Diario:</b> roll de vencidos 6:00 AM → tu día de ejecutar/vigilar el plan → cuadrar el lado del dinero <b>antes de la reunión de las 2:30 PM</b> (3:30 Perú) → después de las 3 PM JT es la verdad → 8:00 PM llegan Daily Report y Task Lists → cierre reconciliado (aprobado-vs-pagado, comprobantes, desviaciones).</li>
+<li><b>Viernes:</b> consolidación de saldos + reunión de presupuestos + pago estándar a subs + baseline 11 PM (módulo M4).</li>
+<li><i>Nota de estado (2026-08-06): los check-ins/alertas automáticos de KITBOT están en pausa desde el 31-jul mientras Jose redefine los formatos — la cadencia de deberes sigue viva aunque el mensaje automático no llegue.</i></li>
+</ul>
+
+<h2><span class="seccion-num">3.</span> EL CASO REAL <span class="chip">esta sección existe para no repetir el error</span></h2>
+<div class="gap"><b>Por qué Jose tuvo que fijar la fuente de la verdad (2026-08-03).</b> Los "confirmados" podían leerse en dos lugares que no siempre dicen lo mismo: los checks del schedule de JobTread y los ☑ del Finance tab. Jose lo cerró DEFINITIVO: <b>la verdad es el Finance tab</b> (<code>confirmed: true</code>), y todo reporte de confirmados debe cuadrar <b>al centavo</b> con la celda CONFIRMED OUTFLOW de la misma ventana. El ejemplo vivo de la diferencia es el pago de los MEPs de Martha (P3): <b>potencialmente</b> se pagaba esa semana, pero al pasar la inspección recién ayer, por contrato salía la semana siguiente — <b>potencial ≠ confirmado</b>. Un reporte que suma potenciales como confirmados le miente al plan. <b>Moraleja:</b> antes de afirmar "esta semana salen $X confirmados", tu número salió del Finance tab y cuadró al centavo — o no se envía.</div>
+
+<h2><span class="seccion-num">4.</span> EL EJERCICIO <span class="chip">esta sección existe para practicar sobre casos reales</span></h2>
+<div class="pos">
+<h3>Práctica guiada</h3>
+<ol>
+<li><b>El check de confirmado:</b> abrir el Finance tab de HOY, leer el CONFIRMED OUTFLOW de la semana (lun→dom) y listar los ☑ que lo componen. Contrastar contra el schedule: encontrar al menos 1 caso donde el estado del schedule y el ☑ del Finance tab NO cuenten lo mismo, y explicar cuál manda.</li>
+<li><b>Sus 3 reportes:</b> ubicar su data en el Project Dept Weekly Evaluation (pagado/cobrado: confirmados vs no-confirmados), el Daily Report de gerencia, y el cashflow del dashboard — decir qué de cada uno ella produce y qué controla.</li>
+<li><b>Cuadre al centavo:</b> tomar el reporte de pagos confirmados de la semana y verificar que el total cuadra al centavo con la celda CONFIRMED OUTFLOW. Si no cuadra: levantar la discrepancia (ley 2 — no recalcular por fuera).</li>
+<li><b>Un día completo con el reloj:</b> correr un día real con Jose observando — plan vigente en la mañana, dinero cuadrado antes de la 2:30, cierre reconciliado con los 5 checks del Día Cumplido.</li>
+</ol>
+</div>
+
+<h2><span class="seccion-num">5.</span> LO QUE SE EVALÚA <span class="chip">esta sección existe para que sepas cómo apruebas</span></h2>
+<div class="mat"><b>Nivel 1:</b> distingue sin error los 3 estados (confirmado ☑ / pagado histórico / check de schedule) y recita las 5 leyes de la reportería; nombra sus 4 reportes y qué mira en cada uno.<br>
+<b>Nivel 2:</b> 1 lectura semanal completa: CONFIRMED OUTFLOW leído + cuadre al centavo + su sección de pagado/cobrado del Weekly explicada a "gerencia" (role-play).<br>
+<b>Nivel 3 (certificación):</b> los 5 checks del Día Cumplido sostenidos [PROPUESTA: 10 días hábiles]; cero números oficiales recalculados por fuera; cero "confirmados" afirmados sin el Finance tab.<br>
+<b>Comportamiento (los 5):</b> aquí se observan <b>RIGUROSIDAD</b> (el cuadre al centavo, siempre) y <b>ATENCIÓN AL DETALLE</b> (potencial ≠ confirmado; la discrepancia se levanta, no se tapa).</div>
+
+<div class="footer-note">TRACK D · Módulo 6 · v1 — 2026-08-06. Fuentes: REPORTERIA_MASTER §A + "FUENTE DE LA VERDAD — PAGOS CONFIRMADOS" (Jose 2026-08-03, DEFINITIVO) · canon v4 §8 (checks=confirmados, P3 verbatim) + §9.4–9.5 · _BRIEF_CONSTRUCTORES §2–§3 · manual v2.0 §2. Estado vivo de la reportería: REPORTERIA_MASTER §B.</div>
+
+</body>
+</html>

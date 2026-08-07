@@ -1,0 +1,407 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TRACK E PLANNING · CNG</title>
+<link rel="stylesheet" href="/proceso/assets/style.css">
+<style>
+.doc{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.doc h1{font-size:28px;border-bottom:3px solid var(--ink,#0f172a);padding-bottom:10px;margin-top:0}
+.doc h2{font-size:20px;margin-top:34px;border-bottom:2px solid #cbd5e1;padding-bottom:6px}
+.doc h3{font-size:16px;color:#1d4ed8;margin-top:24px}
+.doc table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.doc th{background:#0f172a;color:#fff;padding:8px 10px;text-align:left}
+.doc td{border:1px solid #cbd5e1;padding:8px 10px;vertical-align:top}
+.doc tr:nth-child(even) td{background:#f8fafc}
+.doc pre{background:#f1f5f9;padding:14px;border-radius:8px;overflow-x:auto;font-size:13px;border:1px solid #e2e8f0}
+.doc code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:13px}
+.doc blockquote{border-left:4px solid #2563eb;background:#eff6ff;margin:14px 0;padding:10px 16px;border-radius:0 8px 8px 0}
+.doc li{margin:5px 0}
+.volver{display:inline-block;margin:16px 0;padding:8px 16px;background:#0f172a;color:#fff;border-radius:20px;text-decoration:none;font-size:14px;font-weight:600}
+</style></head><body>
+<div class="doc"><a class="volver" href="/proceso/materiales/">← Centro de materiales</a>
+<h1>TRACK E · PLANNING (Claudia · Karla) — Currículo de Capacitación</h1>
+<p><strong>Para:</strong> Claudia (Planning Manager / arquitecta, Perú) · Karla (arquitecta, Perú) — y todo arquitecto de Planning futuro.<br />
+<strong>Prerrequisito: Módulo 0 completo</strong> (proceso canónico — sesiones 0.1 a 0.7; ver <code>00_PLAN_MAESTRO_CAPACITACION.md</code> §3). Este track NO repite el Módulo 0: lo asume y lo referencia.</p>
+<p><strong>Por qué este track existe (Jose, corrección 2026-08-04, canónico §11):</strong> el fallo #1 de framing de CNG no es del framer — llega a la obra con <strong>planos estructurales desactualizados o no aprobados por el ingeniero</strong> → retrabajo. Y el red tag de Martha (24-jul) fue, textualmente, por <strong>planos no presentes en obra</strong> — el fallo que el audit ya había predicho. Planning es el eslabón que decide si el PM ejecuta sobre información <strong>completa y aprobada</strong> o sobre información <strong>incompleta que revienta en obra</strong>. Este track lleva a Planning del <em>"ya hace los planos"</em> al <em>"entrega un portafolio que hace imposible el retrabajo por información"</em>.</p>
+<blockquote>
+<p><strong>⚠️ NOTA DE FUENTES:</strong> a diferencia de los tracks B/C, <strong>Planning no tiene un manual v2.0 dedicado</strong> (<code>JD_planning</code> no existe). Este track se construye desde el <strong>proceso canónico</strong> (§3, §11), la <strong>Parte 3 del entrenamiento de Jose</strong> (2026-08-05 — la explicación completa del flujo de Planning, en boca de Jose), <code>ORG_ROLES.md</code>, y los huecos reales del mega-análisis. Donde el canon no fija un detalle operativo (formato exacto de un gate, N de días de certificación), va marcado <strong>[PROPUESTA — por confirmar con Jose]</strong>. No se inventan cifras de código, permisos ni precios.</p>
+</blockquote>
+<p><strong>Fuentes:</strong> <code>00_PROCESO_CANONICO_CNG.md</code> (§2, §3, §7, §11) · transcripciones Parte 1+2+3 (entrenamiento de Jose, ago-2026 — Planning = P3 líneas 620–1038) · <code>ORG_ROLES.md</code> · <code>SCHEDULE_STRUCTURE.md</code> · <code>EL_FLOW_ACTION_TASK.md</code> · <code>DIA_CUMPLIDO_POR_PUESTO.md</code> (v3, sección Planning [PROPUESTA]) · mega-análisis 2026-07-26 (<code>interno_ejecucion-obra.md</code>).</p>
+<hr />
+<h2>1. Perfil y misión</h2>
+<h3>1.1 La misión</h3>
+<blockquote>
+<p><strong>"Convertir lo que el vendedor prometió en un proyecto EJECUTABLE: planos completos y aprobados por el ingeniero, permisos gestionados, y un PORTAFOLIO tan claro que el PM ejecute la obra entera sin sorpresas ni retrabajos por información."</strong></p>
+</blockquote>
+<p>Planning es la <strong>fábrica de la información</strong> con la que se construye. CNG <em>"depende de la información: si el registro es limpio, la operación corre; si no, se rompe"</em> (canónico §1) — y el registro más aguas-arriba de todos, el que condiciona a todos los demás, es el que produce Planning. El PM no ejecuta la obra que quiere: ejecuta <strong>la obra que Planning documentó</strong>. Si el portafolio está incompleto, el PM lo descubre en obra, con la cuadrilla presente y el reloj corriendo. Por eso la medida del puesto <strong>no es cuántos planos se dibujan, sino si algún proyecto llegó a obra con información faltante, desactualizada o sin aprobar.</strong></p>
+<h3>1.2 Las 3 verdades no negociables del puesto</h3>
+<ol>
+<li><strong>Nada llega a obra sin aprobación del ingeniero.</strong> Los planos estructurales, de energía y de fundación se <strong>tercerizan a ingenieros externos</strong> (canónico §3, P3) — y Planning <strong>no cierra el portafolio hasta tenerlos aprobados en mano</strong>. El fallo #1 de framing (planos estructurales desactualizados/no aprobados) es un fallo de Planning antes que del PM. <em>"No aprobado" = no existe.</em></li>
+<li><strong>El portafolio es LA BIBLIA DEL PM — y una biblia con páginas en blanco no sirve.</strong> El portafolio se juzga por una sola cosa: ¿puede el PM ejecutar cada trade con SOLO este documento, sin preguntar? Cada medida faltante, cada spec ambiguo, cada ventana sin código es una pregunta que el PM tendrá que hacer en obra — o peor, adivinar.</li>
+<li><strong>Planning nunca habla directo con el cliente.</strong> TODO pasa por el vendedor (ASM) (canónico §3, P3: <em>"el equipo de planning realmente no tiene contacto directo con el cliente… lo que hacen es pasárselo al vendedor y el vendedor se lo da al cliente"</em>). Una duda de diseño, una aprobación, un cambio de spec — siempre por el canal del vendedor. Saltarse el canal rompe la trazabilidad del cambio (el mismo síntoma que causó las puertas 96").</li>
+</ol>
+<h3>1.3 Mapa de conexiones — de quién recibe, a quién entrega</h3>
+<table>
+<thead>
+<tr>
+<th>Con quién</th>
+<th>Qué recibe Planning</th>
+<th>Qué entrega Planning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vendedor / ASM</strong> (Account Success Manager)</td>
+<td>El <strong>Sales Report</strong>: floor plan del cliente, información de sus visitas, análisis de factibilidad de lo que el cliente pidió (canónico §3)</td>
+<td>El <strong>Floor Plan Proposal</strong>, el portafolio v1 y el portafolio final — SIEMPRE por el vendedor, que es quien lo lleva al cliente</td>
+</tr>
+<tr>
+<td><strong>Cliente</strong> (SOLO vía vendedor)</td>
+<td>Aprobaciones / rechazos del floor plan y de los portafolios; selecciones de acabados (Fase 2)</td>
+<td>— (cero contacto directo — canónico §3)</td>
+</tr>
+<tr>
+<td><strong>Ingenieros externos</strong> (tercerizados)</td>
+<td>Los <strong>reportes estructurales, de energía y de fundación</strong> (+ otros según la ciudad) aprobados (canónico §3, P3)</td>
+<td>Los planos arquitectónicos/MEP y las especificaciones para que el ingeniero calcule; el seguimiento para que lleguen <em>"en un plazo decente"</em> (P3)</td>
+</tr>
+<tr>
+<td><strong>Lead PM + Backoffice</strong></td>
+<td>Preguntas en las reuniones de <strong>ADELANTO</strong> y de entrega del portafolio v1 (canónico §3, P3)</td>
+<td>La reunión de adelanto (tras aprobación del floor plan) y la reunión de portafolio v1 — el insumo con que Backoffice arma el <strong>schedule ideal</strong> desde el template</td>
+</tr>
+<tr>
+<td><strong>Compras (Romina)</strong></td>
+<td>—</td>
+<td>La <strong>lista de compras detallada</strong> dentro del portafolio (medidas, ventanas "W3", specs) = la fuente del take-off de Romina (canónico §3)</td>
+</tr>
+<tr>
+<td><strong>Ciudad</strong> (permits)</td>
+<td>Aprobación / observaciones / negativa de los permisos (canónico §3, P3)</td>
+<td>La gestión de los <strong>permits</strong>; si la ciudad exige cambios → revisión de presupuesto → change order vía vendedor</td>
+</tr>
+<tr>
+<td><strong>KITBOT</strong></td>
+<td>Radar/cadencia del puesto, dudas técnicas a nivel experto, persecución de esperas (a ingenieros/ciudad por Planning)</td>
+<td>Cada espera registrada en el bot (ingeniero pendiente, permiso en trámite, aprobación de cliente pendiente)</td>
+</tr>
+</tbody>
+</table>
+<h3>1.4 La mentalidad — la causa raíz es el comportamiento (Jose, 2026-08-04)</h3>
+<p>Los fallos del proceso no vienen de falta de conocimiento técnico — Planning son arquitectos, dominan el diseño. Vienen de falta de <strong>RIGUROSIDAD</strong>, de <strong>ATENCIÓN AL DETALLE</strong>, de no <strong>PREVER</strong>, no <strong>SOLUCIONAR</strong> y no ser <strong>PROACTIVO</strong> (canónico §1, §11). La regla mental del puesto: <em>"no aceptar el problema y reaccionar: prevenirlo, o buscar soluciones insaciablemente para cumplir el cronograma a como dé lugar"</em> (Jose).</p>
+<p>En Planning esto se traduce literal y es la columna vertebral del track: <strong>un plano que se envió sin la aprobación del ingeniero, una medida que se dejó "por confirmar", una ventana sin código, un permiso que no se persiguió, un cambio del cliente que no se propagó a todos los planos — todos son fallos de comportamiento antes que de proceso.</strong> La rigurosidad de Planning es lo que evita el retrabajo del PM dos meses después. Este comportamiento <strong>se evalúa</strong> junto con la mecánica (§4).</p>
+<hr />
+<h2>2. Mapa de competencias</h2>
+<table>
+<thead>
+<tr>
+<th>Debe SABER</th>
+<th>Debe SABER HACER</th>
+<th>Debe VERIFICAR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El proceso canónico completo (Módulo 0) y <strong>su lugar aguas-arriba</strong>: por qué su información condiciona a TODOS los demás puestos</td>
+<td>Leer un <strong>Sales Report</strong> y extraer lo prometido, lo factible y lo que hay que aclarar con el vendedor ANTES de dibujar</td>
+<td>Que lo que Planning dibuja = lo que el vendedor prometió al cliente (cotejo Sales Report vs Floor Plan Proposal)</td>
+</tr>
+<tr>
+<td>El flujo completo de Planning F1: Sales Report → schedule interno → Floor Plan Proposal → aprobación → adelanto → planos+renders → portafolio v1 → permits (canónico §3, P3)</td>
+<td>Armar el <strong>Floor Plan Proposal</strong> (propuesta de planta según lo prometido) y pasarlo al vendedor para aprobación</td>
+<td>Que el floor plan sea <strong>construible</strong> (no solo bonito) — factibilidad real antes de comprometer el diseño</td>
+</tr>
+<tr>
+<td>Qué se terceriza y qué no: arquitectura/MEP/renders = Planning; <strong>estructural, energía, fundación = ingenieros externos</strong> (canónico §3)</td>
+<td>Coordinar con los <strong>ingenieros externos</strong> y <strong>perseguir</strong> sus reportes hasta tenerlos aprobados <em>"en un plazo decente"</em> (P3)</td>
+<td>Que los reportes del ingeniero estén <strong>APROBADOS y en mano</strong> ANTES de cerrar el portafolio (el fallo #1 de framing)</td>
+</tr>
+<tr>
+<td>El proceso constructivo físico (canónico §2) lo suficiente para que el portafolio hable el idioma del PM (secuencia, qué depende de qué)</td>
+<td>Producir los planos arquitectónicos, eléctricos, de plomería y HVAC + renders iniciales</td>
+<td>Que cada plano esté <strong>completo</strong>: medidas, códigos de ventanas/puertas (W3), plano eléctrico, medidas de carpintería</td>
+</tr>
+<tr>
+<td>Qué debe contener el <strong>PORTAFOLIO</strong> = la biblia del PM (canónico §3) para que ejecute sin sorpresas</td>
+<td>Ensamblar el <strong>portafolio v1</strong> (layout antes/después, qué se demuele/añade/remueve, medidas) + la <strong>lista de compras</strong> para Romina</td>
+<td>Que el portafolio sea <strong>auto-suficiente</strong>: ¿puede el PM ejecutar cada trade sin preguntar?</td>
+</tr>
+<tr>
+<td>Cómo el portafolio alimenta el <strong>schedule ideal</strong>: del template se eliminan los trades no vendidos (canónico §3, P3)</td>
+<td>Presentar el portafolio v1 en la reunión con <strong>Lead PM + Backoffice</strong> y responder todas sus preguntas</td>
+<td>Que los trades del portafolio = los trades que se le vendieron al cliente (base para depurar el template)</td>
+</tr>
+<tr>
+<td>La gestión de <strong>permits</strong>: tiempos variables, ~1/100 la ciudad niega, cambios de ciudad → change order (canónico §3, P3)</td>
+<td>Gestionar los permits con la ciudad y, ante observaciones, disparar la revisión de presupuesto vía vendedor</td>
+<td>Que el permit esté <strong>otorgado</strong> (o sus cambios propagados a planos + budget + cliente) antes de dar la obra por iniciada</td>
+</tr>
+<tr>
+<td>El <strong>CLIENT FINISHES SELECTION PROCESS</strong> de F2 y qué es el <strong>Portafolio 2</strong> (renders 3D finales + acabados)</td>
+<td>Correr la Fase 2 con Compras: enviar opciones de materiales/estéticas y cerrar el <strong>portafolio versión FINAL</strong></td>
+<td>Que el portafolio final esté listo <strong>2 semanas antes</strong> de iniciar cualquier acabado (canónico §3)</td>
+</tr>
+<tr>
+<td>Nomenclatura y el idioma del sistema: inglés para trades/tools/permits, español para el equipo</td>
+<td>Registrar cada <strong>espera</strong> (ingeniero, ciudad, aprobación de cliente) en el bot</td>
+<td>Que ninguna espera suya (ingeniero/permit/cliente) quede sin registrar — "si no está en el bot, no existe"</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Módulos (8 sesiones)</h2>
+<blockquote>
+<p>Formato estándar (igual que Tracks B/C): sesión grabada (para repaso) + práctica guiada sobre proyectos reales en JobTread/CompanyCam. Como Claudia y Karla YA operan el puesto, cada sesión abre con 5 min de <em>"muéstrame cómo lo haces hoy"</em> y se corrige sobre su práctica real. Práctica en vivo apoyada en la reunión de las 2:30 PM cuando aplique.</p>
+</blockquote>
+<hr />
+<h3>SESIÓN E1 · El puesto en el mapa: la fábrica de la información aguas-arriba (45–60 min)</h3>
+<p><strong>Objetivo:</strong> que Planning explique en 2 minutos su misión, las 3 verdades, y <strong>por qué un portafolio incompleto es la raíz de un retrabajo que estalla dos meses después en obra.</strong></p>
+<p><strong>Contenido:</strong><br />
+- Repaso exprés del Módulo 0 (no se repite): LA CLAVE de CNG es <strong>GESTIONAR LA OBRA DE LA FORMA EN LA QUE SE PLANIFICÓ EN EL CRONOGRAMA</strong> — flujo de información impecable + solucionar los imprevistos para no salirse del cronograma = lo que garantiza el éxito de la operación (canónico §1, Jose 2026-08-04). Planning es <strong>la primera fuente</strong> de ese flujo de información.<br />
+- La misión y la medida única del puesto: ¿algún proyecto llegó a obra con información faltante, desactualizada o sin aprobar? (§1.1).<br />
+- <strong>Planning aguas-arriba:</strong> el orden del proceso de empresa (canónico §3) — Ventas → Estimado → Budget → <strong>Planning F1</strong> → Portafolio → <em>"The Turn"</em> al PM → Operación. Planning entrega ANTES que todos; por eso su error se propaga a todos. El PM ejecuta la obra que Planning documentó, no la que imagina.<br />
+- Las 3 verdades no negociables (§1.2) — leerlas en voz alta y dar un ejemplo real de cada una.<br />
+- <strong>El caso que define el puesto</strong> (canónico §11, mega-análisis §5): el red tag de framing de Martha (24-jul) fue por <strong>planos no presentes/desactualizados en obra</strong> — <em>"el fallo que el audit ya había predicho"</em>. Y el fallo #1 declarado del framing en CNG es planos estructurales <strong>no aprobados por el ingeniero</strong>. Ambos son fallos de la calidad del portafolio. Planning es quien los previene.<br />
+- Valores (transversales a todos los manuales v2.0): respeto y amabilidad en TODO canal — con el vendedor, con los ingenieros, con el Lead PM y Backoffice. Condición del puesto, no aspiración.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Abrir el portafolio real más reciente que Planning entregó (p. ej. de <strong>Lingyan</strong> o <strong>Martha Cockrell</strong>) y responder en voz alta: si yo fuera el PM y solo tuviera este documento, ¿qué <strong>3 preguntas</strong> tendría que hacer para poder ejecutar? (cada pregunta = un hueco del portafolio).<br />
+2. Rastrear un proyecto de punta a punta: ¿en qué momento la información que Planning produjo tocó al PM, a Romina y a la ciudad? Dibujar la cadena.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Framing con planos desactualizados/no aprobados</strong> (canónico §11) = el fallo #1. Ocurre cuando Planning cierra el portafolio sin la aprobación del ingeniero en mano.<br />
+- <strong>Martha 24-jul: red tag por planos no presentes en obra</strong> (mega-análisis §5). Un portafolio que no llegó completo a la obra es un portafolio que no cumplió su función.</p>
+<hr />
+<h3>SESIÓN E2 · Del Sales Report al Floor Plan Proposal: no dibujar sobre supuestos (60–90 min)</h3>
+<p><strong>Objetivo:</strong> leer un Sales Report como insumo crítico, cerrar las dudas con el vendedor ANTES de dibujar, y producir un Floor Plan Proposal fiel a lo prometido y <strong>construible</strong>.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>Qué es el Sales Report</strong> (canónico §3): lo genera el vendedor al cerrar la venta — floor plan del cliente, información de sus visitas, y el <strong>análisis de factibilidad</strong> de lo que el cliente pidió. Es el insumo #1 de Planning: <em>"el ASM le envía la información al Planning Manager"</em> (P3).<br />
+- El primer paso de Planning (P3): <strong>Claudia recibe la información y agenda una reunión</strong> para explicar la mayor cantidad de detalles del proyecto, y luego <strong>crea un schedule de trabajo interno</strong> para el equipo de Planning y les baja la información. Planning <strong>planifica su propio trabajo</strong> antes de dibujar.<br />
+- <strong>El Floor Plan Proposal</strong> (P3): la propuesta de configuración de planta hacia el cliente. La lógica en palabras de Jose: <em>"el cliente va y dice: yo sueño con tener esta cocina aquí… acá es donde nosotros le bajamos la información ya en planos"</em> — de acuerdo a lo conversado y <strong>a lo que se le prometió con su vendedor</strong>. Planning traduce el sueño del cliente a una planta ejecutable.<br />
+- <strong>Regla dura: cero contacto con el cliente</strong> (§1.2, canónico §3). El Floor Plan Proposal se pasa al vendedor → el vendedor se lo da al cliente → el cliente lo aprueba o no. Toda duda de diseño se resuelve por el canal del vendedor.<br />
+- <strong>Factibilidad = comportamiento (rigurosidad):</strong> un floor plan bonito pero no construible es un problema diferido al PM. Prever aquí = detectar la incompatibilidad estructural/dimensional ANTES de comprometer el diseño con el cliente, no después.<br />
+- Si el cliente <strong>aprueba</strong> el floor plan → la líder de Planning agenda la reunión de <strong>ADELANTO</strong> con Lead PM + Backoffice (siguiente sesión).</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Tomar un Sales Report real de un proyecto reciente: extraer en 3 columnas → (a) lo que el cliente pidió, (b) lo que es factible, (c) <strong>lo que hay que aclarar con el vendedor antes de dibujar</strong>. La columna (c) es el ejercicio de rigurosidad.<br />
+2. Sobre un Floor Plan Proposal real ya entregado: cotejarlo contra su Sales Report — ¿coincide con lo prometido? ¿algo se dibujó sobre un supuesto no confirmado?</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- Dibujar sobre lo que "se entiende" del Sales Report en vez de sobre lo confirmado por el vendedor — es la misma familia de fallo que las puertas 96" (un spec que nunca se confirmó y se ejecutó sobre el dato errado, mega-análisis §7).<br />
+- Saltarse el canal del vendedor para "aclarar rápido" con el cliente: rompe la trazabilidad del acuerdo y deja al vendedor sin saber qué se prometió.</p>
+<hr />
+<h3>SESIÓN E3 · La reunión de ADELANTO y la coordinación de ingenieros externos (60–90 min)</h3>
+<p><strong>Objetivo:</strong> correr la reunión de adelanto con Lead PM + Backoffice, y dominar la coordinación con ingenieros externos hasta tener <strong>sus reportes aprobados en mano</strong> — la verdad #1 del puesto.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>La reunión de ADELANTO</strong> (canónico §3, P3): tras la aprobación del floor plan por el cliente, la líder de Planning agenda una reunión con el <strong>Lead PM + Backoffice</strong> para <em>"darles un adelanto del proyecto"</em>. Es la primera vez que operaciones ve lo que viene. Sirve para alinear expectativas y capturar preguntas tempranas.<br />
+- <strong>Qué produce Planning en paralelo</strong> (P3): planos <strong>arquitectónicos</strong>, planos <strong>eléctricos</strong>, planos de <strong>plomería</strong>, planos de <strong>aire acondicionado (HVAC)</strong>, y <strong>renders iniciales</strong>.<br />
+- <strong>Qué se terceriza</strong> (canónico §3, P3, verdad #1): los <strong>reportes estructurales, de energía y de fundación</strong> — más <em>"otros reportes que normalmente son necesarios dependiendo de cada ciudad"</em> — se hacen con <strong>ingenieros externos</strong>. Planning les provee los planos/specs, coordina, y <strong>los persigue</strong> <em>"para que puedan proveer esto en un plazo decente"</em> (P3). (Los planos MEP —eléctrico/plomería/HVAC— NO se tercerizan: los produce Planning.)<br />
+- <strong>El gate crítico del puesto:</strong> el portafolio v1 <strong>NO se cierra</strong> hasta que el ingeniero envió y <strong>aprobó</strong> los reportes. Un plano estructural sin aprobar en el portafolio = el fallo #1 de framing servido en bandeja. Perseguir al ingeniero es tan parte del trabajo como dibujar (proactividad).<br />
+- <strong>Registrar la espera del ingeniero en el bot</strong> (KITBOT persigue por Planning): <em>"espero el reporte estructural de <proyecto> del ingeniero X"</em> — con fecha comprometida. Si no está en el bot, la espera se pudre en silencio (mismo patrón que las esperas de Romina, Track B).</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Sobre un proyecto en curso: listar <strong>qué reportes de ingeniería</strong> requiere (estructural / energía / fundación u otros según la ciudad) y el <strong>estado de cada uno</strong> (no pedido / pedido / recibido / <strong>aprobado</strong>). Marcar en rojo todo lo que no esté "aprobado".<br />
+2. Redactar la espera modelo en el bot para el reporte más atrasado: ingeniero · reporte · fecha comprometida · próximo paso.<br />
+3. Simular la reunión de adelanto: en 5 minutos, "bajarle" el proyecto al Lead PM + Backoffice y anticipar sus 3 preguntas probables.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- Cerrar el portafolio con reportes de ingeniería "pedidos pero no aprobados" = exactamente el fallo #1 de framing (canónico §11). <em>"Pedido" no es "aprobado".</em><br />
+- No perseguir al ingeniero: el reporte llega tarde, retrasa el permit, retrasa el arranque de obra — y el cronograma se rompe desde el origen.</p>
+<hr />
+<h3>SESIÓN E4 · El PORTAFOLIO v1: la biblia del PM · qué debe contener para ejecutar sin sorpresas (90 min) ⭐ LA SESIÓN MÁS IMPORTANTE</h3>
+<p><strong>Objetivo:</strong> ensamblar un portafolio v1 <strong>auto-suficiente</strong> — que el PM pueda ejecutar CADA trade con solo ese documento — y entenderlo como el insumo maestro del que dependen el PM, Romina y el schedule ideal.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>Qué es el portafolio</strong> (canónico §3, P3): <em>"la biblia del PM"</em>. Se crea cuando el equipo terminó los planos arquitectónicos + los renders iniciales <strong>Y</strong> los ingenieros enviaron los reportes estructurales/energía/fundación (P3: <em>"se crea la primera versión del portafolio"</em>). Es la síntesis ejecutable de todo el diseño.<br />
+- <strong>Qué DEBE contener</strong> (canónico §3 — el estándar mínimo del portafolio como biblia del PM):<br />
+  1. <strong>Layout antes / después</strong> — qué existe hoy vs qué quedará.<br />
+  2. <strong>Qué se demuele / añade / remueve</strong> — sin ambigüedad, para que el PM sepa el alcance de cada trade.<br />
+  3. <strong>Medidas</strong> completas — incluyendo la codificación de <strong>ventanas ("W3" → tabla de medidas)</strong> y <strong>puertas</strong>, para que Romina cotice y el PM instale sin adivinar.<br />
+  4. <strong>Plano eléctrico</strong> — ubicaciones, circuitos, luminarias.<br />
+  5. <strong>Medidas de carpintería</strong> — recordando que <em>"carpintería es la mitad de la obra"</em> (P3): un error aquí es un error grande.<br />
+  6. <strong>La lista de compras detallada para Compras</strong> (canónico §3): <em>"una lista más detallada para la parte de compras, para que la coordinadora de compras pueda realizar su labor correctamente"</em> (Jose, P2) → la fuente directa del take-off de Romina.<br />
+- <strong>El criterio de calidad (el gate del portafolio):</strong> por cada trade del proyecto, preguntarse <em>"¿puede el PM ejecutar esto con SOLO el portafolio, sin llamar a preguntar?"</em> Si la respuesta es no, falta algo. <strong>La calidad del portafolio es lo que evita el retrabajo</strong> (énfasis crítico de Jose): cada hueco es una pregunta en obra o una adivinanza.<br />
+- <strong>La reunión de portafolio v1</strong> (canónico §3, P3): con el v1 listo, Planning contacta <strong>de nuevo</strong> al Lead PM + Backoffice: <em>"del proyecto que les adelanté… este es el resultado final y este es el portafolio"</em>. Ellos hacen <em>"las preguntas necesarias para entender el proyecto"</em> y con eso Backoffice <strong>arma el schedule ideal</strong>: del <strong>template maestro</strong> se eliminan las secciones de los trades <strong>no vendidos</strong> (P3: <em>"si el cliente nunca quiso mamparas, se elimina toda la sección de mamparas; si no quiso ladrillos, se elimina toda la sección de ladrillos"</em>).<br />
+- <strong>La regla de propagación de cambios:</strong> si un spec cambia (cliente, ciudad, ingeniero), el cambio se propaga a <strong>TODOS</strong> los planos y a la lista de compras — no solo a uno. El fallo de las puertas 8ft/82"/96" (mega-análisis §7) fue un cambio de spec que no se propagó. Rigurosidad = un cambio, todos los documentos.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. <strong>Auditoría de portafolio (el ejercicio central):</strong> tomar un portafolio v1 real (p. ej. <strong>Martha Cockrell</strong>) y correr el gate trade por trade: por cada trade, marcar ✅ (ejecutable con solo el portafolio) o ❌ (falta X). Producir la lista de huecos y cómo cerrarlos.<br />
+2. <strong>Construir la lista de compras</strong> de un trade real desde el portafolio: campos por locación con medidas, en el nivel de detalle que Romina necesita para el take-off (recordar el ejemplo de siding de Jose: starter strip / esquinas / J-channel con pies lineales).<br />
+3. Cotejo <strong>portafolio vs Sales Report vs reportes de ingeniería</strong>: ¿todo lo prometido está dibujado, medido y aprobado?</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Portafolio con páginas en blanco:</strong> una medida "por confirmar", una ventana sin código, un trade sin plano — cada uno es un retrabajo diferido al PM (canónico §11: el conocimiento existe pero se usa reactivo, no se inyecta en los gates).<br />
+- <strong>Puertas de Katie Holmes:</strong> se framearon a 8 ft cuando debían ser 82", y luego se pidieron a 96" — el error de spec <strong>se compró</strong> (mega-análisis §7). La medida correcta y propagada en el portafolio es la primera defensa contra esto.<br />
+- Entregar el portafolio v1 sin los reportes de ingeniería aprobados = repetir el fallo #1 de framing.</p>
+<hr />
+<h3>SESIÓN E5 · Permits: gestión con la ciudad, cambios y change orders (60 min)</h3>
+<p><strong>Objetivo:</strong> gestionar los permits con la ciudad, manejar sus observaciones sin salirse del proceso, y propagar todo cambio de ciudad a planos + budget + cliente <strong>vía vendedor</strong>.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>Cuándo entran los permits</strong> (canónico §3, P3): con el portafolio v1 y el schedule ideal preliminar listos, <em>"acá es donde se empiezan a gestionar los permisos de la ciudad"</em>.<br />
+- <strong>Los tiempos son variables</strong> (P3): <em>"puede demorar un montón como puede demorar poquito"</em>. La proactividad es perseguir el trámite, no esperar sentado.<br />
+- <strong>El caso de negativa</strong> (canónico §3, P3): <em>"~1 de cada 100 la ciudad niega definitivamente"</em> (ej. sitio histórico) → <strong>se abandona el proyecto</strong>. Es raro; en la mayoría de casos se avanza.<br />
+- <strong>El caso de cambios</strong> (canónico §3, P3): si la ciudad exige cambios → <strong>se revisa nuevamente el presupuesto</strong> → <strong>se habla con el cliente</strong> (vía vendedor) → <strong>change order si es necesario</strong> → recién con eso <em>"se da por iniciada la obra"</em>. Planning dispara la cadena; no la resuelve sola.<br />
+- <strong>Regla dura:</strong> el permit otorgado (o sus cambios ya propagados a planos + budget + cliente) es una <strong>precondición para dar la obra por iniciada</strong>. Un permit pendiente o unos cambios de ciudad sin propagar = obra que arranca sobre información incompleta.<br />
+- <strong>Registrar el permit en el bot como espera</strong> (proactividad): <em>"permit de <proyecto> en trámite con <ciudad>, presentado el X"</em> — para que KITBOT lo persiga y nadie olvide el estado.<br />
+- <strong>⚠️ No inventar códigos ni requisitos:</strong> el canon NO fija requisitos de permit por ciudad; cada ciudad manda los suyos. Planning verifica con la ciudad y con las fuentes oficiales, nunca de memoria (misma disciplina de la autoridad de códigos del sistema).</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Sobre un proyecto en gestión de permits: registrar el estado real del trámite y la espera en el bot; identificar qué documentos entregó Planning y qué falta.<br />
+2. Simular el caso "la ciudad pide un cambio": redactar la cadena completa → qué cambia en el plano · qué se revisa en el budget · qué se le comunica al cliente (vía vendedor) · ¿hace falta change order?</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- Tratar el permit como "trámite que llega solo": sin persecución, el permit tardío retrasa el arranque y toda la cadena aguas abajo (permisos tardíos = un fallo documentado).<br />
+- Un cambio de ciudad propagado al plano pero <strong>no</strong> al budget ni al cliente = la obra arranca con un presupuesto y un cliente desalineados.</p>
+<hr />
+<h3>SESIÓN E6 · Fase 2 de planeamiento: Client Finishes Selection, renders 3D y el Portafolio FINAL (75–90 min)</h3>
+<p><strong>Objetivo:</strong> correr la Fase 2 (acabados) con Compras y el vendedor, cerrar el <strong>Portafolio 2 / versión FINAL</strong>, y entregarlo <strong>2 semanas antes</strong> de cualquier acabado.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>Por qué existen dos fases</strong> (canónico §3): Fase 1 = estructura, Fase 2 = acabados. Existen <em>"para que la construcción no se frene esperando que el cliente elija acabados"</em>. Planning F2 corre mientras la obra F1 ya avanza.<br />
+- <strong>El disparador — CLIENT FINISHES SELECTION PROCESS</strong> (canónico §3, P3): <em>"está muy involucrada el área de planning y el área de compras… se le envían diferentes opciones de materiales y opciones estéticas al cliente y se le acompaña para que pueda escoger"</em>. Planning + Compras arman las opciones.<br />
+- <strong>Los showrooms = chamba del VENDEDOR</strong> (canónico §3, P3): <em>"muchas veces hay que llevarlos a los showrooms de los proveedores… es una chamba que normalmente hace el vendedor en coordinación con el área de compras"</em>. Planning provee las opciones; no lleva al cliente.<br />
+- <strong>Portafolio 2 / versión FINAL</strong> (P3): <em>"aquí es donde ya se finalizan los renders 3D para finalizar el portafolio y tenerlo en su versión final"</em>. El portafolio final = el v1 + los acabados seleccionados + los renders 3D finales.<br />
+- <strong>El flujo de cierre de F2</strong> (P3): renders 3D finales → portafolio final → <strong>aprobación del cliente (vía vendedor)</strong> → <strong>última revisión del budget</strong> (<em>"para ver de que todo coincida, todo calce bien"</em>) → <strong>creación del schedule ideal de acabados</strong> → cotizar subs igual que en F1 → inicia Fase 2 de operaciones.<br />
+- <strong>Los tiempos</strong> (canónico §3, P3): F2 de planeamiento ≤ 1–1.5 meses; adiciones ~2 meses hasta acabados; acabados 1–2 meses; obra ideal 3–5 meses. <strong>Regla de oro del timing: el portafolio final debe estar listo 2 SEMANAS ANTES de iniciar cualquier acabado</strong> (P3). <em>"Carpintería es la mitad de la obra"</em> — el detalle de acabados es donde se juega medio proyecto.<br />
+- <strong>La rigurosidad en F2:</strong> una selección de acabado sin confirmar es un tile de Katie Holmes esperando ocurrir (4 días de ping-pong para confirmar si el tile pagado era el elegido — mega-análisis §7). El punto único de verdad de cada selección vive en el portafolio final.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Sobre un proyecto en F1: proyectar cuándo debe estar listo el portafolio final (2 semanas antes del primer acabado) y trabajar hacia atrás la fecha de cada hito de F2.<br />
+2. Armar (guiado, con Compras) el set de opciones de acabados de un trade real para el Client Finishes Selection: qué se le envía al cliente, quién lo lleva (vendedor), quién confirma.<br />
+3. <strong>Caso tile de Katie Holmes:</strong> reconstruir cómo el portafolio final, con la selección confirmada como punto único de verdad, habría evitado los 4 días de ping-pong.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- Portafolio final tarde (&lt; 2 semanas de colchón) = la obra llega a acabados sin la información y se frena — el mismo problema que las 2 fases existen para evitar.<br />
+- Selección de acabado ambigua o sin dueño de confirmación = el tile de Katie (4 días parados). El portafolio final debe dejar cada selección cerrada.</p>
+<hr />
+<h3>SESIÓN E7 · La cadencia diaria: schedule interno, esperas en el bot, KITBOT y las reuniones (60–90 min)</h3>
+<p><strong>Objetivo:</strong> correr un día/semana de Planning con su schedule interno al día, cada espera (ingeniero/ciudad/cliente) registrada en el bot, y conexión clara con las reuniones y la reportería.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>El schedule interno de Planning</strong> (P3): lo primero que hace Planning al recibir un proyecto es <em>"crear un schedule de trabajo para el equipo de Planning y bajarles la información"</em>. Planning se autogestiona con su propio cronograma — la disciplina que predica se aplica a sí misma.<br />
+- <strong>KITBOT para Planning</strong> (canónico §9.3): organiza el día, responde dudas técnicas a nivel experto, <strong>persigue esperas</strong> (a los ingenieros y a la ciudad por Planning), y audita documentación. Planning registra en el bot: reportes de ingeniería pendientes, permits en trámite, aprobaciones de cliente pendientes (vía vendedor).</p>
+<blockquote>
+<p>⚠️ <strong>ESTADO REAL (2026-08-06, canónico §9.3):</strong> desde la reestructura del 31-jul los envíos automáticos de formatos están en pausa; la cadencia por puesto se reactivará cuando Jose termine de ajustarla. La <strong>disciplina</strong> (schedule interno al día + esperas en el bot) se entrena igual, independiente del estado del envío automático.<br />
+- <strong>Esperas en el bot — regla del puesto:</strong> toda espera de Planning se registra ("espero reporte estructural de X", "permit de Y en trámite", "aprobación de floor plan de Z pendiente con el vendedor"). Si no está en el bot, no existe (misma regla que Track B). KITBOT persigue por Planning.<br />
+- <strong>Las reuniones de Planning con operaciones</strong> (canónico §3): (1) reunión de <strong>ADELANTO</strong> tras la aprobación del floor plan; (2) reunión de <strong>portafolio v1</strong> con Lead PM + Backoffice. Planning llega a ambas con el proyecto "bajado" y las preguntas anticipadas.<br />
+- <strong>La reunión diaria de las 2:30 PM</strong> (canónico §9.1) es de operaciones (re-fechado de schedules de obra); Planning <strong>no la conduce</strong>, pero su información aguas-arriba es la base de todo lo que ahí se ejecuta. Cuando un proyecto de Planning está por entrar a <em>"The Turn"</em>, Planning se coordina con esa cadencia.<br />
+- <strong>La línea base del viernes</strong> (canónico §9.5, P3): el schedule ideal que Planning ayuda a definir (F1 y F2) es el que se convierte en <strong>línea base</strong> — <em>"del template se saca y se crea el schedule ideal"</em>; los viernes a las <strong>11:00 PM</strong> esa foto queda como baseline de la semana (hora OFICIAL fijada por Jose 2026-08-06; el "8 de la noche" mencionado en la grabación P3 quedó superseded). <strong>GRIS = ideal (lo que Planning/Backoffice definieron), VERDE = lo que realmente sucedió.</strong> Planning es co-autor del "gris" contra el que se mide toda la operación.</p>
+</blockquote>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Un día real con el proceso observando: revisar el schedule interno de Planning, registrar 2 esperas reales en el bot (un ingeniero + un permit o aprobación), y declarar el estado de cada proyecto activo.<br />
+2. Mapear los proyectos activos de Planning en el flujo: ¿cuál está en floor plan, cuál en planos+ingeniería, cuál en portafolio v1, cuál en permits, cuál en F2? — un tablero de estado del pipeline de Planning.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- Esperas (ingeniero/permit/cliente) en la memoria o en chat suelto: nadie las persigue y se pudren — el reporte tardío del ingeniero retrasa todo aguas abajo.<br />
+- Tratar el schedule interno de Planning como opcional: sin él, el propio equipo que produce la información trabaja sin cronograma — incoherente con la CLAVE del negocio.</p>
+<hr />
+<h3>SESIÓN E8 · Integración: el proyecto completo de punta a punta y la entrega al PM ("The Turn") (60 min)</h3>
+<p><strong>Objetivo:</strong> correr un proyecto completo por toda la cadena de Planning y entender qué recibe el PM en <em>"The Turn"</em> — para entregar exactamente lo que el PM necesita para arrancar bien.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>La cadena completa de Planning en orden</strong> (canónico §3, P3), recitada de memoria:<br />
+  1. <strong>Sales Report</strong> (del vendedor) → reunión + <strong>schedule interno</strong> de Planning.<br />
+  2. <strong>Floor Plan Proposal</strong> → vendedor → cliente → aprobación.<br />
+  3. Reunión de <strong>ADELANTO</strong> con Lead PM + Backoffice.<br />
+  4. Planos <strong>arquitectónicos / eléctricos / plomería / HVAC</strong> + <strong>renders iniciales</strong> (Planning) ‖ reportes <strong>estructurales / energía / fundación</strong> (+ otros según la ciudad) (ingenieros externos, <strong>aprobados</strong>).<br />
+  5. <strong>PORTAFOLIO v1</strong> (la biblia del PM) + <strong>lista de compras</strong> → reunión con Lead PM + Backoffice → Backoffice arma el <strong>schedule ideal</strong> desde el template (quitando trades no vendidos).<br />
+  6. <strong>PERMITS</strong> con la ciudad → (cambios → revisión de budget → change order vía vendedor) → obra <strong>INICIADA</strong>.<br />
+  7. <strong>Fase 2:</strong> Client Finishes Selection (Planning + Compras + vendedor a showrooms) → renders 3D finales → <strong>PORTAFOLIO FINAL</strong> → aprobación → última revisión de budget → schedule ideal de acabados.<br />
+- <strong>"The Turn"</strong> (canónico §3): se elige un PM y se le entrega el proyecto — <strong>Sales Report + Portafolio + planos</strong>. La bajada es una reunión vendedor + Backoffice + Lead PM → el PM hace la llamada inicial al cliente. Lo que Planning puso en el portafolio es literalmente lo que el PM va a ejecutar.<br />
+- <strong>El caso de éxito modelo</strong> (canónico §3, P3): la PM ex-vendedora que vendió una remodelación de cocina y la ejecutó — con <strong>todo cotizado y negociado ANTES de iniciar</strong>, cada cosa con WO → <em>"el proyecto que más rápido nos ha salido"</em> y uno de los únicos a tiempo. La moraleja de Jose: <em>"si la gente sigue el proceso, le va a ir bien, porque es un buen proceso."</em> Un portafolio impecable es lo que <strong>habilita</strong> que el PM pueda cotizar todo desde el inicio.<br />
+- <strong>Cierre reflexivo:</strong> el retrabajo por información (planos incompletos, specs no confirmados, permits tardíos) es evitable <strong>en su totalidad</strong> desde Planning. La calidad del portafolio no es estética — es la primera línea de defensa del cronograma.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Tomar un proyecto real y recorrer las 7 etapas en voz alta, señalando el estado de cada una y el gate de calidad de cada eslabón (qué recibe, qué produce, qué verifica, a quién entrega).<br />
+2. <strong>Simulación de "The Turn":</strong> entregarle (roleplay) el proyecto a un PM con solo Sales Report + Portafolio + planos, y que el PM diga qué le falta para arrancar. Cada faltante = una lección de portafolio para Planning.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- Entregar en "The Turn" un portafolio con huecos: el PM arranca con preguntas abiertas → adivina o para → retrabajo. La cadena entera hereda el error de Planning.<br />
+- Olvidar que el portafolio final debe estar 2 semanas antes de acabados: la obra alcanza a Planning en vez de Planning ir por delante de la obra.</p>
+<hr />
+<h2>4. Evaluación y certificación</h2>
+<p>Tres niveles, todos observables por el sistema (no exámenes de papel — Plan Maestro §5).</p>
+<p><strong>Criterio transversal (los 3 niveles) — el comportamiento (§1.4):</strong> rigurosidad · atención al detalle · prever · solucionar · proactividad. No aceptar el problema y reaccionar: prevenirlo, o buscar soluciones insaciablemente para cumplir el cronograma a como dé lugar. En Planning se observa concretamente: ¿el portafolio salió completo y con ingeniería aprobada, o con huecos que estallarán en obra?</p>
+<h3>Nivel 1 — Comprensión</h3>
+<ul>
+<li>Explica en conversación: la misión y su medida única, las 3 verdades, y la <strong>cadena completa de Planning</strong> (Sales Report → schedule interno → Floor Plan Proposal → adelanto → planos+ingeniería aprobada → portafolio v1 → schedule ideal → permits → F2 → portafolio final → The Turn).</li>
+<li>Enumera de memoria <strong>qué debe contener el portafolio</strong> para ser la biblia del PM (layout antes/después · demoler/añadir/remover · medidas + códigos W3 · plano eléctrico · medidas de carpintería · lista de compras).</li>
+<li>Explica qué se terceriza (estructural/energía/fundación + otros según la ciudad; los planos MEP los produce Planning) y por qué el portafolio <strong>no se cierra sin la aprobación del ingeniero</strong>.</li>
+</ul>
+<h3>Nivel 2 — Ejecución guiada (sobre casos reales, con supervisión)</h3>
+<ul>
+<li>1 <strong>Floor Plan Proposal</strong> producido y cotejado contra su Sales Report (fiel a lo prometido + construible).</li>
+<li>1 <strong>coordinación de ingeniería</strong> llevada hasta reportes <strong>aprobados en mano</strong>, con la espera registrada en el bot.</li>
+<li>1 <strong>auditoría de portafolio</strong> completa: gate trade-por-trade, lista de huecos y su cierre (el portafolio queda auto-suficiente).</li>
+<li>1 <strong>lista de compras</strong> para Romina producida desde el portafolio, con el nivel de detalle del take-off.</li>
+<li>1 <strong>gestión de permit</strong> seguida (estado real + espera en el bot; si hubo cambio de ciudad, cadena change order propagada).</li>
+<li>1 <strong>portafolio final de F2</strong> cerrado con selecciones confirmadas y renders 3D, entregado con ≥2 semanas de colchón.</li>
+</ul>
+<h3>Nivel 3 — Ejecución autónoma = CERTIFICADA</h3>
+<p>Cumplir su <strong>"Día Cumplido" de Planning N días/entregas seguidas sin ayuda</strong>. Los checks propuestos (DIA_CUMPLIDO_POR_PUESTO.md — <strong>sección Planning [PROPUESTA, por confirmar con Jose]</strong>, alineados con el patrón de los demás puestos):</p>
+<ol>
+<li><strong>Ningún portafolio entregado con reportes de ingeniería sin aprobar</strong> (verdad #1).</li>
+<li><strong>Ningún portafolio entregado con huecos</strong> que impidan al PM ejecutar un trade sin preguntar (gate de auto-suficiencia).</li>
+<li><strong>Todo cambio (cliente/ciudad/ingeniero) propagado a TODOS los planos + lista de compras + budget</strong> (regla de propagación).</li>
+<li><strong>Toda espera de Planning (ingeniero / permit / aprobación de cliente vía vendedor) registrada en el bot.</strong></li>
+<li><strong>El schedule interno de Planning al día</strong> (cada proyecto con su estado real).</li>
+<li><strong>Portafolio final entregado ≥ 2 semanas antes de cualquier acabado</strong> (regla de timing F2).</li>
+</ol>
+<p>Semántica del gate: ✅ = todos los checks core ("puedes cerrar tranquila") · ⚠️ = parcial, el sistema dice qué falta · ❌ = sin señal (merece UNA pregunta antes de concluir — ¿dato real o sistema desactualizado?).</p>
+<p><strong>[PROPUESTA — por confirmar con Jose]</strong> N y cadencia: como el ciclo de Planning es por <strong>entregable</strong> (no por día de obra como el PM), la certificación se mide por <strong>entregables consecutivos cumplidos</strong> — p. ej. <strong>3 portafolios completos</strong> entregados sin huecos ni ingeniería sin aprobar, más el semáforo de esperas/schedule interno en verde. Jose fija el N y la mecánica finales. El registro de avance del track se lleva en la tabla por persona de la biblioteca (Plan Maestro §5).</p>
+<hr />
+<h2>5. Material de apoyo — ONE-PAGER (imprimir y tener al lado)</h2>
+<pre><code>═══════════════════════════════════════════════════════════════════
+  PLANNING — LA MECÁNICA EXACTA               CNG · Claudia · Karla
+  Misión: convertir lo prometido en un proyecto EJECUTABLE.
+  La medida del puesto: ¿algún proyecto llegó a obra con info
+  faltante, desactualizada o SIN APROBAR? → si sí, Planning falló.
+═══════════════════════════════════════════════════════════════════
+
+LA MENTALIDAD: rigurosidad · atención al detalle · prever ·
+solucionar · proactividad. NO aceptes el problema y reacciones:
+prevélo. Un plano sin aprobar, una medida &quot;por confirmar&quot;, una
+ventana sin código = un RETRABAJO diferido al PM dos meses después.
+
+LA CADENA DE PLANNING (en orden — nada se salta):
+ 1. SALES REPORT (del vendedor) → reunión + SCHEDULE INTERNO
+    de Planning. No dibujes sobre supuestos: aclara con el
+    vendedor ANTES.
+ 2. FLOOR PLAN PROPOSAL → al VENDEDOR → cliente → aprobación.
+    (Planning NUNCA habla directo con el cliente.)
+    Que sea CONSTRUIBLE, no solo bonito.
+ 3. Reunión de ADELANTO con Lead PM + Backoffice.
+ 4. PLANOS arq / eléctrico / plomería / HVAC + RENDERS (Planning)
+    ‖ reportes ESTRUCTURAL / ENERGÍA / FUNDACIÓN (+ otros
+    según la ciudad) — INGENIEROS EXTERNOS: persíguelos hasta
+    tenerlos APROBADOS.
+    ★ NADA llega a obra sin aprobación del ingeniero (fallo #1
+      de framing). &quot;Pedido&quot; NO es &quot;aprobado&quot;.
+ 5. PORTAFOLIO v1 = LA BIBLIA DEL PM. Debe contener:
+    · layout antes/después · qué se demuele/añade/remueve
+    · MEDIDAS + códigos de ventanas (W3) y puertas
+    · plano eléctrico · medidas de carpintería (¡es la MITAD
+      de la obra!) · LISTA DE COMPRAS para Romina.
+    GATE: ¿puede el PM ejecutar cada trade con SOLO esto, sin
+    preguntar? Si no → falta algo.
+    → Reunión con Lead PM + Backoffice → Backoffice arma el
+      SCHEDULE IDEAL (del template se quitan los trades NO vendidos).
+ 6. PERMITS con la ciudad (tiempos variables · ~1/100 niega).
+    Cambio de ciudad → revisar budget → hablar al cliente (vía
+    vendedor) → change order → obra INICIADA.
+    (No inventes requisitos: verifica con la ciudad/fuentes.)
+ 7. FASE 2: CLIENT FINISHES SELECTION (Planning + Compras;
+    showrooms = el VENDEDOR). Renders 3D finales →
+    PORTAFOLIO FINAL → aprobación → última revisión de budget →
+    schedule ideal de acabados.
+    ★ Portafolio FINAL listo ≥ 2 SEMANAS ANTES de cualquier acabado.
+ 8. &quot;THE TURN&quot;: el PM recibe Sales Report + PORTAFOLIO + planos.
+    Lo que pusiste en el portafolio es lo que el PM ejecuta.
+
+REGLA DE PROPAGACIÓN: un cambio (cliente/ciudad/ingeniero) se
+propaga a TODOS los planos + lista de compras + budget. Un cambio,
+todos los documentos. (Las puertas 96&quot; fueron un cambio no propagado.)
+
+ESPERAS EN EL BOT: ingeniero pendiente · permit en trámite ·
+aprobación de cliente (vía vendedor). Si no está en el bot, NO EXISTE.
+
+DÍA CUMPLIDO ✅ (propuesto — por confirmar con Jose):
+  1. Cero portafolios con ingeniería sin aprobar.
+  2. Cero portafolios con huecos (PM ejecuta sin preguntar).
+  3. Todo cambio propagado a planos + compras + budget.
+  4. Toda espera (ingeniero/permit/cliente) en el bot.
+  5. Schedule interno de Planning al día.
+  6. Portafolio final ≥ 2 semanas antes de acabados.
+
+REGLAS DE ORO:
+  · La CALIDAD del portafolio es lo que evita el retrabajo.
+  · NADA a obra sin aprobación del ingeniero.
+  · Planning es aguas-arriba: tu error se propaga a TODOS.
+  · Cero contacto con el cliente — todo por el vendedor.
+  · Idioma: trades/tools/permits en INGLÉS; el equipo en español.
+  · Respeto y amabilidad en TODO canal. Sin excepción.
+═══════════════════════════════════════════════════════════════════
+</code></pre>
+<hr />
+<p><em>Track E v1 — 2026-08-06. Construido desde el proceso canónico (§2, §3, §7, §11), la Parte 3 del entrenamiento de Jose (2026-08-05 — la explicación completa del flujo de Planning), ORG_ROLES, SCHEDULE_STRUCTURE, EL_FLOW y los huecos reales del mega-análisis 2026-07-26. </em><em>Nota de vacío de fuente:</em><em> Planning es el único track sin manual v2.0 dedicado (<code>JD_planning</code> no existe) y sin sección propia confirmada en <code>DIA_CUMPLIDO_POR_PUESTO.md</code> — los checks del Día Cumplido y el N de certificación van marcados [PROPUESTA] a la espera de Jose. Se revisa con Jose antes de entrenar (regla: un entregable a la vez).</em></p>
+<a class="volver" href="/proceso/materiales/">← Centro de materiales</a></div></body></html>

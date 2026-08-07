@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TRACK A · S4 — Work Orders con detalle + el flujo de firma</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+h3 { font-size: 12px; margin: 14px 0 6px; color: #1d4ed8; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.portada { text-align: center; padding-top: 90px; page-break-after: always; }
+.portada .sub { font-size: 13px; color: #475569; margin-top: 8px; }
+.portada .fecha { margin-top: 30px; color: #64748b; font-size: 11px; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.pos { page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+.pos h3 { margin-top: 0; }
+ul { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+ol { margin: 4px 0 8px; padding-left: 20px; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.seccion-num { color: #94a3b8; font-weight: 400; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+<h1>TRACK A · BACKOFFICE / DATA-ENTRY</h1>
+<div class="sub">SESIÓN 4 — Work Orders con detalle + el flujo de firma electrónica</div>
+<div class="sub">Duración: 60–75 min · Aprendiz: Joaquín · Entrenador: Jose</div>
+<div class="fecha">v2026-08-06 · Biblioteca de Entrenamientos CNG</div>
+</div>
+
+<h2><span class="seccion-num">1 ·</span> OBJETIVO</h2>
+<p><b>Esta sesión existe para</b> que el Data-Entry elabore una Work Order completa que "un extraño podría ejecutar" (Mandamiento III), con los datos que entrega el PM, y domine el flujo de firma electrónica que la convierte en contrato.</p>
+
+<div class="clave">
+<i>"Las órdenes de trabajo o Work Orders son los contratos."</i> — Jose (P2)
+<br><br>
+<b>Regla dura: NINGÚN trabajo inicia sin WO FIRMADA.</b> <i>"No es como acuerdo de palabra."</i> El "Aprobado" en JobTread va DESPUÉS de la firma electrónica — nunca antes.
+</div>
+
+<h2><span class="seccion-num">2 ·</span> CONTENIDO</h2>
+
+<h3>2.1 De dónde sale la WO</h3>
+<ul>
+<li>El PM ya hizo: SOW → source vendors con <b>≥3 cotizaciones</b> (<i>"si solo tienes una cotización… ese será el precio del mercado. Pero si mandas a diferentes, puedes ver cómo realmente está la cotización del mercado"</i> — P2) → seleccionó al sub y negoció.</li>
+<li>El Data-Entry <b>construye el documento</b>; los datos los da el PM (<i>"tú vas a estar haciendo esta documentación, pero lo que vas a ingresar te lo va a estar dando el Project Manager"</i> — P2).</li>
+</ul>
+
+<div class="pos">
+<h3>2.2 Mecánica exacta (P2)</h3>
+<ol>
+<li>Proyecto → Añadir documento → <b>Work Order</b>.</li>
+<li>Seleccionar <b>subcontratista</b> → <b>trade</b> → el <b>presupuesto</b> disponible de ese trade.</li>
+<li><b>Editar el monto al negociado</b> (P2: presupuesto $20,000, el PM negoció $18,000 → se registra 18,000 y CNG ahorra $2,000). El costo máximo viene del budget: costo = precio × (1 − margen).</li>
+<li><b>Scope of Work:</b> copiar y pegar el SOW report del PM (<i>"lo copias y lo pegas"</i>) — o el PDF del SOW adjunto en files. <b>NUNCA sin scope.</b></li>
+<li><b>Payment Breakdown SIEMPRE:</b> los términos que dicte el PM. <b>Estándar = el viernes siguiente a terminar el trabajo</b> · excepción "día después" · a veces partido: ROUGH FINISH / PASS INSPECTION · <b>downpayment</b> = especial, solo CIERTOS subs/trades (framing, MEP rough-ins — se ven en el template las tareas DOWN PAYMENT de esos trades); único pago pre-trabajo.</li>
+</ol>
+</div>
+
+<div class="pos">
+<h3>2.3 El flujo de FIRMA (P3)</h3>
+<ol>
+<li>El sub debe estar <b>registrado como proveedor</b>: nombre, email, teléfono + documentación.</li>
+<li>Se le pone como <b>receptor de la WO</b> → el sistema envía <b>SMS + email</b>.</li>
+<li>El sub <b>firma electrónicamente</b>.</li>
+<li><b>RECIÉN entonces se marca "Aprobado" en JobTread.</b> La firma visible = sello legal.</li>
+</ol>
+</div>
+
+<h3>2.4 Después de la WO</h3>
+<ul>
+<li><span class="chip">CONFIRM SCHEDULE WITH SUB</span> — el PM llama 3–5 días antes; la tarea existe <i>"para que no se olviden, porque se olvida"</i> (P2). El Data-Entry pone la tarea y la marca cuando el PM confirma.</li>
+<li><b>Renegociaciones (P3):</b> si CEO/COO renegocia un precio ya cerrado (ej. $1,000→$800), el cambio DEBE notificarse para actualizar la WO antes de pagar.</li>
+</ul>
+
+<h2><span class="seccion-num">3 ·</span> EL CASO REAL</h2>
+<div class="gap"><b>WO sin firma / WO a posteriori.</b> (P3) Un sub reclamó su pago 1 día después de terminar — su WO firmada decía "1 semana después" y <b>por contrato esperó</b>: la firma protege a CNG. Y el contraejemplo: en Martha (24-jul, 17:25) — <i>"Crear urgente work order para Cesar"</i> — la WO DESPUÉS del trabajo, invirtiendo la regla: trabajo no autorizado y no facturable. Además, la WO real revisada en vivo en la P3 tenía el Payment Breakdown bien pero <b>SIN el scope adentro — está MAL</b>. <b>Moraleja:</b> la WO se hace ANTES, con scope y breakdown, y se envía a firma. Si un PM reporta trabajo iniciado sin WO → discrepancia → se registra y se avisa a Jose; no se "regulariza" en silencio.</div>
+
+<h2><span class="seccion-num">4 ·</span> EL EJERCICIO</h2>
+<div class="mat">
+<ol>
+<li><b>Auditoría:</b> abrir una WO real existente (Martha o Felton) y auditarla contra el estándar P3: ¿SOW adentro o PDF en files? ¿Payment Breakdown claro? ¿monto = negociado? ¿firmada ANTES de "Aprobado"?</li>
+<li><b>Creación supervisada:</b> crear la próxima WO real que pida un PM esta semana (ej. un trade pendiente en Karim, de Giselle): sub → trade → presupuesto → monto → SOW pegado → breakdown estándar viernes → envío a firma.</li>
+<li><b>Verificación de budget:</b> ¿el monto negociado entra en el line item? (<i>"el primer filtro siempre va a ser si está o no dentro de tu presupuesto"</i> — P2).</li>
+</ol>
+</div>
+
+<h2><span class="seccion-num">5 ·</span> LO QUE SE EVALÚA</h2>
+<ul>
+<li>Crea una WO completa sin ayuda: sub → trade → presupuesto → monto negociado → SOW pegado → Payment Breakdown → flujo de firma.</li>
+<li>Pasa la prueba de calidad: <b>¿un extraño podría ejecutarla?</b> (Si una OT solo dice "instalar tablaroca", falló antes de que llegue la cuadrilla.)</li>
+<li>Detecta una WO defectuosa (sin scope, sin breakdown, aprobada sin firma, emitida a posteriori) y la trata como discrepancia.</li>
+<li>Nivel 2 de certificación: <b>2 Work Orders reales completas</b>.</li>
+</ul>
+
+<div class="footer-note">TRACK A · Sesión 4 · v2026-08-06 · Fuentes: transcripción Parte 2 (mecánica) + Parte 3 (firma, scope, renegociaciones) · EL_FLOW_ACTION_TASK.md Fase A/E · 00_PROCESO_CANONICO_CNG.md §5.4/§8 · TRACK_A_v2026-08-06 §S4 · casos reales brief §5 (caso 6).</div>
+
+</body>
+</html>

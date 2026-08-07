@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>MARKETING S2 · El funnel completo: lead → dispatch → vendedor → firma</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+h3 { font-size: 12px; margin: 14px 0 6px; color: #1d4ed8; }
+h4 { font-size: 10.5px; margin: 10px 0 4px; color: #0f172a; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.portada { text-align: center; padding-top: 90px; page-break-after: always; }
+.portada .sub { font-size: 13px; color: #475569; margin-top: 8px; }
+.portada .fecha { margin-top: 30px; color: #64748b; font-size: 11px; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.pos { page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+.pos h3 { margin-top: 0; }
+ul { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+.dos-col { display: flex; gap: 14px; } .dos-col > div { flex: 1; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.seccion-num { color: #94a3b8; font-weight: 400; }
+.funnel { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 9.5px; background: #f8fafc; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 10px 14px; margin: 8px 0; white-space: pre; overflow-x: auto; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <h1>MARKETING · Sesión 2</h1>
+  <div class="sub">EL FUNNEL COMPLETO<br>lead → dispatch → vendedor → firma — y qué pasa con cada lead en HighLevel</div>
+  <div class="fecha">Track Marketing (capa liviana) · v1 · 2026-08-06<br><span class="chip">equipo Rey</span> <span class="chip">Módulo 2 de 3</span> <span class="chip">prerequisito: Módulo 0 + S1</span></div>
+</div>
+
+<h2><span class="seccion-num">1 ·</span> OBJETIVO</h2>
+<p><b>Esta sesión existe para que Marketing sepa exactamente qué pasa con cada lead DESPUÉS de generarlo</b> — quién lo toca, en qué sistema vive, dónde puede morirse — y qué le toca a Marketing en cada eslabón (spoiler: generar y registrar; nunca filtrar ni vender). Quien no conoce el destino de sus leads no puede mejorar su calidad.</p>
+
+<h2><span class="seccion-num">2 ·</span> CONTENIDO</h2>
+
+<h3>2.1 El mapa completo (canon §3 + PROCESS_MASTER §1 + lifecycle doc)</h3>
+<div class="funnel">1. MARKETING genera el lead (inbound)
+2. DISPATCH lo recibe — "posición virtual, un recepcionista" (Jose, P1)
+   · filtra contra las FILTERING GUIDELINES → descarta lo no calificable
+   · califica con el CLIENT RATING: Platinum / Gold / Silver / Not Qualified
+   · lo sube al sistema · cold call (grabada vía HighLevel Lead Connector)
+   · LEAD APPROACH LOOP (intentos hasta enganchar — ⚠ criterios de salida TO DEFINE)
+   · agenda la cita (HighLevel) y la registra en JobTread
+3. Se asigna un ASM (Sales Point System) → Propwire (propiedad/equity)
+   → discovery call → cita confirmada o cancelada (SIEMPRE se loguea el porqué)
+4. VISITA AL SITIO: el ASM pitchea, toma fotos/medidas → DEBRIEFING FORM
+   (CompanyCam) → registrado en JobTread
+5. 2ª calificación (ASM recomienda, se aprueba) → ESTIMADO en JobTread,
+   estructurado POR TRADES (los mismos del schedule)
+6. Cierre: objeciones → CONTRATO → firma + depósito
+   · si se pierde: se registra el motivo en JobTread (lost deal con razones)
+7. FIRMA = el estimado se convierte en el BUDGET → onboarding → Planning
+   → The Turn → obra → CLOSEOUT → VIDEO TESTIMONIAL → vuelve a MARKETING</div>
+
+<h3>2.2 Los tres sistemas donde vive el lead (propósito: saber dónde mirar)</h3>
+<table>
+<tr><th>Sistema</th><th>Qué guarda del lead</th></tr>
+<tr><td><b>HighLevel</b></td><td>El CRM comercial: el lead, sus llamadas (grabadas — Lead Connector/MYCRMSIM), la cita, el pipeline. La herramienta del Dispatch es "HighLevel only" (ORG_ROLES).</td></tr>
+<tr><td><b>JobTread</b></td><td>El registro operativo: cita registrada, calificación con razones, estimado, contrato, budget. <i>"La columna vertebral de la operación a nivel administrativo."</i></td></tr>
+<tr><td><b>CompanyCam</b></td><td>La evidencia de la visita: fotos del sitio + Debriefing Form del ASM.</td></tr>
+</table>
+
+<h3>2.3 Dónde se muere un lead (propósito: que no se muera por descuido)</h3>
+<ul>
+<li><b>En la entrada:</b> llega y nadie lo registra → no existe. Mandamiento 1 de Marketing: todo lead con fuente, fecha y estado.</li>
+<li><b>En el filtro:</b> Not Qualified → se descarta CON registro (eso también es dato para Marketing: qué fuente trae ruido).</li>
+<li><b>En el Approach Loop:</b> el hueco documentado — sin criterios de salida definidos (máx. intentos / tiempo), los leads quedan "vivos" para siempre y se pudren. <b>[VERIFICAR CON JOSE]</b>: los exit criteria siguen TO DEFINE.</li>
+<li><b>En la cancelación de cita / lost deal:</b> AMBOS caminos se loguean en JobTread con razones — la disciplina que alimenta el módulo 3 (qué cierra de verdad).</li>
+</ul>
+
+<h3>2.4 El estado real del motor (propósito: honestidad sobre dónde estamos)</h3>
+<div class="gap"><b>Hoy:</b> ventas está detenida por diseño y en reestructura (<i>"habíamos parado las ventas hasta estructurarnos bien"</i> — Jose, P1) · <b>Dispatch NO activo</b> (canon §3: se retoma al reactivar ventas) · el CEO hace de gerente de ventas · el sistema comercial <i>"no estamos usando ahorita, pero vamos a retomar porque ahorita estamos volviendo a vender"</i> (Jose, P1). Marketing alimenta el funnel IGUAL — porque la mecha es de 6 meses.</div>
+
+<h2><span class="seccion-num">3 ·</span> EL CASO REAL</h2>
+<div class="gap"><b>La brecha de ventas (ORG_ROLES, confirmado por Jose 2026-06-16):</b> sin Dispatcher ni cabeza de ventas, quedaron <b>425 oportunidades y 111 leads sin trabajar</b>, y el dashboard de ventas murió el 25-mar. Nadie califica, nadie asigna, nadie persigue. <b>Moraleja (aceptar-y-reaccionar vs prevenir):</b> generar leads sin un circuito que los trabaje es tirar el dinero del funnel; y tener leads sin registro de estado es no saber ni cuántos se pudrieron. El funnel es una CADENA — Marketing debe saber en qué estado está cada eslabón aguas abajo, y levantar la mano (proactividad) cuando su output se está acumulando sin trabajar, ANTES de que sean 111.</div>
+
+<h2><span class="seccion-num">4 ·</span> EL EJERCICIO</h2>
+<ol>
+<li><b>Dibujar el funnel de memoria</b> (los 7 pasos del mapa) y marcar: dónde entra Marketing, dónde entrega, y los 4 puntos donde un lead puede morirse.</li>
+<li><b>Seguir un lead real</b> (histórico) por los tres sistemas: ¿está en HighLevel? ¿su cita/calificación quedó en JobTread? ¿hay Debriefing Form en CompanyCam? Anotar cada hueco encontrado.</li>
+<li><b>El caso 111:</b> proponer las 2 alertas que Marketing debería pedir para no repetirlo (ej.: leads entregados sin primer contacto >X días; % de leads sin rating). Comparar con el hueco "Approach Loop sin exit criteria".</li>
+</ol>
+
+<h2><span class="seccion-num">5 ·</span> LO QUE SE EVALÚA</h2>
+<ul>
+<li>Recorre el funnel completo de memoria: los 7 pasos, los 3 sistemas, el Client Rating (Platinum/Gold/Silver/Not Qualified) y el Sales Point System.</li>
+<li>Explica la división de trabajo: Marketing genera y registra · Dispatch filtra y agenda · ASM visita, estima por trades y cierra.</li>
+<li>Nombra los 4 puntos de muerte del lead y qué disciplina evita cada uno.</li>
+<li><b>Comportamiento</b> (los 5): en el ejercicio 3 se evalúa PREVER + PROACTIVIDAD — proponer la alerta antes de que el problema exista, no describir el problema.</li>
+</ul>
+
+<div class="footer-note">MARKETING S2 v1 · 2026-08-06 · Fuentes: canon v4 §3 · company_lifecycle/01_lead_acquisition_sales_phase.md (etapas 1–7 + gaps) · PROCESS_MASTER §1 · ORG_ROLES · transcripción Parte 1. Autocontenida — lista para proyectar o imprimir (letter).</div>
+
+</body>
+</html>

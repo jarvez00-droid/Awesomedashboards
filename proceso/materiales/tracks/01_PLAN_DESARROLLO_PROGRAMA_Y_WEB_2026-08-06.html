@@ -1,0 +1,222 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>01 PLAN DESARROLLO PROGRAMA Y WEB 2026-08-06 · CNG</title>
+<link rel="stylesheet" href="/proceso/assets/style.css">
+<style>
+.doc{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.doc h1{font-size:28px;border-bottom:3px solid var(--ink,#0f172a);padding-bottom:10px;margin-top:0}
+.doc h2{font-size:20px;margin-top:34px;border-bottom:2px solid #cbd5e1;padding-bottom:6px}
+.doc h3{font-size:16px;color:#1d4ed8;margin-top:24px}
+.doc table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.doc th{background:#0f172a;color:#fff;padding:8px 10px;text-align:left}
+.doc td{border:1px solid #cbd5e1;padding:8px 10px;vertical-align:top}
+.doc tr:nth-child(even) td{background:#f8fafc}
+.doc pre{background:#f1f5f9;padding:14px;border-radius:8px;overflow-x:auto;font-size:13px;border:1px solid #e2e8f0}
+.doc code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:13px}
+.doc blockquote{border-left:4px solid #2563eb;background:#eff6ff;margin:14px 0;padding:10px 16px;border-radius:0 8px 8px 0}
+.doc li{margin:5px 0}
+.volver{display:inline-block;margin:16px 0;padding:8px 16px;background:#0f172a;color:#fff;border-radius:20px;text-decoration:none;font-size:14px;font-weight:600}
+</style></head><body>
+<div class="doc"><a class="volver" href="/proceso/materiales/">← Centro de materiales</a>
+<h1>PLAN MAESTRO — Programa de Entrenamiento por Posición + Web del Proceso CNG</h1>
+<p><strong>2026-08-06 · Ordenado por Jose · Documento de ruta (paso a paso, con gates)</strong></p>
+<p><strong>Objetivo final:</strong> que CADA posición de CNG tenga un programa de entrenamiento maestro que enseñe (1) el proceso completo de la empresa, (2) la mecánica exacta de su puesto, y (3) el comportamiento (rigurosidad · atención al detalle · prever · solucionar · proactividad) — verificado por "Día Cumplido"; y que TODO el proceso viva en una <strong>web navegable en Vercel</strong> que reemplace los swimlanes ilegibles y sirva para enseñar el sistema a cualquiera, hoy y en cada contratación futura.</p>
+<p><strong>Regla de trabajo:</strong> un entregable a la vez. Cada fase produce UN entregable que Jose revisa antes de seguir. Este documento es el mapa; no se construye nada en paralelo sin cerrar lo anterior.</p>
+<hr />
+<h2>ESTADO DE PARTIDA (lo que YA existe — no se rehace)</h2>
+<table>
+<thead>
+<tr>
+<th>Pieza</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proceso canónico v2 (<code>01_PROCESOS/00_PROCESO_CANONICO_CNG.md</code>)</td>
+<td>✅ con correcciones de Jose 04-ago</td>
+</tr>
+<tr>
+<td>Plan maestro de capacitación v2 (Módulo 0 + arquitectura de 6 tracks)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Track A Backoffice/Data-Entry (Joaquín) · Track B Purchases · Track C PMs</td>
+<td>✅ construidos y verificados — <strong>esperan revisión de Jose, de a uno (A→B→C)</strong></td>
+</tr>
+<tr>
+<td>Partes 1+2 de la inducción transcritas + corpus completo (JDs v2.0, PDFs de proceso, docs maestros)</td>
+<td>✅ en <code>00_FUENTES/</code></td>
+</tr>
+<tr>
+<td>Conocimiento profundo del sistema (26 dossiers de trades, codes/dfw, company/, KITBOT, reportería)</td>
+<td>✅ en <code>~/.openclaw/workspace-assistant/knowledge/</code></td>
+</tr>
+<tr>
+<td>Diagramas existentes</td>
+<td>⚠️ los swimlanes (<code>company_lifecycle/</code>, PDFs "Procesos CNG") son ILEGIBLES para entrenar — motivo de la web</td>
+</tr>
+<tr>
+<td>Pipeline de transcripción (ffmpeg → whisper turbo, ~45 min/video)</td>
+<td>✅ probado con Partes 1+2</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>FASE 0 — INSUMOS (avance 2026-08-06)</h2>
+<p><strong>Entregable: fuentes completas e ingeridas.</strong></p>
+<ol>
+<li>✅ <strong>Parte 3 INGERIDA (2026-08-06):</strong> transcrita (68 min, 9,042 palabras) + cruzada contra canon/tracks + <strong>canon v3 consolidado</strong> (marcas "(P3)": checklists Before×2, firma de WO, 4 filtros de pago, proceso general F1+F2 completo, línea base del viernes) + Track A v1.1 + agenda del viernes RESUELTA (§9.2). Jose declaró el proceso general COMPLETO — las partes futuras son práctica supervisada (llamadas + registros con Milagros).</li>
+<li>✅ <strong>Template maestro de JobTread INGERIDO (2026-08-06, noche):</strong> <code>00_FUENTES/documentos_originales/TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv</code> (export del taskTemplate <code>22PZihLhwSty</code> — 34 grupos-trade · 411 tareas) = fuente canónica del proceso constructivo (§2 del canon). <strong>El archivo oficial MANDA</strong> sobre cualquier reconstrucción; los tracks v2026-08-06 ya practican sobre él.</li>
+<li>~~Agenda de la reunión de viernes~~ → ✅ RESUELTO con la P3 (canon §9.2).</li>
+<li><strong>Resolver los [PROPUESTA] del Track B</strong> (formato de cotización 4 campos; handoff 4 columnas) y el <strong>[POR CONFIRMAR]</strong> (qué tarea se marca cuando LLEGA el material).</li>
+<li>✅ <strong>RESUELTOS por Jose (2026-08-06):</strong> (a) reunión diaria = <strong>2:30 PM oficial</strong> (3:30 Perú); (b) <strong>downpayment vigente</strong> como algo especial con ciertos subs/trades (framing, MEP rough-ins); (c) <strong>línea base = viernes 11:00 PM</strong> (plist del sistema ya actualizado 19:00→23:00). <strong>+ 2 reglas NUEVAS integradas:</strong> las grabaciones/transcripts de la reunión <strong>se alimentan al bot TODOS los días</strong> (mecánica: soltar en <code>~/.openclaw/REUNIONES/</code>, el watcher hace el resto) · <strong>evidencias obligatorias en el reporte de TAKEOFF de CC</strong>: foto del precio confirmado + ETA por escrito del proveedor + recibo (canon §5, Track A Auditoría 5, Track B S4).</li>
+</ol>
+<blockquote>
+<p>Cada parte futura del entrenamiento (Parte 4+) repite el pipeline. La biblioteca es acumulativa.</p>
+</blockquote>
+<h2>FASE 0-BIS — REPORTERÍA (insumo obligatorio del programa)</h2>
+<p>El entrenamiento enseña los reportes como parte del proceso (canon §9.4-9.5). Estado (detalle completo en <code>~/.openclaw/workspace-assistant/knowledge/company/REPORTERIA_MASTER.md</code> §B/B2/B3, actualizado 2026-08-06; enviado a Jose por Telegram):<br />
+- <strong>FIJADOS (entran al entrenamiento tal cual):</strong> Productividad v19 · Carrera v14 · Semanal por-PM v16 · Semanal Gerencia v7 · Mensual v10 · Pagos Confirmados (fuente 03-ago) · brief 7:50 · prep 14:30 · roll 6AM · leyes C2/C3.<br />
+- <strong>PENDIENTES DE JOSE (se enseñan cuando se fijen):</strong> EOD Gerencia F3 · auditores Semanal/EOD · Próxima Semana ×3 (confirmar) · Carrera v15 (3 decisiones) · reportería de viernes + Consolidar Budget · evaluación diaria PM · PDF 7PM.<br />
+- <strong>GATE CLAVE (t23): definir la cadencia OFICIAL objetivo</strong> (qué formato revive, a qué hora — SOD/TDM/radar/cierres/check-ins/nudger/seguimiento). <strong>El programa entrena la cadencia que va a operar, no la pausada.</strong> Los módulos 0.7 y las sesiones de "reloj diario" de cada track quedan en borrador hasta este gate.</p>
+<h2>FASE 1 — CERRAR LOS 3 TRACKS EXISTENTES (revisión uno-por-uno)</h2>
+<p><strong>Entregable por paso: un track APROBADO.</strong></p>
+<ol>
+<li>Jose revisa <strong>Track A</strong> (Backoffice/Joaquín — prioridad viva) → yo aplico correcciones → v2 aprobada.</li>
+<li>Jose revisa <strong>Track B</strong> (Romina) → correcciones → aprobado.</li>
+<li>Jose revisa <strong>Track C</strong> (PMs) → correcciones → aprobado → <strong>traducción 1:1 a inglés</strong> (Jeff opera 100% EN; el one-pager ya es bilingüe).</li>
+<li>Al aprobar cada track: extraer su <strong>ficha de posición</strong> a <code>02_POSICIONES/</code> (qué hace, herramientas, medición, conexiones) — el insumo directo de las JDs nuevas (salida B).</li>
+</ol>
+<h2>FASE 2 — TRACKS RESTANTES (misma maquinaria, uno a la vez)</h2>
+<p><strong>Entregable por paso: un track construido + verificado + revisado.</strong></p>
+<ol>
+<li><strong>Track D · Administradora (Milagros):</strong> cashflow diario, gatekeeper de pagos, montos aprobado-vs-pagado (flag &gt;$1,000), aviso al grupo, flag pre-negativo con Ruta de Pagos, custodia de documentación. Fuente extra: su flip a administrator ya está vivo en el sistema (sandbox con finanzas).</li>
+<li><strong>Track E · Planning (Claudia · Karla):</strong> Sales Report → planos → permisos → PORTAFOLIO (la biblia del PM) → Portafolio 2 → lista de compras. Énfasis: calidad del portafolio = lo que evita retrabajos (planos aprobados por ingeniero — el fallo #1 de framing).</li>
+<li><strong>Track F · Ventas/ASM (cuando se reactive):</strong> estimado por trades = trades del schedule, margen, contrato→budget, Sales Report. Depende de la reestructura de ventas de Jose (+ SalesBot si se enciende).</li>
+<li><strong>Salida B — JDs detalladas nuevas</strong> en <code>04_JOB_DESCRIPTIONS/</code> (formato Manual de Operaciones v2.0 bilingüe), una por posición, alimentadas por tracks + fichas.</li>
+</ol>
+<h2>FASE 3 — MATERIALES DE ENTRENAMIENTO POR POSICIÓN (empaquetado)</h2>
+<p><strong>Entregable: el "paquete de entrenamiento" listo para usar por posición.</strong></p>
+<p>Por cada track aprobado se produce:<br />
+- <strong>Guion de sesión</strong> por módulo (qué decir, qué mostrar en pantalla, qué ejercicio correr) — para que Jose (o quien entrene después) dicte sin preparar.<br />
+- <strong>Cuaderno de casos reales</strong> (los errores documentados: puertas 96", semana 29-jun, red tags de Martha, tile de Katie, WO a posteriori) con la pregunta "¿qué habrías hecho tú?" por caso.<br />
+- <strong>One-pager imprimible</strong> (ya existen en los tracks; se maquetan en HTML→PDF).<br />
+- <strong>Evaluaciones de los 3 niveles</strong> (comprensión / ejecución guiada / Día Cumplido) como checklists verificables.<br />
+- <strong>Índice de video</strong>: timestamps de las Partes grabadas por tema (para repaso dirigido: "budgets → Parte 2 min 41").<br />
+- <strong>Registro de avance por persona</strong> (tabla módulo→estado→fecha en la biblioteca, conectada al semáforo de los viernes).</p>
+<h2>FASE 4 — LA WEB DEL PROCESO (proceso CNG en Vercel) ⭐</h2>
+<p><strong>Problema que resuelve:</strong> los swimlanes son ilegibles y el conocimiento está regado en decenas de docs. La web es EL lugar donde cualquiera entiende el sistema completo — para entrenar hoy y para cada contratación futura.</p>
+<h3>4.1 Arquitectura técnica (misma receta probada del dashboard)</h3>
+<ul>
+<li><strong>Repo GitHub nuevo</strong> (p. ej. <code>cng-proceso</code>) → integración Git de Vercel → auto-deploy (~30s por push). <em>Gate previo: <code>gh auth login</code> de Jose (pendiente del plan GitHub).</em></li>
+<li><strong>HTML estático autocontenido</strong> (sin framework, sin build — el patrón de dashboard-site que ya dominamos): carga instantánea, cero mantenimiento, editable por cualquier sesión futura.</li>
+<li><strong>Gate por password</strong> (mismo patrón sessionStorage del dashboard — ofuscación consciente, contenido interno).</li>
+<li><strong>Bilingüe ES/EN</strong> con toggle (Jeff y subs angloparlantes; el proceso se enseña en ambos idiomas).</li>
+<li>Responsive (los PMs lo verán del teléfono, en obra).</li>
+</ul>
+<h3>4.2 Mapa del sitio (sitemap propuesto — Jose lo aprueba antes de construir)</h3>
+<ol>
+<li><strong>Home — LA CLAVE</strong>: "GESTIONAR LA OBRA COMO SE PLANIFICÓ EN EL CRONOGRAMA" + la mentalidad (los 5 comportamientos) + mapa clickeable de todo el sitio.</li>
+<li><strong>El proceso constructivo</strong> (el TEMPLATE): diagrama interactivo propio de la secuencia de trades (ruta crítica azul / no-crítico gris, como Jose lo dibuja) — clic en cada trade abre: qué es, dependencias ("no X sin Y"), inspecciones, dónde se falla.</li>
+<li><strong>El proceso de empresa</strong>: la línea de vida Marketing→Ventas→Budget→Planning→The Turn→Ops F1/F2→Closeout con zoom progresivo por fase (reemplaza los swimlanes: una fase por vista, roles como carriles SOLO dentro del zoom).</li>
+<li><strong>El bucle diario por trade</strong>: versión web mejorada de <code>trade_progression</code> — las dos ramas (PM / Compras) animadas paso a paso, con la regla de oro al centro.</li>
+<li><strong>JobTread — el alfabeto</strong>: los 9 tipos de tarea, nomenclatura, el monto en la descripción, los DOS registros (schedule + libros) con capturas de pantalla reales, la regla DELIVERY ETA.</li>
+<li><strong>Presupuestos</strong>: line items, costo vs precio, margen, el ejemplo real de pintura de Kyle (el que Jose usa para enseñar).</li>
+<li><strong>Cashflow y pagos</strong>: el ciclo, el doble candado, el viernes (presupuestos + pago estándar).</li>
+<li><strong>El reloj diario</strong>: reunión 2:30 PM (hora oficial, Jose 06-ago; "después de las 3, JobTread es la verdad"), KITBOT por puesto, la reportería vigente y sus leyes.</li>
+<li><strong>Una página por POSICIÓN</strong> (las 6): misión, su día hora a hora, qué SABE/HACE/VERIFICA, su Día Cumplido, su one-pager descargable, link a su track.</li>
+<li><strong>Biblioteca de casos reales</strong>: los errores que ya nos costaron dinero, con foto y moraleja — el material anti-"aceptar y reaccionar".</li>
+<li><strong>Glosario EN↔ES de obra</strong> (la tabla del Track A, navegable).</li>
+</ol>
+<h3>4.3 Material visual</h3>
+<ul>
+<li><strong>Diagramas propios</strong>: SVG/HTML interactivos hechos a mano (patrón <code>trade_progression.html</code> que ya funciona) — NUNCA swimlanes de 14 carriles; principio: una idea por vista, zoom para el detalle, color por rol.</li>
+<li><strong>Fotos de referencia reales</strong>: curadas de CompanyCam vía <code>companycam_query.py</code> (read-only, ya operativo) — fotos de trades bien ejecutados + fotos de los errores célebres. <strong>Gate: Jose aprueba la selección</strong> (privacidad de clientes: sin direcciones/nombres visibles).</li>
+<li><strong>Capturas de JobTread</strong> de los flujos exactos (crear tarea, registro doble, WO) — tomadas de los proyectos reales que ya usamos para entrenar.</li>
+<li>(Futuro, opcional) los videos de inducción embebidos por capítulo, si Jose decide hospedarlos (Drive privado; NO van a git).</li>
+</ul>
+<h3>4.4 Pasos de construcción (con gates)</h3>
+<ol>
+<li>Jose aprueba <strong>sitemap</strong> (4.2) → 2. Construyo <strong>Home + diagrama del proceso constructivo</strong> como piloto de estilo → gate Jose → 3. Resto de páginas de proceso (2-8) → gate → 4. Páginas por posición (con tracks aprobados de Fases 1-2) → gate → 5. Fotos/capturas curadas → gate → 6. <strong>Repo + Vercel + password</strong> → verificación en caliente → 7. Se anuncia al equipo y se usa como material del Módulo 0.</li>
+</ol>
+<h2>FASE 5 — OPERACIÓN DEL PROGRAMA (el entrenamiento vivo)</h2>
+<ol>
+<li><strong>Certificación</strong>: 3 niveles observables (Plan Maestro §5) — la evidencia es el sistema (Día Cumplido N días seguidos), no exámenes.</li>
+<li><strong>Registro de avance</strong> por persona conectado al semáforo de los viernes.</li>
+<li><strong>Loop de mejora</strong>: cada fallo real nuevo (inspección rechazada, error de compra, discrepancia) se convierte en caso de la biblioteca web + ajuste del track correspondiente. <code>INSPECTION_FAILURES.md</code> (hoy casi vacío) se vuelve la cola de entrada.</li>
+<li><strong>Onboarding de nuevos</strong> = web (Módulo 0 guiado) + track de su posición + shadowing según su plan — el material ya no depende de que Jose dicte todo en vivo.</li>
+<li>Cada Parte nueva grabada → Fase 0 paso 1 → actualiza canon → actualiza web.</li>
+</ol>
+<hr />
+<h2>SECUENCIA Y DEPENDENCIAS</h2>
+<pre><code>FASE 0 (link Parte 3 · template JT · viernes · propuestas B)
+   │
+FASE 1 (revisar A → B → C, uno por vez)  ──────────┐
+   │                                                │
+FASE 2 (D → E → F + JDs)                            ├──► FASE 4 páginas por posición
+   │                                                │    (necesitan tracks aprobados)
+FASE 3 (paquetes por posición)                      │
+                                                    │
+FASE 4.1-4.3 web de PROCESO (páginas 1-8) ──────────┘
+   (puede arrancar en paralelo a Fase 1: el canon v2 ya está aprobado;
+    gate previo: gh auth login + aprobación del sitemap)
+   │
+FASE 5 (operación permanente)
+</code></pre>
+<h2>GATES DE JOSE (todo lo que espera SU decisión)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Gate</th>
+<th>Fase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Link de la Parte 3 (ya anunciado)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Revisión Track A → B → C + [PROPUESTA]s del B</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>~~Template maestro JT exportado~~ ✅ (ingerido 06-ago) · ~~agenda del viernes~~ ✅ (resuelta con P3, canon §9.2)</td>
+<td>0</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>gh auth login</code> (destraba repos: biblioteca + estate + web)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Aprobación del sitemap de la web · piloto de estilo · fotos</td>
+<td>4</td>
+</tr>
+<tr>
+<td>6</td>
+<td>N del Día Cumplido para certificar (propuesto: 10 días hábiles)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>7</td>
+<td>(Relacionado, del traspaso) Cuenta CNG + <code>claude auth login</code> — hoy la flota está sin uso hasta el 10-ago</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2>QUÉ SIGUE AHORA MISMO</h2>
+<ol>
+<li><strong>Jose pasa el link de la última sesión de entrenamiento</strong> → corro Fase 0 paso 1 (transcribir + consolidar al canon) y reporto qué cambió.</li>
+<li>En paralelo de su lado: revisión del <strong>Track A</strong> (sigue siendo el entregable en revisión).</li>
+<li>Con el canon actualizado: propongo el <strong>sitemap definitivo de la web</strong> (gate 5) como siguiente entregable único.</li>
+</ol>
+<hr />
+<p><em>Plan v1 — 2026-08-06. Vive en la biblioteca; se actualiza al cerrar cada fase.</em></p>
+<a class="volver" href="/proceso/materiales/">← Centro de materiales</a></div></body></html>

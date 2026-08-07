@@ -1,0 +1,469 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TRACK A BACKOFFICE DATA ENTRY · CNG</title>
+<link rel="stylesheet" href="/proceso/assets/style.css">
+<style>
+.doc{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.doc h1{font-size:28px;border-bottom:3px solid var(--ink,#0f172a);padding-bottom:10px;margin-top:0}
+.doc h2{font-size:20px;margin-top:34px;border-bottom:2px solid #cbd5e1;padding-bottom:6px}
+.doc h3{font-size:16px;color:#1d4ed8;margin-top:24px}
+.doc table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.doc th{background:#0f172a;color:#fff;padding:8px 10px;text-align:left}
+.doc td{border:1px solid #cbd5e1;padding:8px 10px;vertical-align:top}
+.doc tr:nth-child(even) td{background:#f8fafc}
+.doc pre{background:#f1f5f9;padding:14px;border-radius:8px;overflow-x:auto;font-size:13px;border:1px solid #e2e8f0}
+.doc code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:13px}
+.doc blockquote{border-left:4px solid #2563eb;background:#eff6ff;margin:14px 0;padding:10px 16px;border-radius:0 8px 8px 0}
+.doc li{margin:5px 0}
+.volver{display:inline-block;margin:16px 0;padding:8px 16px;background:#0f172a;color:#fff;border-radius:20px;text-decoration:none;font-size:14px;font-weight:600}
+</style></head><body>
+<div class="doc"><a class="volver" href="/proceso/materiales/">← Centro de materiales</a>
+<h1>TRACK A · BACKOFFICE / DATA-ENTRY — Currículo de Capacitación</h1>
+<p><strong>Aprendiz:</strong> Joaquín (Perú, Data-Entry — convocatoria "Data Entry — Análisis de Datos y Gestión de la Información").<br />
+<strong>Entrenador:</strong> Jose (el Backoffice ES Jose; Joaquín absorbe el registro diario y las auditorías bajo su dirección — Proceso Canónico §6 ⚠️ REALIDAD).<br />
+<strong>Punto de partida:</strong> este track CONTINÚA la inducción real grabada (Parte 1: proceso constructivo + empresa · Parte 2: budgets, tipos de tarea, los dos registros, Work Orders). Jose anunció a mitad de la Parte 2: <em>"continuamos mañana con el resto del proceso y profundicemos en el manejo de los cronogramas"</em> — las sesiones 3 en adelante son exactamente esa continuación.<br />
+<strong>Prerequisito:</strong> Módulo 0 del Plan Maestro (el proceso canónico completo). NO se repite aquí; las Partes 1 y 2 de la inducción de Joaquín ya lo cubrieron casi entero — la Sesión 1 lo verifica, no lo re-enseña.</p>
+<p>Fuentes: manual v2.0 (<code>JD_backoffice_manual-operaciones.md</code>) · convocatoria Data-Entry · transcripciones Parte 1+2 · <code>00_PROCESO_CANONICO_CNG.md</code> · <code>EL_FLOW_ACTION_TASK.md</code> · <code>SCHEDULE_STRUCTURE.md</code> · <code>DIA_CUMPLIDO_POR_PUESTO.md</code> v3 · mega-análisis 2026-07-26 (<code>interno_proceso-org.md</code>).</p>
+<hr />
+<h2>1. Perfil y misión</h2>
+<h3>1.1 La misión (manual v2.0, resumido)</h3>
+<p><strong>Hacer que el schedule y la realidad sean la misma cosa desde la oficina.</strong> Después de la reunión diaria, el schedule en JobTread es la única verdad del día: cada cambio que el campo reporta queda reflejado, cada inconsistencia se resuelve, y todo el equipo trabaja sobre el mismo plan limpio. <em>"Si no está en JobTread después de las 3:00 PM, no pasó."</em></p>
+<ul>
+<li>El Backoffice <strong>no espera a que el schedule se actualice solo. Lo actualiza él.</strong> Los PMs reportan; el Backoffice es <strong>el autor del sistema</strong> (manual §2).</li>
+<li><strong>Verificar, no asumir:</strong> nada se marca hecho por fe. Todo se contrasta contra evidencia (lo que dijo el PM vs. JobTread; lo que afirma vs. CompanyCam). <strong>Sin documento, no hay aprobación</strong> (manual §1.4).</li>
+<li>Por qué existe el puesto, en palabras de Jose (P2): <em>"somos una empresa que realmente depende de la información"</em> — y las manos que hacen los registros son las del Data-Entry. <em>"¿Empiezas a ver por qué es central tu posición?"</em></li>
+</ul>
+<p><strong>La mentalidad (Canónico §1, corrección de Jose 2026-08-04).</strong> Los fallos en CNG no vienen del trade ni de la teoría — vienen del comportamiento: falta de <strong>rigurosidad</strong>, de <strong>atención al detalle</strong>, de no <strong>prever</strong>, no <strong>solucionar</strong>, no ser <strong>proactivo</strong>. La regla mental del puesto, en palabras de Jose: <em>"no aceptar el problema y reaccionar: prevenirlo, o buscar soluciones insaciablemente para cumplir el cronograma a como dé lugar."</em> Para el Data-Entry eso se traduce en: la discrepancia se levanta HOY (no se deja flotando), el ETA se persigue antes de que venza, el expediente se pide antes del viernes de pago.</p>
+<h3>1.2 Las funciones del puesto (convocatoria)</h3>
+<ol>
+<li><strong>Actualizar diaria y rigurosamente los cronogramas</strong> de cada proyecto en JobTread.</li>
+<li><strong>Recibir en inglés los reportes de avance</strong> de los PMs en EE.UU. e incorporarlos a los cronogramas.</li>
+<li><strong>Registrar los pagos a subcontratistas y las compras de materiales</strong> (los dos registros).</li>
+<li><strong>Elaborar las Work Orders</strong> para subcontratistas.</li>
+<li>Soporte al análisis de datos y a la gestión ordenada de la información.</li>
+</ol>
+<h3>1.3 Lo que el puesto NO hace (manual §2)</h3>
+<ul>
+<li><strong>No ejecuta obra física</strong> (eso es de los PMs y el COO).</li>
+<li><strong>No mueve ni aprueba dinero</strong> (eso es de Milagros, la Administradora: <em>"nada se paga sin pasar por ella"</em>). El Backoffice <strong>prepara y verifica la documentación</strong>; el pago lo ejecuta ella.</li>
+<li><strong>No decide re-fechados de fondo solo:</strong> en la reunión de las 2:45/3:00 los cambios se acuerdan; el Data-Entry los registra en el momento.</li>
+<li><strong>(P3) No empuja a los subcontratistas:</strong> confirmar asistencia del sub = tarea EXCLUSIVA del PM. El Backoffice audita documentos y recuerda a los PMs.</li>
+<li><strong>(P3) Regla laboral:</strong> si alguien de la empresa (ej. Romina) le pide algo en horario laboral, se atiende aunque no venga de Jose.</li>
+<li><strong>(P3) El cashflow es de gerencia:</strong> el Data-Entry NO se involucra aún; lo suyo es entender que sus schedules limpios lo alimentan.</li>
+</ul>
+<h3>1.4 Mapa de conexiones — de quién recibe, a quién entrega</h3>
+<table>
+<thead>
+<tr>
+<th>Con quién</th>
+<th>Recibe</th>
+<th>Entrega</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PMs</strong> (Angel · Giselle · Jeff)</td>
+<td>Reportes de avance <strong>en inglés</strong> (el grupo de Jeff — Felton, Martha — es 100% inglés), términos negociados con subs, confirmaciones de campo</td>
+<td>Schedule cuadrado, WOs listas, aclaraciones de schedule/budget ("el Backoffice existe para destrabar, no para poner trabas" — manual §6)</td>
+</tr>
+<tr>
+<td><strong>Romina</strong> (Purchases)</td>
+<td><strong>Handoff ~1:00 PM</strong>: lo pendiente de compras pasa al Backoffice para el seguimiento de la tarde (manual §4.2); pricing/ETAs</td>
+<td>Auditoría de que sus ETAs estén puestos y cumplidos (<em>"a veces se le pasa al área de compras"</em> — P2)</td>
+</tr>
+<tr>
+<td><strong>Milagros</strong> (Administradora)</td>
+<td>Confirmación de pagos ejecutados</td>
+<td>Cambios de schedule que alimentan el cashflow; expediente completo antes de cada pago (bill/expense + WO + checklist). <strong>Nunca aprueba pagos</strong></td>
+</tr>
+<tr>
+<td><strong>Jose</strong> (Backoffice/dueño)</td>
+<td>Dirección, decisiones de la reunión, prioridades</td>
+<td>Registros hechos, discrepancias detectadas, schedules cuadrados</td>
+</tr>
+<tr>
+<td><strong>KITBOT</strong> (sistema)</td>
+<td>Cadencia del puesto (Canónico §9.3): <strong>brief matinal 7:50</strong> · <strong>prep de reunión 2:30</strong> · flags al instante · <strong>alerta pre-cierre 5:00 PM</strong> · <strong>EOD nocturno</strong> (cierra el día y siembra la prep de mañana). Además el bot <strong>responde dudas técnicas a nivel experto, persigue esperas, audita que las fotos lleven descripción</strong> y corre <code>/inspeccion</code> para los PMs. Alertas pre-cierre de los demás (útiles para el seguimiento): <strong>PM 4:00 PM · Romina 12:00 PM</strong> (cierra 1:00 PM con handoff al Backoffice)</td>
+<td>Cambios del bot aplicados (movimientos, completados sin autor, cadenas sin ETA — Mandamiento VIII)</td>
+</tr>
+<tr>
+<td><strong>Grupos Telegram</strong></td>
+<td>Preguntas del equipo (<em>"la gente te va a empezar a escribir"</em> — P2)</td>
+<td><strong>Listas de tareas del día siguiente antes de cerrar el día</strong> (Mandamiento IX)</td>
+</tr>
+<tr>
+<td><strong>Planning (Claudia)</strong> (P3)</td>
+<td>Reunión de ADELANTO tras el floor plan aprobado + reunión de portafolio v1</td>
+<td><strong>Schedule ideal F1 consolidado</strong> desde el template (eliminando trades no vendidos), "hasta el colgado del drywall"</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Mapa de competencias</h2>
+<table>
+<thead>
+<tr>
+<th>Debe SABER (explicar)</th>
+<th>Debe SABER HACER (ejecutar)</th>
+<th>Debe VERIFICAR (auditar)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El proceso constructivo completo y por qué una cosa bloquea la otra (P1: <em>"una cosa te va bloqueando la otra… es lo que no se puede achicar más"</em>)</td>
+<td><strong>Registro doble</strong> de cada movimiento de dinero: schedule (tarea+tipo+monto+check) y libros (Bill/Expense → vendor → trade → line item → approve → pay)</td>
+<td><strong>Dicho vs. marcado</strong>: cada reporte de PM contra lo que muestra JobTread; discrepancias → ops.db (Mandamiento II)</td>
+</tr>
+<tr>
+<td>Budgets: line item, cantidad·unidad·costo unitario·costo extendido; costo vs. precio; margen ~40% (P2, caso Kyle Aubrey)</td>
+<td><strong>Crear Work Orders con detalle</strong>: sub → trade → presupuesto → monto negociado → SOW copiado → Payment Breakdown</td>
+<td>Que <strong>Compras cumpla ETAs</strong>: cada compra con su tarea ETA al día siguiente, con el plazo real del proveedor</td>
+</tr>
+<tr>
+<td>Los 9 tipos de tarea y la nomenclatura <code>&lt;TRADE&gt; + &lt;ACCIÓN&gt;</code></td>
+<td><strong>Re-fechar tareas CON razón</strong> durante la reunión; extender tareas vivas día a día (ej. SOURCE VENDORS hasta tener las 3 quotes)</td>
+<td><strong>Documentación completa antes de pago</strong>: factura, WO, lien waiver, checklist — sin expediente, el pago no se mueve (Mandamiento VI)</td>
+</tr>
+<tr>
+<td>La regla de oro de EL_FLOW y la cadena completa por trade (Fases A–E)</td>
+<td><strong>Mantener dependencias</strong>: ningún EXECUTE con fecha si su cadena previa no está 100% cerrada</td>
+<td><strong>Fotos con descripción</strong> en CompanyCam para toda obra trabajada</td>
+</tr>
+<tr>
+<td>El ciclo del cashflow: el monto en la descripción es lo que el sistema parsea; sin monto = "amount TBD", no cuenta</td>
+<td>Aplicar los <strong>cambios del bot</strong> (movimientos, completados sin autor, cadenas sin ETA) y dejar las <strong>listas de mañana</strong> en los grupos</td>
+<td>Que <strong>toda tarea tenga asignado</strong> (cero "Nobody") y todo proyecto tenga PM</td>
+</tr>
+<tr>
+<td>Vocabulario de obra EN→ES (sesión 2)</td>
+<td>Leer y volcar a JobTread un reporte de PM <strong>en inglés</strong> sin perder datos</td>
+<td>Que la nomenclatura y el tipo de tarea sean correctos en todo lo nuevo</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Módulos (sesiones)</h2>
+<blockquote>
+<p>Formato de cada sesión (Plan Maestro): grabada para repaso + práctica en vivo. Las prácticas usan los proyectos reales: <strong>Kyle Aubrey, Martha Cockrell, Katie Holmes, Lingyan, Felton, Karim, Rohini</strong>. Regla de la práctica temprana (el propio Joaquín la dijo en P2): <em>"me voy a meter a curiosear, no voy a mover nada"</em> — mirar todo, escribir solo lo indicado en cada ejercicio.</p>
+</blockquote>
+<hr />
+<h3>SESIÓN 1 · Repaso activo de la inducción + el puesto en el mapa (60 min)</h3>
+<p><strong>Objetivo:</strong> confirmar que lo enseñado en las Partes 1 y 2 quedó sólido (equivale al Módulo 0) y ubicar exactamente qué le toca al Data-Entry en cada pieza.</p>
+<p><strong>Contenido:</strong><br />
+- Quiz oral sobre la Parte 1: la secuencia constructiva (MEP in-ground → foundation con 10 días de curado → framing → sheathing/roof decking → puertas/ventanas → rough-ins → framing inspection → interior/exterior) y 3 dependencias "no X sin Y" (P1: no sheetrock sin insulation; no trims sin pisos; no countertops sin cabinets). Ese proceso escalonado <strong>ES el TEMPLATE maestro que vive en JobTread</strong> (Jose lo exportará; pendiente de ingerir a la biblioteca — Canónico §2).<br />
+- <strong>LA CLAVE del negocio (Canónico §1, corrección de Jose 2026-08-04): GESTIONAR LA OBRA DE LA FORMA EN LA QUE SE PLANIFICÓ EN EL CRONOGRAMA.</strong> Flujo de información impecable + solucionar los imprevistos para no salirse del cronograma = lo que garantiza el éxito de la operación (P1: <em>"nuestro core está en manejar el proyecto… un manejo impecable de este cronograma es lo que asegura el éxito"</em>). El margen se gana gestionando el cronograma; el registro limpio es la materia prima de esa gestión.<br />
+- El problema #1 declarado (P1): <em>"los project managers son lentos y ejecutan lentamente la obra"</em> — el sistema (y este puesto) existe para darles estructura.<br />
+- Los 9 tipos de tarea (P2 + Canónico §4): PM Task, Purchases, Action Task, Critical Path, Payment – Subs, Payment – Materials, City Inspection, Additional Expenses, Refunds. Cuál dispara qué registro.<br />
+- El manual v2.0: misión, los 10 Mandamientos (leer en voz alta I, II, IV, VI, VIII y IX — son los del Data-Entry), el ciclo diario §4 (brief 7:50 → handoff Compras 1PM → prep 2:30 → reunión 3:00 → cierre 5:00 → listas de mañana).<br />
+- Los valores (manual §6): respeto en todo canal; el Backoffice destraba, no bloquea.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Abrir <strong>Martha Cockrell</strong> (nomenclatura estándar nueva) y <strong>Kyle Aubrey</strong> (nomenclatura vieja: SOURCE VENDOR / APPROVE WO / COMPLETE TAKEOFF — EL_FLOW, notas) lado a lado. Identificar en cada uno: 3 PM Tasks, 3 Purchases, 1 Action Task/Critical Path, 1 Payment de cada tipo, 1 City Inspection.<br />
+2. En <strong>Katie Holmes</strong>, señalar qué tareas de hoy/esta semana le tocarían registrar al Data-Entry y cuáles son del PM.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- Confundir las 2 nomenclaturas conviviendo (Kyle vs. Martha — mega-análisis §3): al crear tareas nuevas se usa SIEMPRE la estándar (la de Martha).<br />
+- Tratar el schedule como "lista de deseos": en 2023 se manejaban 74 obras en Notion y obras de 6 meses cerraron en 2 años (P1) — ese caos es exactamente lo que este puesto evita.</p>
+<hr />
+<h3>SESIÓN 2 · Inglés de obra: vocabulario EN→ES + reportes de PMs (60–75 min)</h3>
+<p><strong>Objetivo:</strong> leer un reporte de avance en inglés (Jeff escribe 100% en inglés) y volcarlo a JobTread sin perder ni inventar datos.</p>
+<p><strong>Contenido — vocabulario del proceso canónico (§2, §4, §5), agrupado como se usa:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Inglés (como llega)</th>
+<th>Qué es (ES operativo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>foundation · formboard · survey · concrete pour/curing</td>
+<td>losa de concreto · delimitar el plano en terreno con madera · inspección de tercero · tirado/curado del concreto (~10 días)</td>
+</tr>
+<tr>
+<td>framing · exterior sheathing · roof decking</td>
+<td>esqueleto de madera · envolvente impermeable · lo mismo para el techo</td>
+</tr>
+<tr>
+<td>MEP (mechanical/electrical/plumbing) · in-ground · rough-in · trim</td>
+<td>las 3 fases de las instalaciones: bajo tierra · dentro de la casa · acabados finales</td>
+</tr>
+<tr>
+<td>zip tape · insulation (fiberglass/foam)</td>
+<td>sellado de uniones/ventanas · aislamiento (fibra de vidrio/espuma)</td>
+</tr>
+<tr>
+<td>drywall / sheetrock · hang · tape, bed &amp; texture · primer</td>
+<td>tablaroca · colgado · cinta+masilla+textura · primera capa (la pintura final va AL FINAL — P1)</td>
+</tr>
+<tr>
+<td>flooring · tiles · grout</td>
+<td>pisos (laminados/madera) · cerámica · fragua/pegamento</td>
+</tr>
+<tr>
+<td>interior doors · baseboards · trims (carpentry)</td>
+<td>puertas interiores · zócalos · contornos/molduras</td>
+</tr>
+<tr>
+<td>cabinets · vanities · island · countertops</td>
+<td>gabinetes de cocina · de baño · isla · cubiertas de piedra</td>
+</tr>
+<tr>
+<td>bricks · siding · gutters · gutter guard</td>
+<td>fachada de ladrillo · paneles decorativos · canaletas · protector</td>
+</tr>
+<tr>
+<td>punch list · pre-delivery walk · final inspection</td>
+<td>lista de correcciones · recorrido con el cliente · inspección final (la hace LA CIUDAD)</td>
+</tr>
+<tr>
+<td>red tag · pass/fail inspection · permit</td>
+<td>rechazo de inspección · pasó/falló · permiso de la ciudad</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Vocabulario administrativo (el del registro):</strong> SOW (scope of work) · take-off (cuantificar material) · bid request / quote (pedido de cotización / cotización) · vendor (sub o proveedor) · WO (work order = el contrato) · ETA (estimated time of arrival) · bill (pago a sub) · expense (compra de material) · invoice/receipt (factura/boleta) · lien waiver (renuncia de gravamen — parte del expediente de pago) · downpayment (pago inicial) · draw (desembolso del banco) · due (vencido) · crew (cuadrilla).</p>
+<p><strong>Reglas al recibir un reporte en inglés:</strong><br />
+1. Extraer SIEMPRE: proyecto → trade → qué pasó (done / in progress / blocked) → fechas → montos → qué pide el PM.<br />
+2. Lo que no se entiende <strong>se pregunta, no se adivina</strong> (Mandamiento V: verificar antes de actuar). Un "finished" sin evidencia en CompanyCam no es un completado.<br />
+3. Los montos y términos que dé el PM se registran textuales (ellos negocian; tú eres el autor del registro — P2).</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Tomar 3 mensajes reales del grupo de Jeff (proyectos <strong>Felton</strong> y <strong>Martha</strong>) y traducirlos a "acción de registro": qué tarea tocar, qué marcar, qué preguntar de vuelta. [PROPUESTA: Jose selecciona los 3 mensajes de esta semana.]<br />
+2. Dictado inverso: Jose describe un avance en inglés hablado (estilo llamada de las 3PM) y Joaquín anota trade + acción + fecha + monto.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- El caso <strong>puertas de 8 ft</strong>: el spec real era 8 ft (96") contra puertas existentes de 82" — el cambio viajó sin canal claro y <strong>se compró el error</strong> (mega-análisis: "puertas a 8ft vs 82: se compró el error a 96"). Moraleja para el Data-Entry: una medida ambigua en un reporte NUNCA se registra sin confirmar — se repregunta al PM con la medida exacta en el mensaje.<br />
+- Marcar "done" porque el mensaje sonaba a terminado: <em>"una afirmación sin evidencia no es un completado"</em> (manual §3, Mandamiento V).</p>
+<hr />
+<h3>SESIÓN 3 · Los DOS registros: la mecánica exacta (75–90 min)</h3>
+<p><strong>Objetivo:</strong> ejecutar sin ayuda el registro doble de cualquier movimiento de dinero, exactamente como Jose lo enseñó en la Parte 2.</p>
+<p><strong>Contenido — P2, literal:</strong> <em>"Siempre son dos, acuérdense: el schedule, que es nuestro registro de obra, y los libros contables."</em></p>
+<p><strong>A) Registro en el SCHEDULE (registro de obra) — 4 pasos (P2):</strong><br />
+1. <strong>Crear la tarea en el día correspondiente</strong> (el día que ocurrió — hoy). El template usa días numerados (día 60, 85); el schedule en producción usa calendario real (P2).<br />
+2. <strong>Tipo de tarea:</strong> <code>Payment - Materials</code> si es compra de material, <code>Payment - Subs</code> si es pago a sub.<br />
+3. <strong>Monto en la descripción — solo el número, SIN signo menos</strong> (P2: <em>"no necesito que pongas menos, simplemente el número escrito"</em>). El sistema lo parsea para el cashflow; <strong>sin monto = "amount TBD" y NO cuenta en cashflow</strong> (Canónico §4).<br />
+4. <strong>Marcar completado (check).</strong> → Queda el registro en calendario: ese día se hizo esa compra/pago por ese monto.</p>
+<p><strong>B) Registro en los LIBROS (documento contable) — P2:</strong><br />
+1. Proyecto → <strong>Documentos → Crear documento</strong>.<br />
+2. Elegir el tipo: <strong>Expense</strong> = compra de material a una tienda (factura/boleta) · <strong>Bill</strong> = pago a subcontratista ("como un recibo por honorarios" — P2).<br />
+3. Seleccionar <strong>vendor</strong> (a quién se compró/pagó) → <strong>trade</strong> (ej. Plumbing) → <strong>line item del budget</strong> (a qué ítem corresponde, ej. tankless water heater — P2).<br />
+4. <strong>Crear</strong> → poner el <strong>costo</strong> → <strong>Approve for Payment</strong> → <strong>Pay</strong> (solo si ya se pagó de verdad) → queda para los libros.</p>
+<p><strong>C) Casos especiales:</strong><br />
+- <strong>Additional Expenses:</strong> compras del día a día / caja chica (ej. bolsas de basura — P2). Se registran igual en el cronograma el día que se pagaron.<br />
+- <strong>Refunds:</strong> reembolsos (ej. gasolina de los PMs — P2).<br />
+- <strong>Nomenclatura siempre:</strong> <code>&lt;TRADE&gt; + &lt;ACCIÓN&gt;</code> — ej. <code>PLUMBING: PURCHASE MATERIAL</code>, <code>&lt;TRADE&gt;: BILL &amp; PAYMENT</code> (P2: <em>"la nomenclatura es básicamente el nombre del trade y luego la acción"</em>).<br />
+- Por qué importa el line item correcto: es lo que permite ver <strong>si se cumplen los márgenes</strong> (P2: <em>"nos da la posibilidad de ver claramente si se está cumpliendo o no nuestros márgenes"</em>) — repaso express del budget de <strong>Kyle Aubrey</strong> visto en P2: techo 1,456 sqft × $1.32 = $1,921 de costo; paredes $3,035 de costo vs. $4,722 de precio al cliente; margen ~40%.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. <strong>En sandbox (método del propio Jose en P2):</strong> crear un Expense de prueba con costo $0 en un proyecto designado, recorrer vendor→trade→line item→approve→pay, y borrarlo. Repetir con un Bill.<br />
+2. <strong>En vivo, supervisado:</strong> registrar los pagos/compras REALES que salgan de la reunión de hoy (ej. una compra de Romina en <strong>Lingyan</strong> o <strong>Katie Holmes</strong>): los 4 pasos del schedule + el documento completo. Jose revisa antes de guardar.<br />
+3. Buscar en <strong>Rohini</strong> o <strong>Martha</strong> un pago ya registrado y rastrear su doble registro: ¿está en el schedule con monto y check? ¿está el bill contra el line item correcto?</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Monto ausente o ambiguo en la descripción</strong> = "amount TBD": no alimenta cashflow y Milagros no puede planificar (casos reales de montos ambiguos flaggeados en productividad: Rohini "43k", Martha "551872"). El monto va limpio, solo número.<br />
+- <strong>Registrar contra el proyecto o line item equivocado</strong> — pariente directo del "material cruzado entre obras" (mega-análisis §11.4). Antes de guardar: ¿proyecto correcto? ¿trade correcto? ¿ítem correcto?<br />
+- <strong>Poner "Pay" sin que el pago haya ocurrido:</strong> el registro dice la verdad o no dice nada (manual §1.4). Pagar es de Milagros; registrar el pago hecho es tuyo.<br />
+- <strong>(P3) Reescribir la fecha original de un pago:</strong> la fecha original = <strong>gatillo contractual</strong> (culminación + término); NO se cambia a la fecha en que se pagó — el pago se MUEVE ("patear"), y se registra en la fecha en que REALMENTE se pagó. Checks = pagos CONFIRMADOS/reservados de la semana.<br />
+- Dejar solo UNO de los dos registros: schedule sin documento = los libros quedan cojos; documento sin schedule = el calendario miente.</p>
+<hr />
+<h3>SESIÓN 4 · Work Orders con detalle (60–75 min)</h3>
+<p><strong>Objetivo:</strong> elaborar una WO completa que "un extraño podría ejecutar" (Mandamiento III), con los datos que entrega el PM.</p>
+<p><strong>Contenido — P2 + EL_FLOW:</strong><br />
+- <strong>Qué es:</strong> <em>"las órdenes de trabajo o Work Orders son los contratos"</em> (P2). <strong>Sin WO aprobada no se inicia trabajo — nunca</strong> (EL_FLOW, Fase A).<br />
+- <strong>De dónde sale:</strong> el PM ya hizo SOW → source vendors (≥3 cotizaciones — P2: <em>"si solo tienes una cotización, dices, bueno, ese será el precio del mercado… Pero si mandas a diferentes, puedes ver cómo realmente está la cotización del mercado"</em>) → seleccionó al sub y negoció. El Data-Entry <strong>construye el documento</strong>; los datos los da el PM (P2: <em>"tú vas a estar haciendo esta documentación, pero lo que vas a ingresar te lo va a estar dando el Project Manager"</em>).<br />
+- <strong>Mecánica exacta (P2):</strong><br />
+  1. Proyecto → Añadir documento → <strong>Work Order</strong>.<br />
+  2. Seleccionar <strong>subcontratista</strong> → <strong>trade</strong> → el <strong>presupuesto</strong> disponible de ese trade.<br />
+  3. <strong>Editar el monto al negociado</strong> (P2: presupuesto $20,000, el PM negoció $18,000 → se registra 18,000 y CNG ahorra $2,000). El costo máximo viene del budget: <code>costo = precio × (1 − margen)</code> (Canónico §7).<br />
+  4. <strong>Scope of Work:</strong> copiar y pegar el SOW report del PM (P2: <em>"lo copias y lo pegas"</em>). Si la WO solo dice "instalar drywall", fallaste antes de que llegue la cuadrilla (Mandamiento III).<br />
+  5. <strong>Payment Breakdown:</strong> los términos que dicte el PM. <strong>Pago estándar = el viernes siguiente a terminar el trabajo</strong> (P2: <em>"pago estándar significa que se le va a pagar el siguiente viernes una vez terminado el trabajo"</em>); excepción "día después"; a veces partido: "ROUGH FINISH" / "PASS INSPECTION" (EL_FLOW Fase E). Por eso el viernes es el día de cierre del dinero: ahí cae la reunión de presupuestos de la semana (Canónico §9.2, Sesión 7).<br />
+- <strong>(P3) El flujo de FIRMA de la WO:</strong> el sub debe estar <strong>registrado como proveedor</strong> (nombre, email, teléfono + documentación) → receptor de la WO → el sistema envía <strong>SMS + email</strong> → el sub <strong>firma electrónicamente</strong> → <strong>RECIÉN entonces se marca "Aprobado" en JT</strong>. La firma visible = sello legal (caso real P3: sub reclamando pago 1 día después de terminar — su WO decía "1 semana después" y por contrato esperó). <strong>Regla: ningún trabajo inicia sin WO FIRMADA</strong> — no acuerdos de palabra.<br />
+- <strong>(P3) Renegociaciones:</strong> si CEO/COO renegocia un precio ya cerrado (ej. $1,000→$800), el cambio DEBE notificarse para actualizar la WO antes de pagar.<br />
+- <strong>Después de la WO</strong> (para dejar la cadena viva): <code>CONFIRM SCHEDULE WITH SUB</code> — el PM llama 3–5 días antes; existe <em>"para que no se olviden, porque se olvida"</em> (P2). El Data-Entry pone la tarea y la marca cuando el PM confirma.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Abrir una WO real existente (ej. en <strong>Martha</strong> o <strong>Felton</strong>) y auditarla contra el estándar: ¿SOW completo o una línea? ¿Payment Breakdown claro? ¿monto = negociado?<br />
+2. Crear la próxima WO real que pida un PM esta semana (ej. un trade pendiente en <strong>Karim</strong>, de Giselle), supervisado: sub → trade → presupuesto → monto → SOW pegado → breakdown estándar viernes.<br />
+3. Verificar el budget antes: ¿el monto negociado entra en el line item? (P2: <em>"el primer filtro siempre va a ser si está o no dentro de tu presupuesto"</em> — dicho para compras, aplica igual aquí).</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>WO creada DESPUÉS del trabajo</strong> (mega-análisis: "WO creada DESPUÉS del trabajo — invierte la regla 'sin WO no se inicia'"). La WO se hace ANTES; si un PM reporta trabajo iniciado sin WO, eso es discrepancia → se registra y se avisa a Jose, no se "regulariza" en silencio como si fuera normal.<br />
+- <strong>(P3) WO sin scope adentro:</strong> el ejemplo real revisado en la Parte 3 tenía el Payment Breakdown bien pero SIN el scope of work — está MAL. La WO lleva el scope (o el PDF del SOW adjunto en files) SIEMPRE. Auditar las WO existentes exactamente contra esto.<br />
+- <strong>SOW de una línea:</strong> <em>"si una OT solo dice 'instalar tablaroca', has fallado antes de que llegue la cuadrilla"</em> (Mandamiento III).<br />
+- Payment Breakdown vacío o "a convenir": sin términos escritos, el viernes de pago se vuelve discusión.</p>
+<hr />
+<h3>SESIÓN 5 · El manejo de los cronogramas: EL FLOW y la regla de oro (75–90 min)</h3>
+<p><strong>Objetivo:</strong> dominar la cadena completa por trade y aplicar la regla de oro al re-fechar — la profundización que Jose dejó anunciada en la Parte 2.</p>
+<p><strong>Contenido — EL_FLOW completo:</strong><br />
+- <strong>La regla de oro (§0):</strong> <em>"Un EXECUTE solo puede tener fecha en el schedule si su cadena previa está CERRADA"</em> = SOW creado + vendor con WO enviada + schedule confirmado con el sub + material comprado con entrega confirmada + inspección Before hecha.<br />
+- <strong>La cadena por fases</strong> (recorrerla completa en pantalla): Fase A pre-contrato (PM) → Fase B compras (Romina, EN PARALELO, termina ANTES del EXECUTE) → Fase C pre-ejecución (Before + downpayment si aplica, único pago pre-trabajo) → Fase D ejecución (el EXECUTE = lo único que cuenta como producción; hold points: nunca se tapa nada sin foto) → Fase E cierre y pago (city inspection si aplica → After + lien waiver → gate de pago → BILL &amp; PAYMENT → draw del banco). <em>Nota vigente: las tareas <code>CC CHECKLIST: BEFORE SOW</code> se obvian por ahora (Jose, 2026-07-06 — checklists CC no construidos).</em><br />
+- <strong>Regla práctica de la reunión (§0):</strong> si un EXECUTE tiene fecha esta semana, sus 6 tareas previas tienen que estar al 100%. Si no, <strong>el EXECUTE se mueve — no se deja "por si acaso"</strong>.<br />
+- <strong>Re-fechar CON razón:</strong> todo movimiento de fecha lleva su porqué (dicho en la reunión o al bot). Un "no se hizo y nadie dijo por qué" rompe el sistema (DIA_CUMPLIDO, check 3 del PM).<br />
+- <strong>Tareas que se extienden:</strong> las tareas vivas (ej. SOURCE VENDORS esperando quotes) se extienden día a día hasta culminar, y ese día se les da check (P2: <em>"lo vamos extendiendo día a día hasta que por fin reciba sus tres cotizaciones"</em>).<br />
+- <strong>DELIVERY ETA — cómo se lee (SCHEDULE_STRUCTURE):</strong> duración &gt;1 día → la fecha FIN = plazo máximo de llegada; duración =1 día → en stock o ETA sin verificar (el sistema lo persigue). La tarea ETA arranca <strong>1 día después de la compra</strong> con el plazo del proveedor (P2).<br />
+- <strong>Dependencias reales en JT:</strong> los links dependsOn existen y se usan (DRYWALL dependsOn INSULATION; ACTION dependsOn DELIVERY ETA; BILL &amp; PAYMENT dependsOn PM INSPECTION-AFTER — SCHEDULE_STRUCTURE).<br />
+- <strong>Asignados:</strong> cada tarea con dueño — PM Tasks al PM del proyecto, Purchases a Romina (P2).</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. <strong>Auditoría de cadena en Martha Cockrell</strong> — el caso real de la lección: en julio su <code>ELECTRICAL ROUGH IN: EXECUTE</code> estuvo fechado (7–8 jul) con <code>SELECT VENDOR &amp; SEND WO</code> y <code>CONFIRM SCHEDULE WITH SUB</code> <strong>en 0%</strong> (EL_FLOW §0). Buscar en el schedule actual de Martha y de <strong>Kyle</strong> todo EXECUTE fechado en los próximos 14 días y verificar su cadena tarea por tarea. Producir la lista: "estos EXECUTE están respaldados / estos hay que mover".<br />
+2. <strong>Re-fechado con razón:</strong> tomar 2 tareas vencidas reales de <strong>Rohini</strong> o <strong>Lingyan</strong>, preguntar el porqué en la reunión y moverlas con la razón registrada.<br />
+3. <strong>Barrido de huérfanos:</strong> en un proyecto asignado, listar tareas sin asignado ("Nobody") y sin monto donde debería haberlo.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>La semana del 29-jun:</strong> se produjo <strong>la mitad de lo proyectado</strong> por violar la regla de oro (EXECUTE con el sub en sourcing; framing fechado sin framer contratado) — EL_FLOW §0 y §3.<br />
+- <strong>Red tags de Martha (24-jul):</strong> inspecciones rechazadas por <strong>secuencia mal pedida y planos no presentes en obra</strong> (Canónico §11.5) — la cadena y el orden de inspecciones no son burocracia, son lo que evita el red tag.<br />
+- <strong>~$12k de compras frenadas</strong> por takeoffs vencidos aguas arriba (EL_FLOW §3.5): las tareas de las fases A/B vencidas son tan graves como un EXECUTE atrasado.<br />
+- <strong>253 tareas "Nobody" y proyectos sin PM</strong> (mega-análisis §6; Charles Harris estuvo 24 días sin PM ni documentación con draw bancario en juego): tarea sin dueño = cadena huérfana → se flaggea, no se ignora.</p>
+<hr />
+<h3>SESIÓN 6 · La reunión de las 2:45 PM y el cierre del día (75–90 min + shadowing)</h3>
+<p><strong>Objetivo:</strong> operar el momento donde "está realmente lo fuerte del trabajo" (P2): registrar en vivo durante la reunión y dejar el día cerrado.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>La reunión (P2 + manual §4.3):</strong> todos los días L–V, ~2 horas, <strong>2:30 PM hora Jose = 3:30 PM Perú (hora OFICIAL — Jose 2026-08-06)</strong>. Jose llama a los PMs; cada uno da su avance; <strong>se re-fechan los schedules de TODOS los proyectos</strong>. El Data-Entry DEBE estar (P2: fue la única condición innegociable de horario que Jose le puso a Joaquín).<br />
+- <strong>(Jose 2026-08-06) Después de la reunión: alimentar la grabación/transcript AL BOT, todos los días</strong> — para que guarde registro de todo y haga mejor su función. Mecánica: la grabación se suelta en <code>~/.openclaw/REUNIONES/</code> y el sistema la transcribe y procesa solo. Es parte del cierre del día del Backoffice/Data-Entry: <strong>día sin transcript alimentado = registro incompleto</strong>.<br />
+- <strong>Antes (2:30):</strong> leer la prep de KITBOT — qué pasó desde ayer por proyecto, qué dijeron los PMs, inconsistencias, qué decidir (manual §4.3).<br />
+- <strong>Durante:</strong> por cada avance dictado → tocar la tarea en el momento (check / extender / re-fechar con razón / crear pago con su doble registro). Lo que quede a medias al colgar es deuda.<br />
+- <strong>Después de las 3PM, JobTread es la verdad del día.</strong> <em>"No un recuerdo, no un mensaje de chat, no un acuerdo verbal"</em> (manual §1.3).<br />
+- <strong>El cierre (manual §4.4):</strong> aplicar los cambios del bot (movimientos, completados sin autor, cadenas sin ETA) → resolver pendientes/alertas derivados → <strong>alerta pre-cierre 5:00 PM</strong> dice qué falta → dejar las <strong>listas de tareas de mañana en los grupos</strong> (Mandamiento IX: <em>"el equipo arranca mañana sobre el plan que dejas esta noche"</em>).<br />
+- <strong>El handoff de Compras (~1:00 PM):</strong> Romina declara sus pendientes; la tarde los persigue el Backoffice (manual §4.2).<br />
+- <strong>El mapa completo de la reportería (Canónico §9.4–9.5)</strong> — el registro del Data-Entry es el insumo de TODOS estos reportes. Ciclo diario: roll de vencidos 6AM → radar de compras 7:40 → brief 7:50 → SOD a los grupos → prep 2:30 → reporte de cierre ~5PM → <strong>"Tu Día Mañana" 6PM</strong> → EOD nocturno. Ciclo largo: <strong>SEMANAL</strong> (evaluación viernes-vs-viernes) · <strong>MENSUAL</strong> (gerencia: baseline inicial vs último viernes, solo obra) · <strong>PRODUCTIVIDAD</strong> (continuo) · <strong>CARRERA</strong> (diario 7:35). Leyes: <strong>los números del reporte oficial MANDAN</strong> (no se recalculan por fuera) · <strong>"lo dicho manda sobre lo agendado"</strong> (si el campo reportó distinto al schedule, se registra y se cuadra) · <strong>la evaluación = cierres viernes vs viernes</strong> (nunca por schedules "sin mover" en corrección).</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+0. <strong>(P3 — YA INSTALADA por Jose):</strong> en las llamadas, Joaquín <strong>ANOTA los cambios de schedule que entienda (sin ejecutarlos)</strong> y después contrasta sus notas contra las grabaciones para medir precisión. Meta declarada: que modifique todos los schedules solo, y Jose únicamente le pase sus interacciones con los PMs. Es el puente entre el shadowing y "manos en 1 proyecto".<br />
+1. <strong>Shadowing (2 días):</strong> asistir a la reunión completa solo mirando cómo Jose toca los schedules en vivo. Anotar cada tipo de cambio que ocurre.<br />
+2. <strong>Manos en 1 proyecto (2 días):</strong> en la reunión, Joaquín registra en vivo TODO lo de un proyecto (empezar con uno tranquilo, ej. <strong>Katie Holmes</strong>); Jose lleva el resto y revisa al colgar.<br />
+3. <strong>Cierre completo guiado (1 día):</strong> después de la reunión, ejecutar el cierre entero: cambios del bot + pendientes + responder la alerta de las 5PM + listas de mañana a los grupos, con Jose validando antes de enviar.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Dejar schedules a medio cuadrar</strong> después de la reunión: <em>"un schedule que no calza con la reunión es una mentira en el sistema"</em> (Mandamiento I).<br />
+- <strong>Confiar en la memoria</strong> ("lo registro al final"): los registros se hacen en el momento; a las 2 horas de reunión la memoria ya perdió montos y fechas.<br />
+- <strong>Flags del bot ignorados:</strong> <em>"un flag dejado abierto es un fuego dejado ardiendo"</em> (Mandamiento VII). Los nudges ignorados 47–140 veces enseñaron al equipo que el sistema no tiene consecuencia (mega-análisis §8.2) — el Data-Entry es quien corta ese patrón cerrando lo suyo el mismo día.</p>
+<hr />
+<h3>SESIÓN 7 · Las auditorías del Backoffice + simulacro de día completo (90 min)</h3>
+<p><strong>Objetivo:</strong> ejercer los 4 "VERIFICAR" del puesto y correr un día entero de punta a punta.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>Auditoría 1 — Dicho vs. marcado (Mandamiento II):</strong> contrastar el reporte de cada PM contra JobTread y contra CompanyCam. Toda discrepancia se <strong>registra en ops.db y se resuelve</strong> — nunca se asume resuelta. Verificar el Daily Update ANTES de actuar sobre él (Mandamiento V).<br />
+- <strong>Auditoría 2 — ETAs de Compras (P2):</strong> <em>"nosotros tenemos que auditar que esto se esté cumpliendo, porque a veces se le pasa al área de compras"</em>. Checks: cada PURCHASE MATERIAL tiene su tarea ETA al día siguiente · el plazo puesto = el del proveedor · ETA de 1 día = stock o SIN VERIFICAR (se persigue) · ninguna cadena crítica sin ETA.<br />
+- <strong>Auditoría 3 — Expediente antes de pago (Mandamiento VI):</strong> antes de que un BILL &amp; PAYMENT llegue a Milagros: factura + WO <strong>FIRMADA</strong> + lien waiver + inspección After respaldada. <strong>El gate de pago es doble candado: PM en obra + Backoffice en oficina</strong> (EL_FLOW Fase E). El estándar contra el que se prepara el expediente = <strong>los 4 filtros de la Administradora (P3)</strong>: ¿está en el plan de la semana? ¿misma cantidad? ¿nos deja bien financieramente? ¿documentación adecuada (WO + inspecciones)? Sin expediente, el pago no se mueve — y el Data-Entry lo dice a tiempo, no el viernes a las 5. <strong>(P3) Tras cada pago ejecutado: actualizar el schedule + subir la factura.</strong><br />
+- <strong>Auditoría 4 — Fotos con descripción:</strong> toda obra trabajada hoy debe tener fotos en CompanyCam CON descripción (DIA_CUMPLIDO, check 2 del PM; EL_FLOW §1 Fase D: nunca se tapa nada sin foto); el watch horario de CompanyCam (sistema) las audita cada hora y arma las bitácoras del reporte de 5PM. El Data-Entry detecta al PM en cero y lo levanta en la reunión.<br />
+- <strong>(P3) Auditoría 5 — Take-off reports creados Y COMPLETOS:</strong> verificar que Compras cree sus take-offs y <strong>avisar a los PMs con take-off pendiente de confirmar</strong> <em>"si no le hacen caso a Romina"</em>. <strong>(Jose 2026-08-06)</strong> Además, cada compra debe dejar DENTRO del reporte de takeoff en CompanyCam sus 3 evidencias: <strong>foto del precio confirmado/fijado + ETA por escrito del proveedor + recibo de la compra</strong>. Takeoff sin las 3 evidencias = expediente de compra incompleto → flag.<br />
+- <strong>(P3) Auditoría 6 — SOW existe + checklist Durante activo:</strong> por cada trade próximo, el <strong>SOW debe EXISTIR en CompanyCam</strong> (no hay forma de trackear el envío al sub; la existencia sí se audita). Y por cada trade EN EJECUCIÓN: si la sección <strong>Durante</strong> del checklist no tiene fotos/registros → el PM no está inspeccionando con checklist → flag.<br />
+- <strong>El insumo del cashflow:</strong> el "Daily Schedule Update by EOD" del Backoffice alimenta el CASHFLOW DATA de Milagros (Canónico §8) — si el schedule está sucio, el plan de pagos de toda la empresa se hace sobre mentiras.<br />
+- <strong>La reunión de los VIERNES — presupuestos (Canónico §9.2):</strong> los viernes hay reunión para FIJAR PRESUPUESTOS: es el día donde el dinero de la semana se cierra (consolidación de saldos bancarios, pagos estándar del viernes, baseline semanal) y el de la siguiente se planifica <em>(agenda exacta por confirmar)</em>. Para este puesto importa doblemente: el Backoffice <strong>registra los pagos estándar que caen viernes</strong> (doble registro + expediente listo ANTES) y su <strong>Daily Schedule Update alimenta el cashflow</strong> que esa reunión planifica.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. <strong>ETAs:</strong> barrido completo de compras de la semana en <strong>Lingyan</strong> y <strong>Rohini</strong>: compras sin ETA, ETAs de 1 día sin verificar, ETAs vencidos. Producir la lista para Romina/Jose.<br />
+2. <strong>Fotos:</strong> revisar en CompanyCam los proyectos trabajados ayer y contar fotos con/sin descripción (referencia del hueco real: <strong>Martha 2/49, Felton 1/35</strong> — Canónico §11.3). Llevar el dato a la reunión.<br />
+3. <strong>Expediente:</strong> tomar el próximo BILL &amp; PAYMENT que venza (cualquier proyecto) y auditar su expediente completo ANTES de que Milagros pague.<br />
+4. <strong>SIMULACRO FINAL — un día completo, Joaquín conduce, Jose observa:</strong> mañana (revisar schedules + flags del brief) → 1PM handoff de Romina → 2:30 prep → 2:45 reunión registrando en vivo TODOS los proyectos → cierre: bot + pendientes + alerta 5PM + listas de mañana. Este simulacro es la puerta al Nivel 3.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>ETAs añejos / "está ordenado ≠ ETA confirmado"</strong> (Plan Maestro Track B; PIZARRA 07-26: ETA sin confirmar &gt;24h como discrepancia abierta).<br />
+- <strong>Pagar por urgencia sin expediente:</strong> el doble candado de pago hoy NO opera en la práctica (mega-análisis: "pagos por urgencia de cashflow") — este puesto es la mitad del candado que falta.<br />
+- <strong>Checklists instanciados en 0%</strong> (Martha: 29 de 30 en 0/x — Canónico §11.1): mientras los checklists CC no estén desplegados, la evidencia son fotos con descripción + inspección del PM; no dar por "verificado" lo que solo está instanciado.<br />
+- <strong>Dejar la discrepancia flotando:</strong> <em>"cada discrepancia se registra y se resuelve — nunca se deja flotando"</em> (manual §1.3).<br />
+- <strong>(P3) Preguntar "sí/no" sin verificar:</strong> la práctica vieja que este puesto entierra — hasta la P3 la auditoría era preguntarle al PM si cumplía (<em>"nos han dicho sí y no"</em>) sin mirar CompanyCam/JT. La auditoría real verifica el documento, no la palabra.<br />
+- <strong>(P3) PM llenando el checklist completo al final del trade:</strong> invalida las 3 secciones (Before/Durante/Después tienen momentos distintos). Detectarlo por el patrón: todo el reporte llenado el mismo día del cierre.</p>
+<hr />
+<h2>4. Evaluación y certificación</h2>
+<p>Tres niveles observables (Plan Maestro §5) — no hay examen de papel; la evidencia vive en JobTread, ops.db y el semáforo.</p>
+<h3>Nivel 1 — Comprensión (tras Sesiones 1–2)</h3>
+<ul>
+<li>Explica en 3 minutos por qué el registro limpio ES el producto (historia Notion→caos→sistema).</li>
+<li>Enuncia LA CLAVE (gestionar la obra como se planificó en el cronograma) y la mentalidad que la sostiene: rigurosidad · atención al detalle · prever · solucionar · proactividad — "no aceptar el problema y reaccionar" (Canónico §1).</li>
+<li>Recorre la cadena de un trade de memoria (A→E) y recita la regla de oro.</li>
+<li>Dado un schedule real, identifica los 9 tipos de tarea sin errores.</li>
+<li>Traduce un reporte real de Jeff (inglés) a acciones de registro sin perder datos.</li>
+<li><strong>Verificación:</strong> conversación con Jose + ejercicio sobre pantalla compartida.</li>
+</ul>
+<h3>Nivel 2 — Ejecución guiada (tras Sesiones 3–6)</h3>
+<p>Sobre casos reales, con Jose revisando antes de guardar/enviar:<br />
+- Registra <strong>5 movimientos de dinero reales</strong> con doble registro perfecto (schedule 4 pasos + documento completo contra el line item correcto).<br />
+- Crea <strong>2 Work Orders reales</strong> completas (SOW pegado + Payment Breakdown estándar).<br />
+- Audita la cadena de <strong>2 proyectos</strong> y produce la lista mover/respaldado correcta.<br />
+- Registra en vivo <strong>1 proyecto completo</strong> durante la reunión de las 2:45, 3 días seguidos.<br />
+- Ejecuta <strong>1 cierre de día completo</strong> (bot + pendientes + alerta 5PM + listas de mañana).<br />
+- <strong>Verificación:</strong> revisión de lo hecho en JT/CC por Jose, mismo día.</p>
+<h3>Nivel 3 — Ejecución autónoma = CERTIFICADO</h3>
+<p><strong>Cumplir el "Día Cumplido" del Backoffice sin ayuda, N días seguidos.</strong> Los checks EXACTOS (DIA_CUMPLIDO_POR_PUESTO.md v3 — el sistema los verifica y la alerta pre-cierre de las 5:00 PM avisa lo que falte):</p>
+<ol>
+<li><strong>"Reunión de cierre / verificación con los PMs hecha y lo dicho vs lo marcado en JobTread verificado (discrepancias → ops.db)."</strong></li>
+<li><strong>"Schedules al día: realizados los cambios reportados por el bot, y resueltos los pendientes/alertas derivados al backoffice."</strong></li>
+</ol>
+<p><em>(El doc los define para el puesto Backoffice — hoy Jose. Joaquín certifica ejecutándolos como manos del Backoffice: en el check 1, la reunión la corre Jose y Joaquín registra + verifica dicho-vs-marcado; en el check 2, los cambios y pendientes de registro los cierra Joaquín.)</em></p>
+<ul>
+<li>El EOD marca ✅ (todos los checks) / ⚠️ (parcial) / ❌ (sin señal); ✅ = "puede irse tranquilo".</li>
+<li>[PROPUESTA] <strong>N = 10 días hábiles consecutivos</strong> (2 semanas de semáforo verde, coherente con el semáforo semanal "verde ≥4/5 días" del Plan Maestro §5), sin que Jose haya tenido que corregir un registro después de guardado.</li>
+<li>[PROPUESTA] Además, durante esos 10 días: cero WO emitidas después de iniciado un trabajo sin flag, y cero compras de la semana sin ETA auditado — los dos huecos que este track existe para cerrar.</li>
+<li><strong>Criterio de comportamiento (Canónico §1):</strong> durante esos 10 días se observa la mentalidad, no solo la mecánica — discrepancias levantadas el mismo día, esperas perseguidas antes de vencer, problemas prevenidos o escalados con propuesta de solución (nunca "aceptar y reaccionar").</li>
+</ul>
+<p><strong>Registro de avance:</strong> tabla módulo → estado → fecha en la biblioteca, conectada al semáforo de los viernes (Plan Maestro §5).</p>
+<hr />
+<h2>5. Material de apoyo — ONE-PAGER DEL PUESTO (imprimir y tener al lado)</h2>
+<pre><code>═══════════════════════════════════════════════════════════════════
+  BACKOFFICE / DATA-ENTRY — LA MECÁNICA EXACTA          CNG · v1.0
+═══════════════════════════════════════════════════════════════════
+
+REGLAS DE ORO (no se negocian)
+ 1. Después de las 3PM, JobTread es la verdad del día.
+    Si no está en JT, no pasó.
+ 2. SIEMPRE SON DOS registros por movimiento de dinero:
+    schedule (obra) + libros (documento).
+ 3. Un EXECUTE solo tiene fecha si su cadena previa está 100%:
+    SOW ✓  WO enviada ✓  schedule confirmado con sub ✓
+    material comprado con entrega confirmada ✓  Before ✓
+    → si no: el EXECUTE SE MUEVE, no se deja &quot;por si acaso&quot;.
+ 4. Verificar, no asumir. Sin documento, no hay aprobación.
+ 5. Nomenclatura: &lt;TRADE&gt; + &lt;ACCIÓN&gt;   (ej. PLUMBING: PURCHASE
+    MATERIAL · SIDING: BILL &amp; PAYMENT). Estándar = proyecto Martha.
+ 6. Yo NO apruebo pagos ni muevo dinero (Milagros) y NO ejecuto
+    obra (PMs). Yo soy el AUTOR del registro.
+
+───────────────────────────────────────────────────────────────────
+REGISTRO A · SCHEDULE (cada compra o pago, el día que ocurre)
+ 1. Crear tarea en el DÍA correspondiente (hoy)
+ 2. Tipo:  material → Payment - Materials  ·  sub → Payment - Subs
+ 3. Monto en la descripción: SOLO el número, SIN signo menos
+    (sin monto = &quot;amount TBD&quot; → NO cuenta en cashflow)
+ 4. Marcar completado ✓
+
+REGISTRO B · LIBROS (inmediatamente después)
+ Proyecto → Documentos → Crear documento
+ → Expense (material/tienda)  o  Bill (pago a sub)
+ → vendor → trade → LINE ITEM del budget correcto
+ → Crear → costo → Approve for Payment → Pay (solo si YA se pagó)
+
+───────────────────────────────────────────────────────────────────
+WORK ORDER (antes de que el trabajo inicie — SIEMPRE antes)
+ Añadir documento → Work Order
+ → subcontratista → trade → presupuesto del trade
+ → editar monto = LO NEGOCIADO por el PM (≤ costo del budget)
+ → Scope of Work: COPIAR Y PEGAR el SOW report del PM
+ → Payment Breakdown: términos del PM
+   · ESTÁNDAR = viernes siguiente a terminar el trabajo
+   · excepción &quot;día después&quot; · a veces partido:
+     ROUGH FINISH / PASS INSPECTION
+ Prueba de calidad: ¿un extraño podría ejecutarla? Si no, falta.
+
+───────────────────────────────────────────────────────────────────
+ETA (auditar a Compras — &quot;a veces se le pasa&quot;)
+ · La tarea ETA arranca 1 día después de la compra,
+   con el plazo que dio el proveedor
+ · Duración &gt;1 día → fecha FIN = llega a más tardar ese día
+ · Duración =1 día → en stock O SIN VERIFICAR (perseguir)
+ · SECURE PRICING lleva las cotizaciones attached
+
+───────────────────────────────────────────────────────────────────
+MI DÍA (L–V)
+  7:50   brief KITBOT — revisar schedules y flags
+ ~1:00   handoff de Romina — la tarde persigo yo sus pendientes
+  2:30   prep de KITBOT — leerla ANTES de la reunión
+  2:30 Jose / 3:30 Perú  REUNIÓN (~2h, hora oficial) — registro EN VIVO:
+         check / extender / re-fechar CON RAZÓN / pagos (doble
+         registro) / discrepancias dicho-vs-marcado → ops.db
+  luego  cierre: cambios del bot + pendientes + expedientes
+  5:00   alerta pre-cierre — me dice qué falta
+  antes de cerrar: LISTAS DE MAÑANA a los grupos
+
+MI DÍA CUMPLIDO (el sistema lo verifica)
+ ✓ Reunión hecha + dicho-vs-marcado verificado (discrep → ops.db)
+ ✓ Schedules al día: cambios del bot hechos + pendientes resueltos
+
+───────────────────────────────────────────────────────────────────
+ANTES DE GUARDAR CUALQUIER REGISTRO — 5 PREGUNTAS
+ ¿Proyecto correcto? ¿Trade correcto? ¿Line item correcto?
+ ¿Monto limpio (solo número)? ¿Evidencia existe (foto/doc)?
+
+SI UN REPORTE EN INGLÉS ES AMBIGUO → PREGUNTO, NO ADIVINO
+ (las puertas de 8 ft se compraron mal por no confirmar la medida)
+═══════════════════════════════════════════════════════════════════
+</code></pre>
+<hr />
+<p><em>Track A v1.1 — 2026-08-06: integrada la </em><em>Parte 3</em><em> (marcas "(P3)"): flujo de firma de WO, 4 filtros de pago, auditorías 5-6 (take-offs + SOW/Durante), práctica 0 de anotar-en-llamadas (ya instalada por Jose), fila Planning, regla laboral, matiz fecha-contractual, y 2 puntos [POR CONFIRMAR] (horario de reunión · downpayment vs "nunca pagar al inicio"). Encaja en el Plan Maestro de Capacitación (entregable 1 de 6). Se ajusta con el feedback de Jose.</em></p>
+<a class="volver" href="/proceso/materiales/">← Centro de materiales</a></div></body></html>

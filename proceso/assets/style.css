@@ -604,3 +604,13 @@ a.err:hover{transform:translateY(-2px);text-decoration:none;border-color:#fca5a5
   .diagrama-wrap{overflow:visible; border:0}
   h2{break-after:avoid}
 }
+
+/* ============================================================
+   TEMARIO + CENTRO DE MATERIALES (2026-08-07) — adiciones minimas.
+   Todo lo demas de esas dos paginas reusa el design system v2.
+   ============================================================ */
+
+/* bloque "TU MATERIAL" al pie de cada posicion: el badge lleva
+   emoji, asi que necesita fondo claro (el .num normal es ink). */
+.grid.tumat a.mapa-card .num{background:var(--soft); color:var(--ink);
+  border:1.5px solid var(--line2); font-size:15px; line-height:1.15; padding:3px 9px}

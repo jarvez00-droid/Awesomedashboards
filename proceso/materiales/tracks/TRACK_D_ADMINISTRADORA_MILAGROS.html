@@ -1,0 +1,488 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TRACK D ADMINISTRADORA MILAGROS · CNG</title>
+<link rel="stylesheet" href="/proceso/assets/style.css">
+<style>
+.doc{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.doc h1{font-size:28px;border-bottom:3px solid var(--ink,#0f172a);padding-bottom:10px;margin-top:0}
+.doc h2{font-size:20px;margin-top:34px;border-bottom:2px solid #cbd5e1;padding-bottom:6px}
+.doc h3{font-size:16px;color:#1d4ed8;margin-top:24px}
+.doc table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.doc th{background:#0f172a;color:#fff;padding:8px 10px;text-align:left}
+.doc td{border:1px solid #cbd5e1;padding:8px 10px;vertical-align:top}
+.doc tr:nth-child(even) td{background:#f8fafc}
+.doc pre{background:#f1f5f9;padding:14px;border-radius:8px;overflow-x:auto;font-size:13px;border:1px solid #e2e8f0}
+.doc code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:13px}
+.doc blockquote{border-left:4px solid #2563eb;background:#eff6ff;margin:14px 0;padding:10px 16px;border-radius:0 8px 8px 0}
+.doc li{margin:5px 0}
+.volver{display:inline-block;margin:16px 0;padding:8px 16px;background:#0f172a;color:#fff;border-radius:20px;text-decoration:none;font-size:14px;font-weight:600}
+</style></head><body>
+<div class="doc"><a class="volver" href="/proceso/materiales/">← Centro de materiales</a>
+<h1>TRACK D · ADMINISTRADORA (Milagros) — Currículo de Capacitación</h1>
+<p><strong>Lugar en el programa:</strong> Track D del <a href="00_PLAN_MAESTRO_CAPACITACION.md">Plan Maestro de Capacitación</a>. <strong>Prerrequisito: Módulo 0 completo</strong> (proceso canónico — sesiones 0.1 a 0.7). Este track NO repite el Módulo 0: lo asume y lo referencia.</p>
+<p><strong>Situación de partida:</strong> Milagros YA ejerce el puesto y su rol de <strong>administrator ya está VIVO en el sistema</strong> — tiene el sandbox con acceso a finanzas (Finance dashboard, <code>JADE_DASH_DATA</code>, cashflow), la 🧭 Ruta de Pagos, y el comando "update database" habilitado en KITBOT. Este track no es para "aprender desde cero": es para llevarla del <strong>"ya lo hace"</strong> al <strong>"lo hace al 100% según el proceso"</strong> — anclando su rol vivo a los reportes y al reloj diario (reunión, viernes = fijar presupuestos + pago estándar) del canon, y cerrando los huecos reales documentados (doble candado de pago que NO opera, pagos por urgencia sin expediente, ping-pong de spec de 4 días). Por eso cada sesión arranca por la mecánica exacta y la práctica, no por teoría.</p>
+<p><strong>Fuentes:</strong> manual v2.0 (<code>JD_administrator_manual-operaciones.md</code>) · <code>00_PROCESO_CANONICO_CNG.md</code> (§8 cashflow, §9 reloj diario/reportería, §11 huecos) · <code>EL_FLOW_ACTION_TASK.md</code> (Fase E: gate de pago) · <code>SCHEDULE_STRUCTURE.md</code> · transcripciones Parte 1+2+3 (entrenamiento de Jose) · mega-análisis 2026-07-26. La <strong>Día Cumplido v3 de la Administradora vive en el propio manual §6</strong> (no hay archivo <code>DIA_CUMPLIDO</code> separado — <em>hueco anotado para Jose</em>).</p>
+<hr />
+<h2>1. Perfil y misión</h2>
+<h3>1.1 La misión (manual v2.0 §1.2)</h3>
+<blockquote>
+<p><strong>"Asegurar que la empresa SIEMPRE tenga con qué operar — que los pagos que sostienen la obra se hagan a tiempo, que ninguno se cuele fuera del plan, y que cuando el dinero se vaya a poner corto, el CEO y el COO se enteren ANTES de que pase, con una propuesta ya sobre la mesa."</strong></p>
+</blockquote>
+<p>La Administradora es la <strong>guardiana del dinero de la empresa</strong> (manual §1.1): <em>"nada se paga sin pasar por ella, y el plan de cashflow no es una sugerencia — es la regla que ella hace cumplir."</em> En el org diseñado esto eran DOS roles — <strong>CFO</strong> (estrategia financiera, cashflow, AP/AR, control de costos) y <strong>Accountant</strong> (bookkeeping, pagos a subs, comisiones, lien releases). Milagros los absorbe en <strong>un solo puesto operativo</strong>, apoyada por el Finance dashboard y por KITBOT. <strong>No hace estrategia financiera de alto nivel (eso es del CEO)</strong> — ella <strong>ejecuta, controla, y hace cumplir</strong> el dinero del día a día de CNG.</p>
+<p>El puesto <strong>no se mide por cuánto dinero mueve, sino por si la empresa siempre tuvo con qué operar y si algún pago se coló fuera del plan</strong> (manual §1.2–1.3). Su oficio es el <strong>control y la anticipación</strong>: ver que el proyectado va a apretar el jueves y tener la 🧭 Ruta de Pagos armada <strong>antes de que el jueves exista</strong> — nunca enterarse (ni hacer enterar al CEO) cuando el dinero ya se puso corto.</p>
+<h3>1.2 El principio fundamental: EL PLAN ES LA REGLA (manual §1.3)</h3>
+<blockquote>
+<p>El plan de cashflow consolidado <strong>es la ley de la semana.</strong> La Administradora es <strong>decisión-soporte y control, NO caja chica</strong>: hace cumplir el orden, no inventa prioridades. Una vez que el CEO aprueba el plan, cada pago se mide contra él — los pagos programados se ejecutan cuando toca; los que no calzan se <strong>mueven con razón registrada</strong>. El plan se consolida <strong>semanalmente (viernes)</strong> y aplica <strong>viernes a viernes</strong>; el plan vigente es siempre el del último viernes.</p>
+</blockquote>
+<ul>
+<li>Ella <strong>no decide qué proyectos priorizar</strong> ni fija la estrategia — <strong>categoriza y controla</strong>; <strong>Jose y Jonas deciden</strong> cuándo hay que sostener o soltar algo (manual §1.3, §8).</li>
+<li>Esto ancla directo al canon: los <strong>checks del cronograma = pagos CONFIRMADOS/reservados</strong> (dinero que sucede sí o sí en la semana); si no alcanza, pasan a la siguiente con prioridad, "pateando" pagos según lleguen los ingresos (Canónico §8).</li>
+</ul>
+<h3>1.3 El segundo principio: SIN DOCUMENTACIÓN NO HAY PAGO (manual §1.4)</h3>
+<p>Ningún pago sale sin su <strong>verificación de reglas + confirmación con el solicitante</strong>. Facturas, Work Orders, lien waivers y comprobantes deben estar registrados en los sistemas (JobTread / CompanyCam). <strong>Sin documentación completa, el pago no se aprueba.</strong> Y no basta con autorizar — <strong>confirma que el pago efectivamente salió, con su comprobante subido al sistema</strong> (autorizar no es pagar — Mandamiento III).</p>
+<h3>1.4 Mapa de conexiones — de quién recibe, a quién entrega (manual §1.5, §3)</h3>
+<table>
+<thead>
+<tr>
+<th>Con quién</th>
+<th>Qué recibe Milagros</th>
+<th>Qué entrega Milagros</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CEO (Jonas)</strong></td>
+<td>La <strong>aprobación del plan de cashflow</strong> (dueño de la estrategia financiera); las decisiones de sostener/soltar</td>
+<td>El plan consolidado para aprobar; <strong>flags de desviación &gt;$1,000 y de proyectado negativo</strong> con propuesta</td>
+</tr>
+<tr>
+<td><strong>COO (Rey)</strong></td>
+<td>Las <strong>negociaciones CON DETALLE</strong> que alimentan el cashflow data; <strong>Request Payments</strong>; renegociaciones de precios ya cerrados</td>
+<td>Confirmación de cada pago; flags de desviación (junto al CEO)</td>
+</tr>
+<tr>
+<td><strong>Backoffice (Jose)</strong></td>
+<td>El <strong>Daily Schedule Update by EOD</strong> (schedules limpios que alimentan el cashflow data); el expediente completo antes de cada pago (bill/expense + WO firmada + lien waiver + inspección After)</td>
+<td>El <strong>pago ejecutado</strong> que destraba una actualización de schedule; confirmación de qué se pagó</td>
+</tr>
+<tr>
+<td><strong>PMs (Angel · Giselle · Jeff)</strong></td>
+<td><strong>Request Payments</strong>; confirmación de que el trabajo culminó y de la documentación de campo</td>
+<td><strong>Aviso al grupo de los PMs de CADA pago realizado</strong> (Mandamiento VI)</td>
+</tr>
+<tr>
+<td><strong>Compras (Romina)</strong></td>
+<td><strong>Request Payments</strong> de materiales; la <strong>notificación de entrega verificada</strong> (Compras coordina, ella ejecuta el pago)</td>
+<td>Confirmación del pago del material; aviso al grupo</td>
+</tr>
+<tr>
+<td><strong>El banco</strong></td>
+<td>Saldos, transferencias, problemas bancarios</td>
+<td>Resolución directa con el banco; consolidación semanal de saldos (viernes) — <strong>única fuente de verdad del saldo bancario</strong></td>
+</tr>
+<tr>
+<td><strong>KITBOT</strong></td>
+<td>Check-ins apertura 9:30 / control de pagos 12:00 / pre-3PM 2:00 · <strong>alerta pre-cierre 4:00 PM</strong> · cashflow fresco inyectado; comando "update database" <em>(⚠️ los envíos automáticos de esta cadencia están DADOS DE BAJA — Jose 06-ago; se enseña como el diseño del puesto, ver nota de vigencia §6)</em></td>
+<td>Cada desviación registrada; el <strong>Cierre Administrativo</strong> nocturno (PDF) armado</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Regla estructural (EL_FLOW Fase E + Canónico §5 cierre por trade):</strong> el pago es un <strong>doble candado</strong> — el PM aprueba en obra (After + lien waiver) y el Backoffice arma el expediente en oficina → <strong>recién entonces llega a Milagros</strong>, que aplica sus 4 filtros y ejecuta. Ella es la <strong>última compuerta</strong>: "nada se paga sin pasar por ella".</p>
+<h3>1.5 La mentalidad — la causa raíz es el comportamiento (Jose, 2026-08-04)</h3>
+<p>Los fallos del proceso no vienen de falta de conocimiento técnico: vienen de falta de <strong>RIGUROSIDAD</strong>, de <strong>ATENCIÓN AL DETALLE</strong>, de no <strong>PREVER</strong>, no <strong>SOLUCIONAR</strong> y no ser <strong>PROACTIVO</strong>. La regla mental del puesto: <em>"no aceptar el problema y reaccionar: prevenirlo, o buscar soluciones insaciablemente para cumplir el cronograma a como dé lugar"</em> (Jose). En la Administración esto se traduce literal: un proyectado que se va a negativo el jueves y no se avisó el lunes, un pago que salió distinto al aprobado y no se flaggeó, un expediente que se pide recién el viernes a las 5 — todos son fallos de comportamiento antes que de proceso. Su versión de la proactividad es <strong>la mala noticia temprano, con la solución ya en la mano</strong> (Mandamiento V). Este comportamiento <strong>se evalúa</strong> junto con la mecánica (§4).</p>
+<hr />
+<h2>2. Mapa de competencias</h2>
+<table>
+<thead>
+<tr>
+<th>Debe SABER (explicar)</th>
+<th>Debe SABER HACER (ejecutar)</th>
+<th>Debe VERIFICAR (controlar)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El proceso canónico completo (Módulo 0) y por qué el registro limpio del schedule ES la materia prima del cashflow (Canónico §8: <em>"JobTread es un espejo de lo que está pasando en la realidad"</em>)</td>
+<td><strong>Armar/leer el cashflow diario</strong>: saldo + negociaciones del COO + schedule updates del Backoffice → CASHFLOW DATA → CASHFLOW PLAN</td>
+<td>Que <strong>ningún pago salga sin sus 4 filtros</strong> cumplidos (plan · misma cantidad · buena posición financiera · documentación)</td>
+</tr>
+<tr>
+<td>El <strong>ciclo del cashflow</strong> (Canónico §8) y su carril "ADMINISTRATOR" en 8 pasos (manual §3)</td>
+<td><strong>Ejecutar un pago</strong>: verificar reglas → confirmar con el solicitante → pagar (o mover con razón) → <strong>subir el comprobante</strong> → avisar al grupo</td>
+<td>Montos <strong>aprobado-vs-pagado</strong> de HOY, con el POR QUÉ de toda diferencia registrado</td>
+</tr>
+<tr>
+<td>Los <strong>4 filtros de pago</strong> (Canónico §8) y los <strong>10 Mandamientos</strong> (manual §7)</td>
+<td><strong>Correr la 🧭 Ruta de Pagos</strong> cuando el proyectado aprieta: splits semanales / secuencia con subs (pagar → cobrar → avanzar)</td>
+<td>Que toda diferencia <strong>&gt;$1,000 del proyectado</strong> dispare <strong>flag al CEO Y al COO</strong> con su POR QUÉ</td>
+</tr>
+<tr>
+<td>La regla <strong>checks = pagos CONFIRMADOS/reservados</strong>; la fecha original = <strong>gatillo contractual</strong> (NO se reescribe a la fecha de pago)</td>
+<td><strong>Consolidar los saldos bancarios los VIERNES</strong> (única fuente de verdad) → plan viernes-a-viernes aprobado por el CEO</td>
+<td>Que el proyectado <strong>NO se vaya a negativo</strong> — flag emitido <strong>ANTES</strong>, con propuesta en mano</td>
+</tr>
+<tr>
+<td>El <strong>pago estándar = viernes siguiente</strong> a terminar; el <strong>downpayment</strong> = excepción (FRAMING / MEP ROUGH-INS)</td>
+<td><strong>Avisar al grupo de PMs de CADA pago realizado</strong> (que quede registrado)</td>
+<td>Que <strong>nada quede overdue</strong>: pagos Y cobros y misc se patean día a día hasta resolverse (<code>roll_overdue</code>)</td>
+</tr>
+<tr>
+<td>Que ella <strong>es gatekeeper de toda negociación</strong>: todo cambio de términos con cliente/sub le llega a ella para el cashflow</td>
+<td><strong>Custodiar la documentación</strong>: facturas · WOs · lien waivers · comprobantes registrados en JT/CompanyCam</td>
+<td>Que el <strong>expediente</strong> de cada pago esté completo ANTES de mover el dinero (sin documento, no hay aprobación)</td>
+</tr>
+<tr>
+<td>El <strong>reloj diario</strong> (reunión 2:30 PM / viernes de presupuestos) y dónde caen sus datos en la reportería (Canónico §9.4–9.5)</td>
+<td>Registrar cada <strong>desviación</strong> y armar el <strong>Cierre Administrativo</strong> nocturno (PDF)</td>
+<td>El performance del equipo por la reportería (EOD, bitácoras, CompanyCam) — su <strong>lente de cumplimiento</strong></td>
+</tr>
+<tr>
+<td>Los valores del puesto: respeto y amabilidad en TODO canal, con TODOS (manual §9)</td>
+<td>El <strong>cierre del día</strong> = sus 5 checks del Día Cumplido en ✅ antes de irse</td>
+<td>Su propio cierre: los 5 checks cumplidos y verificables por el sistema</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Módulos (7 sesiones)</h2>
+<blockquote>
+<p>Formato estándar: sesión grabada (para repaso) + práctica guiada sobre proyectos reales en el Finance dashboard / JobTread / CompanyCam. Como Milagros ya opera con el sandbox vivo, cada sesión abre con 5 min de "muéstrame cómo lo haces hoy" y se corrige sobre su práctica real. Los proyectos de práctica: <strong>Kyle Aubrey, Martha Cockrell, Katie Holmes, Lingyan, Felton, Karim, Rohini, Charles Harris</strong>.</p>
+</blockquote>
+<hr />
+<h3>SESIÓN D1 · El puesto en el mapa — misión, "el plan es la ley", mandamientos y conexiones (45–60 min)</h3>
+<p><strong>Objetivo:</strong> que Milagros explique en 2 minutos su misión, los dos principios fundamentales (el plan es la ley · sin documento no hay pago), y por qué ella es la <strong>última compuerta</strong> del dinero.</p>
+<p><strong>Contenido:</strong><br />
+- Repaso exprés del Módulo 0 (no se repite): LA CLAVE de CNG es <strong>GESTIONAR LA OBRA DE LA FORMA EN LA QUE SE PLANIFICÓ EN EL CRONOGRAMA</strong> — flujo de información impecable + solucionar los imprevistos para no salirse del cronograma = lo que garantiza el éxito de la operación (Canónico §1, Jose 2026-08-04). El margen (~40%) se gana gestionando el cronograma; <strong>el dinero es el combustible que mantiene ese cronograma corriendo</strong> — y ella es quien lo administra.<br />
+- La misión y la medida única del puesto: ¿la empresa siempre tuvo con qué operar? ¿algún pago se coló fuera del plan? (manual §1.2).<br />
+- Las <strong>dos herencias del puesto</strong> (manual §1.1): CFO (control/cashflow) + Accountant (bookkeeping/pagos/lien releases), fusionadas en un puesto operativo. <strong>NO hace estrategia</strong> (eso es del CEO): ejecuta, controla, hace cumplir.<br />
+- <strong>EL PLAN ES LA REGLA</strong> (manual §1.3): decisión-soporte y control, NO caja chica. Ella categoriza y controla; <strong>Jose y Jonas deciden</strong> qué se sostiene o se suelta. Leerlo en voz alta.<br />
+- <strong>SIN DOCUMENTACIÓN NO HAY PAGO</strong> (manual §1.4): el gate del dinero. Autorizar no es pagar (Mandamiento III).<br />
+- Los <strong>10 Mandamientos</strong> (manual §7), uno por uno, con un ejemplo real de cada uno: sin documento no hay aprobación · hace cumplir el plan no sus prioridades · confirma que el pago SALIÓ (comprobante subido) · flag &gt;$1,000 al CEO+COO · flag ANTES del negativo con propuesta · avisa al grupo cada pago · suma saldos SEMANAL (viernes) · nada overdue · persigue y custodia la documentación · respeto en todo canal.<br />
+- Por qué existe la compuerta: el <strong>doble candado de pago</strong> (EL_FLOW Fase E) — PM en obra + Backoffice en oficina + ella como última verificación. Hoy ese candado NO opera del todo (§11 del canon): ella es la mitad que lo cierra.<br />
+- Valores (manual §9): respeto, cero gritos/insultos —ni persiguiendo un pago tarde o un documento faltante—, disposición a facilitar información. Es la <strong>cara del dinero de la empresa</strong>: cómo trata a la gente es parte de cómo se confía en la empresa. Son condición del puesto, no aspiración.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Abrir el <strong>Finance dashboard</strong> y ubicar en vivo: Saldo Restante · Pagos Realizados · timeline con running_balance · closing_balance semanal. Decir en voz alta qué mira cada mañana y qué mira cada viernes.<br />
+2. Elegir un pago programado de esta semana en cualquier proyecto y recorrer en voz alta su carril "ADMINISTRATOR" (los 8 pasos del manual §3): ¿de quién viene el Request? ¿tiene documento? ¿está en el plan? ¿qué schedule update destraba?</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>El doble candado de pago NO opera</strong> (Canónico §11.2): hoy hay pagos por urgencia de cashflow y <strong>WO creada DESPUÉS del trabajo</strong> (invierte la regla "sin WO no se inicia"). Su compuerta es exactamente lo que atrapa esto — un pago sin WO firmada NO pasa.<br />
+- Confundir "autorizar" con "pagar": el Mandamiento III existe porque un pago autorizado sin comprobante subido es un pago que el sistema no puede verificar.</p>
+<hr />
+<h3>SESIÓN D2 · El cashflow diario: cómo se arma, cómo se lee, qué decisiones dispara (75–90 min)</h3>
+<p><strong>Objetivo:</strong> leer el cashflow diario en el Finance dashboard sin error y saber exactamente qué decisión dispara cada estado (verde / apretado / pre-negativo).</p>
+<p><strong>Contenido:</strong><br />
+- <strong>Cómo se arma el CASHFLOW DATA</strong> (Canónico §8 + manual §3): <code>saldos bancarios (ella, semanal) + negociaciones del COO CON DETALLE + Daily Schedule Update by EOD del Backoffice</code> → <strong>CASHFLOW DATA</strong> → <strong>CASHFLOW PLAN</strong> → <strong>CEO ¿aprueba?</strong> (No → plan alternativo) → Verify Payment Rules → Request Payments → Confirm con solicitante → Proceed with Payment (Subs) → Update Schedule.<br />
+- <strong>Cómo se lee el dashboard</strong> (manual §2): Saldo Restante (Remaining Balance) + Pagos Realizados (Payments Made) + <strong>timeline con running_balance</strong> (el saldo corriendo día a día) + <strong>closing_balance semanal</strong> (el cierre de cada viernes). Es su <strong>tablero de control</strong>; la reconciliación vive ahí.<br />
+- <strong>El ritmo del dato — SEMANAL, no diario</strong> (manual §2, Mandamiento VII): la suma de saldos bancarios se hace <strong>una vez a la semana, los viernes</strong>, al consolidar el plan. Su día a día NO es re-sumar cuentas — es <strong>EJECUTAR y VIGILAR</strong> el plan vigente. <em>(Este es un matiz que suele confundirse: el cashflow "diario" que ella lee es la proyección corriendo sobre el plan del último viernes, no un recálculo de saldos.)</em><br />
+- <strong>Los checks del cronograma = pagos CONFIRMADOS/reservados</strong> (Canónico §8): dinero que sucede sí o sí en la semana. Si no alcanza, pasan a la siguiente <strong>con prioridad</strong>. El cuadre se maneja <strong>"pateando" pagos a proveedores</strong> según lleguen los ingresos; meta = colchón en cuenta para que una movida de ~$200k no afecte.<br />
+- <strong>Qué decisiones dispara el cashflow, según su estado:</strong><br />
+  - <strong>Verde / holgado</strong> → ejecutar el plan tal cual; nada que escalar.<br />
+  - <strong>Apretado</strong> → correr la 🧭 Ruta de Pagos (sesión D5): qué pago se puede "patear", qué cobro acelerar.<br />
+  - <strong>Pre-negativo</strong> → <strong>FLAG ANTES de que pase</strong> al CEO+COO con propuesta en mano (Mandamiento V) — nunca esperar a que el saldo cruce el cero.<br />
+  - <strong>Diferencia &gt;$1,000 aprobado-vs-real</strong> → flag al CEO+COO con el POR QUÉ (Mandamiento IV).<br />
+- <strong>Nada queda overdue</strong> (manual §5.1, Jose 2026-07-09): tanto <strong>pagos</strong> como <strong>cobros (income)</strong> y misc se <strong>patean día a día</strong> hasta pagarse/cobrarse — el <code>roll_overdue</code> cubre también los cobros. Un cobro sin recibir no queda como "overdue" permanente; se empuja al día siguiente hasta resolverse.<br />
+- Por qué depende del registro limpio del Backoffice: <em>"JobTread es un espejo de lo que está pasando en la realidad"</em> (Canónico §8) — si el schedule está sucio, el plan de pagos de toda la empresa se hace sobre mentiras. Cuando ella ve algo raro en el cashflow, la causa suele estar en un schedule mal cuadrado → se levanta con el Backoffice.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Sobre el Finance dashboard de HOY: leer el running_balance de los próximos 7 días y clasificar cada día como verde / apretado / pre-negativo. Por cada día no-verde, decir qué decisión dispara.<br />
+2. Rastrear una tarea de pago confirmada (check) en el schedule de <strong>Martha</strong> o <strong>Kyle</strong> y seguirla al cashflow: ¿su monto está limpio en la descripción? ¿aparece en el timeline? Si no aparece, ubicar la causa (monto ambiguo / sin tipo de tarea) y anotarla para el Backoffice.<br />
+3. Encontrar en el dashboard un ítem que debería haberse pagado/cobrado y sigue rodando: confirmar que el <code>roll_overdue</code> lo pateó y decir qué falta para cerrarlo.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Re-sumar saldos a diario</strong> (Mandamiento VII): no es su trabajo diario; el dato de saldo es semanal. Confundirlo la saca del plan.<br />
+- <strong>Montos ilegibles en la descripción</strong> ("43k" de Rohini, "551872" de Martha — Canónico §11 / mega-análisis §7): el parser financiero no los lee bien → el cashflow se vuelve ciego a ese dinero. Cuando ella los detecta, es un flag directo al Backoffice.<br />
+- Tratar el cashflow como cálculo suelto: el watch sigue <strong>EL PLAN</strong> (cumplimiento del plan consolidado), no una cuenta improvisada del día (manual §5 ancla semanal).</p>
+<hr />
+<h3>SESIÓN D3 · Gatekeeper de pagos: los 4 filtros y el doble candado (75–90 min)</h3>
+<p><strong>Objetivo:</strong> aplicar los 4 filtros a cualquier solicitud de pago sin excepción, y no dejar pasar jamás un pago sin expediente.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>Los 4 FILTROS de la Administradora</strong> (Canónico §8, P3) — el orden es el orden:<br />
+  1. <strong>¿Está en el plan de la semana?</strong> (el plan aprobado el viernes es la ley).<br />
+  2. <strong>¿Es la misma cantidad?</strong> (aprobado = solicitado; si difiere, se para).<br />
+  3. <strong>¿Nos deja en buena posición financiera según el plan?</strong> (no rompe el running_balance).<br />
+  4. <strong>¿Tiene la documentación adecuada?</strong> = <strong>work order (firmada) + inspecciones</strong>.<br />
+  → Si pasa los 4 → se paga → el Backoffice <strong>actualiza el schedule + sube la factura</strong>.<br />
+- <strong>El doble candado de pago</strong> (EL_FLOW Fase E + Canónico §5): el pago llega a ella con DOS candados ya cerrados — (1) el <strong>PM en obra</strong> (inspección After + lien waiver), (2) el <strong>Backoffice en oficina</strong> (expediente: bill/expense + WO firmada + lien waiver + inspección After respaldada). Ella es la <strong>tercera y última verificación</strong>: los 4 filtros. Si un candado falta, el pago NO pasa — lo devuelve, no lo "regulariza".<br />
+- <strong>El expediente completo</strong> (manual §1.4, §7 Mandamiento I): facturas · Work Orders (FIRMADAS) · lien waivers · comprobantes, registrados en JobTread/CompanyCam. <strong>Sin documentación completa, el pago no se aprueba.</strong><br />
+- <strong>Confirmar con el solicitante</strong> (manual §3 paso 6): antes de ejecutar, confirma con quien pidió el pago que corresponde, que la documentación está, que gatea lo correcto.<br />
+- <strong>La fecha original NO se reescribe</strong> (Canónico §8, P3): la fecha original de la tarea de pago = <strong>gatillo contractual</strong> (culminación + término del contrato). NO se cambia a la fecha en que se paga — el <strong>pago se MUEVE</strong> ("patear") y se registra en la fecha en que <strong>REALMENTE</strong> se pagó. Confundir esto ensucia el viernes-vs-viernes y el cashflow.<br />
+- <strong>A los subs nunca se les paga al inicio</strong> (Canónico §8, P3): <em>"se van y te dejan varado"</em>. Pago al culminar, típicamente 1 semana después por contrato, idealmente en viernes. <strong>Excepción (Jose 2026-08-06): el DOWNPAYMENT</strong> es algo especial con CIERTOS subs/trades — <strong>FRAMING</strong> o <strong>MEP ROUGH-INS</strong> (único pago pre-trabajo, con gate). Ella reconoce cuándo un downpayment es legítimo y cuándo un pago "adelantado" es una violación de la regla.<br />
+- <strong>Confirmar que el pago SALIÓ</strong> (Mandamiento III): no basta autorizar — verifica que el dinero efectivamente se movió y <strong>sube el comprobante</strong> al sistema. Autorizar no es pagar.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Tomar los Request Payments reales de esta semana (de PMs y de Romina) y correr los 4 filtros sobre cada uno en voz alta: por cada uno, veredicto <strong>paga / mueve con razón / devuelve por expediente incompleto</strong>.<br />
+2. <strong>Caso downpayment:</strong> ubicar un FRAMING o MEP ROUGH-IN próximo en <strong>Charles Harris</strong> o <strong>Lingyan</strong> y decidir si un pago pre-trabajo es un downpayment legítimo (con su gate) o una violación — justificar en 3 frases.<br />
+3. Tomar un BILL &amp; PAYMENT que venza y auditar su expediente completo (WO firmada + factura + lien waiver + inspección After) ANTES de que el dinero se mueva. Producir la lista "completo / falta X".</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Pagar por urgencia sin expediente</strong> (Canónico §11.2): el hueco #1 que este track cierra — el doble candado hoy no opera y se paga bajo presión de cashflow. Cada pago sin filtro #4 es un fuego futuro.<br />
+- <strong>Reescribir la fecha original del pago</strong> a la fecha en que se pagó: rompe el gatillo contractual y el viernes-vs-viernes. El pago se MUEVE; la fecha en que se pagó se registra aparte.<br />
+- <strong>Confundir un adelanto irregular con un downpayment:</strong> el downpayment solo aplica a FRAMING / MEP ROUGH-INS con gate; cualquier otro "pago al inicio" es la regla violada.<br />
+- <strong>Autorizar y no confirmar la salida:</strong> un pago sin comprobante subido es un pago que la reconciliación no puede cerrar (Mandamiento III).</p>
+<hr />
+<h3>SESIÓN D4 · Aviso al grupo · verificación aprobado-vs-pagado · flag &gt;$1,000 (60–75 min)</h3>
+<p><strong>Objetivo:</strong> cerrar el circuito de transparencia de cada pago (aviso + reconciliación) y disparar el flag correcto cuando la realidad se separa del plan.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>Aviso al grupo de los PMs de CADA pago realizado</strong> (Mandamiento VI, Día Cumplido check 3 · Canónico §9.3 "Grupos"): cada pago ejecutado se avisa al grupo — <em>"que el equipo sepa qué se pagó y quede registrado"</em>. Es transparencia + registro, no cortesía. Formato <strong>[PROPUESTA, pendiente de aprobar con Jose]</strong>: proyecto · trade · sub/proveedor · monto · concepto (a qué WO/factura corresponde).<br />
+- <strong>Verificación aprobado-vs-pagado</strong> (Día Cumplido check 1, manual §6): al cierre, contrasta los <strong>montos aprobados HOY</strong> contra lo que <strong>REALMENTE se pagó</strong>, y <strong>registra el POR QUÉ</strong> de cualquier diferencia. Esta es la reconciliación diaria: aprobado = pagado, o hay una razón escrita.<br />
+- <strong>El flag &gt;$1,000</strong> (Mandamiento IV, Canónico §8): una diferencia <strong>mayor a $1,000 de lo proyectado</strong> se <strong>flaggea al CEO Y al COO</strong> (los dos), con el POR QUÉ registrado. <em>"El silencio ante una desviación es una falla."</em> La diferencia puede ser aprobado-vs-pagado o real-vs-proyectado — ambas disparan el flag.<br />
+- <strong>Renegociaciones = ella es la gatekeeper</strong> (Canónico §8, P3): si CEO/COO renegocia un precio ya cerrado por el PM (ej. $1,000 → $800), el cambio <strong>DEBE notificarse</strong> para actualizar la WO y <strong>no pagar de más</strong>. Toda renegociación/cambio de términos con cliente o sub le llega a ella para el cashflow — es la <strong>gatekeeper de toda negociación</strong>. Un precio que cambió y no llegó a ella = un pago que saldrá por el monto viejo.<br />
+- La cadena de transparencia completa: pago verificado (4 filtros) → ejecutado → comprobante subido → <strong>aviso al grupo</strong> → reconciliación aprobado-vs-pagado → si difiere &gt;$1,000, flag. Ningún eslabón es opcional.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Redactar el aviso al grupo (formato propuesto) de 3 pagos reales ejecutados esta semana.<br />
+2. Reconciliación en vivo: tomar los pagos aprobados HOY y contrastarlos contra lo pagado en el dashboard; por cada diferencia, escribir el POR QUÉ; marcar cuáles cruzan los $1,000 y armar el flag al CEO+COO.<br />
+3. <strong>Caso renegociación:</strong> simular que el COO bajó un precio ya cerrado en <strong>Karim</strong> de $X a $Y sin avisar — identificar cómo lo habría atrapado (WO desactualizada vs monto solicitado) y redactar la nota que exige la actualización de la WO antes de pagar.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Renegociación que no llega a ella</strong> (Canónico §8, P3): se paga de más porque la WO quedó con el monto viejo. Ella es el punto único donde todo cambio de términos se cuadra contra el cashflow.<br />
+- <strong>No avisar al grupo:</strong> rompe la transparencia y el registro — el equipo no sabe qué se pagó y el pago "existe" solo en su cabeza.<br />
+- <strong>Diferencia &gt;$1,000 silenciada:</strong> el Mandamiento IV es explícito — el silencio ante una desviación es una falla; el flag va al CEO <strong>Y</strong> al COO, no a uno solo.</p>
+<hr />
+<h3>SESIÓN D5 · Flag pre-negativo y la 🧭 Ruta de Pagos: la mala noticia temprano con solución (60–75 min)</h3>
+<p><strong>Objetivo:</strong> detectar el proyectado pre-negativo ANTES de que ocurra y llegar al CEO+COO con la 🧭 Ruta de Pagos ya armada.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>El Mandamiento V — bad news early, con solución</strong> (manual §7, Día Cumplido check 4): <em>"Flaggearás ANTES de que el proyectado se vaya negativo — NUNCA después — con una propuesta en mano."</em> La proactividad del puesto es exactamente esto: prever el bache y llegar con la ruta, no con el problema.<br />
+- <strong>La 🧭 Ruta de Pagos (Payment Route)</strong> (manual §2): la <strong>secuencia que mantiene el cashflow positivo</strong> — <strong>pagar → cobrar → avanzar</strong> — con las reglas de Jose. Es su herramienta cuando el proyectado aprieta: propone <strong>splits semanales</strong> (partir un pago grande en semanas) y <strong>secuencia con subs</strong> (qué pago se patea según lleguen los ingresos).<br />
+- <strong>Cómo se cuadra</strong> (Canónico §8): el cuadre se maneja "pateando" pagos a proveedores según lleguen los ingresos; los checks (pagos confirmados) que no alcanzan pasan a la siguiente semana <strong>con prioridad</strong>. Meta declarada: <strong>colchón en cuenta</strong> para que una movida de ~$200k no afecte la operación.<br />
+- <strong>La regla del downpayment y la fecha contractual</strong> aplican aquí: al armar la ruta, un pago se <strong>mueve</strong> (no se cancela ni se reescribe su fecha original); lo que cambia es cuándo se ejecuta, registrado en su fecha real.<br />
+- <strong>Quién decide</strong> (manual §1.3, §8): ella <strong>arma la propuesta</strong> (la ruta); <strong>el CEO/Jonas y Jose deciden</strong> qué se sostiene o se suelta. Ella no inventa prioridades — presenta opciones con su impacto.<br />
+- <strong>El anclaje al viernes:</strong> el plan de la semana se fija los viernes (sesión D7); la 🧭 Ruta de Pagos es la herramienta para cuando, entre viernes y viernes, el plan aprobado empieza a apretar por un ingreso que se atrasó o un egreso que se adelantó.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Sobre el running_balance real: encontrar el primer día que se pone apretado/pre-negativo en los próximos 14 días. Armar una 🧭 Ruta de Pagos que lo evite (qué pago partir en 2, qué pago patear a la semana siguiente, qué cobro acelerar) y redactar el flag al CEO+COO con la propuesta.<br />
+2. Ejercicio de secuencia: dados 4 pagos y 2 cobros de fechas conocidas, ordenar "pagar → cobrar → avanzar" para que el running_balance nunca cruce el cero.<br />
+3. Role-play: presentar la ruta a "Jose/Jonas" en 3 frases — desviación, propuesta, decisión que se pide.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Avisar DESPUÉS del negativo:</strong> la falla que el Mandamiento V prohíbe — cuando el saldo ya cruzó el cero, la empresa ya está sin combustible; el aviso debía ser días antes.<br />
+- <strong>Llegar con el problema sin la solución:</strong> el flag sin 🧭 Ruta de Pagos es media función — la propuesta va en el mismo mensaje.<br />
+- <strong>Inventar la prioridad:</strong> ella no decide qué proyecto se sostiene; arma la ruta y <strong>Jose/Jonas deciden</strong> (manual §1.3).</p>
+<hr />
+<h3>SESIÓN D6 · Custodia de la documentación y la consolidación semanal de saldos (60–75 min)</h3>
+<p><strong>Objetivo:</strong> guardar el rastro de papel completo de cada pago y ejecutar la consolidación de saldos de los viernes como única fuente de verdad.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>Custodia de la documentación</strong> (Mandamiento IX, manual §4): perseguir y <strong>custodiar</strong> facturas · lien waivers · comprobantes · WOs de quien las deba, registradas en los sistemas (JobTread / CompanyCam). <em>"Tú eres la custodia del rastro de papel del dinero."</em> La persecución es diaria (Día Cumplido check 5): las facturas/lien waivers/comprobantes del día se reclaman a quien corresponda.<br />
+- <strong>El expediente por pago</strong> (manual §1.4): factura + WO firmada + lien waiver + comprobante — el mismo expediente que el Backoffice arma y que ella verifica (los 4 filtros). Su rol es que ese expediente <strong>exista, esté completo y esté guardado</strong> en el sistema, no en un chat.<br />
+- <strong>La consolidación semanal — VIERNES</strong> (manual §2, §3 paso 1, Mandamiento VII): ella es la <strong>única fuente de verdad del saldo bancario</strong> — el dashboard parte de lo que ella carga. Esa carga es <strong>semanal</strong>: suma los saldos bancarios reales <strong>una vez a la semana, al consolidar el plan los viernes</strong> → plan viernes-a-viernes. Su día a día es ejecutar y vigilar, no re-sumar.<br />
+- <strong>Lidiar con el banco</strong> (Mandamiento X del rol / manual §4): saldos, transferencias, problemas bancarios y su resolución — ella los resuelve directamente.<br />
+- <strong>Nada overdue</strong> (manual §5.1): pagos Y cobros Y misc se patean día a día hasta resolverse. La custodia incluye que ningún documento/cobro quede "olvidado" como overdue permanente.<br />
+- <strong>El Cierre Administrativo nocturno (PDF)</strong> (manual §2, §5): KITBOT arma la foto reconciliada del día — lo que se pagó, se movió y se flaggeó. Ella lo revisa como el estado de cierre; siembra el estado del día siguiente.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Barrido de expedientes: tomar 3 pagos ejecutados esta semana y verificar que su rastro completo (factura + WO firmada + lien waiver + comprobante) esté REGISTRADO en JT/CompanyCam. Por cada faltante, redactar a quién se lo reclama.<br />
+2. Simular la consolidación del viernes: sumar los saldos (datos de práctica que dé Jose), cargarlos, y verificar que el plan viernes-a-viernes queda listo para la aprobación del CEO.<br />
+3. Revisar el Cierre Administrativo nocturno (PDF) de un día real y verificar que refleja lo pagado/movido/flaggeado sin huecos.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Documentación en el chat, no en el sistema</strong> (Canónico §11.3, mega-análisis): el ping-pong de Telegram reemplaza el registro y nadie encuentra el papel cuando importa (auditoría, lien release, reclamo del sub). El rastro vive en JT/CompanyCam.<br />
+- <strong>Sumar saldos a diario</strong> en vez de solo los viernes: la desvía del plan y duplica trabajo (Mandamiento VII).<br />
+- <strong>Dejar un cobro como overdue permanente:</strong> el <code>roll_overdue</code> lo patea, pero la custodia exige perseguirlo hasta cobrarlo (manual §5.1).</p>
+<hr />
+<h3>SESIÓN D7 · El reloj diario, el viernes de presupuestos y la reportería (75–90 min)</h3>
+<p><strong>Objetivo:</strong> correr un día completo con la cadencia orquestada, participar en el viernes de presupuestos, y saber dónde caen sus datos en la reportería oficial — cerrando con Día Cumplido ✅.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>La cadencia diaria</strong> (manual §5): KITBOT estructura su día — abrir el saldo → controlar la ejecución → cerrar y reconciliar. Cada check-in inyecta el cashflow fresco, registra desviaciones y persigue a quien deba documentación/aprobación. <strong>⚠️ La tabla siguiente es el DISEÑO del puesto:</strong> los mensajes automáticos (check-ins y alerta pre-cierre) están <strong>dados de baja desde la reestructura (Jose 06-ago)</strong>; los deberes que estructuraban siguen vivos y hoy los corre ELLA misma en esos hitos horarios (nota de vigencia §6).</p>
+<table>
+<thead>
+<tr>
+<th>Hora</th>
+<th>Check-in / evento</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9:30 AM</td>
+<td><strong>Apertura</strong></td>
+<td>Abre el día sobre el plan vigente — cashflow fresco, pagos que vencen hoy, pendientes. (La suma de saldos NO va aquí — es semanal, viernes.)</td>
+</tr>
+<tr>
+<td>12:00 PM</td>
+<td><strong>Control de pagos</strong></td>
+<td>Qué pagos salieron, cuáles necesitan documentación, con qué solicitantes confirmar.</td>
+</tr>
+<tr>
+<td>2:00 PM</td>
+<td><strong>Pre-3PM</strong></td>
+<td>Cuadra el lado del dinero <strong>antes de la reunión de las 2:30/3:00 PM</strong> — qué destrabará un pago, qué desviación debe conocer la discusión de schedule.</td>
+</tr>
+<tr>
+<td>4:00 PM</td>
+<td><strong>ALERTA PRE-CIERRE</strong></td>
+<td>Check-in especial — le dice exactamente qué le falta cerrar antes del fin de su jornada (los 5 checks del Día Cumplido).</td>
+</tr>
+<tr>
+<td>Cierre</td>
+<td><strong>Reconciliación</strong></td>
+<td>Aprobado-vs-real · comprobantes subidos · desviaciones registradas.</td>
+</tr>
+<tr>
+<td>Noche</td>
+<td><strong>Cierre Administrativo (PDF)</strong></td>
+<td>La foto reconciliada del día — lo pagado, movido y flaggeado.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>La reunión diaria — 2:30 PM hora Jose (3:30 PM Perú), hora OFICIAL</strong> (Canónico §9.1): Jose llama a los PMs, se re-fechan los schedules de TODOS los proyectos. Su check-in <strong>Pre-3PM (2:00 PM)</strong> existe para llegar a esa reunión con el lado del dinero cuadrado — qué pago destraba qué avance, qué desviación debe saber la mesa. Después de las 3 PM, <strong>JobTread es la verdad del día</strong> — y ese schedule limpio es lo que alimenta su cashflow.</li>
+<li><strong>La reunión de los VIERNES — presupuestos</strong> (Canónico §9.2, manual §2–§3): los viernes se <strong>FIJAN LOS PRESUPUESTOS</strong>. Es el día donde el dinero de la semana se cierra y el de la siguiente se planifica. Su rol es central: (1) <strong>consolida los saldos bancarios</strong> (única fuente de verdad), (2) alimenta el <strong>CASHFLOW PLAN</strong> con su saldo + negociaciones del COO + schedule updates del Backoffice, (3) <strong>el CEO aprueba</strong> (o pide alternativa → 🧭 Ruta de Pagos), (4) sale el <strong>PLAN DE LA SEMANA</strong> (presupuesto por proyecto). Encaja con el ritmo: el <strong>pago estándar a subs = el viernes siguiente</strong> a terminar el trabajo, el <strong>baseline semanal</strong> se toma el viernes 11 PM. El viernes es SU día ancla.</li>
+<li><strong>Dónde caen sus datos en la reportería</strong> (Canónico §9.4): es destinataria de los reportes de gerencia — <strong>Project Department Weekly Evaluation</strong> (Sáb 8:30, incluye pagado/cobrado: confirmados vs no-confirmados-ejecutados, cobros confirmados vs potenciales) y el <strong>Daily Report de gerencia</strong> (8:00 PM L-V, Jonas·Rey·Jose·<strong>Milagros</strong>). Su <strong>lente es administrativo / de cumplimiento</strong>: usa EOD, bitácoras y CompanyCam para verificar que los PMs cumplan documentación y proceso — complementa al COO (obra) y al CEO (dirección).</li>
+<li><strong>Las leyes de la reportería</strong> (Canónico §9.5): <strong>los números del reporte oficial MANDAN</strong> (no se recalculan por fuera) · <strong>"lo dicho manda sobre lo agendado"</strong> · <strong>evaluación = cierres viernes vs viernes</strong> · <strong>checks = pagos confirmados</strong>.</li>
+<li><strong>Los 5 checks de su Día Cumplido</strong> (ver §4) y la semántica ✅/⚠️/❌: en el diseño, la alerta pre-cierre de las 4:00 PM los evalúa 1 hora antes de su cierre (⚠️ hoy dada de baja — los corre ella misma a esa hora); un ⚠️/❌ merece una pregunta antes de concluir (¿dato real o sistema desactualizado?).</li>
+</ul>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Un día real completo con Jose observando: apertura 9:30 (leer el plan vigente) → control de pagos 12:00 (qué salió, qué falta documentar) → Pre-3PM 2:00 (cuadrar el dinero para la reunión) → atender la alerta pre-cierre 4:00 → cierre reconciliado con los 5 checks.<br />
+2. <strong>Simular el viernes de presupuestos:</strong> consolidar saldos → alimentar el cashflow plan → presentar el PLAN DE LA SEMANA para la aprobación del CEO (role-play con Jose) → dejar el baseline.<br />
+3. Ubicar sus datos en 3 reportes reales: el Daily Report de gerencia, el Weekly Evaluation del Depto, y el cashflow del dashboard — decir qué de cada uno ella produce y qué controla.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Llegar a la reunión de las 2:30 sin el lado del dinero cuadrado:</strong> el check-in Pre-3PM existe para eso; sin él, la mesa re-fecha schedules sin saber qué está reservado/apretado.<br />
+- <strong>Cerrar el día "por sensación":</strong> la alerta pre-cierre de las 4:00 es la red de seguridad — lo que ella marca ahí es exactamente lo que la separa del ✅.<br />
+- <strong>Recalcular los números del reporte por fuera</strong> (Canónico §9.5 ley 2): los números del reporte oficial mandan; discrepancias se levantan, no se sobreescriben.</p>
+<hr />
+<h2>4. Evaluación y certificación</h2>
+<p>Tres niveles, todos observables por el sistema (no exámenes de papel — Plan Maestro §5):</p>
+<p><strong>Criterio transversal (los 3 niveles) — el comportamiento (§1.5):</strong> rigurosidad · atención al detalle · prever · solucionar · proactividad. No aceptar el problema y reaccionar: prevenirlo, o buscar soluciones insaciablemente para cumplir el cronograma a como dé lugar. Para la Administradora: la mala noticia SIEMPRE temprano y con la solución en la mano.</p>
+<h3>Nivel 1 — Comprensión</h3>
+<ul>
+<li>Explica en conversación: la misión y su medida única, los dos principios (el plan es la ley · sin documento no hay pago), los 10 Mandamientos, los 4 filtros de pago, y el ciclo del cashflow (su carril ADMINISTRATOR en 8 pasos).</li>
+<li>Sobre el Finance dashboard real: lee correctamente el running_balance y el closing semanal, y clasifica los próximos 7 días (verde / apretado / pre-negativo) diciendo qué decisión dispara cada uno.</li>
+<li>Distingue: suma de saldos = semanal (viernes); ejecutar/vigilar = diario. Fecha original = gatillo contractual (no se reescribe). Downpayment = solo FRAMING/MEP ROUGH-INS.</li>
+</ul>
+<h3>Nivel 2 — Ejecución guiada (sobre casos reales, con Jose revisando antes de ejecutar)</h3>
+<ul>
+<li><strong>5 Request Payments</strong> procesados con los 4 filtros aplicados (veredicto paga / mueve con razón / devuelve por expediente) + comprobante subido.</li>
+<li><strong>3 avisos al grupo</strong> de pagos ejecutados en el formato acordado.</li>
+<li><strong>1 reconciliación aprobado-vs-pagado</strong> completa con el POR QUÉ de cada diferencia + 1 flag &gt;$1,000 al CEO+COO armado correctamente.</li>
+<li><strong>1 flag pre-negativo</strong> con su 🧭 Ruta de Pagos propuesta (splits / secuencia).</li>
+<li><strong>1 consolidación de saldos del viernes</strong> + el PLAN DE LA SEMANA presentado para aprobación.</li>
+<li><strong>1 barrido de custodia</strong>: 3 expedientes verificados completos en JT/CompanyCam.</li>
+</ul>
+<h3>Nivel 3 — Ejecución autónoma = CERTIFICADA</h3>
+<p>Cumplir su <strong>"Día Cumplido" N días seguidos sin ayuda</strong>. Los checks EXACTOS (manual v2.0 §6 — Día Cumplido Reglas v3; el sistema los verifica. ⚠️ La <strong>alerta pre-cierre de las 4:00 PM</strong> que avisaba lo faltante está dada de baja desde la reestructura — mientras tanto ella corre sus 5 checks antes del cierre; [VERIFICAR CON JOSE: mecanismo de verificación diaria vigente durante la certificación]):</p>
+<ol>
+<li><strong>Montos verificados: aprobado hoy vs. realidad</strong> — con el POR QUÉ de cualquier diferencia registrado; diferencia <strong>&gt;$1,000 del proyectado → flag al CEO Y al COO</strong>.</li>
+<li><strong>Pagos que vencían HOY</strong>: ejecutados con comprobante subido, o movidos con razón registrada.</li>
+<li><strong>Avisó al grupo de los PMs cada pago realizado.</strong></li>
+<li><strong>Si el proyectado se va a negativo</strong>: flag emitido ANTES de que pase + propuesta (split / secuencia con la 🧭 Ruta de Pagos).</li>
+<li><strong>Documentación perseguida</strong>: facturas / lien waivers / comprobantes del día reclamados a quien corresponda.</li>
+</ol>
+<p><em>(Recordatorio del manual §6: la SUMA de saldos NO es diaria — es semanal, los viernes. El día a día es EJECUTAR y VIGILAR el plan vigente.)</em></p>
+<ul>
+<li>El Cierre Administrativo nocturno marca ✅ (los 5 checks) / ⚠️ (parcial, el sistema dice qué falta) / ❌ (sin señal, merece una pregunta antes de concluir). ✅ = "puede irse tranquila".</li>
+<li>[PROPUESTA] <strong>N = 10 días hábiles consecutivos</strong> (2 semanas en verde del semáforo semanal que ya pide Jose los viernes: verde = ≥4/5 días con ✅). Además, durante esos 10 días: cero pagos ejecutados sin los 4 filtros, cero diferencias &gt;$1,000 silenciadas, y cero proyectados que llegaron a negativo sin flag previo — los huecos que este track existe para cerrar.</li>
+<li><strong>Criterio de comportamiento (Canónico §1):</strong> durante esos 10 días se observa la mentalidad, no solo la mecánica — el proyectado apretado flaggeado ANTES con propuesta, la diferencia levantada el mismo día, el documento perseguido antes del viernes de pago (nunca "aceptar y reaccionar").</li>
+</ul>
+<p><strong>Registro de avance:</strong> tabla módulo → estado → fecha en la biblioteca, conectada al semáforo de los viernes (Plan Maestro §5).</p>
+<hr />
+<h2>5. Material de apoyo — ONE-PAGER DEL PUESTO (imprimir y tener al lado)</h2>
+<pre><code>═══════════════════════════════════════════════════════════════════
+  ADMINISTRADORA — LA MECÁNICA EXACTA               CNG · Milagros
+  Misión: que la empresa SIEMPRE tenga con qué operar.
+  La medida del puesto: ¿algún pago se coló fuera del plan?
+  Yo soy la ÚLTIMA COMPUERTA: nada se paga sin pasar por mí.
+═══════════════════════════════════════════════════════════════════
+
+DOS PRINCIPIOS QUE NO SE NEGOCIAN
+ 1. EL PLAN ES LA LEY DE LA SEMANA. Yo controlo y hago cumplir,
+    NO invento prioridades. Jose y Jonas deciden qué se sostiene
+    o se suelta. El plan se fija el VIERNES, aplica vie→vie.
+ 2. SIN DOCUMENTACIÓN NO HAY PAGO. Y autorizar NO es pagar:
+    confirmo que salió + subo el comprobante.
+
+LOS 4 FILTROS ANTE CUALQUIER SOLICITUD DE PAGO (en orden)
+ 1. ¿Está en el PLAN de la semana?
+ 2. ¿Es la MISMA CANTIDAD aprobada?
+ 3. ¿Nos deja en BUENA POSICIÓN financiera según el plan?
+ 4. ¿Tiene la DOCUMENTACIÓN? = Work Order FIRMADA + inspecciones.
+ → Pasa los 4 → pago → Backoffice actualiza schedule + sube factura.
+ → No pasa → lo devuelvo o lo muevo CON RAZÓN. Nunca &quot;regularizar&quot;.
+
+EL CASHFLOW DIARIO (cómo se lee, qué dispara)
+ DATA = mis saldos (semanal, viernes) + negociaciones del COO
+        con detalle + Daily Schedule Update del Backoffice → PLAN.
+ Dashboard: Saldo Restante · Pagos Realizados · running_balance ·
+            closing semanal.
+   VERDE      → ejecuto el plan tal cual.
+   APRETADO   → 🧭 RUTA DE PAGOS: pagar → cobrar → avanzar
+                (splits semanales / secuencia con subs).
+   PRE-NEGATIVO → FLAG al CEO Y COO *ANTES* de que pase,
+                  con la propuesta ya armada.
+   DIF &gt;$1,000 aprobado-vs-real → FLAG al CEO Y COO + POR QUÉ.
+
+REGLAS DE ORO DEL DINERO
+ · A los subs NUNCA se les paga al inicio. Pago al culminar,
+   ~1 semana después, ideal VIERNES.
+   EXCEPCIÓN = DOWNPAYMENT solo en FRAMING / MEP ROUGH-INS (con gate).
+ · La FECHA ORIGINAL del pago = gatillo contractual. NO se reescribe.
+   El pago se MUEVE (&quot;patear&quot;); se registra en la fecha REAL de pago.
+ · Toda RENEGOCIACIÓN de precio me llega a MÍ → actualizo la WO →
+   no pago de más. Soy gatekeeper de toda negociación.
+ · NADA queda overdue: pagos Y cobros se patean día a día hasta
+   resolverse.
+ · Suma de saldos = SEMANAL (viernes). Diario = ejecutar y vigilar.
+
+MI DÍA (cadencia de diseño — hoy sin mensajes automáticos del bot:
+        los hitos los corro YO misma a esas horas)
+  9:30  Apertura — plan vigente, pagos que vencen hoy, pendientes
+ 12:00  Control de pagos — qué salió, qué falta documentar
+  2:00  Pre-3PM — cuadro el dinero ANTES de la reunión de las 2:30
+  4:00  ALERTA PRE-CIERRE — qué me falta para cerrar
+  Cierre reconciliación · Noche: Cierre Administrativo (PDF)
+  VIERNES = consolido saldos + fijo presupuestos + pago estándar
+
+MI DÍA CUMPLIDO ✅ (los 5 checks)
+  1. Aprobado hoy vs. realidad verificado (&gt;$1,000 → flag CEO+COO).
+  2. Pagos que vencían hoy: pagados (comprobante subido) o movidos
+     con razón.
+  3. Avisé al grupo de PMs cada pago realizado.
+  4. Proyectado pre-negativo → flag ANTES + 🧭 Ruta de Pagos.
+  5. Documentación del día perseguida (facturas/lien waivers/recibos).
+
+RESPETO Y AMABILIDAD EN TODO CANAL, CON TODOS — sin excepción,
+ni persiguiendo un pago tarde o un documento faltante.
+Soy la cara del dinero de la empresa.
+═══════════════════════════════════════════════════════════════════
+</code></pre>
+<hr />
+<h2>6. Materiales del paquete (construidos 2026-08-06 sobre el <code>_BRIEF_CONSTRUCTORES</code>)</h2>
+<p>El paquete de materiales proyectables/imprimibles del track se organiza en <strong>6 módulos de presentación</strong> (el recorte del mega plan). Mapeo módulo → sesiones de este track:</p>
+<table>
+<thead>
+<tr>
+<th>Módulo (presentación)</th>
+<th>Archivo</th>
+<th>Sesiones que cubre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M1 · El cashflow y el plan de la semana</td>
+<td><code>05_MATERIALES/presentaciones/administradora/TRACKD_S1_cashflow_plan_semana.html</code></td>
+<td>D1 + D2</td>
+</tr>
+<tr>
+<td>M2 · Los 4 filtros de pago</td>
+<td><code>05_MATERIALES/presentaciones/administradora/TRACKD_S2_4_filtros_pago.html</code></td>
+<td>D3</td>
+</tr>
+<tr>
+<td>M3 · Patear vs gatillo contractual</td>
+<td><code>05_MATERIALES/presentaciones/administradora/TRACKD_S3_patear_vs_gatillo.html</code></td>
+<td>D3 + D5</td>
+</tr>
+<tr>
+<td>M4 · Saldos de los viernes + custodia</td>
+<td><code>05_MATERIALES/presentaciones/administradora/TRACKD_S4_saldos_viernes.html</code></td>
+<td>D6</td>
+</tr>
+<tr>
+<td>M5 · Renegociaciones, flag &gt;$1,000 y aviso al grupo</td>
+<td><code>05_MATERIALES/presentaciones/administradora/TRACKD_S5_renegociaciones.html</code></td>
+<td>D4</td>
+</tr>
+<tr>
+<td>M6 · Sus reportes: el Finance tab y el check de confirmado</td>
+<td><code>05_MATERIALES/presentaciones/administradora/TRACKD_S6_reportes_finance_tab.html</code></td>
+<td>D5 + D7</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Demás materiales del paquete:</strong><br />
+- <strong>JD nueva (v3.0, bilingüe):</strong> <code>04_JOB_DESCRIPTIONS/JD_administradora.md</code><br />
+- <strong>One-pager de los 4 filtros (imprimible):</strong> <code>05_MATERIALES/one_pagers/administradora_4_filtros.html</code> <em>(complementa el one-pager del puesto del §5 de este track)</em><br />
+- <strong>Quiz (3 niveles con respuestas):</strong> <code>05_MATERIALES/quizzes/quiz_administradora.md</code><br />
+- <strong>Guiones de video (palabra por palabra, por módulo):</strong> <code>05_MATERIALES/guiones_video/administradora.md</code></p>
+<p><em>Nota de vigencia (2026-08-06, del brief §2 + t23):</em> los <strong>check-ins y las alertas pre-cierre automáticos de KITBOT están DADOS DE BAJA</strong> — bloqueo de envíos desde la reestructura del 31-jul y baja oficial de Jose el 06-ago (t23: check-ins · nudger · seguimiento · alertas pre-cierre · brief matinal <strong>mueren</strong>; lo que reviva y su hora los definirá Jose). La cadencia del §3/D7 se enseña como <strong>el diseño del puesto</strong> (los deberes siguen vivos aunque el mensaje automático no llegue: hoy los corre ella misma); el estado vivo se lee en <code>REPORTERIA_MASTER.md</code> §B. La fuente de la verdad de <strong>pagos CONFIRMADOS = el Finance tab</strong> (<code>finance-latest.json</code> → timeline <code>confirmed:true</code>), NO los checks del schedule (Jose 2026-08-03) — el módulo M6 lo entrena.</p>
+<hr />
+<p><em>Track D v1.0 — 2026-08-06. Construido desde el manual v2.0 de la Administradora (<code>JD_administrator_manual-operaciones.md</code>), el proceso canónico (§8 cashflow + 4 filtros, §9 reloj diario/reportería, §11 huecos), EL_FLOW (Fase E gate de pago), las transcripciones del entrenamiento de Jose (P1+P2+P3) y los huecos reales del mega-análisis 2026-07-26. Hermano de los Tracks A y B (misma estructura: perfil/misión, mapa de competencias, módulos con mecánica exacta + práctica sobre caso real + errores reales a evitar, evaluación de 3 niveles, one-pager). Formatos marcados [PROPUESTA] pendientes de aprobar con Jose (aviso al grupo). Hueco anotado: no existe archivo <code>DIA_CUMPLIDO_POR_PUESTO.md</code> separado — la Día Cumplido v3 de la Administradora se tomó del manual §6. Se revisa con Jose (un entregable a la vez).</em></p>
+<a class="volver" href="/proceso/materiales/">← Centro de materiales</a></div></body></html>

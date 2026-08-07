@@ -1,0 +1,425 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JD planning · CNG</title>
+<link rel="stylesheet" href="/proceso/assets/style.css">
+<style>
+.doc{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.doc h1{font-size:28px;border-bottom:3px solid var(--ink,#0f172a);padding-bottom:10px;margin-top:0}
+.doc h2{font-size:20px;margin-top:34px;border-bottom:2px solid #cbd5e1;padding-bottom:6px}
+.doc h3{font-size:16px;color:#1d4ed8;margin-top:24px}
+.doc table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.doc th{background:#0f172a;color:#fff;padding:8px 10px;text-align:left}
+.doc td{border:1px solid #cbd5e1;padding:8px 10px;vertical-align:top}
+.doc tr:nth-child(even) td{background:#f8fafc}
+.doc pre{background:#f1f5f9;padding:14px;border-radius:8px;overflow-x:auto;font-size:13px;border:1px solid #e2e8f0}
+.doc code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:13px}
+.doc blockquote{border-left:4px solid #2563eb;background:#eff6ff;margin:14px 0;padding:10px 16px;border-radius:0 8px 8px 0}
+.doc li{margin:5px 0}
+.volver{display:inline-block;margin:16px 0;padding:8px 16px;background:#0f172a;color:#fff;border-radius:20px;text-decoration:none;font-size:14px;font-weight:600}
+</style></head><body>
+<div class="doc"><a class="volver" href="/proceso/materiales/">← Centro de materiales</a>
+<h1>CONSTRUCTION NATION GROUP</h1>
+<h3>Residential Construction &amp; Renovation</h3>
+<h1>PLANNING (ARQUITECTURA Y PLANEAMIENTO)</h1>
+<h2>PLANNING TEAM</h2>
+<p><strong>Descripción de Puesto y Manual de Operaciones</strong><br />
+<em>Job Description &amp; Operations Manual</em></p>
+<p><strong>CONFIDENCIAL — USO INTERNO EXCLUSIVO</strong><br />
+<em>CONFIDENTIAL — INTERNAL USE ONLY</em></p>
+<p><strong>Versión 1.0 — Agosto 2026</strong> (construida sobre el Proceso Canónico CNG v4 + Parte 3 del entrenamiento de Jose, 2026-08-05, y la consolidación 2026-08-06)<br />
+<em>Version 1.0 — August 2026 (built on the CNG Canonical Process v4 + Part 3 of Jose's training, 2026-08-05, and the 2026-08-06 consolidation)</em></p>
+<p><strong>Titulares actuales / Current holders:</strong> Claudia (Planning Manager, arquitecta, Perú) · Karla (arquitecta, Perú)</p>
+<blockquote>
+<p>⚠️ <strong>Nota de fuente:</strong> Planning no tenía manual v2.0 previo (<code>JD_planning</code> no existía). Este manual se construye desde el<br />
+<strong>proceso canónico</strong> (§2, §3, §7, §11), la <strong>Parte 3</strong> del entrenamiento de Jose (la explicación completa del flujo de<br />
+Planning en su voz), <code>ORG_ROLES.md</code> y el brief de constructores 2026-08-06. Lo que el canon no fija va marcado<br />
+<strong>[VERIFICAR CON JOSE]</strong>.</p>
+</blockquote>
+<hr />
+<h2>1. Descripción General del Puesto</h2>
+<h3><em>1. Role Overview</em></h3>
+<h3>1.1 Resumen del Puesto</h3>
+<h3><em>1.1 Position Summary</em></h3>
+<p>Planning es dueño de un resultado por encima de todos los demás: <strong>que ningún proyecto llegue a obra con información<br />
+faltante, desactualizada o sin aprobar.</strong> Es la <strong>fábrica de la información</strong> con la que se construye: convierte lo que<br />
+el vendedor prometió al cliente en planos completos, permisos gestionados y un <strong>PORTAFOLIO</strong> — <em>"la biblia del PM"</em> —<br />
+tan claro que el PM ejecuta la obra entera sin sorpresas ni retrabajos por información. El puesto no se mide por cuántos<br />
+planos se dibujan, sino por si <strong>algún retrabajo en obra tuvo su raíz en un plano incompleto, un spec sin confirmar o<br />
+una ingeniería sin aprobar.</strong></p>
+<p><em>Planning owns one outcome above all others: </em><em>that no project ever reaches the jobsite with missing, outdated, or<br />
+unapproved information.</em><em> It is the </em><em>information factory</em><em> the company builds with: it converts what the salesperson<br />
+promised the client into complete plans, managed permits, and a </em><em>PORTFOLIO</em><em> — "the PM's bible" — so clear that the PM<br />
+can execute the entire build without surprises or information-driven rework. The role is not measured by how many plans<br />
+are drawn, but by whether </em><em>any jobsite rework traces back to an incomplete plan, an unconfirmed spec, or unapproved<br />
+engineering.</em>**</p>
+<p>Planning trabaja <strong>aguas-arriba</strong> de toda la operación: entrega ANTES que todos, por eso su error se propaga a todos.<br />
+El PM no ejecuta la obra que imagina — ejecuta <strong>la obra que Planning documentó</strong>. El fallo #1 de framing en CNG<br />
+(planos estructurales desactualizados o no aprobados por el ingeniero → retrabajo) es un fallo de Planning antes que<br />
+del PM (canon §2, §11).</p>
+<p><em>Planning works </em><em>upstream</em><em> of the entire operation: it delivers BEFORE everyone else, which is why its errors<br />
+propagate to everyone. The PM does not execute the build he imagines — he executes </em><em>the build Planning documented</em><em>.<br />
+CNG's #1 framing failure (structural plans outdated or not engineer-approved → rework) is a Planning failure before it<br />
+is a PM failure (canon §2, §11).</em></p>
+<h3>1.2 Declaración de Misión</h3>
+<h3><em>1.2 Mission Statement</em></h3>
+<blockquote>
+<p><strong>Convertir lo que el vendedor prometió en un proyecto EJECUTABLE: planos completos y aprobados por el ingeniero,<br />
+permisos gestionados, y un PORTAFOLIO tan claro que el PM ejecute la obra entera sin sorpresas ni retrabajos por<br />
+información.</strong></p>
+<p><strong><em>To convert what the salesperson promised into an EXECUTABLE project: complete, engineer-approved plans, managed<br />
+permits, and a PORTFOLIO so clear that the PM executes the entire build with no surprises and no<br />
+information-driven rework.</em></strong></p>
+</blockquote>
+<h3>1.3 Principios Fundamentales — las 3 verdades no negociables</h3>
+<h3><em>1.3 Core Principles — the 3 non-negotiable truths</em></h3>
+<ol>
+<li>
+<p><strong>Nada llega a obra sin aprobación del ingeniero.</strong> Los reportes estructurales, de energía y de fundación (+ otros<br />
+   que exija cada ciudad) se <strong>tercerizan a ingenieros externos</strong> — y Planning <strong>no cierra el portafolio hasta tenerlos<br />
+   aprobados en mano</strong>. <em>"Pedido" no es "aprobado". "No aprobado" = no existe.</em> (Los planos MEP —eléctrico/plomería/<br />
+   HVAC— los produce el propio Planning, canon §3.)<br />
+<em>Nothing reaches the jobsite without engineer approval. Structural, energy, and foundation reports (+ others each<br />
+   city may require) are </em><em>outsourced to external engineers</em><em> — and Planning </em><em>does not close the portfolio until they<br />
+   are approved and in hand.</em><em> "Requested" is not "approved." "Not approved" = it does not exist. (The MEP plans —<br />
+   electrical/plumbing/HVAC — are produced by Planning itself.)</em></p>
+</li>
+<li>
+<p><strong>El portafolio es LA BIBLIA DEL PM — y una biblia con páginas en blanco no sirve.</strong> Se juzga por una sola pregunta:<br />
+   ¿puede el PM ejecutar cada trade con SOLO este documento, sin preguntar? Cada medida faltante, cada spec ambiguo,<br />
+   cada ventana sin código es una pregunta que el PM hará en obra — o peor, adivinará.<br />
+<em>The portfolio is THE PM'S BIBLE — and a bible with blank pages is useless. It is judged by a single question: can<br />
+   the PM execute every trade with ONLY this document, without asking? Every missing measurement, ambiguous spec, or<br />
+   uncoded window is a question the PM will ask on site — or worse, guess.</em></p>
+</li>
+<li>
+<p><strong>Planning nunca habla directo con el cliente.</strong> TODO pasa por el vendedor (ASM). Jose, verbatim (P3): <em>"el equipo<br />
+   de planning realmente no tiene contacto directo con el cliente… lo que hacen es pasárselo al vendedor y el vendedor<br />
+   se lo da al cliente."</em> Saltarse el canal rompe la trazabilidad del cambio — la misma familia de fallo que las<br />
+   puertas 96".<br />
+<em>Planning never speaks directly with the client. EVERYTHING goes through the salesperson (ASM). Skipping the channel<br />
+   breaks change traceability — the same failure family as the 96" doors.</em></p>
+</li>
+</ol>
+<h3>1.4 Estructura de Reporte</h3>
+<h3><em>1.4 Reporting Structure</em></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Reporta a</strong> / <em>Reports to</em></td>
+<td><strong>Gerencia (CEO/Jose)</strong>. La <strong>Planning Manager (Claudia)</strong> lidera el equipo de Planning y su schedule interno. / <em>Management (CEO/Jose). The </em><em>Planning Manager (Claudia)</em><em> leads the Planning team and its internal schedule.</em></td>
+</tr>
+<tr>
+<td><strong>Recibe de</strong> / <em>Receives from</em></td>
+<td><strong>El vendedor (ASM)</strong> → el <strong>Sales Report</strong> · <strong>ingenieros externos</strong> → reportes aprobados · <strong>la ciudad</strong> → permisos/observaciones. / <em>The salesperson (ASM) → the Sales Report · external engineers → approved reports · the city → permits/observations.</em></td>
+</tr>
+<tr>
+<td><strong>Entrega a</strong> / <em>Delivers to</em></td>
+<td><strong>El cliente VÍA vendedor</strong> (Floor Plan Proposal, portafolios) · <strong>lead PM + Backoffice</strong> (reuniones de adelanto y de portafolio v1) · <strong>el PM</strong> (el PORTAFOLIO) · <strong>Compras</strong> (la lista detallada de compras). / <em>The client VIA the salesperson (Floor Plan Proposal, portfolios) · lead PM + Backoffice (advance and portfolio-v1 meetings) · the PM (the PORTFOLIO) · Purchases (the detailed purchase list).</em></td>
+</tr>
+<tr>
+<td><strong>Apoyado por</strong> / <em>Supported by</em></td>
+<td><strong>KITBOT</strong> (dudas técnicas + persecución de esperas), <strong>JobTread</strong> (visibilidad), <strong>CompanyCam</strong> (documentos de referencia). / <em>KITBOT (technical questions + chasing waits), JobTread (visibility), CompanyCam (reference documents).</em></td>
+</tr>
+<tr>
+<td><strong>Horario</strong> / <em>Hours</em></td>
+<td>Equipo Perú. Cadencia por <strong>entregable</strong> (no por día de obra). <strong>[VERIFICAR CON JOSE]</strong> horario y cierre de día formales del puesto. / <em>Peru team. Cadence is per </em><em>deliverable</em><em> (not per jobsite day). [VERIFY WITH JOSE] formal working hours and end-of-day.</em></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Herramientas y Plataformas</h2>
+<h3><em>2. Tools &amp; Platforms</em></h3>
+<table>
+<thead>
+<tr>
+<th>Herramienta / <em>Tool</em></th>
+<th>Para qué la usa / <em>What it is used for</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AutoCAD / Revit + herramientas 3D</strong></td>
+<td>Planos arquitectónicos, eléctricos, de plomería y HVAC; renders iniciales y renders 3D finales (ORG_ROLES: equipo Perú = floorplans, architectural/MEP, 3D renders). / <em>Architectural, electrical, plumbing, and HVAC plans; initial renders and final 3D renders.</em></td>
+</tr>
+<tr>
+<td><strong>JobTread</strong></td>
+<td>Visibilidad del proyecto y del budget; el schedule ideal que Backoffice arma desde el template usa como insumo el portafolio de Planning. / <em>Project and budget visibility; the ideal schedule Backoffice builds from the template uses Planning's portfolio as input.</em></td>
+</tr>
+<tr>
+<td><strong>CompanyCam</strong></td>
+<td>Referencia documental de la obra (fotos con descripción, reportes) para cotejar plano-vs-realidad. / <em>Documentary reference of the jobsite (described photos, reports) to check plan-vs-reality.</em></td>
+</tr>
+<tr>
+<td><strong>Telegram + KITBOT</strong></td>
+<td>Su asistente: responde dudas técnicas a nivel experto y <strong>persigue las esperas de Planning</strong> (ingeniero pendiente, permiso en trámite, aprobación de cliente vía vendedor). Regla: <strong>si la espera no está en el bot, no existe.</strong> / <em>Its assistant: expert-level technical answers and </em><em>chasing Planning's waits</em><em> (pending engineer, permit in process, client approval via salesperson). Rule: </em><em>if the wait is not in the bot, it does not exist.</em>**</td>
+</tr>
+<tr>
+<td><strong>Schedule interno de Planning</strong></td>
+<td>Lo primero al recibir un proyecto (P3): <em>"crear un schedule de trabajo para el equipo de Planning"</em> — Planning se autogestiona con su propio cronograma. / <em>The first thing on receiving a project: an internal work schedule — Planning manages itself with its own timeline.</em></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Responsabilidades Exactas (la cadena de Planning, en orden)</h2>
+<h3><em>3. Exact Responsibilities (the Planning chain, in order)</em></h3>
+<p><strong>FASE 1 / <em>PHASE 1</em></strong></p>
+<ol>
+<li>
+<p><strong>Recibir el Sales Report del ASM y bajar la información.</strong> Claudia recibe la información, <strong>agenda una reunión</strong><br />
+   para explicar el máximo detalle del proyecto, y crea el <strong>schedule interno</strong> del equipo de Planning (P3). No se<br />
+   dibuja sobre supuestos: lo ambiguo se aclara con el vendedor ANTES de dibujar.<br />
+<em>Receive the ASM's Sales Report and cascade it. Claudia receives the information, schedules a meeting, and creates<br />
+   Planning's internal schedule. Never draw on assumptions: ambiguities are cleared with the salesperson BEFORE drawing.</em></p>
+</li>
+<li>
+<p><strong>Producir el Floor Plan Proposal</strong> — la propuesta de configuración de planta según lo conversado y <strong>lo que se le<br />
+   prometió con su vendedor</strong> (P3). Debe ser <strong>construible</strong>, no solo bonita. Se entrega <strong>al vendedor</strong>, que la lleva<br />
+   al cliente para aprobación.<br />
+<em>Produce the Floor Plan Proposal — the floor-plan configuration per what was discussed and promised through the<br />
+   salesperson. It must be </em><em>buildable</em><em>, not just beautiful. Delivered to the salesperson, who takes it to the client.</em></p>
+</li>
+<li>
+<p><strong>Correr la reunión de ADELANTO.</strong> Aprobado el floor plan, la líder de Planning agenda la reunión con el <strong>lead PM<br />
+   (hoy el CEO) + Backoffice</strong> para darles el adelanto del proyecto — la primera vez que operaciones ve lo que viene.<br />
+<em>Run the ADVANCE meeting with the lead PM (today the CEO) + Backoffice — operations' first look at what is coming.</em></p>
+</li>
+<li>
+<p><strong>Producir los planos y coordinar las ingenierías tercerizadas.</strong> Planning crea planos <strong>arquitectónicos /<br />
+   eléctricos / plomería / HVAC</strong> + renders iniciales; en paralelo coordina con <strong>ingenieros externos</strong> los reportes<br />
+<strong>estructurales / de energía / de fundación</strong> (+ otros según exija cada ciudad) y <strong>los persigue</strong> <em>"para que puedan<br />
+   proveer esto en un plazo decente"</em> (P3), con cada espera registrada en el bot.<br />
+<em>Produce the plans and coordinate outsourced engineering: architectural/electrical/plumbing/HVAC plans + initial<br />
+   renders; in parallel, coordinate structural/energy/foundation reports (+ others each city requires) with external<br />
+   engineers and chase them, each wait logged in the bot.</em></p>
+</li>
+<li>
+<p><strong>Ensamblar el PORTAFOLIO v1 (la biblia del PM)</strong> — SOLO con las ingenierías aprobadas en mano. Contenido mínimo<br />
+   (canon §3): layout <strong>antes/después</strong> · qué se <strong>demuele/añade/remueve</strong> · <strong>medidas</strong> completas con códigos de<br />
+   ventanas (<strong>W3</strong>) y puertas · <strong>plano eléctrico</strong> · <strong>medidas de carpintería</strong> (<em>"carpintería es la mitad de la<br />
+   obra"</em>) · la <strong>lista de compras detallada para Compras</strong> (la fuente del take-off de Romina). Gate de calidad: ¿puede<br />
+   el PM ejecutar cada trade con SOLO el portafolio, sin preguntar?<br />
+<em>Assemble PORTFOLIO v1 (the PM's bible) — ONLY with approved engineering in hand: before/after layout ·<br />
+   demolish/add/remove · full measurements with window (W3) and door codes · electrical plan · carpentry measurements ·<br />
+   the detailed purchase list for Purchases. Quality gate: can the PM execute every trade with ONLY the portfolio?</em></p>
+</li>
+<li>
+<p><strong>Presentar el portafolio v1 al lead PM + Backoffice</strong> y responder todas sus preguntas; con eso Backoffice arma el<br />
+<strong>schedule ideal</strong> desde el template maestro <strong>eliminando los trades no vendidos</strong> (P3: <em>"si el cliente nunca quiso<br />
+   mamparas, se elimina toda la sección de mamparas"</em>).<br />
+<em>Present portfolio v1 to the lead PM + Backoffice; with it, Backoffice builds the ideal schedule from the master<br />
+   template, removing unsold trades.</em></p>
+</li>
+<li>
+<p><strong>Gestionar los PERMITS con la ciudad.</strong> Tiempos variables (<em>"puede demorar un montón como puede demorar<br />
+   poquito"</em>); ~1 de cada 100 la ciudad niega definitivamente → se abandona el proyecto. Si la ciudad exige cambios:<br />
+<strong>revisión del presupuesto → conversación con el cliente (vía vendedor) → change order si es necesario</strong> → recién<br />
+   se da por <strong>INICIADA</strong> la obra. El trámite se persigue y su espera vive en el bot.<br />
+<em>Manage city PERMITS. Variable timelines; ~1 in 100 is definitively denied → project abandoned. If the city requires<br />
+   changes: budget review → client conversation (via salesperson) → change order if needed → only then is the build<br />
+   considered STARTED. The permit is chased and its wait lives in the bot.</em></p>
+</li>
+</ol>
+<p><strong>FASE 2 / <em>PHASE 2</em></strong></p>
+<ol>
+<li>
+<p><strong>Correr el CLIENT FINISHES SELECTION PROCESS con Compras.</strong> Planning + Compras arman y envían opciones de<br />
+   materiales/estéticas; <strong>llevar al cliente a showrooms = chamba del VENDEDOR</strong> en coordinación con Compras (P3).<br />
+<em>Run the CLIENT FINISHES SELECTION PROCESS with Purchases. Planning + Purchases assemble and send material/aesthetic<br />
+   options; taking the client to showrooms = the SALESPERSON's job, coordinated with Purchases.</em></p>
+</li>
+<li>
+<p><strong>Cerrar el PORTAFOLIO FINAL (Portafolio 2).</strong> Renders 3D finales + acabados seleccionados → aprobación del cliente<br />
+   (vía vendedor) → <strong>última revisión del budget</strong> (<em>"que todo coincida, todo calce bien"</em>) → <strong>schedule ideal de<br />
+   acabados</strong>. <strong>Regla de timing: el portafolio final debe estar listo ≥ 2 SEMANAS ANTES de iniciar cualquier<br />
+   acabado.</strong> F2 de planeamiento no debería durar más de 1–1.5 meses.<br />
+<em>Close the FINAL PORTFOLIO (Portfolio 2): final 3D renders + selected finishes → client approval (via salesperson) →<br />
+   final budget review → ideal finishes schedule. Timing rule: the final portfolio must be ready ≥ 2 WEEKS BEFORE any<br />
+   finish work starts. Phase-2 planning should take no more than 1–1.5 months.</em></p>
+</li>
+</ol>
+<p><strong>TRANSVERSAL / <em>CROSS-CUTTING</em></strong></p>
+<ol>
+<li>
+<p><strong>Propagar TODO cambio a TODOS los documentos.</strong> Si un spec cambia (cliente, ciudad, ingeniero), el cambio se<br />
+    propaga a todos los planos + la lista de compras + el budget — no solo a uno. Un cambio, todos los documentos.<br />
+<em>Propagate EVERY change to ALL documents: all plans + the purchase list + the budget. One change, all documents.</em></p>
+</li>
+<li>
+<p><strong>Mantener el schedule interno de Planning al día</strong> y <strong>cada espera registrada en el bot</strong> (ingeniero / permit /<br />
+    aprobación de cliente vía vendedor).<br />
+<em>Keep Planning's internal schedule current and every wait logged in the bot (engineer / permit / client approval<br />
+    via salesperson).</em></p>
+</li>
+</ol>
+<hr />
+<h2>4. Lo que Planning NO hace</h2>
+<h3><em>4. What Planning does NOT do</em></h3>
+<ul>
+<li><strong>NO habla con el cliente.</strong> Ni para "aclarar rápido". Todo — propuestas, dudas, aprobaciones, selecciones — pasa por<br />
+  el vendedor (ASM). / <em>Does NOT talk to the client. Not even to "clarify quickly." Everything goes through the ASM.</em></li>
+<li><strong>NO lleva al cliente a showrooms.</strong> Eso es del vendedor, en coordinación con Compras (P3). / <em>Does NOT take the<br />
+  client to showrooms — that is the salesperson's job, coordinated with Purchases.</em></li>
+<li><strong>NO calcula las ingenierías.</strong> Estructural, energía y fundación (+ otros según la ciudad) se <strong>tercerizan</strong>; Planning<br />
+  provee planos/specs, coordina y persigue hasta tener el reporte <strong>aprobado</strong>. / <em>Does NOT calculate engineering.<br />
+  Structural, energy, and foundation reports (+ others per city) are outsourced; Planning provides plans/specs,<br />
+  coordinates, and chases until approved.</em></li>
+<li><strong>NO ejecuta obra ni dirige subs.</strong> Eso es del PM. Planning entrega la información con la que el PM ejecuta. /<br />
+<em>Does NOT execute construction or direct subs — that is the PM. Planning delivers the information the PM executes with.</em></li>
+<li><strong>NO arma el schedule ideal en JobTread.</strong> Lo arma <strong>Backoffice</strong> desde el template, usando el portafolio y las<br />
+  respuestas de Planning en la reunión de portafolio v1. / <em>Does NOT build the ideal schedule in JobTread — Backoffice<br />
+  does, from the template, using Planning's portfolio and answers.</em></li>
+<li><strong>NO hace los take-offs.</strong> Hoy los hace <strong>Compras</strong> (con confirmación del PM en obra); que salgan de Planning es un<br />
+  ideal futuro declarado por Jose, <strong>NO vigente</strong> (P3: <em>"esto no lo podemos aplicar ahorita porque no tenemos las<br />
+  manos"</em>). / <em>Does NOT do take-offs. Today Purchases does them (with PM on-site confirmation); Planning-origin<br />
+  take-offs are a stated future ideal, NOT current.</em></li>
+<li><strong>NO inventa requisitos de permisos ni códigos.</strong> Cada ciudad manda los suyos: se verifica con la ciudad y fuentes<br />
+  oficiales, nunca de memoria. / <em>Does NOT invent permit requirements or codes. Each city rules its own: verify with<br />
+  the city and official sources, never from memory.</em></li>
+</ul>
+<hr />
+<h2>5. Mapa de Interacciones — de quién recibe, a quién entrega</h2>
+<h3><em>5. Interaction Map — who it receives from, who it delivers to</em></h3>
+<table>
+<thead>
+<tr>
+<th>Con quién / <em>With whom</em></th>
+<th>RECIBE / <em>RECEIVES</em></th>
+<th>ENTREGA / <em>DELIVERS</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vendedor / ASM</strong></td>
+<td>El <strong>Sales Report</strong> (plano de planta, info de visitas, análisis de factibilidad)</td>
+<td><strong>Floor Plan Proposal</strong>, portafolio v1 y portafolio final — SIEMPRE por el vendedor, que los lleva al cliente</td>
+</tr>
+<tr>
+<td><strong>Cliente</strong> (SOLO vía vendedor)</td>
+<td>Aprobaciones/rechazos del floor plan y los portafolios; selecciones de acabados (F2)</td>
+<td>— (cero contacto directo)</td>
+</tr>
+<tr>
+<td><strong>Ingenieros externos</strong></td>
+<td>Reportes <strong>estructurales / energía / fundación</strong> (+ otros según la ciudad) aprobados</td>
+<td>Planos y especificaciones para calcular + el seguimiento (<em>"en un plazo decente"</em>)</td>
+</tr>
+<tr>
+<td><strong>Lead PM (hoy el CEO) + Backoffice</strong></td>
+<td>Preguntas en las reuniones de <strong>ADELANTO</strong> y de <strong>portafolio v1</strong></td>
+<td>Las dos reuniones — el insumo con que Backoffice arma el <strong>schedule ideal</strong> desde el template</td>
+</tr>
+<tr>
+<td><strong>PM</strong> (vía "The Turn")</td>
+<td>—</td>
+<td><strong>El PORTAFOLIO</strong> (la biblia del PM: layout antes/después, medidas, W3, plano eléctrico, carpintería) + <strong>Portafolio 2</strong> (renders + acabados, final ≥2 semanas antes de acabados)</td>
+</tr>
+<tr>
+<td><strong>Compras (Romina)</strong></td>
+<td>Coordinación en F2 (opciones de acabados)</td>
+<td><strong>La lista detallada de compras</strong> dentro del portafolio = la fuente del take-off</td>
+</tr>
+<tr>
+<td><strong>Ciudad (permits)</strong></td>
+<td>Aprobación / observaciones / negativa</td>
+<td>La gestión de los permisos; ante cambios → revisión de budget → change order vía vendedor</td>
+</tr>
+<tr>
+<td><strong>KITBOT</strong></td>
+<td>Dudas técnicas; persecución de esperas</td>
+<td><strong>Cada espera registrada</strong> (ingeniero pendiente, permiso en trámite, aprobación de cliente pendiente)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>6. Cómo se mide el puesto</h2>
+<h3><em>6. How the role is measured</em></h3>
+<h3>6.1 La medida única / <em>The single measure</em></h3>
+<p><strong>¿Algún proyecto llegó a obra con información faltante, desactualizada o sin aprobar?</strong> Si sí, Planning falló — sin<br />
+importar cuántos planos se dibujaron. / <em><strong>Did any project reach the jobsite with missing, outdated, or unapproved<br />
+information?</strong> If yes, Planning failed — no matter how many plans were drawn.</em></p>
+<h3>6.2 El "Día Cumplido" de Planning — <strong>[PROPUESTA — VERIFICAR CON JOSE]</strong></h3>
+<p>Planning no tiene aún sección confirmada en <code>DIA_CUMPLIDO_POR_PUESTO.md</code>. Checks propuestos (alineados al patrón de los<br />
+demás puestos):</p>
+<ol>
+<li><strong>Ningún portafolio entregado con reportes de ingeniería sin aprobar</strong> (verdad #1).</li>
+<li><strong>Ningún portafolio entregado con huecos</strong> que impidan al PM ejecutar un trade sin preguntar (gate de auto-suficiencia).</li>
+<li><strong>Todo cambio (cliente/ciudad/ingeniero) propagado a TODOS los planos + lista de compras + budget.</strong></li>
+<li><strong>Toda espera de Planning (ingeniero / permit / aprobación de cliente vía vendedor) registrada en el bot.</strong></li>
+<li><strong>El schedule interno de Planning al día</strong> (cada proyecto con su estado real).</li>
+<li><strong>Portafolio final entregado ≥ 2 semanas antes de cualquier acabado</strong> (regla de timing F2).</li>
+</ol>
+<p>Semántica del gate: ✅ = todos los checks core · ⚠️ = parcial (el sistema dice qué falta) · ❌ = sin señal (merece UNA<br />
+pregunta: ¿dato real o sistema desactualizado?).</p>
+<h3>6.3 Evaluación semanal — el algoritmo honesto aplicado a Planning</h3>
+<p>La ley de evaluación de CNG es <strong>viernes vs viernes</strong> (baseline oficial: <strong>viernes 11:00 PM</strong>): lo que cuenta es qué se<br />
+<strong>CERRÓ</strong> entre viernes y viernes, nunca acusar por schedules "sin mover" que están en corrección; las reprogramaciones<br />
+se presentan <strong>en neutro y sin culpa</strong>. El <strong>algoritmo honesto</strong> de los reportes oficiales (% = solo entregables<br />
+culminados EN plazo; lo extendido se muestra en naranja con flechas ›››) aplica igual a los entregables de Planning<br />
+medidos contra su <strong>schedule interno</strong>: un Floor Plan Proposal, una ingeniería aprobada o un portafolio se cuentan como<br />
+cumplidos <strong>solo si cerraron en su fecha</strong>.</p>
+<p><strong>[VERIFICAR CON JOSE]</strong> Planning no tiene hoy un reporte semanal propio entre los 11 reportes oficiales (la reportería<br />
+viva cubre PMs, gerencia y Compras). ¿Se crea un "Planning Weekly" con este algoritmo sobre su schedule interno, o<br />
+Planning se refleja dentro del Project Department Weekly?</p>
+<p><em>The CNG evaluation law is Friday-vs-Friday (official baseline: Friday 11:00 PM): what counts is what CLOSED between<br />
+Fridays; reschedules are reported neutrally. The official reports' honest algorithm (% = only deliverables finished ON<br />
+time; extensions shown orange with ›››) applies equally to Planning's deliverables measured against its internal<br />
+schedule. [VERIFY WITH JOSE] Planning has no dedicated weekly report among the 11 official ones today.</em></p>
+<h3>6.4 Certificación / <em>Certification</em></h3>
+<p>Certificación = <strong>Nivel 3 del track</strong> (TRACK_G): cumplir el Día Cumplido de Planning por <strong>entregables consecutivos</strong><br />
+(el ciclo del puesto es por entregable, no por día de obra). <strong>[PROPUESTA — VERIFICAR CON JOSE]</strong>: p. ej. <strong>3<br />
+portafolios completos consecutivos</strong> sin huecos ni ingeniería sin aprobar, con esperas y schedule interno en verde.</p>
+<hr />
+<h2>7. Valores y Comportamiento — los 5</h2>
+<h3><em>7. Values &amp; Behavior — the 5</em></h3>
+<p>La causa raíz de los fallos en CNG no es técnica ni de conocimiento — es de <strong>comportamiento</strong> (Jose, 2026-08-04,<br />
+verbatim): <em>"no se tiene rigurosidad, no se tiene atención al detalle, no se prevé y no se soluciona, no se es<br />
+proactivo; aceptamos los problemas y reaccionamos, en vez de prevenirlos o buscar soluciones insaciablemente para<br />
+cumplir a como dé lugar el cronograma planteado."</em></p>
+<p>Los 5, en positivo, y lo que significan EN ESTE puesto / <em>The 5, in the positive, and what they mean IN THIS role:</em></p>
+<table>
+<thead>
+<tr>
+<th>Comportamiento / <em>Behavior</em></th>
+<th>En Planning significa / <em>In Planning it means</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Rigurosidad</strong> / <em>Rigor</em></td>
+<td>Ningún plano sale sin la aprobación del ingeniero en mano; ninguna medida queda "por confirmar"</td>
+</tr>
+<tr>
+<td><strong>2. Atención al detalle</strong> / <em>Attention to detail</em></td>
+<td>Cada ventana con su código (W3), cada medida de carpintería exacta — <em>"carpintería es la mitad de la obra"</em></td>
+</tr>
+<tr>
+<td><strong>3. Prever</strong> / <em>Foresee</em></td>
+<td>Detectar la infactibilidad ANTES de comprometer el diseño con el cliente; proyectar el portafolio final 2 semanas antes de acabados</td>
+</tr>
+<tr>
+<td><strong>4. Solucionar</strong> / <em>Solve</em></td>
+<td>Ante observaciones de la ciudad o del ingeniero: disparar la cadena completa (plano → budget → cliente vía vendedor → change order), no archivar el problema</td>
+</tr>
+<tr>
+<td><strong>5. Proactividad insaciable</strong> / <em>Insatiable proactivity</em></td>
+<td>Perseguir al ingeniero y al permit todos los días que haga falta; escalar la ambigüedad el DÍA 1, no dejarla rebotar</td>
+</tr>
+</tbody>
+</table>
+<p><strong>La regla mental del puesto:</strong> NO aceptar el problema y reaccionar — <strong>prevenirlo, o buscar soluciones insaciablemente<br />
+hasta cumplir el cronograma a como dé lugar.</strong> Un plano sin aprobar, una medida "por confirmar", una ventana sin código,<br />
+un permiso sin perseguir, un cambio sin propagar — todos son fallos de comportamiento antes que de proceso.</p>
+<p><strong>Respeto y amabilidad en TODO canal</strong> — con el vendedor, los ingenieros, el lead PM y Backoffice. Condición del puesto,<br />
+no aspiración. / <em>Respect and kindness in EVERY channel — a condition of the role, not an aspiration.</em></p>
+<hr />
+<p><em>JD Planning v1.0 — 2026-08-07. Fuentes: <code>01_PROCESOS/00_PROCESO_CANONICO_CNG.md</code> (v4, §2 §3 §7 §11) · transcripción<br />
+Parte 3 (2026-08-05, la voz de Jose sobre el flujo de Planning) · <code>ORG_ROLES.md</code> · <code>_BRIEF_CONSTRUCTORES.md</code><br />
+(2026-08-06) · mega-análisis 2026-07-26. Pendientes marcados [VERIFICAR CON JOSE]: horario/cierre de día del puesto ·<br />
+checks y N de certificación del Día Cumplido · reporte semanal propio de Planning.</em></p>
+<a class="volver" href="/proceso/materiales/">← Centro de materiales</a></div></body></html>

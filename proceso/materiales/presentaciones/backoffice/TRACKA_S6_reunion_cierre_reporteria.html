@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>TRACK A · S6 — La reunión de las 2:30, el cierre del día y la reportería oficial</title>
+<style>
+@page { size: letter; margin: 14mm 13mm; }
+* { box-sizing: border-box; }
+body { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; color: #1e293b; font-size: 10.5px; line-height: 1.5; margin: 0; }
+h1 { font-size: 24px; margin: 0 0 4px; color: #0f172a; }
+h2 { font-size: 15px; margin: 22px 0 8px; color: #0f172a; border-bottom: 2.5px solid #0f172a; padding-bottom: 4px; }
+h3 { font-size: 12px; margin: 14px 0 6px; color: #1d4ed8; }
+table { border-collapse: collapse; width: 100%; margin: 6px 0 10px; font-size: 9.3px; }
+th { background: #0f172a; color: #fff; padding: 4px 6px; text-align: left; font-size: 8.8px; }
+td { border: 1px solid #cbd5e1; padding: 4px 6px; vertical-align: top; }
+tr:nth-child(even) td { background: #f8fafc; }
+.portada { text-align: center; padding-top: 90px; page-break-after: always; }
+.portada .sub { font-size: 13px; color: #475569; margin-top: 8px; }
+.portada .fecha { margin-top: 30px; color: #64748b; font-size: 11px; }
+.clave { background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 12px; }
+.clave b { color: #fbbf24; }
+.chip { display: inline-block; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; border-radius: 20px; padding: 1px 9px; font-size: 8.8px; font-weight: 600; margin: 1px 2px; }
+.mat { background: #f0fdf4; border-left: 3px solid #16a34a; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.mat b { color: #15803d; }
+.gap { background: #fffbeb; border-left: 3px solid #d97706; padding: 6px 10px; margin: 6px 0; font-size: 9.5px; }
+.pos { page-break-inside: avoid; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 12px 14px; margin: 12px 0; }
+.pos h3 { margin-top: 0; }
+ul { margin: 4px 0 8px; padding-left: 18px; }
+li { margin: 2px 0; }
+ol { margin: 4px 0 8px; padding-left: 20px; }
+.footer-note { color: #94a3b8; font-size: 8.5px; margin-top: 26px; border-top: 1px solid #e2e8f0; padding-top: 6px; }
+.seccion-num { color: #94a3b8; font-weight: 400; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+<h1>TRACK A · BACKOFFICE / DATA-ENTRY</h1>
+<div class="sub">SESIÓN 6 — La reunión de las 2:30 PM, el cierre del día y LA REPORTERÍA OFICIAL</div>
+<div class="sub">Duración: 75–90 min + shadowing · Aprendiz: Joaquín · Entrenador: Jose</div>
+<div class="fecha">v2026-08-06 · Biblioteca de Entrenamientos CNG</div>
+</div>
+
+<h2><span class="seccion-num">1 ·</span> OBJETIVO</h2>
+<p><b>Esta sesión existe para</b> operar el momento donde <i>"está realmente lo fuerte del trabajo"</i> (Jose, P2): registrar en vivo durante la reunión diaria, dejar el día cerrado — <b>transcript incluido</b> — y entender los 11 reportes oficiales que se alimentan del registro del Data-Entry.</p>
+
+<div class="clave">
+<b>LA REUNIÓN DIARIA — hora OFICIAL (Jose, 06-ago): 2:30 PM (hora Jose) = 3:30 PM Perú.</b> L–V, ~2 horas. Jose llama a los PMs; cada uno da su avance; <b>se re-fechan los schedules de TODOS los proyectos</b>. El Data-Entry DEBE estar.
+<br><br>
+<b>"Después de las 3 PM, JobTread es la verdad del día."</b> No un recuerdo, no un mensaje de chat, no un acuerdo verbal.
+</div>
+
+<h2><span class="seccion-num">2 ·</span> CONTENIDO</h2>
+
+<h3>2.1 Antes · durante · después</h3>
+<ul>
+<li><b>Antes (2:30):</b> leer la <b>prep de KITBOT</b> (vigente, 14:30) — qué pasó desde ayer por proyecto, qué dijeron los PMs, inconsistencias, qué decidir.</li>
+<li><b>Durante:</b> por cada avance dictado → tocar la tarea EN EL MOMENTO: check con fechas cuadradas · extender · re-fechar con razón · crear pago con doble registro · discrepancia → ops.db. Lo que quede a medias al colgar es deuda. Práctica instalada (P3): Joaquín ANOTA los cambios que entienda (sin ejecutar) y contrasta contra las grabaciones para medir su precisión.</li>
+<li><b>⭐ Después — el transcript (Jose, 06-ago):</b> la grabación de la reunión <b>SE ALIMENTA AL SISTEMA TODOS LOS DÍAS</b>: se suelta en <span class="chip">~/.openclaw/REUNIONES/</span> y el watcher la transcribe y procesa solo. <b>Es deber del cierre: día sin transcript alimentado = registro incompleto.</b></li>
+<li><b>El cierre:</b> aplicar los cambios del bot (movimientos, completados sin autor, cadenas sin ETA) → resolver pendientes → transcript al sistema → <b>schedule LIMPIO antes de las 8:00 PM</b> (de él salen el Daily Report y las Task Lists automáticas).</li>
+<li><b>El handoff de Compras (~1:00 PM):</b> Romina declara sus pendientes; la tarde los persigue el Backoffice.</li>
+</ul>
+
+<h3>2.2 📊 La reportería oficial (consolidación de Jose 2026-08-06 — nombres, horas y audiencias FINALES)</h3>
+<table>
+<tr><th>#</th><th>Reporte</th><th>Cuándo</th><th>Para quién / qué es</th></tr>
+<tr><td>1</td><td><b>PM Weekly Evaluation</b></td><td>Sáb 8:00 AM (auto)</td><td>Cada PM + Jose — semana cerrada (vie 11 PM); algoritmo honesto: % = solo culminadas EN plazo; extendidas naranja + ›››</td></tr>
+<tr><td>2</td><td><b>Project Department Weekly Evaluation</b></td><td>Sáb 8:30 AM (auto)</td><td>Jose·Jonas·Rey·Milagros — gantts Action/CP/City + pagado/cobrado + métricas por PM</td></tr>
+<tr><td>3</td><td><b>Project Department Next Week Report</b></td><td>On-demand</td><td>Gerencia — plan puro semana entrante + dinero SOLO confirmados</td></tr>
+<tr><td>4</td><td><b>Your Next Week</b></td><td>Con el #3</td><td>Cada PM — su plan puro + sus pagos/compras confirmadas</td></tr>
+<tr><td>5</td><td><b>Upcoming Week Purchases</b></td><td>Con el #3</td><td>Romina — kanban sáb→vie solo compras confirmadas</td></tr>
+<tr><td>6</td><td><b>Daily Report (gerencia)</b></td><td>8:00 PM L–V</td><td>Jonas·Rey·Jose·Milagros — narrativo con FOTOS del día; veredicto ✅/🔴</td></tr>
+<tr><td>7</td><td><b>Task List (PMs)</b></td><td>8:00 PM L–V</td><td>Cada PM — lo de MAÑANA (frases solo sobre tareas REALES del schedule) + inspecciones 5/3/1</td></tr>
+<tr><td>8</td><td><b>Monthly Gerencial</b></td><td>Día 1, 8:00 AM</td><td>Gerencia — baseline inicial vs último viernes; solo obra</td></tr>
+<tr><td>9</td><td><b>Monthly por-PM</b></td><td>Con el #8</td><td>Cada PM — filtrado a sus obras + bitácora narrativa</td></tr>
+<tr><td>10</td><td><b>Productividad</b></td><td>c/20 min</td><td>Dashboard — producción neta vs overhead</td></tr>
+<tr><td>11</td><td><b>Carrera</b></td><td>Continuo + 7:35</td><td>Dashboard — avance del mes vs baseline (lo revisa Jonas)</td></tr>
+</table>
+<div class="gap"><b>No enseñar como vivos:</b> backlog (Purchases Review · Carrera v15 · Task List de gerencia · rediseño de la Prep) y muertos por decisión de Jose 06-ago (check-ins, nudger, seguimiento, alertas pre-cierre, brief matinal).</div>
+
+<h3>2.3 Las leyes de la reportería (canon §9.5)</h3>
+<ol>
+<li><b>Ley 0:</b> baseline cada <b>VIERNES 11:00 PM</b> (hora oficial). En los reportes: <b>GRIS = ideal (la foto del viernes) · VERDE = lo que realmente sucedió</b>.</li>
+<li><b>Ley 1:</b> evaluación = <b>cierres viernes vs viernes</b> — nunca por schedules "sin mover" en corrección.</li>
+<li><b>Ley 2:</b> los números del reporte oficial <b>MANDAN</b> — no se recalculan por fuera.</li>
+<li><b>Ley 3:</b> <b>"lo dicho manda sobre lo agendado"</b> — si el campo reportó distinto al schedule, se registra y se cuadra.</li>
+<li><b>Ley 4:</b> después de las 3 PM, JobTread es la verdad del día.</li>
+</ol>
+
+<h3>2.4 El reloj diario oficial completo</h3>
+<p>6:00 AM roll de vencidos → 7:35 análisis Carrera → ~1:00 PM handoff Compras → 2:30 PM REUNIÓN → transcript al sistema → 3:00 PM JT = verdad → 8:00 PM Daily Report + Task List → <b>VIERNES</b>: reunión de cashflow/presupuestos (PLAN DE LA SEMANA, aprueba el CEO; checks = pagos confirmados/reservados) → <b>VIE 11:00 PM</b> baseline → Sáb 8:00/8:30 weeklies → Día 1 monthlies → continuo: Productividad c/20 min · fotos CompanyCam c/1h.</p>
+
+<h2><span class="seccion-num">3 ·</span> EL CASO REAL</h2>
+<div class="gap"><b>Los flags ignorados enseñan que el sistema no tiene consecuencia.</b> En el diagnóstico 2026-07, los nudges del sistema fueron ignorados 47–140 veces — y el equipo aprendió que no pasaba nada. <i>"Un flag dejado abierto es un fuego dejado ardiendo"</i> (Mandamiento VII). <b>Moraleja:</b> el Data-Entry corta ese patrón cerrando lo suyo el mismo día: cambios del bot aplicados, discrepancias resueltas, transcript alimentado. Y el contra-hábito personal: NO confiar en la memoria ("lo registro al final") — a las 2 horas de reunión la memoria ya perdió montos y fechas; el registro se hace en el momento.</div>
+
+<h2><span class="seccion-num">4 ·</span> EL EJERCICIO</h2>
+<div class="mat">
+<ol>
+<li><b>(Ya instalada por Jose — P3):</b> anotar en las llamadas los cambios de schedule entendidos (sin ejecutar) y contrastar contra las grabaciones. Meta: precisión suficiente para operar solo.</li>
+<li><b>Shadowing (2 días):</b> asistir a la reunión completa mirando cómo Jose toca los schedules en vivo; anotar cada tipo de cambio.</li>
+<li><b>Manos en 1 proyecto (2 días):</b> registrar en vivo TODO lo de un proyecto tranquilo (ej. Katie Holmes); Jose lleva el resto y revisa al colgar.</li>
+<li><b>Cierre completo guiado (1 día):</b> cambios del bot + pendientes + <b>soltar la grabación en ~/.openclaw/REUNIONES/</b> y verificar que el watcher la procesó.</li>
+<li><b>Lectura de reportes:</b> tomar el PM Weekly Evaluation del sábado y localizar 3 datos que salieron DIRECTO de registros hechos por Joaquín esa semana.</li>
+</ol>
+</div>
+
+<h2><span class="seccion-num">5 ·</span> LO QUE SE EVALÚA</h2>
+<ul>
+<li>Registra en vivo 1 proyecto completo durante la reunión, 3 días seguidos (Nivel 2).</li>
+<li>Ejecuta 1 cierre de día completo: bot + pendientes + transcript + schedule limpio antes de las 8 PM (Nivel 2).</li>
+<li>Recita las 5 leyes de la reportería y nombra los 11 reportes oficiales con su hora y audiencia.</li>
+<li>Explica qué reporte se alimenta de qué registro suyo (ej.: su check con fecha cuadrada → PM Weekly Evaluation; su monto limpio → Productividad/cashflow).</li>
+<li>Cero días sin transcript alimentado durante la práctica.</li>
+</ul>
+
+<div class="footer-note">TRACK A · Sesión 6 · v2026-08-06 · Fuentes: 00_PROCESO_CANONICO_CNG.md §9 (reloj, reportería, leyes) · REPORTERIA_MASTER.md §A/B · _BRIEF_CONSTRUCTORES.md §2–3 · manual v2.0 §4 · TRACK_A_v2026-08-06 §S6 · reglas de Jose 06-ago (hora 2:30 · transcript diario · baseline vie 11 PM).</div>
+
+</body>
+</html>

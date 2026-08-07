@@ -1,0 +1,385 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TRACK F VENTAS ASM · CNG</title>
+<link rel="stylesheet" href="/proceso/assets/style.css">
+<style>
+.doc{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+.doc h1{font-size:28px;border-bottom:3px solid var(--ink,#0f172a);padding-bottom:10px;margin-top:0}
+.doc h2{font-size:20px;margin-top:34px;border-bottom:2px solid #cbd5e1;padding-bottom:6px}
+.doc h3{font-size:16px;color:#1d4ed8;margin-top:24px}
+.doc table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px;display:block;overflow-x:auto}
+.doc th{background:#0f172a;color:#fff;padding:8px 10px;text-align:left}
+.doc td{border:1px solid #cbd5e1;padding:8px 10px;vertical-align:top}
+.doc tr:nth-child(even) td{background:#f8fafc}
+.doc pre{background:#f1f5f9;padding:14px;border-radius:8px;overflow-x:auto;font-size:13px;border:1px solid #e2e8f0}
+.doc code{background:#f1f5f9;padding:1px 5px;border-radius:4px;font-size:13px}
+.doc blockquote{border-left:4px solid #2563eb;background:#eff6ff;margin:14px 0;padding:10px 16px;border-radius:0 8px 8px 0}
+.doc li{margin:5px 0}
+.volver{display:inline-block;margin:16px 0;padding:8px 16px;background:#0f172a;color:#fff;border-radius:20px;text-decoration:none;font-size:14px;font-weight:600}
+</style></head><body>
+<div class="doc"><a class="volver" href="/proceso/materiales/">← Centro de materiales</a>
+<h1>TRACK F · VENTAS / ASM (Account Success Manager) — Currículo de Capacitación</h1>
+<p><strong>Lugar en el programa:</strong> Track F del <a href="00_PLAN_MAESTRO_CAPACITACION.md">Plan Maestro de Capacitación</a>. <strong>Prerrequisito: Módulo 0 completo</strong> (proceso canónico — sesiones 0.1 a 0.7). Este track NO repite el Módulo 0: lo asume y lo referencia.</p>
+<blockquote>
+<p>⚠️ <strong>ESTADO: TARGET-STATE / A ACTIVAR.</strong> Ventas está <strong>detenida por diseño</strong> ("<em>habíamos parado las ventas hasta estructurarnos bien</em>" — Jose, P1) y <strong>en reestructuración</strong> por Jose (+ SalesBot si se enciende). Este track describe <strong>cómo DEBE operar ventas cuando se reactive</strong>, no el estado actual desordenado ("<em>la parte de ventas todavía está un poco desordenada</em>" — Jose, P1). Se congela hasta que Jose cierre la reestructura; entonces se revisa contra su nuevo proceso y se activa. Cada regla que dependa de una decisión aún no tomada va marcada <strong>[A CONFIRMAR CON JOSE]</strong>.</p>
+</blockquote>
+<p><strong>Situación de partida:</strong> a diferencia de Romina (Track B) o los PMs (Track C), aquí <strong>no hay un titular en formación operando bien hoy</strong> — hay un puesto histórico (los ASM Giselle + William, hoy sin motor de ventas: no hay Dispatcher ni Cabeza de Ventas — ORG_ROLES). Este track no corrige a alguien que "ya lo hace": <strong>fija el estándar del puesto para cuando ventas vuelva a encenderse</strong>, atado a los dos fallos de ventas que YA rompieron obras: <strong>estimados que no heredan al budget</strong> (estructura de trades inconsistente) y <strong>precios bajados por cerrar la venta</strong> que reventaron el margen.</p>
+<p><strong>Fuentes:</strong> <code>00_PROCESO_CANONICO_CNG.md</code> (§3 el proceso de empresa · §7 budget/margen · §2 el template) · <code>PROCESS_MASTER.md</code> (lifecycle SALES + CLOSEOUT) · <code>ORG_ROLES.md</code> (ASM, Cabeza de Ventas, la brecha de ventas) · <code>SCHEDULE_STRUCTURE.md</code> · transcripciones Parte 1 (entrenamiento de Jose — sales→estimado→budget) + Parte 3 (proceso general F1+F2 completo) · <code>DIA_CUMPLIDO_POR_PUESTO.md</code> (v3, cuando incluya Ventas). <strong>NO existe manual de operaciones v2.0 del ASM</strong> (a diferencia de PM/Compras/Admin) — este track lo construye desde los flujos y las transcripciones; el "manual del ASM" es un entregable posterior (carpeta 04, cuando Jose cierre la reestructura).</p>
+<hr />
+<h2>1. Perfil y misión</h2>
+<h3>1.1 La misión (síntesis del canon + flujos)</h3>
+<blockquote>
+<p><strong>"Vender SOLO lo que CNG puede ejecutar y presupuestar bien desde el inicio — estructurar cada estimado por los mismos trades del schedule, proteger el margen del 40%, y entregarle a Planning un Sales Report tan completo que la obra arranque sin sorpresas — para que la venta NUNCA rompa el cronograma después."</strong></p>
+</blockquote>
+<p>El ASM (<strong>Account Success Manager</strong>) es <strong>el dueño del cliente</strong> de punta a punta: califica → visita → arma el estimado → cierra → entrega a Planning → acompaña milestones → camina la entrega final (PROCESS_MASTER §1, §6; canon §3). Pero su medida en la <strong>CLAVE</strong> de CNG no es cuánto vende: es <strong>si lo que vendió se pudo construir tal como se planificó en el cronograma</strong>. Un estimado bajo, un scope mal vendido o una estructura de trades que el budget no puede heredar <strong>rompen el cronograma aguas abajo</strong> — y ese es un fallo de ventas, no de obra.</p>
+<p>La CLAVE de CNG (canon §1, Jose 2026-08-04): <strong>GESTIONAR LA OBRA DE LA FORMA EN LA QUE SE PLANIFICÓ EN EL CRONOGRAMA</strong> = flujo de información impecable + resolver imprevistos sin salirse del plan. En ventas esto se traduce literal: <strong>la calidad de la venta es la primera materia prima de esa gestión.</strong> Si el estimado hereda limpio al budget y el Sales Report llega completo, Planning y el PM heredan un plan ejecutable. Si no, heredan un problema que aparecerá como change order, red tag o margen perdido.</p>
+<h3>1.2 Las 3 verdades no negociables del ASM</h3>
+<ol>
+<li><strong>Se vende SOLO lo ejecutable.</strong> Antes de prometer, el ASM verifica factibilidad (canon §3: "<em>análisis de factibilidad de lo que pide el cliente</em>"). Vender algo que la obra no puede construir tal como se dibujó, o que la ciudad no permitirá, es vender un cronograma roto. Ante la duda: <strong>factibilidad primero, promesa después.</strong></li>
+<li><strong>El estimado se estructura por los MISMOS trades del schedule.</strong> "<em>Como nosotros construimos los trades, es como idealmente debería estar puesto el estimado</em>" (Jose, P1). La regla dura: <strong>si el cliente compró 20 trades, deberían haber 20 ítems en el budget y 20 trades en el schedule</strong> (Jose, P1). El estimado es la <strong>misma columna vertebral</strong> que el schedule — no una lista de precios paralela.</li>
+<li><strong>El margen del 40% no se regala para cerrar.</strong> El precio se le vende al cliente; el costo es lo que CNG puede pagar al sub; la diferencia (40%) es el negocio (canon §7). Bajar el precio por ganar la venta <strong>sacrifica el margen</strong> de toda la obra (⚠️ canon §3: "<em>a veces se baja mucho el precio por ganar la venta y sufre el margen</em>"). Un descuento se <strong>negocia y se documenta</strong>, nunca se improvisa en la mesa.</li>
+</ol>
+<h3>1.3 Mapa de conexiones — de quién recibe, a quién entrega</h3>
+<table>
+<thead>
+<tr>
+<th>Con quién</th>
+<th>Qué recibe el ASM</th>
+<th>Qué entrega el ASM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dispatch</strong> <em>(hoy inactivo; vuelve al reactivar ventas — canon §3)</em></td>
+<td>El lead <strong>filtrado y calificado</strong> (Client Rating: Platinum/Gold/Silver/Not Qualified) + agendado en <strong>HighLevel</strong></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Cabeza de Ventas</strong> <em>(rol a reactivar — ORG_ROLES; asigna ASMs, hace la conciliación del estimado, da luz verde a Fase 1)</em></td>
+<td>La asignación del lead + la <strong>conciliación estimado-vs-contrato</strong> antes de firmar</td>
+<td>El estimado para conciliar; el pipeline al día</td>
+</tr>
+<tr>
+<td><strong>Cliente</strong></td>
+<td>Lo que quiere construir, su presupuesto, selecciones, aprobaciones, accesos</td>
+<td>El estimado, el contrato, el estatus SIEMPRE primero, y — clave — <strong>es el ÚNICO canal con Planning</strong>: "<em>Planning nunca habla directo con el cliente: todo pasa por el vendedor</em>" (canon §3)</td>
+</tr>
+<tr>
+<td><strong>Planning (Claudia · Karla — Perú)</strong> <em>(Track E)</em></td>
+<td>El <strong>Floor Plan Proposal</strong> para aprobación del cliente; el <strong>Portafolio</strong></td>
+<td>El <strong>SALES REPORT</strong> (plano de planta + info de sus visitas + análisis de factibilidad) = <strong>el entregable que ARRANCA Planning</strong> (canon §3)</td>
+</tr>
+<tr>
+<td><strong>Backoffice (Jose)</strong></td>
+<td>El <strong>budget consolidado</strong> (su estimado convertido); las reglas de estructura de trades</td>
+<td>El estimado estructurado por trades para que herede limpio → budget</td>
+</tr>
+<tr>
+<td><strong>Compras (Romina)</strong> <em>(Track B)</em></td>
+<td>Opciones de materiales/estéticas para el <strong>Client Finishes Selection</strong></td>
+<td>La coordinación de <strong>showrooms con el cliente</strong> ("<em>llevar al cliente a showrooms = chamba del VENDEDOR en coordinación con Compras</em>" — canon §3)</td>
+</tr>
+<tr>
+<td><strong>PM</strong> <em>(Track C)</em></td>
+<td>El proyecto en ejecución</td>
+<td>En "The Turn": el ASM aporta contexto de venta; en el closeout, camina la entrega junto al PM</td>
+</tr>
+<tr>
+<td><strong>SalesBot / KITBOT</strong> <em>(si se enciende)</em></td>
+<td>Motor de estimación / seguimiento de pipeline / dudas técnicas</td>
+<td>Estimados estructurados, seguimiento de leads, factibilidad consultada</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Regla estructural:</strong> el ASM es <strong>el primer eslabón de toda la cadena de datos</strong> de CNG. <code>estimado → contrato → budget → Sales Report → Planning → The Turn → obra</code>. Un defecto aquí se propaga por TODA la obra. Por eso su rigor no es "comercial": es <strong>operativo</strong>.</p>
+<h3>1.4 La mentalidad — la causa raíz es el comportamiento (Jose, 2026-08-04)</h3>
+<p>Los fallos del proceso no vienen de falta de conocimiento técnico: vienen de falta de <strong>RIGUROSIDAD</strong>, de <strong>ATENCIÓN AL DETALLE</strong>, de no <strong>PREVER</strong>, no <strong>SOLUCIONAR</strong> y no ser <strong>PROACTIVO</strong> (canon §1). La regla mental del puesto: <em>"no aceptar el problema y reaccionar: prevenirlo, o buscar soluciones insaciablemente para cumplir el cronograma a como dé lugar"</em> (Jose). En ventas esto se traduce literal:</p>
+<ul>
+<li>Un <strong>estimado bajo</strong> que no cubre el costo real del trade = un margen que ya se perdió antes de empezar (falta de rigurosidad en el cálculo).</li>
+<li>Un <strong>scope mal vendido</strong> ("le dije que sí sin verificar factibilidad") = un change order o un red tag esperando (falta de atención al detalle y previsión).</li>
+<li>Un <strong>estimado con estructura de trades inconsistente</strong> = un budget que NO puede heredar limpio y un PM que negocia a ciegas (falta de rigurosidad en la estructura).</li>
+<li>Un <strong>Sales Report incompleto</strong> = Planning arranca con huecos y se los pasa a la obra (falta de proactividad).</li>
+</ul>
+<p>El ASM riguroso <strong>previene</strong> estos cuatro fallos EN LA MESA DE VENTA — no los descubre cuando el PM llama a las 3PM diciendo que el budget no alcanza. Este comportamiento <strong>se evalúa</strong> junto con la mecánica (§4).</p>
+<hr />
+<h2>2. Mapa de competencias</h2>
+<table>
+<thead>
+<tr>
+<th>Debe SABER</th>
+<th>Debe SABER HACER</th>
+<th>Debe VERIFICAR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>El proceso canónico completo (Módulo 0) y el proceso constructivo a nivel de <strong>factibilidad</strong> (qué se puede/no se puede construir y en qué secuencia)</td>
+<td><strong>Calificar y descubrir</strong>: discovery call, visita al sitio, tomar notas/fotos/medidas, Debriefing Form en CompanyCam</td>
+<td>Que lo prometido al cliente <strong>se pueda construir tal como se dibuja</strong> (factibilidad) — antes de estimar</td>
+</tr>
+<tr>
+<td>El <strong>TEMPLATE maestro</strong> de trades (canon §2) — porque el estimado se estructura por esos mismos trades</td>
+<td>Construir el <strong>estimado en JobTread por trades</strong> (= los trades del schedule), un line item por trade con cantidad · unidad · costo unitario · costo extendido</td>
+<td>Que <strong>la estructura de trades del estimado = la del schedule</strong> ("20 trades comprados → 20 ítems en budget → 20 trades en schedule")</td>
+</tr>
+<tr>
+<td><strong>Costo vs. precio y el margen del 40%</strong>: <code>costo = precio × (1 − margen)</code> (canon §7)</td>
+<td>Aplicar el margen del 40% a cada line item; calcular en <strong>unidades imperiales</strong> (square feet, pies lineales, pulgadas)</td>
+<td>Que <strong>cada line item proteja el margen</strong> — que el precio cubra el costo real del trade + el 40%</td>
+</tr>
+<tr>
+<td>Por qué bajar el precio "sacrifica el margen" (canon §3) y cómo se maneja un descuento (conciliación, no improvisación)</td>
+<td>Manejar objeciones y <strong>cerrar sin regalar margen</strong>; si hay descuento, cuantificar el impacto y llevarlo a conciliación</td>
+<td>Que todo descuento esté <strong>conciliado y documentado</strong> (Cabeza de Ventas), no improvisado en la mesa</td>
+</tr>
+<tr>
+<td>La cadena <code>estimado → contrato → budget → Sales Report → Planning</code> y qué necesita cada eslabón</td>
+<td>Convertir estimado firmado → <strong>budget</strong> (se fija UNA vez, con descuentos si aplica — canon §7); redactar el <strong>Sales Report</strong> completo</td>
+<td>Que el budget <strong>herede limpio</strong> del estimado (misma estructura); que el Sales Report tenga plano + factibilidad + info de visitas</td>
+</tr>
+<tr>
+<td>Qué es el <strong>Sales Report</strong> y por qué ARRANCA Planning (canon §3)</td>
+<td>Entregar a Planning un Sales Report que permita hacer el Floor Plan Proposal sin volver a preguntar</td>
+<td>Que el Sales Report esté <strong>completo</strong> antes de entregarlo — Planning no habla con el cliente, depende 100% de él</td>
+</tr>
+<tr>
+<td>El toolchain: HighLevel (CRM/pipeline) · JobTread (estimado/contrato/budget) · CompanyCam (debrief/fotos) · Propwire (investigación) · SalesBot/KITBOT</td>
+<td>Mantener el <strong>pipeline al día en HighLevel</strong>; ser el <strong>único canal con Planning</strong> por el cliente; coordinar showrooms (F2) con Compras</td>
+<td>Su propio pipeline: cada lead con estado real; cada promesa al cliente con dueño y fecha</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Módulos (7 sesiones)</h2>
+<blockquote>
+<p>Formato estándar: sesión grabada (para repaso) + práctica guiada sobre proyectos reales en JobTread/CompanyCam/HighLevel. Como NO hay un titular operando bien hoy, cada sesión abre con el <strong>estándar objetivo</strong> y practica sobre <strong>la última venta con estructura estable</strong> (Jose la usó en la P1) + sobre los budgets reales ya existentes. Cuando ventas se reactive con el nuevo proceso de Jose, se re-ancla cada sesión a ese proceso.</p>
+</blockquote>
+<hr />
+<h3>SESIÓN F1 · El puesto en el mapa — misión, las 3 verdades y por qué la venta es el primer eslabón operativo (45–60 min)</h3>
+<p><strong>Objetivo:</strong> que el ASM explique en 2 minutos su misión, las 3 verdades, y por qué un defecto en la venta rompe el cronograma tres fases más adelante.</p>
+<p><strong>Contenido:</strong><br />
+- Repaso exprés del Módulo 0 (no se repite): LA CLAVE de CNG es <strong>GESTIONAR LA OBRA DE LA FORMA EN LA QUE SE PLANIFICÓ EN EL CRONOGRAMA</strong> — y <strong>la venta es la primera materia prima de esa gestión</strong> (canon §1, Jose 2026-08-04).<br />
+- La misión y la medida real del puesto: no "cuánto vendí" sino "¿lo que vendí se pudo construir tal como se planificó?".<br />
+- El ASM como <strong>dueño del cliente</strong> de punta a punta (PROCESS_MASTER §1, §6): califica → visita → estima → cierra → entrega a Planning → milestones → walkthrough final → comisiones.<br />
+- <strong>El ASM es el ÚNICO canal con Planning por el cliente</strong> (canon §3: "<em>Planning nunca habla directo con el cliente</em>"). Todo lo que Planning sabe del cliente, lo sabe por el Sales Report del ASM. Esta es una responsabilidad enorme: <strong>si el ASM no lo capturó, Planning no lo sabe.</strong><br />
+- Las 3 verdades no negociables (§1.2) — leerlas en voz alta y dar un ejemplo real de cada una.<br />
+- <strong>El ciclo largo de ventas</strong> (canon §3): ~6 meses para adiciones; contratos de <strong>$300k–$2M</strong>. "<em>La venta aquí es trabajosa… toma tiempo madurar esa venta</em>" (Jose, P1). El ASM nutre, no apura — pero cada paso deja registro en HighLevel/JT.<br />
+- Por qué existe este track ahora como target-state: ventas se paró por diseño y se está reestructurando; el estándar se fija ANTES de reactivar para no repetir el desorden.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Abrir <strong>la última venta con estructura estable</strong> (la que Jose mostró en la P1) y recorrer el estimado: identificar cada trade y decir en voz alta a qué trade del schedule corresponde.<br />
+2. Tomar una obra activa cualquiera y trazar hacia atrás: <code>budget del PM → estimado del ASM</code> — ¿el PM puede negociar limpio con la estructura que se vendió? ¿Dónde se rompe?</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>La estructura de trades inconsistente (Jose, P1):</strong> en la venta mostrada, "<em>el exterior sheeting estaba dentro del framing… aquí lo han cobrado como ítems por separado</em>"; "<em>entrance wooden ceiling… normalmente lo colocamos como un ítem de carpintería… pero acá está como un ítem aparte</em>"; cabinets y countertops "<em>igual se está juntando</em>". Cada inconsistencia es un budget que no hereda limpio y un PM que negocia a ciegas.<br />
+- <strong>La brecha de ventas (ORG_ROLES):</strong> 425 oportunidades / 111 leads sin trabajar, el dashboard de ventas muerto — el resultado de ventas sin motor ni disciplina. El pipeline al día es la mitad del puesto.</p>
+<hr />
+<h3>SESIÓN F2 · Calificación, discovery y factibilidad: vender solo lo ejecutable (60–90 min)</h3>
+<p><strong>Objetivo:</strong> que el ASM corra la calificación y la visita de forma que salga con TODO lo que Planning y el estimado necesitan — y que NUNCA prometa algo que la obra no pueda construir.</p>
+<p><strong>Contenido:</strong><br />
+- El embudo de entrada (PROCESS_MASTER §1): Dispatch filtra/califica/agenda en HighLevel → asigna la Cabeza de Ventas → <strong>Propwire</strong> (estado de propiedad / equity antes de invertir tiempo) → <strong>discovery/qualification call</strong>. <em>(Dispatch y Cabeza de Ventas se reactivan con ventas — canon §3, ORG_ROLES.)</em><br />
+- "<em>Cuando vemos que ya pasó todos los filtros, que es una persona seria y vale la pena invertir nuestro tiempo… se hace el primer appointment</em>" (Jose, P1). La calificación protege el tiempo del ASM: no todo lead merece una visita.<br />
+- <strong>La visita al sitio</strong> (Jose, P1): "<em>el vendedor va, toma nota de todo, entiende qué es lo que quiere el cliente</em>". Fotos + medidas + notas → <strong>Debriefing Form en CompanyCam</strong> logueado en JT (PROCESS_MASTER §1).<br />
+- <strong>El análisis de factibilidad</strong> (canon §3): el ASM analiza "<em>la factibilidad de lo que pide el cliente</em>". Aquí es donde el conocimiento del proceso constructivo (Módulo 0) se vuelve dinero: ¿lo que el cliente quiere se puede construir tal como lo imagina? ¿La secuencia lo permite? ¿La ciudad lo permitirá (permisos)? ⚠️ Canon §3: "<em>~1 de cada 100 la ciudad niega definitivamente</em>" (ej. sitio histórico) → proyecto abandonado. La factibilidad se verifica ANTES de prometer.<br />
+- Los tipos de obra y sus peculiaridades (canon §1, Jose P1): <strong>attach</strong> (expansión pegada), <strong>ADU</strong> (unidad independiente = se trata como obra nueva), remodelación de cocina, construcción nueva. Cada uno estima distinto.<br />
+- La regla dura: <strong>factibilidad primero, promesa después</strong> (verdad #1). Un "sí" en la mesa sin verificar es un change order o un red tag comprado por anticipado.<br />
+- El segundo filtro / feasibility check (PROCESS_MASTER §1) antes de construir el estimado.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Sobre un lead/venta histórica: reconstruir el Debriefing Form COMO DEBIÓ hacerse — qué fotos, qué medidas, qué notas de factibilidad. ¿Qué le faltó a esa venta para que Planning no tuviera que volver a preguntar?<br />
+2. Ejercicio de factibilidad: dado lo que "quiere el cliente" (ej. una adición attach que toca una línea estructural), listar las 3 preguntas de factibilidad que el ASM DEBE responder antes de estimar (secuencia constructiva, permisos, specs).</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Prometer sin verificar factibilidad:</strong> el scope mal vendido genera el change order o el red tag aguas abajo. El ASM que promete "sí se puede" sin cotejar con la secuencia constructiva <strong>compró un problema de obra en la mesa de venta</strong>.<br />
+- <strong>Cambios de spec que nunca llegan al campo</strong> (canon §11.4, caso puertas 8ft vs 82"→96"): el origen de muchos de estos errores es un dato mal capturado o mal comunicado en la venta. El Debriefing Form completo y el Sales Report claro son la primera defensa.<br />
+- Saltarse Propwire/calificación e invertir semanas en un lead que nunca iba a cerrar (la brecha de ventas: 111 leads sin trabajar).</p>
+<hr />
+<h3>SESIÓN F3 · El estimado por trades: la MISMA columna vertebral del schedule ⭐ (90 min · LA SESIÓN MÁS IMPORTANTE)</h3>
+<p><strong>Objetivo:</strong> que el ASM construya un estimado estructurado por los mismos trades del schedule, de forma que el budget herede DIRECTO del estimado — cero traducción, cero reestructura aguas abajo.</p>
+<p><strong>Contenido:</strong><br />
+- El principio central (Jose, P1): "<em>de la misma forma en la que nosotros construimos los trades… es como idealmente debería estar puesto el estimado</em>". El estimado NO es una lista de precios comercial: es <strong>el schedule visto desde el dinero</strong>.<br />
+- <strong>La regla de la columna vertebral (Jose, P1 — dura):</strong> "<em>si al final el cliente compró 20 trades, deberían haber 20 ítems en el budget y 20 trades en el schedule</em>". Uno-a-uno. El template maestro de trades (canon §2 — 34 grupos-trade) es el mapa: se estima trade por trade y se <strong>eliminan las secciones no vendidas</strong> (igual que el schedule ideal se arma quitando trades no vendidos — canon §3).<br />
+- La anatomía de un line item (canon §7): <strong>cantidad · unidad · costo unitario · costo extendido</strong> (extended = unitario × cantidad). Unidad típica = <strong>square feet</strong> (⚠️ unidades imperiales — Jose las detesta pero es el oficio: pies, pulgadas, yardas, pies lineales).<br />
+- <strong>Por qué importa la estructura limpia:</strong> cuando el estimado se convierte en budget, el PM "<em>va al budget del trade, ve el costo máximo, y negocia con el sub por ≤ ese costo</em>" (canon §7). Si el estimado juntó trades o los partió mal, el PM no puede leer su costo máximo por trade → negocia a ciegas → margen invisible.<br />
+- El estimado vive en <strong>JobTread</strong> (vía SalesBot/Quo cuando se encienda — el motor paramétrico feeds el estimado en JT; PROCESS_MASTER §1). El ASM estructura; el motor calcula cantidades.<br />
+- La conexión con las inspecciones y la secuencia: estimar por trade obliga al ASM a pensar el orden constructivo — cada trade estimado es un trade que habrá que schedulear, inspeccionar y pagar.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Sobre la venta estable de la P1: <strong>auditar la estructura de trades</strong> — hacer la lista de las inconsistencias que Jose señaló (exterior sheathing dentro de framing vs separado; entrance wooden ceiling como ítem suelto vs carpintería; cabinets+countertops juntos) y <strong>re-estructurarla</strong> al estándar 1-trade-1-ítem contra el template maestro.<br />
+2. Tomar un tipo de obra (ej. adición attach) y armar la <strong>lista de trades del estimado</strong> partiendo del template maestro y eliminando las secciones no vendidas (ej. sin mamparas, sin bricks) — hasta que la lista de trades del estimado = la lista de trades que tendría ese schedule.<br />
+3. Construir 3 line items completos (cantidad · unidad · costo unitario · costo extendido) en square feet para un trade real.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Trades juntados o partidos (Jose, P1):</strong> el error más caro de ventas — rompe la herencia estimado→budget. "<em>La mayoría de las obras no siguen la misma estructura</em>" es exactamente lo que Jose está reestructurando.<br />
+- <strong>Estimar sin pensar el schedule:</strong> un estimado que no mapea 1-a-1 al schedule obliga a Backoffice a reestructurar el budget a mano — retrabajo y riesgo de error en cada line item.<br />
+- Unidades mal calculadas por confusión imperial (pies vs pies lineales vs square feet) — un error de unidad es un costo unitario aplicado a la cantidad equivocada = margen roto.</p>
+<hr />
+<h3>SESIÓN F4 · Margen y pricing: el 40%, cómo se aplica y cómo se PROTEGE (75–90 min)</h3>
+<p><strong>Objetivo:</strong> que el ASM domine <code>costo = precio × (1 − margen)</code>, aplique el 40% a cada line item, y cierre la venta SIN regalar el margen.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>La fórmula central (canon §7):</strong> el <strong>precio</strong> es lo que se le vende al cliente; el <strong>costo</strong> es lo que CNG puede pagar al sub; la diferencia es el <strong>margen (normalmente 40%)</strong>. El costo disponible sale automático: <strong><code>costo = precio × (1 − margen)</code></strong>. Se fija <strong>una sola vez</strong> al convertir estimado→budget (con descuentos si aplica).<br />
+- Cómo se ve en la práctica (el ejemplo que Jose enseñó a los PMs, canon §7 / Track C — pintura de Kyle Aubrey): paredes 3,373 sqft → costo <strong>$3,035.7</strong> (precio al cliente: <strong>$4,722</strong>); techo 1,456 sqft × $1.32 → <strong>$1,921</strong>; siding 616 sqft → <strong>$628</strong>. El precio al cliente y el costo al sub son dos números por line item — el ASM fija el precio; el 40% define el costo.<br />
+- <strong>Por qué el ASM es el guardián del margen:</strong> el margen se gana o se pierde EN LA VENTA. Si el ASM estima un precio que no cubre el costo real del trade + 40%, la obra arranca en pérdida y no hay forma de recuperarlo aguas abajo. "<em>El margen se gana gestionando el cronograma, no ejecutando obra</em>" (canon §1) — pero <strong>el margen se PIERDE cuando la venta lo regala.</strong><br />
+- <strong>El fallo documentado a cerrar (canon §3):</strong> "<em>a veces se baja mucho el precio por ganar la venta y sufre el margen</em>". El descuento no es libre: cada dólar bajado sale del 40%. Antes de firmar hay <strong>conciliación del estimado</strong> (canon §3, ORG_ROLES: la Cabeza de Ventas hace la "budget/estimate reconciliation").<br />
+- Cómo manejar un descuento correctamente: (1) cuantificar el impacto exacto en el margen por line item; (2) llevarlo a <strong>conciliación</strong> con la Cabeza de Ventas / Jose — no decidirlo solo en la mesa; (3) si se aprueba, <strong>documentarlo</strong> para que el budget refleje el costo real disponible (el margen ya reducido). Un descuento improvisado = un margen que nadie sabe que se perdió hasta que el PM no puede pagar al sub.<br />
+- Manejo de objeciones sin tocar el margen: valor, alcance, secuencia — reencuadrar antes que descontar (PROCESS_MASTER §1: "<em>attempt close (objection handling)</em>").<br />
+- El primer filtro de toda la operación aguas abajo es <strong>si entra en el presupuesto</strong> (canon §7) — y ese presupuesto lo fija el ASM. Un estimado bajo no "ayuda a la obra": la asfixia.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Sobre el budget real de <strong>Kyle Aubrey</strong>: reproducir el cálculo de Jose línea por línea (cantidad × costo unitario = costo extendido; costo vs precio) y verificar el margen implícito por line item.<br />
+2. Ejercicio de descuento: dado un estimado con margen del 40%, el cliente pide "un 10% de descuento". Calcular el impacto exacto en el margen resultante y <strong>redactar la propuesta de conciliación</strong> (cuánto baja el margen, qué line items se tocan, qué se lleva a la Cabeza de Ventas).<br />
+3. Role-play de cierre: el cliente presiona por precio; el ASM reencuadra por valor/alcance SIN tocar el margen, y si concede, lo documenta.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Bajar el precio en la mesa para cerrar (canon §3):</strong> el fallo clásico de ventas. Un descuento no conciliado es un margen perdido invisible que revienta cuando el PM no puede pagar al sub por ≤ el costo del line item.<br />
+- <strong>Estimar un costo unitario por debajo del real del trade:</strong> el precio se ve bien para el cliente pero el 40% no existe — la obra nace en pérdida.<br />
+- <strong>Montos ambiguos</strong> (casos reales del sistema de reportería/productividad: descripciones con "43k" y "551872" que el sistema no pudo parsear): aunque el ASM trabaja en el estimado y no en el schedule, el número tiene que ser limpio y parseable desde el origen — cada line item con su cifra clara.</p>
+<hr />
+<h3>SESIÓN F5 · La cadena contrato → budget → Sales Report → handoff a Planning (90 min)</h3>
+<p><strong>Objetivo:</strong> que el ASM convierta un estimado firmado en un budget que herede limpio, redacte un Sales Report completo, y haga el handoff a Planning sin dejar ningún hueco.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>El cierre y el contrato (Jose, P1):</strong> "<em>el vendedor se acerca al cliente con su estimado; suponiendo de que el cliente acepta… se cierra el contrato, el cliente lo firma, y ese estimado se convierte en el presupuesto de tu obra — ahí es donde pasa a ser el budget</em>". El momento contrato→budget es el punto de no retorno del margen: se fija UNA vez (canon §7).<br />
+- Onboarding del cliente al firmar (PROCESS_MASTER §1): Planning Questionnaire + <strong>deposit collected</strong> → notificar a Accounting + Planning. El depósito arranca formalmente el proyecto.<br />
+- <strong>El Sales Report — el entregable que ARRANCA Planning (canon §3):</strong> contiene el <strong>plano de planta</strong>, la <strong>información de sus visitas</strong>, y el <strong>análisis de factibilidad de lo que pide el cliente</strong>. Planning intake el Sales Report → hace el <strong>Floor Plan Proposal</strong> (propuesta de planta según lo prometido) → aprobación del cliente → planos arq/MEP + renders (PROCESS_MASTER §2, canon §3).<br />
+- <strong>Por qué el Sales Report debe estar COMPLETO:</strong> "<em>Planning nunca habla directo con el cliente: todo pasa por el vendedor</em>" (canon §3). Planning NO puede llamar al cliente a preguntar. Todo lo que necesita para el Floor Plan Proposal tiene que estar en el Sales Report. Un Sales Report incompleto = Planning arranca con huecos → los pasa a los planos → los pasa a la obra.<br />
+- <strong>La conciliación del budget (PROCESS_MASTER §2, ORG_ROLES):</strong> Planning Manager + Cabeza de Ventas <strong>reconcilian budget vs contrato</strong> antes de finalizar el schedule de Fase 1. El ASM aporta el estimado original y justifica cada line item.<br />
+- El puente con el Track E (Planning): el Sales Report del ASM es el <strong>INPUT #1</strong> de Planning. La calidad del handoff del ASM determina la calidad del Portafolio ("la biblia del PM") tres eslabones más adelante.<br />
+- Qué NO es tarea del ASM: no hace los planos, no gestiona permisos, no arma el Portafolio (eso es Planning — Track E). El ASM entrega el Sales Report y sigue siendo <strong>el único canal con el cliente</strong>.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Sobre una venta cerrada real: verificar la <strong>herencia</strong> — ¿el budget refleja 1-a-1 la estructura del estimado? Marcar cada line item donde NO heredó limpio y explicar por qué (juntado / partido / re-estructurado a mano por Backoffice).<br />
+2. Redactar (guiado) un <strong>Sales Report completo</strong> para una venta: plano de planta + info de visitas (del Debriefing Form) + análisis de factibilidad → checklist de "¿Planning podría hacer el Floor Plan Proposal sin llamar al cliente?".<br />
+3. Simular la <strong>conciliación budget-vs-contrato</strong>: defender 3 line items del estimado ante la Cabeza de Ventas.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Sales Report incompleto:</strong> Planning arranca con huecos y, como no puede llamar al cliente, los planos salen con supuestos → retrabajo en obra. El Sales Report es el único puente ASM→Planning: si le falta algo, se pierde para siempre.<br />
+- <strong>Budget que no hereda limpio:</strong> obliga a Backoffice a reestructurar a mano → riesgo de error en cada line item → el PM negocia sobre un budget que no corresponde al estimado firmado.<br />
+- <strong>Descuento aplicado después de fijar el budget:</strong> el budget se fija UNA vez (canon §7). Bajar el precio después de la conversión rompe la coherencia estimado-budget-margen.</p>
+<hr />
+<h3>SESIÓN F6 · El ASM en Fase 2 y en el closeout: showrooms, walkthrough y comisiones (60 min)</h3>
+<p><strong>Objetivo:</strong> que el ASM entienda que su relación con el cliente NO termina en la firma — acompaña la selección de acabados y cierra el ciclo en la entrega.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>Client Finishes Selection (Fase 2 de planeamiento — canon §3):</strong> Planning + Compras envían opciones de materiales/estéticas; <strong>llevar al cliente a showrooms = chamba del VENDEDOR</strong> en coordinación con Compras (Track B). El ASM sigue siendo el canal con el cliente en F2.<br />
+- El flujo F2 (canon §3): Client Finishes Selection → renders 3D finales → <strong>portafolio VERSIÓN FINAL</strong> → aprobación del cliente → última revisión del budget → schedule ideal de acabados. El ASM acompaña las aprobaciones del cliente.<br />
+- <strong>The Turn (canon §3):</strong> cuando el proyecto se entrega al PM (Sales Report + Portafolio + planos), el ASM aporta el contexto de venta. La bajada es reunión vendedor + Backoffice + lead PM → el PM hace la llamada inicial al cliente. <em>(⚠️ el cliente ya conoce al ASM; el traspaso de relación al PM se coordina.)</em><br />
+- <strong>El closeout (canon §3 / PROCESS_MASTER §6):</strong> última tarea → se notifica al vendedor → <strong>caminata del VENDEDOR con el cliente contrastando contra contrato</strong> → <strong>Completion Form</strong> (conformidad, libera a la empresa de lo no cubierto por garantía) → depósito final → <strong>Lien Release</strong> → entrega de garantía → <strong>postventa</strong>. El ASM cierra el ciclo que abrió.<br />
+- <strong>Comisiones (PROCESS_MASTER §6):</strong> Accounting procesa las comisiones del ASM (y del PM) al cierre. La comisión premia la venta BIEN hecha — la que se ejecutó sin romper el cronograma, no la que se cerró barato.<br />
+- El testimonial en video (PROCESS_MASTER §6) → Marketing: el ASM que entregó bien cosecha la referencia.</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Reconstruir la <strong>caminata de entrega</strong> de una obra cerrada: contrastar contra el contrato original — ¿qué se prometió en la venta vs qué se entregó? Identificar dónde un scope mal vendido habría causado una disputa en la entrega.<br />
+2. Role-play del walkthrough final: el cliente señala algo que "creía incluido". El ASM contrasta contra contrato (el que él mismo cerró) con datos, no con improvisación.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Desaparecer tras la firma:</strong> el ASM que no acompaña F2 (showrooms) ni el closeout deja al cliente sin su canal — y el cliente termina enterándose de las cosas por el PM o por el inspector (el fallo que Track C combate: "el cliente siempre se entera primero por su canal").<br />
+- <strong>Un scope mal vendido reventando en la entrega:</strong> lo que el ASM prometió y no está en el contrato aparece en el walkthrough final como disputa. La factibilidad de F2 y el contrato claro lo previenen.</p>
+<hr />
+<h3>SESIÓN F7 · La cadencia del ASM: pipeline, HighLevel, SalesBot y el registro que arranca la obra (60–90 min)</h3>
+<p><strong>Objetivo:</strong> que el ASM corra un ciclo de venta con el pipeline al día y entienda que <strong>su registro es el primer eslabón de toda la data de CNG</strong>.</p>
+<p><strong>Contenido:</strong><br />
+- <strong>El pipeline en HighLevel</strong> (PROCESS_MASTER): cada lead con su estado real (calificado → agendado → visitado → estimado enviado → conciliado → cerrado). El pipeline al día es la mitad del puesto — la brecha de ventas (425 opps / 111 leads sin trabajar) es exactamente un pipeline abandonado.<br />
+- <strong>JobTread</strong> como spine de la venta (PROCESS_MASTER): el estimado, el contrato y el budget viven en JT. Lo que el ASM registre ahí es lo que el resto de la empresa hereda.<br />
+- <strong>SalesBot / KITBOT (si se enciende — target-state):</strong> motor de estimación (estructura por trades + cálculo de cantidades), seguimiento del pipeline, respuestas de factibilidad a nivel experto, y — como todo KITBOT — persigue lo que el ASM espera del cliente (aprobaciones, selecciones, accesos). <strong>[A CONFIRMAR CON JOSE: el rol exacto de SalesBot en la estimación y qué automatiza vs qué queda en manos del ASM.]</strong><br />
+- <strong>El ASM como primer eslabón de datos:</strong> <code>estimado (ASM) → budget (Backoffice) → cashflow (gerencia) → negociación del PM con subs</code>. Todo se apoya en la estructura y las cifras que el ASM fijó. "<em>JobTread es un espejo de lo que está pasando en la realidad</em>" (canon §8) — y en ventas, el espejo empieza a formarse en el estimado.<br />
+- La conexión con los viernes de presupuestos (canon §9.2): cuando la obra corre, el dinero de cada trade se planifica los viernes contra el budget — que es el estimado del ASM. Un estimado bien estructurado hace que ese plan sea legible; uno mal estructurado lo enturbia desde el origen.<br />
+- El registro de sus promesas al cliente: toda promesa (una selección pendiente, un acceso, una aprobación) con dueño y fecha — para que no se pudra en silencio (misma disciplina que las esperas de Compras en el bot, Track B).<br />
+- <strong>[A CONFIRMAR CON JOSE: la cadencia diaria/horaria exacta del ASM, los reportes de ventas oficiales, y el Día Cumplido del ASM</strong> — dependen del nuevo proceso de ventas que Jose está construyendo. Ojo: los viejos formatos 7:50/check-ins/alertas pre-cierre de los demás puestos quedaron <strong>MUERTOS por decisión de Jose (2026-08-06)</strong>; el equivalente vigente hoy son la Task List 8 PM y los reportes oficiales del canon §9.4 — no calcar la cadencia vieja.]</p>
+<p><strong>Práctica sobre caso real:</strong><br />
+1. Revisar el pipeline histórico en HighLevel: clasificar 10 leads por estado real y detectar los "muertos" (los 111 sin trabajar) — ¿cuáles se recuperan, cuáles se cierran?<br />
+2. Trazar una venta completa por el toolchain: HighLevel (lead) → CompanyCam (debrief) → JobTread (estimado → contrato → budget) → Sales Report → Planning. Marcar en cada salto qué registro DEBE quedar.</p>
+<p><strong>Errores reales a evitar:</strong><br />
+- <strong>Pipeline abandonado</strong> (la brecha de ventas): leads que se enfrían por falta de seguimiento = ingresos que nunca entraron.<br />
+- <strong>Promesas al cliente sin registro:</strong> una selección o aprobación que "quedó conversada" y nadie persigue frena Planning o la obra — el equivalente en ventas al tile de Katie (4 días de ping-pong, Track B/C).<br />
+- Trabajar el estimado por fuera de JT: si no está en el spine, el resto de la empresa no lo hereda.</p>
+<hr />
+<h2>4. Evaluación y certificación</h2>
+<p>Tres niveles, todos observables por el sistema (no exámenes de papel — Plan Maestro §5):</p>
+<p><strong>Criterio transversal (los 3 niveles) — el comportamiento (§1.4):</strong> rigurosidad · atención al detalle · prever · solucionar · proactividad. No aceptar el problema y reaccionar: prevenirlo, o buscar soluciones insaciablemente para cumplir el cronograma a como dé lugar. En ventas se observa: ¿el ASM previno (factibilidad verificada, margen protegido, estructura limpia, Sales Report completo) o vendió un problema que reventó en obra?</p>
+<blockquote>
+<p>⚠️ <strong>CERTIFICACIÓN — TARGET-STATE.</strong> El Día Cumplido del ASM aún no existe en <code>DIA_CUMPLIDO_POR_PUESTO.md</code> (Ventas está detenida). Los checks de abajo son la <strong>[PROPUESTA]</strong> de este track, a validar con Jose cuando cierre la reestructura de ventas. Se activan junto con el track.</p>
+</blockquote>
+<h3>Nivel 1 — Comprensión</h3>
+<ul>
+<li>Explica en conversación: la misión y su medida real, las 3 verdades, y la cadena <code>estimado → contrato → budget → Sales Report → Planning</code>.</li>
+<li>Sobre un estimado real: identifica cada trade y lo mapea 1-a-1 al trade del schedule; detecta trades juntados/partidos.</li>
+<li>Calcula el costo máximo de un line item dado precio y margen (<code>costo = precio × (1 − margen)</code>) y explica cómo un descuento afecta el margen.</li>
+</ul>
+<h3>Nivel 2 — Ejecución guiada (sobre casos reales, con supervisión de Jose / Cabeza de Ventas)</h3>
+<ul>
+<li>1 <strong>Debriefing Form + análisis de factibilidad</strong> completo de una visita (real o simulada).</li>
+<li>1 <strong>estimado estructurado por trades</strong> que hereda 1-a-1 al schedule (auditado contra el template maestro).</li>
+<li>1 ejercicio de <strong>pricing con margen 40%</strong> + 1 propuesta de <strong>descuento conciliado</strong> (impacto cuantificado).</li>
+<li>1 <strong>Sales Report completo</strong> que pasa el check "Planning podría hacer el Floor Plan Proposal sin llamar al cliente".</li>
+<li>1 <strong>conciliación budget-vs-contrato</strong> defendida.</li>
+</ul>
+<h3>Nivel 3 — Ejecución autónoma = CERTIFICADA</h3>
+<p>Cumplir su <strong>"Día Cumplido" N días/ventas seguidas sin ayuda</strong>. Los checks <strong>[PROPUESTA, a validar con Jose]</strong>:</p>
+<ol>
+<li><strong>Todo estimado enviado está estructurado por trades = trades del schedule</strong> (1-a-1, cero juntados/partidos).</li>
+<li><strong>Todo estimado protege el margen del 40%</strong> (ningún line item por debajo del costo real + margen); todo descuento conciliado y documentado.</li>
+<li><strong>Toda venta cerrada tiene su Sales Report completo</strong> antes del handoff a Planning (plano + factibilidad + info de visitas).</li>
+<li><strong>Pipeline al día en HighLevel</strong> — cada lead con estado real; cero leads "muertos" sin decisión.</li>
+<li><strong>Toda promesa al cliente registrada</strong> con dueño y fecha (selecciones, aprobaciones, accesos).</li>
+</ol>
+<p><strong>[PROPUESTA] N</strong> = a definir con Jose (las ventas son ciclos largos ~6 meses; la certificación probablemente combine <em>checks diarios de pipeline</em> + <em>auditoría por venta cerrada</em>, no "N días seguidos" como los puestos de obra). El registro de avance del track se lleva en la tabla por persona de la biblioteca (Plan Maestro §5).</p>
+<hr />
+<h2>5. Material de apoyo — ONE-PAGER (imprimir y tener al lado)</h2>
+<pre><code>═══════════════════════════════════════════════════════════════════
+  ASM / VENTAS — LA MECÁNICA EXACTA               CNG · TARGET-STATE
+  Misión: vender SOLO lo ejecutable, con el estimado estructurado
+  como el schedule, protegiendo el 40% — para que la venta NUNCA
+  rompa el cronograma después.
+  La medida del puesto: ¿lo que vendí se pudo construir tal como
+  se planificó en el cronograma?
+═══════════════════════════════════════════════════════════════════
+
+LA MENTALIDAD: rigurosidad · atención al detalle · prever ·
+  solucionar · proactividad. NO vendas un problema: previénlo en
+  la mesa (factibilidad, margen, estructura, Sales Report) — no
+  lo descubras cuando el PM no pueda pagar al sub.
+
+EL CICLO DE CADA VENTA (dueño del cliente de punta a punta)
+ 1. LEAD calificado (Dispatch) → PROPWIRE (estado/equity) →
+    DISCOVERY CALL. No toda venta merece una visita.
+ 2. VISITA AL SITIO → notas + fotos + medidas →
+    DEBRIEFING FORM (CompanyCam, logueado en JT).
+ 3. FACTIBILIDAD: ¿se puede construir tal como lo pide?
+    ¿la secuencia lo permite? ¿la ciudad lo permitirá (permisos)?
+    → FACTIBILIDAD PRIMERO, PROMESA DESPUÉS. Nunca &quot;sí&quot; sin verificar.
+ 4. ESTIMADO POR TRADES (en JobTread / SalesBot):
+    ★ 20 trades comprados → 20 ítems en budget → 20 trades en schedule.
+    Un trade = un ítem. Cero juntados, cero partidos.
+    Cada line item: cantidad · unidad · costo unitario · costo
+    extendido (square feet — unidades imperiales).
+ 5. PRICING + MARGEN 40%:  costo = precio × (1 − 0.40).
+    El PRECIO lo paga el cliente; el COSTO es lo que CNG paga al sub;
+    el 40% es el negocio. NO regales el margen para cerrar.
+    ¿Descuento? → cuantifica el impacto + concilia con la Cabeza de
+    Ventas/Jose + DOCUMÉNTALO. Nunca improvisado en la mesa.
+ 6. CIERRE → CONTRATO firmado → el estimado SE CONVIERTE EN BUDGET
+    (se fija UNA vez, con descuento si aplica). Depósito + onboarding.
+ 7. SALES REPORT (arranca Planning): plano de planta + info de tus
+    visitas + análisis de factibilidad. COMPLETO — Planning NO
+    habla con el cliente: todo lo que sabe, lo sabe por ti.
+ 8. CONCILIACIÓN budget-vs-contrato (con la Cabeza de Ventas).
+ 9. NO desaparezcas tras la firma:
+    · Fase 2: SHOWROOMS con el cliente (con Compras).
+    · The Turn: contexto de venta al PM.
+    · Closeout: CAMINATA con el cliente contra contrato →
+      Completion Form → Lien Release → garantía → postventa.
+
+LA CADENA QUE DEPENDES DE NO ROMPER:
+  estimado → contrato → BUDGET → Sales Report → Planning →
+  The Turn → obra.  Un defecto tuyo se propaga por TODA la obra.
+
+TOOLCHAIN: HighLevel (pipeline) · JobTread (estimado/contrato/
+  budget) · CompanyCam (debrief/fotos) · Propwire (investigación)
+  · SalesBot/KITBOT (estimación + factibilidad + seguimiento).
+
+DÍA CUMPLIDO ✅ [PROPUESTA — a validar con Jose]:
+  1. Todo estimado estructurado por trades = schedule (1-a-1).
+  2. Todo estimado protege el 40%; descuentos conciliados.
+  3. Toda venta cerrada con Sales Report COMPLETO antes de Planning.
+  4. Pipeline al día en HighLevel; cero leads muertos sin decisión.
+  5. Toda promesa al cliente registrada (dueño + fecha).
+
+REGLAS DE ORO:
+  · Vende SOLO lo ejecutable. Factibilidad antes que promesa.
+  · El estimado es el schedule visto desde el dinero.
+  · El margen se gana en la venta y se pierde en la venta.
+  · Un descuento no conciliado = margen perdido invisible.
+  · Sales Report incompleto = Planning ciego = obra con huecos.
+  · Si no está en HighLevel/JT, NO EXISTE.
+═══════════════════════════════════════════════════════════════════
+</code></pre>
+<hr />
+<p><em>Track F v1.0 (TARGET-STATE) — 2026-08-06. Construido desde el proceso canónico (§3 proceso de empresa · §7 budget/margen · §2 template), PROCESS_MASTER (lifecycle SALES + CLOSEOUT), ORG_ROLES (ASM + Cabeza de Ventas + la brecha de ventas), SCHEDULE_STRUCTURE, y la transcripción Parte 1 de Jose (sales→estimado→budget, la regla "20 trades → 20 ítems", el fallo del descuento). Sigue la estructura/profundidad/tono de los Tracks B y C ya aprobados. </em><em>NO se activa hasta que Jose cierre la reestructura de ventas</em><em> (+ SalesBot si se enciende); entonces se revisa contra el nuevo proceso, se resuelven los [A CONFIRMAR CON JOSE] (cadencia diaria, reportes de ventas, Día Cumplido, rol de SalesBot) y se construye el manual de operaciones del ASM (carpeta 04). Se revisa con Jose (un entregable a la vez).</em></p>
+<a class="volver" href="/proceso/materiales/">← Centro de materiales</a></div></body></html>
