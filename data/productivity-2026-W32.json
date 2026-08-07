@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T09:28:45",
+  "generated_at": "2026-08-07T16:08:02",
   "week_iso": "2026-W32",
   "week_start": "2026-08-01",
   "week_end": "2026-08-07",
@@ -319,7 +319,7 @@
       "project_id": "22PCPuWPndkt",
       "project_name": "Clifford Clack \u2014 Gym Addition",
       "pm": "Angel Pacheco",
-      "group_count": 1,
+      "group_count": 2,
       "attribution": 0.0,
       "groups": [
         {
@@ -336,7 +336,7 @@
             "CLEANING: TRASH HAUL"
           ],
           "action_progresses": [
-            null
+            1
           ],
           "action_starts": [
             "2026-08-04"
@@ -352,7 +352,7 @@
               "name": "CLEANING: TRASH HAUL",
               "description": "",
               "amount": 0.0,
-              "progress": null,
+              "progress": 1,
               "end_date": "2026-08-04"
             }
           ],
@@ -363,7 +363,7 @@
               "description": "-200",
               "amount": 200.0,
               "progress": null,
-              "end_date": "2026-08-07"
+              "end_date": "2026-08-08"
             },
             {
               "task_id": "22PaCCdCwhYG",
@@ -378,8 +378,8 @@
               "name": "CLEANING: TRASH HAUL SECOND PAYMENT",
               "description": "$300",
               "amount": 300.0,
-              "progress": null,
-              "end_date": "2026-08-07"
+              "progress": 1,
+              "end_date": "2026-08-04"
             }
           ],
           "materials_lines": [],
@@ -390,9 +390,58 @@
           "expenses_additional": 0,
           "expenses_total": 900.0,
           "profit": -900.0,
-          "status": "in_progress",
+          "status": "finished",
           "has_price": false,
-          "this_pct": 0.0,
+          "this_pct": 100.0,
+          "attribution": 0.0,
+          "user_set": false
+        },
+        {
+          "project_id": "22PCPuWPndkt",
+          "project_name": "Clifford Clack \u2014 Gym Addition",
+          "group_id": "22PaCEVLguxT",
+          "group_name": "FENCE",
+          "parent_group_id": null,
+          "action_count": 1,
+          "action_task_ids": [
+            "22PaCEWgzt4Q"
+          ],
+          "action_task_names": [
+            "FENCE: REINSTALL"
+          ],
+          "action_progresses": [
+            1
+          ],
+          "action_starts": [
+            "2026-08-07"
+          ],
+          "action_ends": [
+            "2026-08-07"
+          ],
+          "action_start_min": "2026-08-07",
+          "action_end_max": "2026-08-07",
+          "action_lines": [
+            {
+              "task_id": "22PaCEWgzt4Q",
+              "name": "FENCE: REINSTALL",
+              "description": "",
+              "amount": 0.0,
+              "progress": 1,
+              "end_date": "2026-08-07"
+            }
+          ],
+          "subs_lines": [],
+          "materials_lines": [],
+          "additional_lines": [],
+          "sold": 0.0,
+          "expenses_subs": 0,
+          "expenses_materials": 0,
+          "expenses_additional": 0,
+          "expenses_total": 0,
+          "profit": 0.0,
+          "status": "finished",
+          "has_price": false,
+          "this_pct": 100.0,
           "attribution": 0.0,
           "user_set": false
         }
@@ -546,7 +595,7 @@
     {
       "pm": "Angel Pacheco",
       "project_count": 1,
-      "group_count": 1,
+      "group_count": 2,
       "sold": 0.0,
       "expenses": 0.0,
       "profit_potential": 0.0,
@@ -556,7 +605,7 @@
           "project_id": "22PCPuWPndkt",
           "project_name": "Clifford Clack \u2014 Gym Addition",
           "attribution": 0.0,
-          "group_count": 1
+          "group_count": 2
         }
       ]
     }
@@ -566,9 +615,9 @@
     "expenses": 4600.0,
     "profit_potential": 11050.0,
     "profit_attributed_this_week": 3050.0,
-    "groups_in_progress": 3,
-    "groups_finished_this_week": 3,
-    "groups_missing_price": 2,
+    "groups_in_progress": 2,
+    "groups_finished_this_week": 5,
+    "groups_missing_price": 3,
     "expense_missing_price": 7980.0,
     "project_count": 6
   }
