@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T07:56:05",
+  "generated_at": "2026-08-07T09:28:57",
   "today": "2026-08-07",
   "horizon": "2027-06-07",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -39,30 +39,30 @@
   ],
   "totals": {
     "prod": [
-      582164.79,
-      498955.13
+      581883.15,
+      498736.37
     ],
     "prod_todate": [
-      341623.55,
-      292778.46
+      330859.54,
+      283375.73
     ],
     "weekly": {
-      "fixed": 375538.84,
+      "fixed": 386584.1,
       "net": [
-        206625.95,
-        123416.29
+        195299.05,
+        112152.27
       ],
-      "periods": 34,
+      "periods": 35,
       "positive": [
         16,
-        15
+        16
       ]
     },
     "monthly": {
       "fixed": 526490.8,
       "net": [
-        55673.99,
-        -27535.67
+        55392.35,
+        -27754.43
       ],
       "periods": 11,
       "positive": [
@@ -444,17 +444,17 @@
       "label_moy": "jul S2",
       "label_short": "11 jul",
       "prod": [
-        22278.35,
-        17960.77
+        22272.81,
+        17955.88
       ],
       "fixed": 11045.26,
       "net": [
-        11233.09,
-        6915.51
+        11227.55,
+        6910.62
       ],
       "cum": [
-        3802.78,
-        -9337.56
+        3797.24,
+        -9342.45
       ],
       "active_count": 10,
       "active_projects": [
@@ -494,8 +494,8 @@
           1904.3
         ],
         "Shaan Lagisetty": [
-          -255.88,
-          -351.84
+          -261.41,
+          -356.73
         ],
         "Martha Cockrell": [
           2726.97,
@@ -523,17 +523,17 @@
       "label_moy": "jul S3",
       "label_short": "18 jul",
       "prod": [
-        33139.3,
-        27715.2
+        33100.54,
+        27680.95
       ],
       "fixed": 11045.26,
       "net": [
-        22094.04,
-        16669.94
+        22055.28,
+        16635.69
       ],
       "cum": [
-        25896.82,
-        7332.38
+        25852.52,
+        7293.24
       ],
       "active_count": 10,
       "active_projects": [
@@ -573,8 +573,8 @@
           1904.3
         ],
         "Shaan Lagisetty": [
-          658.88,
-          582.14
+          620.12,
+          547.89
         ],
         "Martha Cockrell": [
           6185.89,
@@ -611,8 +611,8 @@
         24574.49
       ],
       "cum": [
-        56376.45,
-        31906.87
+        56332.15,
+        31867.73
       ],
       "active_count": 10,
       "active_projects": [
@@ -673,17 +673,17 @@
       "label_moy": "ago S1",
       "label_short": "1 ago",
       "prod": [
-        43279.91,
-        39619.1
+        43086.13,
+        39447.88
       ],
       "fixed": 11045.26,
       "net": [
-        32234.65,
-        28573.84
+        32040.87,
+        28402.62
       ],
       "cum": [
-        88611.1,
-        60480.71
+        88373.02,
+        60270.35
       ],
       "active_count": 10,
       "active_projects": [
@@ -723,8 +723,8 @@
           952.15
         ],
         "Shaan Lagisetty": [
-          282.38,
-          249.49
+          88.59,
+          78.27
         ],
         "Martha Cockrell": [
           1785.89,
@@ -748,17 +748,17 @@
       "label_moy": "ago S2",
       "label_short": "8 ago",
       "prod": [
-        50930.66,
-        42007.8
+        47577.1,
+        38955.46
       ],
       "fixed": 11045.26,
       "net": [
-        39885.4,
-        30962.54
+        36531.84,
+        27910.2
       ],
       "cum": [
-        128496.5,
-        91443.25
+        124904.86,
+        88180.55
       ],
       "active_count": 9,
       "active_projects": [
@@ -793,8 +793,8 @@
           6941.56
         ],
         "Shaan Lagisetty": [
-          3619.32,
-          3287.15
+          265.76,
+          234.81
         ],
         "Martha Cockrell": [
           11320.85,
@@ -822,17 +822,17 @@
       "label_moy": "ago S3",
       "label_short": "15 ago",
       "prod": [
-        46914.96,
-        40428.62
+        43232.19,
+        37138.44
       ],
       "fixed": 11045.26,
       "net": [
-        35869.7,
-        29383.36
+        32186.93,
+        26093.18
       ],
       "cum": [
-        164366.2,
-        120826.61
+        157091.79,
+        114273.73
       ],
       "active_count": 7,
       "active_projects": [
@@ -861,8 +861,8 @@
           6496.31
         ],
         "Shaan Lagisetty": [
-          6738.47,
-          6083.5
+          3055.7,
+          2793.32
         ],
         "Martha Cockrell": [
           28344.19,
@@ -886,17 +886,17 @@
       "label_moy": "ago S4",
       "label_short": "22 ago",
       "prod": [
-        35943.26,
-        31994.26
+        33218.79,
+        29727.47
       ],
       "fixed": 11045.26,
       "net": [
-        24898.0,
-        20949.0
+        22173.53,
+        18682.21
       ],
       "cum": [
-        189264.2,
-        141775.61
+        179265.32,
+        132955.94
       ],
       "active_count": 6,
       "active_projects": [
@@ -916,8 +916,8 @@
           1904.3
         ],
         "Shaan Lagisetty": [
-          7949.99,
-          7070.73
+          5225.52,
+          4803.94
         ],
         "Martha Cockrell": [
           13155.49,
@@ -941,17 +941,17 @@
       "label_moy": "ago S5",
       "label_short": "29 ago",
       "prod": [
-        41027.4,
-        36030.58
+        41278.7,
+        36506.36
       ],
       "fixed": 11045.26,
       "net": [
-        29982.14,
-        24985.32
+        30233.44,
+        25461.1
       ],
       "cum": [
-        219246.34,
-        166760.93
+        209498.76,
+        158417.04
       ],
       "active_count": 5,
       "active_projects": [
@@ -970,8 +970,8 @@
           1428.22
         ],
         "Shaan Lagisetty": [
-          5241.69,
-          4558.88
+          5492.99,
+          5034.66
         ],
         "Martha Cockrell": [
           21823.31,
@@ -995,17 +995,17 @@
       "label_moy": "sep S1",
       "label_short": "5 sep",
       "prod": [
-        21318.81,
-        17445.11
+        25922.85,
+        21932.33
       ],
       "fixed": 11045.26,
       "net": [
-        10273.55,
-        6399.85
+        14877.59,
+        10887.07
       ],
       "cum": [
-        229519.89,
-        173160.78
+        224376.35,
+        169304.11
       ],
       "active_count": 5,
       "active_projects": [
@@ -1024,8 +1024,8 @@
           6073.33
         ],
         "Shaan Lagisetty": [
-          1536.43,
-          1170.99
+          6140.48,
+          5658.21
         ],
         "Martha Cockrell": [
           7327.35,
@@ -1049,17 +1049,17 @@
       "label_moy": "sep S2",
       "label_short": "12 sep",
       "prod": [
-        40044.22,
-        33957.8
+        39381.59,
+        33393.78
       ],
       "fixed": 11045.26,
       "net": [
-        28998.96,
-        22912.54
+        28336.33,
+        22348.52
       ],
       "cum": [
-        258518.85,
-        196073.32
+        252712.68,
+        191652.63
       ],
       "active_count": 5,
       "active_projects": [
@@ -1076,10 +1076,6 @@
         "Charles Harris": [
           28722.94,
           25850.69
-        ],
-        "Shaan Lagisetty": [
-          662.63,
-          564.02
         ],
         "Martha Cockrell": [
           5923.97,
@@ -1112,15 +1108,16 @@
         13463.8
       ],
       "cum": [
-        276382.82,
-        209537.12
+        270576.65,
+        205116.43
       ],
-      "active_count": 4,
+      "active_count": 5,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
         "Martha Cockrell",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1152,24 +1149,25 @@
       "label_moy": "sep S4",
       "label_short": "26 sep",
       "prod": [
-        37187.73,
-        29441.85
+        37723.66,
+        29911.22
       ],
       "fixed": 11045.26,
       "net": [
-        26142.47,
-        18396.59
+        26678.4,
+        18865.96
       ],
       "cum": [
-        302525.29,
-        227933.71
+        297255.05,
+        223982.39
       ],
-      "active_count": 4,
+      "active_count": 5,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
         "Martha Cockrell",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1178,6 +1176,10 @@
         "Charles Harris": [
           25402.05,
           20906.42
+        ],
+        "Shaan Lagisetty": [
+          535.94,
+          469.37
         ],
         "Martha Cockrell": [
           9874.44,
@@ -1197,24 +1199,25 @@
       "label_moy": "oct S1",
       "label_short": "3 oct",
       "prod": [
-        40521.63,
-        36405.1
+        41429.03,
+        37136.74
       ],
       "fixed": 11045.26,
       "net": [
-        29476.37,
-        25359.84
+        30383.77,
+        26091.48
       ],
       "cum": [
-        332001.66,
-        253293.55
+        327638.82,
+        250073.87
       ],
-      "active_count": 4,
+      "active_count": 5,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
         "Martha Cockrell",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1223,6 +1226,10 @@
         "Charles Harris": [
           30421.07,
           27959.65
+        ],
+        "Shaan Lagisetty": [
+          907.4,
+          731.64
         ],
         "Martha Cockrell": [
           6238.47,
@@ -1242,23 +1249,24 @@
       "label_moy": "oct S2",
       "label_short": "10 oct",
       "prod": [
-        11815.29,
-        11036.13
+        12890.85,
+        11798.67
       ],
       "fixed": 11045.26,
       "net": [
-        770.03,
-        -9.13
+        1845.59,
+        753.41
       ],
       "cum": [
-        332771.69,
-        253284.42
+        329484.41,
+        250827.28
       ],
-      "active_count": 3,
+      "active_count": 4,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1267,6 +1275,10 @@
         "Charles Harris": [
           8814.15,
           8212.61
+        ],
+        "Shaan Lagisetty": [
+          1075.56,
+          762.54
         ],
         "Karim Merchant": [
           3001.14,
@@ -1282,28 +1294,33 @@
       "label_moy": "oct S3",
       "label_short": "17 oct",
       "prod": [
-        1846.68,
-        1241.84
+        2409.09,
+        1632.55
       ],
       "fixed": 11045.26,
       "net": [
-        -9198.58,
-        -9803.42
+        -8636.17,
+        -9412.71
       ],
       "cum": [
-        323573.11,
-        243481.0
+        320848.24,
+        241414.57
       ],
-      "active_count": 3,
+      "active_count": 4,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
       "pending": false,
       "by_project": {
+        "Shaan Lagisetty": [
+          562.41,
+          390.7
+        ],
         "Karim Merchant": [
           1846.68,
           1241.84
@@ -1318,28 +1335,33 @@
       "label_moy": "oct S4",
       "label_short": "24 oct",
       "prod": [
-        2296.76,
-        1679.49
+        4227.28,
+        3285.57
       ],
       "fixed": 11045.26,
       "net": [
-        -8748.5,
-        -9365.77
+        -6817.98,
+        -7759.69
       ],
       "cum": [
-        314824.61,
-        234115.23
+        314030.26,
+        233654.88
       ],
-      "active_count": 3,
+      "active_count": 4,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
       "pending": false,
       "by_project": {
+        "Shaan Lagisetty": [
+          1930.51,
+          1606.08
+        ],
         "Karim Merchant": [
           2296.76,
           1679.49
@@ -1354,28 +1376,33 @@
       "label_moy": "oct S5",
       "label_short": "31 oct",
       "prod": [
-        2360.63,
-        1686.91
+        2748.34,
+        1986.11
       ],
       "fixed": 11045.26,
       "net": [
-        -8684.63,
-        -9358.35
+        -8296.92,
+        -9059.15
       ],
       "cum": [
-        306139.98,
-        224756.88
+        305733.34,
+        224595.73
       ],
-      "active_count": 3,
+      "active_count": 4,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
       "pending": false,
       "by_project": {
+        "Shaan Lagisetty": [
+          387.71,
+          299.2
+        ],
         "Rohini Williams": [
           2054.46,
           1443.56
@@ -1403,13 +1430,14 @@
         0.0
       ],
       "cum": [
-        306139.98,
-        224756.88
+        305733.34,
+        224595.73
       ],
-      "active_count": 2,
+      "active_count": 3,
       "active_projects": [
         "Charles Harris",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1424,27 +1452,33 @@
       "label_moy": "nov S2",
       "label_short": "14 nov",
       "prod": [
-        0.0,
-        0.0
+        124.98,
+        -7.6
       ],
-      "fixed": 0.0,
+      "fixed": 11045.26,
       "net": [
-        0.0,
-        0.0
+        -10920.28,
+        -11052.86
       ],
       "cum": [
-        306139.98,
-        224756.88
+        294813.06,
+        213542.87
       ],
-      "active_count": 2,
+      "active_count": 3,
       "active_projects": [
         "Charles Harris",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
-      "pending": true,
-      "by_project": {}
+      "pending": false,
+      "by_project": {
+        "Shaan Lagisetty": [
+          124.98,
+          -7.6
+        ]
+      }
     },
     {
       "week_iso": "2026-W48",
@@ -1455,21 +1489,22 @@
       "label_short": "21 nov",
       "prod": [
         1056.53,
-        1056.53
+        1006.53
       ],
       "fixed": 11045.26,
       "net": [
         -9988.73,
-        -9988.73
+        -10038.73
       ],
       "cum": [
-        296151.25,
-        214768.15
+        284824.33,
+        203504.14
       ],
-      "active_count": 2,
+      "active_count": 3,
       "active_projects": [
         "Charles Harris",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1478,6 +1513,10 @@
         "Charles Harris": [
           1056.53,
           1056.53
+        ],
+        "Shaan Lagisetty": [
+          0.0,
+          -50.0
         ]
       }
     },
@@ -1498,8 +1537,8 @@
         -7347.39
       ],
       "cum": [
-        288803.86,
-        207420.76
+        277476.94,
+        196156.75
       ],
       "active_count": 2,
       "active_projects": [
@@ -1533,8 +1572,8 @@
         -7875.66
       ],
       "cum": [
-        280928.2,
-        199545.1
+        269601.28,
+        188281.09
       ],
       "active_count": 2,
       "active_projects": [
@@ -1568,8 +1607,8 @@
         0.0
       ],
       "cum": [
-        280928.2,
-        199545.1
+        269601.28,
+        188281.09
       ],
       "active_count": 2,
       "active_projects": [
@@ -1598,8 +1637,8 @@
         0.0
       ],
       "cum": [
-        280928.2,
-        199545.1
+        269601.28,
+        188281.09
       ],
       "active_count": 2,
       "active_projects": [
@@ -1628,8 +1667,8 @@
         -11757.05
       ],
       "cum": [
-        269447.6,
-        187788.05
+        258120.68,
+        176524.04
       ],
       "active_count": 2,
       "active_projects": [
@@ -1663,8 +1702,8 @@
         -11557.03
       ],
       "cum": [
-        258329.85,
-        176231.02
+        247002.93,
+        164967.01
       ],
       "active_count": 1,
       "active_projects": [
@@ -1697,8 +1736,8 @@
         0.0
       ],
       "cum": [
-        258329.85,
-        176231.02
+        247002.93,
+        164967.01
       ],
       "active_count": 1,
       "active_projects": [
@@ -1726,8 +1765,8 @@
         0.0
       ],
       "cum": [
-        258329.85,
-        176231.02
+        247002.93,
+        164967.01
       ],
       "active_count": 1,
       "active_projects": [
@@ -1755,8 +1794,8 @@
         0.0
       ],
       "cum": [
-        258329.85,
-        176231.02
+        247002.93,
+        164967.01
       ],
       "active_count": 1,
       "active_projects": [
@@ -1784,8 +1823,8 @@
         0.0
       ],
       "cum": [
-        258329.85,
-        176231.02
+        247002.93,
+        164967.01
       ],
       "active_count": 1,
       "active_projects": [
@@ -1813,8 +1852,8 @@
         -10595.93
       ],
       "cum": [
-        247896.43,
-        165635.09
+        236569.51,
+        154371.08
       ],
       "active_count": 1,
       "active_projects": [
@@ -1847,8 +1886,8 @@
         -10595.93
       ],
       "cum": [
-        237463.01,
-        155039.16
+        226136.09,
+        143775.15
       ],
       "active_count": 1,
       "active_projects": [
@@ -1881,8 +1920,8 @@
         0.0
       ],
       "cum": [
-        237463.01,
-        155039.16
+        226136.09,
+        143775.15
       ],
       "active_count": 1,
       "active_projects": [
@@ -1910,8 +1949,8 @@
         -6621.15
       ],
       "cum": [
-        231118.38,
-        148418.01
+        219791.46,
+        137154.0
       ],
       "active_count": 1,
       "active_projects": [
@@ -1944,8 +1983,8 @@
         -8889.59
       ],
       "cum": [
-        222376.97,
-        139528.42
+        211050.05,
+        128264.41
       ],
       "active_count": 1,
       "active_projects": [
@@ -1978,8 +2017,8 @@
         0.0
       ],
       "cum": [
-        222376.97,
-        139528.42
+        211050.05,
+        128264.41
       ],
       "active_count": 1,
       "active_projects": [
@@ -2007,8 +2046,8 @@
         -5217.94
       ],
       "cum": [
-        217430.23,
-        134310.48
+        206103.31,
+        123046.47
       ],
       "active_count": 1,
       "active_projects": [
@@ -2041,8 +2080,8 @@
         0.0
       ],
       "cum": [
-        217430.23,
-        134310.48
+        206103.31,
+        123046.47
       ],
       "active_count": 1,
       "active_projects": [
@@ -2070,8 +2109,8 @@
         0.0
       ],
       "cum": [
-        217430.23,
-        134310.48
+        206103.31,
+        123046.47
       ],
       "active_count": 1,
       "active_projects": [
@@ -2099,8 +2138,8 @@
         0.0
       ],
       "cum": [
-        217430.23,
-        134310.48
+        206103.31,
+        123046.47
       ],
       "active_count": 1,
       "active_projects": [
@@ -2128,8 +2167,8 @@
         0.0
       ],
       "cum": [
-        217430.23,
-        134310.48
+        206103.31,
+        123046.47
       ],
       "active_count": 1,
       "active_projects": [
@@ -2157,8 +2196,8 @@
         0.0
       ],
       "cum": [
-        217430.23,
-        134310.48
+        206103.31,
+        123046.47
       ],
       "active_count": 1,
       "active_projects": [
@@ -2186,8 +2225,8 @@
         0.0
       ],
       "cum": [
-        217430.23,
-        134310.48
+        206103.31,
+        123046.47
       ],
       "active_count": 1,
       "active_projects": [
@@ -2215,8 +2254,8 @@
         0.0
       ],
       "cum": [
-        217430.23,
-        134310.48
+        206103.31,
+        123046.47
       ],
       "active_count": 1,
       "active_projects": [
@@ -2244,8 +2283,8 @@
         0.0
       ],
       "cum": [
-        217430.23,
-        134310.48
+        206103.31,
+        123046.47
       ],
       "active_count": 1,
       "active_projects": [
@@ -2273,8 +2312,8 @@
         0.0
       ],
       "cum": [
-        217430.23,
-        134310.48
+        206103.31,
+        123046.47
       ],
       "active_count": 1,
       "active_projects": [
@@ -2302,8 +2341,8 @@
         0.0
       ],
       "cum": [
-        217430.23,
-        134310.48
+        206103.31,
+        123046.47
       ],
       "active_count": 1,
       "active_projects": [
@@ -2331,8 +2370,8 @@
         -10894.19
       ],
       "cum": [
-        206625.96,
-        123416.29
+        195299.04,
+        112152.28
       ],
       "active_count": 1,
       "active_projects": [
@@ -2408,17 +2447,17 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        116312.63,
-        98345.28
+        116268.33,
+        98306.15
       ],
       "fixed": 47862.8,
       "net": [
-        68449.83,
-        50482.48
+        68405.53,
+        50443.35
       ],
       "cum": [
-        60058.19,
-        35588.59
+        60013.89,
+        35549.46
       ],
       "is_future": false,
       "is_partial": false,
@@ -2445,8 +2484,8 @@
           3808.59
         ],
         "Shaan Lagisetty": [
-          -297.0,
-          -639.7
+          -341.29,
+          -678.84
         ],
         "Martha Cockrell": [
           28798.56,
@@ -2470,17 +2509,17 @@
       "month": "2026-08",
       "label": "ago 2026",
       "prod": [
-        185839.76,
-        161464.27
+        175120.05,
+        152100.67
       ],
       "fixed": 47862.8,
       "net": [
-        137976.96,
-        113601.47
+        127257.25,
+        104237.87
       ],
       "cum": [
-        198035.15,
-        149190.06
+        187271.14,
+        139787.33
       ],
       "is_future": false,
       "is_partial": true,
@@ -2507,8 +2546,8 @@
           16294.31
         ],
         "Shaan Lagisetty": [
-          23003.61,
-          20701.93
+          12283.89,
+          11338.33
         ],
         "Martha Cockrell": [
           54255.64,
@@ -2532,17 +2571,17 @@
       "month": "2026-09",
       "label": "sep 2026",
       "prod": [
-        160275.98,
-        136459.16
+        165769.77,
+        141910.58
       ],
       "fixed": 47862.8,
       "net": [
-        112413.18,
-        88596.36
+        117906.97,
+        94047.78
       ],
       "cum": [
-        310448.33,
-        237786.42
+        305178.11,
+        233835.11
       ],
       "is_future": true,
       "is_partial": false,
@@ -2553,8 +2592,8 @@
           76401.34
         ],
         "Shaan Lagisetty": [
-          3027.29,
-          2282.83
+          8521.08,
+          7734.24
         ],
         "Martha Cockrell": [
           50679.81,
@@ -2574,17 +2613,17 @@
       "month": "2026-10",
       "label": "oct 2026",
       "prod": [
-        56022.86,
-        47954.43
+        60576.29,
+        51505.23
       ],
       "fixed": 47862.8,
       "net": [
-        8160.06,
-        91.63
+        12713.49,
+        3642.43
       ],
       "cum": [
-        318608.39,
-        237878.05
+        317891.6,
+        237477.54
       ],
       "is_future": true,
       "is_partial": false,
@@ -2593,6 +2632,10 @@
         "Charles Harris": [
           36680.16,
           32494.35
+        ],
+        "Shaan Lagisetty": [
+          4553.43,
+          3550.8
         ],
         "Martha Cockrell": [
           6935.63,
@@ -2608,17 +2651,17 @@
       "month": "2026-11",
       "label": "nov 2026",
       "prod": [
-        4899.91,
-        4247.13
+        5335.06,
+        4428.88
       ],
       "fixed": 47862.8,
       "net": [
-        -42962.89,
-        -43615.67
+        -42527.74,
+        -43433.92
       ],
       "cum": [
-        275645.5,
-        194262.38
+        275363.86,
+        194043.62
       ],
       "is_future": true,
       "is_partial": false,
@@ -2627,6 +2670,10 @@
         "Charles Harris": [
           2641.33,
           2641.33
+        ],
+        "Shaan Lagisetty": [
+          435.15,
+          181.76
         ],
         "Rohini Williams": [
           2054.46,
@@ -2651,8 +2698,8 @@
         -43159.35
       ],
       "cum": [
-        232692.72,
-        151103.03
+        232411.08,
+        150884.27
       ],
       "is_future": true,
       "is_partial": false,
@@ -2681,8 +2728,8 @@
         -48507.14
       ],
       "cum": [
-        184694.73,
-        102595.89
+        184413.09,
+        102377.13
       ],
       "is_future": true,
       "is_partial": false,
@@ -2707,8 +2754,8 @@
         -46964.13
       ],
       "cum": [
-        138055.6,
-        55631.76
+        137773.96,
+        55413.0
       ],
       "is_future": true,
       "is_partial": false,
@@ -2733,8 +2780,8 @@
         -35455.7
       ],
       "cum": [
-        103295.8,
-        20176.06
+        103014.16,
+        19957.3
       ],
       "is_future": true,
       "is_partial": false,
@@ -2759,8 +2806,8 @@
         0.0
       ],
       "cum": [
-        103295.8,
-        20176.06
+        103014.16,
+        19957.3
       ],
       "is_future": true,
       "is_partial": false,
@@ -2780,8 +2827,8 @@
         0.0
       ],
       "cum": [
-        103295.8,
-        20176.06
+        103014.16,
+        19957.3
       ],
       "is_future": true,
       "is_partial": false,
@@ -2801,8 +2848,8 @@
         -47711.73
       ],
       "cum": [
-        55673.99,
-        -27535.67
+        55392.35,
+        -27754.43
       ],
       "is_future": true,
       "is_partial": false,
@@ -3497,50 +3544,78 @@
     },
     {
       "project": "Shaan Lagisetty",
-      "revenue": 59622.36,
-      "revenue_gross": 59622.36,
-      "cost": 33888.46,
+      "revenue": 58711.86,
+      "revenue_gross": 58711.86,
+      "cost": 33259.6,
       "prod": [
-        25733.9,
-        22345.05
+        25452.26,
+        22126.3
       ],
-      "margin_pct": 43.2,
+      "margin_pct": 43.4,
       "weeks": {
         "2026-W29": [
-          -255.88,
-          -351.84
+          -261.41,
+          -356.73
         ],
         "2026-W30": [
-          658.88,
-          582.14
-        ],
-        "2026-W32": [
-          282.38,
-          249.49
+          620.12,
+          547.89
         ],
         "2026-W33": [
-          3619.32,
-          3287.15
+          265.76,
+          234.81
         ],
         "2026-W34": [
-          6738.47,
-          6083.5
+          3055.7,
+          2793.32
         ],
-        "2026-W36": [
-          5241.69,
-          4558.88
+        "2026-W32": [
+          88.59,
+          78.27
         ],
         "2026-W35": [
-          7949.99,
-          7070.73
+          5225.52,
+          4803.94
         ],
         "2026-W37": [
-          1536.43,
-          1170.99
+          6140.48,
+          5658.21
         ],
-        "2026-W38": [
-          662.63,
-          564.02
+        "2026-W36": [
+          5492.99,
+          5034.66
+        ],
+        "2026-W40": [
+          535.94,
+          469.37
+        ],
+        "2026-W44": [
+          1930.51,
+          1606.08
+        ],
+        "2026-W41": [
+          907.4,
+          731.64
+        ],
+        "2026-W42": [
+          1075.56,
+          762.54
+        ],
+        "2026-W43": [
+          562.41,
+          390.7
+        ],
+        "2026-W45": [
+          387.71,
+          299.2
+        ],
+        "2026-W47": [
+          124.98,
+          -7.6
+        ],
+        "2026-W48": [
+          0.0,
+          -50.0
         ],
         "2026-W28": [
           -700.0,
@@ -3549,20 +3624,28 @@
       },
       "months": {
         "2026-07": [
-          -297.0,
-          -639.7
+          -341.29,
+          -678.84
         ],
         "2026-08": [
-          23003.61,
-          20701.93
+          12283.89,
+          11338.33
         ],
         "2026-09": [
-          3027.29,
-          2282.83
+          8521.08,
+          7734.24
+        ],
+        "2026-10": [
+          4553.43,
+          3550.8
+        ],
+        "2026-11": [
+          435.15,
+          181.76
         ]
       },
       "first_week": "2026-W28",
-      "last_week": "2026-W38"
+      "last_week": "2026-W48"
     },
     {
       "project": "Clifford Clack",
@@ -4450,8 +4533,8 @@
       "produced": 2740.0,
       "margin_pct": 64.6,
       "ratio": 2.8,
-      "start": "2026-08-27",
-      "end": "2026-08-31",
+      "start": "2026-09-04",
+      "end": "2026-09-08",
       "severity": "media"
     },
     {
@@ -4462,8 +4545,8 @@
       "produced": 3508.32,
       "margin_pct": 63.8,
       "ratio": 2.8,
-      "start": "2026-08-22",
-      "end": "2026-08-24",
+      "start": "2026-08-29",
+      "end": "2026-08-31",
       "severity": "media"
     },
     {
@@ -6161,175 +6244,6 @@
       "loose_amount": 0
     },
     {
-      "project": "Shaan Lagisetty",
-      "project_id": "22PEuiuEZaAY",
-      "trades": [
-        {
-          "trade": "FRAMING",
-          "income": 16522.36,
-          "expense": 7377.7,
-          "grouped": true,
-          "n_inc": 2,
-          "n_exp": 3
-        },
-        {
-          "trade": "INTERIOR PAINT",
-          "income": 5346.0,
-          "expense": 3717.6,
-          "grouped": true,
-          "n_inc": 3,
-          "n_exp": 2
-        },
-        {
-          "trade": "TILES",
-          "income": 5330.0,
-          "expense": 3515.2,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 2
-        },
-        {
-          "trade": "ROOFING",
-          "income": 5501.6,
-          "expense": 1993.28,
-          "grouped": true,
-          "n_inc": 2,
-          "n_exp": 2
-        },
-        {
-          "trade": "ELECTRICAL ROUGH IN",
-          "income": 4240.0,
-          "expense": 1500.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 1
-        },
-        {
-          "trade": "FOUNDATION",
-          "income": 3260.0,
-          "expense": 1754.0,
-          "grouped": true,
-          "n_inc": 3,
-          "n_exp": 1
-        },
-        {
-          "trade": "MECHANICAL ROUGH IN",
-          "income": 3383.34,
-          "expense": 1400.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 1
-        },
-        {
-          "trade": "SHEETROCK",
-          "income": 3004.0,
-          "expense": 1664.16,
-          "grouped": true,
-          "n_inc": 2,
-          "n_exp": 2
-        },
-        {
-          "trade": "DEMO / TIE-IN",
-          "income": 2700.0,
-          "expense": 1800.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 1
-        },
-        {
-          "trade": "MECHANICAL RELOCATION",
-          "income": 1500.0,
-          "expense": 2550.0,
-          "grouped": true,
-          "n_inc": 2,
-          "n_exp": 3
-        },
-        {
-          "trade": "BASEBOARDS AND TRIM",
-          "income": 2102.0,
-          "expense": 1681.6,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 2
-        },
-        {
-          "trade": "STUCCO",
-          "income": 1450.8,
-          "expense": 1325.82,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 2
-        },
-        {
-          "trade": "INSULATION",
-          "income": 1612.26,
-          "expense": 1079.1,
-          "grouped": true,
-          "n_inc": 2,
-          "n_exp": 3
-        },
-        {
-          "trade": "ELECTRICAL TRIM",
-          "income": 1420.0,
-          "expense": 700.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 2
-        },
-        {
-          "trade": "INTERIOR DOORS",
-          "income": 700.0,
-          "expense": 700.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 2
-        },
-        {
-          "trade": "GUTTERS",
-          "income": 500.0,
-          "expense": 500.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 1
-        },
-        {
-          "trade": "DOORS AND WINDOWS",
-          "income": 0.0,
-          "expense": 701.0,
-          "grouped": true,
-          "n_inc": 0,
-          "n_exp": 1
-        },
-        {
-          "trade": "PROJECT CLEANING - FRAMING",
-          "income": 350.0,
-          "expense": 210.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 1
-        },
-        {
-          "trade": "PROJECT CLEANING - SHEETROCK",
-          "income": 350.0,
-          "expense": 210.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 1
-        },
-        {
-          "trade": "PRE DELIVERY WALK THROUGH",
-          "income": 350.0,
-          "expense": 210.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 1
-        }
-      ],
-      "total_income": 59622.36,
-      "total_expense": 34589.46,
-      "loose_amount": 0
-    },
-    {
       "project": "Brandy Sexton",
       "project_id": "22PLKSsB4aeV",
       "trades": [
@@ -6448,6 +6362,175 @@
       ],
       "total_income": 59273.0,
       "total_expense": 34896.91,
+      "loose_amount": 0
+    },
+    {
+      "project": "Shaan Lagisetty",
+      "project_id": "22PEuiuEZaAY",
+      "trades": [
+        {
+          "trade": "FRAMING",
+          "income": 16522.36,
+          "expense": 7377.7,
+          "grouped": true,
+          "n_inc": 2,
+          "n_exp": 3
+        },
+        {
+          "trade": "INTERIOR PAINT",
+          "income": 5346.0,
+          "expense": 3717.6,
+          "grouped": true,
+          "n_inc": 3,
+          "n_exp": 2
+        },
+        {
+          "trade": "TILES",
+          "income": 5330.0,
+          "expense": 3515.2,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 2
+        },
+        {
+          "trade": "ROOFING",
+          "income": 5501.6,
+          "expense": 1993.28,
+          "grouped": true,
+          "n_inc": 2,
+          "n_exp": 2
+        },
+        {
+          "trade": "ELECTRICAL ROUGH IN",
+          "income": 4240.0,
+          "expense": 1500.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        },
+        {
+          "trade": "FOUNDATION",
+          "income": 3260.0,
+          "expense": 1754.0,
+          "grouped": true,
+          "n_inc": 3,
+          "n_exp": 1
+        },
+        {
+          "trade": "MECHANICAL ROUGH IN",
+          "income": 3383.34,
+          "expense": 1400.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        },
+        {
+          "trade": "SHEETROCK",
+          "income": 3004.0,
+          "expense": 1664.16,
+          "grouped": true,
+          "n_inc": 2,
+          "n_exp": 2
+        },
+        {
+          "trade": "DEMO / TIE-IN",
+          "income": 2700.0,
+          "expense": 1800.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        },
+        {
+          "trade": "MECHANICAL RELOCATION",
+          "income": 1500.0,
+          "expense": 2550.0,
+          "grouped": true,
+          "n_inc": 2,
+          "n_exp": 3
+        },
+        {
+          "trade": "BASEBOARDS AND TRIM",
+          "income": 2102.0,
+          "expense": 1681.6,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 2
+        },
+        {
+          "trade": "STUCCO",
+          "income": 1450.8,
+          "expense": 1325.82,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 2
+        },
+        {
+          "trade": "ELECTRICAL TRIM",
+          "income": 1420.0,
+          "expense": 700.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 2
+        },
+        {
+          "trade": "INTERIOR DOORS",
+          "income": 700.0,
+          "expense": 700.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 2
+        },
+        {
+          "trade": "INSULATION",
+          "income": 701.76,
+          "expense": 450.24,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 2
+        },
+        {
+          "trade": "GUTTERS",
+          "income": 500.0,
+          "expense": 500.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        },
+        {
+          "trade": "DOORS AND WINDOWS",
+          "income": 0.0,
+          "expense": 701.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 1
+        },
+        {
+          "trade": "PROJECT CLEANING - FRAMING",
+          "income": 350.0,
+          "expense": 210.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        },
+        {
+          "trade": "PROJECT CLEANING - SHEETROCK",
+          "income": 350.0,
+          "expense": 210.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        },
+        {
+          "trade": "PRE DELIVERY WALK THROUGH",
+          "income": 350.0,
+          "expense": 210.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        }
+      ],
+      "total_income": 58711.86,
+      "total_expense": 33960.6,
       "loose_amount": 0
     },
     {
