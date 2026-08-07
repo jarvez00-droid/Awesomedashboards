@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-06T19:27:16",
+ "generated_at": "2026-08-06T19:50:25",
  "date": "2026-08-06",
  "window_start": "2026-08-06",
  "window_end": "2026-08-20",
@@ -7,17 +7,10 @@
   "tasks": 150,
   "projects": 8,
   "alerts": 8,
-  "overdue": 38,
+  "overdue": 35,
   "to_purchase_amount": 76135.52
  },
  "alerts": [
-  {
-   "project": "Stephanie and Marc Felton",
-   "projectId": "22P2cmNJZcwJ",
-   "task": "ROOFING: PURCHASE MATERIAL (SPANISH TILES)",
-   "due": "2026-07-28",
-   "taskId": "22PV9dYCdve5"
-  },
   {
    "project": "Katie Holmes & Sean Springs",
    "projectId": "22P2j3sQMKqz",
@@ -52,6 +45,13 @@
    "task": "MECHANICAL TRIM: PURCHASE MATERIALS",
    "due": "2026-08-15",
    "taskId": "22PZzzsKDUJ6"
+  },
+  {
+   "project": "Stephanie and Marc Felton",
+   "projectId": "22P2cmNJZcwJ",
+   "task": "ROOFING: PURCHASE MATERIAL (SPANISH TILES)",
+   "due": "2026-08-17",
+   "taskId": "22PV9dYCdve5"
   },
   {
    "project": "Katie Holmes & Sean Springs",
@@ -821,57 +821,74 @@
    "counts": {
     "tasks": 5,
     "alerts": 1,
-    "overdue": 3
+    "overdue": 0
    },
-   "overdue": [
-    {
-     "name": "ROOFING: COMPLETE TAKEOFF (SPANISH TILES)",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-07-24",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PV9dUqwM6d",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: SECURE PRICING",
-     "step": "pricing",
-     "icon": "💲",
-     "step_label": "Secure pricing",
-     "due": "2026-07-27",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PV9dVWqeZm",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: PURCHASE MATERIAL (SPANISH TILES)",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-07-28",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PV9dYCdve5",
-     "progress": 0
-    }
-   ],
+   "overdue": [],
    "days": [
     {
-     "date": "2026-08-10",
-     "label": "Mon Aug 10",
+     "date": "2026-08-14",
+     "label": "Fri Aug 14",
+     "tasks": [
+      {
+       "name": "ROOFING: COMPLETE TAKEOFF (SPANISH TILES)",
+       "step": "takeoff",
+       "icon": "📋",
+       "step_label": "Takeoff",
+       "due": "2026-08-14",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PV9dUqwM6d",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-08-15",
+     "label": "Sat Aug 15",
+     "tasks": [
+      {
+       "name": "ROOFING: SECURE PRICING",
+       "step": "pricing",
+       "icon": "💲",
+       "step_label": "Secure pricing",
+       "due": "2026-08-15",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PV9dVWqeZm",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-08-17",
+     "label": "Mon Aug 17",
+     "tasks": [
+      {
+       "name": "ROOFING: PURCHASE MATERIAL (SPANISH TILES)",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-17",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PV9dYCdve5",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-08-18",
+     "label": "Tue Aug 18",
      "tasks": [
       {
        "name": "ROOFING: CONFIRM DELIVERY",
        "step": "confirm",
        "icon": "📦",
        "step_label": "Confirm delivery",
-       "due": "2026-08-10",
+       "due": "2026-08-18",
        "amount": null,
        "alert": false,
        "overdue": false,
@@ -881,15 +898,15 @@
      ]
     },
     {
-     "date": "2026-08-11",
-     "label": "Tue Aug 11",
+     "date": "2026-08-19",
+     "label": "Wed Aug 19",
      "tasks": [
       {
        "name": "ROOFING: PURCHASE SPANISH TILES",
        "step": "other",
        "icon": "•",
        "step_label": "Purchases",
-       "due": "2026-08-11",
+       "due": "2026-08-19",
        "amount": null,
        "alert": false,
        "overdue": false,
