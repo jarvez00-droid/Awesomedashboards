@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>CNG · El dinero — budgets, cashflow y pagos</title>
+<title>CNG · El dinero — del budget al cobro</title>
 <link rel="stylesheet" href="/proceso/assets/style.css">
 </head>
 <body>
@@ -29,125 +29,181 @@
 </header>
 
 <main>
-  <h1><span data-i18n="es">El dinero — budgets, cashflow y pagos</span><span data-i18n="en">The money — budgets, cashflow and payments</span></h1>
-  <p class="proposito">
-    <span data-i18n="es"><b>Esta página existe para</b> que entiendas de dónde sale el costo que puedes gastar (el budget), cómo se planifica el dinero de cada semana (cashflow + viernes), y por qué NINGÚN pago sale sin pasar los 4 filtros de la Administradora.</span>
-    <span data-i18n="en"><b>This page exists so</b> you understand where the cost you may spend comes from (the budget), how each week's money gets planned (cashflow + Friday), and why NO payment goes out without passing the Administrator's 4 filters.</span>
-  </p>
 
-  <!-- BUDGET -->
-  <h2><span class="seccion-num">1 · </span><span data-i18n="es">El budget — el corazón del registro</span><span data-i18n="en">The budget — the heart of the record</span></h2>
-  <p>
-    <span data-i18n="es">El <b>budget</b> = el estimado firmado, estructurado por <b>trades</b> y <b>line items</b>. Cada line item = <b>cantidad · unidad · costo unitario · costo extendido</b> (extendido = unitario × cantidad; unidad típica: square feet — unidades imperiales).</span>
-    <span data-i18n="en">The <b>budget</b> = the signed estimate, structured by <b>trades</b> and <b>line items</b>. Each line item = <b>quantity · unit · unit cost · extended cost</b> (extended = unit × quantity; typical unit: square feet — imperial units).</span>
-  </p>
-  <div class="grid c2">
-    <div class="card">
-      <h3><span data-i18n="es">Costo vs Precio (el margen)</span><span data-i18n="en">Cost vs Price (the margin)</span></h3>
-      <p style="font-size:13.5px"><span data-i18n="es">El <b>precio</b> es lo que se le vende al cliente; el <b>costo</b> es lo que CNG puede pagar al sub. La diferencia es el <b>margen (normalmente 40%)</b>. El costo disponible sale automático: <code>costo = precio × (1 − margen)</code>. Se fija <b>una sola vez</b> al convertir estimado→budget (con descuentos si aplica).</span>
-      <span data-i18n="en">The <b>price</b> is what the client is sold; the <b>cost</b> is what CNG can pay the sub. The difference is the <b>margin (normally 40%)</b>. The available cost is automatic: <code>cost = price × (1 − margin)</code>. It is set <b>once</b> when the estimate converts to the budget (with discounts if any).</span></p>
-    </div>
-    <div class="card">
-      <h3><span data-i18n="es">Cómo lo usa el PM</span><span data-i18n="en">How the PM uses it</span></h3>
-      <p style="font-size:13.5px"><span data-i18n="es">El PM va al budget del trade, ve el <b>costo máximo</b>, y <b>negocia con el sub por ≤ ese costo</b> (si negocia por menos, CNG ahorra). El budget es lo que le permite al PM “conseguir el trabajo” con un sub sin pasarse.</span>
-      <span data-i18n="en">The PM opens the trade's budget, sees the <b>maximum cost</b>, and <b>negotiates with the sub at ≤ that cost</b> (negotiating below it = CNG saves). The budget is what lets the PM “get the work done” with a sub without overshooting.</span></p>
-      <p style="font-size:13px;margin:0"><span data-i18n="es"><b>Por qué le importa al registro:</b> compras/pagos contra el line item correcto = ver si se cumplen los márgenes + alimentar el cashflow (qué días hay egresos).</span>
-      <span data-i18n="en"><b>Why the record cares:</b> purchases/payments against the correct line item = seeing whether margins hold + feeding cashflow (which days money goes out).</span></p>
+  <div class="hero">
+    <span class="paso-n">5 / 9 · <span data-i18n="es">EL DINERO</span><span data-i18n="en">THE MONEY</span></span>
+    <h1><span data-i18n="es">El viaje del dinero: del budget al cobro</span><span data-i18n="en">The money's journey: from budget to collection</span></h1>
+    <p class="sub">
+      <span data-i18n="es">De dónde sale lo que puedes gastar, por qué NINGÚN pago sale sin pasar 4 peajes, y por qué el viernes es el día donde el dinero se cierra y se planifica.</span>
+      <span data-i18n="en">Where what you can spend comes from, why NO payment leaves without passing 4 tollgates, and why Friday is the day money closes and gets planned.</span>
+    </p>
+    <div class="aprende">
+      <div class="ttl"><span data-i18n="es">EN ESTA PÁGINA VAS A ENTENDER:</span><span data-i18n="en">ON THIS PAGE YOU WILL UNDERSTAND:</span></div>
+      <ul>
+        <li><span data-i18n="es">El budget: costo vs precio, el margen del 40% y los line items — con un ejemplo con números</span><span data-i18n="en">The budget: cost vs price, the 40% margin and line items — with a worked number example</span></li>
+        <li><span data-i18n="es">El viaje completo de un dólar: budget → WO → trabajo → checklist → pago → cobro</span><span data-i18n="en">A dollar's complete journey: budget → WO → work → checklist → payment → collection</span></li>
+        <li><span data-i18n="es">Los 4 FILTROS de la Administradora (los peajes de todo pago)</span><span data-i18n="en">The Administrator's 4 FILTERS (every payment's tollgates)</span></li>
+        <li><span data-i18n="es">El ritmo semanal: la reunión del viernes, el plan de la semana y el baseline de las 11 PM</span><span data-i18n="en">The weekly rhythm: the Friday meeting, the week's plan and the 11 PM baseline</span></li>
+      </ul>
     </div>
   </div>
 
-  <!-- CICLO CASHFLOW -->
-  <h2><span class="seccion-num">2 · </span><span data-i18n="es">El ciclo del cashflow y la aprobación de pagos</span><span data-i18n="en">The cashflow cycle and payment approval</span></h2>
+  <!-- ============ EL BUDGET ============ -->
+  <h2><span class="seccion-num">1 · </span><span data-i18n="es">El budget: el corazón del registro</span><span data-i18n="en">The budget: the heart of the record</span></h2>
   <p class="proposito">
-    <span data-i18n="es"><b>Esta sección existe para</b> que veas el camino completo de un dólar: de los saldos bancarios al plan aprobado, y del plan al pago ejecutado y registrado.</span>
-    <span data-i18n="en"><b>This section exists so</b> you see a dollar's full path: from bank balances to the approved plan, and from the plan to the executed, recorded payment.</span>
+    <span data-i18n="es"><b>Esta sección existe para</b> que sepas de dónde sale el número máximo que puedes gastar en cada trade — y por qué registrar contra el line item correcto no es burocracia.</span>
+    <span data-i18n="en"><b>This section exists so</b> you know where the maximum number you can spend on each trade comes from — and why recording against the correct line item is not bureaucracy.</span>
   </p>
+
+  <p>
+    <span data-i18n="es">El <i class="glo" data-g="budget">budget</i> = el estimado firmado, estructurado por <i class="glo" data-g="trade">trades</i> y <i class="glo" data-g="lineitem">line items</i>. Cada line item = <b>cantidad · unidad · costo unitario · costo extendido</b> (extendido = unitario × cantidad; unidad típica: square feet — unidades imperiales).</span>
+    <span data-i18n="en">The <i class="glo" data-g="budget">budget</i> = the signed estimate, structured by <i class="glo" data-g="trade">trades</i> and <i class="glo" data-g="lineitem">line items</i>. Each line item = <b>quantity · unit · unit cost · extended cost</b> (extended = unit × quantity; typical unit: square feet — imperial units).</span>
+  </p>
+
+  <div class="grid c2">
+    <div class="card" style="border-top:5px solid var(--ambar)">
+      <h3><span data-i18n="es">Costo vs Precio (el margen)</span><span data-i18n="en">Cost vs Price (the margin)</span></h3>
+      <p style="font-size:14.5px"><span data-i18n="es">El <b>precio</b> es lo que paga el cliente; el <b>costo</b> es lo que CNG puede pagar al sub. La diferencia es el <b>margen (normalmente 40%)</b>: <code>costo = precio × (1 − margen)</code>. Se fija UNA sola vez al convertir estimado→budget (con descuentos si aplica).</span><span data-i18n="en">The <b>price</b> is what the client pays; the <b>cost</b> is what CNG can pay the sub. The difference is the <b>margin (normally 40%)</b>: <code>cost = price × (1 − margin)</code>. Set ONCE when converting estimate→budget (with discounts if any).</span></p>
+      <div class="mock"><div class="mock-top"><span class="dot"></span><span data-i18n="es">Ejemplo con números</span><span data-i18n="en">Worked example</span></div>
+        <div class="mock-body" style="font-size:14px">
+          <span data-i18n="es">El cliente paga <b>$10,000</b> por el trade PLUMBING →<br>margen 40% = $4,000 para CNG →<br><b>costo máximo para el sub: $6,000</b>.</span>
+          <span data-i18n="en">The client pays <b>$10,000</b> for the PLUMBING trade →<br>40% margin = $4,000 for CNG →<br><b>maximum cost for the sub: $6,000</b>.</span>
+        </div></div>
+    </div>
+    <div class="card" style="border-top:5px solid var(--azul)">
+      <h3><span data-i18n="es">Cómo lo usa el PM</span><span data-i18n="en">How the PM uses it</span></h3>
+      <p style="font-size:14.5px;margin-bottom:6px"><span data-i18n="es">El PM va al budget del trade, ve el <b>costo máximo</b>, y negocia con el sub por <b>≤ ese costo</b>. Si negocia por menos, CNG ahorra. El budget es lo que le permite "conseguir el trabajo" con un sub sin pasarse.</span><span data-i18n="en">The PM opens the trade's budget, sees the <b>maximum cost</b>, and negotiates with the sub for <b>≤ that cost</b>. Negotiate lower and CNG saves. The budget is what lets the PM "get the work done" without overshooting.</span></p>
+      <p style="font-size:13.5px;color:var(--mut);margin:0"><span data-i18n="es"><b>¿Por qué importa el line item?</b> Registrar compras/pagos contra el line item correcto = ver si se cumplen los márgenes + alimentar el cashflow (saber qué días hay egresos).</span><span data-i18n="en"><b>Why does the line item matter?</b> Recording purchases/payments against the correct line item = seeing whether margins hold + feeding cashflow (knowing which days money leaves).</span></p>
+    </div>
+  </div>
+
+  <!-- ============ EL VIAJE ============ -->
+  <h2><span class="seccion-num">2 · </span><span data-i18n="es">El viaje completo de un dólar</span><span data-i18n="en">A dollar's complete journey</span></h2>
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta sección existe para</b> que veas el camino entero: cada parada tiene un documento que la prueba. Si una parada no deja rastro, el dinero se vuelve invisible.</span>
+    <span data-i18n="en"><b>This section exists so</b> you see the whole road: every stop has a document proving it. If a stop leaves no trail, the money turns invisible.</span>
+  </p>
+
+  <div class="flujo">
+    <div class="f-paso" style="border-top:4px solid var(--ambar)"><span class="f-ico">📋</span><div class="f-t">1 · BUDGET</div><p><span data-i18n="es">El line item fija el costo máximo del trade (ej. PLUMBING: $6,000).</span><span data-i18n="en">The line item sets the trade's max cost (e.g., PLUMBING: $6,000).</span></p></div>
+    <div class="f-paso" style="border-top:4px solid var(--azul)"><span class="f-ico">✍️</span><div class="f-t">2 · WO <span data-i18n="es">FIRMADA</span><span data-i18n="en">SIGNED</span></div><p><span data-i18n="es">El PM negocia ≤ costo (ej. $5,500) y el sub firma la <i class="glo" data-g="wo">WO</i> con su Payment Breakdown.</span><span data-i18n="en">The PM negotiates ≤ cost (e.g., $5,500) and the sub signs the <i class="glo" data-g="wo">WO</i> with its Payment Breakdown.</span></p></div>
+    <div class="f-paso" style="border-top:4px solid var(--gris)"><span class="f-ico">🔨</span><div class="f-t">3 · <span data-i18n="es">TRABAJO</span><span data-i18n="en">WORK</span></div><p><span data-i18n="es">El sub ejecuta; el PM supervisa con fotos + checklist During.</span><span data-i18n="en">The sub executes; the PM supervises with photos + During checklist.</span></p></div>
+    <div class="f-paso" style="border-top:4px solid var(--verde)"><span class="f-ico">📸</span><div class="f-t">4 · CHECKLIST AFTER</div><p><span data-i18n="es">El After lleno + revisión del Backoffice = el trabajo se da por terminado. SIN esto no hay pago.</span><span data-i18n="en">The filled After + Backoffice review = the work counts as done. WITHOUT this there is no payment.</span></p></div>
+    <div class="f-paso" style="border-top:4px solid var(--ambar)"><span class="f-ico">💸</span><div class="f-t">5 · <span data-i18n="es">PAGO</span><span data-i18n="en">PAYMENT</span></div><p><span data-i18n="es">Pasa los 4 peajes de la Administradora → Bill + tarea en el schedule (los DOS registros).</span><span data-i18n="en">Passes the Administrator's 4 tollgates → Bill + schedule task (the TWO records).</span></p></div>
+    <div class="f-paso" style="border-top:4px solid var(--rol-ceo)"><span class="f-ico">🏦</span><div class="f-t">6 · <span data-i18n="es">COBRO</span><span data-i18n="en">COLLECTION</span></div><p><span data-i18n="es">Cada trade terminado se convierte en cobro: el <i class="glo" data-g="draw">draw</i> bancario lo gestiona el CEO.</span><span data-i18n="en">Every finished trade becomes a collection: the bank <i class="glo" data-g="draw">draw</i>, managed by the CEO.</span></p></div>
+  </div>
+
+  <!-- ============ LOS 4 PEAJES ============ -->
+  <h2><span class="seccion-num">3 · </span><span data-i18n="es">Los 4 peajes de la Administradora</span><span data-i18n="en">The Administrator's 4 tollgates</span></h2>
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta sección existe para</b> que sepas qué te van a preguntar ANTES de que pidas un pago. Milagros (Administradora) es la gatekeeper: <i>"nada se paga sin pasar por ella."</i> Un pago pasa los 4 peajes o no sale.</span>
+    <span data-i18n="en"><b>This section exists so</b> you know what you'll be asked BEFORE you request a payment. Milagros (Administrator) is the gatekeeper: <i>"nothing gets paid without going through her."</i> A payment passes all 4 tollgates or it doesn't leave.</span>
+  </p>
+
+  <div class="peajes">
+    <div class="peaje"><div class="p-barrera"></div><div class="p-body">
+      <span class="p-num"><span data-i18n="es">PEAJE 1</span><span data-i18n="en">TOLL 1</span></span>
+      <h4><span data-i18n="es">¿Está en el plan de la semana?</span><span data-i18n="en">Is it in the week's plan?</span></h4>
+      <p><span data-i18n="es">Si no está en el plan aprobado por el CEO, no sale esta semana.</span><span data-i18n="en">If it's not in the CEO-approved plan, it doesn't leave this week.</span></p>
+    </div></div>
+    <div class="peaje"><div class="p-barrera"></div><div class="p-body">
+      <span class="p-num"><span data-i18n="es">PEAJE 2</span><span data-i18n="en">TOLL 2</span></span>
+      <h4><span data-i18n="es">¿Es la misma cantidad?</span><span data-i18n="en">Is it the same amount?</span></h4>
+      <p><span data-i18n="es">Aprobado-vs-pagado debe calzar. Diferencia &gt;$1,000 → flag al CEO + COO.</span><span data-i18n="en">Approved-vs-paid must match. Difference &gt;$1,000 → flag to CEO + COO.</span></p>
+    </div></div>
+    <div class="peaje"><div class="p-barrera"></div><div class="p-body">
+      <span class="p-num"><span data-i18n="es">PEAJE 3</span><span data-i18n="en">TOLL 3</span></span>
+      <h4><span data-i18n="es">¿Nos deja en buena posición?</span><span data-i18n="en">Does it leave us in good position?</span></h4>
+      <p><span data-i18n="es">Según el plan financiero. Además: flag ANTES de que el proyectado se vuelva negativo.</span><span data-i18n="en">Per the financial plan. Plus: a flag BEFORE the projection goes negative.</span></p>
+    </div></div>
+    <div class="peaje"><div class="p-barrera"></div><div class="p-body">
+      <span class="p-num"><span data-i18n="es">PEAJE 4</span><span data-i18n="en">TOLL 4</span></span>
+      <h4><span data-i18n="es">¿Documentación adecuada?</span><span data-i18n="en">Adequate documentation?</span></h4>
+      <p><span data-i18n="es">= <i class="glo" data-g="wo">Work Order</i> firmada + inspecciones (el After del checklist). Sin expediente no hay pago.</span><span data-i18n="en">= signed <i class="glo" data-g="wo">Work Order</i> + inspections (the checklist's After). No file, no payment.</span></p>
+    </div></div>
+  </div>
+
+  <p style="font-size:14px;color:var(--mut)">
+    <span data-i18n="es">Si pasa los 4 → se paga → el Backoffice <b>actualiza el schedule + sube la factura</b> → la Administradora <b>avisa al grupo de PMs de CADA pago realizado</b>.</span>
+    <span data-i18n="en">If it passes all 4 → it gets paid → Backoffice <b>updates the schedule + uploads the invoice</b> → the Administrator <b>notifies the PM group of EVERY payment made</b>.</span>
+  </p>
+
+  <!-- ============ EL CICLO SEMANAL ============ -->
+  <h2><span class="seccion-num">4 · </span><span data-i18n="es">El VIERNES: donde el dinero se cierra y se planifica</span><span data-i18n="en">FRIDAY: where money closes and gets planned</span></h2>
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta sección existe para</b> que el ritmo semanal del dinero sea de todos, no solo de gerencia. El viernes se cierra la semana que termina y se planifica la que viene.</span>
+    <span data-i18n="en"><b>This section exists so</b> the money's weekly rhythm belongs to everyone, not just management. Friday closes the ending week and plans the coming one.</span>
+  </p>
+
   <ol class="pasos">
-    <li><span class="tarea"><span class="chip admin">Admin</span> <span data-i18n="es">Suma los saldos bancarios</span><span data-i18n="en">Adds up the bank balances</span></span>
-      <div class="det"><span data-i18n="es">Consolidación semanal de saldos los VIERNES — la única fuente de verdad del cashflow.</span><span data-i18n="en">Weekly balance consolidation on FRIDAYS — the single source of truth for cashflow.</span></div></li>
-    <li><span class="tarea">CASHFLOW DATA</span>
-      <div class="det"><span data-i18n="es">Alimentado por: <span class="chip coo">COO</span> negociaciones CON DETALLES + <span class="chip backoffice">Backoffice</span> “Daily Schedule Update by EOD”. El registro limpio del schedule es lo que hace que el dinero se planifique bien.</span>
-      <span data-i18n="en">Fed by: <span class="chip coo">COO</span> negotiations WITH DETAILS + <span class="chip backoffice">Backoffice</span> “Daily Schedule Update by EOD”. A clean schedule record is what makes money plannable.</span></div></li>
-    <li><span class="tarea">CASHFLOW PLAN → <span class="chip ceo">CEO</span> <span data-i18n="es">¿aprueba?</span><span data-i18n="en">approves?</span></span>
-      <div class="det"><span data-i18n="es">Si NO aprueba → plan alternativo. El plan aprobado = el PLAN DE LA SEMANA (presupuesto por proyecto).</span><span data-i18n="en">If NOT approved → alternative plan. The approved plan = the WEEK PLAN (budget per project).</span></div></li>
-    <li><span class="tarea">Verify Payment Rules → Request Payments</span>
-      <div class="det"><span data-i18n="es">Solicitan: <span class="chip coo">COO</span> <span class="chip pm">PMs</span> <span class="chip compras">Purchases</span> — cada solicitud con su expediente (WO + inspecciones).</span>
-      <span data-i18n="en">Requesters: <span class="chip coo">COO</span> <span class="chip pm">PMs</span> <span class="chip compras">Purchases</span> — each request with its file (WO + inspections).</span></div></li>
-    <li><span class="tarea"><span class="chip admin">Admin</span> <span data-i18n="es">Confirma con el solicitante → Proceed with Payment</span><span data-i18n="en">Confirms with the requester → Proceed with Payment</span></span>
-      <div class="det"><span data-i18n="es">Los 4 FILTROS (abajo). Tras pagar: <span class="chip backoffice">Backoffice</span> actualiza el schedule + sube la factura. La Admin avisa al grupo de PMs de CADA pago realizado.</span>
-      <span data-i18n="en">The 4 FILTERS (below). After paying: <span class="chip backoffice">Backoffice</span> updates the schedule + uploads the invoice. Admin notifies the PM group of EVERY payment made.</span></div></li>
+    <li><span class="tarea"><span data-i18n="es">Consolidación de saldos bancarios</span><span data-i18n="en">Bank balance consolidation</span> <span class="chip admin">Admin</span></span>
+      <div class="det"><span data-i18n="es">Cada viernes la Administradora suma los saldos de los bancos — la ÚNICA fuente de verdad del cashflow.</span><span data-i18n="en">Every Friday the Administrator adds up the bank balances — the ONLY source of truth for cashflow.</span></div></li>
+    <li><span class="tarea"><span data-i18n="es">Reunión de cash flow / presupuestos</span><span data-i18n="en">Cashflow / budget meeting</span> <span class="chip ceo">CEO</span> <span class="chip admin">Admin</span></span>
+      <div class="det"><span data-i18n="es">(Viernes o lunes.) Se examinan pagos e ingresos y se cuadra → sale el <b>PLAN DE LA SEMANA</b>: presupuesto por proyecto ("para X solo podemos gastar tanto en estos trades"). <b>El CEO aprueba</b>; si no → plan alternativo.</span><span data-i18n="en">(Friday or Monday.) Payments and income get examined and squared → out comes the <b>WEEK'S PLAN</b>: a budget per project ("for X we can only spend this much on these trades"). <b>The CEO approves</b>; if not → alternative plan.</span></div></li>
+    <li><span class="tarea"><span data-i18n="es">Checks del cronograma = pagos CONFIRMADOS</span><span data-i18n="en">Schedule checks = CONFIRMED payments</span></span>
+      <div class="det"><span data-i18n="es">Dinero reservado: suceden sí o sí en la semana; si no alcanza, pasan a la siguiente CON PRIORIDAD. El cuadre se maneja "pateando" pagos a proveedores según lleguen los ingresos. Meta: un colchón en cuenta para que una movida de ~$200k no afecte. <b>Fuente de la verdad de pagos confirmados: el Finance tab del dashboard</b> — no los checks del schedule.</span><span data-i18n="en">Reserved money: they happen in the week no matter what; if funds fall short, they roll to the next week WITH PRIORITY. Squaring is managed by "kicking" supplier payments as income lands. Goal: a cushion so a ~$200k move doesn't hurt. <b>Source of truth for confirmed payments: the dashboard's Finance tab</b> — not the schedule checks.</span></div></li>
+    <li><span class="tarea"><span data-i18n="es">Pago estándar a subs</span><span data-i18n="en">Standard sub payment</span></span>
+      <div class="det"><span data-i18n="es">= el viernes siguiente a terminar el trabajo (o la excepción "día después" si la WO lo dice).</span><span data-i18n="en">= the Friday after the work finishes (or the "day after" exception if the WO says so).</span></div></li>
+    <li><span class="tarea"><span data-i18n="es">VIERNES 11:00 PM — BASELINE OFICIAL</span><span data-i18n="en">FRIDAY 11:00 PM — OFFICIAL BASELINE</span> <span class="chip sistema">sistema</span></span>
+      <div class="det"><span data-i18n="es">La foto del schedule que ancla el <i class="glo" data-g="viernes">viernes-vs-viernes</i>. <a href="reloj-reportes.html">Ver el reloj de la semana →</a></span><span data-i18n="en">The schedule snapshot that anchors <i class="glo" data-g="viernes">Friday-vs-Friday</i>. <a href="reloj-reportes.html">See the week's clock →</a></span></div></li>
   </ol>
 
-  <blockquote class="jose">
-    <span data-i18n="es">“nada se paga sin pasar por ella” — Milagros (Administradora) es el gatekeeper de TODOS los pagos.</span>
-    <span data-i18n="en">“nothing gets paid without going through her” — Milagros (Administrator) is the gatekeeper of ALL payments.</span>
-    <footer><span data-i18n="es">Canon §8</span><span data-i18n="en">Canon §8</span></footer>
-  </blockquote>
-
-  <!-- 4 FILTROS -->
-  <h2><span class="seccion-num">3 · </span><span data-i18n="es">Los 4 FILTROS de la Administradora</span><span data-i18n="en">The Administrator's 4 FILTERS</span></h2>
-  <div class="grid c2">
-    <div class="card"><h3>1 · <span data-i18n="es">¿Está en el plan de la semana?</span><span data-i18n="en">Is it in the week plan?</span></h3>
-      <p style="font-size:13px;margin:0"><span data-i18n="es">Si no está en el plan aprobado por el CEO, no sale esta semana.</span><span data-i18n="en">If it isn't in the CEO-approved plan, it doesn't go out this week.</span></p></div>
-    <div class="card"><h3>2 · <span data-i18n="es">¿Es la misma cantidad?</span><span data-i18n="en">Is it the same amount?</span></h3>
-      <p style="font-size:13px;margin:0"><span data-i18n="es">Aprobado-vs-pagado debe calzar. Diferencia &gt;$1,000 → flag al CEO+COO.</span><span data-i18n="en">Approved-vs-paid must match. Difference &gt;$1,000 → flag to CEO+COO.</span></p></div>
-    <div class="card"><h3>3 · <span data-i18n="es">¿Nos deja en buena posición?</span><span data-i18n="en">Does it leave us in a good position?</span></h3>
-      <p style="font-size:13px;margin:0"><span data-i18n="es">Según el plan financiero. Además: flag ANTES de que el proyectado se vuelva negativo.</span><span data-i18n="en">Per the financial plan. Also: flag BEFORE the projection turns negative.</span></p></div>
-    <div class="card"><h3>4 · <span data-i18n="es">¿Documentación adecuada?</span><span data-i18n="en">Adequate documentation?</span></h3>
-      <p style="font-size:13px;margin:0"><span data-i18n="es">= <b>Work Order firmada + inspecciones</b> (el After del checklist). Sin expediente no hay pago.</span><span data-i18n="en">= <b>signed Work Order + inspections</b> (the checklist After). No file, no payment.</span></p></div>
-  </div>
-
-  <!-- VIERNES -->
-  <h2><span class="seccion-num">4 · </span><span data-i18n="es">El VIERNES — el día donde el dinero se cierra y se planifica</span><span data-i18n="en">FRIDAY — the day money closes and gets planned</span></h2>
+  <!-- ============ REGLAS DURAS ============ -->
+  <h2><span class="seccion-num">5 · </span><span data-i18n="es">Reglas de pago que no se negocian</span><span data-i18n="en">Payment rules that are not negotiable</span></h2>
   <p class="proposito">
-    <span data-i18n="es"><b>Esta sección existe para</b> que el ritmo semanal del dinero sea de todos: el viernes se cierra la semana y se planifica la siguiente.</span>
-    <span data-i18n="en"><b>This section exists so</b> everyone owns the weekly money rhythm: Friday closes the week and plans the next one.</span>
+    <span data-i18n="es"><b>Esta sección existe para</b> que nadie "invente" una excepción en caliente. Cada regla trae su porqué.</span>
+    <span data-i18n="en"><b>This section exists so</b> nobody "invents" an exception in the heat of the moment. Each rule carries its why.</span>
   </p>
-  <ul style="font-size:14px">
-    <li><span data-i18n="es"><b>Reunión de cash flow / presupuestos (viernes o lunes):</b> se examinan pagos e ingresos y se cuadra → sale el <b>PLAN DE LA SEMANA</b> (presupuesto por proyecto: “para X solo podemos gastar tanto en estos trades”) → <b>el CEO aprueba</b> (si no → plan alternativo).</span>
-    <span data-i18n="en"><b>Cash flow / budget meeting (Friday or Monday):</b> payments and income get examined and squared → out comes the <b>WEEK PLAN</b> (budget per project: “for X we can only spend this much on these trades”) → <b>the CEO approves</b> (if not → alternative plan).</span></li>
-    <li><span data-i18n="es"><b>Checks del cronograma = pagos CONFIRMADOS/reservados:</b> dinero reservado, suceden sí o sí en la semana; si no alcanza, pasan a la siguiente CON PRIORIDAD. El cuadre se maneja “pateando” pagos a proveedores según lleguen los ingresos; meta: colchón en cuenta para que una movida de ~$200k no afecte.</span>
-    <span data-i18n="en"><b>Schedule checks = CONFIRMED/reserved payments:</b> money set aside, they happen in the week no matter what; if funds fall short they roll to the next week WITH PRIORITY. Squaring is managed by “kicking” supplier payments as income lands; goal: a cushion so a ~$200k move doesn't hurt.</span></li>
-    <li><span data-i18n="es"><b>Consolidación semanal de saldos bancarios</b> (Administradora, viernes) + <b>pago estándar a subs = el viernes siguiente</b> a terminar el trabajo.</span>
-    <span data-i18n="en"><b>Weekly bank-balance consolidation</b> (Administrator, Fridays) + <b>standard sub payment = the Friday after</b> the work is finished.</span></li>
-    <li><span data-i18n="es"><b>Viernes 11:00 PM = BASELINE OFICIAL</b> — la foto del schedule que ancla el viernes-vs-viernes. <a href="reloj-reportes.html">Ver el reloj →</a></span>
-    <span data-i18n="en"><b>Friday 11:00 PM = OFFICIAL BASELINE</b> — the schedule snapshot that anchors Friday-vs-Friday. <a href="reloj-reportes.html">See the clock →</a></span></li>
-  </ul>
 
-  <!-- REGLAS DE PAGO -->
-  <h2><span class="seccion-num">5 · </span><span data-i18n="es">Reglas de pago que no se negocian</span><span data-i18n="en">Non-negotiable payment rules</span></h2>
   <div class="grid c2">
-    <div class="card"><h3><span data-i18n="es">A los subs NUNCA se les paga al inicio</span><span data-i18n="en">Subs are NEVER paid up front</span></h3>
-      <p style="font-size:13.5px;margin:0"><span data-i18n="es"><i>“se van y te dejan varado.”</i> Pago al culminar, típicamente 1 semana después por contrato, idealmente en viernes. <b>Excepción: el DOWNPAYMENT</b> es algo especial con CIERTOS subs o trades — como FRAMING o MEP ROUGH-INS (único pago pre-trabajo, con gate).</span>
-      <span data-i18n="en">“they leave and strand you.” Payment on completion, typically 1 week later per contract, ideally on a Friday. <b>Exception: the DOWNPAYMENT</b> is something special with CERTAIN subs or trades — like FRAMING or MEP ROUGH-INS (the only pre-work payment, gated).</span></p></div>
-    <div class="card"><h3><span data-i18n="es">Renegociaciones SE NOTIFICAN</span><span data-i18n="en">Renegotiations GET NOTIFIED</span></h3>
-      <p style="font-size:13.5px;margin:0"><span data-i18n="es">Si el CEO/COO renegocia un precio ya cerrado por el PM (ej. $1,000 → $800) <b>DEBE notificar el cambio</b> para actualizar la WO y no pagar de más.</span>
-      <span data-i18n="en">If the CEO/COO renegotiates a price the PM already closed (e.g. $1,000 → $800) they <b>MUST notify the change</b> so the WO gets updated and no one overpays.</span></p></div>
-    <div class="card"><h3><span data-i18n="es">TODO dinero pasa por el schedule</span><span data-i18n="en">ALL money goes through the schedule</span></h3>
-      <p style="font-size:13.5px;margin:0"><span data-i18n="es">Regla sin excepciones (Jose 2026-08-06): compra de último minuto → tarea con su tipo; gasto de Home Depot/caja chica → Additional Expense al proyecto. <a href="jobtread.html">Los dos registros →</a></span>
-      <span data-i18n="en">Rule without exceptions (Jose 2026-08-06): last-minute purchase → task with its type; Home Depot/petty-cash expense → Additional Expense on the project. <a href="jobtread.html">The two records →</a></span></p></div>
-    <div class="card"><h3><span data-i18n="es">La fuente de verdad de PAGOS CONFIRMADOS</span><span data-i18n="en">The source of truth for CONFIRMED payments</span></h3>
-      <p style="font-size:13.5px;margin:0"><span data-i18n="es">(Jose 2026-08-03) El <b>Finance tab del dashboard</b> (timeline con <code>confirmed:true</code>) — NO los checks del schedule.</span>
-      <span data-i18n="en">(Jose 2026-08-03) The <b>dashboard's Finance tab</b> (timeline with <code>confirmed:true</code>) — NOT the schedule checks.</span></p></div>
+    <div class="card" style="border-left:5px solid var(--rojo)">
+      <h4 style="margin-top:0"><span data-i18n="es">A los subs NUNCA se les paga al inicio</span><span data-i18n="en">Subs NEVER get paid upfront</span></h4>
+      <p style="font-size:14px;margin:0"><span data-i18n="es"><b>¿Por qué?</b> <i>"Se van y te dejan varado."</i> Pago al culminar, típicamente 1 semana después por contrato, idealmente en viernes. <b>Única excepción:</b> el <i class="glo" data-g="downpayment">downpayment</i> con CIERTOS subs/trades (framing, MEP rough-ins).</span><span data-i18n="en"><b>Why?</b> <i>"They leave and strand you."</i> Payment on completion, typically 1 week later by contract, ideally on a Friday. <b>Only exception:</b> the <i class="glo" data-g="downpayment">downpayment</i> with CERTAIN subs/trades (framing, MEP rough-ins).</span></p>
+    </div>
+    <div class="card" style="border-left:5px solid var(--ambar)">
+      <h4 style="margin-top:0"><span data-i18n="es">Renegociaciones se NOTIFICAN</span><span data-i18n="en">Renegotiations get NOTIFIED</span></h4>
+      <p style="font-size:14px;margin:0"><span data-i18n="es">Si el CEO/COO renegocia un precio ya cerrado por el PM (ej. $1,000 → $800), <b>DEBE notificar el cambio</b> para actualizar la WO. <b>¿Por qué?</b> Si nadie actualiza la WO, se paga de más.</span><span data-i18n="en">If the CEO/COO renegotiates a price the PM already closed (e.g., $1,000 → $800), they <b>MUST notify the change</b> so the WO gets updated. <b>Why?</b> If nobody updates the WO, we overpay.</span></p>
+    </div>
+    <div class="card" style="border-left:5px solid var(--violeta)">
+      <h4 style="margin-top:0"><span data-i18n="es">El Backoffice alimenta el cashflow</span><span data-i18n="en">Backoffice feeds the cashflow</span></h4>
+      <p style="font-size:14px;margin:0"><span data-i18n="es">Con el "Daily Schedule Update by EOD". El cashflow es de gerencia — el Data-Entry no se involucra aún; lo que debe internalizar: <b>sus schedules limpios lo alimentan</b>. <i>"JobTread es un espejo de lo que está pasando en la realidad."</i></span><span data-i18n="en">Via the "Daily Schedule Update by EOD". Cashflow belongs to management — Data-Entry isn't involved yet; what they must internalize: <b>their clean schedules feed it</b>. <i>"JobTread is a mirror of what is happening in reality."</i></span></p>
+    </div>
+    <div class="card" style="border-left:5px solid var(--ink)">
+      <h4 style="margin-top:0"><span data-i18n="es">TODO dinero pasa por el schedule</span><span data-i18n="en">ALL money goes through the schedule</span></h4>
+      <p style="font-size:14px;margin:0"><span data-i18n="es">La regla sin excepciones (Jose, 2026-08-06): compra de último minuto → tarea Payment; gasto de Home Depot → Additional Expense. <b>¿Por qué?</b> Dinero sin tarea = cashflow, productividad y reportes ciegos.</span><span data-i18n="en">The rule without exceptions (Jose, 2026-08-06): last-minute purchase → Payment task; Home Depot spend → Additional Expense. <b>Why?</b> Money without a task = blind cashflow, productivity and reports.</span></p>
+    </div>
   </div>
 
-  <div class="regla">
-    <span data-i18n="es"><b>El matiz del pago en el schedule:</b> la fecha original de la tarea de pago = <b>gatillo contractual</b> (culminación + término) y NO se reescribe; el pago se <b>MUEVE</b> y se registra en la fecha en que REALMENTE se pagó. El cashflow es de gerencia: lo que cada puesto debe internalizar es que <b>sus schedules limpios lo alimentan</b>.</span>
-    <span data-i18n="en"><b>The schedule payment nuance:</b> the payment task's original date = the <b>contractual trigger</b> (completion + terms) and is NOT rewritten; the payment is <b>MOVED</b> and recorded on the date it was REALLY paid. Cashflow belongs to management: what each position must internalize is that <b>their clean schedules feed it</b>.</span>
+  <div class="alerta">
+    <span data-i18n="es"><b>Caso real (7):</b> un cheque rebotado del cliente (Felton, 17-jul) terminó condicionando si el sub trabajaba el sábado. Cuando el dinero toca la ejecución, el PM <b>escala a Milagros/Jose ESE día</b> — no lo descubre el sábado.</span>
+    <span data-i18n="en"><b>Real case (7):</b> a bounced client check (Felton, Jul-17) ended up deciding whether the sub worked Saturday. When money touches execution, the PM <b>escalates to Milagros/Jose THAT day</b> — you don't find out on Saturday.</span>
   </div>
 
-  <!-- CASOS -->
-  <h2><span class="seccion-num">6 · </span><span data-i18n="es">Los casos que enseñan el dinero</span><span data-i18n="en">The cases that teach the money</span></h2>
-  <div class="grid c2">
-    <div class="gap"><span data-i18n="es"><b>Cheques rebotados (Felton, 17-jul).</b> Un cheque rebotado del cliente condicionando si el sub trabaja el sábado. Moraleja: cuando el dinero toca la ejecución, el PM <b>escala a Milagros/Jose ESE día</b> — no lo descubre el sábado.</span>
-    <span data-i18n="en"><b>Bounced checks (Felton, Jul 17).</b> A bounced client check deciding whether the sub works Saturday. Lesson: when money touches execution, the PM <b>escalates to Milagros/Jose THAT day</b> — it isn't discovered on Saturday.</span></div>
-    <div class="gap"><span data-i18n="es"><b>Material cruzado entre obras.</b> César usando material de Martha en otra cosa — detectado por chat, no por sistema. Moraleja: material que entra a una obra es DE ESA obra; todo registro va contra el proyecto/trade/line item correcto.</span>
-    <span data-i18n="en"><b>Material crossed between jobs.</b> César using Martha's material elsewhere — caught by chat, not by the system. Lesson: material that enters a job belongs to THAT job; every record goes against the correct project/trade/line item.</span></div>
-  </div>
+  <section class="quiz">
+    <div class="q-head">
+      <span class="q-ico">🧠</span>
+      <div>
+        <h2><span data-i18n="es">¿Lo entendiste?</span><span data-i18n="en">Did you get it?</span></h2>
+        <p><span data-i18n="es">Responde en tu cabeza y luego toca "ver respuesta".</span><span data-i18n="en">Answer in your head, then tap "show answer".</span></p>
+      </div>
+    </div>
+    <details class="q">
+      <summary><span class="q-n">1</span><span data-i18n="es">El cliente paga $20,000 por el trade FLOORING y el margen es 40%. ¿Hasta cuánto puede negociar el PM con el sub?</span><span data-i18n="en">The client pays $20,000 for the FLOORING trade and the margin is 40%. Up to how much can the PM negotiate with the sub?</span></summary>
+      <div class="q-a"><span data-i18n="es"><b>$12,000.</b> costo = precio × (1 − margen) = $20,000 × 0.6. Si negocia por menos (ej. $11,000), CNG ahorra $1,000. Si se pasa, se come el margen — y el margen ES el negocio.</span><span data-i18n="en"><b>$12,000.</b> cost = price × (1 − margin) = $20,000 × 0.6. Negotiating lower (e.g., $11,000) saves CNG $1,000. Going over eats the margin — and the margin IS the business.</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="q-n">2</span><span data-i18n="es">Un pago tiene WO firmada, la cantidad calza y hay caja. ¿Ya sale?</span><span data-i18n="en">A payment has a signed WO, the amount matches and there's cash. Does it go out?</span></summary>
+      <div class="q-a"><span data-i18n="es"><b>Todavía no — son 4 peajes.</b> Falta el peaje 1: ¿está en el PLAN DE LA SEMANA aprobado por el CEO? Y el peaje 4 completo exige también las inspecciones (el After del checklist), no solo la WO.</span><span data-i18n="en"><b>Not yet — there are 4 tollgates.</b> Toll 1 is missing: is it in the CEO-approved WEEK'S PLAN? And toll 4 in full also requires the inspections (the checklist's After), not just the WO.</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="q-n">3</span><span data-i18n="es">Un sub de framing pide un adelanto antes de empezar. ¿Se puede?</span><span data-i18n="en">A framing sub asks for an advance before starting. Is that allowed?</span></summary>
+      <div class="q-a"><span data-i18n="es"><b>Sí — framing es de las excepciones.</b> El downpayment existe solo con CIERTOS subs/trades (framing, MEP rough-ins) y con su gate. Para el resto, la regla manda: nunca pagar al inicio — "se van y te dejan varado".</span><span data-i18n="en"><b>Yes — framing is one of the exceptions.</b> The downpayment exists only with CERTAIN subs/trades (framing, MEP rough-ins) and gated. For everyone else the rule stands: never pay upfront — "they leave and strand you".</span></div>
+    </details>
+  </section>
 
   <div class="footer-note">
-    <span data-i18n="es">Fuente: PROCESO CANÓNICO CNG v4 §7 (budgets) + §8 (cashflow y 4 filtros, P3) + §9.2 (viernes) + BRIEF §2 (fuente de pagos confirmados) y §5 (casos). Citas de Jose verbatim.</span>
-    <span data-i18n="en">Source: CNG CANONICAL PROCESS v4 §7 (budgets) + §8 (cashflow and 4 filters, P3) + §9.2 (Friday) + BRIEF §2 (confirmed-payments source) and §5 (cases). Jose's quotes verbatim (translated where shown in English).</span>
+    <span data-i18n="es">WEB DEL PROCESO CNG · Dinero · 2026-08-07 · Fuente: PROCESO CANÓNICO CNG v4 §7 + §8 (Procesos CNG (2) + P3 + reglas de Jose 2026-08-06) + REPORTERIA_MASTER (fuente de la verdad de pagos confirmados). Los montos de los ejemplos son ilustrativos de la mecánica. Material interno — no distribuir.</span>
+    <span data-i18n="en">CNG PROCESS SITE · Money · 2026-08-07 · Source: CNG CANONICAL PROCESS v4 §7 + §8 (Procesos CNG (2) + P3 + Jose's 2026-08-06 rules) + REPORTERIA_MASTER (source of truth for confirmed payments). Example amounts illustrate the mechanics. Internal material — do not distribute.</span>
   </div>
 </main>
 

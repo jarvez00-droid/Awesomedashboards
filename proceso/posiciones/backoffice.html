@@ -4,19 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>CNG · Posición — Backoffice / Data-Entry</title>
+<title>CNG · Un día en la vida del Backoffice / Data-Entry</title>
 <link rel="stylesheet" href="/proceso/assets/style.css">
-<style>
-.btn{display:inline-block;background:var(--ink);color:#fbbf24;font-weight:700;border-radius:9px;padding:8px 14px;font-size:13px;margin:2px 6px 2px 0}
-.btn:hover{text-decoration:none;opacity:.92}
-ul.checks{list-style:none;margin:8px 0;padding:0}
-ul.checks li{padding:7px 10px 7px 34px;position:relative;border-bottom:1px dashed var(--line);font-size:13.5px}
-ul.checks li:last-child{border-bottom:0}
-ul.checks li::before{content:"✓";position:absolute;left:8px;color:var(--verde);font-weight:800}
-.shv-s{border-top:4px solid var(--violeta)} .shv-h{border-top:4px solid var(--verde)} .shv-v{border-top:4px solid var(--ambar)}
-.shv-s ul,.shv-h ul,.shv-v ul{margin:6px 0 0;padding-left:18px;font-size:13px}
-.shv-s li,.shv-h li,.shv-v li{margin:4px 0}
-</style>
 </head>
 <body>
 
@@ -40,32 +29,84 @@ ul.checks li::before{content:"✓";position:absolute;left:8px;color:var(--verde)
 </header>
 
 <main>
-  <p style="margin:0 0 4px"><span class="chip backoffice">BACKOFFICE</span> <span style="font-size:12.5px;color:var(--mut)"><span data-i18n="es">Hoy: Jose (la función) → Joaquín (Data-Entry, Perú — las manos)</span><span data-i18n="en">Today: Jose (the function) → Joaquín (Data-Entry, Peru — the hands)</span></span></p>
-  <h1>Backoffice / Data-Entry</h1>
-  <p class="lead">
-    <span data-i18n="es">El dueño del schedule y del proceso desde la oficina. Los PMs reportan; el Backoffice es <b>el autor del sistema</b>. <i>"Somos una empresa que realmente depende de la información"</i> (Jose, P2).</span>
-    <span data-i18n="en">Owner of the schedule and the process from the office. PMs report; the Backoffice is <b>the system's author</b>. <i>"We are a company that truly depends on information"</i> (Jose, P2).</span>
-  </p>
 
+  <div class="hero">
+    <span class="paso-n"><span class="chip backoffice" style="border:0">BACKOFFICE</span> <span data-i18n="es">Jose (la función) → Joaquín (Data-Entry, Perú)</span><span data-i18n="en">Jose (the function) → Joaquín (Data-Entry, Peru)</span></span>
+    <h1><span data-i18n="es">Un día en la vida del Backoffice / Data-Entry</span><span data-i18n="en">A day in the life of the Backoffice / Data-Entry</span></h1>
+    <p class="sub">
+      <span data-i18n="es">Los PMs reportan lo que pasa; el Backoffice lo convierte en REGISTRO. Es el autor del <i class="glo" data-g="schedule" style="color:#e2e8f0;border-bottom-color:#fbbf24">schedule</i> en <i class="glo" data-g="jobtread" style="color:#e2e8f0;border-bottom-color:#fbbf24">JobTread</i> desde la oficina. <i>"Somos una empresa que realmente depende de la información"</i> (Jose, P2).</span>
+      <span data-i18n="en">The PMs report what happens; the Backoffice turns it into RECORD. It is the author of the <i class="glo" data-g="schedule" style="color:#e2e8f0;border-bottom-color:#fbbf24">schedule</i> in <i class="glo" data-g="jobtread" style="color:#e2e8f0;border-bottom-color:#fbbf24">JobTread</i>, from the office. <i>"We are a company that truly depends on information"</i> (Jose, P2).</span>
+    </p>
+    <div class="aprende">
+      <div class="ttl"><span data-i18n="es">EN ESTA PÁGINA VAS A ENTENDER:</span><span data-i18n="en">ON THIS PAGE YOU WILL UNDERSTAND:</span></div>
+      <ul>
+        <li><span data-i18n="es">Por qué la reunión de las 2:30 es el corazón de este puesto (y del sistema entero)</span><span data-i18n="en">Why the 2:30 meeting is the heart of this role (and of the whole system)</span></li>
+        <li><span data-i18n="es">Los DOS registros por cada movimiento de dinero y las 6 auditorías que corre</span><span data-i18n="en">The TWO records per money movement and the 6 audits it runs</span></li>
+        <li><span data-i18n="es">Por qué un registro sucio ensucia la evaluación y el plan de pagos de TODA la empresa</span><span data-i18n="en">Why a dirty record dirties the evaluation and payment plan of the WHOLE company</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============ MISIÓN + EN CRISTIANO ============ -->
+  <h2><span class="seccion-num">1 · </span><span data-i18n="es">Qué se espera de él — en cristiano</span><span data-i18n="en">What's expected — in plain words</span></h2>
   <div class="clave">
     <div style="font-size:12px;letter-spacing:1.5px;color:#94a3b8;font-weight:700;margin-bottom:6px"><span data-i18n="es">MISIÓN</span><span data-i18n="en">MISSION</span></div>
     <span data-i18n="es"><b>Hacer que el schedule y la realidad sean la misma cosa desde la oficina</b> — de modo que después de la reunión diaria, el schedule en JobTread sea la única verdad del día, cada cambio que el campo reporta quede reflejado, cada inconsistencia se resuelva, y todo el equipo trabaje sobre el mismo plan limpio.</span>
-    <span data-i18n="en"><b>To make the schedule and reality the same thing from the office</b> — so that after the daily meeting, the schedule in JobTread is the single truth of the day, every change the field reports is reflected, every inconsistency resolved, and the whole team works over the same clean plan.</span>
+    <span data-i18n="en"><b>Make the schedule and reality the same thing from the office</b> — so that after the daily meeting, the schedule in JobTread is the single truth of the day, every change the field reports is reflected, every inconsistency resolved, and the whole team works over the same clean plan.</span>
     <div class="sub"><span data-i18n="es">JD v3.0 — 2026-08-06. Registro sucio = plan de pagos de toda la empresa hecho sobre mentiras.</span><span data-i18n="en">JD v3.0 — 2026-08-06. A dirty record = the whole company's payment plan built on lies.</span></div>
   </div>
+  <div class="grid c2">
+    <div class="card"><span class="icono">✌️</span><b data-i18n="es">Siempre son DOS registros. Siempre.</b><b data-i18n="en">It's always TWO records. Always.</b><p style="font-size:13.5px;margin:6px 0 0"><span data-i18n="es">Cada movimiento de dinero deja huella en el schedule (la tarea con tipo + monto + check) Y en los libros (<i class="glo" data-g="bill">Bill</i> o <i class="glo" data-g="expense">Expense</i>). Uno solo = registro incompleto.</span><span data-i18n="en">Every money movement leaves a mark in the schedule (task with type + amount + check) AND in the books (<i class="glo" data-g="bill">Bill</i> or <i class="glo" data-g="expense">Expense</i>). Just one = an incomplete record.</span></p></div>
+    <div class="card"><span class="icono">📅</span><b data-i18n="es">Cerrar no es marcar un check.</b><b data-i18n="en">Closing is not ticking a box.</b><p style="font-size:13.5px;margin:6px 0 0"><span data-i18n="es">Cerrar = check + <b>fechas reales cuadradas</b>. Un check sobre una fecha falsa rompe el viernes-vs-viernes, el cashflow y la productividad.</span><span data-i18n="en">Closing = check + <b>real dates squared</b>. A check on a false date breaks Friday-vs-Friday, cashflow and productivity.</span></p></div>
+    <div class="card"><span class="icono">🕵️</span><b data-i18n="es">No le crees a nadie: verificas.</b><b data-i18n="en">You believe no one: you verify.</b><p style="font-size:13.5px;margin:6px 0 0"><span data-i18n="es">Antes, la "auditoría" era preguntar sí/no al PM. Ahora es verificación real en CompanyCam y JobTread — las 6 auditorías (sección 4).</span><span data-i18n="en">Before, the "audit" was asking the PM yes/no. Now it's real verification in CompanyCam and JobTread — the 6 audits (section 4).</span></p></div>
+    <div class="card"><span class="icono">🤝</span><b data-i18n="es">Destrabas, no bloqueas.</b><b data-i18n="en">You unblock, you never block.</b><p style="font-size:13.5px;margin:6px 0 0"><span data-i18n="es">Lo que pida cualquier miembro del equipo en horario laboral se atiende. El Backoffice existe para que los demás avancen.</span><span data-i18n="en">Whatever any team member asks during work hours gets handled. The Backoffice exists so everyone else can move.</span></p></div>
+  </div>
 
-  <h2><span class="seccion-num">1 · </span><span data-i18n="es">Su día</span><span data-i18n="en">Its day</span></h2>
-  <p class="proposito"><span data-i18n="es"><b>Esta sección existe para</b> que el Data-Entry viva el mismo día que practicó en el simulacro final del Track A (Sesión 7).</span><span data-i18n="en"><b>This section exists so</b> the Data-Entry lives the same day rehearsed in Track A's final simulation (Session 7).</span></p>
+  <!-- ============ UN DÍA EN LA VIDA ============ -->
+  <h2><span class="seccion-num">2 · </span><span data-i18n="es">Un día en la vida (hora a hora, con su herramienta)</span><span data-i18n="en">A day in the life (hour by hour, with its tool)</span></h2>
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta sección existe para</b> que el Data-Entry viva el mismo día que practicó en el simulacro final del Track A (Sesión 7). Chips: <span class="tool jt">JobTread</span> = el registro · <span class="tool cc">CompanyCam</span> = auditar fotos/checklists · <span class="tool tg">KITBOT</span> = flags y prep · <span class="tool tel">REUNIÓN</span> = la 2:30.</span>
+    <span data-i18n="en"><b>This section exists so</b> the Data-Entry lives the same day rehearsed in Track A's final simulation (Session 7). Chips: <span class="tool jt">JobTread</span> = the record · <span class="tool cc">CompanyCam</span> = auditing photos/checklists · <span class="tool tg">KITBOT</span> = flags and prep · <span class="tool tel">MEETING</span> = the 2:30.</span>
+  </p>
   <ul class="reloj">
-    <li><span class="hora" data-i18n="es">Mañana</span><span class="hora" data-i18n="en">Morning</span><div class="que"><span data-i18n="es"><b>Revisar schedules + flags</b>: aplicar cambios que reporta el bot, resolver pendientes/alertas derivados al Backoffice.</span><span data-i18n="en"><b>Review schedules + flags</b>: apply the changes the bot reports, resolve pending items/alerts routed to the Backoffice.</span></div></li>
-    <li><span class="hora">~1:00 PM</span><div class="que"><span data-i18n="es"><b>Handoff de Compras:</b> Romina declara sus pendientes; la tarde los persigue el Backoffice.</span><span data-i18n="en"><b>Purchases handoff:</b> Romina declares her open items; the Backoffice chases them in the afternoon.</span></div></li>
-    <li><span class="hora">2:30 PM</span><div class="que"><span data-i18n="es">Leer la <b>prep del bot</b> ANTES de la reunión.</span><span data-i18n="en">Read the <b>bot's prep</b> BEFORE the meeting.</span></div></li>
-    <li class="hito"><span class="hora">2:30 PM</span><div class="que"><span data-i18n="es"><b>LA REUNIÓN DIARIA</b> (~2 h — el Data-Entry DEBE estar): registrar EN VIVO todos los proyectos — check / extender / re-fechar con razón / pagos con doble registro / discrepancias → ops.db.</span><span data-i18n="en"><b>THE DAILY MEETING</b> (~2 h — the Data-Entry MUST be there): register ALL projects LIVE — check / extend / re-date with reason / payments with double record / discrepancies → ops.db.</span></div></li>
+    <li><span class="hora" data-i18n="es">Mañana</span><span class="hora" data-i18n="en">Morning</span><div class="que"><span data-i18n="es"><b>Revisar schedules + flags</b> <span class="tool jt">JobTread</span> <span class="tool tg">KITBOT</span>: aplicar los cambios que reporta el bot, resolver pendientes y alertas derivados al Backoffice, y correr auditorías de la mañana (fotos de ayer con descripción, ETAs de Compras).</span><span data-i18n="en"><b>Review schedules + flags</b> <span class="tool jt">JobTread</span> <span class="tool tg">KITBOT</span>: apply the changes the bot reports, resolve pending items and routed alerts, and run the morning audits (yesterday's photos with descriptions, Purchases' ETAs).</span></div></li>
+    <li><span class="hora">~1:00 PM</span><div class="que"><span data-i18n="es"><b>Handoff de Compras</b> <span class="tool tg">TELEGRAM</span>: Romina cierra su jornada declarando sus pendientes; la tarde los persigue el Backoffice.</span><span data-i18n="en"><b>Purchases handoff</b> <span class="tool tg">TELEGRAM</span>: Romina closes her day declaring her open items; the Backoffice chases them in the afternoon.</span></div></li>
+    <li><span class="hora">2:30 PM</span><div class="que"><span data-i18n="es">Leer la <b>prep del bot</b> <span class="tool tg">KITBOT</span> ANTES de la reunión: qué pasó desde ayer por proyecto, inconsistencias, qué decidir.</span><span data-i18n="en">Read the <b>bot's prep</b> <span class="tool tg">KITBOT</span> BEFORE the meeting: what happened since yesterday per project, inconsistencies, what to decide.</span></div></li>
+    <li class="hito"><span class="hora">2:30 PM</span><div class="que"><span data-i18n="es"><b>LA REUNIÓN DIARIA</b> (~2 h — el Data-Entry DEBE estar) <span class="tool tel">REUNIÓN</span> <span class="tool jt">JobTread</span>: registrar EN VIVO todos los proyectos — check / extender / re-fechar con razón / pagos con doble registro / discrepancias → ops.db. Aquí ocurren la mayoría de los registros del día.</span><span data-i18n="en"><b>THE DAILY MEETING</b> (~2 h — the Data-Entry MUST be there) <span class="tool tel">MEETING</span> <span class="tool jt">JobTread</span>: register ALL projects LIVE — check / extend / re-date with reason / payments with the double record / discrepancies → ops.db. Most of the day's records happen here.</span></div></li>
     <li><span class="hora" data-i18n="es">Después</span><span class="hora" data-i18n="en">After</span><div class="que"><span data-i18n="es"><b>Alimentar el transcript de la reunión TODOS los días</b> (Jose 2026-08-06): soltar la grabación en <code>~/.openclaw/REUNIONES/</code> — el watcher hace el resto. Día sin transcript = registro incompleto.</span><span data-i18n="en"><b>Feed the meeting transcript EVERY day</b> (Jose 2026-08-06): drop the recording in <code>~/.openclaw/REUNIONES/</code> — the watcher does the rest. A day without the transcript = an incomplete record.</span></div></li>
-    <li><span class="hora">EOD</span><div class="que"><span data-i18n="es"><b>Daily Schedule Update by EOD:</b> schedules cuadrados al cierre (limpios antes de las 8 PM) — el insumo del CASHFLOW DATA de la Administradora y de la Task List 8 PM de cada PM.</span><span data-i18n="en"><b>Daily Schedule Update by EOD:</b> schedules squared at close (clean before 8 PM) — the input to the Administrator's CASHFLOW DATA and each PM's 8 PM Task List.</span></div></li>
+    <li><span class="hora">EOD</span><div class="que"><span data-i18n="es"><b>Daily Schedule Update by EOD</b> <span class="tool jt">JobTread</span>: schedules cuadrados al cierre (limpios antes de las 8 PM) — el insumo del CASHFLOW DATA de la Administradora y de la Task List 8 PM de cada PM.</span><span data-i18n="en"><b>Daily Schedule Update by EOD</b> <span class="tool jt">JobTread</span>: schedules squared at close (clean before 8 PM) — the input to the Administrator's CASHFLOW DATA and each PM's 8 PM Task List.</span></div></li>
   </ul>
 
-  <h2><span class="seccion-num">2 · </span><span data-i18n="es">Qué SABE · qué HACE · qué VERIFICA</span><span data-i18n="en">What it KNOWS · DOES · VERIFIES</span></h2>
+  <!-- ============ SU LUGAR EN EL MAPA ============ -->
+  <h2><span class="seccion-num">3 · </span><span data-i18n="es">Su lugar en el mapa</span><span data-i18n="en">Its place on the map</span></h2>
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta sección existe para</b> ver que el Backoffice es el EMBUDO de la información: todo lo que pasa en el campo entra por él al registro, y del registro sale hacia el dinero y los reportes.</span>
+    <span data-i18n="en"><b>This section exists to</b> see that the Backoffice is the information FUNNEL: everything that happens in the field enters the record through it, and from the record flows to the money and the reports.</span>
+  </p>
+  <div class="rolmap">
+    <div class="rm-col rm-in">
+      <div class="rm-k"><span data-i18n="es">Recibe de</span><span data-i18n="en">Receives from</span></div>
+      <a class="rm-item" href="pm.html"><span class="chip pm">PMs</span><span><span data-i18n="es">lo DICHO en la 2:30 (avances, razones) + datos de WO + "trabajo aprobado en sitio"</span><span data-i18n="en">what's SAID at 2:30 (progress, reasons) + WO data + "work approved on site"</span></span></a>
+      <a class="rm-item" href="purchases.html"><span class="chip compras">COMPRAS</span><span><span data-i18n="es">compras del día, ETAs y el handoff de la 1:00 PM</span><span data-i18n="en">the day's purchases, ETAs and the 1:00 PM handoff</span></span></a>
+      <a class="rm-item" href="planning.html"><span class="chip planning">PLANNING</span><span><span data-i18n="es">reuniones de ADELANTO + el portafolio (para consolidar el schedule ideal)</span><span data-i18n="en">ADVANCE meetings + the portfolio (to consolidate the ideal schedule)</span></span></a>
+      <a class="rm-item" href="../reloj-reportes.html"><span class="chip sistema">KITBOT</span><span><span data-i18n="es">flags, prep de la 2:30, cambios detectados</span><span data-i18n="en">flags, the 2:30 prep, detected changes</span></span></a>
+    </div>
+    <div class="rm-center">
+      <div class="rm-avatar" style="border-color:var(--rol-backoffice)">🗂️</div>
+      <div class="rm-rol">Backoffice / Data-Entry</div>
+      <div class="rm-nom">Jose → Joaquín</div>
+    </div>
+    <div class="rm-col rm-out">
+      <div class="rm-k"><span data-i18n="es">Entrega a</span><span data-i18n="en">Delivers to</span></div>
+      <a class="rm-item" href="../jobtread.html"><span class="chip sistema">JOBTREAD</span><span><span data-i18n="es">los DOS registros por movimiento + WOs creadas + schedules re-fechados y cuadrados</span><span data-i18n="en">the TWO records per movement + created WOs + re-dated, squared schedules</span></span></a>
+      <a class="rm-item" href="administradora.html"><span class="chip admin">ADMIN</span><span><span data-i18n="es">Daily Schedule Update by EOD (su CASHFLOW DATA) + checklist revisado (2º candado) antes de cada pago</span><span data-i18n="en">Daily Schedule Update by EOD (her CASHFLOW DATA) + reviewed checklist (2nd lock) before every payment</span></span></a>
+      <a class="rm-item" href="pm.html"><span class="chip pm">PMs</span><span><span data-i18n="es">schedules limpios (su Task List de las 8 PM sale de ahí) + flags de auditoría</span><span data-i18n="en">clean schedules (their 8 PM Task List comes from there) + audit flags</span></span></a>
+      <a class="rm-item" href="../reloj-reportes.html"><span class="chip sistema">SISTEMA</span><span><span data-i18n="es">el transcript diario de la reunión + ops.db al día — la materia prima de los 11 reportes</span><span data-i18n="en">the daily meeting transcript + a current ops.db — the raw material of the 11 reports</span></span></a>
+    </div>
+  </div>
+
+  <!-- ============ SABE/HACE/VERIFICA ============ -->
+  <h2><span class="seccion-num">4 · </span><span data-i18n="es">Qué SABE · qué HACE · qué VERIFICA (las 6 auditorías)</span><span data-i18n="en">What it KNOWS · DOES · VERIFIES (the 6 audits)</span></h2>
   <div class="grid c3">
     <div class="card shv-s"><h3 style="color:var(--violeta)"><span data-i18n="es">SABE</span><span data-i18n="en">KNOWS</span></h3>
       <ul>
@@ -73,7 +114,7 @@ ul.checks li::before{content:"✓";position:absolute;left:8px;color:var(--verde)
         <li data-i18n="es"><b>Los DOS registros</b> por movimiento de dinero: schedule (registro de obra) + libros (Bill/Expense).</li><li data-i18n="en"><b>The TWO records</b> per money movement: schedule (job record) + books (Bill/Expense).</li>
         <li data-i18n="es">Cerrar = check + fechas cuadradas · TODO dinero por el schedule · la fecha original de un pago = gatillo contractual.</li><li data-i18n="en">Closing = check + squared dates · ALL money through the schedule · a payment's original date = contractual trigger.</li>
         <li data-i18n="es"><b>Inglés de obra</b>: Jeff escribe 100% en inglés — lo ambiguo se pregunta, no se adivina (ver el <a href="../glosario.html">glosario</a>).</li><li data-i18n="en"><b>Jobsite English</b>: Jeff writes 100% in English — ambiguity gets asked, never guessed (see the <a href="../glosario.html">glossary</a>).</li>
-        <li data-i18n="es">El template maestro oficial: de ahí consolida el schedule ideal F1 de cada obra nueva ("hasta el colgado del drywall"), eliminando trades no vendidos.</li><li data-i18n="en">The official master template: from it, the ideal Phase-1 schedule of every new job ("up to hanging the drywall"), removing unsold trades.</li>
+        <li data-i18n="es">El <i class="glo" data-g="template">template maestro</i>: de ahí consolida el schedule ideal F1 de cada obra nueva ("hasta el colgado del drywall"), eliminando trades no vendidos.</li><li data-i18n="en">The <i class="glo" data-g="template">master template</i>: from it, the ideal Phase-1 schedule of every new job ("up to hanging the drywall"), removing unsold trades.</li>
       </ul>
     </div>
     <div class="card shv-h"><h3 style="color:var(--verde)"><span data-i18n="es">HACE</span><span data-i18n="en">DOES</span></h3>
@@ -104,7 +145,8 @@ ul.checks li::before{content:"✓";position:absolute;left:8px;color:var(--verde)
     </ul></div>
   </details>
 
-  <h2><span class="seccion-num">3 · </span><span data-i18n="es">Su "Día Cumplido"</span><span data-i18n="en">Its "Day Done"</span></h2>
+  <!-- ============ DÍA CUMPLIDO ============ -->
+  <h2><span class="seccion-num">5 · </span><span data-i18n="es">Su "Día Cumplido"</span><span data-i18n="en">Its "Day Done"</span></h2>
   <div class="card">
     <ul class="checks">
       <li data-i18n="es"><b>Reunión de cierre/verificación con los PMs hecha</b> y lo dicho vs lo marcado en JobTread verificado (discrepancias → ops.db).</li><li data-i18n="en"><b>Close/verification meeting with the PMs done</b> and said-vs-marked verified in JobTread (discrepancies → ops.db).</li>
@@ -114,24 +156,84 @@ ul.checks li::before{content:"✓";position:absolute;left:8px;color:var(--verde)
     <p style="font-size:12.5px;color:var(--mut);margin:8px 0 0"><span data-i18n="es">✅ = puede irse tranquilo · ⚠️ = parcial · ❌ = sin señal (merece UNA pregunta antes de concluir).</span><span data-i18n="en">✅ = can leave in peace · ⚠️ = partial · ❌ = no signal (deserves ONE question before any conclusion).</span></p>
   </div>
 
-  <h2><span class="seccion-num">4 · </span><span data-i18n="es">Sus reportes (con su guía de lectura)</span><span data-i18n="en">Its reports (with the reading guide)</span></h2>
-  <p class="proposito"><span data-i18n="es"><b>Esta sección existe para</b> entender que los reportes oficiales #1 y #2 <b>se construyen SOBRE sus registros</b>: registro sucio = evaluación de todo el equipo sucia. Su calidad es visible cada sábado.</span><span data-i18n="en"><b>This section exists so</b> you understand that official reports #1 and #2 <b>are built ON its records</b>: a dirty record = a dirty evaluation for the whole team. Its quality shows every Saturday.</span></p>
-  <div class="tbl-wrap">
-    <table>
-      <tr><th data-i18n="es">Reporte</th><th data-i18n="en">Report</th><th data-i18n="es">Cuándo</th><th data-i18n="en">When</th><th data-i18n="es">Guía</th><th data-i18n="en">Guide</th></tr>
-      <tr><td><b>PM Weekly Evaluation</b> — <span data-i18n="es">documentación ✓/✗ y cierres: salen de SUS registros</span><span data-i18n="en">documentation ✓/✗ and closures: they come from ITS records</span></td><td data-i18n="es">Sáb 8:00 AM</td><td data-i18n="en">Sat 8:00 AM</td><td><a href="../materiales/guias/GUIA_01_PM_WEEKLY_EVALUATION.html">ES</a> · <a href="../materiales/guias/GUIA_01_PM_WEEKLY_EVALUATION_EN.html">EN</a></td></tr>
-      <tr><td><b>Project Department Weekly Evaluation</b> — <span data-i18n="es">pagado/cobrado + métricas por PM sobre sus registros</span><span data-i18n="en">paid/collected + per-PM metrics over its records</span></td><td data-i18n="es">Sáb 8:30 AM</td><td data-i18n="en">Sat 8:30 AM</td><td><a href="../materiales/guias/GUIA_02_PROJECT_DEPT_WEEKLY_EVALUATION.html">ES</a></td></tr>
-    </table>
+  <!-- ============ REPORTES ============ -->
+  <h2><span class="seccion-num">6 · </span><span data-i18n="es">Sus reportes: qué le llega y qué hace con cada uno</span><span data-i18n="en">Its reports: what arrives and what to do with each</span></h2>
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta sección existe para</b> entender que los reportes oficiales #1 y #2 <b>se construyen SOBRE sus registros</b>: registro sucio = evaluación de todo el equipo sucia. Su calidad es visible cada sábado.</span>
+    <span data-i18n="en"><b>This section exists so</b> you understand that official reports #1 and #2 <b>are built ON its records</b>: a dirty record = a dirty evaluation for the whole team. Its quality shows every Saturday.</span>
+  </p>
+  <div class="rep-grid">
+    <div class="rep-card">
+      <div class="mini"><svg viewBox="0 0 220 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="12" y="12" width="86" height="8" rx="3" fill="#cbd5e1"/><rect x="12" y="24" width="66" height="8" rx="3" fill="#16a34a"/><rect x="12" y="42" width="120" height="8" rx="3" fill="#cbd5e1"/><rect x="12" y="54" width="82" height="8" rx="3" fill="#16a34a"/><rect x="98" y="54" width="30" height="8" rx="3" fill="#d97706"/><rect x="150" y="12" width="58" height="68" rx="6" fill="#f1f5f9" stroke="#e2e8f0"/><text x="158" y="30" font-size="9" fill="#64748b">SOW ✓</text><text x="158" y="44" font-size="9" fill="#64748b">WO ✓</text><text x="158" y="58" font-size="9" fill="#dc2626">CHK ✗</text><text x="158" y="72" font-size="9" fill="#64748b">TKF ✓</text></svg></div>
+      <h4>PM Weekly Evaluation</h4>
+      <div class="meta"><span data-i18n="es">Sáb 8:00 AM · el PDF de cada PM</span><span data-i18n="en">Sat 8:00 AM · each PM's PDF</span></div>
+      <p><span data-i18n="es">La documentación ✓/✗ y los cierres que muestra <b>salen de SUS registros</b>. Si el Backoffice cerró sin cuadrar fechas, el reporte miente.</span><span data-i18n="en">The ✓/✗ documentation and closures it shows <b>come from ITS records</b>. If the Backoffice closed without squaring dates, the report lies.</span></p>
+      <div class="haz"><span data-i18n="es"><b>Qué hago con él:</b> leerlo como espejo: cada ✗ injusto que un PM reclame = revisar si fue registro mío o documentación de él.</span><span data-i18n="en"><b>What I do with it:</b> read it as a mirror: every unfair ✗ a PM disputes = check whether it was my record or their documentation.</span></div>
+      <div class="meta" style="margin-top:6px"><a href="../materiales/guias/GUIA_01_PM_WEEKLY_EVALUATION.html"><span data-i18n="es">Guía ES</span><span data-i18n="en">Guide ES</span></a> · <a href="../materiales/guias/GUIA_01_PM_WEEKLY_EVALUATION_EN.html"><span data-i18n="es">Guía EN</span><span data-i18n="en">Guide EN</span></a></div>
+    </div>
+    <div class="rep-card">
+      <div class="mini"><svg viewBox="0 0 220 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="12" y="14" width="60" height="6" rx="3" fill="#94a3b8"/><rect x="12" y="26" width="90" height="6" rx="3" fill="#cbd5e1"/><rect x="12" y="38" width="70" height="6" rx="3" fill="#cbd5e1"/><rect x="12" y="58" width="196" height="22" rx="5" fill="#f0fdf4" stroke="#bbf7d0"/><text x="20" y="73" font-size="10" fill="#16a34a" font-weight="700"><tspan data-i18n="es">pagado</tspan></text><text x="80" y="73" font-size="10" fill="#16a34a">$ ▮▮▮</text><text x="130" y="73" font-size="10" fill="#2563eb">cobrado $ ▮▮</text></svg></div>
+      <h4>Project Dept Weekly Evaluation</h4>
+      <div class="meta"><span data-i18n="es">Sáb 8:30 AM · gerencia</span><span data-i18n="en">Sat 8:30 AM · management</span></div>
+      <p><span data-i18n="es">Pagado/cobrado + métricas de cada PM — todo calculado <b>sobre sus registros</b> de la semana.</span><span data-i18n="en">Paid/collected + each PM's metrics — all computed <b>over its records</b> of the week.</span></p>
+      <div class="haz"><span data-i18n="es"><b>Qué hago con él:</b> verificar que el pagado/cobrado que reporta cuadre con lo que registré — cualquier sorpresa = un registro que se me escapó esa semana.</span><span data-i18n="en"><b>What I do with it:</b> verify that the paid/collected it reports squares with what I recorded — any surprise = a record that slipped past me that week.</span></div>
+      <div class="meta" style="margin-top:6px"><a href="../materiales/guias/GUIA_02_PROJECT_DEPT_WEEKLY_EVALUATION.html"><span data-i18n="es">Guía ES</span><span data-i18n="en">Guide ES</span></a></div>
+    </div>
   </div>
   <p style="font-size:12.5px"><span class="verificar">[VERIFICAR CON JOSE]</span> <span data-i18n="es">El formato del semanal individual del Backoffice/Data-Entry (la ley C2 aplica también al backoffice; el builder específico aún no existe en la reportería oficial).</span><span data-i18n="en">The Backoffice/Data-Entry's own weekly format (law C2 also applies to the backoffice; the specific builder does not yet exist in the official reporting).</span></p>
 
-  <h2><span class="seccion-num">5 · </span><span data-i18n="es">Materiales del puesto</span><span data-i18n="en">Position materials</span></h2>
+  <!-- ============ ERRORES QUE EVITA ============ -->
+  <h2><span class="seccion-num">7 · </span><span data-i18n="es">Los errores que este puesto evita (casos reales)</span><span data-i18n="en">The mistakes this role prevents (real cases)</span></h2>
+  <div class="errores">
+    <a class="err" href="../casos-reales.html">
+      <div class="e-caso"><span data-i18n="es">CASO 9 · 29 DE 30 EN CERO</span><span data-i18n="en">CASE 9 · 29 OF 30 AT ZERO</span></div>
+      <h4><span data-i18n="es">Los checklists que nadie llenó</span><span data-i18n="en">The checklists nobody filled</span></h4>
+      <p><span data-i18n="es">En Martha: 30 checklists instanciados, 29 en 0/x — los PMs querían llenar todo al final del trade.</span><span data-i18n="en">On Martha: 30 checklists instantiated, 29 at 0/x — PMs wanted to fill everything at the trade's end.</span></p>
+      <div class="e-moraleja"><span data-i18n="es"><b>El Backoffice lo evita así:</b> auditoría del During — trade activo sin fotos = flag ESE día, no el viernes.</span><span data-i18n="en"><b>The Backoffice prevents it:</b> the During audit — active trade with no photos = flag THAT day, not Friday.</span></div>
+    </a>
+    <a class="err" href="../casos-reales.html">
+      <div class="e-caso"><span data-i18n="es">CASO 6 · LA WO A POSTERIORI</span><span data-i18n="en">CASE 6 · THE AFTER-THE-FACT WO</span></div>
+      <h4><span data-i18n="es">"Crear urgente work order para Cesar"</span><span data-i18n="en">"Urgently create a work order for Cesar"</span></h4>
+      <p><span data-i18n="es">Martha, 24-jul, 17:25: la WO se creó DESPUÉS del trabajo — trabajo no autorizado y no facturable hasta entonces.</span><span data-i18n="en">Martha, Jul-24, 5:25 PM: the WO was created AFTER the work — unauthorized, unbillable work until then.</span></p>
+      <div class="e-moraleja"><span data-i18n="es"><b>El Backoffice lo evita así:</b> auditoría de expediente — ningún Bill avanza a la Administradora sin WO firmada ANTES del trabajo.</span><span data-i18n="en"><b>The Backoffice prevents it:</b> the file audit — no Bill advances to the Administrator without a WO signed BEFORE the work.</span></div>
+    </a>
+    <a class="err" href="../casos-reales.html">
+      <div class="e-caso"><span data-i18n="es">CASO 10 · EL ETA QUE MIENTE</span><span data-i18n="en">CASE 10 · THE LYING ETA</span></div>
+      <h4><span data-i18n="es">"Está ordenado" no es un ETA</span><span data-i18n="en">"It's ordered" is not an ETA</span></h4>
+      <p><span data-i18n="es">Un ETA desactualizado "le miente al cronograma": el PM planifica su semana sobre una fecha falsa.</span><span data-i18n="en">A stale ETA "lies to the schedule": the PM plans the week on a false date.</span></p>
+      <div class="e-moraleja"><span data-i18n="es"><b>El Backoffice lo evita así:</b> auditoría de ETAs — cada compra con su tarea ETA al día siguiente; =1 día = sin verificar → se persigue.</span><span data-i18n="en"><b>The Backoffice prevents it:</b> the ETA audit — every purchase gets its ETA task the next day; =1 day = unverified → chased.</span></div>
+    </a>
+  </div>
+
+  <section class="quiz">
+    <div class="q-head">
+      <span class="q-ico">🧠</span>
+      <div>
+        <h2><span data-i18n="es">¿Lo entendiste?</span><span data-i18n="en">Did you get it?</span></h2>
+        <p><span data-i18n="es">Responde en tu cabeza y luego toca "ver respuesta".</span><span data-i18n="en">Answer in your head, then tap "show answer".</span></p>
+      </div>
+    </div>
+    <details class="q">
+      <summary><span class="q-n">1</span><span data-i18n="es">En la 2:30 un PM dice "el drywall quedó ayer". En JobTread la tarea sigue abierta, fechada hace 3 días. ¿Qué registras?</span><span data-i18n="en">At the 2:30 a PM says "drywall finished yesterday". In JobTread the task is still open, dated 3 days ago. What do you record?</span></summary>
+      <div class="q-a"><span data-i18n="es"><b>Check + fechas CUADRADAS a la realidad</b> (terminó AYER — la fecha se ajusta a cuándo ocurrió de verdad). Un check sobre la fecha vieja es registro sucio: rompe el viernes-vs-viernes y el cashflow. Y "lo dicho manda sobre lo agendado" — pero se verifica en CompanyCam (dicho vs marcado).</span><span data-i18n="en"><b>Check + dates SQUARED to reality</b> (it finished YESTERDAY — the date is adjusted to when it really happened). A check on the old date is a dirty record: it breaks Friday-vs-Friday and cashflow. And "what's said rules over what's scheduled" — but you verify it in CompanyCam (said vs marked).</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="q-n">2</span><span data-i18n="es">Llega una compra de Home Depot de $37 en bolsas de basura. ¿Se registra? ¿Dónde?</span><span data-i18n="en">A $37 Home Depot purchase of trash bags comes in. Is it recorded? Where?</span></summary>
+      <div class="q-a"><span data-i18n="es"><b>Sí, SIEMPRE, y en DOS lugares.</b> TODO dinero pasa por el schedule — hasta caja chica: tarea <b>Additional Expense</b> al proyecto (con monto) + el documento contable. Si se movió dinero y no hay tarea, el cashflow y la productividad quedan ciegos a ese gasto.</span><span data-i18n="en"><b>Yes, ALWAYS, and in TWO places.</b> ALL money goes through the schedule — even petty cash: an <b>Additional Expense</b> task on the project (with the amount) + the accounting document. If money moved and there's no task, cashflow and productivity are blind to that spend.</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="q-n">3</span><span data-i18n="es">Ves un schedule claramente atrasado. ¿Lo re-fechas tú para "dejarlo realista"?</span><span data-i18n="en">You see a clearly delayed schedule. Do you re-date it yourself to "make it realistic"?</span></summary>
+      <div class="q-a"><span data-i18n="es"><b>No.</b> La reunión decide, el Backoffice registra. Los re-fechados de fondo se deciden en la 2:30 con el PM presente (y toda re-fecha lleva su RAZÓN). Lo que sí haces solo: aplicar cambios que el bot reporta y flaggear la inconsistencia para la reunión.</span><span data-i18n="en"><b>No.</b> The meeting decides, the Backoffice records. Substantive re-dates are decided at the 2:30 with the PM present (and every re-date carries its REASON). What you do alone: apply bot-reported changes and flag the inconsistency for the meeting.</span></div>
+    </details>
+  </section>
+
+  <h2><span class="seccion-num">8 · </span><span data-i18n="es">Materiales del puesto</span><span data-i18n="en">Position materials</span></h2>
   <p><a class="btn" href="../materiales/one-pagers/one_pager_backoffice.html">⬇ One-pager Backoffice</a></p>
   <p style="font-size:12.5px;color:var(--mut)"><span data-i18n="es">Su track de entrenamiento: <code>03_PAQUETES_ENTRENAMIENTO/TRACK_A_BACKOFFICE_DATA_ENTRY_v2026-08-06.md</code> (7 sesiones + simulacro de día completo).</span><span data-i18n="en">Training track: <code>03_PAQUETES_ENTRENAMIENTO/TRACK_A_BACKOFFICE_DATA_ENTRY_v2026-08-06.md</code> (7 sessions + full-day simulation).</span></p>
 
   <div class="footer-note">
-    <span data-i18n="es">Posición · Backoffice / Data-Entry · 2026-08-07 · Fuentes: JD_backoffice.md v3.0 (2026-08-06) · Track A v2026-08-06 (Sesión 7, simulacro) · canon v4 · DIA_CUMPLIDO_POR_PUESTO v3 · _BRIEF_CONSTRUCTORES. Material interno.</span>
-    <span data-i18n="en">Position · Backoffice / Data-Entry · 2026-08-07 · Sources: JD_backoffice.md v3.0 · Track A v2026-08-06 · canon v4 · DIA_CUMPLIDO_POR_PUESTO v3 · Builders' BRIEF. Internal material.</span>
+    <span data-i18n="es">Posición · Backoffice / Data-Entry · 2026-08-07 · Fuentes: JD_backoffice.md v3.0 (2026-08-06) · Track A v2026-08-06 (Sesión 7, simulacro) · canon v4 §5/§6 · DIA_CUMPLIDO_POR_PUESTO v3 · _BRIEF_CONSTRUCTORES. Material interno.</span>
+    <span data-i18n="en">Position · Backoffice / Data-Entry · 2026-08-07 · Sources: JD_backoffice.md v3.0 · Track A v2026-08-06 · canon v4 §5/§6 · DIA_CUMPLIDO_POR_PUESTO v3 · Builders' BRIEF. Internal material.</span>
   </div>
 </main>
 

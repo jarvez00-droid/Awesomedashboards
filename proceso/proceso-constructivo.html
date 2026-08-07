@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>CNG · Proceso constructivo — los 34 trades del template</title>
+<title>CNG · Proceso constructivo — la ruta de los 34 trades</title>
 <link rel="stylesheet" href="/proceso/assets/style.css">
 </head>
 <body>
@@ -29,252 +29,285 @@
 </header>
 
 <main>
-  <h1><span data-i18n="es">El proceso constructivo — el TEMPLATE oficial</span><span data-i18n="en">The build sequence — the official TEMPLATE</span></h1>
-  <p class="lead">
-    <span data-i18n="es"><b>34 grupos-trade · 411 tareas</b> (209 PM Tasks · 64 Purchases · 40 Critical Path · 14 Action · 45 Payment-Subs · 21 Payment-Materials · 18 City Inspections). Dibujado 1:1 desde <code>TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv</code> — <b>el archivo oficial MANDA</b> sobre cualquier reconstrucción.</span>
-    <span data-i18n="en"><b>34 trade groups · 411 tasks</b> (209 PM Tasks · 64 Purchases · 40 Critical Path · 14 Action · 45 Payment-Subs · 21 Payment-Materials · 18 City Inspections). Drawn 1:1 from <code>TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv</code> — <b>the official file RULES</b> over any reconstruction.</span>
-  </p>
-  <p class="proposito">
-    <span data-i18n="es"><b>Esta página existe para</b> que veas la secuencia completa de una obra y sus dependencias: qué bloquea a qué, dónde están las inspecciones de ciudad y qué es ruta crítica. <b>Haz clic en cualquier trade</b> para expandir sus dependencias, inspecciones y su cadena interna de tareas.</span>
-    <span data-i18n="en"><b>This page exists so</b> you can see the complete sequence of a job and its dependencies: what blocks what, where the city inspections sit, and what is critical path. <b>Click any trade</b> to expand its dependencies, inspections and its internal task chain.</span>
-  </p>
 
-  <div class="regla">
-    <span data-i18n="es">Toda obra sigue una <b>secuencia escalonada de dependencias</b> — <i>“una cosa te va bloqueando la otra… es lo que no se puede achicar más”</i> (Jose, P1). Es el tiempo mínimo de un proyecto: se estira según tamaño, <b>no se achica</b>. El template usa <b>días numerados</b> (día 15 … día 171); el schedule en producción usa fechas de calendario.</span>
-    <span data-i18n="en">Every job follows a <b>staggered sequence of dependencies</b> — <i>“one thing keeps blocking the next… that's what can't be compressed any further”</i> (Jose, P1, translated). It is the minimum time of a project: it stretches with size, <b>it does not shrink</b>. The template uses <b>numbered days</b> (day 15 … day 171); a production schedule uses calendar dates.</span>
+  <div class="hero">
+    <span class="paso-n">1 / 9 · <span data-i18n="es">LA OBRA FÍSICA</span><span data-i18n="en">THE PHYSICAL BUILD</span></span>
+    <h1><span data-i18n="es">El proceso constructivo: la ruta de los 34 trades</span><span data-i18n="en">The build sequence: the 34-trade route</span></h1>
+    <p class="sub">
+      <span data-i18n="es">Cómo se construye una casa, etapa por etapa. Dibujado 1:1 desde el TEMPLATE oficial (34 grupos-<i class="glo" data-g="trade" style="color:#e2e8f0;border-bottom-color:#fbbf24">trade</i> · 411 tareas). Toca cualquier trade para abrirlo.</span>
+      <span data-i18n="en">How a house gets built, stage by stage. Drawn 1:1 from the official TEMPLATE (34 <i class="glo" data-g="trade" style="color:#e2e8f0;border-bottom-color:#fbbf24">trade</i> groups · 411 tasks). Tap any trade to open it.</span>
+    </p>
+    <div class="aprende">
+      <div class="ttl"><span data-i18n="es">EN ESTA PÁGINA VAS A ENTENDER:</span><span data-i18n="en">ON THIS PAGE YOU WILL UNDERSTAND:</span></div>
+      <ul>
+        <li><span data-i18n="es">Las 5 etapas de una casa: cimientos → estructura → interior/exterior → acabados → entrega</span><span data-i18n="en">A house's 5 stages: foundations → structure → interior/exterior → finishes → delivery</span></li>
+        <li><span data-i18n="es">Qué es cada trade EN CRISTIANO, qué va antes/después y POR QUÉ</span><span data-i18n="en">What each trade is IN PLAIN LANGUAGE, what goes before/after and WHY</span></li>
+        <li><span data-i18n="es">Qué inspección de ciudad gatea cada trade (los "ítems rojitos")</span><span data-i18n="en">Which city inspection gates each trade (the "little red items")</span></li>
+        <li><span data-i18n="es">Por qué la ruta crítica no se puede achicar — solo estirar</span><span data-i18n="en">Why the critical path can't be shrunk — only stretched</span></li>
+      </ul>
+    </div>
   </div>
+
+  <p class="proposito">
+    <span data-i18n="es"><b>Esta página existe para</b> que veas la secuencia completa de una obra y sus dependencias: qué bloquea a qué, dónde están las inspecciones y qué es <i class="glo" data-g="cp">ruta crítica</i>. La idea madre, en palabras de Jose: <i>"una cosa te va bloqueando la otra… es lo que no se puede achicar más."</i> Es el tiempo MÍNIMO de un proyecto: se estira según tamaño, no se achica.</span>
+    <span data-i18n="en"><b>This page exists so</b> you see a job's complete sequence and its dependencies: what blocks what, where the inspections are and what the <i class="glo" data-g="cp">critical path</i> is. The mother idea, in Jose's words: <i>"one thing keeps blocking the next… it's what cannot be shrunk any further."</i> It's a project's MINIMUM time: it stretches with size, it never shrinks.</span>
+  </p>
 
   <div class="leyenda">
-    <span class="it"><span class="sw" style="background:#2563eb"></span><span data-i18n="es">Ruta crítica (Critical Path)</span><span data-i18n="en">Critical path</span></span>
-    <span class="it"><span class="sw" style="background:#94a3b8"></span><span data-i18n="es">No crítico (Action Task)</span><span data-i18n="en">Non-critical (Action Task)</span></span>
-    <span class="it"><span style="color:#dc2626;font-size:14px">◆</span><span data-i18n="es">Inspección de ciudad (“los ítems rojitos”)</span><span data-i18n="en">City inspection (“the little red items”)</span></span>
-    <span class="it"><span style="color:#d97706;font-weight:800">$</span><span data-i18n="es">Downpayment (solo ciertos subs/trades)</span><span data-i18n="en">Downpayment (only certain subs/trades)</span></span>
+    <span class="it"><span class="sw" style="background:var(--azul-bg);border:2px solid var(--azul-line)"></span><span data-i18n="es">Ruta crítica (si se atrasa, TODO se atrasa)</span><span data-i18n="en">Critical path (if it slips, EVERYTHING slips)</span></span>
+    <span class="it"><span class="sw" style="background:var(--gris-bg);border:2px solid var(--line2)"></span><span data-i18n="es">No crítico (corre en paralelo)</span><span data-i18n="en">Non-critical (runs in parallel)</span></span>
+    <span class="it"><span style="color:var(--rojo);font-weight:800">◆</span><span data-i18n="es">Tiene inspección de ciudad</span><span data-i18n="en">Has a city inspection</span></span>
+    <span class="it"><span style="color:var(--ambar);font-weight:800">$</span><span data-i18n="es">Tiene downpayment (excepción: solo ciertos trades)</span><span data-i18n="en">Has a downpayment (exception: only certain trades)</span></span>
   </div>
 
-  <div class="diagrama-wrap">
-    <svg id="svg-template" xmlns="http://www.w3.org/2000/svg"></svg>
-  </div>
+  <!-- Las etapas se generan por JS desde el template oficial -->
+  <div id="etapas"></div>
 
+  <h2><span data-i18n="es">El detalle del trade</span><span data-i18n="en">Trade detail</span></h2>
   <div id="detalle-trade">
-    <div class="gap" id="detalle-placeholder">
-      <span data-i18n="es"><b>Haz clic en un trade del diagrama</b> para ver aquí sus dependencias (“no arranca sin…”), qué desbloquea, sus inspecciones y su cadena completa de tareas.</span>
-      <span data-i18n="en"><b>Click a trade in the diagram</b> to see here its dependencies (“doesn't start without…”), what it unlocks, its inspections and its full task chain.</span>
+    <div class="card" id="detalle-vacio" style="border-style:dashed">
+      <span data-i18n="es">👆 Toca un trade en la ruta de arriba para ver aquí: qué es en cristiano, qué va antes y después (y por qué), sus inspecciones y su cadena completa de tareas.</span>
+      <span data-i18n="en">👆 Tap a trade on the route above to see here: what it is in plain language, what goes before and after (and why), its inspections and its full task chain.</span>
     </div>
-    <div id="detalle-body"></div>
   </div>
 
-  <h2><span class="seccion-num">⚠ · </span><span data-i18n="es">Dónde más se falla (realidad)</span><span data-i18n="en">Where we fail the most (reality)</span></h2>
   <div class="alerta">
-    <span data-i18n="es">Los trades donde más se falla son los <b>MEP rough-ins</b> (inspecciones rechazadas por observaciones) y el <b>framing</b> (llega al sub con planos estructurales desactualizados / no aprobados por el ingeniero → retrabajo). La causa <b>no es técnica ni del trade</b>: es falta de rigurosidad y atención al detalle — no se prevé, no se soluciona, no se es proactivo. Caso real: <b>red tags de Martha (24-jul)</b> — inspecciones rechazadas por secuencia mal pedida y planos no presentes en obra, el fallo que ya se había predicho. El PM verifica la secuencia y los <b>planos aprobados físicamente en obra</b> ANTES de llamar a la ciudad.</span>
-    <span data-i18n="en">The trades we fail the most are the <b>MEP rough-ins</b> (inspections rejected with observations) and <b>framing</b> (the sub receives outdated / not-engineer-approved structural plans → rework). The cause is <b>not technical and not the trade</b>: it is lack of rigor and attention to detail — no anticipating, no solving, no proactivity. Real case: <b>Martha's red tags (Jul 24)</b> — inspections rejected because the sequence was requested wrong and the plans were not on site, the exact failure that had been predicted. The PM verifies the sequence and the <b>approved plans physically on site</b> BEFORE calling the city.</span>
+    <span data-i18n="es"><b>⚠ Dónde más se falla (realidad):</b> los MEP rough-ins (inspecciones rechazadas por observaciones) y el framing (llega al sub con planos estructurales desactualizados / no aprobados por el ingeniero → retrabajo). La causa <b>no es técnica</b>: es falta de rigurosidad y atención al detalle. Caso real: los <i class="glo" data-g="redtag">red tags</i> de Martha (24-jul) — inspecciones rechazadas por secuencia mal pedida y planos no presentes en obra. <b>El PM verifica la secuencia y los planos aprobados FÍSICAMENTE en obra antes de llamar a la ciudad.</b></span>
+    <span data-i18n="en"><b>⚠ Where we fail the most (reality):</b> the MEP rough-ins (inspections rejected over observations) and framing (reaching the sub with outdated / non-engineer-approved structural plans → rework). The cause is <b>not technical</b>: it's lack of rigor and attention to detail. Real case: Martha's <i class="glo" data-g="redtag">red tags</i> (Jul-24) — inspections rejected for wrongly-sequenced requests and plans not present on site. <b>The PM verifies the sequence and the approved plans PHYSICALLY on site before calling the city.</b></span>
   </div>
+
+  <section class="quiz">
+    <div class="q-head">
+      <span class="q-ico">🧠</span>
+      <div>
+        <h2><span data-i18n="es">¿Lo entendiste?</span><span data-i18n="en">Did you get it?</span></h2>
+        <p><span data-i18n="es">Responde en tu cabeza y luego toca "ver respuesta".</span><span data-i18n="en">Answer in your head, then tap "show answer".</span></p>
+      </div>
+    </div>
+    <details class="q">
+      <summary><span class="q-n">1</span><span data-i18n="es">¿Por qué el drywall NO se puede colgar si los MEP no pasaron su inspección?</span><span data-i18n="en">Why can't drywall be hung if the MEPs haven't passed their inspection?</span></summary>
+      <div class="q-a"><span data-i18n="es">Porque el inspector necesita VER las instalaciones dentro de la pared. Si tapas con drywall antes de que pasen inspección, <b>el inspector te obliga a quitar el drywall</b> — pagas el trade dos veces y pierdes días.</span><span data-i18n="en">Because the inspector needs to SEE the systems inside the wall. If you cover them with drywall before they pass inspection, <b>the inspector makes you tear the drywall out</b> — you pay the trade twice and lose days.</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="q-n">2</span><span data-i18n="es">La fachada de ladrillo (BRICKS) se atrasó una semana. ¿Se atrasa la entrega de la casa?</span><span data-i18n="en">The brick façade (BRICKS) slipped a week. Does the house delivery slip?</span></summary>
+      <div class="q-a"><span data-i18n="es"><b>No necesariamente.</b> El exterior corre EN PARALELO al interior y casi todo no es ruta crítica. La ruta crítica más larga es el interior — por eso se prioriza. Un atraso en ruta crítica (ej. SHEETROCK) sí atrasa TODO.</span><span data-i18n="en"><b>Not necessarily.</b> The exterior runs IN PARALLEL to the interior and most of it is not critical path. The longest critical path is the interior — that's why it gets priority. A critical-path slip (e.g., SHEETROCK) does delay EVERYTHING.</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="q-n">3</span><span data-i18n="es">¿Por qué la pintura final va al FINAL de la obra si el primer va justo después del drywall?</span><span data-i18n="en">Why does final paint go at the END of the job if primer goes right after drywall?</span></summary>
+      <div class="q-a"><span data-i18n="es">CNG cambió el proceso: pintar todo temprano <b>arruinaba la pintura</b> con los trabajos posteriores (pisos, carpintería, trims). Por eso aquí solo va el primer, y el grupo INTERIOR PAINT se extiende hasta el final del template.</span><span data-i18n="en">CNG changed the process: painting everything early <b>ruined the paint</b> with later work (floors, carpentry, trims). So only primer goes here, and the INTERIOR PAINT group stretches to the end of the template.</span></div>
+    </details>
+  </section>
 
   <div class="footer-note">
-    <span data-i18n="es">Fuente: TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv (export del taskTemplate 22PZihLhwSty — el archivo oficial MANDA) + PROCESO CANÓNICO CNG v4 §2 (notas didácticas). Las bandas de etapa son un resumen didáctico; los nombres de tareas son los oficiales del template y no se traducen.</span>
-    <span data-i18n="en">Source: TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv (export of taskTemplate 22PZihLhwSty — the official file RULES) + CNG CANONICAL PROCESS v4 §2 (teaching notes). Stage bands are a teaching summary; task names are the official template names and are not translated.</span>
+    <span data-i18n="es">WEB DEL PROCESO CNG · Proceso constructivo · 2026-08-07 · Fuente: TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv (export del taskTemplate 22PZihLhwSty — el archivo oficial MANDA) + PROCESO CANÓNICO CNG v4 §2 (notas didácticas). Las etapas son un resumen didáctico; los nombres de tareas son los oficiales del template y no se traducen. Material interno — no distribuir.</span>
+    <span data-i18n="en">CNG PROCESS SITE · Build sequence · 2026-08-07 · Source: TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv (export of taskTemplate 22PZihLhwSty — the official file RULES) + CNG CANONICAL PROCESS v4 §2 (teaching notes). Stages are a teaching summary; task names are the official template names and are not translated. Internal material — do not distribute.</span>
   </div>
 </main>
 
 <script src="/proceso/assets/app.js"></script>
 <script src="/proceso/assets/template-data.js"></script>
 <script>
-(function(){
-'use strict';
-var DATA = window.CNG_TEMPLATE;
-var SEL = -1;               // indice del trade seleccionado
+(function () {
+  'use strict';
+  var T = window.CNG_TEMPLATE || [];
+  var byId = {};
+  T.forEach(function (g) { byId[g.id] = g; });
 
-/* ---- geometria ---- */
-var GUT=214, ROWH=23, TOP=26, PX=5.1, DMIN=15, DMAX=171, BH=16;
-var W = GUT + (DMAX-DMIN+2)*PX + 14;
-var X = function(d){ return GUT + (d-DMIN)*PX; };
-/* cada banda lleva su franja-titulo propia (BH px) para no chocar con las etiquetas */
-function bandOf(i){ for(var k=0;k<BANDS.length;k++){ if(i>=BANDS[k].a && i<=BANDS[k].b) return k; } return BANDS.length-1; }
-var Y0 = function(i){ return TOP + i*ROWH + (bandOf(i)+1)*BH; };
-var YC = function(i){ return Y0(i) + ROWH/2; };
-var BOTTOM_DYN = 0; /* se fija en render */
+  /* ---------- Etapas de la casa (resumen didáctico del canon §2) ---------- */
+  var ETAPAS = [
+    { ico: '🏗️', es: 'Cimientos', en: 'Foundations',
+      pes: 'Todo lo que va BAJO o ES la losa de concreto. Nada de esto se puede corregir después: una vez tirado el concreto, lo que quedó abajo, quedó abajo.',
+      pen: 'Everything that goes UNDER or IS the concrete slab. None of this can be fixed later: once the concrete is poured, whatever is underneath stays underneath.',
+      trades: ['811', 'IN GROUND ELECTRICAL', 'IN GROUND PLUMBING', 'FOUNDATION'] },
+    { ico: '🪵', es: 'Estructura', en: 'Structure',
+      pes: 'El esqueleto de madera, el techo, y todas las instalaciones DENTRO de las paredes mientras siguen abiertas. Termina con las paredes listas para cerrarse.',
+      pen: 'The wooden skeleton, the roof, and all the systems INSIDE the walls while they are still open. Ends with the walls ready to be closed.',
+      trades: ['FRAMING', 'DOORS AND WINDOWS', 'ROOFING', 'PROJECT CLEANING - FRAMING', 'ELECTRICAL ROUGH IN', 'MECHANICAL ROUGH IN', 'PLUMBING ROUGH IN', 'INSULATION'] },
+    { ico: '🛋️', es: 'Interior (la ruta crítica más larga — se prioriza)', en: 'Interior (the longest critical path — gets priority)',
+      pes: 'Cerrar las paredes y construir los acabados de adentro: pisos, cerámica, carpintería, gabinetes, y los acabados finales de las instalaciones. Aquí vive la mayor parte del tiempo de la obra.',
+      pen: 'Closing the walls and building the inside finishes: floors, tile, carpentry, cabinets, and the systems’ final trim. Most of the job’s time lives here.',
+      trades: ['SHEETROCK', 'PROJECT CLEANING - SHEETROCK', 'INTERIOR PAINT', 'FLOORING', 'TILES', 'GLASS', 'INTERIOR DOORS', 'BASEBOARDS AND TRIM', 'CABINETS', 'COUNTERTOPS', 'ELECTRICAL TRIM', 'MECHANICAL TRIM', 'PLUMBING TRIM'] },
+    { ico: '🧱', es: 'Exterior (en paralelo, no crítico)', en: 'Exterior (in parallel, non-critical)',
+      pes: 'La cara de la casa. Corre EN PARALELO al interior cuando se puede: casi nada de esto frena la entrega, por eso el interior se prioriza.',
+      pen: 'The face of the house. Runs IN PARALLEL to the interior when possible: almost none of this holds up delivery, which is why the interior gets priority.',
+      trades: ['BRICKS', 'SIDING', 'EXTERIOR PAINT', 'GUTTERS', 'GARAGE DOOR'] },
+    { ico: '🔑', es: 'Entrega', en: 'Delivery',
+      pes: 'El cierre: el cliente recorre, se corrige, la CIUDAD inspecciona y se entrega. El orden protege a CNG: primero se corrige, después se llama a la ciudad.',
+      pen: 'The closeout: the client walks the job, fixes get made, the CITY inspects and the job is delivered. The order protects CNG: fix first, call the city after.',
+      trades: ['PRE DELIVERY WALK THROUGH', 'FINAL PUNCH LIST', 'FINAL INSPECTIONS', 'PROJECT DELIVERY'] }
+  ];
 
-/* bandas didacticas (resumen del canon §2; el template manda) */
-var BANDS = [
-  {a:0, b:4,  es:'CIMIENTOS Y ESTRUCTURA',      en:'FOUNDATIONS & STRUCTURE',      c:'#eff6ff'},
-  {a:5, b:10, es:'ENVOLVENTE + MEP ROUGH-INS',  en:'ENVELOPE + MEP ROUGH-INS',     c:'#f8fafc'},
-  {a:11,b:13, es:'AISLAMIENTO Y DRYWALL',       en:'INSULATION & DRYWALL',         c:'#eff6ff'},
-  {a:14,b:24, es:'ACABADOS INTERIORES',         en:'INTERIOR FINISHES',            c:'#f8fafc'},
-  {a:25,b:29, es:'EXTERIOR (EN PARALELO)',      en:'EXTERIOR (IN PARALLEL)',       c:'#eff6ff'},
-  {a:30,b:33, es:'CIERRE',                      en:'CLOSEOUT',                     c:'#f8fafc'}
-];
+  /* ---------- Qué es cada trade EN CRISTIANO + por qué va ahí ---------- */
+  var X = {
+    '811': { es: 'Antes de meter una pala a la tierra se verifica que no haya líneas enterradas (gas, agua, fibra): un email de verificación a la ciudad + la inspección 811.', en: 'Before a shovel touches the ground, buried lines (gas, water, fiber) are checked: a verification email to the city + the 811 inspection.', pes: 'Va PRIMERO en toda obra: excavar sin verificar puede perforar una línea de gas.', pen: 'It goes FIRST on every job: digging without checking can puncture a gas line.' },
+    'IN GROUND ELECTRICAL': { es: 'La parte eléctrica que va BAJO tierra: la puesta a tierra de la casa.', en: 'The electrical work that goes UNDERGROUND: the house grounding.', pes: 'Va antes de tirar el concreto: después de la losa ya no puedes meter nada abajo. Su inspección de ciudad libera la excavación de la fundación.', pen: 'It goes before the pour: after the slab you can’t put anything underneath. Its city inspection clears the foundation dig.' },
+    'IN GROUND PLUMBING': { es: 'Las tuberías de agua y desagüe que van BAJO la losa.', en: 'The water and drain pipes that go UNDER the slab.', pes: 'Misma lógica: bajo la losa, antes del concreto, con inspección de ciudad que libera la excavación.', pen: 'Same logic: under the slab, before the concrete, with a city inspection that clears the dig.' },
+    'FOUNDATION': { es: 'La losa de concreto. Su cadena: delimitar el plano en el terreno con madera (formboard) → survey (inspección de tercero) → excavar → inspección de ciudad pre-pour → tirar el concreto → ~10 días de curado.', en: 'The concrete slab. Its chain: outline the plan on the ground with wood (formboard) → survey (third-party inspection) → dig → pre-pour city inspection → pour → ~10 days curing.', pes: 'Todo lo demás se construye ENCIMA de esta losa. El curado de ~10 días no se puede apurar — es tiempo muerto planificado.', pen: 'Everything else is built ON TOP of this slab. The ~10-day cure can’t be rushed — it’s planned dead time.' },
+    'FRAMING': { es: 'El esqueleto de madera de la casa: paredes, pisos y techo (en Texas toda la estructura es madera).', en: 'The house’s wooden skeleton: walls, floors and roof (in Texas the whole structure is wood).', pes: 'Sin esqueleto no hay dónde colgar nada. Necesita los planos estructurales APROBADOS por el ingeniero, FÍSICAMENTE en obra — el fallo histórico #1 es framear con planos desactualizados. Es de los pocos trades con downpayment.', pen: 'Without a skeleton there’s nothing to hang anything on. It needs engineer-APPROVED structural plans, PHYSICALLY on site — the #1 historic failure is framing with outdated plans. One of the few trades with a downpayment.' },
+    'DOORS AND WINDOWS': { es: 'Las puertas y ventanas EXTERIORES de la casa.', en: 'The house’s EXTERIOR doors and windows.', pes: 'La mayoría de ciudades las exige instaladas ANTES de aprobar la inspección de framing.', pen: 'Most cities require them installed BEFORE passing the framing inspection.' },
+    'ROOFING': { es: 'El techo: primero el underlayment (la capa impermeable) y luego los shingles (las tejas).', en: 'The roof: first the underlayment (the waterproof layer), then the shingles.', pes: 'Cierra la casa contra la lluvia antes de meter instalaciones y aislamiento adentro.', pen: 'It seals the house against rain before systems and insulation go in.' },
+    'PROJECT CLEANING - FRAMING': { es: 'La limpieza de obra al cerrar la etapa de estructura.', en: 'The site cleanup that closes the structure stage.', pes: 'Un sitio limpio es condición para que los MEP trabajen bien y para presentarse a inspecciones.', pen: 'A clean site is a condition for the MEPs to work well and for inspections.' },
+    'ELECTRICAL ROUGH IN': { es: 'Todo el cableado eléctrico DENTRO de las paredes y techos, mientras están abiertos.', en: 'All the electrical wiring INSIDE walls and ceilings, while they are open.', pes: 'Solo se puede hacer con las paredes abiertas — después del drywall ya no. Su inspección de ciudad es obligatoria antes de aislar y cerrar.', pen: 'It can only be done with open walls — not after drywall. Its city inspection is mandatory before insulating and closing.' },
+    'MECHANICAL ROUGH IN': { es: 'Los ductos del aire acondicionado dentro de paredes y techos.', en: 'The A/C ducts inside walls and ceilings.', pes: 'Misma lógica que el eléctrico: paredes abiertas + inspección antes de cerrar.', pen: 'Same logic as electrical: open walls + inspection before closing.' },
+    'PLUMBING ROUGH IN': { es: 'Las tuberías dentro de la casa + la línea de gas y de agua a la ciudad (el desagüe va a la ciudad o a pozo séptico).', en: 'The pipes inside the house + the gas and water lines to the city (drainage goes to the city or a septic tank).', pes: 'Paredes abiertas + inspección antes de cerrar. Lleva downpayments (gas / waste-water) — excepción de la regla "nunca pagar al inicio".', pen: 'Open walls + inspection before closing. It carries downpayments (gas / waste-water) — an exception to the "never pay upfront" rule.' },
+    'INSULATION': { es: 'El aislamiento térmico: fibra de vidrio o espuma. ⚠ La espuma NO va cerca de líneas de agua caliente o gas — riesgo de incendio (ya pasó y hubo retrabajo).', en: 'Thermal insulation: fiberglass or foam. ⚠ Foam must NOT touch hot-water or gas lines — fire risk (it happened; rework followed).', pes: 'Va después de que los 3 MEP PASARON su inspección: si aíslas antes, tapas lo que el inspector tiene que ver.', pen: 'It goes after all 3 MEPs PASSED inspection: insulate earlier and you cover what the inspector must see.' },
+    'SHEETROCK': { es: 'Colgar la tablaroca (drywall) y rematarla: tape, bed & texture (cinta + masilla + textura).', en: 'Hanging the drywall and finishing it: tape, bed & texture.', pes: 'Solo cuando MEPs e insulación pasaron inspección — si no, el inspector te obliga a QUITAR el drywall. Colgar el sheetrock marca el FIN de la Fase 1 (estructura).', pen: 'Only after MEPs and insulation passed inspection — otherwise the inspector makes you TEAR OUT the drywall. Hanging sheetrock marks the END of Phase 1 (structure).' },
+    'PROJECT CLEANING - SHEETROCK': { es: 'La limpieza después del drywall: el polvo del sheetrock lo invade todo.', en: 'The cleanup after drywall: sheetrock dust gets everywhere.', pes: 'Los acabados necesitan un sitio limpio para empezar.', pen: 'Finishes need a clean site to start.' },
+    'INTERIOR PAINT': { es: 'Primero SOLO el primer (la primera capa). La pintura final va AL FINAL de la obra.', en: 'First ONLY the primer (first coat). Final paint goes at the very END of the job.', pes: 'CNG cambió el proceso: pintar todo temprano arruinaba la pintura con los trabajos posteriores. Por eso este grupo se extiende hasta el final del template (día 171).', pen: 'CNG changed the process: painting early got ruined by later work. That’s why this group stretches to the end of the template (day 171).' },
+    'FLOORING': { es: 'Los pisos: laminados o madera.', en: 'The floors: laminate or wood.', pes: 'Después del primer; antes de puertas interiores y zócalos, que se instalan SOBRE el piso ya puesto.', pen: 'After primer; before interior doors and baseboards, which install ON TOP of the finished floor.' },
+    'TILES': { es: 'La cerámica de cocina y baños (con su fragua/pegamento).', en: 'The kitchen and bathroom tile (with its grout/adhesive).', pes: 'Corre con los pisos en la etapa de acabados; los vidrios de ducha se miden sobre la cerámica ya instalada.', pen: 'Runs with flooring in the finishes stage; shower glass is measured over installed tile.' },
+    'GLASS': { es: 'Vidrios y mamparas: duchas, balcones.', en: 'Glass and enclosures: showers, balconies.', pes: 'Se mide SOBRE la cerámica ya instalada — por eso va después de TILES. No es ruta crítica.', pen: 'Measured OVER installed tile — that’s why it follows TILES. Not critical path.' },
+    'INTERIOR DOORS': { es: 'Colgar y pintar las puertas interiores.', en: 'Hanging and painting the interior doors.', pes: 'Sobre pisos ya puestos, antes de zócalos y molduras que las rematan.', pen: 'Over finished floors, before the baseboards and trims that frame them.' },
+    'BASEBOARDS AND TRIM': { es: 'Los zócalos (la madera al pie de la pared) y las molduras.', en: 'The baseboards (the wood at the foot of the wall) and the moldings.', pes: 'Rematan la unión pared-piso-puerta: necesitan pisos y puertas ya instalados.', pen: 'They finish the wall-floor-door joints: they need floors and doors already in.' },
+    'CABINETS': { es: 'Los gabinetes de cocina, los vanities de baño y las islas.', en: 'The kitchen cabinets, bathroom vanities and islands.', pes: 'La carpintería es "la mitad de la obra" (Jose). Los countertops se miden ENCIMA de los cabinets instalados.', pen: 'Carpentry is "half the job" (Jose). Countertops are measured ON TOP of installed cabinets.' },
+    'COUNTERTOPS': { es: 'Las cubiertas de piedra de cocina y baños.', en: 'The stone countertops in kitchen and baths.', pes: 'Se plantillan SOBRE los cabinets ya instalados — por eso dependen de ellos.', pen: 'Templated OVER the installed cabinets — that’s why they depend on them.' },
+    'ELECTRICAL TRIM': { es: 'Los acabados eléctricos: luminarias, LED, y el panel maestro (la caja de fusibles).', en: 'The electrical finishes: fixtures, LEDs, and the master panel (the breaker box).', pes: 'Su inspección de ciudad le DEVUELVE la electricidad de ciudad a la casa — gatea el final de la obra.', pen: 'Its city inspection RETURNS city power to the house — it gates the end of the job.' },
+    'MECHANICAL TRIM': { es: 'Rejillas de ventilación y la conexión final del aire acondicionado.', en: 'Vents and the A/C final hookup.', pes: 'Los acabados de MEP van después de countertops y antes de la pintura final.', pen: 'MEP trim goes after countertops and before final paint.' },
+    'PLUMBING TRIM': { es: 'Caños, duchas, cabezales: los acabados visibles de la plomería.', en: 'Faucets, showers, heads: plumbing’s visible finishes.', pes: 'Misma lógica que los otros trims; su inspección cierra el ciclo MEP.', pen: 'Same logic as the other trims; its inspection closes the MEP cycle.' },
+    'BRICKS': { es: 'La fachada de ladrillo. Es decorativa, NO estructural.', en: 'The brick façade. Decorative, NOT structural.', pes: 'Arranca apenas el framing lo permite y corre EN PARALELO al interior: no frena la entrega.', pen: 'Starts as soon as framing allows and runs IN PARALLEL to the interior: it doesn’t hold up delivery.' },
+    'SIDING': { es: 'Paneles decorativos de fachada (opcional en muchos proyectos).', en: 'Decorative façade panels (optional on many projects).', pes: 'Después de bricks, antes de la pintura exterior.', pen: 'After bricks, before exterior paint.' },
+    'EXTERIOR PAINT': { es: 'La pintura de la fachada.', en: 'The façade paint.', pes: 'Cuando bricks y siding terminaron — pintar antes sería pintar dos veces.', pen: 'Once bricks and siding are done — painting earlier means painting twice.' },
+    'GUTTERS': { es: 'Las canaletas del techo y su protector (gutter guard).', en: 'The roof gutters and their guard.', pes: 'Al final del exterior, sobre la fachada ya pintada.', pen: 'At the end of the exterior, over the painted façade.' },
+    'GARAGE DOOR': { es: 'La puerta del garaje.', en: 'The garage door.', pes: 'Cierre del exterior; va cuando la fachada está terminada.', pen: 'Closes out the exterior; goes in when the façade is done.' },
+    'PRE DELIVERY WALK THROUGH': { es: 'El recorrido con el cliente, contrastando la obra contra el contrato.', en: 'The walkthrough with the client, checking the job against the contract.', pes: 'ANTES de llamar a la ciudad: lo que salga aquí se corrige en el punch list.', pen: 'BEFORE calling the city: whatever comes up gets fixed in the punch list.' },
+    'FINAL PUNCH LIST': { es: 'La lista de correcciones que salió del recorrido — y su ejecución.', en: 'The list of fixes from the walkthrough — and executing them.', pes: 'Se corrige TODO antes de la inspección final y la entrega.', pen: 'EVERYTHING gets fixed before the final inspection and delivery.' },
+    'FINAL INSPECTIONS': { es: 'La inspección final la hace LA CIUDAD (no un tercero), porque la responsabilidad legal recae en la ciudad.', en: 'The final inspection is done by THE CITY (not a third party), because legal responsibility falls on the city.', pes: 'Es el último candado antes de entregar la casa.', pen: 'The last lock before handing over the house.' },
+    'PROJECT DELIVERY': { es: 'La entrega: limpieza final, caminata del vendedor con el cliente, Completion Form (conformidad), lien release y garantía.', en: 'Delivery: final cleaning, the salesperson’s walk with the client, the Completion Form, lien release and warranty.', pes: 'Cada trade terminado ya se convirtió en cobro; aquí se cierra el proyecto y arranca la postventa.', pen: 'Each finished trade already became a collection; here the project closes and post-sale begins.' }
+  };
 
-/* notas didacticas por trade (canon §2 — solo lo que el canon dice) */
-var NOTES = {
-  'FOUNDATION':{es:'Formboard → Survey (inspección de tercero) → inspección de ciudad → tirar concreto → ~10 días de curado.', en:'Formboard → Survey (third-party inspection) → city inspection → concrete pour → ~10 days of curing.'},
-  'FRAMING':{es:'Esqueleto de madera (toda la estructura es madera). ⚠ El fallo real #1: el sub recibe planos estructurales desactualizados / no aprobados por el ingeniero → retrabajo.', en:'Wood skeleton (the whole structure is wood). ⚠ The #1 real failure: the sub receives outdated / not-engineer-approved structural plans → rework.'},
-  'DOORS AND WINDOWS':{es:'La mayoría de ciudades exige puertas y ventanas exteriores instaladas ANTES de la inspección de framing.', en:'Most cities require exterior doors and windows installed BEFORE the framing inspection.'},
-  'INSULATION':{es:'⚠ La espuma NO va cerca de líneas de agua caliente/gas: riesgo de incendio — ya pasó y hubo retrabajo.', en:'⚠ Foam does NOT go near hot-water/gas lines: fire risk — it already happened and caused rework.'},
-  'INTERIOR PAINT':{es:'CNG cambió el proceso: aquí solo PRIMER; la PINTURA FINAL va al final (después de los trims) para no arruinarla con trabajos posteriores. Míralo en las fechas: PRIMER d116–119, PAINT d158–164.', en:'CNG changed the process: only PRIMER here; the FINAL PAINT goes at the end (after the trims) so later work does not ruin it. See the dates: PRIMER d116–119, PAINT d158–164.'},
-  'ELECTRICAL ROUGH IN':{es:'MEP rough-ins = donde más se rechazan inspecciones. La causa es comportamiento (rigurosidad, prever), no técnica.', en:'MEP rough-ins = where the most inspections get rejected. The cause is behavior (rigor, anticipating), not technique.'},
-  'MECHANICAL ROUGH IN':{es:'MEP rough-ins = donde más se rechazan inspecciones. La causa es comportamiento, no técnica.', en:'MEP rough-ins = where the most inspections get rejected. The cause is behavior, not technique.'},
-  'PLUMBING ROUGH IN':{es:'En plumbing: línea de gas y de agua a la ciudad; desagüe = ciudad o pozo séptico. MEP rough-ins = donde más se rechazan inspecciones.', en:'Plumbing includes the gas line and the water line to the city; drainage = city or septic. MEP rough-ins = where the most inspections get rejected.'},
-  'CABINETS':{es:'Carpintería = “la mitad de la obra” (Jose, P3): medir → fabricar custom → instalar → pintar → hardware.', en:'Carpentry = “half the job” (Jose, P3): measure → custom build → install → paint → hardware.'},
-  'FINAL INSPECTIONS':{es:'En obra nueva la inspección FINAL la hace la CIUDAD (no un tercero): la responsabilidad legal recae en la ciudad.', en:'On new construction the FINAL inspection is done by the CITY (not a third party): legal responsibility sits with the city.'}
-};
+  var TIPOS = {
+    pm:   { es: 'PM Task', en: 'PM Task', cls: 't-pm' },
+    pur:  { es: 'Purchases', en: 'Purchases', cls: 't-pur' },
+    act:  { es: 'Action', en: 'Action', cls: 't-act' },
+    cp:   { es: 'Critical Path', en: 'Critical Path', cls: 't-cp' },
+    psub: { es: 'Payment-Subs', en: 'Payment-Subs', cls: 't-psub' },
+    pmat: { es: 'Payment-Materials', en: 'Payment-Materials', cls: 't-pmat' },
+    insp: { es: 'City Inspection', en: 'City Inspection', cls: 't-insp' }
+  };
 
-var TYPE_LBL = {
-  pm:{es:'PM Task',en:'PM Task',cls:'t-pm'},
-  pur:{es:'Purchases',en:'Purchases',cls:'t-pur'},
-  act:{es:'Action',en:'Action',cls:'t-act'},
-  cp:{es:'Critical Path',en:'Critical Path',cls:'t-cp'},
-  psub:{es:'Pago Sub',en:'Pay Subs',cls:'t-psub'},
-  pmat:{es:'Material',en:'Materials',cls:'t-pmat'},
-  insp:{es:'Inspección ciudad',en:'City Inspection',cls:'t-insp'}
-};
-
-function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-function T(es,en){ return window.cngT(es,en); }
-
-/* indice inverso: quien depende de cada grupo */
-var UNLOCKS = {};
-DATA.forEach(function(g){ UNLOCKS[g.id]=[]; });
-DATA.forEach(function(g){ g.deps.forEach(function(d){ if(UNLOCKS[d]) UNLOCKS[d].push(g.id); }); });
-function idxOf(id){ for(var i=0;i<DATA.length;i++) if(DATA[i].id===id) return i; return -1; }
-
-/* ---------- render del SVG ---------- */
-function render(){
-  var svg = document.getElementById('svg-template');
-  var BOTTOM = TOP + DATA.length*ROWH + BANDS.length*BH;
-  var H = BOTTOM + 26;
-  svg.setAttribute('viewBox','0 0 '+W+' '+H);
-  svg.setAttribute('width',W); svg.setAttribute('height',H);
-  svg.style.minWidth = '900px';
-  var s = '';
-  s += '<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0f172a"/></marker></defs>';
-
-  /* bandas con franja-titulo propia */
-  BANDS.forEach(function(b,k){
-    var yh = TOP + b.a*ROWH + k*BH;             /* franja titulo */
-    var h  = BH + (b.b-b.a+1)*ROWH;
-    s += '<rect x="0" y="'+yh+'" width="'+W+'" height="'+h+'" fill="'+b.c+'"/>';
-    s += '<rect x="0" y="'+yh+'" width="'+W+'" height="'+BH+'" fill="#0f172a" opacity="0.05"/>';
-    s += '<text x="8" y="'+(yh+11.5)+'" font-size="8.5" font-weight="800" letter-spacing="1.2" fill="#64748b">'+esc(T(b.es,b.en))+'</text>';
-  });
-
-  /* grid de dias (cada 10) */
-  for(var d=20; d<=DMAX; d+=10){
-    s += '<line x1="'+X(d)+'" y1="'+TOP+'" x2="'+X(d)+'" y2="'+BOTTOM+'" stroke="#e2e8f0" stroke-width="1"/>';
-    s += '<text x="'+X(d)+'" y="'+(BOTTOM+16)+'" font-size="9" fill="#94a3b8" text-anchor="middle">d'+d+'</text>';
-  }
-  s += '<text x="'+GUT+'" y="'+(TOP-10)+'" font-size="9" fill="#94a3b8">'+esc(T('días del template →','template days →'))+'</text>';
-
-  /* filas */
-  DATA.forEach(function(g,i){
-    var yc = YC(i), y0 = Y0(i);
-    var isSel = (i===SEL), isDep = (SEL>=0 && DATA[SEL].deps.indexOf(g.id)>=0), isUnl = (SEL>=0 && UNLOCKS[DATA[SEL].id].indexOf(g.id)>=0);
-    var fill = g.cls==='cp' ? '#2563eb' : (g.cls==='act' ? '#94a3b8' : '#dc2626');
-    var op = (SEL<0 || isSel || isDep || isUnl) ? 1 : 0.35;
-    s += '<g class="rowg" data-i="'+i+'" style="cursor:pointer" opacity="'+op+'">';
-    /* etiqueta */
-    s += '<text x="'+(GUT-8)+'" y="'+(yc+3.5)+'" font-size="10" text-anchor="end" font-weight="'+(isSel?'800':'600')+'" fill="'+(isSel?'#0f172a':'#334155')+'">'+esc(g.id)+'</text>';
-    /* barra */
-    var bx=X(g.s), bw=Math.max((g.e-g.s+1)*PX,7);
-    s += '<rect x="'+bx+'" y="'+(yc-6.5)+'" width="'+bw+'" height="13" rx="4" fill="'+fill+'"'+(isSel?' stroke="#0f172a" stroke-width="2"':(isDep||isUnl?' stroke="#0f172a" stroke-width="1.2" stroke-dasharray="3,2"':''))+'/>';
-    /* marcadores: inspecciones (rojo) y downpayments (ambar) */
-    g.tasks.forEach(function(t){
-      if(t.t==='insp'){ var mx=X(t.s)+2; s += '<path d="M'+mx+' '+(yc-5)+' l4.6 5 -4.6 5 -4.6 -5 z" fill="#dc2626" stroke="#fff" stroke-width="0.8"/>'; }
-      if(t.t==='psub' && t.n.toUpperCase().indexOf('DOWN')>=0){ var dx2=X(t.s)+2; s += '<circle cx="'+dx2+'" cy="'+(yc)+'" r="4.4" fill="#d97706" stroke="#fff" stroke-width="0.8"/><text x="'+dx2+'" y="'+(yc+2.8)+'" font-size="7.5" font-weight="800" fill="#fff" text-anchor="middle">$</text>'; }
+  /* dependencias inversas: qué desbloquea cada trade */
+  var desbloquea = {};
+  T.forEach(function (g) {
+    (g.deps || []).forEach(function (d) {
+      (desbloquea[d] = desbloquea[d] || []).push(g.id);
     });
-    /* zona clickeable completa */
-    s += '<rect x="0" y="'+y0+'" width="'+W+'" height="'+ROWH+'" fill="transparent"/>';
-    s += '</g>';
   });
 
-  /* flechas de dependencia del seleccionado */
-  if(SEL>=0){
-    var gsel = DATA[SEL];
-    gsel.deps.forEach(function(dep){
-      var j = idxOf(dep); if(j<0) return;
-      var x1 = X(Math.min(DATA[j].e, DMAX))+3, y1 = YC(j);
-      var x2 = X(gsel.s)-2, y2 = YC(SEL);
-      var mx = (x1+x2)/2;
-      s += '<path d="M'+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2+'" fill="none" stroke="#0f172a" stroke-width="1.6" stroke-dasharray="4,3" marker-end="url(#arr)" opacity="0.85"/>';
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function t(es, en) { return window.cngT ? window.cngT(es, en) : es; }
+
+  /* ---------- pintar etapas + estaciones ---------- */
+  var cont = document.getElementById('etapas');
+  var seleccionado = null;
+
+  function pintarEtapas() {
+    var html = '';
+    ETAPAS.forEach(function (e, i) {
+      var dmin = Infinity, dmax = 0;
+      e.trades.forEach(function (id) {
+        var g = byId[id]; if (!g) return;
+        dmin = Math.min(dmin, g.s); dmax = Math.max(dmax, g.e);
+      });
+      html += '<div class="etapa">' +
+        '<div class="etapa-head"><span class="e-ico">' + e.ico + '</span>' +
+        '<div><div class="e-num">' + t('ETAPA', 'STAGE') + ' ' + (i + 1) + ' · ' + t('de la casa', 'of the house') + '</div>' +
+        '<h3>' + esc(t(e.es, e.en)) + '</h3></div>' +
+        '<span class="e-dias">' + t('días', 'days') + ' ' + dmin + '–' + dmax + '</span></div>' +
+        '<div class="etapa-body"><p class="etapa-por">' + esc(t(e.pes, e.pen)) + '</p><div class="ruta">';
+      e.trades.forEach(function (id) {
+        var g = byId[id]; if (!g) return;
+        var cls = g.cls === 'cp' ? 'cp' : (g.cls === 'insp' ? 'insp' : 'act');
+        html += '<button type="button" class="station ' + cls + (seleccionado === id ? ' on' : '') + '" data-trade="' + esc(id) + '">' +
+          esc(id) +
+          (g.insp && g.insp.length ? ' <span class="b-insp">◆' + g.insp.length + '</span>' : '') +
+          (g.down && g.down.length ? ' <span class="b-down">$</span>' : '') +
+          '</button>';
+      });
+      html += '</div></div></div>';
+      if (i === 1) {
+        html += '<div class="gate-banner"><div class="g-title">FRAMING INSPECTION</div>' +
+          '<span data-i18n="es">La ciudad revisa el esqueleto + los rough-ins y autoriza continuar. <b>Aquí el proyecto se parte en dos:</b> INTERIOR (la ruta crítica más larga — se prioriza) y EXTERIOR (en paralelo).</span>' +
+          '<span data-i18n="en">The city reviews the skeleton + rough-ins and authorizes continuing. <b>Here the project splits in two:</b> INTERIOR (the longest critical path — it gets priority) and EXTERIOR (in parallel).</span></div>';
+      } else if (i < ETAPAS.length - 1) {
+        html += '<div class="conector-etapa">↓</div>';
+      }
     });
+    cont.innerHTML = html;
   }
 
-  svg.innerHTML = s;
-  svg.querySelectorAll('g.rowg').forEach(function(el){
-    el.addEventListener('click', function(){ select(parseInt(el.getAttribute('data-i'),10)); });
+  /* ---------- panel de detalle ---------- */
+  function pintarDetalle(id) {
+    var g = byId[id], x = X[id] || {};
+    var panel = document.getElementById('detalle-trade');
+    if (!g) return;
+    var deps = g.deps || [];
+    var unlock = desbloquea[id] || [];
+    var html = '<div class="trade-panel">' +
+      '<h3>' + esc(id) + ' ' +
+      (g.cls === 'cp' ? '<span class="chip t-cp">' + t('ruta crítica', 'critical path') + '</span>' : '<span class="chip t-act">' + t('no crítico', 'non-critical') + '</span>') +
+      (g.down && g.down.length ? ' <span class="chip t-psub">$ downpayment</span>' : '') + '</h3>' +
+      '<div class="dias">' + t('En el template: días', 'In the template: days') + ' ' + g.s + '–' + g.e + ' · ' + g.tasks.length + ' ' + t('tareas', 'tasks') + '</div>' +
+      '<div class="cristiano"><b>' + t('¿Qué es, en cristiano?', 'What is it, in plain language?') + '</b> ' + esc(t(x.es || '', x.en || '')) + '</div>' +
+      '<p style="font-size:14.5px"><b>' + t('¿Por qué va aquí en la secuencia?', 'Why does it sit here in the sequence?') + '</b> ' + esc(t(x.pes || '', x.pen || '')) + '</p>';
+
+    html += '<div class="grid c2">';
+    html += '<div><h4>← ' + t('No arranca sin', 'Won’t start without') + '</h4><p class="dep-list" style="font-size:14px;margin:4px 0">' +
+      (deps.length ? deps.map(function (d) { return '<a class="chip t-pm" data-goto="' + esc(d) + '">' + esc(d) + '</a>'; }).join(' ') : '<span class="chip">' + t('nada — puede arrancar de una', 'nothing — can start right away') + '</span>') + '</p></div>';
+    html += '<div><h4>→ ' + t('Desbloquea a', 'Unlocks') + '</h4><p class="dep-list" style="font-size:14px;margin:4px 0">' +
+      (unlock.length ? unlock.map(function (d) { return '<a class="chip t-pur" data-goto="' + esc(d) + '">' + esc(d) + '</a>'; }).join(' ') : '<span class="chip">' + t('nada directamente', 'nothing directly') + '</span>') + '</p></div>';
+    html += '</div>';
+
+    if (g.insp && g.insp.length) {
+      html += '<h4>◆ ' + t('Inspecciones que lo gatean', 'Inspections that gate it') + '</h4><p style="font-size:14px;margin:4px 0">' +
+        g.insp.map(function (n) { return '<span class="chip t-insp">' + esc(n) + '</span>'; }).join(' ') +
+        '<br><span style="font-size:12.5px;color:var(--mut)">' + t('Sin esta inspección aprobada, el siguiente paso NO arranca. Un red tag aquí = días perdidos.', 'Without this inspection passed, the next step does NOT start. A red tag here = days lost.') + '</span></p>';
+    }
+    if (g.down && g.down.length) {
+      html += '<h4>$ Downpayment</h4><p style="font-size:14px;margin:4px 0">' +
+        g.down.map(function (n) { return '<span class="chip t-psub">' + esc(n) + '</span>'; }).join(' ') +
+        '<br><span style="font-size:12.5px;color:var(--mut)">' + t('Excepción de la regla "a los subs nunca se les paga al inicio": solo ciertos subs/trades como framing o MEP rough-ins.', 'Exception to the "subs are never paid upfront" rule: only certain subs/trades like framing or MEP rough-ins.') + '</span></p>';
+    }
+
+    html += '<details class="exp"><summary>' + t('Ver la cadena completa de tareas (' + g.tasks.length + ')', 'See the full task chain (' + g.tasks.length + ')') + '</summary><div class="exp-body"><ul class="tareas-chain">';
+    g.tasks.forEach(function (tk) {
+      var tp = TIPOS[tk.t] || { es: tk.t, en: tk.t, cls: '' };
+      html += '<li><span class="chip ' + tp.cls + '">' + esc(t(tp.es, tp.en)) + '</span> ' + esc(tk.n) +
+        '<span class="dias-t">' + t('día', 'day') + ' ' + tk.s + (tk.e !== tk.s ? '–' + tk.e : '') + '</span></li>';
+    });
+    html += '</ul></div></details></div>';
+    panel.innerHTML = html;
+  }
+
+  function seleccionar(id, scroll) {
+    seleccionado = id;
+    pintarEtapas();
+    pintarDetalle(id);
+    if (scroll) {
+      var p = document.getElementById('detalle-trade');
+      if (p && p.scrollIntoView) p.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var st = e.target.closest ? e.target.closest('button.station') : null;
+    if (st) { seleccionar(st.getAttribute('data-trade'), true); return; }
+    var go = e.target.closest ? e.target.closest('[data-goto]') : null;
+    if (go) {
+      e.preventDefault();
+      seleccionar(go.getAttribute('data-goto'), false);
+      var first = document.querySelector('button.station.on');
+      if (first && first.scrollIntoView) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   });
-}
 
-/* ---------- panel de detalle ---------- */
-function select(i){
-  SEL = (SEL===i) ? -1 : i;
-  render(); panel();
-  if(SEL>=0){ var p=document.getElementById('detalle-trade'); if(p && p.scrollIntoView) p.scrollIntoView({behavior:'smooth',block:'nearest'}); }
-}
-window.cngSelectTrade = function(id){ var i=idxOf(id); if(i>=0) select(i); };
-
-function chipList(ids){
-  if(!ids.length) return '<span style="color:#94a3b8">—</span>';
-  return ids.map(function(id){
-    return '<a class="chip" style="cursor:pointer" onclick="cngSelectTrade(\''+id.replace(/'/g,"\\'")+'\')">'+esc(id)+'</a>';
-  }).join(' ');
-}
-
-function panel(){
-  var ph = document.getElementById('detalle-placeholder');
-  var body = document.getElementById('detalle-body');
-  if(SEL<0){ ph.style.display=''; body.innerHTML=''; return; }
-  ph.style.display='none';
-  var g = DATA[SEL];
-  var counts = {};
-  g.tasks.forEach(function(t){ counts[t.t]=(counts[t.t]||0)+1; });
-  var chips = Object.keys(TYPE_LBL).filter(function(k){return counts[k];}).map(function(k){
-    return '<span class="chip '+TYPE_LBL[k].cls+'">'+counts[k]+' · '+esc(T(TYPE_LBL[k].es,TYPE_LBL[k].en))+'</span>';
-  }).join(' ');
-
-  var h = '<div class="trade-panel">';
-  h += '<h3>'+esc(g.id)+'</h3>';
-  h += '<div class="dias">'+esc(T('Día '+g.s+' – '+g.e+' del template · '+(g.e-g.s+1)+' días · '+g.tasks.length+' tareas','Template day '+g.s+' – '+g.e+' · '+(g.e-g.s+1)+' days · '+g.tasks.length+' tasks'))+'</div>';
-  h += '<div style="margin-bottom:10px">'+chips+'</div>';
-
-  if(NOTES[g.id]){ h += '<div class="mat">'+esc(T(NOTES[g.id].es,NOTES[g.id].en))+'</div>'; }
-
-  h += '<div class="grid c2" style="margin:10px 0">';
-  h += '<div><h4>'+esc(T('No arranca sin (depende de)','Does not start without (depends on)'))+'</h4><div class="dep-list">'+chipList(g.deps)+'</div></div>';
-  h += '<div><h4>'+esc(T('Desbloquea a','Unlocks'))+'</h4><div class="dep-list">'+chipList(UNLOCKS[g.id])+'</div></div>';
-  h += '</div>';
-
-  h += '<h4 style="color:#dc2626">'+esc(T('Inspecciones de ciudad en este grupo','City inspections in this group'))+'</h4>';
-  if(g.insp.length){
-    h += '<ul style="font-size:13px;margin:4px 0 10px">'+g.insp.map(function(n){return '<li>◆ '+esc(n)+'</li>';}).join('')+'</ul>';
-  } else {
-    h += '<p style="font-size:12.5px;color:#94a3b8;margin:4px 0 10px">'+esc(T('— Sin inspección de ciudad en este grupo. Igual llevan inspección del PM (checklist CC).','— No city inspection in this group. PM inspections (CC checklist) still apply.'))+'</p>';
-  }
-
-  if(g.down.length){
-    h += '<div class="gap"><b>Downpayment:</b> '+g.down.map(esc).join(' · ')+'. '+esc(T('El downpayment es algo especial con CIERTOS subcontratistas o trades (ej. framing, MEP rough-ins) — es el único pago pre-trabajo. A los subs nunca se les paga todo al inicio.','The downpayment is something special with CERTAIN subs or trades (e.g. framing, MEP rough-ins) — the only pre-work payment. Subs are never paid in full up front.'))+'</div>';
-  }
-
-  /* dependencias tarea-a-tarea entre grupos */
-  var xdeps = [];
-  g.tasks.forEach(function(t){ (t.xd||[]).forEach(function(d){ xdeps.push({from:t.n, g:d.g, t:d.t}); }); });
-  if(xdeps.length){
-    h += '<details class="exp"><summary>'+esc(T('Dependencias exactas entre grupos ('+xdeps.length+')','Exact cross-group dependencies ('+xdeps.length+')'))+'</summary><div class="exp-body"><ul style="margin:8px 0;padding-left:18px;font-size:12.5px">';
-    xdeps.forEach(function(d){ h += '<li><b>'+esc(d.from)+'</b> '+esc(T('espera a','waits for'))+' <i>'+esc(d.g)+'; '+esc(d.t)+'</i></li>'; });
-    h += '</ul></div></details>';
-  }
-
-  h += '<details class="exp"><summary>'+esc(T('La cadena completa de tareas del grupo','The group\'s full task chain'))+'</summary><div class="exp-body"><ul class="tareas-chain">';
-  g.tasks.forEach(function(t){
-    var L = TYPE_LBL[t.t];
-    h += '<li><span class="chip '+L.cls+'">'+esc(T(L.es,L.en))+'</span> '+esc(t.n)+'<span class="dias-t">d'+t.s+(t.e!==t.s?'–'+t.e:'')+'</span></li>';
+  document.addEventListener('cng:lang', function () {
+    pintarEtapas();
+    if (seleccionado) pintarDetalle(seleccionado);
   });
-  h += '</ul></div></details>';
-  h += '</div>';
-  body.innerHTML = h;
-}
 
-document.addEventListener('cng:ready', function(){ render(); panel(); });
-document.addEventListener('cng:lang', function(){ render(); panel(); });
-if(document.body.classList.contains('cng-locked')===false){ render(); panel(); }
+  pintarEtapas();
 })();
 </script>
 </body>
