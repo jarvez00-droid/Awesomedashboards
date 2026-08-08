@@ -20,6 +20,7 @@
      Clave provisional: CNG2026  [VERIFICAR CON JOSE]              */
   var PW = 'CNG2026';
   var KEY = 'cng_proceso_auth';
+  var GATE_ENABLED = false;  // Jose 2026-08-07: sin contraseña
 
   function buildGate() {
     document.body.classList.add('cng-locked');
@@ -333,7 +334,7 @@
     if (sessionStorage.getItem(KEY) === '1') {
       document.dispatchEvent(new CustomEvent('cng:ready'));
     } else {
-      buildGate();
+      if (GATE_ENABLED) buildGate();
     }
   }
 
