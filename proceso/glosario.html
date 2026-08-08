@@ -21,20 +21,7 @@
 <header class="site">
   <div class="bar">
     <span class="logo">CNG · <b>PROCESO</b></span>
-    <nav>
-      <a href="index.html"><span data-i18n="es">Inicio</span><span data-i18n="en">Home</span></a>
-      <a href="temario.html"><span data-i18n="es">Temario</span><span data-i18n="en">Syllabus</span></a>
-      <a href="proceso-constructivo.html"><span data-i18n="es">Proceso constructivo</span><span data-i18n="en">Build sequence</span></a>
-      <a href="proceso-empresa.html"><span data-i18n="es">Proceso de empresa</span><span data-i18n="en">Company process</span></a>
-      <a href="bucle-diario.html"><span data-i18n="es">Bucle diario</span><span data-i18n="en">Daily loop</span></a>
-      <a href="jobtread.html">JobTread</a>
-      <a href="dinero.html"><span data-i18n="es">Dinero</span><span data-i18n="en">Money</span></a>
-      <a href="reloj-reportes.html"><span data-i18n="es">Reloj &amp; reportes</span><span data-i18n="en">Clock &amp; reports</span></a>
-      <a href="posiciones/index.html"><span data-i18n="es">Posiciones</span><span data-i18n="en">Positions</span></a>
-      <a href="casos-reales.html"><span data-i18n="es">Casos reales</span><span data-i18n="en">Real cases</span></a>
-      <a href="glosario.html"><span data-i18n="es">Glosario</span><span data-i18n="en">Glossary</span></a>
-      <a href="materiales/index.html"><span data-i18n="es">Materiales</span><span data-i18n="en">Materials</span></a>
-    </nav>
+    <nav aria-label="Menu" data-cng-nav></nav>
     <button id="cng-lang-btn" class="lang-toggle" type="button">EN</button>
   </div>
 </header>
@@ -45,8 +32,8 @@
     <span class="paso-n">9 / 9 · <span data-i18n="es">CONSULTA PERMANENTE</span><span data-i18n="en">PERMANENT REFERENCE</span></span>
     <h1><span data-i18n="es">Glosario EN↔ES del proceso</span><span data-i18n="en">EN↔ES glossary of the process</span></h1>
     <p class="sub">
-      <span data-i18n="es">Todos los términos de esta web en un solo lugar: el vocabulario del campo, el de la ciudad, el del registro y los roles/herramientas. Es la misma fuente de los tooltips de puntitos azules. <b>¿Por qué bilingüe?</b> Porque la obra ocurre en Dallas y se habla en inglés: los subs, los inspectores y los proveedores escriben en inglés, y <b>Jeff —uno de los tres PMs— trabaja 100% en inglés</b>. Media empresa (Compras, Backoffice, Planning, Administración) está en Perú y trabaja en español. Este glosario es el puente entre las dos mitades.</span>
-      <span data-i18n="en">Every term on this site in one place: field vocabulary, city vocabulary, record vocabulary and roles/tools. Same source as the blue-dotted tooltips. <b>Why bilingual?</b> Because the jobs happen in Dallas and run in English: subs, inspectors and suppliers write in English, and <b>Jeff — one of the three PMs — works 100% in English</b>. Half the company (Purchases, Backoffice, Planning, Admin) sits in Peru and works in Spanish. This glossary is the bridge between the two halves.</span>
+      <span data-i18n="es">Todos los términos de esta web en un solo lugar: el vocabulario del campo, el de la ciudad, el del registro y los roles/herramientas. Es la misma fuente de los tooltips de puntitos azules. <b>¿Por qué bilingüe?</b> Porque la obra ocurre en Dallas y se habla en inglés: los subs, los inspectores y los proveedores escriben en inglés, y <b>Jeff —uno de los tres PMs— trabaja 100% en inglés</b>. Buena parte de la empresa (Compras, Backoffice, Planning) está en Perú y trabaja en español. Este glosario es el puente entre las dos mitades.</span>
+      <span data-i18n="en">Every term on this site in one place: field vocabulary, city vocabulary, record vocabulary and roles/tools. Same source as the blue-dotted tooltips. <b>Why bilingual?</b> Because the jobs happen in Dallas and run in English: subs, inspectors and suppliers write in English, and <b>Jeff — one of the three PMs — works 100% in English</b>. A good part of the company (Purchases, Backoffice, Planning) sits in Peru and works in Spanish. This glossary is the bridge between the two halves.</span>
     </p>
     <div class="aprende">
       <div class="ttl"><span data-i18n="es">EN ESTA PÁGINA PUEDES:</span><span data-i18n="en">ON THIS PAGE YOU CAN:</span></div>
@@ -67,10 +54,10 @@
   </p>
   <div class="glo-filtros" id="glo-filtros">
     <button type="button" data-f="*" class="on"><span data-i18n="es">Todos</span><span data-i18n="en">All</span></button>
-    <button type="button" data-f="obra"><span data-i18n="es">🧱 Obra</span><span data-i18n="en">🧱 Field</span></button>
-    <button type="button" data-f="ciudad"><span data-i18n="es">🏛️ Ciudad</span><span data-i18n="en">🏛️ City</span></button>
-    <button type="button" data-f="registro"><span data-i18n="es">🗂️ Registro</span><span data-i18n="en">🗂️ Record</span></button>
-    <button type="button" data-f="rol"><span data-i18n="es">👥 Roles &amp; herramientas</span><span data-i18n="en">👥 Roles &amp; tools</span></button>
+    <button type="button" data-f="obra"><span data-i18n="es">Obra</span><span data-i18n="en">Field</span></button>
+    <button type="button" data-f="ciudad"><span data-i18n="es">Ciudad</span><span data-i18n="en">City</span></button>
+    <button type="button" data-f="registro"><span data-i18n="es">Registro</span><span data-i18n="en">Record</span></button>
+    <button type="button" data-f="rol"><span data-i18n="es">Roles &amp; herramientas</span><span data-i18n="en">Roles &amp; tools</span></button>
   </div>
   <div id="glo-count"></div>
 
@@ -94,10 +81,9 @@
 
   <section class="quiz">
     <div class="q-head">
-      <span class="q-ico">🧠</span>
       <div>
-        <h2><span data-i18n="es">¿Lo entendiste?</span><span data-i18n="en">Did you get it?</span></h2>
-        <p><span data-i18n="es">Tres términos que confunden a todos al inicio.</span><span data-i18n="en">Three terms that confuse everyone at first.</span></p>
+        <h2><span data-i18n="es">Para verificar que lo dominas</span><span data-i18n="en">To verify you have mastered it</span></h2>
+        <p><span data-i18n="es">Tres términos que suelen confundirse al inicio.</span><span data-i18n="en">Three terms that are often confused at first.</span></p>
       </div>
     </div>
     <details class="q">

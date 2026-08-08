@@ -17,10 +17,10 @@
   /* ---------- 1. GATE DE PASSWORD ----------
      Mismo patron que los dashboards (sessionStorage, ofuscacion
      consciente de contenido interno — no es seguridad fuerte).
-     Clave provisional: CNG2026  [VERIFICAR CON JOSE]              */
+     Clave provisional: CNG2026  [VERIFICAR CON GERENCIA]          */
   var PW = 'CNG2026';
+  var GATE_ENABLED = false;  // decisión de empresa 2026-08-07: sin contraseña
   var KEY = 'cng_proceso_auth';
-  var GATE_ENABLED = false;  // Jose 2026-08-07: sin contraseña
 
   function buildGate() {
     document.body.classList.add('cng-locked');
@@ -92,7 +92,7 @@
     pm:            { t: 'PM (Project Manager)', g: 'rol', es: 'El gestor de la obra: contrata subs, supervisa, documenta y mantiene su schedule como espejo de la realidad. No ejecuta con sus manos — GESTIONA.', en: 'The project manager: hires subs, supervises, documents and keeps the schedule mirroring reality. Doesn’t swing the hammer — MANAGES.' },
     purchases:     { t: 'Purchases (Compras)', g: 'rol', es: 'La posición (Romina, Perú) que cuantifica, cotiza con 3 proveedores y compra el material para que llegue ANTES que la cuadrilla.', en: 'The position (Romina, Peru) that quantifies, quotes with 3 suppliers and buys material so it arrives BEFORE the crew.' },
     backoffice:    { t: 'Backoffice / Data-Entry', g: 'rol', es: 'La posición que registra TODO en JobTread (schedule + libros), re-fecha los schedules tras la reunión de 2:30 y audita la documentación.', en: 'The position that records EVERYTHING in JobTread (schedule + books), re-dates schedules after the 2:30 meeting and audits documentation.' },
-    admin:         { t: 'Administradora', g: 'rol', es: 'Milagros: la gatekeeper del dinero. “Nada se paga sin pasar por ella” — aplica los 4 filtros a cada solicitud de pago.', en: 'Milagros: the money gatekeeper. “Nothing gets paid without going through her” — she applies the 4 filters to every payment request.' },
+    admin:         { t: 'Administradora', g: 'rol', es: 'Milagros (Estados Unidos): la gatekeeper del dinero y el nexo entre el backoffice y el campo. “Nada se paga sin pasar por ella” — aplica los 4 filtros a cada solicitud de pago.', en: 'Milagros (United States): the money gatekeeper and the link between the back office and the field. “Nothing gets paid without going through her” — she applies the 4 filters to every payment request.' },
     asm:           { t: 'ASM (vendedor)', g: 'rol', es: 'Account Success Manager: el vendedor. Canal ÚNICO del cliente durante el planeamiento; genera el Sales Report al cerrar la venta.', en: 'Account Success Manager: the salesperson. The client’s ONLY channel during planning; produces the Sales Report at closing.' },
     planning:      { t: 'Planning', g: 'rol', es: 'El equipo de arquitectura en Perú (Claudia): planos, permisos con la ciudad y el Portafolio del PM. Nunca habla directo con el cliente — todo pasa por el vendedor.', en: 'The architecture team in Peru (Claudia): drawings, city permits and the PM’s Portfolio. Never talks to the client directly — everything goes through the salesperson.' },
     leadpm:        { t: 'lead PM', g: 'rol', es: 'La posición que asigna obras, supervisa PMs y recibe escalamientos. Hoy la hace el CEO.', en: 'The position that assigns jobs, supervises PMs and receives escalations. Today the CEO covers it.' },
@@ -138,7 +138,7 @@
     holdpoint:     { t: 'hold point', g: 'registro', es: 'Un punto del trabajo donde hay que PARAR y dejar evidencia antes de continuar (ej. foto de la pared abierta antes de taparla con drywall). Después de taparlo ya no hay forma de probar cómo quedó.', en: 'A point in the work where you must STOP and leave evidence before continuing (e.g., a photo of the open wall before drywall covers it). Once it’s covered there’s no way to prove how it was left.' },
     clockin:       { t: 'clock in / clock out', g: 'registro', es: 'Marcar entrada y salida del día en JobTread. Es lo que deja constancia de la jornada del PM; forma parte de su "Día Cumplido".', en: 'Clocking in and out of the day in JobTread. It’s what records the PM’s workday; part of their "Day Done".' },
     diacumplido:   { t: 'Día Cumplido', g: 'registro', es: 'La lista corta de checks que define si tu día está terminado — igual para todos los días y verificable por el sistema. No es "sentir" que trabajaste: es que los checks se cumplan.', en: 'The short checklist that defines whether your day is finished — the same every day and verifiable by the system. It’s not "feeling" you worked: it’s the checks being met.' },
-    escalar:       { t: 'escalar', g: 'registro', es: 'Pasar un problema que TÚ no puedes resolver a quien sí puede (lead PM/CEO, Administradora, Jose), el MISMO día y con el problema + un camino propuesto. Escalar no es quejarse ni delegar: es no dejar que el cronograma pague la espera.', en: 'Handing a problem YOU can’t solve to whoever can (lead PM/CEO, Administrator, Jose), the SAME day, with the problem + a proposed path. Escalating isn’t complaining or delegating: it’s not letting the schedule pay for the wait.' },
+    escalar:       { t: 'escalar', g: 'registro', es: 'Pasar un problema que TÚ no puedes resolver a quien sí puede (lead PM/CEO, Administradora, gerencia), el MISMO día y con el problema + un camino propuesto. Escalar no es quejarse ni delegar: es no dejar que el cronograma pague la espera.', en: 'Handing a problem YOU can’t solve to whoever can (lead PM/CEO, Administrator, management), the SAME day, with the problem + a proposed path. Escalating isn’t complaining or delegating: it’s not letting the schedule pay for the wait.' },
     carrera:       { t: 'la Carrera', g: 'registro', es: 'El nombre del reporte #11: compara el avance del mes contra el baseline con el que arrancó el mes. La metáfora: el mes es una carrera contra el plan — o vas ganando o vas perdiendo.', en: 'The name of report #11: it compares the month’s progress against the baseline the month started with. The metaphor: the month is a race against the plan — you’re either winning or losing it.' },
     additionals:   { t: 'additionals', g: 'registro', es: 'El total de Additional Expenses (gastos del día a día) acumulados por proyecto. Se miran juntos porque muchos gastos chicos sin control se comen el margen del trade.', en: 'The total of Additional Expenses (day-to-day spend) accumulated per project. They’re watched together because many small uncontrolled buys eat the trade’s margin.' },
     eod:           { t: 'EOD (end of day)', g: 'registro', es: 'Fin de la jornada. "Daily Schedule Update by EOD" = los schedules quedan cuadrados antes de cerrar el día (antes de las 8 PM, que es cuando el sistema genera los reportes).', en: 'End of day. "Daily Schedule Update by EOD" = schedules are squared before the day closes (before 8 PM, when the system generates the reports).' },
@@ -274,33 +274,226 @@
     upd();
   }
 
-  /* ---------- 7. NAV MOVIL (hamburguesa) ---------- */
+  /* ---------- 7. NAV CENTRALIZADO + ORIENTACION ----------
+     UNICA fuente del menu: este arreglo. Cada pagina solo trae
+     <nav data-cng-nav></nav> y aqui se inyecta TODO:
+     a) menu agrupado (Inicio · El Proceso ▾ · Posiciones ▾ ·
+        Temario · Materiales · Glosario)
+     b) linea de contexto bajo el header (breadcrumb)
+     c) paginacion ← anterior · siguiente → al pie, siguiendo
+        el CAMINO de estudio.
+     Para agregar una pagina nueva: se agrega AQUI y listo.      */
+
+  /* las 7 paginas de proceso, EN SU ORDEN de estudio */
+  var PROCESO = [
+    { id: 'proceso-constructivo', href: 'proceso-constructivo.html', es: 'Proceso constructivo', en: 'Build sequence' },
+    { id: 'proceso-empresa',      href: 'proceso-empresa.html',      es: 'Proceso de empresa',   en: 'Company process' },
+    { id: 'bucle-diario',         href: 'bucle-diario.html',         es: 'Bucle diario',         en: 'Daily loop' },
+    { id: 'jobtread',             href: 'jobtread.html',             es: 'JobTread',             en: 'JobTread' },
+    { id: 'dinero',               href: 'dinero.html',               es: 'Dinero',               en: 'Money' },
+    { id: 'reloj-reportes',       href: 'reloj-reportes.html',       es: 'Reloj y reportes',     en: 'Clock & reports' },
+    { id: 'casos-reales',         href: 'casos-reales.html',         es: 'Casos reales',         en: 'Real cases' }
+  ];
+  /* las 8 fichas, en el orden del organigrama */
+  var FICHAS = [
+    { id: 'posiciones/ceo-ventas',     href: 'posiciones/ceo-ventas.html',     es: 'CEO · Ventas',           en: 'CEO · Sales' },
+    { id: 'posiciones/coo',            href: 'posiciones/coo.html',            es: 'COO',                    en: 'COO' },
+    { id: 'posiciones/administradora', href: 'posiciones/administradora.html', es: 'Administradora',         en: 'Administrator' },
+    { id: 'posiciones/pm',             href: 'posiciones/pm.html',             es: 'Project Manager',        en: 'Project Manager' },
+    { id: 'posiciones/backoffice',     href: 'posiciones/backoffice.html',     es: 'Backoffice / Data-Entry',en: 'Backoffice / Data-Entry' },
+    { id: 'posiciones/purchases',      href: 'posiciones/purchases.html',      es: 'Compras (Purchases)',    en: 'Purchases' },
+    { id: 'posiciones/marketing',      href: 'posiciones/marketing.html',      es: 'Marketing',              en: 'Marketing' },
+    { id: 'posiciones/planning',       href: 'posiciones/planning.html',       es: 'Planning',               en: 'Planning' }
+  ];
+  var HUB = { id: 'posiciones/index', href: 'posiciones/index.html', es: 'Ver el equipo (organigrama)', en: 'Meet the team (org chart)' };
+  var DIRECTOS = {
+    index:     { id: 'index',            href: 'index.html',            es: 'Inicio',     en: 'Home' },
+    temario:   { id: 'temario',          href: 'temario.html',          es: 'Temario',    en: 'Syllabus' },
+    materiales:{ id: 'materiales/index', href: 'materiales/index.html', es: 'Materiales', en: 'Materials' },
+    glosario:  { id: 'glosario',         href: 'glosario.html',         es: 'Glosario',   en: 'Glossary' }
+  };
+  /* el CAMINO de estudio (orden de anterior/siguiente) */
+  var CAMINO = [DIRECTOS.index].concat(PROCESO).concat([
+    { id: 'posiciones/index', href: 'posiciones/index.html', es: 'Posiciones — el equipo', en: 'Positions — the team' },
+    DIRECTOS.temario
+  ]);
+
+  function whereAmI() {
+    var parts = location.pathname.split('/');
+    var file = parts.pop() || 'index.html';
+    var dir = parts.pop() || '';
+    var id = file.replace(/\.html$/, '') || 'index';
+    if (dir === 'posiciones') id = 'posiciones/' + id;
+    else if (dir === 'materiales') id = 'materiales/' + id;
+    return { id: id, base: (dir === 'posiciones' || dir === 'materiales') ? '../' : '' };
+  }
+
+  function esen(es, en) {
+    return '<span data-i18n="es">' + es + '</span><span data-i18n="en">' + en + '</span>';
+  }
+  function navLink(p, base, hereId, num) {
+    return '<a href="' + base + p.href + '"' + (p.id === hereId ? ' class="active" aria-current="page"' : '') + '>' +
+      (num ? '<span class="nv-num" aria-hidden="true">' + num + '</span>' : '') +
+      esen(p.es, p.en) + '</a>';
+  }
+  function navGroup(key, es, en, itemsHtml, containsHere) {
+    return '<div class="nav-group' + (containsHere ? ' here' : '') + '" data-group="' + key + '">' +
+      '<button type="button" class="nav-group-btn" aria-haspopup="true" aria-expanded="false">' +
+      esen(es, en) + '<span class="nv-caret" aria-hidden="true">▾</span></button>' +
+      '<div class="nav-drop">' + itemsHtml + '</div></div>';
+  }
+
   function initNav() {
     var header = document.querySelector('header.site');
     if (!header) return;
     var bar = header.querySelector('.bar');
     var nav = header.querySelector('nav');
     if (!bar || !nav) return;
+    var here = whereAmI();
+    var base = here.base;
+
+    /* --- a) el menu agrupado --- */
+    var enProceso = PROCESO.some(function (p) { return p.id === here.id; });
+    var enPosiciones = here.id.indexOf('posiciones/') === 0;
+    var procesoItems = PROCESO.map(function (p, i) { return navLink(p, base, here.id, i + 1); }).join('');
+    var posicionesItems = navLink(HUB, base, here.id) +
+      FICHAS.map(function (p) { return navLink(p, base, here.id); }).join('');
+    nav.innerHTML =
+      navLink(DIRECTOS.index, base, here.id) +
+      navGroup('proceso', 'El Proceso', 'The Process', procesoItems, enProceso) +
+      navGroup('posiciones', 'Posiciones', 'Positions', posicionesItems, enPosiciones) +
+      navLink(DIRECTOS.temario, base, here.id) +
+      navLink(DIRECTOS.materiales, base, here.id) +
+      navLink(DIRECTOS.glosario, base, here.id);
+
+    /* hamburguesa */
     var btn = document.createElement('button');
     btn.className = 'nav-toggle';
     btn.type = 'button';
     btn.setAttribute('aria-label', 'Menu');
+    btn.setAttribute('aria-expanded', 'false');
     btn.textContent = '☰';
     var langBtn = document.getElementById('cng-lang-btn');
     if (langBtn) { bar.insertBefore(btn, langBtn); } else { bar.appendChild(btn); }
-    btn.addEventListener('click', function () { header.classList.toggle('nav-open'); });
+
+    function setGroup(g, open) {
+      g.classList.toggle('open', open);
+      var b = g.querySelector('.nav-group-btn');
+      if (b) b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    function closeGroups(except) {
+      nav.querySelectorAll('.nav-group').forEach(function (g) {
+        if (g !== except) setGroup(g, false);
+      });
+    }
+    function closePanel() {
+      header.classList.remove('nav-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.textContent = '☰';
+      closeGroups(null);
+    }
+    btn.addEventListener('click', function () {
+      var open = !header.classList.contains('nav-open');
+      header.classList.toggle('nav-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? '✕' : '☰';
+      if (open) {
+        /* orientacion: el grupo de la pagina actual arranca abierto */
+        var hg = nav.querySelector('.nav-group.here');
+        closeGroups(hg);
+        if (hg) setGroup(hg, true);
+      } else {
+        closeGroups(null);
+      }
+    });
+
+    /* dropdowns: click/tap (ademas del hover por CSS en desktop) */
+    nav.querySelectorAll('.nav-group-btn').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var g = b.parentElement;
+        var willOpen = !g.classList.contains('open');
+        closeGroups(g);
+        setGroup(g, willOpen);
+      });
+    });
+    /* navegar cierra todo; click fuera y Escape cierran */
     nav.addEventListener('click', function (e) {
-      if (e.target.closest && e.target.closest('a')) header.classList.remove('nav-open');
+      if (e.target.closest && e.target.closest('a')) closePanel();
     });
-    /* nav activa: comparar la URL RESUELTA del link contra la pagina actual
-       (funciona en la raiz y en posiciones/ con sus hrefs relativos) */
-    var herePath = location.pathname.replace(/\/$/, '/index.html');
-    nav.querySelectorAll('a').forEach(function (a) {
-      try {
-        var target = new URL(a.getAttribute('href') || '', location.href).pathname;
-        if (target === herePath) a.classList.add('active');
-      } catch (e) { /* href raro: se ignora */ }
+    document.addEventListener('click', function (e) {
+      if (!header.contains(e.target)) { closePanel(); }
     });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closePanel();
+    });
+
+    /* --- b) breadcrumb: la linea de contexto bajo el header --- */
+    var crumb = null;
+    var pIdx = -1;
+    PROCESO.forEach(function (p, i) { if (p.id === here.id) pIdx = i; });
+    if (pIdx >= 0) {
+      var pg = PROCESO[pIdx];
+      crumb = esen('El Proceso · ' + (pIdx + 1) + ' de 7 — <b>' + pg.es + '</b>',
+                   'The Process · ' + (pIdx + 1) + ' of 7 — <b>' + pg.en + '</b>');
+    } else if (here.id === 'index') {
+      crumb = esen('Inicio — el punto de partida del camino', 'Home — the starting point of the path');
+    } else if (here.id === 'posiciones/index') {
+      crumb = esen('Posiciones — el mapa del equipo', 'Positions — the team map');
+    } else if (enPosiciones) {
+      var f = null;
+      FICHAS.forEach(function (x) { if (x.id === here.id) f = x; });
+      if (f) crumb = esen('<a href="' + base + 'posiciones/index.html">Posiciones</a> — <b>' + f.es + '</b>',
+                          '<a href="' + base + 'posiciones/index.html">Positions</a> — <b>' + f.en + '</b>');
+    } else if (here.id === 'temario') {
+      crumb = esen('Temario — qué estudiar y en qué orden', 'Syllabus — what to study and in what order');
+    } else if (here.id === 'materiales/index') {
+      crumb = esen('Materiales — todos los documentos del programa', 'Materials — every document of the program');
+    } else if (here.id === 'glosario') {
+      crumb = esen('Glosario — los términos EN↔ES del proceso', 'Glossary — the process EN↔ES terms');
+    }
+    if (crumb) {
+      var cEl = document.createElement('div');
+      cEl.className = 'cng-crumb';
+      cEl.innerHTML = '<div class="c-in">' + crumb + '</div>';
+      header.parentNode.insertBefore(cEl, header.nextSibling);
+    }
+
+    /* --- c) paginacion ← anterior · siguiente → --- */
+    var main = document.querySelector('main');
+    if (!main) return;
+    var prev = null, next = null, prevDir = null, nextDir = null;
+    var cIdx = -1;
+    CAMINO.forEach(function (p, i) { if (p.id === here.id) cIdx = i; });
+    if (cIdx >= 0) {
+      if (cIdx > 0) prev = CAMINO[cIdx - 1];
+      if (cIdx < CAMINO.length - 1) next = CAMINO[cIdx + 1];
+    } else if (enPosiciones) {
+      var fIdx = -1;
+      FICHAS.forEach(function (p, i) { if (p.id === here.id) fIdx = i; });
+      if (fIdx >= 0) {
+        prev = { href: 'posiciones/index.html', es: 'Ver el equipo', en: 'Meet the team' };
+        prevDir = ['← Posiciones', '← Positions'];
+        if (fIdx < FICHAS.length - 1) {
+          next = FICHAS[fIdx + 1];
+          nextDir = ['Siguiente posición →', 'Next position →'];
+        }
+      }
+    }
+    if (prev || next) {
+      var pager = document.createElement('nav');
+      pager.className = 'cng-pager';
+      pager.id = 'camino';
+      pager.setAttribute('aria-label', 'Anterior / siguiente');
+      pager.innerHTML =
+        (prev ? '<a class="pg pg-prev" href="' + base + prev.href + '">' +
+          '<span class="pg-dir">' + esen(prevDir ? prevDir[0] : '← Anterior', prevDir ? prevDir[1] : '← Previous') + '</span>' +
+          '<span class="pg-t">' + esen(prev.es, prev.en) + '</span></a>' : '') +
+        (next ? '<a class="pg pg-next" href="' + base + next.href + '">' +
+          '<span class="pg-dir">' + esen(nextDir ? nextDir[0] : 'Siguiente →', nextDir ? nextDir[1] : 'Next →') + '</span>' +
+          '<span class="pg-t">' + esen(next.es, next.en) + '</span></a>' : '');
+      main.appendChild(pager);
+    }
   }
 
   /* ---------- 8. INIT ---------- */

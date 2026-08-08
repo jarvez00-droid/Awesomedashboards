@@ -12,25 +12,12 @@
 <header class="site">
   <div class="bar">
     <span class="logo">CNG · <b>PROCESO</b></span>
-    <nav>
-      <a href="../index.html"><span data-i18n="es">Inicio</span><span data-i18n="en">Home</span></a>
-      <a href="../temario.html"><span data-i18n="es">Temario</span><span data-i18n="en">Syllabus</span></a>
-      <a href="../proceso-constructivo.html"><span data-i18n="es">Proceso constructivo</span><span data-i18n="en">Build sequence</span></a>
-      <a href="../proceso-empresa.html"><span data-i18n="es">Proceso de empresa</span><span data-i18n="en">Company process</span></a>
-      <a href="../bucle-diario.html"><span data-i18n="es">Bucle diario</span><span data-i18n="en">Daily loop</span></a>
-      <a href="../jobtread.html">JobTread</a>
-      <a href="../dinero.html"><span data-i18n="es">Dinero</span><span data-i18n="en">Money</span></a>
-      <a href="../reloj-reportes.html"><span data-i18n="es">Reloj &amp; reportes</span><span data-i18n="en">Clock &amp; reports</span></a>
-      <a href="index.html"><span data-i18n="es">Posiciones</span><span data-i18n="en">Positions</span></a>
-      <a href="../casos-reales.html"><span data-i18n="es">Casos reales</span><span data-i18n="en">Real cases</span></a>
-      <a href="../glosario.html"><span data-i18n="es">Glosario</span><span data-i18n="en">Glossary</span></a>
-      <a href="../materiales/index.html"><span data-i18n="es">Materiales</span><span data-i18n="en">Materials</span></a>
-    </nav>
+    <nav aria-label="Menu" data-cng-nav></nav>
     <button id="cng-lang-btn" class="lang-toggle" type="button">EN</button>
   </div>
 </header>
 
-<main>
+<main class="prosa">
 
   <div class="hero">
     <span class="paso-n">7 / 9 · <span data-i18n="es">EL EQUIPO</span><span data-i18n="en">THE TEAM</span></span>
@@ -50,8 +37,8 @@
   </div>
 
   <p class="proposito">
-    <span data-i18n="es"><b>Esta página existe para</b> que ubiques a cada persona en el mapa antes de leer su página. Cada posición tiene su propia página con: un día en su vida hora a hora, su lugar en el mapa, qué se espera de ella en cristiano, sus reportes, su Día Cumplido y los errores que ese puesto evita.</span>
-    <span data-i18n="en"><b>This page exists so</b> you can place every person on the map before reading their page. Each position has its own page with: a day in their life hour by hour, their place on the map, what's expected of them in plain words, their reports, their Day Done, and the mistakes that role prevents.</span>
+    <span data-i18n="es"><b>Esta página existe para</b> que ubiques a cada persona en el mapa antes de leer su página. Cada posición tiene su propia página con: su jornada hora por hora, su lugar en el mapa, la misión del puesto y sus principios, sus reportes, su Día Cumplido y los errores que ese puesto evita.</span>
+    <span data-i18n="en"><b>This page exists so</b> you can place every person on the map before reading their page. Each position has its own page with: their day hour by hour, their place on the map, the position's mission and principles, their reports, their Day Done, and the mistakes that role prevents.</span>
   </p>
 
   <div class="regla">
@@ -70,7 +57,7 @@
     <div class="org-label"><span data-i18n="es">LA DIRECCIÓN — decide</span><span data-i18n="en">MANAGEMENT — decides</span></div>
     <div class="org-nivel">
       <a class="persona" href="ceo-ventas.html">
-        <div class="p-foto" style="border-color:var(--rol-ceo)">👔</div>
+        <div class="p-foto" style="border-color:var(--rol-ceo);font-size:16px;font-weight:800;color:var(--ink)">CEO</div>
         <div class="p-rol">CEO + <span data-i18n="es">Ventas</span><span data-i18n="en">Sales</span></div>
         <div class="p-nombre">Jonas</div>
         <div class="p-que"><span data-i18n="es">El cliente, el motor comercial, los draws. Hoy también: gerente de ventas y lead PM interino.</span><span data-i18n="en">The client, the commercial engine, the draws. Today also: interim sales manager and lead PM.</span></div>
@@ -79,35 +66,35 @@
     <div class="conn"></div>
     <div class="org-nivel">
       <a class="persona" href="coo.html">
-        <div class="p-foto" style="border-color:var(--rol-coo)">🏗️</div>
+        <div class="p-foto" style="border-color:var(--rol-coo);font-size:16px;font-weight:800;color:var(--ink)">COO</div>
         <div class="p-rol">COO</div>
         <div class="p-nombre">Rey</div>
         <div class="p-que"><span data-i18n="es">Dueño de la operación y las obras: schedule vs realidad, calidad, ruta crítica.</span><span data-i18n="en">Owns the operation and the sites: schedule vs reality, quality, critical path.</span></div>
       </a>
       <a class="persona" href="administradora.html">
-        <div class="p-foto" style="border-color:var(--rol-admin)">🔐</div>
+        <div class="p-foto" style="border-color:var(--rol-admin);font-size:16px;font-weight:800;color:var(--ink)">ADM</div>
         <div class="p-rol"><span data-i18n="es">Administradora</span><span data-i18n="en">Administrator</span></div>
-        <div class="p-nombre">Milagros · <span data-i18n="es">Perú</span><span data-i18n="en">Peru</span></div>
-        <div class="p-que"><span data-i18n="es">La guardiana del dinero: "nada se paga sin pasar por ella" — los 4 filtros.</span><span data-i18n="en">Guardian of the money: "nothing is paid without passing through her" — the 4 filters.</span></div>
+        <div class="p-nombre">Milagros · <span data-i18n="es">Estados Unidos</span><span data-i18n="en">United States</span></div>
+        <div class="p-que"><span data-i18n="es">La guardiana del dinero y el nexo backoffice–campo: "nada se paga sin pasar por ella" — los 4 filtros.</span><span data-i18n="en">Guardian of the money and the back office–field link: "nothing is paid without passing through her" — the 4 filters.</span></div>
       </a>
     </div>
 
     <div class="org-label"><span data-i18n="es">LA OPERACIÓN — hace avanzar la obra cada día</span><span data-i18n="en">OPERATIONS — moves the job every day</span></div>
     <div class="org-nivel">
       <a class="persona" href="pm.html">
-        <div class="p-foto" style="border-color:var(--rol-pm)">👷</div>
+        <div class="p-foto" style="border-color:var(--rol-pm);font-size:16px;font-weight:800;color:var(--ink)">PM</div>
         <div class="p-rol">Project Manager</div>
         <div class="p-nombre">Angel · Giselle · Jeff</div>
         <div class="p-que"><span data-i18n="es">El dueño de que SU obra avance de verdad: subs, WOs, material, documentación.</span><span data-i18n="en">Owns that THEIR job really moves: subs, WOs, material, documentation.</span></div>
       </a>
       <a class="persona" href="backoffice.html">
-        <div class="p-foto" style="border-color:var(--rol-backoffice)">🗂️</div>
+        <div class="p-foto" style="border-color:var(--rol-backoffice);font-size:16px;font-weight:800;color:var(--ink)">BO</div>
         <div class="p-rol">Backoffice / Data-Entry</div>
         <div class="p-nombre">Jose → Joaquín (<span data-i18n="es">Perú</span><span data-i18n="en">Peru</span>)</div>
         <div class="p-que"><span data-i18n="es">El autor del registro: los DOS registros por movimiento, las WOs, la 2:30 en vivo, las 6 auditorías.</span><span data-i18n="en">The record's author: the TWO records per movement, the WOs, the live 2:30, the 6 audits.</span></div>
       </a>
       <a class="persona" href="purchases.html">
-        <div class="p-foto" style="border-color:var(--rol-compras)">📦</div>
+        <div class="p-foto" style="border-color:var(--rol-compras);font-size:16px;font-weight:800;color:var(--ink)">PUR</div>
         <div class="p-rol">Purchases</div>
         <div class="p-nombre">Romina (<span data-i18n="es">Perú</span><span data-i18n="en">Peru</span>)</div>
         <div class="p-que"><span data-i18n="es">Que ningún trade quede parado por material: 3 cotizaciones, compra, ETA confirmado.</span><span data-i18n="en">No trade ever idle for material: 3 quotes, purchase, confirmed ETA.</span></div>
@@ -117,19 +104,19 @@
     <div class="org-label"><span data-i18n="es">AGUAS-ARRIBA — preparan la obra antes de que exista</span><span data-i18n="en">UPSTREAM — prepare the job before it exists</span></div>
     <div class="org-nivel">
       <a class="persona" href="marketing.html">
-        <div class="p-foto" style="border-color:#be185d">📣</div>
+        <div class="p-foto" style="border-color:#be185d;font-size:16px;font-weight:800;color:var(--ink)">MKT</div>
         <div class="p-rol">Marketing</div>
         <div class="p-nombre"><span data-i18n="es">equipo Rey</span><span data-i18n="en">Rey's team</span></div>
         <div class="p-que"><span data-i18n="es">El tope del <i class="glo" data-g="funnel">funnel</i>: los <i class="glo" data-g="lead">leads</i> de HOY son los contratos de ~6 meses. Mandato: $0.</span><span data-i18n="en">Top of <i class="glo" data-g="funnel">funnel</i>: TODAY's <i class="glo" data-g="lead">leads</i> are the contracts of ~6 months out. Mandate: $0.</span></div>
       </a>
       <a class="persona" href="ceo-ventas.html">
-        <div class="p-foto" style="border-color:var(--rol-ventas)">🤝</div>
+        <div class="p-foto" style="border-color:var(--rol-ventas);font-size:16px;font-weight:800;color:var(--ink)">ASM</div>
         <div class="p-rol"><span data-i18n="es">Ventas / ASM</span><span data-i18n="en">Sales / ASM</span></div>
         <div class="p-nombre"><span data-i18n="es">hoy: Jonas (interino)</span><span data-i18n="en">today: Jonas (interim)</span></div>
         <div class="p-que"><span data-i18n="es">Canal ÚNICO del cliente en planeamiento; el estimado por trades que al firmar = budget.</span><span data-i18n="en">The client's ONLY channel during planning; the per-trade estimate that becomes the budget.</span></div>
       </a>
       <a class="persona" href="planning.html">
-        <div class="p-foto" style="border-color:var(--rol-planning)">📐</div>
+        <div class="p-foto" style="border-color:var(--rol-planning);font-size:16px;font-weight:800;color:var(--ink)">PLN</div>
         <div class="p-rol">Planning</div>
         <div class="p-nombre">Claudia · Karla (<span data-i18n="es">Perú</span><span data-i18n="en">Peru</span>)</div>
         <div class="p-que"><span data-i18n="es">La fábrica de la información: planos, permisos y el PORTAFOLIO — "la biblia del PM".</span><span data-i18n="en">The information factory: plans, permits and the PORTFOLIO — "the PM's bible".</span></div>
@@ -149,12 +136,12 @@
     <span data-i18n="en"><b>This section exists to</b> see the org chart IN MOTION: whose hands a project passes through, in order. Every arrow is a real handoff with a real document.</span>
   </p>
   <div class="flujo">
-    <div class="f-paso"><span class="f-ico">📣</span><div class="f-t">Marketing</div><p><span data-i18n="es">Genera el lead (el posible cliente).</span><span data-i18n="en">Generates the lead (the potential client).</span></p></div>
-    <div class="f-paso"><span class="f-ico">🤝</span><div class="f-t"><span data-i18n="es">Ventas</span><span data-i18n="en">Sales</span></div><p><span data-i18n="es">Visita, estima por trades, firma → el estimado se vuelve <i class="glo" data-g="budget">budget</i> + <i class="glo" data-g="salesreport">Sales Report</i>.</span><span data-i18n="en">Visits, estimates by trade, signs → the estimate becomes the <i class="glo" data-g="budget">budget</i> + <i class="glo" data-g="salesreport">Sales Report</i>.</span></p></div>
-    <div class="f-paso"><span class="f-ico">📐</span><div class="f-t">Planning</div><p><span data-i18n="es">Planos + permisos + el <i class="glo" data-g="portafolio">PORTAFOLIO</i>.</span><span data-i18n="en">Plans + permits + the <i class="glo" data-g="portafolio">PORTFOLIO</i>.</span></p></div>
-    <div class="f-paso"><span class="f-ico">🔄</span><div class="f-t"><i class="glo" data-g="theturn">The Turn</i></div><p><span data-i18n="es">El proyecto se entrega al PM elegido.</span><span data-i18n="en">The project is handed to the chosen PM.</span></p></div>
-    <div class="f-paso"><span class="f-ico">👷</span><div class="f-t">PM + <span data-i18n="es">Compras</span><span data-i18n="en">Purchases</span></div><p><span data-i18n="es">El bucle diario por trade (con Backoffice registrando y la Admin pagando).</span><span data-i18n="en">The daily loop per trade (Backoffice recording, Admin paying).</span></p></div>
-    <div class="f-paso"><span class="f-ico">🏁</span><div class="f-t">Closeout</div><p><span data-i18n="es">Walkthrough + Completion Form + cobro final (CEO) → testimonial a Marketing.</span><span data-i18n="en">Walkthrough + Completion Form + final collection (CEO) → testimonial back to Marketing.</span></p></div>
+    <div class="f-paso"><div class="f-t">Marketing</div><p><span data-i18n="es">Genera el lead (el posible cliente).</span><span data-i18n="en">Generates the lead (the potential client).</span></p></div>
+    <div class="f-paso"><div class="f-t"><span data-i18n="es">Ventas</span><span data-i18n="en">Sales</span></div><p><span data-i18n="es">Visita, estima por trades, firma → el estimado se vuelve <i class="glo" data-g="budget">budget</i> + <i class="glo" data-g="salesreport">Sales Report</i>.</span><span data-i18n="en">Visits, estimates by trade, signs → the estimate becomes the <i class="glo" data-g="budget">budget</i> + <i class="glo" data-g="salesreport">Sales Report</i>.</span></p></div>
+    <div class="f-paso"><div class="f-t">Planning</div><p><span data-i18n="es">Planos + permisos + el <i class="glo" data-g="portafolio">PORTAFOLIO</i>.</span><span data-i18n="en">Plans + permits + the <i class="glo" data-g="portafolio">PORTFOLIO</i>.</span></p></div>
+    <div class="f-paso"><div class="f-t"><i class="glo" data-g="theturn">The Turn</i></div><p><span data-i18n="es">El proyecto se entrega al PM elegido.</span><span data-i18n="en">The project is handed to the chosen PM.</span></p></div>
+    <div class="f-paso"><div class="f-t">PM + <span data-i18n="es">Compras</span><span data-i18n="en">Purchases</span></div><p><span data-i18n="es">El bucle diario por trade (con Backoffice registrando y la Admin pagando).</span><span data-i18n="en">The daily loop per trade (Backoffice recording, Admin paying).</span></p></div>
+    <div class="f-paso"><div class="f-t">Closeout</div><p><span data-i18n="es">Walkthrough + Completion Form + cobro final (CEO) → testimonial a Marketing.</span><span data-i18n="en">Walkthrough + Completion Form + final collection (CEO) → testimonial back to Marketing.</span></p></div>
   </div>
 
   <!-- ============ MAPA EN TABLA ============ -->
@@ -177,10 +164,9 @@
 
   <section class="quiz">
     <div class="q-head">
-      <span class="q-ico">🧠</span>
       <div>
-        <h2><span data-i18n="es">¿Lo entendiste?</span><span data-i18n="en">Did you get it?</span></h2>
-        <p><span data-i18n="es">Responde en tu cabeza y luego toca "ver respuesta".</span><span data-i18n="en">Answer in your head, then tap "show answer".</span></p>
+        <h2><span data-i18n="es">Para verificar que lo dominas</span><span data-i18n="en">To verify you have mastered it</span></h2>
+        <p><span data-i18n="es">Responde cada pregunta antes de abrir la respuesta.</span><span data-i18n="en">Answer each question before opening the answer.</span></p>
       </div>
     </div>
     <details class="q">
@@ -193,7 +179,7 @@
     </details>
     <details class="q">
       <summary><span class="q-n">3</span><span data-i18n="es">¿Quién es el único par de ojos de la empresa DENTRO de la obra todos los días?</span><span data-i18n="en">Who is the company's only pair of eyes INSIDE the jobsite every day?</span></summary>
-      <div class="q-a"><span data-i18n="es"><b>El PM.</b> Compras, Backoffice, la Administradora y Planning están en Perú; el CEO dirige; el COO visita pero no vive en cada obra. Por eso el PM confirma el takeoff EN OBRA, documenta con fotos y es el primero en avisar al cliente.</span><span data-i18n="en"><b>The PM.</b> Purchases, Backoffice, the Administrator and Planning are in Peru; the CEO directs; the COO visits but doesn't live on every site. That's why the PM confirms the takeoff ON SITE, documents with photos, and is the first to tell the client.</span></div>
+      <div class="q-a"><span data-i18n="es"><b>El PM.</b> Compras, Backoffice y Planning están en Perú; la Administradora está en Estados Unidos como nexo entre el backoffice y el campo, pero no vive dentro de cada obra; el CEO dirige; el COO visita pero no vive en cada obra. Por eso el PM confirma el takeoff EN OBRA, documenta con fotos y es el primero en avisar al cliente.</span><span data-i18n="en"><b>The PM.</b> Purchases, Backoffice and Planning are in Peru; the Administrator is in the United States as the back office–field link, but does not live inside each job; the CEO directs; the COO visits but doesn't live on every site. That's why the PM confirms the takeoff ON SITE, documents with photos, and is the first to tell the client.</span></div>
     </details>
   </section>
 

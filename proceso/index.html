@@ -12,208 +12,223 @@
 <header class="site">
   <div class="bar">
     <span class="logo">CNG · <b>PROCESO</b></span>
-    <nav>
-      <a href="index.html"><span data-i18n="es">Inicio</span><span data-i18n="en">Home</span></a>
-      <a href="temario.html"><span data-i18n="es">Temario</span><span data-i18n="en">Syllabus</span></a>
-      <a href="proceso-constructivo.html"><span data-i18n="es">Proceso constructivo</span><span data-i18n="en">Build sequence</span></a>
-      <a href="proceso-empresa.html"><span data-i18n="es">Proceso de empresa</span><span data-i18n="en">Company process</span></a>
-      <a href="bucle-diario.html"><span data-i18n="es">Bucle diario</span><span data-i18n="en">Daily loop</span></a>
-      <a href="jobtread.html">JobTread</a>
-      <a href="dinero.html"><span data-i18n="es">Dinero</span><span data-i18n="en">Money</span></a>
-      <a href="reloj-reportes.html"><span data-i18n="es">Reloj &amp; reportes</span><span data-i18n="en">Clock &amp; reports</span></a>
-      <a href="posiciones/index.html"><span data-i18n="es">Posiciones</span><span data-i18n="en">Positions</span></a>
-      <a href="casos-reales.html"><span data-i18n="es">Casos reales</span><span data-i18n="en">Real cases</span></a>
-      <a href="glosario.html"><span data-i18n="es">Glosario</span><span data-i18n="en">Glossary</span></a>
-      <a href="materiales/index.html"><span data-i18n="es">Materiales</span><span data-i18n="en">Materials</span></a>
-    </nav>
+    <nav aria-label="Menu" data-cng-nav></nav>
     <button id="cng-lang-btn" class="lang-toggle" type="button">EN</button>
   </div>
 </header>
 
-<main>
+<main class="prosa">
 
   <!-- ============ HERO ============ -->
   <div class="hero">
-    <span class="paso-n"><span data-i18n="es">EMPIEZA AQUÍ</span><span data-i18n="en">START HERE</span></span>
+    <span class="paso-n"><span data-i18n="es">MANUAL DE OPERACIONES · EMPIEZA AQUÍ</span><span data-i18n="en">OPERATIONS MANUAL · START HERE</span></span>
     <h1><span data-i18n="es">El proceso CNG, explicado desde cero</span><span data-i18n="en">The CNG process, explained from zero</span></h1>
     <p class="sub">
-      <span data-i18n="es">No necesitas saber NADA de construcción para empezar. Esta web te lleva de la mano: cada término se define la primera vez que aparece (los puntitos azules <i class="glo" data-g="trade">como este</i> — tócalos), cada regla trae su porqué y un ejemplo real.</span>
-      <span data-i18n="en">You don't need to know ANYTHING about construction to start. This site walks you through it: every term is defined the first time it appears (blue dotted words <i class="glo" data-g="trade">like this one</i> — tap them), and every rule comes with its why and a real example.</span>
+      <span data-i18n="es">Este sitio es el manual de operaciones de Construction Nation Group. No presupone ningún conocimiento previo de construcción: cada término se define la primera vez que aparece (las palabras con subrayado punteado, <i class="glo" data-g="trade" style="color:#e2e8f0;border-bottom-color:#fbbf24">como esta</i>, muestran su definición al tocarlas), cada regla se explica con su propósito, y cada concepto se acompaña de un ejemplo real de nuestras obras.</span>
+      <span data-i18n="en">This site is Construction Nation Group's operations manual. It assumes no prior construction knowledge: every term is defined the first time it appears (words with a dotted underline, <i class="glo" data-g="trade" style="color:#e2e8f0;border-bottom-color:#fbbf24">like this one</i>, show their definition when tapped), every rule is explained with its purpose, and every concept comes with a real example from our jobs.</span>
     </p>
     <div class="aprende">
-      <div class="ttl"><span data-i18n="es">EN ESTA PÁGINA VAS A ENTENDER:</span><span data-i18n="en">ON THIS PAGE YOU WILL UNDERSTAND:</span></div>
+      <div class="ttl"><span data-i18n="es">AL TERMINAR ESTA PÁGINA SABRÁS:</span><span data-i18n="en">BY THE END OF THIS PAGE YOU WILL KNOW:</span></div>
       <ul>
-        <li><span data-i18n="es">Qué es CNG y de qué vive realmente la empresa (spoiler: no de poner ladrillos)</span><span data-i18n="en">What CNG is and what the company really lives from (spoiler: not laying bricks)</span></li>
-        <li><span data-i18n="es">LA CLAVE de todo el proceso y los 5 comportamientos que lo sostienen</span><span data-i18n="en">THE KEY to the whole process and the 5 behaviors that hold it up</span></li>
-        <li><span data-i18n="es">Las 2 reglas que TODOS aplican todos los días</span><span data-i18n="en">The 2 rules EVERYONE applies every day</span></li>
-        <li><span data-i18n="es">El camino de aprendizaje: las 9 paradas de esta web, en el orden correcto</span><span data-i18n="en">The learning path: this site's 9 stops, in the right order</span></li>
+        <li><span data-i18n="es">Qué es CNG, qué construye y de qué vive realmente la empresa</span><span data-i18n="en">What CNG is, what it builds and what the company really lives from</span></li>
+        <li><span data-i18n="es">La regla central de la que se deriva todo el proceso</span><span data-i18n="en">The central rule everything in the process derives from</span></li>
+        <li><span data-i18n="es">Los cuatro pilares del estándar CNG, los cinco comportamientos que sostienen el proceso y las dos reglas que todo el equipo aplica a diario</span><span data-i18n="en">The four pillars of the CNG standard, the five behaviors that sustain the process and the two rules the whole team applies daily</span></li>
+        <li><span data-i18n="es">En qué orden estudiar las nueve secciones de este manual</span><span data-i18n="en">In what order to study this manual's nine sections</span></li>
       </ul>
     </div>
   </div>
 
+  <!-- ============ INTRODUCCIÓN ============ -->
+  <p>
+    <span data-i18n="es"><b>Qué cubre esta página y por qué importa.</b> Antes de estudiar cronogramas, presupuestos o herramientas, necesitas entender el terreno común: qué tipo de empresa es CNG, cuál es su negocio real y cuál es la mentalidad con la que se ejecuta el proceso. Esta página establece ese punto de partida. Todo lo que leas en las páginas siguientes — la secuencia constructiva, el ciclo de vida de un proyecto, el bucle diario, JobTread, el dinero y los reportes — se apoya en los conceptos que se definen aquí.</span>
+    <span data-i18n="en"><b>What this page covers and why it matters.</b> Before studying schedules, budgets or tools, you need the common ground: what kind of company CNG is, what its real business is, and the mindset the process is executed with. This page establishes that starting point. Everything you read in the following pages — the build sequence, a project's life cycle, the daily loop, JobTread, the money and the reports — rests on the concepts defined here.</span>
+  </p>
+  <p>
+    <span data-i18n="es">Este manual existe por una razón concreta: en CNG constatamos que nadie del equipo conocía el proceso completo, al cien por ciento. El proceso está bien diseñado y bien documentado; lo que ha faltado es que cada persona del equipo lo conozca completo, con el detalle suficiente para ejecutarlo sin improvisar. Ese es el objetivo de este sitio.</span>
+    <span data-i18n="en">This manual exists for a concrete reason: at CNG we found that nobody on the team knew the complete process, one hundred percent. The process is well designed and well documented; what has been missing is for every person on the team to know it in full, with enough detail to execute it without improvising. That is this site's objective.</span>
+  </p>
 
-  <!-- ============ ACCESO AL MATERIAL (temario + centro de materiales) ============ -->
-  <div class="gate-banner" id="cng-acceso-material">
-    <div class="g-title"><span data-i18n="es">¿BUSCAS EL MATERIAL?</span><span data-i18n="en">LOOKING FOR THE MATERIAL?</span></div>
-    <span data-i18n="es">Todo el material de entrenamiento está en esta web, en dos puertas: <b>el Temario</b> te dice qué estudiar y en qué orden (Módulo 0 común + el track de tu puesto + cómo se te evalúa) &middot; <b>el Centro de Materiales</b> tiene los 103 documentos — tracks, job descriptions, presentaciones, one-pagers, quizzes, guiones y guías de reportes — con buscador y filtro por posición.</span><span data-i18n="en">All the training material lives on this site, behind two doors: <b>the Syllabus</b> tells you what to study and in what order (common Module 0 + your seat's track + how you're evaluated) &middot; <b>the Materials Center</b> holds the 103 documents — tracks, job descriptions, slides, one-pagers, quizzes, scripts and report guides — with a search box and a per-position filter.</span>
-    <div style="margin-top:14px">
-      <a class="btn sec" href="temario.html">📚 <span data-i18n="es">El Temario: qué estudiar y en qué orden</span><span data-i18n="en">The Syllabus: what to study and in what order</span></a>
-      <a class="btn sec" href="materiales/index.html">🗂️ <span data-i18n="es">Centro de Materiales (103 documentos)</span><span data-i18n="en">Materials Center (103 documents)</span></a>
-    </div>
-  </div>
-
-  <!-- ============ QUE ES CNG ============ -->
-  <h2><span class="seccion-num">1 · </span><span data-i18n="es">Primero lo primero: ¿qué es CNG?</span><span data-i18n="en">First things first: what is CNG?</span></h2>
+  <!-- ============ 1 · QUÉ ES CNG ============ -->
+  <h2><span class="seccion-num">1 · </span><span data-i18n="es">Qué es CNG y de qué vive</span><span data-i18n="en">What CNG is and what it lives from</span></h2>
   <p class="proposito">
-    <span data-i18n="es"><b>Esta sección existe para</b> que arranques sin asumir nada. Cinco palabras que vas a escuchar todos los días, explicadas en cristiano.</span>
-    <span data-i18n="en"><b>This section exists so</b> you start without assuming anything. Five words you'll hear every day, explained in plain language.</span>
+    <span data-i18n="es"><b>Propósito de esta sección:</b> establecer, sin asumir nada, qué empresa es esta, qué construye y — el punto que lo cambia todo — cuál es su verdadero negocio.</span>
+    <span data-i18n="en"><b>Purpose of this section:</b> to establish, assuming nothing, what company this is, what it builds and — the point that changes everything — what its true business is.</span>
   </p>
 
   <p>
-    <span data-i18n="es"><b>Construction Nation Group (CNG)</b> es una constructora residencial en Dallas, Texas. Hace <b>adiciones</b> (ampliar una casa), <b>remodelaciones de cocina</b> y <b>construcción nueva</b>. Pero ojo con esto, porque lo cambia todo:</span>
-    <span data-i18n="en"><b>Construction Nation Group (CNG)</b> is a residential builder in Dallas, Texas. It does <b>additions</b> (expanding a house), <b>kitchen remodels</b> and <b>new construction</b>. But watch this, because it changes everything:</span>
+    <span data-i18n="es"><b>Construction Nation Group (CNG)</b> es una constructora residencial con sede en Dallas, Texas. Su nicho actual son tres tipos de proyecto: las <b>adiciones</b> — ampliar una casa existente, ya sea pegada a la casa (<i class="glo" data-g="adu">attach</i>) o como unidad independiente (<i class="glo" data-g="adu">ADU</i>, que se trata como obra nueva) —, la <b>remodelación de cocinas</b> y la <b>construcción nueva</b>. Son contratos grandes: una adición típica se firma entre $300,000 y $2,000,000.</span>
+    <span data-i18n="en"><b>Construction Nation Group (CNG)</b> is a residential builder based in Dallas, Texas. Its current niche covers three project types: <b>additions</b> — expanding an existing house, either attached to it (<i class="glo" data-g="adu">attach</i>) or as an independent unit (an <i class="glo" data-g="adu">ADU</i>, treated as new construction) —, <b>kitchen remodels</b> and <b>new construction</b>. These are large contracts: a typical addition signs between $300,000 and $2,000,000.</span>
+  </p>
+  <p>
+    <span data-i18n="es">Ahora el punto esencial. CNG <b>no construye con cuadrillas propias</b>. Es un <i class="glo" data-g="gc">general contractor</i>: para cada oficio de la obra — la plomería, la estructura de madera, la pintura — contrata a una empresa o cuadrilla externa especializada. A cada oficio lo llamamos <i class="glo" data-g="trade">trade</i>; a cada especialista externo, <i class="glo" data-g="sub">sub</i> (subcontratista). Una obra típica de CNG involucra hasta 34 trades distintos, cada uno ejecutado por un sub distinto.</span>
+    <span data-i18n="en">Now the essential point. CNG <b>does not build with its own crews</b>. It is a <i class="glo" data-g="gc">general contractor</i>: for every specialty on the job — plumbing, the wooden structure, paint — it hires a specialized outside company or crew. We call each specialty a <i class="glo" data-g="trade">trade</i>; each outside specialist, a <i class="glo" data-g="sub">sub</i> (subcontractor). A typical CNG job involves up to 34 different trades, each executed by a different sub.</span>
   </p>
 
   <div class="clave">
-    <span data-i18n="es">CNG <b>no construye con cuadrillas propias</b>. Es un <i class="glo" data-g="gc" style="color:#fff;border-bottom-color:#fbbf24">general contractor</i>: contrata a un especialista externo (un <i class="glo" data-g="sub" style="color:#fff;border-bottom-color:#fbbf24">sub</i>) para cada oficio de la obra (cada <i class="glo" data-g="trade" style="color:#fff;border-bottom-color:#fbbf24">trade</i>). El negocio de CNG es <b>manejar el cronograma, los presupuestos y las contrataciones de forma impecable</b>. El margen se gana GESTIONANDO — no martillando.</span>
-    <span data-i18n="en">CNG <b>does not build with its own crews</b>. It is a <i class="glo" data-g="gc" style="color:#fff;border-bottom-color:#fbbf24">general contractor</i>: it hires an outside specialist (a <i class="glo" data-g="sub" style="color:#fff;border-bottom-color:#fbbf24">sub</i>) for every specialty of the job (every <i class="glo" data-g="trade" style="color:#fff;border-bottom-color:#fbbf24">trade</i>). CNG's business is <b>managing the schedule, the budgets and the contracting impeccably</b>. The margin is earned by MANAGING — not by hammering.</span>
+    <span data-i18n="es">Si CNG no ejecuta la obra con sus manos, ¿cuál es su trabajo? <b>Manejar el cronograma, los presupuestos y las contrataciones de forma impecable.</b> El core de CNG está en manejar el proyecto: un manejo impecable del cronograma es lo que asegura el éxito. El margen de la empresa se gana gestionando — no ejecutando.</span>
+    <span data-i18n="en">If CNG doesn't execute the work with its own hands, what is its job? <b>Managing the schedule, the budgets and the contracting impeccably.</b> CNG's core is managing the project: impeccable management of the schedule is what ensures success. The company's margin is earned by managing — not by executing.</span>
   </div>
 
-  <!-- ---- quién es quién (antes de que aparezca el primer nombre) ---- -->
-  <div class="card" style="border-left:5px solid var(--oro)">
-    <h3 style="margin-top:0"><span data-i18n="es">Antes de seguir: los nombres que vas a leer</span><span data-i18n="en">Before you go on: the names you'll read</span></h3>
-    <p style="font-size:14px;color:var(--mut);margin:0 0 10px">
-      <span data-i18n="es">En esta web se citan personas reales por su nombre de pila. Para que ninguna cita te suene a nombre suelto, aquí está quién es cada quien. Ninguna es tu jefe por defecto: cada puesto tiene el suyo, y eso lo ves en la <a href="posiciones/index.html">página 7 (Posiciones)</a>.</span>
-      <span data-i18n="en">This site quotes real people by first name. So no quote sounds like a random name, here's who each one is. None of them is your boss by default: each position has its own, and you'll see that on <a href="posiciones/index.html">page 7 (Positions)</a>.</span>
+  <h3><span data-i18n="es">La historia que explica por qué existe el sistema</span><span data-i18n="en">The history that explains why the system exists</span></h3>
+  <p>
+    <span data-i18n="es">CNG vivió una etapa de crecimiento acelerado: se vendía muchísimo y la empresa llegó a figurar entre las constructoras de mayor volumen del país. Pero los cronogramas se manejaban en Notion, una herramienta de notas que no estaba hecha para eso. El resultado fue caos operativo: obras planificadas para seis meses que cerraban en dos años, y una estructura grande — con taller de carpintería propio — cuyos costos fijos devoraban el margen. Esa etapa dejó una lección que hoy es doctrina: <b>vender mucho sin gestionar bien no es crecer — es acumular compromisos que no se pueden cumplir.</b> La empresa desescaló a una operación compacta y enfocada, y reconstruyó sobre una base distinta: el proceso.</span>
+    <span data-i18n="en">CNG lived through a stage of accelerated growth: sales were pouring in and the company came to rank among the higher-volume builders in the country. But the schedules were managed in Notion, a note-taking tool never meant for that. The result was operational chaos: jobs planned for six months closing in two years, and a large structure — with its own carpentry shop — whose fixed costs devoured the margin. That stage left a lesson that is now doctrine: <b>selling a lot without managing well is not growth — it is piling up commitments you cannot keep.</b> The company scaled down to a compact, focused operation and rebuilt on a different foundation: the process.</span>
+  </p>
+  <p>
+    <span data-i18n="es">De esa experiencia nace la apuesta actual: CNG apuesta por la tecnología y las herramientas digitales — un sistema de registro y de inteligencia artificial aplicado a un rubro tradicional, primero para ordenar la operación y después para escalarla. La consecuencia práctica te afecta directamente, ocupes el puesto que ocupes: <b>CNG depende de la información</b>. Si el registro es limpio, la operación corre; si el registro es sucio, la operación se rompe. Gran parte de este manual consiste en aprender a mantener ese registro limpio — y, como verás en la sección 3, el registro es una de las <b>cuatro patas</b> del estándar CNG: pesa exactamente igual que estar en la obra, gestionar bien y anticiparse a los problemas.</span>
+    <span data-i18n="en">The current bet was born from that experience: CNG bets on technology and digital tools — a system of record and artificial intelligence applied to a traditional industry, first to bring order to the operation and then to scale it. The practical consequence affects you directly, whatever your position: <b>CNG depends on information</b>. If the record is clean, the operation runs; if the record is dirty, the operation breaks. A large part of this manual is learning to keep that record clean — and, as you will see in section 3, the record is one of the <b>four legs</b> of the CNG standard: it weighs exactly as much as being on the jobsite, managing well and getting ahead of problems.</span>
+  </p>
+
+  <h3><span data-i18n="es">Cinco términos que escucharás todos los días</span><span data-i18n="en">Five terms you will hear every day</span></h3>
+  <p>
+    <span data-i18n="es">Antes de continuar, conviene fijar el vocabulario mínimo. Estos cinco términos aparecen en todas las páginas de este manual y en todas las conversaciones de trabajo.</span>
+    <span data-i18n="en">Before continuing, it helps to fix the minimum vocabulary. These five terms appear on every page of this manual and in every working conversation.</span>
+  </p>
+  <ul>
+    <li><span data-i18n="es"><b>Trade</b> — un oficio de la obra: plomería, estructura de madera (framing), pintura, pisos. Cada trade lo ejecuta un especialista distinto, y en nuestro cronograma cada trade es también un grupo de tareas con su propia cadena.</span><span data-i18n="en"><b>Trade</b> — a specialty of the job: plumbing, the wooden structure (framing), paint, floors. Each trade is executed by a different specialist, and in our schedule each trade is also a group of tasks with its own chain.</span></li>
+    <li><span data-i18n="es"><b>Sub</b> — el subcontratista: la empresa o cuadrilla externa que ejecuta un trade. CNG le paga únicamente contra un contrato firmado (la Work Order) y una inspección de calidad.</span><span data-i18n="en"><b>Sub</b> — the subcontractor: the outside company or crew that executes a trade. CNG pays them only against a signed contract (the Work Order) and a quality inspection.</span></li>
+    <li><span data-i18n="es"><b>Schedule</b> — el cronograma del proyecto: qué trade trabaja qué día. Es EL documento que la empresa gestiona; todo lo demás existe para alimentarlo o para verificarlo.</span><span data-i18n="en"><b>Schedule</b> — the project's timeline: which trade works on which day. It is THE document the company manages; everything else exists to feed it or to verify it.</span></li>
+    <li><span data-i18n="es"><b>JobTread (JT)</b> — el software donde vive todo el registro administrativo: el schedule, las tareas, los presupuestos, los contratos y los pagos. Es la columna vertebral de la operación a nivel administrativo.</span><span data-i18n="en"><b>JobTread (JT)</b> — the software where the entire administrative record lives: the schedule, tasks, budgets, contracts and payments. It is the administrative backbone of the operation.</span></li>
+    <li><span data-i18n="es"><b>CompanyCam (CC)</b> — la aplicación de fotos de obra: fotografías con descripción y las listas de verificación (<i class="glo" data-g="checklist">checklists</i>) de cada trade. La división de trabajo entre ambas herramientas es simple: JobTread dice cuándo y cuánto; CompanyCam prueba cómo quedó.</span><span data-i18n="en"><b>CompanyCam (CC)</b> — the jobsite photo application: photographs with descriptions and each trade's verification lists (<i class="glo" data-g="checklist">checklists</i>). The division of labor between the two tools is simple: JobTread says when and how much; CompanyCam proves how it turned out.</span></li>
+  </ul>
+
+  <div class="card">
+    <h3 style="margin-top:0"><span data-i18n="es">Las personas que este manual nombra</span><span data-i18n="en">The people this manual names</span></h3>
+    <p style="font-size:14.5px;color:var(--mut)">
+      <span data-i18n="es">A lo largo del sitio aparecen personas reales por su nombre de pila. Esta ficha te dice quién es cada una. Ninguna es tu jefe por defecto: cada puesto tiene el suyo, y lo verás en la sección de <a href="posiciones/index.html">Posiciones</a>.</span>
+      <span data-i18n="en">Real people appear throughout the site by first name. This card tells you who each one is. None of them is your manager by default: each position has its own, and you will see that in the <a href="posiciones/index.html">Positions</a> section.</span>
     </p>
-    <div class="grid c3" style="gap:10px">
-      <div><span class="chip backoffice">Jose</span> <span style="font-size:13.5px"><span data-i18n="es">Lidera el desarrollo, el proceso y los sistemas. <b>Casi todas las citas y reglas de esta web son suyas</b> — por eso verás "Jose, 2026-08-06": es la fecha en que fijó esa regla. También cubre hoy el Backoffice mientras entra Joaquín.</span><span data-i18n="en">Leads development, the process and the systems. <b>Almost every quote and rule on this site is his</b> — that's why you'll see "Jose, 2026-08-06": the date he set that rule. He also covers Backoffice today while Joaquín onboards.</span></span></div>
-      <div><span class="chip ceo">Jonas</span> <span style="font-size:13.5px"><span data-i18n="es">CEO. Aprueba el plan de pagos de la semana, gestiona los cobros al banco y hoy además hace de jefe de PMs y de ventas.</span><span data-i18n="en">CEO. Approves the week's payment plan, manages bank collections and today also acts as head of PMs and of sales.</span></span></div>
-      <div><span class="chip coo">Rey</span> <span style="font-size:13.5px"><span data-i18n="es">COO. Dueño de la operación: que la obra vaya como dice el cronograma, la calidad y la ruta crítica.</span><span data-i18n="en">COO. Owns operations: that the job runs as the schedule says, quality and the critical path.</span></span></div>
-      <div><span class="chip admin">Milagros</span> <span style="font-size:13.5px"><span data-i18n="es">Administradora (Perú). Nadie cobra sin pasar por ella: revisa cada pago con 4 filtros.</span><span data-i18n="en">Administrator (Peru). Nobody gets paid without going through her: she checks every payment with 4 filters.</span></span></div>
-      <div><span class="chip compras">Romina</span> <span style="font-size:13.5px"><span data-i18n="es">Compras (Perú). Cotiza y compra el material para que llegue ANTES que la cuadrilla.</span><span data-i18n="en">Purchases (Peru). Quotes and buys material so it lands BEFORE the crew.</span></span></div>
-      <div><span class="chip planning">Claudia</span> <span style="font-size:13.5px"><span data-i18n="es">Planning (Perú). Planos, permisos de la ciudad y el "Portafolio" que recibe el PM.</span><span data-i18n="en">Planning (Peru). Drawings, city permits and the "Portfolio" the PM receives.</span></span></div>
-      <div><span class="chip pm">Angel · Giselle · Jeff</span> <span style="font-size:13.5px"><span data-i18n="es">Los Project Managers: cada uno maneja sus obras en Dallas. Jeff trabaja 100% en inglés — por eso el glosario es EN↔ES.</span><span data-i18n="en">The Project Managers: each runs their own jobs in Dallas. Jeff works 100% in English — that's why the glossary is EN↔ES.</span></span></div>
-      <div><span class="chip backoffice">Joaquín</span> <span style="font-size:13.5px"><span data-i18n="es">Backoffice / Data-Entry (Perú), incorporándose: convierte en registro lo que el campo reporta.</span><span data-i18n="en">Backoffice / Data-Entry (Peru), onboarding: turns what the field reports into record.</span></span></div>
-      <div><span class="chip sistema"><span data-i18n="es">"el sistema"</span><span data-i18n="en">"the system"</span></span> <span style="font-size:13.5px"><span data-i18n="es">No es una persona: son los programas de CNG (KITBOT por Telegram + los dashboards) que leen el registro y <b>escriben los reportes solos</b>.</span><span data-i18n="en">Not a person: it's CNG's software (KITBOT on Telegram + the dashboards) that reads the record and <b>writes the reports on its own</b>.</span></span></div>
+    <div class="grid c2" style="gap:12px;font-size:14px">
+      <div><span class="chip backoffice">Jose</span> <span data-i18n="es">Lidera el desarrollo, el proceso y los sistemas; socio. Hoy cubre además el Backoffice mientras Joaquín se incorpora.</span><span data-i18n="en">Leads development, the process and the systems; partner. He also covers Backoffice today while Joaquín onboards.</span></div>
+      <div><span class="chip ceo">Jonas</span> <span data-i18n="es">CEO y fundador, ex contratista general. Aprueba el plan de pagos de la semana, gestiona los cobros al banco y hoy cubre también la jefatura de PMs y de ventas.</span><span data-i18n="en">CEO and founder, former general contractor. Approves the week's payment plan, manages bank collections and today also covers the head-of-PMs and sales roles.</span></div>
+      <div><span class="chip coo">Rey</span> <span data-i18n="es">COO y fundador. Dueño de la operación: que la obra avance como dice el cronograma, la calidad y la ruta crítica.</span><span data-i18n="en">COO and founder. Owns operations: that the job advances as the schedule says, quality and the critical path.</span></div>
+      <div><span class="chip admin">Milagros</span> <span data-i18n="es">Administradora (Estados Unidos) y el nexo entre el backoffice y el campo. Ningún pago sale sin pasar por ella: aplica cuatro filtros a cada solicitud.</span><span data-i18n="en">Administrator (United States) and the link between the back office and the field. No payment goes out without passing through her: she applies four filters to every request.</span></div>
+      <div><span class="chip compras">Romina</span> <span data-i18n="es">Compras (Perú). Cuantifica, cotiza y compra el material para que llegue antes que la cuadrilla.</span><span data-i18n="en">Purchases (Peru). Quantifies, quotes and buys material so it arrives before the crew.</span></div>
+      <div><span class="chip planning">Claudia</span> <span data-i18n="es">Planning (Perú). Dirige los planos, los permisos de la ciudad y el Portafolio que recibe el PM.</span><span data-i18n="en">Planning (Peru). Leads the drawings, the city permits and the Portfolio the PM receives.</span></div>
+      <div><span class="chip pm">Angel · Giselle · Jeff</span> <span data-i18n="es">Los Project Managers: cada uno gestiona sus obras en Dallas. Jeff trabaja completamente en inglés; por eso el glosario de este sitio es bilingüe.</span><span data-i18n="en">The Project Managers: each manages their own jobs in Dallas. Jeff works entirely in English; that is why this site's glossary is bilingual.</span></div>
+      <div><span class="chip backoffice">Joaquín</span> <span data-i18n="es">Backoffice / Data-Entry (Perú), en incorporación: convierte en registro lo que el campo reporta.</span><span data-i18n="en">Backoffice / Data-Entry (Peru), onboarding: turns what the field reports into record.</span></div>
+      <div><span class="chip sistema"><span data-i18n="es">"el sistema"</span><span data-i18n="en">"the system"</span></span> <span data-i18n="es">No es una persona: es el software de CNG (KITBOT por Telegram y los dashboards) que lee el registro y produce los reportes de forma automática.</span><span data-i18n="en">Not a person: CNG's software (KITBOT on Telegram and the dashboards) that reads the record and produces the reports automatically.</span></div>
     </div>
   </div>
 
-  <div class="grid c3">
-    <div class="card"><span class="icono">🧱</span><h3>trade</h3>
-      <p style="font-size:14px;margin:0"><span data-i18n="es">Un oficio de la obra: plomería, framing, pintura, pisos… Cada trade lo ejecuta un especialista distinto. Una obra típica de CNG tiene <b>34 trades</b>.</span><span data-i18n="en">A specialty of the job: plumbing, framing, paint, floors… Each trade is executed by a different specialist. A typical CNG job has <b>34 trades</b>.</span></p></div>
-    <div class="card"><span class="icono">👷</span><h3>sub</h3>
-      <p style="font-size:14px;margin:0"><span data-i18n="es">Subcontratista: la empresa o cuadrilla externa que ejecuta un trade. CNG le paga solo contra contrato firmado (<i class="glo" data-g="wo">WO</i>) e inspección.</span><span data-i18n="en">Subcontractor: the outside company or crew that executes a trade. CNG pays them only against a signed contract (<i class="glo" data-g="wo">WO</i>) and an inspection.</span></p></div>
-    <div class="card"><span class="icono">🗓️</span><h3>schedule</h3>
-      <p style="font-size:14px;margin:0"><span data-i18n="es">El cronograma de la obra: qué trade va qué día. Vive en JobTread y es EL documento que se gestiona. Todo lo demás lo alimenta.</span><span data-i18n="en">The job's timeline: which trade goes on which day. It lives in JobTread and is THE document being managed. Everything else feeds it.</span></p></div>
-    <div class="card"><span class="icono">💻</span><h3>JobTread</h3>
-      <p style="font-size:14px;margin:0"><span data-i18n="es">El software donde vive TODO el registro: schedule, tareas, presupuestos, contratos, pagos. Jose: <i>"la columna vertebral de la operación a nivel administrativo."</i></span><span data-i18n="en">The software where ALL the record lives: schedule, tasks, budgets, contracts, payments. Jose: <i>"the administrative backbone of the operation."</i></span></p></div>
-    <div class="card"><span class="icono">📸</span><h3>CompanyCam</h3>
-      <p style="font-size:14px;margin:0"><span data-i18n="es">La app de fotos de obra: fotos CON descripción y los <i class="glo" data-g="checklist">checklists</i> por trade. Si JobTread dice CUÁNDO, CompanyCam prueba CÓMO quedó.</span><span data-i18n="en">The jobsite photo app: photos WITH descriptions and the per-trade <i class="glo" data-g="checklist">checklists</i>. If JobTread says WHEN, CompanyCam proves HOW it turned out.</span></p></div>
-  </div>
-
-  <details class="exp">
-    <summary><span data-i18n="es">📖 La historia que explica por qué existe todo este sistema</span><span data-i18n="en">📖 The story that explains why this whole system exists</span></summary>
-    <div class="exp-body">
-      <span data-i18n="es">En 2022–2023 CNG vendía muchísimo (~74 proyectos en 2023, ranking ~#298 de constructoras de EE.UU. por volumen)… pero manejaba los cronogramas <b>en Notion</b>. Resultado: caos — obras de 6 meses cerrando en 2 años, oficina de 40–50 personas y ~$100–150k/mes de costos fijos. La mala racha de fines de 2023 obligó a desescalar: la mitad del equipo fuera, oficina chica, hoy <b>11 proyectos activos</b>. La apuesta actual, en palabras de Jose: <i>"la empresa está apostando todo a la tecnología y a herramientas digitales."</i> Por eso CNG depende de la información: <b>si el registro es limpio, la operación corre; si no, se rompe.</b> Y por eso existe esta web.</span>
-      <span data-i18n="en">In 2022–2023 CNG sold a lot (~74 projects in 2023, roughly #298 among US builders by volume)… but managed its schedules <b>in Notion</b>. The result: chaos — 6-month jobs closing in 2 years, a 40–50 person office and ~$100–150k/month in fixed costs. The bad streak of late 2023 forced a downscale: half the team let go, small office, today <b>11 active projects</b>. The current bet, in Jose's words: <i>"the company is betting everything on technology and digital tools."</i> That's why CNG depends on information: <b>if the record is clean, the operation runs; if not, it breaks.</b> And that's why this site exists.</span>
-    </div>
-  </details>
-
-  <!-- ============ LA CLAVE ============ -->
-  <h2><span class="seccion-num">2 · </span><span data-i18n="es">LA CLAVE de todo</span><span data-i18n="en">THE KEY to everything</span></h2>
+  <!-- ============ 2 · LA CLAVE ============ -->
+  <h2><span class="seccion-num">2 · </span><span data-i18n="es">La regla central del proceso</span><span data-i18n="en">The process's central rule</span></h2>
   <p class="proposito">
-    <span data-i18n="es"><b>Esta sección existe para</b> que memorices la única frase de la que se deriva todo lo demás. Si solo te llevas una cosa de esta web, que sea esta.</span>
-    <span data-i18n="en"><b>This section exists so</b> you memorize the one sentence everything else derives from. If you take one thing from this site, make it this.</span>
+    <span data-i18n="es"><b>Propósito de esta sección:</b> presentar la única frase de la que se deriva todo lo demás. Si retienes una sola idea de esta página, debe ser esta.</span>
+    <span data-i18n="en"><b>Purpose of this section:</b> to present the one sentence everything else derives from. If you retain a single idea from this page, it should be this one.</span>
   </p>
 
   <div class="clave">
-    <div style="font-size:12px;letter-spacing:1.5px;color:#94a3b8;font-weight:700;margin-bottom:6px">
+    <div style="font-size:11.5px;letter-spacing:1.8px;color:#94a3b8;font-weight:700;margin-bottom:8px">
       <span data-i18n="es">LA CLAVE DE TODO</span><span data-i18n="en">THE KEY TO EVERYTHING</span>
     </div>
-    <span data-i18n="es"><b>GESTIONAR LA OBRA DE LA FORMA EN LA QUE SE PLANIFICÓ EN EL CRONOGRAMA.</b>
-    Mantener un <b>flujo de información impecable</b> y <b>solucionar los imprevistos para NO salirse del cronograma</b> es lo que garantiza el éxito de la operación. El margen se gana gestionando el cronograma (no ejecutando obra), y la calidad del registro — schedule + pagos + documentación — es la materia prima de esa gestión.</span>
-    <span data-i18n="en"><b>MANAGE THE JOB EXACTLY THE WAY IT WAS PLANNED IN THE SCHEDULE.</b>
-    Keeping an <b>impeccable flow of information</b> and <b>solving the unexpected so the job does NOT fall off the schedule</b> is what guarantees the success of the operation. The margin is earned by managing the schedule (not by doing the physical work), and the quality of the record — schedule + payments + documentation — is the raw material of that management.</span>
+    <span data-i18n="es"><b>GESTIONAR LA OBRA DE LA FORMA EN LA QUE SE PLANIFICÓ EN EL CRONOGRAMA.</b><br>
+    Mantener un flujo de información impecable y solucionar los imprevistos para no salirse del cronograma es lo que garantiza el éxito de la operación.</span>
+    <span data-i18n="en"><b>MANAGE THE JOB EXACTLY THE WAY IT WAS PLANNED IN THE SCHEDULE.</b><br>
+    Keeping an impeccable flow of information and solving the unexpected so the job does not fall off the schedule is what guarantees the operation's success.</span>
     <div class="sub">
-      <span data-i18n="es">Jose, corrección 2026-08-04 — el canon del proceso.</span>
-      <span data-i18n="en">Jose, 2026-08-04 correction — the process canon. (Translated from the original Spanish.)</span>
+      <span data-i18n="es">El canon del proceso CNG.</span>
+      <span data-i18n="en">The CNG process canon.</span>
     </div>
   </div>
 
-  <blockquote class="jose">
-    <span data-i18n="es">"nadie realmente conoce al 100% el proceso" · "JobTread es un espejo de lo que está pasando en la realidad"</span>
-    <span data-i18n="en">"nadie realmente conoce al 100% el proceso" <i>(nobody really knows the process 100%)</i> · "JobTread es un espejo de lo que está pasando en la realidad" <i>(JobTread is a mirror of what is happening in reality)</i></span>
-    <footer><span data-i18n="es">Jose — inducción grabada, ago-2026 (citas verbatim). Por eso existe esta web: para que TÚ sí lo conozcas al 100%.</span><span data-i18n="en">Jose — recorded induction, Aug 2026 (verbatim quotes). That's why this site exists: so YOU do know it 100%.</span></footer>
-  </blockquote>
-
-  <!-- ============ LA MENTALIDAD ============ -->
-  <h2><span class="seccion-num">3 · </span><span data-i18n="es">La mentalidad: los 5 comportamientos</span><span data-i18n="en">The mindset: the 5 behaviors</span></h2>
-  <p class="proposito">
-    <span data-i18n="es"><b>Esta sección existe para</b> que entiendas POR QUÉ falla el proceso cuando falla: no es el trade ni la teoría — es el comportamiento. Todo lo demás de esta web se ejecuta con estos 5.</span>
-    <span data-i18n="en"><b>This section exists so</b> you understand WHY the process fails when it fails: it's not the trade and it's not the theory — it's behavior. Everything else on this site is executed with these 5.</span>
+  <p>
+    <span data-i18n="es">Conviene desarmar esta frase, porque de ella se deriva todo lo demás. Primero: el éxito de una obra no se define por trabajar mucho, sino por que la obra suceda <b>como fue planificada</b>. Segundo: como CNG gana su margen gestionando el cronograma y no ejecutando obra, la materia prima de esa gestión es <b>la calidad del registro</b> — el schedule, los pagos y la documentación. Un registro limpio permite ver los problemas a tiempo y decidir con datos; un registro sucio deja a la gerencia ciega. Tercero: los imprevistos son parte normal de la construcción; lo que distingue una operación bien gestionada es que los imprevistos <b>se resuelven sin salirse del cronograma</b>, en lugar de simplemente aceptarse.</span>
+    <span data-i18n="en">It is worth unpacking this sentence, because everything else derives from it. First: a job's success is not defined by working hard, but by the job happening <b>as it was planned</b>. Second: since CNG earns its margin by managing the schedule and not by executing the work, the raw material of that management is <b>the quality of the record</b> — the schedule, the payments and the documentation. A clean record lets you see problems in time and decide with data; a dirty record leaves management blind. Third: the unexpected is a normal part of construction; what distinguishes a well-managed operation is that the unexpected <b>gets solved without falling off the schedule</b>, rather than simply being accepted.</span>
   </p>
 
+  <!-- ============ 3 · LOS 5 COMPORTAMIENTOS ============ -->
+  <h2><span class="seccion-num">3 · </span><span data-i18n="es">La mentalidad: cuatro pilares y cinco comportamientos</span><span data-i18n="en">The mindset: four pillars and five behaviors</span></h2>
+  <p class="proposito">
+    <span data-i18n="es"><b>Propósito de esta sección:</b> explicar por qué el proceso falla cuando falla. La causa raíz de los fallos no es técnica ni del trade — es de comportamiento. Aquí se fijan los cuatro pilares sobre los que se para el estándar CNG y los cinco comportamientos con los que se ejecuta todo lo demás de este manual.</span>
+    <span data-i18n="en"><b>Purpose of this section:</b> to explain why the process fails when it fails. The root cause of failures is neither technical nor the trade's — it is behavioral. This section fixes the four pillars the CNG standard stands on and the five behaviors everything else in this manual is executed with.</span>
+  </p>
+
+  <h3><span data-i18n="es">Los cuatro pilares del estándar CNG — todos pesan igual</span><span data-i18n="en">The four pillars of the CNG standard — all weigh the same</span></h3>
+  <p>
+    <span data-i18n="es">Antes de los comportamientos, una aclaración que importa: el estándar CNG <b>no</b> dice que lo único que importa es el sistema y el registro. El estándar se para en <b>cuatro patas iguales</b> — si una falla, la mesa se cae:</span>
+    <span data-i18n="en">Before the behaviors, a clarification that matters: the CNG standard does <b>not</b> say the system and the record are all that matters. The standard stands on <b>four equal legs</b> — if one fails, the table falls:</span>
+  </p>
+  <ol>
+    <li><span data-i18n="es"><b>LA OBRA.</b> Estar presente en el campo, caminar el sitio, ver con tus propios ojos. Ninguna foto sustituye haber estado ahí: los mejores gerentes de obra del mundo practican lo que la industria llama <i>genchi genbutsu</i> — ir al lugar real a ver el problema real. Lo que no viste, no lo gestionas.</span><span data-i18n="en"><b>THE JOBSITE.</b> Being present in the field, walking the site, seeing with your own eyes. No photo replaces having been there: the best construction managers in the world practice what the industry calls <i>genchi genbutsu</i> — going to the real place to see the real problem. What you did not see, you do not manage.</span></li>
+    <li><span data-i18n="es"><b>LA GESTIÓN.</b> Planificar, anticipar, coordinar subs y materiales correctamente. Que el material llegue antes que la cuadrilla, que la Work Order esté firmada antes del primer martillazo, que cada trade encuentre su frente de trabajo listo.</span><span data-i18n="en"><b>MANAGEMENT.</b> Planning, anticipating, coordinating subs and materials correctly. Material arriving before the crew, the Work Order signed before the first hammer swing, every trade finding its work front ready.</span></li>
+    <li><span data-i18n="es"><b>LA PROACTIVIDAD.</b> Prevenir en vez de reaccionar; resolver antes de que pare la obra. El problema detectado hoy se resuelve hoy — el que se descubre el día que la cuadrilla llega ya costó un día de obra.</span><span data-i18n="en"><b>PROACTIVITY.</b> Preventing instead of reacting; solving before the job stops. The problem detected today gets solved today — the one discovered the day the crew shows up has already cost a day of work.</span></li>
+    <li><span data-i18n="es"><b>EL REGISTRO.</b> Porque lo que no se documenta no se puede gestionar. El schedule al día, las fotos, los montos: son los ojos de toda la operación — y la memoria que protege a la empresa y a ti.</span><span data-i18n="en"><b>THE RECORD.</b> Because what is not documented cannot be managed. The up-to-date schedule, the photos, the amounts: they are the whole operation's eyes — and the memory that protects the company and you.</span></li>
+  </ol>
+
+  <p>
+    <span data-i18n="es">Cuando una obra de CNG se atrasa, casi nunca es porque alguien no supiera hacer su trabajo técnico. El diagnóstico institucional de la causa raíz es de comportamiento:</span>
+    <span data-i18n="en">When a CNG job falls behind, it is almost never because someone lacked the technical skill. The institutional diagnosis of the root cause is behavioral:</span>
+  </p>
   <blockquote class="jose">
-    <span data-i18n="es">"no se tiene rigurosidad, no se tiene atención al detalle, no se prevé y no se soluciona, no se es proactivo; aceptamos los problemas y reaccionamos, en vez de prevenirlos o buscar soluciones insaciablemente para cumplir a como dé lugar el cronograma planteado."</span>
-    <span data-i18n="en">"no se tiene rigurosidad, no se tiene atención al detalle…" <i>(there is no rigor, no attention to detail, no anticipating and no solving, no proactivity; we accept problems and react, instead of preventing them or hunting for solutions relentlessly to meet the planned schedule no matter what.)</i></span>
-    <footer><span data-i18n="es">Jose, 2026-08-04 — la causa raíz, verbatim</span><span data-i18n="en">Jose, 2026-08-04 — the root cause, verbatim</span></footer>
+    <span data-i18n="es">Los fallos ocurren cuando falta rigurosidad y atención al detalle, cuando no se prevé y no se soluciona, cuando no se es proactivo: se aceptan los problemas y se reacciona, en vez de prevenirlos o de buscar soluciones insaciablemente para cumplir a como dé lugar el cronograma planteado.</span>
+    <span data-i18n="en">Failures happen when rigor and attention to detail are missing, when nobody anticipates and nobody solves, when nobody is proactive: problems get accepted and reacted to, instead of being prevented — or solutions hunted for relentlessly to meet the planned schedule no matter what.</span>
+    <footer><span data-i18n="es">El estándar CNG — la causa raíz de los atrasos.</span><span data-i18n="en">The CNG standard — the root cause of delays.</span></footer>
   </blockquote>
 
-  <div class="grid c3">
-    <div class="card"><span class="icono">🎯</span><h3>1 · <span data-i18n="es">Rigurosidad</span><span data-i18n="en">Rigor</span></h3>
-      <p style="font-size:14px;margin:0"><span data-i18n="es">Cada paso del proceso se cumple completo, siempre — no "casi". <b>Ejemplo:</b> la <i class="glo" data-g="wo">WO</i> se firma ANTES del trabajo, no después.</span><span data-i18n="en">Every step of the process is completed fully, every time — not "almost". <b>Example:</b> the <i class="glo" data-g="wo">WO</i> gets signed BEFORE the work, not after.</span></p></div>
-    <div class="card"><span class="icono">🔍</span><h3>2 · <span data-i18n="es">Atención al detalle</span><span data-i18n="en">Attention to detail</span></h3>
-      <p style="font-size:14px;margin:0"><span data-i18n="es">Specs, medidas, fechas y montos se VERIFICAN — no se asumen. <b>Ejemplo real:</b> unas puertas se compraron a 96" cuando el diseño decía 82". Se compró el error.</span><span data-i18n="en">Specs, measurements, dates and amounts get VERIFIED — not assumed. <b>Real example:</b> doors were bought at 96" when the design said 82". The mistake was purchased.</span></p></div>
-    <div class="card"><span class="icono">🔭</span><h3>3 · <span data-i18n="es">Prever</span><span data-i18n="en">Anticipate</span></h3>
-      <p style="font-size:14px;margin:0"><span data-i18n="es">Detectar el problema ANTES de que llegue el día. La cadena del schedule existe para eso: si el electricista no está confirmado hoy, el lunes no habrá electricista.</span><span data-i18n="en">Spot the problem BEFORE the day arrives. The schedule chain exists for that: if the electrician isn't confirmed today, there'll be no electrician on Monday.</span></p></div>
-    <div class="card"><span class="icono">🔧</span><h3>4 · <span data-i18n="es">Solucionar</span><span data-i18n="en">Solve</span></h3>
-      <p style="font-size:14px;margin:0"><span data-i18n="es">El imprevisto se RESUELVE para no salirse del cronograma — no se documenta la excusa y ya.</span><span data-i18n="en">The unexpected gets SOLVED so the schedule holds — you don't just document the excuse and move on.</span></p></div>
-    <div class="card"><span class="icono">🔥</span><h3>5 · <span data-i18n="es">Proactividad insaciable</span><span data-i18n="en">Relentless proactivity</span></h3>
-      <p style="font-size:14px;margin:0"><span data-i18n="es">Buscar soluciones hasta cumplir el cronograma a como dé lugar. La ambigüedad se escala el DÍA 1, no se deja rebotar 4 días.</span><span data-i18n="en">Hunt for solutions until the schedule is met, no matter what. Ambiguity gets escalated on DAY 1, not left bouncing for 4 days.</span></p></div>
-  </div>
+  <p>
+    <span data-i18n="es">De ese diagnóstico salen los cinco comportamientos que la capacitación de CNG entrena junto con el proceso. Cada uno tiene una definición operativa y un ejemplo real:</span>
+    <span data-i18n="en">From that diagnosis come the five behaviors CNG's training develops alongside the process. Each has an operational definition and a real example:</span>
+  </p>
+  <ol>
+    <li><span data-i18n="es"><b>Rigurosidad.</b> Cada paso del proceso se cumple completo, todas las veces — no "casi siempre". Ejemplo: la <i class="glo" data-g="wo">Work Order</i> se firma antes de que el trabajo empiece, no después. Un proceso que se cumple al 90% no es un proceso: es una lotería.</span><span data-i18n="en"><b>Rigor.</b> Every step of the process is completed in full, every time — not "almost always". Example: the <i class="glo" data-g="wo">Work Order</i> gets signed before the work starts, not after. A process followed 90% of the time is not a process: it is a lottery.</span></li>
+    <li><span data-i18n="es"><b>Atención al detalle.</b> Las especificaciones, medidas, fechas y montos se verifican — no se asumen. Ejemplo real: unas puertas se compraron a 96 pulgadas cuando el diseño indicaba 82; nadie cotejó el plano contra el pedido, y la empresa compró el error.</span><span data-i18n="en"><b>Attention to detail.</b> Specifications, measurements, dates and amounts get verified — not assumed. Real example: doors were purchased at 96 inches when the design specified 82; nobody checked the plan against the order, and the company bought the mistake.</span></li>
+    <li><span data-i18n="es"><b>Prever.</b> Detectar el problema antes de que llegue el día. La cadena de tareas del schedule existe exactamente para esto: si hoy el electricista no está confirmado para el lunes, el lunes no habrá electricista — y hoy todavía es posible resolverlo.</span><span data-i18n="en"><b>Anticipating.</b> Spotting the problem before the day arrives. The schedule's task chain exists exactly for this: if the electrician is not confirmed today for Monday, there will be no electrician on Monday — and today it can still be solved.</span></li>
+    <li><span data-i18n="es"><b>Solucionar.</b> El imprevisto se resuelve para no salirse del cronograma. Documentar la excusa y seguir adelante no es gestionar: es aceptar el atraso.</span><span data-i18n="en"><b>Solving.</b> The unexpected gets solved so the schedule holds. Documenting the excuse and moving on is not managing: it is accepting the delay.</span></li>
+    <li><span data-i18n="es"><b>Proactividad insaciable.</b> Buscar soluciones hasta cumplir el cronograma, sin conformarse con el primer "no se puede". Una ambigüedad se escala el mismo día en que se detecta — no se deja rebotar entre personas durante cuatro días.</span><span data-i18n="en"><b>Relentless proactivity.</b> Hunting for solutions until the schedule is met, without settling for the first "it can't be done". An ambiguity gets escalated the same day it is detected — it is not left bouncing between people for four days.</span></li>
+  </ol>
 
   <div class="regla">
-    <span data-i18n="es"><b>La regla mental de cada puesto:</b> NO aceptar el problema y reaccionar — <b>prevenirlo</b>, o buscar soluciones <b>insaciablemente</b> hasta cumplir el cronograma a como dé lugar.</span>
-    <span data-i18n="en"><b>The mental rule for every position:</b> do NOT accept the problem and react — <b>prevent it</b>, or hunt for solutions <b>relentlessly</b> until the schedule is met, no matter what.</span>
+    <span data-i18n="es"><b>La regla mental para todos los puestos:</b> no aceptar el problema y reaccionar — prevenirlo, o buscar soluciones insaciablemente hasta cumplir el cronograma a como dé lugar.</span>
+    <span data-i18n="en"><b>The mental rule for every position:</b> do not accept the problem and react — prevent it, or hunt for solutions relentlessly until the schedule is met, no matter what.</span>
   </div>
 
-  <!-- ============ LAS 2 REGLAS NUEVAS ============ -->
-  <h2><span class="seccion-num">4 · </span><span data-i18n="es">Las 2 reglas que TODO el equipo aplica</span><span data-i18n="en">The 2 rules the WHOLE team applies</span></h2>
-  <p class="proposito">
-    <span data-i18n="es"><b>Esta sección existe para</b> que las dos reglas más nuevas del canon (Jose, 2026-08-06) no se pierdan entre las páginas: aplican a todos, todos los días.</span>
-    <span data-i18n="en"><b>This section exists so</b> the two newest canon rules (Jose, 2026-08-06) don't get lost between pages: they apply to everyone, every day.</span>
+  <h3><span data-i18n="es">Por qué este estándar funciona: la evidencia de la industria</span><span data-i18n="en">Why this standard works: the industry's evidence</span></h3>
+  <p>
+    <span data-i18n="es">Nada de lo anterior es una ocurrencia de esta empresa. Es la misma conclusión a la que llegaron las industrias donde el error cuesta vidas. Cuando la aviación comercial y la cirugía adoptaron los <b>checklists</b> — la historia que Atul Gawande documenta en <i>The Checklist Manifesto</i> — no fue porque los pilotos o los cirujanos fueran incompetentes: fue porque el trabajo moderno superó la memoria de cualquier experto. El checklist de seguridad quirúrgica de la OMS redujo complicaciones y muertes en hospitales de todo el mundo con una simple lista de verificaciones ejecutada <b>todas las veces</b>. Una obra con 34 trades y cientos de tareas es exactamente ese tipo de trabajo: demasiadas piezas para la memoria de cualquiera. Por eso el proceso escribe cada verificación — y por eso "casi siempre" no cuenta.</span>
+    <span data-i18n="en">None of the above is this company's whim. It is the same conclusion reached by the industries where error costs lives. When commercial aviation and surgery adopted <b>checklists</b> — the story Atul Gawande documents in <i>The Checklist Manifesto</i> — it was not because pilots or surgeons were incompetent: it was because modern work outgrew any expert's memory. The WHO surgical safety checklist cut complications and deaths in hospitals worldwide with a simple list of verifications executed <b>every single time</b>. A job with 34 trades and hundreds of tasks is exactly that kind of work: too many pieces for anyone's memory. That is why the process writes every verification down — and why "almost always" does not count.</span>
   </p>
-  <div class="grid c2">
-    <div class="card">
-      <span class="icono">💵</span>
-      <h3><span data-i18n="es">a) TODO dinero pasa por el schedule</span><span data-i18n="en">a) ALL money goes through the schedule</span></h3>
-      <p style="font-size:14.5px">
-        <span data-i18n="es">TODA compra se registra en el schedule <b>aunque sea de último minuto</b>, con su tipo de tarea (Payment - Materials / Payment - Subs). Y TODO gasto — <b>aunque sea de Home Depot o caja chica</b> — se anota al proyecto como <i class="glo" data-g="addexp">Additional Expense</i>. <b>¿Por qué?</b> Si se movió dinero y no hay tarea en el schedule, el cashflow, la productividad y los reportes quedan CIEGOS a ese gasto.</span>
-        <span data-i18n="en">EVERY purchase is recorded in the schedule <b>even if it's last-minute</b>, with its task type (Payment - Materials / Payment - Subs). And EVERY expense — <b>even Home Depot or petty cash</b> — is logged to the project as an <i class="glo" data-g="addexp">Additional Expense</i>. <b>Why?</b> If money moved and there's no task in the schedule, cashflow, productivity and reports go BLIND to that spend.</span>
-      </p>
-      <p style="font-size:13px;margin:0"><a href="dinero.html">→ <span data-i18n="es">Ver la página de Dinero</span><span data-i18n="en">See the Money page</span></a></p>
-    </div>
-    <div class="card">
-      <span class="icono">✅</span>
-      <h3><span data-i18n="es">b) Cerrar = check + fechas reales cuadradas</span><span data-i18n="en">b) Closing = check + real dates squared</span></h3>
-      <p style="font-size:14.5px">
-        <span data-i18n="es">El schedule es <b>el reflejo de lo que pasa o pasó en la realidad, y la proyección OPTIMISTA de lo que pasará</b>. Al cerrar una tarea hay que <b>CUADRAR las FECHAS — no basta marcar el check</b>. <b>¿Por qué?</b> Un check sobre una fecha que no corresponde a cuándo ocurrió de verdad es un registro sucio: rompe el <i class="glo" data-g="viernes">viernes-vs-viernes</i>, el cashflow y la productividad.</span>
-        <span data-i18n="en">The schedule is <b>the reflection of what happens or happened in reality, and the OPTIMISTIC projection of what will happen</b>. When you close a task you must <b>SQUARE the DATES — checking the box is not enough</b>. <b>Why?</b> A check sitting on a date that doesn't match when it really happened is a dirty record: it breaks <i class="glo" data-g="viernes">Friday-vs-Friday</i>, cashflow and productivity.</span>
-      </p>
-      <p style="font-size:13px;margin:0"><a href="jobtread.html">→ <span data-i18n="es">Ver la página de JobTread</span><span data-i18n="en">See the JobTread page</span></a></p>
-    </div>
+  <p>
+    <span data-i18n="es">La industria también sabe cuánto cuesta no hacerlo. La regla <b>1-10-100</b> de la gestión de calidad: el defecto que cuesta 1 prevenir cuesta 10 corregir cuando se detecta a tiempo — y 100 cuando llega al cliente o a la inspección de la ciudad. Las puertas compradas a la medida equivocada, la línea de gas perforada: cada caso real de este manual es esa regla en acción. Por eso las manufactureras de clase mundial aplican el <b>poka-yoke</b> de Shigeo Shingo — diseñar el trabajo para que el error sea imposible o se detecte al instante, en la fuente — y por eso los planes de inspección profesionales (ITP) definen <b>hold points</b>: puntos donde el trabajo NO avanza hasta que alguien verifica y libera. Nuestros checklists de CompanyCam y las inspecciones antes de cerrar paredes son exactamente eso.</span>
+    <span data-i18n="en">The industry also knows what skipping this costs. Quality management's <b>1-10-100 rule</b>: the defect that costs 1 to prevent costs 10 to correct when caught in time — and 100 when it reaches the client or the city inspection. The doors bought at the wrong size, the punctured gas line: every real case in this manual is that rule in action. That is why world-class manufacturers apply Shigeo Shingo's <b>poka-yoke</b> — designing the work so the error is impossible or instantly detected, at the source — and why professional inspection plans (ITPs) define <b>hold points</b>: points where work does NOT advance until someone verifies and releases it. Our CompanyCam checklists and the inspections before closing walls are exactly that.</span>
+  </p>
+  <p>
+    <span data-i18n="es">Y sobre el cronograma: el <b>Last Planner System</b> del Lean Construction Institute — el método de los constructores más confiables de Estados Unidos — mide cada semana el <b>PPC</b> (Percent Plan Complete): qué porcentaje de lo comprometido para la semana se cumplió al 100%. Décadas de datos dicen dos cosas. Una: los equipos que no lo miden cumplen aproximadamente la mitad de lo que prometen. Dos: <b>la confiabilidad del plan semanal es EL predictor de una obra rentable</b> — más que el talento individual, más que las horas trabajadas. Y la disciplina que la produce se llama <i>make-ready</i>: una tarea solo se promete cuando sus restricciones — material en sitio, sub confirmado, predecesora verificada, inspección pasada — ya fueron removidas. Nuestro bucle diario y la evaluación viernes-vs-viernes son esa misma disciplina, con nombre propio.</span>
+    <span data-i18n="en">And on the schedule: the Lean Construction Institute's <b>Last Planner System</b> — the method of the most reliable builders in the United States — measures the weekly <b>PPC</b> (Percent Plan Complete): what share of the week's commitments got done 100%. Decades of data say two things. One: teams that do not measure it deliver roughly half of what they promise. Two: <b>weekly plan reliability is THE predictor of a profitable job</b> — more than individual talent, more than hours worked. And the discipline that produces it is called <i>make-ready</i>: a task is only promised once its constraints — material on site, sub confirmed, predecessor verified, inspection passed — have been removed. Our daily loop and the Friday-vs-Friday evaluation are that same discipline, under our own name.</span>
+  </p>
+  <div class="clave">
+    <span data-i18n="es"><b>Lo que esto significa para ti.</b> Este manual no te pide fe: te pone a operar con las mismas herramientas con las que trabajan los mejores builders del país — checklists que la aviación validó con décadas de seguridad, hold points que la industria pesada usa para no enterrar errores, y un plan semanal medido como lo mide el Lean Construction. Dominar este proceso no es "aprender las reglas de una empresa": es adquirir un oficio de gestión que vale en cualquier constructora seria del mundo. Ese es el nivel de juego al que entras — y la vara con la que aquí se mide el trabajo bien hecho.</span>
+    <span data-i18n="en"><b>What this means for you.</b> This manual does not ask for faith: it puts you to work with the same tools the best builders in the country run on — checklists aviation validated with decades of safety, hold points heavy industry uses to avoid burying mistakes, and a weekly plan measured the way Lean Construction measures it. Mastering this process is not "learning one company's rules": it is acquiring a management craft worth its weight at any serious builder in the world. That is the level of play you are stepping into — and the bar work is measured against here.</span>
   </div>
 
-  <!-- ============ CAMINO DE APRENDIZAJE ============ -->
-  <h2><span class="seccion-num">5 · </span><span data-i18n="es">Tu camino de aprendizaje (1 → 9)</span><span data-i18n="en">Your learning path (1 → 9)</span></h2>
+  <!-- ============ 4 · LAS 2 REGLAS ============ -->
+  <h2><span class="seccion-num">4 · </span><span data-i18n="es">Las dos reglas que todo el equipo aplica a diario</span><span data-i18n="en">The two rules the whole team applies daily</span></h2>
   <p class="proposito">
-    <span data-i18n="es"><b>Esta sección existe para</b> que leas la web en el orden correcto: primero QUÉ se construye, luego CÓMO corre la empresa, y al final las herramientas de consulta. Sigue los números.</span>
-    <span data-i18n="en"><b>This section exists so</b> you read the site in the right order: first WHAT gets built, then HOW the company runs, and finally the reference tools. Follow the numbers.</span>
+    <span data-i18n="es"><b>Propósito de esta sección:</b> fijar las dos reglas más recientes del canon CNG. Aplican a todas las posiciones, todos los días, y las verás repetidas en las páginas de JobTread y de Dinero.</span>
+    <span data-i18n="en"><b>Purpose of this section:</b> to fix the two most recent CNG canon rules. They apply to every position, every day, and you will see them again on the JobTread and Money pages.</span>
   </p>
-  <p style="font-size:13.5px;color:var(--mut);margin:-6px 0 14px">
-    <span data-i18n="es"><b>Cómo leerla:</b> son <b>9 paradas</b> (la parada 7 se abre en 9 páginas: el mapa del equipo + una por posición, 18 páginas en total). Cálculo realista: <b>~20–30 min por parada</b>; hazlo en 2 o 3 sesiones, no de un tirón. Al final de cada página hay 3 preguntas para comprobar que entendiste — si fallas una, vuelve a esa sección antes de seguir. <b>Al terminar la parada 6, lee TU posición completa</b> (parada 7) y recién después las paradas 8 y 9.</span>
-    <span data-i18n="en"><b>How to read it:</b> there are <b>9 stops</b> (stop 7 opens into 9 pages: the team map + one per position, 18 pages in total). Realistic estimate: <b>~20–30 min per stop</b>; do it across 2 or 3 sittings, not in one go. Every page ends with 3 questions to check you got it — miss one and go back to that section before moving on. <b>Once you finish stop 6, read YOUR position in full</b> (stop 7) and only then stops 8 and 9.</span>
+
+  <h3><span data-i18n="es">Regla A — Todo movimiento de dinero pasa por el schedule</span><span data-i18n="en">Rule A — Every money movement goes through the schedule</span></h3>
+  <p>
+    <span data-i18n="es">Toda compra se registra en el schedule, aunque sea de último minuto, con su tipo de tarea correspondiente (Payment - Materials para material, Payment - Subs para pagos a subcontratistas). Y todo gasto — incluida una compra menor en Home Depot o un gasto de caja chica — se anota al proyecto como <i class="glo" data-g="addexp">Additional Expense</i>. La razón: el flujo de caja, la productividad y los reportes se calculan leyendo el schedule. Si el dinero se movió y no existe la tarea que lo registra, todos esos cálculos quedan ciegos a ese gasto. Es una regla sin excepciones. El detalle completo está en la página de <a href="dinero.html">Dinero</a>.</span>
+    <span data-i18n="en">Every purchase is recorded in the schedule, even a last-minute one, with its corresponding task type (Payment - Materials for material, Payment - Subs for subcontractor payments). And every expense — including a minor Home Depot purchase or petty cash — is logged to the project as an <i class="glo" data-g="addexp">Additional Expense</i>. The reason: cashflow, productivity and the reports are computed by reading the schedule. If money moved and the task recording it does not exist, all those calculations go blind to that spend. It is a rule without exceptions. The full detail is on the <a href="dinero.html">Money</a> page.</span>
+  </p>
+
+  <h3><span data-i18n="es">Regla B — Cerrar una tarea = marcar el check y cuadrar las fechas reales</span><span data-i18n="en">Rule B — Closing a task = checking it off and squaring the real dates</span></h3>
+  <p>
+    <span data-i18n="es">El schedule es el reflejo de lo que pasa o pasó en la realidad, y la proyección optimista de lo que pasará. Por eso, al cerrar una tarea no basta marcar la casilla de completado: hay que ajustar la tarea a las fechas en que el trabajo realmente ocurrió. Un check sobre una fecha que no corresponde a cuándo sucedió el trabajo es un registro sucio: rompe la evaluación semanal (<i class="glo" data-g="viernes">viernes-vs-viernes</i>), el flujo de caja y la productividad. La mecánica exacta está en la página de <a href="jobtread.html">JobTread</a>.</span>
+    <span data-i18n="en">The schedule is the reflection of what happens or happened in reality, and the optimistic projection of what will happen. Therefore, closing a task takes more than ticking the completed box: the task must be adjusted to the dates the work really occurred. A check sitting on a date that does not match when the work happened is a dirty record: it breaks the weekly evaluation (<i class="glo" data-g="viernes">Friday-vs-Friday</i>), cashflow and productivity. The exact mechanics are on the <a href="jobtread.html">JobTread</a> page.</span>
+  </p>
+
+  <!-- ============ 5 · CAMINO ============ -->
+  <h2><span class="seccion-num">5 · </span><span data-i18n="es">Cómo estudiar este manual: el camino 1 → 9</span><span data-i18n="en">How to study this manual: the 1 → 9 path</span></h2>
+  <p class="proposito">
+    <span data-i18n="es"><b>Propósito de esta sección:</b> darte el orden de lectura correcto. Primero qué se construye, después cómo corre la empresa y la operación, y al final las herramientas de consulta permanente.</span>
+    <span data-i18n="en"><b>Purpose of this section:</b> to give you the correct reading order. First what gets built, then how the company and the operation run, and finally the permanent reference tools.</span>
+  </p>
+  <p>
+    <span data-i18n="es">El manual tiene nueve paradas. La parada 7 se abre en nueve páginas propias — el mapa del equipo más una página por posición. Una estimación realista es de 20 a 30 minutos por parada; conviene repartir la lectura en dos o tres sesiones. Cada página cierra con una sección de verificación: si fallas una pregunta, vuelve a la sección correspondiente antes de continuar. Al terminar la parada 6, lee completa la página de <b>tu</b> posición (parada 7) y solo después las paradas 8 y 9.</span>
+    <span data-i18n="en">The manual has nine stops. Stop 7 opens into nine pages of its own — the team map plus one page per position. A realistic estimate is 20 to 30 minutes per stop; it is best to spread the reading across two or three sittings. Every page closes with a verification section: if you miss a question, return to the corresponding section before continuing. When you finish stop 6, read <b>your</b> position's page in full (stop 7) and only then stops 8 and 9.</span>
   </p>
 
   <div class="camino">
@@ -222,8 +237,8 @@
       <span class="p-body">
         <span class="p-tiempo"><span data-i18n="es">La obra física</span><span data-i18n="en">The physical build</span></span>
         <h3><span data-i18n="es">El proceso constructivo</span><span data-i18n="en">The build sequence</span></h3>
-        <p><span data-i18n="es">La ruta de los 34 trades por etapas de la casa: cimientos → estructura → interior/exterior → acabados → entrega. Clic en cada trade: qué es en cristiano, qué va antes/después y por qué, y qué inspección lo gatea.</span>
-           <span data-i18n="en">The 34-trade route by house stage: foundations → structure → interior/exterior → finishes → delivery. Click each trade: what it is in plain language, what goes before/after and why, and which inspection gates it.</span></p>
+        <p><span data-i18n="es">Cómo se construye una casa: las cinco etapas, la ruta crítica y la secuencia completa de los 34 trades, con el detalle de cada uno.</span>
+           <span data-i18n="en">How a house gets built: the five stages, the critical path and the complete 34-trade sequence, with each trade's detail.</span></p>
       </span>
     </a>
     <a class="paso" href="proceso-empresa.html">
@@ -231,8 +246,8 @@
       <span class="p-body">
         <span class="p-tiempo"><span data-i18n="es">La empresa</span><span data-i18n="en">The company</span></span>
         <h3><span data-i18n="es">El proceso de empresa</span><span data-i18n="en">The company process</span></h3>
-        <p><span data-i18n="es">La vida de un proyecto contada como historia: desde que el cliente llama hasta la postventa, con cada personaje (rol) apareciendo donde entra.</span>
-           <span data-i18n="en">The life of a project told as a story: from the client's first call to post-sale, with each character (role) appearing where they enter.</span></p>
+        <p><span data-i18n="es">La vida completa de un proyecto en diez fases: del lead a la postventa, con los actores, entregables y riesgos de cada fase.</span>
+           <span data-i18n="en">A project's complete life in ten phases: from lead to post-sale, with each phase's actors, deliverables and risks.</span></p>
       </span>
     </a>
     <a class="paso" href="bucle-diario.html">
@@ -240,17 +255,17 @@
       <span class="p-body">
         <span class="p-tiempo"><span data-i18n="es">La operación</span><span data-i18n="en">The operation</span></span>
         <h3><span data-i18n="es">El bucle diario por trade</span><span data-i18n="en">The daily loop per trade</span></h3>
-        <p><span data-i18n="es">Las 2 ramas en paralelo — PM y Compras — como diagrama de carriles con pasos numerados, la regla de oro al centro y el cierre que desbloquea el pago.</span>
-           <span data-i18n="en">The 2 parallel branches — PM and Purchasing — as a swimlane diagram with numbered steps, the golden rule at the center and the closeout that unlocks payment.</span></p>
+        <p><span data-i18n="es">Los trece pasos con los que se arranca y se cierra cada trade: la rama del PM, la rama de Compras, la regla de oro y el cierre que desbloquea el pago.</span>
+           <span data-i18n="en">The thirteen steps that start and close every trade: the PM branch, the Purchasing branch, the golden rule and the closeout that unlocks payment.</span></p>
       </span>
     </a>
     <a class="paso" href="jobtread.html">
       <span class="p-num">4</span>
       <span class="p-body">
         <span class="p-tiempo"><span data-i18n="es">La herramienta</span><span data-i18n="en">The tool</span></span>
-        <h3>JobTread — <span data-i18n="es">el alfabeto</span><span data-i18n="en">the alphabet</span></h3>
-        <p><span data-i18n="es">Los 9 tipos de tarea con ejemplo real cada uno, los DOS registros por movimiento de dinero, y la distinción clave: el schedule agrupa por trade — los DETALLES viven en los checklists.</span>
-           <span data-i18n="en">The 9 task types with a real example each, the TWO records per money movement, and the key distinction: the schedule groups by trade — the DETAILS live in the checklists.</span></p>
+        <h3>JobTread</h3>
+        <p><span data-i18n="es">Los nueve tipos de tarea, los dos registros de cada movimiento de dinero y la distinción entre el schedule y los checklists.</span>
+           <span data-i18n="en">The nine task types, the two records behind every money movement and the distinction between the schedule and the checklists.</span></p>
       </span>
     </a>
     <a class="paso" href="dinero.html">
@@ -258,26 +273,26 @@
       <span class="p-body">
         <span class="p-tiempo"><span data-i18n="es">El dinero</span><span data-i18n="en">The money</span></span>
         <h3><span data-i18n="es">El viaje del dinero</span><span data-i18n="en">The money's journey</span></h3>
-        <p><span data-i18n="es">Del budget al cobro, paso a paso: budget → WO → trabajo → checklist → pago → cobro. Los 4 filtros de la Administradora como peajes, y el viernes de presupuestos.</span>
-           <span data-i18n="en">From budget to collection, step by step: budget → WO → work → checklist → payment → collection. The Administrator's 4 filters as tollgates, and the Friday budget meeting.</span></p>
+        <p><span data-i18n="es">Del budget al cobro: presupuestos, Work Orders, los cuatro filtros de la Administradora y la reunión de presupuestos del viernes.</span>
+           <span data-i18n="en">From budget to collection: budgets, Work Orders, the Administrator's four filters and the Friday budget meeting.</span></p>
       </span>
     </a>
     <a class="paso" href="reloj-reportes.html">
       <span class="p-num">6</span>
       <span class="p-body">
         <span class="p-tiempo"><span data-i18n="es">El sistema nervioso</span><span data-i18n="en">The nervous system</span></span>
-        <h3><span data-i18n="es">El reloj de la semana y los 11 reportes</span><span data-i18n="en">The weekly clock and the 11 reports</span></h3>
-        <p><span data-i18n="es">La semana interactiva día por día: qué sale a cada hora, quién lo genera (el sistema, solo), quién lo recibe y para qué le sirve. Los 11 reportes oficiales desde cero.</span>
-           <span data-i18n="en">The interactive week, day by day: what goes out at each hour, who generates it (the system, on its own), who receives it and what it's for. The 11 official reports from zero.</span></p>
+        <h3><span data-i18n="es">El reloj de la semana y los reportes</span><span data-i18n="en">The weekly clock and the reports</span></h3>
+        <p><span data-i18n="es">La semana de CNG hora por hora: qué reporte sale en cada momento, quién lo recibe y para qué sirve.</span>
+           <span data-i18n="en">CNG's week hour by hour: which report goes out at each moment, who receives it and what it is for.</span></p>
       </span>
     </a>
     <a class="paso hito" href="posiciones/index.html">
       <span class="p-num">7</span>
       <span class="p-body">
         <span class="p-tiempo"><span data-i18n="es">Tu puesto</span><span data-i18n="en">Your position</span></span>
-        <h3><span data-i18n="es">Las 8 posiciones</span><span data-i18n="en">The 8 positions</span></h3>
-        <p><span data-i18n="es">Una página por puesto: misión, su día, SABE/HACE/VERIFICA, "Día Cumplido" y sus reportes. Después de las páginas 1–6, lee LA TUYA completa.</span>
-           <span data-i18n="en">One page per position: mission, its day, KNOWS/DOES/VERIFIES, "Day Done" and its reports. After pages 1–6, read YOURS in full.</span></p>
+        <h3><span data-i18n="es">Las posiciones</span><span data-i18n="en">The positions</span></h3>
+        <p><span data-i18n="es">Una página por puesto: misión, su día tipo, lo que sabe, hace y verifica, y su "Día Cumplido". Tras las paradas 1–6, lee la tuya completa.</span>
+           <span data-i18n="en">One page per position: mission, its typical day, what it knows, does and verifies, and its "Day Done". After stops 1–6, read yours in full.</span></p>
       </span>
     </a>
     <a class="paso" href="casos-reales.html">
@@ -285,8 +300,8 @@
       <span class="p-body">
         <span class="p-tiempo"><span data-i18n="es">La memoria</span><span data-i18n="en">The memory</span></span>
         <h3><span data-i18n="es">Biblioteca de casos reales</span><span data-i18n="en">Real-case library</span></h3>
-        <p><span data-i18n="es">Los 10 errores que ya nos costaron dinero, contados como historia con moraleja — para que no se repitan por olvido.</span>
-           <span data-i18n="en">The 10 mistakes that already cost us money, told as stories with a lesson — so they don't repeat out of forgetfulness.</span></p>
+        <p><span data-i18n="es">Los errores que ya costaron dinero, documentados con su causa y su lección — para que no se repitan por olvido.</span>
+           <span data-i18n="en">The mistakes that already cost money, documented with their cause and their lesson — so they are not repeated out of forgetfulness.</span></p>
       </span>
     </a>
     <a class="paso" href="glosario.html">
@@ -294,38 +309,50 @@
       <span class="p-body">
         <span class="p-tiempo"><span data-i18n="es">Consulta permanente</span><span data-i18n="en">Permanent reference</span></span>
         <h3><span data-i18n="es">Glosario EN↔ES</span><span data-i18n="en">EN↔ES glossary</span></h3>
-        <p><span data-i18n="es">Todos los términos de esta web (los de puntitos azules incluidos), con buscador. Vuelve aquí cada vez que un término se te escape.</span>
-           <span data-i18n="en">Every term on this site (blue-dotted ones included), with a search box. Come back whenever a term slips away.</span></p>
+        <p><span data-i18n="es">Todos los términos del sitio, con buscador. Vuelve aquí cada vez que un término se te escape.</span>
+           <span data-i18n="en">Every term on the site, with a search box. Return here whenever a term slips away.</span></p>
       </span>
     </a>
   </div>
 
-  <!-- ============ QUIZ ============ -->
+  <div class="gate-banner" id="cng-acceso-material">
+    <div class="g-title"><span data-i18n="es">EL MATERIAL DE ESTUDIO</span><span data-i18n="en">THE STUDY MATERIAL</span></div>
+    <span data-i18n="es">Además de estas páginas, el programa de capacitación tiene dos puertas: el <b>Temario</b> indica qué estudiar, en qué orden y cómo se evalúa cada puesto; el <b>Centro de Materiales</b> reúne los 103 documentos del programa — tracks, descripciones de puesto, presentaciones, guías y cuestionarios — con buscador y filtro por posición.</span><span data-i18n="en">Beyond these pages, the training program has two doors: the <b>Syllabus</b> states what to study, in what order and how each position is evaluated; the <b>Materials Center</b> gathers the program's 103 documents — tracks, job descriptions, presentations, guides and quizzes — with a search box and a per-position filter.</span>
+    <div style="margin-top:14px">
+      <a class="btn sec" href="temario.html"><span data-i18n="es">Ir al Temario</span><span data-i18n="en">Go to the Syllabus</span></a>
+      <a class="btn sec" href="materiales/index.html"><span data-i18n="es">Ir al Centro de Materiales</span><span data-i18n="en">Go to the Materials Center</span></a>
+    </div>
+  </div>
+
+  <!-- ============ VERIFICACIÓN ============ -->
   <section class="quiz">
     <div class="q-head">
-      <span class="q-ico">🧠</span>
       <div>
-        <h2><span data-i18n="es">¿Lo entendiste?</span><span data-i18n="en">Did you get it?</span></h2>
-        <p><span data-i18n="es">Responde en tu cabeza y luego toca "ver respuesta".</span><span data-i18n="en">Answer in your head, then tap "show answer".</span></p>
+        <h2><span data-i18n="es">Para verificar que lo dominas</span><span data-i18n="en">To verify you have mastered it</span></h2>
+        <p><span data-i18n="es">Responde cada pregunta antes de abrir la respuesta. Si fallas alguna, vuelve a la sección indicada.</span><span data-i18n="en">Answer each question before opening the answer. If you miss one, return to the indicated section.</span></p>
       </div>
     </div>
     <details class="q">
       <summary><span class="q-n">1</span><span data-i18n="es">CNG tiene sus propias cuadrillas de construcción. ¿Verdadero o falso?</span><span data-i18n="en">CNG has its own construction crews. True or false?</span></summary>
-      <div class="q-a"><span data-i18n="es"><b>Falso.</b> CNG es un general contractor: subcontrata cada trade a un sub. Su negocio es GESTIONAR el cronograma, los presupuestos y las contrataciones — el margen se gana gestionando, no martillando.</span><span data-i18n="en"><b>False.</b> CNG is a general contractor: it subcontracts every trade to a sub. Its business is MANAGING the schedule, budgets and contracting — the margin is earned by managing, not hammering.</span></div>
+      <div class="q-a"><span data-i18n="es"><b>Falso.</b> CNG es un general contractor: subcontrata cada trade a un sub especializado. Su negocio es gestionar el cronograma, los presupuestos y las contrataciones; el margen se gana gestionando, no ejecutando. (Sección 1.)</span><span data-i18n="en"><b>False.</b> CNG is a general contractor: it subcontracts every trade to a specialized sub. Its business is managing the schedule, budgets and contracting; the margin is earned by managing, not executing. (Section 1.)</span></div>
     </details>
     <details class="q">
-      <summary><span class="q-n">2</span><span data-i18n="es">Marcaste el check de una tarea que terminó el martes, pero la tarea quedó fechada el viernes. ¿Está bien cerrada?</span><span data-i18n="en">You checked off a task that finished on Tuesday, but the task stayed dated Friday. Is it properly closed?</span></summary>
-      <div class="q-a"><span data-i18n="es"><b>No.</b> Cerrar = check + fechas reales cuadradas. Un check sobre una fecha falsa es un registro sucio: rompe el viernes-vs-viernes, el cashflow y la productividad. Se mueve la tarea al martes Y se marca el check.</span><span data-i18n="en"><b>No.</b> Closing = check + real dates squared. A check on a false date is a dirty record: it breaks Friday-vs-Friday, cashflow and productivity. Move the task to Tuesday AND check it off.</span></div>
+      <summary><span class="q-n">2</span><span data-i18n="es">¿Cuál es la regla central del proceso, y qué dos cosas la garantizan?</span><span data-i18n="en">What is the process's central rule, and which two things guarantee it?</span></summary>
+      <div class="q-a"><span data-i18n="es"><b>Gestionar la obra de la forma en la que se planificó en el cronograma.</b> La garantizan un flujo de información impecable (registro limpio) y la resolución de los imprevistos sin salirse del cronograma. (Sección 2.)</span><span data-i18n="en"><b>Manage the job exactly the way it was planned in the schedule.</b> It is guaranteed by an impeccable flow of information (a clean record) and by solving the unexpected without falling off the schedule. (Section 2.)</span></div>
     </details>
     <details class="q">
-      <summary><span class="q-n">3</span><span data-i18n="es">Compraste bolsas de basura en Home Depot con caja chica. ¿Se registra en algún lado?</span><span data-i18n="en">You bought trash bags at Home Depot with petty cash. Does it get recorded anywhere?</span></summary>
-      <div class="q-a"><span data-i18n="es"><b>Sí, siempre.</b> TODO dinero pasa por el schedule: se anota al proyecto como Additional Expense. Si no, el cashflow y los reportes quedan ciegos a ese gasto. Regla sin excepciones (Jose, 2026-08-06).</span><span data-i18n="en"><b>Yes, always.</b> ALL money goes through the schedule: it's logged to the project as an Additional Expense. Otherwise cashflow and reports go blind to that spend. Rule without exceptions (Jose, 2026-08-06).</span></div>
+      <summary><span class="q-n">3</span><span data-i18n="es">Marcaste el check de una tarea que terminó el martes, pero la tarea quedó fechada el viernes. ¿Está bien cerrada?</span><span data-i18n="en">You checked off a task that finished on Tuesday, but the task stayed dated Friday. Is it properly closed?</span></summary>
+      <div class="q-a"><span data-i18n="es"><b>No.</b> Cerrar una tarea exige el check y las fechas reales cuadradas. Un check sobre una fecha que no corresponde es un registro sucio: rompe la evaluación viernes-vs-viernes, el flujo de caja y la productividad. La tarea se mueve al martes y entonces se marca. (Sección 4, regla B.)</span><span data-i18n="en"><b>No.</b> Closing a task requires the check and the real dates squared. A check on a wrong date is a dirty record: it breaks the Friday-vs-Friday evaluation, cashflow and productivity. The task is moved to Tuesday and then checked off. (Section 4, rule B.)</span></div>
+    </details>
+    <details class="q">
+      <summary><span class="q-n">4</span><span data-i18n="es">Compraste bolsas de basura para la obra con caja chica. ¿Se registra en algún lado?</span><span data-i18n="en">You bought trash bags for the site with petty cash. Does it get recorded anywhere?</span></summary>
+      <div class="q-a"><span data-i18n="es"><b>Sí, siempre.</b> Todo movimiento de dinero pasa por el schedule: se anota al proyecto como Additional Expense. De lo contrario, el flujo de caja y los reportes quedan ciegos a ese gasto. Es una regla sin excepciones. (Sección 4, regla A.)</span><span data-i18n="en"><b>Yes, always.</b> Every money movement goes through the schedule: it is logged to the project as an Additional Expense. Otherwise, cashflow and the reports go blind to that spend. It is a rule without exceptions. (Section 4, rule A.)</span></div>
     </details>
   </section>
 
   <div class="footer-note">
-    <span data-i18n="es">WEB DEL PROCESO CNG · v2 (rediseño SPEC_WEB_V2) · 2026-08-07 · Fuentes: PROCESO CANÓNICO CNG v4 · BRIEF constructores · TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv (34 trades · 411 tareas — el archivo oficial MANDA) · EL_FLOW · SCHEDULE_STRUCTURE · tracks A–G. Material interno — no distribuir.</span>
-    <span data-i18n="en">CNG PROCESS SITE · v2 (SPEC_WEB_V2 redesign) · 2026-08-07 · Sources: CNG CANONICAL PROCESS v4 · Builders' BRIEF · TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv (34 trades · 411 tasks — the official file RULES) · EL_FLOW · SCHEDULE_STRUCTURE · tracks A–G. Internal material — do not distribute.</span>
+    <span data-i18n="es">WEB DEL PROCESO CNG · v3 (estándar sobrio) · 2026-08-07 · Fuentes: PROCESO CANÓNICO CNG v4 · TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv (34 trades · 411 tareas — el archivo oficial manda) · EL_FLOW · SCHEDULE_STRUCTURE · tracks A–G. Material interno — no distribuir.</span>
+    <span data-i18n="en">CNG PROCESS SITE · v3 (sober standard) · 2026-08-07 · Sources: CNG CANONICAL PROCESS v4 · TEMPLATE_MAESTRO_JOBTREAD_2026-08-06.csv (34 trades · 411 tasks — the official file rules) · EL_FLOW · SCHEDULE_STRUCTURE · tracks A–G. Internal material — do not distribute.</span>
   </div>
 </main>
 

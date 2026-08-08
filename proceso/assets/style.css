@@ -37,7 +37,7 @@
 }
 
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:74px} /* el header sticky no tapa anclas */
 body{
   margin:0; background:var(--bg); color:var(--body);
   font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
@@ -69,27 +69,86 @@ html[data-lang="en"] [data-i18n="es"]{display:none !important}
 #cng-gate .g-err{color:#f87171; font-size:12.5px; visibility:hidden; margin-top:8px}
 body.cng-locked > *:not(#cng-gate){display:none !important}
 
-/* ---------- header / nav (mobile-first: hamburguesa) ---------- */
+/* ---------- header / nav agrupado (inyectado por app.js) ----------
+   Inicio · El Proceso ▾ · Posiciones ▾ · Temario · Materiales · Glosario
+   Mobile-first: hamburguesa → panel con grupos colapsables (tap).
+   Desktop: dropdowns por hover Y por click (accesible con teclado). */
 header.site{background:var(--ink); color:#fff; position:sticky; top:0; z-index:50;
   box-shadow:0 1px 6px rgba(15,23,42,.25)}
 header.site .bar{max-width:var(--maxw); margin:0 auto; padding:11px 16px;
   display:flex; align-items:center; gap:12px; flex-wrap:wrap}
 header.site .logo{font-weight:800; font-size:16px; letter-spacing:.4px; color:#fff; white-space:nowrap; margin-right:auto}
 header.site .logo b{color:var(--oro)}
-header.site nav{display:none; width:100%; flex-direction:column; gap:2px; padding:6px 0 10px}
+/* panel movil (cerrado por defecto) */
+header.site nav{display:none; order:10; width:100%; flex-direction:column; gap:2px; padding:6px 0 12px;
+  max-height:calc(100vh - 64px); overflow-y:auto; -webkit-overflow-scrolling:touch}
 header.site.nav-open nav{display:flex}
-header.site nav a{color:#cbd5e1; font-size:15px; padding:9px 12px; border-radius:9px}
+header.site nav a{color:#cbd5e1; font-size:15.5px; min-height:44px; padding:10px 14px;
+  border-radius:10px; display:flex; align-items:center; gap:10px}
 header.site nav a:hover{background:#1e293b; text-decoration:none; color:#fff}
 header.site nav a.active{background:var(--azul-2); color:#fff; font-weight:700}
+/* grupos (El Proceso / Posiciones) */
+.nav-group{width:100%}
+.nav-group-btn{display:flex; align-items:center; gap:10px; width:100%; text-align:left;
+  border:0; background:transparent; color:#cbd5e1; font:inherit; font-size:15.5px; font-weight:700;
+  min-height:44px; padding:10px 14px; border-radius:10px; cursor:pointer}
+.nav-group-btn:hover{background:#1e293b; color:#fff}
+.nav-group.here > .nav-group-btn{color:var(--oro)}
+.nv-caret{font-size:11px; opacity:.85; margin-left:auto; transition:transform .15s ease}
+.nav-group.open > .nav-group-btn .nv-caret{transform:rotate(180deg)}
+.nav-drop{display:none; flex-direction:column; gap:2px; margin-left:16px; padding:2px 0 8px 8px;
+  border-left:2px solid #334155}
+.nav-group.open > .nav-drop{display:flex}
+/* numerito del orden de estudio en "El Proceso" */
+.nv-num{flex:none; display:inline-flex; align-items:center; justify-content:center;
+  width:21px; height:21px; border-radius:50%; background:#1e293b; color:var(--oro);
+  font-size:11px; font-weight:800}
+header.site nav a.active .nv-num{background:rgba(255,255,255,.18); color:#fff}
 .lang-toggle,.nav-toggle{border:1px solid #475569; border-radius:9px; background:#1e293b; color:#e2e8f0;
   font-size:13px; font-weight:800; padding:7px 12px; cursor:pointer}
 .lang-toggle:hover,.nav-toggle:hover{background:#334155}
-.nav-toggle{font-size:17px; line-height:1; padding:6px 11px}
+.nav-toggle{font-size:17px; line-height:1; padding:8px 13px; min-width:44px; min-height:40px}
 @media (min-width:880px){
-  header.site nav{display:flex !important; width:auto; flex-direction:row; flex-wrap:wrap; flex:1; min-width:0; padding:0; order:0}
+  header.site nav{display:flex !important; order:0; width:auto; flex-direction:row; align-items:center;
+    flex-wrap:wrap; flex:1; min-width:0; padding:0; gap:2px; max-height:none; overflow:visible}
   header.site .logo{margin-right:0}
-  header.site nav a{font-size:12.5px; padding:5px 9px; white-space:nowrap}
+  header.site nav a{font-size:13.5px; padding:8px 11px; min-height:0; white-space:nowrap; display:inline-flex; gap:8px}
+  .nav-group{position:relative; width:auto}
+  .nav-group-btn{width:auto; font-size:13.5px; padding:8px 11px; min-height:0; white-space:nowrap}
+  .nv-caret{margin-left:2px}
+  /* dropdown flotante: abre por hover, por foco (teclado) y por click (.open) */
+  .nav-drop{position:absolute; top:100%; left:0; z-index:60; min-width:255px; margin:6px 0 0;
+    padding:8px; background:var(--ink); border:1px solid #334155; border-left:1px solid #334155;
+    border-radius:12px; box-shadow:0 14px 34px rgba(15,23,42,.5)}
+  .nav-drop::before{content:""; position:absolute; top:-8px; left:0; right:0; height:8px} /* puente de hover */
+  .nav-group:hover > .nav-drop, .nav-group:focus-within > .nav-drop, .nav-group.open > .nav-drop{display:flex}
+  header.site nav .nav-drop a{display:flex; white-space:normal; font-size:13.5px; padding:9px 11px; min-height:40px}
+  /* activo en desktop: subrayado dorado sobrio en el nivel de arriba */
+  header.site nav > a.active{background:transparent; box-shadow:inset 0 -3px 0 var(--oro); border-radius:0; color:#fff}
+  .nav-group.here > .nav-group-btn{box-shadow:inset 0 -3px 0 var(--oro); border-radius:0; color:#fff}
+  .nav-drop a.active{background:var(--azul-2); color:#fff; border-radius:9px}
   .nav-toggle{display:none}
+}
+
+/* ---------- breadcrumb: la linea "donde estoy" bajo el header ---------- */
+.cng-crumb{background:var(--card); border-bottom:1px solid var(--line)}
+.cng-crumb .c-in{max-width:var(--maxw); margin:0 auto; padding:8px 16px;
+  font-size:13px; color:var(--mut); line-height:1.5}
+.cng-crumb b{color:var(--ink); font-weight:700}
+.cng-crumb a{color:var(--azul); font-weight:600}
+
+/* ---------- paginacion ← anterior · siguiente → (inyectada) ---------- */
+.cng-pager{display:flex; gap:12px; margin:44px 0 6px; padding-top:20px; border-top:1.5px solid var(--line2)}
+.cng-pager .pg{flex:1; max-width:min(48%, 340px); display:flex; flex-direction:column; gap:2px;
+  background:var(--card); border:1.5px solid var(--line); border-radius:12px;
+  padding:12px 15px; min-height:44px; box-shadow:var(--sombra)}
+.cng-pager .pg:hover{text-decoration:none; border-color:var(--azul-2)}
+.cng-pager .pg-next{margin-left:auto; align-items:flex-end; text-align:right}
+.cng-pager .pg-dir{font-size:11px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:var(--mut)}
+.cng-pager .pg-t{color:var(--ink); font-weight:700; font-size:15px; line-height:1.35}
+@media (max-width:560px){
+  .cng-pager{flex-direction:column}
+  .cng-pager .pg, .cng-pager .pg-next{max-width:100%; margin-left:0}
 }
 
 /* ---------- layout ---------- */
@@ -594,7 +653,8 @@ a.err:hover{transform:translateY(-2px);text-decoration:none;border-color:#fca5a5
 /* ---------- print ---------- */
 @media print{
   body{background:#fff; font-size:11px}
-  header.site, .lang-toggle, .nav-toggle, #cng-gate, #cng-progress, .no-print{display:none !important}
+  header.site, .lang-toggle, .nav-toggle, #cng-gate, #cng-progress, .no-print,
+  .cng-crumb, .cng-pager{display:none !important}
   main{max-width:none; padding:0}
   .hero{background:#0f172a !important; -webkit-print-color-adjust:exact}
   .card,.trade-panel,.fase-detalle,details.exp,.caso,.evento,.peaje{break-inside:avoid; box-shadow:none}
@@ -614,3 +674,109 @@ a.err:hover{transform:translateY(-2px);text-decoration:none;border-color:#fca5a5
    emoji, asi que necesita fondo claro (el .num normal es ink). */
 .grid.tumat a.mapa-card .num{background:var(--soft); color:var(--ink);
   border:1.5px solid var(--line2); font-size:15px; line-height:1.15; padding:3px 9px}
+
+/* ============================================================
+   V3 SOBRIO (2026-08-07) — CORRECCIÓN v3 de Jose: diseño sereno
+   de manual de operaciones. Capa de overrides al final para no
+   romper ninguna clase existente (posiciones/, dinero, reloj…).
+   Principios: espacio en blanco, jerarquía tipográfica, medida
+   ~70ch para prosa, 1-2 acentos por página, sombras mínimas,
+   tarjetas solo donde son casos/accesos.
+   ============================================================ */
+
+:root{
+  --bg:#f7f8fa;                 /* fondo casi blanco, sin gris azulado fuerte */
+  --sombra:0 1px 2px rgba(15,23,42,.05);
+  --maxw:960px;
+}
+body{font-size:16.5px; line-height:1.72; background:var(--bg)}
+main{padding:34px 20px 80px}
+
+/* jerarquía tipográfica serena */
+h1{font-size:31px; line-height:1.2; letter-spacing:-.4px; margin:0 0 10px}
+h2{font-size:22px; border-bottom:1px solid var(--line2); padding-bottom:8px; margin:54px 0 18px}
+h3{font-size:17.5px; color:var(--ink); margin:28px 0 10px}
+.seccion-num{color:var(--mut2); font-weight:600; font-variant-numeric:tabular-nums}
+.lead{font-size:17px}
+
+/* medida de línea ~70ch para prosa de capítulo */
+main>p, main>ul, main>ol, main>blockquote,
+.prosa p, .prosa ul, .prosa ol, .prosa blockquote{max-width:70ch}
+main>p{margin:0 0 16px}
+main>ul>li, main>ol>li, .prosa li{margin:6px 0}
+
+/* capítulo de prosa larga: párrafos con aire, listas espaciadas */
+.prosa p{margin:0 0 16px; font-size:16.5px}
+.prosa h3{margin-top:30px}
+
+/* figuras con caption */
+figure.fig{margin:22px 0; max-width:100%}
+figure.fig>figcaption{font-size:13px; color:var(--mut); margin-top:8px; max-width:70ch}
+
+/* hero sobrio: bloque tinta plano, sin gradiente ni decoración */
+.hero{background:var(--ink); border-radius:12px; padding:30px 30px 26px; margin:8px 0 34px}
+.hero::after{display:none}
+.hero .paso-n{background:transparent; border:0; padding:0; border-radius:0;
+  color:var(--mut2); font-size:12px; letter-spacing:2px; font-weight:700; margin-bottom:10px}
+.hero h1{font-size:29px}
+.hero .sub{color:#b6c2d4; font-size:15.5px; max-width:70ch; line-height:1.65}
+.hero .aprende{background:transparent; border:0; border-top:1px solid rgba(148,163,184,.28);
+  border-radius:0; padding:16px 0 0; margin-top:20px}
+.hero .aprende .ttl{color:#94a3b8; letter-spacing:1.6px; font-size:11px}
+.hero .aprende li{color:#dbe3ee; font-size:14.5px; padding:3px 0 3px 20px}
+.hero .aprende li::before{content:"—"; color:var(--oro); font-weight:400; left:0}
+
+/* propósito de sección: nota marginal serena */
+.proposito{background:transparent; border-left:3px solid var(--line2); border-radius:0;
+  padding:2px 0 2px 16px; margin:0 0 20px; font-size:14.5px; max-width:70ch}
+
+/* tarjetas y componentes: sombra mínima, bordes finos */
+.card, a.mapa-card, a.paso, ol.pasos>li, details.exp, .etapa, .trade-panel, .fase-detalle,
+.caso, .evento, .rep-card, .clasifica, .diagrama-wrap, .lane, .peaje, .mock,
+.svsc .lado, .decision .d-rama, a.persona, a.rm-item, a.err, .flujo .f-paso{
+  box-shadow:var(--sombra); border-width:1px}
+.card{padding:20px 22px; margin:16px 0}
+.grid{gap:16px}
+.chip{font-weight:600}
+
+/* citas: sobrias */
+blockquote.jose{background:transparent; border-left:3px solid var(--oro); font-size:15.5px; padding:6px 18px}
+
+/* la clave / reglas: los DOS acentos permitidos de la página */
+.clave{border-radius:12px; padding:22px 26px; font-size:16.5px}
+.regla{background:var(--card); border:1px solid var(--azul-line); border-left:4px solid var(--azul);
+  border-radius:10px; font-size:15px; max-width:none}
+.gate-banner{border-radius:12px}
+
+/* verificación final (reutiliza .quiz): tarjeta clara, sin gradiente */
+.quiz{background:var(--card); border:1px solid var(--line2); border-top:4px solid var(--ink);
+  border-radius:12px; color:var(--body); padding:24px 26px 18px}
+.quiz .q-head{margin-bottom:6px}
+.quiz .q-head .q-ico{display:none}
+.quiz .q-head h2{color:var(--ink); font-size:19px; border:0; margin:0; padding:0}
+.quiz .q-head p{color:var(--mut)}
+details.q{background:var(--soft); border:1px solid var(--line)}
+details.q>summary{color:var(--ink); font-weight:600}
+details.q>summary .q-n{color:var(--azul); font-weight:800}
+details.q>summary::after{color:var(--azul)}
+details.q .q-a{color:var(--body); border-top:1px dashed var(--line2)}
+details.q .q-a b{color:var(--ink)}
+
+/* pasos numerados: círculo tinta discreto */
+ol.pasos>li::before{background:var(--ink); color:#fff; font-weight:700}
+a.paso .p-num{color:#fff}
+.capitulo .cap-dot{color:#fff}
+a.mapa-card .num{color:#fff}
+
+/* estaciones de la ruta: menos gritonas */
+button.station{font-weight:600; border-width:1.5px}
+button.station.on{outline:2px solid var(--ink); outline-offset:1px}
+
+/* tablas: cabecera sobria */
+th{background:var(--soft); color:var(--ink); border-bottom:2px solid var(--ink); font-weight:700}
+
+/* (nav activa: las reglas viven arriba, en el bloque del header) */
+
+/* v3 fix móvil: los <code> con rutas/nombres largos (sin espacios) deben poder
+   partirse — sin esto producen scroll horizontal en pantallas de 375px. */
+code{overflow-wrap:anywhere;word-break:break-word}
