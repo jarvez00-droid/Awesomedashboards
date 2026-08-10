@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-10T17:27:20",
+  "generated_at": "2026-08-10T17:51:02",
   "today": "2026-08-10",
   "horizon": "2027-06-07",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -748,17 +748,17 @@
       "label_moy": "ago S2",
       "label_short": "8 ago",
       "prod": [
-        42863.91,
-        34980.86
+        44063.91,
+        36180.86
       ],
       "fixed": 12561.42,
       "net": [
-        30302.49,
-        22419.44
+        31502.49,
+        23619.44
       ],
       "cum": [
-        107516.33,
-        72842.91
+        108716.33,
+        74042.91
       ],
       "active_count": 10,
       "active_projects": [
@@ -778,8 +778,8 @@
       "pending": false,
       "by_project": {
         "Kyle Aubry": [
-          5559.72,
-          5484.86
+          6759.72,
+          6684.86
         ],
         "Stephanie Felton": [
           436.47,
@@ -827,25 +827,24 @@
       "label_moy": "ago S3",
       "label_short": "15 ago",
       "prod": [
-        53685.29,
-        47725.55
+        52485.29,
+        46525.55
       ],
       "fixed": 12561.42,
       "net": [
-        41123.87,
-        35164.13
+        39923.87,
+        33964.13
       ],
       "cum": [
         148640.2,
         108007.04
       ],
-      "active_count": 9,
+      "active_count": 8,
       "active_projects": [
         "Charles Harris",
         "Clifford Clack",
         "Karim Merchant",
         "Katie Holmes",
-        "Kyle Aubry",
         "Martha Cockrell",
         "Rohini Williams",
         "Shaan Lagisetty",
@@ -855,10 +854,6 @@
       "is_partial": false,
       "pending": false,
       "by_project": {
-        "Kyle Aubry": [
-          1200.0,
-          1200.0
-        ],
         "Stephanie Felton": [
           -272.82,
           -362.92
@@ -3463,12 +3458,8 @@
           591.78
         ],
         "2026-W33": [
-          5559.72,
-          5484.86
-        ],
-        "2026-W34": [
-          1200.0,
-          1200.0
+          6759.72,
+          6684.86
         ]
       },
       "months": {
@@ -3486,7 +3477,7 @@
         ]
       },
       "first_week": "2026-W23",
-      "last_week": "2026-W34"
+      "last_week": "2026-W33"
     },
     {
       "project": "Lingyan Qiu",
@@ -4084,8 +4075,8 @@
       "produced": 1200.0,
       "margin_pct": 100.0,
       "ratio": null,
-      "start": "2026-08-15",
-      "end": "2026-08-15",
+      "start": "2026-08-13",
+      "end": "2026-08-13",
       "severity": "alta"
     },
     {
