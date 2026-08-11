@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-11T13:07:21",
+  "generated_at": "2026-08-11T13:31:15",
   "today": "2026-08-11",
   "horizon": "2027-06-07",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -1217,17 +1217,17 @@
       "label_moy": "oct S1",
       "label_short": "3 oct",
       "prod": [
-        41705.48,
-        37296.68
+        41300.76,
+        36984.36
       ],
       "fixed": 12561.42,
       "net": [
-        29144.06,
-        24735.26
+        28739.34,
+        24422.94
       ],
       "cum": [
-        314698.13,
-        238059.98
+        314293.41,
+        237747.66
       ],
       "active_count": 5,
       "active_projects": [
@@ -1246,8 +1246,8 @@
           27959.65
         ],
         "Shaan Lagisetty": [
-          962.15,
-          724.45
+          557.43,
+          412.13
         ],
         "Martha Cockrell": [
           6238.47,
@@ -1267,17 +1267,17 @@
       "label_moy": "oct S2",
       "label_short": "10 oct",
       "prod": [
-        13241.34,
-        12238.8
+        13612.73,
+        12525.4
       ],
       "fixed": 12561.42,
       "net": [
-        679.92,
-        -322.62
+        1051.31,
+        -36.02
       ],
       "cum": [
-        315378.05,
-        237737.36
+        315344.72,
+        237711.64
       ],
       "active_count": 4,
       "active_projects": [
@@ -1295,8 +1295,8 @@
           8212.61
         ],
         "Shaan Lagisetty": [
-          1031.41,
-          901.28
+          1402.8,
+          1187.88
         ],
         "Karim Merchant": [
           3395.78,
@@ -1312,17 +1312,17 @@
       "label_moy": "oct S3",
       "label_short": "17 oct",
       "prod": [
-        2146.6,
-        1404.1
+        2089.46,
+        1360.01
       ],
       "fixed": 12561.42,
       "net": [
-        -10414.82,
-        -11157.32
+        -10471.96,
+        -11201.41
       ],
       "cum": [
-        304963.23,
-        226580.04
+        304872.76,
+        226510.23
       ],
       "active_count": 4,
       "active_projects": [
@@ -1336,8 +1336,8 @@
       "pending": false,
       "by_project": {
         "Shaan Lagisetty": [
-          704.09,
-          456.64
+          646.95,
+          412.54
         ],
         "Karim Merchant": [
           1442.51,
@@ -1353,17 +1353,17 @@
       "label_moy": "oct S4",
       "label_short": "24 oct",
       "prod": [
-        2810.03,
-        1994.13
+        2760.5,
+        1944.95
       ],
       "fixed": 12561.42,
       "net": [
-        -9751.39,
-        -10567.29
+        -9800.92,
+        -10616.47
       ],
       "cum": [
-        295211.84,
-        216012.75
+        295071.84,
+        215893.76
       ],
       "active_count": 4,
       "active_projects": [
@@ -1377,8 +1377,8 @@
       "pending": false,
       "by_project": {
         "Shaan Lagisetty": [
-          160.83,
-          67.73
+          111.3,
+          18.55
         ],
         "Karim Merchant": [
           2649.2,
@@ -1394,28 +1394,33 @@
       "label_moy": "oct S5",
       "label_short": "31 oct",
       "prod": [
-        2508.04,
-        1804.08
+        2648.04,
+        1923.08
       ],
       "fixed": 12561.42,
       "net": [
-        -10053.38,
-        -10757.34
+        -9913.38,
+        -10638.34
       ],
       "cum": [
         285158.46,
-        205255.41
+        205255.42
       ],
-      "active_count": 3,
+      "active_count": 4,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
       "pending": false,
       "by_project": {
+        "Shaan Lagisetty": [
+          140.0,
+          119.0
+        ],
         "Rohini Williams": [
           2054.46,
           1443.56
@@ -1444,7 +1449,7 @@
       ],
       "cum": [
         285158.46,
-        205255.41
+        205255.42
       ],
       "active_count": 2,
       "active_projects": [
@@ -1474,7 +1479,7 @@
       ],
       "cum": [
         285158.46,
-        205255.41
+        205255.42
       ],
       "active_count": 2,
       "active_projects": [
@@ -1504,7 +1509,7 @@
       ],
       "cum": [
         273653.57,
-        193750.52
+        193750.53
       ],
       "active_count": 2,
       "active_projects": [
@@ -1539,7 +1544,7 @@
       ],
       "cum": [
         264790.02,
-        184886.97
+        184886.98
       ],
       "active_count": 2,
       "active_projects": [
@@ -1574,7 +1579,7 @@
       ],
       "cum": [
         255398.2,
-        175495.15
+        175495.16
       ],
       "active_count": 2,
       "active_projects": [
@@ -1609,7 +1614,7 @@
       ],
       "cum": [
         255398.2,
-        175495.15
+        175495.16
       ],
       "active_count": 2,
       "active_projects": [
@@ -1639,7 +1644,7 @@
       ],
       "cum": [
         255398.2,
-        175495.15
+        175495.16
       ],
       "active_count": 2,
       "active_projects": [
@@ -1669,7 +1674,7 @@
       ],
       "cum": [
         242401.44,
-        162221.94
+        162221.95
       ],
       "active_count": 2,
       "active_projects": [
@@ -1704,7 +1709,7 @@
       ],
       "cum": [
         229767.53,
-        149148.75
+        149148.76
       ],
       "active_count": 1,
       "active_projects": [
@@ -1738,7 +1743,7 @@
       ],
       "cum": [
         229767.53,
-        149148.75
+        149148.76
       ],
       "active_count": 1,
       "active_projects": [
@@ -1767,7 +1772,7 @@
       ],
       "cum": [
         229767.53,
-        149148.75
+        149148.76
       ],
       "active_count": 1,
       "active_projects": [
@@ -1796,7 +1801,7 @@
       ],
       "cum": [
         229767.53,
-        149148.75
+        149148.76
       ],
       "active_count": 1,
       "active_projects": [
@@ -1825,7 +1830,7 @@
       ],
       "cum": [
         229767.53,
-        149148.75
+        149148.76
       ],
       "active_count": 1,
       "active_projects": [
@@ -1854,7 +1859,7 @@
       ],
       "cum": [
         217817.95,
-        137036.66
+        137036.67
       ],
       "active_count": 1,
       "active_projects": [
@@ -1888,7 +1893,7 @@
       ],
       "cum": [
         205868.37,
-        124924.57
+        124924.58
       ],
       "active_count": 1,
       "active_projects": [
@@ -1922,7 +1927,7 @@
       ],
       "cum": [
         205868.37,
-        124924.57
+        124924.58
       ],
       "active_count": 1,
       "active_projects": [
@@ -1951,7 +1956,7 @@
       ],
       "cum": [
         198007.58,
-        116787.26
+        116787.27
       ],
       "active_count": 1,
       "active_projects": [
@@ -1985,7 +1990,7 @@
       ],
       "cum": [
         187750.01,
-        106381.51
+        106381.52
       ],
       "active_count": 1,
       "active_projects": [
@@ -2019,7 +2024,7 @@
       ],
       "cum": [
         187750.01,
-        106381.51
+        106381.52
       ],
       "active_count": 1,
       "active_projects": [
@@ -2048,7 +2053,7 @@
       ],
       "cum": [
         181287.11,
-        99647.41
+        99647.42
       ],
       "active_count": 1,
       "active_projects": [
@@ -2082,7 +2087,7 @@
       ],
       "cum": [
         181287.11,
-        99647.41
+        99647.42
       ],
       "active_count": 1,
       "active_projects": [
@@ -2111,7 +2116,7 @@
       ],
       "cum": [
         181287.11,
-        99647.41
+        99647.42
       ],
       "active_count": 1,
       "active_projects": [
@@ -2140,7 +2145,7 @@
       ],
       "cum": [
         181287.11,
-        99647.41
+        99647.42
       ],
       "active_count": 1,
       "active_projects": [
@@ -2169,7 +2174,7 @@
       ],
       "cum": [
         181287.11,
-        99647.41
+        99647.42
       ],
       "active_count": 1,
       "active_projects": [
@@ -2198,7 +2203,7 @@
       ],
       "cum": [
         181287.11,
-        99647.41
+        99647.42
       ],
       "active_count": 1,
       "active_projects": [
@@ -2227,7 +2232,7 @@
       ],
       "cum": [
         181287.11,
-        99647.41
+        99647.42
       ],
       "active_count": 1,
       "active_projects": [
@@ -2256,7 +2261,7 @@
       ],
       "cum": [
         181287.11,
-        99647.41
+        99647.42
       ],
       "active_count": 1,
       "active_projects": [
@@ -2285,7 +2290,7 @@
       ],
       "cum": [
         181287.11,
-        99647.41
+        99647.42
       ],
       "active_count": 1,
       "active_projects": [
@@ -2314,7 +2319,7 @@
       ],
       "cum": [
         181287.11,
-        99647.41
+        99647.42
       ],
       "active_count": 1,
       "active_projects": [
@@ -2343,7 +2348,7 @@
       ],
       "cum": [
         181287.11,
-        99647.41
+        99647.42
       ],
       "active_count": 1,
       "active_projects": [
@@ -2372,7 +2377,7 @@
       ],
       "cum": [
         168966.68,
-        87237.06
+        87237.07
       ],
       "active_count": 1,
       "active_projects": [
@@ -2614,17 +2619,17 @@
       "month": "2026-10",
       "label": "oct 2026",
       "prod": [
-        59139.92,
-        50266.77
+        58999.92,
+        50147.77
       ],
       "fixed": 54432.8,
       "net": [
-        4707.12,
-        -4166.03
+        4567.12,
+        -4285.03
       ],
       "cum": [
-        299512.45,
-        220290.1
+        299372.45,
+        220171.1
       ],
       "is_future": true,
       "is_partial": false,
@@ -2635,8 +2640,8 @@
           32494.35
         ],
         "Shaan Lagisetty": [
-          3068.68,
-          2276.22
+          2928.68,
+          2157.22
         ],
         "Martha Cockrell": [
           6935.63,
@@ -2652,13 +2657,13 @@
       "month": "2026-11",
       "label": "nov 2026",
       "prod": [
-        5035.98,
-        4355.28
+        5175.98,
+        4474.28
       ],
       "fixed": 54432.8,
       "net": [
-        -49396.82,
-        -50077.52
+        -49256.82,
+        -49958.52
       ],
       "cum": [
         250115.63,
@@ -2671,6 +2676,10 @@
         "Charles Harris": [
           2641.33,
           2641.33
+        ],
+        "Shaan Lagisetty": [
+          140.0,
+          119.0
         ],
         "Rohini Williams": [
           2054.46,
@@ -3591,24 +3600,28 @@
           1757.34
         ],
         "2026-W42": [
-          1031.41,
-          901.28
+          1402.8,
+          1187.88
         ],
         "2026-W40": [
           678.26,
           411.84
         ],
         "2026-W41": [
-          962.15,
-          724.45
+          557.43,
+          412.13
         ],
         "2026-W43": [
-          704.09,
-          456.64
+          646.95,
+          412.54
         ],
         "2026-W44": [
-          160.83,
-          67.73
+          111.3,
+          18.55
+        ],
+        "2026-W45": [
+          140.0,
+          119.0
         ],
         "2026-W28": [
           -700.0,
@@ -3629,12 +3642,16 @@
           9159.46
         ],
         "2026-10": [
-          3068.68,
-          2276.22
+          2928.68,
+          2157.22
+        ],
+        "2026-11": [
+          140.0,
+          119.0
         ]
       },
       "first_week": "2026-W28",
-      "last_week": "2026-W44"
+      "last_week": "2026-W45"
     },
     {
       "project": "Clifford Clack",
