@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-12T23:41:05",
-  "date": "2026-08-12",
+  "generated_at": "2026-08-13T00:05:34",
+  "date": "2026-08-13",
   "source": "sqlite:fixed_costs",
   "sheet_id": null,
   "window": {
-    "start": "2026-07-13",
-    "end": "2026-12-10"
+    "start": "2026-07-14",
+    "end": "2026-12-11"
   },
   "summary": {
     "total_tasks": 149,
@@ -15,13 +15,13 @@
         "tasks": 73,
         "amount": 63162.6
       },
-      "utilities": {
-        "tasks": 17,
-        "amount": 15940.0
-      },
       "salaries": {
         "tasks": 59,
         "amount": 144061.6
+      },
+      "utilities": {
+        "tasks": 17,
+        "amount": 15940.0
       }
     },
     "rule_count": 30
@@ -33,95 +33,15 @@
       "project": "FIXED COSTS",
       "type": "others",
       "amount": 1000.0,
-      "due": "2026-08-12",
+      "due": "2026-08-13",
       "original_due": "2026-08-01",
       "rolled_forward": true,
-      "days_overdue": 11,
+      "days_overdue": 12,
       "paid": false,
       "source": "sqlite",
       "category_raw": "Other",
       "frequency": "monthly",
       "rule_id": 561
-    },
-    {
-      "id": "fc-rule560-2026-08-01",
-      "task": "Krishna",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 1333.0,
-      "due": "2026-08-12",
-      "original_due": "2026-08-01",
-      "rolled_forward": true,
-      "days_overdue": 11,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Other",
-      "frequency": "monthly",
-      "rule_id": 560
-    },
-    {
-      "id": "fc-rule547-2026-08-01",
-      "task": "Matt",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 2000.0,
-      "due": "2026-08-12",
-      "original_due": "2026-08-01",
-      "rolled_forward": true,
-      "days_overdue": 11,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Legal",
-      "frequency": "monthly",
-      "rule_id": 547
-    },
-    {
-      "id": "fc-rule541-2026-08-01",
-      "task": "Office",
-      "project": "FIXED COSTS",
-      "type": "utilities",
-      "amount": 2100.0,
-      "due": "2026-08-12",
-      "original_due": "2026-08-01",
-      "rolled_forward": true,
-      "days_overdue": 11,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Utility",
-      "frequency": "monthly",
-      "rule_id": 541
-    },
-    {
-      "id": "fc-rule546-2026-08-01",
-      "task": "STARNES & BAILEY (LAWYERS)",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 3000.0,
-      "due": "2026-08-12",
-      "original_due": "2026-08-01",
-      "rolled_forward": true,
-      "days_overdue": 11,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Legal",
-      "frequency": "monthly",
-      "rule_id": 546
-    },
-    {
-      "id": "fc-rule545-2026-08-01",
-      "task": "Yaniv",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 1000.0,
-      "due": "2026-08-12",
-      "original_due": "2026-08-01",
-      "rolled_forward": true,
-      "days_overdue": 11,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Legal",
-      "frequency": "monthly",
-      "rule_id": 545
     },
     {
       "id": "fc-rule532-2026-08-13",
@@ -172,6 +92,22 @@
       "rule_id": 528
     },
     {
+      "id": "fc-rule560-2026-08-01",
+      "task": "Krishna",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 1333.0,
+      "due": "2026-08-13",
+      "original_due": "2026-08-01",
+      "rolled_forward": true,
+      "days_overdue": 12,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Other",
+      "frequency": "monthly",
+      "rule_id": 560
+    },
+    {
       "id": "fc-rule534-2026-08-13",
       "task": "MILAGROS PORTURAS",
       "project": "FIXED COSTS",
@@ -188,6 +124,38 @@
       "rule_id": 534
     },
     {
+      "id": "fc-rule547-2026-08-01",
+      "task": "Matt",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 2000.0,
+      "due": "2026-08-13",
+      "original_due": "2026-08-01",
+      "rolled_forward": true,
+      "days_overdue": 12,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Legal",
+      "frequency": "monthly",
+      "rule_id": 547
+    },
+    {
+      "id": "fc-rule541-2026-08-01",
+      "task": "Office",
+      "project": "FIXED COSTS",
+      "type": "utilities",
+      "amount": 2100.0,
+      "due": "2026-08-13",
+      "original_due": "2026-08-01",
+      "rolled_forward": true,
+      "days_overdue": 12,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Utility",
+      "frequency": "monthly",
+      "rule_id": 541
+    },
+    {
       "id": "fc-rule529-2026-08-13",
       "task": "REYNALDO AQUIJE",
       "project": "FIXED COSTS",
@@ -202,6 +170,38 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 529
+    },
+    {
+      "id": "fc-rule546-2026-08-01",
+      "task": "STARNES & BAILEY (LAWYERS)",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 3000.0,
+      "due": "2026-08-13",
+      "original_due": "2026-08-01",
+      "rolled_forward": true,
+      "days_overdue": 12,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Legal",
+      "frequency": "monthly",
+      "rule_id": 546
+    },
+    {
+      "id": "fc-rule545-2026-08-01",
+      "task": "Yaniv",
+      "project": "FIXED COSTS",
+      "type": "others",
+      "amount": 1000.0,
+      "due": "2026-08-13",
+      "original_due": "2026-08-01",
+      "rolled_forward": true,
+      "days_overdue": 12,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Legal",
+      "frequency": "monthly",
+      "rule_id": 545
     },
     {
       "id": "fc-rule563-2026-08-20",
