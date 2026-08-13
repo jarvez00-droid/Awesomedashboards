@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T15:01:22",
+  "generated_at": "2026-08-13T15:24:58",
   "today": "2026-08-13",
   "horizon": "2027-06-07",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -40,17 +40,17 @@
   "totals": {
     "prod": [
       596054.92,
-      514325.33
+      514325.32
     ],
     "prod_todate": [
-      340900.2,
-      294974.91
+      343670.35,
+      297541.24
     ],
     "weekly": {
       "fixed": 427088.28,
       "net": [
         168966.64,
-        87237.05
+        87237.04
       ],
       "periods": 34,
       "positive": [
@@ -62,7 +62,7 @@
       "fixed": 598760.8,
       "net": [
         -2705.88,
-        -84435.47
+        -84435.48
       ],
       "periods": 11,
       "positive": [
@@ -956,17 +956,17 @@
       "label_moy": "ago S5",
       "label_short": "29 ago",
       "prod": [
-        31362.03,
-        27384.54
+        34132.17,
+        29950.87
       ],
       "fixed": 12561.42,
       "net": [
-        18800.61,
-        14823.12
+        21570.75,
+        17389.45
       ],
       "cum": [
-        191346.45,
-        142539.21
+        194116.59,
+        145105.54
       ],
       "active_count": 5,
       "active_projects": [
@@ -997,8 +997,8 @@
           1387.0
         ],
         "Karim Merchant": [
-          6925.36,
-          6415.83
+          9695.51,
+          8982.16
         ]
       }
     },
@@ -1010,17 +1010,17 @@
       "label_moy": "sep S1",
       "label_short": "5 sep",
       "prod": [
-        27102.03,
-        24068.7
+        24331.89,
+        21502.36
       ],
       "fixed": 12561.42,
       "net": [
-        14540.61,
-        11507.28
+        11770.47,
+        8940.94
       ],
       "cum": [
         205887.06,
-        154046.49
+        154046.48
       ],
       "active_count": 5,
       "active_projects": [
@@ -1051,8 +1051,8 @@
           1328.97
         ],
         "Karim Merchant": [
-          6053.48,
-          5351.39
+          3283.34,
+          2785.06
         ]
       }
     },
@@ -1074,7 +1074,7 @@
       ],
       "cum": [
         208694.44,
-        152488.09
+        152488.08
       ],
       "active_count": 5,
       "active_projects": [
@@ -1128,7 +1128,7 @@
       ],
       "cum": [
         232920.99,
-        171386.28
+        171386.27
       ],
       "active_count": 5,
       "active_projects": [
@@ -1182,7 +1182,7 @@
       ],
       "cum": [
         254670.59,
-        187529.16
+        187529.15
       ],
       "active_count": 5,
       "active_projects": [
@@ -1232,7 +1232,7 @@
       ],
       "cum": [
         285418.01,
-        211886.53
+        211886.52
       ],
       "active_count": 5,
       "active_projects": [
@@ -1282,7 +1282,7 @@
       ],
       "cum": [
         297376.96,
-        220719.31
+        220719.3
       ],
       "active_count": 4,
       "active_projects": [
@@ -1327,7 +1327,7 @@
       ],
       "cum": [
         304730.58,
-        226400.51
+        226400.5
       ],
       "active_count": 4,
       "active_projects": [
@@ -1372,7 +1372,7 @@
       ],
       "cum": [
         295071.82,
-        215893.74
+        215893.73
       ],
       "active_count": 4,
       "active_projects": [
@@ -1413,7 +1413,7 @@
       ],
       "cum": [
         285158.44,
-        205255.4
+        205255.39
       ],
       "active_count": 4,
       "active_projects": [
@@ -1458,7 +1458,7 @@
       ],
       "cum": [
         285158.44,
-        205255.4
+        205255.39
       ],
       "active_count": 2,
       "active_projects": [
@@ -1488,7 +1488,7 @@
       ],
       "cum": [
         285158.44,
-        205255.4
+        205255.39
       ],
       "active_count": 2,
       "active_projects": [
@@ -1518,7 +1518,7 @@
       ],
       "cum": [
         285158.44,
-        205255.4
+        205255.39
       ],
       "active_count": 2,
       "active_projects": [
@@ -1548,7 +1548,7 @@
       ],
       "cum": [
         273125.29,
-        193222.25
+        193222.24
       ],
       "active_count": 2,
       "active_projects": [
@@ -1583,7 +1583,7 @@
       ],
       "cum": [
         264261.74,
-        184358.7
+        184358.69
       ],
       "active_count": 2,
       "active_projects": [
@@ -1618,7 +1618,7 @@
       ],
       "cum": [
         255398.19,
-        175495.15
+        175495.14
       ],
       "active_count": 2,
       "active_projects": [
@@ -1653,7 +1653,7 @@
       ],
       "cum": [
         255398.19,
-        175495.15
+        175495.14
       ],
       "active_count": 2,
       "active_projects": [
@@ -1683,7 +1683,7 @@
       ],
       "cum": [
         242401.43,
-        162221.94
+        162221.93
       ],
       "active_count": 2,
       "active_projects": [
@@ -1718,7 +1718,7 @@
       ],
       "cum": [
         229767.52,
-        149148.75
+        149148.74
       ],
       "active_count": 2,
       "active_projects": [
@@ -1753,7 +1753,7 @@
       ],
       "cum": [
         229767.52,
-        149148.75
+        149148.74
       ],
       "active_count": 1,
       "active_projects": [
@@ -1782,7 +1782,7 @@
       ],
       "cum": [
         229767.52,
-        149148.75
+        149148.74
       ],
       "active_count": 1,
       "active_projects": [
@@ -1811,7 +1811,7 @@
       ],
       "cum": [
         229767.52,
-        149148.75
+        149148.74
       ],
       "active_count": 1,
       "active_projects": [
@@ -1840,7 +1840,7 @@
       ],
       "cum": [
         229767.52,
-        149148.75
+        149148.74
       ],
       "active_count": 1,
       "active_projects": [
@@ -1869,7 +1869,7 @@
       ],
       "cum": [
         217817.94,
-        137036.66
+        137036.65
       ],
       "active_count": 1,
       "active_projects": [
@@ -1903,7 +1903,7 @@
       ],
       "cum": [
         205868.36,
-        124924.57
+        124924.56
       ],
       "active_count": 1,
       "active_projects": [
@@ -1937,7 +1937,7 @@
       ],
       "cum": [
         205868.36,
-        124924.57
+        124924.56
       ],
       "active_count": 1,
       "active_projects": [
@@ -1966,7 +1966,7 @@
       ],
       "cum": [
         198007.57,
-        116787.26
+        116787.25
       ],
       "active_count": 1,
       "active_projects": [
@@ -2000,7 +2000,7 @@
       ],
       "cum": [
         187750.0,
-        106381.51
+        106381.5
       ],
       "active_count": 1,
       "active_projects": [
@@ -2034,7 +2034,7 @@
       ],
       "cum": [
         187750.0,
-        106381.51
+        106381.5
       ],
       "active_count": 1,
       "active_projects": [
@@ -2063,7 +2063,7 @@
       ],
       "cum": [
         181287.1,
-        99647.41
+        99647.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2097,7 +2097,7 @@
       ],
       "cum": [
         181287.1,
-        99647.41
+        99647.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2126,7 +2126,7 @@
       ],
       "cum": [
         181287.1,
-        99647.41
+        99647.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2155,7 +2155,7 @@
       ],
       "cum": [
         181287.1,
-        99647.41
+        99647.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2184,7 +2184,7 @@
       ],
       "cum": [
         181287.1,
-        99647.41
+        99647.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2213,7 +2213,7 @@
       ],
       "cum": [
         181287.1,
-        99647.41
+        99647.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2242,7 +2242,7 @@
       ],
       "cum": [
         181287.1,
-        99647.41
+        99647.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2271,7 +2271,7 @@
       ],
       "cum": [
         181287.1,
-        99647.41
+        99647.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2300,7 +2300,7 @@
       ],
       "cum": [
         181287.1,
-        99647.41
+        99647.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2329,7 +2329,7 @@
       ],
       "cum": [
         181287.1,
-        99647.41
+        99647.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2358,7 +2358,7 @@
       ],
       "cum": [
         181287.1,
-        99647.41
+        99647.4
       ],
       "active_count": 1,
       "active_projects": [
@@ -2387,7 +2387,7 @@
       ],
       "cum": [
         168966.67,
-        87237.06
+        87237.05
       ],
       "active_count": 1,
       "active_projects": [
@@ -2525,17 +2525,17 @@
       "month": "2026-08",
       "label": "ago 2026",
       "prod": [
-        181899.7,
-        159776.82
+        184669.85,
+        162343.15
       ],
       "fixed": 54432.8,
       "net": [
-        127466.9,
-        105344.02
+        130237.05,
+        107910.35
       ],
       "cum": [
-        177601.8,
-        131676.51
+        180371.95,
+        134242.84
       ],
       "is_future": false,
       "is_partial": true,
@@ -2578,8 +2578,8 @@
           12466.1
         ],
         "Karim Merchant": [
-          10858.98,
-          9227.94
+          13629.12,
+          11794.28
         ]
       }
     },
@@ -2587,17 +2587,17 @@
       "month": "2026-09",
       "label": "sep 2026",
       "prod": [
-        130853.96,
-        111116.88
+        128083.81,
+        108550.54
       ],
       "fixed": 54432.8,
       "net": [
-        76421.16,
-        56684.08
+        73651.01,
+        54117.74
       ],
       "cum": [
         254022.96,
-        188360.59
+        188360.58
       ],
       "is_future": true,
       "is_partial": false,
@@ -2620,8 +2620,8 @@
           2134.48
         ],
         "Karim Merchant": [
-          19937.68,
-          17308.63
+          17167.54,
+          14742.3
         ]
       }
     },
@@ -2639,7 +2639,7 @@
       ],
       "cum": [
         299372.45,
-        220171.1
+        220171.09
       ],
       "is_future": true,
       "is_partial": false,
@@ -2677,7 +2677,7 @@
       ],
       "cum": [
         247474.3,
-        167571.25
+        167571.24
       ],
       "is_future": true,
       "is_partial": false,
@@ -2711,7 +2711,7 @@
       ],
       "cum": [
         200592.85,
-        120483.23
+        120483.22
       ],
       "is_future": true,
       "is_partial": false,
@@ -2741,7 +2741,7 @@
       ],
       "cum": [
         146024.86,
-        65406.09
+        65406.08
       ],
       "is_future": true,
       "is_partial": false,
@@ -2767,7 +2767,7 @@
       ],
       "cum": [
         92815.73,
-        11871.96
+        11871.95
       ],
       "is_future": true,
       "is_partial": false,
@@ -2793,7 +2793,7 @@
       ],
       "cum": [
         51485.93,
-        -30153.74
+        -30153.75
       ],
       "is_future": true,
       "is_partial": false,
@@ -2819,7 +2819,7 @@
       ],
       "cum": [
         51485.93,
-        -30153.74
+        -30153.75
       ],
       "is_future": true,
       "is_partial": false,
@@ -2840,7 +2840,7 @@
       ],
       "cum": [
         51485.93,
-        -30153.74
+        -30153.75
       ],
       "is_future": true,
       "is_partial": false,
@@ -2861,7 +2861,7 @@
       ],
       "cum": [
         -2705.88,
-        -84435.47
+        -84435.48
       ],
       "is_future": true,
       "is_partial": false,
@@ -3343,16 +3343,16 @@
           5659.32
         ],
         "2026-W37": [
-          6053.48,
-          5351.39
+          3283.34,
+          2785.06
         ],
         "2026-W38": [
           4789.1,
           3839.2
         ],
         "2026-W36": [
-          6925.36,
-          6415.83
+          9695.51,
+          8982.16
         ],
         "2026-W39": [
           3122.28,
@@ -3393,12 +3393,12 @@
           2042.13
         ],
         "2026-08": [
-          10858.98,
-          9227.94
+          13629.12,
+          11794.28
         ],
         "2026-09": [
-          19937.68,
-          17308.63
+          17167.54,
+          14742.3
         ],
         "2026-10": [
           12455.46,
@@ -4381,8 +4381,8 @@
       "produced": 5732.3,
       "margin_pct": 78.6,
       "ratio": 4.7,
-      "start": "2026-08-31",
-      "end": "2026-09-07",
+      "start": "2026-08-29",
+      "end": "2026-09-05",
       "severity": "alta"
     },
     {
@@ -4489,8 +4489,8 @@
       "produced": 4770.0,
       "margin_pct": 69.5,
       "ratio": 3.3,
-      "start": "2026-08-31",
-      "end": "2026-09-07",
+      "start": "2026-08-29",
+      "end": "2026-09-05",
       "severity": "media"
     },
     {
