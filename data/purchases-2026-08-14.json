@@ -1,14 +1,14 @@
 {
- "generated_at": "2026-08-14T17:24:50",
+ "generated_at": "2026-08-14T17:48:42",
  "date": "2026-08-14",
  "window_start": "2026-08-14",
  "window_end": "2026-08-28",
  "summary": {
   "tasks": 123,
   "projects": 6,
-  "alerts": 6,
+  "alerts": 5,
   "overdue": 32,
-  "to_purchase_amount": 69437.9
+  "to_purchase_amount": 69438.9
  },
  "alerts": [
   {
@@ -33,13 +33,6 @@
    "taskId": "22PZzzsKDUJ6"
   },
   {
-   "project": "Katie Holmes & Sean Springs",
-   "projectId": "22P2j3sQMKqz",
-   "task": "GUTTERS: PURCHASE MATERIALS",
-   "due": "2026-08-18",
-   "taskId": "22PZzzsPjpMa"
-  },
-  {
    "project": "Karim-Merchant",
    "projectId": "22PMwhcSuqJD",
    "task": "DOORS AND WINDOWS: PURCHASE MATERIALS",
@@ -60,7 +53,7 @@
    "name": "Katie Holmes & Sean Springs",
    "counts": {
     "tasks": 29,
-    "alerts": 3,
+    "alerts": 2,
     "overdue": 14
    },
    "overdue": [
@@ -239,18 +232,6 @@
      "label": "Fri Aug 14",
      "tasks": [
       {
-       "name": "GARAGE DOOR: PURCHASE",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-08-14",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22Pcah8xXFu5",
-       "progress": 0
-      },
-      {
        "name": "INTERIOR DOORS: PURCHASE MATERIAL (BIFOLD)",
        "step": "purchase",
        "icon": "🛒",
@@ -377,6 +358,18 @@
        "progress": 0
       },
       {
+       "name": "GARAGE DOOR: PURCHASE",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-08-18",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22Pcah8xXFu5",
+       "progress": 0
+      },
+      {
        "name": "GLASS: DELIVERY ETA",
        "step": "eta",
        "icon": "🚚",
@@ -394,8 +387,8 @@
        "icon": "🛒",
        "step_label": "Purchase material",
        "due": "2026-08-18",
-       "amount": null,
-       "alert": true,
+       "amount": 1.0,
+       "alert": false,
        "overdue": false,
        "taskId": "22PZzzsPjpMa",
        "progress": 0
