@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-14T12:13:17",
+  "generated_at": "2026-08-14T12:37:11",
   "today": "2026-08-14",
-  "horizon": "2027-06-18",
+  "horizon": "2027-01-06",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
   "params": {
     "weekly_fixed": 12561.42,
@@ -39,7 +39,7 @@
   ],
   "totals": {
     "prod": [
-      591232.91,
+      591232.92,
       509021.14
     ],
     "prod_todate": [
@@ -47,24 +47,24 @@
       289004.85
     ],
     "weekly": {
-      "fixed": 439649.7,
+      "fixed": 326596.92,
       "net": [
-        151583.21,
-        69371.44
+        264636.0,
+        182424.22
       ],
-      "periods": 35,
+      "periods": 26,
       "positive": [
         17,
         15
       ]
     },
     "monthly": {
-      "fixed": 653193.6,
+      "fixed": 381029.6,
       "net": [
-        -61960.69,
-        -144172.46
+        210203.32,
+        127991.54
       ],
-      "periods": 12,
+      "periods": 7,
       "positive": [
         4,
         4
@@ -1066,17 +1066,17 @@
       "label_moy": "sep S2",
       "label_short": "12 sep",
       "prod": [
-        20547.52,
-        16068.13
+        22441.78,
+        17277.31
       ],
       "fixed": 12561.42,
       "net": [
-        7986.1,
-        3506.71
+        9880.36,
+        4715.89
       ],
       "cum": [
-        202456.64,
-        146165.11
+        204350.9,
+        147374.29
       ],
       "active_count": 5,
       "active_projects": [
@@ -1103,8 +1103,8 @@
           8094.18
         ],
         "Rohini Williams": [
-          839.28,
-          545.48
+          2733.54,
+          1754.67
         ],
         "Karim Merchant": [
           5102.67,
@@ -1120,17 +1120,17 @@
       "label_moy": "sep S3",
       "label_short": "19 sep",
       "prod": [
-        36587.6,
-        31061.09
+        36223.64,
+        30395.87
       ],
       "fixed": 12561.42,
       "net": [
-        24026.18,
-        18499.67
+        23662.22,
+        17834.45
       ],
       "cum": [
-        226482.82,
-        164664.78
+        228013.12,
+        165208.74
       ],
       "active_count": 5,
       "active_projects": [
@@ -1157,8 +1157,8 @@
           4156.0
         ],
         "Rohini Williams": [
-          -229.89,
-          -486.09
+          -593.85,
+          -1151.31
         ],
         "Karim Merchant": [
           3089.09,
@@ -1174,17 +1174,17 @@
       "label_moy": "sep S4",
       "label_short": "26 sep",
       "prod": [
-        34877.16,
-        29287.88
+        41394.94,
+        34902.76
       ],
       "fixed": 12561.42,
       "net": [
-        22315.74,
-        16726.46
+        28833.52,
+        22341.34
       ],
       "cum": [
-        248798.56,
-        181391.24
+        256846.64,
+        187550.08
       ],
       "active_count": 5,
       "active_projects": [
@@ -1210,6 +1210,10 @@
           9874.44,
           7086.48
         ],
+        "Rohini Williams": [
+          6517.77,
+          5614.87
+        ],
         "Karim Merchant": [
           1769.46,
           1496.91
@@ -1224,17 +1228,17 @@
       "label_moy": "oct S1",
       "label_short": "3 oct",
       "prod": [
-        42141.4,
-        36047.18
+        50244.19,
+        43642.51
       ],
       "fixed": 12561.42,
       "net": [
-        29579.98,
-        23485.76
+        37682.77,
+        31081.09
       ],
       "cum": [
-        278378.54,
-        204877.0
+        294529.41,
+        218631.17
       ],
       "active_count": 5,
       "active_projects": [
@@ -1260,6 +1264,10 @@
           6238.47,
           5526.47
         ],
+        "Rohini Williams": [
+          8102.79,
+          7595.33
+        ],
         "Karim Merchant": [
           2916.35,
           2214.5
@@ -1283,14 +1291,13 @@
         8614.89
       ],
       "cum": [
-        290618.95,
-        213491.89
+        306769.82,
+        227246.06
       ],
-      "active_count": 4,
+      "active_count": 3,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Rohini Williams",
         "Shaan Lagisetty"
       ],
       "is_future": true,
@@ -1328,14 +1335,13 @@
         7255.13
       ],
       "cum": [
-        299209.37,
-        220747.02
+        315360.24,
+        234501.19
       ],
-      "active_count": 4,
+      "active_count": 3,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Rohini Williams",
         "Shaan Lagisetty"
       ],
       "is_future": true,
@@ -1373,14 +1379,13 @@
         -11129.59
       ],
       "cum": [
-        288982.29,
-        209617.43
+        305133.16,
+        223371.6
       ],
-      "active_count": 4,
+      "active_count": 3,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Rohini Williams",
         "Shaan Lagisetty"
       ],
       "is_future": true,
@@ -1414,14 +1419,13 @@
         -11187.11
       ],
       "cum": [
-        278245.42,
-        198430.32
+        294396.29,
+        212184.49
       ],
-      "active_count": 4,
+      "active_count": 3,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Rohini Williams",
         "Shaan Lagisetty"
       ],
       "is_future": true,
@@ -1446,32 +1450,26 @@
       "label_moy": "nov S1",
       "label_short": "7 nov",
       "prod": [
-        2054.46,
-        1443.56
+        0.0,
+        0.0
       ],
-      "fixed": 12561.42,
+      "fixed": 0.0,
       "net": [
-        -10506.96,
-        -11117.86
+        0.0,
+        0.0
       ],
       "cum": [
-        267738.46,
-        187312.46
+        294396.29,
+        212184.49
       ],
-      "active_count": 2,
+      "active_count": 1,
       "active_projects": [
-        "Charles Harris",
-        "Rohini Williams"
+        "Charles Harris"
       ],
       "is_future": true,
       "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          2054.46,
-          1443.56
-        ]
-      }
+      "pending": true,
+      "by_project": {}
     },
     {
       "week_iso": "2026-W47",
@@ -1490,13 +1488,12 @@
         0.0
       ],
       "cum": [
-        267738.46,
-        187312.46
+        294396.29,
+        212184.49
       ],
-      "active_count": 2,
+      "active_count": 1,
       "active_projects": [
-        "Charles Harris",
-        "Rohini Williams"
+        "Charles Harris"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1520,13 +1517,12 @@
         0.0
       ],
       "cum": [
-        267738.46,
-        187312.46
+        294396.29,
+        212184.49
       ],
-      "active_count": 2,
+      "active_count": 1,
       "active_projects": [
-        "Charles Harris",
-        "Rohini Williams"
+        "Charles Harris"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1550,13 +1546,12 @@
         -12033.15
       ],
       "cum": [
-        255705.31,
-        175279.31
+        282363.14,
+        200151.34
       ],
-      "active_count": 2,
+      "active_count": 1,
       "active_projects": [
-        "Charles Harris",
-        "Rohini Williams"
+        "Charles Harris"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1585,13 +1580,12 @@
         -8863.55
       ],
       "cum": [
-        246841.76,
-        166415.76
+        273499.59,
+        191287.79
       ],
-      "active_count": 2,
+      "active_count": 1,
       "active_projects": [
-        "Charles Harris",
-        "Rohini Williams"
+        "Charles Harris"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1620,13 +1614,12 @@
         -8863.55
       ],
       "cum": [
-        237978.21,
-        157552.21
+        264636.04,
+        182424.24
       ],
-      "active_count": 2,
+      "active_count": 1,
       "active_projects": [
-        "Charles Harris",
-        "Rohini Williams"
+        "Charles Harris"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1655,13 +1648,12 @@
         0.0
       ],
       "cum": [
-        237978.21,
-        157552.21
+        264636.04,
+        182424.24
       ],
-      "active_count": 2,
+      "active_count": 1,
       "active_projects": [
-        "Charles Harris",
-        "Rohini Williams"
+        "Charles Harris"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1685,13 +1677,12 @@
         0.0
       ],
       "cum": [
-        237978.21,
-        157552.21
+        264636.04,
+        182424.24
       ],
-      "active_count": 2,
+      "active_count": 1,
       "active_projects": [
-        "Charles Harris",
-        "Rohini Williams"
+        "Charles Harris"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1706,75 +1697,6 @@
       "label_moy": "ene S1",
       "label_short": "2 ene",
       "prod": [
-        -367.42,
-        -568.17
-      ],
-      "fixed": 12561.42,
-      "net": [
-        -12928.84,
-        -13129.59
-      ],
-      "cum": [
-        225049.37,
-        144422.62
-      ],
-      "active_count": 2,
-      "active_projects": [
-        "Charles Harris",
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          -367.42,
-          -568.17
-        ]
-      }
-    },
-    {
-      "week_iso": "2027-W02",
-      "week_start": "2027-01-09",
-      "week_end": "2027-01-15",
-      "label": "9\u201315 ene",
-      "label_moy": "ene S2",
-      "label_short": "9 ene",
-      "prod": [
-        -103.84,
-        -578.06
-      ],
-      "fixed": 12561.42,
-      "net": [
-        -12665.26,
-        -13139.48
-      ],
-      "cum": [
-        212384.11,
-        131283.14
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          -103.84,
-          -578.06
-        ]
-      }
-    },
-    {
-      "week_iso": "2027-W03",
-      "week_start": "2027-01-16",
-      "week_end": "2027-01-22",
-      "label": "16\u201322 ene",
-      "label_moy": "ene S3",
-      "label_short": "16 ene",
-      "prod": [
         0.0,
         0.0
       ],
@@ -1784,656 +1706,17 @@
         0.0
       ],
       "cum": [
-        212384.11,
-        131283.14
+        264636.04,
+        182424.24
       ],
       "active_count": 1,
       "active_projects": [
-        "Rohini Williams"
+        "Charles Harris"
       ],
       "is_future": true,
       "is_partial": false,
       "pending": true,
       "by_project": {}
-    },
-    {
-      "week_iso": "2027-W04",
-      "week_start": "2027-01-23",
-      "week_end": "2027-01-29",
-      "label": "23\u201329 ene",
-      "label_moy": "ene S4",
-      "label_short": "23 ene",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        212384.11,
-        131283.14
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W05",
-      "week_start": "2027-01-30",
-      "week_end": "2027-02-05",
-      "label": "30 ene\u20135 feb",
-      "label_moy": "ene S5",
-      "label_short": "30 ene",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        212384.11,
-        131283.14
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W06",
-      "week_start": "2027-02-06",
-      "week_end": "2027-02-12",
-      "label": "6\u201312 feb",
-      "label_moy": "feb S1",
-      "label_short": "6 feb",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        212384.11,
-        131283.14
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W07",
-      "week_start": "2027-02-13",
-      "week_end": "2027-02-19",
-      "label": "13\u201319 feb",
-      "label_moy": "feb S2",
-      "label_short": "13 feb",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        212384.11,
-        131283.14
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W08",
-      "week_start": "2027-02-20",
-      "week_end": "2027-02-26",
-      "label": "20\u201326 feb",
-      "label_moy": "feb S3",
-      "label_short": "20 feb",
-      "prod": [
-        1223.67,
-        898.67
-      ],
-      "fixed": 12561.42,
-      "net": [
-        -11337.75,
-        -11662.75
-      ],
-      "cum": [
-        201046.36,
-        119620.39
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          1223.67,
-          898.67
-        ]
-      }
-    },
-    {
-      "week_iso": "2027-W09",
-      "week_start": "2027-02-27",
-      "week_end": "2027-03-05",
-      "label": "27 feb\u20135 mar",
-      "label_moy": "feb S4",
-      "label_short": "27 feb",
-      "prod": [
-        4700.63,
-        4424.11
-      ],
-      "fixed": 12561.42,
-      "net": [
-        -7860.79,
-        -8137.31
-      ],
-      "cum": [
-        193185.57,
-        111483.08
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          4700.63,
-          4424.11
-        ]
-      }
-    },
-    {
-      "week_iso": "2027-W10",
-      "week_start": "2027-03-06",
-      "week_end": "2027-03-12",
-      "label": "6\u201312 mar",
-      "label_moy": "mar S1",
-      "label_short": "6 mar",
-      "prod": [
-        2303.85,
-        2155.67
-      ],
-      "fixed": 12561.42,
-      "net": [
-        -10257.57,
-        -10405.75
-      ],
-      "cum": [
-        182928.0,
-        101077.33
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          2303.85,
-          2155.67
-        ]
-      }
-    },
-    {
-      "week_iso": "2027-W11",
-      "week_start": "2027-03-13",
-      "week_end": "2027-03-19",
-      "label": "13\u201319 mar",
-      "label_moy": "mar S2",
-      "label_short": "13 mar",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        182928.0,
-        101077.33
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W12",
-      "week_start": "2027-03-20",
-      "week_end": "2027-03-26",
-      "label": "20\u201326 mar",
-      "label_moy": "mar S3",
-      "label_short": "20 mar",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        182928.0,
-        101077.33
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W13",
-      "week_start": "2027-03-27",
-      "week_end": "2027-04-02",
-      "label": "27 mar\u20132 abr",
-      "label_moy": "mar S4",
-      "label_short": "27 mar",
-      "prod": [
-        1219.7,
-        1165.46
-      ],
-      "fixed": 12561.42,
-      "net": [
-        -11341.72,
-        -11395.96
-      ],
-      "cum": [
-        171586.28,
-        89681.37
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          1219.7,
-          1165.46
-        ]
-      }
-    },
-    {
-      "week_iso": "2027-W14",
-      "week_start": "2027-04-03",
-      "week_end": "2027-04-09",
-      "label": "3\u20139 abr",
-      "label_moy": "abr S1",
-      "label_short": "3 abr",
-      "prod": [
-        4878.82,
-        4661.86
-      ],
-      "fixed": 12561.42,
-      "net": [
-        -7682.6,
-        -7899.56
-      ],
-      "cum": [
-        163903.68,
-        81781.81
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          4878.82,
-          4661.86
-        ]
-      }
-    },
-    {
-      "week_iso": "2027-W15",
-      "week_start": "2027-04-10",
-      "week_end": "2027-04-16",
-      "label": "10\u201316 abr",
-      "label_moy": "abr S2",
-      "label_short": "10 abr",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        163903.68,
-        81781.81
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W16",
-      "week_start": "2027-04-17",
-      "week_end": "2027-04-23",
-      "label": "17\u201323 abr",
-      "label_moy": "abr S3",
-      "label_short": "17 abr",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        163903.68,
-        81781.81
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W17",
-      "week_start": "2027-04-24",
-      "week_end": "2027-04-30",
-      "label": "24\u201330 abr",
-      "label_moy": "abr S4",
-      "label_short": "24 abr",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        163903.68,
-        81781.81
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W18",
-      "week_start": "2027-05-01",
-      "week_end": "2027-05-07",
-      "label": "1\u20137 may",
-      "label_moy": "may S1",
-      "label_short": "1 may",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        163903.68,
-        81781.81
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W19",
-      "week_start": "2027-05-08",
-      "week_end": "2027-05-14",
-      "label": "8\u201314 may",
-      "label_moy": "may S2",
-      "label_short": "8 may",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        163903.68,
-        81781.81
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W20",
-      "week_start": "2027-05-15",
-      "week_end": "2027-05-21",
-      "label": "15\u201321 may",
-      "label_moy": "may S3",
-      "label_short": "15 may",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        163903.68,
-        81781.81
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W21",
-      "week_start": "2027-05-22",
-      "week_end": "2027-05-28",
-      "label": "22\u201328 may",
-      "label_moy": "may S4",
-      "label_short": "22 may",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        163903.68,
-        81781.81
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W22",
-      "week_start": "2027-05-29",
-      "week_end": "2027-06-04",
-      "label": "29 may\u20134 jun",
-      "label_moy": "may S5",
-      "label_short": "29 may",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        163903.68,
-        81781.81
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W23",
-      "week_start": "2027-06-05",
-      "week_end": "2027-06-11",
-      "label": "5\u201311 jun",
-      "label_moy": "jun S1",
-      "label_short": "5 jun",
-      "prod": [
-        0.0,
-        0.0
-      ],
-      "fixed": 0.0,
-      "net": [
-        0.0,
-        0.0
-      ],
-      "cum": [
-        163903.68,
-        81781.81
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": true,
-      "by_project": {}
-    },
-    {
-      "week_iso": "2027-W24",
-      "week_start": "2027-06-12",
-      "week_end": "2027-06-18",
-      "label": "12\u201318 jun",
-      "label_moy": "jun S2",
-      "label_short": "12 jun",
-      "prod": [
-        240.99,
-        151.07
-      ],
-      "fixed": 12561.42,
-      "net": [
-        -12320.43,
-        -12410.35
-      ],
-      "cum": [
-        151583.25,
-        69371.46
-      ],
-      "active_count": 1,
-      "active_projects": [
-        "Rohini Williams"
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          240.99,
-          151.07
-        ]
-      }
     }
   ],
   "timeline_month": [
@@ -2619,17 +1902,17 @@
       "month": "2026-09",
       "label": "sep 2026",
       "prod": [
-        132293.55,
-        111353.34
+        135100.42,
+        112549.34
       ],
       "fixed": 54432.8,
       "net": [
-        77860.75,
-        56920.54
+        80667.62,
+        58116.54
       ],
       "cum": [
-        248694.9,
-        182626.99
+        251501.77,
+        183822.99
       ],
       "is_future": true,
       "is_partial": false,
@@ -2652,8 +1935,8 @@
           296.28
         ],
         "Rohini Williams": [
-          2912.95,
-          1155.57
+          5719.83,
+          2351.57
         ],
         "Karim Merchant": [
           22128.57,
@@ -2665,17 +1948,17 @@
       "month": "2026-10",
       "label": "oct 2026",
       "prod": [
-        99317.73,
-        85908.73
+        112661.73,
+        98466.9
       ],
       "fixed": 54432.8,
       "net": [
-        44884.93,
-        31475.93
+        58228.93,
+        44034.1
       ],
       "cum": [
-        293579.83,
-        214102.92
+        309730.7,
+        227857.09
       ],
       "is_future": true,
       "is_partial": false,
@@ -2693,6 +1976,10 @@
           6935.63,
           5736.59
         ],
+        "Rohini Williams": [
+          13343.99,
+          12558.17
+        ],
         "Karim Merchant": [
           11990.9,
           9425.02
@@ -2703,17 +1990,17 @@
       "month": "2026-11",
       "label": "nov 2026",
       "prod": [
-        3468.68,
-        2519.61
+        1414.22,
+        1076.05
       ],
       "fixed": 54432.8,
       "net": [
-        -50964.12,
-        -51913.19
+        -53018.58,
+        -53356.75
       ],
       "cum": [
-        242615.71,
-        162189.73
+        256712.12,
+        174500.34
       ],
       "is_future": true,
       "is_partial": false,
@@ -2722,10 +2009,6 @@
         "Shaan Lagisetty": [
           140.0,
           119.0
-        ],
-        "Rohini Williams": [
-          2054.46,
-          1443.56
         ],
         "Karim Merchant": [
           1274.22,
@@ -2746,8 +2029,8 @@
         -46508.8
       ],
       "cum": [
-        196106.91,
-        115680.93
+        210203.32,
+        127991.54
       ],
       "is_future": true,
       "is_partial": false,
@@ -2763,110 +2046,6 @@
       "month": "2027-01",
       "label": "ene 2027",
       "prod": [
-        -471.26,
-        -1146.23
-      ],
-      "fixed": 54432.8,
-      "net": [
-        -54904.06,
-        -55579.03
-      ],
-      "cum": [
-        141202.85,
-        60101.9
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          -471.26,
-          -1146.23
-        ]
-      }
-    },
-    {
-      "month": "2027-02",
-      "label": "feb 2027",
-      "prod": [
-        1223.67,
-        898.67
-      ],
-      "fixed": 54432.8,
-      "net": [
-        -53209.13,
-        -53534.13
-      ],
-      "cum": [
-        87993.72,
-        6567.77
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          1223.67,
-          898.67
-        ]
-      }
-    },
-    {
-      "month": "2027-03",
-      "label": "mar 2027",
-      "prod": [
-        7004.48,
-        6579.78
-      ],
-      "fixed": 54432.8,
-      "net": [
-        -47428.32,
-        -47853.02
-      ],
-      "cum": [
-        40565.4,
-        -41285.25
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          7004.48,
-          6579.78
-        ]
-      }
-    },
-    {
-      "month": "2027-04",
-      "label": "abr 2027",
-      "prod": [
-        6098.52,
-        5827.32
-      ],
-      "fixed": 54432.8,
-      "net": [
-        -48334.28,
-        -48605.48
-      ],
-      "cum": [
-        -7768.88,
-        -89890.73
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          6098.52,
-          5827.32
-        ]
-      }
-    },
-    {
-      "month": "2027-05",
-      "label": "may 2027",
-      "prod": [
         0.0,
         0.0
       ],
@@ -2876,39 +2055,13 @@
         0.0
       ],
       "cum": [
-        -7768.88,
-        -89890.73
+        210203.32,
+        127991.54
       ],
       "is_future": true,
       "is_partial": false,
       "pending": true,
       "by_project": {}
-    },
-    {
-      "month": "2027-06",
-      "label": "jun 2027",
-      "prod": [
-        240.99,
-        151.07
-      ],
-      "fixed": 54432.8,
-      "net": [
-        -54191.81,
-        -54281.73
-      ],
-      "cum": [
-        -61960.69,
-        -144172.46
-      ],
-      "is_future": true,
-      "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Rohini Williams": [
-          240.99,
-          151.07
-        ]
-      }
     }
   ],
   "by_project": [
@@ -3347,53 +2500,25 @@
           3696.29,
           2822.62
         ],
-        "2027-W02": [
-          -103.84,
-          -578.06
+        "2026-W40": [
+          6517.77,
+          5614.87
         ],
-        "2027-W24": [
-          240.99,
-          151.07
+        "2026-W41": [
+          8102.79,
+          7595.33
         ],
         "2026-W37": [
           1621.9,
           883.52
         ],
         "2026-W38": [
-          839.28,
-          545.48
-        ],
-        "2026-W46": [
-          2054.46,
-          1443.56
-        ],
-        "2027-W01": [
-          -367.42,
-          -568.17
+          2733.54,
+          1754.67
         ],
         "2026-W39": [
-          -229.89,
-          -486.09
-        ],
-        "2027-W08": [
-          1223.67,
-          898.67
-        ],
-        "2027-W13": [
-          1219.7,
-          1165.46
-        ],
-        "2027-W14": [
-          4878.82,
-          4661.86
-        ],
-        "2027-W09": [
-          4700.63,
-          4424.11
-        ],
-        "2027-W10": [
-          2303.85,
-          2155.67
+          -593.85,
+          -1151.31
         ]
       },
       "months": {
@@ -3410,36 +2535,16 @@
           11982.68
         ],
         "2026-09": [
-          2912.95,
-          1155.57
+          5719.83,
+          2351.57
         ],
-        "2027-01": [
-          -471.26,
-          -1146.23
-        ],
-        "2027-06": [
-          240.99,
-          151.07
-        ],
-        "2026-11": [
-          2054.46,
-          1443.56
-        ],
-        "2027-02": [
-          1223.67,
-          898.67
-        ],
-        "2027-04": [
-          6098.52,
-          5827.32
-        ],
-        "2027-03": [
-          7004.48,
-          6579.78
+        "2026-10": [
+          13343.99,
+          12558.17
         ]
       },
       "first_week": "2026-W26",
-      "last_week": "2027-W24"
+      "last_week": "2026-W41"
     },
     {
       "project": "Kyle Aubry",
@@ -4482,8 +3587,8 @@
       "produced": 8415.2,
       "margin_pct": 75.6,
       "ratio": 4.1,
-      "start": "2027-04-02",
-      "end": "2027-04-06",
+      "start": "2026-10-01",
+      "end": "2026-10-05",
       "severity": "alta"
     },
     {
@@ -4506,8 +3611,8 @@
       "produced": 7653.0,
       "margin_pct": 71.5,
       "ratio": 3.5,
-      "start": "2027-03-03",
-      "end": "2027-03-06",
+      "start": "2026-10-01",
+      "end": "2026-10-05",
       "severity": "media"
     },
     {
@@ -4590,8 +3695,8 @@
       "produced": 2310.0,
       "margin_pct": 65.8,
       "ratio": 2.9,
-      "start": "2027-03-04",
-      "end": "2027-03-08",
+      "start": "2026-10-01",
+      "end": "2026-10-05",
       "severity": "media"
     },
     {
