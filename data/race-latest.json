@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-14T15:01:22",
+ "generated_at": "2026-08-14T15:25:13",
  "today": "2026-08-14",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -86,8 +86,8 @@
   "runner_pct": 58.6,
   "ghost_pct": 100.0,
   "july_money": [
-   107755.58,
-   93552.36000000002
+   107512.23,
+   93318.79000000001
   ],
   "projects": 9,
   "daily": [
@@ -5980,7 +5980,7 @@
      {
       "name": "EXTERIOR: PAINT",
       "from": "2026-07-15",
-      "to": "2026-08-14",
+      "to": "2026-08-17",
       "days": 7
      },
      {
@@ -5998,7 +5998,7 @@
      {
       "name": "FINAL: PUNCH LIST COMPLETION",
       "from": "2026-07-23",
-      "to": "2026-08-18",
+      "to": "2026-08-29",
       "days": 2
      },
      {
@@ -6022,7 +6022,7 @@
      {
       "name": "FINAL INSPECTION",
       "from": "2026-07-24",
-      "to": "2026-08-19",
+      "to": "2026-08-31",
       "days": 1
      }
     ]
@@ -6162,19 +6162,6 @@
      ]
     },
     {
-     "id": "22PJWeDm3ZaG",
-     "name": "FINAL: PUNCH LIST COMPLETION",
-     "baseline_end": "2026-07-23",
-     "live_end": "2026-08-18",
-     "current_end": "2026-08-18",
-     "current_start": "2026-08-17",
-     "moved_days": 26,
-     "status": "moved",
-     "depends_on": [
-      "FINAL: TOUCH UP PAINT AND CLEAN"
-     ]
-    },
-    {
      "id": "22PUT7JGaFjS",
      "name": "ELECTRICAL: CITY INSPECTION",
      "baseline_end": "2026-07-16",
@@ -6184,19 +6171,6 @@
      "moved_days": 34,
      "status": "moved",
      "depends_on": []
-    },
-    {
-     "id": "22PJWeDm3wUZ",
-     "name": "FINAL INSPECTION",
-     "baseline_end": "2026-07-24",
-     "live_end": "2026-08-19",
-     "current_end": "2026-08-19",
-     "current_start": "2026-08-19",
-     "moved_days": 26,
-     "status": "moved",
-     "depends_on": [
-      "FINAL: PUNCH LIST COMPLETION"
-     ]
     },
     {
      "id": "22PUT7AFdshz",
@@ -6219,11 +6193,37 @@
      "moved_days": 33,
      "status": "moved",
      "depends_on": []
+    },
+    {
+     "id": "22PJWeDm3ZaG",
+     "name": "FINAL: PUNCH LIST COMPLETION",
+     "baseline_end": "2026-07-23",
+     "live_end": "2026-08-29",
+     "current_end": "2026-08-29",
+     "current_start": "2026-08-22",
+     "moved_days": 37,
+     "status": "moved",
+     "depends_on": [
+      "FINAL: TOUCH UP PAINT AND CLEAN"
+     ]
+    },
+    {
+     "id": "22PJWeDm3wUZ",
+     "name": "FINAL INSPECTION",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-08-31",
+     "current_end": "2026-08-31",
+     "current_start": "2026-08-31",
+     "moved_days": 38,
+     "status": "moved",
+     "depends_on": [
+      "FINAL: PUNCH LIST COMPLETION"
+     ]
     }
    ],
    "july_money": [
-    1326.51,
-    -147.99
+    1083.16,
+    -381.56
    ],
    "margin_pct": 22.6,
    "moved_count": 15,
@@ -6234,6 +6234,20 @@
      "from": "2026-07-11",
      "to": "2026-08-18",
      "days": 38
+    },
+    {
+     "id": "22PJWeDm3wUZ",
+     "name": "FINAL INSPECTION",
+     "from": "2026-07-24",
+     "to": "2026-08-31",
+     "days": 38
+    },
+    {
+     "id": "22PJWeDm3ZaG",
+     "name": "FINAL: PUNCH LIST COMPLETION",
+     "from": "2026-07-23",
+     "to": "2026-08-29",
+     "days": 37
     },
     {
      "id": "22PUT7AFdshz",
@@ -6264,32 +6278,18 @@
      "days": 33
     },
     {
+     "id": "22PZpXyEynv6",
+     "name": "EXTERIOR: PAINT",
+     "from": "2026-07-15",
+     "to": "2026-08-17",
+     "days": 33
+    },
+    {
      "id": "22PVDYk5hi6N",
      "name": "GLASS: INSTALL GLASS",
      "from": "2026-07-11",
      "to": "2026-08-11",
      "days": 31
-    },
-    {
-     "id": "22PZpXyEynv6",
-     "name": "EXTERIOR: PAINT",
-     "from": "2026-07-15",
-     "to": "2026-08-14",
-     "days": 30
-    },
-    {
-     "id": "22PJWeDm3ZaG",
-     "name": "FINAL: PUNCH LIST COMPLETION",
-     "from": "2026-07-23",
-     "to": "2026-08-18",
-     "days": 26
-    },
-    {
-     "id": "22PJWeDm3wUZ",
-     "name": "FINAL INSPECTION",
-     "from": "2026-07-24",
-     "to": "2026-08-19",
-     "days": 26
     },
     {
      "id": "22PJWewqDSU5",
@@ -6558,8 +6558,8 @@
        "baseline_start": "2026-07-09",
        "baseline_end": "2026-07-15",
        "live_start": "2026-07-21",
-       "live_end": "2026-08-14",
-       "moved_days": 30,
+       "live_end": "2026-08-17",
+       "moved_days": 33,
        "days_in_week": 4,
        "earned_in_week": 4.0,
        "started": true,
@@ -6678,8 +6678,8 @@
        "baseline_start": "2026-07-09",
        "baseline_end": "2026-07-15",
        "live_start": "2026-07-21",
-       "live_end": "2026-08-14",
-       "moved_days": 30,
+       "live_end": "2026-08-17",
+       "moved_days": 33,
        "days_in_week": 3,
        "earned_in_week": 2.0,
        "started": true,
@@ -6795,9 +6795,9 @@
        "marker": null,
        "baseline_start": "2026-07-22",
        "baseline_end": "2026-07-23",
-       "live_start": "2026-08-17",
-       "live_end": "2026-08-18",
-       "moved_days": 26,
+       "live_start": "2026-08-22",
+       "live_end": "2026-08-29",
+       "moved_days": 37,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "started": false,
@@ -6815,9 +6815,9 @@
        "marker": null,
        "baseline_start": "2026-07-24",
        "baseline_end": "2026-07-24",
-       "live_start": "2026-08-19",
-       "live_end": "2026-08-19",
-       "moved_days": 26,
+       "live_start": "2026-08-31",
+       "live_end": "2026-08-31",
+       "moved_days": 38,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -6895,9 +6895,9 @@
        "marker": "start",
        "baseline_start": "2026-08-01",
        "baseline_end": "2026-08-05",
-       "live_start": "2026-08-22",
-       "live_end": "2026-08-26",
-       "moved_days": 21,
+       "live_start": "2026-08-28",
+       "live_end": "2026-09-01",
+       "moved_days": 27,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "started": false,
