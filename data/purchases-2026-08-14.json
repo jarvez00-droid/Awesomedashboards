@@ -1,23 +1,16 @@
 {
- "generated_at": "2026-08-14T08:38:37",
+ "generated_at": "2026-08-14T10:14:02",
  "date": "2026-08-14",
  "window_start": "2026-08-14",
  "window_end": "2026-08-28",
  "summary": {
-  "tasks": 145,
+  "tasks": 144,
   "projects": 7,
   "alerts": 7,
   "overdue": 36,
   "to_purchase_amount": 76507.9
  },
  "alerts": [
-  {
-   "project": "Karim-Merchant",
-   "projectId": "22PMwhcSuqJD",
-   "task": "DOORS AND WINDOWS: PURCHASE MATERIALS",
-   "due": "2026-08-14",
-   "taskId": "22PZqFvVLiVF"
-  },
   {
    "project": "Katie Holmes & Sean Springs",
    "projectId": "22P2j3sQMKqz",
@@ -52,6 +45,13 @@
    "task": "ROOFING: PURCHASE MATERIAL (SPANISH TILES)",
    "due": "2026-08-19",
    "taskId": "22PV9dYCdve5"
+  },
+  {
+   "project": "Karim-Merchant",
+   "projectId": "22PMwhcSuqJD",
+   "task": "DOORS AND WINDOWS: PURCHASE MATERIALS",
+   "due": "2026-08-24",
+   "taskId": "22PZqFvVLiVF"
   },
   {
    "project": "Karim-Merchant",
@@ -469,7 +469,7 @@
    "id": "22PMwhcSuqJD",
    "name": "Karim-Merchant",
    "counts": {
-    "tasks": 32,
+    "tasks": 31,
     "alerts": 2,
     "overdue": 5
    },
@@ -536,54 +536,6 @@
     }
    ],
    "days": [
-    {
-     "date": "2026-08-14",
-     "label": "Fri Aug 14",
-     "tasks": [
-      {
-       "name": "DOORS AND WINDOWS: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-08-14",
-       "amount": null,
-       "alert": true,
-       "overdue": false,
-       "taskId": "22PZqFvVLiVF",
-       "progress": 0
-      },
-      {
-       "name": "PROJECT CLEANING - FRAMING: CONFIRM TAKEOFF DETAILS",
-       "step": "takeoff",
-       "icon": "📋",
-       "step_label": "Takeoff",
-       "due": "2026-08-14",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PcdymBqyAz",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-08-15",
-     "label": "Sat Aug 15",
-     "tasks": [
-      {
-       "name": "DOORS AND WINDOWS: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-08-15",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZqFvVM7PY",
-       "progress": 0
-      }
-     ]
-    },
     {
      "date": "2026-08-17",
      "label": "Mon Aug 17",
@@ -719,47 +671,23 @@
        "overdue": false,
        "taskId": "22Pa9UAaHPSc",
        "progress": 0
-      },
-      {
-       "name": "ROOFING: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-08-21",
-       "amount": 2995.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZwr2mu4UL",
-       "progress": 0
-      },
-      {
-       "name": "ROOFING: PURCHASE UNDERLAYMENT",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-08-21",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZqFvVfPPu",
-       "progress": 0
       }
      ]
     },
     {
-     "date": "2026-08-22",
-     "label": "Sat Aug 22",
+     "date": "2026-08-24",
+     "label": "Mon Aug 24",
      "tasks": [
       {
-       "name": "ROOFING: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-08-22",
+       "name": "DOORS AND WINDOWS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-24",
        "amount": null,
-       "alert": false,
+       "alert": true,
        "overdue": false,
-       "taskId": "22PZqFvVhFtM",
+       "taskId": "22PZqFvVLiVF",
        "progress": 0
       }
      ]
@@ -778,6 +706,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZqFvah9SQ",
+       "progress": 0
+      },
+      {
+       "name": "DOORS AND WINDOWS: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-08-25",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZqFvVM7PY",
        "progress": 0
       },
       {
@@ -823,6 +763,30 @@
        "progress": 0
       },
       {
+       "name": "ROOFING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-26",
+       "amount": 2995.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZwr2mu4UL",
+       "progress": 0
+      },
+      {
+       "name": "ROOFING: PURCHASE UNDERLAYMENT",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-08-26",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZqFvVfPPu",
+       "progress": 0
+      },
+      {
        "name": "SHEETROCK: CONFIRM TAKEOFF DETAILS",
        "step": "takeoff",
        "icon": "📋",
@@ -862,6 +826,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZqFvaid3b",
+       "progress": 0
+      },
+      {
+       "name": "ROOFING: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-08-27",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZqFvVhFtM",
        "progress": 0
       },
       {
