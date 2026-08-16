@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-16T05:48:34",
+ "generated_at": "2026-08-16T06:12:18",
  "date": "2026-08-16",
  "window_start": "2026-08-16",
  "window_end": "2026-08-30",
@@ -7,7 +7,7 @@
   "tasks": 126,
   "projects": 6,
   "alerts": 5,
-  "overdue": 40,
+  "overdue": 37,
   "to_purchase_amount": 69438.9
  },
  "alerts": [
@@ -15,14 +15,14 @@
    "project": "Katie Holmes & Sean Springs",
    "projectId": "22P2j3sQMKqz",
    "task": "INTERIOR DOORS: PURCHASE MATERIAL (BIFOLD)",
-   "due": "2026-08-15",
+   "due": "2026-08-16",
    "taskId": "22PcB6Kzekgs"
   },
   {
    "project": "Martha Cockrell (CNG-20251199)",
    "projectId": "22PGVNmUgLww",
    "task": "GARAGE DOOR: PURCHASE MATERIAL",
-   "due": "2026-08-15",
+   "due": "2026-08-16",
    "taskId": "22PbkAfcgZJh"
   },
   {
@@ -54,7 +54,7 @@
    "counts": {
     "tasks": 30,
     "alerts": 2,
-    "overdue": 16
+    "overdue": 15
    },
    "overdue": [
     {
@@ -236,21 +236,27 @@
      "overdue": true,
      "taskId": "22PcamMEt69F",
      "progress": 0
-    },
-    {
-     "name": "INTERIOR DOORS: PURCHASE MATERIAL (BIFOLD)",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-08-15",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PcB6Kzekgs",
-     "progress": 0
     }
    ],
    "days": [
+    {
+     "date": "2026-08-16",
+     "label": "Sun Aug 16",
+     "tasks": [
+      {
+       "name": "INTERIOR DOORS: PURCHASE MATERIAL (BIFOLD)",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-16",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PcB6Kzekgs",
+       "progress": 0
+      }
+     ]
+    },
     {
      "date": "2026-08-17",
      "label": "Mon Aug 17",
@@ -289,18 +295,6 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZzzrtKiuq",
-       "progress": 0
-      },
-      {
-       "name": "INTERIOR DOORS: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-08-17",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PcB6iRB54H",
        "progress": 0
       },
       {
@@ -379,6 +373,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZzzsPjpMa",
+       "progress": 0
+      },
+      {
+       "name": "INTERIOR DOORS: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-08-18",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PcB6iRB54H",
        "progress": 0
       }
      ]
@@ -463,7 +469,7 @@
    "counts": {
     "tasks": 20,
     "alerts": 1,
-    "overdue": 10
+    "overdue": 8
    },
    "overdue": [
     {
@@ -561,33 +567,39 @@
      "overdue": true,
      "taskId": "22PZzWVzJha9",
      "progress": 0
-    },
-    {
-     "name": "SIDING: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-08-15",
-     "amount": 11428.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzWVL3SUx",
-     "progress": 0
-    },
-    {
-     "name": "GARAGE DOOR: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-08-15",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PbkAfcgZJh",
-     "progress": 0
     }
    ],
    "days": [
+    {
+     "date": "2026-08-16",
+     "label": "Sun Aug 16",
+     "tasks": [
+      {
+       "name": "GARAGE DOOR: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-16",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PbkAfcgZJh",
+       "progress": 0
+      },
+      {
+       "name": "SIDING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-16",
+       "amount": 11428.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzWVL3SUx",
+       "progress": 0
+      }
+     ]
+    },
     {
      "date": "2026-08-17",
      "label": "Mon Aug 17",
