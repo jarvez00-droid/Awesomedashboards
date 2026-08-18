@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-18T15:32:13",
+ "generated_at": "2026-08-18T16:09:35",
  "today": "2026-08-18",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -51,25 +51,25 @@
   "weighting": "conteo de tareas (el motor de productividad no expone $ por-tarea; el $ del mes es contexto por proyecto)"
  },
  "company": {
-  "monthly_pct": 62.1,
-  "days_pct": 75.0,
+  "monthly_pct": 63.2,
+  "days_pct": 76.4,
   "ghost_days_pct": 100.0,
-  "earned_days": 327.0,
+  "earned_days": 333.0,
   "total_days": 436.0,
   "plan_days": 436.0,
   "month_forecast": {
    "status": "behind",
-   "projected_pct": 74.8,
+   "projected_pct": 77.1,
    "plan_pct": 100.0,
-   "leaked_count": 56,
-   "leaked_days": 110.0,
-   "leaked_pct": 25.2,
+   "leaked_count": 53,
+   "leaked_days": 100.0,
+   "leaked_pct": 22.9,
    "reshuffled_in_month": 0
   },
-  "adherence": 62.1,
+  "adherence": 63.2,
   "band": "red",
   "runner_date": "2026-07-18",
-  "gap": 25.0,
+  "gap": 23.6,
   "status": "behind",
   "week": {
    "days_planned": 0.0,
@@ -82,8 +82,8 @@
   },
   "total_target": 174,
   "due_to_today": 174,
-  "done_total": 108,
-  "runner_pct": 62.1,
+  "done_total": 110,
+  "runner_pct": 63.2,
   "ghost_pct": 100.0,
   "july_money": [
    109751.48999999999,
@@ -394,8 +394,8 @@
    },
    {
     "date": "2026-08-18",
-    "real": 108,
-    "real_pct": 62.1,
+    "real": 110,
+    "real_pct": 63.2,
     "plan": 174,
     "plan_pct": 100.0
    }
@@ -7360,22 +7360,22 @@
    ],
    "total_target": 23,
    "due_to_today": 23,
-   "done_total": 15,
-   "done_due": 15,
-   "monthly_pct": 65.2,
-   "adherence": 65.2,
-   "band": "red",
-   "runner_pct": 65.2,
+   "done_total": 17,
+   "done_due": 17,
+   "monthly_pct": 73.9,
+   "adherence": 73.9,
+   "band": "amber",
+   "runner_pct": 73.9,
    "ghost_pct": 100.0,
-   "runner_date": "2026-07-14",
+   "runner_date": "2026-07-15",
    "finish_date": "2026-07-29",
-   "days_pct": 80.4,
+   "days_pct": 86.3,
    "ghost_days_pct": 100.0,
    "total_days": 102.0,
-   "earned_days": 82.0,
+   "earned_days": 88.0,
    "plan_days": 102.0,
    "city_inspections": 3,
-   "gap": 19.6,
+   "gap": 13.7,
    "status": "no_work",
    "status_scope": "current_week",
    "week": {
@@ -7396,19 +7396,13 @@
    "excluded_admin": [],
    "month_forecast": {
     "status": "behind",
-    "projected_pct": 78.4,
+    "projected_pct": 88.2,
     "plan_pct": 100.0,
-    "leaked_count": 7,
-    "leaked_days": 22.0,
-    "leaked_pct": 21.6,
+    "leaked_count": 4,
+    "leaked_days": 12.0,
+    "leaked_pct": 11.8,
     "reshuffled_in_month": 0,
     "leaked": [
-     {
-      "name": "INSULATION: EXECUTE",
-      "from": "2026-07-27",
-      "to": "2026-08-17",
-      "days": 5
-     },
      {
       "name": "DOORS & WINDOWS: EXECUTE",
       "from": "2026-07-10",
@@ -7422,12 +7416,6 @@
       "days": 4
      },
      {
-      "name": "INSULATION: EXECUTE",
-      "from": "2026-07-27",
-      "to": "2026-08-18",
-      "days": 4
-     },
-     {
       "name": "ROOFING: EXECUTE",
       "from": "2026-07-15",
       "to": "2026-08-24",
@@ -7437,12 +7425,6 @@
       "name": "ROOFING: EXECUTE",
       "from": "2026-07-23",
       "to": "2026-08-21",
-      "days": 1
-     },
-     {
-      "name": "INSULATION: CITY INSPECTION",
-      "from": "2026-07-29",
-      "to": "2026-08-19",
       "days": 1
      }
     ]
@@ -7528,6 +7510,17 @@
      "depends_on": []
     },
     {
+     "id": "22PZzWVfUWhN",
+     "name": "INSULATION: CITY INSPECTION",
+     "baseline_end": "2026-07-29",
+     "live_end": null,
+     "current_end": "2026-07-29",
+     "current_start": "2026-07-29",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
      "id": "22PZzWfSdfDV",
      "name": "INSULATION: CITY INSPECTION",
      "baseline_end": "2026-07-29",
@@ -7568,7 +7561,7 @@
      "current_end": "2026-08-17",
      "current_start": "2026-08-17",
      "moved_days": 21,
-     "status": "moved",
+     "status": "done",
      "depends_on": []
     },
     {
@@ -7579,18 +7572,7 @@
      "current_end": "2026-08-18",
      "current_start": "2026-08-18",
      "moved_days": 22,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
-     "id": "22PZzWVfUWhN",
-     "name": "INSULATION: CITY INSPECTION",
-     "baseline_end": "2026-07-29",
-     "live_end": "2026-08-19",
-     "current_end": "2026-08-19",
-     "current_start": "2026-08-19",
-     "moved_days": 21,
-     "status": "moved",
+     "status": "done",
      "depends_on": []
     },
     {
@@ -7643,7 +7625,7 @@
     30778.56
    ],
    "margin_pct": 42.1,
-   "moved_count": 19,
+   "moved_count": 18,
    "moved": [
     {
      "id": "22PZzWUzYRut",
@@ -7692,13 +7674,6 @@
      "name": "INSULATION: EXECUTE",
      "from": "2026-07-27",
      "to": "2026-08-17",
-     "days": 21
-    },
-    {
-     "id": "22PZzWVfUWhN",
-     "name": "INSULATION: CITY INSPECTION",
-     "from": "2026-07-29",
-     "to": "2026-08-19",
      "days": 21
     },
     {
@@ -8288,10 +8263,10 @@
      "deadline": "2026-07-26",
      "is_current": false,
      "total": 4,
-     "done": 0,
+     "done": 2,
      "days_planned": 15.0,
-     "days_earned": 3.0,
-     "pct": 20.0,
+     "days_earned": 7.0,
+     "pct": 46.7,
      "target_task": "INSULATION: EXECUTE",
      "target_type": "CP",
      "target_marker": "start",
@@ -8369,10 +8344,10 @@
        "live_end": "2026-08-17",
        "moved_days": 21,
        "days_in_week": 4,
-       "earned_in_week": 2.0,
+       "earned_in_week": 4.0,
        "started": true,
-       "progress": 0,
-       "status": "moved",
+       "progress": 1,
+       "status": "done",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -8389,10 +8364,10 @@
        "live_end": "2026-08-18",
        "moved_days": 22,
        "days_in_week": 3,
-       "earned_in_week": 1.0,
+       "earned_in_week": 3.0,
        "started": true,
-       "progress": 0,
-       "status": "moved",
+       "progress": 1,
+       "status": "done",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -8407,10 +8382,10 @@
      "deadline": "2026-08-02",
      "is_current": true,
      "total": 7,
-     "done": 0,
+     "done": 2,
      "days_planned": 20.0,
-     "days_earned": 0.0,
-     "pct": 0.0,
+     "days_earned": 2.0,
+     "pct": 10.0,
      "target_task": "DRYWALL: EXECUTE",
      "target_type": "CP",
      "target_marker": "start",
@@ -8427,10 +8402,10 @@
        "live_end": "2026-08-17",
        "moved_days": 21,
        "days_in_week": 1,
-       "earned_in_week": 0.0,
+       "earned_in_week": 1.0,
        "started": true,
-       "progress": 0,
-       "status": "moved",
+       "progress": 1,
+       "status": "done",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -8447,10 +8422,10 @@
        "live_end": "2026-08-18",
        "moved_days": 22,
        "days_in_week": 1,
-       "earned_in_week": 0.0,
+       "earned_in_week": 1.0,
        "started": true,
-       "progress": 0,
-       "status": "moved",
+       "progress": 1,
+       "status": "done",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -8463,14 +8438,14 @@
        "marker": null,
        "baseline_start": "2026-07-29",
        "baseline_end": "2026-07-29",
-       "live_start": "2026-08-19",
-       "live_end": "2026-08-19",
-       "moved_days": 21,
+       "live_start": null,
+       "live_end": null,
+       "moved_days": 0,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
        "progress": 0,
-       "status": "moved",
+       "status": "pending",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -8565,9 +8540,9 @@
        "marker": "start",
        "baseline_start": "2026-07-29",
        "baseline_end": "2026-08-06",
-       "live_start": "2026-08-28",
-       "live_end": "2026-08-29",
-       "moved_days": 23,
+       "live_start": "2026-08-26",
+       "live_end": "2026-08-27",
+       "moved_days": 21,
        "days_in_week": 5,
        "earned_in_week": 0.0,
        "started": false,
@@ -8585,9 +8560,9 @@
        "marker": "start",
        "baseline_start": "2026-07-29",
        "baseline_end": "2026-08-13",
-       "live_start": "2026-08-20",
-       "live_end": "2026-08-25",
-       "moved_days": 12,
+       "live_start": "2026-08-19",
+       "live_end": "2026-08-24",
+       "moved_days": 11,
        "days_in_week": 5,
        "earned_in_week": 0.0,
        "started": false,
@@ -8906,8 +8881,8 @@
     },
     {
      "date": "2026-08-18",
-     "real": 15,
-     "real_pct": 65.2,
+     "real": 17,
+     "real_pct": 73.9,
      "plan": 23,
      "plan_pct": 100.0
     }
@@ -9965,7 +9940,7 @@
      {
       "name": "DELIVERY",
       "from": "2026-07-29",
-      "to": "2026-08-21",
+      "to": "2026-09-04",
       "days": 1
      }
     ]
@@ -10173,10 +10148,10 @@
      "id": "22PZpzbCr8TZ",
      "name": "DELIVERY",
      "baseline_end": "2026-07-29",
-     "live_end": "2026-08-21",
-     "current_end": "2026-08-21",
-     "current_start": "2026-08-21",
-     "moved_days": 23,
+     "live_end": "2026-09-04",
+     "current_end": "2026-09-04",
+     "current_start": "2026-09-04",
+     "moved_days": 37,
      "status": "moved",
      "depends_on": []
     }
@@ -10189,18 +10164,18 @@
    "moved_count": 18,
    "moved": [
     {
+     "id": "22PZpzbCr8TZ",
+     "name": "DELIVERY",
+     "from": "2026-07-29",
+     "to": "2026-09-04",
+     "days": 37
+    },
+    {
      "id": "22PZwrcQBAuZ",
      "name": "ELECTRICAL MAIN PANEL INSTALLATION",
      "from": "2026-07-23",
      "to": "2026-08-19",
      "days": 27
-    },
-    {
-     "id": "22PZpzbCr8TZ",
-     "name": "DELIVERY",
-     "from": "2026-07-29",
-     "to": "2026-08-21",
-     "days": 23
     },
     {
      "id": "22PZpzb9pfS3",
@@ -11064,9 +11039,9 @@
        "marker": null,
        "baseline_start": "2026-07-29",
        "baseline_end": "2026-07-29",
-       "live_start": "2026-08-21",
-       "live_end": "2026-08-21",
-       "moved_days": 23,
+       "live_start": "2026-09-04",
+       "live_end": "2026-09-04",
+       "moved_days": 37,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
