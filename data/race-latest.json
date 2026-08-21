@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-21T11:53:18",
+ "generated_at": "2026-08-21T15:45:08",
  "today": "2026-08-21",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -86,8 +86,8 @@
   "runner_pct": 63.8,
   "ghost_pct": 100.0,
   "july_money": [
-   109015.56,
-   96073.97
+   109077.62999999999,
+   96142.24
   ],
   "projects": 9,
   "daily": [
@@ -1764,73 +1764,73 @@
      {
       "name": "SHEETROCK: INSTALL SHEETROCK",
       "from": "2026-07-27",
-      "to": "2026-08-31",
+      "to": "2026-09-02",
       "days": 4
      },
      {
       "name": "SHEETROCK: TAPE, BED AND TEXTURE",
       "from": "2026-07-30",
-      "to": "2026-09-04",
+      "to": "2026-09-07",
       "days": 2
      },
      {
       "name": "FRAMING: REQUEST CITY INSPECTION",
       "from": "2026-07-20",
-      "to": "2026-08-24",
+      "to": "2026-08-26",
       "days": 1
      },
      {
       "name": "FRAMING: INSTALL ZIP TAPE",
       "from": "2026-07-21",
-      "to": "2026-08-25",
+      "to": "2026-08-27",
       "days": 1
      },
      {
       "name": "PLUMBING ROUGH IN: CITY INSPECTION",
       "from": "2026-07-19",
-      "to": "2026-08-24",
+      "to": "2026-08-25",
       "days": 1
      },
      {
       "name": "ELECTRICAL ROUGH IN: CITY INSPECTION",
       "from": "2026-07-19",
-      "to": "2026-08-21",
+      "to": "2026-08-24",
       "days": 1
      },
      {
       "name": "INSULATION: INSULATE WALLS AND CEILING",
       "from": "2026-07-21",
-      "to": "2026-08-26",
+      "to": "2026-08-28",
       "days": 1
      },
      {
       "name": "INSULATION: ENERGY EFFICIENCY REPORT",
       "from": "2026-07-22",
-      "to": "2026-08-27",
+      "to": "2026-08-29",
       "days": 1
      },
      {
       "name": "INSULATION: CITY INSPECTION",
       "from": "2026-07-23",
-      "to": "2026-08-27",
+      "to": "2026-08-29",
       "days": 1
      },
      {
       "name": "BRICKS: INSTALL BRICK TIES",
       "from": "2026-07-21",
-      "to": "2026-08-29",
+      "to": "2026-09-01",
       "days": 1
      },
      {
       "name": "BRICKS: CITY INSPECTION - BRICK TIES",
       "from": "2026-07-22",
-      "to": "2026-08-31",
+      "to": "2026-09-02",
       "days": 1
      },
      {
       "name": "SHEETROCK: SCREW CITY INSPECTION",
       "from": "2026-07-28",
-      "to": "2026-09-01",
+      "to": "2026-09-03",
       "days": 1
      }
     ]
@@ -1959,10 +1959,21 @@
      "id": "22PZpJfGTrqV",
      "name": "ELECTRICAL ROUGH IN: CITY INSPECTION",
      "baseline_end": "2026-07-19",
-     "live_end": "2026-08-21",
-     "current_end": "2026-08-21",
-     "current_start": "2026-08-21",
-     "moved_days": 33,
+     "live_end": "2026-08-24",
+     "current_end": "2026-08-24",
+     "current_start": "2026-08-24",
+     "moved_days": 36,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpJf2dNpM",
+     "name": "PLUMBING ROUGH IN: CITY INSPECTION",
+     "baseline_end": "2026-07-19",
+     "live_end": "2026-08-25",
+     "current_end": "2026-08-25",
+     "current_start": "2026-08-25",
+     "moved_days": 37,
      "status": "moved",
      "depends_on": []
     },
@@ -1970,10 +1981,10 @@
      "id": "22PZpJeTBBJ6",
      "name": "FRAMING: REQUEST CITY INSPECTION",
      "baseline_end": "2026-07-20",
-     "live_end": "2026-08-24",
-     "current_end": "2026-08-24",
-     "current_start": "2026-08-24",
-     "moved_days": 35,
+     "live_end": "2026-08-26",
+     "current_end": "2026-08-26",
+     "current_start": "2026-08-26",
+     "moved_days": 37,
      "status": "moved",
      "depends_on": [
       "PLUMBING ROUGH IN: CITY INSPECTION",
@@ -1982,24 +1993,13 @@
      ]
     },
     {
-     "id": "22PZpJf2dNpM",
-     "name": "PLUMBING ROUGH IN: CITY INSPECTION",
-     "baseline_end": "2026-07-19",
-     "live_end": "2026-08-24",
-     "current_end": "2026-08-24",
-     "current_start": "2026-08-24",
-     "moved_days": 36,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PZpJfP8HdN",
      "name": "INSULATION: INSULATE WALLS AND CEILING",
      "baseline_end": "2026-07-21",
-     "live_end": "2026-08-26",
-     "current_end": "2026-08-26",
-     "current_start": "2026-08-25",
-     "moved_days": 36,
+     "live_end": "2026-08-28",
+     "current_end": "2026-08-28",
+     "current_start": "2026-08-27",
+     "moved_days": 38,
      "status": "moved",
      "depends_on": []
     },
@@ -2007,10 +2007,10 @@
      "id": "22PZpJfQQ9CU",
      "name": "INSULATION: CITY INSPECTION",
      "baseline_end": "2026-07-23",
-     "live_end": "2026-08-27",
-     "current_end": "2026-08-27",
-     "current_start": "2026-08-27",
-     "moved_days": 35,
+     "live_end": "2026-08-29",
+     "current_end": "2026-08-29",
+     "current_start": "2026-08-29",
+     "moved_days": 37,
      "status": "moved",
      "depends_on": []
     },
@@ -2018,10 +2018,10 @@
      "id": "22PZpJfPsGRu",
      "name": "INSULATION: ENERGY EFFICIENCY REPORT",
      "baseline_end": "2026-07-22",
-     "live_end": "2026-08-27",
-     "current_end": "2026-08-27",
-     "current_start": "2026-08-27",
-     "moved_days": 36,
+     "live_end": "2026-08-29",
+     "current_end": "2026-08-29",
+     "current_start": "2026-08-29",
+     "moved_days": 38,
      "status": "moved",
      "depends_on": []
     },
@@ -2029,10 +2029,10 @@
      "id": "22PZpJfZb7Ua",
      "name": "SHEETROCK: INSTALL SHEETROCK",
      "baseline_end": "2026-07-27",
-     "live_end": "2026-08-31",
-     "current_end": "2026-08-31",
-     "current_start": "2026-08-29",
-     "moved_days": 35,
+     "live_end": "2026-09-02",
+     "current_end": "2026-09-02",
+     "current_start": "2026-09-01",
+     "moved_days": 37,
      "status": "moved",
      "depends_on": []
     },
@@ -2040,10 +2040,10 @@
      "id": "22PZpJfaDEPW",
      "name": "SHEETROCK: SCREW CITY INSPECTION",
      "baseline_end": "2026-07-28",
-     "live_end": "2026-09-01",
-     "current_end": "2026-09-01",
-     "current_start": "2026-09-01",
-     "moved_days": 35,
+     "live_end": "2026-09-03",
+     "current_end": "2026-09-03",
+     "current_start": "2026-09-03",
+     "moved_days": 37,
      "status": "moved",
      "depends_on": []
     },
@@ -2051,10 +2051,10 @@
      "id": "22PZpJfahY9v",
      "name": "SHEETROCK: TAPE, BED AND TEXTURE",
      "baseline_end": "2026-07-30",
-     "live_end": "2026-09-04",
-     "current_end": "2026-09-04",
-     "current_start": "2026-09-02",
-     "moved_days": 36,
+     "live_end": "2026-09-07",
+     "current_end": "2026-09-07",
+     "current_start": "2026-09-04",
+     "moved_days": 39,
      "status": "moved",
      "depends_on": []
     },
@@ -2062,111 +2062,111 @@
      "id": "22PZpJfj77u7",
      "name": "PROJECT CLEANING - SHEETROCK: PROJECT CLEANING / HAUL",
      "baseline_end": "2026-07-31",
-     "live_end": "2026-09-05",
-     "current_end": "2026-09-05",
-     "current_start": "2026-09-05",
-     "moved_days": 36,
+     "live_end": "2026-09-08",
+     "current_end": "2026-09-08",
+     "current_start": "2026-09-08",
+     "moved_days": 39,
      "status": "moved",
      "depends_on": []
     }
    ],
    "july_money": [
-    5692.83,
-    3972.06
+    5754.9,
+    4040.33
    ],
-   "margin_pct": 36.4,
+   "margin_pct": 36.6,
    "moved_count": 20,
    "moved": [
-    {
-     "id": "22PZpJhpt2eN",
-     "name": "BRICKS: CITY INSPECTION - BRICK TIES",
-     "from": "2026-07-22",
-     "to": "2026-08-31",
-     "days": 40
-    },
     {
      "id": "22PZpJhpLmm5",
      "name": "BRICKS: INSTALL BRICK TIES",
      "from": "2026-07-21",
-     "to": "2026-08-29",
-     "days": 39
+     "to": "2026-09-01",
+     "days": 42
     },
     {
-     "id": "22PZpJf2dNpM",
-     "name": "PLUMBING ROUGH IN: CITY INSPECTION",
-     "from": "2026-07-19",
-     "to": "2026-08-24",
-     "days": 36
-    },
-    {
-     "id": "22PZpJfP8HdN",
-     "name": "INSULATION: INSULATE WALLS AND CEILING",
-     "from": "2026-07-21",
-     "to": "2026-08-26",
-     "days": 36
-    },
-    {
-     "id": "22PZpJfPsGRu",
-     "name": "INSULATION: ENERGY EFFICIENCY REPORT",
+     "id": "22PZpJhpt2eN",
+     "name": "BRICKS: CITY INSPECTION - BRICK TIES",
      "from": "2026-07-22",
-     "to": "2026-08-27",
-     "days": 36
+     "to": "2026-09-02",
+     "days": 42
     },
     {
      "id": "22PZpJfahY9v",
      "name": "SHEETROCK: TAPE, BED AND TEXTURE",
      "from": "2026-07-30",
-     "to": "2026-09-04",
-     "days": 36
+     "to": "2026-09-07",
+     "days": 39
     },
     {
      "id": "22PZpJfj77u7",
      "name": "PROJECT CLEANING - SHEETROCK: PROJECT CLEANING / HAUL",
      "from": "2026-07-31",
-     "to": "2026-09-05",
-     "days": 36
+     "to": "2026-09-08",
+     "days": 39
+    },
+    {
+     "id": "22PZpJfP8HdN",
+     "name": "INSULATION: INSULATE WALLS AND CEILING",
+     "from": "2026-07-21",
+     "to": "2026-08-28",
+     "days": 38
+    },
+    {
+     "id": "22PZpJfPsGRu",
+     "name": "INSULATION: ENERGY EFFICIENCY REPORT",
+     "from": "2026-07-22",
+     "to": "2026-08-29",
+     "days": 38
     },
     {
      "id": "22PZpJeTBBJ6",
      "name": "FRAMING: REQUEST CITY INSPECTION",
      "from": "2026-07-20",
-     "to": "2026-08-24",
-     "days": 35
+     "to": "2026-08-26",
+     "days": 37
     },
     {
      "id": "22PZpJeTpqtF",
      "name": "FRAMING: INSTALL ZIP TAPE",
      "from": "2026-07-21",
+     "to": "2026-08-27",
+     "days": 37
+    },
+    {
+     "id": "22PZpJf2dNpM",
+     "name": "PLUMBING ROUGH IN: CITY INSPECTION",
+     "from": "2026-07-19",
      "to": "2026-08-25",
-     "days": 35
+     "days": 37
     },
     {
      "id": "22PZpJfQQ9CU",
      "name": "INSULATION: CITY INSPECTION",
      "from": "2026-07-23",
-     "to": "2026-08-27",
-     "days": 35
+     "to": "2026-08-29",
+     "days": 37
     },
     {
      "id": "22PZpJfZb7Ua",
      "name": "SHEETROCK: INSTALL SHEETROCK",
      "from": "2026-07-27",
-     "to": "2026-08-31",
-     "days": 35
+     "to": "2026-09-02",
+     "days": 37
     },
     {
      "id": "22PZpJfaDEPW",
      "name": "SHEETROCK: SCREW CITY INSPECTION",
      "from": "2026-07-28",
-     "to": "2026-09-01",
-     "days": 35
+     "to": "2026-09-03",
+     "days": 37
     },
     {
      "id": "22PZpJfGTrqV",
      "name": "ELECTRICAL ROUGH IN: CITY INSPECTION",
      "from": "2026-07-19",
-     "to": "2026-08-21",
-     "days": 33
+     "to": "2026-08-24",
+     "days": 36
     },
     {
      "id": "22PZpJeqBFWH",
@@ -2460,12 +2460,12 @@
        "marker": null,
        "baseline_start": "2026-07-19",
        "baseline_end": "2026-07-19",
-       "live_start": "2026-08-21",
-       "live_end": "2026-08-21",
-       "moved_days": 33,
+       "live_start": "2026-08-24",
+       "live_end": "2026-08-24",
+       "moved_days": 36,
        "days_in_week": 1,
        "earned_in_week": 0.0,
-       "started": true,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -2500,9 +2500,9 @@
        "marker": null,
        "baseline_start": "2026-07-19",
        "baseline_end": "2026-07-19",
-       "live_start": "2026-08-24",
-       "live_end": "2026-08-24",
-       "moved_days": 36,
+       "live_start": "2026-08-25",
+       "live_end": "2026-08-25",
+       "moved_days": 37,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2538,9 +2538,9 @@
        "marker": null,
        "baseline_start": "2026-07-20",
        "baseline_end": "2026-07-20",
-       "live_start": "2026-08-24",
-       "live_end": "2026-08-24",
-       "moved_days": 35,
+       "live_start": "2026-08-26",
+       "live_end": "2026-08-26",
+       "moved_days": 37,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2558,9 +2558,9 @@
        "marker": null,
        "baseline_start": "2026-07-21",
        "baseline_end": "2026-07-21",
-       "live_start": "2026-08-29",
-       "live_end": "2026-08-29",
-       "moved_days": 39,
+       "live_start": "2026-09-01",
+       "live_end": "2026-09-01",
+       "moved_days": 42,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2578,9 +2578,9 @@
        "marker": null,
        "baseline_start": "2026-07-21",
        "baseline_end": "2026-07-21",
-       "live_start": "2026-08-25",
-       "live_end": "2026-08-25",
-       "moved_days": 35,
+       "live_start": "2026-08-27",
+       "live_end": "2026-08-27",
+       "moved_days": 37,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2598,9 +2598,9 @@
        "marker": null,
        "baseline_start": "2026-07-21",
        "baseline_end": "2026-07-21",
-       "live_start": "2026-08-25",
-       "live_end": "2026-08-26",
-       "moved_days": 36,
+       "live_start": "2026-08-27",
+       "live_end": "2026-08-28",
+       "moved_days": 38,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2618,9 +2618,9 @@
        "marker": null,
        "baseline_start": "2026-07-22",
        "baseline_end": "2026-07-22",
-       "live_start": "2026-08-31",
-       "live_end": "2026-08-31",
-       "moved_days": 40,
+       "live_start": "2026-09-02",
+       "live_end": "2026-09-02",
+       "moved_days": 42,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2638,9 +2638,9 @@
        "marker": null,
        "baseline_start": "2026-07-22",
        "baseline_end": "2026-07-22",
-       "live_start": "2026-08-27",
-       "live_end": "2026-08-27",
-       "moved_days": 36,
+       "live_start": "2026-08-29",
+       "live_end": "2026-08-29",
+       "moved_days": 38,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2658,9 +2658,9 @@
        "marker": null,
        "baseline_start": "2026-07-23",
        "baseline_end": "2026-07-23",
-       "live_start": "2026-08-27",
-       "live_end": "2026-08-27",
-       "moved_days": 35,
+       "live_start": "2026-08-29",
+       "live_end": "2026-08-29",
+       "moved_days": 37,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2678,9 +2678,9 @@
        "marker": "start",
        "baseline_start": "2026-07-24",
        "baseline_end": "2026-07-27",
-       "live_start": "2026-08-29",
-       "live_end": "2026-08-31",
-       "moved_days": 35,
+       "live_start": "2026-09-01",
+       "live_end": "2026-09-02",
+       "moved_days": 37,
        "days_in_week": 3,
        "earned_in_week": 0.0,
        "started": false,
@@ -2716,9 +2716,9 @@
        "marker": "finish",
        "baseline_start": "2026-07-24",
        "baseline_end": "2026-07-27",
-       "live_start": "2026-08-29",
-       "live_end": "2026-08-31",
-       "moved_days": 35,
+       "live_start": "2026-09-01",
+       "live_end": "2026-09-02",
+       "moved_days": 37,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2757,9 +2757,9 @@
        "marker": null,
        "baseline_start": "2026-07-28",
        "baseline_end": "2026-07-28",
-       "live_start": "2026-09-01",
-       "live_end": "2026-09-01",
-       "moved_days": 35,
+       "live_start": "2026-09-03",
+       "live_end": "2026-09-03",
+       "moved_days": 37,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2777,9 +2777,9 @@
        "marker": null,
        "baseline_start": "2026-07-29",
        "baseline_end": "2026-07-30",
-       "live_start": "2026-09-02",
-       "live_end": "2026-09-04",
-       "moved_days": 36,
+       "live_start": "2026-09-04",
+       "live_end": "2026-09-07",
+       "moved_days": 39,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "started": false,
@@ -2818,9 +2818,9 @@
        "marker": null,
        "baseline_start": "2026-07-31",
        "baseline_end": "2026-07-31",
-       "live_start": "2026-09-05",
-       "live_end": "2026-09-05",
-       "moved_days": 36,
+       "live_start": "2026-09-08",
+       "live_end": "2026-09-08",
+       "moved_days": 39,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
@@ -2838,9 +2838,9 @@
        "marker": null,
        "baseline_start": "2026-07-29",
        "baseline_end": "2026-08-01",
-       "live_start": "2026-09-02",
-       "live_end": "2026-09-05",
-       "moved_days": 35,
+       "live_start": "2026-09-03",
+       "live_end": "2026-09-07",
+       "moved_days": 37,
        "days_in_week": 4,
        "earned_in_week": 0.0,
        "started": false,
