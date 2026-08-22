@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T20:36:23",
+  "generated_at": "2026-08-21T20:58:09",
   "date": "2026-08-21",
   "source": "sqlite:fixed_costs",
   "sheet_id": null,
@@ -8,20 +8,20 @@
     "end": "2026-12-19"
   },
   "summary": {
-    "total_tasks": 150,
-    "total_amount": 228164.2,
+    "total_tasks": 149,
+    "total_amount": 226064.2,
     "by_type": {
       "others": {
         "tasks": 73,
         "amount": 63162.6
       },
-      "utilities": {
-        "tasks": 17,
-        "amount": 15940.0
-      },
       "salaries": {
         "tasks": 60,
         "amount": 149061.6
+      },
+      "utilities": {
+        "tasks": 16,
+        "amount": 13840.0
       }
     },
     "rule_count": 30
@@ -90,22 +90,6 @@
       "category_raw": "Legal",
       "frequency": "monthly",
       "rule_id": 547
-    },
-    {
-      "id": "fc-rule541-2026-08-01",
-      "task": "Office",
-      "project": "FIXED COSTS",
-      "type": "utilities",
-      "amount": 2100.0,
-      "due": "2026-08-21",
-      "original_due": "2026-08-01",
-      "rolled_forward": true,
-      "days_overdue": 20,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Utility",
-      "frequency": "monthly",
-      "rule_id": 541
     },
     {
       "id": "fc-rule546-2026-08-01",
