@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-29T05:57:04",
+ "generated_at": "2026-08-29T06:20:35",
  "date": "2026-08-29",
  "window_start": "2026-08-29",
  "window_end": "2026-09-12",
@@ -7,7 +7,7 @@
   "tasks": 149,
   "projects": 8,
   "alerts": 3,
-  "overdue": 64,
+  "overdue": 57,
   "to_purchase_amount": 96732.7
  },
  "alerts": [
@@ -22,14 +22,14 @@
    "project": "Katie Holmes & Sean Springs",
    "projectId": "22P2j3sQMKqz",
    "task": "MECHANICAL TRIM: PURCHASE MATERIALS",
-   "due": "2026-08-27",
+   "due": "2026-08-29",
    "taskId": "22PZzzsKDUJ6"
   },
   {
    "project": "Martha Cockrell (CNG-20251199)",
    "projectId": "22PGVNmUgLww",
    "task": "GARAGE DOOR: PURCHASE MATERIAL",
-   "due": "2026-08-27",
+   "due": "2026-08-29",
    "taskId": "22PbkAfcgZJh"
   }
  ],
@@ -40,7 +40,7 @@
    "counts": {
     "tasks": 20,
     "alerts": 1,
-    "overdue": 16
+    "overdue": 13
    },
    "overdue": [
     {
@@ -198,45 +198,51 @@
      "overdue": true,
      "taskId": "22PcamMEt69F",
      "progress": 0
-    },
-    {
-     "name": "PLUMBING TRIM: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-08-27",
-     "amount": 9536.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzzsDqYLC",
-     "progress": 0.5
-    },
-    {
-     "name": "ELECTRICAL TRIM: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-08-27",
-     "amount": 10125.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzzsGMNmm",
-     "progress": 0
-    },
-    {
-     "name": "MECHANICAL TRIM: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-08-27",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PZzzsKDUJ6",
-     "progress": 0
     }
    ],
    "days": [
+    {
+     "date": "2026-08-29",
+     "label": "Sat Aug 29",
+     "tasks": [
+      {
+       "name": "ELECTRICAL TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-29",
+       "amount": 10125.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzzsGMNmm",
+       "progress": 0
+      },
+      {
+       "name": "MECHANICAL TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-29",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PZzzsKDUJ6",
+       "progress": 0
+      },
+      {
+       "name": "PLUMBING TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-29",
+       "amount": 9536.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzzsDqYLC",
+       "progress": 0.5
+      }
+     ]
+    },
     {
      "date": "2026-08-31",
      "label": "Mon Aug 31",
@@ -317,7 +323,7 @@
    "counts": {
     "tasks": 25,
     "alerts": 1,
-    "overdue": 9
+    "overdue": 8
    },
    "overdue": [
     {
@@ -415,21 +421,27 @@
      "overdue": true,
      "taskId": "22PZzWXThcwX",
      "progress": 0
-    },
-    {
-     "name": "GARAGE DOOR: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-08-27",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PbkAfcgZJh",
-     "progress": 0
     }
    ],
    "days": [
+    {
+     "date": "2026-08-29",
+     "label": "Sat Aug 29",
+     "tasks": [
+      {
+       "name": "GARAGE DOOR: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-29",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PbkAfcgZJh",
+       "progress": 0
+      }
+     ]
+    },
     {
      "date": "2026-08-31",
      "label": "Mon Aug 31",
@@ -751,421 +763,6 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PawnDWgSnu",
-       "progress": 0
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "id": "22PEuiuEZaAY",
-   "name": "Shaan Lagisetty (CNG-20251169)",
-   "counts": {
-    "tasks": 29,
-    "alerts": 0,
-    "overdue": 13
-   },
-   "overdue": [
-    {
-     "name": "FRAMING: CONFIRM TAKEOFF DETAILS",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-08-13",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYpK6p7S",
-     "progress": 0
-    },
-    {
-     "name": "FRAMING: SECURE PRICING & ETA",
-     "step": "pricing",
-     "icon": "💲",
-     "step_label": "Secure pricing",
-     "due": "2026-08-14",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PcWx7gZrWy",
-     "progress": 0
-    },
-    {
-     "name": "DOORS AND WINDOWS: CREATE TAKEOFF REPORT",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-08-17",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYpTm6YD",
-     "progress": 0
-    },
-    {
-     "name": "DOORS AND WINDOWS: SECURE PRICING & ETA",
-     "step": "pricing",
-     "icon": "💲",
-     "step_label": "Secure pricing",
-     "due": "2026-08-18",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYpUHhxJ",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: CONFIRM TAKEOFF DETAILS",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-08-21",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYpcbma2",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: SECURE PRICING & ETA",
-     "step": "pricing",
-     "icon": "💲",
-     "step_label": "Secure pricing",
-     "due": "2026-08-22",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYpd4eTU",
-     "progress": 0
-    },
-    {
-     "name": "PROJECT CLEANING - FRAMING: CONFIRM TAKEOFF DETAILS",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-08-24",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYpXwJTn",
-     "progress": 0
-    },
-    {
-     "name": "ELECTRICAL ROUGH IN: CREAT TAKE OFF REPORT",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-08-24",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22Pce6pdWEDS",
-     "progress": 0
-    },
-    {
-     "name": "DEMO / TIE-IN: CONFIRM TAKEOFF DETAILS",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-08-25",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYpji6qs",
-     "progress": 0
-    },
-    {
-     "name": "ELECTRICAL ROUGH IN: CONFIRM TAKEOFF DETAILS",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-08-25",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYpqHiTv",
-     "progress": 0
-    },
-    {
-     "name": "MECHANICAL ROUGH IN: CONFIRM TAKEOFF DETAILS",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-08-26",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYpvfRwc",
-     "progress": 0
-    },
-    {
-     "name": "FRAMING: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-08-27",
-     "amount": 3441.46,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYpLHRpm",
-     "progress": 0
-    },
-    {
-     "name": "FRAMING: DELIVERY ETA",
-     "step": "eta",
-     "icon": "🚚",
-     "step_label": "Delivery ETA",
-     "due": "2026-08-28",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYpLettg",
-     "progress": 0
-    }
-   ],
-   "days": [
-    {
-     "date": "2026-08-31",
-     "label": "Mon Aug 31",
-     "tasks": [
-      {
-       "name": "DOORS AND WINDOWS: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-08-31",
-       "amount": 701.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYpUh6uD",
-       "progress": 0
-      },
-      {
-       "name": "ROOFING: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-08-31",
-       "amount": 1391.28,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYpe3BDC",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-09-01",
-     "label": "Tue Sep 1",
-     "tasks": [
-      {
-       "name": "DOORS AND WINDOWS: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-09-01",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYpV6iys",
-       "progress": 0
-      },
-      {
-       "name": "INSULATION: CREATE TAKEOFF REPORT",
-       "step": "takeoff",
-       "icon": "📋",
-       "step_label": "Takeoff",
-       "due": "2026-09-01",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYq2Ftzn",
-       "progress": 0
-      },
-      {
-       "name": "ROOFING: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-09-01",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYpeSfKe",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-09-02",
-     "label": "Wed Sep 2",
-     "tasks": [
-      {
-       "name": "INSULATION: CONFIRM TAKEOFF DETAILS",
-       "step": "takeoff",
-       "icon": "📋",
-       "step_label": "Takeoff",
-       "due": "2026-09-02",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYq2fxyH",
-       "progress": 0
-      },
-      {
-       "name": "SHEETROCK: CREATE TAKEOFF REPORT",
-       "step": "takeoff",
-       "icon": "📋",
-       "step_label": "Takeoff",
-       "due": "2026-09-02",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYq93iH3",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-09-03",
-     "label": "Thu Sep 3",
-     "tasks": [
-      {
-       "name": "INSULATION: SECURE PRICING & ETA",
-       "step": "pricing",
-       "icon": "💲",
-       "step_label": "Secure pricing",
-       "due": "2026-09-03",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYq38u2A",
-       "progress": 0
-      },
-      {
-       "name": "SHEETROCK: CONFIRM TAKEOFF DETAILS",
-       "step": "takeoff",
-       "icon": "📋",
-       "step_label": "Takeoff",
-       "due": "2026-09-03",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYq9Twtc",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-09-04",
-     "label": "Fri Sep 4",
-     "tasks": [
-      {
-       "name": "INSULATION: WALLS PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-09-04",
-       "amount": 182.4,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYq3wrvK",
-       "progress": 0
-      },
-      {
-       "name": "SHEETROCK: SECURE PRICING & ETA",
-       "step": "pricing",
-       "icon": "💲",
-       "step_label": "Secure pricing",
-       "due": "2026-09-04",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYqA9EMF",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-09-05",
-     "label": "Sat Sep 5",
-     "tasks": [
-      {
-       "name": "INSULATION: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-09-05",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYq4Mfhe",
-       "progress": 0
-      },
-      {
-       "name": "SHEETROCK: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-09-05",
-       "amount": 862.8,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYqBHWtw",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-09-07",
-     "label": "Mon Sep 7",
-     "tasks": [
-      {
-       "name": "SHEETROCK: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-09-07",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYqBkAKG",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-09-11",
-     "label": "Fri Sep 11",
-     "tasks": [
-      {
-       "name": "TILES: CREATE TAKEOFF REPORT",
-       "step": "takeoff",
-       "icon": "📋",
-       "step_label": "Takeoff",
-       "due": "2026-09-11",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYqTxPnf",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-09-12",
-     "label": "Sat Sep 12",
-     "tasks": [
-      {
-       "name": "TILES: CONFIRM TAKEOFF DETAILS",
-       "step": "takeoff",
-       "icon": "📋",
-       "step_label": "Takeoff",
-       "due": "2026-09-12",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYqUMKsw",
        "progress": 0
       }
      ]
@@ -1756,6 +1353,427 @@
    ]
   },
   {
+   "id": "22PEuiuEZaAY",
+   "name": "Shaan Lagisetty (CNG-20251169)",
+   "counts": {
+    "tasks": 29,
+    "alerts": 0,
+    "overdue": 11
+   },
+   "overdue": [
+    {
+     "name": "FRAMING: CONFIRM TAKEOFF DETAILS",
+     "step": "takeoff",
+     "icon": "📋",
+     "step_label": "Takeoff",
+     "due": "2026-08-13",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpYpK6p7S",
+     "progress": 0
+    },
+    {
+     "name": "FRAMING: SECURE PRICING & ETA",
+     "step": "pricing",
+     "icon": "💲",
+     "step_label": "Secure pricing",
+     "due": "2026-08-14",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PcWx7gZrWy",
+     "progress": 0
+    },
+    {
+     "name": "DOORS AND WINDOWS: CREATE TAKEOFF REPORT",
+     "step": "takeoff",
+     "icon": "📋",
+     "step_label": "Takeoff",
+     "due": "2026-08-17",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpYpTm6YD",
+     "progress": 0
+    },
+    {
+     "name": "DOORS AND WINDOWS: SECURE PRICING & ETA",
+     "step": "pricing",
+     "icon": "💲",
+     "step_label": "Secure pricing",
+     "due": "2026-08-18",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpYpUHhxJ",
+     "progress": 0
+    },
+    {
+     "name": "ROOFING: CONFIRM TAKEOFF DETAILS",
+     "step": "takeoff",
+     "icon": "📋",
+     "step_label": "Takeoff",
+     "due": "2026-08-21",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpYpcbma2",
+     "progress": 0
+    },
+    {
+     "name": "ROOFING: SECURE PRICING & ETA",
+     "step": "pricing",
+     "icon": "💲",
+     "step_label": "Secure pricing",
+     "due": "2026-08-22",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpYpd4eTU",
+     "progress": 0
+    },
+    {
+     "name": "PROJECT CLEANING - FRAMING: CONFIRM TAKEOFF DETAILS",
+     "step": "takeoff",
+     "icon": "📋",
+     "step_label": "Takeoff",
+     "due": "2026-08-24",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpYpXwJTn",
+     "progress": 0
+    },
+    {
+     "name": "ELECTRICAL ROUGH IN: CREAT TAKE OFF REPORT",
+     "step": "takeoff",
+     "icon": "📋",
+     "step_label": "Takeoff",
+     "due": "2026-08-24",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22Pce6pdWEDS",
+     "progress": 0
+    },
+    {
+     "name": "DEMO / TIE-IN: CONFIRM TAKEOFF DETAILS",
+     "step": "takeoff",
+     "icon": "📋",
+     "step_label": "Takeoff",
+     "due": "2026-08-25",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpYpji6qs",
+     "progress": 0
+    },
+    {
+     "name": "ELECTRICAL ROUGH IN: CONFIRM TAKEOFF DETAILS",
+     "step": "takeoff",
+     "icon": "📋",
+     "step_label": "Takeoff",
+     "due": "2026-08-25",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpYpqHiTv",
+     "progress": 0
+    },
+    {
+     "name": "MECHANICAL ROUGH IN: CONFIRM TAKEOFF DETAILS",
+     "step": "takeoff",
+     "icon": "📋",
+     "step_label": "Takeoff",
+     "due": "2026-08-26",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpYpvfRwc",
+     "progress": 0
+    }
+   ],
+   "days": [
+    {
+     "date": "2026-08-29",
+     "label": "Sat Aug 29",
+     "tasks": [
+      {
+       "name": "FRAMING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-29",
+       "amount": 3441.46,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYpLHRpm",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-08-31",
+     "label": "Mon Aug 31",
+     "tasks": [
+      {
+       "name": "DOORS AND WINDOWS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-31",
+       "amount": 701.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYpUh6uD",
+       "progress": 0
+      },
+      {
+       "name": "FRAMING: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-08-31",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYpLettg",
+       "progress": 0
+      },
+      {
+       "name": "ROOFING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-08-31",
+       "amount": 1391.28,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYpe3BDC",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-09-01",
+     "label": "Tue Sep 1",
+     "tasks": [
+      {
+       "name": "DOORS AND WINDOWS: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-09-01",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYpV6iys",
+       "progress": 0
+      },
+      {
+       "name": "INSULATION: CREATE TAKEOFF REPORT",
+       "step": "takeoff",
+       "icon": "📋",
+       "step_label": "Takeoff",
+       "due": "2026-09-01",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYq2Ftzn",
+       "progress": 0
+      },
+      {
+       "name": "ROOFING: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-09-01",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYpeSfKe",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-09-02",
+     "label": "Wed Sep 2",
+     "tasks": [
+      {
+       "name": "INSULATION: CONFIRM TAKEOFF DETAILS",
+       "step": "takeoff",
+       "icon": "📋",
+       "step_label": "Takeoff",
+       "due": "2026-09-02",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYq2fxyH",
+       "progress": 0
+      },
+      {
+       "name": "SHEETROCK: CREATE TAKEOFF REPORT",
+       "step": "takeoff",
+       "icon": "📋",
+       "step_label": "Takeoff",
+       "due": "2026-09-02",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYq93iH3",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-09-03",
+     "label": "Thu Sep 3",
+     "tasks": [
+      {
+       "name": "INSULATION: SECURE PRICING & ETA",
+       "step": "pricing",
+       "icon": "💲",
+       "step_label": "Secure pricing",
+       "due": "2026-09-03",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYq38u2A",
+       "progress": 0
+      },
+      {
+       "name": "SHEETROCK: CONFIRM TAKEOFF DETAILS",
+       "step": "takeoff",
+       "icon": "📋",
+       "step_label": "Takeoff",
+       "due": "2026-09-03",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYq9Twtc",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-09-04",
+     "label": "Fri Sep 4",
+     "tasks": [
+      {
+       "name": "INSULATION: WALLS PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-04",
+       "amount": 182.4,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYq3wrvK",
+       "progress": 0
+      },
+      {
+       "name": "SHEETROCK: SECURE PRICING & ETA",
+       "step": "pricing",
+       "icon": "💲",
+       "step_label": "Secure pricing",
+       "due": "2026-09-04",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYqA9EMF",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-09-05",
+     "label": "Sat Sep 5",
+     "tasks": [
+      {
+       "name": "INSULATION: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-09-05",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYq4Mfhe",
+       "progress": 0
+      },
+      {
+       "name": "SHEETROCK: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-05",
+       "amount": 862.8,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYqBHWtw",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-09-07",
+     "label": "Mon Sep 7",
+     "tasks": [
+      {
+       "name": "SHEETROCK: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-09-07",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYqBkAKG",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-09-11",
+     "label": "Fri Sep 11",
+     "tasks": [
+      {
+       "name": "TILES: CREATE TAKEOFF REPORT",
+       "step": "takeoff",
+       "icon": "📋",
+       "step_label": "Takeoff",
+       "due": "2026-09-11",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYqTxPnf",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-09-12",
+     "label": "Sat Sep 12",
+     "tasks": [
+      {
+       "name": "TILES: CONFIRM TAKEOFF DETAILS",
+       "step": "takeoff",
+       "icon": "📋",
+       "step_label": "Takeoff",
+       "due": "2026-09-12",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYqUMKsw",
+       "progress": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "22PMwhcSuqJD",
    "name": "Karim-Merchant",
    "counts": {
@@ -2081,42 +2099,6 @@
    ]
   },
   {
-   "id": "22PK9BhEJtZn",
-   "name": "Lingyan Qiu (CNG2025-458)",
-   "counts": {
-    "tasks": 2,
-    "alerts": 0,
-    "overdue": 2
-   },
-   "overdue": [
-    {
-     "name": "PLUMBING TRIM: MISSING ITEMS TAKE OFF",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-08-20",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22Pcwe2pjT4x",
-     "progress": 0
-    },
-    {
-     "name": "PLUMBING TRIM: BUY MISSING ITEMS",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-08-27",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PcwdvNZbUc",
-     "progress": 0
-    }
-   ],
-   "days": []
-  },
-  {
    "id": "22PDc9569pUD",
    "name": "Charles Harris — Argyle TX",
    "counts": {
@@ -2207,6 +2189,49 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZtEUP2zPb",
+       "progress": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "22PK9BhEJtZn",
+   "name": "Lingyan Qiu (CNG2025-458)",
+   "counts": {
+    "tasks": 2,
+    "alerts": 0,
+    "overdue": 1
+   },
+   "overdue": [
+    {
+     "name": "PLUMBING TRIM: MISSING ITEMS TAKE OFF",
+     "step": "takeoff",
+     "icon": "📋",
+     "step_label": "Takeoff",
+     "due": "2026-08-20",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22Pcwe2pjT4x",
+     "progress": 0
+    }
+   ],
+   "days": [
+    {
+     "date": "2026-08-29",
+     "label": "Sat Aug 29",
+     "tasks": [
+      {
+       "name": "PLUMBING TRIM: BUY MISSING ITEMS",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-08-29",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PcwdvNZbUc",
        "progress": 0
       }
      ]
