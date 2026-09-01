@@ -1,14 +1,14 @@
 {
- "generated_at": "2026-09-01T15:10:26",
+ "generated_at": "2026-09-01T17:08:47",
  "date": "2026-09-01",
  "window_start": "2026-09-01",
  "window_end": "2026-09-15",
  "summary": {
-  "tasks": 164,
+  "tasks": 158,
   "projects": 8,
   "alerts": 4,
-  "overdue": 57,
-  "to_purchase_amount": 106778.3
+  "overdue": 53,
+  "to_purchase_amount": 101103.3
  },
  "alerts": [
   {
@@ -734,50 +734,93 @@
    ]
   },
   {
-   "id": "22PMwhcSuqJD",
-   "name": "Karim-Merchant",
+   "id": "22P2cmNJZcwJ",
+   "name": "Stephanie and Marc Felton",
    "counts": {
-    "tasks": 29,
+    "tasks": 5,
     "alerts": 1,
-    "overdue": 7
+    "overdue": 4
    },
    "overdue": [
     {
-     "name": "FRAMING: CONFIRM TAKEOFF DETAILS",
+     "name": "ROOFING: COMPLETE TAKEOFF (SPANISH TILES)",
      "step": "takeoff",
      "icon": "📋",
      "step_label": "Takeoff",
-     "due": "2026-08-12",
+     "due": "2026-08-22",
      "amount": null,
      "alert": false,
      "overdue": true,
-     "taskId": "22PZqFvV5nZS",
+     "taskId": "22PV9dUqwM6d",
      "progress": 0
     },
     {
-     "name": "FRAMING: SECURE PRICING & ETA",
+     "name": "ROOFING: SECURE PRICING",
      "step": "pricing",
      "icon": "💲",
      "step_label": "Secure pricing",
-     "due": "2026-08-13",
+     "due": "2026-08-24",
      "amount": null,
      "alert": false,
      "overdue": true,
-     "taskId": "22PZqFvV6BTj",
+     "taskId": "22PV9dVWqeZm",
      "progress": 0
     },
     {
-     "name": "EXTERIOR SHEATING: CREATE TAKEOFF REPORT",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-08-17",
+     "name": "ROOFING: PURCHASE MATERIAL (SPANISH TILES)",
+     "step": "purchase",
+     "icon": "🛒",
+     "step_label": "Purchase material",
+     "due": "2026-08-25",
+     "amount": null,
+     "alert": true,
+     "overdue": true,
+     "taskId": "22PV9dYCdve5",
+     "progress": 0
+    },
+    {
+     "name": "ROOFING: CONFIRM DELIVERY",
+     "step": "confirm",
+     "icon": "📦",
+     "step_label": "Confirm delivery",
+     "due": "2026-08-26",
      "amount": null,
      "alert": false,
      "overdue": true,
-     "taskId": "22Pa9BrA9HHR",
+     "taskId": "22PV9dYrJimq",
      "progress": 0
-    },
+    }
+   ],
+   "days": [
+    {
+     "date": "2026-09-01",
+     "label": "Tue Sep 1",
+     "tasks": [
+      {
+       "name": "ROOFING: PURCHASE SPANISH TILES",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-09-01",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PawnDWgSnu",
+       "progress": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "22PMwhcSuqJD",
+   "name": "Karim-Merchant",
+   "counts": {
+    "tasks": 23,
+    "alerts": 1,
+    "overdue": 3
+   },
+   "overdue": [
     {
      "name": "ROOFING: CREATE TAKEOFF REPORT",
      "step": "takeoff",
@@ -788,18 +831,6 @@
      "alert": false,
      "overdue": true,
      "taskId": "22PZqFvVZmvY",
-     "progress": 0
-    },
-    {
-     "name": "EXTERIOR SHEATING: SECURE PRICING",
-     "step": "pricing",
-     "icon": "💲",
-     "step_label": "Secure pricing",
-     "due": "2026-08-18",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22Pa9U9rwJ3L",
      "progress": 0
     },
     {
@@ -843,18 +874,6 @@
        "overdue": false,
        "taskId": "22PZqFvah9SQ",
        "progress": 0
-      },
-      {
-       "name": "FRAMING: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-09-01",
-       "amount": 5675.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZqFvV7JAd",
-       "progress": 0
       }
      ]
     },
@@ -872,18 +891,6 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZqFvag2jW",
-       "progress": 0
-      },
-      {
-       "name": "FRAMING: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-09-02",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZqFvV7f4w",
        "progress": 0
       },
       {
@@ -1154,85 +1161,6 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZqFvawCsk",
-       "progress": 0
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "id": "22P2cmNJZcwJ",
-   "name": "Stephanie and Marc Felton",
-   "counts": {
-    "tasks": 5,
-    "alerts": 1,
-    "overdue": 4
-   },
-   "overdue": [
-    {
-     "name": "ROOFING: COMPLETE TAKEOFF (SPANISH TILES)",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-08-22",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PV9dUqwM6d",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: SECURE PRICING",
-     "step": "pricing",
-     "icon": "💲",
-     "step_label": "Secure pricing",
-     "due": "2026-08-24",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PV9dVWqeZm",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: PURCHASE MATERIAL (SPANISH TILES)",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-08-25",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PV9dYCdve5",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: CONFIRM DELIVERY",
-     "step": "confirm",
-     "icon": "📦",
-     "step_label": "Confirm delivery",
-     "due": "2026-08-26",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PV9dYrJimq",
-     "progress": 0
-    }
-   ],
-   "days": [
-    {
-     "date": "2026-09-01",
-     "label": "Tue Sep 1",
-     "tasks": [
-      {
-       "name": "ROOFING: PURCHASE SPANISH TILES",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-09-01",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PawnDWgSnu",
        "progress": 0
       }
      ]
