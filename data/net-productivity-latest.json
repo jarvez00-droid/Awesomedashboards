@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T16:05:55",
+  "generated_at": "2026-09-03T16:30:20",
   "today": "2026-09-03",
   "horizon": "2027-01-08",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -54,7 +54,7 @@
       ],
       "periods": 28,
       "positive": [
-        17,
+        18,
         15
       ]
     },
@@ -1209,17 +1209,17 @@
       "label_moy": "sep S4",
       "label_short": "26 sep",
       "prod": [
-        46456.33,
-        38661.31
+        46519.03,
+        38793.88
       ],
       "fixed": 12561.42,
       "net": [
-        33894.91,
-        26099.89
+        33957.61,
+        26232.46
       ],
       "cum": [
-        344701.68,
-        284605.6
+        344764.38,
+        284738.17
       ],
       "active_count": 5,
       "active_projects": [
@@ -1246,8 +1246,8 @@
           7086.48
         ],
         "Rohini Williams": [
-          2563.63,
-          1418.18
+          2626.32,
+          1550.75
         ],
         "Karim Merchant": [
           5092.85,
@@ -1263,17 +1263,17 @@
       "label_moy": "oct S1",
       "label_short": "3 oct",
       "prod": [
-        25048.01,
-        19476.54
+        24534.36,
+        19758.05
       ],
       "fixed": 12561.42,
       "net": [
-        12486.59,
-        6915.12
+        11972.94,
+        7196.63
       ],
       "cum": [
-        357188.27,
-        291520.72
+        356737.32,
+        291934.8
       ],
       "active_count": 5,
       "active_projects": [
@@ -1299,10 +1299,6 @@
           6238.47,
           5526.47
         ],
-        "Rohini Williams": [
-          513.66,
-          -281.51
-        ],
         "Karim Merchant": [
           3619.0,
           3084.47
@@ -1317,17 +1313,17 @@
       "label_moy": "oct S2",
       "label_short": "10 oct",
       "prod": [
-        47563.71,
-        43844.98
+        32194.56,
+        29232.41
       ],
       "fixed": 12561.42,
       "net": [
-        35002.29,
-        31283.56
+        19633.14,
+        16670.99
       ],
       "cum": [
-        392190.56,
-        322804.28
+        376370.46,
+        308605.79
       ],
       "active_count": 4,
       "active_projects": [
@@ -1348,10 +1344,6 @@
           1222.7,
           850.82
         ],
-        "Rohini Williams": [
-          15369.15,
-          14612.58
-        ],
         "Karim Merchant": [
           550.79,
           421.94
@@ -1366,17 +1358,17 @@
       "label_moy": "oct S3",
       "label_short": "17 oct",
       "prod": [
-        14761.94,
-        12693.29
+        14170.46,
+        11965.87
       ],
       "fixed": 12561.42,
       "net": [
-        2200.52,
-        131.87
+        1609.04,
+        -595.55
       ],
       "cum": [
-        394391.08,
-        322936.15
+        377979.5,
+        308010.24
       ],
       "active_count": 4,
       "active_projects": [
@@ -1398,8 +1390,8 @@
           405.79
         ],
         "Rohini Williams": [
-          403.39,
-          329.71
+          -188.09,
+          -397.71
         ],
         "Karim Merchant": [
           5098.77,
@@ -1415,22 +1407,23 @@
       "label_moy": "oct S4",
       "label_short": "24 oct",
       "prod": [
-        5051.27,
-        4439.25
+        5627.62,
+        4290.32
       ],
       "fixed": 12561.42,
       "net": [
-        -7510.15,
-        -8122.17
+        -6933.8,
+        -8271.1
       ],
       "cum": [
-        386880.93,
-        314813.98
+        371045.7,
+        299739.14
       ],
-      "active_count": 3,
+      "active_count": 4,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
+        "Rohini Williams",
         "Shaan Lagisetty"
       ],
       "is_future": true,
@@ -1440,6 +1433,10 @@
         "Shaan Lagisetty": [
           1423.63,
           1136.61
+        ],
+        "Rohini Williams": [
+          576.35,
+          -148.94
         ],
         "Karim Merchant": [
           3627.64,
@@ -1455,22 +1452,23 @@
       "label_moy": "oct S5",
       "label_short": "31 oct",
       "prod": [
-        1032.03,
-        663.88
+        16463.87,
+        15409.02
       ],
       "fixed": 12561.42,
       "net": [
-        -11529.39,
-        -11897.54
+        3902.45,
+        2847.6
       ],
       "cum": [
-        375351.54,
-        302916.44
+        374948.15,
+        302586.74
       ],
-      "active_count": 3,
+      "active_count": 4,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
+        "Rohini Williams",
         "Shaan Lagisetty"
       ],
       "is_future": true,
@@ -1480,6 +1478,10 @@
         "Shaan Lagisetty": [
           542.8,
           418.88
+        ],
+        "Rohini Williams": [
+          15431.84,
+          14745.15
         ],
         "Karim Merchant": [
           489.23,
@@ -1495,22 +1497,23 @@
       "label_moy": "nov S1",
       "label_short": "7 nov",
       "prod": [
-        3002.74,
-        2079.83
+        3406.13,
+        2409.54
       ],
       "fixed": 12561.42,
       "net": [
-        -9558.68,
-        -10481.59
+        -9155.29,
+        -10151.88
       ],
       "cum": [
         365792.86,
-        292434.85
+        292434.86
       ],
-      "active_count": 3,
+      "active_count": 4,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
+        "Rohini Williams",
         "Shaan Lagisetty"
       ],
       "is_future": true,
@@ -1520,6 +1523,10 @@
         "Shaan Lagisetty": [
           90.47,
           69.81
+        ],
+        "Rohini Williams": [
+          403.39,
+          329.71
         ],
         "Karim Merchant": [
           2912.27,
@@ -1545,7 +1552,7 @@
       ],
       "cum": [
         353938.42,
-        280443.07
+        280443.08
       ],
       "active_count": 3,
       "active_projects": [
@@ -1585,7 +1592,7 @@
       ],
       "cum": [
         353938.42,
-        280443.07
+        280443.08
       ],
       "active_count": 1,
       "active_projects": [
@@ -1614,7 +1621,7 @@
       ],
       "cum": [
         353938.42,
-        280443.07
+        280443.08
       ],
       "active_count": 1,
       "active_projects": [
@@ -1643,7 +1650,7 @@
       ],
       "cum": [
         344018.33,
-        270522.98
+        270522.99
       ],
       "active_count": 1,
       "active_projects": [
@@ -1677,7 +1684,7 @@
       ],
       "cum": [
         335154.78,
-        261659.43
+        261659.44
       ],
       "active_count": 1,
       "active_projects": [
@@ -1711,7 +1718,7 @@
       ],
       "cum": [
         324178.16,
-        250682.81
+        250682.82
       ],
       "active_count": 1,
       "active_projects": [
@@ -1745,7 +1752,7 @@
       ],
       "cum": [
         324178.16,
-        250682.81
+        250682.82
       ],
       "active_count": 1,
       "active_projects": [
@@ -1774,7 +1781,7 @@
       ],
       "cum": [
         324178.16,
-        250682.81
+        250682.82
       ],
       "active_count": 1,
       "active_projects": [
@@ -2023,17 +2030,17 @@
       "month": "2026-10",
       "label": "oct 2026",
       "prod": [
-        102267.77,
-        88634.81
+        87044.37,
+        74009.29
       ],
       "fixed": 54432.8,
       "net": [
-        47834.97,
-        34202.01
+        32611.57,
+        19576.49
       ],
       "cum": [
-        391178.06,
-        319083.32
+        375954.66,
+        304457.8
       ],
       "is_future": true,
       "is_partial": false,
@@ -2052,8 +2059,8 @@
           5736.59
         ],
         "Rohini Williams": [
-          16068.53,
-          14304.89
+          845.12,
+          -320.63
         ],
         "Karim Merchant": [
           13947.85,
@@ -2065,13 +2072,13 @@
       "month": "2026-11",
       "label": "nov 2026",
       "prod": [
-        4631.83,
-        3231.26
+        19855.23,
+        17856.78
       ],
       "fixed": 54432.8,
       "net": [
-        -49800.97,
-        -51201.54
+        -34577.57,
+        -36576.02
       ],
       "cum": [
         341377.09,
@@ -2084,6 +2091,10 @@
         "Shaan Lagisetty": [
           682.8,
           537.88
+        ],
+        "Rohini Williams": [
+          15223.4,
+          14625.52
         ],
         "Karim Merchant": [
           3949.03,
@@ -2603,11 +2614,11 @@
           2838.28,
           2464.78
         ],
-        "2026-W41": [
-          513.66,
-          -281.51
+        "2026-W44": [
+          576.35,
+          -148.94
         ],
-        "2026-W43": [
+        "2026-W46": [
           403.39,
           329.71
         ],
@@ -2616,12 +2627,16 @@
           2910.35
         ],
         "2026-W40": [
-          2563.63,
-          1418.18
+          2626.32,
+          1550.75
         ],
-        "2026-W42": [
-          15369.15,
-          14612.58
+        "2026-W43": [
+          -188.09,
+          -397.71
+        ],
+        "2026-W45": [
+          15431.84,
+          14745.15
         ]
       },
       "months": {
@@ -2642,12 +2657,16 @@
           9843.27
         ],
         "2026-10": [
-          16068.53,
-          14304.89
+          845.12,
+          -320.63
+        ],
+        "2026-11": [
+          15223.4,
+          14625.52
         ]
       },
       "first_week": "2026-W26",
-      "last_week": "2026-W43"
+      "last_week": "2026-W46"
     },
     {
       "project": "Kyle Aubry",
@@ -3654,8 +3673,8 @@
       "produced": 8900.0,
       "margin_pct": 83.2,
       "ratio": 5.9,
-      "start": "2026-10-13",
-      "end": "2026-10-16",
+      "start": "2026-11-02",
+      "end": "2026-11-05",
       "severity": "alta"
     },
     {
@@ -3690,8 +3709,8 @@
       "produced": 8885.21,
       "margin_pct": 79.9,
       "ratio": 5.0,
-      "start": "2026-10-13",
-      "end": "2026-10-16",
+      "start": "2026-11-02",
+      "end": "2026-11-05",
       "severity": "alta"
     },
     {
@@ -3894,8 +3913,8 @@
       "produced": 2310.0,
       "margin_pct": 65.8,
       "ratio": 2.9,
-      "start": "2026-10-13",
-      "end": "2026-10-16",
+      "start": "2026-11-02",
+      "end": "2026-11-05",
       "severity": "media"
     },
     {
