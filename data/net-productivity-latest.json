@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T16:54:51",
+  "generated_at": "2026-09-03T17:18:07",
   "today": "2026-09-03",
   "horizon": "2027-01-08",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -5259,14 +5259,6 @@
           "n_exp": 1
         },
         {
-          "trade": "\u21aa PLUMBING ROUGH IN (suelto)",
-          "income": 0.0,
-          "expense": 3125.0,
-          "grouped": false,
-          "n_inc": 0,
-          "n_exp": 1
-        },
-        {
           "trade": "IN GROUND PLUMBING",
           "income": 0.0,
           "expense": 2550.0,
@@ -5316,8 +5308,8 @@
         }
       ],
       "total_income": 134339.18,
-      "total_expense": 80464.0,
-      "loose_amount": 3125.0
+      "total_expense": 77339.0,
+      "loose_amount": 0
     },
     {
       "project": "Stephanie Felton",
