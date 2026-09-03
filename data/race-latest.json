@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-03T17:18:09",
+ "generated_at": "2026-09-03T17:41:18",
  "today": "2026-09-03",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -51,25 +51,25 @@
   "weighting": "conteo de tareas (el motor de productividad no expone $ por-tarea; el $ del mes es contexto por proyecto)"
  },
  "company": {
-  "monthly_pct": 69.5,
-  "days_pct": 81.0,
+  "monthly_pct": 70.1,
+  "days_pct": 81.2,
   "ghost_days_pct": 100.0,
-  "earned_days": 353.0,
+  "earned_days": 354.0,
   "total_days": 436.0,
   "plan_days": 436.0,
   "month_forecast": {
    "status": "behind",
-   "projected_pct": 81.7,
+   "projected_pct": 83.0,
    "plan_pct": 100.0,
-   "leaked_count": 37,
-   "leaked_days": 80.0,
-   "leaked_pct": 18.3,
+   "leaked_count": 35,
+   "leaked_days": 74.0,
+   "leaked_pct": 17.0,
    "reshuffled_in_month": 0
   },
-  "adherence": 69.5,
-  "band": "red",
+  "adherence": 70.1,
+  "band": "amber",
   "runner_date": "2026-07-20",
-  "gap": 19.0,
+  "gap": 18.8,
   "status": "behind",
   "week": {
    "days_planned": 0.0,
@@ -82,8 +82,8 @@
   },
   "total_target": 174,
   "due_to_today": 174,
-  "done_total": 121,
-  "runner_pct": 69.5,
+  "done_total": 122,
+  "runner_pct": 70.1,
   "ghost_pct": 100.0,
   "july_money": [
    107595.87000000001,
@@ -506,8 +506,8 @@
    },
    {
     "date": "2026-09-03",
-    "real": 121,
-    "real_pct": 69.5,
+    "real": 122,
+    "real_pct": 70.1,
     "plan": 174,
     "plan_pct": 100.0
    }
@@ -523,22 +523,22 @@
    ],
    "total_target": 15,
    "due_to_today": 15,
-   "done_total": 7,
-   "done_due": 7,
-   "monthly_pct": 46.7,
-   "adherence": 46.7,
+   "done_total": 8,
+   "done_due": 8,
+   "monthly_pct": 53.3,
+   "adherence": 53.3,
    "band": "red",
-   "runner_pct": 46.7,
+   "runner_pct": 53.3,
    "ghost_pct": 100.0,
-   "runner_date": "2026-07-16",
+   "runner_date": "2026-07-17",
    "finish_date": "2026-07-30",
-   "days_pct": 60.6,
+   "days_pct": 63.6,
    "ghost_days_pct": 100.0,
    "total_days": 33.0,
-   "earned_days": 20.0,
+   "earned_days": 21.0,
    "plan_days": 33.0,
    "city_inspections": 3,
-   "gap": 39.4,
+   "gap": 36.4,
    "status": "no_work",
    "status_scope": "current_week",
    "week": {
@@ -559,19 +559,13 @@
    "excluded_admin": [],
    "month_forecast": {
     "status": "behind",
-    "projected_pct": 51.5,
+    "projected_pct": 69.7,
     "plan_pct": 100.0,
-    "leaked_count": 7,
-    "leaked_days": 16.0,
-    "leaked_pct": 48.5,
+    "leaked_count": 5,
+    "leaked_days": 10.0,
+    "leaked_pct": 30.3,
     "reshuffled_in_month": 0,
     "leaked": [
-     {
-      "name": "FOUNDATION: FOUNDATION CURE",
-      "from": "2026-07-18",
-      "to": "2026-09-01",
-      "days": 5
-     },
      {
       "name": "FRAMING: EXECUTE FRAMING",
       "from": "2026-07-22",
@@ -589,12 +583,6 @@
       "from": "2026-07-28",
       "to": "2026-09-12",
       "days": 2
-     },
-     {
-      "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
-      "from": "2026-07-29",
-      "to": "2026-09-11",
-      "days": 1
      },
      {
       "name": "PROJECT CLEANING - FRAMING: PROJECT CLEANING / HAUL",
@@ -687,6 +675,17 @@
      ]
     },
     {
+     "id": "22PZqFvVMrC9",
+     "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
+     "baseline_end": "2026-07-29",
+     "live_end": null,
+     "current_end": "2026-07-29",
+     "current_start": "2026-07-29",
+     "moved_days": 0,
+     "status": "pending",
+     "depends_on": []
+    },
+    {
      "id": "22PZqFvV2pNx",
      "name": "ELECTRICAL: CITY INSPECTION",
      "baseline_end": "2026-07-09",
@@ -721,7 +720,7 @@
      "current_end": "2026-09-01",
      "current_start": "2026-08-22",
      "moved_days": 45,
-     "status": "moved",
+     "status": "done",
      "depends_on": [
       "FOUNDATION: EXECUTE CONCRETE POUR"
      ]
@@ -742,17 +741,6 @@
       "FRAMING: CC CHECKLIST - PM INSPECTION (BEFORE)",
       "FRAMING: BILL & PAYMENT DOWNPAYMENT"
      ]
-    },
-    {
-     "id": "22PZqFvVMrC9",
-     "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
-     "baseline_end": "2026-07-29",
-     "live_end": "2026-09-11",
-     "current_end": "2026-09-11",
-     "current_start": "2026-09-11",
-     "moved_days": 44,
-     "status": "moved",
-     "depends_on": []
     },
     {
      "id": "22PZqFvVCtd4",
@@ -809,7 +797,7 @@
     1590.77
    ],
    "margin_pct": 41.9,
-   "moved_count": 13,
+   "moved_count": 12,
    "moved": [
     {
      "id": "22PZqFvVAHM2",
@@ -852,13 +840,6 @@
      "from": "2026-07-18",
      "to": "2026-09-01",
      "days": 45
-    },
-    {
-     "id": "22PZqFvVMrC9",
-     "name": "DOORS AND WINDOWS: INSTALL DOORS AND WINDOWS",
-     "from": "2026-07-29",
-     "to": "2026-09-11",
-     "days": 44
     },
     {
      "id": "22PZqFvUxqCQ",
@@ -1068,10 +1049,10 @@
      "deadline": "2026-07-19",
      "is_current": false,
      "total": 2,
-     "done": 1,
+     "done": 2,
      "days_planned": 6.0,
-     "days_earned": 5.0,
-     "pct": 83.3,
+     "days_earned": 6.0,
+     "pct": 100.0,
      "target_task": "FOUNDATION: FOUNDATION CURE",
      "target_type": "CP",
      "target_marker": null,
@@ -1171,10 +1152,10 @@
        "live_end": "2026-09-01",
        "moved_days": 45,
        "days_in_week": 5,
-       "earned_in_week": 4.0,
+       "earned_in_week": 5.0,
        "started": true,
-       "progress": 0,
-       "status": "moved",
+       "progress": 1,
+       "status": "done",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -1304,14 +1285,14 @@
        "marker": null,
        "baseline_start": "2026-07-29",
        "baseline_end": "2026-07-29",
-       "live_start": "2026-09-11",
-       "live_end": "2026-09-11",
-       "moved_days": 44,
+       "live_start": null,
+       "live_end": null,
+       "moved_days": 0,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
        "progress": 0,
-       "status": "moved",
+       "status": "pending",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -1878,8 +1859,8 @@
     },
     {
      "date": "2026-09-03",
-     "real": 7,
-     "real_pct": 46.7,
+     "real": 8,
+     "real_pct": 53.3,
      "plan": 15,
      "plan_pct": 100.0
     }
@@ -7464,9 +7445,9 @@
        "marker": null,
        "baseline_start": "2026-07-29",
        "baseline_end": "2026-08-01",
-       "live_start": "2026-09-08",
-       "live_end": "2026-09-11",
-       "moved_days": 41,
+       "live_start": "2026-09-15",
+       "live_end": "2026-09-18",
+       "moved_days": 48,
        "days_in_week": 4,
        "earned_in_week": 0.0,
        "started": false,
