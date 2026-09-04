@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T16:57:34",
+  "generated_at": "2026-09-04T17:21:27",
   "today": "2026-09-04",
   "horizon": "2027-01-08",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -39,20 +39,20 @@
   ],
   "totals": {
     "prod": [
-      669266.68,
-      595943.03
+      667004.73,
+      593551.88
     ],
     "prod_todate": [
-      565001.89,
-      505808.22
+      564155.07,
+      504830.2
     ],
     "weekly": {
-      "fixed": 351719.76,
+      "fixed": 339158.34,
       "net": [
-        317546.92,
-        244223.27
+        327846.39,
+        254393.54
       ],
-      "periods": 28,
+      "periods": 27,
       "positive": [
         17,
         15
@@ -61,8 +61,8 @@
     "monthly": {
       "fixed": 381029.6,
       "net": [
-        288237.08,
-        214913.43
+        285975.13,
+        212522.28
       ],
       "periods": 7,
       "positive": [
@@ -1101,17 +1101,17 @@
       "label_moy": "sep S2",
       "label_short": "12 sep",
       "prod": [
-        51114.24,
-        45009.08
+        50267.43,
+        44031.07
       ],
       "fixed": 12561.42,
       "net": [
-        38552.82,
-        32447.66
+        37706.01,
+        31469.65
       ],
       "cum": [
-        283638.42,
-        238192.75
+        282791.61,
+        237214.74
       ],
       "active_count": 5,
       "active_projects": [
@@ -1138,8 +1138,8 @@
           15705.73
         ],
         "Rohini Williams": [
-          5811.14,
-          4950.94
+          4964.32,
+          3972.92
         ],
         "Karim Merchant": [
           6417.4,
@@ -1164,8 +1164,8 @@
         28311.52
       ],
       "cum": [
-        319834.13,
-        266504.27
+        318987.32,
+        265526.26
       ],
       "active_count": 5,
       "active_projects": [
@@ -1218,8 +1218,8 @@
         22830.49
       ],
       "cum": [
-        350343.47,
-        289334.76
+        349496.66,
+        288356.75
       ],
       "active_count": 5,
       "active_projects": [
@@ -1263,17 +1263,17 @@
       "label_moy": "oct S1",
       "label_short": "3 oct",
       "prod": [
-        22045.47,
-        17636.74
+        21977.43,
+        17585.83
       ],
       "fixed": 12561.42,
       "net": [
-        9484.05,
-        5075.32
+        9416.01,
+        5024.41
       ],
       "cum": [
-        359827.52,
-        294410.08
+        358912.67,
+        293381.16
       ],
       "active_count": 4,
       "active_projects": [
@@ -1295,8 +1295,8 @@
           5526.47
         ],
         "Karim Merchant": [
-          2930.74,
-          2477.09
+          2862.7,
+          2426.17
         ]
       }
     },
@@ -1308,17 +1308,17 @@
       "label_moy": "oct S2",
       "label_short": "10 oct",
       "prod": [
-        32570.16,
-        28840.28
+        32509.89,
+        28802.2
       ],
       "fixed": 12561.42,
       "net": [
-        20008.74,
-        16278.86
+        19948.47,
+        16240.78
       ],
       "cum": [
-        379836.26,
-        310688.94
+        378861.14,
+        309621.94
       ],
       "active_count": 3,
       "active_projects": [
@@ -1339,8 +1339,8 @@
           -132.57
         ],
         "Karim Merchant": [
-          2211.79,
-          1013.2
+          2151.52,
+          975.12
         ]
       }
     },
@@ -1352,17 +1352,17 @@
       "label_moy": "oct S3",
       "label_short": "17 oct",
       "prod": [
-        11985.46,
-        9717.64
+        11508.51,
+        9340.26
       ],
       "fixed": 12561.42,
       "net": [
-        -575.96,
-        -2843.78
+        -1052.91,
+        -3221.16
       ],
       "cum": [
-        379260.3,
-        307845.16
+        377808.23,
+        306400.78
       ],
       "active_count": 3,
       "active_projects": [
@@ -1379,12 +1379,12 @@
           8018.24
         ],
         "Rohini Williams": [
-          -64.28,
-          -1280.53
+          659.4,
+          -294.45
         ],
         "Karim Merchant": [
-          3451.54,
-          2979.93
+          2250.92,
+          1616.47
         ]
       }
     },
@@ -1396,17 +1396,17 @@
       "label_moy": "oct S4",
       "label_short": "24 oct",
       "prod": [
-        14232.42,
-        13395.72
+        14609.77,
+        13308.2
       ],
       "fixed": 12561.42,
       "net": [
-        1671.0,
-        834.3
+        2048.35,
+        746.78
       ],
       "cum": [
-        380931.3,
-        308679.46
+        379856.58,
+        307147.56
       ],
       "active_count": 3,
       "active_projects": [
@@ -1419,12 +1419,12 @@
       "pending": false,
       "by_project": {
         "Rohini Williams": [
-          14096.33,
-          13309.73
+          13249.52,
+          12331.72
         ],
         "Karim Merchant": [
-          136.09,
-          85.99
+          1360.25,
+          976.48
         ]
       }
     },
@@ -1436,17 +1436,17 @@
       "label_moy": "oct S5",
       "label_short": "31 oct",
       "prod": [
-        77.77,
-        49.14
+        2417.07,
+        1769.76
       ],
       "fixed": 12561.42,
       "net": [
-        -12483.65,
-        -12512.28
+        -10144.35,
+        -10791.66
       ],
       "cum": [
-        368447.65,
-        296167.18
+        369712.23,
+        296355.9
       ],
       "active_count": 2,
       "active_projects": [
@@ -1458,8 +1458,8 @@
       "pending": false,
       "by_project": {
         "Karim Merchant": [
-          77.77,
-          49.14
+          2417.07,
+          1769.76
         ]
       }
     },
@@ -1471,17 +1471,17 @@
       "label_moy": "nov S1",
       "label_short": "7 nov",
       "prod": [
-        2891.69,
-        2100.14
+        455.85,
+        359.31
       ],
       "fixed": 12561.42,
       "net": [
-        -9669.73,
-        -10461.28
+        -12105.57,
+        -12202.11
       ],
       "cum": [
-        358777.92,
-        285705.9
+        357606.66,
+        284153.79
       ],
       "active_count": 2,
       "active_projects": [
@@ -1493,8 +1493,8 @@
       "pending": false,
       "by_project": {
         "Karim Merchant": [
-          2891.69,
-          2100.14
+          455.85,
+          359.31
         ]
       }
     },
@@ -1506,17 +1506,17 @@
       "label_moy": "nov S2",
       "label_short": "14 nov",
       "prod": [
-        1090.69,
-        839.04
+        0.0,
+        0.0
       ],
-      "fixed": 12561.42,
+      "fixed": 0.0,
       "net": [
-        -11470.73,
-        -11722.38
+        0.0,
+        0.0
       ],
       "cum": [
-        347307.19,
-        273983.52
+        357606.66,
+        284153.79
       ],
       "active_count": 2,
       "active_projects": [
@@ -1525,13 +1525,8 @@
       ],
       "is_future": true,
       "is_partial": false,
-      "pending": false,
-      "by_project": {
-        "Karim Merchant": [
-          1090.69,
-          839.04
-        ]
-      }
+      "pending": true,
+      "by_project": {}
     },
     {
       "week_iso": "2026-W48",
@@ -1550,8 +1545,8 @@
         0.0
       ],
       "cum": [
-        347307.19,
-        273983.52
+        357606.66,
+        284153.79
       ],
       "active_count": 1,
       "active_projects": [
@@ -1579,8 +1574,8 @@
         0.0
       ],
       "cum": [
-        347307.19,
-        273983.52
+        357606.66,
+        284153.79
       ],
       "active_count": 1,
       "active_projects": [
@@ -1608,8 +1603,8 @@
         -9920.09
       ],
       "cum": [
-        337387.1,
-        264063.43
+        347686.57,
+        274233.7
       ],
       "active_count": 1,
       "active_projects": [
@@ -1642,8 +1637,8 @@
         -8863.55
       ],
       "cum": [
-        328523.55,
-        255199.88
+        338823.02,
+        265370.15
       ],
       "active_count": 1,
       "active_projects": [
@@ -1676,8 +1671,8 @@
         -10976.62
       ],
       "cum": [
-        317546.93,
-        244223.26
+        327846.4,
+        254393.53
       ],
       "active_count": 1,
       "active_projects": [
@@ -1710,8 +1705,8 @@
         0.0
       ],
       "cum": [
-        317546.93,
-        244223.26
+        327846.4,
+        254393.53
       ],
       "active_count": 1,
       "active_projects": [
@@ -1739,8 +1734,8 @@
         0.0
       ],
       "cum": [
-        317546.93,
-        244223.26
+        327846.4,
+        254393.53
       ],
       "active_count": 1,
       "active_projects": [
@@ -1935,17 +1930,17 @@
       "month": "2026-09",
       "label": "sep 2026",
       "prod": [
-        206608.44,
-        179661.75
+        205761.62,
+        178683.73
       ],
       "fixed": 54432.8,
       "net": [
-        152175.64,
-        125228.95
+        151328.82,
+        124250.93
       ],
       "cum": [
-        347270.69,
-        288077.02
+        346423.87,
+        287099.0
       ],
       "is_future": false,
       "is_partial": true,
@@ -1976,8 +1971,8 @@
           -522.73
         ],
         "Rohini Williams": [
-          18442.24,
-          15953.6
+          17595.42,
+          14975.58
         ],
         "Karim Merchant": [
           24987.14,
@@ -1989,17 +1984,17 @@
       "month": "2026-10",
       "label": "oct 2026",
       "prod": [
-        92300.08,
-        79234.78
+        92481.52,
+        78978.54
       ],
       "fixed": 54432.8,
       "net": [
-        37867.28,
-        24801.98
+        38048.72,
+        24545.74
       ],
       "cum": [
-        385137.97,
-        312879.0
+        384472.59,
+        311644.74
       ],
       "is_future": true,
       "is_partial": false,
@@ -2018,12 +2013,12 @@
           5736.59
         ],
         "Rohini Williams": [
-          13906.66,
-          11764.06
+          13783.52,
+          11772.13
         ],
         "Karim Merchant": [
-          11499.65,
-          8865.88
+          11804.23,
+          8601.57
         ]
       }
     },
@@ -2031,25 +2026,25 @@
       "month": "2026-11",
       "label": "nov 2026",
       "prod": [
-        4040.71,
-        2976.03
+        2444.14,
+        1819.14
       ],
       "fixed": 54432.8,
       "net": [
-        -50392.09,
-        -51456.77
+        -51988.66,
+        -52613.66
       ],
       "cum": [
-        334745.88,
-        261422.23
+        332483.93,
+        259031.08
       ],
       "is_future": true,
       "is_partial": false,
       "pending": false,
       "by_project": {
         "Karim Merchant": [
-          4040.71,
-          2976.03
+          2444.14,
+          1819.14
         ]
       }
     },
@@ -2066,8 +2061,8 @@
         -46508.8
       ],
       "cum": [
-        288237.08,
-        214913.43
+        285975.13,
+        212522.28
       ],
       "is_future": true,
       "is_partial": false,
@@ -2092,8 +2087,8 @@
         0.0
       ],
       "cum": [
-        288237.08,
-        214913.43
+        285975.13,
+        212522.28
       ],
       "is_future": true,
       "is_partial": false,
@@ -2383,14 +2378,14 @@
     },
     {
       "project": "Rohini Williams",
-      "revenue": 131891.08,
-      "revenue_gross": 166571.2,
+      "revenue": 130921.13,
+      "revenue_gross": 165346.2,
       "cost": 82872.7,
       "prod": [
-        49018.38,
-        40731.11
+        48048.43,
+        39761.16
       ],
-      "margin_pct": 37.2,
+      "margin_pct": 36.7,
       "weeks": {
         "2026-W26": [
           699.77,
@@ -2441,16 +2436,12 @@
           7057.06
         ],
         "2026-W38": [
-          5811.14,
-          4950.94
-        ],
-        "2026-W43": [
-          -64.28,
-          -1280.53
+          4964.32,
+          3972.92
         ],
         "2026-W44": [
-          14096.33,
-          13309.73
+          13249.52,
+          12331.72
         ],
         "2026-W39": [
           2449.2,
@@ -2459,6 +2450,10 @@
         "2026-W40": [
           -10.77,
           -288.62
+        ],
+        "2026-W43": [
+          659.4,
+          -294.45
         ],
         "2026-W42": [
           -62.7,
@@ -2479,12 +2474,12 @@
           8059.96
         ],
         "2026-09": [
-          18442.24,
-          15953.6
+          17595.42,
+          14975.58
         ],
         "2026-10": [
-          13906.66,
-          11764.06
+          13783.52,
+          11772.13
         ]
       },
       "first_week": "2026-W26",
@@ -2494,12 +2489,12 @@
       "project": "Karim Merchant",
       "revenue": 118834.87,
       "revenue_gross": 130832.18,
-      "cost": 74348.5,
+      "cost": 75640.5,
       "prod": [
-        44486.37,
-        37051.52
+        43194.37,
+        35630.32
       ],
-      "margin_pct": 37.4,
+      "margin_pct": 36.3,
       "weeks": {
         "2026-W27": [
           164.95,
@@ -2550,32 +2545,28 @@
           5299.89
         ],
         "2026-W41": [
-          2930.74,
-          2477.09
+          2862.7,
+          2426.17
         ],
         "2026-W42": [
-          2211.79,
-          1013.2
+          2151.52,
+          975.12
         ],
         "2026-W43": [
-          3451.54,
-          2979.93
+          2250.92,
+          1616.47
         ],
         "2026-W44": [
-          136.09,
-          85.99
+          1360.25,
+          976.48
         ],
         "2026-W45": [
-          77.77,
-          49.14
+          2417.07,
+          1769.76
         ],
         "2026-W46": [
-          2891.69,
-          2100.14
-        ],
-        "2026-W47": [
-          1090.69,
-          839.04
+          455.85,
+          359.31
         ]
       },
       "months": {
@@ -2596,16 +2587,16 @@
           22028.07
         ],
         "2026-10": [
-          11499.65,
-          8865.88
+          11804.23,
+          8601.57
         ],
         "2026-11": [
-          4040.71,
-          2976.03
+          2444.14,
+          1819.14
         ]
       },
       "first_week": "2026-W27",
-      "last_week": "2026-W47"
+      "last_week": "2026-W46"
     },
     {
       "project": "Kyle Aubry",
@@ -3026,10 +3017,10 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 46,
-    "orphan_cost": 315905.0,
+    "orphan_trades": 47,
+    "orphan_cost": 316905.0,
     "priced_trades": 170,
-    "total_trades": 216,
+    "total_trades": 217,
     "by_project": [
       {
         "project": "Charles Harris",
@@ -3114,8 +3105,8 @@
       },
       {
         "project": "Karim Merchant",
-        "orphan_trades": 4,
-        "orphan_cost": 7042.0,
+        "orphan_trades": 5,
+        "orphan_cost": 8042.0,
         "examples": [
           {
             "trade": "IN GROUND ELECTRICAL",
@@ -3132,6 +3123,10 @@
           {
             "trade": "GLASS",
             "cost": 1470.0
+          },
+          {
+            "trade": "FINAL PUNCH LIST",
+            "cost": 1000.0
           }
         ]
       },
@@ -3658,18 +3653,6 @@
       "severity": "alta"
     },
     {
-      "project": "Karim Merchant",
-      "trade": "BASEBOARDS AND TRIM",
-      "revenue": 3786.0,
-      "cost": 812.5,
-      "produced": 2973.5,
-      "margin_pct": 78.5,
-      "ratio": 4.7,
-      "start": "2026-10-21",
-      "end": "2026-10-23",
-      "severity": "alta"
-    },
-    {
       "project": "Lingyan Qiu",
       "trade": "INTERIOR PAINT",
       "revenue": 5215.0,
@@ -3847,6 +3830,18 @@
       "ratio": 2.9,
       "start": "2026-10-24",
       "end": "2026-10-28",
+      "severity": "media"
+    },
+    {
+      "project": "Karim Merchant",
+      "trade": "BASEBOARDS AND TRIM",
+      "revenue": 3786.0,
+      "cost": 1312.5,
+      "produced": 2473.5,
+      "margin_pct": 65.3,
+      "ratio": 2.9,
+      "start": "2026-10-21",
+      "end": "2026-10-23",
       "severity": "media"
     },
     {
@@ -4876,14 +4871,6 @@
           "n_exp": 2
         },
         {
-          "trade": "INTERIOR PAINT",
-          "income": 7200.0,
-          "expense": 7872.0,
-          "grouped": true,
-          "n_inc": 3,
-          "n_exp": 3
-        },
-        {
           "trade": "ELECTRICAL ROUGH IN",
           "income": 10700.0,
           "expense": 3650.0,
@@ -4908,6 +4895,14 @@
           "n_exp": 1
         },
         {
+          "trade": "INTERIOR PAINT",
+          "income": 5975.0,
+          "expense": 7872.0,
+          "grouped": true,
+          "n_inc": 2,
+          "n_exp": 3
+        },
+        {
           "trade": "PLUMBING TRIM",
           "income": 11127.2,
           "expense": 2241.99,
@@ -4929,7 +4924,7 @@
           "expense": 4300.0,
           "grouped": true,
           "n_inc": 1,
-          "n_exp": 3
+          "n_exp": 4
         },
         {
           "trade": "TILES",
@@ -5052,7 +5047,7 @@
           "n_exp": 1
         }
       ],
-      "total_income": 175398.2,
+      "total_income": 174173.2,
       "total_expense": 93222.7,
       "loose_amount": 0
     },
@@ -5175,10 +5170,10 @@
         {
           "trade": "BASEBOARDS AND TRIM",
           "income": 3786.0,
-          "expense": 812.5,
+          "expense": 1312.5,
           "grouped": true,
           "n_inc": 1,
-          "n_exp": 1
+          "n_exp": 2
         },
         {
           "trade": "CABINETS",
@@ -5187,6 +5182,14 @@
           "grouped": true,
           "n_inc": 1,
           "n_exp": 1
+        },
+        {
+          "trade": "GUTTERS",
+          "income": 1320.0,
+          "expense": 1384.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 2
         },
         {
           "trade": "IN GROUND PLUMBING",
@@ -5205,17 +5208,17 @@
           "n_exp": 1
         },
         {
-          "trade": "GUTTERS",
-          "income": 1320.0,
-          "expense": 592.0,
-          "grouped": true,
-          "n_inc": 1,
-          "n_exp": 1
-        },
-        {
           "trade": "GLASS",
           "income": 0.0,
           "expense": 1470.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 1
+        },
+        {
+          "trade": "FINAL PUNCH LIST",
+          "income": 0.0,
+          "expense": 1000.0,
           "grouped": true,
           "n_inc": 0,
           "n_exp": 1
@@ -5230,7 +5233,7 @@
         }
       ],
       "total_income": 130832.18,
-      "total_expense": 81390.5,
+      "total_expense": 83682.5,
       "loose_amount": 0
     },
     {
