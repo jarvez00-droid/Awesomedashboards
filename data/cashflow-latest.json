@@ -1,19 +1,19 @@
 {
   "date": "2026-09-03",
-  "generated_at": "2026-09-03T19:38:32.685332",
+  "generated_at": "2026-09-03T20:02:15.734862",
   "summary": {
     "total_payment_tasks": 767,
     "total_income": 389913.64,
     "total_p_income": 0,
-    "total_outgoing": 512656.65,
-    "total_net": -122743.01,
-    "pending_income": 1086483.08,
+    "total_outgoing": 514155.65,
+    "total_net": -124242.01,
+    "pending_income": 1082683.08,
     "pending_p_income": 0,
-    "pending_outgoing": 873374.93,
-    "paid_income": 759802.33,
+    "pending_outgoing": 874873.93,
+    "paid_income": 763602.33,
     "paid_p_income": 0,
     "paid_outgoing": 579430.19,
-    "unpaid_net": 213108.15,
+    "unpaid_net": 207809.15,
     "weeks_covered": 5
   },
   "weeks": [
@@ -24,15 +24,15 @@
       "is_past": false,
       "income": 156001.0,
       "p_income": 0,
-      "subs": 113366.0,
+      "subs": 113365.0,
       "materials": 32120.74,
       "additional": 0,
-      "outgoing": 145486.74,
-      "net": 10514.26,
-      "income_paid": 7500.0,
+      "outgoing": 145485.74,
+      "net": 10515.26,
+      "income_paid": 11300.0,
       "p_income_paid": 0,
       "outgoing_paid": 8393.46,
-      "task_count": 75,
+      "task_count": 74,
       "items": [
         {
           "project": "Charles Harris \u2014 Argyle TX",
@@ -56,7 +56,7 @@
           "type": "income",
           "amount": 3800.0,
           "due": "2026-09-03",
-          "paid": false
+          "paid": true
         },
         {
           "project": "Kyle Aubry - Project 01",
@@ -619,14 +619,6 @@
           "paid": false
         },
         {
-          "project": "Stephanie and Marc Felton",
-          "task": "PAINT: BILL & PAYMENT",
-          "type": "subs",
-          "amount": 1.0,
-          "due": "2026-09-04",
-          "paid": false
-        },
-        {
           "project": "Karim Merchant (JOSE-TEST10)",
           "task": "FRAMING: BILL & PAYMENT DOWNPAYMENT",
           "type": "subs",
@@ -643,15 +635,15 @@
       "is_past": false,
       "income": 82146.68,
       "p_income": 0,
-      "subs": 111241.0,
+      "subs": 112741.0,
       "materials": 52749.92,
       "additional": 0,
-      "outgoing": 163990.92,
-      "net": -81844.24,
+      "outgoing": 165490.92,
+      "net": -83344.24,
       "income_paid": 0,
       "p_income_paid": 0,
       "outgoing_paid": 1300.0,
-      "task_count": 29,
+      "task_count": 30,
       "items": [
         {
           "project": "Martha Cockrell (CNG-20251199)",
@@ -866,6 +858,14 @@
           "task": "POOL: BILL & PAYMENT",
           "type": "subs",
           "amount": 25000.0,
+          "due": "2026-09-11",
+          "paid": false
+        },
+        {
+          "project": "Stephanie and Marc Felton",
+          "task": "PAINT: BILL & PAYMENT",
+          "type": "subs",
+          "amount": 1500.0,
           "due": "2026-09-11",
           "paid": false
         },
@@ -7518,7 +7518,7 @@
       "type": "income",
       "amount": 3800.0,
       "due": "2026-09-03",
-      "paid": false,
+      "paid": true,
       "assignee": "PAYMENTS",
       "assignedTo": "",
       "taskId": "22PchHURd7sy",
@@ -8507,20 +8507,6 @@
       "external": false
     },
     {
-      "project": "Stephanie and Marc Felton",
-      "task": "PAINT: BILL & PAYMENT",
-      "type": "subs",
-      "amount": 1.0,
-      "due": "2026-09-04",
-      "paid": false,
-      "assignee": "PAINT",
-      "assignedTo": "",
-      "taskId": "22PcFcZdTnNA",
-      "projectId": "22P2cmNJZcwJ",
-      "planning": false,
-      "external": false
-    },
-    {
       "project": "Karim Merchant (JOSE-TEST10)",
       "task": "FRAMING: BILL & PAYMENT DOWNPAYMENT",
       "type": "subs",
@@ -8908,6 +8894,20 @@
       "assignee": "Decking",
       "assignedTo": "",
       "taskId": "22PW9KqMr2QT",
+      "projectId": "22P2cmNJZcwJ",
+      "planning": false,
+      "external": false
+    },
+    {
+      "project": "Stephanie and Marc Felton",
+      "task": "PAINT: BILL & PAYMENT",
+      "type": "subs",
+      "amount": 1500.0,
+      "due": "2026-09-11",
+      "paid": false,
+      "assignee": "PAINT",
+      "assignedTo": "",
+      "taskId": "22PcFcZdTnNA",
       "projectId": "22P2cmNJZcwJ",
       "planning": false,
       "external": false
