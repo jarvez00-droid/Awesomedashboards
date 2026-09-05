@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-04T21:43:25",
+ "generated_at": "2026-09-04T22:07:26",
  "today": "2026-09-04",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -52,24 +52,24 @@
  },
  "company": {
   "monthly_pct": 71.3,
-  "days_pct": 81.9,
+  "days_pct": 81.0,
   "ghost_days_pct": 100.0,
-  "earned_days": 357.0,
+  "earned_days": 353.0,
   "total_days": 436.0,
   "plan_days": 436.0,
   "month_forecast": {
    "status": "behind",
-   "projected_pct": 85.1,
+   "projected_pct": 86.5,
    "plan_pct": 100.0,
-   "leaked_count": 32,
-   "leaked_days": 65.0,
-   "leaked_pct": 14.9,
+   "leaked_count": 30,
+   "leaked_days": 59.0,
+   "leaked_pct": 13.5,
    "reshuffled_in_month": 0
   },
   "adherence": 71.3,
   "band": "amber",
   "runner_date": "2026-07-20",
-  "gap": 18.1,
+  "gap": 19.0,
   "status": "behind",
   "week": {
    "days_planned": 0.0,
@@ -1885,13 +1885,13 @@
    "ghost_pct": 100.0,
    "runner_date": "2026-07-20",
    "finish_date": "2026-07-31",
-   "days_pct": 72.7,
+   "days_pct": 66.7,
    "ghost_days_pct": 100.0,
    "total_days": 66.0,
-   "earned_days": 48.0,
+   "earned_days": 44.0,
    "plan_days": 66.0,
    "city_inspections": 4,
-   "gap": 27.3,
+   "gap": 33.3,
    "status": "no_work",
    "status_scope": "current_week",
    "week": {
@@ -1918,11 +1918,11 @@
    ],
    "month_forecast": {
     "status": "behind",
-    "projected_pct": 63.6,
+    "projected_pct": 72.7,
     "plan_pct": 100.0,
-    "leaked_count": 11,
-    "leaked_days": 24.0,
-    "leaked_pct": 36.4,
+    "leaked_count": 9,
+    "leaked_days": 18.0,
+    "leaked_pct": 27.3,
     "reshuffled_in_month": 0,
     "leaked": [
      {
@@ -1930,12 +1930,6 @@
       "from": "2026-07-23",
       "to": "2026-09-07",
       "days": 6
-     },
-     {
-      "name": "BRICKS: INSTALL BRICKS",
-      "from": "2026-07-21",
-      "to": "2026-08-24",
-      "days": 4
      },
      {
       "name": "FLOORING: INSTALL HARDWOOD",
@@ -1948,12 +1942,6 @@
       "from": "2026-07-23",
       "to": "2026-09-01",
       "days": 3
-     },
-     {
-      "name": "GUTTERS: INSTALL GUTTERS",
-      "from": "2026-07-23",
-      "to": "2026-08-29",
-      "days": 2
      },
      {
       "name": "PLUMBING: CITY INSPECTION",
@@ -2036,6 +2024,17 @@
      "current_start": "2026-07-15",
      "moved_days": 6,
      "status": "done",
+     "depends_on": []
+    },
+    {
+     "id": "22PZpKBqLfMY",
+     "name": "BRICKS: INSTALL BRICKS",
+     "baseline_end": "2026-07-21",
+     "live_end": null,
+     "current_end": "2026-07-21",
+     "current_start": "2026-07-18",
+     "moved_days": 0,
+     "status": "pending",
      "depends_on": []
     },
     {
@@ -2171,17 +2170,6 @@
      "depends_on": []
     },
     {
-     "id": "22PZpKBqLfMY",
-     "name": "BRICKS: INSTALL BRICKS",
-     "baseline_end": "2026-07-21",
-     "live_end": "2026-08-24",
-     "current_end": "2026-08-24",
-     "current_start": "2026-08-22",
-     "moved_days": 34,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PZpKA3WxLB",
      "name": "FLOORING: INSTALL HARDWOOD",
      "baseline_end": "2026-07-10",
@@ -2252,8 +2240,8 @@
     15944.19,
     13316.25
    ],
-   "margin_pct": 44.5,
-   "moved_count": 26,
+   "margin_pct": 45.3,
+   "moved_count": 24,
    "moved": [
     {
      "id": "22PZpKA3WxLB",
@@ -2310,20 +2298,6 @@
      "from": "2026-07-24",
      "to": "2026-09-01",
      "days": 39
-    },
-    {
-     "id": "22PZpKC3L9j4",
-     "name": "GUTTERS: INSTALL GUTTERS",
-     "from": "2026-07-23",
-     "to": "2026-08-29",
-     "days": 37
-    },
-    {
-     "id": "22PZpKBqLfMY",
-     "name": "BRICKS: INSTALL BRICKS",
-     "from": "2026-07-21",
-     "to": "2026-08-24",
-     "days": 34
     },
     {
      "id": "22PZpKCjBHpp",
@@ -2429,6 +2403,13 @@
      "from": "2026-07-23",
      "to": "2026-07-31",
      "days": 8
+    },
+    {
+     "id": "22PZpK8JeCxp",
+     "name": "KITCHEN FLOOR: FLOOR INSTALLATION",
+     "from": "2026-07-10",
+     "to": "2026-07-16",
+     "days": 6
     }
    ],
    "weeks": [
@@ -2678,8 +2659,8 @@
      "total": 8,
      "done": 6,
      "days_planned": 14.0,
-     "days_earned": 12.0,
-     "pct": 85.7,
+     "days_earned": 10.0,
+     "pct": 71.4,
      "target_task": "PLUMBING: INSTALL PLUMBING TRIM",
      "target_type": "CP",
      "target_marker": "start",
@@ -2794,14 +2775,14 @@
        "marker": "start",
        "baseline_start": "2026-07-18",
        "baseline_end": "2026-07-21",
-       "live_start": "2026-08-22",
-       "live_end": "2026-08-24",
-       "moved_days": 34,
+       "live_start": null,
+       "live_end": null,
+       "moved_days": 0,
        "days_in_week": 2,
-       "earned_in_week": 2.0,
-       "started": true,
+       "earned_in_week": 0.0,
+       "started": false,
        "progress": 0,
-       "status": "moved",
+       "status": "pending",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -2898,8 +2879,8 @@
      "total": 13,
      "done": 4,
      "days_planned": 27.0,
-     "days_earned": 15.0,
-     "pct": 55.6,
+     "days_earned": 13.0,
+     "pct": 48.1,
      "target_task": "FINAL INSPECTIONS: CITY INSPECTION",
      "target_type": "CI",
      "target_marker": null,
@@ -2912,14 +2893,14 @@
        "marker": "finish",
        "baseline_start": "2026-07-18",
        "baseline_end": "2026-07-21",
-       "live_start": "2026-08-22",
-       "live_end": "2026-08-24",
-       "moved_days": 34,
+       "live_start": null,
+       "live_end": null,
+       "moved_days": 0,
        "days_in_week": 2,
-       "earned_in_week": 1.0,
-       "started": true,
+       "earned_in_week": 0.0,
+       "started": false,
        "progress": 0,
-       "status": "moved",
+       "status": "pending",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -3033,14 +3014,14 @@
        "marker": null,
        "baseline_start": "2026-07-22",
        "baseline_end": "2026-07-23",
-       "live_start": "2026-08-28",
-       "live_end": "2026-08-29",
-       "moved_days": 37,
+       "live_start": null,
+       "live_end": null,
+       "moved_days": 0,
        "days_in_week": 2,
-       "earned_in_week": 1.0,
-       "started": true,
+       "earned_in_week": 0.0,
+       "started": false,
        "progress": 0,
-       "status": "moved",
+       "status": "pending",
        "in_week_plan": true,
        "kicked_out": false,
        "pulled_in": false,
@@ -5413,7 +5394,7 @@
     25811.56,
     24671.65
    ],
-   "margin_pct": 49.6,
+   "margin_pct": 50.8,
    "moved_count": 11,
    "moved": [
     {
