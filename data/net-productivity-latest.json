@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-05T00:10:00",
+  "generated_at": "2026-09-05T00:33:44",
   "today": "2026-09-05",
   "horizon": "2027-01-13",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -92,8 +92,9 @@
         -9153.83,
         -9600.99
       ],
-      "active_count": 7,
+      "active_count": 8,
       "active_projects": [
+        "Brandy Sexton",
         "Clifford Clack",
         "Katie Holmes",
         "Kyle Aubry",
@@ -3062,10 +3063,10 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 47,
-    "orphan_cost": 330354.0,
+    "orphan_trades": 48,
+    "orphan_cost": 330504.0,
     "priced_trades": 167,
-    "total_trades": 214,
+    "total_trades": 215,
     "by_project": [
       {
         "project": "Charles Harris",
@@ -3275,6 +3276,17 @@
           {
             "trade": "DEMO",
             "cost": 302.3
+          }
+        ]
+      },
+      {
+        "project": "Brandy Sexton",
+        "orphan_trades": 1,
+        "orphan_cost": 150.0,
+        "examples": [
+          {
+            "trade": "FINAL PUNCH LIST",
+            "cost": 150.0
           }
         ]
       }
@@ -5617,6 +5629,127 @@
       "loose_amount": 0
     },
     {
+      "project": "Brandy Sexton",
+      "project_id": "22PLKSsB4aeV",
+      "trades": [
+        {
+          "trade": "CABINETS",
+          "income": 23900.0,
+          "expense": 8280.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 8
+        },
+        {
+          "trade": "COUNTERTOPS",
+          "income": 16200.0,
+          "expense": 11491.7,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 2
+        },
+        {
+          "trade": "CABINET PAINTING",
+          "income": 5980.0,
+          "expense": 3393.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 4
+        },
+        {
+          "trade": "PLUMBING TRIM",
+          "income": 1875.0,
+          "expense": 1631.15,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 3
+        },
+        {
+          "trade": "INTERIOR PAINT",
+          "income": 1823.0,
+          "expense": 1610.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 4
+        },
+        {
+          "trade": "INTERIOR DOORS",
+          "income": 2068.0,
+          "expense": 1204.71,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 4
+        },
+        {
+          "trade": "PLUMBING ROUGH IN",
+          "income": 1875.0,
+          "expense": 900.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        },
+        {
+          "trade": "ELECTRICAL TRIM",
+          "income": 1549.0,
+          "expense": 994.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 3
+        },
+        {
+          "trade": "DEMO INTERIOR",
+          "income": 855.0,
+          "expense": 1650.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 4
+        },
+        {
+          "trade": "WINDOWS",
+          "income": 980.0,
+          "expense": 1242.35,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 3
+        },
+        {
+          "trade": "FRAMING",
+          "income": 1135.0,
+          "expense": 900.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        },
+        {
+          "trade": "ELECTRICAL ROUGH IN",
+          "income": 1033.0,
+          "expense": 600.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        },
+        {
+          "trade": "SHEETROCK",
+          "income": 0.0,
+          "expense": 850.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 3
+        },
+        {
+          "trade": "FINAL PUNCH LIST",
+          "income": 0.0,
+          "expense": 150.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 1
+        }
+      ],
+      "total_income": 59273.0,
+      "total_expense": 34896.91,
+      "loose_amount": 0
+    },
+    {
       "project": "Shaan Lagisetty",
       "project_id": "22PEuiuEZaAY",
       "trades": [
@@ -5933,15 +6066,253 @@
   ],
   "brandy": {
     "project": "Brandy Sexton",
-    "revenue": 0,
-    "cost": 0,
-    "orphan_cost": 0,
+    "revenue": 59273.0,
+    "cost": 33896.91,
+    "orphan_cost": 1000.0,
     "prod": [
-      0.0,
-      0.0
+      25376.09,
+      21986.4
     ],
-    "margin_pct": null,
-    "by_month": {},
-    "trades": []
+    "margin_pct": 42.8,
+    "by_month": {
+      "2026-05": [
+        24686.55,
+        21464.6
+      ],
+      "2026-06": [
+        689.54,
+        521.8
+      ]
+    },
+    "trades": [
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "CABINETS",
+        "revenue": 23900.0,
+        "revenue_gross": 23900.0,
+        "discount_pct": 0.0,
+        "cost": 8280.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-06",
+            "2026-05-06"
+          ],
+          [
+            "2026-05-09",
+            "2026-05-13"
+          ],
+          [
+            "2026-05-11",
+            "2026-05-30"
+          ]
+        ],
+        "start": "2026-05-06",
+        "end": "2026-05-30"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "COUNTERTOPS",
+        "revenue": 16200.0,
+        "revenue_gross": 16200.0,
+        "discount_pct": 0.0,
+        "cost": 11491.7,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-22",
+            "2026-05-22"
+          ],
+          [
+            "2026-05-26",
+            "2026-05-27"
+          ]
+        ],
+        "start": "2026-05-22",
+        "end": "2026-05-27"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "CABINET PAINTING",
+        "revenue": 5980.0,
+        "revenue_gross": 5980.0,
+        "discount_pct": 0.0,
+        "cost": 3393.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-19",
+            "2026-06-03"
+          ]
+        ],
+        "start": "2026-05-19",
+        "end": "2026-06-03"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "PLUMBING ROUGH IN",
+        "revenue": 1875.0,
+        "revenue_gross": 1875.0,
+        "discount_pct": 0.0,
+        "cost": 900.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-05",
+            "2026-05-05"
+          ]
+        ],
+        "start": "2026-05-05",
+        "end": "2026-05-05"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "INTERIOR DOORS",
+        "revenue": 2068.0,
+        "revenue_gross": 2068.0,
+        "discount_pct": 0.0,
+        "cost": 1204.71,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-19",
+            "2026-05-19"
+          ]
+        ],
+        "start": "2026-05-19",
+        "end": "2026-05-19"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "ELECTRICAL TRIM",
+        "revenue": 1549.0,
+        "revenue_gross": 1549.0,
+        "discount_pct": 0.0,
+        "cost": 994.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-26",
+            "2026-06-01"
+          ]
+        ],
+        "start": "2026-05-26",
+        "end": "2026-06-01"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "ELECTRICAL ROUGH IN",
+        "revenue": 1033.0,
+        "revenue_gross": 1033.0,
+        "discount_pct": 0.0,
+        "cost": 600.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-06",
+            "2026-05-07"
+          ]
+        ],
+        "start": "2026-05-06",
+        "end": "2026-05-07"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "PLUMBING TRIM",
+        "revenue": 1875.0,
+        "revenue_gross": 1875.0,
+        "discount_pct": 0.0,
+        "cost": 1631.15,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-25",
+            "2026-06-02"
+          ]
+        ],
+        "start": "2026-05-25",
+        "end": "2026-06-02"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "FRAMING",
+        "revenue": 1135.0,
+        "revenue_gross": 1135.0,
+        "discount_pct": 0.0,
+        "cost": 900.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-04",
+            "2026-05-05"
+          ]
+        ],
+        "start": "2026-05-04",
+        "end": "2026-05-05"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "INTERIOR PAINT",
+        "revenue": 1823.0,
+        "revenue_gross": 1823.0,
+        "discount_pct": 0.0,
+        "cost": 1610.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-28",
+            "2026-06-02"
+          ]
+        ],
+        "start": "2026-05-28",
+        "end": "2026-06-02"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "WINDOWS",
+        "revenue": 980.0,
+        "revenue_gross": 980.0,
+        "discount_pct": 0.0,
+        "cost": 1242.35,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-16",
+            "2026-05-16"
+          ]
+        ],
+        "start": "2026-05-16",
+        "end": "2026-05-16"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "DEMO INTERIOR",
+        "revenue": 855.0,
+        "revenue_gross": 855.0,
+        "discount_pct": 0.0,
+        "cost": 1650.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-02",
+            "2026-05-02"
+          ]
+        ],
+        "start": "2026-05-02",
+        "end": "2026-05-02"
+      }
+    ]
   }
 }
