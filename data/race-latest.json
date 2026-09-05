@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-04T18:31:52",
+ "generated_at": "2026-09-04T20:55:19",
  "today": "2026-09-04",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -86,8 +86,8 @@
   "runner_pct": 70.7,
   "ghost_pct": 100.0,
   "july_money": [
-   106995.01000000001,
-   94184.05000000002
+   106953.72000000002,
+   94156.69000000002
   ],
   "projects": 9,
   "daily": [
@@ -3943,13 +3943,13 @@
      {
       "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
       "from": "2026-07-11",
-      "to": "2026-09-04",
+      "to": "2026-09-08",
       "days": 2
      },
      {
       "name": "FINAL INSPECTION",
       "from": "2026-07-24",
-      "to": "2026-09-02",
+      "to": "2026-09-08",
       "days": 1
      }
     ]
@@ -4120,37 +4120,37 @@
      "depends_on": []
     },
     {
-     "id": "22PJWeDm3wUZ",
-     "name": "FINAL INSPECTION",
-     "baseline_end": "2026-07-24",
-     "live_end": "2026-09-02",
-     "current_end": "2026-09-02",
-     "current_start": "2026-09-02",
-     "moved_days": 40,
-     "status": "moved",
-     "depends_on": [
-      "FINAL: PUNCH LIST COMPLETION"
-     ]
-    },
-    {
      "id": "22PJWeDkzh6i",
      "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
      "baseline_end": "2026-07-11",
-     "live_end": "2026-09-04",
-     "current_end": "2026-09-04",
+     "live_end": "2026-09-08",
+     "current_end": "2026-09-08",
      "current_start": "2026-07-21",
-     "moved_days": 55,
+     "moved_days": 59,
      "status": "moved",
      "depends_on": [
       "ELECTRICAL: DELIVERY ETA",
       "ELECTRICAL: PM INSPECTION - Before",
       "PAINT: WALL FIX PAINT"
      ]
+    },
+    {
+     "id": "22PJWeDm3wUZ",
+     "name": "FINAL INSPECTION",
+     "baseline_end": "2026-07-24",
+     "live_end": "2026-09-08",
+     "current_end": "2026-09-08",
+     "current_start": "2026-09-08",
+     "moved_days": 46,
+     "status": "moved",
+     "depends_on": [
+      "FINAL: PUNCH LIST COMPLETION"
+     ]
     }
    ],
    "july_money": [
-    2225.35,
-    1002.92
+    2184.06,
+    975.56
    ],
    "margin_pct": 30.6,
    "moved_count": 11,
@@ -4159,21 +4159,21 @@
      "id": "22PJWeDkzh6i",
      "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
      "from": "2026-07-11",
-     "to": "2026-09-04",
-     "days": 55
+     "to": "2026-09-08",
+     "days": 59
+    },
+    {
+     "id": "22PJWeDm3wUZ",
+     "name": "FINAL INSPECTION",
+     "from": "2026-07-24",
+     "to": "2026-09-08",
+     "days": 46
     },
     {
      "id": "22PZpXyEynv6",
      "name": "EXTERIOR: PAINT",
      "from": "2026-07-15",
      "to": "2026-08-24",
-     "days": 40
-    },
-    {
-     "id": "22PJWeDm3wUZ",
-     "name": "FINAL INSPECTION",
-     "from": "2026-07-24",
-     "to": "2026-09-02",
      "days": 40
     },
     {
@@ -4397,8 +4397,8 @@
        "baseline_start": "2026-07-10",
        "baseline_end": "2026-07-11",
        "live_start": "2026-07-21",
-       "live_end": "2026-09-04",
-       "moved_days": 55,
+       "live_end": "2026-09-08",
+       "moved_days": 59,
        "days_in_week": 2,
        "earned_in_week": 1.0,
        "started": true,
@@ -4714,12 +4714,12 @@
        "marker": null,
        "baseline_start": "2026-07-24",
        "baseline_end": "2026-07-24",
-       "live_start": "2026-09-02",
-       "live_end": "2026-09-02",
-       "moved_days": 40,
+       "live_start": "2026-09-08",
+       "live_end": "2026-09-08",
+       "moved_days": 46,
        "days_in_week": 1,
        "earned_in_week": 0.0,
-       "started": true,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -4794,9 +4794,9 @@
        "marker": "start",
        "baseline_start": "2026-08-01",
        "baseline_end": "2026-08-05",
-       "live_start": "2026-09-05",
-       "live_end": "2026-09-09",
-       "moved_days": 35,
+       "live_start": "2026-09-16",
+       "live_end": "2026-09-19",
+       "moved_days": 45,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "started": false,
