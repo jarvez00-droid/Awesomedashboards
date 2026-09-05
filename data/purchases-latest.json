@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-05T05:39:09",
+ "generated_at": "2026-09-05T06:02:32",
  "date": "2026-09-05",
  "window_start": "2026-09-05",
  "window_end": "2026-09-19",
@@ -7,7 +7,7 @@
   "tasks": 160,
   "projects": 8,
   "alerts": 4,
-  "overdue": 69,
+  "overdue": 65,
   "to_purchase_amount": 92998.88
  },
  "alerts": [
@@ -22,14 +22,14 @@
    "project": "Katie Holmes & Sean Springs",
    "projectId": "22P2j3sQMKqz",
    "task": "MECHANICAL TRIM: PURCHASE MATERIALS",
-   "due": "2026-09-04",
+   "due": "2026-09-05",
    "taskId": "22PZzzsKDUJ6"
   },
   {
    "project": "Martha Cockrell (CNG-20251199)",
    "projectId": "22PGVNmUgLww",
    "task": "GARAGE DOOR: PURCHASE MATERIAL",
-   "due": "2026-09-04",
+   "due": "2026-09-05",
    "taskId": "22PbkAfcgZJh"
   },
   {
@@ -678,7 +678,7 @@
    "counts": {
     "tasks": 20,
     "alerts": 1,
-    "overdue": 16
+    "overdue": 13
    },
    "overdue": [
     {
@@ -836,42 +836,6 @@
      "overdue": true,
      "taskId": "22PcamMEt69F",
      "progress": 0
-    },
-    {
-     "name": "PLUMBING TRIM: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-09-04",
-     "amount": 9536.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzzsDqYLC",
-     "progress": 0.5
-    },
-    {
-     "name": "ELECTRICAL TRIM: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-09-04",
-     "amount": 10125.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzzsGMNmm",
-     "progress": 0
-    },
-    {
-     "name": "MECHANICAL TRIM: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-09-04",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PZzzsKDUJ6",
-     "progress": 0
     }
    ],
    "days": [
@@ -879,6 +843,18 @@
      "date": "2026-09-05",
      "label": "Sat Sep 5",
      "tasks": [
+      {
+       "name": "ELECTRICAL TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-05",
+       "amount": 10125.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzzsGMNmm",
+       "progress": 0
+      },
       {
        "name": "GLASS: DELIVERY ETA",
        "step": "eta",
@@ -890,6 +866,30 @@
        "overdue": false,
        "taskId": "22Pa9MpACMGD",
        "progress": 0
+      },
+      {
+       "name": "MECHANICAL TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-05",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PZzzsKDUJ6",
+       "progress": 0
+      },
+      {
+       "name": "PLUMBING TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-05",
+       "amount": 9536.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzzsDqYLC",
+       "progress": 0.5
       }
      ]
     },
@@ -949,7 +949,7 @@
    "counts": {
     "tasks": 40,
     "alerts": 1,
-    "overdue": 9
+    "overdue": 8
    },
    "overdue": [
     {
@@ -1047,18 +1047,6 @@
      "overdue": true,
      "taskId": "22PZzWXThcwX",
      "progress": 0
-    },
-    {
-     "name": "GARAGE DOOR: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-09-04",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PbkAfcgZJh",
-     "progress": 0
     }
    ],
    "days": [
@@ -1076,6 +1064,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZzWXW4pub",
+       "progress": 0
+      },
+      {
+       "name": "GARAGE DOOR: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-05",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PbkAfcgZJh",
        "progress": 0
       },
       {
