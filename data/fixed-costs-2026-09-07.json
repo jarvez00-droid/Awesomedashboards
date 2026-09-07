@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T07:38:13",
+  "generated_at": "2026-09-07T11:14:42",
   "date": "2026-09-07",
   "source": "sqlite:fixed_costs",
   "sheet_id": null,
@@ -8,23 +8,23 @@
     "end": "2027-01-05"
   },
   "summary": {
-    "total_tasks": 164,
-    "total_amount": 238818.6,
+    "total_tasks": 166,
+    "total_amount": 232407.0,
     "by_type": {
       "others": {
-        "tasks": 83,
-        "amount": 67457.0
+        "tasks": 79,
+        "amount": 65137.0
       },
       "salaries": {
-        "tasks": 61,
-        "amount": 154061.6
+        "tasks": 67,
+        "amount": 149970.0
       },
       "utilities": {
         "tasks": 20,
         "amount": 17300.0
       }
     },
-    "rule_count": 30
+    "rule_count": 31
   },
   "tasks": [
     {
@@ -42,6 +42,22 @@
       "category_raw": "Other",
       "frequency": "monthly",
       "rule_id": 561
+    },
+    {
+      "id": "fc-rule566-2026-08-28",
+      "task": "Anthony",
+      "project": "FIXED COSTS",
+      "type": "salaries",
+      "amount": 500.0,
+      "due": "2026-09-07",
+      "original_due": "2026-08-28",
+      "rolled_forward": true,
+      "days_overdue": 10,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Salary",
+      "frequency": "monthly",
+      "rule_id": 566
     },
     {
       "id": "fc-rule564-2026-08-28",
@@ -154,6 +170,22 @@
       "category_raw": "Other",
       "frequency": "monthly",
       "rule_id": 562
+    },
+    {
+      "id": "fc-rule565-2026-08-28",
+      "task": "Joaquin",
+      "project": "FIXED COSTS",
+      "type": "salaries",
+      "amount": 450.0,
+      "due": "2026-09-07",
+      "original_due": "2026-08-28",
+      "rolled_forward": true,
+      "days_overdue": 10,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Salary",
+      "frequency": "monthly",
+      "rule_id": 565
     },
     {
       "id": "fc-rule556-2026-09-01",
@@ -368,7 +400,7 @@
       "task": "Giselle",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1015.0,
+      "amount": 1750.0,
       "due": "2026-09-13",
       "original_due": "2026-09-13",
       "rolled_forward": false,
@@ -378,22 +410,6 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 532
-    },
-    {
-      "id": "fc-rule533-2026-09-13",
-      "task": "JEFFERY CLARCK",
-      "project": "FIXED COSTS",
-      "type": "salaries",
-      "amount": 2090.2,
-      "due": "2026-09-13",
-      "original_due": "2026-09-13",
-      "rolled_forward": false,
-      "days_overdue": 0,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Salary",
-      "frequency": "semi-monthly",
-      "rule_id": 533
     },
     {
       "id": "fc-rule528-2026-09-13",
@@ -460,6 +476,22 @@
       "rule_id": 563
     },
     {
+      "id": "fc-rule566-2026-09-28",
+      "task": "Anthony",
+      "project": "FIXED COSTS",
+      "type": "salaries",
+      "amount": 500.0,
+      "due": "2026-09-28",
+      "original_due": "2026-09-28",
+      "rolled_forward": false,
+      "days_overdue": 0,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Salary",
+      "frequency": "monthly",
+      "rule_id": 566
+    },
+    {
       "id": "fc-rule564-2026-09-28",
       "task": "BRYAN (ELECTRICISTA)",
       "project": "FIXED COSTS",
@@ -496,7 +528,7 @@
       "task": "Giselle",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1015.0,
+      "amount": 1750.0,
       "due": "2026-09-28",
       "original_due": "2026-09-28",
       "rolled_forward": false,
@@ -506,22 +538,6 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 532
-    },
-    {
-      "id": "fc-rule533-2026-09-28",
-      "task": "JEFFERY CLARCK",
-      "project": "FIXED COSTS",
-      "type": "salaries",
-      "amount": 2090.2,
-      "due": "2026-09-28",
-      "original_due": "2026-09-28",
-      "rolled_forward": false,
-      "days_overdue": 0,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Salary",
-      "frequency": "semi-monthly",
-      "rule_id": 533
     },
     {
       "id": "fc-rule528-2026-09-28",
@@ -556,18 +572,34 @@
       "rule_id": 536
     },
     {
-      "id": "fc-rule559-2026-09-28",
-      "task": "Karla",
+      "id": "fc-rule565-2026-09-28",
+      "task": "Joaquin",
       "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 580.0,
+      "type": "salaries",
+      "amount": 450.0,
       "due": "2026-09-28",
       "original_due": "2026-09-28",
       "rolled_forward": false,
       "days_overdue": 0,
       "paid": false,
       "source": "sqlite",
-      "category_raw": "Other",
+      "category_raw": "Salary",
+      "frequency": "monthly",
+      "rule_id": 565
+    },
+    {
+      "id": "fc-rule559-2026-09-28",
+      "task": "Karla",
+      "project": "FIXED COSTS",
+      "type": "salaries",
+      "amount": 500.0,
+      "due": "2026-09-28",
+      "original_due": "2026-09-28",
+      "rolled_forward": false,
+      "days_overdue": 0,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Salary",
       "frequency": "monthly",
       "rule_id": 559
     },
@@ -944,7 +976,7 @@
       "task": "Giselle",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1015.0,
+      "amount": 1750.0,
       "due": "2026-10-13",
       "original_due": "2026-10-13",
       "rolled_forward": false,
@@ -954,22 +986,6 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 532
-    },
-    {
-      "id": "fc-rule533-2026-10-13",
-      "task": "JEFFERY CLARCK",
-      "project": "FIXED COSTS",
-      "type": "salaries",
-      "amount": 2090.2,
-      "due": "2026-10-13",
-      "original_due": "2026-10-13",
-      "rolled_forward": false,
-      "days_overdue": 0,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Salary",
-      "frequency": "semi-monthly",
-      "rule_id": 533
     },
     {
       "id": "fc-rule528-2026-10-13",
@@ -1036,6 +1052,22 @@
       "rule_id": 563
     },
     {
+      "id": "fc-rule566-2026-10-28",
+      "task": "Anthony",
+      "project": "FIXED COSTS",
+      "type": "salaries",
+      "amount": 500.0,
+      "due": "2026-10-28",
+      "original_due": "2026-10-28",
+      "rolled_forward": false,
+      "days_overdue": 0,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Salary",
+      "frequency": "monthly",
+      "rule_id": 566
+    },
+    {
       "id": "fc-rule564-2026-10-28",
       "task": "BRYAN (ELECTRICISTA)",
       "project": "FIXED COSTS",
@@ -1072,7 +1104,7 @@
       "task": "Giselle",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1015.0,
+      "amount": 1750.0,
       "due": "2026-10-28",
       "original_due": "2026-10-28",
       "rolled_forward": false,
@@ -1082,22 +1114,6 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 532
-    },
-    {
-      "id": "fc-rule533-2026-10-28",
-      "task": "JEFFERY CLARCK",
-      "project": "FIXED COSTS",
-      "type": "salaries",
-      "amount": 2090.2,
-      "due": "2026-10-28",
-      "original_due": "2026-10-28",
-      "rolled_forward": false,
-      "days_overdue": 0,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Salary",
-      "frequency": "semi-monthly",
-      "rule_id": 533
     },
     {
       "id": "fc-rule528-2026-10-28",
@@ -1132,18 +1148,34 @@
       "rule_id": 536
     },
     {
-      "id": "fc-rule559-2026-10-28",
-      "task": "Karla",
+      "id": "fc-rule565-2026-10-28",
+      "task": "Joaquin",
       "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 580.0,
+      "type": "salaries",
+      "amount": 450.0,
       "due": "2026-10-28",
       "original_due": "2026-10-28",
       "rolled_forward": false,
       "days_overdue": 0,
       "paid": false,
       "source": "sqlite",
-      "category_raw": "Other",
+      "category_raw": "Salary",
+      "frequency": "monthly",
+      "rule_id": 565
+    },
+    {
+      "id": "fc-rule559-2026-10-28",
+      "task": "Karla",
+      "project": "FIXED COSTS",
+      "type": "salaries",
+      "amount": 500.0,
+      "due": "2026-10-28",
+      "original_due": "2026-10-28",
+      "rolled_forward": false,
+      "days_overdue": 0,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Salary",
       "frequency": "monthly",
       "rule_id": 559
     },
@@ -1520,7 +1552,7 @@
       "task": "Giselle",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1015.0,
+      "amount": 1750.0,
       "due": "2026-11-13",
       "original_due": "2026-11-13",
       "rolled_forward": false,
@@ -1530,22 +1562,6 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 532
-    },
-    {
-      "id": "fc-rule533-2026-11-13",
-      "task": "JEFFERY CLARCK",
-      "project": "FIXED COSTS",
-      "type": "salaries",
-      "amount": 2090.2,
-      "due": "2026-11-13",
-      "original_due": "2026-11-13",
-      "rolled_forward": false,
-      "days_overdue": 0,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Salary",
-      "frequency": "semi-monthly",
-      "rule_id": 533
     },
     {
       "id": "fc-rule528-2026-11-13",
@@ -1612,6 +1628,22 @@
       "rule_id": 563
     },
     {
+      "id": "fc-rule566-2026-11-28",
+      "task": "Anthony",
+      "project": "FIXED COSTS",
+      "type": "salaries",
+      "amount": 500.0,
+      "due": "2026-11-28",
+      "original_due": "2026-11-28",
+      "rolled_forward": false,
+      "days_overdue": 0,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Salary",
+      "frequency": "monthly",
+      "rule_id": 566
+    },
+    {
       "id": "fc-rule564-2026-11-28",
       "task": "BRYAN (ELECTRICISTA)",
       "project": "FIXED COSTS",
@@ -1648,7 +1680,7 @@
       "task": "Giselle",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1015.0,
+      "amount": 1750.0,
       "due": "2026-11-28",
       "original_due": "2026-11-28",
       "rolled_forward": false,
@@ -1658,22 +1690,6 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 532
-    },
-    {
-      "id": "fc-rule533-2026-11-28",
-      "task": "JEFFERY CLARCK",
-      "project": "FIXED COSTS",
-      "type": "salaries",
-      "amount": 2090.2,
-      "due": "2026-11-28",
-      "original_due": "2026-11-28",
-      "rolled_forward": false,
-      "days_overdue": 0,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Salary",
-      "frequency": "semi-monthly",
-      "rule_id": 533
     },
     {
       "id": "fc-rule528-2026-11-28",
@@ -1708,18 +1724,34 @@
       "rule_id": 536
     },
     {
-      "id": "fc-rule559-2026-11-28",
-      "task": "Karla",
+      "id": "fc-rule565-2026-11-28",
+      "task": "Joaquin",
       "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 580.0,
+      "type": "salaries",
+      "amount": 450.0,
       "due": "2026-11-28",
       "original_due": "2026-11-28",
       "rolled_forward": false,
       "days_overdue": 0,
       "paid": false,
       "source": "sqlite",
-      "category_raw": "Other",
+      "category_raw": "Salary",
+      "frequency": "monthly",
+      "rule_id": 565
+    },
+    {
+      "id": "fc-rule559-2026-11-28",
+      "task": "Karla",
+      "project": "FIXED COSTS",
+      "type": "salaries",
+      "amount": 500.0,
+      "due": "2026-11-28",
+      "original_due": "2026-11-28",
+      "rolled_forward": false,
+      "days_overdue": 0,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Salary",
       "frequency": "monthly",
       "rule_id": 559
     },
@@ -2096,7 +2128,7 @@
       "task": "Giselle",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1015.0,
+      "amount": 1750.0,
       "due": "2026-12-13",
       "original_due": "2026-12-13",
       "rolled_forward": false,
@@ -2106,22 +2138,6 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 532
-    },
-    {
-      "id": "fc-rule533-2026-12-13",
-      "task": "JEFFERY CLARCK",
-      "project": "FIXED COSTS",
-      "type": "salaries",
-      "amount": 2090.2,
-      "due": "2026-12-13",
-      "original_due": "2026-12-13",
-      "rolled_forward": false,
-      "days_overdue": 0,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Salary",
-      "frequency": "semi-monthly",
-      "rule_id": 533
     },
     {
       "id": "fc-rule528-2026-12-13",
@@ -2188,6 +2204,22 @@
       "rule_id": 563
     },
     {
+      "id": "fc-rule566-2026-12-28",
+      "task": "Anthony",
+      "project": "FIXED COSTS",
+      "type": "salaries",
+      "amount": 500.0,
+      "due": "2026-12-28",
+      "original_due": "2026-12-28",
+      "rolled_forward": false,
+      "days_overdue": 0,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Salary",
+      "frequency": "monthly",
+      "rule_id": 566
+    },
+    {
       "id": "fc-rule564-2026-12-28",
       "task": "BRYAN (ELECTRICISTA)",
       "project": "FIXED COSTS",
@@ -2224,7 +2256,7 @@
       "task": "Giselle",
       "project": "FIXED COSTS",
       "type": "salaries",
-      "amount": 1015.0,
+      "amount": 1750.0,
       "due": "2026-12-28",
       "original_due": "2026-12-28",
       "rolled_forward": false,
@@ -2234,22 +2266,6 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 532
-    },
-    {
-      "id": "fc-rule533-2026-12-28",
-      "task": "JEFFERY CLARCK",
-      "project": "FIXED COSTS",
-      "type": "salaries",
-      "amount": 2090.2,
-      "due": "2026-12-28",
-      "original_due": "2026-12-28",
-      "rolled_forward": false,
-      "days_overdue": 0,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Salary",
-      "frequency": "semi-monthly",
-      "rule_id": 533
     },
     {
       "id": "fc-rule528-2026-12-28",
@@ -2284,18 +2300,34 @@
       "rule_id": 536
     },
     {
-      "id": "fc-rule559-2026-12-28",
-      "task": "Karla",
+      "id": "fc-rule565-2026-12-28",
+      "task": "Joaquin",
       "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 580.0,
+      "type": "salaries",
+      "amount": 450.0,
       "due": "2026-12-28",
       "original_due": "2026-12-28",
       "rolled_forward": false,
       "days_overdue": 0,
       "paid": false,
       "source": "sqlite",
-      "category_raw": "Other",
+      "category_raw": "Salary",
+      "frequency": "monthly",
+      "rule_id": 565
+    },
+    {
+      "id": "fc-rule559-2026-12-28",
+      "task": "Karla",
+      "project": "FIXED COSTS",
+      "type": "salaries",
+      "amount": 500.0,
+      "due": "2026-12-28",
+      "original_due": "2026-12-28",
+      "rolled_forward": false,
+      "days_overdue": 0,
+      "paid": false,
+      "source": "sqlite",
+      "category_raw": "Salary",
       "frequency": "monthly",
       "rule_id": 559
     },
