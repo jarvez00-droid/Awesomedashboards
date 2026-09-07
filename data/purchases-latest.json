@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-07T06:02:28",
+ "generated_at": "2026-09-07T06:27:27",
  "date": "2026-09-07",
  "window_start": "2026-09-07",
  "window_end": "2026-09-21",
@@ -7,7 +7,7 @@
   "tasks": 167,
   "projects": 8,
   "alerts": 4,
-  "overdue": 77,
+  "overdue": 74,
   "to_purchase_amount": 98906.88
  },
  "alerts": [
@@ -22,7 +22,7 @@
    "project": "Katie Holmes & Sean Springs",
    "projectId": "22P2j3sQMKqz",
    "task": "MECHANICAL TRIM: PURCHASE MATERIALS",
-   "due": "2026-09-06",
+   "due": "2026-09-07",
    "taskId": "22PZzzsKDUJ6"
   },
   {
@@ -714,7 +714,7 @@
    "counts": {
     "tasks": 20,
     "alerts": 1,
-    "overdue": 17
+    "overdue": 14
    },
    "overdue": [
     {
@@ -884,45 +884,51 @@
      "overdue": true,
      "taskId": "22Pa9MpACMGD",
      "progress": 0
-    },
-    {
-     "name": "PLUMBING TRIM: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-09-06",
-     "amount": 9536.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzzsDqYLC",
-     "progress": 0.5
-    },
-    {
-     "name": "ELECTRICAL TRIM: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-09-06",
-     "amount": 10125.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzzsGMNmm",
-     "progress": 0
-    },
-    {
-     "name": "MECHANICAL TRIM: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-09-06",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PZzzsKDUJ6",
-     "progress": 0
     }
    ],
    "days": [
+    {
+     "date": "2026-09-07",
+     "label": "Mon Sep 7",
+     "tasks": [
+      {
+       "name": "ELECTRICAL TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-07",
+       "amount": 10125.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzzsGMNmm",
+       "progress": 0
+      },
+      {
+       "name": "MECHANICAL TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-07",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PZzzsKDUJ6",
+       "progress": 0
+      },
+      {
+       "name": "PLUMBING TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-07",
+       "amount": 9536.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzzsDqYLC",
+       "progress": 0.5
+      }
+     ]
+    },
     {
      "date": "2026-09-08",
      "label": "Tue Sep 8",
