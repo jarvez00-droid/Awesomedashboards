@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T05:38:19",
+  "generated_at": "2026-09-09T06:01:53",
   "today": "2026-09-09",
   "horizon": "2027-01-13",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -43,8 +43,8 @@
       599153.76
     ],
     "prod_todate": [
-      542423.94,
-      486850.93
+      542599.14,
+      487238.73
     ],
     "weekly": {
       "fixed": 327691.17,
@@ -1036,17 +1036,17 @@
       "label_moy": "sep S1",
       "label_short": "5 sep",
       "prod": [
-        53055.46,
-        48091.78
+        53001.97,
+        48095.13
       ],
       "fixed": 12136.71,
       "net": [
-        40918.75,
-        35955.07
+        40865.26,
+        35958.42
       ],
       "cum": [
-        241226.24,
-        203376.24
+        241172.75,
+        203379.59
       ],
       "active_count": 8,
       "active_projects": [
@@ -1076,8 +1076,8 @@
           20129.46
         ],
         "Shaan Lagisetty": [
-          8882.32,
-          8349.1
+          8828.83,
+          8352.44
         ],
         "Martha Cockrell": [
           11979.82,
@@ -1105,17 +1105,17 @@
       "label_moy": "sep S2",
       "label_short": "12 sep",
       "prod": [
-        38420.6,
-        33637.35
+        38649.28,
+        34021.81
       ],
       "fixed": 12136.71,
       "net": [
-        26283.89,
-        21500.64
+        26512.57,
+        21885.1
       ],
       "cum": [
-        267510.13,
-        224876.88
+        267685.32,
+        225264.69
       ],
       "active_count": 7,
       "active_projects": [
@@ -1140,8 +1140,8 @@
           12773.12
         ],
         "Shaan Lagisetty": [
-          3041.17,
-          2533.26
+          3269.85,
+          2917.71
         ],
         "Martha Cockrell": [
           8993.04,
@@ -1174,8 +1174,8 @@
         31988.34
       ],
       "cum": [
-        307120.38,
-        256865.22
+        307295.57,
+        257253.03
       ],
       "active_count": 6,
       "active_projects": [
@@ -1229,8 +1229,8 @@
         21721.6
       ],
       "cum": [
-        336288.73,
-        278586.82
+        336463.92,
+        278974.63
       ],
       "active_count": 5,
       "active_projects": [
@@ -1283,15 +1283,16 @@
         36084.02
       ],
       "cum": [
-        377125.47,
-        314670.84
+        377300.66,
+        315058.65
       ],
-      "active_count": 4,
+      "active_count": 5,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
         "Martha Cockrell",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1323,23 +1324,24 @@
       "label_moy": "oct S2",
       "label_short": "10 oct",
       "prod": [
-        11521.09,
-        5945.85
+        11574.57,
+        5942.51
       ],
       "fixed": 12136.71,
       "net": [
-        -615.62,
-        -6190.86
+        -562.14,
+        -6194.2
       ],
       "cum": [
-        376509.85,
-        308479.98
+        376738.52,
+        308864.45
       ],
-      "active_count": 3,
+      "active_count": 4,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Rohini Williams"
+        "Rohini Williams",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1348,6 +1350,10 @@
         "Charles Harris": [
           11144.76,
           6976.35
+        ],
+        "Shaan Lagisetty": [
+          53.49,
+          -3.34
         ],
         "Rohini Williams": [
           -1570.49,
@@ -1367,22 +1373,23 @@
       "label_moy": "oct S3",
       "label_short": "17 oct",
       "prod": [
-        34876.53,
-        32751.31
+        34647.85,
+        32366.85
       ],
       "fixed": 12136.71,
       "net": [
-        22739.82,
-        20614.6
+        22511.14,
+        20230.14
       ],
       "cum": [
-        399249.67,
-        329094.58
+        399249.66,
+        329094.59
       ],
-      "active_count": 2,
+      "active_count": 3,
       "active_projects": [
         "Charles Harris",
-        "Karim Merchant"
+        "Karim Merchant",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1391,6 +1398,10 @@
         "Charles Harris": [
           32976.12,
           31637.55
+        ],
+        "Shaan Lagisetty": [
+          -228.69,
+          -384.46
         ],
         "Karim Merchant": [
           1900.41,
@@ -1415,8 +1426,8 @@
         -7160.42
       ],
       "cum": [
-        392846.91,
-        321934.16
+        392846.9,
+        321934.17
       ],
       "active_count": 2,
       "active_projects": [
@@ -1454,8 +1465,8 @@
         -10208.67
       ],
       "cum": [
-        383340.92,
-        311725.49
+        383340.91,
+        311725.5
       ],
       "active_count": 2,
       "active_projects": [
@@ -1489,8 +1500,8 @@
         -11776.79
       ],
       "cum": [
-        371661.03,
-        299948.7
+        371661.02,
+        299948.71
       ],
       "active_count": 2,
       "active_projects": [
@@ -1524,8 +1535,8 @@
         0.0
       ],
       "cum": [
-        371661.03,
-        299948.7
+        371661.02,
+        299948.71
       ],
       "active_count": 2,
       "active_projects": [
@@ -1554,8 +1565,8 @@
         0.0
       ],
       "cum": [
-        371661.03,
-        299948.7
+        371661.02,
+        299948.71
       ],
       "active_count": 1,
       "active_projects": [
@@ -1583,8 +1594,8 @@
         0.0
       ],
       "cum": [
-        371661.03,
-        299948.7
+        371661.02,
+        299948.71
       ],
       "active_count": 1,
       "active_projects": [
@@ -1612,8 +1623,8 @@
         -11608.44
       ],
       "cum": [
-        360052.59,
-        288340.26
+        360052.58,
+        288340.27
       ],
       "active_count": 1,
       "active_projects": [
@@ -1646,8 +1657,8 @@
         -8438.84
       ],
       "cum": [
-        351613.75,
-        279901.42
+        351613.74,
+        279901.43
       ],
       "active_count": 1,
       "active_projects": [
@@ -1680,8 +1691,8 @@
         -8438.84
       ],
       "cum": [
-        343174.91,
-        271462.58
+        343174.9,
+        271462.59
       ],
       "active_count": 1,
       "active_projects": [
@@ -1714,8 +1725,8 @@
         0.0
       ],
       "cum": [
-        343174.91,
-        271462.58
+        343174.9,
+        271462.59
       ],
       "active_count": 1,
       "active_projects": [
@@ -1743,8 +1754,8 @@
         0.0
       ],
       "cum": [
-        343174.91,
-        271462.58
+        343174.9,
+        271462.59
       ],
       "active_count": 1,
       "active_projects": [
@@ -1772,8 +1783,8 @@
         0.0
       ],
       "cum": [
-        343174.91,
-        271462.58
+        343174.9,
+        271462.59
       ],
       "active_count": 1,
       "active_projects": [
@@ -1968,17 +1979,17 @@
       "month": "2026-09",
       "label": "sep 2026",
       "prod": [
-        204938.21,
-        180083.74
+        205113.41,
+        180471.54
       ],
       "fixed": 52592.4,
       "net": [
-        152345.81,
-        127491.34
+        152521.01,
+        127879.14
       ],
       "cum": [
-        332054.34,
-        276481.33
+        332229.54,
+        276869.13
       ],
       "is_future": false,
       "is_partial": true,
@@ -1997,8 +2008,8 @@
           66214.62
         ],
         "Shaan Lagisetty": [
-          25473.12,
-          23198.29
+          25648.32,
+          23586.09
         ],
         "Martha Cockrell": [
           65293.97,
@@ -2022,13 +2033,13 @@
       "month": "2026-10",
       "label": "oct 2026",
       "prod": [
-        117860.37,
-        102401.41
+        117685.17,
+        102013.61
       ],
       "fixed": 52592.4,
       "net": [
-        65267.97,
-        49809.01
+        65092.77,
+        49421.21
       ],
       "cum": [
         397322.31,
@@ -2043,8 +2054,8 @@
           73599.79
         ],
         "Shaan Lagisetty": [
-          288.0,
-          260.0
+          112.8,
+          -127.8
         ],
         "Martha Cockrell": [
           6935.63,
@@ -2854,12 +2865,12 @@
           11070.35
         ],
         "2026-W37": [
-          8882.32,
-          8349.1
+          8828.83,
+          8352.44
         ],
         "2026-W38": [
-          3041.17,
-          2533.26
+          3269.85,
+          2917.71
         ],
         "2026-W39": [
           1509.0,
@@ -2868,6 +2879,14 @@
         "2026-W40": [
           664.13,
           470.21
+        ],
+        "2026-W42": [
+          53.49,
+          -3.34
+        ],
+        "2026-W43": [
+          -228.69,
+          -384.46
         ],
         "2026-W28": [
           -700.0,
@@ -2884,16 +2903,16 @@
           798.36
         ],
         "2026-09": [
-          25473.12,
-          23198.29
+          25648.32,
+          23586.09
         ],
         "2026-10": [
-          288.0,
-          260.0
+          112.8,
+          -127.8
         ]
       },
       "first_week": "2026-W28",
-      "last_week": "2026-W40"
+      "last_week": "2026-W43"
     },
     {
       "project": "Clifford Clack",
@@ -3903,7 +3922,7 @@
       "margin_pct": 63.8,
       "ratio": 2.8,
       "start": "2026-09-08",
-      "end": "2026-09-10",
+      "end": "2026-09-11",
       "severity": "media"
     },
     {
