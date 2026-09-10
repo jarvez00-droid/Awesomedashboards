@@ -1,14 +1,14 @@
 {
- "generated_at": "2026-09-10T07:49:24",
+ "generated_at": "2026-09-10T14:11:59",
  "date": "2026-09-10",
  "window_start": "2026-09-10",
  "window_end": "2026-09-24",
  "summary": {
-  "tasks": 190,
+  "tasks": 189,
   "projects": 8,
-  "alerts": 5,
+  "alerts": 4,
   "overdue": 83,
-  "to_purchase_amount": 99061.88
+  "to_purchase_amount": 98612.88
  },
  "alerts": [
   {
@@ -26,17 +26,10 @@
    "taskId": "22PZzzsKDUJ6"
   },
   {
-   "project": "Martha Cockrell (CNG-20251199)",
-   "projectId": "22PGVNmUgLww",
-   "task": "GARAGE DOOR: PURCHASE MATERIAL",
-   "due": "2026-09-10",
-   "taskId": "22PbkAfcgZJh"
-  },
-  {
    "project": "Rohini Williams (CNG2025-496)",
    "projectId": "22PL9RSbYNs9",
    "task": "CABINETS: PURCHASE MATERIALS",
-   "due": "2026-09-18",
+   "due": "2026-09-21",
    "taskId": "22PceCzzuibT"
   },
   {
@@ -492,24 +485,6 @@
      ]
     },
     {
-     "date": "2026-09-16",
-     "label": "Wed Sep 16",
-     "tasks": [
-      {
-       "name": "INTERIOR DOORS: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-09-16",
-       "amount": 3334.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpJgek3NS",
-       "progress": 0
-      }
-     ]
-    },
-    {
      "date": "2026-09-17",
      "label": "Thu Sep 17",
      "tasks": [
@@ -544,30 +519,6 @@
      "label": "Fri Sep 18",
      "tasks": [
       {
-       "name": "BASEBOARDS AND TRIM: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-09-18",
-       "amount": 1067.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpJgpsFQK",
-       "progress": 0
-      },
-      {
-       "name": "CABINETS: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-09-18",
-       "amount": null,
-       "alert": true,
-       "overdue": false,
-       "taskId": "22PceCzzuibT",
-       "progress": 0
-      },
-      {
        "name": "COUNTERTOPS: CONFIRM TAKEOFF DETAILS",
        "step": "takeoff",
        "icon": "📋",
@@ -589,6 +540,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpJhW2nPA",
+       "progress": 0
+      },
+      {
+       "name": "INTERIOR DOORS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-18",
+       "amount": 3334.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpJgek3NS",
        "progress": 0
       },
       {
@@ -663,6 +626,30 @@
      "date": "2026-09-21",
      "label": "Mon Sep 21",
      "tasks": [
+      {
+       "name": "BASEBOARDS AND TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-21",
+       "amount": 1067.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpJgpsFQK",
+       "progress": 0
+      },
+      {
+       "name": "CABINETS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-21",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PceCzzuibT",
+       "progress": 0
+      },
       {
        "name": "MECHANICAL TRIM: SECURE PRICING & ETA",
        "step": "pricing",
@@ -1564,11 +1551,90 @@
    ]
   },
   {
+   "id": "22P2cmNJZcwJ",
+   "name": "Stephanie and Marc Felton",
+   "counts": {
+    "tasks": 5,
+    "alerts": 1,
+    "overdue": 4
+   },
+   "overdue": [
+    {
+     "name": "ROOFING: COMPLETE TAKEOFF (SPANISH TILES)",
+     "step": "takeoff",
+     "icon": "📋",
+     "step_label": "Takeoff",
+     "due": "2026-08-22",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PV9dUqwM6d",
+     "progress": 0
+    },
+    {
+     "name": "ROOFING: SECURE PRICING",
+     "step": "pricing",
+     "icon": "💲",
+     "step_label": "Secure pricing",
+     "due": "2026-08-24",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PV9dVWqeZm",
+     "progress": 0
+    },
+    {
+     "name": "ROOFING: PURCHASE MATERIAL (SPANISH TILES)",
+     "step": "purchase",
+     "icon": "🛒",
+     "step_label": "Purchase material",
+     "due": "2026-08-25",
+     "amount": null,
+     "alert": true,
+     "overdue": true,
+     "taskId": "22PV9dYCdve5",
+     "progress": 0
+    },
+    {
+     "name": "ROOFING: CONFIRM DELIVERY",
+     "step": "confirm",
+     "icon": "📦",
+     "step_label": "Confirm delivery",
+     "due": "2026-08-26",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PV9dYrJimq",
+     "progress": 0
+    }
+   ],
+   "days": [
+    {
+     "date": "2026-09-15",
+     "label": "Tue Sep 15",
+     "tasks": [
+      {
+       "name": "ROOFING: PURCHASE SPANISH TILES",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-09-15",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PawnDWgSnu",
+       "progress": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "22PGVNmUgLww",
    "name": "Martha Cockrell (CNG-20251199)",
    "counts": {
-    "tasks": 51,
-    "alerts": 1,
+    "tasks": 50,
+    "alerts": 0,
     "overdue": 12
    },
    "overdue": [
@@ -1723,25 +1789,13 @@
      "label": "Thu Sep 10",
      "tasks": [
       {
-       "name": "FLOORING: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-09-10",
-       "amount": 6372.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZzWXVa9tN",
-       "progress": 0
-      },
-      {
        "name": "GARAGE DOOR: PURCHASE MATERIAL",
        "step": "purchase",
        "icon": "🛒",
        "step_label": "Purchase material",
        "due": "2026-09-10",
-       "amount": null,
-       "alert": true,
+       "amount": 1.0,
+       "alert": false,
        "overdue": false,
        "taskId": "22PbkAfcgZJh",
        "progress": 0
@@ -1813,6 +1867,18 @@
        "progress": 0
       },
       {
+       "name": "FLOORING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-11",
+       "amount": 6372.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzWXVa9tN",
+       "progress": 0
+      },
+      {
        "name": "GLASS: CREATE TAKEOFF REPORT",
        "step": "takeoff",
        "icon": "📋",
@@ -1830,18 +1896,6 @@
      "date": "2026-09-12",
      "label": "Sat Sep 12",
      "tasks": [
-      {
-       "name": "CABINETRY: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-09-12",
-       "amount": 1402.6,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZzWmf8tKQ",
-       "progress": 0
-      },
       {
        "name": "COUNTERTOP: CONFIRM TAKEOFF DETAILS",
        "step": "takeoff",
@@ -1963,30 +2017,6 @@
        "progress": 0
       },
       {
-       "name": "ELECTRICAL TRIM: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-09-17",
-       "amount": 450.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZzWn4VGfR",
-       "progress": 0
-      },
-      {
-       "name": "GLASS: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-09-17",
-       "amount": 3460.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZzWXhzcHP",
-       "progress": 0
-      },
-      {
        "name": "PLUMBING TRIM: CREATE TAKEOFF REPORT",
        "step": "takeoff",
        "icon": "📋",
@@ -2097,6 +2127,24 @@
      ]
     },
     {
+     "date": "2026-09-21",
+     "label": "Mon Sep 21",
+     "tasks": [
+      {
+       "name": "GLASS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-21",
+       "amount": 3460.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzWXhzcHP",
+       "progress": 0
+      }
+     ]
+    },
+    {
      "date": "2026-09-22",
      "label": "Tue Sep 22",
      "tasks": [
@@ -2185,6 +2233,18 @@
      "label": "Thu Sep 24",
      "tasks": [
       {
+       "name": "CABINETRY: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-09-24",
+       "amount": 1402.6,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzWmf8tKQ",
+       "progress": 0
+      },
+      {
        "name": "ELECTRICAL TRIM: CONFIRM TAKEOFF DETAILS",
        "step": "takeoff",
        "icon": "📋",
@@ -2242,85 +2302,6 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZzWfe2Ysd",
-       "progress": 0
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "id": "22P2cmNJZcwJ",
-   "name": "Stephanie and Marc Felton",
-   "counts": {
-    "tasks": 5,
-    "alerts": 1,
-    "overdue": 4
-   },
-   "overdue": [
-    {
-     "name": "ROOFING: COMPLETE TAKEOFF (SPANISH TILES)",
-     "step": "takeoff",
-     "icon": "📋",
-     "step_label": "Takeoff",
-     "due": "2026-08-22",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PV9dUqwM6d",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: SECURE PRICING",
-     "step": "pricing",
-     "icon": "💲",
-     "step_label": "Secure pricing",
-     "due": "2026-08-24",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PV9dVWqeZm",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: PURCHASE MATERIAL (SPANISH TILES)",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-08-25",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PV9dYCdve5",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: CONFIRM DELIVERY",
-     "step": "confirm",
-     "icon": "📦",
-     "step_label": "Confirm delivery",
-     "due": "2026-08-26",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PV9dYrJimq",
-     "progress": 0
-    }
-   ],
-   "days": [
-    {
-     "date": "2026-09-15",
-     "label": "Tue Sep 15",
-     "tasks": [
-      {
-       "name": "ROOFING: PURCHASE SPANISH TILES",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-09-15",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PawnDWgSnu",
        "progress": 0
       }
      ]
