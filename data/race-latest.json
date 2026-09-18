@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-18T12:07:16",
+ "generated_at": "2026-09-18T12:31:02",
  "today": "2026-09-18",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -52,9 +52,9 @@
  },
  "company": {
   "monthly_pct": 71.3,
-  "days_pct": 85.1,
+  "days_pct": 84.9,
   "ghost_days_pct": 100.0,
-  "earned_days": 371.0,
+  "earned_days": 370.0,
   "total_days": 436.0,
   "plan_days": 436.0,
   "month_forecast": {
@@ -69,7 +69,7 @@
   "adherence": 71.3,
   "band": "amber",
   "runner_date": "2026-07-21",
-  "gap": 14.9,
+  "gap": 15.1,
   "status": "behind",
   "week": {
    "days_planned": 0.0,
@@ -86,8 +86,8 @@
   "runner_pct": 71.3,
   "ghost_pct": 100.0,
   "july_money": [
-   104837.43000000001,
-   91938.87000000001
+   103390.86,
+   90376.97000000002
   ],
   "projects": 9,
   "daily": [
@@ -2433,10 +2433,10 @@
     }
    ],
    "july_money": [
-    15944.19,
-    13316.25
+    14648.95,
+    11891.49
    ],
-   "margin_pct": 45.3,
+   "margin_pct": 41.6,
    "moved_count": 24,
    "moved": [
     {
@@ -4179,15 +4179,15 @@
    "band": "red",
    "runner_pct": 65.0,
    "ghost_pct": 100.0,
-   "runner_date": "2026-07-14",
+   "runner_date": "2026-07-13",
    "finish_date": "2026-07-24",
-   "days_pct": 82.7,
+   "days_pct": 80.8,
    "ghost_days_pct": 100.0,
    "total_days": 52.0,
-   "earned_days": 43.0,
+   "earned_days": 42.0,
    "plan_days": 52.0,
    "city_inspections": 3,
-   "gap": 17.3,
+   "gap": 19.2,
    "status": "no_work",
    "status_scope": "current_week",
    "week": {
@@ -4218,7 +4218,7 @@
      {
       "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
       "from": "2026-07-11",
-      "to": "2026-09-09",
+      "to": "2026-09-25",
       "days": 2
      },
      {
@@ -4395,21 +4395,6 @@
      "depends_on": []
     },
     {
-     "id": "22PJWeDkzh6i",
-     "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
-     "baseline_end": "2026-07-11",
-     "live_end": "2026-09-09",
-     "current_end": "2026-09-09",
-     "current_start": "2026-07-21",
-     "moved_days": 60,
-     "status": "moved",
-     "depends_on": [
-      "ELECTRICAL: DELIVERY ETA",
-      "ELECTRICAL: PM INSPECTION - Before",
-      "PAINT: WALL FIX PAINT"
-     ]
-    },
-    {
      "id": "22PJWeDm3wUZ",
      "name": "FINAL INSPECTION",
      "baseline_end": "2026-07-24",
@@ -4421,11 +4406,26 @@
      "depends_on": [
       "FINAL: PUNCH LIST COMPLETION"
      ]
+    },
+    {
+     "id": "22PJWeDkzh6i",
+     "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
+     "baseline_end": "2026-07-11",
+     "live_end": "2026-09-25",
+     "current_end": "2026-09-25",
+     "current_start": "2026-09-22",
+     "moved_days": 76,
+     "status": "moved",
+     "depends_on": [
+      "ELECTRICAL: DELIVERY ETA",
+      "ELECTRICAL: PM INSPECTION - Before",
+      "PAINT: WALL FIX PAINT"
+     ]
     }
    ],
    "july_money": [
-    2660.56,
-    1533.4
+    2509.23,
+    1396.26
    ],
    "margin_pct": 29.6,
    "moved_count": 11,
@@ -4434,8 +4434,8 @@
      "id": "22PJWeDkzh6i",
      "name": "ELECTRICAL: INSTALL ELECTRICAL TRIM",
      "from": "2026-07-11",
-     "to": "2026-09-09",
-     "days": 60
+     "to": "2026-09-25",
+     "days": 76
     },
     {
      "id": "22PJWeDm3wUZ",
@@ -4517,8 +4517,8 @@
      "total": 11,
      "done": 10,
      "days_planned": 23.0,
-     "days_earned": 22.0,
-     "pct": 95.7,
+     "days_earned": 21.0,
+     "pct": 91.3,
      "target_task": "EXTERIOR: PAINT",
      "target_type": "AT",
      "target_marker": "start",
@@ -4671,12 +4671,12 @@
        "marker": null,
        "baseline_start": "2026-07-10",
        "baseline_end": "2026-07-11",
-       "live_start": "2026-07-21",
-       "live_end": "2026-09-09",
-       "moved_days": 60,
+       "live_start": "2026-09-22",
+       "live_end": "2026-09-25",
+       "moved_days": 76,
        "days_in_week": 2,
-       "earned_in_week": 1.0,
-       "started": true,
+       "earned_in_week": 0.0,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -5069,9 +5069,9 @@
        "marker": "start",
        "baseline_start": "2026-08-01",
        "baseline_end": "2026-08-05",
-       "live_start": "2026-09-19",
-       "live_end": "2026-09-23",
-       "moved_days": 49,
+       "live_start": "2026-10-05",
+       "live_end": "2026-10-08",
+       "moved_days": 64,
        "days_in_week": 2,
        "earned_in_week": 0.0,
        "started": false,
