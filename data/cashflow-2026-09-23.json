@@ -1,19 +1,19 @@
 {
   "date": "2026-09-23",
-  "generated_at": "2026-09-23T19:54:07.056410",
+  "generated_at": "2026-09-23T19:58:56.178974",
   "summary": {
     "total_payment_tasks": 760,
     "total_income": 425062.59,
     "total_p_income": 0,
     "total_outgoing": 530538.6,
     "total_net": -105476.01,
-    "pending_income": 884590.35,
+    "pending_income": 865590.35,
     "pending_p_income": 0,
     "pending_outgoing": 791633.6,
-    "paid_income": 900570.21,
+    "paid_income": 919570.21,
     "paid_p_income": 0,
     "paid_outgoing": 646148.19,
-    "unpaid_net": 92956.75,
+    "unpaid_net": 73956.75,
     "weeks_covered": 5
   },
   "weeks": [
@@ -29,7 +29,7 @@
       "additional": 0,
       "outgoing": 222271.03,
       "net": -23643.07,
-      "income_paid": 0,
+      "income_paid": 19000.0,
       "p_income_paid": 0,
       "outgoing_paid": 8900.0,
       "task_count": 74,
@@ -60,19 +60,11 @@
         },
         {
           "project": "Ginger Brown",
-          "task": "FINAL PAYMENT",
-          "type": "income",
-          "amount": 20000.0,
-          "due": "2026-09-23",
-          "paid": false
-        },
-        {
-          "project": "Ginger Brown",
           "task": "BEFORE FINAL INSPECTION PAYMENT",
           "type": "income",
           "amount": 10000.0,
           "due": "2026-09-23",
-          "paid": false
+          "paid": true
         },
         {
           "project": "Katie Holmes & Sean Springs",
@@ -80,7 +72,7 @@
           "type": "income",
           "amount": 9000.0,
           "due": "2026-09-23",
-          "paid": false
+          "paid": true
         },
         {
           "project": "Kyle Aubry - Project 01",
@@ -95,14 +87,6 @@
           "task": "Final payment second half",
           "type": "income",
           "amount": 5400.0,
-          "due": "2026-09-23",
-          "paid": false
-        },
-        {
-          "project": "Rohini Williams (CNG2025-496)",
-          "task": "MILESTONE; TILES",
-          "type": "income",
-          "amount": 26175.0,
           "due": "2026-09-23",
           "paid": false
         },
@@ -448,6 +432,22 @@
           "type": "subs",
           "amount": 150.0,
           "due": "2026-09-23",
+          "paid": false
+        },
+        {
+          "project": "Ginger Brown",
+          "task": "FINAL PAYMENT",
+          "type": "income",
+          "amount": 20000.0,
+          "due": "2026-09-25",
+          "paid": false
+        },
+        {
+          "project": "Rohini Williams (CNG2025-496)",
+          "task": "MILESTONE; TILES",
+          "type": "income",
+          "amount": 26175.0,
+          "due": "2026-09-25",
           "paid": false
         },
         {
@@ -8246,20 +8246,6 @@
     },
     {
       "project": "Ginger Brown",
-      "task": "FINAL PAYMENT",
-      "type": "income",
-      "amount": 20000.0,
-      "due": "2026-09-23",
-      "paid": false,
-      "assignee": "",
-      "assignedTo": "",
-      "taskId": "22PWPFpiBiam",
-      "projectId": "22NxUEJKTj6C",
-      "planning": false,
-      "external": false
-    },
-    {
-      "project": "Ginger Brown",
       "task": "BEFORE FINAL INSPECTION PAYMENT",
       "type": "income",
       "amount": 10000.0,
@@ -8311,20 +8297,6 @@
       "assignedTo": "",
       "taskId": "22Pdt8gBgxrL",
       "projectId": "22Nx8Uut2Qxs",
-      "planning": false,
-      "external": false
-    },
-    {
-      "project": "Rohini Williams (CNG2025-496)",
-      "task": "MILESTONE; TILES",
-      "type": "income",
-      "amount": 26175.0,
-      "due": "2026-09-23",
-      "paid": false,
-      "assignee": "TILES",
-      "assignedTo": "",
-      "taskId": "22PZrHNht9A6",
-      "projectId": "22PL9RSbYNs9",
       "planning": false,
       "external": false
     },
@@ -8927,6 +8899,34 @@
       "assignedTo": "",
       "taskId": "22PdwqtPPWjn",
       "projectId": "22P2cmNJZcwJ",
+      "planning": false,
+      "external": false
+    },
+    {
+      "project": "Ginger Brown",
+      "task": "FINAL PAYMENT",
+      "type": "income",
+      "amount": 20000.0,
+      "due": "2026-09-25",
+      "paid": false,
+      "assignee": "",
+      "assignedTo": "",
+      "taskId": "22PWPFpiBiam",
+      "projectId": "22NxUEJKTj6C",
+      "planning": false,
+      "external": false
+    },
+    {
+      "project": "Rohini Williams (CNG2025-496)",
+      "task": "MILESTONE; TILES",
+      "type": "income",
+      "amount": 26175.0,
+      "due": "2026-09-25",
+      "paid": false,
+      "assignee": "TILES",
+      "assignedTo": "",
+      "taskId": "22PZrHNht9A6",
+      "projectId": "22PL9RSbYNs9",
       "planning": false,
       "external": false
     },
