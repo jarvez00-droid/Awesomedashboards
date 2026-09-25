@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T08:56:31",
+  "generated_at": "2026-09-25T09:20:08",
   "week_iso": "2026-W39",
   "week_start": "2026-09-19",
   "week_end": "2026-09-25",
@@ -106,7 +106,7 @@
             "TILES: INSTALL TILES (BACKSPLASH)"
           ],
           "action_progresses": [
-            null
+            1
           ],
           "action_starts": [
             "2026-09-25"
@@ -122,7 +122,7 @@
               "name": "TILES: INSTALL TILES (BACKSPLASH)",
               "description": "",
               "amount": 0.0,
-              "progress": null,
+              "progress": 1,
               "end_date": "2026-09-25"
             }
           ],
@@ -144,6 +144,103 @@
           "expenses_additional": 0,
           "expenses_total": 3500.0,
           "profit": -3500.0,
+          "status": "finished",
+          "has_price": false,
+          "this_pct": 100.0,
+          "attribution": 0.0,
+          "user_set": false
+        }
+      ]
+    },
+    {
+      "project_id": "22PMwhcSuqJD",
+      "project_name": "Karim-Merchant",
+      "pm": "Giselle Garcia",
+      "group_count": 1,
+      "attribution": 0.0,
+      "groups": [
+        {
+          "project_id": "22PMwhcSuqJD",
+          "project_name": "Karim-Merchant",
+          "group_id": "22PZqFvV4fsX",
+          "group_name": "FRAMING",
+          "parent_group_id": null,
+          "action_count": 2,
+          "action_task_ids": [
+            "22PZqFvVHNQZ",
+            "22PfA5Kv3kfm"
+          ],
+          "action_task_names": [
+            "FRAMING: INSTALL ZIP TAPE",
+            "windows arrival"
+          ],
+          "action_progresses": [
+            null,
+            null
+          ],
+          "action_starts": [
+            "2026-11-07",
+            "2026-09-16"
+          ],
+          "action_ends": [
+            "2026-11-07",
+            "2026-10-26"
+          ],
+          "action_start_min": "2026-09-16",
+          "action_end_max": "2026-11-07",
+          "action_lines": [
+            {
+              "task_id": "22PZqFvVHNQZ",
+              "name": "FRAMING: INSTALL ZIP TAPE",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-11-07"
+            },
+            {
+              "task_id": "22PfA5Kv3kfm",
+              "name": "windows arrival",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-10-26"
+            }
+          ],
+          "subs_lines": [
+            {
+              "task_id": "22Pejit9hcQL",
+              "name": "framing: remaining payment",
+              "description": "2600",
+              "amount": 2600.0,
+              "progress": null,
+              "end_date": "2026-09-25"
+            }
+          ],
+          "materials_lines": [
+            {
+              "task_id": "22PZqFvV7JAd",
+              "name": "FRAMING: PURCHASE MATERIALS",
+              "description": "5675",
+              "amount": 5675.0,
+              "progress": 1,
+              "end_date": "2026-09-01"
+            },
+            {
+              "task_id": "22PZwraw6BHq",
+              "name": "EXTERIOR SHEATING: PURCHASE MATERIALS",
+              "description": "1916",
+              "amount": 1916.0,
+              "progress": 1,
+              "end_date": "2026-09-04"
+            }
+          ],
+          "additional_lines": [],
+          "sold": 0.0,
+          "expenses_subs": 2600.0,
+          "expenses_materials": 7591.0,
+          "expenses_additional": 0,
+          "expenses_total": 10191.0,
+          "profit": -10191.0,
           "status": "in_progress",
           "has_price": false,
           "this_pct": 0.0,
@@ -173,8 +270,8 @@
     },
     {
       "pm": "Giselle Garcia",
-      "project_count": 1,
-      "group_count": 1,
+      "project_count": 2,
+      "group_count": 2,
       "sold": 0.0,
       "expenses": 0.0,
       "profit_potential": 0.0,
@@ -183,6 +280,12 @@
         {
           "project_id": "22PL9RSbYNs9",
           "project_name": "Rohini Williams (CNG2025-496)",
+          "attribution": 0.0,
+          "group_count": 1
+        },
+        {
+          "project_id": "22PMwhcSuqJD",
+          "project_name": "Karim-Merchant",
           "attribution": 0.0,
           "group_count": 1
         }
@@ -195,9 +298,9 @@
     "profit_potential": -180.0,
     "profit_attributed_this_week": 0.0,
     "groups_in_progress": 2,
-    "groups_finished_this_week": 0,
-    "groups_missing_price": 1,
-    "expense_missing_price": 3500.0,
-    "project_count": 2
+    "groups_finished_this_week": 1,
+    "groups_missing_price": 2,
+    "expense_missing_price": 13691.0,
+    "project_count": 3
   }
 }
