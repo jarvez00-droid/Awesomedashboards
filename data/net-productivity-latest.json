@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T17:39:13",
+  "generated_at": "2026-09-25T18:02:49",
   "today": "2026-09-25",
   "horizon": "2027-01-20",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -1109,11 +1109,12 @@
         231545.92,
         195108.73
       ],
-      "active_count": 7,
+      "active_count": 8,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
         "Katie Holmes",
+        "Lingyan Qiu",
         "Martha Cockrell",
         "Rohini Williams",
         "Shaan Lagisetty",
@@ -1165,11 +1166,12 @@
         233541.66,
         195164.84
       ],
-      "active_count": 7,
+      "active_count": 8,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
         "Katie Holmes",
+        "Lingyan Qiu",
         "Martha Cockrell",
         "Rohini Williams",
         "Shaan Lagisetty",
@@ -1225,11 +1227,12 @@
         259525.43,
         214459.33
       ],
-      "active_count": 7,
+      "active_count": 8,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
         "Katie Holmes",
+        "Lingyan Qiu",
         "Martha Cockrell",
         "Rohini Williams",
         "Shaan Lagisetty",
@@ -1289,10 +1292,11 @@
         285782.67,
         234184.27
       ],
-      "active_count": 6,
+      "active_count": 7,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
+        "Lingyan Qiu",
         "Martha Cockrell",
         "Rohini Williams",
         "Shaan Lagisetty",
@@ -3267,10 +3271,10 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 48,
-    "orphan_cost": 320045.75,
+    "orphan_trades": 49,
+    "orphan_cost": 320545.75,
     "priced_trades": 167,
-    "total_trades": 215,
+    "total_trades": 216,
     "by_project": [
       {
         "project": "Charles Harris",
@@ -3386,9 +3390,13 @@
       },
       {
         "project": "Lingyan Qiu",
-        "orphan_trades": 6,
-        "orphan_cost": 6553.69,
+        "orphan_trades": 7,
+        "orphan_cost": 7053.69,
         "examples": [
+          {
+            "trade": "1ST STORY ADDITION",
+            "cost": 500.0
+          },
           {
             "trade": "GLASS",
             "cost": 1844.33
@@ -3408,10 +3416,6 @@
           {
             "trade": "KITCHEN: ELECTRICAL TRIM",
             "cost": 30.0
-          },
-          {
-            "trade": "KITCHEN: MECHANICAL TRIM",
-            "cost": 400.0
           }
         ]
       },
@@ -5084,6 +5088,14 @@
           "n_exp": 2
         },
         {
+          "trade": "1ST STORY ADDITION",
+          "income": 0.0,
+          "expense": 500.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 1
+        },
+        {
           "trade": "BASEBOARD & TRIM",
           "income": 0.0,
           "expense": 453.99,
@@ -5109,7 +5121,7 @@
         }
       ],
       "total_income": 179995.0,
-      "total_expense": 105074.37,
+      "total_expense": 105574.37,
       "loose_amount": 0
     },
     {
