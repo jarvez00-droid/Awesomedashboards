@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T18:02:49",
+  "generated_at": "2026-09-25T18:26:17",
   "today": "2026-09-25",
   "horizon": "2027-01-20",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -39,18 +39,18 @@
   ],
   "totals": {
     "prod": [
-      664878.07,
-      592566.96
+      665278.08,
+      593006.96
     ],
     "prod_todate": [
-      465181.36,
-      422253.92
+      465581.37,
+      422693.92
     ],
     "weekly": {
       "fixed": 376238.01,
       "net": [
-        288640.06,
-        216328.95
+        289040.07,
+        216768.95
       ],
       "periods": 31,
       "positive": [
@@ -61,8 +61,8 @@
     "monthly": {
       "fixed": 420739.2,
       "net": [
-        244138.87,
-        171827.76
+        244538.88,
+        172267.76
       ],
       "periods": 8,
       "positive": [
@@ -301,17 +301,17 @@
       "label_moy": "jun S4",
       "label_short": "27 jun",
       "prod": [
-        13540.92,
-        11686.09
+        13566.32,
+        11708.31
       ],
       "fixed": 12136.71,
       "net": [
-        1404.21,
-        -450.62
+        1429.61,
+        -428.4
       ],
       "cum": [
-        -16021.11,
-        -22796.28
+        -15995.71,
+        -22774.06
       ],
       "active_count": 8,
       "active_projects": [
@@ -333,8 +333,8 @@
           1038.47
         ],
         "Stephanie Felton": [
-          445.2,
-          379.08
+          470.6,
+          401.3
         ],
         "Katie Holmes": [
           3220.93,
@@ -370,17 +370,17 @@
       "label_moy": "jul S1",
       "label_short": "4 jul",
       "prod": [
-        13527.74,
-        11838.88
+        13550.83,
+        11859.08
       ],
       "fixed": 12136.71,
       "net": [
-        1391.03,
-        -297.83
+        1414.12,
+        -277.63
       ],
       "cum": [
-        -14630.08,
-        -23094.11
+        -14581.59,
+        -23051.69
       ],
       "active_count": 9,
       "active_projects": [
@@ -403,8 +403,8 @@
           601.01
         ],
         "Stephanie Felton": [
-          147.18,
-          -27.11
+          170.27,
+          -6.91
         ],
         "Katie Holmes": [
           1352.48,
@@ -444,17 +444,17 @@
       "label_moy": "jul S2",
       "label_short": "11 jul",
       "prod": [
-        24871.95,
-        21620.41
+        24883.5,
+        21630.51
       ],
       "fixed": 12136.71,
       "net": [
-        12735.24,
-        9483.7
+        12746.79,
+        9493.8
       ],
       "cum": [
-        -1894.84,
-        -13610.41
+        -1834.8,
+        -13557.89
       ],
       "active_count": 10,
       "active_projects": [
@@ -478,8 +478,8 @@
           2182.4
         ],
         "Stephanie Felton": [
-          422.27,
-          214.84
+          433.82,
+          224.93
         ],
         "Katie Holmes": [
           6886.26,
@@ -523,17 +523,17 @@
       "label_moy": "jul S3",
       "label_short": "18 jul",
       "prod": [
-        40685.42,
-        37125.78
+        40701.58,
+        37139.92
       ],
       "fixed": 12136.71,
       "net": [
-        28548.71,
-        24989.07
+        28564.87,
+        25003.21
       ],
       "cum": [
-        26653.87,
-        11378.66
+        26730.07,
+        11445.32
       ],
       "active_count": 10,
       "active_projects": [
@@ -557,8 +557,8 @@
           5040.68
         ],
         "Stephanie Felton": [
-          400.71,
-          11.07
+          416.87,
+          25.21
         ],
         "Katie Holmes": [
           8063.65,
@@ -602,17 +602,17 @@
       "label_moy": "jul S4",
       "label_short": "25 jul",
       "prod": [
-        47516.05,
-        42314.07
+        47543.76,
+        42338.31
       ],
       "fixed": 12136.71,
       "net": [
-        35379.34,
-        30177.36
+        35407.05,
+        30201.6
       ],
       "cum": [
-        62033.21,
-        41556.02
+        62137.12,
+        41646.92
       ],
       "active_count": 10,
       "active_projects": [
@@ -636,8 +636,8 @@
           6310.41
         ],
         "Stephanie Felton": [
-          1253.54,
-          958.08
+          1281.24,
+          982.31
         ],
         "Katie Holmes": [
           7112.08,
@@ -677,17 +677,17 @@
       "label_moy": "ago S1",
       "label_short": "1 ago",
       "prod": [
-        46695.88,
-        44457.84
+        46728.2,
+        44486.12
       ],
       "fixed": 12136.71,
       "net": [
-        34559.17,
-        32321.13
+        34591.49,
+        32349.41
       ],
       "cum": [
-        96592.38,
-        73877.15
+        96728.61,
+        73996.33
       ],
       "active_count": 10,
       "active_projects": [
@@ -711,8 +711,8 @@
           9433.97
         ],
         "Stephanie Felton": [
-          1148.73,
-          1010.57
+          1181.05,
+          1038.84
         ],
         "Katie Holmes": [
           13655.79,
@@ -752,17 +752,17 @@
       "label_moy": "ago S2",
       "label_short": "8 ago",
       "prod": [
-        24771.17,
-        22768.39
+        24803.49,
+        22796.66
       ],
       "fixed": 12136.71,
       "net": [
-        12634.46,
-        10631.68
+        12666.78,
+        10659.95
       ],
       "cum": [
-        109226.84,
-        84508.83
+        109395.39,
+        84656.28
       ],
       "active_count": 10,
       "active_projects": [
@@ -786,8 +786,8 @@
           1352.27
         ],
         "Stephanie Felton": [
-          1089.61,
-          915.93
+          1121.93,
+          944.21
         ],
         "Katie Holmes": [
           7460.41,
@@ -823,17 +823,17 @@
       "label_moy": "ago S3",
       "label_short": "15 ago",
       "prod": [
-        38246.45,
-        34912.96
+        38262.61,
+        34927.09
       ],
       "fixed": 12136.71,
       "net": [
-        26109.74,
-        22776.25
+        26125.9,
+        22790.38
       ],
       "cum": [
-        135336.58,
-        107285.08
+        135521.29,
+        107446.66
       ],
       "active_count": 10,
       "active_projects": [
@@ -857,8 +857,8 @@
           5631.64
         ],
         "Stephanie Felton": [
-          1075.62,
-          992.68
+          1091.78,
+          1006.82
         ],
         "Katie Holmes": [
           11132.35,
@@ -898,17 +898,17 @@
       "label_moy": "ago S4",
       "label_short": "22 ago",
       "prod": [
-        38901.12,
-        36502.69
+        38908.04,
+        36508.75
       ],
       "fixed": 12136.71,
       "net": [
-        26764.41,
-        24365.98
+        26771.33,
+        24372.04
       ],
       "cum": [
-        162100.99,
-        131651.06
+        162292.62,
+        131818.7
       ],
       "active_count": 10,
       "active_projects": [
@@ -928,8 +928,8 @@
       "pending": false,
       "by_project": {
         "Stephanie Felton": [
-          525.46,
-          501.58
+          532.38,
+          507.64
         ],
         "Katie Holmes": [
           4470.97,
@@ -974,8 +974,8 @@
         28741.89
       ],
       "cum": [
-        193595.08,
-        160392.95
+        193786.71,
+        160560.59
       ],
       "active_count": 10,
       "active_projects": [
@@ -1041,8 +1041,8 @@
         26968.25
       ],
       "cum": [
-        222065.61,
-        187361.2
+        222257.24,
+        187528.84
       ],
       "active_count": 8,
       "active_projects": [
@@ -1106,8 +1106,8 @@
         7747.53
       ],
       "cum": [
-        231545.92,
-        195108.73
+        231737.55,
+        195276.37
       ],
       "active_count": 8,
       "active_projects": [
@@ -1154,17 +1154,17 @@
       "label_moy": "sep S3",
       "label_short": "19 sep",
       "prod": [
-        14132.45,
-        12192.82
+        14372.78,
+        12493.12
       ],
       "fixed": 12136.71,
       "net": [
-        1995.74,
-        56.11
+        2236.07,
+        356.41
       ],
       "cum": [
-        233541.66,
-        195164.84
+        233973.62,
+        195632.78
       ],
       "active_count": 8,
       "active_projects": [
@@ -1182,8 +1182,8 @@
       "pending": false,
       "by_project": {
         "Stephanie Felton": [
-          -1502.41,
-          -2019.94
+          -1262.09,
+          -1719.64
         ],
         "Katie Holmes": [
           4750.64,
@@ -1215,17 +1215,17 @@
       "label_moy": "sep S4",
       "label_short": "26 sep",
       "prod": [
-        38120.48,
-        31431.2
+        38088.54,
+        31403.26
       ],
       "fixed": 12136.71,
       "net": [
-        25983.77,
-        19294.49
+        25951.83,
+        19266.55
       ],
       "cum": [
-        259525.43,
-        214459.33
+        259925.45,
+        214899.33
       ],
       "active_count": 8,
       "active_projects": [
@@ -1242,10 +1242,6 @@
       "is_partial": false,
       "pending": false,
       "by_project": {
-        "Stephanie Felton": [
-          31.94,
-          27.94
-        ],
         "Katie Holmes": [
           2032.44,
           1833.39
@@ -1289,8 +1285,8 @@
         19724.94
       ],
       "cum": [
-        285782.67,
-        234184.27
+        286182.69,
+        234624.27
       ],
       "active_count": 7,
       "active_projects": [
@@ -1345,16 +1341,17 @@
         34201.9
       ],
       "cum": [
-        328002.49,
-        268386.17
+        328402.51,
+        268826.17
       ],
-      "active_count": 5,
+      "active_count": 6,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
         "Martha Cockrell",
         "Rohini Williams",
-        "Shaan Lagisetty"
+        "Shaan Lagisetty",
+        "Stephanie Felton"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1399,15 +1396,16 @@
         2390.36
       ],
       "cum": [
-        335932.36,
-        270776.53
+        336332.38,
+        271216.53
       ],
-      "active_count": 4,
+      "active_count": 5,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
         "Martha Cockrell",
-        "Shaan Lagisetty"
+        "Shaan Lagisetty",
+        "Stephanie Felton"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1448,8 +1446,8 @@
         25102.74
       ],
       "cum": [
-        362973.82,
-        295879.27
+        363373.84,
+        296319.27
       ],
       "active_count": 4,
       "active_projects": [
@@ -1497,8 +1495,8 @@
         -3002.69
       ],
       "cum": [
-        360910.49,
-        292876.58
+        361310.51,
+        293316.58
       ],
       "active_count": 3,
       "active_projects": [
@@ -1541,8 +1539,8 @@
         -9724.07
       ],
       "cum": [
-        351584.81,
-        283152.51
+        351984.83,
+        283592.51
       ],
       "active_count": 2,
       "active_projects": [
@@ -1576,8 +1574,8 @@
         -9671.91
       ],
       "cum": [
-        342359.4,
-        273480.6
+        342759.42,
+        273920.6
       ],
       "active_count": 2,
       "active_projects": [
@@ -1611,8 +1609,8 @@
         -11173.26
       ],
       "cum": [
-        332355.74,
-        262307.34
+        332755.76,
+        262747.34
       ],
       "active_count": 2,
       "active_projects": [
@@ -1646,8 +1644,8 @@
         -9644.36
       ],
       "cum": [
-        323353.83,
-        252662.98
+        323753.85,
+        253102.98
       ],
       "active_count": 2,
       "active_projects": [
@@ -1681,8 +1679,8 @@
         -11005.5
       ],
       "cum": [
-        312797.38,
-        241657.48
+        313197.4,
+        242097.48
       ],
       "active_count": 2,
       "active_projects": [
@@ -1716,8 +1714,8 @@
         -9796.27
       ],
       "cum": [
-        303630.87,
-        231861.21
+        304030.89,
+        232301.21
       ],
       "active_count": 2,
       "active_projects": [
@@ -1755,8 +1753,8 @@
         -6769.96
       ],
       "cum": [
-        297263.95,
-        225091.25
+        297663.97,
+        225531.25
       ],
       "active_count": 2,
       "active_projects": [
@@ -1794,8 +1792,8 @@
         -8762.28
       ],
       "cum": [
-        288640.07,
-        216328.97
+        289040.09,
+        216768.97
       ],
       "active_count": 2,
       "active_projects": [
@@ -1833,8 +1831,8 @@
         0.0
       ],
       "cum": [
-        288640.07,
-        216328.97
+        289040.09,
+        216768.97
       ],
       "active_count": 1,
       "active_projects": [
@@ -1862,8 +1860,8 @@
         0.0
       ],
       "cum": [
-        288640.07,
-        216328.97
+        289040.09,
+        216768.97
       ],
       "active_count": 1,
       "active_projects": [
@@ -1891,8 +1889,8 @@
         0.0
       ],
       "cum": [
-        288640.07,
-        216328.97
+        289040.09,
+        216768.97
       ],
       "active_count": 1,
       "active_projects": [
@@ -1909,17 +1907,17 @@
       "month": "2026-06",
       "label": "jun 2026",
       "prod": [
-        40278.39,
-        34040.7
+        40289.94,
+        34050.8
       ],
       "fixed": 52592.4,
       "net": [
-        -12314.01,
-        -18551.7
+        -12302.46,
+        -18541.6
       ],
       "cum": [
-        -12314.01,
-        -18551.7
+        -12302.46,
+        -18541.6
       ],
       "is_future": false,
       "is_partial": false,
@@ -1930,8 +1928,8 @@
           7201.97
         ],
         "Stephanie Felton": [
-          6868.29,
-          6128.72
+          6879.84,
+          6138.82
         ],
         "Katie Holmes": [
           4992.53,
@@ -1963,17 +1961,17 @@
       "month": "2026-07",
       "label": "jul 2026",
       "prod": [
-        130985.22,
-        116745.71
+        131077.56,
+        116826.5
       ],
       "fixed": 52592.4,
       "net": [
-        78392.82,
-        64153.31
+        78485.16,
+        64234.1
       ],
       "cum": [
-        66078.81,
-        45601.61
+        66182.7,
+        45692.5
       ],
       "is_future": false,
       "is_partial": false,
@@ -1984,8 +1982,8 @@
           14628.7
         ],
         "Stephanie Felton": [
-          2509.23,
-          1396.26
+          2601.58,
+          1477.05
         ],
         "Katie Holmes": [
           23639.89,
@@ -2025,17 +2023,17 @@
       "month": "2026-08",
       "label": "ago 2026",
       "prod": [
-        158773.07,
-        147964.78
+        158860.8,
+        148041.53
       ],
       "fixed": 52592.4,
       "net": [
-        106180.67,
-        95372.38
+        106268.4,
+        95449.13
       ],
       "cum": [
-        172259.48,
-        140973.99
+        172451.1,
+        141141.63
       ],
       "is_future": false,
       "is_partial": false,
@@ -2046,8 +2044,8 @@
           16417.88
         ],
         "Stephanie Felton": [
-          3839.42,
-          3420.76
+          3927.14,
+          3497.51
         ],
         "Katie Holmes": [
           36845.79,
@@ -2087,25 +2085,25 @@
       "month": "2026-09",
       "label": "sep 2026",
       "prod": [
-        135144.68,
-        123502.73
+        135353.07,
+        123775.09
       ],
       "fixed": 52592.4,
       "net": [
-        82552.28,
-        70910.33
+        82760.67,
+        71182.69
       ],
       "cum": [
-        254811.76,
-        211884.32
+        255211.77,
+        212324.32
       ],
       "is_future": false,
       "is_partial": true,
       "pending": false,
       "by_project": {
         "Stephanie Felton": [
-          -1470.47,
-          -1992.0
+          -1262.09,
+          -1719.64
         ],
         "Katie Holmes": [
           8744.45,
@@ -2150,8 +2148,8 @@
         89093.46
       ],
       "cum": [
-        368240.63,
-        300977.78
+        368640.64,
+        301417.78
       ],
       "is_future": true,
       "is_partial": false,
@@ -2192,8 +2190,8 @@
         -38729.27
       ],
       "cum": [
-        332560.32,
-        262248.51
+        332960.33,
+        262688.51
       ],
       "is_future": true,
       "is_partial": false,
@@ -2222,8 +2220,8 @@
         -38356.62
       ],
       "cum": [
-        296203.0,
-        223891.89
+        296603.01,
+        224331.89
       ],
       "is_future": true,
       "is_partial": false,
@@ -2252,8 +2250,8 @@
         -52064.13
       ],
       "cum": [
-        244138.87,
-        171827.76
+        244538.88,
+        172267.76
       ],
       "is_future": true,
       "is_partial": false,
@@ -3180,56 +3178,52 @@
       "project": "Stephanie Felton",
       "revenue": 39673.8,
       "revenue_gross": 44082.0,
-      "cost": 27927.33,
+      "cost": 27527.33,
       "prod": [
-        11746.47,
-        8953.74
+        12146.47,
+        9393.74
       ],
-      "margin_pct": 29.6,
+      "margin_pct": 30.6,
       "weeks": {
         "2026-W29": [
-          422.27,
-          214.84
+          433.82,
+          224.93
         ],
         "2026-W30": [
-          400.71,
-          11.07
+          416.87,
+          25.21
         ],
         "2026-W31": [
-          1253.54,
-          958.08
+          1281.24,
+          982.31
         ],
         "2026-W39": [
-          -1502.41,
-          -2019.94
+          -1262.09,
+          -1719.64
         ],
         "2026-W32": [
-          1148.73,
-          1010.57
+          1181.05,
+          1038.84
         ],
         "2026-W34": [
-          1075.62,
-          992.68
+          1091.78,
+          1006.82
         ],
         "2026-W33": [
-          1089.61,
-          915.93
+          1121.93,
+          944.21
         ],
         "2026-W35": [
-          525.46,
-          501.58
+          532.38,
+          507.64
         ],
         "2026-W27": [
-          445.2,
-          379.08
+          470.6,
+          401.3
         ],
         "2026-W28": [
-          147.18,
-          -27.11
-        ],
-        "2026-W40": [
-          31.94,
-          27.94
+          170.27,
+          -6.91
         ],
         "2026-W23": [
           281.74,
@@ -3250,31 +3244,31 @@
       },
       "months": {
         "2026-07": [
-          2509.23,
-          1396.26
+          2601.58,
+          1477.05
         ],
         "2026-09": [
-          -1470.47,
-          -1992.0
+          -1262.09,
+          -1719.64
         ],
         "2026-08": [
-          3839.42,
-          3420.76
+          3927.14,
+          3497.51
         ],
         "2026-06": [
-          6868.29,
-          6128.72
+          6879.84,
+          6138.82
         ]
       },
       "first_week": "2026-W23",
-      "last_week": "2026-W40"
+      "last_week": "2026-W39"
     }
   ],
   "data_quality": {
-    "orphan_trades": 49,
-    "orphan_cost": 320545.75,
+    "orphan_trades": 50,
+    "orphan_cost": 321095.75,
     "priced_trades": 167,
-    "total_trades": 216,
+    "total_trades": 217,
     "by_project": [
       {
         "project": "Charles Harris",
@@ -3309,8 +3303,8 @@
       },
       {
         "project": "Stephanie Felton",
-        "orphan_trades": 4,
-        "orphan_cost": 42943.54,
+        "orphan_trades": 5,
+        "orphan_cost": 43493.54,
         "examples": [
           {
             "trade": "Decking",
@@ -3327,6 +3321,10 @@
           {
             "trade": "EXTERIOR DRIVEWAY",
             "cost": 15092.0
+          },
+          {
+            "trade": "FINAL TOUCHUPS",
+            "cost": 550.0
           }
         ]
       },
@@ -5533,10 +5531,10 @@
         {
           "trade": "BRICKS",
           "income": 25274.0,
-          "expense": 17296.0,
+          "expense": 17146.0,
           "grouped": true,
           "n_inc": 1,
-          "n_exp": 8
+          "n_exp": 7
         },
         {
           "trade": "Decking",
@@ -5637,10 +5635,10 @@
         {
           "trade": "ELECTRICAL TRIM",
           "income": 3275.0,
-          "expense": 4158.26,
+          "expense": 3758.26,
           "grouped": true,
           "n_inc": 1,
-          "n_exp": 7
+          "n_exp": 6
         },
         {
           "trade": "Insulation",
@@ -5686,6 +5684,14 @@
           "trade": "INTERIOR DOORS AND TRIM",
           "income": 0.0,
           "expense": 1200.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 2
+        },
+        {
+          "trade": "FINAL TOUCHUPS",
+          "income": 0.0,
+          "expense": 550.0,
           "grouped": true,
           "n_inc": 0,
           "n_exp": 2
