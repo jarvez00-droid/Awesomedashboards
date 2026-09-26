@@ -8590,7 +8590,7 @@ function renderSOD(c) {
   let pmCards = '';
   (DATA.pms || []).forEach(pm => {
     const badge = pm.ind === 'clean' ? '✅' : pm.ind === 'green' ? '🟢' : pm.ind === 'yellow' ? '🟡' : '🔴';
-    pmCards += `<div class="pmc"><div><div class="pmn">${pm.name}</div><div class="pmd">${pm.ov} overdue / ${pm.act} active · ${pm.proj} project${pm.proj>1?'s':''}</div></div><div class="pmb">${badge}</div></div>`;
+    pmCards += `<div class="pmc"><div><div class="pmn">${pm.name}</div><div class="pmd">${pm.ov} overdue${pm.her ? ` (${pm.her} before Sep 25)` : ''} / ${pm.act} active · ${pm.proj} project${pm.proj>1?'s':''}</div></div><div class="pmb">${badge}</div></div>`;
   });
 
   let h = `
@@ -8645,8 +8645,8 @@ function buildPMSection(pms, isEOD) {
   pms.forEach(pm => {
     const badge = pm.ind === 'clean' ? '✅' : pm.ind === 'green' ? '🟢' : pm.ind === 'yellow' ? '🟡' : '🔴';
     const detail = isEOD
-      ? `${pm.completed||0} done today · ${pm.ov} overdue · ${pm.act} active<br>${pm.proj} project${pm.proj>1?'s':''}`
-      : `${pm.ov} overdue / ${pm.act} active<br>${pm.proj} project${pm.proj>1?'s':''}`;
+      ? `${pm.completed||0} done today · ${pm.ov} overdue${pm.her ? ` (${pm.her} before Sep 25)` : ''} · ${pm.act} active<br>${pm.proj} project${pm.proj>1?'s':''}`
+      : `${pm.ov} overdue${pm.her ? ` (${pm.her} before Sep 25)` : ''} / ${pm.act} active<br>${pm.proj} project${pm.proj>1?'s':''}`;
     h += `<div class="pmc"><div><div class="pmn">${pm.name}</div><div class="pmd">${detail}</div></div><div class="pmb">${badge}</div></div>`;
   });
   return h + '</div>';
