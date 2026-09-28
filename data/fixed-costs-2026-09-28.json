@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T17:08:56",
+  "generated_at": "2026-09-28T17:20:30",
   "date": "2026-09-28",
   "source": "sqlite:fixed_costs",
   "sheet_id": null,
@@ -8,41 +8,25 @@
     "end": "2027-01-26"
   },
   "summary": {
-    "total_tasks": 153,
-    "total_amount": 220229.6,
+    "total_tasks": 144,
+    "total_amount": 210369.6,
     "by_type": {
-      "others": {
-        "tasks": 71,
-        "amount": 62009.6
-      },
       "salaries": {
         "tasks": 64,
         "amount": 144020.0
       },
+      "others": {
+        "tasks": 64,
+        "amount": 52509.6
+      },
       "utilities": {
-        "tasks": 18,
-        "amount": 14200.0
+        "tasks": 16,
+        "amount": 13840.0
       }
     },
     "rule_count": 31
   },
   "tasks": [
-    {
-      "id": "fc-rule561-2026-09-01",
-      "task": "Accountant",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 1000.0,
-      "due": "2026-09-28",
-      "original_due": "2026-09-01",
-      "rolled_forward": true,
-      "days_overdue": 27,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Other",
-      "frequency": "monthly",
-      "rule_id": 561
-    },
     {
       "id": "fc-rule566-2026-09-28",
       "task": "Anthony",
@@ -106,38 +90,6 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 532
-    },
-    {
-      "id": "fc-rule563-2026-09-20",
-      "task": "Henry (20th)",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 500.0,
-      "due": "2026-09-28",
-      "original_due": "2026-09-20",
-      "rolled_forward": true,
-      "days_overdue": 8,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Other",
-      "frequency": "monthly",
-      "rule_id": 563
-    },
-    {
-      "id": "fc-rule562-2026-09-05",
-      "task": "Henry (5th)",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 1000.0,
-      "due": "2026-09-28",
-      "original_due": "2026-09-05",
-      "rolled_forward": true,
-      "days_overdue": 23,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Other",
-      "frequency": "monthly",
-      "rule_id": 562
     },
     {
       "id": "fc-rule528-2026-09-28",
@@ -204,22 +156,6 @@
       "rule_id": 559
     },
     {
-      "id": "fc-rule544-2026-09-01",
-      "task": "Luz",
-      "project": "FIXED COSTS",
-      "type": "utilities",
-      "amount": 200.0,
-      "due": "2026-09-28",
-      "original_due": "2026-09-01",
-      "rolled_forward": true,
-      "days_overdue": 27,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Utility",
-      "frequency": "monthly",
-      "rule_id": 544
-    },
-    {
       "id": "fc-rule534-2026-09-28",
       "task": "MILAGROS PORTURAS",
       "project": "FIXED COSTS",
@@ -234,38 +170,6 @@
       "category_raw": "Salary",
       "frequency": "semi-monthly",
       "rule_id": 534
-    },
-    {
-      "id": "fc-rule551-2026-09-01",
-      "task": "Marketing",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 1000.0,
-      "due": "2026-09-28",
-      "original_due": "2026-09-01",
-      "rolled_forward": true,
-      "days_overdue": 27,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Systems",
-      "frequency": "monthly",
-      "rule_id": 551
-    },
-    {
-      "id": "fc-rule547-2026-09-01",
-      "task": "Matt",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 2000.0,
-      "due": "2026-09-28",
-      "original_due": "2026-09-01",
-      "rolled_forward": true,
-      "days_overdue": 27,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Legal",
-      "frequency": "monthly",
-      "rule_id": 547
     },
     {
       "id": "fc-rule529-2026-09-28",
@@ -298,54 +202,6 @@
       "category_raw": "Salary",
       "frequency": "monthly",
       "rule_id": 537
-    },
-    {
-      "id": "fc-rule546-2026-09-01",
-      "task": "STARNES & BAILEY (LAWYERS)",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 3000.0,
-      "due": "2026-09-28",
-      "original_due": "2026-09-01",
-      "rolled_forward": true,
-      "days_overdue": 27,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Legal",
-      "frequency": "monthly",
-      "rule_id": 546
-    },
-    {
-      "id": "fc-rule540-2026-09-01",
-      "task": "Seguro empresa",
-      "project": "FIXED COSTS",
-      "type": "utilities",
-      "amount": 160.0,
-      "due": "2026-09-28",
-      "original_due": "2026-09-01",
-      "rolled_forward": true,
-      "days_overdue": 27,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Utility",
-      "frequency": "monthly",
-      "rule_id": 540
-    },
-    {
-      "id": "fc-rule545-2026-09-01",
-      "task": "Yaniv",
-      "project": "FIXED COSTS",
-      "type": "others",
-      "amount": 1000.0,
-      "due": "2026-09-28",
-      "original_due": "2026-09-01",
-      "rolled_forward": true,
-      "days_overdue": 27,
-      "paid": false,
-      "source": "sqlite",
-      "category_raw": "Legal",
-      "frequency": "monthly",
-      "rule_id": 545
     },
     {
       "id": "fc-rule561-2026-10-01",
