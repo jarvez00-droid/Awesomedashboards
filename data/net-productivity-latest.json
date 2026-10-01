@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-30T18:49:27",
-  "today": "2026-09-30",
+  "generated_at": "2026-10-01T00:04:17",
+  "today": "2026-10-01",
   "horizon": "2027-02-05",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
   "params": {
@@ -43,8 +43,8 @@
       591577.02
     ],
     "prod_todate": [
-      423285.54,
-      384763.07
+      596298.5,
+      532309.49
     ],
     "weekly": {
       "fixed": 412648.14,
@@ -2148,7 +2148,7 @@
         174393.47
       ],
       "is_future": false,
-      "is_partial": true,
+      "is_partial": false,
       "pending": false,
       "by_project": {
         "Stephanie Felton": [
@@ -2201,8 +2201,8 @@
         333336.5,
         269347.49
       ],
-      "is_future": true,
-      "is_partial": false,
+      "is_future": false,
+      "is_partial": true,
       "pending": false,
       "by_project": {
         "Katie Holmes": [
