@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T11:18:47",
+  "generated_at": "2026-10-02T11:42:23",
   "today": "2026-10-02",
   "horizon": "2027-02-05",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -40,17 +40,17 @@
   "totals": {
     "prod": [
       663828.35,
-      591577.03
+      591577.02
     ],
     "prod_todate": [
       596298.5,
-      532309.5
+      532309.49
     ],
     "weekly": {
       "fixed": 412648.14,
       "net": [
         251180.21,
-        178928.89
+        178928.88
       ],
       "periods": 34,
       "positive": [
@@ -62,7 +62,7 @@
       "fixed": 420739.2,
       "net": [
         243089.15,
-        170837.83
+        170837.82
       ],
       "periods": 8,
       "positive": [
@@ -1187,17 +1187,17 @@
       "label_moy": "sep S4",
       "label_short": "26 sep",
       "prod": [
-        21638.22,
-        18861.17
+        21123.84,
+        18485.88
       ],
       "fixed": 12136.71,
       "net": [
-        9501.51,
-        6724.46
+        8987.13,
+        6349.17
       ],
       "cum": [
-        217590.62,
-        178683.78
+        217076.24,
+        178308.49
       ],
       "active_count": 8,
       "active_projects": [
@@ -1219,8 +1219,8 @@
           -1186.59
         ],
         "Katie Holmes": [
-          8690.76,
-          7645.53
+          8176.38,
+          7270.24
         ],
         "Charles Harris": [
           7288.84,
@@ -1244,13 +1244,13 @@
       "label_moy": "oct S1",
       "label_short": "3 oct",
       "prod": [
-        35282.96,
-        29119.97
+        35797.34,
+        29495.26
       ],
       "fixed": 12136.71,
       "net": [
-        23146.25,
-        16983.26
+        23660.63,
+        17358.55
       ],
       "cum": [
         240736.87,
@@ -1272,8 +1272,8 @@
       "pending": false,
       "by_project": {
         "Katie Holmes": [
-          5357.41,
-          5031.89
+          5871.8,
+          5407.18
         ],
         "Charles Harris": [
           14089.47,
@@ -2127,17 +2127,17 @@
       "month": "2026-09",
       "label": "sep 2026",
       "prod": [
-        101214.32,
-        93266.5
+        100699.94,
+        92891.2
       ],
       "fixed": 52592.4,
       "net": [
-        48621.92,
-        40674.1
+        48107.54,
+        40298.8
       ],
       "cum": [
-        212963.8,
-        174450.43
+        212449.42,
+        174075.13
       ],
       "is_future": false,
       "is_partial": false,
@@ -2148,8 +2148,8 @@
           -1186.59
         ],
         "Katie Holmes": [
-          3720.7,
-          2924.63
+          3206.32,
+          2549.34
         ],
         "Charles Harris": [
           24088.84,
@@ -2181,25 +2181,25 @@
       "month": "2026-10",
       "label": "oct 2026",
       "prod": [
-        172965.1,
-        147489.47
+        173479.48,
+        147864.76
       ],
       "fixed": 52592.4,
       "net": [
-        120372.7,
-        94897.07
+        120887.08,
+        95272.36
       ],
       "cum": [
         333336.5,
-        269347.5
+        269347.49
       ],
       "is_future": false,
       "is_partial": true,
       "pending": false,
       "by_project": {
         "Katie Holmes": [
-          10327.47,
-          9752.79
+          10841.86,
+          10128.08
         ],
         "Charles Harris": [
           81676.53,
@@ -2237,7 +2237,7 @@
       ],
       "cum": [
         331510.6,
-        261258.58
+        261258.57
       ],
       "is_future": true,
       "is_partial": false,
@@ -2267,7 +2267,7 @@
       ],
       "cum": [
         287757.55,
-        215506.23
+        215506.22
       ],
       "is_future": true,
       "is_partial": false,
@@ -2293,7 +2293,7 @@
       ],
       "cum": [
         243089.15,
-        170837.83
+        170837.82
       ],
       "is_future": true,
       "is_partial": false,
@@ -2319,7 +2319,7 @@
       ],
       "cum": [
         243089.15,
-        170837.83
+        170837.82
       ],
       "is_future": true,
       "is_partial": false,
@@ -2594,12 +2594,12 @@
           7517.08
         ],
         "2026-W41": [
-          5357.41,
-          5031.89
+          5871.8,
+          5407.18
         ],
         "2026-W40": [
-          8690.76,
-          7645.53
+          8176.38,
+          7270.24
         ],
         "2026-W34": [
           4604.96,
@@ -2620,12 +2620,12 @@
           26840.88
         ],
         "2026-10": [
-          10327.47,
-          9752.79
+          10841.86,
+          10128.08
         ],
         "2026-09": [
-          3720.7,
-          2924.63
+          3206.32,
+          2549.34
         ]
       },
       "first_week": "2026-W26",
