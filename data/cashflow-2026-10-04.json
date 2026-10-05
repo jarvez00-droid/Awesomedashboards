@@ -1,19 +1,19 @@
 {
   "date": "2026-10-04",
-  "generated_at": "2026-10-04T19:36:14.174758",
+  "generated_at": "2026-10-04T20:48:37.584249",
   "summary": {
     "total_payment_tasks": 762,
-    "total_income": 347260.7,
+    "total_income": 357260.7,
     "total_p_income": 0,
-    "total_outgoing": 424044.1,
-    "total_net": -76783.4,
-    "pending_income": 832851.35,
+    "total_outgoing": 409044.1,
+    "total_net": -51783.4,
+    "pending_income": 789851.35,
     "pending_p_income": 0,
-    "pending_outgoing": 741775.6,
-    "paid_income": 931963.5,
+    "pending_outgoing": 713775.6,
+    "paid_income": 984963.5,
     "paid_p_income": 0,
-    "paid_outgoing": 648401.19,
-    "unpaid_net": 91075.75,
+    "paid_outgoing": 661401.19,
+    "unpaid_net": 76075.75,
     "weeks_covered": 5
   },
   "weeks": [
@@ -29,9 +29,9 @@
       "additional": 0,
       "outgoing": 110617.83,
       "net": -18448.87,
-      "income_paid": 0,
+      "income_paid": 53000.0,
       "p_income_paid": 0,
-      "outgoing_paid": 0,
+      "outgoing_paid": 13000.0,
       "task_count": 66,
       "items": [
         {
@@ -40,7 +40,7 @@
           "type": "income",
           "amount": 53000.0,
           "due": "2026-10-04",
-          "paid": false
+          "paid": true
         },
         {
           "project": "Clifford Clack \u2014 Gym Addition",
@@ -248,7 +248,7 @@
           "type": "subs",
           "amount": 13000.0,
           "due": "2026-10-04",
-          "paid": false
+          "paid": true
         },
         {
           "project": "Clifford Clack \u2014 Gym Addition",
@@ -569,13 +569,13 @@
       "week_label": "Oct 5 - Oct 11",
       "is_current": false,
       "is_past": false,
-      "income": 97014.68,
+      "income": 107014.68,
       "p_income": 0,
       "subs": 94743.0,
-      "materials": 67046.59,
+      "materials": 52046.59,
       "additional": 0,
-      "outgoing": 161789.59,
-      "net": -64774.91,
+      "outgoing": 146789.59,
+      "net": -39774.91,
       "income_paid": 14000.0,
       "p_income_paid": 0,
       "outgoing_paid": 0,
@@ -585,7 +585,7 @@
           "project": "Charles Harris \u2014 Argyle TX",
           "task": "FRAMING: PURCHASE MATERIALS",
           "type": "materials",
-          "amount": 53000.0,
+          "amount": 38000.0,
           "due": "2026-10-05",
           "paid": false
         },
@@ -654,14 +654,6 @@
           "paid": false
         },
         {
-          "project": "Charles Harris \u2014 Argyle TX",
-          "task": "POST FRAMING PURCHASE: DRAW",
-          "type": "income",
-          "amount": 44000.0,
-          "due": "2026-10-06",
-          "paid": false
-        },
-        {
           "project": "Shaan Lagisetty (CNG-20251169)",
           "task": "FINAL PUNCH LIST: PURCHASE MATERIALS",
           "type": "materials",
@@ -675,6 +667,14 @@
           "type": "subs",
           "amount": 600.0,
           "due": "2026-10-06",
+          "paid": false
+        },
+        {
+          "project": "Charles Harris \u2014 Argyle TX",
+          "task": "POST FRAMING PURCHASE: DRAW",
+          "type": "income",
+          "amount": 54000.0,
+          "due": "2026-10-07",
           "paid": false
         },
         {
@@ -8162,7 +8162,7 @@
       "type": "income",
       "amount": 53000.0,
       "due": "2026-10-04",
-      "paid": false,
+      "paid": true,
       "assignee": "FOUNDATION",
       "assignedTo": "",
       "taskId": "22PZrK6zzK8s",
@@ -8526,7 +8526,7 @@
       "type": "subs",
       "amount": 13000.0,
       "due": "2026-10-04",
-      "paid": false,
+      "paid": true,
       "assignee": "FOUNDATION",
       "assignedTo": "",
       "taskId": "22PejuydB4Mt",
@@ -9084,7 +9084,7 @@
       "project": "Charles Harris \u2014 Argyle TX",
       "task": "FRAMING: PURCHASE MATERIALS",
       "type": "materials",
-      "amount": 53000.0,
+      "amount": 38000.0,
       "due": "2026-10-05",
       "paid": false,
       "assignee": "FRAMING",
@@ -9207,20 +9207,6 @@
       "external": false
     },
     {
-      "project": "Charles Harris \u2014 Argyle TX",
-      "task": "POST FRAMING PURCHASE: DRAW",
-      "type": "income",
-      "amount": 44000.0,
-      "due": "2026-10-06",
-      "paid": false,
-      "assignee": "FRAMING",
-      "assignedTo": "",
-      "taskId": "22Pe7WmEzDP5",
-      "projectId": "22PDc9569pUD",
-      "planning": false,
-      "external": false
-    },
-    {
       "project": "Shaan Lagisetty (CNG-20251169)",
       "task": "FINAL PUNCH LIST: PURCHASE MATERIALS",
       "type": "materials",
@@ -9245,6 +9231,20 @@
       "assignedTo": "",
       "taskId": "22PfBQEm5ED2",
       "projectId": "22P2j3sQMKqz",
+      "planning": false,
+      "external": false
+    },
+    {
+      "project": "Charles Harris \u2014 Argyle TX",
+      "task": "POST FRAMING PURCHASE: DRAW",
+      "type": "income",
+      "amount": 54000.0,
+      "due": "2026-10-07",
+      "paid": false,
+      "assignee": "FRAMING",
+      "assignedTo": "",
+      "taskId": "22Pe7WmEzDP5",
+      "projectId": "22PDc9569pUD",
       "planning": false,
       "external": false
     },
