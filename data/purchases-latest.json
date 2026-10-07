@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-10-07T05:52:14",
+ "generated_at": "2026-10-07T06:15:44",
  "date": "2026-10-07",
  "window_start": "2026-10-07",
  "window_end": "2026-10-21",
  "summary": {
-  "tasks": 74,
+  "tasks": 75,
   "projects": 8,
   "alerts": 4,
-  "overdue": 10,
+  "overdue": 0,
   "to_purchase_amount": 62687.69,
-  "overdue_no_cuentan": 199
+  "overdue_no_cuentan": 198
  },
  "alerts": [
   {
@@ -48,51 +48,38 @@
    "counts": {
     "tasks": 18,
     "alerts": 2,
-    "overdue": 3
+    "overdue": 0
    },
-   "overdue": [
-    {
-     "name": "TILES: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-10-06",
-     "amount": 980.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYqVawbS",
-     "progress": 0
-    },
-    {
-     "name": "BASEBOARDS AND TRIM: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-10-06",
-     "amount": 570.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYqiyJHc",
-     "progress": 0
-    },
-    {
-     "name": "FLOOR: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-10-06",
-     "amount": 515.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PdwFeSUVGh",
-     "progress": 0
-    }
-   ],
+   "overdue": [],
    "days": [
     {
      "date": "2026-10-07",
      "label": "Wed Oct 7",
      "tasks": [
+      {
+       "name": "BASEBOARDS AND TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-10-07",
+       "amount": 570.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYqiyJHc",
+       "progress": 0
+      },
+      {
+       "name": "FLOOR: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-10-07",
+       "amount": 515.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PdwFeSUVGh",
+       "progress": 0
+      },
       {
        "name": "STUCCO: CREATE TAKEOFF REPORT",
        "step": "takeoff",
@@ -103,6 +90,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpYrF4BRT",
+       "progress": 0
+      },
+      {
+       "name": "TILES: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-10-07",
+       "amount": 980.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYqVawbS",
        "progress": 0
       }
      ]
@@ -260,18 +259,6 @@
        "overdue": false,
        "taskId": "22PZpYrNVevS",
        "progress": 0
-      },
-      {
-       "name": "TILES: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-10-14",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYqW5hvk",
-       "progress": 0
       }
      ]
     },
@@ -308,150 +295,17 @@
        "overdue": false,
        "taskId": "22PZpYrPLr6j",
        "progress": 0
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "id": "22PL9RSbYNs9",
-   "name": "Rohini Williams (CNG2025-496)",
-   "counts": {
-    "tasks": 9,
-    "alerts": 1,
-    "overdue": 3
-   },
-   "overdue": [
-    {
-     "name": "GLASS: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-10-06",
-     "amount": 1020.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpJgV4QXR",
-     "progress": 0
-    },
-    {
-     "name": "INTERIOR PAINT: PURCHASE",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-10-06",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PfBDE3PHg4",
-     "progress": 0
-    },
-    {
-     "name": "EXTERIOR PAINT: PURCHASE",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-10-06",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PfBDFjZ2qU",
-     "progress": 0
-    }
-   ],
-   "days": [
-    {
-     "date": "2026-10-07",
-     "label": "Wed Oct 7",
-     "tasks": [
+      },
       {
-       "name": "GLASS: DELIVERY ETA",
+       "name": "TILES: DELIVERY ETA",
        "step": "eta",
        "icon": "🚚",
        "step_label": "Delivery ETA",
-       "due": "2026-10-07",
+       "due": "2026-10-16",
        "amount": null,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZpJgVyhh8",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-10-09",
-     "label": "Fri Oct 9",
-     "tasks": [
-      {
-       "name": "COUNTERTOPS: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-10-09",
-       "amount": 1000.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpJhE9fS9",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-10-12",
-     "label": "Mon Oct 12",
-     "tasks": [
-      {
-       "name": "ELECTRICAL TRIM: PURCHASE VANITY LIGHT",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-10-12",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PcvidaTSYe",
-       "progress": 0
-      },
-      {
-       "name": "MECHANICAL TRIM: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-10-12",
-       "amount": null,
-       "alert": true,
-       "overdue": false,
-       "taskId": "22PZpJhkLVDW",
-       "progress": 0
-      },
-      {
-       "name": "PLUMBING TRIM: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-10-12",
-       "amount": 1041.99,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpJhQVhjQ",
-       "progress": 0
-      }
-     ]
-    },
-    {
-     "date": "2026-10-14",
-     "label": "Wed Oct 14",
-     "tasks": [
-      {
-       "name": "GUTTERS: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-10-14",
-       "amount": 977.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpJiR3eUt",
+       "taskId": "22PZpYqW5hvk",
        "progress": 0
       }
      ]
@@ -464,23 +318,28 @@
    "counts": {
     "tasks": 8,
     "alerts": 1,
-    "overdue": 1
+    "overdue": 0
    },
-   "overdue": [
-    {
-     "name": "GARAGE DOOR: PURCHASE MATERIAL",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-10-06",
-     "amount": 1.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PbkAfcgZJh",
-     "progress": 0
-    }
-   ],
+   "overdue": [],
    "days": [
+    {
+     "date": "2026-10-07",
+     "label": "Wed Oct 7",
+     "tasks": [
+      {
+       "name": "GARAGE DOOR: PURCHASE MATERIAL",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-10-07",
+       "amount": 1.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PbkAfcgZJh",
+       "progress": 0
+      }
+     ]
+    },
     {
      "date": "2026-10-09",
      "label": "Fri Oct 9",
@@ -592,28 +451,201 @@
    ]
   },
   {
+   "id": "22PL9RSbYNs9",
+   "name": "Rohini Williams (CNG2025-496)",
+   "counts": {
+    "tasks": 9,
+    "alerts": 1,
+    "overdue": 0
+   },
+   "overdue": [],
+   "days": [
+    {
+     "date": "2026-10-07",
+     "label": "Wed Oct 7",
+     "tasks": [
+      {
+       "name": "EXTERIOR PAINT: PURCHASE",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-10-07",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PfBDFjZ2qU",
+       "progress": 0
+      },
+      {
+       "name": "GLASS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-10-07",
+       "amount": 1020.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpJgV4QXR",
+       "progress": 0
+      },
+      {
+       "name": "INTERIOR PAINT: PURCHASE",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-10-07",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PfBDE3PHg4",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-10-08",
+     "label": "Thu Oct 8",
+     "tasks": [
+      {
+       "name": "GLASS: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-10-08",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpJgVyhh8",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-10-09",
+     "label": "Fri Oct 9",
+     "tasks": [
+      {
+       "name": "COUNTERTOPS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-10-09",
+       "amount": 1000.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpJhE9fS9",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-10-12",
+     "label": "Mon Oct 12",
+     "tasks": [
+      {
+       "name": "ELECTRICAL TRIM: PURCHASE VANITY LIGHT",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-10-12",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PcvidaTSYe",
+       "progress": 0
+      },
+      {
+       "name": "MECHANICAL TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-10-12",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PZpJhkLVDW",
+       "progress": 0
+      },
+      {
+       "name": "PLUMBING TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-10-12",
+       "amount": 1041.99,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpJhQVhjQ",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-10-14",
+     "label": "Wed Oct 14",
+     "tasks": [
+      {
+       "name": "GUTTERS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-10-14",
+       "amount": 977.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpJiR3eUt",
+       "progress": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "22PDc9569pUD",
    "name": "Charles Harris — Argyle TX",
    "counts": {
-    "tasks": 13,
+    "tasks": 14,
     "alerts": 0,
-    "overdue": 1
+    "overdue": 0
    },
-   "overdue": [
-    {
-     "name": "FRAMING: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-10-06",
-     "amount": 38000.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZtEUP2zPb",
-     "progress": 0
-    }
-   ],
+   "overdue": [],
    "days": [
+    {
+     "date": "2026-10-07",
+     "label": "Wed Oct 7",
+     "tasks": [
+      {
+       "name": "FRAMING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-10-07",
+       "amount": 38000.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZtEUP2zPb",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-10-08",
+     "label": "Thu Oct 8",
+     "tasks": [
+      {
+       "name": "FRAMING: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-10-08",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZtEUP3NHu",
+       "progress": 0
+      }
+     ]
+    },
     {
      "date": "2026-10-09",
      "label": "Fri Oct 9",
@@ -820,47 +852,29 @@
    "counts": {
     "tasks": 1,
     "alerts": 0,
-    "overdue": 1
+    "overdue": 0
    },
-   "overdue": [
+   "overdue": [],
+   "days": [
     {
-     "name": "WORK MATERIALS",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-10-06",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PfhDLUwjY6",
-     "progress": 0
+     "date": "2026-10-07",
+     "label": "Wed Oct 7",
+     "tasks": [
+      {
+       "name": "WORK MATERIALS",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-10-07",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PfhDLUwjY6",
+       "progress": 0
+      }
+     ]
     }
-   ],
-   "days": []
-  },
-  {
-   "id": "22PK9BhEJtZn",
-   "name": "Lingyan Qiu (CNG2025-458)",
-   "counts": {
-    "tasks": 1,
-    "alerts": 0,
-    "overdue": 1
-   },
-   "overdue": [
-    {
-     "name": "MISSING DETAILS TO FINISH THE PROYECT",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-10-06",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PfBH6Fs2KP",
-     "progress": 0
-    }
-   ],
-   "days": []
+   ]
   },
   {
    "id": "22PMwhcSuqJD",
@@ -1222,6 +1236,36 @@
        "alert": false,
        "overdue": false,
        "taskId": "22Pa9MpACMGD",
+       "progress": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "22PK9BhEJtZn",
+   "name": "Lingyan Qiu (CNG2025-458)",
+   "counts": {
+    "tasks": 1,
+    "alerts": 0,
+    "overdue": 0
+   },
+   "overdue": [],
+   "days": [
+    {
+     "date": "2026-10-07",
+     "label": "Wed Oct 7",
+     "tasks": [
+      {
+       "name": "MISSING DETAILS TO FINISH THE PROYECT",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-10-07",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PfBH6Fs2KP",
        "progress": 0
       }
      ]
