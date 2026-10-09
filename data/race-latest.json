@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-09T12:31:15",
+ "generated_at": "2026-10-09T18:27:41",
  "today": "2026-10-09",
  "month": "July 2026",
  "month_prefix": "2026-07",
@@ -52,9 +52,9 @@
  },
  "company": {
   "monthly_pct": 78.7,
-  "days_pct": 87.6,
+  "days_pct": 86.9,
   "ghost_days_pct": 100.0,
-  "earned_days": 382.0,
+  "earned_days": 379.0,
   "total_days": 436.0,
   "plan_days": 436.0,
   "month_forecast": {
@@ -69,7 +69,7 @@
   "adherence": 78.7,
   "band": "amber",
   "runner_date": "2026-07-22",
-  "gap": 12.4,
+  "gap": 13.1,
   "status": "behind",
   "week": {
    "days_planned": 0.0,
@@ -4622,15 +4622,15 @@
    "band": "red",
    "runner_pct": 69.6,
    "ghost_pct": 100.0,
-   "runner_date": "2026-07-22",
+   "runner_date": "2026-07-15",
    "finish_date": "2026-07-29",
-   "days_pct": 89.2,
+   "days_pct": 86.3,
    "ghost_days_pct": 100.0,
    "total_days": 102.0,
-   "earned_days": 91.0,
+   "earned_days": 88.0,
    "plan_days": 102.0,
    "city_inspections": 3,
-   "gap": 10.8,
+   "gap": 13.7,
    "status": "no_work",
    "status_scope": "current_week",
    "week": {
@@ -4661,7 +4661,7 @@
      {
       "name": "DOORS & WINDOWS: EXECUTE",
       "from": "2026-07-10",
-      "to": "2026-09-26",
+      "to": "2026-10-30",
       "days": 4
      },
      {
@@ -4673,13 +4673,13 @@
      {
       "name": "ROOFING: EXECUTE",
       "from": "2026-07-15",
-      "to": "2026-10-14",
+      "to": "2026-10-19",
       "days": 3
      },
      {
       "name": "ROOFING: EXECUTE",
       "from": "2026-07-23",
-      "to": "2026-10-14",
+      "to": "2026-10-19",
       "days": 1
      }
     ]
@@ -4842,24 +4842,13 @@
      "depends_on": []
     },
     {
-     "id": "22PZzWUzYRut",
-     "name": "DOORS & WINDOWS: EXECUTE",
-     "baseline_end": "2026-07-10",
-     "live_end": "2026-09-26",
-     "current_end": "2026-09-26",
-     "current_start": "2026-09-18",
-     "moved_days": 78,
-     "status": "moved",
-     "depends_on": []
-    },
-    {
      "id": "22PZzWUsGsvd",
      "name": "ROOFING: EXECUTE",
      "baseline_end": "2026-07-23",
-     "live_end": "2026-10-14",
-     "current_end": "2026-10-14",
-     "current_start": "2026-10-10",
-     "moved_days": 83,
+     "live_end": "2026-10-19",
+     "current_end": "2026-10-19",
+     "current_start": "2026-10-15",
+     "moved_days": 88,
      "status": "moved",
      "depends_on": []
     },
@@ -4867,10 +4856,21 @@
      "id": "22PZzWexBK6A",
      "name": "ROOFING: EXECUTE",
      "baseline_end": "2026-07-15",
-     "live_end": "2026-10-14",
-     "current_end": "2026-10-14",
-     "current_start": "2026-10-10",
-     "moved_days": 91,
+     "live_end": "2026-10-19",
+     "current_end": "2026-10-19",
+     "current_start": "2026-10-15",
+     "moved_days": 96,
+     "status": "moved",
+     "depends_on": []
+    },
+    {
+     "id": "22PZzWUzYRut",
+     "name": "DOORS & WINDOWS: EXECUTE",
+     "baseline_end": "2026-07-10",
+     "live_end": "2026-10-30",
+     "current_end": "2026-10-30",
+     "current_start": "2026-10-22",
+     "moved_days": 112,
      "status": "moved",
      "depends_on": []
     }
@@ -4883,25 +4883,25 @@
    "moved_count": 18,
    "moved": [
     {
+     "id": "22PZzWUzYRut",
+     "name": "DOORS & WINDOWS: EXECUTE",
+     "from": "2026-07-10",
+     "to": "2026-10-30",
+     "days": 112
+    },
+    {
      "id": "22PZzWexBK6A",
      "name": "ROOFING: EXECUTE",
      "from": "2026-07-15",
-     "to": "2026-10-14",
-     "days": 91
+     "to": "2026-10-19",
+     "days": 96
     },
     {
      "id": "22PZzWUsGsvd",
      "name": "ROOFING: EXECUTE",
      "from": "2026-07-23",
-     "to": "2026-10-14",
-     "days": 83
-    },
-    {
-     "id": "22PZzWUzYRut",
-     "name": "DOORS & WINDOWS: EXECUTE",
-     "from": "2026-07-10",
-     "to": "2026-09-26",
-     "days": 78
+     "to": "2026-10-19",
+     "days": 88
     },
     {
      "id": "22PZzWesQkCw",
@@ -5018,8 +5018,8 @@
      "total": 10,
      "done": 8,
      "days_planned": 43.0,
-     "days_earned": 42.0,
-     "pct": 97.7,
+     "days_earned": 39.0,
+     "pct": 90.7,
      "target_task": "DOORS & WINDOWS: EXECUTE",
      "target_type": "CP",
      "target_marker": "start",
@@ -5092,12 +5092,12 @@
        "marker": null,
        "baseline_start": "2026-07-07",
        "baseline_end": "2026-07-10",
-       "live_start": "2026-09-18",
-       "live_end": "2026-09-26",
-       "moved_days": 78,
+       "live_start": "2026-10-22",
+       "live_end": "2026-10-30",
+       "moved_days": 112,
        "days_in_week": 4,
-       "earned_in_week": 3.0,
-       "started": true,
+       "earned_in_week": 0.0,
+       "started": false,
        "progress": 0,
        "status": "moved",
        "in_week_plan": true,
@@ -5353,9 +5353,9 @@
        "marker": null,
        "baseline_start": "2026-07-13",
        "baseline_end": "2026-07-15",
-       "live_start": "2026-10-10",
-       "live_end": "2026-10-14",
-       "moved_days": 91,
+       "live_start": "2026-10-15",
+       "live_end": "2026-10-19",
+       "moved_days": 96,
        "days_in_week": 3,
        "earned_in_week": 0.0,
        "started": false,
@@ -5534,9 +5534,9 @@
        "marker": null,
        "baseline_start": "2026-07-23",
        "baseline_end": "2026-07-23",
-       "live_start": "2026-10-10",
-       "live_end": "2026-10-14",
-       "moved_days": 83,
+       "live_start": "2026-10-15",
+       "live_end": "2026-10-19",
+       "moved_days": 88,
        "days_in_week": 1,
        "earned_in_week": 0.0,
        "started": false,
