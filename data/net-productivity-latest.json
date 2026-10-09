@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T11:17:40",
+  "generated_at": "2026-10-09T11:41:10",
   "today": "2026-10-09",
   "horizon": "2027-02-05",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -1244,17 +1244,17 @@
       "label_moy": "oct S1",
       "label_short": "3 oct",
       "prod": [
-        23809.37,
-        19370.87
+        23932.66,
+        19584.16
       ],
       "fixed": 10752.09,
       "net": [
-        13057.28,
-        8618.78
+        13180.57,
+        8832.07
       ],
       "cum": [
-        243676.35,
-        205209.2
+        243799.64,
+        205422.49
       ],
       "active_count": 9,
       "active_projects": [
@@ -1277,8 +1277,8 @@
           -1186.59
         ],
         "Katie Holmes": [
-          5871.8,
-          5407.18
+          5995.09,
+          5620.47
         ],
         "Charles Harris": [
           7288.84,
@@ -1310,21 +1310,22 @@
       "label_moy": "oct S2",
       "label_short": "10 oct",
       "prod": [
-        55392.69,
-        49054.84
+        55269.4,
+        48841.55
       ],
       "fixed": 10752.09,
       "net": [
-        44640.6,
-        38302.75
+        44517.31,
+        38089.46
       ],
       "cum": [
         288316.95,
         243511.95
       ],
-      "active_count": 8,
+      "active_count": 9,
       "active_projects": [
         "Charles Harris",
+        "Clifford Clack",
         "Karim Merchant",
         "Katie Holmes",
         "Lingyan Qiu",
@@ -1337,6 +1338,10 @@
       "is_partial": false,
       "pending": false,
       "by_project": {
+        "Katie Holmes": [
+          -123.29,
+          -213.29
+        ],
         "Charles Harris": [
           29369.74,
           28419.42
@@ -2597,12 +2602,16 @@
           7517.08
         ],
         "2026-W41": [
-          5871.8,
-          5407.18
+          5995.09,
+          5620.47
         ],
         "2026-W40": [
           8176.38,
           7270.24
+        ],
+        "2026-W42": [
+          -123.29,
+          -213.29
         ],
         "2026-W34": [
           4604.96,
@@ -2632,7 +2641,7 @@
         ]
       },
       "first_week": "2026-W26",
-      "last_week": "2026-W41"
+      "last_week": "2026-W42"
     },
     {
       "project": "Karim Merchant",
