@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T07:53:05",
+  "generated_at": "2026-10-16T11:26:25",
   "today": "2026-10-16",
   "horizon": "2027-02-11",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -3359,7 +3359,7 @@
   ],
   "data_quality": {
     "orphan_trades": 51,
-    "orphan_cost": 318506.75,
+    "orphan_cost": 316106.75,
     "priced_trades": 165,
     "total_trades": 216,
     "by_project": [
@@ -3480,37 +3480,6 @@
         ]
       },
       {
-        "project": "Lingyan Qiu",
-        "orphan_trades": 7,
-        "orphan_cost": 7455.69,
-        "examples": [
-          {
-            "trade": "1ST STORY ADDITION",
-            "cost": 1002.0
-          },
-          {
-            "trade": "GLASS",
-            "cost": 1844.33
-          },
-          {
-            "trade": "INTERIOR DOORS",
-            "cost": 1076.62
-          },
-          {
-            "trade": "FINAL PUNCH LIST",
-            "cost": 2648.75
-          },
-          {
-            "trade": "BASEBOARD & TRIM",
-            "cost": 453.99
-          },
-          {
-            "trade": "KITCHEN: ELECTRICAL TRIM",
-            "cost": 30.0
-          }
-        ]
-      },
-      {
         "project": "Clifford Clack",
         "orphan_trades": 5,
         "orphan_cost": 6159.0,
@@ -3534,6 +3503,37 @@
           {
             "trade": "CONCRETE",
             "cost": 1750.0
+          }
+        ]
+      },
+      {
+        "project": "Lingyan Qiu",
+        "orphan_trades": 7,
+        "orphan_cost": 5055.69,
+        "examples": [
+          {
+            "trade": "1ST STORY ADDITION",
+            "cost": 1002.0
+          },
+          {
+            "trade": "GLASS",
+            "cost": 1844.33
+          },
+          {
+            "trade": "INTERIOR DOORS",
+            "cost": 1076.62
+          },
+          {
+            "trade": "FINAL PUNCH LIST",
+            "cost": 248.75
+          },
+          {
+            "trade": "BASEBOARD & TRIM",
+            "cost": 453.99
+          },
+          {
+            "trade": "KITCHEN: ELECTRICAL TRIM",
+            "cost": 30.0
           }
         ]
       },
@@ -5175,14 +5175,6 @@
           "n_exp": 2
         },
         {
-          "trade": "FINAL PUNCH LIST",
-          "income": 0.0,
-          "expense": 2648.75,
-          "grouped": true,
-          "n_inc": 0,
-          "n_exp": 2
-        },
-        {
           "trade": "GLASS",
           "income": 0.0,
           "expense": 1844.33,
@@ -5239,6 +5231,14 @@
           "n_exp": 2
         },
         {
+          "trade": "FINAL PUNCH LIST",
+          "income": 0.0,
+          "expense": 248.75,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 1
+        },
+        {
           "trade": "KITCHEN: ELECTRICAL TRIM",
           "income": 0.0,
           "expense": 30.0,
@@ -5248,7 +5248,7 @@
         }
       ],
       "total_income": 179995.0,
-      "total_expense": 105376.37,
+      "total_expense": 102976.37,
       "loose_amount": 0
     },
     {
