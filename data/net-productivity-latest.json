@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T14:18:33",
+  "generated_at": "2026-10-16T14:26:18",
   "today": "2026-10-16",
   "horizon": "2027-02-11",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -4638,7 +4638,7 @@
         {
           "trade": "\u21aa FOUNDATION (suelto)",
           "income": 0.0,
-          "expense": 35000.0,
+          "expense": 32780.0,
           "grouped": false,
           "n_inc": 0,
           "n_exp": 1
@@ -4789,8 +4789,8 @@
         }
       ],
       "total_income": 359215.7,
-      "total_expense": 393288.82,
-      "loose_amount": 46000.0
+      "total_expense": 391068.82,
+      "loose_amount": 43780.0
     },
     {
       "project": "Katie Holmes",
