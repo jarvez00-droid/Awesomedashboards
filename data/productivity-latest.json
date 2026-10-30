@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T07:48:09",
+  "generated_at": "2026-10-30T10:57:19",
   "week_iso": "2026-W44",
   "week_start": "2026-10-24",
   "week_end": "2026-10-30",
@@ -144,7 +144,7 @@
               "description": "3571.50",
               "amount": 3571.5,
               "progress": null,
-              "end_date": "2026-11-07"
+              "end_date": "2026-11-13"
             }
           ],
           "materials_lines": [
@@ -182,164 +182,188 @@
         {
           "project_id": "22PK9BhEJtZn",
           "project_name": "Lingyan Qiu (CNG2025-458)",
-          "group_id": "22PZpKCiZ3iF",
-          "group_name": "PROJECT DELIVERY",
+          "group_id": "22PZpKCYUXnv",
+          "group_name": "FINAL PUNCH LIST",
           "parent_group_id": "22PZpK8bqjzd",
-          "action_count": 1,
+          "action_count": 2,
           "action_task_ids": [
-            "22PZpKCjBHpp"
+            "22PZpKCZ56D8",
+            "22PfBGdVKYHG"
           ],
           "action_task_names": [
-            "PROJECT DELIVERY: DELIVERY"
+            "FINAL PUNCH LIST: FINISHES AND TOUCH UPS",
+            "FLOORING: STAIN"
           ],
           "action_progresses": [
-            null
+            1,
+            1
           ],
           "action_starts": [
-            "2026-10-24"
+            "2026-08-29",
+            "2026-10-27"
           ],
           "action_ends": [
-            "2026-10-24"
+            "2026-09-01",
+            "2026-10-27"
           ],
-          "action_start_min": "2026-10-24",
-          "action_end_max": "2026-10-24",
+          "action_start_min": "2026-08-29",
+          "action_end_max": "2026-10-27",
           "action_lines": [
             {
-              "task_id": "22PZpKCjBHpp",
-              "name": "PROJECT DELIVERY: DELIVERY",
+              "task_id": "22PZpKCZ56D8",
+              "name": "FINAL PUNCH LIST: FINISHES AND TOUCH UPS",
               "description": "",
               "amount": 0.0,
-              "progress": null,
-              "end_date": "2026-10-24"
+              "progress": 1,
+              "end_date": "2026-09-01"
+            },
+            {
+              "task_id": "22PfBGdVKYHG",
+              "name": "FLOORING: STAIN",
+              "description": "",
+              "amount": 0.0,
+              "progress": 1,
+              "end_date": "2026-10-27"
             }
           ],
-          "subs_lines": [],
+          "subs_lines": [
+            {
+              "task_id": "22PejcZi9shj",
+              "name": "BRICKS: BILL & PAYMENT",
+              "description": "$248.75",
+              "amount": 248.75,
+              "progress": 1,
+              "end_date": "2026-10-05"
+            }
+          ],
           "materials_lines": [],
           "additional_lines": [],
           "sold": 0.0,
-          "expenses_subs": 0,
+          "expenses_subs": 248.75,
           "expenses_materials": 0,
           "expenses_additional": 0,
-          "expenses_total": 0,
-          "profit": 0.0,
-          "status": "in_progress",
+          "expenses_total": 248.75,
+          "profit": -248.75,
+          "status": "finished",
           "has_price": false,
-          "this_pct": 0.0,
+          "this_pct": 100.0,
           "attribution": 0.0,
           "user_set": false
         }
       ]
     },
     {
-      "project_id": "22PL9RSbYNs9",
-      "project_name": "Rohini Williams (CNG2025-496)",
+      "project_id": "22PMwhcSuqJD",
+      "project_name": "Karim-Merchant",
       "pm": "Giselle Garcia",
-      "group_count": 2,
+      "group_count": 1,
       "attribution": 0.0,
       "groups": [
         {
-          "project_id": "22PL9RSbYNs9",
-          "project_name": "Rohini Williams (CNG2025-496)",
-          "group_id": "22PZpJipA8r5",
-          "group_name": "FINAL INSPECTIONS",
+          "project_id": "22PMwhcSuqJD",
+          "project_name": "Karim-Merchant",
+          "group_id": "22PZqFvV4fsX",
+          "group_name": "FRAMING",
           "parent_group_id": null,
-          "action_count": 1,
+          "action_count": 3,
           "action_task_ids": [
-            "22PZpJiwrMWM"
+            "22PhD5xxT6gs",
+            "22PZqFvVHNQZ",
+            "22PfA5Kv3kfm"
           ],
           "action_task_names": [
-            "PROJECT DELIVERY"
+            "Framing bench install",
+            "FRAMING: INSTALL ZIP TAPE",
+            "windows arrival"
           ],
           "action_progresses": [
+            null,
+            null,
             null
           ],
           "action_starts": [
-            "2026-10-28"
+            "2026-10-30",
+            "2026-12-11",
+            "2026-10-30"
           ],
           "action_ends": [
-            "2026-10-28"
+            "2026-11-02",
+            "2026-12-11",
+            "2026-11-28"
           ],
-          "action_start_min": "2026-10-28",
-          "action_end_max": "2026-10-28",
+          "action_start_min": "2026-10-30",
+          "action_end_max": "2026-12-11",
           "action_lines": [
             {
-              "task_id": "22PZpJiwrMWM",
-              "name": "PROJECT DELIVERY",
+              "task_id": "22PhD5xxT6gs",
+              "name": "Framing bench install",
               "description": "",
               "amount": 0.0,
               "progress": null,
-              "end_date": "2026-10-28"
-            }
-          ],
-          "subs_lines": [],
-          "materials_lines": [],
-          "additional_lines": [],
-          "sold": 0.0,
-          "expenses_subs": 0,
-          "expenses_materials": 0,
-          "expenses_additional": 0,
-          "expenses_total": 0,
-          "profit": 0.0,
-          "status": "in_progress",
-          "has_price": false,
-          "this_pct": 0.0,
-          "attribution": 0.0,
-          "user_set": false
-        },
-        {
-          "project_id": "22PL9RSbYNs9",
-          "project_name": "Rohini Williams (CNG2025-496)",
-          "group_id": "22PZpJiJUjrn",
-          "group_name": "GUTTERS",
-          "parent_group_id": null,
-          "action_count": 1,
-          "action_task_ids": [
-            "22PZpJiKk2zu"
-          ],
-          "action_task_names": [
-            "GUTTERS: GUTTERS INSTALLATION"
-          ],
-          "action_progresses": [
-            null
-          ],
-          "action_starts": [
-            "2026-10-27"
-          ],
-          "action_ends": [
-            "2026-10-27"
-          ],
-          "action_start_min": "2026-10-27",
-          "action_end_max": "2026-10-27",
-          "action_lines": [
+              "end_date": "2026-11-02"
+            },
             {
-              "task_id": "22PZpJiKk2zu",
-              "name": "GUTTERS: GUTTERS INSTALLATION",
-              "description": "1562",
-              "amount": 1562.0,
+              "task_id": "22PZqFvVHNQZ",
+              "name": "FRAMING: INSTALL ZIP TAPE",
+              "description": "",
+              "amount": 0.0,
               "progress": null,
-              "end_date": "2026-10-27"
+              "end_date": "2026-12-11"
+            },
+            {
+              "task_id": "22PfA5Kv3kfm",
+              "name": "windows arrival",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-11-28"
             }
           ],
-          "subs_lines": [],
-          "materials_lines": [
+          "subs_lines": [
             {
-              "task_id": "22PZpJiR3eUt",
-              "name": "GUTTERS: payment",
-              "description": "977",
-              "amount": 977.0,
+              "task_id": "22Pejit9hcQL",
+              "name": "framing: remaining payment",
+              "description": "1500",
+              "amount": 1500.0,
               "progress": null,
               "end_date": "2026-10-30"
+            },
+            {
+              "task_id": "22PhD6NskuF9",
+              "name": "framing: bench install payment",
+              "description": "",
+              "amount": 0.0,
+              "progress": null,
+              "end_date": "2026-11-06"
+            }
+          ],
+          "materials_lines": [
+            {
+              "task_id": "22PZqFvV7JAd",
+              "name": "FRAMING: PURCHASE MATERIALS",
+              "description": "5675",
+              "amount": 5675.0,
+              "progress": 1,
+              "end_date": "2026-09-01"
+            },
+            {
+              "task_id": "22PZwraw6BHq",
+              "name": "EXTERIOR SHEATING: PURCHASE MATERIALS",
+              "description": "1916",
+              "amount": 1916.0,
+              "progress": 1,
+              "end_date": "2026-09-04"
             }
           ],
           "additional_lines": [],
-          "sold": 1562.0,
-          "expenses_subs": 0,
-          "expenses_materials": 977.0,
+          "sold": 0.0,
+          "expenses_subs": 1500.0,
+          "expenses_materials": 7591.0,
           "expenses_additional": 0,
-          "expenses_total": 977.0,
-          "profit": 585.0,
+          "expenses_total": 9091.0,
+          "profit": -9091.0,
           "status": "in_progress",
-          "has_price": true,
+          "has_price": false,
           "this_pct": 0.0,
           "attribution": 0.0,
           "user_set": false
@@ -374,10 +398,10 @@
     {
       "pm": "Giselle Garcia",
       "project_count": 2,
-      "group_count": 3,
-      "sold": 1562.0,
-      "expenses": 977.0,
-      "profit_potential": 585.0,
+      "group_count": 2,
+      "sold": 0.0,
+      "expenses": 0.0,
+      "profit_potential": 0.0,
       "attribution": 0.0,
       "projects": [
         {
@@ -387,23 +411,23 @@
           "group_count": 1
         },
         {
-          "project_id": "22PL9RSbYNs9",
-          "project_name": "Rohini Williams (CNG2025-496)",
+          "project_id": "22PMwhcSuqJD",
+          "project_name": "Karim-Merchant",
           "attribution": 0.0,
-          "group_count": 2
+          "group_count": 1
         }
       ]
     }
   ],
   "totals": {
-    "sold": 1562.0,
-    "expenses": 977.0,
-    "profit_potential": 585.0,
+    "sold": 0.0,
+    "expenses": 0.0,
+    "profit_potential": 0.0,
     "profit_attributed_this_week": 0.0,
-    "groups_in_progress": 5,
-    "groups_finished_this_week": 0,
+    "groups_in_progress": 3,
+    "groups_finished_this_week": 1,
     "groups_missing_price": 4,
-    "expense_missing_price": 9471.5,
+    "expense_missing_price": 18811.25,
     "project_count": 4
   }
 }
