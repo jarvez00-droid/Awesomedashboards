@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-31T06:18:27",
+ "generated_at": "2026-10-31T06:48:26",
  "date": "2026-10-31",
  "window_start": "2026-10-31",
  "window_end": "2026-11-14",
@@ -7,7 +7,7 @@
   "tasks": 66,
   "projects": 5,
   "alerts": 4,
-  "overdue": 5,
+  "overdue": 0,
   "to_purchase_amount": 109061.42,
   "overdue_no_cuentan": 214
  },
@@ -48,22 +48,9 @@
    "counts": {
     "tasks": 42,
     "alerts": 3,
-    "overdue": 1
+    "overdue": 0
    },
-   "overdue": [
-    {
-     "name": "FRAMING: PURCHASE MATERIALS LEFT",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-10-30",
-     "amount": 7000.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZtEUP2zPb",
-     "progress": 0
-    }
-   ],
+   "overdue": [],
    "days": [
     {
      "date": "2026-10-31",
@@ -94,15 +81,15 @@
        "progress": 0
       },
       {
-       "name": "FRAMING: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
+       "name": "FRAMING: PURCHASE MATERIALS LEFT",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
        "due": "2026-10-31",
-       "amount": null,
+       "amount": 7000.0,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZtEUP3NHu",
+       "taskId": "22PZtEUP2zPb",
        "progress": 0
       },
       {
@@ -133,6 +120,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZtEUPBDAD",
+       "progress": 0
+      },
+      {
+       "name": "FRAMING: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-11-02",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZtEUP3NHu",
        "progress": 0
       }
      ]
@@ -643,45 +642,50 @@
    "counts": {
     "tasks": 9,
     "alerts": 1,
-    "overdue": 2
+    "overdue": 0
    },
-   "overdue": [
-    {
-     "name": "FLOORING: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-10-30",
-     "amount": 3000.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzWXVa9tN",
-     "progress": 0
-    },
-    {
-     "name": "tiles: PURCHASE MATERIALS (Copy)",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-10-30",
-     "amount": 1500.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PdtBtZbj8v",
-     "progress": 0
-    }
-   ],
+   "overdue": [],
    "days": [
     {
      "date": "2026-10-31",
      "label": "Sat Oct 31",
      "tasks": [
       {
+       "name": "FLOORING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-10-31",
+       "amount": 3000.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzWXVa9tN",
+       "progress": 0
+      },
+      {
+       "name": "tiles: PURCHASE MATERIALS (Copy)",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-10-31",
+       "amount": 1500.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PdtBtZbj8v",
+       "progress": 0
+      }
+     ]
+    },
+    {
+     "date": "2026-11-02",
+     "label": "Mon Nov 2",
+     "tasks": [
+      {
        "name": "FLOORING: DELIVERY ETA",
        "step": "eta",
        "icon": "🚚",
        "step_label": "Delivery ETA",
-       "due": "2026-10-31",
+       "due": "2026-11-02",
        "amount": null,
        "alert": false,
        "overdue": false,
@@ -789,39 +793,44 @@
    ]
   },
   {
+   "id": "22P2j3sQMKqz",
+   "name": "Katie Holmes & Sean Springs",
+   "counts": {
+    "tasks": 1,
+    "alerts": 0,
+    "overdue": 0
+   },
+   "overdue": [],
+   "days": [
+    {
+     "date": "2026-10-31",
+     "label": "Sat Oct 31",
+     "tasks": [
+      {
+       "name": "GLASS: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-10-31",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22Pa9MpACMGD",
+       "progress": 0
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "22PL9RSbYNs9",
    "name": "Rohini Williams (CNG2025-496)",
    "counts": {
     "tasks": 9,
     "alerts": 0,
-    "overdue": 2
+    "overdue": 0
    },
-   "overdue": [
-    {
-     "name": "MECHANICAL TRIM: DOWNPAYMENT",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-10-30",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpJhkLVDW",
-     "progress": 0
-    },
-    {
-     "name": "PINTURA EXTERIOR",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-10-30",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PgPcBRRw8S",
-     "progress": 0
-    }
-   ],
+   "overdue": [],
    "days": [
     {
      "date": "2026-10-31",
@@ -852,15 +861,27 @@
        "progress": 0
       },
       {
-       "name": "MECHANICAL TRIM: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
+       "name": "MECHANICAL TRIM: DOWNPAYMENT",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
        "due": "2026-10-31",
        "amount": null,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZpJhksx2G",
+       "taskId": "22PZpJhkLVDW",
+       "progress": 0
+      },
+      {
+       "name": "PINTURA EXTERIOR",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-10-31",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PgPcBRRw8S",
        "progress": 0
       },
       {
@@ -904,6 +925,18 @@
        "overdue": false,
        "taskId": "22PZpJhE9fS9",
        "progress": 0
+      },
+      {
+       "name": "MECHANICAL TRIM: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-11-02",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpJhksx2G",
+       "progress": 0
       }
      ]
     },
@@ -921,36 +954,6 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpJiR3eUt",
-       "progress": 0
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "id": "22P2j3sQMKqz",
-   "name": "Katie Holmes & Sean Springs",
-   "counts": {
-    "tasks": 1,
-    "alerts": 0,
-    "overdue": 0
-   },
-   "overdue": [],
-   "days": [
-    {
-     "date": "2026-10-31",
-     "label": "Sat Oct 31",
-     "tasks": [
-      {
-       "name": "GLASS: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-10-31",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22Pa9MpACMGD",
        "progress": 0
       }
      ]

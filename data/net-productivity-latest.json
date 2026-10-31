@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-31T06:18:27",
+  "generated_at": "2026-10-31T06:48:26",
   "today": "2026-10-31",
-  "horizon": "2027-02-25",
+  "horizon": "2027-02-26",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
   "params": {
     "weekly_fixed": 11077.48,
@@ -39,30 +39,30 @@
   ],
   "totals": {
     "prod": [
-      673339.29,
-      608935.57
+      673339.28,
+      608935.56
     ],
     "prod_todate": [
-      420526.47,
-      384792.1
+      419851.02,
+      384331.43
     ],
     "weekly": {
       "fixed": 409866.76,
       "net": [
-        263472.53,
-        199068.81
+        263472.52,
+        199068.8
       ],
       "periods": 37,
       "positive": [
-        19,
-        18
+        20,
+        19
       ]
     },
     "monthly": {
       "fixed": 432021.6,
       "net": [
-        241317.69,
-        176913.97
+        241317.68,
+        176913.96
       ],
       "periods": 9,
       "positive": [
@@ -92,8 +92,9 @@
         -7669.89,
         -8117.05
       ],
-      "active_count": 7,
+      "active_count": 8,
       "active_projects": [
+        "Brandy Sexton",
         "Clifford Clack",
         "Katie Holmes",
         "Kyle Aubry",
@@ -1423,17 +1424,17 @@
       "label_moy": "oct S5",
       "label_short": "31 oct",
       "prod": [
-        58460.63,
-        50331.13
+        50311.86,
+        42777.77
       ],
       "fixed": 11077.48,
       "net": [
-        47383.15,
-        39253.65
+        39234.38,
+        31700.29
       ],
       "cum": [
-        224378.48,
-        181350.0
+        216229.71,
+        173796.64
       ],
       "active_count": 9,
       "active_projects": [
@@ -1460,16 +1461,16 @@
           2182.07
         ],
         "Charles Harris": [
-          27527.89,
-          26393.39
+          22022.32,
+          21114.72
         ],
         "Shaan Lagisetty": [
           -5649.2,
           -6409.2
         ],
         "Martha Cockrell": [
-          21175.23,
-          18638.19
+          19172.89,
+          16902.79
         ],
         "Lingyan Qiu": [
           189.67,
@@ -1480,8 +1481,8 @@
           4621.75
         ],
         "Karim Merchant": [
-          5336.9,
-          4754.16
+          4696.06,
+          4214.88
         ]
       }
     },
@@ -1493,17 +1494,17 @@
       "label_moy": "nov S1",
       "label_short": "7 nov",
       "prod": [
-        54409.48,
-        49591.93
+        56402.35,
+        51552.54
       ],
       "fixed": 11077.48,
       "net": [
-        43332.0,
-        38514.45
+        45324.87,
+        40475.06
       ],
       "cum": [
-        267710.48,
-        219864.45
+        261554.58,
+        214271.7
       ],
       "active_count": 4,
       "active_projects": [
@@ -1525,12 +1526,12 @@
           350.0
         ],
         "Martha Cockrell": [
-          18539.82,
-          15293.55
+          19891.84,
+          16714.87
         ],
         "Karim Merchant": [
-          2486.19,
-          2276.31
+          3127.03,
+          2815.59
         ]
       }
     },
@@ -1542,17 +1543,17 @@
       "label_moy": "nov S2",
       "label_short": "14 nov",
       "prod": [
-        51422.49,
-        46633.33
+        52072.81,
+        46947.41
       ],
       "fixed": 11077.48,
       "net": [
-        40345.01,
-        35555.85
+        40995.33,
+        35869.93
       ],
       "cum": [
-        308055.49,
-        255420.3
+        302549.91,
+        250141.63
       ],
       "active_count": 3,
       "active_projects": [
@@ -1569,8 +1570,8 @@
           36950.75
         ],
         "Martha Cockrell": [
-          9195.25,
-          6478.06
+          9845.56,
+          6792.14
         ],
         "Karim Merchant": [
           3688.19,
@@ -1586,17 +1587,17 @@
       "label_moy": "nov S3",
       "label_short": "21 nov",
       "prod": [
-        16885.92,
-        12025.94
+        20235.69,
+        16462.87
       ],
       "fixed": 11077.48,
       "net": [
-        5808.44,
-        948.46
+        9158.21,
+        5385.39
       ],
       "cum": [
-        313863.93,
-        256368.76
+        311708.12,
+        255527.02
       ],
       "active_count": 3,
       "active_projects": [
@@ -1609,8 +1610,8 @@
       "pending": false,
       "by_project": {
         "Charles Harris": [
-          11144.76,
-          6976.35
+          14494.52,
+          11413.28
         ],
         "Martha Cockrell": [
           3575.4,
@@ -1630,17 +1631,17 @@
       "label_moy": "nov S4",
       "label_short": "28 nov",
       "prod": [
-        37509.43,
-        35381.08
+        34954.37,
+        31703.18
       ],
       "fixed": 11077.48,
       "net": [
-        26431.95,
-        24303.6
+        23876.89,
+        20625.7
       ],
       "cum": [
-        340295.88,
-        280672.36
+        335585.01,
+        276152.72
       ],
       "active_count": 3,
       "active_projects": [
@@ -1653,8 +1654,8 @@
       "pending": false,
       "by_project": {
         "Charles Harris": [
-          32976.12,
-          31637.55
+          30421.07,
+          27959.65
         ],
         "Martha Cockrell": [
           670.81,
@@ -1674,17 +1675,17 @@
       "label_moy": "dic S1",
       "label_short": "5 dic",
       "prod": [
-        10248.11,
-        9462.31
+        14958.98,
+        13981.96
       ],
       "fixed": 11077.48,
       "net": [
-        -829.37,
-        -1615.17
+        3881.5,
+        2904.48
       ],
       "cum": [
         339466.51,
-        279057.19
+        279057.2
       ],
       "active_count": 2,
       "active_projects": [
@@ -1696,8 +1697,8 @@
       "pending": false,
       "by_project": {
         "Charles Harris": [
-          5505.58,
-          5278.68
+          10216.45,
+          9798.33
         ],
         "Karim Merchant": [
           4742.53,
@@ -1723,7 +1724,7 @@
       ],
       "cum": [
         332282.44,
-        271128.52
+        271128.53
       ],
       "active_count": 2,
       "active_projects": [
@@ -1758,7 +1759,7 @@
       ],
       "cum": [
         327301.76,
-        264978.2
+        264978.21
       ],
       "active_count": 2,
       "active_projects": [
@@ -1793,7 +1794,7 @@
       ],
       "cum": [
         317993.79,
-        254420.15
+        254420.16
       ],
       "active_count": 2,
       "active_projects": [
@@ -1828,7 +1829,7 @@
       ],
       "cum": [
         309210.22,
-        245255.52
+        245255.53
       ],
       "active_count": 2,
       "active_projects": [
@@ -1863,7 +1864,7 @@
       ],
       "cum": [
         299023.29,
-        234833.88
+        234833.89
       ],
       "active_count": 2,
       "active_projects": [
@@ -1898,7 +1899,7 @@
       ],
       "cum": [
         288780.95,
-        224377.23
+        224377.24
       ],
       "active_count": 2,
       "active_projects": [
@@ -1923,17 +1924,17 @@
       "label_moy": "ene S4",
       "label_short": "23 ene",
       "prod": [
-        3697.87,
-        3697.87
+        2641.33,
+        2641.33
       ],
       "fixed": 11077.48,
       "net": [
-        -7379.61,
-        -7379.61
+        -8436.15,
+        -8436.15
       ],
       "cum": [
-        281401.34,
-        216997.62
+        280344.8,
+        215941.09
       ],
       "active_count": 2,
       "active_projects": [
@@ -1945,8 +1946,8 @@
       "pending": false,
       "by_project": {
         "Charles Harris": [
-          3697.87,
-          3697.87
+          2641.33,
+          2641.33
         ]
       }
     },
@@ -1967,8 +1968,8 @@
         -7379.61
       ],
       "cum": [
-        274021.73,
-        209618.01
+        272965.19,
+        208561.48
       ],
       "active_count": 1,
       "active_projects": [
@@ -1992,16 +1993,16 @@
       "label_moy": "feb S1",
       "label_short": "6 feb",
       "prod": [
-        528.27,
-        528.27
+        1584.8,
+        1584.8
       ],
       "fixed": 11077.48,
       "net": [
-        -10549.21,
-        -10549.21
+        -9492.68,
+        -9492.68
       ],
       "cum": [
-        263472.52,
+        263472.51,
         199068.8
       ],
       "active_count": 1,
@@ -2013,8 +2014,8 @@
       "pending": false,
       "by_project": {
         "Charles Harris": [
-          528.27,
-          528.27
+          1584.8,
+          1584.8
         ]
       }
     },
@@ -2035,7 +2036,7 @@
         0.0
       ],
       "cum": [
-        263472.52,
+        263472.51,
         199068.8
       ],
       "active_count": 1,
@@ -2064,7 +2065,7 @@
         0.0
       ],
       "cum": [
-        263472.52,
+        263472.51,
         199068.8
       ],
       "active_count": 1,
@@ -2310,17 +2311,17 @@
       "month": "2026-10",
       "label": "oct 2026",
       "prod": [
-        48616.03,
-        44122.77
+        47940.58,
+        43662.1
       ],
       "fixed": 48002.4,
       "net": [
-        613.63,
-        -3879.63
+        -61.82,
+        -4340.3
       ],
       "cum": [
-        180514.47,
-        144780.1
+        179839.02,
+        144319.43
       ],
       "is_future": false,
       "is_partial": true,
@@ -2343,16 +2344,16 @@
           6265.1
         ],
         "Martha Cockrell": [
-          17203.37,
-          16303.71
+          16848.34,
+          16112.68
         ],
         "Rohini Williams": [
           3411.94,
           1933.0
         ],
         "Karim Merchant": [
-          1558.0,
-          1416.31
+          1237.58,
+          1146.67
         ]
       }
     },
@@ -2360,17 +2361,17 @@
       "month": "2026-11",
       "label": "nov 2026",
       "prod": [
-        196196.47,
-        173544.05
+        192161.04,
+        169485.06
       ],
       "fixed": 48002.4,
       "net": [
-        148194.07,
-        125541.65
+        144158.64,
+        121482.66
       ],
       "cum": [
-        328708.54,
-        270321.75
+        323997.66,
+        265802.09
       ],
       "is_future": true,
       "is_partial": false,
@@ -2385,16 +2386,16 @@
           2182.07
         ],
         "Charles Harris": [
-          124377.8,
-          115551.52
+          119666.93,
+          111031.87
         ],
         "Shaan Lagisetty": [
           -5299.2,
           -6059.2
         ],
         "Martha Cockrell": [
-          51940.26,
-          42891.39
+          52295.29,
+          43082.41
         ],
         "Lingyan Qiu": [
           189.67,
@@ -2405,8 +2406,8 @@
           7142.15
         ],
         "Karim Merchant": [
-          13047.23,
-          11685.35
+          13367.65,
+          11954.99
         ]
       }
     },
@@ -2414,25 +2415,25 @@
       "month": "2026-12",
       "label": "dic 2026",
       "prod": [
-        44623.06,
-        39517.18
+        49333.93,
+        44036.83
       ],
       "fixed": 48002.4,
       "net": [
-        -3379.34,
-        -8485.22
+        1331.53,
+        -3965.57
       ],
       "cum": [
-        325329.2,
-        261836.53
+        325329.19,
+        261836.52
       ],
       "is_future": true,
       "is_partial": false,
       "pending": false,
       "by_project": {
         "Charles Harris": [
-          24349.08,
-          23357.28
+          29059.95,
+          27876.93
         ],
         "Martha Cockrell": [
           268.32,
@@ -2448,25 +2449,25 @@
       "month": "2027-01",
       "label": "ene 2027",
       "prod": [
-        8823.69,
-        7912.64
+        7767.16,
+        6856.11
       ],
       "fixed": 48002.4,
       "net": [
-        -39178.71,
-        -40089.76
+        -40235.24,
+        -41146.29
       ],
       "cum": [
-        286150.49,
-        221746.77
+        285093.95,
+        220690.23
       ],
       "is_future": true,
       "is_partial": false,
       "pending": false,
       "by_project": {
         "Charles Harris": [
-          4754.4,
-          4754.4
+          3697.87,
+          3697.87
         ],
         "Karim Merchant": [
           4069.29,
@@ -2478,25 +2479,25 @@
       "month": "2027-02",
       "label": "feb 2027",
       "prod": [
-        3169.6,
-        3169.6
+        4226.13,
+        4226.13
       ],
       "fixed": 48002.4,
       "net": [
-        -44832.8,
-        -44832.8
+        -43776.27,
+        -43776.27
       ],
       "cum": [
-        241317.69,
-        176913.97
+        241317.68,
+        176913.96
       ],
       "is_future": true,
       "is_partial": false,
       "pending": false,
       "by_project": {
         "Charles Harris": [
-          3169.6,
-          3169.6
+          4226.13,
+          4226.13
         ]
       }
     }
@@ -2554,8 +2555,8 @@
           7036.51
         ],
         "2026-W45": [
-          27527.89,
-          26393.39
+          22022.32,
+          21114.72
         ],
         "2026-W46": [
           33033.47,
@@ -2565,29 +2566,29 @@
           38539.05,
           36950.75
         ],
-        "2026-W50": [
-          5505.58,
-          5278.68
-        ],
         "2026-W48": [
-          11144.76,
-          6976.35
+          14494.52,
+          11413.28
+        ],
+        "2026-W50": [
+          10216.45,
+          9798.33
         ],
         "2026-W49": [
-          32976.12,
-          31637.55
+          30421.07,
+          27959.65
         ],
         "2027-W04": [
-          3697.87,
-          3697.87
+          2641.33,
+          2641.33
         ],
         "2027-W05": [
           3697.87,
           3697.87
         ],
         "2027-W06": [
-          528.27,
-          528.27
+          1584.8,
+          1584.8
         ]
       },
       "months": {
@@ -2608,20 +2609,20 @@
           9851.12
         ],
         "2026-11": [
-          124377.8,
-          115551.52
+          119666.93,
+          111031.87
         ],
         "2026-12": [
-          24349.08,
-          23357.28
+          29059.95,
+          27876.93
         ],
         "2027-01": [
-          4754.4,
-          4754.4
+          3697.87,
+          3697.87
         ],
         "2027-02": [
-          3169.6,
-          3169.6
+          4226.13,
+          4226.13
         ]
       },
       "first_week": "2026-W29",
@@ -2655,12 +2656,12 @@
           12536.76
         ],
         "2026-W45": [
-          21175.23,
-          18638.19
+          19172.89,
+          16902.79
         ],
         "2026-W46": [
-          18539.82,
-          15293.55
+          19891.84,
+          16714.87
         ],
         "2026-W27": [
           -110.95,
@@ -2683,8 +2684,8 @@
           4461.9
         ],
         "2026-W47": [
-          9195.25,
-          6478.06
+          9845.56,
+          6792.14
         ],
         "2026-W48": [
           3575.4,
@@ -2724,17 +2725,17 @@
           37459.3,
           34989.3
         ],
-        "2026-10": [
-          17203.37,
-          16303.71
-        ],
         "2026-11": [
-          51940.26,
-          42891.39
+          52295.29,
+          43082.41
         ],
         "2026-08": [
           48766.03,
           46627.96
+        ],
+        "2026-10": [
+          16848.34,
+          16112.68
         ],
         "2026-06": [
           -393.16,
@@ -3006,16 +3007,16 @@
           573.34
         ],
         "2026-W45": [
-          5336.9,
-          4754.16
+          4696.06,
+          4214.88
         ],
         "2026-W50": [
           4742.53,
           4183.63
         ],
         "2026-W46": [
-          2486.19,
-          2276.31
+          3127.03,
+          2815.59
         ],
         "2026-W47": [
           3688.19,
@@ -3076,12 +3077,12 @@
           2070.6
         ],
         "2026-10": [
-          1558.0,
-          1416.31
+          1237.58,
+          1146.67
         ],
         "2026-11": [
-          13047.23,
-          11685.35
+          13367.65,
+          11954.99
         ],
         "2026-12": [
           20005.66,
@@ -3534,10 +3535,10 @@
     }
   ],
   "data_quality": {
-    "orphan_trades": 50,
-    "orphan_cost": 302955.75,
+    "orphan_trades": 51,
+    "orphan_cost": 303105.75,
     "priced_trades": 159,
-    "total_trades": 209,
+    "total_trades": 210,
     "by_project": [
       {
         "project": "Charles Harris",
@@ -3753,6 +3754,17 @@
             "cost": 1020.0
           }
         ]
+      },
+      {
+        "project": "Brandy Sexton",
+        "orphan_trades": 1,
+        "orphan_cost": 150.0,
+        "examples": [
+          {
+            "trade": "FINAL PUNCH LIST",
+            "cost": 150.0
+          }
+        ]
       }
     ],
     "note": "Trades con costo pero SIN ingreso en su Action Task NO se cuentan como produccion (seria perdida falsa) \u2014 se listan aqui para cargar el valor en el Action Task. El producido es un PISO."
@@ -3814,8 +3826,8 @@
       "produced": 7924.0,
       "margin_pct": 100.0,
       "ratio": null,
-      "start": "2027-01-23",
-      "end": "2027-02-06",
+      "start": "2027-01-25",
+      "end": "2027-02-08",
       "severity": "alta"
     },
     {
@@ -3850,8 +3862,8 @@
       "produced": 5300.9,
       "margin_pct": 100.0,
       "ratio": null,
-      "start": "2026-11-05",
-      "end": "2026-11-09",
+      "start": "2026-11-06",
+      "end": "2026-11-10",
       "severity": "alta"
     },
     {
@@ -4318,8 +4330,8 @@
       "produced": 37687.0,
       "margin_pct": 71.1,
       "ratio": 3.5,
-      "start": "2026-11-27",
-      "end": "2026-12-04",
+      "start": "2026-11-28",
+      "end": "2026-12-05",
       "severity": "media"
     },
     {
@@ -4342,8 +4354,8 @@
       "produced": 104606.0,
       "margin_pct": 70.8,
       "ratio": 3.4,
-      "start": "2026-11-02",
-      "end": "2026-12-08",
+      "start": "2026-11-03",
+      "end": "2026-12-09",
       "severity": "media"
     },
     {
@@ -4522,8 +4534,8 @@
       "produced": 9655.34,
       "margin_pct": 60.2,
       "ratio": 2.5,
-      "start": "2026-11-09",
-      "end": "2026-11-10",
+      "start": "2026-11-10",
+      "end": "2026-11-11",
       "severity": "media"
     }
   ],
@@ -6169,6 +6181,127 @@
       "loose_amount": 0
     },
     {
+      "project": "Brandy Sexton",
+      "project_id": "22PLKSsB4aeV",
+      "trades": [
+        {
+          "trade": "CABINETS",
+          "income": 23900.0,
+          "expense": 8280.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 8
+        },
+        {
+          "trade": "COUNTERTOPS",
+          "income": 16200.0,
+          "expense": 11491.7,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 2
+        },
+        {
+          "trade": "CABINET PAINTING",
+          "income": 5980.0,
+          "expense": 3393.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 4
+        },
+        {
+          "trade": "PLUMBING TRIM",
+          "income": 1875.0,
+          "expense": 1631.15,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 3
+        },
+        {
+          "trade": "INTERIOR PAINT",
+          "income": 1823.0,
+          "expense": 1610.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 4
+        },
+        {
+          "trade": "INTERIOR DOORS",
+          "income": 2068.0,
+          "expense": 1204.71,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 4
+        },
+        {
+          "trade": "PLUMBING ROUGH IN",
+          "income": 1875.0,
+          "expense": 900.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        },
+        {
+          "trade": "ELECTRICAL TRIM",
+          "income": 1549.0,
+          "expense": 994.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 3
+        },
+        {
+          "trade": "DEMO INTERIOR",
+          "income": 855.0,
+          "expense": 1650.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 4
+        },
+        {
+          "trade": "WINDOWS",
+          "income": 980.0,
+          "expense": 1242.35,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 3
+        },
+        {
+          "trade": "FRAMING",
+          "income": 1135.0,
+          "expense": 900.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        },
+        {
+          "trade": "ELECTRICAL ROUGH IN",
+          "income": 1033.0,
+          "expense": 600.0,
+          "grouped": true,
+          "n_inc": 1,
+          "n_exp": 1
+        },
+        {
+          "trade": "SHEETROCK",
+          "income": 0.0,
+          "expense": 850.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 3
+        },
+        {
+          "trade": "FINAL PUNCH LIST",
+          "income": 0.0,
+          "expense": 150.0,
+          "grouped": true,
+          "n_inc": 0,
+          "n_exp": 1
+        }
+      ],
+      "total_income": 59273.0,
+      "total_expense": 34896.91,
+      "loose_amount": 0
+    },
+    {
       "project": "Clifford Clack",
       "project_id": "22PCPuWPndkt",
       "trades": [
@@ -6437,15 +6570,253 @@
   ],
   "brandy": {
     "project": "Brandy Sexton",
-    "revenue": 0,
-    "cost": 0,
-    "orphan_cost": 0,
+    "revenue": 59273.0,
+    "cost": 33896.91,
+    "orphan_cost": 1000.0,
     "prod": [
-      0.0,
-      0.0
+      25376.09,
+      21986.4
     ],
-    "margin_pct": null,
-    "by_month": {},
-    "trades": []
+    "margin_pct": 42.8,
+    "by_month": {
+      "2026-05": [
+        24686.55,
+        21464.6
+      ],
+      "2026-06": [
+        689.54,
+        521.8
+      ]
+    },
+    "trades": [
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "CABINETS",
+        "revenue": 23900.0,
+        "revenue_gross": 23900.0,
+        "discount_pct": 0.0,
+        "cost": 8280.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-06",
+            "2026-05-06"
+          ],
+          [
+            "2026-05-09",
+            "2026-05-13"
+          ],
+          [
+            "2026-05-11",
+            "2026-05-30"
+          ]
+        ],
+        "start": "2026-05-06",
+        "end": "2026-05-30"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "COUNTERTOPS",
+        "revenue": 16200.0,
+        "revenue_gross": 16200.0,
+        "discount_pct": 0.0,
+        "cost": 11491.7,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-22",
+            "2026-05-22"
+          ],
+          [
+            "2026-05-26",
+            "2026-05-27"
+          ]
+        ],
+        "start": "2026-05-22",
+        "end": "2026-05-27"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "CABINET PAINTING",
+        "revenue": 5980.0,
+        "revenue_gross": 5980.0,
+        "discount_pct": 0.0,
+        "cost": 3393.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-19",
+            "2026-06-03"
+          ]
+        ],
+        "start": "2026-05-19",
+        "end": "2026-06-03"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "PLUMBING ROUGH IN",
+        "revenue": 1875.0,
+        "revenue_gross": 1875.0,
+        "discount_pct": 0.0,
+        "cost": 900.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-05",
+            "2026-05-05"
+          ]
+        ],
+        "start": "2026-05-05",
+        "end": "2026-05-05"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "INTERIOR DOORS",
+        "revenue": 2068.0,
+        "revenue_gross": 2068.0,
+        "discount_pct": 0.0,
+        "cost": 1204.71,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-19",
+            "2026-05-19"
+          ]
+        ],
+        "start": "2026-05-19",
+        "end": "2026-05-19"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "ELECTRICAL TRIM",
+        "revenue": 1549.0,
+        "revenue_gross": 1549.0,
+        "discount_pct": 0.0,
+        "cost": 994.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-26",
+            "2026-06-01"
+          ]
+        ],
+        "start": "2026-05-26",
+        "end": "2026-06-01"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "ELECTRICAL ROUGH IN",
+        "revenue": 1033.0,
+        "revenue_gross": 1033.0,
+        "discount_pct": 0.0,
+        "cost": 600.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-06",
+            "2026-05-07"
+          ]
+        ],
+        "start": "2026-05-06",
+        "end": "2026-05-07"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "PLUMBING TRIM",
+        "revenue": 1875.0,
+        "revenue_gross": 1875.0,
+        "discount_pct": 0.0,
+        "cost": 1631.15,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-25",
+            "2026-06-02"
+          ]
+        ],
+        "start": "2026-05-25",
+        "end": "2026-06-02"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "FRAMING",
+        "revenue": 1135.0,
+        "revenue_gross": 1135.0,
+        "discount_pct": 0.0,
+        "cost": 900.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-04",
+            "2026-05-05"
+          ]
+        ],
+        "start": "2026-05-04",
+        "end": "2026-05-05"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "INTERIOR PAINT",
+        "revenue": 1823.0,
+        "revenue_gross": 1823.0,
+        "discount_pct": 0.0,
+        "cost": 1610.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-28",
+            "2026-06-02"
+          ]
+        ],
+        "start": "2026-05-28",
+        "end": "2026-06-02"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "WINDOWS",
+        "revenue": 980.0,
+        "revenue_gross": 980.0,
+        "discount_pct": 0.0,
+        "cost": 1242.35,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-16",
+            "2026-05-16"
+          ]
+        ],
+        "start": "2026-05-16",
+        "end": "2026-05-16"
+      },
+      {
+        "project_id": "22PLKSsB4aeV",
+        "project": "Brandy Sexton",
+        "trade": "DEMO INTERIOR",
+        "revenue": 855.0,
+        "revenue_gross": 855.0,
+        "discount_pct": 0.0,
+        "cost": 1650.0,
+        "rev_source": "action",
+        "rev_ranges": [
+          [
+            "2026-05-02",
+            "2026-05-02"
+          ]
+        ],
+        "start": "2026-05-02",
+        "end": "2026-05-02"
+      }
+    ]
   }
 }
