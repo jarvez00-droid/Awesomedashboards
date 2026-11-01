@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T05:52:35",
+  "generated_at": "2026-11-01T06:18:02",
   "today": "2026-11-01",
   "horizon": "2027-02-26",
   "rule": "Ingreso = (Action Task + Critical Path) \u00d7 (1 \u2212 %descuento real del proyecto). Menos (Subs + Materiales + Adiciones) \u00d7 (1 + contingencia) = Producido por trade. Repartido por DIA DE EJECUCION del action task (producido \u00f7 suma de duraciones \u00d7 d\u00edas en el periodo). 2 escenarios: Normal (0%) y +10% costo. Segmentado por MES y por semana; menos el fijo prorrateado (overhead baseline del cashflow) = Neta. Incluye trabajo FUTURO ya programado (toda la data de JobTread).",
@@ -1424,17 +1424,17 @@
       "label_moy": "oct S5",
       "label_short": "31 oct",
       "prod": [
-        50311.86,
-        42777.77
+        55961.06,
+        49186.97
       ],
       "fixed": 11077.48,
       "net": [
-        39234.38,
-        31700.29
+        44883.58,
+        38109.49
       ],
       "cum": [
-        216229.71,
-        173796.64
+        221878.91,
+        180205.84
       ],
       "active_count": 9,
       "active_projects": [
@@ -1464,10 +1464,6 @@
           22022.32,
           21114.72
         ],
-        "Shaan Lagisetty": [
-          -5649.2,
-          -6409.2
-        ],
         "Martha Cockrell": [
           19172.89,
           16902.79
@@ -1494,17 +1490,17 @@
       "label_moy": "nov S1",
       "label_short": "7 nov",
       "prod": [
-        56402.35,
-        51552.54
+        56052.35,
+        51202.54
       ],
       "fixed": 11077.48,
       "net": [
-        45324.87,
-        40475.06
+        44974.87,
+        40125.06
       ],
       "cum": [
-        261554.58,
-        214271.7
+        266853.78,
+        220330.9
       ],
       "active_count": 4,
       "active_projects": [
@@ -1520,10 +1516,6 @@
         "Charles Harris": [
           33033.47,
           31672.07
-        ],
-        "Shaan Lagisetty": [
-          350.0,
-          350.0
         ],
         "Martha Cockrell": [
           19891.84,
@@ -1543,23 +1535,24 @@
       "label_moy": "nov S2",
       "label_short": "14 nov",
       "prod": [
-        52072.81,
-        46947.41
+        46598.61,
+        40713.21
       ],
       "fixed": 11077.48,
       "net": [
-        40995.33,
-        35869.93
+        35521.13,
+        29635.73
       ],
       "cum": [
-        302549.91,
-        250141.63
+        302374.91,
+        249966.63
       ],
-      "active_count": 3,
+      "active_count": 4,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Martha Cockrell"
+        "Martha Cockrell",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1568,6 +1561,10 @@
         "Charles Harris": [
           38539.05,
           36950.75
+        ],
+        "Shaan Lagisetty": [
+          -5474.2,
+          -6234.2
         ],
         "Martha Cockrell": [
           9845.56,
@@ -1587,23 +1584,24 @@
       "label_moy": "nov S3",
       "label_short": "21 nov",
       "prod": [
-        20235.69,
-        16462.87
+        20410.69,
+        16637.87
       ],
       "fixed": 11077.48,
       "net": [
-        9158.21,
-        5385.39
+        9333.21,
+        5560.39
       ],
       "cum": [
         311708.12,
         255527.02
       ],
-      "active_count": 3,
+      "active_count": 4,
       "active_projects": [
         "Charles Harris",
         "Karim Merchant",
-        "Martha Cockrell"
+        "Martha Cockrell",
+        "Shaan Lagisetty"
       ],
       "is_future": true,
       "is_partial": false,
@@ -1612,6 +1610,10 @@
         "Charles Harris": [
           14494.52,
           11413.28
+        ],
+        "Shaan Lagisetty": [
+          175.0,
+          175.0
         ],
         "Martha Cockrell": [
           3575.4,
@@ -3495,13 +3497,13 @@
           746.67,
           726.67
         ],
-        "2026-W45": [
-          -5649.2,
-          -6409.2
+        "2026-W47": [
+          -5474.2,
+          -6234.2
         ],
-        "2026-W46": [
-          350.0,
-          350.0
+        "2026-W48": [
+          175.0,
+          175.0
         ],
         "2026-W28": [
           -700.0,
@@ -3531,7 +3533,7 @@
         ]
       },
       "first_week": "2026-W28",
-      "last_week": "2026-W46"
+      "last_week": "2026-W48"
     }
   ],
   "data_quality": {
@@ -3838,8 +3840,8 @@
       "produced": 350.0,
       "margin_pct": 100.0,
       "ratio": null,
-      "start": "2026-11-07",
-      "end": "2026-11-09",
+      "start": "2026-11-20",
+      "end": "2026-11-21",
       "severity": "alta"
     },
     {
