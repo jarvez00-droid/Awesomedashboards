@@ -1,24 +1,17 @@
 {
- "generated_at": "2026-11-06T16:47:57",
+ "generated_at": "2026-11-06T17:20:24",
  "date": "2026-11-06",
  "window_start": "2026-11-06",
  "window_end": "2026-11-20",
  "summary": {
-  "tasks": 59,
+  "tasks": 58,
   "projects": 4,
   "alerts": 4,
-  "overdue": 12,
-  "to_purchase_amount": 123365.42,
+  "overdue": 7,
+  "to_purchase_amount": 119905.42,
   "overdue_no_cuentan": 225
  },
  "alerts": [
-  {
-   "project": "Martha Cockrell (CNG-20251199)",
-   "projectId": "22PGVNmUgLww",
-   "task": "cabinetry: purchase materials",
-   "due": "2026-11-05",
-   "taskId": "22PejqF3fKS7"
-  },
   {
    "project": "Charles Harris — Argyle TX",
    "projectId": "22PDc9569pUD",
@@ -39,6 +32,13 @@
    "task": "GARAGE DOOR: PURCHASE MATERIALS",
    "due": "2026-11-13",
    "taskId": "22PZtEUTeiV3"
+  },
+  {
+   "project": "Martha Cockrell (CNG-20251199)",
+   "projectId": "22PGVNmUgLww",
+   "task": "cabinetry: purchase materials",
+   "due": "2026-11-13",
+   "taskId": "22PejqF3fKS7"
   }
  ],
  "projects": [
@@ -593,48 +593,11 @@
    "id": "22PGVNmUgLww",
    "name": "Martha Cockrell (CNG-20251199)",
    "counts": {
-    "tasks": 10,
+    "tasks": 9,
     "alerts": 1,
-    "overdue": 3
+    "overdue": 0
    },
-   "overdue": [
-    {
-     "name": "FLOORING: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-11-05",
-     "amount": 3000.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzWXVa9tN",
-     "progress": 0
-    },
-    {
-     "name": "tiles: PURCHASE MATERIALS (Copy)",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-11-05",
-     "amount": 1500.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PdtBtZbj8v",
-     "progress": 0
-    },
-    {
-     "name": "cabinetry: purchase materials",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-11-05",
-     "amount": null,
-     "alert": true,
-     "overdue": true,
-     "taskId": "22PejqF3fKS7",
-     "progress": 0
-    }
-   ],
+   "overdue": [],
    "days": [
     {
      "date": "2026-11-06",
@@ -659,15 +622,27 @@
      "label": "Mon Nov 9",
      "tasks": [
       {
-       "name": "GLASS: PURCHASE MATERIALS",
+       "name": "FLOORING: PURCHASE MATERIALS",
        "step": "purchase",
        "icon": "🛒",
        "step_label": "Purchase material",
        "due": "2026-11-09",
-       "amount": 3460.0,
+       "amount": 3000.0,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZzWXhzcHP",
+       "taskId": "22PZzWXVa9tN",
+       "progress": 0
+      },
+      {
+       "name": "tiles: PURCHASE MATERIALS (Copy)",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-11-09",
+       "amount": 1500.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PdtBtZbj8v",
        "progress": 0
       }
      ]
@@ -676,18 +651,6 @@
      "date": "2026-11-12",
      "label": "Thu Nov 12",
      "tasks": [
-      {
-       "name": "ELECTRICAL TRIM: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-11-12",
-       "amount": 4450.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZzWZP38a3",
-       "progress": 0
-      },
       {
        "name": "GARAGE DOOR: DELIVERY ETA",
        "step": "eta",
@@ -699,17 +662,23 @@
        "overdue": false,
        "taskId": "22PbkAgcQLqG",
        "progress": 0
-      },
+      }
+     ]
+    },
+    {
+     "date": "2026-11-13",
+     "label": "Fri Nov 13",
+     "tasks": [
       {
-       "name": "PLUMBING TRIM: PURCHASE MATERIALS",
+       "name": "cabinetry: purchase materials",
        "step": "purchase",
        "icon": "🛒",
        "step_label": "Purchase material",
-       "due": "2026-11-12",
-       "amount": 1740.0,
-       "alert": false,
+       "due": "2026-11-13",
+       "amount": null,
+       "alert": true,
        "overdue": false,
-       "taskId": "22PZzWZhbERa",
+       "taskId": "22PejqF3fKS7",
        "progress": 0
       }
      ]
@@ -749,6 +718,36 @@
        "progress": 0
       }
      ]
+    },
+    {
+     "date": "2026-11-18",
+     "label": "Wed Nov 18",
+     "tasks": [
+      {
+       "name": "ELECTRICAL TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-11-18",
+       "amount": 4450.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzWZP38a3",
+       "progress": 0
+      },
+      {
+       "name": "PLUMBING TRIM: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-11-18",
+       "amount": 1740.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzWZhbERa",
+       "progress": 0
+      }
+     ]
     }
    ]
   },
@@ -758,21 +757,9 @@
    "counts": {
     "tasks": 6,
     "alerts": 0,
-    "overdue": 4
+    "overdue": 2
    },
    "overdue": [
-    {
-     "name": "COUNTERTOPS: Downpayment",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-11-05",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpJhE9fS9",
-     "progress": 0
-    },
     {
      "name": "MECHANICAL TRIM: DOWNPAYMENT",
      "step": "other",
@@ -796,18 +783,6 @@
      "overdue": true,
      "taskId": "22PZpJiR3eUt",
      "progress": 0
-    },
-    {
-     "name": "PINTURA INTERIOR",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-11-05",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PgPc9vkgDw",
-     "progress": 0
     }
    ],
    "days": [
@@ -828,6 +803,18 @@
        "progress": 0
       },
       {
+       "name": "COUNTERTOPS: Downpayment",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-11-06",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpJhE9fS9",
+       "progress": 0
+      },
+      {
        "name": "MECHANICAL TRIM: DELIVERY ETA",
        "step": "eta",
        "icon": "🚚",
@@ -837,6 +824,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZpJhksx2G",
+       "progress": 0
+      },
+      {
+       "name": "PINTURA INTERIOR",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-11-06",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PgPc9vkgDw",
        "progress": 0
       }
      ]
