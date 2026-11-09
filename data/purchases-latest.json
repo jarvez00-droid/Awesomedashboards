@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-11-08T07:28:06",
- "date": "2026-11-08",
- "window_start": "2026-11-08",
- "window_end": "2026-11-22",
+ "generated_at": "2026-11-09T00:11:10",
+ "date": "2026-11-09",
+ "window_start": "2026-11-09",
+ "window_end": "2026-11-23",
  "summary": {
-  "tasks": 54,
+  "tasks": 56,
   "projects": 4,
-  "alerts": 4,
-  "overdue": 0,
-  "to_purchase_amount": 119905.42,
-  "overdue_no_cuentan": 230
+  "alerts": 5,
+  "overdue": 10,
+  "to_purchase_amount": 123365.42,
+  "overdue_no_cuentan": 231
  },
  "alerts": [
   {
@@ -39,6 +39,13 @@
    "task": "cabinetry: purchase materials",
    "due": "2026-11-13",
    "taskId": "22PejqF3fKS7"
+  },
+  {
+   "project": "Charles Harris — Argyle TX",
+   "projectId": "22PDc9569pUD",
+   "task": "EXTERIOR PAINT: PURCHASE MATERIALS",
+   "due": "2026-11-23",
+   "taskId": "22PZtEUTMZBP"
   }
  ],
  "projects": [
@@ -46,66 +53,61 @@
    "id": "22PDc9569pUD",
    "name": "Charles Harris — Argyle TX",
    "counts": {
-    "tasks": 34,
-    "alerts": 3,
-    "overdue": 0
+    "tasks": 36,
+    "alerts": 4,
+    "overdue": 4
    },
-   "overdue": [],
-   "days": [
+   "overdue": [
     {
-     "date": "2026-11-08",
-     "label": "Sun Nov 8",
-     "tasks": [
-      {
-       "name": "DOORS AND WINDOWS: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-11-08",
-       "amount": 17315.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZtEUPBDAD",
-       "progress": 0
-      },
-      {
-       "name": "FRAMING: PURCHASE MATERIALS LEFT",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-11-08",
-       "amount": 7000.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZtEUP2zPb",
-       "progress": 0
-      },
-      {
-       "name": "ROOFING: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-11-08",
-       "amount": 6956.82,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZtEUPMHQJ",
-       "progress": 0
-      },
-      {
-       "name": "ROOFING: PURCHASE METAL ROOFS",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-11-08",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZzn7cacve",
-       "progress": 0
-      }
-     ]
+     "name": "FRAMING: PURCHASE MATERIALS LEFT",
+     "step": "purchase",
+     "icon": "🛒",
+     "step_label": "Purchase material",
+     "due": "2026-11-08",
+     "amount": 7000.0,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZtEUP2zPb",
+     "progress": 0
     },
+    {
+     "name": "DOORS AND WINDOWS: PURCHASE MATERIALS",
+     "step": "purchase",
+     "icon": "🛒",
+     "step_label": "Purchase material",
+     "due": "2026-11-08",
+     "amount": 17315.0,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZtEUPBDAD",
+     "progress": 0
+    },
+    {
+     "name": "ROOFING: PURCHASE MATERIALS",
+     "step": "purchase",
+     "icon": "🛒",
+     "step_label": "Purchase material",
+     "due": "2026-11-08",
+     "amount": 6956.82,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZtEUPMHQJ",
+     "progress": 0
+    },
+    {
+     "name": "ROOFING: PURCHASE METAL ROOFS",
+     "step": "other",
+     "icon": "•",
+     "step_label": "Purchases",
+     "due": "2026-11-08",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZzn7cacve",
+     "progress": 0
+    }
+   ],
+   "days": [
     {
      "date": "2026-11-09",
      "label": "Mon Nov 9",
@@ -525,6 +527,36 @@
        "progress": 0
       }
      ]
+    },
+    {
+     "date": "2026-11-23",
+     "label": "Mon Nov 23",
+     "tasks": [
+      {
+       "name": "COUNTERTOPS: SECURE PRICING & ETA",
+       "step": "pricing",
+       "icon": "💲",
+       "step_label": "Secure pricing",
+       "due": "2026-11-23",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZtEURjFqZ",
+       "progress": 0
+      },
+      {
+       "name": "EXTERIOR PAINT: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-11-23",
+       "amount": null,
+       "alert": true,
+       "overdue": false,
+       "taskId": "22PZtEUTMZBP",
+       "progress": 0
+      }
+     ]
     }
    ]
   },
@@ -532,7 +564,7 @@
    "id": "22PGVNmUgLww",
    "name": "Martha Cockrell (CNG-20251199)",
    "counts": {
-    "tasks": 8,
+    "tasks": 9,
     "alerts": 1,
     "overdue": 0
    },
@@ -669,6 +701,24 @@
        "progress": 0
       }
      ]
+    },
+    {
+     "date": "2026-11-23",
+     "label": "Mon Nov 23",
+     "tasks": [
+      {
+       "name": "GLASS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-11-23",
+       "amount": 3460.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZzWXhzcHP",
+       "progress": 0
+      }
+     ]
     }
    ]
   },
@@ -678,64 +728,59 @@
    "counts": {
     "tasks": 7,
     "alerts": 0,
-    "overdue": 0
+    "overdue": 4
    },
-   "overdue": [],
-   "days": [
+   "overdue": [
     {
-     "date": "2026-11-08",
-     "label": "Sun Nov 8",
-     "tasks": [
-      {
-       "name": "COUNTERTOPS: Downpayment",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-11-08",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpJhE9fS9",
-       "progress": 0
-      },
-      {
-       "name": "GUTTERS: payment",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-11-08",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpJiR3eUt",
-       "progress": 0
-      },
-      {
-       "name": "MECHANICAL TRIM: DOWNPAYMENT",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-11-08",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpJhkLVDW",
-       "progress": 0
-      },
-      {
-       "name": "PINTURA INTERIOR",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-11-08",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PgPc9vkgDw",
-       "progress": 0
-      }
-     ]
+     "name": "COUNTERTOPS: Downpayment",
+     "step": "other",
+     "icon": "•",
+     "step_label": "Purchases",
+     "due": "2026-11-08",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpJhE9fS9",
+     "progress": 0
     },
+    {
+     "name": "MECHANICAL TRIM: DOWNPAYMENT",
+     "step": "other",
+     "icon": "•",
+     "step_label": "Purchases",
+     "due": "2026-11-08",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpJhkLVDW",
+     "progress": 0
+    },
+    {
+     "name": "GUTTERS: payment",
+     "step": "other",
+     "icon": "•",
+     "step_label": "Purchases",
+     "due": "2026-11-08",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpJiR3eUt",
+     "progress": 0
+    },
+    {
+     "name": "PINTURA INTERIOR",
+     "step": "other",
+     "icon": "•",
+     "step_label": "Purchases",
+     "due": "2026-11-08",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PgPc9vkgDw",
+     "progress": 0
+    }
+   ],
+   "days": [
     {
      "date": "2026-11-09",
      "label": "Mon Nov 9",
@@ -784,54 +829,37 @@
    "id": "22PEuiuEZaAY",
    "name": "Shaan Lagisetty (CNG-20251169)",
    "counts": {
-    "tasks": 5,
+    "tasks": 4,
     "alerts": 0,
-    "overdue": 0
+    "overdue": 2
    },
-   "overdue": [],
-   "days": [
+   "overdue": [
     {
-     "date": "2026-11-08",
-     "label": "Sun Nov 8",
-     "tasks": [
-      {
-       "name": "GUTTERS: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
-       "due": "2026-11-08",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYrQXkiZ",
-       "progress": 0
-      },
-      {
-       "name": "GUTTERS: PURCHASE MATERIALS",
-       "step": "purchase",
-       "icon": "🛒",
-       "step_label": "Purchase material",
-       "due": "2026-11-08",
-       "amount": 300.0,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PcX9UTZZuS",
-       "progress": 0
-      },
-      {
-       "name": "STUCCO: materials & labour",
-       "step": "other",
-       "icon": "•",
-       "step_label": "Purchases",
-       "due": "2026-11-08",
-       "amount": null,
-       "alert": false,
-       "overdue": false,
-       "taskId": "22PZpYrGkHWc",
-       "progress": 0
-      }
-     ]
+     "name": "STUCCO: materials & labour",
+     "step": "other",
+     "icon": "•",
+     "step_label": "Purchases",
+     "due": "2026-11-08",
+     "amount": null,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PZpYrGkHWc",
+     "progress": 0
     },
+    {
+     "name": "GUTTERS: PURCHASE MATERIALS",
+     "step": "purchase",
+     "icon": "🛒",
+     "step_label": "Purchase material",
+     "due": "2026-11-08",
+     "amount": 300.0,
+     "alert": false,
+     "overdue": true,
+     "taskId": "22PcX9UTZZuS",
+     "progress": 0
+    }
+   ],
+   "days": [
     {
      "date": "2026-11-09",
      "label": "Mon Nov 9",
