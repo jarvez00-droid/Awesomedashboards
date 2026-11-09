@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-11-09T05:49:50",
+ "generated_at": "2026-11-09T06:26:10",
  "date": "2026-11-09",
  "window_start": "2026-11-09",
  "window_end": "2026-11-23",
  "summary": {
-  "tasks": 56,
+  "tasks": 57,
   "projects": 4,
   "alerts": 5,
-  "overdue": 10,
+  "overdue": 4,
   "to_purchase_amount": 123365.42,
-  "overdue_no_cuentan": 231
+  "overdue_no_cuentan": 230
  },
  "alerts": [
   {
@@ -55,58 +55,9 @@
    "counts": {
     "tasks": 36,
     "alerts": 4,
-    "overdue": 4
+    "overdue": 0
    },
-   "overdue": [
-    {
-     "name": "FRAMING: PURCHASE MATERIALS LEFT",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-11-08",
-     "amount": 7000.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZtEUP2zPb",
-     "progress": 0
-    },
-    {
-     "name": "DOORS AND WINDOWS: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-11-08",
-     "amount": 17315.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZtEUPBDAD",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-11-08",
-     "amount": 6956.82,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZtEUPMHQJ",
-     "progress": 0
-    },
-    {
-     "name": "ROOFING: PURCHASE METAL ROOFS",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-11-08",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZzn7cacve",
-     "progress": 0
-    }
-   ],
+   "overdue": [],
    "days": [
     {
      "date": "2026-11-09",
@@ -137,15 +88,15 @@
        "progress": 0
       },
       {
-       "name": "DOORS AND WINDOWS: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
+       "name": "DOORS AND WINDOWS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
        "due": "2026-11-09",
-       "amount": null,
+       "amount": 17315.0,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZtEUPBa4W",
+       "taskId": "22PZtEUPBDAD",
        "progress": 0
       },
       {
@@ -161,15 +112,15 @@
        "progress": 0
       },
       {
-       "name": "FRAMING: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
+       "name": "FRAMING: PURCHASE MATERIALS LEFT",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
        "due": "2026-11-09",
-       "amount": null,
+       "amount": 7000.0,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZtEUP3NHu",
+       "taskId": "22PZtEUP2zPb",
        "progress": 0
       },
       {
@@ -209,15 +160,27 @@
        "progress": 0
       },
       {
-       "name": "ROOFING: DELIVERY ETA",
-       "step": "eta",
-       "icon": "🚚",
-       "step_label": "Delivery ETA",
+       "name": "ROOFING: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-11-09",
+       "amount": 6956.82,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZtEUPMHQJ",
+       "progress": 0
+      },
+      {
+       "name": "ROOFING: PURCHASE METAL ROOFS",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
        "due": "2026-11-09",
        "amount": null,
        "alert": false,
        "overdue": false,
-       "taskId": "22PZtEUPMeJb",
+       "taskId": "22PZzn7cacve",
        "progress": 0
       },
       {
@@ -275,6 +238,30 @@
        "progress": 0
       },
       {
+       "name": "DOORS AND WINDOWS: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-11-10",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZtEUPBa4W",
+       "progress": 0
+      },
+      {
+       "name": "FRAMING: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-11-10",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZtEUP3NHu",
+       "progress": 0
+      },
+      {
        "name": "GARAGE DOOR: SECURE PRICING & ETA",
        "step": "pricing",
        "icon": "💲",
@@ -296,6 +283,18 @@
        "alert": false,
        "overdue": false,
        "taskId": "22PZtEUTUeF3",
+       "progress": 0
+      },
+      {
+       "name": "ROOFING: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-11-10",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZtEUPMeJb",
        "progress": 0
       }
      ]
@@ -829,36 +828,11 @@
    "id": "22PEuiuEZaAY",
    "name": "Shaan Lagisetty (CNG-20251169)",
    "counts": {
-    "tasks": 4,
+    "tasks": 5,
     "alerts": 0,
-    "overdue": 2
+    "overdue": 0
    },
-   "overdue": [
-    {
-     "name": "STUCCO: materials & labour",
-     "step": "other",
-     "icon": "•",
-     "step_label": "Purchases",
-     "due": "2026-11-08",
-     "amount": null,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PZpYrGkHWc",
-     "progress": 0
-    },
-    {
-     "name": "GUTTERS: PURCHASE MATERIALS",
-     "step": "purchase",
-     "icon": "🛒",
-     "step_label": "Purchase material",
-     "due": "2026-11-08",
-     "amount": 300.0,
-     "alert": false,
-     "overdue": true,
-     "taskId": "22PcX9UTZZuS",
-     "progress": 0
-    }
-   ],
+   "overdue": [],
    "days": [
     {
      "date": "2026-11-09",
@@ -875,19 +849,55 @@
        "overdue": false,
        "taskId": "22PZpYreWMrx",
        "progress": 0
+      },
+      {
+       "name": "GUTTERS: DELIVERY ETA",
+       "step": "eta",
+       "icon": "🚚",
+       "step_label": "Delivery ETA",
+       "due": "2026-11-09",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYrQXkiZ",
+       "progress": 0
+      },
+      {
+       "name": "GUTTERS: PURCHASE MATERIALS",
+       "step": "purchase",
+       "icon": "🛒",
+       "step_label": "Purchase material",
+       "due": "2026-11-09",
+       "amount": 300.0,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PcX9UTZZuS",
+       "progress": 0
+      },
+      {
+       "name": "STUCCO: materials & labour",
+       "step": "other",
+       "icon": "•",
+       "step_label": "Purchases",
+       "due": "2026-11-09",
+       "amount": null,
+       "alert": false,
+       "overdue": false,
+       "taskId": "22PZpYrGkHWc",
+       "progress": 0
       }
      ]
     },
     {
-     "date": "2026-11-21",
-     "label": "Sat Nov 21",
+     "date": "2026-11-23",
+     "label": "Mon Nov 23",
      "tasks": [
       {
        "name": "STUCCO: DELIVERY ETA",
        "step": "eta",
        "icon": "🚚",
        "step_label": "Delivery ETA",
-       "due": "2026-11-21",
+       "due": "2026-11-23",
        "amount": null,
        "alert": false,
        "overdue": false,
