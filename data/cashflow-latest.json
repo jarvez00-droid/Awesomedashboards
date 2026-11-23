@@ -1,12 +1,12 @@
 {
-  "date": "2026-11-22",
-  "generated_at": "2026-11-22T23:50:57.468000",
+  "date": "2026-11-23",
+  "generated_at": "2026-11-23T00:15:15.122067",
   "summary": {
     "total_payment_tasks": 761,
-    "total_income": 249059.71,
+    "total_income": 304004.71,
     "total_p_income": 0,
-    "total_outgoing": 333042.22,
-    "total_net": -83982.51,
+    "total_outgoing": 333406.22,
+    "total_net": -29401.51,
     "pending_income": 664152.39,
     "pending_p_income": 0,
     "pending_outgoing": 520289.22,
@@ -14,14 +14,14 @@
     "paid_p_income": 0,
     "paid_outgoing": 778479.47,
     "unpaid_net": 143863.17,
-    "weeks_covered": 5
+    "weeks_covered": 6
   },
   "weeks": [
     {
       "week_start": "2026-11-16",
       "week_label": "Nov 16 - Nov 22",
-      "is_current": true,
-      "is_past": false,
+      "is_current": false,
+      "is_past": true,
       "income": 158527.06,
       "p_income": 0,
       "subs": 61080.0,
@@ -671,7 +671,7 @@
     {
       "week_start": "2026-11-23",
       "week_label": "Nov 23 - Nov 29",
-      "is_current": false,
+      "is_current": true,
       "is_past": false,
       "income": 0,
       "p_income": 0,
@@ -1100,6 +1100,49 @@
           "type": "subs",
           "amount": 0.0,
           "due": "2026-12-19",
+          "paid": false
+        }
+      ]
+    },
+    {
+      "week_start": "2026-12-21",
+      "week_label": "Dec 21 - Dec 27",
+      "is_current": false,
+      "is_past": false,
+      "income": 54945.0,
+      "p_income": 0,
+      "subs": 0,
+      "materials": 364.0,
+      "additional": 0,
+      "outgoing": 364.0,
+      "net": 54581.0,
+      "income_paid": 0,
+      "p_income_paid": 0,
+      "outgoing_paid": 0,
+      "task_count": 3,
+      "items": [
+        {
+          "project": "Charles Harris \u2014 Argyle TX",
+          "task": "FRONT PATIO PORCH: PAYMENT INCOME",
+          "type": "income",
+          "amount": 24398.0,
+          "due": "2026-12-21",
+          "paid": false
+        },
+        {
+          "project": "Charles Harris \u2014 Argyle TX",
+          "task": "COVERED BACK PATIO PORCH: PAYMENT INCOME",
+          "type": "income",
+          "amount": 30547.0,
+          "due": "2026-12-21",
+          "paid": false
+        },
+        {
+          "project": "Karim Merchant (JOSE-TEST10)",
+          "task": "INTERIOR PAINT: PURCHASE MATERIALS (Primer)",
+          "type": "materials",
+          "amount": 364.0,
+          "due": "2026-12-21",
           "paid": false
         }
       ]
